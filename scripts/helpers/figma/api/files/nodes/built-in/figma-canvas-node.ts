@@ -1,8 +1,8 @@
-import { type FigmaColor } from '../figma-types.ts';
-import { type FigmaNode } from './figma-node.ts';
-import { type FigmaNodeWithChildren } from './types/figma-node-with-children.ts';
+import { FigmaColor } from '../../types/figma-color';
+import { type FigmaNode } from '../figma-node.ts';
+import { type HavingFigmaNodeChildren } from '../having-figma-node-children.ts';
 
-export interface FigmaCanvasNode extends FigmaNode<'CANVAS'>, FigmaNodeWithChildren {
+export interface FigmaCanvasNode extends FigmaNode<'CANVAS'>, HavingFigmaNodeChildren {
   readonly backgroundColor: FigmaColor;
   readonly prototypeStartNodeID: string | null;
   readonly flowStartingPoints: readonly unknown[];

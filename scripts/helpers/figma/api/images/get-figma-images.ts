@@ -1,9 +1,9 @@
 import {
   fetchFigmaJsonApiV1,
-  type FetchFigmaJsonApiV1LimitedOptions,
-} from './fetch-figma-json-api-v1.ts';
+  type FetchFigmaJsonApiV1ForConsumerOptions,
+} from '../fetch-figma-json-api-v1.ts';
 
-export interface GetFigmaImagesOptions extends FetchFigmaJsonApiV1LimitedOptions {
+export interface GetFigmaImagesOptions extends FetchFigmaJsonApiV1ForConsumerOptions {
   readonly fileKey: string;
   readonly ids: readonly string[];
   readonly format?: 'jpg' | 'png' | 'svg' | 'pdf'; // (default: svg)

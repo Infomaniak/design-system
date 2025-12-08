@@ -4,7 +4,7 @@ export interface FetchFigmaJsonApiV1Options extends RequestInit {
   readonly token: string;
 }
 
-export type FetchFigmaJsonApiV1LimitedOptions = Omit<
+export type FetchFigmaJsonApiV1ForConsumerOptions = Omit<
   FetchFigmaJsonApiV1Options,
   'path' | 'searchParam' | keyof RequestInit
 >;

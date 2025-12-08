@@ -1,9 +1,8 @@
-import { type FigmaNode } from './figma-node.ts';
-import { type FigmaNodeWithChildren } from './types/figma-node-with-children.ts';
+import { type FigmaNode } from '../figma-node.ts';
+import { type HavingFigmaNodeChildren } from '../having-figma-node-children.ts';
 
 export interface FigmaBooleanOperationNode
-  extends FigmaNode<'BOOLEAN_OPERATION'>,
-    FigmaNodeWithChildren {
+  extends FigmaNode<'BOOLEAN_OPERATION'>, HavingFigmaNodeChildren {
   readonly booleanOperation: string;
 }
 

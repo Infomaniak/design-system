@@ -1,12 +1,12 @@
-import { type FigmaFile } from '../types/figma-types.ts';
 import {
   fetchFigmaJsonApiV1,
-  type FetchFigmaJsonApiV1LimitedOptions,
-} from './fetch-figma-json-api-v1.ts';
+  type FetchFigmaJsonApiV1ForConsumerOptions,
+} from '../fetch-figma-json-api-v1.ts';
+import { type FigmaFile } from './types/figma-file.ts';
 
 /* GET FIGMA FILE  */
 
-export interface GetFigmaFileOptions extends FetchFigmaJsonApiV1LimitedOptions {
+export interface GetFigmaFileOptions extends FetchFigmaJsonApiV1ForConsumerOptions {
   readonly fileKey: string;
 }
 

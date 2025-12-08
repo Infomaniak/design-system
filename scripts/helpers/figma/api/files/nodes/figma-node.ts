@@ -1,4 +1,4 @@
-import { type FigmaVariableAlias } from '../figma-types.ts';
+import { FigmaVariableAlias } from '../types/figma-variable-alias';
 
 export interface FigmaNode<GType extends string = any> {
   readonly id: string;

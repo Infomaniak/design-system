@@ -1,8 +1,10 @@
-import { type FigmaColor, type FigmaRectangle, type FigmaVector } from '../figma-types.ts';
-import { type FigmaNode } from './figma-node.ts';
-import type { FigmaNodeWithChildren } from './types/figma-node-with-children.ts';
+import { FigmaColor } from '../../types/figma-color';
+import { FigmaRectangle } from '../../types/figma-rectangle';
+import { FigmaVector } from '../../types/figma-vector';
+import { type FigmaNode } from '../figma-node.ts';
+import type { HavingFigmaNodeChildren } from '../having-figma-node-children.ts';
 
-export interface FigmaFrameNodeProperties extends FigmaNodeWithChildren {
+export interface FigmaFrameNodeProperties extends HavingFigmaNodeChildren {
   readonly locked: boolean;
   readonly background: readonly unknown[];
   readonly backgroundColor: FigmaColor;

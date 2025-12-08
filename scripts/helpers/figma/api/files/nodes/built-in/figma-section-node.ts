@@ -1,7 +1,7 @@
-import { type FigmaNode } from './figma-node.ts';
-import { type FigmaNodeWithChildren } from './types/figma-node-with-children.ts';
+import { type FigmaNode } from '../figma-node.ts';
+import { type HavingFigmaNodeChildren } from '../having-figma-node-children.ts';
 
-export interface FigmaSectionNode extends FigmaNode<'SECTION'>, FigmaNodeWithChildren {
+export interface FigmaSectionNode extends FigmaNode<'SECTION'>, HavingFigmaNodeChildren {
   readonly sectionContentsHidden: boolean;
   readonly devStatus: unknown | null;
   readonly fills: readonly unknown[];
