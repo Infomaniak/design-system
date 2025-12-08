@@ -2,19 +2,20 @@
 
 This projet is open to everyone. Feel free to test the library, share it, improve it, and create merge requests.
 
-### Getting started
+## Getting started
 
 The library requires [Node.js](https://nodejs.org/en) `24+` and [yarn](https://yarnpkg.com/).
 
-First, we have to use the correct version of node:
+First, we use the expected node's version:
 
 ```shell
 nvm use
 ```
 
-If you don't have [nvm](https://github.com/nvm-sh/nvm), you may manually install and use Node.js 24+.
+> [!TIP]  
+> If you don't have [nvm](https://github.com/nvm-sh/nvm), you may manually [install and use](https://nodejs.org/en/download) Node.js 24+.
 
-Then, we have to use the proper package manager (here `yarn`):
+Then, let's use the proper package manager (`yarn`):
 
 ```shell
 corepack enable
@@ -26,19 +27,55 @@ And install the dependencies:
 yarn install
 ```
 
-### Code
+Next, we'll have to create a file named `.env`:
+
+```shell
+cp .env.example .env
+```
+
+And replace the corresponding variables:
+
+### Generate a `FIGMA_API_TOKEN`
+
+Go to https://www.figma.com
+
+On the top left corner, hover the menu, and click on `Settings`:
+
+![](./assets/tokens/figma/figma-token-generation--settings-menu.png)
+
+Then, click on the `Security` tab, and click on `Generate new token`:
+
+![](./assets/tokens/figma/figma-token-generation--settings-security.png)
+
+This will open a modal to set-up your token. Fill the form and click `Generate token`:
+
+![](./assets/tokens/figma/figma-token-generation--settings--generate-token.png)
+
+Finally, **COPY THIS TOKEN**. This is the only time you'll be able to do so, so don't skip this step.
+
+![](./assets/tokens/figma/figma-token-generation--settings--copy-token.png)
+
+#### Store the token locally in your `.env` file
+
+You may put this token inside your `.env` file:
+
+```dotenv
+FIGMA_API_TOKEN="figd_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
+
+## Code
 
 - The source code is located in the `src` directory.
 - The projet uses [prettier](https://prettier.io/) to format the code. You'll want to enable and configure it in your IDE.
 - The tests run with [vitest](https://vitest.dev)
 
-### Commands
+## Commands
 
 - `build`: builds the library.
 - `test`: builds the library.
 
 
-### To create an MR
+## To create an MR
 
 1. fork the repository
 1. add the feature/fix by modifying the code in the `src/` directory
