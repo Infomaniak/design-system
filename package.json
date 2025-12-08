@@ -1,0 +1,39 @@
+{
+  "name": "@infomaniak/design-system",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./index.js",
+  "scripts": {
+    "=== BUILD ===": "",
+    "build": "yarn workspaces foreach -Apt run build",
+    "build:tokens": " yarn workspace @infomaniak-design-system/tokens build",
+    "format": "prettier --write --ignore-unknown --config ./.prettierrc \"src/**/*.{js,jsx,ts,tsx,html,css,scss}\"",
+    "=== TEST ===": "",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "bench": "vitest bench"
+  },
+  "description": "Infomaniak's Design System",
+  "keywords": [],
+  "author": "Valentin Richard",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Infomaniak/design-system.git"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@vitest/coverage-istanbul": "^4.0.15",
+    "prettier": "^3.7.4",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.15"
+  },
+  "packageManager": "yarn@4.12.0"
+}

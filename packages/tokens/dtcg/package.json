@@ -1,0 +1,13 @@
+{
+  "name": "@infomaniak-design-system/tokens-dtcg",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./index.js",
+  "scripts": {
+    "build": "node scripts/build.ts"
+  },
+  "description": "Infomaniak's Design System - Tokens",
+  "keywords": [],
+  "private": true,
+  "devDependencies": {}
+}
