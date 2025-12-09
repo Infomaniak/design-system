@@ -44,7 +44,7 @@ cp .env.example .env
 
 And replace the corresponding variables:
 
-- [FIGMA_API_TOKEN](docs/tokens/figma/figma-api-token.md)
+- [FIGMA_API_TOKEN](docs/figma/api-token/figma-api-token.md)
 
 ## Code
 
