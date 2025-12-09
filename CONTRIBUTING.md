@@ -60,12 +60,12 @@ And replace the corresponding variables:
 - `test`: tests the library.
 
 
-## To create an MR
+## Create a pull request
 
 1. fork the repository
-1. add the feature/fix by modifying the code in the `src/` directory
+1. add the feature/fix by modifying the existing code
 1. add/write some tests until 100% code coverage is reached (run the tests with `yarn test:coverage`)
 1. format the code, using the command `yarn format`
 1. commit and push your work following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention
-1. create an MR from your repository to the upstream repository, explaining clearly what was added/fixed.
+1. create a PR from your repository to the upstream repository, explaining clearly what was added/fixed.
 
