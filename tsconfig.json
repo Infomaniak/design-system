@@ -54,5 +54,5 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true
   },
-  "include": ["src/**/*.ts"]
+  "include": ["./**/*.ts"]
 }

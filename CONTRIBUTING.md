@@ -4,64 +4,47 @@ This projet is open to everyone. Feel free to test the library, share it, improv
 
 ## Getting started
 
-The library requires [Node.js](https://nodejs.org/en) `24+` and [yarn](https://yarnpkg.com/).
+### Tools
 
-First, we use the expected node's version:
+#### [nvm](https://github.com/nvm-sh/nvm)
+
+We recommand using [nvm](https://github.com/nvm-sh/nvm) to manage your Node.js versions.
+
+```shell
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+```
+
+#### [Node](https://nodejs.org)
 
 ```shell
 nvm use
+
+# Verify the Node.js version:
+node -v
 ```
 
-> [!TIP]  
-> If you don't have [nvm](https://github.com/nvm-sh/nvm), you may manually [install and use](https://nodejs.org/en/download) Node.js 24+.
-
-Then, let's use the proper package manager (`yarn`):
+#### [Yarn](https://yarnpkg.com)
 
 ```shell
-corepack enable
-```
+corepack enable yarn
 
-And install the dependencies:
+# Verify Yarn version:
+yarn -v
 
-```shell
+# Install the dependencies:
 yarn install
 ```
 
-Next, we'll have to create a file named `.env`:
+### Environment variables
 
 ```shell
+# Copy the example file into .env:
 cp .env.example .env
 ```
 
 And replace the corresponding variables:
 
-### Generate a `FIGMA_API_TOKEN`
-
-Go to https://www.figma.com
-
-On the top left corner, hover the menu, and click on `Settings`:
-
-![](./assets/tokens/figma/figma-token-generation--settings-menu.png)
-
-Then, click on the `Security` tab, and click on `Generate new token`:
-
-![](./assets/tokens/figma/figma-token-generation--settings-security.png)
-
-This will open a modal to set-up your token. Fill the form and click `Generate token`:
-
-![](./assets/tokens/figma/figma-token-generation--settings--generate-token.png)
-
-Finally, **COPY THIS TOKEN**. This is the only time you'll be able to do so, so don't skip this step.
-
-![](./assets/tokens/figma/figma-token-generation--settings--copy-token.png)
-
-#### Store the token locally in your `.env` file
-
-You may put this token inside your `.env` file:
-
-```dotenv
-FIGMA_API_TOKEN="figd_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-```
+- [FIGMA_API_TOKEN](docs/tokens/figma/figma-api-token.md)
 
 ## Code
 
@@ -71,8 +54,10 @@ FIGMA_API_TOKEN="figd_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 ## Commands
 
+[//]: # (TODO)
+
 - `build`: builds the library.
-- `test`: builds the library.
+- `test`: tests the library.
 
 
 ## To create an MR

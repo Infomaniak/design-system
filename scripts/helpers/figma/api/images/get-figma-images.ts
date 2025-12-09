@@ -19,6 +19,13 @@ interface FigmaImagesResult {
 
 export type FigmaImagesRecord = Readonly<Record<string /* id */, string>>;
 
+/**
+ * Gets the images of a figma file.
+ *
+ * `GET /images/{fileKey}`
+ *
+ * @inheritDoc https://developers.figma.com/docs/rest-api/file-endpoints/#get-images-endpoint
+ */
 export async function getFigmaImages({
   fileKey,
   ids,

@@ -4,6 +4,7 @@
   "type": "module",
   "main": "./index.js",
   "scripts": {
+    "import": "node scripts/import-from-figma.ts",
     "build": "node scripts/build.ts"
   },
   "description": "Infomaniak's Design System - Tokens",
