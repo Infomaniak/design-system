@@ -5,10 +5,13 @@
   "main": "./index.js",
   "scripts": {
     "import": "node scripts/import-from-figma.ts",
-    "build": "node scripts/build.ts"
+    "build": "tz build"
   },
   "description": "Infomaniak's Design System - Tokens",
   "keywords": [],
   "private": true,
-  "devDependencies": {}
+  "devDependencies": {
+    "@terrazzo/cli": "^0.10.5",
+    "@terrazzo/plugin-css": "^0.10.4"
+  }
 }
