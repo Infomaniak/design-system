@@ -1,6 +1,6 @@
-import type { TokensBrueckeRootNode } from '../../../../scripts/helpers/dtcg/from/tokens-bruecke/dtcg-from-tokens-bruecke.ts';
+import type { TokensBrueckeGroupNode } from '../../../../scripts/helpers/tokens-bruecke/dtcg-from-tokens-bruecke.ts';
 
-export const TOKENS: TokensBrueckeRootNode = {
+export const TOKENS: TokensBrueckeGroupNode = {
   TailwindCSS: {
     breakpoint: {
       sm: {
@@ -5450,12 +5450,391 @@ export const TOKENS: TokensBrueckeRootNode = {
       },
     },
   },
+  'Grid-styles': {
+    'max-width': {
+      xs: {
+        $type: 'grid',
+        $value: {
+          columnCount: 1,
+          columnWidth: '320px',
+        },
+      },
+      sm: {
+        $type: 'grid',
+        $value: {
+          columnCount: 1,
+          columnWidth: '384px',
+        },
+      },
+      md: {
+        $type: 'grid',
+        $value: {
+          columnCount: 1,
+          columnWidth: '448px',
+        },
+      },
+      lg: {
+        $type: 'grid',
+        $value: {
+          columnCount: 1,
+          columnWidth: '512px',
+        },
+      },
+      xl: {
+        $type: 'grid',
+        $value: {
+          columnCount: 1,
+          columnWidth: '576px',
+        },
+      },
+      '2xl': {
+        $type: 'grid',
+        $value: {
+          columnCount: 1,
+          columnWidth: '672px',
+        },
+      },
+      '3xl': {
+        $type: 'grid',
+        $value: {
+          columnCount: 1,
+          columnWidth: '768px',
+        },
+      },
+      '4xl': {
+        $type: 'grid',
+        $value: {
+          columnCount: 1,
+          columnWidth: '896px',
+        },
+      },
+      '5xl': {
+        $type: 'grid',
+        $value: {
+          columnCount: 1,
+          columnWidth: '1024px',
+        },
+      },
+      '6xl': {
+        $type: 'grid',
+        $value: {
+          columnCount: 1,
+          columnWidth: '1152px',
+        },
+      },
+      '7xl': {
+        $type: 'grid',
+        $value: {
+          columnCount: 1,
+          columnWidth: '1280px',
+        },
+      },
+    },
+  },
+  'Effect-styles': {
+    shadow: {
+      '2xs': {
+        $type: 'shadow',
+        $value: [
+          {
+            inset: false,
+            color: '#0000000d',
+            offsetX: '0px',
+            offsetY: '1px',
+            blur: '0px',
+            spread: '0px',
+          },
+        ],
+      },
+      xs: {
+        $type: 'shadow',
+        $value: [
+          {
+            inset: false,
+            color: '#0000000d',
+            offsetX: '0px',
+            offsetY: '1px',
+            blur: '2px',
+            spread: '0px',
+          },
+        ],
+      },
+      sm: {
+        $type: 'shadow',
+        $value: [
+          {
+            inset: false,
+            color: '#0000000f',
+            offsetX: '0px',
+            offsetY: '1px',
+            blur: '2px',
+            spread: '0px',
+          },
+          {
+            inset: false,
+            color: '#0000001a',
+            offsetX: '0px',
+            offsetY: '1px',
+            blur: '3px',
+            spread: '0px',
+          },
+        ],
+      },
+      md: {
+        $type: 'shadow',
+        $value: [
+          {
+            inset: false,
+            color: '#0000000f',
+            offsetX: '0px',
+            offsetY: '2px',
+            blur: '4px',
+            spread: '-1px',
+          },
+          {
+            inset: false,
+            color: '#0000001a',
+            offsetX: '0px',
+            offsetY: '4px',
+            blur: '6px',
+            spread: '-1px',
+          },
+        ],
+      },
+      lg: {
+        $type: 'shadow',
+        $value: [
+          {
+            inset: false,
+            color: '#0000000d',
+            offsetX: '0px',
+            offsetY: '4px',
+            blur: '6px',
+            spread: '-2px',
+          },
+          {
+            inset: false,
+            color: '#0000001a',
+            offsetX: '0px',
+            offsetY: '10px',
+            blur: '15px',
+            spread: '-3px',
+          },
+        ],
+      },
+      xl: {
+        $type: 'shadow',
+        $value: [
+          {
+            inset: false,
+            color: '#0000000a',
+            offsetX: '0px',
+            offsetY: '10px',
+            blur: '10px',
+            spread: '-5px',
+          },
+          {
+            inset: false,
+            color: '#0000001a',
+            offsetX: '0px',
+            offsetY: '20px',
+            blur: '25px',
+            spread: '-5px',
+          },
+        ],
+      },
+      '2xl': {
+        $type: 'shadow',
+        $value: [
+          {
+            inset: false,
+            color: '#00000040',
+            offsetX: '0px',
+            offsetY: '25px',
+            blur: '50px',
+            spread: '-12px',
+          },
+        ],
+      },
+      none: {
+        $type: 'shadow',
+        $value: [
+          {
+            inset: false,
+            color: '#000000',
+            offsetX: '0px',
+            offsetY: '0px',
+            blur: '0px',
+            spread: '0px',
+          },
+        ],
+      },
+    },
+    'inner-shadow': {
+      '2xs': {
+        $type: 'shadow',
+        $value: [
+          {
+            inset: true,
+            color: '#0000000d',
+            offsetX: '0px',
+            offsetY: '1px',
+            blur: '0px',
+            spread: '0px',
+          },
+        ],
+      },
+      xs: {
+        $type: 'shadow',
+        $value: [
+          {
+            inset: true,
+            color: '#0000000d',
+            offsetX: '0px',
+            offsetY: '1px',
+            blur: '1px',
+            spread: '0px',
+          },
+        ],
+      },
+      sm: {
+        $type: 'shadow',
+        $value: [
+          {
+            inset: true,
+            color: '#0000000d',
+            offsetX: '0px',
+            offsetY: '2px',
+            blur: '4px',
+            spread: '0px',
+          },
+        ],
+      },
+    },
+    blur: {
+      none: {
+        $type: 'blur',
+        $value: {
+          role: 'layer',
+          blur: '{TailwindCSS.blur.none}',
+        },
+      },
+      xs: {
+        $type: 'blur',
+        $value: {
+          role: 'layer',
+          blur: '{TailwindCSS.blur.xs}',
+        },
+      },
+      sm: {
+        $type: 'blur',
+        $value: {
+          role: 'layer',
+          blur: '{TailwindCSS.blur.sm}',
+        },
+      },
+      md: {
+        $type: 'blur',
+        $value: {
+          role: 'layer',
+          blur: '{TailwindCSS.blur.md}',
+        },
+      },
+      lg: {
+        $type: 'blur',
+        $value: {
+          role: 'layer',
+          blur: '{TailwindCSS.blur.lg}',
+        },
+      },
+      xl: {
+        $type: 'blur',
+        $value: {
+          role: 'layer',
+          blur: '{TailwindCSS.blur.xl}',
+        },
+      },
+      '2xl': {
+        $type: 'blur',
+        $value: {
+          role: 'layer',
+          blur: '{TailwindCSS.blur.2xl}',
+        },
+      },
+      '3xl': {
+        $type: 'blur',
+        $value: {
+          role: 'layer',
+          blur: '{TailwindCSS.blur.3xl}',
+        },
+      },
+    },
+    'backdrop-blur': {
+      none: {
+        $type: 'blur',
+        $value: {
+          role: 'background',
+          blur: '{TailwindCSS.blur.none}',
+        },
+      },
+      xs: {
+        $type: 'blur',
+        $value: {
+          role: 'background',
+          blur: '{TailwindCSS.blur.xs}',
+        },
+      },
+      sm: {
+        $type: 'blur',
+        $value: {
+          role: 'background',
+          blur: '{TailwindCSS.blur.sm}',
+        },
+      },
+      md: {
+        $type: 'blur',
+        $value: {
+          role: 'background',
+          blur: '{TailwindCSS.blur.md}',
+        },
+      },
+      lg: {
+        $type: 'blur',
+        $value: {
+          role: 'background',
+          blur: '{TailwindCSS.blur.lg}',
+        },
+      },
+      xl: {
+        $type: 'blur',
+        $value: {
+          role: 'background',
+          blur: '{TailwindCSS.blur.xl}',
+        },
+      },
+      '2xl': {
+        $type: 'blur',
+        $value: {
+          role: 'background',
+          blur: '{TailwindCSS.blur.2xl}',
+        },
+      },
+      '3xl': {
+        $type: 'blur',
+        $value: {
+          role: 'background',
+          blur: '{TailwindCSS.blur.3xl}',
+        },
+      },
+    },
+  },
+  'Color-styles': {},
   $extensions: {
     'tokens-bruecke-meta': {
       useDTCGKeys: true,
       colorMode: 'hex',
       variableCollections: ['TailwindCSS'],
-      createdAt: '2025-12-09T11:06:49.711Z',
+      createdAt: '2025-12-12T07:10:53.044Z',
     },
   },
 };

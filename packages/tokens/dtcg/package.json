@@ -5,6 +5,8 @@
   "main": "./index.js",
   "scripts": {
     "import": "node scripts/import-from-figma.ts",
+    "normalize-and-build": "yarn run normalize && yarn run build",
+    "normalize": "node scripts/normalize.ts",
     "build": "tz build"
   },
   "description": "Infomaniak's Design System - Tokens",
@@ -12,6 +14,7 @@
   "private": true,
   "devDependencies": {
     "@terrazzo/cli": "^0.10.5",
-    "@terrazzo/plugin-css": "^0.10.4"
+    "@terrazzo/plugin-css": "^0.10.4",
+    "@terrazzo/plugin-tailwind": "^0.3.3"
   }
 }

@@ -405,6 +405,7 @@ __metadata:
   dependencies:
     "@terrazzo/cli": "npm:^0.10.5"
     "@terrazzo/plugin-css": "npm:^0.10.4"
+    "@terrazzo/plugin-tailwind": "npm:^0.3.3"
   languageName: unknown
   linkType: soft
 
@@ -412,6 +413,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@infomaniak/design-system@workspace:."
   dependencies:
+    "@terrazzo/token-tools": "npm:^0.10.5"
     "@types/node": "npm:^24.10.1"
     "@vitest/coverage-istanbul": "npm:^4.0.15"
     prettier: "npm:^3.7.4"
@@ -732,6 +734,19 @@ __metadata:
   peerDependencies:
     "@terrazzo/cli": ^0.10.3
   checksum: 10c0/b054fe098e79f1d70018135e86066fbbd64af330826e30bc9ec741abd4534a136d911d30b13c5f6b4ea1afb60ca7e0625468338bb1d06549498a00656374155f
+  languageName: node
+  linkType: hard
+
+"@terrazzo/plugin-tailwind@npm:^0.3.3":
+  version: 0.3.3
+  resolution: "@terrazzo/plugin-tailwind@npm:0.3.3"
+  dependencies:
+    "@terrazzo/token-tools": "npm:^0.10.3"
+  peerDependencies:
+    "@terrazzo/cli": ^0.10.3
+    "@terrazzo/plugin-css": ^0.10.4
+    tailwindcss: ^4.0.0
+  checksum: 10c0/a444aa99f4e2ec7eb9f6902d18377d8f199c0a4ead1d39747c825a087d9664d7de2c42cb16e88ecc48a60dff9294850c241cd1797bbc63bc3f66849915b5e9c4
   languageName: node
   linkType: hard
 
