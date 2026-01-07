@@ -1,0 +1,9 @@
+{
+  "radius": {
+    "$type": "dimension",
+    "100": { "$value": { "value": 0.25, "unit": "rem" } },
+    "200": { "$value": { "value": 0.5, "unit": "rem" } },
+    "400": { "$value": { "value": 1, "unit": "rem" } },
+    "full": { "$value": { "value": 624.9375, "unit": "rem" } }
+  }
+}

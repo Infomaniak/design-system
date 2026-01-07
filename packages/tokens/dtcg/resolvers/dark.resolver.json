@@ -1,0 +1,29 @@
+{
+  "name": "Dark Resolver",
+  "version": "2025.10",
+  "sets": {
+    "primitive": {
+      "sources": [
+        { "$ref": "../tokens/t1-primitive/color.tokens.json" },
+        { "$ref": "../tokens/t1-primitive/font.tokens.json" },
+        { "$ref": "../tokens/t1-primitive/radius.tokens.json" },
+        { "$ref": "../tokens/t1-primitive/typography.tokens.json" }
+      ]
+    },
+    "semantic": {
+      "sources": [{ "$ref": "../tokens/t2-semantic/color.tokens.json" }]
+    },
+    "component": {
+      "sources": [{ "$ref": "../tokens/t3-component/button.tokens.json" }]
+    },
+    "theme": {
+      "sources": [{ "$ref": "../tokens/themes/dark.tokens.json" }]
+    }
+  },
+  "resolutionOrder": [
+    { "$ref": "#/sets/primitive" },
+    { "$ref": "#/sets/semantic" },
+    { "$ref": "#/sets/component" },
+    { "$ref": "#/sets/theme" }
+  ]
+}

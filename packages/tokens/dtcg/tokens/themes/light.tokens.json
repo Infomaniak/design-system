@@ -1,0 +1,194 @@
+{
+  "color": {
+    "background": {
+      "brand": {
+        "default": { "$value": "{color.brand.800}" },
+        "hover": { "$value": "{color.brand.900}" },
+        "secondary": { "$value": "{color.brand.200}" },
+        "secondary-hover": { "$value": "{color.brand.300}" },
+        "tertiary": { "$value": "{color.brand.100}" },
+        "tertiary-hover": { "$value": "{color.brand.200}" }
+      },
+      "danger": {
+        "default": { "$value": "{color.red.500}" },
+        "hover": { "$value": "{color.red.600}" },
+        "secondary": { "$value": "{color.red.200}" },
+        "secondary-hover": { "$value": "{color.red.300}" },
+        "tertiary": { "$value": "{color.red.100}" },
+        "tertiary-hover": { "$value": "{color.red.200}" }
+      },
+      "default": {
+        "default": { "$value": "{color.white.1000}" },
+        "hover": { "$value": "{color.gray.100}" },
+        "secondary": { "$value": "{color.gray.100}" },
+        "secondary-hover": { "$value": "{color.gray.200}" },
+        "tertiary": { "$value": "{color.gray.300}" },
+        "tertiary-hover": { "$value": "{color.gray.400}" }
+      },
+      "disabled": {
+        "default": { "$value": "{color.brand.300}" }
+      },
+      "neutral": {
+        "default": { "$value": "{color.slate.700}" },
+        "hover": { "$value": "{color.slate.800}" },
+        "secondary": { "$value": "{color.slate.300}" },
+        "secondary-hover": { "$value": "{color.slate.400}" },
+        "tertiary": { "$value": "{color.slate.200}" },
+        "tertiary-hover": { "$value": "{color.slate.300}" }
+      },
+      "positive": {
+        "default": { "$value": "{color.green.500}" },
+        "hover": { "$value": "{color.green.600}" },
+        "secondary": { "$value": "{color.green.200}" },
+        "secondary-hover": { "$value": "{color.green.300}" },
+        "tertiary": { "$value": "{color.green.100}" },
+        "tertiary-hover": { "$value": "{color.green.200}" }
+      },
+      "warning": {
+        "default": { "$value": "{color.yellow.400}" },
+        "hover": { "$value": "{color.yellow.500}" },
+        "secondary": { "$value": "{color.yellow.200}" },
+        "secondary-hover": { "$value": "{color.yellow.300}" },
+        "tertiary": { "$value": "{color.yellow.100}" },
+        "tertiary-hover": { "$value": "{color.yellow.200}" }
+      }
+    },
+    "border": {
+      "brand": {
+        "default": { "$value": "{color.brand.800}" },
+        "secondary": { "$value": "{color.brand.600}" },
+        "tertiary": { "$value": "{color.brand.500}" }
+      },
+      "danger": {
+        "default": { "$value": "{color.red.700}" },
+        "secondary": { "$value": "{color.red.600}" },
+        "tertiary": { "$value": "{color.red.500}" }
+      },
+      "default": {
+        "default": { "$value": "{color.gray.300}" },
+        "secondary": { "$value": "{color.gray.500}" },
+        "tertiary": { "$value": "{color.gray.700}" }
+      },
+      "disabled": {
+        "default": { "$value": "{color.brand.400}" }
+      },
+      "neutral": {
+        "default": { "$value": "{color.slate.900}" },
+        "secondary": { "$value": "{color.slate.600}" },
+        "tertiary": { "$value": "{color.slate.400}" }
+      },
+      "positive": {
+        "default": { "$value": "{color.green.800}" },
+        "secondary": { "$value": "{color.green.600}" },
+        "tertiary": { "$value": "{color.green.500}" }
+      },
+      "warning": {
+        "default": { "$value": "{color.yellow.900}" },
+        "secondary": { "$value": "{color.yellow.700}" },
+        "tertiary": { "$value": "{color.yellow.600}" }
+      }
+    },
+    "icon": {
+      "brand": {
+        "default": { "$value": "{color.brand.800}" },
+        "secondary": { "$value": "{color.brand.600}" },
+        "tertiary": { "$value": "{color.brand.500}" },
+        "on-brand": { "$value": "{color.brand.100}" },
+        "on-brand-secondary": { "$value": "{color.brand.900}" },
+        "on-brand-tertiary": { "$value": "{color.brand.800}" }
+      },
+      "danger": {
+        "default": { "$value": "{color.red.700}" },
+        "secondary": { "$value": "{color.red.600}" },
+        "tertiary": { "$value": "{color.red.500}" },
+        "on-danger": { "$value": "{color.red.100}" },
+        "on-danger-secondary": { "$value": "{color.red.700}" },
+        "on-danger-tertiary": { "$value": "{color.red.700}" }
+      },
+      "default": {
+        "default": { "$value": "{color.gray.900}" },
+        "secondary": { "$value": "{color.gray.500}" },
+        "tertiary": { "$value": "{color.gray.400}" }
+      },
+      "disabled": {
+        "default": { "$value": "{color.brand.400}" },
+        "on-disabled": { "$value": "{color.brand.400}" }
+      },
+      "neutral": {
+        "default": { "$value": "{color.slate.900}" },
+        "secondary": { "$value": "{color.slate.700}" },
+        "tertiary": { "$value": "{color.slate.600}" },
+        "on-neutral": { "$value": "{color.slate.100}" },
+        "on-neutral-secondary": { "$value": "{color.slate.900}" },
+        "on-neutral-tertiary": { "$value": "{color.slate.800}" }
+      },
+      "positive": {
+        "default": { "$value": "{color.green.800}" },
+        "secondary": { "$value": "{color.green.600}" },
+        "tertiary": { "$value": "{color.green.500}" },
+        "on-positive": { "$value": "{color.green.100}" },
+        "on-positive-secondary": { "$value": "{color.green.800}" },
+        "on-positive-tertiary": { "$value": "{color.green.500}" }
+      },
+      "warning": {
+        "default": { "$value": "{color.yellow.900}" },
+        "secondary": { "$value": "{color.yellow.700}" },
+        "tertiary": { "$value": "{color.yellow.600}" },
+        "on-warning": { "$value": "{color.yellow.1000}" },
+        "on-warning-secondary": { "$value": "{color.yellow.800}" },
+        "on-warning-tertiary": { "$value": "{color.yellow.900}" }
+      }
+    },
+    "text": {
+      "brand": {
+        "default": { "$value": "{color.brand.800}" },
+        "secondary": { "$value": "{color.brand.600}" },
+        "tertiary": { "$value": "{color.brand.500}" },
+        "on-brand": { "$value": "{color.brand.100}" },
+        "on-brand-secondary": { "$value": "{color.brand.900}" },
+        "on-brand-tertiary": { "$value": "{color.brand.800}" }
+      },
+      "danger": {
+        "default": { "$value": "{color.red.700}" },
+        "secondary": { "$value": "{color.red.600}" },
+        "tertiary": { "$value": "{color.red.500}" },
+        "on-danger": { "$value": "{color.red.100}" },
+        "on-danger-secondary": { "$value": "{color.red.700}" },
+        "on-danger-tertiary": { "$value": "{color.red.700}" }
+      },
+      "default": {
+        "default": { "$value": "{color.gray.900}" },
+        "secondary": { "$value": "{color.gray.500}" },
+        "tertiary": { "$value": "{color.gray.400}" }
+      },
+      "disabled": {
+        "default": { "$value": "{color.brand.400}" },
+        "on-disabled": { "$value": "{color.brand.400}" }
+      },
+      "neutral": {
+        "default": { "$value": "{color.slate.900}" },
+        "on-neutral": { "$value": "{color.slate.100}" },
+        "on-neutral-secondary": { "$value": "{color.slate.900}" },
+        "on-neutral-tertiary": { "$value": "{color.slate.800}" },
+        "secondary": { "$value": "{color.slate.700}" },
+        "tertiary": { "$value": "{color.slate.600}" }
+      },
+      "positive": {
+        "default": { "$value": "{color.green.800}" },
+        "secondary": { "$value": "{color.green.600}" },
+        "tertiary": { "$value": "{color.green.500}" },
+        "on-positive": { "$value": "{color.green.100}" },
+        "on-positive-secondary": { "$value": "{color.green.800}" },
+        "on-positive-tertiary": { "$value": "{color.green.800}" }
+      },
+      "warning": {
+        "default": { "$value": "{color.yellow.900}" },
+        "secondary": { "$value": "{color.yellow.700}" },
+        "tertiary": { "$value": "{color.yellow.600}" },
+        "on-warning": { "$value": "{color.yellow.1000}" },
+        "on-warning-secondary": { "$value": "{color.yellow.800}" },
+        "on-warning-tertiary": { "$value": "{color.yellow.900}" }
+      }
+    }
+  }
+}
