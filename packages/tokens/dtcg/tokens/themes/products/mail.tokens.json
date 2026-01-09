@@ -1,0 +1,36 @@
+{
+  "color": {
+    "brand": {
+      "100": {
+        "$value": "{color.pink.100}"
+      },
+      "200": {
+        "$value": "{color.pink.200}"
+      },
+      "300": {
+        "$value": "{color.pink.300}"
+      },
+      "400": {
+        "$value": "{color.pink.400}"
+      },
+      "500": {
+        "$value": "{color.pink.500}"
+      },
+      "600": {
+        "$value": "{color.pink.600}"
+      },
+      "700": {
+        "$value": "{color.pink.700}"
+      },
+      "800": {
+        "$value": "{color.pink.800}"
+      },
+      "900": {
+        "$value": "{color.pink.900}"
+      },
+      "1000": {
+        "$value": "{color.pink.1000}"
+      }
+    }
+  }
+}
