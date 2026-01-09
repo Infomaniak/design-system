@@ -41,13 +41,7 @@
           "value": 1,
           "unit": "px"
         },
-        "style": {
-          "dashArray": [
-            { "value": 0.5, "unit": "rem" },
-            { "value": 0.25, "unit": "rem" }
-          ],
-          "lineCap": "round"
-        }
+        "style": "solid"
       }
     }
   },

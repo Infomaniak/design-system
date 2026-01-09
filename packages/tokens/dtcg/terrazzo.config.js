@@ -5,7 +5,7 @@ import css from '@terrazzo/plugin-css';
 export default defineConfig({
   tokens: './resolvers/ikds.resolver.json',
   // tokens: ['./tokens/t1-primitives/colors.tokens.json', './ikds.resolver.json'],
-  outDir: 'formats',
+  outDir: 'dist',
   plugins: [
     css({
       filename: 'tokens.css',

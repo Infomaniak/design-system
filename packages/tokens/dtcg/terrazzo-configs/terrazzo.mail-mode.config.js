@@ -2,13 +2,13 @@ import { defineConfig } from '@terrazzo/cli';
 import css from '@terrazzo/plugin-css';
 
 export default defineConfig({
-  tokens: './resolvers/dark.resolver.json',
-  outDir: 'formats',
+  tokens: './resolvers/mail.resolver.json',
+  outDir: 'dist',
   plugins: [
     css({
-      filename: 'dark.css',
+      filename: 'mail-mode.css',
       variableName: (token) => `--ikds-${token.id.replace(/\./g, '-').toLowerCase()}`,
-      baseSelector: `:root`,
+      baseSelector: `[data-color-mode="mail"]`,
     }),
   ],
 });

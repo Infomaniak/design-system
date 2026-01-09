@@ -1,7 +1,9 @@
 {
   "button": {
     "background": {
-      "color": "{color.brand.200}"
+      "color": {
+        "$value": "{color.brand.200}"
+      }
     }
   }
 }

@@ -7,13 +7,13 @@
     "import": "node scripts/import-from-figma.ts",
     "normalize-and-build": "yarn run normalize && yarn run build",
     "normalize": "node scripts/normalize.ts",
-    "sd:build": "node build-tokens.js",
+    "sd:build": "node build-tokens.ts",
     "tz:build": "yarn tz:build:light && yarn tz:build:dark && yarn tz:build:light-mode && yarn tz:build:dark-mode && yarn tz:build:mail-mode",
-    "tz:build:light": "tz build -c configs/terrazzo.light.config.js",
-    "tz:build:dark": "tz build -c configs/terrazzo.dark.config.js",
-    "tz:build:light-mode": "tz build -c configs/terrazzo.light-mode.config.js",
-    "tz:build:dark-mode": "tz build -c configs/terrazzo.dark-mode.config.js",
-    "tz:build:mail-mode": "tz build -c configs/terrazzo.mail-mode.config.js"
+    "tz:build:light": "tz build -c terrazzo-configs/terrazzo.light.config.js",
+    "tz:build:dark": "tz build -c terrazzo-configs/terrazzo.dark.config.js",
+    "tz:build:light-mode": "tz build -c terrazzo-configs/terrazzo.light-mode.config.js",
+    "tz:build:dark-mode": "tz build -c terrazzo-configs/terrazzo.dark-mode.config.js",
+    "tz:build:mail-mode": "tz build -c terrazzo-configs/terrazzo.mail-mode.config.js"
   },
   "description": "Infomaniak's Design System - Tokens",
   "keywords": [],
@@ -22,6 +22,7 @@
     "@terrazzo/cli": "^2.0.0-alpha.7",
     "@terrazzo/plugin-css": "^2.0.0-alpha.7",
     "@terrazzo/plugin-tailwind": "^0.3.3",
+    "colorjs.io": "^0.6.0",
     "style-dictionary": "^5.1.3"
   }
 }

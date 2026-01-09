@@ -1,0 +1,145 @@
+import Color from 'colorjs.io';
+import StyleDictionary from 'style-dictionary';
+import { formats, transformGroups, transformTypes } from 'style-dictionary/enums';
+
+function isDesignToken(input) {
+  return Reflect.has(input, '$value');
+}
+
+function isObject(input) {
+  return typeof input === 'object' && input !== null;
+}
+
+function isDesignTokenColorValue(input) {
+  return (
+    isObject(input) &&
+    typeof input.colorSpace === 'string' &&
+    Array.isArray(input.components) &&
+    (typeof input.alpha === 'number' || input.alpha === undefined)
+  );
+}
+
+function isJsonReference(input) {
+  return (
+    typeof input === 'object' &&
+    input !== null &&
+    Reflect.has(input, '$ref') &&
+    typeof Reflect.get(input, '$ref') === 'string'
+  );
+}
+
+function dtcgColorToStyleDictionaryColor({ colorSpace, components, alpha }) {
+  if (isJsonReference(colorSpace) || isJsonReference(components) || isJsonReference(alpha)) {
+    throw new Error('References are not supported yet.');
+  }
+
+  return new Color({
+    space: colorSpace,
+    coords: components,
+    alpha,
+  }).toString({
+    format: 'hex',
+  });
+}
+
+// function convertDTCGColorsToStyleDictionaryColors(tree, type = undefined) {
+//   type = tree.$type ?? type;
+//
+//   if (isDesignToken(tree)) {
+//     if (isDesignTokenColorValue(tree.$value)) {
+//       return {
+//         ...tree,
+//         $value: dtcgColorToStyleDictionaryColor(tree.$value),
+//       };
+//     } else {
+//       return tree;
+//     }
+//   } else {
+//     return {
+//       ...tree,
+//       ...Object.fromEntries(
+//         Object.entries(tree)
+//           .filter(([key]) => {
+//             return !key.startsWith('$');
+//           })
+//           .map(([key, value]) => {
+//             return [key, convertDTCGColorsToStyleDictionaryColors(value, type)];
+//           }),
+//       ),
+//     };
+//   }
+// }
+//
+// StyleDictionary.registerParser({
+//   name: 'json-parser',
+//   pattern: /\.json$/,
+//   parser: ({ filePath, contents }) => {
+//     console.log(
+//       JSON.stringify(convertDTCGColorsToStyleDictionaryColors(JSON.parse(contents)), null, 2),
+//     );
+//     return convertDTCGColorsToStyleDictionaryColors(JSON.parse(contents));
+//   },
+// });
+
+StyleDictionary.registerTransform({
+  name: 'dtcg/color',
+  type: transformTypes.value,
+  filter: (token) => {
+    return token.$type === 'color';
+  },
+  transform: (token) => {
+    return dtcgColorToStyleDictionaryColor(token.$value);
+  },
+});
+
+StyleDictionary.registerTransform({
+  name: 'dtcg/dimension',
+  type: transformTypes.value,
+  filter: (token) => {
+    return token.$type === 'dimension';
+  },
+  transform: (token) => {
+    return dtcgColorToStyleDictionaryColor(token.$value);
+  },
+});
+
+const sd = new StyleDictionary({
+  log: {
+    verbosity: 'verbose',
+  },
+  include: [
+    // 'tokens/t1-primitive/color.tokens.json',
+    'tokens/t1-primitive/**/*.json',
+    'tokens/t2-semantic/**/*.json',
+    'tokens/t3-component/**/*.json',
+  ],
+  source: [`tokens/themes/light.tokens.json`],
+  // source: [`tokens/themes/products/mail.tokens.json`],
+  // parsers: ['json-parser'],
+  platforms: {
+    css: {
+      expand: {
+        include: ['strokeStyle', 'border', 'transition', 'shadow', 'gradient', 'typography'],
+      },
+      transformGroup: transformGroups.css,
+      buildPath: 'dist/',
+      prefix: 'ikds-',
+      // transforms: [transforms.colorCss],
+      transforms: ['dtcg/color', 'dtcg/dimension'],
+      files: [
+        {
+          destination: 'light.css',
+          format: formats.cssVariables,
+          options: {
+            outputReferences: true,
+            selector: ':root, :host',
+          },
+        },
+      ],
+    },
+  },
+});
+
+// console.log(sd.hooks.transforms);
+
+await sd.buildAllPlatforms();
