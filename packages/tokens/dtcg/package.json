@@ -8,6 +8,7 @@
     "normalize-and-build": "yarn run normalize && yarn run build",
     "normalize": "node scripts/scripts/normalize.ts",
     "build": "yarn build:tokens && yarn copy:css",
+    "validate:tokens": "node scripts/scripts/validate-tokens.script.ts",
     "build:tokens": "node scripts/scripts/build-tokens.script.ts",
     "copy:css": "rm -rf demo/src/styles/ && cp -a dist/. demo/src/styles/",
     "tz:build": "yarn tz:build:light && yarn tz:build:dark && yarn tz:build:light-mode && yarn tz:build:dark-mode && yarn tz:build:mail-mode",

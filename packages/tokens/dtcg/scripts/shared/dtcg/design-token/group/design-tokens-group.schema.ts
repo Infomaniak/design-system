@@ -3,7 +3,7 @@ import { curlyReferenceSchema } from '../reference/types/curly/curly-reference.s
 import { jsonReferenceSchema } from '../reference/types/json/json-reference.schema.ts';
 import { genericDesignTokenSchema } from '../token/generic-design-token.schema.ts';
 
-export const designTokenGroupSchema = z
+export const designTokensGroupSchema = z
   .looseObject({
     $description: z.string().optional(),
     $type: z.string().optional(),
