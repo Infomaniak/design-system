@@ -3,7 +3,7 @@ import Color from 'colorjs.io';
 import StyleDictionary from 'style-dictionary';
 import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
-import { isObject } from '../../../../../../../../../scripts/helpers/misc/is-object.ts';
+import { isObject } from '../../../../../../../../../../scripts/helpers/misc/is-object.ts';
 import type { CurlyReference } from '../../../../../misc/curly-reference/curly-reference.ts';
 import { isCurlyReference } from '../../../../../misc/curly-reference/is-curly-reference.ts';
 import { isJsonReference } from '../../../../../misc/json-reference/is-json-reference.ts';

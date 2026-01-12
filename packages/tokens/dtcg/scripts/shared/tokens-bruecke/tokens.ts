@@ -1,4 +1,4 @@
-import type { TokensBrueckeGroupNode } from '../../../../scripts/helpers/tokens-bruecke/dtcg-from-tokens-bruecke.ts';
+import type { TokensBrueckeGroupNode } from '../../../../../../scripts/helpers/tokens-bruecke/dtcg-from-tokens-bruecke.ts';
 
 export const TOKENS: TokensBrueckeGroupNode = {
   TailwindCSS: {

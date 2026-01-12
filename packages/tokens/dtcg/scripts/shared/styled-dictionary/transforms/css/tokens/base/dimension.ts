@@ -1,21 +1,22 @@
 import StyleDictionary from 'style-dictionary';
 import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
-import { isObject } from '../../../../../../../../../scripts/helpers/misc/is-object.ts';
+import { isObject } from '../../../../../../../../../../scripts/helpers/misc/is-object.ts';
 import type { CurlyReference } from '../../../../../misc/curly-reference/curly-reference.ts';
 import { isCurlyReference } from '../../../../../misc/curly-reference/is-curly-reference.ts';
 import { isJsonReference } from '../../../../../misc/json-reference/is-json-reference.ts';
 import type { CssContext } from '../../css-context.ts';
 import { curlyReferenceToCssValue } from '../../references/curly-reference-to-css-value.ts';
+import { strokeStyleDesignTokenValueDashArrayToCssValue } from '../composite/stroke-style.ts';
 
-export interface DurationDesignTokenValue {
+export interface DimensionDesignTokenValue {
   readonly value: number;
-  readonly unit: DurationDesignTokenValueUnit;
+  readonly unit: DimensionDesignTokenValueUnit;
 }
 
-export type DurationDesignTokenValueUnit = 's' | 'ms';
+export type DimensionDesignTokenValueUnit = 'px' | 'rem';
 
-export function isDurationDesignTokenValue(input: unknown): input is DurationDesignTokenValue {
+export function isDimensionDesignTokenValue(input: unknown): input is DimensionDesignTokenValue {
   return (
     isObject(input) &&
     typeof Reflect.get(input, 'value') === 'number' &&
@@ -23,19 +24,19 @@ export function isDurationDesignTokenValue(input: unknown): input is DurationDes
   );
 }
 
-export function isDurationDesignTokenValueOrCurlyReference(
+export function isDimensionDesignTokenValueOrCurlyReference(
   input: unknown,
-): input is DurationDesignTokenValue | CurlyReference {
-  return isDurationDesignTokenValue(input) || isCurlyReference(input);
+): input is DimensionDesignTokenValue | CurlyReference {
+  return isDimensionDesignTokenValue(input) || isCurlyReference(input);
 }
 
-export function durationDesignTokenValueToCssValue($value: unknown, ctx: CssContext): string {
+export function dimensionDesignTokenValueToCssValue($value: unknown, ctx: CssContext): string {
   if (isCurlyReference($value)) {
     return curlyReferenceToCssValue($value, ctx);
   }
 
-  if (!isDurationDesignTokenValue($value)) {
-    throw new Error('Invalid duration value.');
+  if (!isDimensionDesignTokenValue($value)) {
+    throw new Error('Invalid dimension value.');
   }
 
   const { value, unit } = $value;
@@ -47,17 +48,21 @@ export function durationDesignTokenValueToCssValue($value: unknown, ctx: CssCont
   return `${value}${unit}`;
 }
 
-export const DTCG_DURATION_CSS = 'dtcg/duration/css';
+export const DTCG_DIMENSION_CSS = 'dtcg/dimension/css';
 
-export function registerDtcgDurationCssStyleDictionaryTransform(): void {
+export function registerDtcgDimensionCssStyleDictionaryTransform(): void {
   StyleDictionary.registerTransform({
-    name: DTCG_DURATION_CSS,
+    name: DTCG_DIMENSION_CSS,
     type: transformTypes.value,
     filter: (token: TransformedToken): boolean => {
-      return token.$type === 'duration';
+      return token.$type === 'dimension';
     },
     transform: (token: TransformedToken, ctx: PlatformConfig): string => {
-      return durationDesignTokenValueToCssValue(token.$value, ctx);
+      if (Array.isArray(token.$value)) {
+        return strokeStyleDesignTokenValueDashArrayToCssValue(token.$value);
+      }
+
+      return dimensionDesignTokenValueToCssValue(token.$value, ctx);
     },
   });
 }

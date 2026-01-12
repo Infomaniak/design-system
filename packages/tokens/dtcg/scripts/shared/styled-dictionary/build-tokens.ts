@@ -1,27 +1,17 @@
 import { glob, rm } from 'node:fs/promises';
-import { basename, dirname, join } from 'node:path';
+import { basename, dirname, join, relative } from 'node:path';
 import StyleDictionary from 'style-dictionary';
 import { formats } from 'style-dictionary/enums';
 import { registerStyleDictionaryThemeFilter } from './filters/register-style-dictionary-theme-filter.ts';
 import { DTCG_CSS_TRANSFORMS } from './transforms/css/dtcg-css-transforms.ts';
 import { registerDtcgCssStyleDictionaryTransform } from './transforms/css/register-dtcg-css-style-dictionary-transform.ts';
 
-registerDtcgCssStyleDictionaryTransform();
-registerStyleDictionaryThemeFilter();
-
 async function debug(): Promise<void> {
   const sd = new StyleDictionary({
     log: {
       verbosity: 'verbose',
     },
-    include: [
-      // 'tokens/t1-primitive/color.tokens.json',
-      // 'tokens/t1-primitive/radius.tokens.json',
-      // 'tokens/t1-primitive/test.tokens.json',
-      'tokens/t1-primitive/**/*.json',
-      'tokens/t2-semantic/**/*.json',
-      'tokens/t3-component/**/*.json',
-    ],
+    include: ['tokens/base/**/*.json'],
     source: [`tokens/themes/full/light.tokens.json`],
     // source: [`tokens/themes/products/mail.tokens.json`],
     // parsers: ['json-parser'],
@@ -52,14 +42,38 @@ async function debug(): Promise<void> {
   await sd.buildAllPlatforms();
 }
 
-async function main(): Promise<void> {
-  const distPath: string = 'dist';
-  await rm(distPath, { force: true, recursive: true });
+export interface BuildTokensOptions {
+  readonly sourceBaseTokenDirectory: string;
+  readonly sourceThemesDirectory: string;
+  readonly outputDirectory: string;
+}
 
-  for await (const entry of glob('tokens/themes/**/*.tokens.json')) {
-    // console.log(entry);
+export async function buildTokens({
+  sourceBaseTokenDirectory,
+  sourceThemesDirectory,
+  outputDirectory,
+}: BuildTokensOptions): Promise<void> {
+  // await debug();
+  // return;
 
-    const outputDir: string = join(distPath, dirname(entry).slice('tokens/themes/'.length));
+  if (sourceBaseTokenDirectory.endsWith('/')) {
+    sourceBaseTokenDirectory = sourceBaseTokenDirectory.slice(0, -1);
+  }
+
+  if (sourceThemesDirectory.endsWith('/')) {
+    sourceThemesDirectory = sourceThemesDirectory.slice(0, -1);
+  }
+
+  registerDtcgCssStyleDictionaryTransform();
+  registerStyleDictionaryThemeFilter();
+
+  await rm(outputDirectory, { force: true, recursive: true });
+
+  for await (const entry of glob(`${sourceThemesDirectory}/**/*.tokens.json`)) {
+    const buildPath: string = join(
+      outputDirectory,
+      relative(sourceThemesDirectory, dirname(entry)),
+    );
 
     const name: string = basename(entry, '.tokens.json');
 
@@ -71,15 +85,11 @@ async function main(): Promise<void> {
       log: {
         verbosity: 'verbose',
       },
-      include: [
-        'tokens/t1-primitive/**/*.tokens.json',
-        'tokens/t2-semantic/**/*.tokens.json',
-        'tokens/t3-component/**/*.tokens.json',
-      ],
+      include: [`${sourceBaseTokenDirectory}/**/*.tokens.json`],
       source: [entry],
       platforms: {
         css: {
-          buildPath: outputDir,
+          buildPath,
           prefix: 'ikds-',
           transforms: [...DTCG_CSS_TRANSFORMS],
           files: [
@@ -106,8 +116,8 @@ async function main(): Promise<void> {
       },
     });
 
+    // console.log(await sd.getPlatformTokens('css'));
+
     await sd.buildAllPlatforms();
   }
 }
-
-main();
