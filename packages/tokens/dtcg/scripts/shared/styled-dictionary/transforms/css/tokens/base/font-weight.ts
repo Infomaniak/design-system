@@ -1,94 +1,30 @@
 import StyleDictionary from 'style-dictionary';
 import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
-import type { CurlyReference } from '../../../../../misc/curly-reference/curly-reference.ts';
-import { isCurlyReference } from '../../../../../misc/curly-reference/is-curly-reference.ts';
+import { designTokenReferenceSchema } from '../../../../../dtcg/design-token/reference/design-token-reference.schema.ts';
+import type { DesignTokenReference } from '../../../../../dtcg/design-token/reference/design-token-reference.ts';
+import { fontWeightDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/base/types/font-weight/value/font-weight-design-token-value.schema.ts';
+import type { NumberFontWeightDesignTokenValue } from '../../../../../dtcg/design-token/token/types/base/types/font-weight/value/types/number/number-font-weight-design-token-value.ts';
+import { predefinedFontWeightDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/base/types/font-weight/value/types/predefined/predefined-font-weight-design-token-value.schema.ts';
+import type { PredefinedFontWeightDesignTokenValue } from '../../../../../dtcg/design-token/token/types/base/types/font-weight/value/types/predefined/predefined-font-weight-design-token-value.ts';
+import { predefinedFontWeightDesignTokenValueToNumberValue } from '../../../../../dtcg/design-token/token/types/base/types/font-weight/value/types/predefined/to/number-value/predefined-font-weight-design-token-value-to-number-value.ts';
 import type { CssContext } from '../../css-context.ts';
-import { curlyReferenceToCssValue } from '../../references/curly-reference-to-css-value.ts';
-
-export type FontWeightDesignTokenValue = number | PredefinedFontWeightDesignTokenValue;
-
-export type PredefinedFontWeightDesignTokenValue =
-  | 'thin'
-  | 'hairline'
-  | 'extra-light'
-  | 'ultra-light'
-  | 'light'
-  | 'normal'
-  | 'regular'
-  | 'book'
-  | 'medium'
-  | 'semi-bold'
-  | 'demi-bold'
-  | 'bold'
-  | 'extra-bold'
-  | 'ultra-bold'
-  | 'black'
-  | 'heavy'
-  | 'extra-black'
-  | 'ultra-black';
-
-export function predefinedFontWeightDesignTokenValueToNumberValue(
-  value: PredefinedFontWeightDesignTokenValue,
-): number {
-  switch (value) {
-    case 'thin':
-    case 'hairline':
-      return 100;
-    case 'extra-light':
-    case 'ultra-light':
-      return 200;
-    case 'light':
-      return 300;
-    case 'normal':
-    case 'regular':
-    case 'book':
-      return 400;
-    case 'medium':
-      return 500;
-    case 'semi-bold':
-    case 'demi-bold':
-      return 600;
-    case 'bold':
-      return 700;
-    case 'extra-bold':
-    case 'ultra-bold':
-      return 800;
-    case 'black':
-    case 'heavy':
-      return 900;
-    case 'extra-black':
-    case 'ultra-black':
-      return 950;
-    default:
-      throw new Error(`Unexpected font weight value: ${value}`);
-  }
-}
-
-export function isFontWeightDesignTokenValue(input: unknown): input is FontWeightDesignTokenValue {
-  return typeof input === 'number' || typeof input === 'string';
-}
-
-export function isFontWeightDesignTokenValueOrCurlyReference(
-  input: unknown,
-): input is FontWeightDesignTokenValue | CurlyReference {
-  return isFontWeightDesignTokenValue(input) || isCurlyReference(input);
-}
+import { designTokenReferenceToCssValue } from '../../references/design-token-reference-to-css-value.ts';
 
 export function fontWeightDesignTokenValueToCssValue($value: unknown, ctx: CssContext): string {
-  if (isCurlyReference($value)) {
-    return curlyReferenceToCssValue($value, ctx);
+  if (designTokenReferenceSchema.safeParse($value).success) {
+    return designTokenReferenceToCssValue($value as DesignTokenReference, ctx);
   }
 
-  if (!isFontWeightDesignTokenValue($value)) {
-    throw new Error('Invalid fontWeight value.');
+  fontWeightDesignTokenValueSchema.parse($value);
+
+  if (predefinedFontWeightDesignTokenValueSchema.safeParse($value).success) {
+    $value = predefinedFontWeightDesignTokenValueToNumberValue(
+      $value as PredefinedFontWeightDesignTokenValue,
+    );
   }
 
-  if (typeof $value === 'string') {
-    $value = predefinedFontWeightDesignTokenValueToNumberValue($value);
-  }
-
-  return ($value as number).toString(10);
+  return ($value as NumberFontWeightDesignTokenValue).toString(10);
 }
 
 export const DTCG_FONT_WEIGHT_CSS = 'dtcg/font-weight/css';

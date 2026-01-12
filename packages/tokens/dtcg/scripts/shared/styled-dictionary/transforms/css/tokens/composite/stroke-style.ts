@@ -1,89 +1,48 @@
 import StyleDictionary from 'style-dictionary';
 import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
-import { isObject } from '../../../../../../../../../../scripts/helpers/misc/is-object.ts';
-import type { CurlyReference } from '../../../../../misc/curly-reference/curly-reference.ts';
-import { isCurlyReference } from '../../../../../misc/curly-reference/is-curly-reference.ts';
-import { isJsonReference } from '../../../../../misc/json-reference/is-json-reference.ts';
+import { designTokenReferenceSchema } from '../../../../../dtcg/design-token/reference/design-token-reference.schema.ts';
+import type { DesignTokenReference } from '../../../../../dtcg/design-token/reference/design-token-reference.ts';
+import { jsonReferenceSchema } from '../../../../../dtcg/design-token/reference/types/json/json-reference.schema.ts';
+import type { ValueOrDesignTokenReference } from '../../../../../dtcg/design-token/reference/value-or/value-or-design-token-reference.ts';
+import type { DimensionDesignTokenValue } from '../../../../../dtcg/design-token/token/types/base/types/dimension/value/dimension-design-token-value.ts';
+import { strokeStyleDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/composite/types/stroke-style/value/stroke-style-design-token-value.schema.ts';
+import type { StrokeStyleDesignTokenValueDashArray } from '../../../../../dtcg/design-token/token/types/composite/types/stroke-style/value/types/object/members/dash-array/stroke-style-design-token-value-dash-array.ts';
+import type { ObjectStrokeStyleDesignTokenValue } from '../../../../../dtcg/design-token/token/types/composite/types/stroke-style/value/types/object/object-stroke-style-design-token-value.ts';
+import { predefinedStrokeStyleDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/composite/types/stroke-style/value/types/predefined/predefined-stroke-style-design-token-value.schema.ts';
+import type { PredefinedStrokeStyleDesignTokenValue } from '../../../../../dtcg/design-token/token/types/composite/types/stroke-style/value/types/predefined/predefined-stroke-style-design-token-value.ts';
 import type { CssContext } from '../../css-context.ts';
-import { curlyReferenceToCssValue } from '../../references/curly-reference-to-css-value.ts';
-import {
-  type DimensionDesignTokenValue,
-  dimensionDesignTokenValueToCssValue,
-  isDimensionDesignTokenValueOrCurlyReference,
-} from '../base/dimension.ts';
-
-export type StrokeStyleDesignTokenValue =
-  | PredefinedStrokeStyleDesignTokenValue
-  | ObjectStrokeStyleDesignTokenValue;
-
-export type PredefinedStrokeStyleDesignTokenValue =
-  | 'solid'
-  | 'dashed'
-  | 'dotted'
-  | 'double'
-  | 'groove'
-  | 'ridge'
-  | 'outset'
-  | 'inset';
-
-export interface ObjectStrokeStyleDesignTokenValue {
-  readonly dashArray: StrokeStyleDesignTokenValueDashArray;
-  readonly lineCap: StrokeStyleDesignTokenValueLineCap;
-}
-
-export type StrokeStyleDesignTokenValueDashArray = readonly (
-  | DimensionDesignTokenValue
-  | CurlyReference
-)[];
-
-export type StrokeStyleDesignTokenValueLineCap = 'round' | 'butt' | 'square';
-
-export function isStrokeStyleDesignTokenValue(
-  input: unknown,
-): input is StrokeStyleDesignTokenValue {
-  return (
-    typeof input === 'string' ||
-    (isObject(input) &&
-      Array.isArray(Reflect.get(input, 'dashArray')) &&
-      Reflect.get(input, 'dashArray').every(isDimensionDesignTokenValueOrCurlyReference) &&
-      typeof Reflect.get(input, 'lineCap') === 'string')
-  );
-}
-
-export function isStrokeStyleDesignTokenValueOrCurlyReference(
-  input: unknown,
-): input is StrokeStyleDesignTokenValue | CurlyReference {
-  return isStrokeStyleDesignTokenValue(input) || isCurlyReference(input);
-}
+import { designTokenReferenceToCssValue } from '../../references/design-token-reference-to-css-value.ts';
+import { dimensionDesignTokenValueToCssValue } from '../base/dimension.ts';
 
 export function strokeStyleDesignTokenValueDashArrayToCssValue(
   input: StrokeStyleDesignTokenValueDashArray,
   ctx: CssContext,
 ): string {
   return input
-    .map((value: DimensionDesignTokenValue | CurlyReference): string => {
+    .map((value: ValueOrDesignTokenReference<DimensionDesignTokenValue>): string => {
       return dimensionDesignTokenValueToCssValue(value, ctx);
     })
     .join(', ');
 }
 
 export function strokeStyleDesignTokenValueToCssValue($value: unknown, ctx: CssContext): string {
-  if (isCurlyReference($value)) {
-    return curlyReferenceToCssValue($value, ctx);
+  if (designTokenReferenceSchema.safeParse($value).success) {
+    return designTokenReferenceToCssValue($value as DesignTokenReference, ctx);
   }
 
-  if (!isStrokeStyleDesignTokenValue($value)) {
-    throw new Error('Invalid strokeStyle value.');
-  }
+  strokeStyleDesignTokenValueSchema.parse($value);
 
-  if (typeof $value === 'string') {
-    return $value;
+  if (predefinedStrokeStyleDesignTokenValueSchema.safeParse($value).success) {
+    return $value as PredefinedStrokeStyleDesignTokenValue;
   } else {
-    const { dashArray, lineCap } = $value;
+    const { dashArray, lineCap } = $value as ObjectStrokeStyleDesignTokenValue;
 
-    if (isJsonReference(dashArray) || isJsonReference(lineCap)) {
-      throw new Error('References are not supported yet.');
+    if (
+      jsonReferenceSchema.safeParse(dashArray).success ||
+      jsonReferenceSchema.safeParse(lineCap).success
+    ) {
+      throw new Error('JSON references are not supported yet.');
     }
 
     return `${strokeStyleDesignTokenValueDashArrayToCssValue(dashArray, ctx)} ${lineCap}`;

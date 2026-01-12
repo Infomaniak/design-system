@@ -1,47 +1,22 @@
 import StyleDictionary from 'style-dictionary';
 import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
-import { isObject } from '../../../../../../../../../../scripts/helpers/misc/is-object.ts';
-import type { CurlyReference } from '../../../../../misc/curly-reference/curly-reference.ts';
-import { isCurlyReference } from '../../../../../misc/curly-reference/is-curly-reference.ts';
-import { isJsonReference } from '../../../../../misc/json-reference/is-json-reference.ts';
+import { designTokenReferenceSchema } from '../../../../../dtcg/design-token/reference/design-token-reference.schema.ts';
+import type { DesignTokenReference } from '../../../../../dtcg/design-token/reference/design-token-reference.ts';
+import { jsonReferenceSchema } from '../../../../../dtcg/design-token/reference/types/json/json-reference.schema.ts';
+import { durationDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/base/types/duration/value/duration-design-token-value.schema.ts';
 import type { CssContext } from '../../css-context.ts';
-import { curlyReferenceToCssValue } from '../../references/curly-reference-to-css-value.ts';
-
-export interface DurationDesignTokenValue {
-  readonly value: number;
-  readonly unit: DurationDesignTokenValueUnit;
-}
-
-export type DurationDesignTokenValueUnit = 's' | 'ms';
-
-export function isDurationDesignTokenValue(input: unknown): input is DurationDesignTokenValue {
-  return (
-    isObject(input) &&
-    typeof Reflect.get(input, 'value') === 'number' &&
-    typeof Reflect.get(input, 'unit') === 'string'
-  );
-}
-
-export function isDurationDesignTokenValueOrCurlyReference(
-  input: unknown,
-): input is DurationDesignTokenValue | CurlyReference {
-  return isDurationDesignTokenValue(input) || isCurlyReference(input);
-}
+import { designTokenReferenceToCssValue } from '../../references/design-token-reference-to-css-value.ts';
 
 export function durationDesignTokenValueToCssValue($value: unknown, ctx: CssContext): string {
-  if (isCurlyReference($value)) {
-    return curlyReferenceToCssValue($value, ctx);
+  if (designTokenReferenceSchema.safeParse($value).success) {
+    return designTokenReferenceToCssValue($value as DesignTokenReference, ctx);
   }
 
-  if (!isDurationDesignTokenValue($value)) {
-    throw new Error('Invalid duration value.');
-  }
+  const { value, unit } = durationDesignTokenValueSchema.parse($value);
 
-  const { value, unit } = $value;
-
-  if (isJsonReference(value) || isJsonReference(unit)) {
-    throw new Error('References are not supported yet.');
+  if (jsonReferenceSchema.safeParse(value).success || jsonReferenceSchema.safeParse(unit).success) {
+    throw new Error('JSON references are not supported yet.');
   }
 
   return `${value}${unit}`;

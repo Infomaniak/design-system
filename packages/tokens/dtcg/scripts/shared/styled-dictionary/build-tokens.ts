@@ -2,78 +2,65 @@ import { glob, rm } from 'node:fs/promises';
 import { basename, dirname, join, relative } from 'node:path';
 import StyleDictionary from 'style-dictionary';
 import { formats } from 'style-dictionary/enums';
+import { removeTrailingSlash } from '../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import { registerStyleDictionaryThemeFilter } from './filters/register-style-dictionary-theme-filter.ts';
 import { DTCG_CSS_TRANSFORMS } from './transforms/css/dtcg-css-transforms.ts';
 import { registerDtcgCssStyleDictionaryTransform } from './transforms/css/register-dtcg-css-style-dictionary-transform.ts';
 
-async function debug(): Promise<void> {
-  const sd = new StyleDictionary({
-    log: {
-      verbosity: 'verbose',
-    },
-    include: ['tokens/base/**/*.json'],
-    source: [`tokens/themes/full/light.tokens.json`],
-    // source: [`tokens/themes/products/mail.tokens.json`],
-    // parsers: ['json-parser'],
-    platforms: {
-      css: {
-        expand: {
-          // include: ['typography'],
-          // include: ['strokeStyle', 'border', 'transition', 'shadow', 'gradient', 'typography'],
-        },
-        buildPath: 'dist/',
-        prefix: 'ikds-',
-        transforms: [...DTCG_CSS_TRANSFORMS],
-        files: [
-          {
-            destination: 'light.css',
-            format: formats.cssVariables,
-            filter: 'theme-filter',
-            options: {
-              outputReferences: true,
-              selector: ':root',
-            },
-          },
-        ],
-      },
-    },
-  });
-
-  await sd.buildAllPlatforms();
-}
+// async function debug(): Promise<void> {
+//   const sd = new StyleDictionary({
+//     log: {
+//       verbosity: 'verbose',
+//     },
+//     include: ['tokens/base/**/*.json'],
+//     source: [`tokens/themes/full/light.tokens.json`],
+//     // source: [`tokens/themes/products/mail.tokens.json`],
+//     // parsers: ['json-parser'],
+//     platforms: {
+//       css: {
+//         expand: {
+//           // include: ['typography'],
+//           // include: ['strokeStyle', 'border', 'transition', 'shadow', 'gradient', 'typography'],
+//         },
+//         buildPath: 'dist/',
+//         prefix: 'ikds-',
+//         transforms: [...DTCG_CSS_TRANSFORMS],
+//         files: [
+//           {
+//             destination: 'light.css',
+//             format: formats.cssVariables,
+//             filter: 'theme-filter',
+//             options: {
+//               outputReferences: true,
+//               selector: ':root',
+//             },
+//           },
+//         ],
+//       },
+//     },
+//   });
+//
+//   await sd.buildAllPlatforms();
+// }
 
 export interface BuildTokensOptions {
-  readonly sourceBaseTokenDirectory: string;
-  readonly sourceThemesDirectory: string;
+  readonly sourceDirectory: string;
   readonly outputDirectory: string;
 }
 
 export async function buildTokens({
-  sourceBaseTokenDirectory,
-  sourceThemesDirectory,
+  sourceDirectory,
   outputDirectory,
 }: BuildTokensOptions): Promise<void> {
-  // await debug();
-  // return;
-
-  if (sourceBaseTokenDirectory.endsWith('/')) {
-    sourceBaseTokenDirectory = sourceBaseTokenDirectory.slice(0, -1);
-  }
-
-  if (sourceThemesDirectory.endsWith('/')) {
-    sourceThemesDirectory = sourceThemesDirectory.slice(0, -1);
-  }
+  sourceDirectory = removeTrailingSlash(sourceDirectory);
 
   registerDtcgCssStyleDictionaryTransform();
   registerStyleDictionaryThemeFilter();
 
   await rm(outputDirectory, { force: true, recursive: true });
 
-  for await (const entry of glob(`${sourceThemesDirectory}/**/*.tokens.json`)) {
-    const buildPath: string = join(
-      outputDirectory,
-      relative(sourceThemesDirectory, dirname(entry)),
-    );
+  for await (const entry of glob(`${sourceDirectory}/themes/**/*.tokens.json`)) {
+    const relativePath: string = relative(`${sourceDirectory}/themes`, dirname(entry));
 
     const name: string = basename(entry, '.tokens.json');
 
@@ -81,15 +68,26 @@ export async function buildTokens({
 
     const attributeName: string = isPatch ? name.slice(0, -'.patch'.length) : name;
 
+    const fileHeader = (): string[] => [
+      'Do not edit directly, this file was auto-generated.',
+      ...(isPatch ? ['This is a "patch" file: it requires "base" themes to works properly.'] : []),
+    ];
+
     const sd = new StyleDictionary({
       log: {
         verbosity: 'verbose',
       },
-      include: [`${sourceBaseTokenDirectory}/**/*.tokens.json`],
+      // include: [`${sourceBaseTokensDirectory}/**/*.tokens.json`],
+      include: [
+        `${sourceDirectory}/base/t1-primitive/**/*.tokens.json`,
+        `${sourceDirectory}/base/t2-semantic/**/*.tokens.json`,
+        `${sourceDirectory}/base/t3-component/**/*.tokens.json`,
+      ],
+      usesDtcg: true,
       source: [entry],
       platforms: {
         css: {
-          buildPath,
+          buildPath: join(outputDirectory, 'css', relativePath),
           prefix: 'ikds-',
           transforms: [...DTCG_CSS_TRANSFORMS],
           files: [
@@ -98,6 +96,7 @@ export async function buildTokens({
               format: formats.cssVariables,
               filter: isPatch ? 'theme-filter' : undefined,
               options: {
+                fileHeader,
                 outputReferences: true,
                 selector: ':root',
               },
@@ -107,6 +106,7 @@ export async function buildTokens({
               format: formats.cssVariables,
               filter: isPatch ? 'theme-filter' : undefined,
               options: {
+                fileHeader,
                 outputReferences: true,
                 selector: `[data-theme="${attributeName}"],\n[data-variant="${attributeName}"]`,
               },
@@ -115,8 +115,6 @@ export async function buildTokens({
         },
       },
     });
-
-    // console.log(await sd.getPlatformTokens('css'));
 
     await sd.buildAllPlatforms();
   }

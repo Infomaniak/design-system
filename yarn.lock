@@ -657,6 +657,7 @@ __metadata:
     "@terrazzo/plugin-tailwind": "npm:^0.3.3"
     colorjs.io: "npm:^0.6.0"
     style-dictionary: "npm:^5.1.3"
+    zod: "npm:^4.3.5"
   languageName: unknown
   linkType: soft
 
@@ -4374,5 +4375,12 @@ __metadata:
   bin:
     yaml: bin.mjs
   checksum: 10c0/703e4dc1e34b324aa66876d63618dcacb9ed49f7e7fe9b70f1e703645be8d640f68ab84f12b86df8ac960bac37acf5513e115de7c970940617ce0343c8c9cd96
+  languageName: node
+  linkType: hard
+
+"zod@npm:^4.3.5":
+  version: 4.3.5
+  resolution: "zod@npm:4.3.5"
+  checksum: 10c0/5a2db7e59177a3d7e202543f5136cb87b97b047b77c8a3d824098d3fa8b80d3aa40a0a5f296965c3b82dfdccdd05dbbfacce91347f16a39c675680fd7b1ab109
   languageName: node
   linkType: hard

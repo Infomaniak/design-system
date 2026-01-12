@@ -1,44 +1,40 @@
 import StyleDictionary from 'style-dictionary';
 import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
-import type { CurlyReference } from '../../../../../misc/curly-reference/curly-reference.ts';
-import { isCurlyReference } from '../../../../../misc/curly-reference/is-curly-reference.ts';
+import { designTokenReferenceSchema } from '../../../../../dtcg/design-token/reference/design-token-reference.schema.ts';
+import type { DesignTokenReference } from '../../../../../dtcg/design-token/reference/design-token-reference.ts';
+import { jsonReferenceSchema } from '../../../../../dtcg/design-token/reference/types/json/json-reference.schema.ts';
+import type { ValueOrJsonReference } from '../../../../../dtcg/design-token/reference/types/json/value-or/value-or-json-reference.ts';
+import { fontFamilyDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/base/types/font-family/value/font-family-design-token-value.schema.ts';
+import type { StringArrayFontFamilyDesignTokenValue } from '../../../../../dtcg/design-token/token/types/base/types/font-family/value/types/string-array/string-array-font-family-design-token-value.ts';
+import { stringFontFamilyDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/base/types/font-family/value/types/string/string-font-family-design-token-value.schema.ts';
+import type { StringFontFamilyDesignTokenValue } from '../../../../../dtcg/design-token/token/types/base/types/font-family/value/types/string/string-font-family-design-token-value.ts';
+
 import type { CssContext } from '../../css-context.ts';
-import { curlyReferenceToCssValue } from '../../references/curly-reference-to-css-value.ts';
-
-export type FontFamilyDesignTokenValue = string | readonly string[];
-
-export function isFontFamilyDesignTokenValue(input: unknown): input is FontFamilyDesignTokenValue {
-  return (
-    typeof input === 'string' ||
-    (Array.isArray(input) &&
-      input.every((item: unknown): item is string => typeof item === 'string'))
-  );
-}
-
-export function isFontFamilyDesignTokenValueOrCurlyReference(
-  input: unknown,
-): input is FontFamilyDesignTokenValue | CurlyReference {
-  return isFontFamilyDesignTokenValue(input) || isCurlyReference(input);
-}
+import { designTokenReferenceToCssValue } from '../../references/design-token-reference-to-css-value.ts';
 
 export function fontFamilyDesignTokenValueFontToCssValue(input: string): string {
   return input.includes(' ') ? JSON.stringify(input) : input;
 }
 
 export function fontFamilyDesignTokenValueToCssValue($value: unknown, ctx: CssContext): string {
-  if (isCurlyReference($value)) {
-    return curlyReferenceToCssValue($value, ctx);
+  if (designTokenReferenceSchema.safeParse($value).success) {
+    return designTokenReferenceToCssValue($value as DesignTokenReference, ctx);
   }
 
-  if (!isFontFamilyDesignTokenValue($value)) {
-    throw new Error('Invalid fontFamily value.');
-  }
+  fontFamilyDesignTokenValueSchema.parse($value);
 
-  if (typeof $value === 'string') {
-    return fontFamilyDesignTokenValueFontToCssValue($value);
+  if (stringFontFamilyDesignTokenValueSchema.safeParse($value).success) {
+    return fontFamilyDesignTokenValueFontToCssValue($value as StringFontFamilyDesignTokenValue);
   } else {
-    return $value.map(fontFamilyDesignTokenValueFontToCssValue).join(', ');
+    return ($value as StringArrayFontFamilyDesignTokenValue)
+      .map((item: ValueOrJsonReference<string>): string => {
+        if (jsonReferenceSchema.safeParse(item).success) {
+          throw new Error('JSON references are not supported yet.');
+        }
+        return fontFamilyDesignTokenValueFontToCssValue(item as string);
+      })
+      .join(', ');
   }
 }
 

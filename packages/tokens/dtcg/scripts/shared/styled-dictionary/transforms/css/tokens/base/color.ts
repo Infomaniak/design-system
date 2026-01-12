@@ -3,74 +3,42 @@ import Color from 'colorjs.io';
 import StyleDictionary from 'style-dictionary';
 import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
-import { isObject } from '../../../../../../../../../../scripts/helpers/misc/is-object.ts';
-import type { CurlyReference } from '../../../../../misc/curly-reference/curly-reference.ts';
-import { isCurlyReference } from '../../../../../misc/curly-reference/is-curly-reference.ts';
-import { isJsonReference } from '../../../../../misc/json-reference/is-json-reference.ts';
+import { designTokenReferenceSchema } from '../../../../../dtcg/design-token/reference/design-token-reference.schema.ts';
+import type { DesignTokenReference } from '../../../../../dtcg/design-token/reference/design-token-reference.ts';
+import { jsonReferenceSchema } from '../../../../../dtcg/design-token/reference/types/json/json-reference.schema.ts';
+import type { ValueOrJsonReference } from '../../../../../dtcg/design-token/reference/types/json/value-or/value-or-json-reference.ts';
+import { colorDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/base/types/color/value/color-design-token-value.schema.ts';
+import type { ColorDesignTokenValueComponents } from '../../../../../dtcg/design-token/token/types/base/types/color/value/members/components/color-design-token-value-components.ts';
+import type { ColorDesignTokenValueComponent } from '../../../../../dtcg/design-token/token/types/base/types/color/value/members/components/component/color-design-token-value-component.ts';
 import type { CssContext } from '../../css-context.ts';
-import { curlyReferenceToCssValue } from '../../references/curly-reference-to-css-value.ts';
-
-export type ColorDesignTokenColorSpace =
-  | 'srgb'
-  | 'srgb-linear'
-  | 'hsl'
-  | 'hwb'
-  | 'lab'
-  | 'lch'
-  | 'oklab'
-  | 'oklch'
-  | 'display-p3'
-  | 'a98-rgb'
-  | 'prophoto-rgb'
-  | 'rec2020'
-  | 'xyz-d65'
-  | 'xyz-d50';
-
-export type ColorDesignTokenValueComponent = number | 'none';
-
-export interface ColorDesignTokenValue {
-  readonly colorSpace: ColorDesignTokenColorSpace;
-  readonly components: readonly ColorDesignTokenValueComponent[];
-  readonly alpha?: number;
-  readonly hey?: string;
-}
-
-export function isColorDesignTokenValue(input: unknown): input is ColorDesignTokenValue {
-  return (
-    isObject(input) &&
-    typeof Reflect.get(input, 'colorSpace') === 'string' &&
-    Array.isArray(Reflect.get(input, 'components')) &&
-    (typeof Reflect.get(input, 'alpha') === 'number' || Reflect.get(input, 'alpha') === undefined)
-  );
-}
-
-export function isColorDesignTokenValueOrCurlyReference(
-  input: unknown,
-): input is ColorDesignTokenValue | CurlyReference {
-  return isColorDesignTokenValue(input) || isCurlyReference(input);
-}
+import { designTokenReferenceToCssValue } from '../../references/design-token-reference-to-css-value.ts';
 
 export function colorDesignTokenValueToCssValue($value: unknown, ctx: CssContext): string {
-  if (isCurlyReference($value)) {
-    return curlyReferenceToCssValue($value, ctx);
+  if (designTokenReferenceSchema.safeParse($value).success) {
+    return designTokenReferenceToCssValue($value as DesignTokenReference, ctx);
   }
 
-  if (!isColorDesignTokenValue($value)) {
-    throw new Error('Invalid color value.');
-  }
+  const { colorSpace, components, alpha } = colorDesignTokenValueSchema.parse($value);
 
-  const { colorSpace, components, alpha } = $value;
-
-  if (isJsonReference(colorSpace) || isJsonReference(components) || isJsonReference(alpha)) {
-    throw new Error('References are not supported yet.');
+  if (
+    jsonReferenceSchema.safeParse(colorSpace).success ||
+    jsonReferenceSchema.safeParse(components).success ||
+    jsonReferenceSchema.safeParse(alpha).success
+  ) {
+    throw new Error('JSON references are not supported yet.');
   }
 
   return new Color({
-    space: colorSpace,
-    coords: components.map((component: ColorDesignTokenValueComponent): number | null => {
-      return component === 'none' ? null : component;
-    }) as Coords,
-    alpha,
+    space: colorSpace as any,
+    coords: (components as ColorDesignTokenValueComponents).map(
+      (component: ValueOrJsonReference<ColorDesignTokenValueComponent>): number | null => {
+        if (jsonReferenceSchema.safeParse(component).success) {
+          throw new Error('JSON references are not supported yet.');
+        }
+        return component === 'none' ? null : (component as number);
+      },
+    ) as Coords,
+    alpha: alpha as number | undefined,
   }).toString({
     format: 'hex',
   });

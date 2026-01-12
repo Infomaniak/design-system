@@ -1,56 +1,29 @@
 import StyleDictionary from 'style-dictionary';
 import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
-import { isObject } from '../../../../../../../../../../scripts/helpers/misc/is-object.ts';
-import type { CurlyReference } from '../../../../../misc/curly-reference/curly-reference.ts';
-import { isCurlyReference } from '../../../../../misc/curly-reference/is-curly-reference.ts';
-import { isJsonReference } from '../../../../../misc/json-reference/is-json-reference.ts';
+import { designTokenReferenceSchema } from '../../../../../dtcg/design-token/reference/design-token-reference.schema.ts';
+import type { DesignTokenReference } from '../../../../../dtcg/design-token/reference/design-token-reference.ts';
+import { jsonReferenceSchema } from '../../../../../dtcg/design-token/reference/types/json/json-reference.schema.ts';
+import { borderDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/composite/types/border/value/border-design-token-value.schema.ts';
 import type { CssContext } from '../../css-context.ts';
-import { curlyReferenceToCssValue } from '../../references/curly-reference-to-css-value.ts';
-import {
-  type ColorDesignTokenValue,
-  colorDesignTokenValueToCssValue,
-  isColorDesignTokenValueOrCurlyReference,
-} from '../base/color.ts';
-import {
-  type DimensionDesignTokenValue,
-  dimensionDesignTokenValueToCssValue,
-  isDimensionDesignTokenValueOrCurlyReference,
-} from '../base/dimension.ts';
-import {
-  isStrokeStyleDesignTokenValueOrCurlyReference,
-  type StrokeStyleDesignTokenValue,
-  strokeStyleDesignTokenValueToCssValue,
-} from './stroke-style.ts';
-
-export interface BorderDesignTokenValue {
-  readonly color: ColorDesignTokenValue | CurlyReference;
-  readonly width: DimensionDesignTokenValue | CurlyReference;
-  readonly style: StrokeStyleDesignTokenValue | CurlyReference;
-}
-
-export function isBorderDesignTokenValue(input: unknown): input is BorderDesignTokenValue {
-  return (
-    isObject(input) &&
-    isColorDesignTokenValueOrCurlyReference(Reflect.get(input, 'color')) &&
-    isDimensionDesignTokenValueOrCurlyReference(Reflect.get(input, 'width')) &&
-    isStrokeStyleDesignTokenValueOrCurlyReference(Reflect.get(input, 'style'))
-  );
-}
+import { designTokenReferenceToCssValue } from '../../references/design-token-reference-to-css-value.ts';
+import { colorDesignTokenValueToCssValue } from '../base/color.ts';
+import { dimensionDesignTokenValueToCssValue } from '../base/dimension.ts';
+import { strokeStyleDesignTokenValueToCssValue } from './stroke-style.ts';
 
 export function borderDesignTokenValueToCssValue($value: unknown, ctx: CssContext): string {
-  if (isCurlyReference($value)) {
-    return curlyReferenceToCssValue($value, ctx);
+  if (designTokenReferenceSchema.safeParse($value).success) {
+    return designTokenReferenceToCssValue($value as DesignTokenReference, ctx);
   }
 
-  if (!isBorderDesignTokenValue($value)) {
-    throw new Error('Invalid border value.');
-  }
+  const { color, width, style } = borderDesignTokenValueSchema.parse($value);
 
-  const { color, width, style } = $value;
-
-  if (isJsonReference(color) || isJsonReference(width) || isJsonReference(style)) {
-    throw new Error('References are not supported yet.');
+  if (
+    jsonReferenceSchema.safeParse(color).success ||
+    jsonReferenceSchema.safeParse(width).success ||
+    jsonReferenceSchema.safeParse(style).success
+  ) {
+    throw new Error('JSON references are not supported yet.');
   }
 
   return `${dimensionDesignTokenValueToCssValue(width, ctx)} ${strokeStyleDesignTokenValueToCssValue(style, ctx)} ${colorDesignTokenValueToCssValue(color, ctx)}`;
