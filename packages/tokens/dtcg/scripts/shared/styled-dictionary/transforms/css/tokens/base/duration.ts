@@ -3,7 +3,7 @@ import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
 import { designTokenReferenceSchema } from '../../../../../dtcg/design-token/reference/design-token-reference.schema.ts';
 import type { DesignTokenReference } from '../../../../../dtcg/design-token/reference/design-token-reference.ts';
-import { jsonReferenceSchema } from '../../../../../dtcg/design-token/reference/types/json/json-reference.schema.ts';
+import { isJsonReference } from '../../../../../dtcg/design-token/reference/types/json/is-json-reference.ts';
 import { durationDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/base/types/duration/value/duration-design-token-value.schema.ts';
 import type { CssContext } from '../../css-context.ts';
 import { designTokenReferenceToCssValue } from '../../references/design-token-reference-to-css-value.ts';
@@ -15,7 +15,7 @@ export function durationDesignTokenValueToCssValue($value: unknown, ctx: CssCont
 
   const { value, unit } = durationDesignTokenValueSchema.parse($value);
 
-  if (jsonReferenceSchema.safeParse(value).success || jsonReferenceSchema.safeParse(unit).success) {
+  if (isJsonReference(value) || isJsonReference(unit)) {
     throw new Error('JSON references are not supported yet.');
   }
 

@@ -1,11 +1,16 @@
-import { removeUndefinedProperties } from '../../../../../../../../../../scripts/helpers/misc/remove-undefined-properties.ts';
-import { isDesignToken } from '../../../token/is-design-token.js';
-import type { DesignTokensTree } from '../../../tree/design-tokens-tree.js';
-import type { DesignTokensGroup } from '../../design-tokens-group.js';
+import { removeUndefinedProperties } from '../../../../../../../../scripts/helpers/misc/remove-undefined-properties.ts';
+import type { DesignTokensGroup } from '../../design-token/group/design-tokens-group.ts';
+import { isDesignToken } from '../../design-token/token/is-design-token.ts';
+import type { DesignTokensTree } from '../../design-token/tree/design-tokens-tree.ts';
+
+export interface PatchDesignTokensGroupOptions {
+  readonly onConflict?: 'throw' | 'replace';
+}
 
 export function patchDesignTokensGroup(
   source: DesignTokensGroup,
   patch: DesignTokensGroup,
+  options?: PatchDesignTokensGroupOptions,
 ): DesignTokensGroup {
   const { $description, $type, $extends, $ref, $deprecated, $extensions, ...children } = source;
 
@@ -28,10 +33,16 @@ export function patchDesignTokensGroup(
     ...Object.fromEntries(
       Object.entries(children).map(
         ([name, child]: [string, DesignTokensTree]): [string, DesignTokensTree] => {
+          if (Reflect.has(patch, name) && isDesignToken(child)) {
+            if (options?.onConflict === 'throw') {
+              throw new Error(`Conflicting design tokens: ${name}`);
+            }
+          }
+
           if (!Reflect.has(patch, name) || isDesignToken(child)) {
             return [name, child];
           } else {
-            return [name, patchDesignTokensGroup(child, Reflect.get(patch, name))];
+            return [name, patchDesignTokensGroup(child, Reflect.get(patch, name), options)];
           }
         },
       ),

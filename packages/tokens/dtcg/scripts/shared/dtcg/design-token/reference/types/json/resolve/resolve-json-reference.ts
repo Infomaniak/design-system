@@ -1,8 +1,8 @@
 import { resolveSegmentsReference } from '../../segments/resolve/resolve-segments-reference.js';
 import type { SegmentsReference } from '../../segments/segments-reference.js';
 import { segmentsReferenceToJsonPointer } from '../../segments/to/json-reference/json-pointer/segments-reference-to-json-pointer.js';
+import { isJsonReference } from '../is-json-reference.ts';
 import type { JsonReference } from '../json-reference.js';
-import { jsonReferenceSchema } from '../json-reference.schema.ts';
 import { jsonReferenceToSegmentsReference } from '../to/segments-reference/json-reference-to-segments-reference.js';
 
 export interface ResolvedJsonReference {
@@ -23,14 +23,14 @@ export function resolveJsonReference(
     references.push(reference);
     let value: unknown = resolveSegmentsReference(reference, root);
 
-    if (recursive && jsonReferenceSchema.safeParse(value).success) {
-      if (explored.has((value as JsonReference).$ref)) {
+    if (recursive && isJsonReference(value)) {
+      if (explored.has(value.$ref)) {
         throw new Error(
           `Unable to resolve reference "${segmentsReferenceToJsonPointer(reference)}" because of circular reference.`,
         );
       }
-      explored.add((value as JsonReference).$ref);
-      reference = jsonReferenceToSegmentsReference(value as JsonReference);
+      explored.add(value.$ref);
+      reference = jsonReferenceToSegmentsReference(value);
     } else {
       return {
         value,

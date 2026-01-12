@@ -3,7 +3,7 @@ import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
 import { designTokenReferenceSchema } from '../../../../../dtcg/design-token/reference/design-token-reference.schema.ts';
 import type { DesignTokenReference } from '../../../../../dtcg/design-token/reference/design-token-reference.ts';
-import { jsonReferenceSchema } from '../../../../../dtcg/design-token/reference/types/json/json-reference.schema.ts';
+import { isJsonReference } from '../../../../../dtcg/design-token/reference/types/json/is-json-reference.ts';
 import type { ValueOrJsonReference } from '../../../../../dtcg/design-token/reference/types/json/value-or/value-or-json-reference.ts';
 import { cubicBezierDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/base/types/cubic-bezier/value/cubic-bezier-design-token-value.schema.ts';
 import type { CubicBezierDesignTokenValue } from '../../../../../dtcg/design-token/token/types/base/types/cubic-bezier/value/cubic-bezier-design-token-value.ts';
@@ -19,7 +19,7 @@ export function cubicBezierDesignTokenValueToCssValue($value: unknown, ctx: CssC
 
   return `cubic-bezier(${($value as CubicBezierDesignTokenValue)
     .map((item: ValueOrJsonReference<number>): string => {
-      if (jsonReferenceSchema.safeParse(item).success) {
+      if (isJsonReference(item)) {
         throw new Error('JSON references are not supported yet.');
       }
 

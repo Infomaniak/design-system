@@ -5,7 +5,7 @@ import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
 import { designTokenReferenceSchema } from '../../../../../dtcg/design-token/reference/design-token-reference.schema.ts';
 import type { DesignTokenReference } from '../../../../../dtcg/design-token/reference/design-token-reference.ts';
-import { jsonReferenceSchema } from '../../../../../dtcg/design-token/reference/types/json/json-reference.schema.ts';
+import { isJsonReference } from '../../../../../dtcg/design-token/reference/types/json/is-json-reference.ts';
 import type { ValueOrJsonReference } from '../../../../../dtcg/design-token/reference/types/json/value-or/value-or-json-reference.ts';
 import { colorDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/base/types/color/value/color-design-token-value.schema.ts';
 import type { ColorDesignTokenValueComponents } from '../../../../../dtcg/design-token/token/types/base/types/color/value/members/components/color-design-token-value-components.ts';
@@ -20,11 +20,7 @@ export function colorDesignTokenValueToCssValue($value: unknown, ctx: CssContext
 
   const { colorSpace, components, alpha } = colorDesignTokenValueSchema.parse($value);
 
-  if (
-    jsonReferenceSchema.safeParse(colorSpace).success ||
-    jsonReferenceSchema.safeParse(components).success ||
-    jsonReferenceSchema.safeParse(alpha).success
-  ) {
+  if (isJsonReference(colorSpace) || isJsonReference(components) || isJsonReference(alpha)) {
     throw new Error('JSON references are not supported yet.');
   }
 
@@ -32,7 +28,7 @@ export function colorDesignTokenValueToCssValue($value: unknown, ctx: CssContext
     space: colorSpace as any,
     coords: (components as ColorDesignTokenValueComponents).map(
       (component: ValueOrJsonReference<ColorDesignTokenValueComponent>): number | null => {
-        if (jsonReferenceSchema.safeParse(component).success) {
+        if (isJsonReference(component)) {
           throw new Error('JSON references are not supported yet.');
         }
         return component === 'none' ? null : (component as number);

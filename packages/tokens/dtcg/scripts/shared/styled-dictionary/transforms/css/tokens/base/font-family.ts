@@ -3,7 +3,7 @@ import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
 import { designTokenReferenceSchema } from '../../../../../dtcg/design-token/reference/design-token-reference.schema.ts';
 import type { DesignTokenReference } from '../../../../../dtcg/design-token/reference/design-token-reference.ts';
-import { jsonReferenceSchema } from '../../../../../dtcg/design-token/reference/types/json/json-reference.schema.ts';
+import { isJsonReference } from '../../../../../dtcg/design-token/reference/types/json/is-json-reference.ts';
 import type { ValueOrJsonReference } from '../../../../../dtcg/design-token/reference/types/json/value-or/value-or-json-reference.ts';
 import { fontFamilyDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/base/types/font-family/value/font-family-design-token-value.schema.ts';
 import type { StringArrayFontFamilyDesignTokenValue } from '../../../../../dtcg/design-token/token/types/base/types/font-family/value/types/string-array/string-array-font-family-design-token-value.ts';
@@ -29,7 +29,7 @@ export function fontFamilyDesignTokenValueToCssValue($value: unknown, ctx: CssCo
   } else {
     return ($value as StringArrayFontFamilyDesignTokenValue)
       .map((item: ValueOrJsonReference<string>): string => {
-        if (jsonReferenceSchema.safeParse(item).success) {
+        if (isJsonReference(item)) {
           throw new Error('JSON references are not supported yet.');
         }
         return fontFamilyDesignTokenValueFontToCssValue(item as string);

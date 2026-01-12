@@ -1,11 +1,11 @@
 import { describe, expect, test } from 'vitest';
-import { normalizeExtendsOfDesignTokensTree } from './normalize-extends-of-design-tokens-tree.js';
+import { resolveDesignTokensTreeExtends } from './resolve-design-tokens-tree-extends.ts';
 
-describe('normalizeExtendsOfDesignTokensTree', () => {
+describe('resolveDesignTokensTreeExtends', () => {
   // https://www.designtokens.org/tr/2025.10/format/#example-override-example
   test('override-example', () => {
     expect(
-      normalizeExtendsOfDesignTokensTree({
+      resolveDesignTokensTreeExtends({
         input: {
           field: {
             width: {
@@ -67,7 +67,7 @@ describe('normalizeExtendsOfDesignTokensTree', () => {
   // https://www.designtokens.org/tr/2025.10/format/#example-multi-level-override
   test('multi-level-override', () => {
     expect(
-      normalizeExtendsOfDesignTokensTree({
+      resolveDesignTokensTreeExtends({
         base: {
           color: { $value: '#blue' },
           spacing: { $value: '16px' },
@@ -104,7 +104,7 @@ describe('normalizeExtendsOfDesignTokensTree', () => {
   // https://www.designtokens.org/tr/2025.10/format/#example-invalid-circular-reference
   test('invalid-circular-reference', () => {
     expect(() =>
-      normalizeExtendsOfDesignTokensTree({
+      resolveDesignTokensTreeExtends({
         button: {
           color: { $value: '#blue' },
           border: { $value: '1px solid' },
@@ -119,7 +119,7 @@ describe('normalizeExtendsOfDesignTokensTree', () => {
   // https://www.designtokens.org/tr/2025.10/format/#example-another-circular-reference
   test('another-circular-reference', () => {
     expect(() =>
-      normalizeExtendsOfDesignTokensTree({
+      resolveDesignTokensTreeExtends({
         groupA: {
           $extends: '{groupB}',
           token: { $value: 'valueA' },
@@ -135,7 +135,7 @@ describe('normalizeExtendsOfDesignTokensTree', () => {
   // https://www.designtokens.org/tr/2025.10/format/#example-valid-inheritance-patterns
   test('valid-inheritance-patterns', () => {
     expect(
-      normalizeExtendsOfDesignTokensTree({
+      resolveDesignTokensTreeExtends({
         button: {
           color: { $value: '#blue' },
           border: { $value: '1px solid' },
@@ -183,7 +183,7 @@ describe('normalizeExtendsOfDesignTokensTree', () => {
   // https://www.designtokens.org/tr/2025.10/format/#example-json-pointer-references
   test('json-pointer-references', () => {
     expect(
-      normalizeExtendsOfDesignTokensTree({
+      resolveDesignTokensTreeExtends({
         base: {
           $value: {
             colorSpace: 'srgb',
@@ -210,7 +210,7 @@ describe('normalizeExtendsOfDesignTokensTree', () => {
   // https://www.designtokens.org/tr/2025.10/format/#example-type-resolution-with-extensions
   test('type-resolution-with-extensions', () => {
     expect(
-      normalizeExtendsOfDesignTokensTree({
+      resolveDesignTokensTreeExtends({
         base: {
           $type: 'color',
           primary: {
@@ -260,7 +260,7 @@ describe('normalizeExtendsOfDesignTokensTree', () => {
   // https://www.designtokens.org/tr/2025.10/format/#example-circular-reference-detection
   test('circular-reference-detection', () => {
     expect(() =>
-      normalizeExtendsOfDesignTokensTree({
+      resolveDesignTokensTreeExtends({
         a: { $extends: '{b}' },
         b: { $extends: '{c}' },
         c: { $extends: '{a}' }, // Creates circular reference: a → b → c → a
@@ -271,7 +271,7 @@ describe('normalizeExtendsOfDesignTokensTree', () => {
   // https://www.designtokens.org/tr/2025.10/format/#example-group-extension-with-override
   test('group-extension-with-override', () => {
     expect(
-      normalizeExtendsOfDesignTokensTree({
+      resolveDesignTokensTreeExtends({
         input: {
           $type: 'dimension',
           field: {
@@ -335,7 +335,7 @@ describe('normalizeExtendsOfDesignTokensTree', () => {
   // https://www.designtokens.org/tr/2025.10/format/#example-complex-hierarchical-structure
   test('complex-hierarchical-structure', () => {
     expect(
-      normalizeExtendsOfDesignTokensTree({
+      resolveDesignTokensTreeExtends({
         color: {
           $type: 'color',
           $description: 'Complete color system',

@@ -3,7 +3,7 @@ import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
 import { designTokenReferenceSchema } from '../../../../../dtcg/design-token/reference/design-token-reference.schema.ts';
 import type { DesignTokenReference } from '../../../../../dtcg/design-token/reference/design-token-reference.ts';
-import { jsonReferenceSchema } from '../../../../../dtcg/design-token/reference/types/json/json-reference.schema.ts';
+import { isJsonReference } from '../../../../../dtcg/design-token/reference/types/json/is-json-reference.ts';
 import type { ValueOrDesignTokenReference } from '../../../../../dtcg/design-token/reference/value-or/value-or-design-token-reference.ts';
 import type { DimensionDesignTokenValue } from '../../../../../dtcg/design-token/token/types/base/types/dimension/value/dimension-design-token-value.ts';
 import { strokeStyleDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/composite/types/stroke-style/value/stroke-style-design-token-value.schema.ts';
@@ -38,10 +38,7 @@ export function strokeStyleDesignTokenValueToCssValue($value: unknown, ctx: CssC
   } else {
     const { dashArray, lineCap } = $value as ObjectStrokeStyleDesignTokenValue;
 
-    if (
-      jsonReferenceSchema.safeParse(dashArray).success ||
-      jsonReferenceSchema.safeParse(lineCap).success
-    ) {
+    if (isJsonReference(dashArray) || isJsonReference(lineCap)) {
       throw new Error('JSON references are not supported yet.');
     }
 

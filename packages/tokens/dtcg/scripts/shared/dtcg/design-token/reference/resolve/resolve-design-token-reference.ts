@@ -1,9 +1,7 @@
 import type { DesignTokenReference } from '../design-token-reference.js';
-import { curlyReferenceSchema } from '../types/curly/curly-reference.schema.ts';
-import type { CurlyReference } from '../types/curly/curly-reference.ts';
+import { isCurlyReference } from '../types/curly/is-curly-reference.ts';
 import { curlyReferenceToSegmentsReference } from '../types/curly/to/segments-reference/curly-reference-to-segments-reference.js';
-import { jsonReferenceSchema } from '../types/json/json-reference.schema.ts';
-import type { JsonReference } from '../types/json/json-reference.ts';
+import { isJsonReference } from '../types/json/is-json-reference.ts';
 import { jsonReferenceToSegmentsReference } from '../types/json/to/segments-reference/json-reference-to-segments-reference.js';
 import { resolveSegmentsReference } from '../types/segments/resolve/resolve-segments-reference.js';
 import type { SegmentsReference } from '../types/segments/segments-reference.js';
@@ -23,30 +21,30 @@ export function resolveDesignTokenReference(
   const explored: Set<string> = new Set<string>();
   const references: SegmentsReference[] = [];
 
-  let reference: SegmentsReference = curlyReferenceSchema.safeParse(designTokenReference).success
-    ? [...curlyReferenceToSegmentsReference(designTokenReference as CurlyReference), '$value']
-    : jsonReferenceToSegmentsReference(designTokenReference as JsonReference);
+  let reference: SegmentsReference = isCurlyReference(designTokenReference)
+    ? [...curlyReferenceToSegmentsReference(designTokenReference), '$value']
+    : jsonReferenceToSegmentsReference(designTokenReference);
 
   while (true) {
     references.push(reference);
     let value: unknown = resolveSegmentsReference(reference, root);
 
-    if (recursive && curlyReferenceSchema.safeParse(value).success) {
-      if (explored.has(value as CurlyReference)) {
+    if (recursive && isCurlyReference(value)) {
+      if (explored.has(value)) {
         throw new Error(
           `Unable to resolve reference "${segmentsReferenceToCurlyReference(reference)}" because of circular reference.`,
         );
       }
-      explored.add(value as CurlyReference);
-      reference = [...curlyReferenceToSegmentsReference(value as CurlyReference), '$value'];
-    } else if (recursive && jsonReferenceSchema.safeParse(value).success) {
-      if (explored.has((value as JsonReference).$ref)) {
+      explored.add(value);
+      reference = [...curlyReferenceToSegmentsReference(value), '$value'];
+    } else if (recursive && isJsonReference(value)) {
+      if (explored.has(value.$ref)) {
         throw new Error(
           `Unable to resolve reference "${segmentsReferenceToJsonPointer(reference)}" because of circular reference.`,
         );
       }
-      explored.add((value as JsonReference).$ref);
-      reference = jsonReferenceToSegmentsReference(value as JsonReference);
+      explored.add(value.$ref);
+      reference = jsonReferenceToSegmentsReference(value);
     } else {
       return {
         value,

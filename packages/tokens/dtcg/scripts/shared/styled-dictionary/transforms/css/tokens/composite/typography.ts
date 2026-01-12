@@ -20,11 +20,11 @@ export function typographyDesignTokenValueToCssValue($value: unknown, ctx: CssCo
     typographyDesignTokenValueSchema.parse($value);
 
   // if (
-  //   jsonReferenceSchema.safeParse(fontFamily).success ||
-  //   jsonReferenceSchema.safeParse(fontSize).success ||
-  //   jsonReferenceSchema.safeParse(fontWeight).success ||
-  //   jsonReferenceSchema.safeParse(letterSpacing).success ||
-  //   jsonReferenceSchema.safeParse(lineHeight).success
+  //   isJsonReference(fontFamily) ||
+  //   isJsonReference(fontSize) ||
+  //   isJsonReference(fontWeight) ||
+  //   isJsonReference(letterSpacing) ||
+  //   isJsonReference(lineHeight)
   // ) {
   //   throw new Error('References are not supported yet.');
   // }

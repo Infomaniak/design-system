@@ -3,7 +3,7 @@ import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
 import { designTokenReferenceSchema } from '../../../../../dtcg/design-token/reference/design-token-reference.schema.ts';
 import type { DesignTokenReference } from '../../../../../dtcg/design-token/reference/design-token-reference.ts';
-import { jsonReferenceSchema } from '../../../../../dtcg/design-token/reference/types/json/json-reference.schema.ts';
+import { isJsonReference } from '../../../../../dtcg/design-token/reference/types/json/is-json-reference.ts';
 import { borderDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/composite/types/border/value/border-design-token-value.schema.ts';
 import type { CssContext } from '../../css-context.ts';
 import { designTokenReferenceToCssValue } from '../../references/design-token-reference-to-css-value.ts';
@@ -18,11 +18,7 @@ export function borderDesignTokenValueToCssValue($value: unknown, ctx: CssContex
 
   const { color, width, style } = borderDesignTokenValueSchema.parse($value);
 
-  if (
-    jsonReferenceSchema.safeParse(color).success ||
-    jsonReferenceSchema.safeParse(width).success ||
-    jsonReferenceSchema.safeParse(style).success
-  ) {
+  if (isJsonReference(color) || isJsonReference(width) || isJsonReference(style)) {
     throw new Error('JSON references are not supported yet.');
   }
 

@@ -1,5 +1,6 @@
 import { glob, readFile } from 'node:fs/promises';
 import { removeTrailingSlash } from '../../../../../../scripts/helpers/path/remove-traling-slash.ts';
+import { mergeDesignTokens } from '../dtcg/operations/merge/merge-design-tokens.ts';
 
 export interface BuildFigmaTokensOptions {
   readonly sourceDirectory: string;
@@ -18,22 +19,29 @@ export async function buildFigmaTokens({
     `${sourceDirectory}/base/t3-component/**/*.tokens.json`,
   ];
 
-  const output: any = {};
+  let allTokens: any = {};
 
   for (const path of base) {
     for await (const entry of glob(path)) {
-      const content: any = JSON.parse(
+      const tokens: any = JSON.parse(
         await readFile(entry, {
           encoding: 'utf-8',
         }),
       );
-      console.log(content);
+
+      allTokens = mergeDesignTokens(allTokens, tokens);
     }
   }
 
-  console.log(output);
-}
+  // for await (const entry of glob(`${sourceDirectory}/themes/**/*.tokens.json`)) {
+  //   const tokens: any = JSON.parse(
+  //     await readFile(entry, {
+  //       encoding: 'utf-8',
+  //     }),
+  //   );
+  //
+  //   allTokens = mergeDesignTokens(allTokens, tokens);
+  // }
 
-function mergeTokens(tokens: any): any {
-  return tokens;
+  console.log(allTokens);
 }

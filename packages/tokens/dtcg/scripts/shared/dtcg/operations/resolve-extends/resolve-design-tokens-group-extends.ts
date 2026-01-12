@@ -1,25 +1,24 @@
-import { removeUndefinedProperties } from '../../../../../../../../../../scripts/helpers/misc/remove-undefined-properties.ts';
-import { curlyReferenceSchema } from '../../../reference/types/curly/curly-reference.schema.ts';
-import { curlyReferenceToSegmentsReference } from '../../../reference/types/curly/to/segments-reference/curly-reference-to-segments-reference.js';
-import { jsonReferenceSchema } from '../../../reference/types/json/json-reference.schema.ts';
-import { jsonPointerToSegmentsReference } from '../../../reference/types/json/members/pointer/to/segments-reference/json-pointer-to-segments-reference.js';
-import type { SegmentsReference } from '../../../reference/types/segments/segments-reference.js';
-import { segmentsReferenceToCurlyReference } from '../../../reference/types/segments/to/curly-reference/segments-reference-to-curly-reference.js';
-import type { DesignTokensTree } from '../../../tree/design-tokens-tree.js';
-import {
-  DESIGN_TOKENS_TREE_EXTENDS_RESOLVING,
-  normalizeExtendsOfDesignTokensTree,
-  type NormalizeExtendsOfDesignTokensTreeContext,
-} from '../../../tree/normalize/extends/normalize-extends-of-design-tokens-tree.js';
-import type { NormalizeInheritedPropertiesOfDesignTokensTreeContext } from '../../../tree/normalize/inherited-properties/normalize-inherited-properties-of-design-tokens-tree.js';
-import type { DesignTokensGroup } from '../../design-tokens-group.js';
-import { isDesignTokensGroup } from '../../is-design-tokens-group.js';
+import { removeUndefinedProperties } from '../../../../../../../../scripts/helpers/misc/remove-undefined-properties.ts';
+import type { DesignTokensGroup } from '../../design-token/group/design-tokens-group.ts';
+import { isDesignTokensGroup } from '../../design-token/group/is-design-tokens-group.ts';
+import { isCurlyReference } from '../../design-token/reference/types/curly/is-curly-reference.ts';
+import { curlyReferenceToSegmentsReference } from '../../design-token/reference/types/curly/to/segments-reference/curly-reference-to-segments-reference.ts';
+import { isJsonPointer } from '../../design-token/reference/types/json/members/pointer/is-json-pointer.ts';
+import { jsonPointerToSegmentsReference } from '../../design-token/reference/types/json/members/pointer/to/segments-reference/json-pointer-to-segments-reference.ts';
+import type { SegmentsReference } from '../../design-token/reference/types/segments/segments-reference.ts';
+import { segmentsReferenceToCurlyReference } from '../../design-token/reference/types/segments/to/curly-reference/segments-reference-to-curly-reference.ts';
+import type { DesignTokensTree } from '../../design-token/tree/design-tokens-tree.ts';
 
-import { patchDesignTokensGroup } from './patch-design-tokens-group.js';
+import type { CascadeInheritedPropertiesOfDesignTokensTreeContext } from '../cascade-inherited-properties/cascade-inherited-properties-of-design-tokens-tree-context.ts';
+import { DESIGN_TOKENS_TREE_EXTENDS_RESOLVING } from './design-tokens-tree-extends-resolving.constant.ts';
 
-export function normalizeExtendsOfDesignTokensGroup(
+import { patchDesignTokensGroup } from '../merge/patch-design-tokens-group.ts';
+import type { ResolveDesignTokensTreeExtendsContext } from './resolve-design-tokens-tree-extends-context.ts';
+import { resolveDesignTokensTreeExtends } from './resolve-design-tokens-tree-extends.ts';
+
+export function resolveDesignTokensGroupExtends(
   input: DesignTokensGroup,
-  ctx: NormalizeExtendsOfDesignTokensTreeContext,
+  ctx: ResolveDesignTokensTreeExtendsContext,
 ): DesignTokensTree {
   const cached: DesignTokensTree | typeof DESIGN_TOKENS_TREE_EXTENDS_RESOLVING | undefined =
     ctx.cache.get(input);
@@ -39,13 +38,13 @@ export function normalizeExtendsOfDesignTokensGroup(
   }
 
   if ($extends !== undefined) {
-    if (!curlyReferenceSchema.safeParse($extends).success) {
+    if (!isCurlyReference($extends)) {
       throw new Error('$extends is not a curly reference.');
     }
 
     reference = curlyReferenceToSegmentsReference($extends);
   } else if ($ref !== undefined) {
-    if (!jsonReferenceSchema.safeParse($extends).success) {
+    if (!isJsonPointer($ref)) {
       throw new Error('$ref is not a json reference.');
     }
 
@@ -62,7 +61,7 @@ export function normalizeExtendsOfDesignTokensGroup(
     ...Object.fromEntries(
       Object.entries(children).map(
         ([name, child]: [string, DesignTokensTree]): [string, DesignTokensTree] => {
-          return [name, normalizeExtendsOfDesignTokensTree(child, ctx)];
+          return [name, resolveDesignTokensTreeExtends(child, ctx)];
         },
       ),
     ),
@@ -72,13 +71,12 @@ export function normalizeExtendsOfDesignTokensGroup(
 
   if (reference !== undefined) {
     let node: any = ctx.root;
-    let inherited: NormalizeInheritedPropertiesOfDesignTokensTreeContext =
-      removeUndefinedProperties({
-        $description: node.$description,
-        $type: node.$type,
-        $deprecated: node.$deprecated,
-        $extensions: node.$extensions,
-      });
+    let inherited: CascadeInheritedPropertiesOfDesignTokensTreeContext = removeUndefinedProperties({
+      $description: node.$description,
+      $type: node.$type,
+      $deprecated: node.$deprecated,
+      $extensions: node.$extensions,
+    });
 
     for (let i: number = 0; i < reference.length; i++) {
       const segment: string = reference[i];
@@ -100,7 +98,7 @@ export function normalizeExtendsOfDesignTokensGroup(
       }
 
       if (Reflect.has(node, '$extends') || Reflect.has(node, '$ref') || isLast) {
-        node = normalizeExtendsOfDesignTokensGroup(node, ctx);
+        node = resolveDesignTokensGroupExtends(node, ctx);
       }
 
       inherited = {
