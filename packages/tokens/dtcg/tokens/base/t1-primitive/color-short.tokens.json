@@ -1,0 +1,28 @@
+{
+  "color": {
+    "blue": {
+      "500": { "value": "#2196F3" },
+      "700": { "value": "#1976D2" }
+    },
+    "gray": {
+      "100": { "value": "#F5F5F5" },
+      "900": { "value": "#212121" }
+    }
+  },
+
+  "space": {
+    "4": { "value": "4px" },
+    "8": { "value": "8px" },
+    "16": { "value": "16px" }
+  },
+
+  "font": {
+    "family": {
+      "base": { "value": "Roboto, Arial, sans-serif" }
+    },
+    "size": {
+      "14": { "value": "14px" },
+      "16": { "value": "16px" }
+    }
+  }
+}

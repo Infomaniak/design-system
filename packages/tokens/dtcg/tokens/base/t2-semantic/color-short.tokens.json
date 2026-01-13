@@ -1,0 +1,16 @@
+{
+  "color": {
+    "primary": {
+      "value": "{color.blue.500}"
+    },
+    "primaryHover": {
+      "value": "{color.blue.700}"
+    },
+    "background": {
+      "value": "{color.gray.100}"
+    },
+    "textPrimary": {
+      "value": "{color.gray.900}"
+    }
+  }
+}

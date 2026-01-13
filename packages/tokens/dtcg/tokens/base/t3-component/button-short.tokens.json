@@ -1,0 +1,21 @@
+{
+  "button": {
+    "primary": {
+      "background": {
+        "value": "{color.primary}"
+      },
+      "backgroundHover": {
+        "value": "{color.primaryHover}"
+      },
+      "text": {
+        "value": "{color.background}"
+      }
+    }
+  },
+
+  "card": {
+    "background": {
+      "value": "{color.background}"
+    }
+  }
+}
