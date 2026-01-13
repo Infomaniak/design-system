@@ -1,9 +1,9 @@
-import { resolveSegmentsReference } from '../../segments/resolve/resolve-segments-reference.js';
-import type { SegmentsReference } from '../../segments/segments-reference.js';
-import { segmentsReferenceToJsonPointer } from '../../segments/to/json-reference/json-pointer/segments-reference-to-json-pointer.js';
+import { resolveSegmentsReference } from '../../segments/resolve/resolve-segments-reference.ts';
+import type { SegmentsReference } from '../../segments/segments-reference.ts';
+import { segmentsReferenceToJsonPointer } from '../../segments/to/json-reference/json-pointer/segments-reference-to-json-pointer.ts';
 import { isJsonReference } from '../is-json-reference.ts';
-import type { JsonReference } from '../json-reference.js';
-import { jsonReferenceToSegmentsReference } from '../to/segments-reference/json-reference-to-segments-reference.js';
+import type { JsonReference } from '../json-reference.ts';
+import { jsonReferenceToSegmentsReference } from '../to/segments-reference/json-reference-to-segments-reference.ts';
 
 export interface ResolvedJsonReference {
   readonly value: unknown;

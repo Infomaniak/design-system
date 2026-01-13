@@ -1,8 +1,7 @@
 import StyleDictionary from 'style-dictionary';
 import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
-import { designTokenReferenceSchema } from '../../../../../dtcg/design-token/reference/design-token-reference.schema.ts';
-import type { DesignTokenReference } from '../../../../../dtcg/design-token/reference/design-token-reference.ts';
+import { isDesignTokenReference } from '../../../../../dtcg/design-token/reference/is-design-token-reference.ts';
 import { isJsonReference } from '../../../../../dtcg/design-token/reference/types/json/is-json-reference.ts';
 import { dimensionDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/base/types/dimension/value/dimension-design-token-value.schema.ts';
 import type { CssContext } from '../../css-context.ts';
@@ -10,8 +9,8 @@ import { designTokenReferenceToCssValue } from '../../references/design-token-re
 import { strokeStyleDesignTokenValueDashArrayToCssValue } from '../composite/stroke-style.ts';
 
 export function dimensionDesignTokenValueToCssValue($value: unknown, ctx: CssContext): string {
-  if (designTokenReferenceSchema.safeParse($value).success) {
-    return designTokenReferenceToCssValue($value as DesignTokenReference, ctx);
+  if (isDesignTokenReference($value)) {
+    return designTokenReferenceToCssValue($value, ctx);
   }
 
   const { value, unit } = dimensionDesignTokenValueSchema.parse($value);

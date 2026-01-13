@@ -1,6 +1,6 @@
-import type { JsonReference } from '../../../json/json-reference.js';
-import type { SegmentsReference } from '../../segments-reference.js';
-import { segmentsReferenceToJsonPointer } from './json-pointer/segments-reference-to-json-pointer.js';
+import type { JsonReference } from '../../../json/json-reference.ts';
+import type { SegmentsReference } from '../../segments-reference.ts';
+import { segmentsReferenceToJsonPointer } from './json-pointer/segments-reference-to-json-pointer.ts';
 
 export function segmentsReferenceToJsonReference(reference: SegmentsReference): JsonReference {
   return {

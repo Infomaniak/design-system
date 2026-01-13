@@ -1,5 +1,5 @@
 import { glob, readFile } from 'node:fs/promises';
-import type { DesignTokensGroup } from '../../design-token/group/design-tokens-group.ts';
+import type { DesignTokensTree } from '../../design-token/tree/design-tokens-tree.ts';
 import {
   type MergeDesignTokensGroupsOptions,
   mergeDesignTokensTrees,
@@ -10,8 +10,8 @@ export interface MergeDesignTokenFilesOptions extends MergeDesignTokensGroupsOpt
 export async function mergeDesignTokenFiles(
   sources: readonly string[],
   options?: MergeDesignTokenFilesOptions,
-): Promise<DesignTokensGroup> {
-  let allTokens: DesignTokensGroup = {};
+): Promise<DesignTokensTree> {
+  let allTokens: DesignTokensTree = {};
 
   for (const path of sources) {
     for await (const entry of glob(path)) {

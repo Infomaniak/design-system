@@ -1,12 +1,12 @@
-import type { DesignTokenReference } from '../design-token-reference.js';
+import type { DesignTokenReference } from '../design-token-reference.ts';
 import { isCurlyReference } from '../types/curly/is-curly-reference.ts';
-import { curlyReferenceToSegmentsReference } from '../types/curly/to/segments-reference/curly-reference-to-segments-reference.js';
+import { curlyReferenceToSegmentsReference } from '../types/curly/to/segments-reference/curly-reference-to-segments-reference.ts';
 import { isJsonReference } from '../types/json/is-json-reference.ts';
-import { jsonReferenceToSegmentsReference } from '../types/json/to/segments-reference/json-reference-to-segments-reference.js';
-import { resolveSegmentsReference } from '../types/segments/resolve/resolve-segments-reference.js';
-import type { SegmentsReference } from '../types/segments/segments-reference.js';
-import { segmentsReferenceToCurlyReference } from '../types/segments/to/curly-reference/segments-reference-to-curly-reference.js';
-import { segmentsReferenceToJsonPointer } from '../types/segments/to/json-reference/json-pointer/segments-reference-to-json-pointer.js';
+import { jsonReferenceToSegmentsReference } from '../types/json/to/segments-reference/json-reference-to-segments-reference.ts';
+import { resolveSegmentsReference } from '../types/segments/resolve/resolve-segments-reference.ts';
+import type { SegmentsReference } from '../types/segments/segments-reference.ts';
+import { segmentsReferenceToCurlyReference } from '../types/segments/to/curly-reference/segments-reference-to-curly-reference.ts';
+import { segmentsReferenceToJsonPointer } from '../types/segments/to/json-reference/json-pointer/segments-reference-to-json-pointer.ts';
 
 export interface ResolvedDesignTokenReference {
   readonly value: unknown;

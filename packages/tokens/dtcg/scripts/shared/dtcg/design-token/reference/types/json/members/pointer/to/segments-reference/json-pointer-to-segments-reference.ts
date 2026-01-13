@@ -1,9 +1,9 @@
-import type { SegmentsReference } from '../../../../../segments/segments-reference.js';
-import type { JsonPointer } from '../../json-pointer.js';
+import type { SegmentsReference } from '../../../../../segments/segments-reference.ts';
+import type { JsonPointer } from '../../json-pointer.ts';
 
 export function jsonPointerToSegmentsReference(reference: JsonPointer): SegmentsReference {
-  return reference === '#' ?
-      []
+  return reference === '#'
+    ? []
     : reference
         .slice(2)
         .split('/')

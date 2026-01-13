@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { resolveDesignTokenReference } from './resolve-design-token-reference.js';
+import { resolveDesignTokenReference } from './resolve-design-token-reference.ts';
 
 describe('resolveDesignTokenReference', () => {
   test('recursivity', () => {

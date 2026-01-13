@@ -1,9 +1,7 @@
 import StyleDictionary from 'style-dictionary';
 import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
-import { designTokenReferenceSchema } from '../../../../../dtcg/design-token/reference/design-token-reference.schema.ts';
-import type { DesignTokenReference } from '../../../../../dtcg/design-token/reference/design-token-reference.ts';
-import { isJsonReference } from '../../../../../dtcg/design-token/reference/types/json/is-json-reference.ts';
+import { isDesignTokenReference } from '../../../../../dtcg/design-token/reference/is-design-token-reference.ts';
 import { borderDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/composite/types/border/value/border-design-token-value.schema.ts';
 import type { CssContext } from '../../css-context.ts';
 import { designTokenReferenceToCssValue } from '../../references/design-token-reference-to-css-value.ts';
@@ -12,15 +10,11 @@ import { dimensionDesignTokenValueToCssValue } from '../base/dimension.ts';
 import { strokeStyleDesignTokenValueToCssValue } from './stroke-style.ts';
 
 export function borderDesignTokenValueToCssValue($value: unknown, ctx: CssContext): string {
-  if (designTokenReferenceSchema.safeParse($value).success) {
-    return designTokenReferenceToCssValue($value as DesignTokenReference, ctx);
+  if (isDesignTokenReference($value)) {
+    return designTokenReferenceToCssValue($value, ctx);
   }
 
   const { color, width, style } = borderDesignTokenValueSchema.parse($value);
-
-  if (isJsonReference(color) || isJsonReference(width) || isJsonReference(style)) {
-    throw new Error('JSON references are not supported yet.');
-  }
 
   return `${dimensionDesignTokenValueToCssValue(width, ctx)} ${strokeStyleDesignTokenValueToCssValue(style, ctx)} ${colorDesignTokenValueToCssValue(color, ctx)}`;
 }

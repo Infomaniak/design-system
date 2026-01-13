@@ -1,5 +1,5 @@
-import type { JsonPointer } from '../../../../json/members/pointer/json-pointer.js';
-import type { SegmentsReference } from '../../../segments-reference.js';
+import type { JsonPointer } from '../../../../json/members/pointer/json-pointer.ts';
+import type { SegmentsReference } from '../../../segments-reference.ts';
 
 export function segmentsReferenceToJsonPointer(reference: SegmentsReference): JsonPointer {
   return `#/${reference

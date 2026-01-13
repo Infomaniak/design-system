@@ -1,5 +1,4 @@
 import { removeUndefinedProperties } from '../../../../../../../../scripts/helpers/misc/remove-undefined-properties.ts';
-import type { DesignTokensGroup } from '../../design-token/group/design-tokens-group.ts';
 import type { SegmentsReference } from '../../design-token/reference/types/segments/segments-reference.ts';
 import { segmentsReferenceToCurlyReference } from '../../design-token/reference/types/segments/to/curly-reference/segments-reference-to-curly-reference.ts';
 import { isDesignToken } from '../../design-token/token/is-design-token.ts';
@@ -14,7 +13,7 @@ export function mergeDesignTokensTrees(
   treeA: DesignTokensTree,
   treeB: DesignTokensTree,
   { preventTokenCollision = true, path = [] }: MergeDesignTokensGroupsOptions = {},
-): DesignTokensGroup {
+): DesignTokensTree {
   if (isDesignToken(treeA)) {
     if (!isDesignToken(treeB)) {
       throw new Error('Got a DesignToken as input A, and a DesignTokensGroup as input B.');

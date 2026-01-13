@@ -1,4 +1,4 @@
-import type { SegmentsReference } from '../segments-reference.js';
+import type { SegmentsReference } from '../segments-reference.ts';
 
 export function resolveSegmentsReference(reference: SegmentsReference, root: unknown): unknown {
   let value: unknown = root;

@@ -1,16 +1,14 @@
 import StyleDictionary from 'style-dictionary';
 import { transformTypes } from 'style-dictionary/enums';
 import type { PlatformConfig, TransformedToken } from 'style-dictionary/types';
-import { designTokenReferenceSchema } from '../../../../../dtcg/design-token/reference/design-token-reference.schema.ts';
-import type { DesignTokenReference } from '../../../../../dtcg/design-token/reference/design-token-reference.ts';
+import { isDesignTokenReference } from '../../../../../dtcg/design-token/reference/is-design-token-reference.ts';
 import { isJsonReference } from '../../../../../dtcg/design-token/reference/types/json/is-json-reference.ts';
 import type { ValueOrDesignTokenReference } from '../../../../../dtcg/design-token/reference/value-or/value-or-design-token-reference.ts';
 import type { DimensionDesignTokenValue } from '../../../../../dtcg/design-token/token/types/base/types/dimension/value/dimension-design-token-value.ts';
 import { strokeStyleDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/composite/types/stroke-style/value/stroke-style-design-token-value.schema.ts';
 import type { StrokeStyleDesignTokenValueDashArray } from '../../../../../dtcg/design-token/token/types/composite/types/stroke-style/value/types/object/members/dash-array/stroke-style-design-token-value-dash-array.ts';
 import type { ObjectStrokeStyleDesignTokenValue } from '../../../../../dtcg/design-token/token/types/composite/types/stroke-style/value/types/object/object-stroke-style-design-token-value.ts';
-import { predefinedStrokeStyleDesignTokenValueSchema } from '../../../../../dtcg/design-token/token/types/composite/types/stroke-style/value/types/predefined/predefined-stroke-style-design-token-value.schema.ts';
-import type { PredefinedStrokeStyleDesignTokenValue } from '../../../../../dtcg/design-token/token/types/composite/types/stroke-style/value/types/predefined/predefined-stroke-style-design-token-value.ts';
+import { isPredefinedStrokeStyleDesignTokenValue } from '../../../../../dtcg/design-token/token/types/composite/types/stroke-style/value/types/predefined/is-predefined-stroke-style-design-token-value.ts';
 import type { CssContext } from '../../css-context.ts';
 import { designTokenReferenceToCssValue } from '../../references/design-token-reference-to-css-value.ts';
 import { dimensionDesignTokenValueToCssValue } from '../base/dimension.ts';
@@ -27,14 +25,14 @@ export function strokeStyleDesignTokenValueDashArrayToCssValue(
 }
 
 export function strokeStyleDesignTokenValueToCssValue($value: unknown, ctx: CssContext): string {
-  if (designTokenReferenceSchema.safeParse($value).success) {
-    return designTokenReferenceToCssValue($value as DesignTokenReference, ctx);
+  if (isDesignTokenReference($value)) {
+    return designTokenReferenceToCssValue($value, ctx);
   }
 
   strokeStyleDesignTokenValueSchema.parse($value);
 
-  if (predefinedStrokeStyleDesignTokenValueSchema.safeParse($value).success) {
-    return $value as PredefinedStrokeStyleDesignTokenValue;
+  if (isPredefinedStrokeStyleDesignTokenValue($value)) {
+    return $value;
   } else {
     const { dashArray, lineCap } = $value as ObjectStrokeStyleDesignTokenValue;
 

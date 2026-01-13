@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { resolveJsonReference } from './resolve-json-reference.js';
+import { resolveJsonReference } from './resolve-json-reference.ts';
 
 describe('resolveJsonReference', () => {
   test('recursivity', () => {

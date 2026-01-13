@@ -3,11 +3,11 @@ import { isCurlyReference } from '../../../../dtcg/design-token/reference/types/
 import type { CssContext } from '../css-context.ts';
 
 export function designTokenReferenceToCssValue(
-  value: DesignTokenReference,
+  reference: DesignTokenReference,
   _ctx: CssContext,
 ): string {
-  if (isCurlyReference(value)) {
-    return value as string;
+  if (isCurlyReference(reference)) {
+    return reference;
     // return `var(--${ctx.prefix ?? ''}${value.slice(1, -1).replaceAll('.', '-')})`;
   } else {
     throw 'TODO'; // TODO support json ref
