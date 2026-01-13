@@ -1,6 +1,7 @@
-import { glob, readFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 import { removeTrailingSlash } from '../../../../../../scripts/helpers/path/remove-traling-slash.ts';
-import { mergeDesignTokens } from '../dtcg/operations/merge/merge-design-tokens.ts';
+import type { DesignTokensGroup } from '../dtcg/design-token/group/design-tokens-group.ts';
+import { mergeDesignTokenFiles } from '../dtcg/operations/merge/merge-design-token-files.ts';
 
 export interface BuildFigmaTokensOptions {
   readonly sourceDirectory: string;
@@ -12,26 +13,15 @@ export async function buildFigmaTokens({
   outputDirectory,
 }: BuildFigmaTokensOptions): Promise<void> {
   sourceDirectory = removeTrailingSlash(sourceDirectory);
+  outputDirectory = removeTrailingSlash(outputDirectory);
 
-  const base: readonly string[] = [
+  const allTokens: DesignTokensGroup = await mergeDesignTokenFiles([
     `${sourceDirectory}/base/t1-primitive/**/*.tokens.json`,
     `${sourceDirectory}/base/t2-semantic/**/*.tokens.json`,
     `${sourceDirectory}/base/t3-component/**/*.tokens.json`,
-  ];
+  ]);
 
-  let allTokens: any = {};
-
-  for (const path of base) {
-    for await (const entry of glob(path)) {
-      const tokens: any = JSON.parse(
-        await readFile(entry, {
-          encoding: 'utf-8',
-        }),
-      );
-
-      allTokens = mergeDesignTokens(allTokens, tokens);
-    }
-  }
+  await writeFile(`${outputDirectory}/all.json`, JSON.stringify(allTokens, null, 2));
 
   // for await (const entry of glob(`${sourceDirectory}/themes/**/*.tokens.json`)) {
   //   const tokens: any = JSON.parse(
@@ -43,5 +33,5 @@ export async function buildFigmaTokens({
   //   allTokens = mergeDesignTokens(allTokens, tokens);
   // }
 
-  console.log(allTokens);
+  // console.log(allTokens);
 }

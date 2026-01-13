@@ -1,0 +1,64 @@
+import { removeUndefinedProperties } from '../../../../../../../../scripts/helpers/misc/remove-undefined-properties.ts';
+import type { DesignTokensGroup } from '../../design-token/group/design-tokens-group.ts';
+import type { SegmentsReference } from '../../design-token/reference/types/segments/segments-reference.ts';
+import { segmentsReferenceToCurlyReference } from '../../design-token/reference/types/segments/to/curly-reference/segments-reference-to-curly-reference.ts';
+import { isDesignToken } from '../../design-token/token/is-design-token.ts';
+import type { DesignTokensTree } from '../../design-token/tree/design-tokens-tree.ts';
+
+export interface PatchDesignTokensGroupOptions {
+  readonly path?: SegmentsReference;
+  readonly onConflict?: PatchDesignTokensGroupOnConflict;
+}
+
+export type PatchDesignTokensGroupOnConflict = 'throw' | 'replace';
+
+export function patchDesignTokensGroup(
+  source: DesignTokensGroup,
+  patch: DesignTokensGroup,
+  { path = [], onConflict = 'replace' }: PatchDesignTokensGroupOptions = {},
+): DesignTokensGroup {
+  const { $description, $type, $extends, $ref, $deprecated, $extensions, ...children } = source;
+
+  if ($extends !== undefined || $ref !== undefined) {
+    throw new Error('Source should not have $extends.');
+  }
+
+  if (patch.$extends !== undefined || patch.$ref !== undefined) {
+    throw new Error('Patch should not have $extends.');
+  }
+
+  return {
+    ...patch,
+    ...removeUndefinedProperties({
+      $description,
+      $type,
+      $deprecated,
+      $extensions,
+    }),
+    ...Object.fromEntries(
+      Object.entries(children).map(
+        ([name, child]: [string, DesignTokensTree]): [string, DesignTokensTree] => {
+          if (Reflect.has(patch, name) && isDesignToken(child)) {
+            if (onConflict === 'throw') {
+              throw new Error(
+                `Conflicting design tokens: ${segmentsReferenceToCurlyReference(path)}`,
+              );
+            }
+          }
+
+          if (!Reflect.has(patch, name) || isDesignToken(child)) {
+            return [name, child];
+          } else {
+            return [
+              name,
+              patchDesignTokensGroup(child, Reflect.get(patch, name), {
+                path: [...path, name],
+                onConflict,
+              }),
+            ];
+          }
+        },
+      ),
+    ),
+  };
+}

@@ -3,14 +3,9 @@ import type { DesignTokensGroup } from '../../design-token/group/design-tokens-g
 import { isDesignToken } from '../../design-token/token/is-design-token.ts';
 import type { DesignTokensTree } from '../../design-token/tree/design-tokens-tree.ts';
 
-export interface PatchDesignTokensGroupOptions {
-  readonly onConflict?: 'throw' | 'replace';
-}
-
-export function patchDesignTokensGroup(
+export function extendDesignTokensGroup(
   source: DesignTokensGroup,
-  patch: DesignTokensGroup,
-  options?: PatchDesignTokensGroupOptions,
+  extendedBy: DesignTokensGroup,
 ): DesignTokensGroup {
   const { $description, $type, $extends, $ref, $deprecated, $extensions, ...children } = source;
 
@@ -18,12 +13,12 @@ export function patchDesignTokensGroup(
     throw new Error('Source should not have $extends.');
   }
 
-  if (patch.$extends !== undefined || patch.$ref !== undefined) {
+  if (extendedBy.$extends !== undefined || extendedBy.$ref !== undefined) {
     throw new Error('Patch should not have $extends.');
   }
 
   return {
-    ...patch,
+    ...extendedBy,
     ...removeUndefinedProperties({
       $description,
       $type,
@@ -33,16 +28,10 @@ export function patchDesignTokensGroup(
     ...Object.fromEntries(
       Object.entries(children).map(
         ([name, child]: [string, DesignTokensTree]): [string, DesignTokensTree] => {
-          if (Reflect.has(patch, name) && isDesignToken(child)) {
-            if (options?.onConflict === 'throw') {
-              throw new Error(`Conflicting design tokens: ${name}`);
-            }
-          }
-
-          if (!Reflect.has(patch, name) || isDesignToken(child)) {
+          if (!Reflect.has(extendedBy, name) || isDesignToken(child)) {
             return [name, child];
           } else {
-            return [name, patchDesignTokensGroup(child, Reflect.get(patch, name), options)];
+            return [name, extendDesignTokensGroup(child, Reflect.get(extendedBy, name))];
           }
         },
       ),

@@ -98,7 +98,7 @@ export async function buildTokens({
               options: {
                 fileHeader,
                 outputReferences: true,
-                selector: ':root',
+                selector: ':root, :host',
               },
             },
             {

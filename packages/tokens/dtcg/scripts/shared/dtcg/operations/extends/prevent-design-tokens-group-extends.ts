@@ -1,5 +1,5 @@
-import type { DesignTokenNameSegments } from '../../../token/name/segments/design-token-name-segments.js';
-import type { DesignTokensGroup } from '../../design-tokens-group.js';
+import type { DesignTokensGroup } from '../../design-token/group/design-tokens-group.ts';
+import type { DesignTokenNameSegments } from '../../design-token/token/name/segments/design-token-name-segments.ts';
 
 export function preventDesignTokensGroupExtends(
   { $extends, $ref }: DesignTokensGroup,
