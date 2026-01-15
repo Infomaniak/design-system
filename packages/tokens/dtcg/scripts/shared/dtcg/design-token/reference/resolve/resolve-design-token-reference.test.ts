@@ -6,30 +6,31 @@ describe('resolveDesignTokenReference', () => {
     expect(
       resolveDesignTokenReference('{semantic.link}', {
         base: {
+          $type: 'color',
           primary: {
             $value: {
               colorSpace: 'srgb',
               components: [0, 0.4, 0.8],
               hex: '#0066cc',
             },
-            $type: 'color',
           },
         },
         semantic: {
           brand: {
             $value: '{base.primary}',
-            $type: 'color',
           },
           link: {
             $value: '{semantic.brand}',
-            $type: 'color',
           },
         },
-      }).value,
+      }).token,
     ).toEqual({
-      colorSpace: 'srgb',
-      components: [0, 0.4, 0.8],
-      hex: '#0066cc',
+      $type: 'color',
+      $value: {
+        colorSpace: 'srgb',
+        components: [0, 0.4, 0.8],
+        hex: '#0066cc',
+      },
     });
   });
 
@@ -40,7 +41,7 @@ describe('resolveDesignTokenReference', () => {
           a: { $value: '{b}' },
           b: { $value: '{c}' },
           c: { $value: '{a}' }, // Creates circular reference: a → b → c → a
-        }).value,
+        }).token,
     ).toThrow();
   });
 });
