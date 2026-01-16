@@ -15,6 +15,9 @@ import { resolvedStrokeStyleDesignTokenToFigmaObject } from './tokens/composite/
 import { resolvedTransitionDesignTokenToFigmaObject } from './tokens/composite/transition.ts';
 import { resolvedTypographyDesignTokenToFigmaObject } from './tokens/composite/typography.ts';
 
+/**
+ * @deprecated
+ */
 export function designTokenTreeToFigmaFormat(
   tree: DesignTokensTree,
   ctx: DesignTokenTreeToFigmaFormatContext,

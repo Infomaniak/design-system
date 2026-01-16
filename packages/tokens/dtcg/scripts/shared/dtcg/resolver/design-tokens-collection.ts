@@ -2,62 +2,37 @@ import { glob, readFile } from 'node:fs/promises';
 import { removeUndefinedProperties } from '../../../../../../../scripts/helpers/misc/remove-undefined-properties.ts';
 import { isDesignTokenReference } from '../design-token/reference/is-design-token-reference.ts';
 import { designTokenReferenceToCurlyReference } from '../design-token/reference/to/curly-reference/design-token-reference-to-curly-reference.ts';
-import { designTokenReferenceToSegmentsReference } from '../design-token/reference/to/segments-reference/design-token-reference-to-segments-reference.ts';
 import type { CurlyReference } from '../design-token/reference/types/curly/curly-reference.ts';
-import type { ValueOrCurlyReference } from '../design-token/reference/types/curly/value-or/value-or-curly-reference.ts';
-import { resolveValueOrJsonReference } from '../design-token/reference/types/json/value-or/resolve/resolve-value-or-json-reference.ts';
-import type { ValueOrJsonReference } from '../design-token/reference/types/json/value-or/value-or-json-reference.ts';
-import type { SegmentsReference } from '../design-token/reference/types/segments/segments-reference.ts';
-import { segmentsReferenceToCurlyReference } from '../design-token/reference/types/segments/to/curly-reference/segments-reference-to-curly-reference.ts';
-import { segmentsReferenceToString } from '../design-token/reference/types/segments/to/string/segments-reference-to-string.ts';
-import type { ValueOrDesignTokenReference } from '../design-token/reference/value-or/value-or-design-token-reference.ts';
+import type { UpdateCurlyReference } from '../design-token/reference/types/curly/update/update-curly-reference.ts';
 import { isDesignToken } from '../design-token/token/is-design-token.ts';
-import type { ColorDesignTokenValue } from '../design-token/token/types/base/types/color/value/color-design-token-value.ts';
-import type { ColorDesignTokenValueComponent } from '../design-token/token/types/base/types/color/value/members/components/component/color-design-token-value-component.ts';
-import type { CubicBezierDesignTokenValue } from '../design-token/token/types/base/types/cubic-bezier/value/cubic-bezier-design-token-value.ts';
-import type { DimensionDesignTokenValue } from '../design-token/token/types/base/types/dimension/value/dimension-design-token-value.ts';
-import type { DurationDesignTokenValue } from '../design-token/token/types/base/types/duration/value/duration-design-token-value.ts';
-import type { FontFamilyDesignTokenValue } from '../design-token/token/types/base/types/font-family/value/font-family-design-token-value.ts';
-import { isStringFontFamilyDesignTokenValue } from '../design-token/token/types/base/types/font-family/value/types/string/is-string-font-family-design-token-value.ts';
-import type { FontWeightDesignTokenValue } from '../design-token/token/types/base/types/font-weight/value/font-weight-design-token-value.ts';
-import type { NumberDesignTokenValue } from '../design-token/token/types/base/types/number/value/number-design-token-value.ts';
-import type { BorderDesignTokenValue } from '../design-token/token/types/composite/types/border/value/border-design-token-value.ts';
-import type { GradientDesignTokenValue } from '../design-token/token/types/composite/types/gradient/value/gradient-design-token-value.ts';
-import type { ObjectGradientDesignTokenValue } from '../design-token/token/types/composite/types/gradient/value/members/object/object-gradient-design-token-value.ts';
-import type { ShadowDesignTokenValue } from '../design-token/token/types/composite/types/shadow/value/shadow-design-token-value.ts';
-import { isObjectShadowDesignTokenValue } from '../design-token/token/types/composite/types/shadow/value/types/object/is-object-shadow-design-token-value.ts';
-import type { ObjectShadowDesignTokenValue } from '../design-token/token/types/composite/types/shadow/value/types/object/object-shadow-design-token-value.ts';
-import type { StrokeStyleDesignTokenValue } from '../design-token/token/types/composite/types/stroke-style/value/stroke-style-design-token-value.ts';
-import type { ObjectStrokeStyleDesignTokenValue } from '../design-token/token/types/composite/types/stroke-style/value/types/object/object-stroke-style-design-token-value.ts';
-import { isPredefinedStrokeStyleDesignTokenValue } from '../design-token/token/types/composite/types/stroke-style/value/types/predefined/is-predefined-stroke-style-design-token-value.ts';
-import type { TransitionDesignTokenValue } from '../design-token/token/types/composite/types/transition/value/transition-design-token-value.ts';
-import type { TypographyDesignTokenValue } from '../design-token/token/types/composite/types/typography/value/typography-design-token-value.ts';
 import { designTokensTreeSchema } from '../design-token/tree/design-tokens-tree.schema.ts';
 import type { DesignTokensTree } from '../design-token/tree/design-tokens-tree.ts';
-
-export interface DesignTokensCollectionToken {
-  readonly file: string | undefined;
-  readonly name: ArrayDesignTokenName;
-  readonly type: string;
-  readonly value: unknown | CurlyReference;
-  readonly description: string | undefined;
-  readonly deprecated: boolean | string | undefined;
-  readonly extensions: object | undefined;
-}
+import type {
+  DesignTokensCollectionTokenWithType,
+  GenericDesignTokensCollectionToken,
+  GenericResolvedDesignTokensCollectionToken,
+} from './token/design-tokens-collection-token.ts';
+import { designTokenValueToDesignTokensCollectionTokenValue } from './token/from/design-token-value-to-design-tokens-collection-token-value.ts';
+import type { ArrayDesignTokenNameOrToken } from './token/name/array-design-token-name-or-token.ts';
+import type { ArrayDesignTokenName } from './token/name/array-design-token-name.ts';
+import type { DesignTokenNameLikeOrToken } from './token/name/design-token-name-like-or-token.ts';
+import type { DesignTokenNameLike } from './token/name/design-token-name-like.ts';
+import { isBorderDesignTokensCollectionToken } from './token/types/composite/border/is-border-design-tokens-collection-token.ts';
+import { updateBorderDesignTokensCollectionTokenValueReferences } from './token/types/composite/border/value/update/update-border-design-tokens-collection-token-value-references.ts';
+import { isGradientDesignTokensCollectionToken } from './token/types/composite/gradient/is-gradient-design-tokens-collection-token.ts';
+import { updateGradientDesignTokensCollectionTokenValueReferences } from './token/types/composite/gradient/value/update/update-gradient-design-tokens-collection-token-value-references.ts';
+import { isShadowDesignTokensCollectionToken } from './token/types/composite/shadow/is-shadow-design-tokens-collection-token.ts';
+import { updateShadowDesignTokensCollectionTokenValueReferences } from './token/types/composite/shadow/value/update/update-shadow-design-tokens-collection-token-value-references.ts';
+import { isStrokeStyleDesignTokensCollectionToken } from './token/types/composite/stroke-style/is-stroke-style-design-tokens-collection-token.ts';
+import { updateStrokeStyleDesignTokensCollectionTokenValueReferences } from './token/types/composite/stroke-style/value/update/update-stroke-style-design-tokens-collection-token-value-references.ts';
+import { isTransitionDesignTokensCollectionToken } from './token/types/composite/transition/is-transition-design-tokens-collection-token.ts';
+import { updateTransitionDesignTokensCollectionTokenValueReferences } from './token/types/composite/transition/value/update/update-transition-design-tokens-collection-token-value-references.ts';
+import { isTypographyDesignTokensCollectionToken } from './token/types/composite/typography/is-typography-design-tokens-collection-token.ts';
+import { updateTypographyDesignTokensCollectionTokenValueReferences } from './token/types/composite/typography/value/update/update-typography-design-tokens-collection-token-value-references.ts';
 
 export interface DesignTokensCollectionTokensIteratorOptions {
   readonly merge?: boolean;
 }
-
-export type ArrayDesignTokenName = readonly string[];
-
-export type StringDesignTokenName = string;
-
-export type DesignTokenNameLike = StringDesignTokenName | ArrayDesignTokenName;
-
-export type ArrayDesignTokenNameOrToken = ArrayDesignTokenName | DesignTokensCollectionToken;
-
-export type DesignTokenNameLikeOrToken = DesignTokenNameLike | DesignTokensCollectionToken;
 
 export class DesignTokensCollection {
   static isCurlyReference(input: unknown): input is CurlyReference {
@@ -95,7 +70,7 @@ export class DesignTokensCollection {
     return typeof input === 'string' ? this.#stringDesignTokenNameToArray(input) : input;
   }
 
-  readonly #tokens: DesignTokensCollectionToken[];
+  readonly #tokens: GenericDesignTokensCollectionToken[];
 
   constructor() {
     this.#tokens = [];
@@ -122,341 +97,6 @@ export class DesignTokensCollection {
     return this;
   }
 
-  #resolveJsonReferencesOfDesignTokenValue($type: string, $value: unknown, root: unknown): unknown {
-    switch ($type) {
-      case 'color':
-        return this.#resolveJsonReferencesOfColorDesignTokenValue(
-          $value as ColorDesignTokenValue,
-          root,
-        );
-      case 'cubicBezier':
-        return this.#resolveJsonReferencesOfCubicBezierDesignTokenValue(
-          $value as CubicBezierDesignTokenValue,
-          root,
-        );
-      case 'dimension':
-        return this.#resolveJsonReferencesOfDimensionDesignTokenValue(
-          $value as DimensionDesignTokenValue,
-          root,
-        );
-      case 'duration':
-        return this.#resolveJsonReferencesOfDurationDesignTokenValue(
-          $value as DurationDesignTokenValue,
-          root,
-        );
-      case 'fontFamily':
-        return this.#resolveJsonReferencesOfFontFamilyDesignTokenValue(
-          $value as FontFamilyDesignTokenValue,
-          root,
-        );
-      case 'fontWeight':
-        return this.#resolveJsonReferencesOfFontWeightDesignTokenValue(
-          $value as FontWeightDesignTokenValue,
-          root,
-        );
-      case 'number':
-        return this.#resolveJsonReferencesOfNumberDesignTokenValue(
-          $value as NumberDesignTokenValue,
-          root,
-        );
-
-      case 'border':
-        return this.#resolveJsonReferencesOfBorderDesignTokenValue(
-          $value as BorderDesignTokenValue,
-          root,
-        );
-      case 'gradient':
-        return this.#resolveJsonReferencesOfGradientDesignTokenValue(
-          $value as GradientDesignTokenValue,
-          root,
-        );
-      case 'shadow':
-        return this.#resolveJsonReferencesOfShadowDesignTokenValue(
-          $value as ShadowDesignTokenValue,
-          root,
-        );
-      case 'strokeStyle':
-        return this.#resolveJsonReferencesOfStrokeStyleDesignTokenValue(
-          $value as StrokeStyleDesignTokenValue,
-          root,
-        );
-      case 'transition':
-        return this.#resolveJsonReferencesOfTransitionDesignTokenValue(
-          $value as TransitionDesignTokenValue,
-          root,
-        );
-      case 'typography':
-        return this.#resolveJsonReferencesOfTypographyDesignTokenValue(
-          $value as TypographyDesignTokenValue,
-          root,
-        );
-      default:
-        console.warn(`Unknown token type: ${$type}.`);
-        return $value;
-    }
-  }
-
-  #resolveJsonReferencesOfColorDesignTokenValue(
-    $value: ColorDesignTokenValue,
-    root: unknown,
-  ): unknown {
-    return {
-      colorSpace: resolveValueOrJsonReference($value.colorSpace, root),
-      components: resolveValueOrJsonReference($value.components, root).map(
-        (
-          component: ValueOrJsonReference<ColorDesignTokenValueComponent>,
-        ): ColorDesignTokenValueComponent => {
-          return resolveValueOrJsonReference(component, root);
-        },
-      ),
-      alpha: resolveValueOrJsonReference($value.alpha, root),
-    };
-  }
-
-  #resolveJsonReferencesOfCubicBezierDesignTokenValue(
-    $value: CubicBezierDesignTokenValue,
-    root: unknown,
-  ): unknown {
-    return $value.map((component: ValueOrJsonReference<number>): number => {
-      return resolveValueOrJsonReference(component, root);
-    });
-  }
-
-  #resolveJsonReferencesOfDimensionDesignTokenValue(
-    $value: DimensionDesignTokenValue,
-    root: unknown,
-  ): unknown {
-    return {
-      value: resolveValueOrJsonReference($value.value, root),
-      unit: resolveValueOrJsonReference($value.unit, root),
-    };
-  }
-
-  #resolveJsonReferencesOfDurationDesignTokenValue(
-    $value: DurationDesignTokenValue,
-    root: unknown,
-  ): unknown {
-    return {
-      value: resolveValueOrJsonReference($value.value, root),
-      unit: resolveValueOrJsonReference($value.unit, root),
-    };
-  }
-
-  #resolveJsonReferencesOfFontFamilyDesignTokenValue(
-    $value: FontFamilyDesignTokenValue,
-    root: unknown,
-  ): unknown {
-    return isStringFontFamilyDesignTokenValue($value)
-      ? $value
-      : $value.map((component: ValueOrJsonReference<string>): string => {
-          return resolveValueOrJsonReference(component, root);
-        });
-  }
-
-  #resolveJsonReferencesOfFontWeightDesignTokenValue(
-    $value: FontWeightDesignTokenValue,
-    _root: unknown,
-  ): unknown {
-    return $value;
-  }
-
-  #resolveJsonReferencesOfNumberDesignTokenValue(
-    $value: NumberDesignTokenValue,
-    _root: unknown,
-  ): unknown {
-    return $value;
-  }
-
-  #resolveJsonReferencesOfCompositeDesignTokenChildValue<GValue, GNewValue>(
-    valueOrReference: ValueOrDesignTokenReference<GValue>,
-    resolve: (value: GValue) => GNewValue,
-  ): ValueOrCurlyReference<GNewValue> {
-    return isDesignTokenReference(valueOrReference)
-      ? designTokenReferenceToCurlyReference(valueOrReference)
-      : resolve(valueOrReference);
-  }
-
-  #resolveJsonReferencesOfBorderDesignTokenValue(
-    $value: BorderDesignTokenValue,
-    root: unknown,
-  ): unknown {
-    return {
-      color: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        $value.color,
-        (value: ColorDesignTokenValue) =>
-          this.#resolveJsonReferencesOfColorDesignTokenValue(value, root),
-      ),
-      width: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        $value.width,
-        (value: DimensionDesignTokenValue) =>
-          this.#resolveJsonReferencesOfDimensionDesignTokenValue(value, root),
-      ),
-      style: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        $value.style,
-        (value: StrokeStyleDesignTokenValue) =>
-          this.#resolveJsonReferencesOfStrokeStyleDesignTokenValue(value, root),
-      ),
-    };
-  }
-
-  #resolveJsonReferencesOfGradientDesignTokenValue(
-    $value: GradientDesignTokenValue,
-    root: unknown,
-  ): unknown {
-    return $value.map((component: ValueOrDesignTokenReference<ObjectGradientDesignTokenValue>) => {
-      return this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        component,
-        (value: ObjectGradientDesignTokenValue) => {
-          return this.#resolveJsonReferencesOfObjectGradientDesignTokenValue(value, root);
-        },
-      );
-    });
-  }
-
-  #resolveJsonReferencesOfObjectGradientDesignTokenValue(
-    value: ObjectGradientDesignTokenValue,
-    root: unknown,
-  ): unknown {
-    return {
-      color: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        value.color,
-        (value: ColorDesignTokenValue) =>
-          this.#resolveJsonReferencesOfColorDesignTokenValue(value, root),
-      ),
-      position: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        value.position,
-        (value: NumberDesignTokenValue) =>
-          this.#resolveJsonReferencesOfNumberDesignTokenValue(value, root),
-      ),
-    };
-  }
-
-  #resolveJsonReferencesOfShadowDesignTokenValue(
-    $value: ShadowDesignTokenValue,
-    root: unknown,
-  ): unknown {
-    return isObjectShadowDesignTokenValue($value)
-      ? this.#resolveJsonReferencesOfObjectShadowDesignTokenValue($value, root)
-      : $value.map((component: ValueOrDesignTokenReference<ObjectShadowDesignTokenValue>) => {
-          return this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-            component,
-            (value: ObjectShadowDesignTokenValue) => {
-              return this.#resolveJsonReferencesOfObjectShadowDesignTokenValue(value, root);
-            },
-          );
-        });
-  }
-
-  #resolveJsonReferencesOfObjectShadowDesignTokenValue(
-    value: ObjectShadowDesignTokenValue,
-    root: unknown,
-  ): unknown {
-    return {
-      color: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        value.color,
-        (value: ColorDesignTokenValue) =>
-          this.#resolveJsonReferencesOfColorDesignTokenValue(value, root),
-      ),
-      offsetX: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        value.offsetX,
-        (value: DimensionDesignTokenValue) =>
-          this.#resolveJsonReferencesOfDimensionDesignTokenValue(value, root),
-      ),
-      offsetY: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        value.offsetY,
-        (value: DimensionDesignTokenValue) =>
-          this.#resolveJsonReferencesOfDimensionDesignTokenValue(value, root),
-      ),
-      blur: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        value.blur,
-        (value: DimensionDesignTokenValue) =>
-          this.#resolveJsonReferencesOfDimensionDesignTokenValue(value, root),
-      ),
-      spread: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        value.spread,
-        (value: DimensionDesignTokenValue) =>
-          this.#resolveJsonReferencesOfDimensionDesignTokenValue(value, root),
-      ),
-      inset: value.inset,
-    };
-  }
-
-  #resolveJsonReferencesOfStrokeStyleDesignTokenValue(
-    $value: StrokeStyleDesignTokenValue,
-    root: unknown,
-  ): unknown {
-    return isPredefinedStrokeStyleDesignTokenValue($value)
-      ? $value
-      : {
-          dashArray: $value.dashArray.map(
-            (component: ValueOrDesignTokenReference<DimensionDesignTokenValue>) => {
-              return this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-                component,
-                (value: DimensionDesignTokenValue) =>
-                  this.#resolveJsonReferencesOfDimensionDesignTokenValue(value, root),
-              );
-            },
-          ),
-          lineCap: $value.lineCap,
-        };
-  }
-
-  #resolveJsonReferencesOfTransitionDesignTokenValue(
-    $value: TransitionDesignTokenValue,
-    root: unknown,
-  ): unknown {
-    return {
-      duration: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        $value.duration,
-        (value: DurationDesignTokenValue) =>
-          this.#resolveJsonReferencesOfDurationDesignTokenValue(value, root),
-      ),
-      delay: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        $value.delay,
-        (value: DurationDesignTokenValue) =>
-          this.#resolveJsonReferencesOfDurationDesignTokenValue(value, root),
-      ),
-      timingFunction: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        $value.timingFunction,
-        (value: CubicBezierDesignTokenValue) =>
-          this.#resolveJsonReferencesOfCubicBezierDesignTokenValue(value, root),
-      ),
-    };
-  }
-
-  #resolveJsonReferencesOfTypographyDesignTokenValue(
-    $value: TypographyDesignTokenValue,
-    root: unknown,
-  ): unknown {
-    return {
-      fontFamily: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        $value.fontFamily,
-        (value: FontFamilyDesignTokenValue) =>
-          this.#resolveJsonReferencesOfFontFamilyDesignTokenValue(value, root),
-      ),
-      fontSize: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        $value.fontSize,
-        (value: DimensionDesignTokenValue) =>
-          this.#resolveJsonReferencesOfDimensionDesignTokenValue(value, root),
-      ),
-      fontWeight: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        $value.fontWeight,
-        (value: FontWeightDesignTokenValue) =>
-          this.#resolveJsonReferencesOfFontWeightDesignTokenValue(value, root),
-      ),
-      letterSpacing: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        $value.letterSpacing,
-        (value: DimensionDesignTokenValue) =>
-          this.#resolveJsonReferencesOfDimensionDesignTokenValue(value, root),
-      ),
-      lineHeight: this.#resolveJsonReferencesOfCompositeDesignTokenChildValue(
-        $value.lineHeight,
-        (value: NumberDesignTokenValue) =>
-          this.#resolveJsonReferencesOfNumberDesignTokenValue(value, root),
-      ),
-    };
-  }
-
   fromDesignTokensTree(root: DesignTokensTree, file?: string | undefined): this {
     // TODO extract explore ?
     const explore = (path: readonly string[], tree: DesignTokensTree): void => {
@@ -464,28 +104,17 @@ export class DesignTokensCollection {
         const { $value, $type, $deprecated, $description, $extensions } = tree;
 
         if (isDesignTokenReference($value)) {
-          const reference: SegmentsReference = designTokenReferenceToSegmentsReference($value);
-
-          try {
-            const token: DesignTokensCollectionToken = this.get(reference);
-
-            this.append({
-              file,
-              name: path,
-              type: $type ?? token.type,
-              value: segmentsReferenceToCurlyReference(reference),
-              deprecated: $deprecated ?? token.deprecated,
-              description: $description ?? token.description,
-              extensions: $extensions ?? token.extensions,
-            });
-          } catch (error) {
-            throw new Error(
-              `Unable to resolve reference: ${segmentsReferenceToString(reference)}.`,
-              {
-                cause: error,
-              },
-            );
-          }
+          this.append({
+            file,
+            name: path,
+            value: designTokenReferenceToCurlyReference($value),
+            ...removeUndefinedProperties({
+              type: $type,
+              deprecated: $deprecated,
+              description: $description,
+              extensions: $extensions,
+            }),
+          } satisfies GenericDesignTokensCollectionToken);
         } else {
           if ($type === undefined) {
             throw new Error('Unable to resolve $type.');
@@ -495,11 +124,13 @@ export class DesignTokensCollection {
             file,
             name: path,
             type: $type,
-            value: this.#resolveJsonReferencesOfDesignTokenValue($type, $value, root),
-            deprecated: $deprecated,
-            description: $description,
-            extensions: $extensions,
-          });
+            value: designTokenValueToDesignTokensCollectionTokenValue($type, $value, root),
+            ...removeUndefinedProperties({
+              deprecated: $deprecated,
+              description: $description,
+              extensions: $extensions,
+            }),
+          } satisfies DesignTokensCollectionTokenWithType<any, any>);
         }
       } else {
         const { $description, $type, $extends, $ref, $deprecated, $extensions, ...children } = tree;
@@ -528,12 +159,169 @@ export class DesignTokensCollection {
     return this.#tokens.length;
   }
 
-  append(token: DesignTokensCollectionToken): this {
+  /**
+   * Appends a token to the collection and returns the current instance.
+   *
+   * @param {GenericDesignTokensCollectionToken} token The token to be added to the collection.
+   * @return {this} The current instance for method chaining.
+   */
+  append(token: GenericDesignTokensCollectionToken): this {
     this.#tokens.push(token);
 
     return this;
   }
 
+  /**
+   * Adds a given token to the collection after removing any existing token with the same name.
+   *
+   * @param {GenericDesignTokensCollectionToken} token - The token to be added to the collection.
+   * @return {this} The current instance for method chaining.
+   */
+  set(token: GenericDesignTokensCollectionToken): this {
+    this.delete(token.name);
+    this.append(token);
+
+    return this;
+  }
+
+  /**
+   * Checks if the collection contains a specific design token or token name.
+   *
+   * @param {DesignTokenNameLikeOrToken} nameOrToken - The token name or token instance to check for existence.
+   * @return {boolean} True if the token or token name exists in the collection, otherwise false.
+   */
+  has(nameOrToken: DesignTokenNameLikeOrToken): boolean {
+    nameOrToken = DesignTokensCollection.#designTokenNameLikeOrTokenToArrayOrToken(nameOrToken);
+
+    const isArrayTokenName: boolean = Array.isArray(nameOrToken);
+
+    for (let i: number = 0; i < this.#tokens.length; i++) {
+      const token: GenericDesignTokensCollectionToken = this.#tokens[i];
+
+      if (
+        isArrayTokenName
+          ? DesignTokensCollection.#tokenNamesEqual(token.name, nameOrToken as readonly string[])
+          : token === nameOrToken
+      ) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * Retrieves a GenericDesignTokensCollectionToken based on the provided design token name.
+   *
+   * @param {DesignTokenNameLike} name - The design token name to retrieve.
+   * @return {GenericDesignTokensCollectionToken} The token associated with the provided name.
+   * @throws {Error} If the token is not found.
+   */
+  get(name: DesignTokenNameLike): GenericDesignTokensCollectionToken {
+    const token: GenericDesignTokensCollectionToken | undefined = this.getOptional(name);
+
+    if (token === undefined) {
+      throw new Error(
+        `Missing token: ${DesignTokensCollection.#designTokenNameLikeToArray(name).join('.')}`,
+      );
+    } else {
+      return token;
+    }
+  }
+
+  /**
+   * Optionally retrieves a design token from the collection by its name.
+   *
+   * Note: the search is performed from last to first, so the most recently added token will be returned if multiple tokens match the provided name.
+   *
+   * @param {DesignTokenNameLike} name - The name of the design token to retrieve.
+   * @return {GenericDesignTokensCollectionToken | undefined} The design token if found, or undefined if no matching token exists.
+   */
+  getOptional(name: DesignTokenNameLike): GenericDesignTokensCollectionToken | undefined {
+    name = DesignTokensCollection.#designTokenNameLikeToArray(name);
+
+    for (let i: number = this.#tokens.length - 1; i >= 0; i--) {
+      const token: GenericDesignTokensCollectionToken = this.#tokens[i];
+
+      if (DesignTokensCollection.#tokenNamesEqual(token.name, name)) {
+        return token;
+      }
+    }
+
+    return undefined;
+  }
+
+  /**
+   * Retrieves all tokens that match the specified design token name.
+   *
+   * @param {DesignTokenNameLike} name - The name or array of names to filter the tokens.
+   * @return {GenericDesignTokensCollectionToken[]} An array of tokens that match the specified name.
+   */
+  getAll(name: DesignTokenNameLike): GenericDesignTokensCollectionToken[] {
+    name = DesignTokensCollection.#designTokenNameLikeToArray(name);
+
+    return this.#tokens.filter((token: GenericDesignTokensCollectionToken): boolean => {
+      return DesignTokensCollection.#tokenNamesEqual(token.name, name);
+    });
+  }
+
+  /**
+   * Resolves a design token to its final value by following references and merging properties.
+   *
+   * @param {DesignTokenNameLike} name - The name or reference of the design token to resolve.
+   * @return {GenericResolvedDesignTokensCollectionToken} The fully resolved design token, including its value, properties, and resolution trace.
+   * @throws {Error} If a circular reference is detected or if the token cannot be found.
+   */
+  getResolved(name: DesignTokenNameLike): GenericResolvedDesignTokensCollectionToken {
+    name = DesignTokensCollection.#designTokenNameLikeToArray(name);
+
+    let resolvedToken: Partial<DesignTokensCollectionTokenWithType<any, any>> = {};
+    const explored: Set<CurlyReference> = new Set<CurlyReference>();
+
+    const getTrace = (): string => Array.from(explored).join(' -> ');
+
+    while (true) {
+      const key: CurlyReference = DesignTokensCollection.arrayDesignTokenNameToCurlyReference(name);
+
+      if (explored.has(key)) {
+        throw new Error(`Circular reference detected: ${getTrace()} -> ${key}`);
+      }
+
+      explored.add(key);
+
+      const token: GenericDesignTokensCollectionToken | undefined = this.getOptional(name);
+
+      if (token === undefined) {
+        throw new Error(`Unable to find referenced token: ${getTrace()}`);
+      }
+
+      const { value, ...properties } = token;
+
+      resolvedToken = {
+        ...removeUndefinedProperties(properties),
+        ...resolvedToken,
+      };
+
+      if (DesignTokensCollection.isCurlyReference(value)) {
+        name = DesignTokensCollection.curlyReferenceToArrayDesignTokenName(value);
+      } else {
+        return {
+          ...(resolvedToken as Omit<DesignTokensCollectionTokenWithType<any, any>, 'value'>),
+          value,
+          trace: Array.from(explored, (reference: CurlyReference): ArrayDesignTokenName => {
+            return DesignTokensCollection.curlyReferenceToArrayDesignTokenName(reference);
+          }),
+        };
+      }
+    }
+  }
+
+  /**
+   * Deletes the design token or tokens matching the provided name or token.
+   *
+   * @param {DesignTokenNameLikeOrToken} nameOrToken - A design token or an array representing the name of the token(s) to delete. It can either be a token object or a name-like structure.
+   * @return {number} The number of tokens deleted.
+   */
   delete(nameOrToken: DesignTokenNameLikeOrToken): number {
     nameOrToken = DesignTokensCollection.#designTokenNameLikeOrTokenToArrayOrToken(nameOrToken);
 
@@ -541,7 +329,7 @@ export class DesignTokensCollection {
     let deleted: number = 0;
 
     for (let i: number = 0; i < this.#tokens.length; i++) {
-      const token: DesignTokensCollectionToken = this.#tokens[i];
+      const token: GenericDesignTokensCollectionToken = this.#tokens[i];
 
       if (
         isArrayTokenName
@@ -557,100 +345,58 @@ export class DesignTokensCollection {
     return deleted;
   }
 
-  get(name: DesignTokenNameLike): DesignTokensCollectionToken {
-    const token: DesignTokensCollectionToken | undefined = this.getOptional(name);
-
-    if (token === undefined) {
-      throw new Error(
-        `Missing token: ${DesignTokensCollection.#designTokenNameLikeToArray(name).join('.')}`,
-      );
-    } else {
-      return token;
-    }
+  /**
+   * Clears all tokens from the internal collection.
+   *
+   * @return {this} The current instance for method chaining.
+   */
+  clear(): this {
+    this.#tokens.length = 0;
+    return this;
   }
 
-  getAll(name: DesignTokenNameLike): DesignTokensCollectionToken[] {
-    name = DesignTokensCollection.#designTokenNameLikeToArray(name);
+  /* LIST */
 
-    return this.#tokens.filter((token: DesignTokensCollectionToken): boolean => {
-      return DesignTokensCollection.#tokenNamesEqual(token.name, name);
-    });
+  get tokens(): readonly GenericDesignTokensCollectionToken[] {
+    return this.#tokens;
   }
 
-  getOptional(name: DesignTokenNameLike): DesignTokensCollectionToken | undefined {
-    name = DesignTokensCollection.#designTokenNameLikeToArray(name);
-
-    for (let i: number = this.#tokens.length - 1; i >= 0; i--) {
-      const token: DesignTokensCollectionToken = this.#tokens[i];
-
-      if (DesignTokensCollection.#tokenNamesEqual(token.name, name)) {
-        return token;
-      }
-    }
-
-    return undefined;
-  }
-
-  has(nameOrToken: DesignTokenNameLikeOrToken): boolean {
-    nameOrToken = DesignTokensCollection.#designTokenNameLikeOrTokenToArrayOrToken(nameOrToken);
-
-    const isArrayTokenName: boolean = Array.isArray(nameOrToken);
+  getMergedTokens(): GenericDesignTokensCollectionToken[] {
+    const tokens: GenericDesignTokensCollectionToken[] = [];
+    const processed: Set<string> = new Set();
 
     for (let i: number = 0; i < this.#tokens.length; i++) {
-      const token: DesignTokensCollectionToken = this.#tokens[i];
+      let token: GenericDesignTokensCollectionToken = this.#tokens[i];
 
-      if (
-        isArrayTokenName
-          ? DesignTokensCollection.#tokenNamesEqual(token.name, nameOrToken as readonly string[])
-          : token === nameOrToken
-      ) {
-        return true;
+      const key: string = JSON.stringify(token.name);
+
+      if (processed.has(key)) {
+        continue;
       }
+
+      processed.add(key);
+
+      for (let j: number = this.#tokens.length - 1; j > i; j--) {
+        const lastToken: GenericDesignTokensCollectionToken = this.#tokens[j];
+
+        if (DesignTokensCollection.#tokenNamesEqual(token.name, lastToken.name)) {
+          token = lastToken;
+          break;
+        }
+      }
+
+      tokens.push(token);
     }
 
-    return false;
+    return tokens;
   }
 
-  set(token: DesignTokensCollectionToken): void {
-    this.delete(token.name);
-    this.append(token);
-  }
-
-  clear(): void {
-    this.#tokens.length = 0;
-  }
-
-  *tokens({
-    merge = true,
-  }: DesignTokensCollectionTokensIteratorOptions = {}): Generator<DesignTokensCollectionToken> {
-    if (merge) {
-      const processed: Set<string> = new Set();
-
-      for (let i: number = 0; i < this.#tokens.length; i++) {
-        let token: DesignTokensCollectionToken = this.#tokens[i];
-
-        const key: string = JSON.stringify(token.name);
-
-        if (processed.has(key)) {
-          continue;
-        }
-
-        processed.add(key);
-
-        for (let j: number = this.#tokens.length - 1; j > i; j--) {
-          const lastToken: DesignTokensCollectionToken = this.#tokens[j];
-
-          if (DesignTokensCollection.#tokenNamesEqual(token.name, lastToken.name)) {
-            token = lastToken;
-            break;
-          }
-        }
-
-        yield token;
-      }
-    } else {
-      yield* this.#tokens;
-    }
+  getResolvedTokens(): GenericResolvedDesignTokensCollectionToken[] {
+    return this.getMergedTokens().map(
+      (token: GenericDesignTokensCollectionToken): GenericResolvedDesignTokensCollectionToken => {
+        return this.getResolved(token.name);
+      },
+    );
   }
 
   /* OPERATIONS -> MUTATE */
@@ -669,160 +415,66 @@ export class DesignTokensCollection {
       DesignTokensCollection.arrayDesignTokenNameToCurlyReference(to);
 
     for (let i: number = 0; i < this.#tokens.length; i++) {
-      const token: DesignTokensCollectionToken = this.#tokens[i];
+      const token: GenericDesignTokensCollectionToken = this.#tokens[i];
+
+      let updatedToken: GenericDesignTokensCollectionToken = token;
 
       if (DesignTokensCollection.#tokenNamesEqual(token.name, from)) {
-        this.#tokens[i] = {
-          ...token,
+        updatedToken = {
+          ...updatedToken,
           name: to,
         };
-      } else {
-        // const updateValueOrCurlyReference = (
-        //   input: unknown | CurlyReference,
-        // ): unknown | CurlyReference => {
-        //   return DesignTokensCollection.isCurlyReference(input) && input === fromAsCurlyReference
-        //     ? toAsCurlyReference
-        //     : input;
-        // };
+      }
 
-        if (DesignTokensCollection.isCurlyReference(token.value)) {
-          if (token.value === fromAsCurlyReference) {
-            this.#tokens[i] = {
-              ...token,
-              value: toAsCurlyReference,
-            };
-          }
-        } else {
-          switch (token.type) {
-            case 'border': {
-              const { color, width, style } = token.value as BorderDesignTokenValue;
-
-              if (
-                color === fromAsCurlyReference ||
-                width === fromAsCurlyReference ||
-                style === fromAsCurlyReference
-              ) {
-                this.#tokens[i] = {
-                  ...token,
-                  value: {
-                    color: color === fromAsCurlyReference ? toAsCurlyReference : color,
-                    width: width === fromAsCurlyReference ? toAsCurlyReference : width,
-                    style: style === fromAsCurlyReference ? toAsCurlyReference : style,
-                  },
-                };
-              }
-              break;
-            }
-            case 'gradient': {
-              if (
-                (token.value as (ObjectGradientDesignTokenValue | CurlyReference)[]).some(
-                  (component: ObjectGradientDesignTokenValue | CurlyReference): boolean => {
-                    return (
-                      component === fromAsCurlyReference ||
-                      (component as ObjectGradientDesignTokenValue).color ===
-                        fromAsCurlyReference ||
-                      (component as ObjectGradientDesignTokenValue).position ===
-                        fromAsCurlyReference
-                    );
-                  },
-                )
-              ) {
-                this.#tokens[i] = {
-                  ...token,
-                  value: (token.value as (ObjectGradientDesignTokenValue | CurlyReference)[]).map(
-                    (component: ObjectGradientDesignTokenValue | CurlyReference): unknown => {
-                      if (component === fromAsCurlyReference) {
-                        return toAsCurlyReference;
-                      } else {
-                        const { color, position } = component as ObjectGradientDesignTokenValue;
-
-                        return {
-                          color: color === fromAsCurlyReference ? toAsCurlyReference : color,
-                          position:
-                            position === fromAsCurlyReference ? toAsCurlyReference : position,
-                        };
-                      }
-                    },
-                  ),
-                };
-              }
-              break;
-            }
-            case 'shadow': {
-              throw 'TODO';
-            }
-            case 'strokeStyle': {
-              if (
-                !isPredefinedStrokeStyleDesignTokenValue(token.value) &&
-                (token.value as ObjectStrokeStyleDesignTokenValue).dashArray.some(
-                  (component: ValueOrDesignTokenReference<DimensionDesignTokenValue>): boolean => {
-                    return component === fromAsCurlyReference;
-                  },
-                )
-              ) {
-                this.#tokens[i] = {
-                  ...token,
-                  value: (token.value as ObjectStrokeStyleDesignTokenValue).dashArray.map(
-                    (
-                      component: ValueOrDesignTokenReference<DimensionDesignTokenValue>,
-                    ): ValueOrDesignTokenReference<DimensionDesignTokenValue> => {
-                      return component === fromAsCurlyReference ? toAsCurlyReference : component;
-                    },
-                  ),
-                };
-              }
-              break;
-            }
-            case 'transition': {
-              const { duration, delay, timingFunction } = token.value as TransitionDesignTokenValue;
-
-              if (
-                duration === fromAsCurlyReference ||
-                delay === fromAsCurlyReference ||
-                timingFunction === fromAsCurlyReference
-              ) {
-                this.#tokens[i] = {
-                  ...token,
-                  value: {
-                    duration: duration === fromAsCurlyReference ? toAsCurlyReference : duration,
-                    delay: delay === fromAsCurlyReference ? toAsCurlyReference : delay,
-                    timingFunction:
-                      timingFunction === fromAsCurlyReference ? toAsCurlyReference : timingFunction,
-                  },
-                };
-              }
-              break;
-            }
-            case 'typography': {
-              const { fontFamily, fontSize, fontWeight, letterSpacing, lineHeight } =
-                token.value as TypographyDesignTokenValue;
-
-              if (
-                fontFamily === fromAsCurlyReference ||
-                fontSize === fromAsCurlyReference ||
-                fontWeight === fromAsCurlyReference ||
-                letterSpacing === fromAsCurlyReference ||
-                lineHeight === fromAsCurlyReference
-              ) {
-                this.#tokens[i] = {
-                  ...token,
-                  value: {
-                    fontFamily:
-                      fontFamily === fromAsCurlyReference ? toAsCurlyReference : fontFamily,
-                    fontSize: fontSize === fromAsCurlyReference ? toAsCurlyReference : fontSize,
-                    fontWeight:
-                      fontWeight === fromAsCurlyReference ? toAsCurlyReference : fontWeight,
-                    letterSpacing:
-                      letterSpacing === fromAsCurlyReference ? toAsCurlyReference : letterSpacing,
-                    lineHeight:
-                      lineHeight === fromAsCurlyReference ? toAsCurlyReference : lineHeight,
-                  },
-                };
-              }
-              break;
-            }
-          }
+      if (DesignTokensCollection.isCurlyReference(token.value)) {
+        if (token.value === fromAsCurlyReference) {
+          updatedToken = {
+            ...updatedToken,
+            value: toAsCurlyReference,
+          };
         }
+      } else {
+        console.assert(token.type !== undefined);
+
+        const update: UpdateCurlyReference = (reference: CurlyReference): CurlyReference => {
+          return reference === fromAsCurlyReference ? toAsCurlyReference : reference;
+        };
+
+        if (isBorderDesignTokensCollectionToken(token)) {
+          updatedToken = {
+            ...updatedToken,
+            value: updateBorderDesignTokensCollectionTokenValueReferences(token.value, update),
+          };
+        } else if (isGradientDesignTokensCollectionToken(token)) {
+          updatedToken = {
+            ...updatedToken,
+            value: updateGradientDesignTokensCollectionTokenValueReferences(token.value, update),
+          };
+        } else if (isShadowDesignTokensCollectionToken(token)) {
+          updatedToken = {
+            ...updatedToken,
+            value: updateShadowDesignTokensCollectionTokenValueReferences(token.value, update),
+          };
+        } else if (isStrokeStyleDesignTokensCollectionToken(token)) {
+          updatedToken = {
+            ...updatedToken,
+            value: updateStrokeStyleDesignTokensCollectionTokenValueReferences(token.value, update),
+          };
+        } else if (isTransitionDesignTokensCollectionToken(token)) {
+          updatedToken = {
+            ...updatedToken,
+            value: updateTransitionDesignTokensCollectionTokenValueReferences(token.value, update),
+          };
+        } else if (isTypographyDesignTokensCollectionToken(token)) {
+          updatedToken = {
+            ...updatedToken,
+            value: updateTypographyDesignTokensCollectionTokenValueReferences(token.value, update),
+          };
+        }
+      }
+
+      if (updatedToken !== token) {
+        this.#tokens[i] = updatedToken;
       }
     }
   }
@@ -837,6 +489,8 @@ export async function debugDesignTokensCollection(sources: Iterable<string>): Pr
 
   console.log(collection.get('button.background.color'));
   collection.rename('color.brand.200', 't1.color.brand.200');
-  console.log(collection.get('button.background.color'));
+  console.log(collection.getResolved('t1.color.brand.200'));
+  console.log(collection.getResolved('button.background.color'));
+  // console.log(collection.getResolved('a'));
   // console.log(Array.from(collection.tokens()));
 }
