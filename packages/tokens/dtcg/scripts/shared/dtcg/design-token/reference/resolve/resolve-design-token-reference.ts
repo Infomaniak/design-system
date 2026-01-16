@@ -1,4 +1,4 @@
-import { isObject } from 'is-what';
+import { isObject } from '../../../../../../../../../scripts/helpers/misc/is-object.ts';
 import { removeUndefinedProperties } from '../../../../../../../../../scripts/helpers/misc/remove-undefined-properties.ts';
 import { isDesignTokensGroup } from '../../group/is-design-tokens-group.ts';
 import type { GenericDesignToken } from '../../token/generic-design-token.ts';

@@ -429,13 +429,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@humanwhocodes/momoa@npm:^3.3.10":
-  version: 3.3.10
-  resolution: "@humanwhocodes/momoa@npm:3.3.10"
-  checksum: 10c0/b80a99f517195ca11d9c3c19431ec5b1b9f4cd21437ed463b2db7e5244a0cdde70148b419e4721baa689b86b8bef2adbb6d1b2c1d140938f1af4640682e3b6d6
-  languageName: node
-  linkType: hard
-
 "@infomaniak-design-system/tokens-dtcg@workspace:packages/tokens/dtcg":
   version: 0.0.0-use.local
   resolution: "@infomaniak-design-system/tokens-dtcg@workspace:packages/tokens/dtcg"
@@ -450,7 +443,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@infomaniak/design-system@workspace:."
   dependencies:
-    "@terrazzo/token-tools": "npm:^0.10.5"
     "@types/node": "npm:^24.10.1"
     "@vitest/coverage-istanbul": "npm:^4.0.15"
     prettier: "npm:^3.7.4"
@@ -934,17 +926,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@terrazzo/token-tools@npm:^0.10.5":
-  version: 0.10.5
-  resolution: "@terrazzo/token-tools@npm:0.10.5"
-  dependencies:
-    "@humanwhocodes/momoa": "npm:^3.3.10"
-    culori: "npm:^4.0.2"
-    wildcard-match: "npm:^5.1.4"
-  checksum: 10c0/aa843e451dcf52317eaf5e93327c238bbd0ca018e6a3a8a09de7bbec5ec68ba809678085877e2e16eed99386e507171fa8884dfbb90f888df95d876a1faf733c
-  languageName: node
-  linkType: hard
-
 "@tybys/wasm-util@npm:^0.10.1":
   version: 0.10.1
   resolution: "@tybys/wasm-util@npm:0.10.1"
@@ -1361,13 +1342,6 @@ __metadata:
     shebang-command: "npm:^2.0.0"
     which: "npm:^2.0.1"
   checksum: 10c0/053ea8b2135caff68a9e81470e845613e374e7309a47731e81639de3eaeb90c3d01af0e0b44d2ab9d50b43467223b88567dfeb3262db942dc063b9976718ffc1
-  languageName: node
-  linkType: hard
-
-"culori@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "culori@npm:4.0.2"
-  checksum: 10c0/5d3c952b947ac5915409bab513e1d2e8bd813caa491af8ded0c769fdc1186a5ff61fb3c59fc8edf5393237d92074dbc54a492e6e99cb039dd6535d5d96106bfe
   languageName: node
   linkType: hard
 
@@ -3472,13 +3446,6 @@ __metadata:
   bin:
     why-is-node-running: cli.js
   checksum: 10c0/1cde0b01b827d2cf4cb11db962f3958b9175d5d9e7ac7361d1a7b0e2dc6069a263e69118bd974c4f6d0a890ef4eedfe34cf3d5167ec14203dbc9a18620537054
-  languageName: node
-  linkType: hard
-
-"wildcard-match@npm:^5.1.4":
-  version: 5.1.4
-  resolution: "wildcard-match@npm:5.1.4"
-  checksum: 10c0/2f37e2fedceca003ec48d064e57c20792a71529ca5765c2d0d67c0964f3a184b33ed61efd8765ed78fd18086c9cf951b381c7277b8f0edb550638f76e3e17897
   languageName: node
   linkType: hard
 

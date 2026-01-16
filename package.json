@@ -31,7 +31,6 @@
     ]
   },
   "devDependencies": {
-    "@terrazzo/token-tools": "^0.10.5",
     "@types/node": "^24.10.1",
     "@vitest/coverage-istanbul": "^4.0.15",
     "prettier": "^3.7.4",
