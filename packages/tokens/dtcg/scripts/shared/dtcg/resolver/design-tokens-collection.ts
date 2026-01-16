@@ -3,7 +3,10 @@ import { removeUndefinedProperties } from '../../../../../../../scripts/helpers/
 import { isDesignTokenReference } from '../design-token/reference/is-design-token-reference.ts';
 import { designTokenReferenceToCurlyReference } from '../design-token/reference/to/curly-reference/design-token-reference-to-curly-reference.ts';
 import type { CurlyReference } from '../design-token/reference/types/curly/curly-reference.ts';
+import { isCurlyReference } from '../design-token/reference/types/curly/is-curly-reference.ts';
+import { curlyReferenceToSegmentsReference } from '../design-token/reference/types/curly/to/segments-reference/curly-reference-to-segments-reference.ts';
 import type { UpdateCurlyReference } from '../design-token/reference/types/curly/update/update-curly-reference.ts';
+import { segmentsReferenceToCurlyReference } from '../design-token/reference/types/segments/to/curly-reference/segments-reference-to-curly-reference.ts';
 import { isDesignToken } from '../design-token/token/is-design-token.ts';
 import { designTokensTreeSchema } from '../design-token/tree/design-tokens-tree.schema.ts';
 import type { DesignTokensTree } from '../design-token/tree/design-tokens-tree.ts';
@@ -30,21 +33,22 @@ import { updateTransitionDesignTokensCollectionTokenValueReferences } from './to
 import { isTypographyDesignTokensCollectionToken } from './token/types/composite/typography/is-typography-design-tokens-collection-token.ts';
 import { updateTypographyDesignTokensCollectionTokenValueReferences } from './token/types/composite/typography/value/update/update-typography-design-tokens-collection-token-value-references.ts';
 
-export interface DesignTokensCollectionTokensIteratorOptions {
-  readonly merge?: boolean;
-}
-
+/**
+ * The `DesignTokensCollection` class provides utilities to manage, resolve, and manipulate
+ * design tokens in a hierarchical structure. It includes methods to parse design tokens from
+ * various sources, store them in a collection, and resolve their references and dependencies.
+ */
 export class DesignTokensCollection {
   static isCurlyReference(input: unknown): input is CurlyReference {
-    return typeof input === 'string' && input.startsWith('{') && input.endsWith('}');
+    return isCurlyReference(input);
   }
 
   static curlyReferenceToArrayDesignTokenName(input: CurlyReference): ArrayDesignTokenName {
-    return input.slice(1, -1).split('.');
+    return curlyReferenceToSegmentsReference(input);
   }
 
   static arrayDesignTokenNameToCurlyReference(input: ArrayDesignTokenName): CurlyReference {
-    return `{${input.join('.')}}`;
+    return segmentsReferenceToCurlyReference(input);
   }
 
   static #tokenNamesEqual(a: ArrayDesignTokenName, b: ArrayDesignTokenName): boolean {
@@ -55,9 +59,7 @@ export class DesignTokensCollection {
   }
 
   static #stringDesignTokenNameToArray(input: string): ArrayDesignTokenName {
-    return input.startsWith('{') && input.endsWith('}')
-      ? input.slice(1, -1).split('.')
-      : input.split('.');
+    return isCurlyReference(input) ? curlyReferenceToSegmentsReference(input) : input.split('.');
   }
 
   static #designTokenNameLikeToArray(input: DesignTokenNameLike): ArrayDesignTokenName {
@@ -153,7 +155,7 @@ export class DesignTokensCollection {
     return this;
   }
 
-  /* OPERATIONS -> MAP */
+  /* MAP */
 
   get size(): number {
     return this.#tokens.length;
@@ -361,6 +363,15 @@ export class DesignTokensCollection {
     return this.#tokens;
   }
 
+  /**
+   * Merges and filters design tokens by ensuring that only the most recent token definitions with unique names are retained.
+   *
+   * This method traverses the list of design tokens and eliminates duplicate tokens based on their names.
+   * If multiple tokens share the same name, the latest occurrence in the list is kept. The resulting collection contains
+   * unique tokens with their respective updated or original values.
+   *
+   * @return {GenericDesignTokensCollectionToken[]} An array of unique design tokens, preserving the latest token definitions for duplicate names.
+   */
   getMergedTokens(): GenericDesignTokensCollectionToken[] {
     const tokens: GenericDesignTokensCollectionToken[] = [];
     const processed: Set<string> = new Set();
@@ -391,6 +402,12 @@ export class DesignTokensCollection {
     return tokens;
   }
 
+  /**
+   * Resolves and returns a collection of design tokens by processing merged tokens and mapping each token
+   * to its resolved form.
+   *
+   * @return {GenericResolvedDesignTokensCollectionToken[]} An array containing resolved design tokens.
+   */
   getResolvedTokens(): GenericResolvedDesignTokensCollectionToken[] {
     return this.getMergedTokens().map(
       (token: GenericDesignTokensCollectionToken): GenericResolvedDesignTokensCollectionToken => {
@@ -399,8 +416,15 @@ export class DesignTokensCollection {
     );
   }
 
-  /* OPERATIONS -> MUTATE */
+  /* OPERATIONS */
 
+  /**
+   * Renames a design token by updating its name and any references to it within the tokens collection.
+   *
+   * @param {DesignTokenNameLike} from - The current name of the design token.
+   * @param {DesignTokenNameLike} to - The new name to assign to the design token.
+   * @return {void} This method does not return anything but updates the relevant tokens' names and references in-place.
+   */
   rename(from: DesignTokenNameLike, to: DesignTokenNameLike): void {
     from = DesignTokensCollection.#designTokenNameLikeToArray(from);
     to = DesignTokensCollection.#designTokenNameLikeToArray(to);
@@ -482,6 +506,10 @@ export class DesignTokensCollection {
 
 /*------------------*/
 
+/**
+ * @deprecated
+ * TODO remove
+ */
 export async function debugDesignTokensCollection(sources: Iterable<string>): Promise<void> {
   const collection: DesignTokensCollection = new DesignTokensCollection();
 
