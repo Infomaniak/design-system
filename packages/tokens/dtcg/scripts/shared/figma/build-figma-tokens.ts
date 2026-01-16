@@ -26,38 +26,7 @@ export async function buildFigmaTokens({
   outputDirectory = removeTrailingSlash(outputDirectory);
 
   const tiers: readonly string[] = ['t1-primitive', 't2-semantic', 't3-component'];
-
-  function fixReferences<GValue>(value: GValue, root: unknown): GValue {
-    if (isDesignTokenReference(value)) {
-      const reference: SegmentsReference = designTokenReferenceToSegmentsReference(value);
-
-      for (const tier of tiers) {
-        const targetReference: SegmentsReference = [tier, ...reference];
-        if (hasExistingSegmentsReference(targetReference, root)) {
-          return (
-            isCurlyReference(value)
-              ? segmentsReferenceToCurlyReference(targetReference)
-              : segmentsReferenceToJsonReference(targetReference)
-          ) as GValue;
-        }
-      }
-      throw new Error(`No token found for reference "${segmentsReferenceToString(reference)}".`);
-    } else if (typeof value === 'object' && value !== null) {
-      if (Array.isArray(value)) {
-        return value.map((item: unknown): unknown => {
-          return fixReferences(item, root);
-        }) as GValue;
-      } else {
-        return Object.fromEntries(
-          Object.entries(value).map(([key, value]): [string, unknown] => {
-            return [key, fixReferences(value, root)];
-          }),
-        ) as GValue;
-      }
-    } else {
-      return value;
-    }
-  }
+  // const themes: readonly string[] = ['dark', 'light'];
 
   let tokens: DesignTokensTree = Object.fromEntries(
     await Promise.all(
@@ -70,7 +39,7 @@ export async function buildFigmaTokens({
     ),
   );
 
-  tokens = fixReferences(tokens, tokens);
+  tokens = fixReferences(tiers, tokens);
 
   const figmaTokens: DesignTokensGroup = designTokenTreeToFigmaFormat(tokens, {
     root: tokens,
@@ -78,7 +47,16 @@ export async function buildFigmaTokens({
 
   const content: string = JSON.stringify(figmaTokens, null, 2);
 
-  await writeFile(`${outputDirectory}/figma.json`, content);
+  await writeFile(`${outputDirectory}/figma.tokens.json`, content);
+
+  /*
+  "$extensions": {
+            "mode": {
+              "Mode 1": "#0c0c0d0d",
+              "Mode 2": "#0c0c0d0d"
+            }
+          }
+   */
 
   // for await (const entry of glob(`${sourceDirectory}/themes/**/*.tokens.json`)) {
   //   const tokens: any = JSON.parse(
@@ -91,4 +69,42 @@ export async function buildFigmaTokens({
   // }
 
   // console.log(allTokens);
+}
+
+/*---*/
+
+function fixReferences<GValue>(
+  tiers: readonly string[],
+  value: GValue,
+  root: unknown = value,
+): GValue {
+  if (isDesignTokenReference(value)) {
+    const reference: SegmentsReference = designTokenReferenceToSegmentsReference(value);
+
+    for (const tier of tiers) {
+      const targetReference: SegmentsReference = [tier, ...reference];
+      if (hasExistingSegmentsReference(targetReference, root)) {
+        return (
+          isCurlyReference(value)
+            ? segmentsReferenceToCurlyReference(targetReference)
+            : segmentsReferenceToJsonReference(targetReference)
+        ) as GValue;
+      }
+    }
+    throw new Error(`No token found for reference "${segmentsReferenceToString(reference)}".`);
+  } else if (typeof value === 'object' && value !== null) {
+    if (Array.isArray(value)) {
+      return value.map((item: unknown): unknown => {
+        return fixReferences(tiers, item, root);
+      }) as GValue;
+    } else {
+      return Object.fromEntries(
+        Object.entries(value).map(([key, value]): [string, unknown] => {
+          return [key, fixReferences(tiers, value, root)];
+        }),
+      ) as GValue;
+    }
+  } else {
+    return value;
+  }
 }

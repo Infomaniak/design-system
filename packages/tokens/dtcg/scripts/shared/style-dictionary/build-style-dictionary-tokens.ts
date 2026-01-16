@@ -1,4 +1,4 @@
-import { glob, rm } from 'node:fs/promises';
+import { glob } from 'node:fs/promises';
 import { basename, dirname, join, relative } from 'node:path';
 import StyleDictionary from 'style-dictionary';
 import { formats } from 'style-dictionary/enums';
@@ -43,21 +43,19 @@ import { registerDtcgCssStyleDictionaryTransform } from './transforms/css/regist
 //   await sd.buildAllPlatforms();
 // }
 
-export interface BuildTokensOptions {
+export interface BuildStyleDictionaryTokensOptions {
   readonly sourceDirectory: string;
   readonly outputDirectory: string;
 }
 
-export async function buildTokens({
+export async function buildStyleDictionaryTokens({
   sourceDirectory,
   outputDirectory,
-}: BuildTokensOptions): Promise<void> {
+}: BuildStyleDictionaryTokensOptions): Promise<void> {
   sourceDirectory = removeTrailingSlash(sourceDirectory);
 
   registerDtcgCssStyleDictionaryTransform();
   registerStyleDictionaryThemeFilter();
-
-  await rm(outputDirectory, { force: true, recursive: true });
 
   for await (const entry of glob(`${sourceDirectory}/themes/**/*.tokens.json`)) {
     const relativePath: string = relative(`${sourceDirectory}/themes`, dirname(entry));

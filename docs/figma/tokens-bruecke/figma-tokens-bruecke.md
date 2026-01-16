@@ -7,6 +7,19 @@
 
 Install the `TokensBrücke` plugin from the Figma Community.
 
+## Import tokens
+
+First remove all existing tokens from the `Variables` panel.
+
+Then opens the `TokensBrücke` plugin, and click on the `Import tokens` button.
+
+![](assets/figma-tokens-bruecke--import-tokens.png)
+
+
+---
+
+# LEGACY - DO NOT USE
+
 ## Configure
 
 ### Configure GitHub
