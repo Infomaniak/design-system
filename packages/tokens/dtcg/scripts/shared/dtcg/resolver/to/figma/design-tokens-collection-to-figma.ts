@@ -52,9 +52,7 @@ export function designTokensCollectionToFigma(collection: DesignTokensCollection
   };
 
   for (const token of collection.getMergedTokens()) {
-    const resolvedToken: GenericResolvedDesignTokensCollectionToken = collection.getResolved(
-      token.name,
-    );
+    const resolvedToken: GenericResolvedDesignTokensCollectionToken = collection.resolve(token);
 
     switch (resolvedToken.type) {
       case 'color':

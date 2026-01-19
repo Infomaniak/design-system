@@ -104,7 +104,7 @@ export class DesignTokensCollection {
               }),
             ),
           ) as DesignTokensTree,
-          entry,
+          [entry],
         );
       }
     }
@@ -116,17 +116,17 @@ export class DesignTokensCollection {
     root: DesignTokensTree,
     path: readonly string[],
     tree: DesignTokensTree,
-    file: string | undefined,
+    files: readonly string[],
   ): void {
     if (isDesignToken(tree)) {
       const { $value, $type, $deprecated, $description, $extensions } = tree;
 
       if (isDesignTokenReference($value)) {
         this.append({
+          files,
           name: path,
           value: designTokenReferenceToCurlyReference($value),
           ...removeUndefinedProperties({
-            file,
             type: $type,
             deprecated: $deprecated,
             description: $description,
@@ -139,11 +139,11 @@ export class DesignTokensCollection {
         }
 
         this.append({
+          files,
           name: path,
           type: $type,
           value: designTokenValueToDesignTokensCollectionTokenValue($type, $value, root),
           ...removeUndefinedProperties({
-            file,
             deprecated: $deprecated,
             description: $description,
             extensions: $extensions,
@@ -165,7 +165,7 @@ export class DesignTokensCollection {
             ...removeUndefinedProperties({ $description, $type, $deprecated, $extensions }),
             ...child,
           },
-          file,
+          files,
         );
       }
     }
@@ -175,11 +175,11 @@ export class DesignTokensCollection {
    * Explores a design tokens tree and appends all design tokens found to the collection.
    *
    * @param {DesignTokensTree} root - The root node of the design tokens tree to process.
-   * @param {string} [file] - An optional file name associated with the design tokens tree.
+   * @param {string} [files] - An optional list of files associated with the design tokens tree.
    * @return {this} The current instance for method chaining.
    */
-  fromDesignTokensTree(root: DesignTokensTree, file?: string | undefined): this {
-    this.#exploreDesignTokensTree(root, [], root, file);
+  fromDesignTokensTree(root: DesignTokensTree, files: readonly string[] = []): this {
+    this.#exploreDesignTokensTree(root, [], root, files);
 
     return this;
   }
@@ -308,11 +308,9 @@ export class DesignTokensCollection {
 
     if (tokens.length === 0) {
       return undefined;
-    } else if (tokens.length === 1) {
-      return tokens[0];
     } else {
       let {
-        file,
+        files,
         name,
         type,
         value,
@@ -323,12 +321,14 @@ export class DesignTokensCollection {
 
       for (let i: number = tokens.length - 2; i >= 0; i--) {
         const {
+          files: superFiles,
           type: superType,
           description: superDescription,
           deprecated: superDeprecated,
           extensions: superExtensions,
         }: GenericDesignTokensCollectionToken = tokens[i];
 
+        files = [...files, ...superFiles];
         type ??= superType;
         description ??= superDescription;
         deprecated ??= superDeprecated;
@@ -341,7 +341,7 @@ export class DesignTokensCollection {
       }
 
       return removeUndefinedProperties({
-        file,
+        files: Array.from(new Set(files)),
         name,
         type,
         value,
@@ -377,12 +377,12 @@ export class DesignTokensCollection {
    * Resolves a design token to its final value by following references and merging properties.
    *
    * @param {GenericDesignTokensCollectionToken} token - The design token to resolve.
-   * @return {GenericResolvedDesignTokensCollectionToken} The fully resolved design token, including its value, properties, and resolution trace.
+   * @return {GenericDesignTokensCollectionToken} The fully resolved design token, including its value, properties, and resolution trace.
    * @throws {Error} If a circular reference is detected or if the token cannot be found.
    */
   resolve(token: GenericDesignTokensCollectionToken): GenericResolvedDesignTokensCollectionToken {
     let {
-      file,
+      files,
       name,
       type,
       value,
@@ -415,6 +415,7 @@ export class DesignTokensCollection {
         }
 
         const {
+          files: superFiles,
           type: superType,
           value: superValue,
           description: superDescription,
@@ -422,6 +423,7 @@ export class DesignTokensCollection {
           extensions: superExtensions,
         }: GenericDesignTokensCollectionToken = resolvedToken;
 
+        files = [...files, ...superFiles];
         type ??= superType;
         value = superValue;
         description ??= superDescription;
@@ -434,7 +436,7 @@ export class DesignTokensCollection {
         }
       } else {
         return removeUndefinedProperties({
-          file,
+          files: Array.from(new Set(files)),
           name,
           type,
           value,
@@ -447,18 +449,6 @@ export class DesignTokensCollection {
         });
       }
     }
-  }
-
-  /**
-   * Resolves a design token to its final value by following references and merging properties.
-   *
-   * @deprecated
-   * @param {DesignTokenNameLike} name - The name or reference of the design token to resolve.
-   * @return {GenericResolvedDesignTokensCollectionToken} The fully resolved design token, including its value, properties, and resolution trace.
-   * @throws {Error} If a circular reference is detected or if the token cannot be found.
-   */
-  getResolved(name: DesignTokenNameLike): GenericResolvedDesignTokensCollectionToken {
-    return this.resolve(this.get(name));
   }
 
   /* LIST */
@@ -476,7 +466,7 @@ export class DesignTokensCollection {
 
     for (let i: number = 0; i < this.#tokens.length; i++) {
       let {
-        file,
+        files,
         name,
         type,
         value,
@@ -492,11 +482,9 @@ export class DesignTokensCollection {
       }
       done.add(nameAsCurlyReference);
 
-      let overloaded: boolean = false;
-
       for (let j: number = i + 1; j < this.#tokens.length; j++) {
         const {
-          file: superFile,
+          files: superFiles,
           name: superName,
           type: superType,
           value: superValue,
@@ -506,9 +494,7 @@ export class DesignTokensCollection {
         }: GenericDesignTokensCollectionToken = this.#tokens[j];
 
         if (DesignTokensCollection.#tokenNamesEqual(name, superName)) {
-          overloaded = true;
-
-          file = superFile;
+          files = [...superFiles, ...files];
           type = superType ?? type;
           value = superValue;
           description = superDescription ?? description;
@@ -524,21 +510,17 @@ export class DesignTokensCollection {
         }
       }
 
-      if (overloaded) {
-        tokens.push(
-          removeUndefinedProperties({
-            file,
-            name,
-            type,
-            value,
-            description,
-            deprecated,
-            extensions,
-          }),
-        );
-      } else {
-        tokens.push(this.#tokens[i]);
-      }
+      tokens.push(
+        removeUndefinedProperties({
+          files: Array.from(new Set(files)),
+          name,
+          type,
+          value,
+          description,
+          deprecated,
+          extensions,
+        }),
+      );
     }
 
     return tokens;

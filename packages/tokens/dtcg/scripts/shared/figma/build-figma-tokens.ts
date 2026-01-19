@@ -17,26 +17,39 @@ export async function buildFigmaTokens({
 
   // await debugDesignTokensCollection([`${sourceDirectory}/base/**/*.tokens.json`]);
 
+  const themes: readonly string[] = ['dark', 'light'];
   const tiers: readonly string[] = ['t1-primitive', 't2-semantic', 't3-component'];
-  // const themes: readonly string[] = ['dark', 'light'];
 
-  const collection = new DesignTokensCollection();
+  const figmaThemes: unknown[] = await Promise.all(
+    themes.map(async (theme: string): Promise<unknown> => {
+      const collection = new DesignTokensCollection();
 
-  await collection.fromFiles(
-    tiers.map((tier: string): string => `${sourceDirectory}/base/${tier}/**/*.tokens.json`),
+      await collection.fromFiles([
+        ...tiers.map((tier: string): string => `${sourceDirectory}/base/${tier}/**/*.tokens.json`),
+        `${sourceDirectory}/themes/${theme}.tokens.json`,
+      ]);
+
+      collection.getMergedTokens();
+
+      main: for (const token of collection.getMergedTokens()) {
+        for (const tier of tiers) {
+          if (token.files.some((path: string) => path.includes(tier))) {
+            collection.rename(token.name, [tier, ...token.name]);
+
+            continue main;
+          }
+        }
+
+        throw new Error(
+          `Token ${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)} does not belong to a tier.`,
+        );
+      }
+
+      return designTokensCollectionToFigma(collection);
+    }),
   );
 
-  for (const token of collection.getMergedTokens()) {
-    for (const tier of tiers) {
-      if (token.file?.includes(tier)) {
-        collection.rename(token.name, [tier, ...token.name]);
-      }
-    }
-  }
-
-  const figmaTokens: unknown = designTokensCollectionToFigma(collection);
-
-  const content: string = JSON.stringify(figmaTokens, null, 2);
+  const content: string = JSON.stringify(figmaThemes[1], null, 2);
 
   await writeFile(`${outputDirectory}/figma.tokens.json`, content);
 
