@@ -1,7 +1,9 @@
 import { writeFile } from 'node:fs/promises';
 import { removeTrailingSlash } from '../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import { DesignTokensCollection } from '../dtcg/resolver/design-tokens-collection.ts';
-import { designTokensCollectionToFigma } from '../dtcg/resolver/to/figma/design-tokens-collection-to-figma.ts';
+import { CssVariablesCollection } from '../dtcg/resolver/to/css/css-variables-collection.ts';
+import { designTokensCollectionToFigmaObject } from '../dtcg/resolver/to/figma/design-tokens-collection-to-figma-object.ts';
+import { mergeFigmaTokensAsModes } from './merge/merge-figma-tokens-as-modes.ts';
 
 export interface BuildFigmaTokensOptions {
   readonly sourceDirectory: string;
@@ -15,13 +17,11 @@ export async function buildFigmaTokens({
   sourceDirectory = removeTrailingSlash(sourceDirectory);
   outputDirectory = removeTrailingSlash(outputDirectory);
 
-  // await debugDesignTokensCollection([`${sourceDirectory}/base/**/*.tokens.json`]);
-
-  const themes: readonly string[] = ['dark', 'light'];
+  const themes: readonly string[] = ['light', 'dark'];
   const tiers: readonly string[] = ['t1-primitive', 't2-semantic', 't3-component'];
 
-  const figmaThemes: unknown[] = await Promise.all(
-    themes.map(async (theme: string): Promise<unknown> => {
+  const collections: readonly DesignTokensCollection[] = await Promise.all(
+    themes.map(async (theme: string): Promise<DesignTokensCollection> => {
       const collection = new DesignTokensCollection();
 
       await collection.fromFiles([
@@ -45,11 +45,26 @@ export async function buildFigmaTokens({
         );
       }
 
-      return designTokensCollectionToFigma(collection);
+      return collection;
     }),
   );
 
-  const content: string = JSON.stringify(figmaThemes[1], null, 2);
+  const cssCollection = new CssVariablesCollection().fromDesignTokensCollection(collections[0]);
+
+  console.log(cssCollection.toString(':root'));
+
+  // const figmaTokens = designTokensCollectionToFigma(collections[0]);
+
+  const figmaTokens = mergeFigmaTokensAsModes(
+    collections.map((collection: DesignTokensCollection, index: number) => {
+      return [
+        index === 0 ? 'Mode 1' : themes[index],
+        designTokensCollectionToFigmaObject(collection),
+      ];
+    }),
+  );
+
+  const content: string = JSON.stringify(figmaTokens, null, 2);
 
   await writeFile(`${outputDirectory}/figma.tokens.json`, content);
 

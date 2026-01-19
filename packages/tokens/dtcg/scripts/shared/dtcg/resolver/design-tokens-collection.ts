@@ -62,7 +62,7 @@ export class DesignTokensCollection {
     return isCurlyReference(input) ? curlyReferenceToSegmentsReference(input) : input.split('.');
   }
 
-  static #designTokenNameLikeToArray(input: DesignTokenNameLike): ArrayDesignTokenName {
+  static designTokenNameLikeToArray(input: DesignTokenNameLike): ArrayDesignTokenName {
     return typeof input === 'string' ? this.#stringDesignTokenNameToArray(input) : input;
   }
 
@@ -108,6 +108,19 @@ export class DesignTokensCollection {
         );
       }
     }
+
+    return this;
+  }
+
+  /**
+   * Explores a design tokens tree and appends all design tokens found to the collection.
+   *
+   * @param {DesignTokensTree} root - The root node of the design tokens tree to process.
+   * @param {string} [files] - An optional list of files associated with the design tokens tree.
+   * @return {this} The current instance for method chaining.
+   */
+  fromDesignTokensTree(root: DesignTokensTree, files: readonly string[] = []): this {
+    this.#exploreDesignTokensTree(root, [], root, files);
 
     return this;
   }
@@ -169,19 +182,6 @@ export class DesignTokensCollection {
         );
       }
     }
-  }
-
-  /**
-   * Explores a design tokens tree and appends all design tokens found to the collection.
-   *
-   * @param {DesignTokensTree} root - The root node of the design tokens tree to process.
-   * @param {string} [files] - An optional list of files associated with the design tokens tree.
-   * @return {this} The current instance for method chaining.
-   */
-  fromDesignTokensTree(root: DesignTokensTree, files: readonly string[] = []): this {
-    this.#exploreDesignTokensTree(root, [], root, files);
-
-    return this;
   }
 
   /* MAP */
@@ -253,7 +253,7 @@ export class DesignTokensCollection {
    * @return {GenericDesignTokensCollectionToken[]} An array of tokens that match the specified name.
    */
   getAll(name: DesignTokenNameLike): GenericDesignTokensCollectionToken[] {
-    name = DesignTokensCollection.#designTokenNameLikeToArray(name);
+    name = DesignTokensCollection.designTokenNameLikeToArray(name);
 
     return this.#tokens.filter((token: GenericDesignTokensCollectionToken): boolean => {
       return DesignTokensCollection.#tokenNamesEqual(token.name, name);
@@ -366,7 +366,7 @@ export class DesignTokensCollection {
 
     if (token === undefined) {
       throw new Error(
-        `Missing token: ${DesignTokensCollection.#designTokenNameLikeToArray(name).join('.')}`,
+        `Missing token: ${DesignTokensCollection.designTokenNameLikeToArray(name).join('.')}`,
       );
     } else {
       return token;
@@ -550,8 +550,8 @@ export class DesignTokensCollection {
    * @return {void} This method does not return anything but updates the relevant tokens' names and references in-place.
    */
   rename(from: DesignTokenNameLike, to: DesignTokenNameLike): void {
-    from = DesignTokensCollection.#designTokenNameLikeToArray(from);
-    to = DesignTokensCollection.#designTokenNameLikeToArray(to);
+    from = DesignTokensCollection.designTokenNameLikeToArray(from);
+    to = DesignTokensCollection.designTokenNameLikeToArray(to);
 
     if (DesignTokensCollection.#tokenNamesEqual(from, to)) {
       return;

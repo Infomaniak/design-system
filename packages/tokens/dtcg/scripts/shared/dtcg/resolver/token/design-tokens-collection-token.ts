@@ -28,6 +28,11 @@ export function isDesignTokensCollectionTokenWithType<GType extends string, GVal
   return input.type !== undefined;
 }
 
+export type GenericDesignTokensCollectionTokenWithType = DesignTokensCollectionTokenWithType<
+  any,
+  any
+>;
+
 /* WITHOUT TYPE */
 
 export interface DesignTokensCollectionTokenWithoutType extends DesignTokensCollectionTokenCommonProperties {

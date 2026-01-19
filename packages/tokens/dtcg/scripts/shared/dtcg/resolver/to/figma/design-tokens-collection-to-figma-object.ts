@@ -27,7 +27,7 @@ import { strokeStyleDesignTokensCollectionTokenToFigmaObject } from './token/typ
 import { transitionDesignTokensCollectionTokenToFigmaObject } from './token/types/composite/transition.ts';
 import { typographyDesignTokensCollectionTokenToFigmaObject } from './token/types/composite/typography.ts';
 
-export function designTokensCollectionToFigma(collection: DesignTokensCollection): unknown {
+export function designTokensCollectionToFigmaObject(collection: DesignTokensCollection): unknown {
   let output: object = {};
 
   const addToken = (path: ArrayDesignTokenName, figmaToken: unknown): void => {

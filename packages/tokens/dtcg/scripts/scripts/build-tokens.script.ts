@@ -15,7 +15,7 @@ export async function buildTokensScript(): Promise<void> {
   //   sourceDirectory: SOURCE_DIR,
   //   outputDirectory: OUTPUT_DIR,
   // });
-  //
+
   await buildFigmaTokens({
     sourceDirectory: SOURCE_DIR,
     outputDirectory: OUTPUT_DIR,
