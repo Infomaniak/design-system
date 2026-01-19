@@ -1,4 +1,3 @@
-import type { SerializeOptions } from 'colorjs.io';
 import { DesignTokensCollection } from '../../design-tokens-collection.ts';
 import type { GenericDesignTokensCollectionTokenWithType } from '../../token/design-tokens-collection-token.ts';
 import type { DesignTokenNameLike } from '../../token/name/design-token-name-like.ts';
@@ -7,26 +6,26 @@ import { designTokensCollectionToCssVariableDeclarations } from './token/design-
 import { designTokensCollectionTokenToCssVariableDeclaration } from './token/design-tokens-collection-token-to-css-variable-declaration.ts';
 import { DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION } from './token/name/default-generate-css-variable-name-function.ts';
 import type { GenerateCssVariableNameFunction } from './token/name/generate-css-variable-name-function.ts';
+import { DEFAULT_FORMAT_COLOR_FUNCTION } from './token/types/base/color/value/default-format-color-function.ts';
+import type { FormatColorFunction } from './token/types/base/color/value/format-color-function.ts';
 
 export interface CssVariablesCollectionOptions {
   readonly generateCssVariableName?: GenerateCssVariableNameFunction;
-  readonly formatColorOptions?: SerializeOptions;
+  readonly formatColor?: FormatColorFunction;
 }
 
 export class CssVariablesCollection {
   readonly #generateCssVariableName: GenerateCssVariableNameFunction;
-  readonly #formatColorOptions: SerializeOptions;
+  readonly #formatColor: FormatColorFunction;
 
   readonly #variableDeclarations: Map<string /* name */, CssVariableDeclaration>;
 
   constructor({
     generateCssVariableName = DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION,
-    formatColorOptions = {
-      format: 'color',
-    },
+    formatColor = DEFAULT_FORMAT_COLOR_FUNCTION,
   }: CssVariablesCollectionOptions = {}) {
     this.#generateCssVariableName = generateCssVariableName;
-    this.#formatColorOptions = formatColorOptions;
+    this.#formatColor = formatColor;
     this.#variableDeclarations = new Map();
   }
 
@@ -44,7 +43,7 @@ export class CssVariablesCollection {
     this.setCssVariableDeclaration(
       designTokensCollectionTokenToCssVariableDeclaration(token, {
         generateCssVariableName: this.#generateCssVariableName,
-        formatColorOptions: this.#formatColorOptions,
+        formatColor: this.#formatColor,
       }),
     );
 
@@ -52,10 +51,12 @@ export class CssVariablesCollection {
   }
 
   fromDesignTokensCollection(collection: DesignTokensCollection): this {
-    designTokensCollectionToCssVariableDeclarations(collection, {
+    for (const declaration of designTokensCollectionToCssVariableDeclarations(collection, {
       generateCssVariableName: this.#generateCssVariableName,
-      formatColorOptions: this.#formatColorOptions,
-    });
+      formatColor: this.#formatColor,
+    })) {
+      this.setCssVariableDeclaration(declaration);
+    }
 
     return this;
   }

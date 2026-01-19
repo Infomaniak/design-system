@@ -1,9 +1,10 @@
-import type { SerializeOptions } from 'colorjs.io';
 import type { ColorDesignTokensCollectionTokenValue } from '../../../../../../../token/types/base/color/value/color-design-tokens-collection-token-value.ts';
 import { colorDesignTokensCollectionTokenValueToColorInstance } from '../../../../../../../token/types/base/color/value/to/color-design-tokens-collection-token-value-to-color-instance.ts';
+import { DEFAULT_FORMAT_COLOR_FUNCTION } from './default-format-color-function.ts';
+import type { FormatColorFunction } from './format-color-function.ts';
 
 export interface ColorDesignTokensCollectionTokenValueToCssValueOptions {
-  readonly formatColorOptions?: SerializeOptions;
+  readonly formatColor?: FormatColorFunction;
 }
 
 /**
@@ -13,7 +14,9 @@ export interface ColorDesignTokensCollectionTokenValueToCssValueOptions {
  */
 export function colorDesignTokensCollectionTokenValueToCssValue(
   value: ColorDesignTokensCollectionTokenValue,
-  { formatColorOptions }: ColorDesignTokensCollectionTokenValueToCssValueOptions = {},
+  {
+    formatColor = DEFAULT_FORMAT_COLOR_FUNCTION,
+  }: ColorDesignTokensCollectionTokenValueToCssValueOptions = {},
 ): string {
-  return colorDesignTokensCollectionTokenValueToColorInstance(value).toString(formatColorOptions);
+  return formatColor(colorDesignTokensCollectionTokenValueToColorInstance(value));
 }

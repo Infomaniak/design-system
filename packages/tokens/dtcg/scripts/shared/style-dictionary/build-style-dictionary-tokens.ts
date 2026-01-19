@@ -7,42 +7,6 @@ import { registerStyleDictionaryThemeFilter } from './filters/register-style-dic
 import { DTCG_CSS_TRANSFORMS } from './transforms/css/dtcg-css-transforms.ts';
 import { registerDtcgCssStyleDictionaryTransform } from './transforms/css/register-dtcg-css-style-dictionary-transform.ts';
 
-// async function debug(): Promise<void> {
-//   const sd = new StyleDictionary({
-//     log: {
-//       verbosity: 'verbose',
-//     },
-//     include: ['tokens/base/**/*.json'],
-//     source: [`tokens/themes/full/light.tokens.json`],
-//     // source: [`tokens/themes/products/mail.tokens.json`],
-//     // parsers: ['json-parser'],
-//     platforms: {
-//       css: {
-//         expand: {
-//           // include: ['typography'],
-//           // include: ['strokeStyle', 'border', 'transition', 'shadow', 'gradient', 'typography'],
-//         },
-//         buildPath: 'dist/',
-//         prefix: 'ikds-',
-//         transforms: [...DTCG_CSS_TRANSFORMS],
-//         files: [
-//           {
-//             destination: 'light.css',
-//             format: formats.cssVariables,
-//             filter: 'theme-filter',
-//             options: {
-//               outputReferences: true,
-//               selector: ':root',
-//             },
-//           },
-//         ],
-//       },
-//     },
-//   });
-//
-//   await sd.buildAllPlatforms();
-// }
-
 export interface BuildStyleDictionaryTokensOptions {
   readonly sourceDirectory: string;
   readonly outputDirectory: string;
