@@ -10,22 +10,28 @@ const SOURCE_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../
 
 const OUTPUT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../../dist');
 
-const logger = new Logger('build-tokens', { logLevel: DEFAULT_LOG_LEVEL });
+const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
-export async function buildTokensScript(): Promise<void> {
-  await rm(OUTPUT_DIR, { force: true, recursive: true });
+export function buildTokensScript(): Promise<void> {
+  return logger.asyncTask('build-tokens', async (logger: Logger): Promise<void> => {
+    await rm(OUTPUT_DIR, { force: true, recursive: true });
 
-  await buildTokens({
-    sourceDirectory: SOURCE_DIR,
-    outputDirectory: OUTPUT_DIR,
-    logger,
-  });
+    await buildTokens({
+      sourceDirectory: SOURCE_DIR,
+      outputDirectory: OUTPUT_DIR,
+      logger,
+    });
 
-  await buildFigmaTokens({
-    sourceDirectory: SOURCE_DIR,
-    outputDirectory: OUTPUT_DIR,
-    logger,
+    await buildFigmaTokens({
+      sourceDirectory: SOURCE_DIR,
+      outputDirectory: OUTPUT_DIR,
+      logger,
+    });
   });
 }
 
-await buildTokensScript();
+try {
+  await buildTokensScript();
+} catch (error: unknown) {
+  logger.fatal(error);
+}

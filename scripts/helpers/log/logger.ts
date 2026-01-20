@@ -8,6 +8,10 @@ export interface LoggerOptions {
 }
 
 export class Logger {
+  static root(options?: LoggerOptions): Logger {
+    return new Logger('$ROOT', options);
+  }
+
   readonly #name: string;
   readonly #logLevel: ReadonlyMap<LogLevel, RawLogger>;
 
@@ -50,7 +54,7 @@ export class Logger {
   }
 
   child(name: string): Logger {
-    return new Logger(`${this.#name} > ${name}`, {
+    return new Logger(this.#name === '$ROOT' ? name : `${this.#name} > ${name}`, {
       logLevel: this.#logLevel,
     });
   }
@@ -64,7 +68,7 @@ export class Logger {
     callback: (logger: Logger) => Promise<GReturn>,
     {
       startLevel = 'info',
-      successLevel = 'info',
+      successLevel = startLevel,
       errorLevel = 'error',
       timer = true,
     }: LoggerAsyncTaskOptions = {},
@@ -90,7 +94,9 @@ export class Logger {
       if (result.type === 'success') {
         logger.report(successLevel, [`DONE${extra}`]);
       } else {
-        logger.report(errorLevel, [`ERROR${extra}`]);
+        logger.report(errorLevel, [
+          `ERROR${extra}${Error.isError(result.error) ? `: ${result.error.message}` : ''}`,
+        ]);
         throw result.error;
       }
 

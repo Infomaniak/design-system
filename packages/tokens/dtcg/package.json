@@ -5,8 +5,8 @@
   "main": "./index.js",
   "scripts": {
     "build": "yarn build:tokens && yarn copy:css",
-    "validate:tokens": "node scripts/scripts/validate-tokens/validate-tokens.script.ts",
-    "build:tokens": "node scripts/scripts/build-tokens/build-tokens.script.ts",
+    "validate:tokens": "node --no-warnings=ExperimentalWarning scripts/scripts/validate-tokens/validate-tokens.script.ts",
+    "build:tokens": "node --no-warnings=ExperimentalWarning scripts/scripts/build-tokens/build-tokens.script.ts",
     "copy:css": "rm -rf demo/src/styles/ && cp -a dist/. demo/src/styles/"
   },
   "description": "Infomaniak's Design System - Tokens",
