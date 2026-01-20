@@ -1,10 +1,12 @@
 # Infomaniak's Design System - DTCG Tokens
 
-Imports the Design System tokens from Figma, using the [Design Tokens Format Module - (DTCG)](https://www.designtokens.org/tr/2025.10/format) format.
+Contains the list of Infomaniak's Design System tokens based on the [Design Tokens Community Group - (DTCG - 2025.10)](https://www.designtokens.org/tr/2025.10/format) format, and script to convert them to different formats (CSS, Figma, Tailwind, etc.).
 
-## Export tokens from figma
+## Scripts
 
-We use the Figma [TokensBrücke plugin](../../../docs/figma/tokens-bruecke/figma-tokens-bruecke.md) to export the figma variables to the DTCG format.
+## Import tokens into figma
+
+We use the Figma [TokensBrücke plugin](../../../docs/figma/tokens-bruecke/figma-tokens-bruecke.md) to import the figma variables.
 
 
 

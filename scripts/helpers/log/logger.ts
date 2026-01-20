@@ -58,4 +58,50 @@ export class Logger {
   spawn<GReturn>(name: string, callback: (logger: Logger) => GReturn): GReturn {
     return callback(this.child(name));
   }
+
+  asyncTask<GReturn>(
+    name: string,
+    callback: (logger: Logger) => Promise<GReturn>,
+    {
+      startLevel = 'info',
+      successLevel = 'info',
+      errorLevel = 'error',
+      timer = true,
+    }: LoggerAsyncTaskOptions = {},
+  ): Promise<GReturn> {
+    return this.spawn(name, async (logger: Logger): Promise<GReturn> => {
+      const start: number = Date.now();
+
+      logger.report(startLevel, ['STARTING...']);
+
+      let result: { type: 'success'; value: GReturn } | { type: 'error'; error: unknown };
+
+      try {
+        result = {
+          type: 'success',
+          value: await callback(logger),
+        };
+      } catch (error: unknown) {
+        result = { type: 'error', error };
+      }
+
+      const extra: string = timer ? ` (${Date.now() - start}ms)` : '';
+
+      if (result.type === 'success') {
+        logger.report(successLevel, [`DONE${extra}`]);
+      } else {
+        logger.report(errorLevel, [`ERROR${extra}`]);
+        throw result.error;
+      }
+
+      return result.value;
+    });
+  }
+}
+
+export interface LoggerAsyncTaskOptions {
+  readonly startLevel?: LogLevel;
+  readonly successLevel?: LogLevel;
+  readonly errorLevel?: LogLevel;
+  readonly timer?: boolean;
 }
