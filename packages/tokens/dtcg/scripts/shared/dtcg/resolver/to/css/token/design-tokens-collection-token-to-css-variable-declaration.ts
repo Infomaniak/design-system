@@ -12,7 +12,7 @@ import { isShadowDesignTokensCollectionToken } from '../../../token/types/compos
 import { isStrokeStyleDesignTokensCollectionToken } from '../../../token/types/composite/stroke-style/is-stroke-style-design-tokens-collection-token.ts';
 import { isTransitionDesignTokensCollectionToken } from '../../../token/types/composite/transition/is-transition-design-tokens-collection-token.ts';
 import { isTypographyDesignTokensCollectionToken } from '../../../token/types/composite/typography/is-typography-design-tokens-collection-token.ts';
-import type { CssVariableDeclaration } from '../css-variable-declaration.ts';
+import type { CssVariableDeclaration } from '../css-variable-declaration/css-variable-declaration.ts';
 import {
   colorDesignTokensCollectionTokenToCssVariableDeclaration,
   type ColorDesignTokensCollectionTokenToCssVariableDeclarationOptions,

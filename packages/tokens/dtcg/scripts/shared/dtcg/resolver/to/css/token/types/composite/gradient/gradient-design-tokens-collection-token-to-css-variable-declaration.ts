@@ -1,6 +1,6 @@
 import type { GradientDesignTokensCollectionToken } from '../../../../../../token/types/composite/gradient/gradient-design-tokens-collection-token.ts';
 import type { GradientDesignTokensCollectionTokenValue } from '../../../../../../token/types/composite/gradient/value/gradient-design-tokens-collection-token-value.ts';
-import type { CssVariableDeclaration } from '../../../../css-variable-declaration.ts';
+import type { CssVariableDeclaration } from '../../../../css-variable-declaration/css-variable-declaration.ts';
 import {
   designTokensCollectionTokenWithMapValueToCssVariableDeclaration,
   type DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions,

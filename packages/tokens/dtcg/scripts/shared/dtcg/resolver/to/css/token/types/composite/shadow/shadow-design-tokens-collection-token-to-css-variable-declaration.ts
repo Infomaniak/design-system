@@ -1,6 +1,6 @@
 import type { ShadowDesignTokensCollectionToken } from '../../../../../../token/types/composite/shadow/shadow-design-tokens-collection-token.ts';
 import type { ShadowDesignTokensCollectionTokenValue } from '../../../../../../token/types/composite/shadow/value/shadow-design-tokens-collection-token-value.ts';
-import type { CssVariableDeclaration } from '../../../../css-variable-declaration.ts';
+import type { CssVariableDeclaration } from '../../../../css-variable-declaration/css-variable-declaration.ts';
 import {
   designTokensCollectionTokenWithMapValueToCssVariableDeclaration,
   type DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions,

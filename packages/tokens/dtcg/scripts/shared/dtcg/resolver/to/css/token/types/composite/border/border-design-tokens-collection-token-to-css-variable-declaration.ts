@@ -1,6 +1,6 @@
 import type { BorderDesignTokensCollectionToken } from '../../../../../../token/types/composite/border/border-design-tokens-collection-token.ts';
 import type { BorderDesignTokensCollectionTokenValue } from '../../../../../../token/types/composite/border/value/border-design-tokens-collection-token-value.ts';
-import type { CssVariableDeclaration } from '../../../../css-variable-declaration.ts';
+import type { CssVariableDeclaration } from '../../../../css-variable-declaration/css-variable-declaration.ts';
 import {
   designTokensCollectionTokenWithMapValueToCssVariableDeclaration,
   type DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions,

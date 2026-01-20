@@ -1,8 +1,9 @@
 import { DesignTokensCollection } from '../../design-tokens-collection.ts';
 import type { GenericDesignTokensCollectionTokenWithType } from '../../token/design-tokens-collection-token.ts';
 import type { DesignTokenNameLike } from '../../token/name/design-token-name-like.ts';
-import type { CssVariableDeclaration } from './css-variable-declaration.ts';
-import { designTokensCollectionToCssVariableDeclarations } from './token/design-tokens-collection-to-css-variable-declarations.ts';
+import type { CssVariableDeclaration } from './css-variable-declaration/css-variable-declaration.ts';
+import { designTokensCollectionToCssVariableDeclarations } from './css-variable-declaration/from/design-tokens-collection-to-css-variable-declarations.ts';
+import { cssVariableDeclarationsToCss } from './css-variable-declaration/to/css-variable-declarations-to-css.ts';
 import { designTokensCollectionTokenToCssVariableDeclaration } from './token/design-tokens-collection-token-to-css-variable-declaration.ts';
 import { DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION } from './token/name/default-generate-css-variable-name-function.ts';
 import type { GenerateCssVariableNameFunction } from './token/name/generate-css-variable-name-function.ts';
@@ -81,42 +82,7 @@ export class CssVariablesCollection {
 
   /* TO */
 
-  cssCssVariableDeclarationToString(declaration: CssVariableDeclaration): string {
-    let output: string = '';
-
-    if (declaration.description !== undefined || declaration.deprecated) {
-      output += '/*\n';
-      const prefix: string = ' * ';
-
-      if (declaration.description) {
-        for (const line of declaration.description.split('\n')) {
-          output += `${prefix}${line}\n`;
-        }
-      }
-
-      if (declaration.deprecated) {
-        output += `${prefix}@deprecated${typeof declaration.deprecated === 'string' ? ` ${declaration.deprecated}` : ''}\n`;
-      }
-
-      output += ' */\n';
-    }
-
-    output += `${declaration.name}: ${declaration.value};`;
-
-    return output;
-  }
-
   toString(selector: string): string {
-    let output: string = `${selector} {\n`;
-
-    for (const declaration of this.#variableDeclarations.values()) {
-      for (const line of this.cssCssVariableDeclarationToString(declaration).split('\n')) {
-        output += `  ${line}\n`;
-      }
-    }
-
-    output += '}';
-
-    return output;
+    return cssVariableDeclarationsToCss(this.#variableDeclarations.values(), selector);
   }
 }

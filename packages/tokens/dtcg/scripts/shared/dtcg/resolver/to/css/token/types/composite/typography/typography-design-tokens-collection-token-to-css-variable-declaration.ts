@@ -1,6 +1,6 @@
 import type { TypographyDesignTokensCollectionToken } from '../../../../../../token/types/composite/typography/typography-design-tokens-collection-token.ts';
 import type { TypographyDesignTokensCollectionTokenValue } from '../../../../../../token/types/composite/typography/value/typography-design-tokens-collection-token-value.ts';
-import type { CssVariableDeclaration } from '../../../../css-variable-declaration.ts';
+import type { CssVariableDeclaration } from '../../../../css-variable-declaration/css-variable-declaration.ts';
 import {
   designTokensCollectionTokenWithMapValueToCssVariableDeclaration,
   type DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions,

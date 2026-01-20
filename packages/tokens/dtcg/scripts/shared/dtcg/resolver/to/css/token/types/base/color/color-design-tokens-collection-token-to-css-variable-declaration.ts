@@ -1,6 +1,6 @@
 import type { ColorDesignTokensCollectionToken } from '../../../../../../token/types/base/color/color-design-tokens-collection-token.ts';
 import type { ColorDesignTokensCollectionTokenValue } from '../../../../../../token/types/base/color/value/color-design-tokens-collection-token-value.ts';
-import type { CssVariableDeclaration } from '../../../../css-variable-declaration.ts';
+import type { CssVariableDeclaration } from '../../../../css-variable-declaration/css-variable-declaration.ts';
 import {
   designTokensCollectionTokenWithMapValueToCssVariableDeclaration,
   type DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions,

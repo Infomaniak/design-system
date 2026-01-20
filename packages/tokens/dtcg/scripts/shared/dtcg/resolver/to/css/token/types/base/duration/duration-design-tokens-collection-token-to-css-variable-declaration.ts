@@ -1,5 +1,5 @@
 import type { DurationDesignTokensCollectionToken } from '../../../../../../token/types/base/duration/duration-design-tokens-collection-token.ts';
-import type { CssVariableDeclaration } from '../../../../css-variable-declaration.ts';
+import type { CssVariableDeclaration } from '../../../../css-variable-declaration/css-variable-declaration.ts';
 import {
   designTokensCollectionTokenWithMapValueToCssVariableDeclaration,
   type DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions,

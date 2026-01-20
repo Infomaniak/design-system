@@ -1,5 +1,5 @@
 import type { DesignTokensCollectionTokenWithType } from '../../../token/design-tokens-collection-token.ts';
-import type { CssVariableDeclaration } from '../css-variable-declaration.ts';
+import type { CssVariableDeclaration } from '../css-variable-declaration/css-variable-declaration.ts';
 import {
   valueOrCurlyReferenceToCssVariableReference,
   type ValueOrCurlyReferenceToCssVariableReferenceOptions,

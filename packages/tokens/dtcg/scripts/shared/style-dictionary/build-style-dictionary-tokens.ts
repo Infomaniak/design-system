@@ -12,6 +12,9 @@ export interface BuildStyleDictionaryTokensOptions {
   readonly outputDirectory: string;
 }
 
+/**
+ * @deprecated
+ */
 export async function buildStyleDictionaryTokens({
   sourceDirectory,
   outputDirectory,

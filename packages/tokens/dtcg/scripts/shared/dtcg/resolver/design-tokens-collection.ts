@@ -79,8 +79,8 @@ export class DesignTokensCollection {
 
   readonly #tokens: GenericDesignTokensCollectionToken[];
 
-  constructor() {
-    this.#tokens = [];
+  constructor(tokens?: Iterable<GenericDesignTokensCollectionToken>) {
+    this.#tokens = tokens === undefined ? [] : Array.from(tokens);
   }
 
   /* FROM */
@@ -606,6 +606,10 @@ export class DesignTokensCollection {
         };
       }
     }
+  }
+
+  clone(): DesignTokensCollection {
+    return new DesignTokensCollection(this.#tokens);
   }
 }
 

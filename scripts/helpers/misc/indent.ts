@@ -1,3 +1,6 @@
-export function indent(lines: readonly string[]): string[] {
-  return lines.map((line: string): string => `  ${line}`);
+export function indent(text: string, indent: string = '  '): string {
+  return text
+    .split('\n')
+    .map((line: string): string => `${indent}${line}`)
+    .join('\n');
 }

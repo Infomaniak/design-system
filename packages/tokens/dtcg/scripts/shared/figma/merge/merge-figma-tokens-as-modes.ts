@@ -26,6 +26,16 @@ export function mergeFigmaTokensAsModes(trees: readonly FigmaTreeWithName[]): un
   if (type === 'token') {
     // tokens
     const [, token] = trees[0];
+
+    /*
+      "$extensions": {
+        "mode": {
+          "Mode 1": "#0c0c0d0d",
+          "Mode 2": "#0c0c0d0d"
+        }
+      }
+     */
+
     return {
       ...(token as object),
       $extensions: {

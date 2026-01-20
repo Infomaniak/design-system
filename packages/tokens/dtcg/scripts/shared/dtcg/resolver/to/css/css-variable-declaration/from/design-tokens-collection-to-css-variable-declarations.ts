@@ -1,10 +1,10 @@
-import { DesignTokensCollection } from '../../../design-tokens-collection.ts';
-import type { GenericDesignTokensCollectionToken } from '../../../token/design-tokens-collection-token.ts';
-import type { CssVariableDeclaration } from '../css-variable-declaration.ts';
+import { DesignTokensCollection } from '../../../../design-tokens-collection.ts';
+import type { GenericDesignTokensCollectionToken } from '../../../../token/design-tokens-collection-token.ts';
 import {
   designTokensCollectionTokenToCssVariableDeclaration,
   type DesignTokensCollectionTokenToCssVariableDeclarationOptions,
-} from './design-tokens-collection-token-to-css-variable-declaration.ts';
+} from '../../token/design-tokens-collection-token-to-css-variable-declaration.ts';
+import type { CssVariableDeclaration } from '../css-variable-declaration.ts';
 
 export interface DesignTokensCollectionToCssVariableDeclarationsOptions extends DesignTokensCollectionTokenToCssVariableDeclarationOptions {}
 

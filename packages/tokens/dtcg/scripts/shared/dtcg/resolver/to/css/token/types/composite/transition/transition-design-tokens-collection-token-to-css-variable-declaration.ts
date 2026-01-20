@@ -1,6 +1,6 @@
 import type { TransitionDesignTokensCollectionToken } from '../../../../../../token/types/composite/transition/transition-design-tokens-collection-token.ts';
 import type { TransitionDesignTokensCollectionTokenValue } from '../../../../../../token/types/composite/transition/value/transition-design-tokens-collection-token-value.ts';
-import type { CssVariableDeclaration } from '../../../../css-variable-declaration.ts';
+import type { CssVariableDeclaration } from '../../../../css-variable-declaration/css-variable-declaration.ts';
 import {
   designTokensCollectionTokenWithMapValueToCssVariableDeclaration,
   type DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions,

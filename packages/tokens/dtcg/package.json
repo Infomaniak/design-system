@@ -9,7 +9,7 @@
     "normalize": "node scripts/scripts/normalize.ts",
     "build": "yarn build:tokens && yarn copy:css",
     "validate:tokens": "node scripts/scripts/validate-tokens.script.ts",
-    "build:tokens": "node scripts/scripts/build-tokens.script.ts",
+    "build:tokens": "node scripts/scripts/build-tokens/build-tokens.script.ts",
     "copy:css": "rm -rf demo/src/styles/ && cp -a dist/. demo/src/styles/"
   },
   "description": "Infomaniak's Design System - Tokens",
