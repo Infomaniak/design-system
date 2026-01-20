@@ -1,4 +1,4 @@
-import { removeUndefinedProperties } from '../../../../../../../../../../scripts/helpers/misc/remove-undefined-properties.ts';
+import { removeUndefinedProperties } from '../../../../../../../../../../scripts/helpers/misc/object/remove-undefined-properties.ts';
 import type { DesignToken } from '../../../token/design-token.ts';
 import type { DesignTokensTree } from '../../../tree/design-tokens-tree.ts';
 import { isDesignTokenReference } from '../../is-design-token-reference.ts';

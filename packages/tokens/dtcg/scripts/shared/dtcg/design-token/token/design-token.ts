@@ -14,5 +14,5 @@ export interface DesignToken<GType extends string, GValue> {
   readonly $type?: GType;
   readonly $deprecated?: boolean | string;
   readonly $description?: string;
-  readonly $extensions?: object;
+  readonly $extensions?: Record<string, any>;
 }

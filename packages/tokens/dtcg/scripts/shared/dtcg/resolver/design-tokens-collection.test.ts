@@ -44,6 +44,7 @@ describe('DesignTokensCollection', () => {
         });
 
         expect(collection.get('breakpoint.sm')).toEqual({
+          files: [],
           name: ['breakpoint', 'sm'],
           type: 'dimension',
           value: {

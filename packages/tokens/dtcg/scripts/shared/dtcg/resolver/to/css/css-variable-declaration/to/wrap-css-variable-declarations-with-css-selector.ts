@@ -10,5 +10,5 @@ export function wrapCssVariableDeclarationsWithCssSelector(
   return `${header}${selector} {\n${cssVariables
     .split('\n')
     .map((line: string): string => `  ${line}`)
-    .join('\n')}}\n`;
+    .join('\n')}\n}\n`;
 }

@@ -13,6 +13,7 @@ import {
 } from '../../../shared/dtcg/resolver/to/css/token/design-tokens-collection-token-to-css-variable-declaration.ts';
 import { createCssVariableNameGenerator } from '../../../shared/dtcg/resolver/to/css/token/name/create-css-variable-name-generator.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
+import { DESIGN_TOKEN_TIERS } from './design-token-tiers.ts';
 
 export interface BuildTokensOptions {
   readonly sourceDirectory: string;
@@ -29,10 +30,10 @@ export function buildTokens({
     sourceDirectory = removeTrailingSlash(sourceDirectory);
     outputDirectory = removeTrailingSlash(outputDirectory);
 
-    const tiers: readonly string[] = ['t1-primitive', 't2-semantic', 't3-component'];
-
     const baseCollection: DesignTokensCollection = await new DesignTokensCollection().fromFiles(
-      tiers.map((tier: string): string => `${sourceDirectory}/base/${tier}/**/*.tokens.json`),
+      DESIGN_TOKEN_TIERS.map(
+        (tier: string): string => `${sourceDirectory}/base/${tier}/**/*.tokens.json`,
+      ),
     );
 
     const cssOptions: DesignTokensCollectionTokenToCssVariableDeclarationOptions = {

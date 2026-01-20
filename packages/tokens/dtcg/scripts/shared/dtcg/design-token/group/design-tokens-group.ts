@@ -32,7 +32,7 @@ export interface DesignTokensGroup {
   /**
    * @inheritDoc https://www.designtokens.org/tr/2025.10/format/#extensions-0
    */
-  readonly $extensions?: object;
+  readonly $extensions?: Record<string, any>;
 
   // Design tokens
   readonly [name: DesignTokenNameSegment]: DesignTokensTree;

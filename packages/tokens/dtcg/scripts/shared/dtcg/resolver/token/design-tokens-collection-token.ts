@@ -5,7 +5,7 @@ import type { ArrayDesignTokenName } from './name/array-design-token-name.ts';
 /* COMMON */
 
 export interface DesignTokensCollectionTokenCommonProperties {
-  readonly files: readonly string[];
+  readonly files: readonly string[]; // from most recent to oldest
   readonly name: ArrayDesignTokenName;
   readonly description?: string;
   readonly deprecated?: boolean | string;

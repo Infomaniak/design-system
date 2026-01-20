@@ -7,7 +7,10 @@ export function cssVariableDeclarationsToString(
   let output: string = '';
 
   for (const declaration of declarations) {
-    output += `${cssVariableDeclarationToString(declaration)}\n`;
+    if (output !== '') {
+      output += '\n';
+    }
+    output += cssVariableDeclarationToString(declaration);
   }
 
   return output;

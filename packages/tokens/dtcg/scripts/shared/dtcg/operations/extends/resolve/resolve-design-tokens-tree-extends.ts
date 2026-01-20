@@ -1,4 +1,4 @@
-import { removeUndefinedProperties } from '../../../../../../../../../scripts/helpers/misc/remove-undefined-properties.ts';
+import { removeUndefinedProperties } from '../../../../../../../../../scripts/helpers/misc/object/remove-undefined-properties.ts';
 import { isDesignTokensGroup } from '../../../design-token/group/is-design-tokens-group.ts';
 import { isCurlyReference } from '../../../design-token/reference/types/curly/is-curly-reference.ts';
 import { curlyReferenceToSegmentsReference } from '../../../design-token/reference/types/curly/to/segments-reference/curly-reference-to-segments-reference.ts';

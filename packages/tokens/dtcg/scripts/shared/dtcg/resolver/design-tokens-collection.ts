@@ -1,5 +1,5 @@
 import { glob, readFile } from 'node:fs/promises';
-import { removeUndefinedProperties } from '../../../../../../../scripts/helpers/misc/remove-undefined-properties.ts';
+import { removeUndefinedProperties } from '../../../../../../../scripts/helpers/misc/object/remove-undefined-properties.ts';
 import { isDesignTokenReference } from '../design-token/reference/is-design-token-reference.ts';
 import { designTokenReferenceToCurlyReference } from '../design-token/reference/to/curly-reference/design-token-reference-to-curly-reference.ts';
 import type { CurlyReference } from '../design-token/reference/types/curly/curly-reference.ts';
