@@ -7,11 +7,13 @@ import { DesignTokensCollection } from '../../../shared/dtcg/resolver/design-tok
 import type { CssVariableDeclaration } from '../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
 import { cssVariableDeclarationsToString } from '../../../shared/dtcg/resolver/to/css/css-variable-declaration/to/css-variable-declarations-to-string.ts';
 import { wrapCssVariableDeclarationsWithCssSelector } from '../../../shared/dtcg/resolver/to/css/css-variable-declaration/to/wrap-css-variable-declarations-with-css-selector.ts';
+import { segmentsReferenceToCssVariableReference } from '../../../shared/dtcg/resolver/to/css/reference/segments-reference-to-css-variable-reference.ts';
 import {
   designTokensCollectionTokenToCssVariableDeclaration,
   type DesignTokensCollectionTokenToCssVariableDeclarationOptions,
 } from '../../../shared/dtcg/resolver/to/css/token/design-tokens-collection-token-to-css-variable-declaration.ts';
 import { createCssVariableNameGenerator } from '../../../shared/dtcg/resolver/to/css/token/name/create-css-variable-name-generator.ts';
+import { DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION } from '../../../shared/dtcg/resolver/to/css/token/name/default-generate-css-variable-name-function.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { DESIGN_TOKEN_TIERS } from './design-token-tiers.ts';
 
@@ -97,5 +99,39 @@ export function buildTokens({
         });
       });
     }
+
+    // TAILWIND 4+ => https://tailwindcss.com/docs/theme#theme-variable-namespaces
+    await logger.asyncTask('tailwind', async (): Promise<void> => {
+      const cssVariables: string = cssVariableDeclarationsToString([
+        {
+          name: '--color-*',
+          value: 'initial',
+        },
+        ...baseCollection
+          .getMergedTokens()
+          .map((token: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
+            return {
+              name: DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(token.name),
+              value: segmentsReferenceToCssVariableReference(token.name, cssOptions),
+              description: token.description,
+              deprecated: token.deprecated,
+            };
+          }),
+      ]);
+
+      await Promise.all([
+        writeFileSafe(
+          `${outputDirectory}/tailwind/tailwind.css`,
+          wrapCssVariableDeclarationsWithCssSelector(
+            cssVariables,
+            '@theme inline',
+            '/*\n  Do not edit directly, this file was auto-generated.\n*/\n\n',
+          ),
+          {
+            encoding: 'utf-8',
+          },
+        ),
+      ]);
+    });
   });
 }
