@@ -2,7 +2,12 @@
   "button": {
     "background": {
       "color": {
-        "$value": "{color.brand.200}"
+        "$value": "{color.brand.200}",
+        "$extensions": {
+          "variant": {
+            "mail": "{color.brand.100}"
+          }
+        }
       }
     }
   }

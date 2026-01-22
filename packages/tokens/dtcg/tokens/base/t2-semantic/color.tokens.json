@@ -2,7 +2,12 @@
   "color": {
     "brand": {
       "100": {
-        "$value": "{color.green.100}"
+        "$value": "{color.green.100}",
+        "$extensions": {
+          "theme": {
+            "light": "{color.gray.100}"
+          }
+        }
       },
       "200": {
         "$value": "{color.green.200}"
