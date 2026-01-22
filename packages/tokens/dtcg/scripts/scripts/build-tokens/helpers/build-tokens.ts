@@ -32,7 +32,7 @@ const THEME_FILE_HEADER = `/*
 
 const VARIANT_FILE_HEADER = `/*
   ${AUTO_GENERATED_COMMENT}
-  This is a "variant" file: it requires "base" themes to works properly.
+  This is a "variant" file: it requires a "base" theme to work properly.
 */
 
 `;
@@ -183,31 +183,35 @@ export function buildTokens({
     // TAILWIND 4+ => https://tailwindcss.com/docs/theme#theme-variable-namespaces
     await logger.asyncTask('tailwind', async (): Promise<void> => {
       const cssVariables: string = cssVariableDeclarationsToString([
-        ...[
-          'color',
-          'font',
-          'text',
-          'font-weight',
-          'tracking',
-          'leading',
-          'breakpoint',
-          'container',
-          'spacing',
-          'radius',
-          'shadow',
-          'inset-shadow',
-          'drop-shadow',
-          'blur',
-          'perspective',
-          'aspect',
-          'ease',
-          'animate',
-        ].map((tailwindNamespace: string): CssVariableDeclaration => {
-          return {
-            name: `--${tailwindNamespace}-*`,
-            value: 'initial',
-          };
-        }),
+        // ...[
+        //   'color',
+        //   'font',
+        //   'text',
+        //   'font-weight',
+        //   'tracking',
+        //   'leading',
+        //   'breakpoint',
+        //   'container',
+        //   'spacing',
+        //   'radius',
+        //   'shadow',
+        //   'inset-shadow',
+        //   'drop-shadow',
+        //   'blur',
+        //   'perspective',
+        //   'aspect',
+        //   'ease',
+        //   'animate',
+        // ].map((tailwindNamespace: string): CssVariableDeclaration => {
+        //   return {
+        //     name: `--${tailwindNamespace}-*`,
+        //     value: 'initial',
+        //   };
+        // }),
+        {
+          name: `--*`,
+          value: 'initial',
+        },
         ...tokens.map((token: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
           return {
             name: DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(token.name),
