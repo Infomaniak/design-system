@@ -7,5 +7,7 @@ export function createCssVariableNameGenerator(
   if (prefix !== '' && !prefix.endsWith('-')) {
     prefix = `${prefix}-`;
   }
-  return (name: ArrayDesignTokenName): string => `--${prefix}${name.join('-')}`;
+  return (name: ArrayDesignTokenName): string => {
+    return `--${prefix}${(name.at(-1) === '$root' ? name.slice(0, -1) : name).join('-')}`;
+  };
 }

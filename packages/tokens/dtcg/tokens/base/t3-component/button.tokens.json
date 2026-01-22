@@ -2,10 +2,20 @@
   "button": {
     "background": {
       "color": {
-        "$value": "{color.brand.200}",
-        "$extensions": {
-          "variant": {
-            "mail": "{color.brand.100}"
+        "$root": {
+          "$value": "{color.brand.200}",
+          "$extensions": {
+            "variant": {
+              "mail": "{button.background.color.mail}"
+            }
+          }
+        },
+        "mail": {
+          "$value": "{color.pink.500}",
+          "$extensions": {
+            "theme": {
+              "dark": "{color.pink.600}"
+            }
           }
         }
       }

@@ -9,7 +9,7 @@ export interface DesignTokensCollectionTokenCommonProperties {
   readonly name: ArrayDesignTokenName;
   readonly description?: string;
   readonly deprecated?: boolean | string;
-  readonly extensions?: object;
+  readonly extensions?: Record<string, unknown>;
 }
 
 /* WITH TYPE */

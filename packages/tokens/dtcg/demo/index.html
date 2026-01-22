@@ -5,37 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>demo</title>
 
-    <link rel="stylesheet" href="src/styles/css/light.css" media="(prefers-color-scheme: light)">
-    <link rel="stylesheet" href="src/styles/css/dark.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="src/styles/css/themes/light.theme.css" media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="src/styles/css/themes/dark.theme.css" media="(prefers-color-scheme: dark)">
     <link rel="stylesheet" href="src/style.css">
 
 <!--    <link rel="preload" as="style" href="src/styles/light-mode.css">-->
 <!--    <link rel="preload" as="style" href="src/styles/dark-mode.css">-->
 
-    <link rel="stylesheet" href="src/styles/css/light.attr.css">
-    <link rel="stylesheet" href="src/styles/css/dark.attr.css">
-    <link rel="stylesheet" href="src/styles/css/products/mail.patch.attr.css">
+    <link rel="stylesheet" href="src/styles/css/themes/light.theme.attr.css">
+    <link rel="stylesheet" href="src/styles/css/themes/dark.theme.attr.css">
+    <link rel="stylesheet" href="src/styles/css/variants/mail.variant.attr.css">
 
     <style>
       body {
-        background-color: var(--ikds-color-background-default-default);
+        background-color: var(--ikds-color-background-default);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--ikds-spacing-4);
+        padding: var(--ikds-spacing-4);
       }
 
       h1 {
         font: var(--ikds-typography-heading-large);
-        color: var(--ikds-color-text-default-default);
+        color: var(--ikds-color-text-default);
       }
 
       .card {
-        background-color: var(--ikds-color-background-default-secondary);
+        background-color: var(--ikds-color-background-secondary);
         font: var(--ikds-typography-body-medium);
-        color: var(--ikds-color-text-default-default);
-        padding: 1rem;
+        color: var(--ikds-color-text-default);
+        padding: var(--ikds-spacing-3);
         border-radius: var(--ikds-radius-100);
       }
 
       button {
-        background-color: var(--ikds-color-brand-500);
+        padding: var(--ikds-spacing-2);
+        border-radius: var(--ikds-spacing-1);
+        background-color: var(--ikds-button-background-color);
         font: var(--ikds-typography-body-medium);
         color: white;
       }
