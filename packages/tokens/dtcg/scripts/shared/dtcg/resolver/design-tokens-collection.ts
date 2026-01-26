@@ -33,6 +33,10 @@ import { updateTransitionDesignTokensCollectionTokenValueReferences } from './to
 import { isTypographyDesignTokensCollectionToken } from './token/types/composite/typography/is-typography-design-tokens-collection-token.ts';
 import { updateTypographyDesignTokensCollectionTokenValueReferences } from './token/types/composite/typography/value/update/update-typography-design-tokens-collection-token-value-references.ts';
 
+export interface DesignTokensCollectionRenameOptions {
+  readonly mapExtensions?: (extensions: Record<string, unknown>) => Record<string, unknown>;
+}
+
 /**
  * The `DesignTokensCollection` class provides utilities to manage, resolve, and manipulate
  * design tokens in a hierarchical structure. It includes methods to parse design tokens from
@@ -547,9 +551,14 @@ export class DesignTokensCollection {
    *
    * @param {DesignTokenNameLike} from - The current name of the design token.
    * @param {DesignTokenNameLike} to - The new name to assign to the design token.
+   * @param {DesignTokensCollectionRenameOptions} options - Extra options.
    * @return {void} This method does not return anything but updates the relevant tokens' names and references in-place.
    */
-  rename(from: DesignTokenNameLike, to: DesignTokenNameLike): void {
+  rename(
+    from: DesignTokenNameLike,
+    to: DesignTokenNameLike,
+    { mapExtensions }: DesignTokensCollectionRenameOptions = {},
+  ): void {
     from = DesignTokensCollection.designTokenNameLikeToArray(from);
     to = DesignTokensCollection.designTokenNameLikeToArray(to);
 
@@ -567,6 +576,7 @@ export class DesignTokensCollection {
 
       let name: ArrayDesignTokenName = token.name;
       let value: unknown | CurlyReference = token.value;
+      let extensions: Record<string, unknown> | undefined = token.extensions;
 
       if (DesignTokensCollection.#tokenNamesEqual(token.name, from)) {
         name = to;
@@ -598,11 +608,16 @@ export class DesignTokensCollection {
         }
       }
 
-      if (name !== token.name || value !== token.value) {
+      if (extensions !== undefined && mapExtensions !== undefined) {
+        extensions = mapExtensions(extensions);
+      }
+
+      if (name !== token.name || value !== token.value || extensions !== token.extensions) {
         this.#tokens[i] = {
           ...token,
           name,
           value,
+          extensions,
         };
       }
     }

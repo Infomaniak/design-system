@@ -3,7 +3,6 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DEFAULT_LOG_LEVEL } from '../../../../../../scripts/helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../../../../../scripts/helpers/log/logger.ts';
-import { buildFigmaTokens } from './helpers/build-figma-tokens.ts';
 import { buildTokens } from './helpers/build-tokens.ts';
 
 const SOURCE_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../../tokens');
@@ -22,11 +21,11 @@ export function buildTokensScript(): Promise<void> {
       logger,
     });
 
-    await buildFigmaTokens({
-      sourceDirectory: SOURCE_DIR,
-      outputDirectory: OUTPUT_DIR,
-      logger,
-    });
+    // await buildFigmaTokens({
+    //   sourceDirectory: SOURCE_DIR,
+    //   outputDirectory: OUTPUT_DIR,
+    //   logger,
+    // });
   });
 }
 

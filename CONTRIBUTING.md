@@ -8,7 +8,7 @@ This projet is open to everyone. Feel free to test the library, share it, improv
 
 #### [nvm](https://github.com/nvm-sh/nvm)
 
-We recommand using [nvm](https://github.com/nvm-sh/nvm) to manage your Node.js versions.
+We recommend using [nvm](https://github.com/nvm-sh/nvm) to manage your Node.js versions.
 
 ```shell
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
@@ -54,11 +54,10 @@ And replace the corresponding variables:
 
 ## Commands
 
-[//]: # (TODO)
+[//]: # 'TODO'
 
 - `build`: builds the library.
 - `test`: tests the library.
-
 
 ## Create a pull request
 
@@ -68,4 +67,3 @@ And replace the corresponding variables:
 1. format the code, using the command `yarn format`
 1. commit and push your work following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention
 1. create a PR from your repository to the upstream repository, explaining clearly what was added/fixed.
-

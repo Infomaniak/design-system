@@ -11,7 +11,7 @@ import {
   mergeFigmaDesignTokensTreesAsModes,
   type NamedFigmaTokens,
 } from '../../../shared/figma/merge/merge-figma-design-tokens-trees-as-modes.ts';
-import { DESIGN_TOKEN_TIERS, type DesignTokenTier } from './design-token-tiers.ts';
+import { DESIGN_TOKEN_TIERS, T1_DIRNAME } from './constants/design-token-tiers.ts';
 
 export interface BuildFigmaTokensOptions {
   readonly sourceDirectory: string;
@@ -56,10 +56,9 @@ export function buildFigmaTokens({
     const figmaTokens: FigmaDesignTokensGroup = {};
 
     // 3.1) t1-primitive -> t1 tokens contain all the values, thus, they don't have alternative modes.
-    const t1: DesignTokenTier = DESIGN_TOKEN_TIERS[0];
     const mainCollection: DesignTokensCollection = themeCollections.get('light')!;
     for (const token of mainCollection.getMergedTokens()) {
-      if (token.name.at(0) === t1) {
+      if (token.name.at(0) === T1_DIRNAME) {
         setObjectDeepProperty(
           figmaTokens,
           token.name,
@@ -69,7 +68,6 @@ export function buildFigmaTokens({
     }
 
     // 3.2) t2-semantic, t3-component -> t2, t3 tokens contain alternative, build from the `themeCollections`, thus, they need to be merged (as modes).
-    const t2t3 = new Set(DESIGN_TOKEN_TIERS.slice(1));
     Object.assign(
       figmaTokens,
       mergeFigmaDesignTokensTreesAsModes(
