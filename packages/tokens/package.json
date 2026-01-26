@@ -10,7 +10,11 @@
     "copy:dist": "DEST=demo/node_modules/@infomaniak-design-system/tokens/ && rm -rf $DEST && mkdir -p $DEST && cp -a dist/web/. $DEST && echo $DEST"
   },
   "description": "Infomaniak's Design System - Tokens",
-  "keywords": [],
+  "keywords": [
+    "Infomaniak",
+    "Design tokens",
+    "DTCG"
+  ],
   "private": true,
   "devDependencies": {
     "colorjs.io": "^0.6.1",
