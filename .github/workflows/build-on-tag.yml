@@ -1,0 +1,34 @@
+name: Build on Tag
+
+on:
+  push:
+    tags:
+      - '@infomaniak-design-system/*@*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          always-auth: true
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Run publish script
+        run: node scripts/scripts/on-tag.script.ts "$TAG"
+        env:
+          TAG: ${{ github.ref_name }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

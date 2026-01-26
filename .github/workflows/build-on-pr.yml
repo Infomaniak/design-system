@@ -1,0 +1,86 @@
+name: Build dev version on PR
+
+on:
+  pull_request:
+    paths:
+      - 'packages/tokens/**'
+
+jobs:
+  publish-dev:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://npm.pkg.github.com'
+          always-auth: true
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Generate dev version
+        id: version
+        run: |
+          PR_NUMBER=${{ github.event.pull_request.number }}
+          TIMESTAMP=$(date +%s)
+          DEV_VERSION="0.0.0-pr.${PR_NUMBER}.${TIMESTAMP}"
+          echo "dev_version=$DEV_VERSION" >> $GITHUB_OUTPUT
+          echo "Generated dev version: $DEV_VERSION"
+
+      - name: Build and publish dev version
+        run: |
+          echo "Publishing dev version: ${{ steps.version.outputs.dev_version }}"
+          node packages/tokens/scripts/scripts/on-pr.ts "${{ steps.version.outputs.dev_version }}"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment PR with dev package info
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const version = '${{ steps.version.outputs.dev_version }}';
+            const comment = `## 🧪 Dev Package Published
+
+            A development version has been published to NPM:
+            
+            \`\`\`bash
+            npm install @infomaniak-design-system/tokens@${version}
+            \`\`\`
+
+            ⚠️ This is an automated dev release for testing this PR only.
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Comment PR on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = `## ❌ Dev Package Publish Failed
+
+            The build/publish process for this PR failed.
+            Please check the workflow logs for details.
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
