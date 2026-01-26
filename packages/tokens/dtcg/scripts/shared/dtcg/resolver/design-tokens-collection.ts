@@ -12,6 +12,7 @@ import { isDesignToken } from '../design-token/token/is-design-token.ts';
 import { designTokensTreeSchema } from '../design-token/tree/design-tokens-tree.schema.ts';
 import type { DesignTokensTree } from '../design-token/tree/design-tokens-tree.ts';
 import type {
+  DesignTokensCollectionTokenExtensions,
   DesignTokensCollectionTokenWithType,
   GenericDesignTokensCollectionToken,
   GenericResolvedDesignTokensCollectionToken,
@@ -34,7 +35,10 @@ import { isTypographyDesignTokensCollectionToken } from './token/types/composite
 import { updateTypographyDesignTokensCollectionTokenValueReferences } from './token/types/composite/typography/value/update/update-typography-design-tokens-collection-token-value-references.ts';
 
 export interface DesignTokensCollectionRenameOptions {
-  readonly mapExtensions?: (extensions: Record<string, unknown>) => Record<string, unknown>;
+  readonly mapExtensions?: (
+    extensions: DesignTokensCollectionTokenExtensions,
+    update: UpdateCurlyReference,
+  ) => DesignTokensCollectionTokenExtensions;
 }
 
 /**
@@ -576,11 +580,15 @@ export class DesignTokensCollection {
 
       let name: ArrayDesignTokenName = token.name;
       let value: unknown | CurlyReference = token.value;
-      let extensions: Record<string, unknown> | undefined = token.extensions;
+      let extensions: DesignTokensCollectionTokenExtensions | undefined = token.extensions;
 
       if (DesignTokensCollection.#tokenNamesEqual(token.name, from)) {
         name = to;
       }
+
+      const update: UpdateCurlyReference = (reference: CurlyReference): CurlyReference => {
+        return reference === fromAsCurlyReference ? toAsCurlyReference : reference;
+      };
 
       if (isCurlyReference(token.value)) {
         if (token.value === fromAsCurlyReference) {
@@ -588,10 +596,6 @@ export class DesignTokensCollection {
         }
       } else {
         console.assert(token.type !== undefined);
-
-        const update: UpdateCurlyReference = (reference: CurlyReference): CurlyReference => {
-          return reference === fromAsCurlyReference ? toAsCurlyReference : reference;
-        };
 
         if (isBorderDesignTokensCollectionToken(token)) {
           value = updateBorderDesignTokensCollectionTokenValueReferences(token.value, update);
@@ -609,7 +613,7 @@ export class DesignTokensCollection {
       }
 
       if (extensions !== undefined && mapExtensions !== undefined) {
-        extensions = mapExtensions(extensions);
+        extensions = mapExtensions(extensions, update);
       }
 
       if (name !== token.name || value !== token.value || extensions !== token.extensions) {
