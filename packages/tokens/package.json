@@ -1,0 +1,21 @@
+{
+  "name": "@infomaniak-design-system/tokens",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn build:tokens && yarn copy:dist",
+    "validate:tokens": "node --no-warnings=ExperimentalWarning scripts/scripts/validate-tokens/validate-tokens.script.ts",
+    "build:tokens": "node --no-warnings=ExperimentalWarning scripts/scripts/build-tokens/build-tokens.script.ts",
+    "copy:dist1": "DEST=demo/src/node_modules/@infomaniak-design-system/tokens/ && rm -rf $DEST && mkdir -p $DEST && cp -a dist/. $DEST && echo $DEST",
+    "copy:dist": "DEST=demo/node_modules/@infomaniak-design-system/tokens/ && rm -rf $DEST && mkdir -p $DEST && cp -a dist/. $DEST && echo $DEST"
+  },
+  "description": "Infomaniak's Design System - Tokens",
+  "keywords": [],
+  "private": true,
+  "devDependencies": {
+    "colorjs.io": "^0.6.1",
+    "style-dictionary": "^5.1.4",
+    "zod": "^4.3.5"
+  }
+}

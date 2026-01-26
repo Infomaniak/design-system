@@ -26,8 +26,8 @@
   "workspaces": {
     "packages": [
       "packages/*",
-      "packages/tokens/dtcg",
-      "packages/tokens/dtcg/demo"
+      "packages/tokens",
+      "packages/tokens/demo"
     ]
   },
   "devDependencies": {

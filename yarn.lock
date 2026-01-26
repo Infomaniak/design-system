@@ -429,9 +429,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@infomaniak-design-system/tokens-dtcg@workspace:packages/tokens/dtcg":
+"@infomaniak-design-system/tokens@workspace:packages/tokens":
   version: 0.0.0-use.local
-  resolution: "@infomaniak-design-system/tokens-dtcg@workspace:packages/tokens/dtcg"
+  resolution: "@infomaniak-design-system/tokens@workspace:packages/tokens"
   dependencies:
     colorjs.io: "npm:^0.6.1"
     style-dictionary: "npm:^5.1.4"
@@ -1552,9 +1552,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"demo@workspace:packages/tokens/dtcg/demo":
+"demo@workspace:packages/tokens/demo":
   version: 0.0.0-use.local
-  resolution: "demo@workspace:packages/tokens/dtcg/demo"
+  resolution: "demo@workspace:packages/tokens/demo"
   dependencies:
     rxjs: "npm:^7.8.2"
     typescript: "npm:~5.9.3"
