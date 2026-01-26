@@ -114,7 +114,7 @@ export function buildTokens({
 
           await Promise.all([
             writeFileSafe(
-              `${outputDirectory}/css/themes/${theme}.theme.css`,
+              `${outputDirectory}/web/css/themes/${theme}.theme.css`,
               wrapCssVariableDeclarationsWithCssSelector(
                 cssVariables,
                 ':root,\n:host',
@@ -125,7 +125,7 @@ export function buildTokens({
               },
             ),
             writeFileSafe(
-              `${outputDirectory}/css/themes/${theme}.theme.attr.css`,
+              `${outputDirectory}/web/css/themes/${theme}.theme.attr.css`,
               wrapCssVariableDeclarationsWithCssSelector(
                 cssVariables,
                 `[data-theme="${theme}"]`,
@@ -170,7 +170,7 @@ export function buildTokens({
 
           await Promise.all([
             writeFileSafe(
-              `${outputDirectory}/css/variants/${variant}.variant.css`,
+              `${outputDirectory}/web/css/variants/${variant}.variant.css`,
               wrapCssVariableDeclarationsWithCssSelector(
                 cssVariables,
                 ':root,\n:host',
@@ -181,7 +181,7 @@ export function buildTokens({
               },
             ),
             writeFileSafe(
-              `${outputDirectory}/css/variants/${variant}.variant.attr.css`,
+              `${outputDirectory}/web/css/variants/${variant}.variant.attr.css`,
               wrapCssVariableDeclarationsWithCssSelector(
                 cssVariables,
                 `[data-variant~="${variant}"]`,
@@ -239,7 +239,7 @@ export function buildTokens({
 
         await Promise.all([
           writeFileSafe(
-            `${outputDirectory}/tailwind/tailwind.css`,
+            `${outputDirectory}/web/tailwind.css`,
             wrapCssVariableDeclarationsWithCssSelector(
               cssVariables,
               '@theme inline',

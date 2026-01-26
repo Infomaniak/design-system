@@ -7,8 +7,7 @@
     "build": "yarn build:tokens && yarn copy:dist",
     "validate:tokens": "node --no-warnings=ExperimentalWarning scripts/scripts/validate-tokens/validate-tokens.script.ts",
     "build:tokens": "node --no-warnings=ExperimentalWarning scripts/scripts/build-tokens/build-tokens.script.ts",
-    "copy:dist1": "DEST=demo/src/node_modules/@infomaniak-design-system/tokens/ && rm -rf $DEST && mkdir -p $DEST && cp -a dist/. $DEST && echo $DEST",
-    "copy:dist": "DEST=demo/node_modules/@infomaniak-design-system/tokens/ && rm -rf $DEST && mkdir -p $DEST && cp -a dist/. $DEST && echo $DEST"
+    "copy:dist": "DEST=demo/node_modules/@infomaniak-design-system/tokens/ && rm -rf $DEST && mkdir -p $DEST && cp -a dist/web/. $DEST && echo $DEST"
   },
   "description": "Infomaniak's Design System - Tokens",
   "keywords": [],
