@@ -62,13 +62,13 @@ export function buildTokens({
     sourceDirectory = removeTrailingSlash(sourceDirectory);
     outputDirectory = removeTrailingSlash(outputDirectory);
 
-    const baseCollection: DesignTokensCollection = await new DesignTokensCollection().fromFiles(
-      DESIGN_TOKEN_TIERS.map(
-        (tier: string): string => `${sourceDirectory}/${tier}/**/*.tokens.json`,
-      ),
-    );
-
-    const tokens: readonly GenericDesignTokensCollectionToken[] = baseCollection.getMergedTokens();
+    const collection: DesignTokensCollection = (
+      await new DesignTokensCollection().fromFiles(
+        DESIGN_TOKEN_TIERS.map(
+          (tier: string): string => `${sourceDirectory}/${tier}/**/*.tokens.json`,
+        ),
+      )
+    ).mergeTokens();
 
     const getTokenValueByTheme = (
       token: GenericDesignTokensCollectionToken,
@@ -93,16 +93,18 @@ export function buildTokens({
       for (const theme of DESIGN_TOKEN_THEMES) {
         await logger.asyncTask(`theme: ${theme}`, async (): Promise<void> => {
           const cssVariables: string = cssVariableDeclarationsToString(
-            tokens.map((token: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
-              return designTokensCollectionTokenToCssVariableDeclaration(
-                {
-                  ...token,
-                  type: baseCollection.resolve(token).type,
-                  value: getTokenValueByTheme(token, theme),
-                },
-                cssOptions,
-              );
-            }),
+            collection.tokens.map(
+              (token: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
+                return designTokensCollectionTokenToCssVariableDeclaration(
+                  {
+                    ...token,
+                    type: collection.resolve(token).type,
+                    value: getTokenValueByTheme(token, theme),
+                  },
+                  cssOptions,
+                );
+              },
+            ),
           );
 
           await Promise.all([
@@ -135,7 +137,7 @@ export function buildTokens({
       for (const variant of DESIGN_TOKEN_VARIANTS) {
         await logger.asyncTask(`variant: ${variant}`, async (): Promise<void> => {
           const cssVariables: string = cssVariableDeclarationsToString(
-            tokens
+            collection.tokens
               .map(
                 (token: GenericDesignTokensCollectionToken): CssVariableDeclaration | undefined => {
                   const value: ValueOrCurlyReference<unknown> | undefined = getTokenValueByVariant(
@@ -148,7 +150,7 @@ export function buildTokens({
                     : designTokensCollectionTokenToCssVariableDeclaration(
                         {
                           ...token,
-                          type: baseCollection.resolve(token).type,
+                          type: collection.resolve(token).type,
                           value,
                         },
                         cssOptions,
@@ -220,14 +222,16 @@ export function buildTokens({
             name: `--*`,
             value: 'initial',
           },
-          ...tokens.map((token: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
-            return {
-              name: DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(token.name),
-              value: segmentsReferenceToCssVariableReference(token.name, cssOptions),
-              description: token.description,
-              deprecated: token.deprecated,
-            };
-          }),
+          ...collection.tokens.map(
+            (token: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
+              return {
+                name: DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(token.name),
+                value: segmentsReferenceToCssVariableReference(token.name, cssOptions),
+                description: token.description,
+                deprecated: token.deprecated,
+              };
+            },
+          ),
         ]);
 
         await Promise.all([
@@ -251,9 +255,9 @@ export function buildTokens({
       const t3FigmaCollectionName: string = 'Themes';
 
       // 1) group tokens by tiers (primitive, semantic, component)
-      const figmaCollection: DesignTokensCollection = baseCollection.clone();
+      const figmaCollection: DesignTokensCollection = collection.clone();
 
-      for (const token of tokens) {
+      for (const token of collection.tokens) {
         const tier: string | undefined = DESIGN_TOKEN_TIERS.find((tier: string): boolean => {
           return token.files.some((path: string): boolean => path.includes(tier));
         });
@@ -269,9 +273,6 @@ export function buildTokens({
           ...token.name,
         ]);
       }
-
-      const figmaCollectionTokens: readonly GenericDesignTokensCollectionToken[] =
-        figmaCollection.getMergedTokens();
 
       // 2) create figma tokens
       const figmaTokens: FigmaDesignTokensGroup = {};
@@ -312,7 +313,7 @@ export function buildTokens({
       };
 
       // 2.1) t1-primitive -> t1 tokens contain all the values, thus, they don't have alternative modes.
-      for (const token of figmaCollectionTokens) {
+      for (const token of figmaCollection.tokens) {
         if (token.name.at(0) === T1_DIRNAME) {
           insertFigmaDesignTokensTree(
             token.name,
@@ -331,7 +332,7 @@ export function buildTokens({
           DESIGN_TOKEN_THEMES.map((theme: string): NamedFigmaTokens => {
             const figmaTokens: FigmaDesignTokensGroup = {};
 
-            for (const token of figmaCollectionTokens) {
+            for (const token of figmaCollection.tokens) {
               if (token.name.at(0) === T2_DIRNAME) {
                 insertFigmaDesignTokensTree(
                   token.name,
@@ -358,7 +359,7 @@ export function buildTokens({
           DESIGN_TOKEN_VARIANTS.map((variant: string): NamedFigmaTokens => {
             const figmaTokens: FigmaDesignTokensGroup = {};
 
-            for (const token of figmaCollectionTokens) {
+            for (const token of figmaCollection.tokens) {
               if (token.name.at(0) === t3FigmaCollectionName) {
                 insertFigmaDesignTokensTree(
                   token.name,

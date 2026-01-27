@@ -118,6 +118,10 @@ The npm package contains a `tailwind.css` file that you can import and use in yo
   rel="stylesheet"
   href="src/styles/tailwind.css"
 />
+
+/* ... */
+
+<button class="bg-yellow-500">Click Me !</button>
 ```
 
 ## Scripts

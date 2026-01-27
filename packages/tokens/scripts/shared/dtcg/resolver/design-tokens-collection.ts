@@ -80,10 +80,27 @@ export class DesignTokensCollection {
       : (token: GenericDesignTokensCollectionToken): boolean => token === input;
   }
 
+  static #useInputTokens: boolean = false;
+
+  static #new(tokens: GenericDesignTokensCollectionToken[]): DesignTokensCollection {
+    this.#useInputTokens = true;
+    try {
+      return new DesignTokensCollection(tokens);
+    } finally {
+      this.#useInputTokens = false;
+    }
+  }
+
   readonly #tokens: GenericDesignTokensCollectionToken[];
 
-  constructor(tokens?: Iterable<GenericDesignTokensCollectionToken>) {
-    this.#tokens = tokens === undefined ? [] : Array.from(tokens);
+  constructor(
+    tokens?: Iterable<GenericDesignTokensCollectionToken> | GenericDesignTokensCollectionToken[],
+  ) {
+    this.#tokens = DesignTokensCollection.#useInputTokens
+      ? (tokens as GenericDesignTokensCollectionToken[])
+      : tokens === undefined
+        ? []
+        : Array.from(tokens);
   }
 
   /* FROM */
@@ -197,11 +214,11 @@ export class DesignTokensCollection {
    * Retrieves all tokens from the collection.
    *
    * Note: this list may contain duplicate tokens, as tokens with the same name can be defined multiple times in different files.
-   * Use `getMergedToken` if you want a consolidated list of unique tokens.
+   * Use `mergeToken` if you want a consolidated list of unique tokens.
    *
    * @return {readonly GenericDesignTokensCollectionToken[]} An array of all tokens in the collection.
    */
-  get allTokens(): readonly GenericDesignTokensCollectionToken[] {
+  get tokens(): readonly GenericDesignTokensCollectionToken[] {
     return this.#tokens;
   }
 
@@ -454,20 +471,27 @@ export class DesignTokensCollection {
     }
   }
 
-  /* LIST */
+  /* OPERATIONS */
 
   /**
-   * Returns a list of _merged_ design tokens:
+   * Merges tokens in the collection by consolidating tokens with identical names.
+   * Combined properties will be deduplicated or updated based on precedence rules.
    *
-   * Starts from first to last, then, for each unique token (identified by their name), get all tokens with the same name and merge their properties (most recent ones overload earlier ones).
+   * Specifically:
    *
-   * @return {GenericDesignTokensCollectionToken[]} An array of merged tokens, where redundant properties are consolidated, and undefined properties are populated with values from matching earlier tokens.
+   * - the `files` properties are concatenated.
+   * - `type`, `value` and `description` will be set to the non-null value of the latest token when applicable
+   * - the `extensions` property will combine objects if present, with properties from the later tokens overwriting earlier ones).
+   *
+   * This process removes all individually iterated tokens and replaces them with a new consolidated set.
+   *
+   * @returns {this} The instance of the class, allowing for method chaining.
    */
-  getMergedTokens(): GenericDesignTokensCollectionToken[] {
-    const tokens: GenericDesignTokensCollectionToken[] = [];
+  mergeTokens(): this {
+    const length: number = this.#tokens.length;
     const done: Set<CurlyReference> = new Set<CurlyReference>();
 
-    for (let i: number = 0; i < this.#tokens.length; i++) {
+    for (let i: number = 0; i < length; i++) {
       let {
         files,
         name,
@@ -485,7 +509,7 @@ export class DesignTokensCollection {
       }
       done.add(nameAsCurlyReference);
 
-      for (let j: number = i + 1; j < this.#tokens.length; j++) {
+      for (let j: number = i + 1; j < length; j++) {
         const {
           files: superFiles,
           name: superName,
@@ -513,7 +537,7 @@ export class DesignTokensCollection {
         }
       }
 
-      tokens.push(
+      this.#tokens.push(
         removeUndefinedProperties({
           files: Array.from(new Set(files)),
           name,
@@ -526,24 +550,10 @@ export class DesignTokensCollection {
       );
     }
 
-    return tokens;
-  }
+    this.#tokens.splice(0, length);
 
-  /**
-   * Resolves and returns a collection of design tokens by processing merged tokens and mapping each token
-   * to its resolved form.
-   *
-   * @return {GenericResolvedDesignTokensCollectionToken[]} An array containing resolved design tokens.
-   */
-  getResolvedTokens(): GenericResolvedDesignTokensCollectionToken[] {
-    return this.getMergedTokens().map(
-      (token: GenericDesignTokensCollectionToken): GenericResolvedDesignTokensCollectionToken => {
-        return this.resolve(token);
-      },
-    );
+    return this;
   }
-
-  /* OPERATIONS */
 
   /**
    * Renames a design token by updating its name and any references to it within the tokens collection.
@@ -625,7 +635,7 @@ export class DesignTokensCollection {
   }
 
   clone(): DesignTokensCollection {
-    return new DesignTokensCollection(this.#tokens);
+    return DesignTokensCollection.#new(this.#tokens.slice());
   }
 }
 
