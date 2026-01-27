@@ -53,7 +53,76 @@ Each t2 and t3 may _optionaly_ have a `variant` property present into the `$exte
 
 For each variant, only the tokens having this variant are generated into a dedicated file, used to locally apply a style to the components or elements.
 
+## Outputs
+
+### Web
+
+The tokens are published as a npm package: `@infomaniak-design-system/tokens`.
+
+#### CSS
+
+CSS files follow this naming convention: `css/(themes|variants)/[name].(theme|variant)(.attr)?.css`
+
+By default (without `.attr`), the tokens are wrapped by a `:root, :host` selector (style is applyed globally or scoped to a custom element).
+
+However, you can also use `.attr` in the file name to get the tokens wrapped by an attribute selector:
+
+- for a `theme` (ex: `light.theme.attr.css`): `[data-theme="light"]`
+- for a `varian` (ex: `mail.variant.attr.css`): `[data-variant~="mail"]`
+
+It may be useful to use this feature to apply a style to an element instead of the global page:
+
+```html
+<button data-variant="mail, small">Mail button (small)</button>
+```
+
+You may import the CSS files as you prefer, but here's an example of how to use them:
+
+```css
+/* src/styles/themes/light.css */
+@import '@infomaniak-design-system/tokens/css/themes/light.theme.css';
+```
+
+```css
+/* src/styles/themes/dark.css */
+@import '@infomaniak-design-system/tokens/css/themes/dark.theme.css';
+```
+
+```html
+<!-- index.html -->
+<link
+  rel="stylesheet"
+  href="src/styles/themes/light.css"
+  media="(prefers-color-scheme: light)"
+/>
+<link
+  rel="stylesheet"
+  href="src/styles/themes/dark.css"
+  media="(prefers-color-scheme: dark)"
+/>
+```
+
+#### Tailwind
+
+The npm package contains a `tailwind.css` file that you can import and use in your Tailwind project:
+
+```css
+/* src/styles/tailwind.css */
+@import 'tailwindcss';
+@import '@infomaniak-design-system/tokens/tailwind.css';
+```
+
+```html
+<!-- index.html -->
+<link
+  rel="stylesheet"
+  href="src/styles/tailwind.css"
+/>
+```
+
 ## Scripts
+
+TODO
 
 ## Import tokens into figma
 
