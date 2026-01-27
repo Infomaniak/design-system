@@ -111,7 +111,7 @@ export class DesignTokensCollection {
    * Then, it extracts the design tokens and appends them to this collection.
    *
    * @param {Iterable<string>} sources - An iterable collection of file paths (glob) to be processed.
-   * @return {Promise<this>} A promise that resolves with the current instance for method chaining.
+   * @returns {Promise<this>} A promise that resolves with the current instance for method chaining.
    */
   async fromFiles(sources: Iterable<string>): Promise<this> {
     for (const path of sources) {
@@ -137,7 +137,7 @@ export class DesignTokensCollection {
    *
    * @param {DesignTokensTree} root - The root node of the design tokens tree to process.
    * @param {string} [files] - An optional list of files associated with the design tokens tree.
-   * @return {this} The current instance for method chaining.
+   * @returns {this} The current instance for method chaining.
    */
   fromDesignTokensTree(root: DesignTokensTree, files: readonly string[] = []): this {
     this.#exploreDesignTokensTree(root, [], root, files);
@@ -216,7 +216,7 @@ export class DesignTokensCollection {
    * Note: this list may contain duplicate tokens, as tokens with the same name can be defined multiple times in different files.
    * Use `mergeToken` if you want a consolidated list of unique tokens.
    *
-   * @return {readonly GenericDesignTokensCollectionToken[]} An array of all tokens in the collection.
+   * @returns {readonly GenericDesignTokensCollectionToken[]} An array of all tokens in the collection.
    */
   get tokens(): readonly GenericDesignTokensCollectionToken[] {
     return this.#tokens;
@@ -226,7 +226,7 @@ export class DesignTokensCollection {
    * Appends a token to the collection and returns the current instance.
    *
    * @param {GenericDesignTokensCollectionToken} token The token to be added to the collection.
-   * @return {this} The current instance for method chaining.
+   * @returns {this} The current instance for method chaining.
    */
   append(token: GenericDesignTokensCollectionToken): this {
     this.#tokens.push(token);
@@ -238,7 +238,7 @@ export class DesignTokensCollection {
    * Adds a given token to the collection after removing any existing token with the same name.
    *
    * @param {GenericDesignTokensCollectionToken} token - The token to be added to the collection.
-   * @return {this} The current instance for method chaining.
+   * @returns {this} The current instance for method chaining.
    */
   set(token: GenericDesignTokensCollectionToken): this {
     this.delete(token.name);
@@ -251,7 +251,7 @@ export class DesignTokensCollection {
    * Checks if the collection contains a specific design token or token name.
    *
    * @param {DesignTokenNameLikeOrToken} nameOrToken - The token name or token instance to check for existence.
-   * @return {boolean} True if the token or token name exists in the collection, otherwise false.
+   * @returns {boolean} True if the token or token name exists in the collection, otherwise false.
    */
   has(nameOrToken: DesignTokenNameLikeOrToken): boolean {
     const predicate: DesignTokensCollectionTokenFilterFunction =
@@ -270,7 +270,7 @@ export class DesignTokensCollection {
    * Retrieves all tokens that match the specified design token name.
    *
    * @param {DesignTokenNameLike} name - The name or array of names to filter the tokens.
-   * @return {GenericDesignTokensCollectionToken[]} An array of tokens that match the specified name.
+   * @returns {GenericDesignTokensCollectionToken[]} An array of tokens that match the specified name.
    */
   getAll(name: DesignTokenNameLike): GenericDesignTokensCollectionToken[] {
     name = DesignTokensCollection.designTokenNameLikeToArray(name);
@@ -284,7 +284,7 @@ export class DesignTokensCollection {
    * Deletes the design token or tokens matching the provided name or token.
    *
    * @param {DesignTokenNameLikeOrToken} nameOrToken - A design token or an array representing the name of the token(s) to delete. It can either be a token object or a name-like structure.
-   * @return {number} The number of tokens deleted.
+   * @returns {number} The number of tokens deleted.
    */
   delete(nameOrToken: DesignTokenNameLikeOrToken): number {
     const predicate: DesignTokensCollectionTokenFilterFunction =
@@ -306,7 +306,7 @@ export class DesignTokensCollection {
   /**
    * Clears all tokens from the internal collection.
    *
-   * @return {this} The current instance for method chaining.
+   * @returns {this} The current instance for method chaining.
    */
   clear(): this {
     this.#tokens.length = 0;
@@ -321,7 +321,7 @@ export class DesignTokensCollection {
    * Note: the search is performed from last to first, and tokens with the selected name are aggregated to form one token with all properties merged.
    *
    * @param {DesignTokenNameLike} name - The name of the design token to retrieve.
-   * @return {GenericDesignTokensCollectionToken | undefined} The design token if found, or undefined if no matching token exists.
+   * @returns {GenericDesignTokensCollectionToken | undefined} The design token if found, or undefined if no matching token exists.
    */
   getOptional(name: DesignTokenNameLike): GenericDesignTokensCollectionToken | undefined {
     const tokens: GenericDesignTokensCollectionToken[] = this.getAll(name);
@@ -378,7 +378,7 @@ export class DesignTokensCollection {
    * Note: the search is performed from last to first, and tokens with the selected name are aggregated to form one token with all properties merged.
    *
    * @param {DesignTokenNameLike} name - The design token name to retrieve.
-   * @return {GenericDesignTokensCollectionToken} The token associated with the provided name.
+   * @returns {GenericDesignTokensCollectionToken} The token associated with the provided name.
    * @throws {Error} If the token is not found.
    */
   get(name: DesignTokenNameLike): GenericDesignTokensCollectionToken {
@@ -397,7 +397,7 @@ export class DesignTokensCollection {
    * Resolves a design token to its final value by following references and merging properties.
    *
    * @param {GenericDesignTokensCollectionToken} token - The design token to resolve.
-   * @return {GenericDesignTokensCollectionToken} The fully resolved design token, including its value, properties, and resolution trace.
+   * @returns {GenericDesignTokensCollectionToken} The fully resolved design token, including its value, properties, and resolution trace.
    * @throws {Error} If a circular reference is detected or if the token cannot be found.
    */
   resolve(token: GenericDesignTokensCollectionToken): GenericResolvedDesignTokensCollectionToken {
@@ -561,7 +561,7 @@ export class DesignTokensCollection {
    * @param {DesignTokenNameLike} from - The current name of the design token.
    * @param {DesignTokenNameLike} to - The new name to assign to the design token.
    * @param {DesignTokensCollectionRenameOptions} options - Extra options.
-   * @return {void} This method does not return anything but updates the relevant tokens' names and references in-place.
+   * @returns {void} This method does not return anything but updates the relevant tokens' names and references in-place.
    */
   rename(
     from: DesignTokenNameLike,
