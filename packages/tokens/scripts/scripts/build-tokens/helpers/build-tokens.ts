@@ -2,13 +2,8 @@ import { writeFileSafe } from '../../../../../../scripts/helpers/file/write-file
 import type { Logger } from '../../../../../../scripts/helpers/log/logger.ts';
 import { setObjectDeepProperty } from '../../../../../../scripts/helpers/misc/object/set-object-deep-property.ts';
 import { removeTrailingSlash } from '../../../../../../scripts/helpers/path/remove-traling-slash.ts';
-import type { UpdateCurlyReference } from '../../../shared/dtcg/design-token/reference/types/curly/update/update-curly-reference.ts';
-import { updateValueOrCurlyReference } from '../../../shared/dtcg/design-token/reference/types/curly/value-or/update/update-value-or-curly-reference.ts';
 import type { ValueOrCurlyReference } from '../../../shared/dtcg/design-token/reference/types/curly/value-or/value-or-curly-reference.ts';
-import {
-  DesignTokensCollection,
-  type DesignTokensCollectionRenameOptions,
-} from '../../../shared/dtcg/resolver/design-tokens-collection.ts';
+import { DesignTokensCollection } from '../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { CssVariableDeclaration } from '../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
 import { cssVariableDeclarationsToString } from '../../../shared/dtcg/resolver/to/css/css-variable-declaration/to/css-variable-declarations-to-string.ts';
 import { wrapCssVariableDeclarationsWithCssSelector } from '../../../shared/dtcg/resolver/to/css/css-variable-declaration/to/wrap-css-variable-declarations-with-css-selector.ts';
@@ -21,10 +16,7 @@ import { createCssVariableNameGenerator } from '../../../shared/dtcg/resolver/to
 import { DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION } from '../../../shared/dtcg/resolver/to/css/token/name/default-generate-css-variable-name-function.ts';
 import type { FigmaDesignTokensGroup } from '../../../shared/dtcg/resolver/to/figma/figma/group/figma-design-tokens-group.ts';
 import { designTokensCollectionTokenToFigmaDesignTokensTree } from '../../../shared/dtcg/resolver/to/figma/token/design-tokens-collection-token-to-figma-design-tokens-tree.ts';
-import type {
-  DesignTokensCollectionTokenExtensions,
-  GenericDesignTokensCollectionToken,
-} from '../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
+import type { GenericDesignTokensCollectionToken } from '../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
 import {
   mergeFigmaDesignTokensTreesAsModes,
@@ -258,41 +250,6 @@ export function buildTokens({
       // 1) group tokens by tiers (primitive, semantic, component)
       const figmaCollection: DesignTokensCollection = baseCollection.clone();
 
-      const renameOptions: DesignTokensCollectionRenameOptions = {
-        mapExtensions: (
-          { theme, variant, ...extensions }: DesignTokensCollectionTokenExtensions,
-          update: UpdateCurlyReference,
-        ): DesignTokensCollectionTokenExtensions => {
-          if (theme !== undefined) {
-            extensions = {
-              ...extensions,
-              theme: Object.fromEntries(
-                Object.entries(theme as Record<string, ValueOrCurlyReference<unknown>>).map(
-                  ([name, value]): [name: string, value: ValueOrCurlyReference<unknown>] => {
-                    return [name, updateValueOrCurlyReference(value, update)];
-                  },
-                ),
-              ),
-            };
-          }
-
-          if (variant !== undefined) {
-            extensions = {
-              ...extensions,
-              variant: Object.fromEntries(
-                Object.entries(variant as Record<string, ValueOrCurlyReference<unknown>>).map(
-                  ([name, value]): [name: string, value: ValueOrCurlyReference<unknown>] => {
-                    return [name, updateValueOrCurlyReference(value, update)];
-                  },
-                ),
-              ),
-            };
-          }
-
-          return extensions;
-        },
-      };
-
       for (const token of tokens) {
         const tier: string | undefined = DESIGN_TOKEN_TIERS.find((tier: string): boolean => {
           return token.files.some((path: string): boolean => path.includes(tier));
@@ -304,7 +261,7 @@ export function buildTokens({
           );
         }
 
-        figmaCollection.rename(token.name, [tier, ...token.name], renameOptions);
+        figmaCollection.rename(token.name, [tier, ...token.name]);
       }
 
       const figmaCollectionTokens: readonly GenericDesignTokensCollectionToken[] =
@@ -327,7 +284,7 @@ export function buildTokens({
         }
       }
 
-      // 2.2) t2-semantic -> t2 tokens contain themes, thus, they need to be merged (as modes).
+      // 2.2) t2-semantic -> t2 tokens contain themes; thus, they need to be merged (as modes).
       Object.assign(
         figmaTokens,
         mergeFigmaDesignTokensTreesAsModes(
@@ -355,7 +312,7 @@ export function buildTokens({
         ),
       );
 
-      // 2.3) t3-component -> t2 tokens contain variants, thus, they need to be merged (as modes).
+      // 2.3) t3-component -> t2 tokens contain variants; thus, they need to be merged (as modes).
       Object.assign(
         figmaTokens,
         mergeFigmaDesignTokensTreesAsModes(
@@ -364,9 +321,8 @@ export function buildTokens({
 
             for (const token of figmaCollectionTokens) {
               if (token.name.at(0) === T3_DIRNAME) {
-                // TODO await support fot $root
                 const name: ArrayDesignTokenName =
-                  token.name.at(-1) === '$root' ? [...token.name.slice(0, -1), 'root'] : token.name;
+                  token.name.at(-1) === '$root' ? token.name.slice(0, -1) : token.name;
 
                 setObjectDeepProperty(
                   figmaTokens,

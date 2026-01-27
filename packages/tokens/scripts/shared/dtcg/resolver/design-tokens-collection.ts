@@ -33,13 +33,8 @@ import { isTransitionDesignTokensCollectionToken } from './token/types/composite
 import { updateTransitionDesignTokensCollectionTokenValueReferences } from './token/types/composite/transition/value/update/update-transition-design-tokens-collection-token-value-references.ts';
 import { isTypographyDesignTokensCollectionToken } from './token/types/composite/typography/is-typography-design-tokens-collection-token.ts';
 import { updateTypographyDesignTokensCollectionTokenValueReferences } from './token/types/composite/typography/value/update/update-typography-design-tokens-collection-token-value-references.ts';
-
-export interface DesignTokensCollectionRenameOptions {
-  readonly mapExtensions?: (
-    extensions: DesignTokensCollectionTokenExtensions,
-    update: UpdateCurlyReference,
-  ) => DesignTokensCollectionTokenExtensions;
-}
+import { designTokensCollectionRenameExtensionsAutomatically } from './types/methods/rename/design-tokens-collection-rename-extensions-function.ts';
+import type { DesignTokensCollectionRenameOptions } from './types/methods/rename/design-tokens-collection-rename-options.ts';
 
 /**
  * The `DesignTokensCollection` class provides utilities to manage, resolve, and manipulate
@@ -561,7 +556,9 @@ export class DesignTokensCollection {
   rename(
     from: DesignTokenNameLike,
     to: DesignTokenNameLike,
-    { mapExtensions }: DesignTokensCollectionRenameOptions = {},
+    {
+      extensions: renameExtensions = designTokensCollectionRenameExtensionsAutomatically,
+    }: DesignTokensCollectionRenameOptions = {},
   ): void {
     from = DesignTokensCollection.designTokenNameLikeToArray(from);
     to = DesignTokensCollection.designTokenNameLikeToArray(to);
@@ -612,8 +609,8 @@ export class DesignTokensCollection {
         }
       }
 
-      if (extensions !== undefined && mapExtensions !== undefined) {
-        extensions = mapExtensions(extensions, update);
+      if (extensions !== undefined) {
+        extensions = renameExtensions(extensions, update);
       }
 
       if (name !== token.name || value !== token.value || extensions !== token.extensions) {
