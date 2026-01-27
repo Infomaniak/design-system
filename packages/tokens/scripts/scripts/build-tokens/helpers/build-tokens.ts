@@ -1,8 +1,8 @@
 import { writeFileSafe } from '../../../../../../scripts/helpers/file/write-file-safe.ts';
 import type { Logger } from '../../../../../../scripts/helpers/log/logger.ts';
-import { setObjectDeepProperty } from '../../../../../../scripts/helpers/misc/object/set-object-deep-property.ts';
 import { removeTrailingSlash } from '../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import type { ValueOrCurlyReference } from '../../../shared/dtcg/design-token/reference/types/curly/value-or/value-or-curly-reference.ts';
+import { isDesignToken } from '../../../shared/dtcg/design-token/token/is-design-token.ts';
 import { DesignTokensCollection } from '../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { CssVariableDeclaration } from '../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
 import { cssVariableDeclarationsToString } from '../../../shared/dtcg/resolver/to/css/css-variable-declaration/to/css-variable-declarations-to-string.ts';
@@ -15,6 +15,7 @@ import {
 import { createCssVariableNameGenerator } from '../../../shared/dtcg/resolver/to/css/token/name/create-css-variable-name-generator.ts';
 import { DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION } from '../../../shared/dtcg/resolver/to/css/token/name/default-generate-css-variable-name-function.ts';
 import type { FigmaDesignTokensGroup } from '../../../shared/dtcg/resolver/to/figma/figma/group/figma-design-tokens-group.ts';
+import type { FigmaDesignTokensTree } from '../../../shared/dtcg/resolver/to/figma/figma/tree/figma-design-tokens-tree.ts';
 import { designTokensCollectionTokenToFigmaDesignTokensTree } from '../../../shared/dtcg/resolver/to/figma/token/design-tokens-collection-token-to-figma-design-tokens-tree.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
@@ -247,6 +248,8 @@ export function buildTokens({
 
     // FIGMA
     await logger.asyncTask('figma', async (): Promise<void> => {
+      const t3FigmaCollectionName: string = 'Themes';
+
       // 1) group tokens by tiers (primitive, semantic, component)
       const figmaCollection: DesignTokensCollection = baseCollection.clone();
 
@@ -261,7 +264,10 @@ export function buildTokens({
           );
         }
 
-        figmaCollection.rename(token.name, [tier, ...token.name]);
+        figmaCollection.rename(token.name, [
+          tier === T3_DIRNAME ? t3FigmaCollectionName : tier,
+          ...token.name,
+        ]);
       }
 
       const figmaCollectionTokens: readonly GenericDesignTokensCollectionToken[] =
@@ -270,11 +276,45 @@ export function buildTokens({
       // 2) create figma tokens
       const figmaTokens: FigmaDesignTokensGroup = {};
 
+      const insertFigmaDesignTokensTree = (
+        name: ArrayDesignTokenName,
+        value: FigmaDesignTokensTree,
+      ): void => {
+        if (name.length === 0) {
+          throw new Error('Cannot set property on root');
+        }
+
+        let node: any = figmaTokens;
+
+        for (let i: number = 0; i < name.length; i++) {
+          const segment: PropertyKey = name[i];
+
+          if (isDesignToken(node)) {
+            const $root: any = { ...node };
+            for (const key of Object.keys(node)) {
+              Reflect.deleteProperty(node, key);
+            }
+            Reflect.set(node, 'root', $root);
+          }
+
+          if (i === name.length - 1) {
+            Reflect.set(node, segment, value);
+          } else {
+            if (Reflect.has(node, segment)) {
+              node = Reflect.get(node, segment);
+            } else {
+              const next: any = {};
+              Reflect.set(node, segment, next);
+              node = next;
+            }
+          }
+        }
+      };
+
       // 2.1) t1-primitive -> t1 tokens contain all the values, thus, they don't have alternative modes.
       for (const token of figmaCollectionTokens) {
         if (token.name.at(0) === T1_DIRNAME) {
-          setObjectDeepProperty(
-            figmaTokens,
+          insertFigmaDesignTokensTree(
             token.name,
             designTokensCollectionTokenToFigmaDesignTokensTree(
               token,
@@ -293,8 +333,7 @@ export function buildTokens({
 
             for (const token of figmaCollectionTokens) {
               if (token.name.at(0) === T2_DIRNAME) {
-                setObjectDeepProperty(
-                  figmaTokens,
+                insertFigmaDesignTokensTree(
                   token.name,
                   designTokensCollectionTokenToFigmaDesignTokensTree(
                     {
@@ -312,7 +351,7 @@ export function buildTokens({
         ),
       );
 
-      // 2.3) t3-component -> t2 tokens contain variants; thus, they need to be merged (as modes).
+      // 2.3) t3-component -> t3 tokens contain variants; thus, they need to be merged (as modes).
       Object.assign(
         figmaTokens,
         mergeFigmaDesignTokensTreesAsModes(
@@ -320,13 +359,9 @@ export function buildTokens({
             const figmaTokens: FigmaDesignTokensGroup = {};
 
             for (const token of figmaCollectionTokens) {
-              if (token.name.at(0) === T3_DIRNAME) {
-                const name: ArrayDesignTokenName =
-                  token.name.at(-1) === '$root' ? token.name.slice(0, -1) : token.name;
-
-                setObjectDeepProperty(
-                  figmaTokens,
-                  name,
+              if (token.name.at(0) === t3FigmaCollectionName) {
+                insertFigmaDesignTokensTree(
+                  token.name,
                   designTokensCollectionTokenToFigmaDesignTokensTree(
                     {
                       ...token,

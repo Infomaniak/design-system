@@ -140,7 +140,7 @@ export class DesignTokensCollection {
       if (isDesignTokenReference($value)) {
         this.append({
           files,
-          name: path,
+          name: path.at(-1) === '$root' ? path.slice(0, -1) : path,
           value: designTokenReferenceToCurlyReference($value),
           ...removeUndefinedProperties({
             type: $type,

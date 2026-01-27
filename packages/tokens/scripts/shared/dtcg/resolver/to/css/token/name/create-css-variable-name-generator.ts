@@ -8,6 +8,7 @@ export function createCssVariableNameGenerator(
     prefix = `${prefix}-`;
   }
   return (name: ArrayDesignTokenName): string => {
-    return `--${prefix}${(name.at(-1) === '$root' ? name.slice(0, -1) : name).join('-')}`;
+    // return `--${prefix}${(name.at(-1) === '$root' ? name.slice(0, -1) : name).join('-')}`;
+    return `--${prefix}${name.join('-')}`;
   };
 }
