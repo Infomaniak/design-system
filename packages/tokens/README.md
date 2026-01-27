@@ -73,7 +73,7 @@ However, you can also use `.attr` in the file name to get the tokens wrapped by 
 It may be useful to use this feature to apply a style to an element instead of the global page:
 
 ```html
-<button data-variant="mail, small">Mail button (small)</button>
+<button data-variant="mail small">Mail button (small)</button>
 ```
 
 You may import the CSS files as you prefer, but here's an example of how to use them:
