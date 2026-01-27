@@ -29,54 +29,57 @@ export function publishTokens({
     `publish-tokens (${mode})`,
     async (logger: Logger): Promise<PublishTokensResult> => {
       return {
-        npm: await logger.asyncTask('npm', async (): Promise<PublishTokensNpmResult> => {
-          const webPackageDirectory: string = join(outputDirectory, 'web');
-          const webPackageFile: string = join(webPackageDirectory, 'package.json');
+        npm: await logger.asyncTask(
+          'npm',
+          async (logger: Logger): Promise<PublishTokensNpmResult> => {
+            const webPackageDirectory: string = join(outputDirectory, 'web');
+            const webPackageFile: string = join(webPackageDirectory, 'package.json');
 
-          const packageJsonContent: any = await readJsonFile(webPackageFile);
+            const packageJsonContent: any = await readJsonFile(webPackageFile);
 
-          const args: string[] = [
-            '--//registry.npmjs.org/:_authToken=$NPM_TOKEN',
-            'publish',
-            '--access',
-            'public',
-          ];
+            const args: string[] = [
+              '--//registry.npmjs.org/:_authToken=$NPM_TOKEN',
+              'publish',
+              '--access',
+              'public',
+            ];
 
-          let version: string;
+            let version: string;
 
-          if (mode === 'dev') {
-            if (packageJsonContent.version.includes('-')) {
-              throw new Error(`Invalid version: ${packageJsonContent.version}.`);
-            }
-
-            version = `${packageJsonContent.version}-dev.${Date.now()}`;
-
-            await writeJsonFileSafe(webPackageFile, {
-              ...packageJsonContent,
-              version,
-            });
-
-            args.push('--tag', 'dev');
-          } else {
-            version = packageJsonContent.version;
-          }
-
-          try {
-            await execCommandInherit(logger, 'npm', args, {
-              shell: true,
-              env: process.env,
-              cwd: resolve(webPackageDirectory),
-            });
-
-            return {
-              version,
-            };
-          } finally {
             if (mode === 'dev') {
-              await writeJsonFileSafe(webPackageFile, packageJsonContent);
+              if (packageJsonContent.version.includes('-')) {
+                throw new Error(`Invalid version: ${packageJsonContent.version}.`);
+              }
+
+              version = `${packageJsonContent.version}-dev.${Date.now()}`;
+
+              await writeJsonFileSafe(webPackageFile, {
+                ...packageJsonContent,
+                version,
+              });
+
+              args.push('--tag', 'dev');
+            } else {
+              version = packageJsonContent.version;
             }
-          }
-        }),
+
+            try {
+              await execCommandInherit(logger, 'npm', args, {
+                shell: true,
+                env: process.env,
+                cwd: resolve(webPackageDirectory),
+              });
+
+              return {
+                version,
+              };
+            } finally {
+              if (mode === 'dev') {
+                await writeJsonFileSafe(webPackageFile, packageJsonContent);
+              }
+            }
+          },
+        ),
       };
     },
   );
