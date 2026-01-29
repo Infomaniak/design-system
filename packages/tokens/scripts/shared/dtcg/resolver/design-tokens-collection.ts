@@ -35,6 +35,7 @@ import { isTypographyDesignTokensCollectionToken } from './token/types/composite
 import { updateTypographyDesignTokensCollectionTokenValueReferences } from './token/types/composite/typography/value/update/update-typography-design-tokens-collection-token-value-references.ts';
 import { designTokensCollectionRenameExtensionsAutomatically } from './types/methods/rename/design-tokens-collection-rename-extensions-function.ts';
 import type { DesignTokensCollectionRenameOptions } from './types/methods/rename/design-tokens-collection-rename-options.ts';
+import type { DesignTokensCollectionSetOptions } from './types/methods/set/design-tokens-collection-set-options.ts';
 
 /**
  * Represents a collection of design tokens and provides utility methods for
@@ -78,7 +79,7 @@ export class DesignTokensCollection {
    *
    * @param {GenericDesignTokensCollectionToken} baseToken - The base token to merge from.
    * @param {GenericDesignTokensCollectionToken} patchToken - The patch token with properties to override or add.
-   * @return {GenericDesignTokensCollectionToken} A new token containing merged properties from the baseToken and patchToken.
+   * @returns {GenericDesignTokensCollectionToken} A new token containing merged properties from the baseToken and patchToken.
    */
   static mergeTokens(
     baseToken: GenericDesignTokensCollectionToken,
@@ -132,7 +133,7 @@ export class DesignTokensCollection {
 
     if (tokens !== undefined) {
       for (const token of tokens) {
-        this.append(token);
+        this.set(token);
       }
     }
   }
@@ -164,12 +165,16 @@ export class DesignTokensCollection {
   /**
    * Appends a token to the collection and returns the current instance.
    *
-   * If a token already exists with the same name, it is merged with the new token.
+   * If `merged` is true (default) and a token already exists with the same name, it is merged with the new token.
    *
    * @param {GenericDesignTokensCollectionToken} token The token to be added to the collection.
+   * @param {DesignTokensCollectionSetOptions} [options] The options to use when inserting the token.
    * @returns {this} The current instance for method chaining.
    */
-  append(token: GenericDesignTokensCollectionToken): this {
+  set(
+    token: GenericDesignTokensCollectionToken,
+    { merge = true }: DesignTokensCollectionSetOptions = {},
+  ): this {
     const key: string = DesignTokensCollection.#arrayDesignTokenNameToStringKey(token.name);
     const existingToken: GenericDesignTokensCollectionToken | undefined = this.#tokens.get(key);
 
@@ -178,23 +183,11 @@ export class DesignTokensCollection {
     } else {
       // delete token to put it as "last"
       this.#tokens.delete(key);
-      this.#tokens.set(key, DesignTokensCollection.mergeTokens(existingToken, token));
+      this.#tokens.set(
+        key,
+        merge ? DesignTokensCollection.mergeTokens(existingToken, token) : token,
+      );
     }
-
-    return this;
-  }
-
-  /**
-   * Adds a given token to the collection after removing any existing token with the same name.
-   *
-   * @param {GenericDesignTokensCollectionToken} token - The token to be added to the collection.
-   * @returns {this} The current instance for method chaining.
-   */
-  set(token: GenericDesignTokensCollectionToken): this {
-    const key: string = DesignTokensCollection.#arrayDesignTokenNameToStringKey(token.name);
-    // delete token to put it as "last"
-    this.#tokens.delete(key);
-    this.#tokens.set(key, token);
 
     return this;
   }
@@ -314,7 +307,7 @@ export class DesignTokensCollection {
       const name: ArrayDesignTokenName = path.at(-1) === '$root' ? path.slice(0, -1) : path;
 
       if (isDesignTokenReference($value)) {
-        this.append({
+        this.set({
           files,
           name,
           value: designTokenReferenceToCurlyReference($value),
@@ -330,7 +323,7 @@ export class DesignTokensCollection {
           throw new Error('Unable to resolve $type.');
         }
 
-        this.append({
+        this.set({
           files,
           name,
           type: $type,
