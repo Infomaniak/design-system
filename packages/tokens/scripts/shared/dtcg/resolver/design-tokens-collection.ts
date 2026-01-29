@@ -33,9 +33,9 @@ import { isTransitionDesignTokensCollectionToken } from './token/types/composite
 import { updateTransitionDesignTokensCollectionTokenValueReferences } from './token/types/composite/transition/value/update/update-transition-design-tokens-collection-token-value-references.ts';
 import { isTypographyDesignTokensCollectionToken } from './token/types/composite/typography/is-typography-design-tokens-collection-token.ts';
 import { updateTypographyDesignTokensCollectionTokenValueReferences } from './token/types/composite/typography/value/update/update-typography-design-tokens-collection-token-value-references.ts';
+import type { DesignTokensCollectionAddOptions } from './types/methods/add/design-tokens-collection-add-options.ts';
 import { designTokensCollectionRenameExtensionsAutomatically } from './types/methods/rename/design-tokens-collection-rename-extensions-function.ts';
 import type { DesignTokensCollectionRenameOptions } from './types/methods/rename/design-tokens-collection-rename-options.ts';
-import type { DesignTokensCollectionSetOptions } from './types/methods/set/design-tokens-collection-set-options.ts';
 
 /**
  * Represents a collection of design tokens and provides utility methods for
@@ -133,12 +133,12 @@ export class DesignTokensCollection {
 
     if (tokens !== undefined) {
       for (const token of tokens) {
-        this.set(token);
+        this.add(token);
       }
     }
   }
 
-  /* MAP */
+  /* MAP/SET BEHAVIOUR */
 
   get size(): number {
     return this.#tokens.size;
@@ -163,17 +163,17 @@ export class DesignTokensCollection {
   }
 
   /**
-   * Appends a token to the collection and returns the current instance.
+   * Adds a token to the collection and returns the current instance.
    *
    * If `merged` is true (default) and a token already exists with the same name, it is merged with the new token.
    *
    * @param {GenericDesignTokensCollectionToken} token The token to be added to the collection.
-   * @param {DesignTokensCollectionSetOptions} [options] The options to use when inserting the token.
+   * @param {DesignTokensCollectionAddOptions} [options] The options to use when inserting the token.
    * @returns {this} The current instance for method chaining.
    */
-  set(
+  add(
     token: GenericDesignTokensCollectionToken,
-    { merge = true }: DesignTokensCollectionSetOptions = {},
+    { merge = true }: DesignTokensCollectionAddOptions = {},
   ): this {
     const key: string = DesignTokensCollection.#arrayDesignTokenNameToStringKey(token.name);
     const existingToken: GenericDesignTokensCollectionToken | undefined = this.#tokens.get(key);
@@ -307,7 +307,7 @@ export class DesignTokensCollection {
       const name: ArrayDesignTokenName = path.at(-1) === '$root' ? path.slice(0, -1) : path;
 
       if (isDesignTokenReference($value)) {
-        this.set({
+        this.add({
           files,
           name,
           value: designTokenReferenceToCurlyReference($value),
@@ -323,7 +323,7 @@ export class DesignTokensCollection {
           throw new Error('Unable to resolve $type.');
         }
 
-        this.set({
+        this.add({
           files,
           name,
           type: $type,
