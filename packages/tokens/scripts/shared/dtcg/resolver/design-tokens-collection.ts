@@ -15,11 +15,11 @@ import type {
   DesignTokensCollectionTokenExtensions,
   DesignTokensCollectionTokenWithType,
   GenericDesignTokensCollectionToken,
+  GenericDesignTokensCollectionTokenWithType,
   GenericResolvedDesignTokensCollectionToken,
 } from './token/design-tokens-collection-token.ts';
 import { designTokenValueToDesignTokensCollectionTokenValue } from './token/from/design-token-value-to-design-tokens-collection-token-value.ts';
 import type { ArrayDesignTokenName } from './token/name/array-design-token-name.ts';
-import type { DesignTokenNameLikeOrToken } from './token/name/design-token-name-like-or-token.ts';
 import type { DesignTokenNameLike } from './token/name/design-token-name-like.ts';
 import { isBorderDesignTokensCollectionToken } from './token/types/composite/border/is-border-design-tokens-collection-token.ts';
 import { updateBorderDesignTokensCollectionTokenValueReferences } from './token/types/composite/border/value/update/update-border-design-tokens-collection-token-value-references.ts';
@@ -37,11 +37,14 @@ import { designTokensCollectionRenameExtensionsAutomatically } from './types/met
 import type { DesignTokensCollectionRenameOptions } from './types/methods/rename/design-tokens-collection-rename-options.ts';
 
 /**
- * The `DesignTokensCollection` class provides utilities to manage, resolve, and manipulate
- * design tokens in a hierarchical structure. It includes methods to parse design tokens from
- * various sources, store them in a collection, and resolve their references and dependencies.
+ * Represents a collection of design tokens and provides utility methods for
+ * managing, merging, and querying tokens. Each token is uniquely identified
+ * within the collection, and operations such as retrieval, addition, deletion,
+ * and clearing are supported.
  */
 export class DesignTokensCollection {
+  /* NAME */
+
   static isCurlyReference(input: unknown): input is CurlyReference {
     return isCurlyReference(input);
   }
@@ -54,10 +57,56 @@ export class DesignTokensCollection {
     return segmentsReferenceToCurlyReference(input);
   }
 
-  static #tokenNamesEqual(a: ArrayDesignTokenName, b: ArrayDesignTokenName): boolean {
+  static designTokenNameLikeToArrayDesignTokenName(
+    input: DesignTokenNameLike,
+  ): ArrayDesignTokenName {
+    return typeof input === 'string' ? this.#stringDesignTokenNameToArray(input) : input;
+  }
+
+  static tokenNamesEqual(a: ArrayDesignTokenName, b: ArrayDesignTokenName): boolean {
     return (
       a.length === b.length &&
       a.every((token: string, index: number): boolean => token === b[index])
+    );
+  }
+
+  /* OPERATIONS */
+
+  /**
+   * Merges two GenericDesignTokensCollectionToken objects and returns a new token
+   * with combined and prioritized properties from both tokens.
+   *
+   * @param {GenericDesignTokensCollectionToken} baseToken - The base token to merge from.
+   * @param {GenericDesignTokensCollectionToken} patchToken - The patch token with properties to override or add.
+   * @return {GenericDesignTokensCollectionToken} A new token containing merged properties from the baseToken and patchToken.
+   */
+  static mergeTokens(
+    baseToken: GenericDesignTokensCollectionToken,
+    patchToken: GenericDesignTokensCollectionToken,
+  ): GenericDesignTokensCollectionToken {
+    return removeUndefinedProperties({
+      files: Array.from(new Set([...patchToken.files, ...baseToken.files])),
+      name: patchToken.name,
+      type: patchToken.type ?? baseToken.type,
+      value: patchToken.value,
+      description: patchToken.description ?? baseToken.description,
+      deprecated: patchToken.deprecated ?? baseToken.deprecated,
+      extensions:
+        patchToken.extensions === undefined
+          ? baseToken.extensions
+          : baseToken.extensions === undefined
+            ? patchToken.extensions
+            : { ...baseToken.extensions, ...patchToken.extensions },
+    });
+  }
+
+  static #arrayDesignTokenNameToStringKey(input: ArrayDesignTokenName): string {
+    return JSON.stringify(input);
+  }
+
+  static #designTokenNameLikeToStringKey(input: DesignTokenNameLike): string {
+    return this.#arrayDesignTokenNameToStringKey(
+      this.designTokenNameLikeToArrayDesignTokenName(input),
     );
   }
 
@@ -65,42 +114,150 @@ export class DesignTokensCollection {
     return isCurlyReference(input) ? curlyReferenceToSegmentsReference(input) : input.split('.');
   }
 
-  static designTokenNameLikeToArray(input: DesignTokenNameLike): ArrayDesignTokenName {
-    return typeof input === 'string' ? this.#stringDesignTokenNameToArray(input) : input;
-  }
+  static #newTokens: Map<string, GenericDesignTokensCollectionToken> | undefined;
 
-  static #designTokenNameLikeOrTokenToFilterFunction(
-    input: DesignTokenNameLikeOrToken,
-  ): DesignTokensCollectionTokenFilterFunction {
-    input = typeof input === 'string' ? this.#stringDesignTokenNameToArray(input) : input;
-
-    return Array.isArray(input)
-      ? (token: GenericDesignTokensCollectionToken): boolean =>
-          DesignTokensCollection.#tokenNamesEqual(token.name, input)
-      : (token: GenericDesignTokensCollectionToken): boolean => token === input;
-  }
-
-  static #useInputTokens: boolean = false;
-
-  static #new(tokens: GenericDesignTokensCollectionToken[]): DesignTokensCollection {
-    this.#useInputTokens = true;
+  static #new(tokens: Map<string, GenericDesignTokensCollectionToken>): DesignTokensCollection {
+    this.#newTokens = tokens;
     try {
-      return new DesignTokensCollection(tokens);
+      return new DesignTokensCollection();
     } finally {
-      this.#useInputTokens = false;
+      this.#newTokens = undefined;
     }
   }
 
-  readonly #tokens: GenericDesignTokensCollectionToken[];
+  readonly #tokens: Map<string, GenericDesignTokensCollectionToken>;
 
-  constructor(
-    tokens?: Iterable<GenericDesignTokensCollectionToken> | GenericDesignTokensCollectionToken[],
-  ) {
-    this.#tokens = DesignTokensCollection.#useInputTokens
-      ? (tokens as GenericDesignTokensCollectionToken[])
-      : tokens === undefined
-        ? []
-        : Array.from(tokens);
+  constructor(tokens?: Iterable<GenericDesignTokensCollectionToken>) {
+    this.#tokens = DesignTokensCollection.#newTokens ?? new Map();
+
+    if (tokens !== undefined) {
+      for (const token of tokens) {
+        this.append(token);
+      }
+    }
+  }
+
+  /* MAP */
+
+  get size(): number {
+    return this.#tokens.size;
+  }
+
+  /**
+   * Retrieves all tokens from the collection.
+   *
+   * @returns {IteratorObject<GenericDesignTokensCollectionToken>} An iterable of all tokens in the collection.
+   */
+  tokens(): IteratorObject<GenericDesignTokensCollectionToken> {
+    return this.#tokens.values();
+  }
+
+  /**
+   * Iterates over the collection.
+   *
+   * @alias tokens
+   */
+  [Symbol.iterator](): IteratorObject<GenericDesignTokensCollectionToken> {
+    return this.tokens();
+  }
+
+  /**
+   * Appends a token to the collection and returns the current instance.
+   *
+   * If a token already exists with the same name, it is merged with the new token.
+   *
+   * @param {GenericDesignTokensCollectionToken} token The token to be added to the collection.
+   * @returns {this} The current instance for method chaining.
+   */
+  append(token: GenericDesignTokensCollectionToken): this {
+    const key: string = DesignTokensCollection.#arrayDesignTokenNameToStringKey(token.name);
+    const existingToken: GenericDesignTokensCollectionToken | undefined = this.#tokens.get(key);
+
+    if (existingToken === undefined) {
+      this.#tokens.set(key, token);
+    } else {
+      // delete token to put it as "last"
+      this.#tokens.delete(key);
+      this.#tokens.set(key, DesignTokensCollection.mergeTokens(existingToken, token));
+    }
+
+    return this;
+  }
+
+  /**
+   * Adds a given token to the collection after removing any existing token with the same name.
+   *
+   * @param {GenericDesignTokensCollectionToken} token - The token to be added to the collection.
+   * @returns {this} The current instance for method chaining.
+   */
+  set(token: GenericDesignTokensCollectionToken): this {
+    const key: string = DesignTokensCollection.#arrayDesignTokenNameToStringKey(token.name);
+    // delete token to put it as "last"
+    this.#tokens.delete(key);
+    this.#tokens.set(key, token);
+
+    return this;
+  }
+
+  /**
+   * Checks if the collection contains a specific design token or token name.
+   *
+   * @param {DesignTokenNameLike} name - The token name to check for existence.
+   * @returns {boolean} True if the token or token name exists in the collection, otherwise false.
+   */
+  has(name: DesignTokenNameLike): boolean {
+    return this.#tokens.has(DesignTokensCollection.#designTokenNameLikeToStringKey(name));
+  }
+
+  /**
+   * Retrieves a GenericDesignTokensCollectionToken based on the provided design token name.
+   *
+   * Note: the search is performed from last to first, and tokens with the selected name are aggregated to form one token with all properties merged.
+   *
+   * @param {DesignTokenNameLike} name - The design token name to retrieve.
+   * @returns {GenericDesignTokensCollectionToken} The token associated with the provided name.
+   * @throws {Error} If the token is not found.
+   */
+  get(name: DesignTokenNameLike): GenericDesignTokensCollectionToken {
+    const token: GenericDesignTokensCollectionToken | undefined = this.getOptional(name);
+
+    if (token === undefined) {
+      throw new Error(
+        `Missing token: ${DesignTokensCollection.designTokenNameLikeToArrayDesignTokenName(name).join('.')}`,
+      );
+    } else {
+      return token;
+    }
+  }
+
+  /**
+   * Optionally retrieves a design token from the collection by its name.
+   *
+   * @param {DesignTokenNameLike} name - The name of the design token to retrieve.
+   * @returns {GenericDesignTokensCollectionToken | undefined} The design token if found, or undefined if no matching token exists.
+   */
+  getOptional(name: DesignTokenNameLike): GenericDesignTokensCollectionToken | undefined {
+    return this.#tokens.get(DesignTokensCollection.#designTokenNameLikeToStringKey(name));
+  }
+
+  /**
+   * Deletes a design token from its name.
+   *
+   * @param {DesignTokenNameLike} name - The name of the token to delete.
+   * @returns {boolean} If a token was deleted, returns true. Otherwise, returns false.
+   */
+  delete(name: DesignTokenNameLike): boolean {
+    return this.#tokens.delete(DesignTokensCollection.#designTokenNameLikeToStringKey(name));
+  }
+
+  /**
+   * Clears all tokens from the internal collection.
+   *
+   * @returns {this} The current instance for method chaining.
+   */
+  clear(): this {
+    this.#tokens.clear();
+    return this;
   }
 
   /* FROM */
@@ -154,10 +311,12 @@ export class DesignTokensCollection {
     if (isDesignToken(tree)) {
       const { $value, $type, $deprecated, $description, $extensions } = tree;
 
+      const name: ArrayDesignTokenName = path.at(-1) === '$root' ? path.slice(0, -1) : path;
+
       if (isDesignTokenReference($value)) {
         this.append({
           files,
-          name: path.at(-1) === '$root' ? path.slice(0, -1) : path,
+          name,
           value: designTokenReferenceToCurlyReference($value),
           ...removeUndefinedProperties({
             type: $type,
@@ -173,7 +332,7 @@ export class DesignTokensCollection {
 
         this.append({
           files,
-          name: path,
+          name,
           type: $type,
           value: designTokenValueToDesignTokensCollectionTokenValue($type, $value, root),
           ...removeUndefinedProperties({
@@ -204,194 +363,7 @@ export class DesignTokensCollection {
     }
   }
 
-  /* MAP */
-
-  get size(): number {
-    return this.#tokens.length;
-  }
-
-  /**
-   * Retrieves all tokens from the collection.
-   *
-   * Note: this list may contain duplicate tokens, as tokens with the same name can be defined multiple times in different files.
-   * Use `mergeToken` if you want a consolidated list of unique tokens.
-   *
-   * @returns {readonly GenericDesignTokensCollectionToken[]} An array of all tokens in the collection.
-   */
-  get tokens(): readonly GenericDesignTokensCollectionToken[] {
-    return this.#tokens;
-  }
-
-  /**
-   * Appends a token to the collection and returns the current instance.
-   *
-   * @param {GenericDesignTokensCollectionToken} token The token to be added to the collection.
-   * @returns {this} The current instance for method chaining.
-   */
-  append(token: GenericDesignTokensCollectionToken): this {
-    this.#tokens.push(token);
-
-    return this;
-  }
-
-  /**
-   * Adds a given token to the collection after removing any existing token with the same name.
-   *
-   * @param {GenericDesignTokensCollectionToken} token - The token to be added to the collection.
-   * @returns {this} The current instance for method chaining.
-   */
-  set(token: GenericDesignTokensCollectionToken): this {
-    this.delete(token.name);
-    this.append(token);
-
-    return this;
-  }
-
-  /**
-   * Checks if the collection contains a specific design token or token name.
-   *
-   * @param {DesignTokenNameLikeOrToken} nameOrToken - The token name or token instance to check for existence.
-   * @returns {boolean} True if the token or token name exists in the collection, otherwise false.
-   */
-  has(nameOrToken: DesignTokenNameLikeOrToken): boolean {
-    const predicate: DesignTokensCollectionTokenFilterFunction =
-      DesignTokensCollection.#designTokenNameLikeOrTokenToFilterFunction(nameOrToken);
-
-    for (let i: number = 0; i < this.#tokens.length; i++) {
-      if (predicate(this.#tokens[i])) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  /**
-   * Retrieves all tokens that match the specified design token name.
-   *
-   * @param {DesignTokenNameLike} name - The name or array of names to filter the tokens.
-   * @returns {GenericDesignTokensCollectionToken[]} An array of tokens that match the specified name.
-   */
-  getAll(name: DesignTokenNameLike): GenericDesignTokensCollectionToken[] {
-    name = DesignTokensCollection.designTokenNameLikeToArray(name);
-
-    return this.#tokens.filter((token: GenericDesignTokensCollectionToken): boolean => {
-      return DesignTokensCollection.#tokenNamesEqual(token.name, name);
-    });
-  }
-
-  /**
-   * Deletes the design token or tokens matching the provided name or token.
-   *
-   * @param {DesignTokenNameLikeOrToken} nameOrToken - A design token or an array representing the name of the token(s) to delete. It can either be a token object or a name-like structure.
-   * @returns {number} The number of tokens deleted.
-   */
-  delete(nameOrToken: DesignTokenNameLikeOrToken): number {
-    const predicate: DesignTokensCollectionTokenFilterFunction =
-      DesignTokensCollection.#designTokenNameLikeOrTokenToFilterFunction(nameOrToken);
-
-    let deleted: number = 0;
-
-    for (let i: number = 0; i < this.#tokens.length; i++) {
-      if (predicate(this.#tokens[i])) {
-        this.#tokens.splice(i, 1);
-        i--;
-        deleted++;
-      }
-    }
-
-    return deleted;
-  }
-
-  /**
-   * Clears all tokens from the internal collection.
-   *
-   * @returns {this} The current instance for method chaining.
-   */
-  clear(): this {
-    this.#tokens.length = 0;
-    return this;
-  }
-
-  /*--*/
-
-  /**
-   * Optionally retrieves a design token from the collection by its name.
-   *
-   * Note: the search is performed from last to first, and tokens with the selected name are aggregated to form one token with all properties merged.
-   *
-   * @param {DesignTokenNameLike} name - The name of the design token to retrieve.
-   * @returns {GenericDesignTokensCollectionToken | undefined} The design token if found, or undefined if no matching token exists.
-   */
-  getOptional(name: DesignTokenNameLike): GenericDesignTokensCollectionToken | undefined {
-    const tokens: GenericDesignTokensCollectionToken[] = this.getAll(name);
-
-    if (tokens.length === 0) {
-      return undefined;
-    } else {
-      let {
-        files,
-        name,
-        type,
-        value,
-        description,
-        deprecated,
-        extensions,
-      }: GenericDesignTokensCollectionToken = tokens[tokens.length - 1];
-
-      for (let i: number = tokens.length - 2; i >= 0; i--) {
-        const {
-          files: superFiles,
-          type: superType,
-          description: superDescription,
-          deprecated: superDeprecated,
-          extensions: superExtensions,
-        }: GenericDesignTokensCollectionToken = tokens[i];
-
-        files = [...files, ...superFiles];
-        type ??= superType;
-        description ??= superDescription;
-        deprecated ??= superDeprecated;
-
-        if (extensions === undefined) {
-          extensions = superExtensions;
-        } else if (superExtensions !== undefined) {
-          extensions = { ...superExtensions, ...extensions };
-        }
-      }
-
-      return removeUndefinedProperties({
-        files: Array.from(new Set(files)),
-        name,
-        type,
-        value,
-        description,
-        deprecated,
-        extensions,
-      });
-    }
-  }
-
-  /**
-   * Retrieves a GenericDesignTokensCollectionToken based on the provided design token name.
-   *
-   * Note: the search is performed from last to first, and tokens with the selected name are aggregated to form one token with all properties merged.
-   *
-   * @param {DesignTokenNameLike} name - The design token name to retrieve.
-   * @returns {GenericDesignTokensCollectionToken} The token associated with the provided name.
-   * @throws {Error} If the token is not found.
-   */
-  get(name: DesignTokenNameLike): GenericDesignTokensCollectionToken {
-    const token: GenericDesignTokensCollectionToken | undefined = this.getOptional(name);
-
-    if (token === undefined) {
-      throw new Error(
-        `Missing token: ${DesignTokensCollection.designTokenNameLikeToArray(name).join('.')}`,
-      );
-    } else {
-      return token;
-    }
-  }
+  /* OPERATIONS */
 
   /**
    * Resolves a design token to its final value by following references and merging properties.
@@ -401,158 +373,42 @@ export class DesignTokensCollection {
    * @throws {Error} If a circular reference is detected or if the token cannot be found.
    */
   resolve(token: GenericDesignTokensCollectionToken): GenericResolvedDesignTokensCollectionToken {
-    let {
-      files,
-      name,
-      type,
-      value,
-      description,
-      deprecated,
-      extensions,
-    }: GenericDesignTokensCollectionToken = token;
-
-    let nameToExplore: ArrayDesignTokenName = name;
+    let name: ArrayDesignTokenName = token.name;
     const explored: Set<CurlyReference> = new Set<CurlyReference>();
     explored.add(DesignTokensCollection.arrayDesignTokenNameToCurlyReference(name));
 
     while (true) {
-      if (isCurlyReference(value)) {
-        nameToExplore = DesignTokensCollection.curlyReferenceToArrayDesignTokenName(value);
+      if (isCurlyReference(token.value)) {
+        name = DesignTokensCollection.curlyReferenceToArrayDesignTokenName(token.value);
 
-        if (explored.has(value)) {
+        if (explored.has(token.value)) {
           throw new Error(
-            `Circular reference detected: ${traceCurlyReferences([...explored, value])}`,
+            `Circular reference detected: ${traceCurlyReferences([...explored, token.value])}`,
           );
         }
 
-        explored.add(value);
+        explored.add(token.value);
 
         const resolvedToken: GenericDesignTokensCollectionToken | undefined =
-          this.getOptional(nameToExplore);
+          this.getOptional(name);
 
         if (resolvedToken === undefined) {
           throw new Error(`Unable to find referenced token: ${traceCurlyReferences(explored)}`);
         }
 
-        const {
-          files: superFiles,
-          type: superType,
-          value: superValue,
-          description: superDescription,
-          deprecated: superDeprecated,
-          extensions: superExtensions,
-        }: GenericDesignTokensCollectionToken = resolvedToken;
-
-        files = [...files, ...superFiles];
-        type ??= superType;
-        value = superValue;
-        description ??= superDescription;
-        deprecated ??= superDeprecated;
-
-        if (extensions === undefined) {
-          extensions = superExtensions;
-        } else if (superExtensions !== undefined) {
-          extensions = { ...superExtensions, ...extensions };
-        }
+        token = DesignTokensCollection.mergeTokens(resolvedToken, {
+          ...token,
+          value: resolvedToken.value,
+        });
       } else {
-        return removeUndefinedProperties({
-          files: Array.from(new Set(files)),
-          name,
-          type,
-          value,
-          description,
-          deprecated,
-          extensions,
+        return {
+          ...(token as GenericDesignTokensCollectionTokenWithType),
           trace: Array.from(explored, (reference: CurlyReference): ArrayDesignTokenName => {
             return DesignTokensCollection.curlyReferenceToArrayDesignTokenName(reference);
           }),
-        });
+        };
       }
     }
-  }
-
-  /* OPERATIONS */
-
-  /**
-   * Merges tokens in the collection by consolidating tokens with identical names.
-   * Combined properties will be deduplicated or updated based on precedence rules.
-   *
-   * Specifically:
-   *
-   * - the `files` properties are concatenated.
-   * - `type`, `value` and `description` will be set to the non-null value of the latest token when applicable
-   * - the `extensions` property will combine objects if present, with properties from the later tokens overwriting earlier ones).
-   *
-   * This process removes all individually iterated tokens and replaces them with a new consolidated set.
-   *
-   * @returns {this} The instance of the class, allowing for method chaining.
-   */
-  mergeTokens(): this {
-    const length: number = this.#tokens.length;
-    const done: Set<CurlyReference> = new Set<CurlyReference>();
-
-    for (let i: number = 0; i < length; i++) {
-      let {
-        files,
-        name,
-        type,
-        value,
-        description,
-        deprecated,
-        extensions,
-      }: GenericDesignTokensCollectionToken = this.#tokens[i];
-
-      const nameAsCurlyReference: CurlyReference =
-        DesignTokensCollection.arrayDesignTokenNameToCurlyReference(name);
-      if (done.has(nameAsCurlyReference)) {
-        continue;
-      }
-      done.add(nameAsCurlyReference);
-
-      for (let j: number = i + 1; j < length; j++) {
-        const {
-          files: superFiles,
-          name: superName,
-          type: superType,
-          value: superValue,
-          description: superDescription,
-          deprecated: superDeprecated,
-          extensions: superExtensions,
-        }: GenericDesignTokensCollectionToken = this.#tokens[j];
-
-        if (DesignTokensCollection.#tokenNamesEqual(name, superName)) {
-          files = [...superFiles, ...files];
-          type = superType ?? type;
-          value = superValue;
-          description = superDescription ?? description;
-          deprecated = superDeprecated ?? deprecated;
-
-          if (superExtensions !== undefined) {
-            if (extensions === undefined) {
-              extensions = superExtensions;
-            } else {
-              extensions = { ...extensions, ...superExtensions };
-            }
-          }
-        }
-      }
-
-      this.#tokens.push(
-        removeUndefinedProperties({
-          files: Array.from(new Set(files)),
-          name,
-          type,
-          value,
-          description,
-          deprecated,
-          extensions,
-        }),
-      );
-    }
-
-    this.#tokens.splice(0, length);
-
-    return this;
   }
 
   /**
@@ -570,10 +426,10 @@ export class DesignTokensCollection {
       extensions: renameExtensions = designTokensCollectionRenameExtensionsAutomatically,
     }: DesignTokensCollectionRenameOptions = {},
   ): void {
-    from = DesignTokensCollection.designTokenNameLikeToArray(from);
-    to = DesignTokensCollection.designTokenNameLikeToArray(to);
+    from = DesignTokensCollection.designTokenNameLikeToArrayDesignTokenName(from);
+    to = DesignTokensCollection.designTokenNameLikeToArrayDesignTokenName(to);
 
-    if (DesignTokensCollection.#tokenNamesEqual(from, to)) {
+    if (DesignTokensCollection.tokenNamesEqual(from, to)) {
       return;
     }
 
@@ -582,14 +438,12 @@ export class DesignTokensCollection {
     const toAsCurlyReference: CurlyReference =
       DesignTokensCollection.arrayDesignTokenNameToCurlyReference(to);
 
-    for (let i: number = 0; i < this.#tokens.length; i++) {
-      const token: GenericDesignTokensCollectionToken = this.#tokens[i];
-
+    for (const token of this.#tokens.values()) {
       let name: ArrayDesignTokenName = token.name;
       let value: unknown | CurlyReference = token.value;
       let extensions: DesignTokensCollectionTokenExtensions | undefined = token.extensions;
 
-      if (DesignTokensCollection.#tokenNamesEqual(token.name, from)) {
+      if (DesignTokensCollection.tokenNamesEqual(token.name, from)) {
         name = to;
       }
 
@@ -624,23 +478,17 @@ export class DesignTokensCollection {
       }
 
       if (name !== token.name || value !== token.value || extensions !== token.extensions) {
-        this.#tokens[i] = {
+        this.#tokens.set(DesignTokensCollection.#arrayDesignTokenNameToStringKey(name), {
           ...token,
           name,
           value,
           extensions,
-        };
+        });
       }
     }
   }
 
   clone(): DesignTokensCollection {
-    return DesignTokensCollection.#new(this.#tokens.slice());
+    return DesignTokensCollection.#new(new Map(this.#tokens.entries()));
   }
-}
-
-/* INTERNAL TYPES */
-
-interface DesignTokensCollectionTokenFilterFunction {
-  (token: GenericDesignTokensCollectionToken): boolean;
 }
