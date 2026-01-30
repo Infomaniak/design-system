@@ -1,31 +1,31 @@
 {
   "breakpoint": {
     "$type": "dimension",
-    "640": {
+    "sm": {
       "$value": {
         "value": 640,
         "unit": "px"
       }
     },
-    "768": {
+    "md": {
       "$value": {
         "value": 768,
         "unit": "px"
       }
     },
-    "1024": {
+    "lg": {
       "$value": {
         "value": 1024,
         "unit": "px"
       }
     },
-    "1280": {
+    "xl": {
       "$value": {
         "value": 1280,
         "unit": "px"
       }
     },
-    "1536": {
+    "2xl": {
       "$value": {
         "value": 1536,
         "unit": "px"

@@ -1,33 +1,33 @@
 {
-  "breakpoint": {
+  "border-width": {
     "$type": "dimension",
-    "640": {
+    "0": {
       "$value": {
-        "value": 640,
+        "value": 0,
         "unit": "px"
       }
     },
-    "768": {
+    "1": {
       "$value": {
-        "value": 768,
+        "value": 1,
         "unit": "px"
       }
     },
-    "1024": {
+    "2": {
       "$value": {
-        "value": 1024,
+        "value": 2,
         "unit": "px"
       }
     },
-    "1280": {
+    "3": {
       "$value": {
-        "value": 1280,
+        "value": 3,
         "unit": "px"
       }
     },
-    "1536": {
+    "4": {
       "$value": {
-        "value": 1536,
+        "value": 4,
         "unit": "px"
       }
     }

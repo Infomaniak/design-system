@@ -1,0 +1,154 @@
+{
+  "shadow": {
+    "shadow-1": {
+      "x": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      },
+      "y": {
+        "$value": {
+          "value": 1,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      },
+      "blur": {
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      },
+      "spread": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      }
+    },
+    "shadow-2": {
+      "x": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      },
+      "y": {
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      },
+      "blur": {
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      },
+      "spread": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      }
+    },
+    "shadow-3": {
+      "x": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      },
+      "y": {
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      },
+      "blur": {
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      },
+      "spread": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      }
+    },
+    "shadow-4": {
+      "x": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      },
+      "y": {
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      },
+      "blur": {
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      },
+      "spread": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      }
+    },
+    "shadow-5": {
+      "x": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      },
+      "y": {
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      },
+      "blur": {
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      },
+      "spread": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension"
+      }
+    }
+  }
+}

@@ -7,207 +7,81 @@
         "unit": "px"
       }
     },
-    "1": {
-      "$value": {
-        "value": 4,
-        "unit": "px"
-      }
-    },
     "2": {
-      "$value": {
-        "value": 8,
-        "unit": "px"
-      }
-    },
-    "3": {
-      "$value": {
-        "value": 12,
-        "unit": "px"
-      }
-    },
-    "4": {
-      "$value": {
-        "value": 16,
-        "unit": "px"
-      }
-    },
-    "5": {
-      "$value": {
-        "value": 20,
-        "unit": "px"
-      }
-    },
-    "6": {
-      "$value": {
-        "value": 24,
-        "unit": "px"
-      }
-    },
-    "7": {
-      "$value": {
-        "value": 28,
-        "unit": "px"
-      }
-    },
-    "8": {
-      "$value": {
-        "value": 32,
-        "unit": "px"
-      }
-    },
-    "9": {
-      "$value": {
-        "value": 36,
-        "unit": "px"
-      }
-    },
-    "10": {
-      "$value": {
-        "value": 40,
-        "unit": "px"
-      }
-    },
-    "11": {
-      "$value": {
-        "value": 44,
-        "unit": "px"
-      }
-    },
-    "12": {
-      "$value": {
-        "value": 48,
-        "unit": "px"
-      }
-    },
-    "14": {
-      "$value": {
-        "value": 56,
-        "unit": "px"
-      }
-    },
-    "16": {
-      "$value": {
-        "value": 64,
-        "unit": "px"
-      }
-    },
-    "20": {
-      "$value": {
-        "value": 80,
-        "unit": "px"
-      }
-    },
-    "24": {
-      "$value": {
-        "value": 96,
-        "unit": "px"
-      }
-    },
-    "28": {
-      "$value": {
-        "value": 112,
-        "unit": "px"
-      }
-    },
-    "32": {
-      "$value": {
-        "value": 128,
-        "unit": "px"
-      }
-    },
-    "36": {
-      "$value": {
-        "value": 144,
-        "unit": "px"
-      }
-    },
-    "40": {
-      "$value": {
-        "value": 160,
-        "unit": "px"
-      }
-    },
-    "44": {
-      "$value": {
-        "value": 176,
-        "unit": "px"
-      }
-    },
-    "48": {
-      "$value": {
-        "value": 192,
-        "unit": "px"
-      }
-    },
-    "52": {
-      "$value": {
-        "value": 208,
-        "unit": "px"
-      }
-    },
-    "56": {
-      "$value": {
-        "value": 224,
-        "unit": "px"
-      }
-    },
-    "60": {
-      "$value": {
-        "value": 240,
-        "unit": "px"
-      }
-    },
-    "64": {
-      "$value": {
-        "value": 256,
-        "unit": "px"
-      }
-    },
-    "72": {
-      "$value": {
-        "value": 288,
-        "unit": "px"
-      }
-    },
-    "80": {
-      "$value": {
-        "value": 320,
-        "unit": "px"
-      }
-    },
-    "96": {
-      "$value": {
-        "value": 384,
-        "unit": "px"
-      }
-    },
-    "px": {
-      "$value": {
-        "value": 1,
-        "unit": "px"
-      }
-    },
-    "0-5": {
       "$value": {
         "value": 2,
         "unit": "px"
       }
     },
-    "1-5": {
+    "4": {
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      }
+    },
+    "6": {
       "$value": {
         "value": 6,
         "unit": "px"
       }
     },
-    "2-5": {
+    "8": {
       "$value": {
-        "value": 10,
+        "value": 8,
         "unit": "px"
       }
     },
-    "3-5": {
+    "12": {
       "$value": {
-        "value": 14,
+        "value": 12,
+        "unit": "px"
+      }
+    },
+    "16": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      }
+    },
+    "20": {
+      "$value": {
+        "value": 20,
+        "unit": "px"
+      }
+    },
+    "24": {
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      }
+    },
+    "32": {
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      }
+    },
+    "40": {
+      "$value": {
+        "value": 40,
+        "unit": "px"
+      }
+    },
+    "48": {
+      "$value": {
+        "value": 48,
+        "unit": "px"
+      }
+    },
+    "64": {
+      "$value": {
+        "value": 64,
+        "unit": "px"
+      }
+    },
+    "100": {
+      "$value": {
+        "value": 100,
         "unit": "px"
       }
     }

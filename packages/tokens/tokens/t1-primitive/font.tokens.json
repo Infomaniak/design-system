@@ -1,78 +1,114 @@
 {
   "font": {
-    "family": {
-      "$type": "fontFamily",
-      "sans": {
-        "$value": "Inter"
-      },
-      "serif": {
-        "$value": "Georgia"
-      },
-      "mono": {
-        "$value": "Menlo"
-      }
-    },
     "size": {
       "$type": "dimension",
-      "xs": {
+      "12": {
         "$value": {
           "value": 12,
           "unit": "px"
         }
       },
-      "sm": {
+      "14": {
         "$value": {
           "value": 14,
           "unit": "px"
         }
       },
-      "base": {
+      "16": {
         "$value": {
           "value": 16,
           "unit": "px"
         }
       },
-      "lg": {
+      "18": {
         "$value": {
           "value": 18,
           "unit": "px"
         }
       },
-      "xl": {
+      "20": {
         "$value": {
           "value": 20,
+          "unit": "px"
+        }
+      },
+      "24": {
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        }
+      },
+      "32": {
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        }
+      },
+      "40": {
+        "$value": {
+          "value": 40,
+          "unit": "px"
+        }
+      },
+      "48": {
+        "$value": {
+          "value": 48,
           "unit": "px"
         }
       }
     },
     "weight": {
       "$type": "fontWeight",
-      "thin": {
-        "$value": 100
-      },
-      "extralight": {
-        "$value": 200
-      },
-      "light": {
-        "$value": 300
-      },
-      "normal": {
+      "400": {
         "$value": 400
       },
-      "medium": {
+      "500": {
         "$value": 500
+      }
+    },
+    "letter-spacing": {
+      "$type": "dimension",
+      "letter-spacing-0": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        }
+      }
+    },
+    "line-height": {
+      "$type": "number",
+      "12": {
+        "$value": 12
       },
-      "semibold": {
-        "$value": 600
+      "14": {
+        "$value": 14
       },
-      "bold": {
-        "$value": 700
+      "16": {
+        "$value": 16
       },
-      "extrabold": {
-        "$value": 800
+      "18": {
+        "$value": 18
       },
-      "black": {
-        "$value": 900
+      "20": {
+        "$value": 20
+      },
+      "24": {
+        "$value": 24
+      },
+      "32": {
+        "$value": 32
+      },
+      "40": {
+        "$value": 40
+      },
+      "48": {
+        "$value": 48
+      }
+    },
+    "family": {
+      "$type": "fontFamily",
+      "Suisse Int'l": {
+        "$value": "Suisse Int'l"
       }
     }
   }

@@ -14,9 +14,9 @@ import {
 } from '../../../shared/dtcg/resolver/to/css/token/design-tokens-collection-token-to-css-variable-declaration.ts';
 import { createCssVariableNameGenerator } from '../../../shared/dtcg/resolver/to/css/token/name/create-css-variable-name-generator.ts';
 import { DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION } from '../../../shared/dtcg/resolver/to/css/token/name/default-generate-css-variable-name-function.ts';
+import { designTokensCollectionTokenToFigmaDesignTokensTree } from '../../../shared/dtcg/resolver/to/figma/dtcg/token/design-tokens-collection-token-to-figma-design-tokens-tree.ts';
 import type { FigmaDesignTokensGroup } from '../../../shared/dtcg/resolver/to/figma/figma/group/figma-design-tokens-group.ts';
 import type { FigmaDesignTokensTree } from '../../../shared/dtcg/resolver/to/figma/figma/tree/figma-design-tokens-tree.ts';
-import { designTokensCollectionTokenToFigmaDesignTokensTree } from '../../../shared/dtcg/resolver/to/figma/token/design-tokens-collection-token-to-figma-design-tokens-tree.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
 import {
@@ -85,7 +85,7 @@ export function buildTokens({
     // CSS
     await logger.asyncTask('css', async (logger: Logger): Promise<void> => {
       const cssOptions: DesignTokensCollectionTokenToCssVariableDeclarationOptions = {
-        generateCssVariableName: createCssVariableNameGenerator('ikds'),
+        generateCssVariableName: createCssVariableNameGenerator('esds'),
       };
 
       for (const theme of DESIGN_TOKEN_THEMES) {
