@@ -2,6 +2,7 @@ import { writeFileSafe } from '../../../../../../scripts/helpers/file/write-file
 import type { Logger } from '../../../../../../scripts/helpers/log/logger.ts';
 import { removeTrailingSlash } from '../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import type { ValueOrCurlyReference } from '../../../shared/dtcg/design-token/reference/types/curly/value-or/value-or-curly-reference.ts';
+import type { SegmentsReference } from '../../../shared/dtcg/design-token/reference/types/segments/segments-reference.ts';
 import { isDesignToken } from '../../../shared/dtcg/design-token/token/is-design-token.ts';
 import { DesignTokensCollection } from '../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { CssVariableDeclaration } from '../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
@@ -189,7 +190,9 @@ export function buildTokens({
         });
       }
 
-      // TAILWIND 4+ => https://tailwindcss.com/docs/theme#theme-variable-namespaces
+      // TAILWIND 4+
+      // https://tailwindcss.com/docs/theme#theme-variable-namespaces
+      // https://tailwindcss.com/docs/theme#default-theme-variable-reference
       await logger.asyncTask('tailwind', async (): Promise<void> => {
         const cssVariables: string = cssVariableDeclarationsToString([
           // ...[
@@ -223,14 +226,41 @@ export function buildTokens({
           },
           ...collection
             .tokens()
-            .map((token: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
-              return {
-                name: DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(token.name),
-                value: segmentsReferenceToCssVariableReference(token.name, cssOptions),
-                description: token.description,
-                deprecated: token.deprecated,
-              };
-            }),
+            .map(
+              (token: GenericDesignTokensCollectionToken): CssVariableDeclaration | undefined => {
+                const tokenName: string = token.name.join('.');
+                let tailwindTokenName: SegmentsReference | undefined;
+
+                if (tokenName.startsWith('color')) {
+                  tailwindTokenName = ['color', ...token.name.slice(1)];
+                } else if (tokenName.startsWith('font.family')) {
+                  tailwindTokenName = ['font', ...token.name.slice(2)];
+                } else if (tokenName.startsWith('font.size')) {
+                  // TODO: seems to be a t2
+                  // tailwindTokenName = ['text', ...token.name.slice(2)];
+                }
+
+                return tailwindTokenName === undefined
+                  ? undefined
+                  : {
+                      name: DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(tailwindTokenName),
+                      value: segmentsReferenceToCssVariableReference(token.name, cssOptions),
+                      description: token.description,
+                      deprecated: token.deprecated,
+                    };
+              },
+            )
+            .filter(
+              (
+                declaration: CssVariableDeclaration | undefined,
+              ): declaration is CssVariableDeclaration => {
+                return declaration !== undefined;
+              },
+            ),
+          {
+            name: '--spacing',
+            value: '1px',
+          },
         ]);
 
         await Promise.all([

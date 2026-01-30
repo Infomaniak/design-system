@@ -1,0 +1,58 @@
+@reference '#tailwind';
+
+body {
+  @apply bg-gray-800 flex flex-col items-start gap-4 p-4;
+}
+
+h1 {
+  font: var(--esde-typography-heading-large);
+  color: var(--esde-color-text-default);
+}
+
+.card {
+  background-color: var(--esde-color-background-secondary);
+  font: var(--esde-typography-body-medium);
+  color: var(--esde-color-text-default);
+  padding: var(--esde-spacing-3);
+  border-radius: var(--esde-radius-100);
+}
+
+button {
+  @apply px-4 py-2 bg-gray-600 text-base-white;
+
+  /*padding: var(--esde-spacing-2);*/
+  /*border-radius: var(--esde-spacing-1);*/
+  /*background-color: var(--esde-button-background-color);*/
+  /*font: var(--esde-typography-body-medium);*/
+  /*color: white;*/
+}
+
+/*body {*/
+/*  background-color: var(--esde-color-background-default);*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: flex-start;*/
+/*  gap: var(--esde-spacing-4);*/
+/*  padding: var(--esde-spacing-4);*/
+/*}*/
+
+/*h1 {*/
+/*  font: var(--esde-typography-heading-large);*/
+/*  color: var(--esde-color-text-default);*/
+/*}*/
+
+/*.card {*/
+/*  background-color: var(--esde-color-background-secondary);*/
+/*  font: var(--esde-typography-body-medium);*/
+/*  color: var(--esde-color-text-default);*/
+/*  padding: var(--esde-spacing-3);*/
+/*  border-radius: var(--esde-radius-100);*/
+/*}*/
+
+/*button {*/
+/*  padding: var(--esde-spacing-2);*/
+/*  border-radius: var(--esde-spacing-1);*/
+/*  background-color: var(--esde-button-background-color);*/
+/*  font: var(--esde-typography-body-medium);*/
+/*  color: white;*/
+/*}*/
