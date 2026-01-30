@@ -251,6 +251,7 @@ export function buildTokens({
 
     // FIGMA
     await logger.asyncTask('figma', async (): Promise<void> => {
+      const t1FigmaCollectionName: string = 't1';
       const t3FigmaCollectionName: string = 'Themes';
 
       // 1) group tokens by tiers (primitive, semantic, component)
@@ -267,10 +268,13 @@ export function buildTokens({
           );
         }
 
-        figmaCollection.rename(token.name, [
-          tier === T3_DIRNAME ? t3FigmaCollectionName : tier,
-          ...token.name,
-        ]);
+        if (tier === T1_DIRNAME) {
+          figmaCollection.rename(token.name, [t1FigmaCollectionName, ...token.name]);
+        } else if (tier === T3_DIRNAME) {
+          figmaCollection.rename(token.name, [t3FigmaCollectionName, ...token.name]);
+        } else {
+          figmaCollection.rename(token.name, [tier, ...token.name]);
+        }
       }
 
       // 2) create figma tokens
@@ -313,7 +317,7 @@ export function buildTokens({
 
       // 2.1) t1-primitive -> t1 tokens contain all the values, thus, they don't have alternative modes.
       for (const token of figmaCollection.tokens()) {
-        if (token.name.at(0) === T1_DIRNAME) {
+        if (token.name.at(0) === t1FigmaCollectionName) {
           insertFigmaDesignTokensTree(
             token.name,
             designTokensCollectionTokenToFigmaDesignTokensTree(
