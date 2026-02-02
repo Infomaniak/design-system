@@ -3,8 +3,8 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DEFAULT_LOG_LEVEL } from '../../../../../scripts/helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../../../../scripts/helpers/log/logger.ts';
-import { buildTokens } from './helpers/build-tokens.ts';
-import { generatePackage } from './helpers/generate-package.ts';
+import { buildTokens } from './src/build/build-tokens.ts';
+import { generatePackage } from './src/generate-package.ts';
 
 const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 
