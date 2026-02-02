@@ -4,7 +4,7 @@ import { parseArgs } from 'node:util';
 import { loadEnvFile } from '../../../../../scripts/helpers/env/load-env-file.ts';
 import { DEFAULT_LOG_LEVEL } from '../../../../../scripts/helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../../../../scripts/helpers/log/logger.ts';
-import { publishTokens } from './helpers/publish-tokens.ts';
+import { publishTokens } from './src/publish-tokens.ts';
 
 const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 
