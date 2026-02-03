@@ -1,0 +1,10 @@
+{
+  "name": "@infomaniak-design-system/svg",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Infomaniak's Design System - SVGs",
+  "scripts": {
+    "on:figma:commit": "node --no-warnings=ExperimentalWarning scripts/scripts/on-figma-commit/on-figma-commit.script.ts"
+  }
+}
