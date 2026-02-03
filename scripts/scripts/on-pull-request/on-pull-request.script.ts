@@ -4,7 +4,7 @@ import { postKchatWebhookMessage } from '../../helpers/kchat/api/post-kchat-webh
 import { getEnvKchatWebhookId } from '../../helpers/kchat/env/get-env-kchat-webhook-id.ts';
 import { DEFAULT_LOG_LEVEL } from '../../helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../helpers/log/logger.ts';
-import { dedent } from '../../helpers/misc/string/dedent.ts';
+import { dedent } from '../../helpers/misc/string/dedent/dedent.ts';
 
 const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
@@ -18,10 +18,10 @@ function onPullRequestScript(): Promise<void> {
       await postKchatWebhookMessage({
         webhookId: getEnvKchatWebhookId(),
         text: dedent(`
-          ## New PR: ${title}
+          #### 🚀 new pull request: ${title}
           
-          - 🔗 url: ${url}
-          - 🧑 author: ${author}
+          - 🔗 ${url}
+          - 🧑 ${author}
         `),
       });
     });

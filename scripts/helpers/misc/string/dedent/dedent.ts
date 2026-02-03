@@ -1,19 +1,33 @@
+/**
+ * Dedents a string.
+ *
+ * @param {string} text - The string to dedent.
+ * @returns {string} The dedented string.
+ *
+ * @exemple
+ *
+ * ```ts
+ * const code = dedent(`
+ *   class A {
+ *     a = 'b';
+ *   }
+ * `);
+ * ```
+ */
 export function dedent(text: string): string {
   const lines: string[] = text.split('\n');
 
-  if (lines.length > 0) {
-    const firstLine: string = lines[0];
+  const firstLine: string = lines[0];
 
-    if (/^\s+$/.test(firstLine) /* first line contains only whitespaces */) {
-      // => remove first line
-      lines.shift();
-    }
+  if (/^\s*$/.test(firstLine) /* first line contains only whitespaces */) {
+    // => remove first line
+    lines.shift();
   }
 
   if (lines.length > 0) {
     const lastLine: string = lines[lines.length - 1];
 
-    if (/^\s+$/.test(lastLine) /* last line contains only whitespaces */) {
+    if (/^\s*$/.test(lastLine) /* last line contains only whitespaces */) {
       // => remove last line
       lines.pop();
     }
