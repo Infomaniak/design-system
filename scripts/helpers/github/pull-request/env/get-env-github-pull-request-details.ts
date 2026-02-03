@@ -5,7 +5,9 @@ export interface GithubPullRequestDetails {
     comments: {
       href: string;
     };
-    commits: {};
+    commits: {
+      href: string;
+    };
     html: {
       href: string;
     };
@@ -88,7 +90,13 @@ export interface GithubPullRequestDetails {
       labels_url: string;
       language: string;
       languages_url: string;
-      license: unknown;
+      license: {
+        key: string;
+        name: string;
+        node_id: string;
+        spdx_id: string;
+        url: string;
+      };
       merge_commit_message: string;
       merge_commit_title: string;
       merges_url: string;
@@ -99,7 +107,27 @@ export interface GithubPullRequestDetails {
       notifications_url: string;
       open_issues: number;
       open_issues_count: number;
-      owner: unknown;
+      owner: {
+        avatar_url: string;
+        events_url: string;
+        followers_url: string;
+        following_url: string;
+        gists_url: string;
+        gravatar_id: string;
+        html_url: string;
+        id: number;
+        login: string;
+        node_id: string;
+        organizations_url: string;
+        received_events_url: string;
+        repos_url: string;
+        site_admin: boolean;
+        starred_url: string;
+        subscriptions_url: string;
+        type: string;
+        url: string;
+        user_view_type: string;
+      };
       private: boolean;
       pulls_url: string;
       pushed_at: string;
@@ -116,7 +144,7 @@ export interface GithubPullRequestDetails {
       svn_url: string;
       tags_url: string;
       teams_url: string;
-      topics: [];
+      topics: unknown[];
       trees_url: string;
       updated_at: string;
       url: string;
@@ -133,7 +161,7 @@ export interface GithubPullRequestDetails {
       followers_url: string;
       following_url: string;
       gists_url: string;
-      gravatar_id: '';
+      gravatar_id: string;
       html_url: string;
       id: number;
       login: string;
@@ -217,7 +245,13 @@ export interface GithubPullRequestDetails {
       labels_url: string;
       language: string;
       languages_url: string;
-      license: [Object];
+      license: {
+        key: string;
+        name: string;
+        node_id: string;
+        spdx_id: string;
+        url: string;
+      };
       merge_commit_message: string;
       merge_commit_title: string;
       merges_url: string;
@@ -228,7 +262,27 @@ export interface GithubPullRequestDetails {
       notifications_url: string;
       open_issues: number;
       open_issues_count: number;
-      owner: unknown;
+      owner: {
+        avatar_url: string;
+        events_url: string;
+        followers_url: string;
+        following_url: string;
+        gists_url: string;
+        gravatar_id: string;
+        html_url: string;
+        id: number;
+        login: string;
+        node_id: string;
+        organizations_url: string;
+        received_events_url: string;
+        repos_url: string;
+        site_admin: boolean;
+        starred_url: string;
+        subscriptions_url: string;
+        type: string;
+        url: string;
+        user_view_type: string;
+      };
       private: boolean;
       pulls_url: string;
       pushed_at: string;
@@ -245,7 +299,7 @@ export interface GithubPullRequestDetails {
       svn_url: string;
       tags_url: string;
       teams_url: string;
-      topics: [];
+      topics: unknown[];
       trees_url: string;
       updated_at: string;
       url: string;
@@ -262,7 +316,7 @@ export interface GithubPullRequestDetails {
       followers_url: string;
       following_url: string;
       gists_url: string;
-      gravatar_id: '';
+      gravatar_id: string;
       html_url: string;
       id: number;
       login: string;
@@ -281,7 +335,7 @@ export interface GithubPullRequestDetails {
   html_url: string;
   id: number;
   issue_url: string;
-  labels: [];
+  labels: unknown[];
   locked: boolean;
   maintainer_can_modify: boolean;
   merge_commit_sha: string;
@@ -329,6 +383,5 @@ export interface GithubPullRequestDetails {
 }
 
 export function getEnvGithubPullRequestDetails(): GithubPullRequestDetails {
-  console.log(getEnvVariable('GITHUB_PULL_REQUEST_DETAILS'));
   return JSON.parse(getEnvVariable('GITHUB_PULL_REQUEST_DETAILS'));
 }
