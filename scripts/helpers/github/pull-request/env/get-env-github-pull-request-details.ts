@@ -9,6 +9,6 @@ export interface GithubPullRequestDetails {
 }
 
 export function getEnvGithubPullRequestDetails(): GithubPullRequestDetails {
-  console.log(JSON.parse(getEnvVariable('GITHUB_PULL_REQUEST_DETAILS'));
+  console.log(JSON.parse(getEnvVariable('GITHUB_PULL_REQUEST_DETAILS')));
   return JSON.parse(getEnvVariable('GITHUB_PULL_REQUEST_DETAILS'));
 }
