@@ -27,18 +27,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Export PR details as JSON
-        run: |
-          GITHUB_PULL_REQUEST_DETAILS=$(jq -n \
-            --arg url "${{ github.event.pull_request.html_url }}" \
-            --arg title "${{ github.event.pull_request.title }}" \
-            --argjson number "${{ github.event.pull_request.number }}" \
-            --arg body "${{ github.event.pull_request.body }}" \
-            --arg author "${{ github.event.pull_request.user.login }}" \
-            '{url: $url, title: $title, number: $number, body: $body, author: $author}')
-          echo "GITHUB_PULL_REQUEST_DETAILS=$GITHUB_PULL_REQUEST_DETAILS" >> $GITHUB_ENV
-
       - name: Run on-pull-request script
         run: yarn run ci:on-pull-request
         env:
-          GITHUB_PULL_REQUEST_DETAILS: ${{ env.GITHUB_PULL_REQUEST_DETAILS }}
+          GITHUB_PULL_REQUEST_DETAILS: ${{ toJson(github.event.pull_request) }}
