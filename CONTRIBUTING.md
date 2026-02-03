@@ -48,6 +48,22 @@ And replace the corresponding variables:
 
 ## Submit a pull request
 
+### Infomaniak's team / Maintainers
+
+1. create a new branch from `main` following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention:
+   - `feat/xxx`: for a new feature
+   - `fix/xxx`: for a bug fix
+   - `docs/xxx`: for documentation changes
+   - etc...
+1. create a `Draft` PR in, explaining clearly what was added/fixed.
+1. write the feature/fix:
+   - add/update some tests until 100% code coverage is reached (run the tests with `yarn test:coverage`)
+   - format the code, using the command `yarn format`
+   - commit and push your work following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention
+1. submit the PR to review by un-drafting it.
+
+### External contributors
+
 1. fork the repository
 1. create a new branch from `main` following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention:
    - `feat/xxx`: for a new feature
