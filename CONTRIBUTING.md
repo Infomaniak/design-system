@@ -59,7 +59,7 @@ And replace the corresponding variables:
   - NOTE: to preserve the commit history, do not squash the commits when working on or merging a PR.
 - The PR must be based on the `main` branch and target the `main` branch.
 - The PR must be marked as `Draft` while you're working on the feature/fix.
-- The PR must be marked and as `Ready` for review when all the following conditions are met:
+- The PR must be marked as `Ready` for review when all the following conditions are met:
   - The PR must be up to date with the `main` branch.
   - The PR must include tests for the new feature/fix with a target of 100% code coverage (`yarn test:coverage`)
   - The PR must be formated using `yarn format`.
