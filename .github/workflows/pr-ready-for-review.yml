@@ -31,3 +31,4 @@ jobs:
         run: yarn run ci:on-pull-request
         env:
           GITHUB_PULL_REQUEST_DETAILS: ${{ toJson(github.event.pull_request) }}
+          KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
