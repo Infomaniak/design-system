@@ -5,7 +5,9 @@
       "$value": {
         "value": 0,
         "unit": "px"
-      }
+      },
+      "$description": "When you don't need any border",
+      "$deprecated": "This is a test"
     },
     "1": {
       "$value": {
