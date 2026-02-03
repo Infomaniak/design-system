@@ -63,14 +63,15 @@ And replace the corresponding variables:
   - The PR must be up to date with the `main` branch.
   - The PR must include tests for the new feature/fix with a target of 100% code coverage (`yarn test:coverage`)
   - The PR must be formated using `yarn format`.
-  - All comments on the PR must be resolved before approval:
+- Approval must meet these conditions:
+  - The PR must be reviewed by at least one of the maintainers, different from the author.
+  - All comments on the PR must be resolved:
     - Authors of comments must follow the [Conventional Comments](https://conventionalcomments.org/) convention.
     - When an update linked to a comment has been done, the author of this update adds a `DONE` comment to the correspondong thread (the author must not resolve the comment by itself).
     - Then, the author of the comment:
-      - accepts the fix by resolving the comment
+      - accepts the update by resolving the comment
       - or adds another comment asking for a better alternative.
     - **NOTE:** only the author of the comment can resolve it, not the author of the PR.
-- The PR must be reviewed by at least one of the maintainers, different from the author, before approval.
 - When the PR is approved:
   - If the author is a maintainer: the author merges the PR.
   - If the author is an external contributor: a maintainer merges the PR (usually the one having done the review).
