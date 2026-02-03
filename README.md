@@ -4,7 +4,13 @@ The Infomaniak's Design System, featuring design tokens, robust web components a
 
 - [Contributing](CONTRIBUTING.md)
 
+## Project structure
+
+- `packages/`: contains the librairies, utilities, ...
+- `apps/`: contains the deployable apps
+
 ## Documentation
 
 - Figma:
   - [TokensBrücke](docs/figma/tokens-bruecke/figma-tokens-bruecke.md)
+
