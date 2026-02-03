@@ -4,6 +4,7 @@ import { DesignTokensCollection } from '../../../../shared/dtcg/resolver/design-
 import { DESIGN_TOKEN_TIERS } from '../constants/design-token-tiers.ts';
 import { buildCssTokens } from './outputs/css/build-css-tokens.ts';
 import { buildFigmaTokens } from './outputs/figma/build-figma-tokens.ts';
+import { buildSwiftTokens } from './outputs/swift/build-swift-tokens.ts';
 
 export interface BuildTokensOptions {
   readonly sourceDirectory: string;
@@ -35,6 +36,13 @@ export function buildTokens({
 
     // FIGMA
     await buildFigmaTokens({
+      collection,
+      outputDirectory,
+      logger,
+    });
+
+    // SWIFT
+    await buildSwiftTokens({
       collection,
       outputDirectory,
       logger,
