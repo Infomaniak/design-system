@@ -46,6 +46,20 @@ And replace the corresponding variables:
 
 - [FIGMA_API_TOKEN](docs/figma/api-token/figma-api-token.md)
 
+## Submit a pull request
+
+1. fork the repository
+1. create a new branch from `main` following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention:
+   - `feat/xxx`: for a new feature
+   - `fix/xxx`: for a bug fix
+   - `docs/xxx`: for documentation changes
+   - etc...
+1. write the feature/fix:
+   - add/update some tests until 100% code coverage is reached (run the tests with `yarn test:coverage`)
+   - format the code, using the command `yarn format`
+   - commit and push your work following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention
+1. create a PR from your repository to the upstream repository, explaining clearly what was added/fixed.
+
 ## Code
 
 - The source code is located in the `src` directory.
@@ -58,12 +72,3 @@ And replace the corresponding variables:
 
 - `build`: builds the library.
 - `test`: tests the library.
-
-## Create a pull request
-
-1. fork the repository
-1. add the feature/fix by modifying the existing code
-1. add/write some tests until 100% code coverage is reached (run the tests with `yarn test:coverage`)
-1. format the code, using the command `yarn format`
-1. commit and push your work following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention
-1. create a PR from your repository to the upstream repository, explaining clearly what was added/fixed.
