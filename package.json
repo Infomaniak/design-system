@@ -12,7 +12,9 @@
     "=== TEST ===": "",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
-    "bench": "vitest bench"
+    "bench": "vitest bench",
+    "=== CI ===": "",
+    "ci:on-pull-request": "node --no-warnings=ExperimentalWarning scripts/scripts/on-pull-request/on-pull-request.script.ts"
   },
   "description": "Infomaniak's Design System",
   "keywords": [],
@@ -25,9 +27,9 @@
   },
   "workspaces": {
     "packages": [
-      "packages/*",
       "packages/tokens",
-      "packages/tokens/demo"
+      "packages/tokens/demo",
+      "apps/docs"
     ]
   },
   "devDependencies": {

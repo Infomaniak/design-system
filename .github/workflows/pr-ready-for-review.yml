@@ -1,0 +1,44 @@
+name: PR Ready for Review
+
+on:
+  pull_request:
+    types: [ready_for_review]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  pr-ready:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://npm.pkg.github.com'
+          always-auth: true
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Export PR details as JSON
+        run: |
+          GITHUB_PULL_REQUEST_DETAILS=$(jq -n \
+            --arg url "${{ github.event.pull_request.html_url }}" \
+            --arg title "${{ github.event.pull_request.title }}" \
+            --argjson number "${{ github.event.pull_request.number }}" \
+            --arg body "${{ github.event.pull_request.body }}" \
+            --arg author "${{ github.event.pull_request.user.login }}" \
+            '{url: $url, title: $title, number: $number, body: $body, author: $author}')
+          echo "GITHUB_PULL_REQUEST_DETAILS=$GITHUB_PULL_REQUEST_DETAILS" >> $GITHUB_ENV
+
+      - name: Run on-pull-request script
+        run: yarn run ci:on-pull-request
+        env:
+          GITHUB_PULL_REQUEST_DETAILS: ${{ env.GITHUB_PULL_REQUEST_DETAILS }}
