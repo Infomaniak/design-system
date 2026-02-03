@@ -48,33 +48,38 @@ And replace the corresponding variables:
 
 ## Submit a pull request
 
-### Infomaniak's team / Maintainers
+### Rules
 
-1. create a new branch from `main` following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention:
-   - `feat/xxx`: for a new feature
-   - `fix/xxx`: for a bug fix
-   - `docs/xxx`: for documentation changes
-   - etc...
-1. create a `Draft` PR in, explaining clearly what was added/fixed.
-1. write the feature/fix:
-   - add/update some tests until 100% code coverage is reached (run the tests with `yarn test:coverage`)
-   - format the code, using the command `yarn format`
-   - commit and push your work following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention
-1. submit the PR to review by un-drafting it.
+- The branches must follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention:
+  - `feat/xxx`: for a new feature
+  - `fix/xxx`: for a bug fix
+  - `docs/xxx`: for documentation changes
+  - etc...
+- The commits must follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention.
+- The PR must be marked as `Draft` while you're working on the feature/fix.
+- The PR must be marked and as `Ready` for review when all the following conditions are met:
+  - The PR must be up-to-date with the `main` branch.
+  - The PR must include tests for the new feature/fix with a target of 100% code coverage (`yarn test:coverage`)
+  - The PR must be formated using `yarn format`.
+  - All comments on the PR must be resolved before approval:
+    - Authors of comments must follow the [Conventional Comments](https://conventionalcomments.org/) convention.
+    - When an update linked to a comment has been done, the author of this update adds a `DONE` comment to the correspondong thread (the author must not resolve the comment by itself).
+    - Then, the author of the comment:
+      - accepts the fix by resolving the comment
+      - or adds another comment asking for a better alternative.
+    - **NOTE:** only the author of the comment can resolve it, not the author of the PR.
+- The PR must be reviewed by at least one of the maintainers, different from the author, before approval.
+- When the PR is approved:
+  - If the author is a maintainer: the author merges the PR.
+  - If the author is an external contributor: a maintainer merges the PR (usually the one having done the review).
 
-### External contributors
+### For infomaniak's team / project's maintainers
 
-1. fork the repository
-1. create a new branch from `main` following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention:
-   - `feat/xxx`: for a new feature
-   - `fix/xxx`: for a bug fix
-   - `docs/xxx`: for documentation changes
-   - etc...
-1. write the feature/fix:
-   - add/update some tests until 100% code coverage is reached (run the tests with `yarn test:coverage`)
-   - format the code, using the command `yarn format`
-   - commit and push your work following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention
-1. create a PR from your repository to the upstream repository, explaining clearly what was added/fixed.
+Create a new branch from `main` following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention, and create the associated `Draft` PR.
+
+### For external contributors
+
+Fork the repository, update the code, create a PR from your repository to the upstream repository, explaining clearly what was added/fixed.
 
 ## Code
 
