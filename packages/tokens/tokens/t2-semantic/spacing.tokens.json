@@ -1,0 +1,10 @@
+{
+  "spacing": {
+    "xs": {
+      "$value": "{spacing.4}"
+    },
+    "sm": {
+      "$value": "{spacing.8}"
+    }
+  }
+}

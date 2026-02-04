@@ -1,6 +1,10 @@
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { removeTrailingSlash } from '../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import { DesignTokensCollection } from '../../../../shared/dtcg/resolver/design-tokens-collection.ts';
+import {
+  type DesignTokenModifiers,
+  extractDesignTokenModifiers,
+} from '../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import { DESIGN_TOKEN_TIERS } from '../constants/design-token-tiers.ts';
 import { buildCssTokens } from './outputs/css/build-css-tokens.ts';
 import { buildFigmaTokens } from './outputs/figma/build-figma-tokens.ts';
@@ -21,29 +25,39 @@ export function buildTokens({
     sourceDirectory = removeTrailingSlash(sourceDirectory);
     outputDirectory = removeTrailingSlash(outputDirectory);
 
-    const collection: DesignTokensCollection = await new DesignTokensCollection().fromFiles(
+    const baseCollection: DesignTokensCollection = await new DesignTokensCollection().fromFiles(
       DESIGN_TOKEN_TIERS.map(
         (tier: string): string => `${sourceDirectory}/${tier}/**/*.tokens.json`,
       ),
+      {
+        forEachTokenBehaviour: 'only-new-token',
+      },
     );
+
+    // MODIFIERS
+    const modifiers: DesignTokenModifiers = await extractDesignTokenModifiers({
+      sourceDirectory: `${sourceDirectory}/modifiers`,
+      baseCollection,
+    });
 
     // CSS
     await buildCssTokens({
-      collection,
+      baseCollection,
+      modifiers,
       outputDirectory,
       logger,
     });
 
     // FIGMA
     await buildFigmaTokens({
-      collection,
+      collection: baseCollection,
       outputDirectory,
       logger,
     });
 
     // SWIFT
     await buildSwiftTokens({
-      collection,
+      collection: baseCollection,
       outputDirectory,
       logger,
     });

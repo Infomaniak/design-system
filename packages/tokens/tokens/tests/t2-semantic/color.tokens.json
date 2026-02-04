@@ -4,8 +4,9 @@
       "100": {
         "$value": "{color.green.100}",
         "$extensions": {
-          "theme": {
-            "dark": "{color.green.800}"
+          "contexts": {
+            "dark": "{color.green.800}",
+            "mail": "{color.green.500}"
           }
         }
       },

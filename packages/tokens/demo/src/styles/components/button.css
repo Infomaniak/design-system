@@ -1,0 +1,5 @@
+button {
+  background-color: var(--esds-button-background-color);
+  padding-inline: var(--esds-button-padding-inline);
+  /*color: var(--esds-color-brand);*/
+}
