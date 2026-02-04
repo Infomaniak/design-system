@@ -68,7 +68,7 @@ By default (without `.attr`), the tokens are wrapped by a `:root, :host` selecto
 However, you can also use `.attr` in the file name to get the tokens wrapped by an attribute selector:
 
 - for a `theme` (ex: `light.theme.attr.css`): `[data-theme="light"]`
-- for a `variant` (ex: `mail.variant.attr.css`): `[data-variant~="mail"]`
+- for a `varian` (ex: `mail.variant.attr.css`): `[data-variant~="mail"]`
 
 It may be useful to use this feature to apply a style to an element instead of the global page:
 
