@@ -1,9 +1,10 @@
 name: Build dev version on PR
 
-on:
-  pull_request:
-    paths:
-      - 'packages/tokens/**'
+on: workflow_dispatch
+#on:
+#  pull_request:
+#    paths:
+#      - 'packages/tokens/**'
 
 jobs:
   publish-dev:

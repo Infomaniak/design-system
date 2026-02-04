@@ -46,6 +46,44 @@ And replace the corresponding variables:
 
 - [FIGMA_API_TOKEN](docs/figma/api-token/figma-api-token.md)
 
+## Submit a pull request
+
+### Rules
+
+- The branches must follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention:
+  - `feat/xxx`: for a new feature
+  - `fix/xxx`: for a bug fix
+  - `docs/xxx`: for documentation changes
+  - etc...
+- The commits must follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention.
+  - NOTE: to preserve the commit history, do not squash the commits when working on or merging a PR.
+- The PR must be based on the `main` branch and target the `main` branch.
+- The PR must be marked as `Draft` while you're working on the feature/fix.
+- The PR must be marked as `Ready` for review when all the following conditions are met:
+  - The PR must be up to date with the `main` branch.
+  - The PR must include tests for the new feature/fix with a target of 100% code coverage (`yarn test:coverage`)
+  - The PR must be formated using `yarn format`.
+- Approval must meet these conditions:
+  - The PR must be reviewed by at least one of the maintainers, different from the author.
+  - All comments on the PR must be resolved:
+    - Authors of comments must follow the [Conventional Comments](https://conventionalcomments.org/) convention.
+    - When an update linked to a comment has been done, the author of this update adds a `DONE` comment to the correspondong thread (the author must not resolve the comment by itself).
+    - Then, the author of the comment:
+      - accepts the update by resolving the comment
+      - or adds another comment asking for a better alternative.
+    - **NOTE:** only the author of the comment can resolve it, not the author of the PR.
+- When the PR is approved:
+  - If the author is a maintainer: the author merges the PR.
+  - If the author is an external contributor: a maintainer merges the PR (usually the one having done the review).
+
+### For infomaniak's team / project's maintainers
+
+Create a new branch from `main` following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention, and create the associated `Draft` PR.
+
+### For external contributors
+
+Fork the repository, update the code, create a PR from your repository to the upstream repository, explaining clearly what was added/fixed.
+
 ## Code
 
 - The source code is located in the `src` directory.
@@ -58,12 +96,3 @@ And replace the corresponding variables:
 
 - `build`: builds the library.
 - `test`: tests the library.
-
-## Create a pull request
-
-1. fork the repository
-1. add the feature/fix by modifying the existing code
-1. add/write some tests until 100% code coverage is reached (run the tests with `yarn test:coverage`)
-1. format the code, using the command `yarn format`
-1. commit and push your work following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention
-1. create a PR from your repository to the upstream repository, explaining clearly what was added/fixed.
