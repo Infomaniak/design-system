@@ -567,6 +567,39 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@infomaniak-design-system/docs@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@infomaniak-design-system/docs@workspace:."
+  dependencies:
+    "@chromatic-com/storybook": "npm:^5.0.0"
+    "@eslint/js": "npm:^9.39.1"
+    "@storybook/addon-a11y": "npm:^10.2.3"
+    "@storybook/addon-docs": "npm:^10.2.3"
+    "@storybook/addon-onboarding": "npm:^10.2.3"
+    "@storybook/addon-vitest": "npm:^10.2.3"
+    "@storybook/react-vite": "npm:^10.2.3"
+    "@types/node": "npm:^24.10.1"
+    "@types/react": "npm:^19.2.5"
+    "@types/react-dom": "npm:^19.2.3"
+    "@vitejs/plugin-react": "npm:^5.1.1"
+    "@vitest/browser-playwright": "npm:^4.0.18"
+    "@vitest/coverage-v8": "npm:^4.0.18"
+    eslint: "npm:^9.39.1"
+    eslint-plugin-react-hooks: "npm:^7.0.1"
+    eslint-plugin-react-refresh: "npm:^0.4.24"
+    eslint-plugin-storybook: "npm:^10.2.3"
+    globals: "npm:^16.5.0"
+    markdown-to-jsx: "npm:^9.7.0"
+    playwright: "npm:^1.58.1"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    storybook: "npm:^10.2.3"
+    typescript: "npm:~5.9.3"
+    typescript-eslint: "npm:^8.46.4"
+    vite: "npm:rolldown-vite@7.2.5"
+  languageName: unknown
+  linkType: soft
+
 "@isaacs/balanced-match@npm:^4.0.1":
   version: 4.0.1
   resolution: "@isaacs/balanced-match@npm:4.0.1"
@@ -1868,39 +1901,6 @@ __metadata:
   checksum: 10c0/acc675c29a5649fa1fb6e255f993b8ee829e510b6b56b0910666949c80c364738833417d0edb5f90e4e46be17228b0f2b66a010513984e18b15deeeac49369c4
   languageName: node
   linkType: hard
-
-"docs@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "docs@workspace:."
-  dependencies:
-    "@chromatic-com/storybook": "npm:^5.0.0"
-    "@eslint/js": "npm:^9.39.1"
-    "@storybook/addon-a11y": "npm:^10.2.3"
-    "@storybook/addon-docs": "npm:^10.2.3"
-    "@storybook/addon-onboarding": "npm:^10.2.3"
-    "@storybook/addon-vitest": "npm:^10.2.3"
-    "@storybook/react-vite": "npm:^10.2.3"
-    "@types/node": "npm:^24.10.1"
-    "@types/react": "npm:^19.2.5"
-    "@types/react-dom": "npm:^19.2.3"
-    "@vitejs/plugin-react": "npm:^5.1.1"
-    "@vitest/browser-playwright": "npm:^4.0.18"
-    "@vitest/coverage-v8": "npm:^4.0.18"
-    eslint: "npm:^9.39.1"
-    eslint-plugin-react-hooks: "npm:^7.0.1"
-    eslint-plugin-react-refresh: "npm:^0.4.24"
-    eslint-plugin-storybook: "npm:^10.2.3"
-    globals: "npm:^16.5.0"
-    markdown-to-jsx: "npm:^9.7.0"
-    playwright: "npm:^1.58.1"
-    react: "npm:^19.2.0"
-    react-dom: "npm:^19.2.0"
-    storybook: "npm:^10.2.3"
-    typescript: "npm:~5.9.3"
-    typescript-eslint: "npm:^8.46.4"
-    vite: "npm:rolldown-vite@7.2.5"
-  languageName: unknown
-  linkType: soft
 
 "doctrine@npm:^3.0.0":
   version: 3.0.0
