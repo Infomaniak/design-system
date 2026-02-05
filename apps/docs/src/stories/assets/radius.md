@@ -1,0 +1,14 @@
+<!-- Do not edit directly, this file was auto-generated. -->
+
+| Preview | Name | Description |
+|---------|------|-------------|
+| <div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: 0px; display: inline-block; "></div> <div style=" margin-top: 8px; font-family: monospace; font-size: 12px; color: #6b7280; ">0px</div> | `radius.0` |  |
+| <div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: 2px; display: inline-block; "></div> <div style=" margin-top: 8px; font-family: monospace; font-size: 12px; color: #6b7280; ">2px</div> | `radius.2` |  |
+| <div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: 4px; display: inline-block; "></div> <div style=" margin-top: 8px; font-family: monospace; font-size: 12px; color: #6b7280; ">4px</div> | `radius.4` |  |
+| <div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: 6px; display: inline-block; "></div> <div style=" margin-top: 8px; font-family: monospace; font-size: 12px; color: #6b7280; ">6px</div> | `radius.6` |  |
+| <div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: 8px; display: inline-block; "></div> <div style=" margin-top: 8px; font-family: monospace; font-size: 12px; color: #6b7280; ">8px</div> | `radius.8` |  |
+| <div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: 12px; display: inline-block; "></div> <div style=" margin-top: 8px; font-family: monospace; font-size: 12px; color: #6b7280; ">12px</div> | `radius.12` |  |
+| <div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: 16px; display: inline-block; "></div> <div style=" margin-top: 8px; font-family: monospace; font-size: 12px; color: #6b7280; ">16px</div> | `radius.16` |  |
+| <div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: 24px; display: inline-block; "></div> <div style=" margin-top: 8px; font-family: monospace; font-size: 12px; color: #6b7280; ">24px</div> | `radius.24` |  |
+| <div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: 32px; display: inline-block; "></div> <div style=" margin-top: 8px; font-family: monospace; font-size: 12px; color: #6b7280; ">32px</div> | `radius.32` |  |
+| <div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: 1000px; display: inline-block; "></div> <div style=" margin-top: 8px; font-family: monospace; font-size: 12px; color: #6b7280; ">1000px</div> | `radius.1000` |  |
