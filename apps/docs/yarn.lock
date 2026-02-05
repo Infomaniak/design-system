@@ -1891,6 +1891,7 @@ __metadata:
     eslint-plugin-react-refresh: "npm:^0.4.24"
     eslint-plugin-storybook: "npm:^10.2.3"
     globals: "npm:^16.5.0"
+    markdown-to-jsx: "npm:^9.7.0"
     playwright: "npm:^1.58.1"
     react: "npm:^19.2.0"
     react-dom: "npm:^19.2.0"
@@ -2999,6 +3000,26 @@ __metadata:
     promise-retry: "npm:^2.0.1"
     ssri: "npm:^13.0.0"
   checksum: 10c0/525f74915660be60b616bcbd267c4a5b59481b073ba125e45c9c3a041bb1a47a2bd0ae79d028eb6f5f95bf9851a4158423f5068539c3093621abb64027e8e461
+  languageName: node
+  linkType: hard
+
+"markdown-to-jsx@npm:^9.7.0":
+  version: 9.7.0
+  resolution: "markdown-to-jsx@npm:9.7.0"
+  peerDependencies:
+    react: ">= 16.0.0"
+    solid-js: ">=1.0.0"
+    vue: ">=3.0.0"
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-native:
+      optional: true
+    solid-js:
+      optional: true
+    vue:
+      optional: true
+  checksum: 10c0/27c91087385295772a9feeb67b5f55da8e76968e2540e79c5c4f77e9d4a278d6dcf74d3067643db5bdc121331df7204045097a56858b318feded5f102c45beb6
   languageName: node
   linkType: hard
 

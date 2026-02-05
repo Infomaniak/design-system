@@ -1,0 +1,34 @@
+name: PR Ready for Review
+
+on:
+  pull_request:
+    types: [ready_for_review]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  pr-ready:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://npm.pkg.github.com'
+          always-auth: true
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Run on-pull-request script
+        run: yarn run ci:on-pull-request
+        env:
+          GITHUB_PULL_REQUEST_DETAILS: ${{ toJson(github.event.pull_request) }}
+          KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
