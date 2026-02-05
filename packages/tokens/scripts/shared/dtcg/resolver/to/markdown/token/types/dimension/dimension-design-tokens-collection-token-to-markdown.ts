@@ -47,9 +47,22 @@ export function dimensionDesignTokensCollectionTokenToMarkdown(
 
   // Create the dimension preview HTML
   // Shows the bar at the exact CSS value (e.g. width: 384px) with no scaling
-  const preview =
-    `<div style="background: #dcfce8; height: ${previewHeight}px; width: ${cssValue}; border-radius: 2px; border: 1px solid #86efad; position: relative;"></div>` +
-    `<div style="margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280;">${cssValue}</div>`;
+  const preview = /* HTML */ `
+    <div style="
+      background: #dcfce8;
+      height: ${previewHeight}px;
+      width: ${cssValue};
+      border-radius: 2px;
+      border: 1px solid #86efad;
+      position: relative;
+    "></div>
+    <div style="
+      margin-top: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #6b7280;
+    ">${cssValue}</div>
+  `;
 
   return {
     preview,

@@ -61,9 +61,24 @@ export function fontWeightDesignTokensCollectionTokenToMarkdown(
   const weightValue = token.value.toString();
 
   // Create the font weight preview HTML
-  const preview =
-    `<p style="font-weight: ${weightValue}; font-size: ${sampleFontSize}px; font-family: ${sampleFontFamily}; margin: 0; padding: 8px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb;">${sampleText}</p>` +
-    `<div style="margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280;">${weightValue}</div>`;
+  const preview = /* HTML */ `
+    <p style="
+      font-weight: ${weightValue};
+      font-size: ${sampleFontSize}px;
+      font-family: ${sampleFontFamily};
+      margin: 0;
+      padding: 8px;
+      background: #f9fafb;
+      border-radius: 4px;
+      border: 1px solid #e5e7eb;
+    ">${sampleText}</p>
+    <div style="
+      margin-top: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #6b7280;
+    ">${weightValue}</div>
+  `;
 
   return {
     preview,

@@ -52,9 +52,21 @@ export function colorDesignTokensCollectionTokenToMarkdown(
 
   // Create the color preview HTML
   // Shows a rounded rectangle with the color as background
-  const preview =
-    `<div style="border-radius: 4px; width: 100%; height: 75px; background: ${cssValue}; border: 1px solid #e5e7eb;"></div>` +
-    `<div style="margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280;">${cssValue}</div>`;
+  const preview = /* HTML */ `
+    <div style="
+      border-radius: 4px;
+      width: 100%;
+      height: 75px;
+      background: ${cssValue};
+      border: 1px solid #e5e7eb;
+    "></div>
+    <div style="
+      margin-top: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #6b7280;
+    ">${cssValue}</div>
+  `;
 
   return {
     preview,

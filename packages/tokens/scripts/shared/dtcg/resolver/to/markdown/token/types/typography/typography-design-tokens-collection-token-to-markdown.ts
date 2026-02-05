@@ -181,9 +181,25 @@ export function typographyDesignTokensCollectionTokenToMarkdown(
   const cssString = typographyToCssString(resolvedValue);
 
   // Create the typography preview HTML
-  const preview =
-    `<p style="${styleParts.join('; ')}; margin: 0; padding: 12px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; max-width: 300px;">${sampleText}</p>` +
-    `<div style="margin-top: 4px; font-family: monospace; font-size: 11px; color: #6b7280; max-width: 300px; word-wrap: break-word;">${cssString}</div>`;
+  const preview = /* HTML */ `
+    <p style="
+      ${styleParts.join('; ')};
+      margin: 0;
+      padding: 12px;
+      background: #f9fafb;
+      border-radius: 4px;
+      border: 1px solid #e5e7eb;
+      max-width: 300px;
+    ">${sampleText}</p>
+    <div style="
+      margin-top: 4px;
+      font-family: monospace;
+      font-size: 11px;
+      color: #6b7280;
+      max-width: 300px;
+      word-wrap: break-word;
+    ">${cssString}</div>
+  `;
 
   return {
     preview,

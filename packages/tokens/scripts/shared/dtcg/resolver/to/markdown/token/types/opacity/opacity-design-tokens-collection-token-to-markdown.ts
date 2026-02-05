@@ -60,13 +60,59 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
 
   // Create the opacity preview HTML
   // Shows a checkerboard grid with a green overlay at the specified opacity
-  const preview =
-    `<div style="position: relative; width: ${boxSize}px; height: ${boxSize}px; display: inline-block; border-radius: 4px; overflow: hidden; border: 1px solid #e5e7eb;">` +
-    `<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: #f0f0f0; background-image: linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%); background-size: 12px 12px; background-position: 0 0, 0 6px, 6px -6px, -6px 0px;"></div>` +
-    `<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: ${overlayColor}; opacity: ${opacity};"></div>` +
-    `<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: monospace; font-size: 14px; font-weight: 600; color: ${opacity > 0.5 ? '#fff' : '#374151'}; text-shadow: ${opacity > 0.5 ? '0 1px 2px rgba(0,0,0,0.3)' : 'none'}; z-index: 10;">${percentage}%</div>` +
-    `</div>` +
-    `<div style="margin-top: 8px; font-family: monospace; font-size: 12px; color: #6b7280;">${displayValue}</div>`;
+  const preview = /* HTML */ `
+    <div style="
+      position: relative;
+      width: ${boxSize}px;
+      height: ${boxSize}px;
+      display: inline-block;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+    ">
+      <div style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #f0f0f0;
+        background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
+          linear-gradient(-45deg, #ccc 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, #ccc 75%),
+          linear-gradient(-45deg, transparent 75%, #ccc 75%);
+        background-size: 12px 12px;
+        background-position: 0 0, 0 6px, 6px -6px, -6px 0px;
+      "></div>
+      <div style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: ${overlayColor};
+        opacity: ${opacity};
+      "></div>
+      <div style="
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: monospace;
+        font-size: 14px;
+        font-weight: 600;
+        color: ${opacity > 0.5 ? '#fff' : '#374151'};
+        text-shadow: ${opacity > 0.5 ? '0 1px 2px rgba(0,0,0,0.3)' : 'none'};
+        z-index: 10;
+      ">${percentage}%</div>
+    </div>
+    <div style="
+      margin-top: 8px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #6b7280;
+    ">${displayValue}</div>
+  `;
 
   return {
     preview,

@@ -87,13 +87,30 @@ function createFallbackPreview(
   const backgroundColor = typeColors[type] ?? '#f3f4f6';
   const borderColor = backgroundColor.replace('100', '200');
 
-  return (
-    `<div style="background: ${backgroundColor}; padding: 12px; border-radius: 4px; border: 1px solid ${borderColor}; font-family: monospace; font-size: 13px; color: #374151;">` +
-    `<div style="font-weight: 600; margin-bottom: 4px; color: #4b5563;">Type: ${type}</div>` +
-    `<div style="word-wrap: break-word;">${truncate(value, 80)}</div>` +
-    `</div>` +
-    `<div style="margin-top: 4px; font-family: monospace; font-size: 11px; color: #6b7280;">${type}</div>`
-  );
+  return /* HTML */ `
+    <div style="
+      background: ${backgroundColor};
+      padding: 12px;
+      border-radius: 4px;
+      border: 1px solid ${borderColor};
+      font-family: monospace;
+      font-size: 13px;
+      color: #374151;
+    ">
+      <div style="
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: #4b5563;
+      ">Type: ${type}</div>
+      <div style="word-wrap: break-word;">${truncate(value, 80)}</div>
+    </div>
+    <div style="
+      margin-top: 4px;
+      font-family: monospace;
+      font-size: 11px;
+      color: #6b7280;
+    ">${type}</div>
+  `;
 }
 
 /**

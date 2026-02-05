@@ -142,9 +142,30 @@ export function shadowDesignTokensCollectionTokenToMarkdown(
 
   // Create the shadow preview HTML
   // Shows a box with the shadow applied
-  const preview =
-    `<div style="width: ${boxSize}px; height: ${boxSize}px; background: white; border: 1px solid #e5e7eb; border-radius: 4px; box-shadow: ${cssShadowValue}; margin: 16px;"></div>` +
-    `<div style="font-family: monospace; font-size: 11px; color: #6b7280; max-width: 200px; word-wrap: break-word;">${cssShadowValue}</div>`;
+  const preview = /* HTML */ `
+    <div
+      style="
+      width: ${boxSize}px;
+      height: ${boxSize}px;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+      box-shadow: ${cssShadowValue};
+      margin: 16px;
+    "
+    ></div>
+    <div
+      style="
+      font-family: monospace;
+      font-size: 11px;
+      color: #6b7280;
+      max-width: 200px;
+      word-wrap: break-word;
+    "
+    >
+      ${cssShadowValue}
+    </div>
+  `;
 
   return {
     preview,

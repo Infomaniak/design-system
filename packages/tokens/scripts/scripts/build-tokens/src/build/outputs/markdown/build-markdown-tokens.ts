@@ -28,6 +28,14 @@ import { isShadowDesignTokensCollectionToken } from '../../../../../../shared/dt
 import { isTypographyDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/composite/typography/is-typography-design-tokens-collection-token.ts';
 import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header .ts';
 
+/**
+ * Normalizes HTML string by removing newlines and extra whitespace
+ * to ensure clean rendering in markdown tables.
+ */
+function normalizeHtml(html: string): string {
+  return html.replace(/\n\s*/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
 export interface BuildMarkdownTokensOptions {
   readonly collection: DesignTokensCollection;
   readonly outputDirectory: string;
@@ -139,12 +147,14 @@ function generateColumnHeaders(category: string): string[] {
  */
 function generateRowContent(row: MarkdownTokenRow, showType: boolean, tokenType?: string): string {
   const { preview, name, description } = row;
+  // Normalize HTML to remove newlines and extra whitespace for clean markdown rendering
+  const normalizedPreview = normalizeHtml(preview);
 
   if (showType && tokenType) {
-    return `| ${preview} | \`${name}\` | ${tokenType} | ${description} |`;
+    return `| ${normalizedPreview} | \`${name}\` | ${tokenType} | ${description} |`;
   }
 
-  return `| ${preview} | \`${name}\` | ${description} |`;
+  return `| ${normalizedPreview} | \`${name}\` | ${description} |`;
 }
 
 /**

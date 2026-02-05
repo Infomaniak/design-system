@@ -39,8 +39,21 @@ export function breakpointDesignTokensCollectionTokenToMarkdown(
   const cssValue = dimensionDesignTokensCollectionTokenValueToCssValue(value);
 
   // Create a simple text-based preview (breakpoints are too large to visualize)
-  const preview =
-    `<div style="background: #f3f4f6; padding: 16px 24px; border-radius: 4px; border: 1px solid #e5e7eb; font-family: monospace; font-size: 24px; font-weight: 600; color: #374151; text-align: center; display: inline-block; min-width: 120px;">${cssValue}</div>`;
+  const preview = /* HTML */ `
+    <div style="
+      background: #f3f4f6;
+      padding: 16px 24px;
+      border-radius: 4px;
+      border: 1px solid #e5e7eb;
+      font-family: monospace;
+      font-size: 24px;
+      font-weight: 600;
+      color: #374151;
+      text-align: center;
+      display: inline-block;
+      min-width: 120px;
+    ">${cssValue}</div>
+  `;
 
   return {
     preview,

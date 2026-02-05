@@ -78,12 +78,36 @@ function createRatioPreview(ratio: number, value: string, name: readonly string[
   // Format the ratio representation (e.g., "4:3", "16:9", "1:1")
   const ratioFormat = getRatioFormat(name);
 
-  return (
-    `<div style="display: inline-block; background: #f3f4f6; border-radius: 4px; border: 2px solid #374151; overflow: hidden; width: ${width}px; height: ${baseHeight}px; position: relative;">` +
-    `<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: monospace; font-size: 12px; color: #374151; font-weight: 600; text-align: center;">${ratioFormat}</div>` +
-    `</div>` +
-    `<div style="margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280;">${ratio}</div>`
-  );
+  return /* HTML */ `
+    <div style="
+      display: inline-block;
+      background: #f3f4f6;
+      border-radius: 4px;
+      border: 2px solid #374151;
+      overflow: hidden;
+      width: ${width}px;
+      height: ${baseHeight}px;
+      position: relative;
+    ">
+      <div style="
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: monospace;
+        font-size: 12px;
+        color: #374151;
+        font-weight: 600;
+        text-align: center;
+      ">${ratioFormat}</div>
+    </div>
+    <div style="
+      margin-top: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #6b7280;
+    ">${ratio}</div>
+  `;
 }
 
 /**
@@ -162,8 +186,20 @@ export function numberDesignTokensCollectionTokenToMarkdown(
   if (isRatioToken(token.name)) {
     preview = createRatioPreview(value, displayValue, token.name);
   } else {
-    preview =
-      `<div style="background: #f3f4f6; padding: 8px 12px; border-radius: 4px; border: 1px solid #e5e7eb; font-family: monospace; font-size: 14px; color: #1f2937; display: inline-block; min-width: 60px; text-align: center;">${displayValue}</div>`;
+    preview = /* HTML */ `
+      <div style="
+        background: #f3f4f6;
+        padding: 8px 12px;
+        border-radius: 4px;
+        border: 1px solid #e5e7eb;
+        font-family: monospace;
+        font-size: 14px;
+        color: #1f2937;
+        display: inline-block;
+        min-width: 60px;
+        text-align: center;
+      ">${displayValue}</div>
+    `;
   }
 
   return {

@@ -48,9 +48,22 @@ export function radiusDesignTokensCollectionTokenToMarkdown(
 
   // Create the radius preview HTML
   // Shows a square box with the border-radius applied
-  const preview =
-    `<div style="width: ${boxSize}px; height: ${boxSize}px; background: #dcfce8; border: 2px solid #374151; border-radius: ${cssValue}; display: inline-block;"></div>` +
-    `<div style="margin-top: 8px; font-family: monospace; font-size: 12px; color: #6b7280;">${cssValue}</div>`;
+  const preview = /* HTML */ `
+    <div style="
+      width: ${boxSize}px;
+      height: ${boxSize}px;
+      background: #dcfce8;
+      border: 2px solid #374151;
+      border-radius: ${cssValue};
+      display: inline-block;
+    "></div>
+    <div style="
+      margin-top: 8px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #6b7280;
+    ">${cssValue}</div>
+  `;
 
   return {
     preview,
