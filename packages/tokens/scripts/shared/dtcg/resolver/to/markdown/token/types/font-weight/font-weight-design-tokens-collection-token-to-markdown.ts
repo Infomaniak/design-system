@@ -2,6 +2,7 @@ import type { FontWeightDesignTokensCollectionToken } from '../../../../../token
 import type { FontWeightDesignTokensCollectionTokenValue } from '../../../../../token/types/base/font-weight/value/font-weight-design-tokens-collection-token-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
+import { DEFAULT_SAMPLE_TEXT } from '../../shared/constants.ts';
 
 /**
  * Configuration options for font weight markdown rendering
@@ -9,7 +10,7 @@ import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
 export interface FontWeightMarkdownRenderOptions {
   /**
    * Sample text to display with the font weight
-   * @default "The quick brown fox jumps over the lazy dog"
+   * @default "Edelweiss prefers rocky limestone locations"
    */
   readonly sampleText?: string;
 
@@ -68,7 +69,7 @@ export function fontWeightDesignTokensCollectionTokenToMarkdown(
   options: FontWeightMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
   const {
-    sampleText = 'The quick brown fox jumps over the lazy dog',
+    sampleText = DEFAULT_SAMPLE_TEXT,
     sampleFontSize = 16,
     sampleFontFamily = 'system-ui, sans-serif',
   } = options;

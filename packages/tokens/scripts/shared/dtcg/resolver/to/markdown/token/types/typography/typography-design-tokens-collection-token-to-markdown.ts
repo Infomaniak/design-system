@@ -3,6 +3,7 @@ import type { TypographyDesignTokensCollectionToken } from '../../../../../token
 import type { TypographyDesignTokensCollectionTokenValue } from '../../../../../token/types/composite/typography/value/typography-design-tokens-collection-token-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
+import { DEFAULT_SAMPLE_TEXT } from '../../shared/constants.ts';
 
 /**
  * Configuration options for typography markdown rendering
@@ -20,16 +21,6 @@ export interface TypographyMarkdownRenderOptions {
    */
   readonly resolveReferences?: boolean;
 }
-
-/**
- * Samples of text with different characters for better font testing
- */
-const SAMPLE_TEXTS = [
-  'Edelweiss prefers rocky limestone locations',
-  'The quick brown fox jumps over the lazy dog',
-  'Sphinx of black quartz, judge my vow',
-  'Pack my box with five dozen liquor jugs',
-];
 
 /**
  * Resolves a token reference and returns its string value
@@ -151,7 +142,7 @@ export function typographyDesignTokensCollectionTokenToMarkdown(
   options: TypographyMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
   const {
-    sampleText = SAMPLE_TEXTS[0],
+    sampleText = DEFAULT_SAMPLE_TEXT,
     resolveReferences = true,
   } = options;
 

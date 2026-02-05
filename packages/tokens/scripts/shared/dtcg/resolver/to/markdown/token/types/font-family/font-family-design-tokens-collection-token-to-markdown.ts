@@ -1,6 +1,7 @@
 import type { FontFamilyDesignTokensCollectionToken } from '../../../../../token/types/base/font-family/font-family-design-tokens-collection-token.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
+import { DEFAULT_SAMPLE_TEXT } from '../../shared/constants.ts';
 
 /**
  * Configuration options for font family markdown rendering
@@ -8,7 +9,7 @@ import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
 export interface FontFamilyMarkdownRenderOptions {
   /**
    * Sample text to display with the font family
-   * @default "The quick brown fox jumps over the lazy dog"
+   * @default "Edelweiss prefers rocky limestone locations"
    */
   readonly sampleText?: string;
 
@@ -45,7 +46,7 @@ export function fontFamilyDesignTokensCollectionTokenToMarkdown(
   options: FontFamilyMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
   const {
-    sampleText = 'The quick brown fox jumps over the lazy dog',
+    sampleText = DEFAULT_SAMPLE_TEXT,
     sampleFontSize = 16,
   } = options;
 
