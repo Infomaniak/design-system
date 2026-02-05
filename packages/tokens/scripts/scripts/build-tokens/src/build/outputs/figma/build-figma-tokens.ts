@@ -147,7 +147,7 @@ export function buildFigmaTokens({
       ),
     );
 
-    // TODO t3
+    // TODO: implement when we work on t3 tokens
     // // 2.3) t3-component -> t3 tokens contain variants; thus, they need to be merged (as modes).
     // Object.assign(
     //   figmaTokens,
