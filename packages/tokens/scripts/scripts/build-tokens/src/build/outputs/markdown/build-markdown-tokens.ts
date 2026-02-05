@@ -82,7 +82,7 @@ function renderTokenToRow(
 
   // Select the appropriate renderer based on token type
   if (isColorDesignTokensCollectionToken(token)) {
-    return colorDesignTokensCollectionTokenToMarkdown(token, context);
+    return colorDesignTokensCollectionTokenToMarkdown(token);
   }
 
   if (isDimensionDesignTokensCollectionToken(token)) {

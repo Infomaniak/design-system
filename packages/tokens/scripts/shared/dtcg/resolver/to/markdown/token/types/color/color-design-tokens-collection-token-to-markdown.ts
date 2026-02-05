@@ -1,7 +1,6 @@
 import type { ColorDesignTokensCollectionToken } from '../../../../../token/types/base/color/color-design-tokens-collection-token.ts';
 import type { ColorDesignTokensCollectionTokenValue } from '../../../../../token/types/base/color/value/color-design-tokens-collection-token-value.ts';
 import { colorDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/color/value/color-design-tokens-collection-token-value-to-css-value.ts';
-import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
 
 /**
@@ -27,8 +26,6 @@ export interface ColorMarkdownRenderOptions {
  * in the specified format (hex or oklch).
  *
  * @param token - The color design token to render
- * @param _context - The render context (unused for simple color tokens)
- * @param options - Rendering options
  * @returns A markdown table row with color preview
  *
  * @example
@@ -42,8 +39,6 @@ export interface ColorMarkdownRenderOptions {
  */
 export function colorDesignTokensCollectionTokenToMarkdown(
   token: ColorDesignTokensCollectionToken,
-  _context: MarkdownRenderContext,
-  options: ColorMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
   // Get the color value as a CSS string (always returns the best representation)
   // For markdown, we use the default format which typically returns hex for srgb colors
