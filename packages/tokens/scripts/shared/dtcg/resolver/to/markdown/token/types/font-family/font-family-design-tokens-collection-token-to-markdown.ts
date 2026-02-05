@@ -1,4 +1,6 @@
 import type { FontFamilyDesignTokensCollectionToken } from '../../../../../token/types/base/font-family/font-family-design-tokens-collection-token.ts';
+import type { FontFamilyDesignTokensCollectionTokenValue } from '../../../../../token/types/base/font-family/value/font-family-design-tokens-collection-token-value.ts';
+import { fontFamilyDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/font-family/value/font-family-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
 import { DEFAULT_SAMPLE_TEXT } from '../../shared/constants.ts';
@@ -50,14 +52,9 @@ export function fontFamilyDesignTokensCollectionTokenToMarkdown(
     sampleFontSize = 16,
   } = options;
 
-  // Font family value can be a single string or an array of strings
-  const fontFamilyValue = token.value;
-
-  // Convert to array if it's a single string, then join
-  const fontFamilies = Array.isArray(fontFamilyValue) ? fontFamilyValue : [fontFamilyValue];
-
-  // Create a comma-separated string for display
-  const fontFamilyString = fontFamilies.join(', ');
+  // Convert font family to CSS value using shared helper
+  const value = token.value as FontFamilyDesignTokensCollectionTokenValue;
+  const fontFamilyString = fontFamilyDesignTokensCollectionTokenValueToCssValue(value);
 
   // Create the font family preview HTML
   // Shows sample text with the font family applied

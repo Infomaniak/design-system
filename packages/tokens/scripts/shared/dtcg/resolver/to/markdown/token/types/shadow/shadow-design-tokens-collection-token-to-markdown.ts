@@ -9,6 +9,8 @@
  */
 
 import type { ShadowDesignTokensCollectionToken } from '../../../../../token/types/composite/shadow/shadow-design-tokens-collection-token.ts';
+import type { ShadowDesignTokensCollectionTokenValue } from '../../../../../token/types/composite/shadow/value/shadow-design-tokens-collection-token-value.ts';
+import { shadowDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/composite/shadow/value/shadow-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
 
@@ -21,93 +23,6 @@ export interface ShadowMarkdownRenderOptions {
    * @default 50
    */
   readonly boxSize?: number;
-
-  /**
-   * Default shadow color when not specified in token
-   * @default "rgba(12, 12, 12, 0.09)"
-   */
-  readonly defaultShadowColor?: string;
-}
-
-/**
- * Extracts a dimension value from a shadow component
- * The value can be either a direct dimension object or resolved value
- */
-function extractDimensionValue(component: unknown, defaultValue: number = 0): number {
-  if (typeof component === 'number') {
-    return component;
-  }
-
-  if (component && typeof component === 'object') {
-    const obj = component as Record<string, unknown>;
-
-    // Check for resolved value (direct number)
-    if (typeof obj['value'] === 'number') {
-      return obj['value'];
-    }
-
-    // Check for $value (raw token structure)
-    if (obj['$value'] && typeof obj['$value'] === 'object') {
-      const valueObj = obj['$value'] as Record<string, unknown>;
-      if (typeof valueObj['value'] === 'number') {
-        return valueObj['value'];
-      }
-    }
-  }
-
-  return defaultValue;
-}
-
-/**
- * Constructs a CSS box-shadow string from shadow token components
- */
-function constructBoxShadow(value: unknown, defaultColor: string): string {
-  // Handle array of shadows (multiple shadows)
-  if (Array.isArray(value)) {
-    return value.map((shadow) => constructSingleBoxShadow(shadow, defaultColor)).join(', ');
-  }
-
-  // Single shadow
-  return constructSingleBoxShadow(value, defaultColor);
-}
-
-/**
- * Constructs a CSS box-shadow string from a single shadow object
- */
-function constructSingleBoxShadow(shadow: unknown, defaultColor: string): string {
-  if (!shadow || typeof shadow !== 'object') {
-    return `0px 2px 4px 0px ${defaultColor}`;
-  }
-
-  const obj = shadow as Record<string, unknown>;
-
-  // Extract dimension values
-  // The token structure has x, y, blur, spread as properties
-  const x = extractDimensionValue(obj['x'] ?? obj['offsetX'], 0);
-  const y = extractDimensionValue(obj['y'] ?? obj['offsetY'], 0);
-  const blur = extractDimensionValue(obj['blur'], 0);
-  const spread = extractDimensionValue(obj['spread'], 0);
-
-  // Check for color in the shadow object
-  let color = defaultColor;
-  if (obj['color']) {
-    const colorValue = obj['color'];
-    if (typeof colorValue === 'string') {
-      color = colorValue;
-    } else if (colorValue && typeof colorValue === 'object') {
-      // Try to extract hex or rgba from color object
-      const colorObj = colorValue as Record<string, unknown>;
-      if (colorObj['hex'] && typeof colorObj['hex'] === 'string') {
-        color = colorObj['hex'];
-      }
-    }
-  }
-
-  // Check for inset
-  const inset = obj['inset'] === true ? 'inset ' : '';
-
-  // Construct CSS box-shadow: x y blur spread color
-  return `${inset}${x}px ${y}px ${blur}px ${spread}px ${color}`;
 }
 
 /**
@@ -135,10 +50,11 @@ export function shadowDesignTokensCollectionTokenToMarkdown(
   _context: MarkdownRenderContext,
   options: ShadowMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
-  const { boxSize = 50, defaultShadowColor = 'rgba(12, 12, 12, 0.09)' } = options;
+  const { boxSize = 50 } = options;
 
-  // Construct the CSS box-shadow value
-  const cssShadowValue = constructBoxShadow(token.value, defaultShadowColor);
+  // Construct the CSS box-shadow value using the shared helper
+  const value = token.value as ShadowDesignTokensCollectionTokenValue;
+  const cssShadowValue = shadowDesignTokensCollectionTokenValueToCssValue(value);
 
   // Create the shadow preview HTML
   // Shows a box with the shadow applied

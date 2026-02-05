@@ -1,6 +1,8 @@
+import type { CurlyReference } from '../../../../../../design-token/reference/types/curly/curly-reference.ts';
 import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { TypographyDesignTokensCollectionToken } from '../../../../../token/types/composite/typography/typography-design-tokens-collection-token.ts';
 import type { TypographyDesignTokensCollectionTokenValue } from '../../../../../token/types/composite/typography/value/typography-design-tokens-collection-token-value.ts';
+import { typographyDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/composite/typography/value/typography-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
 import { DEFAULT_SAMPLE_TEXT } from '../../shared/constants.ts';
@@ -23,21 +25,16 @@ export interface TypographyMarkdownRenderOptions {
 }
 
 /**
- * Resolves a token reference and returns its string value
+ * Resolves a token reference and returns its raw value.
+ * Returns `unknown` to preserve the original type (e.g., dimension objects).
  */
 function resolveReference(
   context: MarkdownRenderContext,
-  reference: string,
-): string | null {
+  reference: CurlyReference,
+): unknown | null {
   try {
-    const tokenName = reference
-      .replace(/[{}]/g, '')
-      .split('.')
-      .filter(Boolean);
-    const resolved = context.collection.resolve(
-      context.collection.get(tokenName),
-    );
-    return String(resolved.value);
+    const resolved = context.collection.resolve(context.collection.get(reference));
+    return resolved.value;
   } catch {
     return null;
   }
@@ -55,9 +52,7 @@ function flattenTypographyValue(
     return value;
   }
 
-  const resolveValue = <T>(
-    val: string | T,
-  ): string | T => {
+  const resolveValue = <T>(val: string | T): string | T => {
     if (isCurlyReference(val)) {
       const resolved = resolveReference(context, val);
       return resolved !== null ? (resolved as unknown as T) : val;
@@ -72,44 +67,6 @@ function flattenTypographyValue(
     letterSpacing: resolveValue(value.letterSpacing),
     lineHeight: resolveValue(value.lineHeight),
   };
-}
-
-/**
- * Constructs a CSS font shorthand string from typography values
- */
-function typographyToCssString(
-  value: TypographyDesignTokensCollectionTokenValue,
-): string {
-  const parts: string[] = [];
-
-  // Font weight
-  if (value.fontWeight) {
-    parts.push(String(value.fontWeight).replace(/[{}]/g, ''));
-  }
-
-  // Font size and line height
-  if (value.fontSize) {
-    const fontSize = String(value.fontSize).replace(/[{}]/g, '');
-    if (value.lineHeight) {
-      const lineHeight = String(value.lineHeight).replace(/[{}]/g, '');
-      parts.push(`${fontSize}/${lineHeight}`);
-    } else {
-      parts.push(fontSize);
-    }
-  }
-
-  // Font family
-  if (value.fontFamily) {
-    const fontFamily = String(value.fontFamily).replace(/[{}]/g, '');
-    // Add quotes if not already present and contains spaces
-    if (fontFamily.includes(' ') && !fontFamily.includes('"') && !fontFamily.includes("'")) {
-      parts.push(`"${fontFamily}"`);
-    } else {
-      parts.push(fontFamily);
-    }
-  }
-
-  return parts.join(' ');
 }
 
 /**
@@ -141,10 +98,7 @@ export function typographyDesignTokensCollectionTokenToMarkdown(
   context: MarkdownRenderContext,
   options: TypographyMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
-  const {
-    sampleText = DEFAULT_SAMPLE_TEXT,
-    resolveReferences = true,
-  } = options;
+  const { sampleText = DEFAULT_SAMPLE_TEXT, resolveReferences = true } = options;
 
   // Try to resolve references to get actual values
   const value = token.value as TypographyDesignTokensCollectionTokenValue;
@@ -178,11 +132,12 @@ export function typographyDesignTokensCollectionTokenToMarkdown(
     styleParts.push(`line-height: ${lineHeight}`);
   }
 
-  const cssString = typographyToCssString(resolvedValue);
+  const cssString = typographyDesignTokensCollectionTokenValueToCssValue(resolvedValue);
 
   // Create the typography preview HTML
   const preview = /* HTML */ `
-    <p style="
+    <p
+      style="
       ${styleParts.join('; ')};
       margin: 0;
       padding: 12px;
@@ -190,15 +145,22 @@ export function typographyDesignTokensCollectionTokenToMarkdown(
       border-radius: 4px;
       border: 1px solid #e5e7eb;
       max-width: 300px;
-    ">${sampleText}</p>
-    <div style="
+    "
+    >
+      ${sampleText}
+    </p>
+    <div
+      style="
       margin-top: 4px;
       font-family: monospace;
       font-size: 11px;
       color: #6b7280;
       max-width: 300px;
       word-wrap: break-word;
-    ">${cssString}</div>
+    "
+    >
+      ${cssString}
+    </div>
   `;
 
   return {

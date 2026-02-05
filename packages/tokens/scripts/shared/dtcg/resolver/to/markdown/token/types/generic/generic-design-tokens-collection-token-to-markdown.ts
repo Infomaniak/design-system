@@ -85,10 +85,11 @@ function createFallbackPreview(
   };
 
   const backgroundColor = typeColors[type] ?? '#f3f4f6';
-  const borderColor = backgroundColor.replace('100', '200');
+  const borderColor = '#e5e7eb'; // gray-200
 
   return /* HTML */ `
-    <div style="
+    <div
+      style="
       background: ${backgroundColor};
       padding: 12px;
       border-radius: 4px;
@@ -96,20 +97,29 @@ function createFallbackPreview(
       font-family: monospace;
       font-size: 13px;
       color: #374151;
-    ">
-      <div style="
+    "
+    >
+      <div
+        style="
         font-weight: 600;
         margin-bottom: 4px;
         color: #4b5563;
-      ">Type: ${type}</div>
+      "
+      >
+        Type: ${type}
+      </div>
       <div style="word-wrap: break-word;">${truncate(value, 80)}</div>
     </div>
-    <div style="
+    <div
+      style="
       margin-top: 4px;
       font-family: monospace;
       font-size: 11px;
       color: #6b7280;
-    ">${type}</div>
+    "
+    >
+      ${type}
+    </div>
   `;
 }
 
@@ -147,11 +157,7 @@ export function genericDesignTokensCollectionTokenToMarkdown(
   _context: MarkdownRenderContext,
   options: GenericMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
-  const {
-    maxValueLength = 100,
-    prettyPrintJson = false,
-    customPreviewTemplate,
-  } = options;
+  const { maxValueLength = 100, prettyPrintJson = false, customPreviewTemplate } = options;
 
   // Format the value for display
   const formattedValue = formatValue(token.value, prettyPrintJson);

@@ -1,4 +1,6 @@
 import type { FontWeightDesignTokensCollectionToken } from '../../../../../token/types/base/font-weight/font-weight-design-tokens-collection-token.ts';
+import type { FontWeightDesignTokensCollectionTokenValue } from '../../../../../token/types/base/font-weight/value/font-weight-design-tokens-collection-token-value.ts';
+import { fontWeightDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/font-weight/value/font-weight-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
 import { DEFAULT_SAMPLE_TEXT } from '../../shared/constants.ts';
@@ -57,8 +59,9 @@ export function fontWeightDesignTokensCollectionTokenToMarkdown(
     sampleFontFamily = 'system-ui, sans-serif',
   } = options;
 
-  // Font weight can be number or string
-  const weightValue = token.value.toString();
+  // Convert font weight to CSS value using shared helper
+  const value = token.value as FontWeightDesignTokensCollectionTokenValue;
+  const weightValue = fontWeightDesignTokensCollectionTokenValueToCssValue(value);
 
   // Create the font weight preview HTML
   const preview = /* HTML */ `
