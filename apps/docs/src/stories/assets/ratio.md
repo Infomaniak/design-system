@@ -1,3 +1,5 @@
+<!-- Do not edit directly, this file was auto-generated. -->
+
 | Preview | Name | Description |
 |---------|------|-------------|
 | <div style="display: inline-block; background: #f3f4f6; border-radius: 4px; border: 2px solid #374151; overflow: hidden; width: 60px; height: 60px; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: monospace; font-size: 12px; color: #374151; font-weight: 600; text-align: center;">1:1</div></div><div style="margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280;">1</div> | `ratio.1-1` |  |

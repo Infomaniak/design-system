@@ -1,3 +1,5 @@
+<!-- Do not edit directly, this file was auto-generated. -->
+
 | Preview | Name | Description |
 |---------|------|-------------|
 | <div style="position: relative; width: 100px; height: 100px; display: inline-block; border-radius: 4px; overflow: hidden; border: 1px solid #e5e7eb;"><div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: #f0f0f0; background-image: linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%); background-size: 12px 12px; background-position: 0 0, 0 6px, 6px -6px, -6px 0px;"></div><div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: #22c55e; opacity: 0;"></div><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: monospace; font-size: 14px; font-weight: 600; color: #374151; text-shadow: none; z-index: 10;">0%</div></div><div style="margin-top: 8px; font-family: monospace; font-size: 12px; color: #6b7280;">0 (0%)</div> | `opacity.0` |  |

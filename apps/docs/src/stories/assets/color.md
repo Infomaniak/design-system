@@ -1,3 +1,5 @@
+<!-- Do not edit directly, this file was auto-generated. -->
+
 | Preview | Name | Description |
 |---------|------|-------------|
 | <div style="border-radius: 4px; width: 100%; height: 75px; background: #000; border: 1px solid #e5e7eb;"></div><div style="margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280;">#000</div> | `color.black` |  |

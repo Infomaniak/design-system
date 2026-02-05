@@ -2,10 +2,11 @@ import { join } from 'node:path';
 import { writeFileSafe } from '../../../../../../../../../scripts/helpers/file/write-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
-import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
+import { getTokenCategory } from '../../../../../../shared/dtcg/resolver/to/markdown/token-category.ts';
 import type { MarkdownRenderContext } from '../../../../../../shared/dtcg/resolver/to/markdown/token/markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../../../../../shared/dtcg/resolver/to/markdown/token/markdown-token-row.ts';
-import { getTokenCategory } from '../../../../../../shared/dtcg/resolver/to/markdown/token-category.ts';
+import { borderWidthDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/border-width/border-width-design-tokens-collection-token-to-markdown.ts';
+import { breakpointDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/breakpoint/breakpoint-design-tokens-collection-token-to-markdown.ts';
 import { colorDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/color/color-design-tokens-collection-token-to-markdown.ts';
 import { dimensionDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/dimension/dimension-design-tokens-collection-token-to-markdown.ts';
 import { fontFamilyDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/font-family/font-family-design-tokens-collection-token-to-markdown.ts';
@@ -14,18 +15,18 @@ import { genericDesignTokensCollectionTokenToMarkdown } from '../../../../../../
 import { numberDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/number/number-design-tokens-collection-token-to-markdown.ts';
 import { opacityDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/opacity/opacity-design-tokens-collection-token-to-markdown.ts';
 import { radiusDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/radius/radius-design-tokens-collection-token-to-markdown.ts';
-import { breakpointDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/breakpoint/breakpoint-design-tokens-collection-token-to-markdown.ts';
-import { borderWidthDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/border-width/border-width-design-tokens-collection-token-to-markdown.ts';
 import { shadowDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/shadow/shadow-design-tokens-collection-token-to-markdown.ts';
 import { typographyDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/typography/typography-design-tokens-collection-token-to-markdown.ts';
+import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
+import { isDesignTokensCollectionTokenWithType } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/color/is-color-design-tokens-collection-token.ts';
 import { isDimensionDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/dimension/is-dimension-design-tokens-collection-token.ts';
 import { isFontFamilyDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/font-family/is-font-family-design-tokens-collection-token.ts';
 import { isFontWeightDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/font-weight/is-font-weight-design-tokens-collection-token.ts';
 import { isNumberDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/number/is-number-design-tokens-collection-token.ts';
-import { isDesignTokensCollectionTokenWithType } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { isShadowDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/composite/shadow/is-shadow-design-tokens-collection-token.ts';
 import { isTypographyDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/composite/typography/is-typography-design-tokens-collection-token.ts';
+import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header .ts';
 
 export interface BuildMarkdownTokensOptions {
   readonly collection: DesignTokensCollection;
@@ -201,7 +202,8 @@ export async function buildMarkdownTokens({
     // Generate markdown for each category
     for (const [category, tokens] of tokensByCategory.entries()) {
       await logger.asyncTask(`category: ${category}`, async (): Promise<void> => {
-        const markdown = generateCategoryMarkdown(category, tokens, context);
+        const markdownContent = generateCategoryMarkdown(category, tokens, context);
+        const markdown = `<!-- ${AUTO_GENERATED_FILE_HEADER} -->\n\n` + markdownContent;
         const filePath = join(outputDirectory, 'markdown', `${category}.md`);
         await writeFileSafe(filePath, markdown, { encoding: 'utf-8' });
       });

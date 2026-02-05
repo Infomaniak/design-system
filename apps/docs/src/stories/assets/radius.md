@@ -1,3 +1,5 @@
+<!-- Do not edit directly, this file was auto-generated. -->
+
 | Preview | Name | Description |
 |---------|------|-------------|
 | <div style="width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: 0px; display: inline-block;"></div><div style="margin-top: 8px; font-family: monospace; font-size: 12px; color: #6b7280;">0px</div> | `radius.0` |  |

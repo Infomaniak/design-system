@@ -1,3 +1,5 @@
+<!-- Do not edit directly, this file was auto-generated. -->
+
 | Preview | Name | Description |
 |---------|------|-------------|
 | <div style="background: #f3f4f6; padding: 16px 24px; border-radius: 4px; border: 1px solid #e5e7eb; font-family: monospace; font-size: 24px; font-weight: 600; color: #374151; text-align: center; display: inline-block; min-width: 120px;">640px</div> | `breakpoint.640` |  |
