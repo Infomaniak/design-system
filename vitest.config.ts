@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
 
 const ROOT_DIR: string = dirname(fileURLToPath(import.meta.url));
+// @ts-expect-error: the code is currently commented out
 const STORYBOOK_DIR: string = join(ROOT_DIR, 'apps/docs');
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
