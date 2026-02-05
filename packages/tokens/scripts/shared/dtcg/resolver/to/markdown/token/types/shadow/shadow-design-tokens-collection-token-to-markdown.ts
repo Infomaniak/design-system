@@ -137,11 +137,8 @@ export function shadowDesignTokensCollectionTokenToMarkdown(
 ): MarkdownTokenRow {
   const { boxSize = 50, defaultShadowColor = 'rgba(12, 12, 12, 0.09)' } = options;
 
-  // Get the shadow value
-  const value = token.value as unknown;
-
   // Construct the CSS box-shadow value
-  const cssShadowValue = constructBoxShadow(value, defaultShadowColor);
+  const cssShadowValue = constructBoxShadow(token.value, defaultShadowColor);
 
   // Create the shadow preview HTML
   // Shows a box with the shadow applied

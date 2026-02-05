@@ -128,7 +128,7 @@ export function numberDesignTokensCollectionTokenToMarkdown(
   } = options;
 
   // Get the numeric value
-  const value = token.value as unknown as number;
+  const value = token.value;
 
   // Format the value
   let displayValue: string;

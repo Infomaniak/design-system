@@ -51,7 +51,7 @@ export function fontFamilyDesignTokensCollectionTokenToMarkdown(
   } = options;
 
   // Font family value can be a single string or an array of strings
-  const fontFamilyValue = token.value as unknown as string | readonly string[];
+  const fontFamilyValue = token.value;
 
   // Convert to array if it's a single string, then join
   const fontFamilies = Array.isArray(fontFamilyValue) ? fontFamilyValue : [fontFamilyValue];

@@ -41,7 +41,7 @@ export function dimensionDesignTokensCollectionTokenToMarkdown(
   options: DimensionMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
   // Convert dimension value to CSS value (e.g. "8px")
-  const value = token.value as unknown as DimensionDesignTokensCollectionTokenValue;
+  const value = token.value as DimensionDesignTokensCollectionTokenValue;
   const cssValue = dimensionDesignTokensCollectionTokenValueToCssValue(value);
   const { previewHeight = 16 } = options;
 

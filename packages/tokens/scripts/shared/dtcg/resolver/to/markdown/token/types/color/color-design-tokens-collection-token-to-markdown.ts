@@ -47,7 +47,7 @@ export function colorDesignTokensCollectionTokenToMarkdown(
 ): MarkdownTokenRow {
   // Get the color value as a CSS string (always returns the best representation)
   // For markdown, we use the default format which typically returns hex for srgb colors
-  const value = token.value as unknown as ColorDesignTokensCollectionTokenValue;
+  const value = token.value as ColorDesignTokensCollectionTokenValue;
   const cssValue = colorDesignTokensCollectionTokenValueToCssValue(value);
 
   // Create the color preview HTML

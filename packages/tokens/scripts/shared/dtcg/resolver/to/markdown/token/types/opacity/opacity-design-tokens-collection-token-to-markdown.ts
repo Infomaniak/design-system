@@ -52,7 +52,7 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
   } = options;
 
   // Get the opacity value
-  const opacity = token.value as unknown as number;
+  const opacity = token.value;
 
   // Format the display value
   const percentage = Math.round(opacity * 100);

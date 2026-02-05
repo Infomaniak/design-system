@@ -146,10 +146,8 @@ export function typographyDesignTokensCollectionTokenToMarkdown(
     resolveReferences = true,
   } = options;
 
-  // Get the typography value
-  const value = token.value as unknown as TypographyDesignTokensCollectionTokenValue;
-
   // Try to resolve references to get actual values
+  const value = token.value as TypographyDesignTokensCollectionTokenValue;
   const resolvedValue = flattenTypographyValue(value, context, resolveReferences);
 
   // Build the CSS style string for inline styles

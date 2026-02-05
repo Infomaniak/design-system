@@ -35,7 +35,7 @@ export function breakpointDesignTokensCollectionTokenToMarkdown(
   _options: BreakpointMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
   // Convert dimension value to CSS value (e.g. "1024px")
-  const value = token.value as unknown as DimensionDesignTokensCollectionTokenValue;
+  const value = token.value as DimensionDesignTokensCollectionTokenValue;
   const cssValue = dimensionDesignTokensCollectionTokenValueToCssValue(value);
 
   // Create a simple text-based preview (breakpoints are too large to visualize)
