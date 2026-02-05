@@ -1,6 +1,6 @@
 import { writeFileSafe } from '../../../../../../../../../scripts/helpers/file/write-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
-import { indent } from '../../../../../../../../../scripts/helpers/misc/indent.ts';
+import { indent } from '../../../../../../../../../scripts/helpers/misc/string/indent/indent.ts';
 import type { SegmentsReference } from '../../../../../../shared/dtcg/design-token/reference/types/segments/segments-reference.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { DesignTokenModifiers } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
