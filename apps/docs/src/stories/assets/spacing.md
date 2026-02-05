@@ -1,0 +1,18 @@
+<!-- Do not edit directly, this file was auto-generated. -->
+
+| Preview | Name | Description |
+|---------|------|-------------|
+| <div style=" background: #dcfce8; height: 16px; width: 0px; border-radius: 2px; border: 1px solid #86efad; position: relative; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">0px</div> | `spacing.0` |  |
+| <div style=" background: #dcfce8; height: 16px; width: 2px; border-radius: 2px; border: 1px solid #86efad; position: relative; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">2px</div> | `spacing.2` |  |
+| <div style=" background: #dcfce8; height: 16px; width: 4px; border-radius: 2px; border: 1px solid #86efad; position: relative; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">4px</div> | `spacing.4` |  |
+| <div style=" background: #dcfce8; height: 16px; width: 6px; border-radius: 2px; border: 1px solid #86efad; position: relative; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">6px</div> | `spacing.6` |  |
+| <div style=" background: #dcfce8; height: 16px; width: 8px; border-radius: 2px; border: 1px solid #86efad; position: relative; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">8px</div> | `spacing.8` |  |
+| <div style=" background: #dcfce8; height: 16px; width: 12px; border-radius: 2px; border: 1px solid #86efad; position: relative; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">12px</div> | `spacing.12` |  |
+| <div style=" background: #dcfce8; height: 16px; width: 16px; border-radius: 2px; border: 1px solid #86efad; position: relative; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">16px</div> | `spacing.16` |  |
+| <div style=" background: #dcfce8; height: 16px; width: 20px; border-radius: 2px; border: 1px solid #86efad; position: relative; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">20px</div> | `spacing.20` |  |
+| <div style=" background: #dcfce8; height: 16px; width: 24px; border-radius: 2px; border: 1px solid #86efad; position: relative; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">24px</div> | `spacing.24` |  |
+| <div style=" background: #dcfce8; height: 16px; width: 32px; border-radius: 2px; border: 1px solid #86efad; position: relative; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">32px</div> | `spacing.32` |  |
+| <div style=" background: #dcfce8; height: 16px; width: 40px; border-radius: 2px; border: 1px solid #86efad; position: relative; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">40px</div> | `spacing.40` |  |
+| <div style=" background: #dcfce8; height: 16px; width: 48px; border-radius: 2px; border: 1px solid #86efad; position: relative; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">48px</div> | `spacing.48` |  |
+| <div style=" background: #dcfce8; height: 16px; width: 64px; border-radius: 2px; border: 1px solid #86efad; position: relative; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">64px</div> | `spacing.64` |  |
+| <div style=" background: #dcfce8; height: 16px; width: 100px; border-radius: 2px; border: 1px solid #86efad; position: relative; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">100px</div> | `spacing.100` |  |
