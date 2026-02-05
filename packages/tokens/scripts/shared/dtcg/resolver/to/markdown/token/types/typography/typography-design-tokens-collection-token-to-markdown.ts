@@ -52,7 +52,7 @@ function flattenTypographyValue(
     return value;
   }
 
-  const resolveValue = <T>(val: string | T): string | T => {
+  const resolveValue = <T>(val: CurlyReference | T): CurlyReference | T => {
     if (isCurlyReference(val)) {
       const resolved = resolveReference(context, val);
       return resolved !== null ? (resolved as unknown as T) : val;
