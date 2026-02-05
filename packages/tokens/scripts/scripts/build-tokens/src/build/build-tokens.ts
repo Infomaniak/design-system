@@ -51,7 +51,8 @@ export function buildTokens({
 
     // FIGMA
     await buildFigmaTokens({
-      collection: baseCollection,
+      baseCollection,
+      modifiers,
       outputDirectory,
       logger,
     });
