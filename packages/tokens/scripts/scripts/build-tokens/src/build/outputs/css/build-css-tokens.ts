@@ -122,9 +122,11 @@ export function buildCssTokens({
 
                 const cssVariables: string = cssVariableDeclarationsToString(declarations);
 
+                const path: string = `${outputDirectory}/web/css/modifiers/${modifier}`;
+
                 await Promise.all([
                   writeFileSafe(
-                    `${outputDirectory}/web/css/modifiers/${modifier}/${context}.root.css`,
+                    `${path}/${context}.root.css`,
                     wrapCssVariableDeclarationsWithCssSelector(
                       cssVariables,
                       ':root,\n:host',
@@ -135,7 +137,7 @@ export function buildCssTokens({
                     },
                   ),
                   writeFileSafe(
-                    `${outputDirectory}/web/css/modifiers/${modifier}/${context}.attr.css`,
+                    `${path}/${context}.attr.css`,
                     wrapCssVariableDeclarationsWithCssSelector(
                       cssVariables,
                       `[data-esds-${modifier}="${context}"]`,
