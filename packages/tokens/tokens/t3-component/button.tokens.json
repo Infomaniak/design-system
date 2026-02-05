@@ -1,0 +1,14 @@
+{
+  "button": {
+    "background": {
+      "color": {
+        "$value": "{color.brand}"
+      }
+    },
+    "padding": {
+      "inline": {
+        "$value": "{spacing.sm}"
+      }
+    }
+  }
+}

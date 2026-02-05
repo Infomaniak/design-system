@@ -1,0 +1,7 @@
+{
+  "color": {
+    "brand": {
+      "$value": "{color.red.500}"
+    }
+  }
+}
