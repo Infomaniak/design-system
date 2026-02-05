@@ -9,7 +9,7 @@ They're assembled into a list of tokens to apply styles to elements.
 
 ## File structure
 
-- `tokens`: Contains the list the all the tokens for the design tokens.
+- `tokens`: Contains the list of all the tokens used by the design system.
   - `t1-primitive`: Contains the _primitive_ tokens: it's a list of all the possible values to use for the design tokens.
     Developers should not use these values directly in their code, as they should rely on more abstract tokens (see t2, t3).
   - `t2-semantic`: Contains the _semantic_ tokens: it's a list of token's having a semantic meaning (ex: "color.brand").
