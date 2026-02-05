@@ -1,3 +1,5 @@
+import type { CurlyReference } from '../../../../../../design-token/reference/types/curly/curly-reference.ts';
+import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { NumberDesignTokensCollectionToken } from '../../../../../token/types/base/number/number-design-tokens-collection-token.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
@@ -64,17 +66,16 @@ function getRatioFormat(name: readonly string[]): string {
  * A ratio of 1 is a square, 1.33 is 4:3, etc.
  *
  * @param ratio - The aspect ratio value (width / height)
- * @param value - The display value text to show in the box
  * @param name - The token name array to extract ratio format
  * @returns HTML string for the ratio preview
  */
-function createRatioPreview(ratio: number, value: string, name: readonly string[]): string {
+function createRatioPreview(ratio: number, name: readonly string[]): string {
   // Base height for the preview box
   const baseHeight = 60;
   // Calculate width based on ratio: width = height * ratio
   // Round to avoid floating point precision issues in pixels
   const width = Math.round(baseHeight * ratio);
-  
+
   // Format the ratio representation (e.g., "4:3", "16:9", "1:1")
   const ratioFormat = getRatioFormat(name);
 
@@ -111,6 +112,22 @@ function createRatioPreview(ratio: number, value: string, name: readonly string[
 }
 
 /**
+ * Resolves a token reference and returns its numeric value.
+ * Returns null if resolution fails or value is not a number.
+ */
+function resolveNumberReference(
+  context: MarkdownRenderContext,
+  reference: CurlyReference,
+): number | null {
+  try {
+    const resolved = context.collection.resolve(context.collection.get(reference));
+    return typeof resolved.value === 'number' ? resolved.value : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Renders a numeric design token to a markdown table row.
  *
  * Creates a visual display of the numeric value with intelligent formatting.
@@ -142,40 +159,53 @@ function createRatioPreview(ratio: number, value: string, name: readonly string[
  */
 export function numberDesignTokensCollectionTokenToMarkdown(
   token: NumberDesignTokensCollectionToken,
-  _context: MarkdownRenderContext,
+  context: MarkdownRenderContext,
   options: NumberMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
-  const {
-    decimalPlaces = 2,
-    showPercentageForDecimals = true,
-    showRawValue = false,
-  } = options;
+  const { decimalPlaces = 2, showPercentageForDecimals = true, showRawValue = false } = options;
 
-  // Get the numeric value
-  const value = token.value;
+  // Get the value and resolve if it's a reference
+  const rawValue = token.value;
 
-  // Format the value
+  let resolvedValue: number | null;
   let displayValue: string;
 
-  if (Number.isInteger(value)) {
-    // Integer value - show as-is
-    displayValue = value.toString();
+  if (isCurlyReference(rawValue)) {
+    // It's a reference - try to resolve it
+    resolvedValue = resolveNumberReference(context, rawValue);
+    displayValue = resolvedValue !== null ? String(resolvedValue) : rawValue;
   } else {
-    // Decimal value - format with specified decimal places
-    const formattedValue = value.toFixed(decimalPlaces);
-
-    // Check if this is likely an opacity value
-    if (showPercentageForDecimals && isLikelyOpacity(token.name, value)) {
-      const percentage = Math.round(value * 100);
-      displayValue = `${formattedValue} (${percentage}%)`;
-    } else {
-      displayValue = formattedValue;
-    }
+    // It's a number value
+    resolvedValue = rawValue;
   }
 
-  // Show raw value if requested and different from formatted
-  if (showRawValue && displayValue !== value.toString()) {
-    displayValue = `${displayValue} [raw: ${value}]`;
+  // Format the value if we have a resolved number
+  if (resolvedValue !== null) {
+    const value = resolvedValue;
+
+    if (Number.isInteger(value)) {
+      // Integer value - show as-is
+      displayValue = value.toString();
+    } else {
+      // Decimal value - format with specified decimal places
+      const formattedValue = value.toFixed(decimalPlaces);
+
+      // Check if this is likely an opacity value
+      if (showPercentageForDecimals && isLikelyOpacity(token.name, value)) {
+        const percentage = Math.round(value * 100);
+        displayValue = `${formattedValue} (${percentage}%)`;
+      } else {
+        displayValue = formattedValue;
+      }
+    }
+
+    // Show raw value if requested and different from formatted
+    if (showRawValue && displayValue !== value.toString()) {
+      displayValue = `${displayValue} [raw: ${value}]`;
+    }
+  } else {
+    // Display the unresolved reference
+    displayValue = String(rawValue);
   }
 
   // Create the number preview HTML
@@ -183,8 +213,8 @@ export function numberDesignTokensCollectionTokenToMarkdown(
   // For others, show a styled code block
   let preview: string;
 
-  if (isRatioToken(token.name)) {
-    preview = createRatioPreview(value, displayValue, token.name);
+  if (isRatioToken(token.name) && resolvedValue !== null) {
+    preview = createRatioPreview(resolvedValue, token.name);
   } else {
     preview = /* HTML */ `
       <div style="
