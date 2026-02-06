@@ -1,34 +1,49 @@
 {
   "breakpoint": {
     "$type": "dimension",
-    "sm": {
+    "640": {
       "$value": {
         "value": 640,
         "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["WIDTH_HEIGHT"]
       }
     },
-    "md": {
+    "768": {
       "$value": {
         "value": 768,
         "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["WIDTH_HEIGHT"]
       }
     },
-    "lg": {
+    "1024": {
       "$value": {
         "value": 1024,
         "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["WIDTH_HEIGHT"]
       }
     },
-    "xl": {
+    "1280": {
       "$value": {
         "value": 1280,
         "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["WIDTH_HEIGHT"]
       }
     },
-    "2xl": {
+    "1536": {
       "$value": {
         "value": 1536,
         "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["WIDTH_HEIGHT"]
       }
     }
   }

@@ -1,0 +1,35 @@
+{
+  "ratio": {
+    "$type": "number",
+    "1-1": {
+      "$value": 1,
+      "$extensions": {
+        "$scopes": []
+      }
+    },
+    "4-3": {
+      "$value": 1.333,
+      "$extensions": {
+        "$scopes": []
+      }
+    },
+    "3-2": {
+      "$value": 1.5,
+      "$extensions": {
+        "$scopes": []
+      }
+    },
+    "16-9": {
+      "$value": 1.778,
+      "$extensions": {
+        "$scopes": []
+      }
+    },
+    "21-9": {
+      "$value": 2.333,
+      "$extensions": {
+        "$scopes": []
+      }
+    }
+  }
+}

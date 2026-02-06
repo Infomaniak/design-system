@@ -5,60 +5,90 @@
       "$value": {
         "value": 0,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "2": {
       "$value": {
         "value": 2,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "4": {
       "$value": {
         "value": 4,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "6": {
       "$value": {
         "value": 6,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "8": {
       "$value": {
         "value": 8,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "12": {
       "$value": {
         "value": 12,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "16": {
       "$value": {
         "value": 16,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "24": {
       "$value": {
         "value": 24,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "32": {
       "$value": {
         "value": 32,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "1000": {
       "$value": {
         "value": 1000,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
       }
     }
   }
