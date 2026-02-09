@@ -1,9 +1,9 @@
 import { writeFileSafe } from '../../../../../../../../../scripts/helpers/file/write-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
-import { indent } from '../../../../../../../../../scripts/helpers/misc/indent.ts';
-import type { ValueOrCurlyReference } from '../../../../../../shared/dtcg/design-token/reference/types/curly/value-or/value-or-curly-reference.ts';
+import { indent } from '../../../../../../../../../scripts/helpers/misc/string/indent/indent.ts';
 import type { SegmentsReference } from '../../../../../../shared/dtcg/design-token/reference/types/segments/segments-reference.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
+import type { DesignTokenModifiers } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import type { CssVariableDeclaration } from '../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
 import { cssVariableDeclarationsToString } from '../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/to/css-variable-declarations-to-string.ts';
 import { wrapCssVariableDeclarationsWithCssSelector } from '../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/to/wrap-css-variable-declarations-with-css-selector.ts';
@@ -15,32 +15,25 @@ import {
 import { createCssVariableNameGenerator } from '../../../../../../shared/dtcg/resolver/to/css/token/name/create-css-variable-name-generator.ts';
 import { DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION } from '../../../../../../shared/dtcg/resolver/to/css/token/name/default-generate-css-variable-name-function.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
-import { DESIGN_TOKEN_THEMES } from '../../../constants/design-token-themes.ts';
-import { DESIGN_TOKEN_VARIANTS } from '../../../constants/design-token-variants.ts';
+import type { ArrayDesignTokenName } from '../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
 import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header .ts';
-import { AUTO_GENERATED_VARIANT_FILE_HEADER } from '../../constants/auto-generated-variant-file-header .ts';
-import { getTokenValueByTheme } from '../../helpers/get-token-value-by-theme.ts';
-import { getTokenValueByVariant } from '../../helpers/get-token-value-by-variant.ts';
 
-const CSS_THEME_FILE_HEADER = `/*
+const CSS_AUTO_GENERATED_FILE_HEADER = `/*
   ${indent(AUTO_GENERATED_FILE_HEADER)}
-*/
-
-`;
-const CSS_VARIANT_FILE_HEADER = `/*
-  ${indent(AUTO_GENERATED_VARIANT_FILE_HEADER)}
 */
 
 `;
 
 export interface BuildCssTokensOptions {
-  readonly collection: DesignTokensCollection;
+  readonly baseCollection: DesignTokensCollection;
+  readonly modifiers: DesignTokenModifiers;
   readonly outputDirectory: string;
   readonly logger: Logger;
 }
 
 export function buildCssTokens({
-  collection,
+  baseCollection,
+  modifiers,
   outputDirectory,
   logger,
 }: BuildCssTokensOptions): Promise<void> {
@@ -49,106 +42,118 @@ export function buildCssTokens({
       generateCssVariableName: createCssVariableNameGenerator('esds'),
     };
 
-    for (const theme of DESIGN_TOKEN_THEMES) {
-      await logger.asyncTask(`theme: ${theme}`, async (): Promise<void> => {
-        const cssVariables: string = cssVariableDeclarationsToString(
-          collection
-            .tokens()
-            .map((token: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
-              return designTokensCollectionTokenToCssVariableDeclaration(
-                {
-                  ...token,
-                  type: collection.resolve(token).type,
-                  value: getTokenValueByTheme(token, theme),
-                },
-                cssOptions,
-              );
-            }),
-        );
+    await logger.asyncTask('main', async (): Promise<void> => {
+      const cssVariables: string = cssVariableDeclarationsToString(
+        baseCollection
+          .tokens()
+          .map((token: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
+            return designTokensCollectionTokenToCssVariableDeclaration(
+              {
+                ...token,
+                type: baseCollection.resolve(token).type,
+              },
+              cssOptions,
+            );
+          }),
+      );
 
-        await Promise.all([
-          writeFileSafe(
-            `${outputDirectory}/web/css/themes/${theme}.theme.css`,
-            wrapCssVariableDeclarationsWithCssSelector(
-              cssVariables,
-              ':root,\n:host',
-              CSS_THEME_FILE_HEADER,
-            ),
-            {
-              encoding: 'utf-8',
-            },
-          ),
-          writeFileSafe(
-            `${outputDirectory}/web/css/themes/${theme}.theme.attr.css`,
-            wrapCssVariableDeclarationsWithCssSelector(
-              cssVariables,
-              `[data-theme="${theme}"]`,
-              CSS_THEME_FILE_HEADER,
-            ),
-            {
-              encoding: 'utf-8',
-            },
-          ),
-        ]);
-      });
-    }
+      await writeFileSafe(
+        `${outputDirectory}/web/css/tokens.root.css`,
+        wrapCssVariableDeclarationsWithCssSelector(
+          cssVariables,
+          ':root,\n:host',
+          CSS_AUTO_GENERATED_FILE_HEADER,
+        ),
+        {
+          encoding: 'utf-8',
+        },
+      );
+    });
 
-    for (const variant of DESIGN_TOKEN_VARIANTS) {
-      await logger.asyncTask(`variant: ${variant}`, async (): Promise<void> => {
-        const cssVariables: string = cssVariableDeclarationsToString(
-          collection
-            .tokens()
-            .map(
-              (token: GenericDesignTokensCollectionToken): CssVariableDeclaration | undefined => {
-                const value: ValueOrCurlyReference<unknown> | undefined = getTokenValueByVariant(
-                  token,
-                  variant,
+    await logger.asyncTask('modifier', async (logger: Logger): Promise<void> => {
+      for (const [modifier, contexts] of modifiers.entries()) {
+        await logger.asyncTask(modifier, async (logger: Logger): Promise<void> => {
+          await logger.asyncTask('context', async (logger: Logger): Promise<void> => {
+            for (const [context, collection] of contexts.entries()) {
+              await logger.asyncTask(context, async (_logger: Logger): Promise<void> => {
+                const expectedPath: string = `${modifier}/${context}`;
+
+                const toRedeclare: Set<string> = new Set();
+
+                const declarations: CssVariableDeclaration[] = Array.from(
+                  collection
+                    .tokens()
+                    .filter((token: GenericDesignTokensCollectionToken): boolean => {
+                      return token.files.some((path: string): boolean =>
+                        path.includes(expectedPath),
+                      );
+                    })
+                    .map((token: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
+                      for (const referenced of collection.getTokensDirectlyReferencing(
+                        token.name,
+                      )) {
+                        toRedeclare.add(JSON.stringify(referenced.name));
+                      }
+
+                      return designTokensCollectionTokenToCssVariableDeclaration(
+                        {
+                          ...token,
+                          type: collection.resolve(token).type,
+                        },
+                        cssOptions,
+                      );
+                    }),
                 );
 
-                return value === undefined
-                  ? undefined
-                  : designTokensCollectionTokenToCssVariableDeclaration(
+                for (const referenced of toRedeclare) {
+                  const name: ArrayDesignTokenName = JSON.parse(referenced);
+                  const token: GenericDesignTokensCollectionToken = collection.get(name);
+
+                  declarations.push(
+                    designTokensCollectionTokenToCssVariableDeclaration(
                       {
                         ...token,
                         type: collection.resolve(token).type,
-                        value,
                       },
                       cssOptions,
-                    );
-              },
-            )
-            .filter(
-              (item: CssVariableDeclaration | undefined): item is CssVariableDeclaration =>
-                item !== undefined,
-            ),
-        );
+                    ),
+                  );
+                }
 
-        await Promise.all([
-          writeFileSafe(
-            `${outputDirectory}/web/css/variants/${variant}.variant.css`,
-            wrapCssVariableDeclarationsWithCssSelector(
-              cssVariables,
-              ':root,\n:host',
-              CSS_VARIANT_FILE_HEADER,
-            ),
-            {
-              encoding: 'utf-8',
-            },
-          ),
-          writeFileSafe(
-            `${outputDirectory}/web/css/variants/${variant}.variant.attr.css`,
-            wrapCssVariableDeclarationsWithCssSelector(
-              cssVariables,
-              `[data-variant~="${variant}"]`,
-              CSS_VARIANT_FILE_HEADER,
-            ),
-            {
-              encoding: 'utf-8',
-            },
-          ),
-        ]);
-      });
-    }
+                const cssVariables: string = cssVariableDeclarationsToString(declarations);
+
+                const path: string = `${outputDirectory}/web/css/modifiers/${modifier}`;
+
+                await Promise.all([
+                  writeFileSafe(
+                    `${path}/${context}.root.css`,
+                    wrapCssVariableDeclarationsWithCssSelector(
+                      cssVariables,
+                      ':root,\n:host',
+                      CSS_AUTO_GENERATED_FILE_HEADER,
+                    ),
+                    {
+                      encoding: 'utf-8',
+                    },
+                  ),
+                  writeFileSafe(
+                    `${path}/${context}.attr.css`,
+                    wrapCssVariableDeclarationsWithCssSelector(
+                      cssVariables,
+                      `[data-esds-${modifier}="${context}"]`,
+                      CSS_AUTO_GENERATED_FILE_HEADER,
+                    ),
+                    {
+                      encoding: 'utf-8',
+                    },
+                  ),
+                ]);
+              });
+            }
+          });
+        });
+      }
+    });
 
     // TAILWIND 4+
     // https://tailwindcss.com/docs/theme#theme-variable-namespaces
@@ -184,7 +189,7 @@ export function buildCssTokens({
           name: `--*`,
           value: 'initial',
         },
-        ...collection
+        ...baseCollection
           .tokens()
           .map((token: GenericDesignTokensCollectionToken): CssVariableDeclaration | undefined => {
             const tokenName: string = token.name.join('.');
@@ -227,7 +232,7 @@ export function buildCssTokens({
           wrapCssVariableDeclarationsWithCssSelector(
             cssVariables,
             '@theme inline',
-            CSS_THEME_FILE_HEADER,
+            CSS_AUTO_GENERATED_FILE_HEADER,
           ),
           {
             encoding: 'utf-8',

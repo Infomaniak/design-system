@@ -1,6 +1,6 @@
 {
   "shadow": {
-    "shadow-1": {
+    "1": {
       "x": {
         "$value": {
           "value": 0,
@@ -30,7 +30,7 @@
         "$type": "dimension"
       }
     },
-    "shadow-2": {
+    "2": {
       "x": {
         "$value": {
           "value": 0,
@@ -60,7 +60,7 @@
         "$type": "dimension"
       }
     },
-    "shadow-3": {
+    "3": {
       "x": {
         "$value": {
           "value": 0,
@@ -90,7 +90,7 @@
         "$type": "dimension"
       }
     },
-    "shadow-4": {
+    "4": {
       "x": {
         "$value": {
           "value": 0,
@@ -120,7 +120,7 @@
         "$type": "dimension"
       }
     },
-    "shadow-5": {
+    "5": {
       "x": {
         "$value": {
           "value": 0,

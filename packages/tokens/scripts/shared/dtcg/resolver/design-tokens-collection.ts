@@ -22,6 +22,7 @@ import { designTokenValueToDesignTokensCollectionTokenValue } from './token/from
 import type { ArrayDesignTokenName } from './token/name/array-design-token-name.ts';
 import type { DesignTokenNameLike } from './token/name/design-token-name-like.ts';
 import { isBorderDesignTokensCollectionToken } from './token/types/composite/border/is-border-design-tokens-collection-token.ts';
+import { isBorderDesignTokensCollectionTokenValueReferencing } from './token/types/composite/border/value/is-referencing/is-border-design-tokens-collection-token-value-referencing.ts';
 import { updateBorderDesignTokensCollectionTokenValueReferences } from './token/types/composite/border/value/update/update-border-design-tokens-collection-token-value-references.ts';
 import { isGradientDesignTokensCollectionToken } from './token/types/composite/gradient/is-gradient-design-tokens-collection-token.ts';
 import { updateGradientDesignTokensCollectionTokenValueReferences } from './token/types/composite/gradient/value/update/update-gradient-design-tokens-collection-token-value-references.ts';
@@ -32,8 +33,11 @@ import { updateStrokeStyleDesignTokensCollectionTokenValueReferences } from './t
 import { isTransitionDesignTokensCollectionToken } from './token/types/composite/transition/is-transition-design-tokens-collection-token.ts';
 import { updateTransitionDesignTokensCollectionTokenValueReferences } from './token/types/composite/transition/value/update/update-transition-design-tokens-collection-token-value-references.ts';
 import { isTypographyDesignTokensCollectionToken } from './token/types/composite/typography/is-typography-design-tokens-collection-token.ts';
+import { isTypographyDesignTokensCollectionTokenValueReferencing } from './token/types/composite/typography/value/is-referencing/is-typography-design-tokens-collection-token-value-referencing.ts';
 import { updateTypographyDesignTokensCollectionTokenValueReferences } from './token/types/composite/typography/value/update/update-typography-design-tokens-collection-token-value-references.ts';
 import type { DesignTokensCollectionAddOptions } from './types/methods/add/design-tokens-collection-add-options.ts';
+import type { DesignTokensCollectionFromDesignTokensTreeOptions } from './types/methods/from-design-tokens-tree/design-tokens-collection-from-design-tokens-tree-options.ts';
+import type { DesignTokensCollectionFromFilesOptions } from './types/methods/from-files/design-tokens-collection-from-files-options.ts';
 import { designTokensCollectionRenameExtensionsAutomatically } from './types/methods/rename/design-tokens-collection-rename-extensions-function.ts';
 import type { DesignTokensCollectionRenameOptions } from './types/methods/rename/design-tokens-collection-rename-options.ts';
 
@@ -253,6 +257,46 @@ export class DesignTokensCollection {
     return this;
   }
 
+  /* LIST */
+
+  getTokensDirectlyReferencing(
+    name: DesignTokenNameLike,
+  ): IteratorObject<GenericDesignTokensCollectionToken> {
+    name = DesignTokensCollection.designTokenNameLikeToArrayDesignTokenName(name);
+    const nameAsCurlyReference: CurlyReference =
+      DesignTokensCollection.arrayDesignTokenNameToCurlyReference(name);
+
+    return this.#tokens.values().filter((token: GenericDesignTokensCollectionToken): boolean => {
+      if (isCurlyReference(token.value)) {
+        return token.value === nameAsCurlyReference;
+      } else {
+        console.assert(token.type !== undefined);
+
+        if (isBorderDesignTokensCollectionToken(token)) {
+          return isBorderDesignTokensCollectionTokenValueReferencing(
+            token.value,
+            nameAsCurlyReference,
+          );
+        } else if (isGradientDesignTokensCollectionToken(token)) {
+          throw 'TODO: implement'; // TODO
+        } else if (isShadowDesignTokensCollectionToken(token)) {
+          throw 'TODO: implement'; // TODO
+        } else if (isStrokeStyleDesignTokensCollectionToken(token)) {
+          throw 'TODO: implement'; // TODO
+        } else if (isTransitionDesignTokensCollectionToken(token)) {
+          throw 'TODO: implement'; // TODO
+        } else if (isTypographyDesignTokensCollectionToken(token)) {
+          return isTypographyDesignTokensCollectionTokenValueReferencing(
+            token.value,
+            nameAsCurlyReference,
+          );
+        } else {
+          return false;
+        }
+      }
+    });
+  }
+
   /* FROM */
 
   /**
@@ -261,9 +305,13 @@ export class DesignTokensCollection {
    * Then, it extracts the design tokens and appends them to this collection.
    *
    * @param {Iterable<string>} sources - An iterable collection of file paths (glob) to be processed.
+   * @param {DesignTokensCollectionFromFilesOptions} [options] - Optional options to customize the behavior of the method.
    * @returns {Promise<this>} A promise that resolves with the current instance for method chaining.
    */
-  async fromFiles(sources: Iterable<string>): Promise<this> {
+  async fromFiles(
+    sources: Iterable<string>,
+    options?: DesignTokensCollectionFromFilesOptions,
+  ): Promise<this> {
     for (const path of sources) {
       for await (const entry of glob(path)) {
         this.fromDesignTokensTree(
@@ -274,7 +322,10 @@ export class DesignTokensCollection {
               }),
             ),
           ) as DesignTokensTree,
-          [entry],
+          {
+            ...options,
+            files: [entry],
+          },
         );
       }
     }
@@ -286,25 +337,53 @@ export class DesignTokensCollection {
    * Explores a design tokens tree and appends all design tokens found to the collection.
    *
    * @param {DesignTokensTree} root - The root node of the design tokens tree to process.
-   * @param {string} [files] - An optional list of files associated with the design tokens tree.
+   * @param {string} [options] - Optional options to customize the behavior of the method.
+   * @param {readonly string[]} [options.files] - An array of file paths associated with this design tokens tree.
+   * @param {boolean} [options.forEachTokenBehaviour=merge] - What to do when a token is encountered during the traversal.
+   * - `merge`: merges the current token with an existing one if it exists.
+   * - `only-new-token`: throws an error if the current token is not already present in the collection.
+   * - `prevent-new-token`: throws an error if the token is new.
    * @returns {this} The current instance for method chaining.
    */
-  fromDesignTokensTree(root: DesignTokensTree, files: readonly string[] = []): this {
-    this.#exploreDesignTokensTree(root, [], root, files);
+  fromDesignTokensTree(
+    root: DesignTokensTree,
+    {
+      files = [],
+      forEachTokenBehaviour = 'merge',
+    }: DesignTokensCollectionFromDesignTokensTreeOptions = {},
+  ): this {
+    this.#exploreDesignTokensTree({
+      root,
+      path: [],
+      current: root,
+      files,
+      forEachTokenBehaviour,
+    });
 
     return this;
   }
 
-  #exploreDesignTokensTree(
-    root: DesignTokensTree,
-    path: readonly string[],
-    tree: DesignTokensTree,
-    files: readonly string[],
-  ): void {
-    if (isDesignToken(tree)) {
-      const { $value, $type, $deprecated, $description, $extensions } = tree;
+  #exploreDesignTokensTree({
+    root,
+    path,
+    current,
+    files,
+    forEachTokenBehaviour,
+  }: ExploreDesignTokensTreeOptions): void {
+    if (isDesignToken(current)) {
+      const { $value, $type, $deprecated, $description, $extensions } = current;
 
       const name: ArrayDesignTokenName = path.at(-1) === '$root' ? path.slice(0, -1) : path;
+
+      if (forEachTokenBehaviour === 'only-new-token') {
+        if (this.has(name)) {
+          throw new Error(`Duplicate token (${forEachTokenBehaviour}): ${name.join('.')}`);
+        }
+      } else if (forEachTokenBehaviour === 'prevent-new-token') {
+        if (!this.has(name)) {
+          throw new Error(`Missing token (${forEachTokenBehaviour}): ${name.join('.')}`);
+        }
+      }
 
       if (isDesignTokenReference($value)) {
         this.add({
@@ -336,22 +415,24 @@ export class DesignTokensCollection {
         } satisfies DesignTokensCollectionTokenWithType<any, any>);
       }
     } else {
-      const { $description, $type, $extends, $ref, $deprecated, $extensions, ...children } = tree;
+      const { $description, $type, $extends, $ref, $deprecated, $extensions, ...children } =
+        current;
 
       if ($extends !== undefined || $ref !== undefined) {
         throw new Error('Missing $extends and $ref implementation on DesignTokensGroup.'); // TODO
       }
 
       for (const [name, child] of Object.entries(children)) {
-        this.#exploreDesignTokensTree(
+        this.#exploreDesignTokensTree({
           root,
-          [...path, name],
-          {
+          path: [...path, name],
+          current: {
             ...removeUndefinedProperties({ $description, $type, $deprecated, $extensions }),
             ...child,
           },
           files,
-        );
+          forEachTokenBehaviour,
+        });
       }
     }
   }
@@ -484,4 +565,16 @@ export class DesignTokensCollection {
   clone(): DesignTokensCollection {
     return DesignTokensCollection.#new(new Map(this.#tokens.entries()));
   }
+}
+
+/* INTERNAL */
+
+interface ExploreDesignTokensTreeOptions extends Pick<
+  DesignTokensCollectionFromDesignTokensTreeOptions,
+  'forEachTokenBehaviour'
+> {
+  readonly root: DesignTokensTree;
+  readonly path: readonly string[];
+  readonly current: DesignTokensTree;
+  readonly files: readonly string[];
 }

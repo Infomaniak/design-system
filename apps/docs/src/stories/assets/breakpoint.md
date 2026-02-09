@@ -1,0 +1,9 @@
+<!-- Do not edit directly, this file was auto-generated. -->
+
+| Preview | Name | Description |
+|---------|------|-------------|
+| <div style=" background: #f3f4f6; padding: 16px 24px; border-radius: 4px; border: 1px solid #e5e7eb; font-family: monospace; font-size: 24px; font-weight: 600; color: #374151; text-align: center; display: inline-block; min-width: 120px; ">640px</div> | `breakpoint.640` |  |
+| <div style=" background: #f3f4f6; padding: 16px 24px; border-radius: 4px; border: 1px solid #e5e7eb; font-family: monospace; font-size: 24px; font-weight: 600; color: #374151; text-align: center; display: inline-block; min-width: 120px; ">768px</div> | `breakpoint.768` |  |
+| <div style=" background: #f3f4f6; padding: 16px 24px; border-radius: 4px; border: 1px solid #e5e7eb; font-family: monospace; font-size: 24px; font-weight: 600; color: #374151; text-align: center; display: inline-block; min-width: 120px; ">1024px</div> | `breakpoint.1024` |  |
+| <div style=" background: #f3f4f6; padding: 16px 24px; border-radius: 4px; border: 1px solid #e5e7eb; font-family: monospace; font-size: 24px; font-weight: 600; color: #374151; text-align: center; display: inline-block; min-width: 120px; ">1280px</div> | `breakpoint.1280` |  |
+| <div style=" background: #f3f4f6; padding: 16px 24px; border-radius: 4px; border: 1px solid #e5e7eb; font-family: monospace; font-size: 24px; font-weight: 600; color: #374151; text-align: center; display: inline-block; min-width: 120px; ">1536px</div> | `breakpoint.1536` |  |

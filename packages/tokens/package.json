@@ -4,11 +4,12 @@
   "type": "module",
   "main": "./index.js",
   "scripts": {
-    "build": "yarn build:tokens && yarn copy:dist",
+    "build": "yarn build:tokens && yarn copy:dist && yarn copy:markdown",
     "validate:tokens": "node --no-warnings=ExperimentalWarning scripts/scripts/validate-tokens/validate-tokens.script.ts",
     "build:tokens": "node --no-warnings=ExperimentalWarning scripts/scripts/build-tokens/build-tokens.script.ts",
     "publish:tokens": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-tokens/publish-tokens.script.ts",
     "copy:dist": "DEST=demo/node_modules/@infomaniak-design-system/tokens/ && rm -rf $DEST && mkdir -p $DEST && cp -a dist/web/. $DEST",
+    "copy:markdown": "cp -r dist/markdown/*.md ../../apps/docs/src/stories/assets/",
     "convert-figma-tokens": "node --no-warnings=ExperimentalWarning scripts/scripts/convert-figma-tokens/convert-figma-tokens.script.ts"
   },
   "description": "Infomaniak's Design System - Tokens",

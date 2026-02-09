@@ -68,7 +68,7 @@
     },
     "letter-spacing": {
       "$type": "dimension",
-      "letter-spacing-0": {
+      "0": {
         "$value": {
           "value": 0,
           "unit": "px"
