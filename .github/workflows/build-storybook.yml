@@ -1,0 +1,57 @@
+name: Build Storybook
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - main
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  build-storybook:
+    name: Build Storybook
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://npm.pkg.github.com'
+          always-auth: true
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Build Storybook
+        id: build
+        run: yarn workspace @infomaniak-design-system/docs build-storybook
+
+      - name: Upload Storybook artifact
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-pr-${{ github.event.pull_request.number }}
+          path: apps/docs/storybook-static/
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Post/Update PR comment
+        if: github.event_name == 'pull_request' && always()
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: storybook-build-status
+          message: |
+            ## ${{ steps.build.outcome == 'success' && '✅' || '❌' }} Storybook Build ${{ steps.build.outcome == 'success' && 'Successful' || 'Failed' }}
+
+            ${{ steps.build.outcome == 'success' && format('Storybook has been built successfully for this PR.{2}{2}- **Status**: Build passed{2}- **Workflow Run**: [View details](https://github.com/{0}/actions/runs/{1}){2}- **Artifact**: `storybook-pr-{3}` available for 14 days{2}{2}The built Storybook will be used for deployment when this PR is merged.', github.repository, github.run_id, '\n', github.event.pull_request.number) || format('Storybook build failed for this PR.{2}{2}- **Status**: Build failed{2}- **Workflow Run**: [View logs](https://github.com/{0}/actions/runs/{1}){2}{2}Please check the workflow logs and fix any errors before merging.', github.repository, github.run_id, '\n') }}
