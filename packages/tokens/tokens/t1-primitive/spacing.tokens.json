@@ -5,84 +5,126 @@
       "$value": {
         "value": 0,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["GAP"]
       }
     },
     "2": {
       "$value": {
         "value": 2,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["GAP"]
       }
     },
     "4": {
       "$value": {
         "value": 4,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["GAP"]
       }
     },
     "6": {
       "$value": {
         "value": 6,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["GAP"]
       }
     },
     "8": {
       "$value": {
         "value": 8,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["GAP"]
       }
     },
     "12": {
       "$value": {
         "value": 12,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["GAP"]
       }
     },
     "16": {
       "$value": {
         "value": 16,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["GAP"]
       }
     },
     "20": {
       "$value": {
         "value": 20,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["GAP"]
       }
     },
     "24": {
       "$value": {
         "value": 24,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["GAP"]
       }
     },
     "32": {
       "$value": {
         "value": 32,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["GAP"]
       }
     },
     "40": {
       "$value": {
         "value": 40,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["GAP"]
       }
     },
     "48": {
       "$value": {
         "value": 48,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["GAP"]
       }
     },
     "64": {
       "$value": {
         "value": 64,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["GAP"]
       }
     },
     "100": {
       "$value": {
         "value": 100,
         "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["GAP"]
       }
     }
   }

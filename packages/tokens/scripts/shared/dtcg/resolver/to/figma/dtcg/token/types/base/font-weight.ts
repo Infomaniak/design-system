@@ -3,19 +3,16 @@ import { predefinedFontWeightDesignTokenValueToNumberValue } from '../../../../.
 import type { FontWeightDesignTokensCollectionToken } from '../../../../../../token/types/base/font-weight/font-weight-design-tokens-collection-token.ts';
 import type { FontWeightDesignTokensCollectionTokenValue } from '../../../../../../token/types/base/font-weight/value/font-weight-design-tokens-collection-token-value.ts';
 import type { NumberFigmaDesignToken } from '../../../../figma/token/types/number/number-figma-design-token.ts';
-import { valueOrCurlyReferenceToValueOrFigmaReference } from '../../../../reference/value-or-curly-reference-to-figma-reference.ts';
+import { designTokensCollectionTokenWithMapValueToFigmaDesignToken } from '../../design-tokens-collection-token-with-map-value-to-figma-design-token.ts';
 
 export function fontWeightDesignTokensCollectionTokenToNumberFigmaDesignToken(
   token: FontWeightDesignTokensCollectionToken,
 ): NumberFigmaDesignToken {
-  return {
-    $type: 'number',
-    $value: valueOrCurlyReferenceToValueOrFigmaReference<
-      FontWeightDesignTokensCollectionTokenValue,
-      number
-    >(token.value, fontWeightDesignTokensCollectionTokenValueToFigmaValue),
-    $description: token.description,
-  };
+  return designTokensCollectionTokenWithMapValueToFigmaDesignToken(
+    token,
+    'number',
+    fontWeightDesignTokensCollectionTokenValueToFigmaValue,
+  );
 }
 
 export function fontWeightDesignTokensCollectionTokenValueToFigmaValue(
