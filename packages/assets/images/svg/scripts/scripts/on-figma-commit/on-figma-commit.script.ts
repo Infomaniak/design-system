@@ -1,16 +1,12 @@
+import { rm } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadEnvFile } from '../../../../../../../scripts/helpers/env/load-env-file.ts';
-import { postKchatWebhookMessage } from '../../../../../../../scripts/helpers/kchat/api/post-kchat-webhook-message.ts';
-import { getEnvKchatWebhookId } from '../../../../../../../scripts/helpers/kchat/env/get-env-kchat-webhook-id.ts';
+import { loadOptionallyEnvFile } from '../../../../../../../scripts/helpers/env/load-env-file.ts';
+import { getEnvFigmaApiToken } from '../../../../../../../scripts/helpers/figma/env/get-env-figma-api-token.ts';
+import { getEnvFigmaIconFileKey } from '../../../../../../../scripts/helpers/figma/env/get-env-figma-icon-file-key.ts';
 import { DEFAULT_LOG_LEVEL } from '../../../../../../../scripts/helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
-
-/*
-doc:
- - gitlab:
-   - https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
- */
+import { importIconsAndIllustrations } from './src/import/import-icons-and-illustrations.ts';
 
 const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 
@@ -20,13 +16,16 @@ const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
 function onFigmaCommitScript(): Promise<void> {
   return logger.asyncTask('on-figma-commit.script', async (logger: Logger): Promise<void> => {
-    loadEnvFile();
+    loadOptionallyEnvFile(logger);
 
-    // await importIconsAndIllustrations({
-    //   figmaSourceFileKey: getEnvFigmaIconFileKey(),
-    //   outputDirectory: OUTPUT_DIR,
-    //   logger,
-    // });
+    await rm(OUTPUT_DIR, { force: true, recursive: true });
+
+    await importIconsAndIllustrations({
+      figmaAPIToken: getEnvFigmaApiToken(),
+      figmaSourceFileKey: getEnvFigmaIconFileKey(),
+      outputDirectory: OUTPUT_DIR,
+      logger,
+    });
 
     // let mr: ExpandedMergeRequestSchema | undefined;
     // try {
@@ -37,10 +36,10 @@ function onFigmaCommitScript(): Promise<void> {
 
     // await notifyProcessCompletion(logger.child('KCHAT'), { mr, errors });
 
-    await postKchatWebhookMessage({
-      webhookId: getEnvKchatWebhookId(),
-      text: 'Test',
-    });
+    // await postKchatWebhookMessage({
+    //   webhookId: getEnvKchatWebhookId(),
+    //   text: 'Test',
+    // });
   });
 }
 

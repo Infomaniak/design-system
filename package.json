@@ -29,6 +29,7 @@
     "packages": [
       "packages/tokens",
       "packages/tokens/demo",
+      "packages/assets/images/svg",
       "apps/docs"
     ]
   },
