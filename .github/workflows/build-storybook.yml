@@ -55,7 +55,18 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           header: storybook-build-status
-          message: |
+          message: |-
             ## ${{ steps.build.outcome == 'success' && '✅' || '❌' }} Storybook Build ${{ steps.build.outcome == 'success' && 'Successful' || 'Failed' }}
 
-            ${{ steps.build.outcome == 'success' && format('Storybook has been built successfully for this PR.{2}{2}- **Status**: Build passed{2}- **Workflow Run**: [View details](https://github.com/{0}/actions/runs/{1}){2}- **Artifact**: `storybook-pr-{3}` available for 14 days{2}{2}The built Storybook will be used for deployment when this PR is merged.', github.repository, github.run_id, '\n', github.event.pull_request.number) || format('Storybook build failed for this PR.{2}{2}- **Status**: Build failed{2}- **Workflow Run**: [View logs](https://github.com/{0}/actions/runs/{1}){2}{2}Please check the workflow logs and fix any errors before merging.', github.repository, github.run_id, '\n') }}
+            ${{ steps.build.outcome == 'success' && format('Storybook has been built successfully for this PR.
+
+            - **Status**: Build passed
+            - **Workflow Run**: [View details](https://github.com/{0}/actions/runs/{1})
+            - **Artifact**: `storybook-pr-{2}` available for 14 days
+
+            The built Storybook will be used for deployment when this PR is merged.', github.repository, github.run_id, github.event.pull_request.number) || format('Storybook build failed for this PR.
+
+            - **Status**: Build failed
+            - **Workflow Run**: [View logs](https://github.com/{0}/actions/runs/{1})
+
+            Please check the workflow logs and fix any errors before merging.', github.repository, github.run_id) }}
