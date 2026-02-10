@@ -37,6 +37,10 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
+      - name: Build Storybook
+        id: build
+        run: yarn workspace @infomaniak-design-system/docs build-storybook
+
       - name: Upload Storybook artifact
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
