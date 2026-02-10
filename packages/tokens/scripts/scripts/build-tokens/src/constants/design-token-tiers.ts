@@ -1,15 +1,15 @@
-export const T1_DIRNAME = 't1-primitive';
-export type T1Dirname = typeof T1_DIRNAME;
+export const T1_DIRECTORY_NAME = 't1-primitive';
+export type T1DirectoryName = typeof T1_DIRECTORY_NAME;
 
-export const T2_DIRNAME = 't2-semantic';
-export type T2Dirname = typeof T2_DIRNAME;
+export const T2_DIRECTORY_NAME = 't2-semantic';
+export type T2DirectoryName = typeof T2_DIRECTORY_NAME;
 
-export const T3_DIRNAME = 't3-component';
-export type T3Dirname = typeof T3_DIRNAME;
+export const T3_DIRECTORY_NAME = 't3-component';
+export type T3DirectoryName = typeof T3_DIRECTORY_NAME;
 
-export type DesignTokenTier = T1Dirname | T2Dirname | T3Dirname;
+export type DesignTokenTier = T1DirectoryName | T2DirectoryName | T3DirectoryName;
 
-export const DESIGN_TOKEN_TIERS: readonly [T1Dirname, T2Dirname, T3Dirname] = [
+export const DESIGN_TOKEN_TIERS: readonly [T1DirectoryName, T2DirectoryName, T3DirectoryName] = [
   't1-primitive',
   't2-semantic',
   't3-component',

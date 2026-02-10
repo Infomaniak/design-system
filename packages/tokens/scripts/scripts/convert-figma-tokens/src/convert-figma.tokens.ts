@@ -7,7 +7,7 @@ import { ascendDesignTokensTreeCommonTypes } from '../../../shared/dtcg/operatio
 import { tokensBrueckeToDtcg } from '../../../shared/tokens-bruecke/to/dtcg/tokens-bruecke-to-dtcg.ts';
 import {
   DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTIONS,
-  T3_DIRNAME,
+  T3_DIRECTORY_NAME,
 } from '../../build-tokens/src/constants/design-token-tiers.ts';
 
 export interface ConvertFigmaTokensOptions {
@@ -32,7 +32,7 @@ export async function convertFigmaTokens({
   for (const [tier, figmaCollectionName] of DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTIONS.entries()) {
     const tokens: DesignTokensTree | undefined = Reflect.get(tree, figmaCollectionName);
 
-    if (tier === T3_DIRNAME) {
+    if (tier === T3_DIRECTORY_NAME) {
       continue;
     }
 
