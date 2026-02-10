@@ -23,27 +23,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '24'
           registry-url: 'https://npm.pkg.github.com'
           always-auth: true
-
-      - name: Restore Yarn cache
-        uses: actions/cache@v4
-        with:
-          path: .yarn/cache
-          key: yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            yarn-${{ runner.os }}-
+          cache: 'yarn'
 
       - name: Install dependencies
         run: yarn install --immutable
-
-      - name: Build Storybook
-        id: build
-        run: yarn workspace @infomaniak-design-system/docs build-storybook
 
       - name: Upload Storybook artifact
         if: github.event_name == 'pull_request'
