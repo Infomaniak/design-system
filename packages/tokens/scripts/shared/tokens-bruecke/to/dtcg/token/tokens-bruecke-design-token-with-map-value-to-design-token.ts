@@ -1,6 +1,7 @@
 import { removeUndefinedProperties } from '../../../../../../../../scripts/helpers/misc/object/remove-undefined-properties.ts';
 import { isCurlyReference } from '../../../../dtcg/design-token/reference/types/curly/is-curly-reference.ts';
 import type { DesignToken } from '../../../../dtcg/design-token/token/design-token.ts';
+import type { GenericTokensBrueckeDesignToken } from '../../../tokens-bruecke/token/generic-tokens-bruecke-design-token.ts';
 import type { TokensBrueckeDesignToken } from '../../../tokens-bruecke/token/tokens-bruecke-design-token.ts';
 
 export function tokensBrueckeDesignTokenWithMapValueToDesignToken<
@@ -8,43 +9,58 @@ export function tokensBrueckeDesignTokenWithMapValueToDesignToken<
   GType extends string,
   GValue,
 >(
-  { $value, $description, $extensions, $deprecated }: TokensBrueckeDesignToken<any, GInputValue>,
+  token: TokensBrueckeDesignToken<any, GInputValue>,
   $type: GType,
   mapValue: (value: GInputValue) => GValue,
 ): DesignToken<GType, GValue> {
   return {
-    $value: isCurlyReference($value) ? $value : mapValue($value),
+    $value: isCurlyReference(token.$value) ? token.$value : mapValue(token.$value),
     $type,
     ...removeUndefinedProperties({
-      $deprecated,
-      $description: tokensBrueckeDesignTokenDescriptionToDesignTokenDescription($description),
-      $extensions: tokensBrueckeDesignTokenExtensionsToDesignTokenExtensions($extensions),
+      $deprecated: token.$deprecated,
+      $description: tokensBrueckeDesignTokenToDesignTokenDescription(token),
+      $extensions: tokensBrueckeDesignTokenToDesignTokenExtensions(token),
     }),
   };
 }
 
-function tokensBrueckeDesignTokenDescriptionToDesignTokenDescription(
-  input: string | undefined,
+function tokensBrueckeDesignTokenToDesignTokenDescription(
+  token: GenericTokensBrueckeDesignToken,
 ): string | undefined {
-  if (input === undefined || input === '') {
+  if (token.$description === undefined || token.$description === '') {
     return undefined;
   } else {
-    return input;
+    return token.$description;
   }
 }
 
-function tokensBrueckeDesignTokenExtensionsToDesignTokenExtensions(
-  input: Record<string, unknown> | undefined,
+function tokensBrueckeDesignTokenToDesignTokenExtensions(
+  token: GenericTokensBrueckeDesignToken,
 ): Record<string, unknown> | undefined {
-  if (input === undefined) {
-    return undefined;
-  } else {
-    const entries: [string, unknown][] = Object.entries(input);
+  let $extensions: Record<string, unknown> | undefined =
+    token.scopes === undefined
+      ? token.$extensions
+      : token.$extensions === undefined
+        ? {
+            scopes: token.scopes,
+          }
+        : {
+            scopes: token.scopes,
+            ...token.$extensions,
+          };
 
-    if (entries.length === 0 || (entries.length === 1 && entries[0][0] === 'mode')) {
-      return undefined;
-    } else {
-      return input;
+  if ($extensions !== undefined && Reflect.has($extensions, 'mode')) {
+    const mode: Record<string, unknown> = Reflect.get($extensions, 'mode')! as Record<
+      string,
+      unknown
+    >;
+
+    if (Object.keys(mode).length === 0) {
+      Reflect.deleteProperty($extensions, 'mode');
     }
   }
+
+  return $extensions === undefined || Object.keys($extensions).length === 0
+    ? undefined
+    : $extensions;
 }

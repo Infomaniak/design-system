@@ -3,6 +3,8 @@ import type { FontWeightDesignToken } from '../../../../../../dtcg/design-token/
 import type { NumberDesignToken } from '../../../../../../dtcg/design-token/token/types/base/types/number/number-design-token.ts';
 import type { DimensionTokensBrueckeDesignToken } from '../../../../../tokens-bruecke/token/types/dimension/dimension-tokens-bruecke-design-token.ts';
 import type { TokensBrueckeToDtcgContext } from '../../../context/tokens-bruecke-to-dtcg-context.ts';
+import { isTokensBrueckeDesignTokenFontWeightDesignToken } from '../../infer-dtcg-type/is-tokens-bruecke-design-token-font-weight-design-token.ts';
+import { isTokensBrueckeDesignTokenNumberDesignToken } from '../../infer-dtcg-type/is-tokens-bruecke-design-token-number-design-token.ts';
 import { tokensBrueckeDesignTokenWithMapValueToDesignToken } from '../../tokens-bruecke-design-token-with-map-value-to-design-token.ts';
 import { dimensionTokensBrueckeDesignTokenValueToDimensionDesignTokenValue } from './value/dimension-tokens-bruecke-design-token-value-to-dimension-design-token-value.ts';
 
@@ -10,9 +12,7 @@ export function dimensionTokensBrueckeDesignTokenToDesignToken(
   input: DimensionTokensBrueckeDesignToken,
   ctx: TokensBrueckeToDtcgContext,
 ): DimensionDesignToken | NumberDesignToken | FontWeightDesignToken {
-  const stringPath: string = ctx.path.join('.');
-
-  if (stringPath.includes('t1.ratio') || stringPath.includes('font.line-height')) {
+  if (isTokensBrueckeDesignTokenNumberDesignToken(input, ctx)) {
     return tokensBrueckeDesignTokenWithMapValueToDesignToken(
       input,
       'number',
@@ -21,7 +21,7 @@ export function dimensionTokensBrueckeDesignTokenToDesignToken(
           .value as number;
       },
     );
-  } else if (stringPath.includes('font.weight')) {
+  } else if (isTokensBrueckeDesignTokenFontWeightDesignToken(input, ctx)) {
     return tokensBrueckeDesignTokenWithMapValueToDesignToken(
       input,
       'fontWeight',
