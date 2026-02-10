@@ -1,1 +1,15 @@
-{}
+{
+  "color": {
+    "brand": {
+      "$root": {
+        "$value": "{color.sky.600}"
+      },
+      "mail": {
+        "$value": "{color.pink.400}"
+      },
+      "drive": {
+        "$value": "{color.purple.700}"
+      }
+    }
+  }
+}
