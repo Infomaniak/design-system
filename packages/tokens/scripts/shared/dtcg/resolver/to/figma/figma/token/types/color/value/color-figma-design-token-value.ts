@@ -1,1 +1,1 @@
-export type ColorFigmaDesignTokenValue = string /* hex*/;
+export type ColorFigmaDesignTokenValue = string /* hex */;
