@@ -2,22 +2,12 @@
   "button": {
     "background": {
       "color": {
-        "$root": {
-          "$value": "{color.brand.200}",
-          "$extensions": {
-            "variant": {
-              "mail": "{button.background.color.mail}"
-            }
-          }
-        },
-        "mail": {
-          "$value": "{color.pink.500}",
-          "$extensions": {
-            "theme": {
-              "dark": "{color.pink.600}"
-            }
-          }
-        }
+        "$value": "{color.brand}"
+      }
+    },
+    "padding": {
+      "inline": {
+        "$value": "{spacing.sm}"
       }
     }
   }

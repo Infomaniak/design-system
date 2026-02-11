@@ -13,9 +13,9 @@ import {
 } from '../../../../../../shared/figma/merge/merge-figma-design-tokens-trees-as-modes.ts';
 import {
   DESIGN_TOKEN_TIERS,
-  T1_DIRNAME,
-  T2_DIRNAME,
-  T3_DIRNAME,
+  T1_DIRECTORY_NAME,
+  T2_DIRECTORY_NAME,
+  T3_DIRECTORY_NAME,
 } from '../../../constants/design-token-tiers.ts';
 
 export interface BuildFigmaTokensOptions {
@@ -46,11 +46,11 @@ export function buildFigmaTokens({
 
       let newTokenName: ArrayDesignTokenName;
 
-      if (tier === T1_DIRNAME) {
+      if (tier === T1_DIRECTORY_NAME) {
         newTokenName = [t1FigmaCollectionName, ...token.name];
-      } else if (tier === T2_DIRNAME) {
+      } else if (tier === T2_DIRECTORY_NAME) {
         newTokenName = [t2FigmaCollectionName, ...token.name];
-      } else if (tier === T3_DIRNAME) {
+      } else if (tier === T3_DIRECTORY_NAME) {
         newTokenName = [t3FigmaCollectionName, ...token.name];
       } else {
         throw new Error(

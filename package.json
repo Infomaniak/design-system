@@ -6,7 +6,8 @@
   "scripts": {
     "=== BUILD ===": "",
     "build": "yarn workspaces foreach -Apt run build",
-    "build:tokens": " yarn workspace @infomaniak-design-system/tokens build",
+    "build:tokens": "yarn workspace @infomaniak-design-system/tokens build",
+    "build:docs": "yarn workspace @infomaniak-design-system/docs build",
     "=== FORMAT ===": "",
     "format": "prettier --write --ignore-unknown --config .prettierrc \"./**/*.{js,jsx,ts,tsx,html,css,scss}\"",
     "=== TEST ===": "",
@@ -34,7 +35,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-    "@tailwindcss/vite": "^4.1.18",
     "@types/node": "^25.0.10",
     "@vitest/coverage-istanbul": "^4.0.18",
     "eslint": "^9.39.1",
@@ -44,7 +44,6 @@
     "globals": "^16.5.0",
     "prettier": "^3.8.1",
     "prettier-plugin-organize-imports": "^4.3.0",
-    "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.4",
     "vitest": "^4.0.18"

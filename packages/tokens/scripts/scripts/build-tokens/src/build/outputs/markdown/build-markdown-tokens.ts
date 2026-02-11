@@ -203,7 +203,7 @@ export async function buildMarkdownTokens({
   outputDirectory,
   logger,
 }: BuildMarkdownTokensOptions) {
-  return logger.asyncTask('markdown', async (): Promise<void> => {
+  return logger.asyncTask('markdown', async (logger: Logger): Promise<void> => {
     const context: MarkdownRenderContext = { collection };
 
     // Group tokens by category

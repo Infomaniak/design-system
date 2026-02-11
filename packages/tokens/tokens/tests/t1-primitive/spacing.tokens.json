@@ -5,210 +5,126 @@
       "$value": {
         "value": 0,
         "unit": "px"
-      }
-    },
-    "1": {
-      "$value": {
-        "value": 4,
-        "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["GAP"]
       }
     },
     "2": {
       "$value": {
-        "value": 8,
+        "value": 2,
         "unit": "px"
-      }
-    },
-    "3": {
-      "$value": {
-        "value": 12,
-        "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["GAP"]
       }
     },
     "4": {
       "$value": {
-        "value": 16,
+        "value": 4,
         "unit": "px"
-      }
-    },
-    "5": {
-      "$value": {
-        "value": 20,
-        "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["GAP"]
       }
     },
     "6": {
       "$value": {
-        "value": 24,
+        "value": 6,
         "unit": "px"
-      }
-    },
-    "7": {
-      "$value": {
-        "value": 28,
-        "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["GAP"]
       }
     },
     "8": {
       "$value": {
-        "value": 32,
+        "value": 8,
         "unit": "px"
-      }
-    },
-    "9": {
-      "$value": {
-        "value": 36,
-        "unit": "px"
-      }
-    },
-    "10": {
-      "$value": {
-        "value": 40,
-        "unit": "px"
-      }
-    },
-    "11": {
-      "$value": {
-        "value": 44,
-        "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["GAP"]
       }
     },
     "12": {
       "$value": {
-        "value": 48,
+        "value": 12,
         "unit": "px"
-      }
-    },
-    "14": {
-      "$value": {
-        "value": 56,
-        "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["GAP"]
       }
     },
     "16": {
       "$value": {
-        "value": 64,
+        "value": 16,
         "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["GAP"]
       }
     },
     "20": {
       "$value": {
-        "value": 80,
+        "value": 20,
         "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["GAP"]
       }
     },
     "24": {
       "$value": {
-        "value": 96,
+        "value": 24,
         "unit": "px"
-      }
-    },
-    "28": {
-      "$value": {
-        "value": 112,
-        "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["GAP"]
       }
     },
     "32": {
       "$value": {
-        "value": 128,
+        "value": 32,
         "unit": "px"
-      }
-    },
-    "36": {
-      "$value": {
-        "value": 144,
-        "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["GAP"]
       }
     },
     "40": {
       "$value": {
-        "value": 160,
+        "value": 40,
         "unit": "px"
-      }
-    },
-    "44": {
-      "$value": {
-        "value": 176,
-        "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["GAP"]
       }
     },
     "48": {
       "$value": {
-        "value": 192,
+        "value": 48,
         "unit": "px"
-      }
-    },
-    "52": {
-      "$value": {
-        "value": 208,
-        "unit": "px"
-      }
-    },
-    "56": {
-      "$value": {
-        "value": 224,
-        "unit": "px"
-      }
-    },
-    "60": {
-      "$value": {
-        "value": 240,
-        "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["GAP"]
       }
     },
     "64": {
       "$value": {
-        "value": 256,
+        "value": 64,
         "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["GAP"]
       }
     },
-    "72": {
+    "100": {
       "$value": {
-        "value": 288,
+        "value": 100,
         "unit": "px"
-      }
-    },
-    "80": {
-      "$value": {
-        "value": 320,
-        "unit": "px"
-      }
-    },
-    "96": {
-      "$value": {
-        "value": 384,
-        "unit": "px"
-      }
-    },
-    "px": {
-      "$value": {
-        "value": 1,
-        "unit": "px"
-      }
-    },
-    "0-5": {
-      "$value": {
-        "value": 2,
-        "unit": "px"
-      }
-    },
-    "1-5": {
-      "$value": {
-        "value": 6,
-        "unit": "px"
-      }
-    },
-    "2-5": {
-      "$value": {
-        "value": 10,
-        "unit": "px"
-      }
-    },
-    "3-5": {
-      "$value": {
-        "value": 14,
-        "unit": "px"
+      },
+      "$extensions": {
+        "$scopes": ["GAP"]
       }
     }
   }

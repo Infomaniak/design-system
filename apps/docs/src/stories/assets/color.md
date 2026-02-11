@@ -2,8 +2,6 @@
 
 | Preview | Name | Description |
 |---------|------|-------------|
-| <div style=" border-radius: 4px; width: 100%; height: 75px; background: #000; border: 1px solid #e5e7eb; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">#000</div> | `color.black` |  |
-| <div style=" border-radius: 4px; width: 100%; height: 75px; background: #fff; border: 1px solid #e5e7eb; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">#fff</div> | `color.white` |  |
 | <div style=" border-radius: 4px; width: 100%; height: 75px; background: #fff1f1; border: 1px solid #e5e7eb; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">#fff1f1</div> | `color.red.50` |  |
 | <div style=" border-radius: 4px; width: 100%; height: 75px; background: #ffe4e5; border: 1px solid #e5e7eb; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">#ffe4e5</div> | `color.red.100` |  |
 | <div style=" border-radius: 4px; width: 100%; height: 75px; background: #fecdd1; border: 1px solid #e5e7eb; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">#fecdd1</div> | `color.red.200` |  |
@@ -48,6 +46,8 @@
 | <div style=" border-radius: 4px; width: 100%; height: 75px; background: #0873c5; border: 1px solid #e5e7eb; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">#0873c5</div> | `color.sky.800` |  |
 | <div style=" border-radius: 4px; width: 100%; height: 75px; background: #0d619b; border: 1px solid #e5e7eb; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">#0d619b</div> | `color.sky.900` |  |
 | <div style=" border-radius: 4px; width: 100%; height: 75px; background: #0e3a5d; border: 1px solid #e5e7eb; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">#0e3a5d</div> | `color.sky.950` |  |
+| <div style=" border-radius: 4px; width: 100%; height: 75px; background: #000; border: 1px solid #e5e7eb; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">#000</div> | `color.black` |  |
+| <div style=" border-radius: 4px; width: 100%; height: 75px; background: #fff; border: 1px solid #e5e7eb; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">#fff</div> | `color.white` |  |
 | <div style=" border-radius: 4px; width: 100%; height: 75px; background: #f1f5fd; border: 1px solid #e5e7eb; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">#f1f5fd</div> | `color.purple.50` |  |
 | <div style=" border-radius: 4px; width: 100%; height: 75px; background: #dfe8fa; border: 1px solid #e5e7eb; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">#dfe8fa</div> | `color.purple.100` |  |
 | <div style=" border-radius: 4px; width: 100%; height: 75px; background: #c6d7f7; border: 1px solid #e5e7eb; "></div> <div style=" margin-top: 4px; font-family: monospace; font-size: 12px; color: #6b7280; ">#c6d7f7</div> | `color.purple.200` |  |
