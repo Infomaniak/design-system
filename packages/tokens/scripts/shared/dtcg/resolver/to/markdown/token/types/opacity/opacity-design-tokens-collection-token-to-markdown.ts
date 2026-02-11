@@ -43,7 +43,7 @@ export interface OpacityMarkdownRenderOptions {
  */
 export function opacityDesignTokensCollectionTokenToMarkdown(
   token: NumberDesignTokensCollectionToken,
-  _context: MarkdownRenderContext,
+  context: MarkdownRenderContext,
   options: OpacityMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
   const {
@@ -51,8 +51,8 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
     overlayColor = '#22c55e',
   } = options;
 
-  // Get the opacity value
-  const opacity = token.value;
+  const resolved = context.collection.resolve(token) as { value: number };
+  const opacity = resolved.value;
 
   // Format the display value
   const percentage = Math.round(opacity * 100);

@@ -19,7 +19,6 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "stripInternal": false,
-    "preserveConstEnums": false,
     "alwaysStrict": true,
 
     /* Mode */
