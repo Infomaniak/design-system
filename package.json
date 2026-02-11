@@ -15,7 +15,7 @@
     "test:coverage": "vitest run --coverage",
     "bench": "vitest bench",
     "=== PUBLISH ===": "",
-    "publish:tokens": "yarn workspace @infomaniak-design-system/tokens publish",
+    "publish:tokens:dev": "yarn workspace @infomaniak-design-system/tokens publish:tokens:dev",
     "=== CI ===": "",
     "ci:on-pull-request": "node --no-warnings=ExperimentalWarning scripts/scripts/on-pull-request/on-pull-request.script.ts"
   },
