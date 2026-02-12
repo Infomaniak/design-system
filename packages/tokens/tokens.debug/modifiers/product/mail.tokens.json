@@ -1,7 +1,7 @@
 {
   "color": {
     "brand": {
-      "$value": "{color.red.500}"
+      "$value": "{color.brand.mail}"
     }
   }
 }

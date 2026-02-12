@@ -1,5 +1,5 @@
 {
-  "radius": {
+  "blur": {
     "$type": "dimension",
     "0": {
       "$value": {
@@ -7,16 +7,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "$scopes": ["CORNER_RADIUS"]
-      }
-    },
-    "2": {
-      "$value": {
-        "value": 2,
-        "unit": "px"
-      },
-      "$extensions": {
-        "$scopes": ["CORNER_RADIUS"]
+        "scopes": ["EFFECT_FLOAT"]
       }
     },
     "4": {
@@ -25,16 +16,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "$scopes": ["CORNER_RADIUS"]
-      }
-    },
-    "6": {
-      "$value": {
-        "value": 6,
-        "unit": "px"
-      },
-      "$extensions": {
-        "$scopes": ["CORNER_RADIUS"]
+        "scopes": ["EFFECT_FLOAT"]
       }
     },
     "8": {
@@ -43,7 +25,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "$scopes": ["CORNER_RADIUS"]
+        "scopes": ["EFFECT_FLOAT"]
       }
     },
     "12": {
@@ -52,7 +34,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "$scopes": ["CORNER_RADIUS"]
+        "scopes": ["EFFECT_FLOAT"]
       }
     },
     "16": {
@@ -61,7 +43,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "$scopes": ["CORNER_RADIUS"]
+        "scopes": ["EFFECT_FLOAT"]
       }
     },
     "24": {
@@ -70,25 +52,25 @@
         "unit": "px"
       },
       "$extensions": {
-        "$scopes": ["CORNER_RADIUS"]
+        "scopes": ["EFFECT_FLOAT"]
       }
     },
-    "32": {
+    "40": {
       "$value": {
-        "value": 32,
+        "value": 40,
         "unit": "px"
       },
       "$extensions": {
-        "$scopes": ["CORNER_RADIUS"]
+        "scopes": ["EFFECT_FLOAT"]
       }
     },
-    "1000": {
+    "64": {
       "$value": {
-        "value": 1000,
+        "value": 64,
         "unit": "px"
       },
       "$extensions": {
-        "$scopes": ["CORNER_RADIUS"]
+        "scopes": ["EFFECT_FLOAT"]
       }
     }
   }

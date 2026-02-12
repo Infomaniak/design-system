@@ -19,7 +19,7 @@ export const DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTIONS: ReadonlyMap<DesignTokenTie
   new Map([
     ['t1-primitive', 't1'],
     ['t2-semantic', 't2'],
-    ['t3-component', 'Themes'],
+    ['t3-component', 't3'],
   ]);
 
 export const FIGMA_COLLECTIONS_TO_DESIGN_TOKEN_TIERS: ReadonlyMap<string, DesignTokenTier> =
@@ -31,3 +31,5 @@ export const FIGMA_COLLECTIONS_TO_DESIGN_TOKEN_TIERS: ReadonlyMap<string, Design
       ] => [collection, tier],
     ),
   );
+
+export const FIGMA_THEMES = ['light', 'dark'] as const;

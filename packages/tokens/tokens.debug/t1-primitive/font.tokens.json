@@ -8,7 +8,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "$scopes": ["FONT_SIZE"]
+          "scopes": ["FONT_SIZE"]
         }
       },
       "14": {
@@ -17,7 +17,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "$scopes": ["FONT_SIZE"]
+          "scopes": ["FONT_SIZE"]
         }
       },
       "16": {
@@ -26,7 +26,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "$scopes": ["FONT_SIZE"]
+          "scopes": ["FONT_SIZE"]
         }
       },
       "18": {
@@ -35,7 +35,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "$scopes": ["FONT_SIZE"]
+          "scopes": ["FONT_SIZE"]
         }
       },
       "20": {
@@ -44,7 +44,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "$scopes": ["FONT_SIZE"]
+          "scopes": ["FONT_SIZE"]
         }
       },
       "24": {
@@ -53,7 +53,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "$scopes": ["FONT_SIZE"]
+          "scopes": ["FONT_SIZE"]
         }
       },
       "32": {
@@ -62,7 +62,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "$scopes": ["FONT_SIZE"]
+          "scopes": ["FONT_SIZE"]
         }
       },
       "40": {
@@ -71,7 +71,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "$scopes": ["FONT_SIZE"]
+          "scopes": ["FONT_SIZE"]
         }
       },
       "48": {
@@ -80,7 +80,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "$scopes": ["FONT_SIZE"]
+          "scopes": ["FONT_SIZE"]
         }
       }
     },
@@ -89,13 +89,13 @@
       "400": {
         "$value": 400,
         "$extensions": {
-          "$scopes": ["FONT_WEIGHT"]
+          "scopes": ["FONT_WEIGHT"]
         }
       },
       "500": {
         "$value": 500,
         "$extensions": {
-          "$scopes": ["FONT_WEIGHT"]
+          "scopes": ["FONT_WEIGHT"]
         }
       }
     },
@@ -107,7 +107,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "$scopes": ["LETTER_SPACING"]
+          "scopes": ["LETTER_SPACING"]
         }
       }
     },
@@ -116,55 +116,55 @@
       "16": {
         "$value": 16,
         "$extensions": {
-          "$scopes": ["LINE_HEIGHT"]
+          "scopes": ["LINE_HEIGHT"]
         }
       },
       "20": {
         "$value": 20,
         "$extensions": {
-          "$scopes": ["LINE_HEIGHT"]
+          "scopes": ["LINE_HEIGHT"]
         }
       },
       "24": {
         "$value": 24,
         "$extensions": {
-          "$scopes": ["LINE_HEIGHT"]
+          "scopes": ["LINE_HEIGHT"]
         }
       },
       "26": {
         "$value": 26,
         "$extensions": {
-          "$scopes": ["LINE_HEIGHT"]
+          "scopes": ["LINE_HEIGHT"]
         }
       },
       "28": {
         "$value": 28,
         "$extensions": {
-          "$scopes": ["LINE_HEIGHT"]
+          "scopes": ["LINE_HEIGHT"]
         }
       },
       "32": {
         "$value": 32,
         "$extensions": {
-          "$scopes": ["LINE_HEIGHT"]
+          "scopes": ["LINE_HEIGHT"]
         }
       },
       "40": {
         "$value": 40,
         "$extensions": {
-          "$scopes": ["LINE_HEIGHT"]
+          "scopes": ["LINE_HEIGHT"]
         }
       },
       "48": {
         "$value": 48,
         "$extensions": {
-          "$scopes": ["LINE_HEIGHT"]
+          "scopes": ["LINE_HEIGHT"]
         }
       },
       "56": {
         "$value": 56,
         "$extensions": {
-          "$scopes": ["LINE_HEIGHT"]
+          "scopes": ["LINE_HEIGHT"]
         }
       }
     },
@@ -173,7 +173,7 @@
       "Suisse Int'l": {
         "$value": "Suisse Int'l",
         "$extensions": {
-          "$scopes": ["FONT_FAMILY"]
+          "scopes": ["FONT_FAMILY"]
         }
       }
     }
