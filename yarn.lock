@@ -926,7 +926,6 @@ __metadata:
     typescript: "npm:~5.9.3"
     typescript-eslint: "npm:^8.46.4"
     vite: "npm:rolldown-vite@7.2.5"
-    vitest: "npm:^4.0.18"
   languageName: unknown
   linkType: soft
 
@@ -943,11 +942,18 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@infomaniak/design-system@workspace:."
   dependencies:
+    "@eslint/js": "npm:^9.39.1"
     "@types/node": "npm:^25.0.10"
     "@vitest/coverage-istanbul": "npm:^4.0.18"
+    eslint: "npm:^9.39.1"
+    eslint-plugin-react-hooks: "npm:^7.0.1"
+    eslint-plugin-react-refresh: "npm:^0.4.24"
+    eslint-plugin-storybook: "npm:^10.2.3"
+    globals: "npm:^16.5.0"
     prettier: "npm:^3.8.1"
     prettier-plugin-organize-imports: "npm:^4.3.0"
     typescript: "npm:^5.9.3"
+    typescript-eslint: "npm:^8.46.4"
     vitest: "npm:^4.0.18"
   languageName: unknown
   linkType: soft
