@@ -15,6 +15,8 @@ export const DESIGN_TOKEN_TIERS: readonly [T1DirectoryName, T2DirectoryName, T3D
   't3-component',
 ];
 
+/* FIGMA BRIDGE */
+
 export const DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTIONS: ReadonlyMap<DesignTokenTier, string> =
   new Map([
     ['t1-primitive', 't1'],
@@ -33,3 +35,18 @@ export const FIGMA_COLLECTIONS_TO_DESIGN_TOKEN_TIERS: ReadonlyMap<string, Design
   );
 
 export const FIGMA_THEMES = ['light', 'dark'] as const;
+
+export const FIGMA_PRODUCT_COLLECTION = 'product';
+
+export const FIGMA_PRODUCTS = [
+  'infomaniak',
+  'mail',
+  'security',
+  'kchat',
+  'kdrive',
+  'calendar',
+  'contacts',
+  'knote',
+  'euria',
+  'swisstransfer',
+] as const;

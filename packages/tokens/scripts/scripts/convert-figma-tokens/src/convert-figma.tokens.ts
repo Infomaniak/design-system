@@ -9,6 +9,7 @@ import { removeDesignTokensTreeModes } from '../../../shared/dtcg/operations/pic
 import { tokensBrueckeToDtcg } from '../../../shared/tokens-bruecke/to/dtcg/tokens-bruecke-to-dtcg.ts';
 import {
   DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTIONS,
+  FIGMA_PRODUCT_COLLECTION,
   FIGMA_THEMES,
   T2_DIRECTORY_NAME,
 } from '../../build-tokens/src/constants/design-token-tiers.ts';
@@ -83,9 +84,13 @@ export async function convertFigmaTokens({
       encoding: 'utf-8',
     });
   }
+
+  // FIGMA_PRODUCT_COLLECTION
 }
 
 function removeFigmaCollectionFromCurlyReferences(input: string): string {
+  input = input.replaceAll(`"{${FIGMA_PRODUCT_COLLECTION}.`, `"{color.`);
+
   for (const figmaCollectionName of DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTIONS.values()) {
     input = input.replaceAll(`"{${figmaCollectionName}.`, `"{`);
   }
