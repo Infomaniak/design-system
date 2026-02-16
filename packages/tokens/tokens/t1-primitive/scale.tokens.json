@@ -7,7 +7,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "1": {
@@ -16,7 +18,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "2": {
@@ -25,7 +29,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "4": {
@@ -34,7 +40,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "8": {
@@ -43,7 +51,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "10": {
@@ -52,7 +62,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "12": {
@@ -61,7 +73,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "14": {
@@ -70,7 +84,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "16": {
@@ -79,7 +95,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "20": {
@@ -88,7 +106,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "24": {
@@ -97,7 +117,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "32": {
@@ -106,7 +128,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "36": {
@@ -115,7 +139,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "40": {
@@ -124,7 +150,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "44": {
@@ -133,7 +161,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "48": {
@@ -142,7 +172,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "56": {
@@ -151,7 +183,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "64": {
@@ -160,7 +194,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "80": {
@@ -169,7 +205,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "96": {
@@ -178,7 +216,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "112": {
@@ -187,7 +227,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "128": {
@@ -196,7 +238,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "144": {
@@ -205,7 +249,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "160": {
@@ -214,7 +260,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "176": {
@@ -223,7 +271,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "192": {
@@ -232,7 +282,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "208": {
@@ -241,7 +293,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "224": {
@@ -250,7 +304,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "256": {
@@ -259,7 +315,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "288": {
@@ -268,7 +326,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "320": {
@@ -277,7 +337,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     },
     "384": {
@@ -286,7 +348,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
       }
     }
   }

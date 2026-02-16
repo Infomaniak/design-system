@@ -172,15 +172,17 @@ export class DesignTokensCollection {
   /**
    * Adds a token to the collection and returns the current instance.
    *
-   * If `merged` is true (default) and a token already exists with the same name, it is merged with the new token.
-   *
    * @param {GenericDesignTokensCollectionToken} token The token to be added to the collection.
    * @param {DesignTokensCollectionAddOptions} [options] The options to use when inserting the token.
+   * @param {boolean} [options.last=true] If the token should be put as "last" in the collection.
+   * @param {boolean} [options.merge=true] If an existing token is found:
+   *  - `true`: merges the existing token with the new one.
+   *  - `false`: replaces the existing token with the new one.
    * @returns {this} The current instance for method chaining.
    */
   add(
     token: GenericDesignTokensCollectionToken,
-    { merge = true }: DesignTokensCollectionAddOptions = {},
+    { last = true, merge = true }: DesignTokensCollectionAddOptions = {},
   ): this {
     const key: string = DesignTokensCollection.#arrayDesignTokenNameToStringKey(token.name);
     const existingToken: GenericDesignTokensCollectionToken | undefined = this.#tokens.get(key);
@@ -188,8 +190,11 @@ export class DesignTokensCollection {
     if (existingToken === undefined) {
       this.#tokens.set(key, token);
     } else {
-      // delete token to put it as "last"
-      this.#tokens.delete(key);
+      if (last) {
+        // delete token to put it as "last
+        this.#tokens.delete(key);
+      }
+
       this.#tokens.set(
         key,
         merge ? DesignTokensCollection.mergeTokens(existingToken, token) : token,

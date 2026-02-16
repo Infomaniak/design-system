@@ -1,14 +1,113 @@
 {
+  "$type": "color",
   "color": {
-    "brand": {
-      "$root": {
-        "$value": "{color.sky.800}"
+    "elevation": {
+      "surface": {
+        "pressed": {
+          "$value": "{color.gray.950}"
+        },
+        "hover": {
+          "$value": "{color.gray.800}"
+        },
+        "default": {
+          "$value": "{color.gray.900}"
+        }
       },
-      "mail": {
-        "$value": "{color.pink.600}"
+      "overlay": {
+        "default": {
+          "$value": "{color.gray.800}"
+        },
+        "hover": {
+          "$value": "{color.gray.700}"
+        },
+        "pressed": {
+          "$value": "{color.gray.900}"
+        }
       },
-      "drive": {
-        "$value": "{color.purple.950}"
+      "raised": {
+        "default": {
+          "$value": "{color.gray.900}"
+        },
+        "hover": {
+          "$value": "{color.gray.800}"
+        },
+        "pressed": {
+          "$value": "{color.gray.950}"
+        }
+      }
+    },
+    "background": {
+      "error": {
+        "default": {
+          "$value": "{color.red.500}"
+        },
+        "hover": {
+          "$value": "{color.red.400}"
+        },
+        "pressed": {
+          "$value": "{color.red.700}"
+        }
+      },
+      "warning": {
+        "default": {
+          "$value": "{color.orange.500}"
+        },
+        "hover": {
+          "$value": "{color.orange.400}"
+        },
+        "pressed": {
+          "$value": "{color.orange.700}"
+        }
+      },
+      "brand": {
+        "default": {
+          "$value": "{color.sky.500}"
+        },
+        "pressed": {
+          "$value": "{color.sky.700}"
+        },
+        "hover": {
+          "$value": "{color.sky.400}"
+        }
+      },
+      "success": {
+        "default": {
+          "$value": "{color.lime.500}"
+        },
+        "hover": {
+          "$value": "{color.lime.400}"
+        },
+        "pressed": {
+          "$value": "{color.lime.700}"
+        }
+      }
+    },
+    "text": {
+      "brand": {
+        "default": {
+          "$value": "{color.sky.600}"
+        },
+        "hover": {
+          "$value": "{color.sky.500}"
+        },
+        "pressed": {
+          "$value": "{color.sky.800}"
+        }
+      },
+      "primary": {
+        "$value": "{color.gray.100}"
+      },
+      "secondary": {
+        "$value": "{color.gray.400}"
+      },
+      "tertiary": {
+        "$value": "{color.gray.500}"
+      },
+      "inverse": {
+        "$value": "{color.gray.800}"
+      },
+      "disabled": {
+        "$value": "{color.gray.600}"
       }
     }
   }

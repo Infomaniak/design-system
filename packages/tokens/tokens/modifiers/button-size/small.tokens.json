@@ -1,9 +1,0 @@
-{
-  "button": {
-    "padding": {
-      "inline": {
-        "$value": "{spacing.xs}"
-      }
-    }
-  }
-}

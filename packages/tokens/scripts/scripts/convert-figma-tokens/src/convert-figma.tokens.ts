@@ -5,7 +5,6 @@ import { isObject } from '../../../../../../scripts/helpers/misc/object/is-objec
 import { removeTrailingSlash } from '../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import { isCurlyReference } from '../../../shared/dtcg/design-token/reference/types/curly/is-curly-reference.ts';
 import type { DesignTokensTree } from '../../../shared/dtcg/design-token/tree/design-tokens-tree.ts';
-import { removeDesignTokensTreeExtensions } from '../../../shared/dtcg/operations/pick-mode/remove-design-tokens-tree-extensions.ts';
 import { removeDesignTokensTreeModes } from '../../../shared/dtcg/operations/pick-mode/remove-design-tokens-tree-modes.ts';
 import { DesignTokensCollection } from '../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
@@ -36,11 +35,12 @@ export async function convertFigmaTokens({
     root,
   );
 
-  // search for modifiers
+  // the list of modifiers present in the Figma file
   const modifiers: Map<string /* modifier */, Set<string /* context*/>> = new Map([
     ['theme', new Set(['light', 'dark'])],
   ]);
 
+  // search for modifiers
   for (const token of rootCollection
     .tokens()
     .filter((token: GenericDesignTokensCollectionToken): boolean => {
@@ -63,57 +63,137 @@ export async function convertFigmaTokens({
     }
   }
 
-  // remove t1, t2, t3 prefixes
+  // a map from a token name to it's belonging tier
   const tokenNameToTierMap: Map<string, DesignTokenTier> = new Map();
 
+  // the "main" collection
+  const mainCollection: DesignTokensCollection = rootCollection.clone();
+
+  // remove t1, t2, t3 prefixes from the main collection
   for (const tier of DESIGN_TOKEN_TIERS) {
     const figmaCollectionName: string = DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTION_NAMES.get(tier)!;
 
-    for (const token of Array.from(
-      rootCollection.tokens().filter((token: GenericDesignTokensCollectionToken): boolean => {
+    for (const token of rootCollection
+      .tokens()
+      .filter((token: GenericDesignTokensCollectionToken): boolean => {
         return token.name[0] === figmaCollectionName;
-      }),
-    )) {
+      })) {
       const newName: ArrayDesignTokenName = token.name.slice(1);
-      rootCollection.rename(token.name, newName);
+      mainCollection.rename(token.name, newName, {
+        onExitingTokenBehaviour: 'throw',
+      });
       tokenNameToTierMap.set(JSON.stringify(newName), tier);
     }
   }
 
-  // resolve and remove modifiers from the root collection
-  for (const modifier of modifiers.keys()) {
-    for (const token of Array.from(
-      rootCollection.tokens().filter((token: GenericDesignTokensCollectionToken): boolean => {
-        return token.name[0] === modifier;
-      }),
-    )) {
-      if (!isCurlyReference(token.value)) {
-        throw new Error(
-          `Expected token ${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)} to be a curly reference.`,
-        );
+  for (const [modifier, contexts] of modifiers.entries()) {
+    for (const context of contexts.values()) {
+      // the list of tokens participating in the modifier
+      const tokensParticipatingInThisModifier: Set<string> = new Set(
+        mainCollection
+          .tokens()
+          .filter((token: GenericDesignTokensCollectionToken): boolean => {
+            return isTokenPartOfModifier(token, modifier);
+          })
+          .map((token: GenericDesignTokensCollectionToken): string => {
+            return JSON.stringify(token.name);
+          }),
+      );
+
+      // the main collection resolved with the specified modifier and context
+      const contextualizedCollection: DesignTokensCollection = new DesignTokensCollection(
+        mainCollection
+          .tokens()
+          .map(
+            ({
+              extensions,
+              ...token
+            }: GenericDesignTokensCollectionToken): GenericDesignTokensCollectionToken => {
+              if (tokensParticipatingInThisModifier.has(JSON.stringify(token.name))) {
+                return {
+                  ...token,
+                  value:
+                    (extensions?.['mode'] as Record<string, unknown> | undefined)?.[context] ??
+                    token.value,
+                };
+              } else {
+                return token;
+              }
+            },
+          ),
+      );
+
+      // the list of tokens to put in the modifier file
+      const tokensOfTheModifier: Set<string> = new Set(
+        modifier === 'theme' ? tokensParticipatingInThisModifier.values() : [],
+      );
+
+      // resolve and remove modifiers from the contextualized collection
+      for (const modifierToResolve of modifiers.keys()) {
+        if (modifierToResolve === 'theme') {
+          continue;
+        }
+
+        for (const token of Array.from(
+          contextualizedCollection
+            .tokens()
+            .filter((token: GenericDesignTokensCollectionToken): boolean => {
+              return token.name[0] === modifierToResolve;
+            }),
+        )) {
+          if (!isCurlyReference(token.value)) {
+            throw new Error(
+              `Expected token ${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)} to be a curly reference.`,
+            );
+          }
+
+          for (const referencedToken of contextualizedCollection.getTokensDirectlyReferencing(
+            token.name,
+          )) {
+            const key: string = JSON.stringify(referencedToken.name);
+            const tier: string | undefined = tokenNameToTierMap.get(key);
+            if (tier !== undefined) {
+              tokensOfTheModifier.add(key);
+            }
+          }
+
+          contextualizedCollection.rename(token.name, token.value, {
+            onExitingTokenBehaviour: 'only-references',
+          });
+
+          contextualizedCollection.delete(token.name);
+        }
       }
 
-      rootCollection.rename(token.name, token.value, {
-        onExitingTokenBehaviour: 'only-references',
-      });
+      const modifierCollection = new DesignTokensCollection(
+        tokensOfTheModifier.values().map((name: string): GenericDesignTokensCollectionToken => {
+          return contextualizedCollection.get(JSON.parse(name) as ArrayDesignTokenName);
+        }),
+      );
 
-      // rootCollection.delete(token.name);
+      await writeJsonFileSafe(
+        `${outputDirectory}/modifiers/${modifier}/${context}.tokens.json`,
+        modifierCollection.toJSON(),
+      );
     }
   }
 
-  await writeJsonFileSafe(`${outputDirectory}/tokens.json`, rootCollection.toJSON());
+  // resolve and remove modifiers from the main collection
+  resolveModifiersFromCollection(mainCollection, modifiers.keys());
+
+  await writeJsonFileSafe(`${outputDirectory}/main.tokens.json`, mainCollection.toJSON());
 
   // generate t1, t2, t3 files
   for (const tier of DESIGN_TOKEN_TIERS) {
-    const newCollection = new DesignTokensCollection(
-      rootCollection.tokens().filter((token: GenericDesignTokensCollectionToken): boolean => {
+    const mainCollectionOfTier = new DesignTokensCollection(
+      mainCollection.tokens().filter((token: GenericDesignTokensCollectionToken): boolean => {
         return tokenNameToTierMap.get(JSON.stringify(token.name)) === tier;
       }),
     );
 
     const tokensGroupedByNamespaceMap: Map<string, DesignTokensCollection> = new Map();
 
-    for (const token of newCollection.tokens()) {
+    for (const token of mainCollectionOfTier.tokens()) {
       const groupName: string = token.name[0];
 
       const tokensGroupedByNamespaceCollection: DesignTokensCollection = mapGetOrInsertComputed(
@@ -136,38 +216,104 @@ export async function convertFigmaTokens({
     }
   }
 
-  // generate modifier files
-  for (const [modifier, contexts] of modifiers.entries()) {
-    for (const context of contexts.values()) {
-      const modifierCollection: DesignTokensCollection = new DesignTokensCollection(
-        rootCollection
-          .tokens()
-          .filter((token: GenericDesignTokensCollectionToken): boolean => {
-            return token.name[0] === modifier;
-          })
-          .map((token: GenericDesignTokensCollectionToken): GenericDesignTokensCollectionToken => {
-            const value: unknown = (token.extensions!['mode'] as Record<string, unknown>)[
-              context
-            ] as unknown;
+  // // generate modifier files
+  // for (const [modifier, contexts] of modifiers.entries()) {
+  //   for (const context of contexts.values()) {
+  //     const modifierCollection: DesignTokensCollection = new DesignTokensCollection(
+  //       rootCollection
+  //         .tokens()
+  //         .filter((token: GenericDesignTokensCollectionToken): boolean => {
+  //           return token.name[0] === modifier;
+  //         })
+  //         .flatMap(
+  //           (token: GenericDesignTokensCollectionToken): GenericDesignTokensCollectionToken => {
+  //             const value: unknown = (token.extensions!['mode'] as Record<string, unknown>)[
+  //               context
+  //             ] as unknown;
+  //
+  //             modifierCollection.getTokensDirectlyReferencing();
+  //
+  //             if (!isCurlyReference(value)) {
+  //               throw new Error(
+  //                 `Expected token ${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)} $extension['mode'][${JSON.stringify(context)}] to be a curly reference.`,
+  //               );
+  //             }
+  //
+  //             return {
+  //               ...token,
+  //               name: token.name.slice(1),
+  //               value,
+  //             };
+  //           },
+  //         ),
+  //     );
+  //
+  //     await writeJsonFileSafe(
+  //       `${outputDirectory}/modifiers/${modifier}/${context}.tokens.json`,
+  //       removeDesignTokensTreeExtensions(modifierCollection.toJSON()),
+  //     );
+  //   }
+  // }
+}
 
-            if (!isCurlyReference(value)) {
-              throw new Error(
-                `Expected token ${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)} $extension['mode'][${JSON.stringify(context)}] to be a curly reference.`,
-              );
-            }
+/* INTERNAL */
 
-            return {
-              ...token,
-              name: token.name.slice(1),
-              value,
-            };
-          }),
-      );
+function isTokenPartOfModifier(
+  token: GenericDesignTokensCollectionToken,
+  modifier: string,
+): boolean {
+  return modifier === 'theme'
+    ? isObject(token.extensions?.['mode']) &&
+        (token.extensions['mode'] as Record<string, unknown>)['light'] !== undefined &&
+        (token.extensions['mode'] as Record<string, unknown>)['light'] !==
+          (token.extensions['mode'] as Record<string, unknown>)['dark']
+    : token.name[0] === modifier;
+  // if (modifier === 'theme') {
+  //   if (isObject(token.extensions?.['mode'])) {
+  //     const mode: Record<string, unknown> = token.extensions['mode'] as Record<string, unknown>;
+  //     let first: unknown = undefined;
+  //
+  //     for (const value of Object.values(mode)) {
+  //       if (first === undefined) {
+  //         first = value;
+  //       } else {
+  //         if (value !== first) {
+  //           return true;
+  //         }
+  //       }
+  //     }
+  //   }
+  //
+  //   return false;
+  // } else {
+  //   return token.name[0] === modifier;
+  // }
+}
 
-      await writeJsonFileSafe(
-        `${outputDirectory}/modifiers/${modifier}/${context}.tokens.json`,
-        removeDesignTokensTreeExtensions(modifierCollection.toJSON()),
-      );
+/**
+ * Resolves and removes modifiers from the collection
+ */
+function resolveModifiersFromCollection(
+  collection: DesignTokensCollection,
+  modifiers: Iterable<string>,
+): void {
+  for (const modifier of modifiers) {
+    for (const token of Array.from(
+      collection.tokens().filter((token: GenericDesignTokensCollectionToken): boolean => {
+        return token.name[0] === modifier;
+      }),
+    )) {
+      if (!isCurlyReference(token.value)) {
+        throw new Error(
+          `Expected token ${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)} to be a curly reference.`,
+        );
+      }
+
+      collection.rename(token.name, token.value, {
+        onExitingTokenBehaviour: 'only-references',
+      });
+
+      collection.delete(token.name);
     }
   }
 }

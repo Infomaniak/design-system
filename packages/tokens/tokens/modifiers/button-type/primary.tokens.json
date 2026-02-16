@@ -1,9 +1,0 @@
-{
-  "button": {
-    "background": {
-      "color": {
-        "$value": "{color.orange.500}"
-      }
-    }
-  }
-}

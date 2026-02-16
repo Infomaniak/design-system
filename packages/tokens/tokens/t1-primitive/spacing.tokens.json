@@ -7,7 +7,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["GAP"]
+        "scopes": [
+          "GAP"
+        ]
       }
     },
     "2": {
@@ -16,7 +18,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["GAP"]
+        "scopes": [
+          "GAP"
+        ]
       }
     },
     "4": {
@@ -25,7 +29,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["GAP"]
+        "scopes": [
+          "GAP"
+        ]
       }
     },
     "6": {
@@ -34,7 +40,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["GAP"]
+        "scopes": [
+          "GAP"
+        ]
       }
     },
     "8": {
@@ -43,7 +51,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["GAP"]
+        "scopes": [
+          "GAP"
+        ]
       }
     },
     "12": {
@@ -52,7 +62,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["GAP"]
+        "scopes": [
+          "GAP"
+        ]
       }
     },
     "16": {
@@ -61,7 +73,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["GAP"]
+        "scopes": [
+          "GAP"
+        ]
       }
     },
     "20": {
@@ -70,7 +84,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["GAP"]
+        "scopes": [
+          "GAP"
+        ]
       }
     },
     "24": {
@@ -79,7 +95,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["GAP"]
+        "scopes": [
+          "GAP"
+        ]
       }
     },
     "32": {
@@ -88,7 +106,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["GAP"]
+        "scopes": [
+          "GAP"
+        ]
       }
     },
     "40": {
@@ -97,7 +117,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["GAP"]
+        "scopes": [
+          "GAP"
+        ]
       }
     },
     "48": {
@@ -106,7 +128,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["GAP"]
+        "scopes": [
+          "GAP"
+        ]
       }
     },
     "64": {
@@ -115,7 +139,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["GAP"]
+        "scopes": [
+          "GAP"
+        ]
       }
     },
     "100": {
@@ -124,7 +150,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["GAP"]
+        "scopes": [
+          "GAP"
+        ]
       }
     }
   }

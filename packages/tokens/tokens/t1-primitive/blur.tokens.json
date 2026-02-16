@@ -7,7 +7,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["EFFECT_FLOAT"]
+        "scopes": [
+          "EFFECT_FLOAT"
+        ]
       }
     },
     "4": {
@@ -16,7 +18,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["EFFECT_FLOAT"]
+        "scopes": [
+          "EFFECT_FLOAT"
+        ]
       }
     },
     "8": {
@@ -25,7 +29,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["EFFECT_FLOAT"]
+        "scopes": [
+          "EFFECT_FLOAT"
+        ]
       }
     },
     "12": {
@@ -34,7 +40,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["EFFECT_FLOAT"]
+        "scopes": [
+          "EFFECT_FLOAT"
+        ]
       }
     },
     "16": {
@@ -43,7 +51,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["EFFECT_FLOAT"]
+        "scopes": [
+          "EFFECT_FLOAT"
+        ]
       }
     },
     "24": {
@@ -52,7 +62,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["EFFECT_FLOAT"]
+        "scopes": [
+          "EFFECT_FLOAT"
+        ]
       }
     },
     "40": {
@@ -61,7 +73,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["EFFECT_FLOAT"]
+        "scopes": [
+          "EFFECT_FLOAT"
+        ]
       }
     },
     "64": {
@@ -70,7 +84,9 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": ["EFFECT_FLOAT"]
+        "scopes": [
+          "EFFECT_FLOAT"
+        ]
       }
     }
   }

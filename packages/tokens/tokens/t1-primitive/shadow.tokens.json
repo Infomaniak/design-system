@@ -8,7 +8,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "y": {
@@ -18,7 +20,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "blur": {
@@ -28,7 +32,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "spread": {
@@ -38,19 +44,27 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "color": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0, 0, 0],
+          "components": [
+            0,
+            0,
+            0
+          ],
           "alpha": 0,
           "hex": "#0000"
         },
         "$type": "color",
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": [
+            "ALL_SCOPES"
+          ]
         }
       }
     },
@@ -62,7 +76,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "y": {
@@ -72,7 +88,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "blur": {
@@ -82,7 +100,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "spread": {
@@ -92,19 +112,27 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "color": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0, 0, 0],
+          "components": [
+            0,
+            0,
+            0
+          ],
           "alpha": 0.050980392156862744,
           "hex": "#0000000d"
         },
         "$type": "color",
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": [
+            "ALL_SCOPES"
+          ]
         }
       }
     },
@@ -116,7 +144,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "y": {
@@ -126,7 +156,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "blur": {
@@ -136,7 +168,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "spread": {
@@ -146,19 +180,27 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "color": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0, 0, 0],
+          "components": [
+            0,
+            0,
+            0
+          ],
           "alpha": 0.0784313725490196,
           "hex": "#00000014"
         },
         "$type": "color",
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": [
+            "ALL_SCOPES"
+          ]
         }
       }
     },
@@ -170,7 +212,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "y": {
@@ -180,7 +224,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "blur": {
@@ -190,7 +236,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "spread": {
@@ -200,19 +248,27 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "color": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0, 0, 0],
+          "components": [
+            0,
+            0,
+            0
+          ],
           "alpha": 0.10196078431372549,
           "hex": "#0000001a"
         },
         "$type": "color",
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": [
+            "ALL_SCOPES"
+          ]
         }
       }
     },
@@ -224,7 +280,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "y": {
@@ -234,7 +292,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "blur": {
@@ -244,7 +304,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "spread": {
@@ -254,19 +316,27 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "color": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0, 0, 0],
+          "components": [
+            0,
+            0,
+            0
+          ],
           "alpha": 0.10196078431372549,
           "hex": "#0000001a"
         },
         "$type": "color",
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": [
+            "ALL_SCOPES"
+          ]
         }
       }
     },
@@ -278,7 +348,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "y": {
@@ -288,7 +360,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "blur": {
@@ -298,7 +372,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "spread": {
@@ -308,19 +384,27 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "color": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0, 0, 0],
+          "components": [
+            0,
+            0,
+            0
+          ],
           "alpha": 0.10196078431372549,
           "hex": "#0000001a"
         },
         "$type": "color",
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": [
+            "ALL_SCOPES"
+          ]
         }
       }
     },
@@ -332,7 +416,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "y": {
@@ -342,7 +428,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "blur": {
@@ -352,7 +440,9 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "spread": {
@@ -362,19 +452,27 @@
         },
         "$type": "dimension",
         "$extensions": {
-          "scopes": ["EFFECT_FLOAT"]
+          "scopes": [
+            "EFFECT_FLOAT"
+          ]
         }
       },
       "color": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0, 0, 0],
+          "components": [
+            0,
+            0,
+            0
+          ],
           "alpha": 0.14901960784313725,
           "hex": "#00000026"
         },
         "$type": "color",
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": [
+            "ALL_SCOPES"
+          ]
         }
       }
     }

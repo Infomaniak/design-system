@@ -4,26 +4,26 @@
     "background": {
       "brand": {
         "default": {
-          "$value": "{color.pink.700}"
+          "$value": "{color.aqua.700}"
         },
         "hover": {
-          "$value": "{color.pink.800}"
+          "$value": "{color.aqua.800}"
         },
         "pressed": {
-          "$value": "{color.pink.900}"
+          "$value": "{color.aqua.900}"
         }
       }
     },
     "text": {
       "brand": {
         "default": {
-          "$value": "{color.pink.700}"
+          "$value": "{color.aqua.700}"
         },
         "hover": {
-          "$value": "{color.pink.800}"
+          "$value": "{color.aqua.800}"
         },
         "pressed": {
-          "$value": "{color.pink.900}"
+          "$value": "{color.aqua.900}"
         }
       }
     }
