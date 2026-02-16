@@ -1,6 +1,6 @@
 {
+  "$type": "dimension",
   "radius": {
-    "$type": "dimension",
     "0": {
       "$value": {
         "value": 0,

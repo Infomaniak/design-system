@@ -1,6 +1,6 @@
 {
+  "$type": "number",
   "opacity": {
-    "$type": "number",
     "0": {
       "$value": 0,
       "$extensions": {

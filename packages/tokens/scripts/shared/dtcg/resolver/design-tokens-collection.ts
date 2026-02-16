@@ -511,6 +511,8 @@ export class DesignTokensCollection {
       return;
     }
 
+    // TODO improve: get "from" token and rename it directly after/before updating rge references
+
     if (this.has(to)) {
       if (onExitingTokenBehaviour === 'throw') {
         throw new Error(`Replacing an existing token: ${to.join('.')}`);
@@ -524,7 +526,7 @@ export class DesignTokensCollection {
     const toAsCurlyReference: CurlyReference =
       DesignTokensCollection.arrayDesignTokenNameToCurlyReference(to);
 
-    for (const token of this.#tokens.values()) {
+    for (const token of Array.from(this.#tokens.values())) {
       let name: ArrayDesignTokenName = token.name;
       let value: unknown | CurlyReference = token.value;
       let extensions: DesignTokensCollectionTokenExtensions | undefined = token.extensions;

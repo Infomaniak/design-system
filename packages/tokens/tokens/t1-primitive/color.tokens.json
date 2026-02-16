@@ -1,6 +1,6 @@
 {
+  "$type": "color",
   "color": {
-    "$type": "color",
     "red": {
       "50": {
         "$value": {

@@ -1,3 +1,4 @@
+import { isEmptyObject } from '../../../../../../../scripts/helpers/misc/object/is-empty-object.ts';
 import { isDesignToken } from '../../design-token/token/is-design-token.ts';
 import type { DesignTokensTree } from '../../design-token/tree/design-tokens-tree.ts';
 import type { ArrayDesignTokenName } from '../../resolver/token/name/array-design-token-name.ts';
@@ -34,17 +35,25 @@ export function mergeDesignTokensTrees(
         `Cannot merge a design token into a design token: ${JSON.stringify(insertionPath.slice(0, insertionIndex + 1))}.`,
       );
     } else {
-      return {
-        $root: parentTree,
-        ...mergedChild,
-      };
+      if (isEmptyObject(mergedChild)) {
+        return parentTree;
+      } else {
+        return {
+          $root: parentTree,
+          ...mergedChild,
+        };
+      }
     }
   } else {
     if (isDesignToken(mergedChild)) {
-      return {
-        $root: mergedChild,
-        ...parentTree,
-      };
+      if (isEmptyObject(parentTree)) {
+        return mergedChild;
+      } else {
+        return {
+          $root: mergedChild,
+          ...parentTree,
+        };
+      }
     } else {
       return {
         ...parentTree,

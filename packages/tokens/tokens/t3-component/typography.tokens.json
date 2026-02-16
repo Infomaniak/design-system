@@ -1,0 +1,878 @@
+{
+  "typography": {
+    "display": {
+      "md": {
+        "base": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.regular}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.5xl.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.5xl.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.5xl.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        },
+        "emphasized": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.medium}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.5xl.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.5xl.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.5xl.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "heading": {
+      "lg": {
+        "base": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.regular}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.4xl.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.4xl.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.4xl.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        },
+        "emphasized": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.medium}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.4xl.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.4xl.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.4xl.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        }
+      },
+      "md": {
+        "base": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.regular}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.3xl.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.3xl.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.3xl.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        },
+        "emphasized": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.medium}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.3xl.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.3xl.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.3xl.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        }
+      },
+      "sm": {
+        "base": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.regular}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.2xl.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.2xl.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.2xl.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        },
+        "emphasized": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.medium}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.2xl.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.2xl.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.2xl.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "title": {
+      "md": {
+        "base": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.regular}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.xl.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.xl.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.xl.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        },
+        "emphasized": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.medium}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.xl.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.xl.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.xl.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "body": {
+      "lg": {
+        "base": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.regular}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.lg.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.lg.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.lg.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        },
+        "emphasized": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.medium}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.lg.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.lg.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.lg.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        }
+      },
+      "md": {
+        "base": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.regular}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.md.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.md.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.md.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        },
+        "emphasized": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.medium}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.md.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.md.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.md.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        }
+      },
+      "sm": {
+        "base": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.regular}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.sm.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.sm.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.sm.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        },
+        "emphasized": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.medium}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.sm.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.sm.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.sm.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "caption": {
+      "md": {
+        "base": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.regular}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.xs.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.xs.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.xs.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        },
+        "emphasized": {
+          "family": {
+            "$value": "{font.family.base}",
+            "$type": "fontFamily",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "weight": {
+            "$value": "{font.weight.medium}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "size": {
+            "$value": "{text.xs.size}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "line-height": {
+            "$value": "{text.xs.line-height}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          },
+          "letter-spacing": {
+            "$value": "{text.xs.letter-spacing}",
+            "$type": "dimension",
+            "$extensions": {
+              "scopes": [
+                "ALL_SCOPES"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
