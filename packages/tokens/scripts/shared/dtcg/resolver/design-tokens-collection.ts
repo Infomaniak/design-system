@@ -11,6 +11,8 @@ import { segmentsReferenceToCurlyReference } from '../design-token/reference/typ
 import { isDesignToken } from '../design-token/token/is-design-token.ts';
 import { designTokensTreeSchema } from '../design-token/tree/design-tokens-tree.schema.ts';
 import type { DesignTokensTree } from '../design-token/tree/design-tokens-tree.ts';
+import { ascendDesignTokensTreeCommonTypes } from '../operations/ascend-common-types/ascend-design-tokens-tree-common-types.ts';
+import { mergeDesignTokensTrees } from '../operations/merge/merge-design-tokens-trees.ts';
 import type {
   DesignTokensCollectionTokenExtensions,
   DesignTokensCollectionTokenWithType,
@@ -40,6 +42,7 @@ import type { DesignTokensCollectionFromDesignTokensTreeOptions } from './types/
 import type { DesignTokensCollectionFromFilesOptions } from './types/methods/from-files/design-tokens-collection-from-files-options.ts';
 import { designTokensCollectionRenameExtensionsAutomatically } from './types/methods/rename/design-tokens-collection-rename-extensions-function.ts';
 import type { DesignTokensCollectionRenameOptions } from './types/methods/rename/design-tokens-collection-rename-options.ts';
+import type { DesignTokensCollectionToJsonOptions } from './types/methods/to-json/design-tokens-collection-to-json-options.ts';
 
 /**
  * Represents a collection of design tokens and provides utility methods for
@@ -498,6 +501,7 @@ export class DesignTokensCollection {
     to: DesignTokenNameLike,
     {
       extensions: renameExtensions = designTokensCollectionRenameExtensionsAutomatically,
+      onExitingTokenBehaviour = 'throw',
     }: DesignTokensCollectionRenameOptions = {},
   ): void {
     from = DesignTokensCollection.designTokenNameLikeToArrayDesignTokenName(from);
@@ -505,6 +509,14 @@ export class DesignTokensCollection {
 
     if (DesignTokensCollection.tokenNamesEqual(from, to)) {
       return;
+    }
+
+    if (this.has(to)) {
+      if (onExitingTokenBehaviour === 'throw') {
+        throw new Error(`Replacing an existing token: ${to.join('.')}`);
+      } else if (onExitingTokenBehaviour === 'skip') {
+        return;
+      }
     }
 
     const fromAsCurlyReference: CurlyReference =
@@ -517,7 +529,10 @@ export class DesignTokensCollection {
       let value: unknown | CurlyReference = token.value;
       let extensions: DesignTokensCollectionTokenExtensions | undefined = token.extensions;
 
-      if (DesignTokensCollection.tokenNamesEqual(token.name, from)) {
+      if (
+        DesignTokensCollection.tokenNamesEqual(token.name, from) &&
+        onExitingTokenBehaviour !== 'only-references'
+      ) {
         name = to;
       }
 
@@ -552,6 +567,10 @@ export class DesignTokensCollection {
       }
 
       if (name !== token.name || value !== token.value || extensions !== token.extensions) {
+        if (name !== token.name) {
+          this.#tokens.delete(DesignTokensCollection.#arrayDesignTokenNameToStringKey(token.name));
+        }
+
         this.#tokens.set(DesignTokensCollection.#arrayDesignTokenNameToStringKey(name), {
           ...token,
           name,
@@ -564,6 +583,32 @@ export class DesignTokensCollection {
 
   clone(): DesignTokensCollection {
     return DesignTokensCollection.#new(new Map(this.#tokens.entries()));
+  }
+
+  toJSON({ ascendCommonTypes = true }: DesignTokensCollectionToJsonOptions = {}): DesignTokensTree {
+    let tree: DesignTokensTree = {};
+
+    for (const token of this.#tokens.values()) {
+      tree = mergeDesignTokensTrees(
+        tree,
+        {
+          $value: token.value,
+          ...removeUndefinedProperties({
+            $type: token.type,
+            $deprecated: token.deprecated,
+            $description: token.description,
+            $extensions: token.extensions,
+          }),
+        },
+        token.name,
+      );
+    }
+
+    if (ascendCommonTypes) {
+      tree = ascendDesignTokensTreeCommonTypes(tree);
+    }
+
+    return tree;
   }
 }
 
