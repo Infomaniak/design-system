@@ -7,9 +7,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "WIDTH_HEIGHT"
-        ]
+        "scopes": ["WIDTH_HEIGHT"]
       }
     },
     "768": {
@@ -18,9 +16,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "WIDTH_HEIGHT"
-        ]
+        "scopes": ["WIDTH_HEIGHT"]
       }
     },
     "1024": {
@@ -29,9 +25,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "WIDTH_HEIGHT"
-        ]
+        "scopes": ["WIDTH_HEIGHT"]
       }
     },
     "1280": {
@@ -40,9 +34,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "WIDTH_HEIGHT"
-        ]
+        "scopes": ["WIDTH_HEIGHT"]
       }
     },
     "1536": {
@@ -51,9 +43,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "WIDTH_HEIGHT"
-        ]
+        "scopes": ["WIDTH_HEIGHT"]
       }
     }
   }

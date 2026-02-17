@@ -5,9 +5,7 @@
       "width": {
         "$value": "{border-width.0}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       }
     },
@@ -15,9 +13,7 @@
       "width": {
         "$value": "{border-width.1}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       }
     },
@@ -25,9 +21,7 @@
       "width": {
         "$value": "{border-width.2}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       }
     },
@@ -35,9 +29,7 @@
       "width": {
         "$value": "{border-width.3}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       }
     },
@@ -45,9 +37,7 @@
       "width": {
         "$value": "{border-width.4}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       }
     }

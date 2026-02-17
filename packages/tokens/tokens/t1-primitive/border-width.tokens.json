@@ -7,9 +7,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "STROKE_FLOAT"
-        ]
+        "scopes": ["STROKE_FLOAT"]
       }
     },
     "1": {
@@ -18,9 +16,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "STROKE_FLOAT"
-        ]
+        "scopes": ["STROKE_FLOAT"]
       }
     },
     "2": {
@@ -29,9 +25,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "STROKE_FLOAT"
-        ]
+        "scopes": ["STROKE_FLOAT"]
       }
     },
     "3": {
@@ -40,9 +34,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "STROKE_FLOAT"
-        ]
+        "scopes": ["STROKE_FLOAT"]
       }
     },
     "4": {
@@ -51,9 +43,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "STROKE_FLOAT"
-        ]
+        "scopes": ["STROKE_FLOAT"]
       }
     }
   }

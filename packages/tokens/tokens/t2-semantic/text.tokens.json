@@ -5,25 +5,19 @@
       "size": {
         "$value": "{font.size.xs}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "line-height": {
         "$value": "{font.line-height.xs}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       }
     },
@@ -31,25 +25,19 @@
       "size": {
         "$value": "{font.size.sm}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "line-height": {
         "$value": "{font.line-height.sm}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       }
     },
@@ -57,25 +45,19 @@
       "size": {
         "$value": "{font.size.md}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "line-height": {
         "$value": "{font.line-height.md}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       }
     },
@@ -83,25 +65,19 @@
       "size": {
         "$value": "{font.size.lg}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "line-height": {
         "$value": "{font.line-height.lg}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       }
     },
@@ -109,25 +85,19 @@
       "size": {
         "$value": "{font.size.xl}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "line-height": {
         "$value": "{font.line-height.xl}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       }
     },
@@ -135,25 +105,19 @@
       "size": {
         "$value": "{font.size.2xl}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "line-height": {
         "$value": "{font.line-height.2xl}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       }
     },
@@ -161,25 +125,19 @@
       "size": {
         "$value": "{font.size.3xl}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "line-height": {
         "$value": "{font.line-height.3xl}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       }
     },
@@ -187,25 +145,19 @@
       "size": {
         "$value": "{font.size.4xl}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "line-height": {
         "$value": "{font.line-height.4xl}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       }
     },
@@ -213,25 +165,19 @@
       "size": {
         "$value": "{font.size.5xl}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "line-height": {
         "$value": "{font.line-height.5xl}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
         "$extensions": {
-          "scopes": [
-            "ALL_SCOPES"
-          ]
+          "scopes": ["ALL_SCOPES"]
         }
       }
     }

@@ -7,9 +7,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "CORNER_RADIUS"
-        ]
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "2": {
@@ -18,9 +16,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "CORNER_RADIUS"
-        ]
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "4": {
@@ -29,9 +25,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "CORNER_RADIUS"
-        ]
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "6": {
@@ -40,9 +34,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "CORNER_RADIUS"
-        ]
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "8": {
@@ -51,9 +43,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "CORNER_RADIUS"
-        ]
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "12": {
@@ -62,9 +52,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "CORNER_RADIUS"
-        ]
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "16": {
@@ -73,9 +61,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "CORNER_RADIUS"
-        ]
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "24": {
@@ -84,9 +70,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "CORNER_RADIUS"
-        ]
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "32": {
@@ -95,9 +79,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "CORNER_RADIUS"
-        ]
+        "scopes": ["CORNER_RADIUS"]
       }
     },
     "1000": {
@@ -106,9 +88,7 @@
         "unit": "px"
       },
       "$extensions": {
-        "scopes": [
-          "CORNER_RADIUS"
-        ]
+        "scopes": ["CORNER_RADIUS"]
       }
     }
   }
