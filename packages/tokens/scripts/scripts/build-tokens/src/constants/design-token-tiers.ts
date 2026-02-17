@@ -27,38 +27,26 @@ export type FigmaT2CollectionName = typeof FIGMA_T2_COLLECTION_NAME;
 export const FIGMA_T3_COLLECTION_NAME = 't3';
 export type FigmaT3CollectionName = typeof FIGMA_T3_COLLECTION_NAME;
 
-export const FIGMA_PRODUCT_COLLECTION_NAME = 'product';
+export type FigmaTierCollectionName =
+  | FigmaT1CollectionName
+  | FigmaT2CollectionName
+  | FigmaT3CollectionName;
 
-export const DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTION_NAMES: ReadonlyMap<DesignTokenTier, string> =
-  new Map([
-    [T1_DIRECTORY_NAME, FIGMA_T1_COLLECTION_NAME],
-    [T2_DIRECTORY_NAME, FIGMA_T2_COLLECTION_NAME],
-    [T3_DIRECTORY_NAME, FIGMA_T3_COLLECTION_NAME],
-  ]);
+export const DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTION_NAMES: ReadonlyMap<
+  string,
+  FigmaTierCollectionName
+> = new Map([
+  [T1_DIRECTORY_NAME, FIGMA_T1_COLLECTION_NAME],
+  [T2_DIRECTORY_NAME, FIGMA_T2_COLLECTION_NAME],
+  [T3_DIRECTORY_NAME, FIGMA_T3_COLLECTION_NAME],
+]);
 
 export const FIGMA_COLLECTION_NAMES_TO_DESIGN_TOKEN_TIERS: ReadonlyMap<string, DesignTokenTier> =
   new Map<string, DesignTokenTier>(
     DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTION_NAMES.entries().map(
-      ([tier, collection]: readonly [DesignTokenTier, string]): readonly [
+      ([tier, collection]: readonly [string, FigmaTierCollectionName]): readonly [
         string,
         DesignTokenTier,
-      ] => [collection, tier],
+      ] => [collection, tier as DesignTokenTier],
     ),
   );
-
-// MODES
-
-export const FIGMA_THEMES = ['light', 'dark'] as const;
-
-export const FIGMA_PRODUCTS = [
-  'infomaniak',
-  'mail',
-  'security',
-  'kchat',
-  'kdrive',
-  'calendar',
-  'contacts',
-  'knote',
-  'euria',
-  'swisstransfer',
-] as const;

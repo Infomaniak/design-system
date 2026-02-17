@@ -181,7 +181,7 @@ export async function convertFigmaTokens({
   // resolve and remove modifiers from the main collection
   resolveModifiersFromCollection(mainCollection, modifiers.keys());
 
-  await writeJsonFileSafe(`${outputDirectory}/main.tokens.json`, mainCollection.toJSON());
+  // await writeJsonFileSafe(`${outputDirectory}/main.tokens.json`, mainCollection.toJSON());
 
   // generate t1, t2, t3 files
   for (const tier of DESIGN_TOKEN_TIERS) {
@@ -215,45 +215,6 @@ export async function convertFigmaTokens({
       );
     }
   }
-
-  // // generate modifier files
-  // for (const [modifier, contexts] of modifiers.entries()) {
-  //   for (const context of contexts.values()) {
-  //     const modifierCollection: DesignTokensCollection = new DesignTokensCollection(
-  //       rootCollection
-  //         .tokens()
-  //         .filter((token: GenericDesignTokensCollectionToken): boolean => {
-  //           return token.name[0] === modifier;
-  //         })
-  //         .flatMap(
-  //           (token: GenericDesignTokensCollectionToken): GenericDesignTokensCollectionToken => {
-  //             const value: unknown = (token.extensions!['mode'] as Record<string, unknown>)[
-  //               context
-  //             ] as unknown;
-  //
-  //             modifierCollection.getTokensDirectlyReferencing();
-  //
-  //             if (!isCurlyReference(value)) {
-  //               throw new Error(
-  //                 `Expected token ${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)} $extension['mode'][${JSON.stringify(context)}] to be a curly reference.`,
-  //               );
-  //             }
-  //
-  //             return {
-  //               ...token,
-  //               name: token.name.slice(1),
-  //               value,
-  //             };
-  //           },
-  //         ),
-  //     );
-  //
-  //     await writeJsonFileSafe(
-  //       `${outputDirectory}/modifiers/${modifier}/${context}.tokens.json`,
-  //       removeDesignTokensTreeExtensions(modifierCollection.toJSON()),
-  //     );
-  //   }
-  // }
 }
 
 /* INTERNAL */
@@ -268,26 +229,6 @@ function isTokenPartOfModifier(
         (token.extensions['mode'] as Record<string, unknown>)['light'] !==
           (token.extensions['mode'] as Record<string, unknown>)['dark']
     : token.name[0] === modifier;
-  // if (modifier === 'theme') {
-  //   if (isObject(token.extensions?.['mode'])) {
-  //     const mode: Record<string, unknown> = token.extensions['mode'] as Record<string, unknown>;
-  //     let first: unknown = undefined;
-  //
-  //     for (const value of Object.values(mode)) {
-  //       if (first === undefined) {
-  //         first = value;
-  //       } else {
-  //         if (value !== first) {
-  //           return true;
-  //         }
-  //       }
-  //     }
-  //   }
-  //
-  //   return false;
-  // } else {
-  //   return token.name[0] === modifier;
-  // }
 }
 
 /**
