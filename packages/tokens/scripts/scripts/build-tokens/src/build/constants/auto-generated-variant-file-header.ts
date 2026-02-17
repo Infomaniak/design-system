@@ -1,4 +1,4 @@
-import { AUTO_GENERATED_FILE_HEADER } from './auto-generated-file-header .ts';
+import { AUTO_GENERATED_FILE_HEADER } from './auto-generated-file-header.ts';
 
 /**
  * @deprecated
