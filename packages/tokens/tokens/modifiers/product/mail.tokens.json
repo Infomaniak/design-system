@@ -1,0 +1,31 @@
+{
+  "$type": "color",
+  "color": {
+    "background": {
+      "brand": {
+        "default": {
+          "$value": "{color.pink.700}"
+        },
+        "hover": {
+          "$value": "{color.pink.800}"
+        },
+        "pressed": {
+          "$value": "{color.pink.900}"
+        }
+      }
+    },
+    "text": {
+      "brand": {
+        "default": {
+          "$value": "{color.pink.700}"
+        },
+        "hover": {
+          "$value": "{color.pink.800}"
+        },
+        "pressed": {
+          "$value": "{color.pink.900}"
+        }
+      }
+    }
+  }
+}

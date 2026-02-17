@@ -55,7 +55,12 @@ function tokensBrueckeDesignTokenToDesignTokenExtensions(
       unknown
     >;
 
-    if (Object.keys(mode).length === 0) {
+    const entries: readonly (readonly [string, unknown])[] = Object.entries(mode);
+
+    if (
+      entries.length === 0 ||
+      entries.every(([, value]): boolean => value === entries[0][1]) /* all identical */
+    ) {
       Reflect.deleteProperty($extensions, 'mode');
     }
   }

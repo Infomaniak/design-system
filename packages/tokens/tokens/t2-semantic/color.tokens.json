@@ -1,7 +1,201 @@
 {
+  "$type": "color",
   "color": {
-    "brand": {
-      "$value": "{color.red.500}"
+    "elevation": {
+      "surface": {
+        "pressed": {
+          "$value": "{color.gray.100}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "hover": {
+          "$value": "{color.gray.50}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "default": {
+          "$value": "{color.white}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        }
+      },
+      "overlay": {
+        "default": {
+          "$value": "{color.gray.100}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "hover": {
+          "$value": "{color.gray.200}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.gray.300}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        }
+      },
+      "raised": {
+        "default": {
+          "$value": "{color.white}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "hover": {
+          "$value": "{color.gray.50}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.gray.100}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        }
+      }
+    },
+    "background": {
+      "error": {
+        "default": {
+          "$value": "{color.red.600}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "hover": {
+          "$value": "{color.red.700}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.red.800}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        }
+      },
+      "warning": {
+        "default": {
+          "$value": "{color.orange.600}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "hover": {
+          "$value": "{color.orange.700}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.orange.800}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        }
+      },
+      "brand": {
+        "default": {
+          "$value": "{color.sky.700}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.sky.900}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "hover": {
+          "$value": "{color.sky.800}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        }
+      },
+      "success": {
+        "default": {
+          "$value": "{color.lime.600}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "hover": {
+          "$value": "{color.lime.700}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.lime.800}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        }
+      }
+    },
+    "text": {
+      "brand": {
+        "default": {
+          "$value": "{color.sky.700}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "hover": {
+          "$value": "{color.sky.800}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.sky.900}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        }
+      },
+      "primary": {
+        "$value": "{color.gray.800}",
+        "$extensions": {
+          "scopes": ["ALL_SCOPES"]
+        }
+      },
+      "secondary": {
+        "$value": "{color.gray.500}",
+        "$extensions": {
+          "scopes": ["ALL_SCOPES"]
+        }
+      },
+      "tertiary": {
+        "$value": "{color.gray.400}",
+        "$extensions": {
+          "scopes": ["ALL_SCOPES"]
+        }
+      },
+      "inverse": {
+        "$value": "{color.gray.100}",
+        "$extensions": {
+          "scopes": ["ALL_SCOPES"]
+        }
+      },
+      "disabled": {
+        "$value": "{color.gray.300}",
+        "$extensions": {
+          "scopes": ["ALL_SCOPES"]
+        }
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 {
+  "$type": "dimension",
   "breakpoint": {
-    "$type": "dimension",
     "640": {
       "$value": {
         "value": 640,

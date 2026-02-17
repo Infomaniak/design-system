@@ -8,8 +8,6 @@ import {
 import { DESIGN_TOKEN_TIERS } from '../constants/design-token-tiers.ts';
 import { buildCssTokens } from './outputs/css/build-css-tokens.ts';
 import { buildFigmaTokens } from './outputs/figma/build-figma-tokens.ts';
-import { buildMarkdownTokens } from './outputs/markdown/build-markdown-tokens.ts';
-import { buildSwiftTokens } from './outputs/swift/build-swift-tokens.ts';
 
 export interface BuildTokensOptions {
   readonly sourceDirectory: string;
@@ -58,17 +56,17 @@ export function buildTokens({
     });
 
     // SWIFT
-    await buildSwiftTokens({
-      collection: baseCollection,
-      outputDirectory,
-      logger,
-    });
+    // await buildSwiftTokens({
+    //   collection: baseCollection,
+    //   outputDirectory,
+    //   logger,
+    // });
 
     // Markdown
-    await buildMarkdownTokens({
-      collection: baseCollection,
-      outputDirectory,
-      logger,
-    });
+    // await buildMarkdownTokens({
+    //   collection: baseCollection,
+    //   outputDirectory,
+    //   logger,
+    // });
   });
 }

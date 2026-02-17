@@ -1,0 +1,31 @@
+{
+  "$type": "color",
+  "color": {
+    "background": {
+      "brand": {
+        "default": {
+          "$value": "{color.indigo.700}"
+        },
+        "hover": {
+          "$value": "{color.indigo.800}"
+        },
+        "pressed": {
+          "$value": "{color.indigo.900}"
+        }
+      }
+    },
+    "text": {
+      "brand": {
+        "default": {
+          "$value": "{color.indigo.700}"
+        },
+        "hover": {
+          "$value": "{color.indigo.800}"
+        },
+        "pressed": {
+          "$value": "{color.indigo.900}"
+        }
+      }
+    }
+  }
+}

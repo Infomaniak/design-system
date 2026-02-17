@@ -1,0 +1,151 @@
+{
+  "font": {
+    "size": {
+      "$type": "dimension",
+      "xs": {
+        "$value": "{font.size.12}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "sm": {
+        "$value": "{font.size.14}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "md": {
+        "$value": "{font.size.16}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "lg": {
+        "$value": "{font.size.18}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "xl": {
+        "$value": "{font.size.20}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "2xl": {
+        "$value": "{font.size.24}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "3xl": {
+        "$value": "{font.size.32}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "4xl": {
+        "$value": "{font.size.40}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "5xl": {
+        "$value": "{font.size.48}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      }
+    },
+    "family": {
+      "$type": "fontFamily",
+      "base": {
+        "$value": "{font.family.Suisse Int'l}",
+        "$extensions": {
+          "scopes": ["ALL_SCOPES"]
+        }
+      }
+    },
+    "line-height": {
+      "$type": "number",
+      "xs": {
+        "$value": "{font.line-height.16}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "sm": {
+        "$value": "{font.line-height.20}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "md": {
+        "$value": "{font.line-height.24}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "xl": {
+        "$value": "{font.line-height.28}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "2xl": {
+        "$value": "{font.line-height.32}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "3xl": {
+        "$value": "{font.line-height.40}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "4xl": {
+        "$value": "{font.line-height.48}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "5xl": {
+        "$value": "{font.line-height.56}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "lg": {
+        "$value": "{font.line-height.26}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      }
+    },
+    "letter-spacing": {
+      "$type": "dimension",
+      "md": {
+        "$value": "{font.letter-spacing.0}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "regular": {
+        "$value": "{font.weight.400}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      },
+      "medium": {
+        "$value": "{font.weight.500}",
+        "$extensions": {
+          "scopes": ["FONT_SIZE"]
+        }
+      }
+    }
+  }
+}

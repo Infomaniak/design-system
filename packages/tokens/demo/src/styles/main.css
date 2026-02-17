@@ -2,7 +2,7 @@
 @reference '#tailwind';
 
 body {
-  @apply bg-gray-800 flex flex-col items-start gap-4 p-4;
+  @apply bg-gray-400 flex flex-col items-start gap-4 p-4;
 }
 
 h1 {

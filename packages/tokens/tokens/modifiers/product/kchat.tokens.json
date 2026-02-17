@@ -1,0 +1,31 @@
+{
+  "$type": "color",
+  "color": {
+    "background": {
+      "brand": {
+        "default": {
+          "$value": "{color.cyan.700}"
+        },
+        "hover": {
+          "$value": "{color.cyan.800}"
+        },
+        "pressed": {
+          "$value": "{color.cyan.900}"
+        }
+      }
+    },
+    "text": {
+      "brand": {
+        "default": {
+          "$value": "{color.cyan.700}"
+        },
+        "hover": {
+          "$value": "{color.cyan.800}"
+        },
+        "pressed": {
+          "$value": "{color.cyan.900}"
+        }
+      }
+    }
+  }
+}

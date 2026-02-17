@@ -1,7 +1,6 @@
 {
   "font": {
     "size": {
-      "$type": "dimension",
       "12": {
         "$value": {
           "value": 12,
@@ -82,10 +81,10 @@
         "$extensions": {
           "scopes": ["FONT_SIZE"]
         }
-      }
+      },
+      "$type": "dimension"
     },
     "weight": {
-      "$type": "fontWeight",
       "400": {
         "$value": 400,
         "$extensions": {
@@ -97,10 +96,10 @@
         "$extensions": {
           "scopes": ["FONT_WEIGHT"]
         }
-      }
+      },
+      "$type": "fontWeight"
     },
     "letter-spacing": {
-      "$type": "dimension",
       "0": {
         "$value": {
           "value": 0,
@@ -109,10 +108,10 @@
         "$extensions": {
           "scopes": ["LETTER_SPACING"]
         }
-      }
+      },
+      "$type": "dimension"
     },
     "line-height": {
-      "$type": "number",
       "16": {
         "$value": 16,
         "$extensions": {
@@ -166,7 +165,8 @@
         "$extensions": {
           "scopes": ["LINE_HEIGHT"]
         }
-      }
+      },
+      "$type": "number"
     },
     "family": {
       "$type": "fontFamily",

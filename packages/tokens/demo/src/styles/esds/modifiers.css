@@ -1,5 +1,7 @@
 @import '@infomaniak-design-system/tokens/css/modifiers/theme/light.attr.css';
 @import '@infomaniak-design-system/tokens/css/modifiers/theme/dark.attr.css';
+@import '@infomaniak-design-system/tokens/css/modifiers/product/mail.attr.css';
+@import '@infomaniak-design-system/tokens/css/modifiers/product/drive.attr.css';
 @import '@infomaniak-design-system/tokens/css/modifiers/button-size/small.attr.css';
 @import '@infomaniak-design-system/tokens/css/modifiers/button-type/primary.attr.css';
 
