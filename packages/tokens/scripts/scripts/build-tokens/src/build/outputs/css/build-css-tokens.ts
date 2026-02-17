@@ -1,7 +1,6 @@
 import { writeFileSafe } from '../../../../../../../../../scripts/helpers/file/write-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
 import { indent } from '../../../../../../../../../scripts/helpers/misc/string/indent/indent.ts';
-import type { SegmentsReference } from '../../../../../../shared/dtcg/design-token/reference/types/segments/segments-reference.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { DesignTokenModifiers } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import type { CssVariableDeclaration } from '../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
@@ -13,9 +12,13 @@ import {
   type DesignTokensCollectionTokenToCssVariableDeclarationOptions,
 } from '../../../../../../shared/dtcg/resolver/to/css/token/design-tokens-collection-token-to-css-variable-declaration.ts';
 import { createCssVariableNameGenerator } from '../../../../../../shared/dtcg/resolver/to/css/token/name/create-css-variable-name-generator.ts';
-import { DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION } from '../../../../../../shared/dtcg/resolver/to/css/token/name/default-generate-css-variable-name-function.ts';
+import {
+  DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION,
+  RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION,
+} from '../../../../../../shared/dtcg/resolver/to/css/token/name/default-generate-css-variable-name-function.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
+import { T1_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
 import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header .ts';
 
 const CSS_AUTO_GENERATED_FILE_HEADER = `/*
@@ -39,7 +42,9 @@ export function buildCssTokens({
 }: BuildCssTokensOptions): Promise<void> {
   return logger.asyncTask('css', async (logger: Logger): Promise<void> => {
     const cssOptions: DesignTokensCollectionTokenToCssVariableDeclarationOptions = {
-      generateCssVariableName: createCssVariableNameGenerator('esds'),
+      generateCssVariableName: createCssVariableNameGenerator({
+        prefix: 'esds',
+      }),
     };
 
     await logger.asyncTask('main', async (): Promise<void> => {
@@ -159,6 +164,18 @@ export function buildCssTokens({
     // https://tailwindcss.com/docs/theme#theme-variable-namespaces
     // https://tailwindcss.com/docs/theme#default-theme-variable-reference
     await logger.asyncTask('tailwind', async (): Promise<void> => {
+      const generateTailwindToken = (
+        token: GenericDesignTokensCollectionToken,
+        tailwindTokenName: string,
+      ): CssVariableDeclaration => {
+        return {
+          name: tailwindTokenName,
+          value: segmentsReferenceToCssVariableReference(token.name, cssOptions),
+          description: token.description,
+          deprecated: token.deprecated,
+        };
+      };
+
       const cssVariables: string = cssVariableDeclarationsToString([
         // ...[
         //   'color',
@@ -191,33 +208,75 @@ export function buildCssTokens({
         },
         ...baseCollection
           .tokens()
-          .map((token: GenericDesignTokensCollectionToken): CssVariableDeclaration | undefined => {
-            const tokenName: string = token.name.join('.');
-            let tailwindTokenName: SegmentsReference | undefined;
+          .flatMap(
+            (token: GenericDesignTokensCollectionToken): readonly CssVariableDeclaration[] => {
+              const tokenName: string = token.name.join('.');
 
-            if (tokenName.startsWith('color')) {
-              tailwindTokenName = ['color', ...token.name.slice(1)];
-            } else if (tokenName.startsWith('font.family')) {
-              tailwindTokenName = ['font', ...token.name.slice(2)];
-            } else if (tokenName.startsWith('font.size')) {
-              // TODO: seems to be a t2
-              // tailwindTokenName = ['text', ...token.name.slice(2)];
-            }
+              const isNotT1Token: boolean = token.files.every(
+                (file: string): boolean => !file.includes(T1_DIRECTORY_NAME),
+              );
 
-            return tailwindTokenName === undefined
-              ? undefined
-              : {
-                  name: DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(tailwindTokenName),
-                  value: segmentsReferenceToCssVariableReference(token.name, cssOptions),
-                  description: token.description,
-                  deprecated: token.deprecated,
-                };
-          })
-          .filter(
-            (
-              declaration: CssVariableDeclaration | undefined,
-            ): declaration is CssVariableDeclaration => {
-              return declaration !== undefined;
+              if (isNotT1Token) {
+                if (tokenName.startsWith('color')) {
+                  // --color-*
+                  return [
+                    generateTailwindToken(
+                      token,
+                      DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
+                        'color',
+                        ...token.name.slice(1),
+                      ]),
+                    ),
+                  ];
+                } else if (tokenName.startsWith('font.family')) {
+                  // --font-*
+                  return [
+                    generateTailwindToken(
+                      token,
+                      DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(['font', ...token.name.slice(2)]),
+                    ),
+                  ];
+                } else if (tokenName.startsWith('text')) {
+                  // --text-*
+                  if (tokenName.endsWith('size')) {
+                    return [
+                      generateTailwindToken(
+                        token,
+                        RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
+                          'text',
+                          ...token.name.slice(1, -1),
+                        ]),
+                      ),
+                    ];
+                  } else if (tokenName.endsWith('line-height')) {
+                    return [
+                      generateTailwindToken(
+                        token,
+                        RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
+                          'text',
+                          ...token.name.slice(1, -1),
+                          '',
+                          'line-height',
+                        ]),
+                      ),
+                    ];
+                  }
+                } else if (tokenName.startsWith('font.weight')) {
+                  // --font-weight-*
+                  return [
+                    generateTailwindToken(
+                      token,
+                      DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
+                        'font',
+                        'weight',
+                        ...token.name.slice(2),
+                      ]),
+                    ),
+                  ];
+                }
+              }
+
+              return [];
             },
           ),
         {

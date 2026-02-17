@@ -3,3 +3,8 @@ import type { GenerateCssVariableNameFunction } from './generate-css-variable-na
 
 export const DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION: GenerateCssVariableNameFunction =
   createCssVariableNameGenerator();
+
+export const RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION: GenerateCssVariableNameFunction =
+  createCssVariableNameGenerator({
+    removeSegments: [],
+  });
