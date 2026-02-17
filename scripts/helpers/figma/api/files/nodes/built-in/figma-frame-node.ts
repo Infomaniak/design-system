@@ -1,6 +1,6 @@
-import { FigmaColor } from '../../types/figma-color';
-import { FigmaRectangle } from '../../types/figma-rectangle';
-import { FigmaVector } from '../../types/figma-vector';
+import { type FigmaColor } from '../../types/figma-color.ts';
+import { type FigmaRectangle } from '../../types/figma-rectangle.ts';
+import { type FigmaVector } from '../../types/figma-vector.ts';
 import { type FigmaNode } from '../figma-node.ts';
 import type { HavingFigmaNodeChildren } from '../having-figma-node-children.ts';
 

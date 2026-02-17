@@ -1,0 +1,75 @@
+name: Build Storybook
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - main
+
+# Cancel previous runs on the same branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-storybook:
+    name: Build Storybook
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://npm.pkg.github.com'
+          always-auth: true
+          cache: 'yarn'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Build Storybook
+        id: build
+        run: yarn build:docs
+
+      - name: Upload Storybook artifact
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-pr-${{ github.event.pull_request.number }}
+          path: apps/docs/storybook-static/
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Post/Update PR comment
+        if: github.event_name == 'pull_request' && always()
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: storybook-build-status
+          message: |-
+            ## ${{ steps.build.outcome == 'success' && '✅' || '❌' }} Storybook Build ${{ steps.build.outcome == 'success' && 'Successful' || 'Failed' }}
+
+            ${{ steps.build.outcome == 'success' && format('Storybook has been built successfully for this PR.
+
+            - **Status**: Build passed
+            - **Workflow Run**: [View details](https://github.com/{0}/actions/runs/{1})
+            - **Artifact**: `storybook-pr-{2}` available for 14 days
+
+            The built Storybook will be used for deployment when this PR is merged.', github.repository, github.run_id, github.event.pull_request.number) || format('Storybook build failed for this PR.
+
+            - **Status**: Build failed
+            - **Workflow Run**: [View logs](https://github.com/{0}/actions/runs/{1})
+
+            Please check the workflow logs and fix any errors before merging.', github.repository, github.run_id) }}

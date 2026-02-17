@@ -159,3 +159,7 @@ dist
 /tmp
 /out-tsc
 
+# Storybook
+*storybook.log
+storybook-static
+
