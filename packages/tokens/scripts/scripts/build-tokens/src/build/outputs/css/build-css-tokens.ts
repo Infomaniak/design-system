@@ -178,15 +178,15 @@ export function buildCssTokens({
 
       const cssVariables: string = cssVariableDeclarationsToString([
         // ...[
-        //   'color',
-        //   'font',
-        //   'text',
-        //   'font-weight',
+        //   'color', // ✅
+        //   'font', // ✅
+        //   'text', // ✅
+        //   'font-weight', // ✅
         //   'tracking',
         //   'leading',
         //   'breakpoint',
         //   'container',
-        //   'spacing',
+        //   'spacing', // ✅
         //   'radius',
         //   'shadow',
         //   'inset-shadow',
