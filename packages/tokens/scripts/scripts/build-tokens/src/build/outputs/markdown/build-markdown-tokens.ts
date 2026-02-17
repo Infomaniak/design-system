@@ -26,7 +26,7 @@ import { isFontWeightDesignTokensCollectionToken } from '../../../../../../share
 import { isNumberDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/number/is-number-design-tokens-collection-token.ts';
 import { isShadowDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/composite/shadow/is-shadow-design-tokens-collection-token.ts';
 import { isTypographyDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/composite/typography/is-typography-design-tokens-collection-token.ts';
-import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header .ts';
+import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header.ts';
 
 /**
  * Normalizes HTML string by removing newlines and extra whitespace
