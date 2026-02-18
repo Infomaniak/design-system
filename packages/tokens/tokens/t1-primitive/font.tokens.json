@@ -7,7 +7,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "scopes": ["FONT_SIZE"]
+          "scopes": []
         }
       },
       "14": {
@@ -16,7 +16,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "scopes": ["FONT_SIZE"]
+          "scopes": []
         }
       },
       "16": {
@@ -25,7 +25,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "scopes": ["FONT_SIZE"]
+          "scopes": []
         }
       },
       "18": {
@@ -34,7 +34,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "scopes": ["FONT_SIZE"]
+          "scopes": []
         }
       },
       "20": {
@@ -43,7 +43,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "scopes": ["FONT_SIZE"]
+          "scopes": []
         }
       },
       "24": {
@@ -52,7 +52,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "scopes": ["FONT_SIZE"]
+          "scopes": []
         }
       },
       "32": {
@@ -61,7 +61,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "scopes": ["FONT_SIZE"]
+          "scopes": []
         }
       },
       "40": {
@@ -70,7 +70,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "scopes": ["FONT_SIZE"]
+          "scopes": []
         }
       },
       "48": {
@@ -79,7 +79,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "scopes": ["FONT_SIZE"]
+          "scopes": []
         }
       },
       "$type": "dimension"
@@ -88,13 +88,13 @@
       "400": {
         "$value": 400,
         "$extensions": {
-          "scopes": ["FONT_WEIGHT"]
+          "scopes": []
         }
       },
       "500": {
         "$value": 500,
         "$extensions": {
-          "scopes": ["FONT_WEIGHT"]
+          "scopes": []
         }
       },
       "$type": "fontWeight"
@@ -106,7 +106,7 @@
           "unit": "px"
         },
         "$extensions": {
-          "scopes": ["LETTER_SPACING"]
+          "scopes": []
         }
       },
       "$type": "dimension"
@@ -115,55 +115,55 @@
       "16": {
         "$value": 16,
         "$extensions": {
-          "scopes": ["LINE_HEIGHT"]
+          "scopes": []
         }
       },
       "20": {
         "$value": 20,
         "$extensions": {
-          "scopes": ["LINE_HEIGHT"]
+          "scopes": []
         }
       },
       "24": {
         "$value": 24,
         "$extensions": {
-          "scopes": ["LINE_HEIGHT"]
+          "scopes": []
         }
       },
       "26": {
         "$value": 26,
         "$extensions": {
-          "scopes": ["LINE_HEIGHT"]
+          "scopes": []
         }
       },
       "28": {
         "$value": 28,
         "$extensions": {
-          "scopes": ["LINE_HEIGHT"]
+          "scopes": []
         }
       },
       "32": {
         "$value": 32,
         "$extensions": {
-          "scopes": ["LINE_HEIGHT"]
+          "scopes": []
         }
       },
       "40": {
         "$value": 40,
         "$extensions": {
-          "scopes": ["LINE_HEIGHT"]
+          "scopes": []
         }
       },
       "48": {
         "$value": 48,
         "$extensions": {
-          "scopes": ["LINE_HEIGHT"]
+          "scopes": []
         }
       },
       "56": {
         "$value": 56,
         "$extensions": {
-          "scopes": ["LINE_HEIGHT"]
+          "scopes": []
         }
       },
       "$type": "number"

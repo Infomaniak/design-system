@@ -1,69 +1,69 @@
 {
   "$type": "color",
   "color": {
-    "elevation": {
-      "surface": {
-        "pressed": {
-          "$value": "{color.gray.100}",
-          "$extensions": {
-            "scopes": ["ALL_SCOPES"]
-          }
-        },
-        "hover": {
-          "$value": "{color.gray.50}",
-          "$extensions": {
-            "scopes": ["ALL_SCOPES"]
-          }
-        },
-        "default": {
-          "$value": "{color.white}",
-          "$extensions": {
-            "scopes": ["ALL_SCOPES"]
-          }
-        }
-      },
-      "overlay": {
-        "default": {
-          "$value": "{color.gray.100}",
-          "$extensions": {
-            "scopes": ["ALL_SCOPES"]
-          }
-        },
-        "hover": {
-          "$value": "{color.gray.200}",
-          "$extensions": {
-            "scopes": ["ALL_SCOPES"]
-          }
-        },
-        "pressed": {
-          "$value": "{color.gray.300}",
-          "$extensions": {
-            "scopes": ["ALL_SCOPES"]
-          }
-        }
-      },
-      "raised": {
-        "default": {
-          "$value": "{color.white}",
-          "$extensions": {
-            "scopes": ["ALL_SCOPES"]
-          }
-        },
-        "hover": {
-          "$value": "{color.gray.50}",
-          "$extensions": {
-            "scopes": ["ALL_SCOPES"]
-          }
-        },
-        "pressed": {
-          "$value": "{color.gray.100}",
-          "$extensions": {
-            "scopes": ["ALL_SCOPES"]
-          }
-        }
-      }
-    },
     "background": {
+      "elevation": {
+        "surface": {
+          "pressed": {
+            "$value": "{color.gray.100}",
+            "$extensions": {
+              "scopes": ["ALL_SCOPES"]
+            }
+          },
+          "hover": {
+            "$value": "{color.gray.50}",
+            "$extensions": {
+              "scopes": ["ALL_SCOPES"]
+            }
+          },
+          "default": {
+            "$value": "{color.white}",
+            "$extensions": {
+              "scopes": ["ALL_SCOPES"]
+            }
+          }
+        },
+        "overlay": {
+          "default": {
+            "$value": "{color.gray.100}",
+            "$extensions": {
+              "scopes": ["ALL_SCOPES"]
+            }
+          },
+          "hover": {
+            "$value": "{color.gray.200}",
+            "$extensions": {
+              "scopes": ["ALL_SCOPES"]
+            }
+          },
+          "pressed": {
+            "$value": "{color.gray.300}",
+            "$extensions": {
+              "scopes": ["ALL_SCOPES"]
+            }
+          }
+        },
+        "raised": {
+          "default": {
+            "$value": "{color.white}",
+            "$extensions": {
+              "scopes": ["ALL_SCOPES"]
+            }
+          },
+          "hover": {
+            "$value": "{color.gray.50}",
+            "$extensions": {
+              "scopes": ["ALL_SCOPES"]
+            }
+          },
+          "pressed": {
+            "$value": "{color.gray.100}",
+            "$extensions": {
+              "scopes": ["ALL_SCOPES"]
+            }
+          }
+        }
+      },
       "error": {
         "default": {
           "$value": "{color.red.600}",
@@ -139,6 +139,26 @@
         },
         "pressed": {
           "$value": "{color.lime.800}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        }
+      },
+      "neutral": {
+        "default": {
+          "$value": "{color.gray.100}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "hover": {
+          "$value": "{color.gray.200}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.gray.300}",
           "$extensions": {
             "scopes": ["ALL_SCOPES"]
           }

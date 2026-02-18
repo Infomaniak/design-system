@@ -4,8 +4,10 @@ import type { TypographyDesignToken } from '../../../../dtcg/design-token/token/
 import type { TokensBrueckeDesignTokensGroup } from '../../../tokens-bruecke/group/tokens-bruecke-design-tokens-group.ts';
 import { isTypographyTokensBrueckeDesignTokensGroup } from '../../../tokens-bruecke/group/types/typography/is-typography-tokens-bruecke-design-tokens-group.ts';
 import type { TokensBrueckeToDtcgContext } from '../context/tokens-bruecke-to-dtcg-context.ts';
-import { tokensBrueckeDesignTokenWithMapValueToDesignToken } from '../token/tokens-bruecke-design-token-with-map-value-to-design-token.ts';
-import { dimensionTokensBrueckeDesignTokenValueToDimensionDesignTokenValue } from '../token/types/dimension/value/dimension-tokens-bruecke-design-token-value-to-dimension-design-token-value.ts';
+import { dimensionTokensBrueckeDesignTokenToDimensionDesignToken } from '../token/types/dimension/dimension-tokens-bruecke-design-token-to-dimension-design-token.ts';
+import { dimensionTokensBrueckeDesignTokenToNumberDesignToken } from '../token/types/dimension/dimension-tokens-bruecke-design-token-to-number-design-token.ts';
+import { stringTokensBrueckeDesignTokenToFontFamilyDesignToken } from '../token/types/string/string-tokens-bruecke-design-token-to-font-family-design-token.ts';
+import { stringTokensBrueckeDesignTokenToFontWeightDesignToken } from '../token/types/string/string-tokens-bruecke-design-token-to-font-weight-design-token.ts';
 import { tokensBrueckeTokensTreeToDesignTokensTree } from '../tree/tokens-bruecke-tokens-tree-to-design-tokens-tree.ts';
 
 export function tokensBrueckeTokensGroupToDesignTokensGroup(
@@ -21,38 +23,19 @@ export function tokensBrueckeTokensGroupToDesignTokensGroup(
       }),
       $type: 'typography',
       $value: {
-        fontFamily: tokensBrueckeDesignTokenWithMapValueToDesignToken(
-          children.family,
-          'fontFamily',
-          (value: string): string => {
-            return value;
-          },
-        ).$value,
-        fontSize: tokensBrueckeDesignTokenWithMapValueToDesignToken(
-          children.size,
-          'dimension',
-          dimensionTokensBrueckeDesignTokenValueToDimensionDesignTokenValue,
-        ).$value,
-        fontWeight: tokensBrueckeDesignTokenWithMapValueToDesignToken(
-          children.weight,
-          'fontWeight',
-          (value: string): number => {
-            return dimensionTokensBrueckeDesignTokenValueToDimensionDesignTokenValue(value)
-              .value as number;
-          },
-        ).$value,
-        letterSpacing: tokensBrueckeDesignTokenWithMapValueToDesignToken(
+        fontFamily: stringTokensBrueckeDesignTokenToFontFamilyDesignToken(children.family, ctx)
+          .$value,
+        fontSize: dimensionTokensBrueckeDesignTokenToDimensionDesignToken(children.size, ctx)
+          .$value,
+        fontWeight: stringTokensBrueckeDesignTokenToFontWeightDesignToken(children.weight, ctx)
+          .$value,
+        letterSpacing: dimensionTokensBrueckeDesignTokenToDimensionDesignToken(
           children['letter-spacing'],
-          'dimension',
-          dimensionTokensBrueckeDesignTokenValueToDimensionDesignTokenValue,
+          ctx,
         ).$value,
-        lineHeight: tokensBrueckeDesignTokenWithMapValueToDesignToken(
+        lineHeight: dimensionTokensBrueckeDesignTokenToNumberDesignToken(
           children['line-height'],
-          'number',
-          (value: string): number => {
-            return dimensionTokensBrueckeDesignTokenValueToDimensionDesignTokenValue(value)
-              .value as number;
-          },
+          ctx,
         ).$value,
       },
     } satisfies TypographyDesignToken;

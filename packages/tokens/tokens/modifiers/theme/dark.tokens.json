@@ -1,42 +1,42 @@
 {
   "$type": "color",
   "color": {
-    "elevation": {
-      "surface": {
-        "pressed": {
-          "$value": "{color.gray.950}"
-        },
-        "hover": {
-          "$value": "{color.gray.800}"
-        },
-        "default": {
-          "$value": "{color.gray.900}"
-        }
-      },
-      "overlay": {
-        "default": {
-          "$value": "{color.gray.800}"
-        },
-        "hover": {
-          "$value": "{color.gray.700}"
-        },
-        "pressed": {
-          "$value": "{color.gray.900}"
-        }
-      },
-      "raised": {
-        "default": {
-          "$value": "{color.gray.900}"
-        },
-        "hover": {
-          "$value": "{color.gray.800}"
-        },
-        "pressed": {
-          "$value": "{color.gray.950}"
-        }
-      }
-    },
     "background": {
+      "elevation": {
+        "surface": {
+          "pressed": {
+            "$value": "{color.gray.950}"
+          },
+          "hover": {
+            "$value": "{color.gray.800}"
+          },
+          "default": {
+            "$value": "{color.gray.900}"
+          }
+        },
+        "overlay": {
+          "default": {
+            "$value": "{color.gray.700}"
+          },
+          "hover": {
+            "$value": "{color.gray.600}"
+          },
+          "pressed": {
+            "$value": "{color.gray.800}"
+          }
+        },
+        "raised": {
+          "default": {
+            "$value": "{color.gray.900}"
+          },
+          "hover": {
+            "$value": "{color.gray.800}"
+          },
+          "pressed": {
+            "$value": "{color.gray.950}"
+          }
+        }
+      },
       "error": {
         "default": {
           "$value": "{color.red.500}"
@@ -61,13 +61,13 @@
       },
       "brand": {
         "default": {
-          "$value": "{color.sky.500}"
+          "$value": "{color.sky.400}"
         },
         "pressed": {
           "$value": "{color.sky.700}"
         },
         "hover": {
-          "$value": "{color.sky.400}"
+          "$value": "{color.sky.300}"
         }
       },
       "success": {
@@ -79,6 +79,17 @@
         },
         "pressed": {
           "$value": "{color.lime.700}"
+        }
+      },
+      "neutral": {
+        "default": {
+          "$value": "{color.gray.900}"
+        },
+        "hover": {
+          "$value": "{color.gray.800}"
+        },
+        "pressed": {
+          "$value": "{color.gray.950}"
         }
       }
     },
