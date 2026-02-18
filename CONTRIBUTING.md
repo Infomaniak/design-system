@@ -1,6 +1,6 @@
 # Contributing
 
-This projet is open to everyone. Feel free to test the library, share it, improve it, and create merge requests.
+This project is open to everyone. Feel free to test the library, share it, improve it, and create merge requests.
 
 ## Getting started
 
@@ -44,7 +44,18 @@ cp .env.example .env
 
 And replace the corresponding variables:
 
-- [FIGMA_API_TOKEN](docs/figma/api-token/figma-api-token.md)
+- `FIGMA_API_TOKEN` ([guide](docs/figma/api-token/figma-api-token.md))
+- `FIGMA_TOKENS_FILE_KEY`
+- `FIGMA_ICON_FILE_KEY`
+- `FIGMA_ILLUSTRATION_FILE_KEY`
+- `NPM_TOKEN` (required for npm publish workflows)
+- `KCHAT_WEBHOOK_ID` (used by PR ready workflow notifications)
+
+Optional local CI publish variables (for manual checks):
+
+- `GITHUB_REF_NAME` (`main` or `develop`)
+- `CI_PUBLISH_STRICT_VERSION_POLICY` (`true` by default)
+- `CI_PUBLISH_DRY_RUN` (`true`/`false`)
 
 ## Submit a pull request
 
@@ -86,13 +97,47 @@ Fork the repository, update the code, create a PR from your repository to the up
 
 ## Code
 
-- The source code is located in the `src` directory.
-- The projet uses [prettier](https://prettier.io/) to format the code. You'll want to enable and configure it in your IDE.
-- The tests run with [vitest](https://vitest.dev)
+- The repository is a monorepo:
+  - `packages/` for libraries and token tooling
+  - `apps/` for deployable apps (Storybook docs)
+  - `scripts/` for automation and CI helpers
+- The project uses [prettier](https://prettier.io/) to format the code. You'll want to enable and configure it in your IDE.
+- The tests run with [vitest](https://vitest.dev).
 
 ## Commands
 
-[//]: # 'TODO'
+- `yarn install`: install dependencies
+- `yarn build`: build all workspaces in topological order
+- `yarn build:tokens`: build tokens package
+- `yarn build:docs`: build Storybook docs
+- `yarn test`: run test suite
+- `yarn test:coverage`: run tests with coverage
+- `yarn format`: format source files
+- `yarn ci:on-pull-request`: run PR-ready automation script
+- `GITHUB_REF_NAME=develop yarn ci:publish`: run branch-based publish orchestration manually
 
-- `build`: builds the library.
-- `test`: tests the library.
+## CI Workflows
+
+- `.github/workflows/publish.yml`
+  - Trigger: `push` on `main` and `develop`
+  - Steps: `yarn install --immutable`, `yarn build`, `yarn test`, `yarn ci:publish`
+  - Publish behavior:
+    - Reads package `name` and `version` from each package `package.json`
+    - Checks npm registry first (`name@version`)
+    - Publishes only missing versions (idempotent workflow)
+    - Uses branch dist-tags: `develop => rc`, `main => latest`
+    - With `CI_PUBLISH_STRICT_VERSION_POLICY=true`:
+      - `develop` requires `x.y.z-rc.n`
+      - `main` requires stable `x.y.z`
+
+- `.github/workflows/build-storybook.yml`
+  - Trigger: PR events (`opened`, `synchronize`, `reopened`) and `push` on `main`
+  - Builds Storybook from `apps/docs`, uploads PR artifact, and comments status on the PR.
+
+- `.github/workflows/pr-ready-for-review.yml`
+  - Trigger: PR `opened` and `ready_for_review`
+  - Runs `yarn ci:on-pull-request`.
+
+- `.github/workflows/build-on-pr.yml`
+  - Trigger: `workflow_dispatch` (manual)
+  - Reserved for manual dev package publishing on PR-related testing.
