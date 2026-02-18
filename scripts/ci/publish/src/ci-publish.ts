@@ -58,8 +58,8 @@ export async function discoverPublishablePackages(
   });
 
   const publishablePackages: PublishablePackage[] = [];
-
-  for (const entry of Array.from(entries).sort((a, b) => a.name.localeCompare(b.name))) {
+  const sortedEntries = Array.from(entries).sort((a, b) => a.name.localeCompare(b.name));
+  for (const entry of sortedEntries) {
     if (!entry.isDirectory()) {
       continue;
     }
