@@ -1,7 +1,7 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
-import { loadEnvFile } from '../../../../../scripts/helpers/env/load-env-file.ts';
+import { loadOptionallyEnvFile } from '../../../../../scripts/helpers/env/load-env-file.ts';
 import { DEFAULT_LOG_LEVEL } from '../../../../../scripts/helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../../../../scripts/helpers/log/logger.ts';
 import { publishTokens } from './src/publish-tokens.ts';
@@ -14,13 +14,16 @@ const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
 export async function publishTokensScript(): Promise<void> {
   const {
-    values: { mode },
+    values: { mode, tag },
   } = parseArgs({
     options: {
       mode: {
         type: 'string',
         short: 'm',
         default: 'dev',
+      },
+      tag: {
+        type: 'string',
       },
     },
   });
@@ -29,11 +32,12 @@ export async function publishTokensScript(): Promise<void> {
     throw new Error(`Invalid mode: ${mode}.`);
   }
 
-  loadEnvFile();
+  loadOptionallyEnvFile(logger);
 
   await publishTokens({
     outputDirectory: OUTPUT_DIR,
     mode,
+    tag,
     logger,
   });
 }

@@ -2,13 +2,14 @@ name: PR Ready for Review
 
 on:
   pull_request:
-    types: [ready_for_review]
+    types: [opened, ready_for_review]
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   pr-ready:
+    if: github.event.action != 'opened' || github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     permissions:
       contents: read
