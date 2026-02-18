@@ -16,7 +16,7 @@ import { createCssVariableNameGenerator } from '../../../../../../shared/dtcg/re
 import { DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION } from '../../../../../../shared/dtcg/resolver/to/css/token/name/default-generate-css-variable-name-function.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
-import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header .ts';
+import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header.ts';
 
 const CSS_AUTO_GENERATED_FILE_HEADER = `/*
   ${indent(AUTO_GENERATED_FILE_HEADER)}
