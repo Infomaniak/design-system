@@ -1,4 +1,5 @@
 import { readdir } from 'node:fs/promises';
+import { Dirent } from 'node:fs';
 import { join } from 'node:path';
 import process from 'node:process';
 import { readJsonFile } from '../../../helpers/file/read-json-file.ts';
@@ -52,7 +53,7 @@ export async function discoverPublishablePackages(
   rootDirectory: string,
 ): Promise<readonly PublishablePackage[]> {
   const packagesDirectory: string = join(rootDirectory, 'packages');
-  const entries: readonly import('node:fs').Dirent[] = await readdir(packagesDirectory, {
+  const entries: readonly Dirent[] = await readdir(packagesDirectory, {
     withFileTypes: true,
   });
 
