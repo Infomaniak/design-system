@@ -16,8 +16,9 @@
     "bench": "vitest bench",
     "=== PUBLISH ===": "",
     "publish:tokens:dev": "yarn workspace @infomaniak-design-system/tokens publish:tokens:dev",
+    "ci:publish": "node --no-warnings=ExperimentalWarning scripts/ci/publish/ci-publish.script.ts",
     "=== CI ===": "",
-    "ci:on-pull-request": "node --no-warnings=ExperimentalWarning scripts/scripts/on-pull-request/on-pull-request.script.ts"
+    "ci:on-pull-request": "node --no-warnings=ExperimentalWarning scripts/ci/on-pull-request/on-pull-request.script.ts"
   },
   "description": "Infomaniak's Design System",
   "keywords": [],
