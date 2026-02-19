@@ -48,12 +48,8 @@ jobs:
         id: pages
         run: yarn ci:storybook-pages --mode=prepare
 
-      - name: Build tokens
-        id: build-tokens
-        run: yarn build:tokens
-
       - name: Build Storybook
-        id: build-storybook
+        id: build
         if: github.event_name != 'pull_request' || steps.prepare.outputs.should_build == 'true'
         run: yarn build:docs
 
