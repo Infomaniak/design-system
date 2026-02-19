@@ -36,7 +36,7 @@ export async function convertFigmaTokens({
   );
 
   // the list of modifiers present in the Figma file
-  const modifiers: Map<string /* modifier */, Set<string /* context*/>> = new Map([
+  const modifiers: Map<string /* modifier */, Set<string /* context */>> = new Map([
     ['theme', new Set(['light', 'dark'])],
   ]);
 
