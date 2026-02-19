@@ -516,7 +516,7 @@ export class DesignTokensCollection {
       return;
     }
 
-    // TODO improve: get "from" token and rename it directly after/before updating rge references
+    // TODO: improvement - get "from" token and rename it directly after/before updating rge references
 
     if (this.has(to)) {
       if (onExitingTokenBehaviour === 'throw') {
