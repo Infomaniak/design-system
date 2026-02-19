@@ -1,21 +1,28 @@
-name: Build dev version on PR
+name: Build and Deploy Storybook on PR
 
-on: workflow_dispatch
-#on:
-#  pull_request:
-#    paths:
-#      - 'packages/tokens/**'
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
+  workflow_dispatch:
+
+concurrency:
+  group: build-on-pr-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  publish-dev:
+  build-storybook-pr:
+    name: Build Storybook (PR)
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      packages: write
+      contents: write
+      pull-requests: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -23,65 +30,66 @@ jobs:
           node-version: '24'
           registry-url: 'https://npm.pkg.github.com'
           always-auth: true
+          cache: 'yarn'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Generate dev version
-        id: version
-        run: |
-          PR_NUMBER=${{ github.event.pull_request.number }}
-          TIMESTAMP=$(date +%s)
-          DEV_VERSION="0.0.0-pr.${PR_NUMBER}.${TIMESTAMP}"
-          echo "dev_version=$DEV_VERSION" >> $GITHUB_OUTPUT
-          echo "Generated dev version: $DEV_VERSION"
-
-      - name: Build and publish dev version
-        run: |
-          echo "Publishing dev version: ${{ steps.version.outputs.dev_version }}"
-          node packages/tokens/scripts/scripts/on-pr.ts "${{ steps.version.outputs.dev_version }}"
+      - name: Prepare Storybook build decision
+        if: github.event_name == 'pull_request'
+        id: prepare
+        run: yarn ci:storybook-pr --mode=prepare
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Comment PR with dev package info
-        if: success()
-        uses: actions/github-script@v7
+      - name: Prepare Storybook Pages context
+        id: pages
+        run: yarn ci:storybook-pages --mode=prepare
+
+      - name: Build Storybook
+        id: build
+        if: github.event_name != 'pull_request' || steps.prepare.outputs.should_build == 'true'
+        run: yarn build:docs
+
+      - name: Normalize Storybook build for subpath hosting
+        if: steps.build.outcome == 'success'
+        run: yarn ci:storybook-pages --mode=postbuild
+
+      - name: Deploy Storybook to GitHub Pages
+        id: deploy
+        if: github.event_name == 'pull_request' && steps.prepare.outputs.should_build == 'true' && steps.build.outcome == 'success' && steps.pages.outputs.should_deploy == 'true'
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          script: |
-            const version = '${{ steps.version.outputs.dev_version }}';
-            const comment = `## 🧪 Dev Package Published
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: apps/docs/storybook-static
+          destination_dir: ${{ steps.pages.outputs.destination_dir }}
+          keep_files: true
+          enable_jekyll: false
 
-            A development version has been published to NPM:
-            
-            \`\`\`bash
-            npm install @infomaniak-design-system/tokens@${version}
-            \`\`\`
-
-            ⚠️ This is an automated dev release for testing this PR only.
-            `;
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: comment
-            });
-
-      - name: Comment PR on failure
-        if: failure()
-        uses: actions/github-script@v7
+      - name: Upload Storybook artifact
+        id: upload_artifact
+        if: steps.build.outcome == 'success' && (github.event_name != 'pull_request' || steps.deploy.outcome != 'success')
+        uses: actions/upload-artifact@v4
         with:
-          script: |
-            const comment = `## ❌ Dev Package Publish Failed
+          name: ${{ github.event_name == 'pull_request' && steps.prepare.outputs.artifact_name || format('storybook-manual-{0}', github.sha) }}
+          path: apps/docs/storybook-static/
+          retention-days: 3
+          if-no-files-found: error
 
-            The build/publish process for this PR failed.
-            Please check the workflow logs for details.
-            `;
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: comment
-            });
+      - name: Post/Update PR comment
+        if: github.event_name == 'pull_request' && always()
+        run: yarn ci:storybook-pr --mode=comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          STORYBOOK_SHOULD_BUILD: ${{ steps.prepare.outputs.should_build }}
+          STORYBOOK_DECISION_REASON: ${{ steps.prepare.outputs.decision_reason }}
+          STORYBOOK_CHANGED_FILES_COUNT: ${{ steps.prepare.outputs.changed_files_count }}
+          STORYBOOK_RELEVANT_FILES_JSON: ${{ steps.prepare.outputs.relevant_files_json }}
+          STORYBOOK_ARTIFACT_NAME: ${{ steps.upload_artifact.outcome == 'success' && steps.prepare.outputs.artifact_name || '' }}
+          STORYBOOK_ARTIFACT_RETENTION_DAYS: '3'
+          STORYBOOK_BUILD_OUTCOME: ${{ steps.build.outcome }}
+          STORYBOOK_DEPLOY_OUTCOME: ${{ steps.deploy.outcome }}
+          STORYBOOK_DEPLOYMENT_URL: ${{ steps.pages.outputs.public_url }}
