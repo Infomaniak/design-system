@@ -22,6 +22,12 @@ import {
 } from './src/storybook-pages-context.ts';
 
 type StorybookPagesScriptMode = 'prepare' | 'postbuild' | 'cleanup-pr';
+const GH_PAGES_JUNK_DIRECTORIES: readonly string[] = [
+  '.yarn',
+  'node_modules',
+  'apps/doc/node_modules',
+  'apps/docs/node_modules',
+];
 
 const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
@@ -128,19 +134,23 @@ async function runCleanupPrMode(): Promise<void> {
       throw error;
     });
 
-  if (!targetDirectoryExists) {
-    logger.info(`Directory ${JSON.stringify(targetDirectory)} does not exist. Nothing to clean.`);
-    return;
+  if (targetDirectoryExists) {
+    await execCommandInherit(logger, 'rm', ['-rf', targetDirectory]);
+    await execCommandInherit(logger, 'rmdir', [
+      '--ignore-fail-on-non-empty',
+      '-p',
+      dirname(targetDirectory),
+    ]);
+  } else {
+    logger.info(`Directory ${JSON.stringify(targetDirectory)} does not exist.`);
   }
 
-  await execCommandInherit(logger, 'rm', ['-rf', targetDirectory]);
-  await execCommandInherit(logger, 'rmdir', [
-    '--ignore-fail-on-non-empty',
-    '-p',
-    dirname(targetDirectory),
-  ]);
+  // Remove accidentally published dependency directories from gh-pages.
+  await execCommandInherit(logger, 'rm', ['-rf', ...GH_PAGES_JUNK_DIRECTORIES]);
 
-  const hasChanges: boolean = await execCommand(logger, 'git', ['diff', '--quiet'])
+  await execCommandInherit(logger, 'git', ['add', '-u']);
+
+  const hasChanges: boolean = await execCommand(logger, 'git', ['diff', '--staged', '--quiet'])
     .then((): boolean => false)
     .catch((error: unknown): boolean => {
       if (error instanceof ExecCommandError && error.exitCode === 1) {
@@ -161,7 +171,6 @@ async function runCleanupPrMode(): Promise<void> {
     'user.email',
     '41898282+github-actions[bot]@users.noreply.github.com',
   ]);
-  await execCommandInherit(logger, 'git', ['add', '-A']);
   await execCommandInherit(logger, 'git', [
     'commit',
     '-m',
