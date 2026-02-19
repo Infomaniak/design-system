@@ -118,6 +118,7 @@ describe('createStorybookPrCommentMessage', () => {
   it('builds success message with artifact', () => {
     const message = createStorybookPrCommentMessage({
       artifactName: 'storybook-pr-42',
+      artifactRetentionDays: 3,
       changedFilesCount: 7,
       deploymentUrl: 'https://infomaniak.github.io/design-system/storybook/mr/42/',
       outcome: 'success',
@@ -128,8 +129,23 @@ describe('createStorybookPrCommentMessage', () => {
 
     expect(message).toContain('✅ Storybook build successful');
     expect(message).toContain('storybook-pr-42');
+    expect(message).toContain('retention: 3 days');
     expect(message).toContain('https://github.com/owner/repo/actions/runs/1234');
     expect(message).toContain('https://infomaniak.github.io/design-system/storybook/mr/42/');
+  });
+
+  it('builds success message without artifact when upload is skipped', () => {
+    const message = createStorybookPrCommentMessage({
+      changedFilesCount: 2,
+      deploymentUrl: 'https://infomaniak.github.io/design-system/storybook/mr/42/',
+      outcome: 'success',
+      reason: 'relevant-change',
+      relevantFiles: ['apps/docs/src/main.tsx'],
+      runUrl: 'https://github.com/owner/repo/actions/runs/1234',
+    });
+
+    expect(message).toContain('✅ Storybook build successful');
+    expect(message).toContain('Artifact**: not uploaded (deploy succeeded)');
   });
 
   it('builds skipped message for draft pull request', () => {

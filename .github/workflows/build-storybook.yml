@@ -65,10 +65,10 @@ jobs:
           enable_jekyll: false
 
       - name: Upload Storybook artifact
-        if: steps.build.outcome == 'success'
+        if: steps.build.outcome == 'success' && steps.deploy.outcome != 'success'
         uses: actions/upload-artifact@v4
         with:
           name: storybook-${{ steps.pages.outputs.target || 'manual' }}-${{ github.sha }}
           path: apps/docs/storybook-static/
-          retention-days: 7
+          retention-days: 3
           if-no-files-found: error

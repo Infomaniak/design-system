@@ -324,7 +324,15 @@ async function runCommentMode(): Promise<void> {
   const relevantFiles: readonly string[] = parseStringArray(
     process.env['STORYBOOK_RELEVANT_FILES_JSON'],
   );
-  const artifactName: string | undefined = process.env['STORYBOOK_ARTIFACT_NAME'];
+  const artifactNameFromEnv: string | undefined = process.env['STORYBOOK_ARTIFACT_NAME'];
+  const artifactName: string | undefined =
+    artifactNameFromEnv === undefined || artifactNameFromEnv.trim() === ''
+      ? undefined
+      : artifactNameFromEnv;
+  const artifactRetentionDays: number = parseInteger(
+    process.env['STORYBOOK_ARTIFACT_RETENTION_DAYS'],
+    3,
+  );
   const deploymentUrl: string | undefined = process.env['STORYBOOK_DEPLOYMENT_URL'];
 
   const outcome = resolveStorybookPrBuildOutcome({
@@ -335,6 +343,7 @@ async function runCommentMode(): Promise<void> {
 
   const commentBody: string = createStorybookPrCommentMessage({
     artifactName,
+    artifactRetentionDays,
     changedFilesCount,
     deploymentUrl,
     outcome,

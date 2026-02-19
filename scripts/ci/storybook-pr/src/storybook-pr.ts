@@ -46,6 +46,7 @@ export interface CreateStorybookPrCommentMessageInput {
   readonly relevantFiles: readonly string[];
   readonly runUrl: string;
   readonly artifactName?: string;
+  readonly artifactRetentionDays?: number;
   readonly deploymentUrl?: string;
 }
 
@@ -146,6 +147,7 @@ function renderRelevantFiles(relevantFiles: readonly string[]): string {
 
 export function createStorybookPrCommentMessage({
   artifactName,
+  artifactRetentionDays,
   changedFilesCount,
   deploymentUrl,
   outcome,
@@ -159,6 +161,10 @@ export function createStorybookPrCommentMessage({
     deploymentUrl === undefined || deploymentUrl === ''
       ? '- **Deployment**: not available'
       : `- **Deployment**: [Open Storybook](${deploymentUrl})`;
+  const hasArtifact: boolean = artifactName !== undefined && artifactName.trim() !== '';
+  const artifactLine: string = hasArtifact
+    ? `- **Artifact**: \`${artifactName}\` (retention: ${artifactRetentionDays ?? 3} days)`
+    : '- **Artifact**: not uploaded (deploy succeeded)';
 
   if (outcome === 'success') {
     return [
@@ -168,7 +174,7 @@ export function createStorybookPrCommentMessage({
       `- **Decision**: ${reasonLabel}`,
       `- **Changed files inspected**: ${changedFilesCount}`,
       `- **Workflow run**: [View details](${runUrl})`,
-      `- **Artifact**: \`${artifactName ?? 'storybook-pr'}\` (retention: 14 days)`,
+      artifactLine,
       deploymentLine,
       '',
       '### Relevant files',

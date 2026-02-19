@@ -71,12 +71,13 @@ jobs:
           enable_jekyll: false
 
       - name: Upload Storybook artifact
-        if: steps.build.outcome == 'success'
+        id: upload_artifact
+        if: steps.build.outcome == 'success' && (github.event_name != 'pull_request' || steps.deploy.outcome != 'success')
         uses: actions/upload-artifact@v4
         with:
           name: ${{ github.event_name == 'pull_request' && steps.prepare.outputs.artifact_name || format('storybook-manual-{0}', github.sha) }}
           path: apps/docs/storybook-static/
-          retention-days: 14
+          retention-days: 3
           if-no-files-found: error
 
       - name: Post/Update PR comment
@@ -88,7 +89,8 @@ jobs:
           STORYBOOK_DECISION_REASON: ${{ steps.prepare.outputs.decision_reason }}
           STORYBOOK_CHANGED_FILES_COUNT: ${{ steps.prepare.outputs.changed_files_count }}
           STORYBOOK_RELEVANT_FILES_JSON: ${{ steps.prepare.outputs.relevant_files_json }}
-          STORYBOOK_ARTIFACT_NAME: ${{ steps.prepare.outputs.artifact_name }}
+          STORYBOOK_ARTIFACT_NAME: ${{ steps.upload_artifact.outcome == 'success' && steps.prepare.outputs.artifact_name || '' }}
+          STORYBOOK_ARTIFACT_RETENTION_DAYS: '3'
           STORYBOOK_BUILD_OUTCOME: ${{ steps.build.outcome }}
           STORYBOOK_DEPLOY_OUTCOME: ${{ steps.deploy.outcome }}
           STORYBOOK_DEPLOYMENT_URL: ${{ steps.pages.outputs.public_url }}
