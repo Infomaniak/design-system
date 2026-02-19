@@ -114,6 +114,8 @@ Fork the repository, update the code, create a PR from your repository to the up
 - `yarn test:coverage`: run tests with coverage
 - `yarn format`: format source files
 - `yarn ci:on-pull-request`: run PR-ready automation script
+- `yarn ci:storybook-pr --mode=prepare|comment`: run Storybook PR CI helper locally
+- `yarn ci:storybook-pages --mode=prepare|postbuild|cleanup-pr`: run Storybook Pages helper locally
 - `GITHUB_REF_NAME=develop yarn ci:publish`: run branch-based publish orchestration manually
 
 ## CI Workflows
@@ -130,14 +132,24 @@ Fork the repository, update the code, create a PR from your repository to the up
       - `develop` requires `x.y.z-rc.n`
       - `main` requires stable `x.y.z`
 
+- `.github/workflows/build-on-pr.yml`
+  - Trigger: PR events (`opened`, `synchronize`, `reopened`, `ready_for_review`, `converted_to_draft`, `closed`) and manual dispatch.
+  - Uses `scripts/ci/storybook-pr/storybook-pr.script.ts` to:
+    - detect relevant changed files (docs/packages/build-related)
+    - decide build vs skip for draft/non-relevant updates
+    - post/update a sticky PR comment with status and deployment URL
+  - Uses `scripts/ci/storybook-pages/storybook-pages.script.ts` to resolve deploy context and normalize Storybook output for subpath hosting.
+  - Builds Storybook from `apps/docs`, deploys to GitHub Pages on `storybook/mr/<pr-number>/`, and uploads PR artifact.
+  - On PR close/merge, removes the corresponding preview from `gh-pages`.
+
 - `.github/workflows/build-storybook.yml`
-  - Trigger: PR events (`opened`, `synchronize`, `reopened`) and `push` on `main`
-  - Builds Storybook from `apps/docs`, uploads PR artifact, and comments status on the PR.
+  - Trigger: `push` on `main`, `develop`, tags, and manual dispatch.
+  - Builds Storybook from `apps/docs`, normalizes subpath hosting assets, deploys to GitHub Pages with env segments:
+    - `main` => `storybook/main/`
+    - `develop` => `storybook/develop/`
+    - `tag` => `storybook/tags/<tag>/`
+  - Uploads a short-lived build artifact.
 
 - `.github/workflows/pr-ready-for-review.yml`
   - Trigger: PR `opened` and `ready_for_review`
   - Runs `yarn ci:on-pull-request`.
-
-- `.github/workflows/build-on-pr.yml`
-  - Trigger: `workflow_dispatch` (manual)
-  - Reserved for manual dev package publishing on PR-related testing.
