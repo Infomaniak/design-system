@@ -25,6 +25,10 @@ describe('isStorybookRelevantPath', () => {
     expect(isStorybookRelevantPath('yarn.lock')).toBe(true);
   });
 
+  it('returns true for storybook cleanup workflow file', () => {
+    expect(isStorybookRelevantPath('.github/workflows/cleanup-storybook-pr.yml')).toBe(true);
+  });
+
   it('returns false for unrelated files', () => {
     expect(isStorybookRelevantPath('docs/figma/readme.md')).toBe(false);
   });

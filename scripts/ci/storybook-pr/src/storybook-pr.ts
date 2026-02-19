@@ -12,6 +12,7 @@ const STORYBOOK_RELEVANT_FILES: ReadonlySet<string> = new Set<string>([
   'vitest.config.ts',
   '.github/workflows/build-storybook.yml',
   '.github/workflows/build-on-pr.yml',
+  '.github/workflows/cleanup-storybook-pr.yml',
   '.github/workflows/pr-ready-for-review.yml',
 ]);
 

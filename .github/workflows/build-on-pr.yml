@@ -2,7 +2,7 @@ name: Build and Deploy Storybook on PR
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft, closed]
+    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
   workflow_dispatch:
 
 concurrency:
@@ -11,7 +11,6 @@ concurrency:
 
 jobs:
   build-storybook-pr:
-    if: github.event_name != 'pull_request' || github.event.action != 'closed'
     name: Build Storybook (PR)
     runs-on: ubuntu-latest
     permissions:
@@ -94,43 +93,3 @@ jobs:
           STORYBOOK_BUILD_OUTCOME: ${{ steps.build.outcome }}
           STORYBOOK_DEPLOY_OUTCOME: ${{ steps.deploy.outcome }}
           STORYBOOK_DEPLOYMENT_URL: ${{ steps.pages.outputs.public_url }}
-
-  cleanup-storybook-pr:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    name: Cleanup Storybook preview (PR closed)
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-          registry-url: 'https://npm.pkg.github.com'
-          always-auth: true
-          cache: 'yarn'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Install dependencies
-        run: yarn install --immutable
-
-      - name: Prepare Storybook Pages context
-        id: pages
-        run: yarn ci:storybook-pages --mode=prepare
-
-      - name: Remove PR preview from gh-pages
-        if: steps.pages.outputs.should_deploy == 'true' && steps.pages.outputs.target == 'mr'
-        env:
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          TARGET_DIR: ${{ steps.pages.outputs.destination_dir }}
-        run: yarn ci:storybook-pages --mode=cleanup-pr
