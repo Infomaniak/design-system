@@ -139,7 +139,7 @@ Fork the repository, update the code, create a PR from your repository to the up
     - decide build vs skip for draft/non-relevant updates
     - post/update a sticky PR comment with status and deployment URL
   - Uses `scripts/ci/storybook-pages/storybook-pages.script.ts` to resolve deploy context and normalize Storybook output for subpath hosting.
-  - Builds Storybook from `apps/docs`, deploys to GitHub Pages on `mr/`, and uploads PR artifact.
+  - Builds Storybook from `apps/docs`, deploys to GitHub Pages on `mr/<pr-number>/`, and uploads PR artifact.
 
 - `.github/workflows/build-storybook.yml`
   - Trigger: `push` on `main`, `develop`, tags, and manual dispatch.

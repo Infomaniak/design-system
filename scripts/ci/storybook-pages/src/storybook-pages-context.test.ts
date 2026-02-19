@@ -11,11 +11,24 @@ describe('resolveStorybookPagesContext', () => {
         repositoryOwner: 'Infomaniak',
       }),
     ).toEqual({
-      destinationDir: 'mr',
-      environmentName: 'storybook-pages-mr',
-      publicUrl: 'https://infomaniak.github.io/design-system/mr/',
+      destinationDir: 'mr/42',
+      environmentName: 'storybook-pages-mr-42',
+      publicUrl: 'https://infomaniak.github.io/design-system/mr/42/',
       shouldDeploy: true,
       target: 'mr',
+    });
+  });
+
+  it('returns no deployment context when pull request ref is invalid', () => {
+    expect(
+      resolveStorybookPagesContext({
+        eventName: 'pull_request',
+        ref: 'refs/heads/main',
+        repository: 'Infomaniak/design-system',
+        repositoryOwner: 'Infomaniak',
+      }),
+    ).toEqual({
+      shouldDeploy: false,
     });
   });
 

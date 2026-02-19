@@ -21,6 +21,22 @@ export interface StorybookPagesNoDeployContext {
 
 export type StorybookPagesContext = StorybookPagesDeployContext | StorybookPagesNoDeployContext;
 
+function getPullRequestNumberFromRef(ref: string): string | undefined {
+  const match: RegExpMatchArray | null = ref.match(/^refs\/pull\/(\d+)\/merge$/);
+
+  if (match === null) {
+    return undefined;
+  }
+
+  const pullRequestNumber: string | undefined = match[1];
+
+  if (pullRequestNumber === undefined || pullRequestNumber.trim() === '') {
+    return undefined;
+  }
+
+  return pullRequestNumber;
+}
+
 function sanitizeSegment(value: string): string {
   const trimmed: string = value.trim();
 
@@ -92,10 +108,18 @@ export function resolveStorybookPagesContext({
   repositoryOwner,
 }: ResolveStorybookPagesContextInput): StorybookPagesContext {
   if (eventName === 'pull_request') {
+    const pullRequestNumber: string | undefined = getPullRequestNumberFromRef(ref);
+
+    if (pullRequestNumber === undefined) {
+      return {
+        shouldDeploy: false,
+      };
+    }
+
     return createDeployContext({
       target: 'mr',
-      destinationDir: 'mr',
-      environmentName: 'storybook-pages-mr',
+      destinationDir: `mr/${pullRequestNumber}`,
+      environmentName: `storybook-pages-mr-${pullRequestNumber}`,
       repository,
       repositoryOwner,
     });
