@@ -181,6 +181,7 @@ export async function convertFigmaTokens({
   // resolve and remove modifiers from the main collection
   resolveModifiersFromCollection(mainCollection, modifiers.keys());
 
+  // NOTE: keep as an intermediate debug file
   // await writeJsonFileSafe(`${outputDirectory}/main.tokens.json`, mainCollection.toJSON());
 
   // generate t1, t2, t3 files
