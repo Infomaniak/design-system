@@ -1,0 +1,1 @@
+var j;function B(z){if(!j)if(typeof document<"u")j=document.createElement("textarea");else return;var q="&"+z+";";j.innerHTML=q;var v=j.value;return v!==q?v:void 0}var C={};export{B as decodeEntity,C as NAMED_CODES_TO_UNICODE};
