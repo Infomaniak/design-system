@@ -1,0 +1,1 @@
+import{n as e,t}from"./lib-Crd7VSMv.js";export{t as MDXProvider};
