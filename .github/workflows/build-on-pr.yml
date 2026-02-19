@@ -51,7 +51,7 @@ jobs:
       - name: Build Storybook
         id: build
         if: github.event_name != 'pull_request' || steps.prepare.outputs.should_build == 'true'
-        run: yarn build:docs
+        run: yarn build
 
       - name: Normalize Storybook build for subpath hosting
         if: steps.build.outcome == 'success'

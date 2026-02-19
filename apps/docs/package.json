@@ -12,6 +12,7 @@
     "storybook": "storybook dev -p 6006"
   },
   "dependencies": {
+    "@infomaniak-design-system/tokens": "workspace:^",
     "markdown-to-jsx": "^9.7.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
