@@ -14,7 +14,8 @@
   "dependencies": {
     "markdown-to-jsx": "^9.7.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "@infomaniak-design-system/tokens": "workspace:^"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.0",
