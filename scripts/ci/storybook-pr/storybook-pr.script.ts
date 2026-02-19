@@ -1,5 +1,7 @@
-import { appendFile, readFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import process from 'node:process';
+import { getCliArgValue } from '../../helpers/ci/get-cli-arg-value.ts';
+import { writeGithubOutput } from '../../helpers/ci/write-github-output.ts';
 import { getEnvVariable } from '../../helpers/env/get-env-variable.ts';
 import { loadOptionallyEnvFile } from '../../helpers/env/load-env-file.ts';
 import { parseBoolean, parseInteger, parseStringArray } from '../../helpers/env/parse-value.ts';
@@ -35,18 +37,9 @@ type StorybookPrScriptMode = 'prepare' | 'comment';
 
 const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
-function getArgValue(name: string): string | undefined {
-  const prefix: string = `${name}=`;
-
-  const arg: string | undefined = process.argv.find((value: string): boolean => {
-    return value.startsWith(prefix);
-  });
-
-  return arg === undefined ? undefined : arg.slice(prefix.length);
-}
-
 function getMode(): StorybookPrScriptMode {
-  const mode: string | undefined = getArgValue('--mode') ?? process.env['STORYBOOK_PR_MODE'];
+  const mode: string | undefined =
+    getCliArgValue(process.argv, '--mode') ?? process.env['STORYBOOK_PR_MODE'];
 
   if (mode !== 'prepare' && mode !== 'comment') {
     throw new Error('Invalid mode. Expected --mode=prepare or --mode=comment.');
@@ -91,17 +84,6 @@ function getRunUrl(): string {
   const repository: string = getEnvVariable('GITHUB_REPOSITORY');
 
   return `${serverUrl}/${repository}/actions/runs/${runId}`;
-}
-
-async function writeGithubOutput(name: string, value: string): Promise<void> {
-  const outputPath: string | undefined = process.env['GITHUB_OUTPUT'];
-
-  if (outputPath === undefined || outputPath === '') {
-    logger.warn(`Skipping output ${name}: GITHUB_OUTPUT is not available.`);
-    return;
-  }
-
-  await appendFile(outputPath, `${name}=${value}\n`, { encoding: 'utf8' });
 }
 
 async function githubRequest<TResponse>({
@@ -266,11 +248,11 @@ async function upsertStorybookComment({
 
 async function runPrepareMode(): Promise<void> {
   if (process.env['GITHUB_EVENT_NAME'] !== 'pull_request') {
-    await writeGithubOutput('should_build', 'true');
-    await writeGithubOutput('decision_reason', 'relevant-change');
-    await writeGithubOutput('changed_files_count', '0');
-    await writeGithubOutput('relevant_files_json', '[]');
-    await writeGithubOutput('artifact_name', 'storybook-pr');
+    await writeGithubOutput({ logger, name: 'should_build', value: 'true' });
+    await writeGithubOutput({ logger, name: 'decision_reason', value: 'relevant-change' });
+    await writeGithubOutput({ logger, name: 'changed_files_count', value: '0' });
+    await writeGithubOutput({ logger, name: 'relevant_files_json', value: '[]' });
+    await writeGithubOutput({ logger, name: 'artifact_name', value: 'storybook-pr' });
     return;
   }
 
@@ -295,12 +277,28 @@ async function runPrepareMode(): Promise<void> {
     isDraft: payload.pull_request.draft,
   });
 
-  await writeGithubOutput('pull_request_number', String(pullRequestNumber));
-  await writeGithubOutput('should_build', String(decision.shouldBuild));
-  await writeGithubOutput('decision_reason', decision.reason);
-  await writeGithubOutput('changed_files_count', String(decision.changedFilesCount));
-  await writeGithubOutput('relevant_files_json', JSON.stringify(decision.relevantFiles));
-  await writeGithubOutput('artifact_name', `storybook-pr-${pullRequestNumber}`);
+  await writeGithubOutput({
+    logger,
+    name: 'pull_request_number',
+    value: String(pullRequestNumber),
+  });
+  await writeGithubOutput({ logger, name: 'should_build', value: String(decision.shouldBuild) });
+  await writeGithubOutput({ logger, name: 'decision_reason', value: decision.reason });
+  await writeGithubOutput({
+    logger,
+    name: 'changed_files_count',
+    value: String(decision.changedFilesCount),
+  });
+  await writeGithubOutput({
+    logger,
+    name: 'relevant_files_json',
+    value: JSON.stringify(decision.relevantFiles),
+  });
+  await writeGithubOutput({
+    logger,
+    name: 'artifact_name',
+    value: `storybook-pr-${pullRequestNumber}`,
+  });
 
   logger.info('Storybook build decision:', decision);
 }

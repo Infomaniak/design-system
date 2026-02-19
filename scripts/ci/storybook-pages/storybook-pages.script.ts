@@ -1,6 +1,8 @@
-import { appendFile, readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import process from 'node:process';
+import { getCliArgValue } from '../../helpers/ci/get-cli-arg-value.ts';
+import { writeGithubOutput } from '../../helpers/ci/write-github-output.ts';
 import { loadOptionallyEnvFile } from '../../helpers/env/load-env-file.ts';
 import { DEFAULT_LOG_LEVEL } from '../../helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../helpers/log/logger.ts';
@@ -23,18 +25,9 @@ type StorybookPagesScriptMode = 'prepare' | 'postbuild' | 'cleanup-pr';
 
 const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
-function getArgValue(name: string): string | undefined {
-  const prefix: string = `${name}=`;
-
-  const arg: string | undefined = process.argv.find((value: string): boolean => {
-    return value.startsWith(prefix);
-  });
-
-  return arg === undefined ? undefined : arg.slice(prefix.length);
-}
-
 function getMode(): StorybookPagesScriptMode {
-  const mode: string | undefined = getArgValue('--mode') ?? process.env['STORYBOOK_PAGES_MODE'];
+  const mode: string | undefined =
+    getCliArgValue(process.argv, '--mode') ?? process.env['STORYBOOK_PAGES_MODE'];
 
   if (mode !== 'prepare' && mode !== 'postbuild' && mode !== 'cleanup-pr') {
     throw new Error(
@@ -43,17 +36,6 @@ function getMode(): StorybookPagesScriptMode {
   }
 
   return mode;
-}
-
-async function writeGithubOutput(name: string, value: string): Promise<void> {
-  const outputPath: string | undefined = process.env['GITHUB_OUTPUT'];
-
-  if (outputPath === undefined || outputPath === '') {
-    logger.warn(`Skipping output ${name}: GITHUB_OUTPUT is not available.`);
-    return;
-  }
-
-  await appendFile(outputPath, `${name}=${value}\n`, { encoding: 'utf8' });
 }
 
 async function runPrepareMode(): Promise<void> {
@@ -72,21 +54,21 @@ async function runPrepareMode(): Promise<void> {
           repositoryOwner,
         });
 
-  await writeGithubOutput('should_deploy', String(context.shouldDeploy));
+  await writeGithubOutput({ logger, name: 'should_deploy', value: String(context.shouldDeploy) });
 
   if (!context.shouldDeploy) {
-    await writeGithubOutput('target', '');
-    await writeGithubOutput('destination_dir', '');
-    await writeGithubOutput('public_url', '');
-    await writeGithubOutput('environment_name', '');
+    await writeGithubOutput({ logger, name: 'target', value: '' });
+    await writeGithubOutput({ logger, name: 'destination_dir', value: '' });
+    await writeGithubOutput({ logger, name: 'public_url', value: '' });
+    await writeGithubOutput({ logger, name: 'environment_name', value: '' });
     logger.warn('Storybook pages deployment context not available for this event/ref.');
     return;
   }
 
-  await writeGithubOutput('target', context.target);
-  await writeGithubOutput('destination_dir', context.destinationDir);
-  await writeGithubOutput('public_url', context.publicUrl);
-  await writeGithubOutput('environment_name', context.environmentName);
+  await writeGithubOutput({ logger, name: 'target', value: context.target });
+  await writeGithubOutput({ logger, name: 'destination_dir', value: context.destinationDir });
+  await writeGithubOutput({ logger, name: 'public_url', value: context.publicUrl });
+  await writeGithubOutput({ logger, name: 'environment_name', value: context.environmentName });
 
   logger.info('Storybook pages context:', context);
 }
