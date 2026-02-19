@@ -36,6 +36,7 @@ export type StorybookPrBuildOutcome = 'success' | 'failure' | 'skipped';
 export interface ResolveStorybookPrBuildOutcomeInput {
   readonly shouldBuild: boolean;
   readonly buildStepOutcome: string;
+  readonly deployStepOutcome?: string;
 }
 
 export interface CreateStorybookPrCommentMessageInput {
@@ -45,6 +46,7 @@ export interface CreateStorybookPrCommentMessageInput {
   readonly relevantFiles: readonly string[];
   readonly runUrl: string;
   readonly artifactName?: string;
+  readonly deploymentUrl?: string;
 }
 
 function normalizePath(filePath: string): string {
@@ -98,12 +100,21 @@ export function evaluateStorybookPrBuild({
 export function resolveStorybookPrBuildOutcome({
   shouldBuild,
   buildStepOutcome,
+  deployStepOutcome,
 }: ResolveStorybookPrBuildOutcomeInput): StorybookPrBuildOutcome {
   if (!shouldBuild) {
     return 'skipped';
   }
 
-  return buildStepOutcome === 'success' ? 'success' : 'failure';
+  if (buildStepOutcome !== 'success') {
+    return 'failure';
+  }
+
+  if (deployStepOutcome !== undefined && deployStepOutcome !== 'success') {
+    return 'failure';
+  }
+
+  return 'success';
 }
 
 function getReasonLabel(reason: StorybookPrBuildReason): string {
@@ -136,6 +147,7 @@ function renderRelevantFiles(relevantFiles: readonly string[]): string {
 export function createStorybookPrCommentMessage({
   artifactName,
   changedFilesCount,
+  deploymentUrl,
   outcome,
   reason,
   relevantFiles,
@@ -143,6 +155,10 @@ export function createStorybookPrCommentMessage({
 }: CreateStorybookPrCommentMessageInput): string {
   const reasonLabel: string = getReasonLabel(reason);
   const relevantFilesMarkdown: string = renderRelevantFiles(relevantFiles);
+  const deploymentLine: string =
+    deploymentUrl === undefined || deploymentUrl === ''
+      ? '- **Deployment**: not available'
+      : `- **Deployment**: [Open Storybook](${deploymentUrl})`;
 
   if (outcome === 'success') {
     return [
@@ -153,6 +169,7 @@ export function createStorybookPrCommentMessage({
       `- **Changed files inspected**: ${changedFilesCount}`,
       `- **Workflow run**: [View details](${runUrl})`,
       `- **Artifact**: \`${artifactName ?? 'storybook-pr'}\` (retention: 14 days)`,
+      deploymentLine,
       '',
       '### Relevant files',
       relevantFilesMarkdown,

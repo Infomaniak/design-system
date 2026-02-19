@@ -97,6 +97,17 @@ describe('resolveStorybookPrBuildOutcome', () => {
     expect(
       resolveStorybookPrBuildOutcome({
         buildStepOutcome: 'failure',
+        deployStepOutcome: 'skipped',
+        shouldBuild: true,
+      }),
+    ).toBe('failure');
+  });
+
+  it('returns failure when deployment step did not succeed', () => {
+    expect(
+      resolveStorybookPrBuildOutcome({
+        buildStepOutcome: 'success',
+        deployStepOutcome: 'failure',
         shouldBuild: true,
       }),
     ).toBe('failure');
@@ -108,6 +119,7 @@ describe('createStorybookPrCommentMessage', () => {
     const message = createStorybookPrCommentMessage({
       artifactName: 'storybook-pr-42',
       changedFilesCount: 7,
+      deploymentUrl: 'https://infomaniak.github.io/design-system/mr/',
       outcome: 'success',
       reason: 'relevant-change',
       relevantFiles: ['apps/docs/src/main.tsx'],
@@ -117,6 +129,7 @@ describe('createStorybookPrCommentMessage', () => {
     expect(message).toContain('✅ Storybook build successful');
     expect(message).toContain('storybook-pr-42');
     expect(message).toContain('https://github.com/owner/repo/actions/runs/1234');
+    expect(message).toContain('https://infomaniak.github.io/design-system/mr/');
   });
 
   it('builds skipped message for draft pull request', () => {

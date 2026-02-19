@@ -320,21 +320,25 @@ async function runCommentMode(): Promise<void> {
 
   const shouldBuild: boolean = parseBoolean(process.env['STORYBOOK_SHOULD_BUILD']);
   const buildStepOutcome: string = process.env['STORYBOOK_BUILD_OUTCOME'] ?? 'failure';
+  const deployStepOutcome: string | undefined = process.env['STORYBOOK_DEPLOY_OUTCOME'];
   const reason: StorybookPrBuildReason = parseReason(process.env['STORYBOOK_DECISION_REASON']);
   const changedFilesCount: number = parseInteger(process.env['STORYBOOK_CHANGED_FILES_COUNT'], 0);
   const relevantFiles: readonly string[] = parseStringArray(
     process.env['STORYBOOK_RELEVANT_FILES_JSON'],
   );
   const artifactName: string | undefined = process.env['STORYBOOK_ARTIFACT_NAME'];
+  const deploymentUrl: string | undefined = process.env['STORYBOOK_DEPLOYMENT_URL'];
 
   const outcome = resolveStorybookPrBuildOutcome({
     shouldBuild,
     buildStepOutcome,
+    deployStepOutcome,
   });
 
   const commentBody: string = createStorybookPrCommentMessage({
     artifactName,
     changedFilesCount,
+    deploymentUrl,
     outcome,
     reason,
     relevantFiles,
