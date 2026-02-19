@@ -11,9 +11,9 @@ describe('resolveStorybookPagesContext', () => {
         repositoryOwner: 'Infomaniak',
       }),
     ).toEqual({
-      destinationDir: 'mr/42',
+      destinationDir: 'storybook/mr/42',
       environmentName: 'storybook-pages-mr-42',
-      publicUrl: 'https://infomaniak.github.io/design-system/mr/42/',
+      publicUrl: 'https://infomaniak.github.io/design-system/storybook/mr/42/',
       shouldDeploy: true,
       target: 'mr',
     });
@@ -41,9 +41,9 @@ describe('resolveStorybookPagesContext', () => {
         repositoryOwner: 'Infomaniak',
       }),
     ).toEqual({
-      destinationDir: 'develop',
+      destinationDir: 'storybook/develop',
       environmentName: 'storybook-pages-develop',
-      publicUrl: 'https://infomaniak.github.io/design-system/develop/',
+      publicUrl: 'https://infomaniak.github.io/design-system/storybook/develop/',
       shouldDeploy: true,
       target: 'develop',
     });
@@ -58,9 +58,9 @@ describe('resolveStorybookPagesContext', () => {
         repositoryOwner: 'Infomaniak',
       }),
     ).toEqual({
-      destinationDir: 'main',
+      destinationDir: 'storybook/main',
       environmentName: 'storybook-pages-main',
-      publicUrl: 'https://infomaniak.github.io/design-system/main/',
+      publicUrl: 'https://infomaniak.github.io/design-system/storybook/main/',
       shouldDeploy: true,
       target: 'main',
     });
@@ -75,9 +75,9 @@ describe('resolveStorybookPagesContext', () => {
         repositoryOwner: 'Infomaniak',
       }),
     ).toEqual({
-      destinationDir: 'tags/v1.2.3',
+      destinationDir: 'storybook/tags/v1.2.3',
       environmentName: 'storybook-pages-tag-v1.2.3',
-      publicUrl: 'https://infomaniak.github.io/design-system/tags/v1.2.3/',
+      publicUrl: 'https://infomaniak.github.io/design-system/storybook/tags/v1.2.3/',
       shouldDeploy: true,
       target: 'tag',
     });
@@ -92,9 +92,9 @@ describe('resolveStorybookPagesContext', () => {
         repositoryOwner: 'Infomaniak',
       }),
     ).toEqual({
-      destinationDir: 'tags/release-2026.02.19-rc',
+      destinationDir: 'storybook/tags/release-2026.02.19-rc',
       environmentName: 'storybook-pages-tag-release-2026.02.19-rc',
-      publicUrl: 'https://infomaniak.github.io/design-system/tags/release-2026.02.19-rc/',
+      publicUrl: 'https://infomaniak.github.io/design-system/storybook/tags/release-2026.02.19-rc/',
       shouldDeploy: true,
       target: 'tag',
     });
@@ -109,9 +109,9 @@ describe('resolveStorybookPagesContext', () => {
         repositoryOwner: 'infomaniak',
       }),
     ).toEqual({
-      destinationDir: 'main',
+      destinationDir: 'storybook/main',
       environmentName: 'storybook-pages-main',
-      publicUrl: 'https://infomaniak.github.io/main/',
+      publicUrl: 'https://infomaniak.github.io/storybook/main/',
       shouldDeploy: true,
       target: 'main',
     });

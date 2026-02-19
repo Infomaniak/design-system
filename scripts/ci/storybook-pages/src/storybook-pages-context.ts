@@ -20,6 +20,7 @@ export interface StorybookPagesNoDeployContext {
 }
 
 export type StorybookPagesContext = StorybookPagesDeployContext | StorybookPagesNoDeployContext;
+const STORYBOOK_PAGES_ROOT_PATH: string = 'storybook';
 
 function getPullRequestNumberFromRef(ref: string): string | undefined {
   const match: RegExpMatchArray | null = ref.match(/^refs\/pull\/(\d+)\/merge$/);
@@ -91,12 +92,13 @@ function createDeployContext({
 }): StorybookPagesDeployContext {
   const baseUrl: string = getPagesBaseUrl({ repository, repositoryOwner });
   const normalizedDestinationDir: string = destinationDir.replace(/^\/+|\/+$/g, '');
+  const prefixedDestinationDir: string = `${STORYBOOK_PAGES_ROOT_PATH}/${normalizedDestinationDir}`;
 
   return {
     shouldDeploy: true,
     target,
-    destinationDir: normalizedDestinationDir,
-    publicUrl: `${baseUrl}/${normalizedDestinationDir}/`,
+    destinationDir: prefixedDestinationDir,
+    publicUrl: `${baseUrl}/${prefixedDestinationDir}/`,
     environmentName,
   };
 }
