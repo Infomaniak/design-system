@@ -34,6 +34,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install dependencies
+        run: yarn install --immutable
+
+
       - name: Prepare Storybook build decision
         if: github.event_name == 'pull_request'
         id: prepare
@@ -44,9 +48,6 @@ jobs:
       - name: Prepare Storybook Pages context
         id: pages
         run: yarn ci:storybook-pages --mode=prepare
-
-      - name: Install dependencies
-        run: yarn install --immutable
 
       - name: Build Storybook
         id: build
