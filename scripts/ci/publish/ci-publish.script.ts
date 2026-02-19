@@ -2,6 +2,7 @@ import { dirname, join } from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { loadOptionallyEnvFile } from '../../helpers/env/load-env-file.ts';
+import { parseBoolean } from '../../helpers/env/parse-value.ts';
 import { DEFAULT_LOG_LEVEL } from '../../helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../helpers/log/logger.ts';
 import { ciPublish } from './src/ci-publish.ts';
@@ -9,16 +10,6 @@ import { ciPublish } from './src/ci-publish.ts';
 const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 
 const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
-
-function parseBoolean(value: string | undefined, defaultValue: boolean): boolean {
-  if (value === undefined) {
-    return defaultValue;
-  }
-
-  const normalized: string = value.trim().toLowerCase();
-
-  return normalized === '1' || normalized === 'true' || normalized === 'yes' || normalized === 'on';
-}
 
 export async function ciPublishScript(): Promise<void> {
   loadOptionallyEnvFile(logger);

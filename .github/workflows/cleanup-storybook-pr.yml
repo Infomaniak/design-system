@@ -1,0 +1,50 @@
+name: Cleanup Storybook Preview on PR Close
+
+on:
+  pull_request:
+    types: [closed]
+
+concurrency:
+  group: cleanup-storybook-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  cleanup-storybook-pr:
+    name: Cleanup Storybook preview (PR closed)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://npm.pkg.github.com'
+          always-auth: true
+          cache: 'yarn'
+          cache-dependency-path: yarn.lock
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Prepare Storybook Pages context
+        id: pages
+        run: yarn ci:storybook-pages --mode=prepare
+
+      - name: Remove PR preview from gh-pages
+        if: steps.pages.outputs.should_deploy == 'true' && steps.pages.outputs.target == 'mr'
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          TARGET_DIR: ${{ steps.pages.outputs.destination_dir }}
+        run: yarn ci:storybook-pages --mode=cleanup-pr
