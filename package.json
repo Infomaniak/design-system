@@ -19,7 +19,8 @@
     "ci:publish": "node --no-warnings=ExperimentalWarning scripts/ci/publish/ci-publish.script.ts",
     "=== CI ===": "",
     "ci:on-pull-request": "node --no-warnings=ExperimentalWarning scripts/ci/on-pull-request/on-pull-request.script.ts",
-    "ci:storybook-pr": "node --no-warnings=ExperimentalWarning scripts/ci/storybook-pr/storybook-pr.script.ts"
+    "ci:storybook-pr": "node --no-warnings=ExperimentalWarning scripts/ci/storybook-pr/storybook-pr.script.ts",
+    "ci:storybook-pages": "node --no-warnings=ExperimentalWarning scripts/ci/storybook-pages/storybook-pages.script.ts"
   },
   "description": "Infomaniak's Design System",
   "keywords": [],

@@ -1,24 +1,24 @@
-name: Build Storybook
+name: Build and Deploy Storybook
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
   push:
     branches:
       - main
+      - develop
+    tags:
+      - '*'
+  workflow_dispatch:
 
-# Cancel previous runs on the same branch
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: build-storybook-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   build-storybook:
-    name: Build Storybook
+    name: Build Storybook (branches/tags)
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pull-requests: write
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -37,6 +37,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Prepare Storybook Pages context
+        id: pages
+        run: yarn ci:storybook-pages --mode=prepare
+
       - name: Install dependencies
         run: yarn install --immutable
 
@@ -44,32 +48,27 @@ jobs:
         id: build
         run: yarn build:docs
 
+      - name: Normalize Storybook build for subpath hosting
+        if: steps.build.outcome == 'success'
+        run: yarn ci:storybook-pages --mode=postbuild
+
+      - name: Deploy Storybook to GitHub Pages
+        id: deploy
+        if: steps.build.outcome == 'success' && steps.pages.outputs.should_deploy == 'true'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: apps/docs/storybook-static
+          destination_dir: ${{ steps.pages.outputs.destination_dir }}
+          keep_files: true
+          enable_jekyll: false
+
       - name: Upload Storybook artifact
-        if: github.event_name == 'pull_request'
+        if: steps.build.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
-          name: storybook-pr-${{ github.event.pull_request.number }}
+          name: storybook-${{ steps.pages.outputs.target || 'manual' }}-${{ github.sha }}
           path: apps/docs/storybook-static/
-          retention-days: 14
+          retention-days: 7
           if-no-files-found: error
-
-      - name: Post/Update PR comment
-        if: github.event_name == 'pull_request' && always()
-        uses: marocchino/sticky-pull-request-comment@v2
-        with:
-          header: storybook-build-status
-          message: |-
-            ## ${{ steps.build.outcome == 'success' && '✅' || '❌' }} Storybook Build ${{ steps.build.outcome == 'success' && 'Successful' || 'Failed' }}
-
-            ${{ steps.build.outcome == 'success' && format('Storybook has been built successfully for this PR.
-
-            - **Status**: Build passed
-            - **Workflow Run**: [View details](https://github.com/{0}/actions/runs/{1})
-            - **Artifact**: `storybook-pr-{2}` available for 14 days
-
-            The built Storybook will be used for deployment when this PR is merged.', github.repository, github.run_id, github.event.pull_request.number) || format('Storybook build failed for this PR.
-
-            - **Status**: Build failed
-            - **Workflow Run**: [View logs](https://github.com/{0}/actions/runs/{1})
-
-            Please check the workflow logs and fix any errors before merging.', github.repository, github.run_id) }}
