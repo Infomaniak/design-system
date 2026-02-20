@@ -1,5 +1,5 @@
 import type { FontWeightDesignTokensCollectionToken } from '../../../../../token/types/base/font-weight/font-weight-design-tokens-collection-token.ts';
-import type { FontWeightDesignTokensCollectionTokenValue } from '../../../../../token/types/base/font-weight/value/font-weight-design-tokens-collection-token-value.ts';
+import { valueOrCurlyReferenceToCssVariableReference } from '../../../../css/reference/value-or-curly-reference-to-css-variable-reference.ts';
 import { fontWeightDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/font-weight/value/font-weight-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
@@ -60,12 +60,15 @@ export function fontWeightDesignTokensCollectionTokenToMarkdown(
   } = options;
 
   // Convert font weight to CSS value using shared helper
-  const value = token.value as FontWeightDesignTokensCollectionTokenValue;
-  const weightValue = fontWeightDesignTokensCollectionTokenValueToCssValue(value);
+  const weightValue = valueOrCurlyReferenceToCssVariableReference(
+    token.value,
+    fontWeightDesignTokensCollectionTokenValueToCssValue,
+  );
 
   // Create the font weight preview HTML
   const preview = /* HTML */ `
-    <p style="
+    <p
+      style="
       font-weight: ${weightValue};
       font-size: ${sampleFontSize}px;
       font-family: ${sampleFontFamily};
@@ -74,13 +77,20 @@ export function fontWeightDesignTokensCollectionTokenToMarkdown(
       background: #f9fafb;
       border-radius: 4px;
       border: 1px solid #e5e7eb;
-    ">${sampleText}</p>
-    <div style="
+    "
+    >
+      ${sampleText}
+    </p>
+    <div
+      style="
       margin-top: 4px;
       font-family: monospace;
       font-size: 12px;
       color: #6b7280;
-    ">${weightValue}</div>
+    "
+    >
+      ${weightValue}
+    </div>
   `;
 
   return {

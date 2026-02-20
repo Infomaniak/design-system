@@ -9,7 +9,7 @@
  */
 
 import type { ShadowDesignTokensCollectionToken } from '../../../../../token/types/composite/shadow/shadow-design-tokens-collection-token.ts';
-import type { ShadowDesignTokensCollectionTokenValue } from '../../../../../token/types/composite/shadow/value/shadow-design-tokens-collection-token-value.ts';
+import { valueOrCurlyReferenceToCssVariableReference } from '../../../../css/reference/value-or-curly-reference-to-css-variable-reference.ts';
 import { shadowDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/composite/shadow/value/shadow-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
@@ -53,8 +53,10 @@ export function shadowDesignTokensCollectionTokenToMarkdown(
   const { boxSize = 50 } = options;
 
   // Construct the CSS box-shadow value using the shared helper
-  const value = token.value as ShadowDesignTokensCollectionTokenValue;
-  const cssShadowValue = shadowDesignTokensCollectionTokenValueToCssValue(value);
+  const cssShadowValue = valueOrCurlyReferenceToCssVariableReference(
+    token.value,
+    shadowDesignTokensCollectionTokenValueToCssValue,
+  );
 
   // Create the shadow preview HTML
   // Shows a box with the shadow applied

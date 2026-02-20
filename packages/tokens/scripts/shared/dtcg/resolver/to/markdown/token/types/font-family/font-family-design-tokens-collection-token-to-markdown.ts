@@ -1,5 +1,5 @@
 import type { FontFamilyDesignTokensCollectionToken } from '../../../../../token/types/base/font-family/font-family-design-tokens-collection-token.ts';
-import type { FontFamilyDesignTokensCollectionTokenValue } from '../../../../../token/types/base/font-family/value/font-family-design-tokens-collection-token-value.ts';
+import { valueOrCurlyReferenceToCssVariableReference } from '../../../../css/reference/value-or-curly-reference-to-css-variable-reference.ts';
 import { fontFamilyDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/font-family/value/font-family-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
@@ -47,19 +47,20 @@ export function fontFamilyDesignTokensCollectionTokenToMarkdown(
   _context: MarkdownRenderContext,
   options: FontFamilyMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
-  const {
-    sampleText = DEFAULT_SAMPLE_TEXT,
-    sampleFontSize = 16,
-  } = options;
+  const { sampleText = DEFAULT_SAMPLE_TEXT, sampleFontSize = 16 } = options;
 
   // Convert font family to CSS value using shared helper
-  const value = token.value as FontFamilyDesignTokensCollectionTokenValue;
-  const fontFamilyString = fontFamilyDesignTokensCollectionTokenValueToCssValue(value);
+  // const value = token.value as FontFamilyDesignTokensCollectionTokenValue;
+  const fontFamilyString = valueOrCurlyReferenceToCssVariableReference(
+    token.value,
+    fontFamilyDesignTokensCollectionTokenValueToCssValue,
+  );
 
   // Create the font family preview HTML
   // Shows sample text with the font family applied
   const preview = /* HTML */ `
-    <p style="
+    <p
+      style="
       font-family: ${fontFamilyString};
       font-size: ${sampleFontSize}px;
       margin: 0;
@@ -67,13 +68,20 @@ export function fontFamilyDesignTokensCollectionTokenToMarkdown(
       background: #f9fafb;
       border-radius: 4px;
       border: 1px solid #e5e7eb;
-    ">${sampleText}</p>
-    <div style="
+    "
+    >
+      ${sampleText}
+    </p>
+    <div
+      style="
       margin-top: 4px;
       font-family: monospace;
       font-size: 12px;
       color: #6b7280;
-    ">${fontFamilyString}</div>
+    "
+    >
+      ${fontFamilyString}
+    </div>
   `;
 
   return {

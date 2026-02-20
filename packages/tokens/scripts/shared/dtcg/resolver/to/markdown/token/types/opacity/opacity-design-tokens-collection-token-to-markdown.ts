@@ -1,3 +1,4 @@
+import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { NumberDesignTokensCollectionToken } from '../../../../../token/types/base/number/number-design-tokens-collection-token.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
@@ -46,13 +47,24 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
   _context: MarkdownRenderContext,
   options: OpacityMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
-  const {
-    boxSize = 100,
-    overlayColor = '#22c55e',
-  } = options;
+  const { boxSize = 100, overlayColor = '#22c55e' } = options;
 
   // Get the opacity value
   const opacity = token.value;
+
+  if (isCurlyReference(opacity)) {
+    // TODO implement
+    console.warn(
+      `Opacity token "${token.name.join('.')}" references another token, which is not supported yet.`,
+    );
+
+    return {
+      preview: '',
+      name: token.name.join('.'),
+      value: opacity,
+      description: token.description ?? '',
+    };
+  }
 
   // Format the display value
   const percentage = Math.round(opacity * 100);
@@ -61,7 +73,8 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
   // Create the opacity preview HTML
   // Shows a checkerboard grid with a green overlay at the specified opacity
   const preview = /* HTML */ `
-    <div style="
+    <div
+      style="
       position: relative;
       width: ${boxSize}px;
       height: ${boxSize}px;
@@ -69,8 +82,10 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
       border-radius: 4px;
       overflow: hidden;
       border: 1px solid #e5e7eb;
-    ">
-      <div style="
+    "
+    >
+      <div
+        style="
         position: absolute;
         top: 0;
         left: 0;
@@ -83,8 +98,10 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
           linear-gradient(-45deg, transparent 75%, #ccc 75%);
         background-size: 12px 12px;
         background-position: 0 0, 0 6px, 6px -6px, -6px 0px;
-      "></div>
-      <div style="
+      "
+      ></div>
+      <div
+        style="
         position: absolute;
         top: 0;
         left: 0;
@@ -92,8 +109,10 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
         bottom: 0;
         background-color: ${overlayColor};
         opacity: ${opacity};
-      "></div>
-      <div style="
+      "
+      ></div>
+      <div
+        style="
         position: absolute;
         top: 50%;
         left: 50%;
@@ -104,14 +123,21 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
         color: ${opacity > 0.5 ? '#fff' : '#374151'};
         text-shadow: ${opacity > 0.5 ? '0 1px 2px rgba(0,0,0,0.3)' : 'none'};
         z-index: 10;
-      ">${percentage}%</div>
+      "
+      >
+        ${percentage}%
+      </div>
     </div>
-    <div style="
+    <div
+      style="
       margin-top: 8px;
       font-family: monospace;
       font-size: 12px;
       color: #6b7280;
-    ">${displayValue}</div>
+    "
+    >
+      ${displayValue}
+    </div>
   `;
 
   return {
