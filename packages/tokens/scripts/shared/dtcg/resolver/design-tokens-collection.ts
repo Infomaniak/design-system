@@ -547,6 +547,8 @@ export class DesignTokensCollection {
         return reference === fromAsCurlyReference ? toAsCurlyReference : reference;
       };
 
+      // TODO improvement - use "updateDesignTokensCollectionTokenReferences"
+
       if (isCurlyReference(token.value)) {
         if (token.value === fromAsCurlyReference) {
           value = toAsCurlyReference;

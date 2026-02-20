@@ -105,6 +105,206 @@
         }
       },
       "brand": {
+        "infomaniak": {
+          "default": {
+            "$value": "{color.sky.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.sky.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.sky.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "mail": {
+          "default": {
+            "$value": "{color.pink.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.pink.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.pink.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "kdrive": {
+          "default": {
+            "$value": "{color.indigo.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.indigo.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.indigo.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "euria": {
+          "default": {
+            "$value": "{color.ocean.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.ocean.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.ocean.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "kchat": {
+          "default": {
+            "$value": "{color.cyan.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.cyan.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.cyan.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "security": {
+          "default": {
+            "$value": "{color.purple.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.purple.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.purple.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "calendar": {
+          "default": {
+            "$value": "{color.aqua.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.aqua.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.aqua.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "contacts": {
+          "default": {
+            "$value": "{color.violet.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.violet.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.violet.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "knote": {
+          "default": {
+            "$value": "{color.amber.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.amber.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.amber.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "swisstransfer": {
+          "default": {
+            "$value": "{color.emerald.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.emerald.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.emerald.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
         "default": {
           "$value": "{color.sky.700}",
           "$extensions": {
@@ -167,6 +367,206 @@
     },
     "text": {
       "brand": {
+        "infomaniak": {
+          "default": {
+            "$value": "{color.sky.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.sky.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.sky.950}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "mail": {
+          "default": {
+            "$value": "{color.pink.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.pink.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.pink.950}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "kdrive": {
+          "default": {
+            "$value": "{color.indigo.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.indigo.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.indigo.950}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "euria": {
+          "default": {
+            "$value": "{color.ocean.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.ocean.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.ocean.950}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "kchat": {
+          "default": {
+            "$value": "{color.cyan.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.cyan.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.cyan.950}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "security": {
+          "default": {
+            "$value": "{color.purple.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.purple.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.purple.950}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "calendar": {
+          "default": {
+            "$value": "{color.aqua.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.aqua.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.aqua.950}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "contacts": {
+          "default": {
+            "$value": "{color.violet.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.violet.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.violet.950}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "knote": {
+          "default": {
+            "$value": "{color.amber.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.amber.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.amber.950}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "swisstransfer": {
+          "default": {
+            "$value": "{color.emerald.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.emerald.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.emerald.950}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
         "default": {
           "$value": "{color.sky.700}",
           "$extensions": {
@@ -214,6 +614,68 @@
         "$value": "{color.gray.300}",
         "$extensions": {
           "scopes": ["ALL_SCOPES"]
+        }
+      }
+    },
+    "border": {
+      "strong": {
+        "default": {
+          "$value": "{color.gray.400}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "hover": {
+          "$value": "{color.gray.500}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.gray.600}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        }
+      },
+      "subtle": {
+        "default": {
+          "$value": "{color.gray.200}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "hover": {
+          "$value": "{color.gray.300}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.gray.400}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        }
+      },
+      "subtlest": {
+        "default": {
+          "$value": "{color.gray.100}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "hover": {
+          "$value": "{color.gray.200}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.gray.300}",
+          "$extensions": {
+            "scopes": ["ALL_SCOPES"]
+          }
         }
       }
     }

@@ -1,3 +1,4 @@
+import { isEmptyObject } from '../../../../../../../../scripts/helpers/misc/object/is-empty-object.ts';
 import { removeUndefinedProperties } from '../../../../../../../../scripts/helpers/misc/object/remove-undefined-properties.ts';
 import { isCurlyReference } from '../../../../dtcg/design-token/reference/types/curly/is-curly-reference.ts';
 import type { DesignToken } from '../../../../dtcg/design-token/token/design-token.ts';
@@ -37,35 +38,30 @@ function tokensBrueckeDesignTokenToDesignTokenDescription(
 function tokensBrueckeDesignTokenToDesignTokenExtensions(
   token: GenericTokensBrueckeDesignToken,
 ): Record<string, unknown> | undefined {
-  let $extensions: Record<string, unknown> | undefined =
-    token.scopes === undefined
-      ? token.$extensions
-      : token.$extensions === undefined
-        ? {
-            scopes: token.scopes,
-          }
-        : {
-            scopes: token.scopes,
-            ...token.$extensions,
-          };
+  let $extensions: Record<string, unknown> = token.$extensions ?? {};
 
-  if ($extensions !== undefined && Reflect.has($extensions, 'mode')) {
-    const mode: Record<string, unknown> = Reflect.get($extensions, 'mode')! as Record<
-      string,
-      unknown
-    >;
-
-    const entries: readonly (readonly [string, unknown])[] = Object.entries(mode);
-
-    if (
-      entries.length === 0 ||
-      entries.every(([, value]): boolean => value === entries[0][1]) /* all identical */
-    ) {
-      Reflect.deleteProperty($extensions, 'mode');
-    }
+  if (token.scopes !== undefined) {
+    $extensions = {
+      ...$extensions,
+      scopes: token.scopes,
+    };
   }
 
-  return $extensions === undefined || Object.keys($extensions).length === 0
-    ? undefined
-    : $extensions;
+  // if (Reflect.has($extensions, 'mode')) {
+  //   const { mode, ...remainingExtensions } = $extensions as {
+  //     mode: Record<string, unknown>;
+  //     [key: string]: unknown;
+  //   };
+  //
+  //   const values: readonly unknown[] = Object.values(mode);
+  //
+  //   if (
+  //     values.length === 0 ||
+  //     values.every((value: unknown): boolean => value === values[0]) /* all identical */
+  //   ) {
+  //     $extensions = remainingExtensions;
+  //   }
+  // }
+
+  return isEmptyObject($extensions) ? undefined : $extensions;
 }

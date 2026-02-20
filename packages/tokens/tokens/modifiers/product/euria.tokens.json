@@ -1,29 +1,28 @@
 {
-  "$type": "color",
   "color": {
     "background": {
       "brand": {
         "default": {
-          "$value": "{color.ocean.700}"
+          "$value": "{color.background.brand.euria.default}"
         },
         "hover": {
-          "$value": "{color.ocean.800}"
+          "$value": "{color.background.brand.euria.hover}"
         },
         "pressed": {
-          "$value": "{color.ocean.900}"
+          "$value": "{color.background.brand.euria.pressed}"
         }
       }
     },
     "text": {
       "brand": {
         "default": {
-          "$value": "{color.ocean.700}"
+          "$value": "{color.text.brand.euria.default}"
         },
         "hover": {
-          "$value": "{color.ocean.800}"
+          "$value": "{color.text.brand.euria.hover}"
         },
         "pressed": {
-          "$value": "{color.ocean.900}"
+          "$value": "{color.text.brand.euria.pressed}"
         }
       }
     }

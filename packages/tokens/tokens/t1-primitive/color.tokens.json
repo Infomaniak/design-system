@@ -9,7 +9,7 @@
           "hex": "#fff1f1"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "100": {
@@ -19,7 +19,7 @@
           "hex": "#ffe4e5"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "200": {
@@ -29,7 +29,7 @@
           "hex": "#fecdd1"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "300": {
@@ -39,7 +39,7 @@
           "hex": "#fda4ab"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400": {
@@ -49,7 +49,7 @@
           "hex": "#fb7180"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "500": {
@@ -59,7 +59,7 @@
           "hex": "#f4364f"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "600": {
@@ -69,7 +69,7 @@
           "hex": "#e21c40"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "700": {
@@ -79,7 +79,7 @@
           "hex": "#be1235"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "800": {
@@ -89,7 +89,7 @@
           "hex": "#9f1233"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "900": {
@@ -99,7 +99,7 @@
           "hex": "#881332"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950": {
@@ -109,7 +109,7 @@
           "hex": "#4c0516"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       }
     },
@@ -121,7 +121,7 @@
           "hex": "#f8fafc"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "100": {
@@ -131,7 +131,7 @@
           "hex": "#f1f5f9"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "200": {
@@ -141,7 +141,7 @@
           "hex": "#e2e8f0"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "300": {
@@ -151,7 +151,7 @@
           "hex": "#cad5e2"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400": {
@@ -161,7 +161,7 @@
           "hex": "#90a1b9"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "500": {
@@ -171,7 +171,7 @@
           "hex": "#62748e"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "600": {
@@ -181,7 +181,7 @@
           "hex": "#45556c"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "700": {
@@ -191,7 +191,7 @@
           "hex": "#314158"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "800": {
@@ -201,7 +201,7 @@
           "hex": "#1d293d"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "900": {
@@ -211,7 +211,7 @@
           "hex": "#0f172b"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950": {
@@ -221,7 +221,7 @@
           "hex": "#020618"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       }
     },
@@ -233,7 +233,7 @@
           "hex": "#fdf2f7"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "100": {
@@ -243,7 +243,7 @@
           "hex": "#fde6f0"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "200": {
@@ -253,7 +253,7 @@
           "hex": "#fdcde2"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "300": {
@@ -263,7 +263,7 @@
           "hex": "#fca5c9"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400": {
@@ -273,7 +273,7 @@
           "hex": "#f96da4"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "500": {
@@ -283,7 +283,7 @@
           "hex": "#f2357a"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "600": {
@@ -293,7 +293,7 @@
           "hex": "#e2205d"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "700": {
@@ -303,7 +303,7 @@
           "hex": "#c51145"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "800": {
@@ -313,7 +313,7 @@
           "hex": "#a31139"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "900": {
@@ -323,7 +323,7 @@
           "hex": "#871433"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950": {
@@ -333,7 +333,7 @@
           "hex": "#530419"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       }
     },
@@ -345,7 +345,7 @@
           "hex": "#edfcff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "100": {
@@ -355,7 +355,7 @@
           "hex": "#d6f7ff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "200": {
@@ -365,7 +365,7 @@
           "hex": "#b5f3ff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "300": {
@@ -375,7 +375,7 @@
           "hex": "#83edff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400": {
@@ -385,7 +385,7 @@
           "hex": "#48e0ff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "500": {
@@ -395,7 +395,7 @@
           "hex": "#1ec6ff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "600": {
@@ -405,7 +405,7 @@
           "hex": "#06abff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "700": {
@@ -415,7 +415,7 @@
           "hex": "#0098ff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "800": {
@@ -425,7 +425,7 @@
           "hex": "#0873c5"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "900": {
@@ -435,7 +435,7 @@
           "hex": "#0d619b"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950": {
@@ -445,7 +445,7 @@
           "hex": "#0e3a5d"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       }
     },
@@ -456,7 +456,7 @@
         "hex": "#000"
       },
       "$extensions": {
-        "scopes": ["ALL_SCOPES"]
+        "scopes": []
       }
     },
     "white": {
@@ -466,7 +466,7 @@
         "hex": "#fff"
       },
       "$extensions": {
-        "scopes": ["ALL_SCOPES"]
+        "scopes": []
       }
     },
     "purple": {
@@ -477,7 +477,7 @@
           "hex": "#f1f5fd"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "100": {
@@ -487,7 +487,7 @@
           "hex": "#dfe8fa"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "200": {
@@ -497,7 +497,7 @@
           "hex": "#c6d7f7"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "300": {
@@ -507,7 +507,7 @@
           "hex": "#9fbef1"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400": {
@@ -517,7 +517,7 @@
           "hex": "#719be9"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "500": {
@@ -527,7 +527,7 @@
           "hex": "#4f79e2"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "600": {
@@ -537,7 +537,7 @@
           "hex": "#3b5cd5"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "700": {
@@ -547,7 +547,7 @@
           "hex": "#314ac4"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "800": {
@@ -557,7 +557,7 @@
           "hex": "#3243ae"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "900": {
@@ -567,7 +567,7 @@
           "hex": "#2a387e"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950": {
@@ -577,7 +577,7 @@
           "hex": "#1e244d"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       }
     },
@@ -589,7 +589,7 @@
           "hex": "#fff8eb"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "100": {
@@ -599,7 +599,7 @@
           "hex": "#feeac7"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "200": {
@@ -609,7 +609,7 @@
           "hex": "#fdd28a"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "300": {
@@ -619,7 +619,7 @@
           "hex": "#fcbb4d"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400": {
@@ -629,7 +629,7 @@
           "hex": "#fbab24"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "500": {
@@ -639,7 +639,7 @@
           "hex": "#f59e0b"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "600": {
@@ -649,7 +649,7 @@
           "hex": "#d98b06"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "700": {
@@ -659,7 +659,7 @@
           "hex": "#b47409"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "800": {
@@ -669,7 +669,7 @@
           "hex": "#92610e"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "900": {
@@ -679,7 +679,7 @@
           "hex": "#78510f"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950": {
@@ -689,7 +689,7 @@
           "hex": "#452c03"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       }
     },
@@ -701,7 +701,7 @@
           "hex": "#f0fdf5"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "100": {
@@ -711,7 +711,7 @@
           "hex": "#dcfce8"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "200": {
@@ -721,7 +721,7 @@
           "hex": "#bbf7d1"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "300": {
@@ -731,7 +731,7 @@
           "hex": "#86efad"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400": {
@@ -741,7 +741,7 @@
           "hex": "#4ade81"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "500": {
@@ -751,7 +751,7 @@
           "hex": "#22c55e"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "600": {
@@ -761,7 +761,7 @@
           "hex": "#16a34a"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "700": {
@@ -771,7 +771,7 @@
           "hex": "#15803c"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "800": {
@@ -781,7 +781,7 @@
           "hex": "#166533"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "900": {
@@ -791,7 +791,7 @@
           "hex": "#14532b"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950": {
@@ -801,7 +801,7 @@
           "hex": "#052e14"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       }
     },
@@ -813,7 +813,7 @@
           "hex": "#ebfeff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "100": {
@@ -823,7 +823,7 @@
           "hex": "#cdfaff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "200": {
@@ -833,7 +833,7 @@
           "hex": "#a1f2ff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "300": {
@@ -843,7 +843,7 @@
           "hex": "#60e6ff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400": {
@@ -853,7 +853,7 @@
           "hex": "#18d1f8"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "500": {
@@ -863,7 +863,7 @@
           "hex": "#00b4de"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "600": {
@@ -873,7 +873,7 @@
           "hex": "#0088b2"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "700": {
@@ -883,7 +883,7 @@
           "hex": "#087196"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "800": {
@@ -893,7 +893,7 @@
           "hex": "#105c7a"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "900": {
@@ -903,7 +903,7 @@
           "hex": "#124c67"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950": {
@@ -913,7 +913,7 @@
           "hex": "#053147"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       }
     },
@@ -925,7 +925,7 @@
           "hex": "#eff3ff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "100": {
@@ -935,7 +935,7 @@
           "hex": "#dce5fd"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "200": {
@@ -945,7 +945,7 @@
           "hex": "#c0d1fd"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "300": {
@@ -955,7 +955,7 @@
           "hex": "#95b5fb"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400": {
@@ -965,7 +965,7 @@
           "hex": "#5c89f7"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "500": {
@@ -975,7 +975,7 @@
           "hex": "#3e66f3"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "600": {
@@ -985,7 +985,7 @@
           "hex": "#2846e8"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "700": {
@@ -995,7 +995,7 @@
           "hex": "#2033d5"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "800": {
@@ -1005,7 +1005,7 @@
           "hex": "#212bac"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "900": {
@@ -1015,7 +1015,7 @@
           "hex": "#202b88"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950": {
@@ -1025,7 +1025,7 @@
           "hex": "#181d53"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       }
     },
@@ -1037,7 +1037,7 @@
           "hex": "#ecfeff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "100": {
@@ -1047,7 +1047,7 @@
           "hex": "#d0f8fd"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "200": {
@@ -1057,7 +1057,7 @@
           "hex": "#a7f0fa"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "300": {
@@ -1067,7 +1067,7 @@
           "hex": "#6ae4f6"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400": {
@@ -1077,7 +1077,7 @@
           "hex": "#36d0eb"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "500": {
@@ -1087,7 +1087,7 @@
           "hex": "#0bb0cf"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "600": {
@@ -1097,7 +1097,7 @@
           "hex": "#0c8cae"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "700": {
@@ -1107,7 +1107,7 @@
           "hex": "#11708d"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "800": {
@@ -1117,7 +1117,7 @@
           "hex": "#175b73"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "900": {
@@ -1127,7 +1127,7 @@
           "hex": "#184c61"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950": {
@@ -1137,7 +1137,7 @@
           "hex": "#093143"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       }
     },
@@ -1149,7 +1149,7 @@
           "hex": "#f9f6fe"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "100": {
@@ -1159,7 +1159,7 @@
           "hex": "#f2ebfc"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "200": {
@@ -1169,7 +1169,7 @@
           "hex": "#e7dafa"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "300": {
@@ -1179,7 +1179,7 @@
           "hex": "#d4bef4"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400": {
@@ -1189,7 +1189,7 @@
           "hex": "#ba94ec"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "500": {
@@ -1199,7 +1199,7 @@
           "hex": "#9d66e1"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "600": {
@@ -1209,7 +1209,7 @@
           "hex": "#894bd2"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "700": {
@@ -1219,7 +1219,7 @@
           "hex": "#7438b8"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "800": {
@@ -1229,7 +1229,7 @@
           "hex": "#633396"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "900": {
@@ -1239,7 +1239,7 @@
           "hex": "#512a79"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950": {
@@ -1249,7 +1249,7 @@
           "hex": "#361358"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       }
     },
@@ -1261,7 +1261,7 @@
           "hex": "#fffcea"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "100": {
@@ -1271,7 +1271,7 @@
           "hex": "#fff4c5"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "200": {
@@ -1281,7 +1281,7 @@
           "hex": "#ffea85"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "300": {
@@ -1291,7 +1291,7 @@
           "hex": "#ffd846"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400": {
@@ -1301,7 +1301,7 @@
           "hex": "#ffc51b"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "500": {
@@ -1311,7 +1311,7 @@
           "hex": "#fca000"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "600": {
@@ -1321,7 +1321,7 @@
           "hex": "#e27a00"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "700": {
@@ -1331,7 +1331,7 @@
           "hex": "#bb5302"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "800": {
@@ -1341,7 +1341,7 @@
           "hex": "#984008"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "900": {
@@ -1351,7 +1351,7 @@
           "hex": "#7c350b"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950": {
@@ -1361,7 +1361,7 @@
           "hex": "#481900"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       }
     },
@@ -1373,7 +1373,7 @@
           "hex": "#edf9ff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "100": {
@@ -1383,7 +1383,7 @@
           "hex": "#d6efff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "200": {
@@ -1393,7 +1393,7 @@
           "hex": "#b5e5ff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "300": {
@@ -1403,7 +1403,7 @@
           "hex": "#83d7ff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400": {
@@ -1413,7 +1413,7 @@
           "hex": "#48bfff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "500": {
@@ -1423,7 +1423,7 @@
           "hex": "#1e9eff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "600": {
@@ -1433,7 +1433,7 @@
           "hex": "#067fff"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "700": {
@@ -1443,7 +1443,7 @@
           "hex": "#0064f0"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "800": {
@@ -1453,7 +1453,7 @@
           "hex": "#0851c5"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "900": {
@@ -1463,7 +1463,7 @@
           "hex": "#0d489b"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950": {
@@ -1473,7 +1473,7 @@
           "hex": "#0e2c5d"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       }
     },
@@ -1485,7 +1485,7 @@
           "hex": "#eefbf3"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "100": {
@@ -1495,7 +1495,7 @@
           "hex": "#d6f5df"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "200": {
@@ -1505,7 +1505,7 @@
           "hex": "#afebc4"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "300": {
@@ -1515,7 +1515,7 @@
           "hex": "#7bdaa2"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400": {
@@ -1525,7 +1525,7 @@
           "hex": "#3cb572"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "500": {
@@ -1535,7 +1535,7 @@
           "hex": "#23a662"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "600": {
@@ -1545,7 +1545,7 @@
           "hex": "#15864e"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "700": {
@@ -1555,7 +1555,7 @@
           "hex": "#116b40"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "800": {
@@ -1565,7 +1565,7 @@
           "hex": "#105535"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "900": {
@@ -1575,7 +1575,7 @@
           "hex": "#0e462c"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950": {
@@ -1585,7 +1585,7 @@
           "hex": "#07271a"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       }
     }

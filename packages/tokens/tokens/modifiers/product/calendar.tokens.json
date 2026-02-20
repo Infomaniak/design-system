@@ -1,29 +1,28 @@
 {
-  "$type": "color",
   "color": {
     "background": {
       "brand": {
         "default": {
-          "$value": "{color.aqua.700}"
+          "$value": "{color.background.brand.calendar.default}"
         },
         "hover": {
-          "$value": "{color.aqua.800}"
+          "$value": "{color.background.brand.calendar.hover}"
         },
         "pressed": {
-          "$value": "{color.aqua.900}"
+          "$value": "{color.background.brand.calendar.pressed}"
         }
       }
     },
     "text": {
       "brand": {
         "default": {
-          "$value": "{color.aqua.700}"
+          "$value": "{color.text.brand.calendar.default}"
         },
         "hover": {
-          "$value": "{color.aqua.800}"
+          "$value": "{color.text.brand.calendar.hover}"
         },
         "pressed": {
-          "$value": "{color.aqua.900}"
+          "$value": "{color.text.brand.calendar.pressed}"
         }
       }
     }

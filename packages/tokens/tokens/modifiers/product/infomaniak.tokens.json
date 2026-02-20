@@ -1,29 +1,28 @@
 {
-  "$type": "color",
   "color": {
     "background": {
       "brand": {
         "default": {
-          "$value": "{color.sky.700}"
+          "$value": "{color.background.brand.infomaniak.default}"
         },
         "hover": {
-          "$value": "{color.sky.800}"
+          "$value": "{color.background.brand.infomaniak.hover}"
         },
         "pressed": {
-          "$value": "{color.sky.900}"
+          "$value": "{color.background.brand.infomaniak.pressed}"
         }
       }
     },
     "text": {
       "brand": {
         "default": {
-          "$value": "{color.sky.700}"
+          "$value": "{color.text.brand.infomaniak.default}"
         },
         "hover": {
-          "$value": "{color.sky.800}"
+          "$value": "{color.text.brand.infomaniak.hover}"
         },
         "pressed": {
-          "$value": "{color.sky.900}"
+          "$value": "{color.text.brand.infomaniak.pressed}"
         }
       }
     }

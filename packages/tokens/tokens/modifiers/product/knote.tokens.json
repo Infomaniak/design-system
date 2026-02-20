@@ -1,29 +1,28 @@
 {
-  "$type": "color",
   "color": {
     "background": {
       "brand": {
         "default": {
-          "$value": "{color.amber.700}"
+          "$value": "{color.background.brand.knote.default}"
         },
         "hover": {
-          "$value": "{color.amber.800}"
+          "$value": "{color.background.brand.knote.hover}"
         },
         "pressed": {
-          "$value": "{color.amber.900}"
+          "$value": "{color.background.brand.knote.pressed}"
         }
       }
     },
     "text": {
       "brand": {
         "default": {
-          "$value": "{color.amber.700}"
+          "$value": "{color.text.brand.knote.default}"
         },
         "hover": {
-          "$value": "{color.amber.800}"
+          "$value": "{color.text.brand.knote.hover}"
         },
         "pressed": {
-          "$value": "{color.amber.900}"
+          "$value": "{color.text.brand.knote.pressed}"
         }
       }
     }

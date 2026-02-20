@@ -1,28 +1,16 @@
 {
-  "$type": "color",
   "color": {
     "background": {
       "elevation": {
         "surface": {
-          "pressed": {
-            "$value": "{color.gray.100}"
+          "default": {
+            "$value": "{color.white}"
           },
           "hover": {
             "$value": "{color.gray.50}"
           },
-          "default": {
-            "$value": "{color.white}"
-          }
-        },
-        "overlay": {
-          "default": {
-            "$value": "{color.gray.100}"
-          },
-          "hover": {
-            "$value": "{color.gray.200}"
-          },
           "pressed": {
-            "$value": "{color.gray.300}"
+            "$value": "{color.gray.100}"
           }
         },
         "raised": {
@@ -35,6 +23,140 @@
           "pressed": {
             "$value": "{color.gray.100}"
           }
+        },
+        "overlay": {
+          "default": {
+            "$value": "{color.gray.100}"
+          },
+          "hover": {
+            "$value": "{color.gray.200}"
+          },
+          "pressed": {
+            "$value": "{color.gray.300}"
+          }
+        }
+      },
+      "brand": {
+        "infomaniak": {
+          "default": {
+            "$value": "{color.sky.700}"
+          },
+          "hover": {
+            "$value": "{color.sky.800}"
+          },
+          "pressed": {
+            "$value": "{color.sky.900}"
+          }
+        },
+        "mail": {
+          "default": {
+            "$value": "{color.pink.700}"
+          },
+          "hover": {
+            "$value": "{color.pink.800}"
+          },
+          "pressed": {
+            "$value": "{color.pink.900}"
+          }
+        },
+        "kdrive": {
+          "default": {
+            "$value": "{color.indigo.700}"
+          },
+          "hover": {
+            "$value": "{color.indigo.800}"
+          },
+          "pressed": {
+            "$value": "{color.indigo.900}"
+          }
+        },
+        "euria": {
+          "default": {
+            "$value": "{color.ocean.700}"
+          },
+          "hover": {
+            "$value": "{color.ocean.800}"
+          },
+          "pressed": {
+            "$value": "{color.ocean.900}"
+          }
+        },
+        "kchat": {
+          "default": {
+            "$value": "{color.cyan.700}"
+          },
+          "hover": {
+            "$value": "{color.cyan.800}"
+          },
+          "pressed": {
+            "$value": "{color.cyan.900}"
+          }
+        },
+        "security": {
+          "default": {
+            "$value": "{color.purple.700}"
+          },
+          "hover": {
+            "$value": "{color.purple.800}"
+          },
+          "pressed": {
+            "$value": "{color.purple.900}"
+          }
+        },
+        "calendar": {
+          "default": {
+            "$value": "{color.aqua.700}"
+          },
+          "hover": {
+            "$value": "{color.aqua.800}"
+          },
+          "pressed": {
+            "$value": "{color.aqua.900}"
+          }
+        },
+        "contacts": {
+          "default": {
+            "$value": "{color.violet.700}"
+          },
+          "hover": {
+            "$value": "{color.violet.800}"
+          },
+          "pressed": {
+            "$value": "{color.violet.900}"
+          }
+        },
+        "knote": {
+          "default": {
+            "$value": "{color.amber.700}"
+          },
+          "hover": {
+            "$value": "{color.amber.800}"
+          },
+          "pressed": {
+            "$value": "{color.amber.900}"
+          }
+        },
+        "swisstransfer": {
+          "default": {
+            "$value": "{color.emerald.700}"
+          },
+          "hover": {
+            "$value": "{color.emerald.800}"
+          },
+          "pressed": {
+            "$value": "{color.emerald.900}"
+          }
+        }
+      },
+      "success": {
+        "default": {
+          "$value": "{color.lime.600}"
+        },
+        "hover": {
+          "$value": "{color.lime.700}"
+        },
+        "pressed": {
+          "$value": "{color.lime.800}"
         }
       },
       "error": {
@@ -59,28 +181,6 @@
           "$value": "{color.orange.800}"
         }
       },
-      "brand": {
-        "default": {
-          "$value": "{color.sky.700}"
-        },
-        "pressed": {
-          "$value": "{color.sky.900}"
-        },
-        "hover": {
-          "$value": "{color.sky.800}"
-        }
-      },
-      "success": {
-        "default": {
-          "$value": "{color.lime.600}"
-        },
-        "hover": {
-          "$value": "{color.lime.700}"
-        },
-        "pressed": {
-          "$value": "{color.lime.800}"
-        }
-      },
       "neutral": {
         "default": {
           "$value": "{color.gray.100}"
@@ -95,14 +195,115 @@
     },
     "text": {
       "brand": {
-        "default": {
-          "$value": "{color.sky.700}"
+        "infomaniak": {
+          "default": {
+            "$value": "{color.sky.800}"
+          },
+          "hover": {
+            "$value": "{color.sky.900}"
+          },
+          "pressed": {
+            "$value": "{color.sky.950}"
+          }
         },
-        "hover": {
-          "$value": "{color.sky.800}"
+        "mail": {
+          "default": {
+            "$value": "{color.pink.800}"
+          },
+          "hover": {
+            "$value": "{color.pink.900}"
+          },
+          "pressed": {
+            "$value": "{color.pink.950}"
+          }
         },
-        "pressed": {
-          "$value": "{color.sky.900}"
+        "kdrive": {
+          "default": {
+            "$value": "{color.indigo.800}"
+          },
+          "hover": {
+            "$value": "{color.indigo.900}"
+          },
+          "pressed": {
+            "$value": "{color.indigo.950}"
+          }
+        },
+        "euria": {
+          "default": {
+            "$value": "{color.ocean.800}"
+          },
+          "hover": {
+            "$value": "{color.ocean.900}"
+          },
+          "pressed": {
+            "$value": "{color.ocean.950}"
+          }
+        },
+        "kchat": {
+          "default": {
+            "$value": "{color.cyan.800}"
+          },
+          "hover": {
+            "$value": "{color.cyan.900}"
+          },
+          "pressed": {
+            "$value": "{color.cyan.950}"
+          }
+        },
+        "security": {
+          "default": {
+            "$value": "{color.purple.800}"
+          },
+          "hover": {
+            "$value": "{color.purple.900}"
+          },
+          "pressed": {
+            "$value": "{color.purple.950}"
+          }
+        },
+        "calendar": {
+          "default": {
+            "$value": "{color.aqua.800}"
+          },
+          "hover": {
+            "$value": "{color.aqua.900}"
+          },
+          "pressed": {
+            "$value": "{color.aqua.950}"
+          }
+        },
+        "contacts": {
+          "default": {
+            "$value": "{color.violet.800}"
+          },
+          "hover": {
+            "$value": "{color.violet.900}"
+          },
+          "pressed": {
+            "$value": "{color.violet.950}"
+          }
+        },
+        "knote": {
+          "default": {
+            "$value": "{color.amber.800}"
+          },
+          "hover": {
+            "$value": "{color.amber.900}"
+          },
+          "pressed": {
+            "$value": "{color.amber.950}"
+          }
+        },
+        "swisstransfer": {
+          "default": {
+            "$value": "{color.emerald.800}"
+          },
+          "hover": {
+            "$value": "{color.emerald.900}"
+          },
+          "pressed": {
+            "$value": "{color.emerald.950}"
+          }
         }
       },
       "primary": {
@@ -114,11 +315,43 @@
       "tertiary": {
         "$value": "{color.gray.400}"
       },
-      "inverse": {
-        "$value": "{color.gray.100}"
-      },
       "disabled": {
         "$value": "{color.gray.300}"
+      },
+      "inverse": {
+        "$value": "{color.gray.100}"
+      }
+    },
+    "border": {
+      "strong": {
+        "default": {
+          "$value": "{color.gray.400}"
+        },
+        "hover": {
+          "$value": "{color.gray.500}"
+        }
+      },
+      "subtle": {
+        "default": {
+          "$value": "{color.gray.200}"
+        },
+        "hover": {
+          "$value": "{color.gray.300}"
+        },
+        "pressed": {
+          "$value": "{color.gray.400}"
+        }
+      },
+      "subtlest": {
+        "default": {
+          "$value": "{color.gray.100}"
+        },
+        "hover": {
+          "$value": "{color.gray.200}"
+        },
+        "pressed": {
+          "$value": "{color.gray.300}"
+        }
       }
     }
   }

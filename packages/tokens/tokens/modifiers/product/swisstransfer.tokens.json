@@ -1,29 +1,28 @@
 {
-  "$type": "color",
   "color": {
     "background": {
       "brand": {
         "default": {
-          "$value": "{color.emerald.700}"
+          "$value": "{color.background.brand.swisstransfer.default}"
         },
         "hover": {
-          "$value": "{color.emerald.800}"
+          "$value": "{color.background.brand.swisstransfer.hover}"
         },
         "pressed": {
-          "$value": "{color.emerald.900}"
+          "$value": "{color.background.brand.swisstransfer.pressed}"
         }
       }
     },
     "text": {
       "brand": {
         "default": {
-          "$value": "{color.emerald.700}"
+          "$value": "{color.text.brand.swisstransfer.default}"
         },
         "hover": {
-          "$value": "{color.emerald.800}"
+          "$value": "{color.text.brand.swisstransfer.hover}"
         },
         "pressed": {
-          "$value": "{color.emerald.900}"
+          "$value": "{color.text.brand.swisstransfer.pressed}"
         }
       }
     }

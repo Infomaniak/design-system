@@ -1,6 +1,9 @@
 import { writeFileSafe } from '../../../../../../../../../scripts/helpers/file/write-file-safe.ts';
+import { writeTextFileSafe } from '../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
+import { dedent } from '../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { indent } from '../../../../../../../../../scripts/helpers/misc/string/indent/indent.ts';
+import { removeTrailingSlash } from '../../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import type { SegmentsReference } from '../../../../../../shared/dtcg/design-token/reference/types/segments/segments-reference.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { DesignTokenModifiers } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
@@ -38,6 +41,9 @@ export function buildCssTokens({
   logger,
 }: BuildCssTokensOptions): Promise<void> {
   return logger.asyncTask('css', async (logger: Logger): Promise<void> => {
+    outputDirectory = removeTrailingSlash(outputDirectory);
+    const cssOutputDirectory: string = `${outputDirectory}/web/css`;
+
     const cssOptions: DesignTokensCollectionTokenToCssVariableDeclarationOptions = {
       generateCssVariableName: createCssVariableNameGenerator('esds'),
     };
@@ -57,17 +63,24 @@ export function buildCssTokens({
           }),
       );
 
-      await writeFileSafe(
-        `${outputDirectory}/web/css/tokens.root.css`,
-        wrapCssVariableDeclarationsWithCssSelector(
-          cssVariables,
-          ':root,\n:host',
-          CSS_AUTO_GENERATED_FILE_HEADER,
+      await Promise.all([
+        writeTextFileSafe(
+          `${cssOutputDirectory}/tokens.root.css`,
+          wrapCssVariableDeclarationsWithCssSelector(
+            cssVariables,
+            ':root,\n:host',
+            CSS_AUTO_GENERATED_FILE_HEADER,
+          ),
         ),
-        {
-          encoding: 'utf-8',
-        },
-      );
+        writeTextFileSafe(
+          `${cssOutputDirectory}/tokens.attr.css`,
+          wrapCssVariableDeclarationsWithCssSelector(
+            cssVariables,
+            `[data-esds-tokens]`,
+            CSS_AUTO_GENERATED_FILE_HEADER,
+          ),
+        ),
+      ]);
     });
 
     await logger.asyncTask('modifier', async (logger: Logger): Promise<void> => {
@@ -105,47 +118,48 @@ export function buildCssTokens({
                     }),
                 );
 
-                for (const referenced of toRedeclare) {
-                  const name: ArrayDesignTokenName = JSON.parse(referenced);
-                  const token: GenericDesignTokensCollectionToken = collection.get(name);
+                const declarationsToRedeclare: CssVariableDeclaration[] = Array.from(
+                  toRedeclare.values().map((referenced: string): CssVariableDeclaration => {
+                    const name: ArrayDesignTokenName = JSON.parse(referenced);
+                    const token: GenericDesignTokensCollectionToken = collection.get(name);
 
-                  declarations.push(
-                    designTokensCollectionTokenToCssVariableDeclaration(
+                    return designTokensCollectionTokenToCssVariableDeclaration(
                       {
                         ...token,
                         type: collection.resolve(token).type,
                       },
                       cssOptions,
-                    ),
-                  );
+                    );
+                  }),
+                );
+
+                let cssVariables: string = cssVariableDeclarationsToString(declarations);
+
+                if (declarationsToRedeclare.length > 0) {
+                  cssVariables += dedent`
+                    /* REDECLARED */
+                    ${cssVariableDeclarationsToString(declarationsToRedeclare)}
+                  `;
                 }
 
-                const cssVariables: string = cssVariableDeclarationsToString(declarations);
-
-                const path: string = `${outputDirectory}/web/css/modifiers/${modifier}`;
+                const modifierOutputDirectory: string = `${cssOutputDirectory}/modifiers/${modifier}`;
 
                 await Promise.all([
-                  writeFileSafe(
-                    `${path}/${context}.root.css`,
+                  writeTextFileSafe(
+                    `${modifierOutputDirectory}/${context}.root.css`,
                     wrapCssVariableDeclarationsWithCssSelector(
                       cssVariables,
                       ':root,\n:host',
                       CSS_AUTO_GENERATED_FILE_HEADER,
                     ),
-                    {
-                      encoding: 'utf-8',
-                    },
                   ),
-                  writeFileSafe(
-                    `${path}/${context}.attr.css`,
+                  writeTextFileSafe(
+                    `${modifierOutputDirectory}/${context}.attr.css`,
                     wrapCssVariableDeclarationsWithCssSelector(
                       cssVariables,
                       `[data-esds-${modifier}="${context}"]`,
                       CSS_AUTO_GENERATED_FILE_HEADER,
                     ),
-                    {
-                      encoding: 'utf-8',
-                    },
                   ),
                 ]);
               });
