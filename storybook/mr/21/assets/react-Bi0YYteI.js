@@ -1,0 +1,1 @@
+import{n as e,t}from"./lib-EtTHOOuS.js";export{t as MDXProvider};
