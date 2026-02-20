@@ -25,5 +25,5 @@ Issue Number: N/A
 ## Other information
 
 <!--
-  Please describe any other relevant informations
+  Please describe any other relevant information
 -->
