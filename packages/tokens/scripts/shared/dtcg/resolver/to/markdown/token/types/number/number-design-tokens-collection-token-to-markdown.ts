@@ -1,4 +1,6 @@
+import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { NumberDesignTokensCollectionToken } from '../../../../../token/types/base/number/number-design-tokens-collection-token.ts';
+import { curlyReferenceToCssVariableReference } from '../../../../css/reference/curly-reference-to-css-variable-reference.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
 
@@ -74,12 +76,13 @@ function createRatioPreview(ratio: number, value: string, name: readonly string[
   // Calculate width based on ratio: width = height * ratio
   // Round to avoid floating point precision issues in pixels
   const width = Math.round(baseHeight * ratio);
-  
+
   // Format the ratio representation (e.g., "4:3", "16:9", "1:1")
   const ratioFormat = getRatioFormat(name);
 
   return /* HTML */ `
-    <div style="
+    <div
+      style="
       display: inline-block;
       background: #f3f4f6;
       border-radius: 4px;
@@ -88,8 +91,10 @@ function createRatioPreview(ratio: number, value: string, name: readonly string[
       width: ${width}px;
       height: ${baseHeight}px;
       position: relative;
-    ">
-      <div style="
+    "
+    >
+      <div
+        style="
         position: absolute;
         top: 50%;
         left: 50%;
@@ -99,14 +104,21 @@ function createRatioPreview(ratio: number, value: string, name: readonly string[
         color: #374151;
         font-weight: 600;
         text-align: center;
-      ">${ratioFormat}</div>
+      "
+      >
+        ${ratioFormat}
+      </div>
     </div>
-    <div style="
+    <div
+      style="
       margin-top: 4px;
       font-family: monospace;
       font-size: 12px;
       color: #6b7280;
-    ">${ratio}</div>
+    "
+    >
+      ${ratio}
+    </div>
   `;
 }
 
@@ -145,11 +157,7 @@ export function numberDesignTokensCollectionTokenToMarkdown(
   _context: MarkdownRenderContext,
   options: NumberMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
-  const {
-    decimalPlaces = 2,
-    showPercentageForDecimals = true,
-    showRawValue = false,
-  } = options;
+  const { decimalPlaces = 2, showPercentageForDecimals = true, showRawValue = false } = options;
 
   // Get the numeric value
   const value = token.value;
@@ -157,7 +165,9 @@ export function numberDesignTokensCollectionTokenToMarkdown(
   // Format the value
   let displayValue: string;
 
-  if (Number.isInteger(value)) {
+  if (isCurlyReference(value)) {
+    displayValue = curlyReferenceToCssVariableReference(value);
+  } else if (Number.isInteger(value)) {
     // Integer value - show as-is
     displayValue = value.toString();
   } else {
@@ -183,11 +193,12 @@ export function numberDesignTokensCollectionTokenToMarkdown(
   // For others, show a styled code block
   let preview: string;
 
-  if (isRatioToken(token.name)) {
+  if (isRatioToken(token.name) && !isCurlyReference(value)) {
     preview = createRatioPreview(value, displayValue, token.name);
   } else {
     preview = /* HTML */ `
-      <div style="
+      <div
+        style="
         background: #f3f4f6;
         padding: 8px 12px;
         border-radius: 4px;
@@ -198,7 +209,10 @@ export function numberDesignTokensCollectionTokenToMarkdown(
         display: inline-block;
         min-width: 60px;
         text-align: center;
-      ">${displayValue}</div>
+      "
+      >
+        ${displayValue}
+      </div>
     `;
   }
 

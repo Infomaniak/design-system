@@ -1,0 +1,30 @@
+{
+  "color": {
+    "background": {
+      "brand": {
+        "default": {
+          "$value": "{color.background.brand.calendar.default}"
+        },
+        "hover": {
+          "$value": "{color.background.brand.calendar.hover}"
+        },
+        "pressed": {
+          "$value": "{color.background.brand.calendar.pressed}"
+        }
+      }
+    },
+    "text": {
+      "brand": {
+        "default": {
+          "$value": "{color.text.brand.calendar.default}"
+        },
+        "hover": {
+          "$value": "{color.text.brand.calendar.hover}"
+        },
+        "pressed": {
+          "$value": "{color.text.brand.calendar.pressed}"
+        }
+      }
+    }
+  }
+}

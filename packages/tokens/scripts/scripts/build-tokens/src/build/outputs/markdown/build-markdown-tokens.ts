@@ -17,7 +17,10 @@ import { opacityDesignTokensCollectionTokenToMarkdown } from '../../../../../../
 import { radiusDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/radius/radius-design-tokens-collection-token-to-markdown.ts';
 import { shadowDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/shadow/shadow-design-tokens-collection-token-to-markdown.ts';
 import { typographyDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/typography/typography-design-tokens-collection-token-to-markdown.ts';
-import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
+import type {
+  GenericDesignTokensCollectionToken,
+  GenericDesignTokensCollectionTokenWithType,
+} from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { isDesignTokensCollectionTokenWithType } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/color/is-color-design-tokens-collection-token.ts';
 import { isDimensionDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/dimension/is-dimension-design-tokens-collection-token.ts';
@@ -75,58 +78,58 @@ function renderTokenToRow(
   token: GenericDesignTokensCollectionToken,
   context: MarkdownRenderContext,
 ): MarkdownTokenRow | null {
-  // Only render tokens with a type
-  if (!isDesignTokensCollectionTokenWithType(token)) {
-    return null;
-  }
+  const tokenWithType: GenericDesignTokensCollectionTokenWithType = {
+    ...token,
+    type: context.collection.resolve(token).type,
+  };
 
   // Select the appropriate renderer based on token type
-  if (isColorDesignTokensCollectionToken(token)) {
-    return colorDesignTokensCollectionTokenToMarkdown(token, context);
+  if (isColorDesignTokensCollectionToken(tokenWithType)) {
+    return colorDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
   }
 
-  if (isDimensionDesignTokensCollectionToken(token)) {
+  if (isDimensionDesignTokensCollectionToken(tokenWithType)) {
     // Special handling for radius tokens - show as boxes with border-radius applied
-    if (token.name[0] === 'radius') {
-      return radiusDesignTokensCollectionTokenToMarkdown(token, context);
+    if (tokenWithType.name[0] === 'radius') {
+      return radiusDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
     }
     // Special handling for border-width tokens - show as boxes with border applied
-    if (token.name[0] === 'border-width') {
-      return borderWidthDesignTokensCollectionTokenToMarkdown(token, context);
+    if (tokenWithType.name[0] === 'border-width') {
+      return borderWidthDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
     }
     // Special handling for breakpoint tokens - show value as text (too large to visualize)
-    if (token.name[0] === 'breakpoint') {
-      return breakpointDesignTokensCollectionTokenToMarkdown(token, context);
+    if (tokenWithType.name[0] === 'breakpoint') {
+      return breakpointDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
     }
-    return dimensionDesignTokensCollectionTokenToMarkdown(token, context);
+    return dimensionDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
   }
 
-  if (isShadowDesignTokensCollectionToken(token)) {
-    return shadowDesignTokensCollectionTokenToMarkdown(token, context);
+  if (isShadowDesignTokensCollectionToken(tokenWithType)) {
+    return shadowDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
   }
 
-  if (isTypographyDesignTokensCollectionToken(token)) {
-    return typographyDesignTokensCollectionTokenToMarkdown(token, context);
+  if (isTypographyDesignTokensCollectionToken(tokenWithType)) {
+    return typographyDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
   }
 
-  if (isFontFamilyDesignTokensCollectionToken(token)) {
-    return fontFamilyDesignTokensCollectionTokenToMarkdown(token, context);
+  if (isFontFamilyDesignTokensCollectionToken(tokenWithType)) {
+    return fontFamilyDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
   }
 
-  if (isFontWeightDesignTokensCollectionToken(token)) {
-    return fontWeightDesignTokensCollectionTokenToMarkdown(token, context);
+  if (isFontWeightDesignTokensCollectionToken(tokenWithType)) {
+    return fontWeightDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
   }
 
-  if (isNumberDesignTokensCollectionToken(token)) {
+  if (isNumberDesignTokensCollectionToken(tokenWithType)) {
     // Special handling for opacity tokens - show with transparent grid preview
-    if (token.name[0] === 'opacity') {
-      return opacityDesignTokensCollectionTokenToMarkdown(token, context);
+    if (tokenWithType.name[0] === 'opacity') {
+      return opacityDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
     }
-    return numberDesignTokensCollectionTokenToMarkdown(token, context);
+    return numberDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
   }
 
   // Fallback to generic renderer for any other type
-  return genericDesignTokensCollectionTokenToMarkdown(token, context);
+  return genericDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
 }
 
 /**

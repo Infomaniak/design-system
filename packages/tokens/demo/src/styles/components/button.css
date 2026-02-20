@@ -1,5 +1,9 @@
 button {
-  background-color: var(--esds-button-background-color);
-  padding-inline: var(--esds-button-padding-inline);
+  padding: var(--esds-spacing-md);
+  background-color: var(--esds-color-background-brand-default);
+  color: var(--esds-color-text-inverse);
+  border-radius: var(--esds-radius-md);
+  /*background-color: var(--esds-button-background-color);*/
+  /*padding-inline: var(--esds-button-padding-inline);*/
   /*color: var(--esds-color-brand);*/
 }

@@ -20,12 +20,12 @@ function onPullRequestScript(): Promise<void> {
     await logger.asyncTask('send-kchat-notification', async (_logger: Logger): Promise<void> => {
       await postKchatWebhookMessage({
         webhookId: getEnvKchatWebhookId(),
-        text: dedent(`
+        text: dedent`
           #### 🚀 new pull request: ${details.title}
           
           - 🔗 ${details.html_url}
           - 🧑 ${details.user.login}
-        `),
+        `,
       });
     });
   });

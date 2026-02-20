@@ -1,0 +1,30 @@
+{
+  "color": {
+    "background": {
+      "brand": {
+        "default": {
+          "$value": "{color.background.brand.kdrive.default}"
+        },
+        "hover": {
+          "$value": "{color.background.brand.kdrive.hover}"
+        },
+        "pressed": {
+          "$value": "{color.background.brand.kdrive.pressed}"
+        }
+      }
+    },
+    "text": {
+      "brand": {
+        "default": {
+          "$value": "{color.text.brand.kdrive.default}"
+        },
+        "hover": {
+          "$value": "{color.text.brand.kdrive.hover}"
+        },
+        "pressed": {
+          "$value": "{color.text.brand.kdrive.pressed}"
+        }
+      }
+    }
+  }
+}

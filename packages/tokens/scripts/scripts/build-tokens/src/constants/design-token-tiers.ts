@@ -10,24 +10,43 @@ export type T3DirectoryName = typeof T3_DIRECTORY_NAME;
 export type DesignTokenTier = T1DirectoryName | T2DirectoryName | T3DirectoryName;
 
 export const DESIGN_TOKEN_TIERS: readonly [T1DirectoryName, T2DirectoryName, T3DirectoryName] = [
-  't1-primitive',
-  't2-semantic',
-  't3-component',
+  T1_DIRECTORY_NAME,
+  T2_DIRECTORY_NAME,
+  T3_DIRECTORY_NAME,
 ];
 
-export const DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTIONS: ReadonlyMap<DesignTokenTier, string> =
-  new Map([
-    ['t1-primitive', 't1'],
-    ['t2-semantic', 't2'],
-    ['t3-component', 'Themes'],
-  ]);
+/* FIGMA BRIDGE */
 
-export const FIGMA_COLLECTIONS_TO_DESIGN_TOKEN_TIERS: ReadonlyMap<string, DesignTokenTier> =
+// COLLECTIONS
+export const FIGMA_T1_COLLECTION_NAME = 't1';
+export type FigmaT1CollectionName = typeof FIGMA_T1_COLLECTION_NAME;
+
+export const FIGMA_T2_COLLECTION_NAME = 't2';
+export type FigmaT2CollectionName = typeof FIGMA_T2_COLLECTION_NAME;
+
+export const FIGMA_T3_COLLECTION_NAME = 't3';
+export type FigmaT3CollectionName = typeof FIGMA_T3_COLLECTION_NAME;
+
+export type FigmaTierCollectionName =
+  | FigmaT1CollectionName
+  | FigmaT2CollectionName
+  | FigmaT3CollectionName;
+
+export const DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTION_NAMES: ReadonlyMap<
+  string,
+  FigmaTierCollectionName
+> = new Map([
+  [T1_DIRECTORY_NAME, FIGMA_T1_COLLECTION_NAME],
+  [T2_DIRECTORY_NAME, FIGMA_T2_COLLECTION_NAME],
+  [T3_DIRECTORY_NAME, FIGMA_T3_COLLECTION_NAME],
+]);
+
+export const FIGMA_COLLECTION_NAMES_TO_DESIGN_TOKEN_TIERS: ReadonlyMap<string, DesignTokenTier> =
   new Map<string, DesignTokenTier>(
-    DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTIONS.entries().map(
-      ([tier, collection]: readonly [DesignTokenTier, string]): readonly [
+    DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTION_NAMES.entries().map(
+      ([tier, collection]: readonly [string, FigmaTierCollectionName]): readonly [
         string,
         DesignTokenTier,
-      ] => [collection, tier],
+      ] => [collection, tier as DesignTokenTier],
     ),
   );
