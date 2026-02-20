@@ -47,21 +47,5 @@ function tokensBrueckeDesignTokenToDesignTokenExtensions(
     };
   }
 
-  // if (Reflect.has($extensions, 'mode')) {
-  //   const { mode, ...remainingExtensions } = $extensions as {
-  //     mode: Record<string, unknown>;
-  //     [key: string]: unknown;
-  //   };
-  //
-  //   const values: readonly unknown[] = Object.values(mode);
-  //
-  //   if (
-  //     values.length === 0 ||
-  //     values.every((value: unknown): boolean => value === values[0]) /* all identical */
-  //   ) {
-  //     $extensions = remainingExtensions;
-  //   }
-  // }
-
   return isEmptyObject($extensions) ? undefined : $extensions;
 }
