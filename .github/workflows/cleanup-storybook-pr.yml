@@ -38,13 +38,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Prepare Storybook Pages context
-        id: pages
-        run: yarn ci:storybook-pages --mode=prepare
-
       - name: Remove PR preview from gh-pages
-        if: steps.pages.outputs.should_deploy == 'true' && steps.pages.outputs.target == 'mr'
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          TARGET_DIR: ${{ steps.pages.outputs.destination_dir }}
+          TARGET_DIR: storybook/mr/${{ github.event.pull_request.number }}
         run: yarn ci:storybook-pages --mode=cleanup-pr
