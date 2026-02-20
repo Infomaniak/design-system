@@ -13,4 +13,3 @@ The Infomaniak's Design System, featuring design tokens, robust web components a
 
 - Figma:
   - [TokensBrücke](docs/figma/tokens-bruecke/figma-tokens-bruecke.md)
-
