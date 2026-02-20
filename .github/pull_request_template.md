@@ -27,15 +27,15 @@ What kind of change does this PR introduce?
 - [ ] Documentation content changes
 - [ ] Other... Please describe:
 
-## What is the current behavior?
+## Problem
 
-<!-- Please describe the current behavior that you are modifying, or link to a relevant issue. -->
+<!-- Please describe the problem you are addressing, or link to a relevant issue. -->
 
 Issue Number: N/A
 
-## What is the new behavior?
+## Solution
 
-<!-- Please describe the new behavior that we're expecting. -->
+<!-- Please describe the solution you have chosen, include possible alternatives considered if relevant. -->
 
 ## Does this PR introduce a breaking change?
 
