@@ -287,6 +287,17 @@ export function buildCssTokens({
                       ]),
                     ),
                   ];
+                } else if (tokenName.startsWith('font.letter-spacing')) {
+                  // --tracking-*
+                  return [
+                    generateTailwindToken(
+                      token,
+                      DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
+                        'tracking',
+                        ...token.name.slice(2),
+                      ]),
+                    ),
+                  ];
                 } else if (tokenName.startsWith('radius')) {
                   // --radius-*
                   return [
