@@ -1,0 +1,1 @@
+import{n as e,t}from"./lib-CZ8ZP4VC.js";export{t as MDXProvider};
