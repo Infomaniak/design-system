@@ -1,0 +1,1 @@
+import{n as e,t}from"./lib-0WcFhnyO.js";export{t as MDXProvider};
