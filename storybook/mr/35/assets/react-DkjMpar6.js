@@ -1,0 +1,1 @@
+import{n as e,t}from"./lib-ByhsYYso.js";export{t as MDXProvider};
