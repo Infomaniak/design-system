@@ -5,36 +5,19 @@ import type { DimensionTokensBrueckeDesignToken } from '../../../../../tokens-br
 import type { TokensBrueckeToDtcgContext } from '../../../context/tokens-bruecke-to-dtcg-context.ts';
 import { isTokensBrueckeDesignTokenFontWeightDesignToken } from '../../infer-dtcg-type/is-tokens-bruecke-design-token-font-weight-design-token.ts';
 import { isTokensBrueckeDesignTokenNumberDesignToken } from '../../infer-dtcg-type/is-tokens-bruecke-design-token-number-design-token.ts';
-import { tokensBrueckeDesignTokenWithMapValueToDesignToken } from '../../tokens-bruecke-design-token-with-map-value-to-design-token.ts';
-import { dimensionTokensBrueckeDesignTokenValueToDimensionDesignTokenValue } from './value/dimension-tokens-bruecke-design-token-value-to-dimension-design-token-value.ts';
+import { dimensionTokensBrueckeDesignTokenToDimensionDesignToken } from './dimension-tokens-bruecke-design-token-to-dimension-design-token.ts';
+import { dimensionTokensBrueckeDesignTokenToFontWeightDesignToken } from './dimension-tokens-bruecke-design-token-to-font-weight-design-token.ts';
+import { dimensionTokensBrueckeDesignTokenToNumberDesignToken } from './dimension-tokens-bruecke-design-token-to-number-design-token.ts';
 
 export function dimensionTokensBrueckeDesignTokenToDesignToken(
   input: DimensionTokensBrueckeDesignToken,
   ctx: TokensBrueckeToDtcgContext,
 ): DimensionDesignToken | NumberDesignToken | FontWeightDesignToken {
   if (isTokensBrueckeDesignTokenNumberDesignToken(input, ctx)) {
-    return tokensBrueckeDesignTokenWithMapValueToDesignToken(
-      input,
-      'number',
-      (value: string): number => {
-        return dimensionTokensBrueckeDesignTokenValueToDimensionDesignTokenValue(value)
-          .value as number;
-      },
-    );
+    return dimensionTokensBrueckeDesignTokenToNumberDesignToken(input, ctx);
   } else if (isTokensBrueckeDesignTokenFontWeightDesignToken(input, ctx)) {
-    return tokensBrueckeDesignTokenWithMapValueToDesignToken(
-      input,
-      'fontWeight',
-      (value: string): number => {
-        return dimensionTokensBrueckeDesignTokenValueToDimensionDesignTokenValue(value)
-          .value as number;
-      },
-    );
+    return dimensionTokensBrueckeDesignTokenToFontWeightDesignToken(input, ctx);
   } else {
-    return tokensBrueckeDesignTokenWithMapValueToDesignToken(
-      input,
-      'dimension',
-      dimensionTokensBrueckeDesignTokenValueToDimensionDesignTokenValue,
-    );
+    return dimensionTokensBrueckeDesignTokenToDimensionDesignToken(input, ctx);
   }
 }

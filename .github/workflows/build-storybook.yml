@@ -1,0 +1,74 @@
+name: Build and Deploy Storybook
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    tags:
+      - '*'
+  workflow_dispatch:
+
+concurrency:
+  group: build-storybook-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-storybook:
+    name: Build Storybook (branches/tags)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://npm.pkg.github.com'
+          always-auth: true
+          cache: 'yarn'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Prepare Storybook Pages context
+        id: pages
+        run: yarn ci:storybook-pages --mode=prepare
+
+      - name: Build Storybook
+        id: build
+        run: yarn build:docs
+
+      - name: Normalize Storybook build for subpath hosting
+        if: steps.build.outcome == 'success'
+        run: yarn ci:storybook-pages --mode=postbuild
+
+      - name: Deploy Storybook to GitHub Pages
+        id: deploy
+        if: steps.build.outcome == 'success' && steps.pages.outputs.should_deploy == 'true'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: apps/docs/storybook-static
+          destination_dir: ${{ steps.pages.outputs.destination_dir }}
+          keep_files: true
+          enable_jekyll: false
+
+      - name: Upload Storybook artifact
+        if: steps.build.outcome == 'success' && steps.deploy.outcome != 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-${{ steps.pages.outputs.target || 'manual' }}-${{ github.sha }}
+          path: apps/docs/storybook-static/
+          retention-days: 3
+          if-no-files-found: error

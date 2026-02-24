@@ -1,0 +1,12 @@
+
+# Add "author" as assignees to the pull requests
+addAssignees: author
+
+# Add reviewers to the pull requests
+addReviewers: true
+reviewers:
+  - lifaon74
+  - vjo
+  - lebojo
+numberOfReviewers: 0
+

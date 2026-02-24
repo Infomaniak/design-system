@@ -1,0 +1,185 @@
+{
+  "$type": "dimension",
+  "text": {
+    "xs": {
+      "size": {
+        "$value": "{font.size.xs}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "line-height": {
+        "$value": "{font.line-height.xs}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "letter-spacing": {
+        "$value": "{font.letter-spacing.md}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    },
+    "sm": {
+      "size": {
+        "$value": "{font.size.sm}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "line-height": {
+        "$value": "{font.line-height.sm}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "letter-spacing": {
+        "$value": "{font.letter-spacing.md}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    },
+    "md": {
+      "size": {
+        "$value": "{font.size.md}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "line-height": {
+        "$value": "{font.line-height.md}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "letter-spacing": {
+        "$value": "{font.letter-spacing.md}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    },
+    "lg": {
+      "size": {
+        "$value": "{font.size.lg}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "line-height": {
+        "$value": "{font.line-height.lg}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "letter-spacing": {
+        "$value": "{font.letter-spacing.md}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    },
+    "xl": {
+      "size": {
+        "$value": "{font.size.xl}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "line-height": {
+        "$value": "{font.line-height.xl}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "letter-spacing": {
+        "$value": "{font.letter-spacing.md}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    },
+    "2xl": {
+      "size": {
+        "$value": "{font.size.2xl}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "line-height": {
+        "$value": "{font.line-height.2xl}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "letter-spacing": {
+        "$value": "{font.letter-spacing.md}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    },
+    "3xl": {
+      "size": {
+        "$value": "{font.size.3xl}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "line-height": {
+        "$value": "{font.line-height.3xl}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "letter-spacing": {
+        "$value": "{font.letter-spacing.md}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    },
+    "4xl": {
+      "size": {
+        "$value": "{font.size.4xl}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "line-height": {
+        "$value": "{font.line-height.4xl}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "letter-spacing": {
+        "$value": "{font.letter-spacing.md}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    },
+    "5xl": {
+      "size": {
+        "$value": "{font.size.5xl}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "line-height": {
+        "$value": "{font.line-height.5xl}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "letter-spacing": {
+        "$value": "{font.letter-spacing.md}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    }
+  }
+}

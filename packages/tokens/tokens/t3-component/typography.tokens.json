@@ -1,0 +1,195 @@
+{
+  "$type": "typography",
+  "typography": {
+    "display": {
+      "md": {
+        "base": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.5xl.size}",
+            "fontWeight": "{font.weight.regular}",
+            "letterSpacing": "{text.5xl.letter-spacing}",
+            "lineHeight": "{text.5xl.line-height}"
+          }
+        },
+        "emphasized": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.5xl.size}",
+            "fontWeight": "{font.weight.medium}",
+            "letterSpacing": "{text.5xl.letter-spacing}",
+            "lineHeight": "{text.5xl.line-height}"
+          }
+        }
+      }
+    },
+    "heading": {
+      "lg": {
+        "base": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.4xl.size}",
+            "fontWeight": "{font.weight.regular}",
+            "letterSpacing": "{text.4xl.letter-spacing}",
+            "lineHeight": "{text.4xl.line-height}"
+          }
+        },
+        "emphasized": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.4xl.size}",
+            "fontWeight": "{font.weight.medium}",
+            "letterSpacing": "{text.4xl.letter-spacing}",
+            "lineHeight": "{text.4xl.line-height}"
+          }
+        }
+      },
+      "md": {
+        "base": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.3xl.size}",
+            "fontWeight": "{font.weight.regular}",
+            "letterSpacing": "{text.3xl.letter-spacing}",
+            "lineHeight": "{text.3xl.line-height}"
+          }
+        },
+        "emphasized": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.3xl.size}",
+            "fontWeight": "{font.weight.medium}",
+            "letterSpacing": "{text.3xl.letter-spacing}",
+            "lineHeight": "{text.3xl.line-height}"
+          }
+        }
+      },
+      "sm": {
+        "base": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.2xl.size}",
+            "fontWeight": "{font.weight.regular}",
+            "letterSpacing": "{text.2xl.letter-spacing}",
+            "lineHeight": "{text.2xl.line-height}"
+          }
+        },
+        "emphasized": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.2xl.size}",
+            "fontWeight": "{font.weight.medium}",
+            "letterSpacing": "{text.2xl.letter-spacing}",
+            "lineHeight": "{text.2xl.line-height}"
+          }
+        }
+      }
+    },
+    "title": {
+      "md": {
+        "base": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.xl.size}",
+            "fontWeight": "{font.weight.regular}",
+            "letterSpacing": "{text.xl.letter-spacing}",
+            "lineHeight": "{text.xl.line-height}"
+          }
+        },
+        "emphasized": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.xl.size}",
+            "fontWeight": "{font.weight.medium}",
+            "letterSpacing": "{text.xl.letter-spacing}",
+            "lineHeight": "{text.xl.line-height}"
+          }
+        }
+      }
+    },
+    "body": {
+      "lg": {
+        "base": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.lg.size}",
+            "fontWeight": "{font.weight.regular}",
+            "letterSpacing": "{text.lg.letter-spacing}",
+            "lineHeight": "{text.lg.line-height}"
+          }
+        },
+        "emphasized": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.lg.size}",
+            "fontWeight": "{font.weight.medium}",
+            "letterSpacing": "{text.lg.letter-spacing}",
+            "lineHeight": "{text.lg.line-height}"
+          }
+        }
+      },
+      "md": {
+        "base": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.md.size}",
+            "fontWeight": "{font.weight.regular}",
+            "letterSpacing": "{text.md.letter-spacing}",
+            "lineHeight": "{text.md.line-height}"
+          }
+        },
+        "emphasized": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.md.size}",
+            "fontWeight": "{font.weight.medium}",
+            "letterSpacing": "{text.md.letter-spacing}",
+            "lineHeight": "{text.md.line-height}"
+          }
+        }
+      },
+      "sm": {
+        "base": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.sm.size}",
+            "fontWeight": "{font.weight.regular}",
+            "letterSpacing": "{text.sm.letter-spacing}",
+            "lineHeight": "{text.sm.line-height}"
+          }
+        },
+        "emphasized": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.sm.size}",
+            "fontWeight": "{font.weight.medium}",
+            "letterSpacing": "{text.sm.letter-spacing}",
+            "lineHeight": "{text.sm.line-height}"
+          }
+        }
+      }
+    },
+    "caption": {
+      "md": {
+        "base": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.xs.size}",
+            "fontWeight": "{font.weight.regular}",
+            "letterSpacing": "{text.xs.letter-spacing}",
+            "lineHeight": "{text.xs.line-height}"
+          }
+        },
+        "emphasized": {
+          "$value": {
+            "fontFamily": "{font.family.base}",
+            "fontSize": "{text.xs.size}",
+            "fontWeight": "{font.weight.medium}",
+            "letterSpacing": "{text.xs.letter-spacing}",
+            "lineHeight": "{text.xs.line-height}"
+          }
+        }
+      }
+    }
+  }
+}

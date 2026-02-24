@@ -11,12 +11,15 @@ import { segmentsReferenceToCurlyReference } from '../design-token/reference/typ
 import { isDesignToken } from '../design-token/token/is-design-token.ts';
 import { designTokensTreeSchema } from '../design-token/tree/design-tokens-tree.schema.ts';
 import type { DesignTokensTree } from '../design-token/tree/design-tokens-tree.ts';
-import type {
-  DesignTokensCollectionTokenExtensions,
-  DesignTokensCollectionTokenWithType,
-  GenericDesignTokensCollectionToken,
-  GenericDesignTokensCollectionTokenWithType,
-  GenericResolvedDesignTokensCollectionToken,
+import { ascendDesignTokensTreeCommonTypes } from '../operations/ascend-common-types/ascend-design-tokens-tree-common-types.ts';
+import { mergeDesignTokensTrees } from '../operations/merge/merge-design-tokens-trees.ts';
+import {
+  type DesignTokensCollectionTokenExtensions,
+  type DesignTokensCollectionTokenWithType,
+  type GenericDesignTokensCollectionToken,
+  type GenericDesignTokensCollectionTokenWithType,
+  type GenericResolvedDesignTokensCollectionToken,
+  isDesignTokensCollectionTokenWithType,
 } from './token/design-tokens-collection-token.ts';
 import { designTokenValueToDesignTokensCollectionTokenValue } from './token/from/design-token-value-to-design-tokens-collection-token-value.ts';
 import type { ArrayDesignTokenName } from './token/name/array-design-token-name.ts';
@@ -40,6 +43,7 @@ import type { DesignTokensCollectionFromDesignTokensTreeOptions } from './types/
 import type { DesignTokensCollectionFromFilesOptions } from './types/methods/from-files/design-tokens-collection-from-files-options.ts';
 import { designTokensCollectionRenameExtensionsAutomatically } from './types/methods/rename/design-tokens-collection-rename-extensions-function.ts';
 import type { DesignTokensCollectionRenameOptions } from './types/methods/rename/design-tokens-collection-rename-options.ts';
+import type { DesignTokensCollectionToJsonOptions } from './types/methods/to-json/design-tokens-collection-to-json-options.ts';
 
 /**
  * Represents a collection of design tokens and provides utility methods for
@@ -169,15 +173,17 @@ export class DesignTokensCollection {
   /**
    * Adds a token to the collection and returns the current instance.
    *
-   * If `merged` is true (default) and a token already exists with the same name, it is merged with the new token.
-   *
    * @param {GenericDesignTokensCollectionToken} token The token to be added to the collection.
    * @param {DesignTokensCollectionAddOptions} [options] The options to use when inserting the token.
+   * @param {boolean} [options.last=true] If the token should be put as "last" in the collection.
+   * @param {boolean} [options.merge=true] If an existing token is found:
+   *  - `true`: merges the existing token with the new one.
+   *  - `false`: replaces the existing token with the new one.
    * @returns {this} The current instance for method chaining.
    */
   add(
     token: GenericDesignTokensCollectionToken,
-    { merge = true }: DesignTokensCollectionAddOptions = {},
+    { last = true, merge = true }: DesignTokensCollectionAddOptions = {},
   ): this {
     const key: string = DesignTokensCollection.#arrayDesignTokenNameToStringKey(token.name);
     const existingToken: GenericDesignTokensCollectionToken | undefined = this.#tokens.get(key);
@@ -185,8 +191,11 @@ export class DesignTokensCollection {
     if (existingToken === undefined) {
       this.#tokens.set(key, token);
     } else {
-      // delete token to put it as "last"
-      this.#tokens.delete(key);
+      if (last) {
+        // delete token to put it as "last
+        this.#tokens.delete(key);
+      }
+
       this.#tokens.set(
         key,
         merge ? DesignTokensCollection.mergeTokens(existingToken, token) : token,
@@ -270,7 +279,9 @@ export class DesignTokensCollection {
       if (isCurlyReference(token.value)) {
         return token.value === nameAsCurlyReference;
       } else {
-        console.assert(token.type !== undefined);
+        if (!isDesignTokensCollectionTokenWithType(token)) {
+          throw new Error('Expected token with type.');
+        }
 
         if (isBorderDesignTokensCollectionToken(token)) {
           return isBorderDesignTokensCollectionTokenValueReferencing(
@@ -498,6 +509,7 @@ export class DesignTokensCollection {
     to: DesignTokenNameLike,
     {
       extensions: renameExtensions = designTokensCollectionRenameExtensionsAutomatically,
+      onExitingTokenBehaviour = 'throw',
     }: DesignTokensCollectionRenameOptions = {},
   ): void {
     from = DesignTokensCollection.designTokenNameLikeToArrayDesignTokenName(from);
@@ -507,17 +519,30 @@ export class DesignTokensCollection {
       return;
     }
 
+    // TODO: improvement - get "from" token and rename it directly after/before updating rge references
+
+    if (this.has(to)) {
+      if (onExitingTokenBehaviour === 'throw') {
+        throw new Error(`Replacing an existing token: ${to.join('.')}`);
+      } else if (onExitingTokenBehaviour === 'skip') {
+        return;
+      }
+    }
+
     const fromAsCurlyReference: CurlyReference =
       DesignTokensCollection.arrayDesignTokenNameToCurlyReference(from);
     const toAsCurlyReference: CurlyReference =
       DesignTokensCollection.arrayDesignTokenNameToCurlyReference(to);
 
-    for (const token of this.#tokens.values()) {
+    for (const token of Array.from(this.#tokens.values())) {
       let name: ArrayDesignTokenName = token.name;
       let value: unknown | CurlyReference = token.value;
       let extensions: DesignTokensCollectionTokenExtensions | undefined = token.extensions;
 
-      if (DesignTokensCollection.tokenNamesEqual(token.name, from)) {
+      if (
+        DesignTokensCollection.tokenNamesEqual(token.name, from) &&
+        onExitingTokenBehaviour !== 'only-references'
+      ) {
         name = to;
       }
 
@@ -525,12 +550,16 @@ export class DesignTokensCollection {
         return reference === fromAsCurlyReference ? toAsCurlyReference : reference;
       };
 
+      // TODO improvement - use "updateDesignTokensCollectionTokenReferences"
+
       if (isCurlyReference(token.value)) {
         if (token.value === fromAsCurlyReference) {
           value = toAsCurlyReference;
         }
       } else {
-        console.assert(token.type !== undefined);
+        if (!isDesignTokensCollectionTokenWithType(token)) {
+          throw new Error('Expected token with type.');
+        }
 
         if (isBorderDesignTokensCollectionToken(token)) {
           value = updateBorderDesignTokensCollectionTokenValueReferences(token.value, update);
@@ -552,6 +581,10 @@ export class DesignTokensCollection {
       }
 
       if (name !== token.name || value !== token.value || extensions !== token.extensions) {
+        if (name !== token.name) {
+          this.#tokens.delete(DesignTokensCollection.#arrayDesignTokenNameToStringKey(token.name));
+        }
+
         this.#tokens.set(DesignTokensCollection.#arrayDesignTokenNameToStringKey(name), {
           ...token,
           name,
@@ -564,6 +597,32 @@ export class DesignTokensCollection {
 
   clone(): DesignTokensCollection {
     return DesignTokensCollection.#new(new Map(this.#tokens.entries()));
+  }
+
+  toJSON({ ascendCommonTypes = true }: DesignTokensCollectionToJsonOptions = {}): DesignTokensTree {
+    let tree: DesignTokensTree = {};
+
+    for (const token of this.#tokens.values()) {
+      tree = mergeDesignTokensTrees(
+        tree,
+        {
+          $value: token.value,
+          ...removeUndefinedProperties({
+            $type: token.type,
+            $deprecated: token.deprecated,
+            $description: token.description,
+            $extensions: token.extensions,
+          }),
+        },
+        token.name,
+      );
+    }
+
+    if (ascendCommonTypes) {
+      tree = ascendDesignTokensTreeCommonTypes(tree);
+    }
+
+    return tree;
   }
 }
 

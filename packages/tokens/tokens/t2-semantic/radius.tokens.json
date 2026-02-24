@@ -1,0 +1,65 @@
+{
+  "$type": "dimension",
+  "radius": {
+    "none": {
+      "$value": "{radius.0}",
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
+      }
+    },
+    "xs": {
+      "$value": "{radius.2}",
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
+      }
+    },
+    "sm": {
+      "$value": "{radius.4}",
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
+      }
+    },
+    "md": {
+      "$value": "{radius.6}",
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
+      }
+    },
+    "lg": {
+      "$value": "{radius.8}",
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
+      }
+    },
+    "xl": {
+      "$value": "{radius.12}",
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
+      }
+    },
+    "2xl": {
+      "$value": "{radius.16}",
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
+      }
+    },
+    "3xl": {
+      "$value": "{radius.24}",
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
+      }
+    },
+    "4xl": {
+      "$value": "{radius.32}",
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
+      }
+    },
+    "full": {
+      "$value": "{radius.1000}",
+      "$extensions": {
+        "scopes": ["CORNER_RADIUS"]
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "$type": "dimension",
+  "border": {
+    "xs": {
+      "width": {
+        "$value": "{border-width.0}",
+        "$extensions": {
+          "scopes": ["STROKE_FLOAT"]
+        }
+      }
+    },
+    "sm": {
+      "width": {
+        "$value": "{border-width.1}",
+        "$extensions": {
+          "scopes": ["STROKE_FLOAT"]
+        }
+      }
+    },
+    "md": {
+      "width": {
+        "$value": "{border-width.2}",
+        "$extensions": {
+          "scopes": ["STROKE_FLOAT"]
+        }
+      }
+    },
+    "ld": {
+      "width": {
+        "$value": "{border-width.3}",
+        "$extensions": {
+          "scopes": ["STROKE_FLOAT"]
+        }
+      }
+    },
+    "xl": {
+      "width": {
+        "$value": "{border-width.4}",
+        "$extensions": {
+          "scopes": ["STROKE_FLOAT"]
+        }
+      }
+    }
+  }
+}

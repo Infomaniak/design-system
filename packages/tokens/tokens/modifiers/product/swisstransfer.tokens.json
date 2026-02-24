@@ -1,0 +1,30 @@
+{
+  "color": {
+    "background": {
+      "brand": {
+        "default": {
+          "$value": "{color.background.brand.swisstransfer.default}"
+        },
+        "hover": {
+          "$value": "{color.background.brand.swisstransfer.hover}"
+        },
+        "pressed": {
+          "$value": "{color.background.brand.swisstransfer.pressed}"
+        }
+      }
+    },
+    "text": {
+      "brand": {
+        "default": {
+          "$value": "{color.text.brand.swisstransfer.default}"
+        },
+        "hover": {
+          "$value": "{color.text.brand.swisstransfer.hover}"
+        },
+        "pressed": {
+          "$value": "{color.text.brand.swisstransfer.pressed}"
+        }
+      }
+    }
+  }
+}

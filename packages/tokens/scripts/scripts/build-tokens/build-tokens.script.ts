@@ -8,6 +8,8 @@ import { generatePackage } from './src/generate-package.ts';
 
 const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 
+const WORKSPACE_ROOT_DIR: string = join(ROOT_DIR, '../..');
+
 const SOURCE_DIR: string = join(ROOT_DIR, 'tokens');
 
 const OUTPUT_DIR: string = join(ROOT_DIR, 'dist');
@@ -25,6 +27,7 @@ export async function buildTokensScript(): Promise<void> {
 
   await generatePackage({
     rootDirectory: ROOT_DIR,
+    workspaceRootDirectory: WORKSPACE_ROOT_DIR,
     outputDirectory: OUTPUT_DIR,
     logger,
   });

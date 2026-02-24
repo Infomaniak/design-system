@@ -1,5 +1,5 @@
 import type { DimensionDesignTokensCollectionToken } from '../../../../../token/types/base/dimension/dimension-design-tokens-collection-token.ts';
-import type { DimensionDesignTokensCollectionTokenValue } from '../../../../../token/types/base/dimension/value/dimension-design-tokens-collection-token-value.ts';
+import { valueOrCurlyReferenceToCssVariableReference } from '../../../../css/reference/value-or-curly-reference-to-css-variable-reference.ts';
 import { dimensionDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/dimension/value/dimension-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
@@ -41,27 +41,35 @@ export function dimensionDesignTokensCollectionTokenToMarkdown(
   options: DimensionMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
   // Convert dimension value to CSS value (e.g. "8px")
-  const value = token.value as DimensionDesignTokensCollectionTokenValue;
-  const cssValue = dimensionDesignTokensCollectionTokenValueToCssValue(value);
+  const cssValue = valueOrCurlyReferenceToCssVariableReference(
+    token.value,
+    dimensionDesignTokensCollectionTokenValueToCssValue,
+  );
   const { previewHeight = 16 } = options;
 
   // Create the dimension preview HTML
   // Shows the bar at the exact CSS value (e.g. width: 384px) with no scaling
   const preview = /* HTML */ `
-    <div style="
+    <div
+      style="
       background: #dcfce8;
       height: ${previewHeight}px;
       width: ${cssValue};
       border-radius: 2px;
       border: 1px solid #86efad;
       position: relative;
-    "></div>
-    <div style="
+    "
+    ></div>
+    <div
+      style="
       margin-top: 4px;
       font-family: monospace;
       font-size: 12px;
       color: #6b7280;
-    ">${cssValue}</div>
+    "
+    >
+      ${cssValue}
+    </div>
   `;
 
   return {

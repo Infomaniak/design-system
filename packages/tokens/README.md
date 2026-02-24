@@ -1,3 +1,8 @@
+[![npm (scoped)](https://img.shields.io/npm/v/@infomaniak-design-system/tokens.svg)](https://www.npmjs.com/package/@infomaniak-design-system/tokens)
+![npm](https://img.shields.io/npm/dm/@infomaniak-design-system/tokens.svg)
+![NPM](https://img.shields.io/npm/l/@infomaniak-design-system/tokens.svg)
+![npm type definitions](https://img.shields.io/npm/types/@infomaniak-design-system/tokens.svg)
+
 # Infomaniak's Design System - DTCG Tokens
 
 Contains the list of Infomaniak's Design System tokens based on the [Design Tokens Community Group - (DTCG - 2025.10)](https://www.designtokens.org/tr/2025.10/format) format, and scripts to convert them to different formats (CSS, Figma, Tailwind, etc.).

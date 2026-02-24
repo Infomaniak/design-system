@@ -1,0 +1,30 @@
+{
+  "color": {
+    "background": {
+      "brand": {
+        "default": {
+          "$value": "{color.background.brand.contacts.default}"
+        },
+        "hover": {
+          "$value": "{color.background.brand.contacts.hover}"
+        },
+        "pressed": {
+          "$value": "{color.background.brand.contacts.pressed}"
+        }
+      }
+    },
+    "text": {
+      "brand": {
+        "default": {
+          "$value": "{color.text.brand.contacts.default}"
+        },
+        "hover": {
+          "$value": "{color.text.brand.contacts.hover}"
+        },
+        "pressed": {
+          "$value": "{color.text.brand.contacts.pressed}"
+        }
+      }
+    }
+  }
+}

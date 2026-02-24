@@ -1,5 +1,5 @@
 import { writeFile } from 'node:fs/promises';
-import { writeFileSafe } from './write-file-safe.ts';
+import { writeTextFileSafe } from './write-text-file-safe.ts';
 
 export type WriteJsonFileSafeArguments =
   Parameters<typeof writeFile> extends [infer GPath, any, ...infer GRest]
@@ -7,8 +7,5 @@ export type WriteJsonFileSafeArguments =
     : never;
 
 export async function writeJsonFileSafe(...args: WriteJsonFileSafeArguments): Promise<void> {
-  await writeFileSafe(args[0], JSON.stringify(args[1], null, 2), {
-    ...(typeof args[2] === 'object' ? args[2] : {}),
-    encoding: 'utf-8',
-  });
+  await writeTextFileSafe(args[0], JSON.stringify(args[1], null, 2), args[2]);
 }

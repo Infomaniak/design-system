@@ -7,6 +7,7 @@ import { execCommandInherit } from '../../../../../../scripts/helpers/misc/exec-
 export interface PublishTokensOptions {
   readonly outputDirectory: string;
   readonly mode: 'prod' | 'dev';
+  readonly tag?: string;
   readonly logger: Logger;
 }
 
@@ -20,9 +21,30 @@ export interface PublishTokensNpmResult {
   readonly version: string;
 }
 
+export interface BuildNpmPublishArgsOptions {
+  readonly mode: 'prod' | 'dev';
+  readonly tag?: string;
+}
+
+export function buildNpmPublishArgs({ mode, tag }: BuildNpmPublishArgsOptions): string[] {
+  const args: string[] = ['--//registry.npmjs.org/:_authToken=$NPM_TOKEN', 'publish', '--access', 'public'];
+
+  if (mode === 'dev') {
+    args.push('--tag', 'dev');
+    return args;
+  }
+
+  if (tag !== undefined && tag !== '') {
+    args.push('--tag', tag);
+  }
+
+  return args;
+}
+
 export function publishTokens({
   outputDirectory,
   mode,
+  tag,
   logger,
 }: PublishTokensOptions): Promise<PublishTokensResult> {
   return logger.asyncTask(
@@ -37,12 +59,7 @@ export function publishTokens({
 
             const packageJsonContent: any = await readJsonFile(webPackageFile);
 
-            const args: string[] = [
-              '--//registry.npmjs.org/:_authToken=$NPM_TOKEN',
-              'publish',
-              '--access',
-              'public',
-            ];
+            const args: string[] = buildNpmPublishArgs({ mode, tag });
 
             let version: string;
 
@@ -58,7 +75,6 @@ export function publishTokens({
                 version,
               });
 
-              args.push('--tag', 'dev');
             } else {
               version = packageJsonContent.version;
             }

@@ -6,7 +6,7 @@ export function isTokensBrueckeDesignTokenFontFamilyDesignToken(
   ctx: TokensBrueckeToDtcgContext,
 ): boolean {
   return (
-    ctx.path.join('.').includes('font.family') ||
+    ctx.path.join('.').includes('.family') ||
     (input.scopes !== undefined && input.scopes.includes('FONT_FAMILY'))
   );
 }

@@ -41,12 +41,14 @@ Infomaniak's Design System featuring design tokens based on DTCG standards and c
 │       ├── demo/                # Live demo app for tokens
 │       └── dist/                # Output: CSS, JSON, Markdown
 ├── scripts/
-│   ├── scripts/                 # CI/CD automation scripts
+│   ├── ci/                      # CI/CD automation scripts
 │   │   ├── on-pull-request/     # PR validation
-│   │   └── on-tag/              # Release automation
+│   │   ├── on-tag/              # Release automation
+│   │   └── publish/             # Branch-based npm publish orchestrator
 │   └── helpers/                 # Shared utility functions
 ├── docs/                        # Project documentation
-│   └── figma/                   # Figma integration docs
+│   ├── figma/                    # Figma integration docs
+│   └── plans/                   # Implementation plans and execution docs
 └── index.js                     # Root entry point
 ```
 
@@ -68,6 +70,7 @@ Infomaniak's Design System featuring design tokens based on DTCG standards and c
 | Test coverage          | `yarn test:coverage`                         |
 | Format code            | `yarn format`                                |
 | PR validation          | `yarn ci:on-pull-request`                    |
+| CI publish (manual)    | `GITHUB_REF_NAME=develop yarn ci:publish`    |
 
 ### Code Style
 

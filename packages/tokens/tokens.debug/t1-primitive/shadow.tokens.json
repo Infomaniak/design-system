@@ -1,0 +1,382 @@
+{
+  "shadow": {
+    "0": {
+      "x": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "y": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "blur": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "spread": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "color": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0, 0, 0],
+          "alpha": 0,
+          "hex": "#0000"
+        },
+        "$type": "color",
+        "$extensions": {
+          "scopes": ["ALL_SCOPES"]
+        }
+      }
+    },
+    "1": {
+      "x": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "y": {
+        "$value": {
+          "value": 1,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "blur": {
+        "$value": {
+          "value": 1,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "spread": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "color": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0, 0, 0],
+          "alpha": 0.050980392156862744,
+          "hex": "#0000000d"
+        },
+        "$type": "color",
+        "$extensions": {
+          "scopes": ["ALL_SCOPES"]
+        }
+      }
+    },
+    "2": {
+      "x": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "y": {
+        "$value": {
+          "value": 1,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "blur": {
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "spread": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "color": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0, 0, 0],
+          "alpha": 0.0784313725490196,
+          "hex": "#00000014"
+        },
+        "$type": "color",
+        "$extensions": {
+          "scopes": ["ALL_SCOPES"]
+        }
+      }
+    },
+    "3": {
+      "x": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "y": {
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "blur": {
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "spread": {
+        "$value": {
+          "value": -1,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "color": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0, 0, 0],
+          "alpha": 0.10196078431372549,
+          "hex": "#0000001a"
+        },
+        "$type": "color",
+        "$extensions": {
+          "scopes": ["ALL_SCOPES"]
+        }
+      }
+    },
+    "4": {
+      "x": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "y": {
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "blur": {
+        "$value": {
+          "value": 6,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "spread": {
+        "$value": {
+          "value": -3,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "color": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0, 0, 0],
+          "alpha": 0.10196078431372549,
+          "hex": "#0000001a"
+        },
+        "$type": "color",
+        "$extensions": {
+          "scopes": ["ALL_SCOPES"]
+        }
+      }
+    },
+    "5": {
+      "x": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "y": {
+        "$value": {
+          "value": 10,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "blur": {
+        "$value": {
+          "value": 10,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "spread": {
+        "$value": {
+          "value": -6,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "color": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0, 0, 0],
+          "alpha": 0.10196078431372549,
+          "hex": "#0000001a"
+        },
+        "$type": "color",
+        "$extensions": {
+          "scopes": ["ALL_SCOPES"]
+        }
+      }
+    },
+    "6": {
+      "x": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "y": {
+        "$value": {
+          "value": 25,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "blur": {
+        "$value": {
+          "value": 50,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "spread": {
+        "$value": {
+          "value": -12,
+          "unit": "px"
+        },
+        "$type": "dimension",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "color": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0, 0, 0],
+          "alpha": 0.14901960784313725,
+          "hex": "#00000026"
+        },
+        "$type": "color",
+        "$extensions": {
+          "scopes": ["ALL_SCOPES"]
+        }
+      }
+    }
+  }
+}

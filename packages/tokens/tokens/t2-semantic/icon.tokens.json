@@ -1,0 +1,55 @@
+{
+  "$type": "dimension",
+  "icon": {
+    "size": {
+      "xs": {
+        "$value": "{scale.12}",
+        "$extensions": {
+          "scopes": ["CORNER_RADIUS"]
+        }
+      },
+      "sm": {
+        "$value": "{scale.14}",
+        "$extensions": {
+          "scopes": ["CORNER_RADIUS"]
+        }
+      },
+      "md": {
+        "$value": "{scale.16}",
+        "$extensions": {
+          "scopes": ["CORNER_RADIUS"]
+        }
+      },
+      "xl": {
+        "$value": "{scale.24}",
+        "$extensions": {
+          "scopes": ["CORNER_RADIUS"]
+        }
+      },
+      "2xl": {
+        "$value": "{scale.32}",
+        "$extensions": {
+          "scopes": ["CORNER_RADIUS"]
+        }
+      },
+      "lg": {
+        "$value": "{scale.20}",
+        "$extensions": {
+          "scopes": ["CORNER_RADIUS"]
+        }
+      },
+      "4xl": {
+        "$value": "{scale.96}",
+        "$extensions": {
+          "scopes": ["CORNER_RADIUS"]
+        }
+      },
+      "3xl": {
+        "$value": "{scale.40}",
+        "$extensions": {
+          "scopes": ["CORNER_RADIUS"]
+        }
+      }
+    }
+  }
+}
