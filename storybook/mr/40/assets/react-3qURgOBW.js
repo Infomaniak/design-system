@@ -1,0 +1,1 @@
+import{n as e,t}from"./lib-DWSpPLC0.js";export{t as MDXProvider};
