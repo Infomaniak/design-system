@@ -91,6 +91,7 @@ jobs:
           CI_PUBLISH_TIMESTAMP: ${{ steps.publish_timestamp.outputs.value }}
           CI_PUBLISH_STRICT_VERSION_POLICY: 'true'
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          CI_PR_AUTH_TOKEN: ${{ secrets.CI_PR_AUTH_TOKEN }}
 
       - name: Publish missing package versions (dry-run for fork PR)
         if: >-
@@ -110,3 +111,4 @@ jobs:
           CI_PUBLISH_TIMESTAMP: ${{ steps.publish_timestamp.outputs.value }}
           CI_PUBLISH_STRICT_VERSION_POLICY: 'true'
           CI_PUBLISH_DRY_RUN: 'true'
+          CI_PR_AUTH_TOKEN: ${{ secrets.CI_PR_AUTH_TOKEN }}

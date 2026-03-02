@@ -53,10 +53,11 @@ export function publishTokens({
         versionOverride,
         internalDependencyVersionOverrides,
 
-      await openIosPr({
+      await publishIosPackage({
+        outputDirectory,
+        tag,
+        versionOverride,
         logger,
-        packageDirectory: join(outputDirectory, 'ios'),
-        version: versionOverride!,
       });
 
       return {
