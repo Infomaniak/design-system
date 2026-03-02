@@ -5,6 +5,16 @@ on:
     branches:
       - main
       - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - labeled
+      - unlabeled
 
 concurrency:
   group: publish-${{ github.ref_name }}
@@ -20,6 +30,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Enable Corepack
         run: corepack enable
@@ -41,9 +53,51 @@ jobs:
       - name: Run tests
         run: yarn test
 
+      - name: Compute publish timestamp
+        id: publish_timestamp
+        if: >-
+          ${{
+            github.event_name == 'push' ||
+            (github.event_name == 'pull_request' &&
+             contains(github.event.pull_request.labels.*.name, 'dev'))
+          }}
+        run: echo "value=$(date +%s%3N)" >> "$GITHUB_OUTPUT"
+
       - name: Publish missing package versions
+        if: >-
+          ${{
+            github.event_name == 'push' ||
+            (github.event_name == 'pull_request' &&
+             github.event.pull_request.head.repo.full_name == github.repository &&
+             contains(github.event.pull_request.labels.*.name, 'dev'))
+          }}
         run: yarn ci:publish
         env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
           GITHUB_REF_NAME: ${{ github.ref_name }}
+          CI_PUBLISH_TARGET_BRANCH: ${{ github.event_name == 'pull_request' && github.base_ref || github.ref_name }}
+          CI_PUBLISH_PR_LABELS: ${{ github.event_name == 'pull_request' && toJson(github.event.pull_request.labels.*.name) || '[]' }}
+          CI_PUBLISH_GIT_BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+          CI_PUBLISH_GIT_HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          CI_PUBLISH_TIMESTAMP: ${{ steps.publish_timestamp.outputs.value }}
           CI_PUBLISH_STRICT_VERSION_POLICY: 'true'
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish missing package versions (dry-run for fork PR)
+        if: >-
+          ${{
+            github.event_name == 'pull_request' &&
+            github.event.pull_request.head.repo.full_name != github.repository &&
+            contains(github.event.pull_request.labels.*.name, 'dev')
+          }}
+        run: yarn ci:publish
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+          CI_PUBLISH_TARGET_BRANCH: ${{ github.base_ref }}
+          CI_PUBLISH_PR_LABELS: ${{ toJson(github.event.pull_request.labels.*.name) }}
+          CI_PUBLISH_GIT_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          CI_PUBLISH_GIT_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          CI_PUBLISH_TIMESTAMP: ${{ steps.publish_timestamp.outputs.value }}
+          CI_PUBLISH_STRICT_VERSION_POLICY: 'true'
+          CI_PUBLISH_DRY_RUN: 'true'

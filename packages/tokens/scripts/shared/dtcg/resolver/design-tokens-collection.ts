@@ -15,7 +15,6 @@ import { ascendDesignTokensTreeCommonTypes } from '../operations/ascend-common-t
 import { mergeDesignTokensTrees } from '../operations/merge/merge-design-tokens-trees.ts';
 import {
   type DesignTokensCollectionTokenExtensions,
-  type DesignTokensCollectionTokenWithType,
   type GenericDesignTokensCollectionToken,
   type GenericDesignTokensCollectionTokenWithType,
   type GenericResolvedDesignTokensCollectionToken,
@@ -423,7 +422,7 @@ export class DesignTokensCollection {
             description: $description,
             extensions: $extensions,
           }),
-        } satisfies DesignTokensCollectionTokenWithType<any, any>);
+        } satisfies GenericDesignTokensCollectionTokenWithType);
       }
     } else {
       const { $description, $type, $extends, $ref, $deprecated, $extensions, ...children } =

@@ -66,14 +66,17 @@ Optional local CI publish variables (for manual checks):
   - `fix/xxx`: for a bug fix
   - `docs/xxx`: for documentation changes
   - etc...
-- The commits must follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention.
+- The commits as well as the PR title must follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention.
   - NOTE: to preserve the commit history, do not squash the commits when working on or merging a PR.
-- The PR must be based on the `main` branch and target the `main` branch.
+- The PR must be based:
+  - on the `main` branch and target the `main` branch for a `stable` release.
+  - on the `develop` branch and target the `develop` branch for an `rc`release.
 - The PR must be marked as `Draft` while you're working on the feature/fix.
 - The PR must be marked as `Ready` for review when all the following conditions are met:
-  - The PR must be up to date with the `main` branch.
-  - The PR must include tests for the new feature/fix with a target of 100% code coverage (`yarn test:coverage`)
-  - The PR must be formated using `yarn format`.
+  - The PR must be up to date with the `main`/`develop` branches.
+  - The PR must include tests for the new feature/fix with good code coverage (`yarn test:coverage`)
+  - The PR must be formated using `yarn format`, and linted using `yarn lint`.
+  - The PR must pass `yarn check`.
 - Approval must meet these conditions:
   - The PR must be reviewed by at least one of the maintainers, different from the author.
   - All comments on the PR must be resolved:
@@ -102,6 +105,7 @@ Fork the repository, update the code, create a PR from your repository to the up
   - `apps/` for deployable apps (Storybook docs)
   - `scripts/` for automation and CI helpers
 - The project uses [prettier](https://prettier.io/) to format the code. You'll want to enable and configure it in your IDE.
+- The project uses [eslint](https://eslint.org/) to lint the code. You'll want to enable and configure it in your IDE.
 - The tests run with [vitest](https://vitest.dev).
 
 ## Commands
@@ -110,10 +114,12 @@ Fork the repository, update the code, create a PR from your repository to the up
 - `yarn build`: build all workspaces in topological order
 - `yarn build:tokens`: build tokens package
 - `yarn build:docs`: build Storybook docs
+- `yarn format`: format source files
+- `yarn lint`: lint source files
+- `yarn check`: ensure source files are formatted, linted, and type-checked
 - `yarn test`: run test suite
 - `yarn test:coverage`: run tests with coverage
-- `yarn format`: format source files
-- `yarn ci:on-pull-request`: run PR-ready automation script
+- `yarn ci:pr-ready-for-review`: run PR-ready automation script
 - `yarn ci:storybook-pr --mode=prepare|comment`: run Storybook PR CI helper locally
 - `yarn ci:storybook-pages --mode=prepare|postbuild|cleanup-pr`: run Storybook Pages helper locally
 - `GITHUB_REF_NAME=develop yarn ci:publish`: run branch-based publish orchestration manually

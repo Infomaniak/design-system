@@ -6,7 +6,8 @@ import {
 } from '../../../design-tokens-collection-token-with-map-value-to-css-variable-declaration.ts';
 import { cubicBezierDesignTokensCollectionTokenValueToCssValue } from './value/cubic-bezier-design-tokens-collection-token-value-to-css-value.ts';
 
-export interface CubicBezierDesignTokensCollectionTokenToCssVariableDeclarationOptions extends DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions {}
+export type CubicBezierDesignTokensCollectionTokenToCssVariableDeclarationOptions =
+  DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions;
 
 export function cubicBezierDesignTokensCollectionTokenToCssVariableDeclaration(
   token: CubicBezierDesignTokensCollectionToken,

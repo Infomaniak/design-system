@@ -92,7 +92,7 @@ export function buildCssTokens({
         await logger.asyncTask(modifier, async (logger: Logger): Promise<void> => {
           await logger.asyncTask('context', async (logger: Logger): Promise<void> => {
             for (const [context, collection] of contexts.entries()) {
-              await logger.asyncTask(context, async (_logger: Logger): Promise<void> => {
+              await logger.asyncTask(context, async (): Promise<void> => {
                 const expectedPath: string = `${modifier}/${context}`;
 
                 const toRedeclare: Set<string> = new Set();

@@ -7,10 +7,7 @@ export function topologicalSortPackages<TPackage extends TopologicalPackageNode>
   packages: readonly TPackage[],
 ): readonly TPackage[] {
   const packagesByName: Map<string, TPackage> = new Map<string, TPackage>(
-    packages.map((pkg: TPackage): readonly [string, TPackage] => [
-      pkg.name,
-      pkg,
-    ]),
+    packages.map((pkg: TPackage): readonly [string, TPackage] => [pkg.name, pkg]),
   );
 
   const inDegreeByName: Map<string, number> = new Map<string, number>();

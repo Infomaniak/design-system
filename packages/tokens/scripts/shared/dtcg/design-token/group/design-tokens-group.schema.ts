@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import type { ExplicitAny } from '../../../../../../../scripts/helpers/types/explicit-any.ts';
 import { curlyReferenceSchema } from '../reference/types/curly/curly-reference.schema.ts';
 import { jsonReferenceSchema } from '../reference/types/json/json-reference.schema.ts';
 import { designTokensTreeSchema } from '../tree/design-tokens-tree.schema.ts';
@@ -12,4 +13,4 @@ export const designTokensGroupSchema = z
     $deprecated: z.union([z.boolean(), z.string()]).optional(),
     $extensions: z.looseObject({}).optional(),
   })
-  .catchall(z.lazy<any>(() => designTokensTreeSchema));
+  .catchall(z.lazy<ExplicitAny>(() => designTokensTreeSchema));

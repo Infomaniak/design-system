@@ -1,0 +1,24 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import T2BorderMarkdown from '../../assets/t2-border.md?raw';
+import Markdown from 'markdown-to-jsx';
+
+<Meta title="Design Tokens/T2/Border" />
+
+# T2 Border Tokens
+
+<Markdown>{T2BorderMarkdown}</Markdown>
+
+<style>
+  {`
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table th:first-child {
+      width: 30%;
+    }
+    table th:nth-of-type(2) {
+        width: 25%;
+    }
+  `}
+</style>

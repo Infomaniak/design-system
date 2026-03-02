@@ -1,5 +1,5 @@
 import { type FigmaColor } from '../../types/figma-color.ts';
-import { type FigmaNode } from '../figma-node.ts';
+import { type FigmaNode, type GenericFigmaNode } from '../figma-node.ts';
 import { type HavingFigmaNodeChildren } from '../having-figma-node-children.ts';
 
 export interface FigmaCanvasNode extends FigmaNode<'CANVAS'>, HavingFigmaNodeChildren {
@@ -12,6 +12,6 @@ export interface FigmaCanvasNode extends FigmaNode<'CANVAS'>, HavingFigmaNodeChi
   readonly measurements: readonly unknown[];
 }
 
-export function isFigmaCanvasNode(input: FigmaNode): input is FigmaCanvasNode {
+export function isFigmaCanvasNode(input: GenericFigmaNode): input is FigmaCanvasNode {
   return input.type === 'CANVAS';
 }

@@ -1,7 +1,9 @@
 import { join } from 'node:path';
 import { writeFileSafe } from '../../../../../../../../../scripts/helpers/file/write-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
+import { mapGetOrInsert } from '../../../../../../../../../scripts/helpers/misc/map/upsert.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
+import type { DesignTokenModifiers } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import { getTokenCategory } from '../../../../../../shared/dtcg/resolver/to/markdown/token-category.ts';
 import type { MarkdownRenderContext } from '../../../../../../shared/dtcg/resolver/to/markdown/token/markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../../../../../shared/dtcg/resolver/to/markdown/token/markdown-token-row.ts';
@@ -29,6 +31,11 @@ import { isFontWeightDesignTokensCollectionToken } from '../../../../../../share
 import { isNumberDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/number/is-number-design-tokens-collection-token.ts';
 import { isShadowDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/composite/shadow/is-shadow-design-tokens-collection-token.ts';
 import { isTypographyDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/composite/typography/is-typography-design-tokens-collection-token.ts';
+import {
+  T1_DIRECTORY_NAME,
+  T2_DIRECTORY_NAME,
+  T3_DIRECTORY_NAME,
+} from '../../../constants/design-token-tiers.ts';
 import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header.ts';
 
 /**
@@ -39,19 +46,39 @@ function normalizeHtml(html: string): string {
   return html.replace(/\n\s*/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
+/**
+ * Extracts the tier prefix (t1, t2, t3) from a file path.
+ * Returns undefined if the tier cannot be determined.
+ */
+function getTierPrefix(filePath: string): string | undefined {
+  const path = filePath.toLowerCase();
+  if (path.includes(`/${T1_DIRECTORY_NAME}/`)) return 't1';
+  if (path.includes(`/${T2_DIRECTORY_NAME}/`)) return 't2';
+  if (path.includes(`/${T3_DIRECTORY_NAME}/`)) return 't3';
+  return undefined;
+}
+
 export interface BuildMarkdownTokensOptions {
-  readonly collection: DesignTokensCollection;
+  readonly baseCollection: DesignTokensCollection;
+  readonly modifiers: DesignTokenModifiers;
   readonly outputDirectory: string;
   readonly logger: Logger;
 }
 
+interface TokenGroup {
+  readonly tierPrefix: string;
+  readonly category: string;
+  readonly tokens: GenericDesignTokensCollectionToken[];
+}
+
 /**
- * Groups tokens by their semantic category (first segment of token name)
+ * Groups tokens by their tier (t1, t2, t3) and semantic category
  */
-function groupTokensByCategory(
+function groupTokensByTierAndCategory(
   tokens: IteratorObject<GenericDesignTokensCollectionToken>,
-): Map<string, GenericDesignTokensCollectionToken[]> {
-  const groups = new Map<string, GenericDesignTokensCollectionToken[]>();
+  logger: Logger,
+): Map<string, TokenGroup> {
+  const groups = new Map<string, TokenGroup>();
 
   for (const token of tokens) {
     // Skip tokens without a type (they are references to other tokens)
@@ -59,13 +86,18 @@ function groupTokensByCategory(
       continue;
     }
 
-    const category = getTokenCategory(token.name);
+    const tierPrefix = token.files.length > 0 ? getTierPrefix(token.files[0]!) : undefined;
 
-    if (!groups.has(category)) {
-      groups.set(category, []);
+    if (tierPrefix === undefined) {
+      logger.warn(`Unable to determine tier for token: ${token.name.join('.')}`);
+      continue;
     }
 
-    groups.get(category)!.push(token);
+    const category = getTokenCategory(token.name);
+    const key = `${tierPrefix}-${category}`;
+
+    const group = mapGetOrInsert(groups, key, { tierPrefix, category, tokens: [] });
+    group.tokens.push(token);
   }
 
   return groups;
@@ -167,6 +199,7 @@ function generateCategoryMarkdown(
   category: string,
   tokens: GenericDesignTokensCollectionToken[],
   context: MarkdownRenderContext,
+  logger: Logger,
 ): string {
   const [headerRow, separatorRow] = generateColumnHeaders(category);
   const showType = category === 'font';
@@ -183,7 +216,7 @@ function generateCategoryMarkdown(
       }
     } catch (error) {
       // Log error but continue with other tokens
-      console.warn(`Failed to render token ${token.name.join('.')}:`, error);
+      logger.warn(`Failed to render token ${token.name.join('.')}:`, error);
     }
   }
 
@@ -202,22 +235,28 @@ function generateCategoryMarkdown(
  * @param options - Build options including the token collection, output directory, and logger
  */
 export async function buildMarkdownTokens({
-  collection,
+  baseCollection,
+  modifiers: _modifiers,
   outputDirectory,
   logger,
 }: BuildMarkdownTokensOptions) {
   return logger.asyncTask('markdown', async (logger: Logger): Promise<void> => {
-    const context: MarkdownRenderContext = { collection };
+    const context: MarkdownRenderContext = { collection: baseCollection };
 
-    // Group tokens by category
-    const tokensByCategory = groupTokensByCategory(collection.tokens());
+    // Group tokens by tier and category
+    const tokensByTierAndCategory = groupTokensByTierAndCategory(baseCollection.tokens(), logger);
 
-    // Generate markdown for each category
-    for (const [category, tokens] of tokensByCategory.entries()) {
-      await logger.asyncTask(`category: ${category}`, async (): Promise<void> => {
-        const markdownContent = generateCategoryMarkdown(category, tokens, context);
+    // Generate markdown for each tier-category combination
+    for (const [key, group] of tokensByTierAndCategory.entries()) {
+      await logger.asyncTask(`category: ${key}`, async (): Promise<void> => {
+        const markdownContent = generateCategoryMarkdown(
+          group.category,
+          group.tokens,
+          context,
+          logger,
+        );
         const markdown = `<!-- ${AUTO_GENERATED_FILE_HEADER} -->\n\n` + markdownContent;
-        const filePath = join(outputDirectory, 'markdown', `${category}.md`);
+        const filePath = join(outputDirectory, 'markdown', `${key}.md`);
         await writeFileSafe(filePath, markdown, { encoding: 'utf-8' });
       });
     }

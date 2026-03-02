@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { areObjectEquivalent } from './are-object-equivalent.ts';
 
 describe('areObjectEquivalent', () => {

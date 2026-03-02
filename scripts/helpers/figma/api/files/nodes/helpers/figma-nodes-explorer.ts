@@ -8,11 +8,11 @@ import { isFigmaFrameNode } from '../built-in/figma-frame-node.ts';
 import { isFigmaGroupNode } from '../built-in/figma-group-node.ts';
 import { isFigmaSectionNode } from '../built-in/figma-section-node.ts';
 import { isFigmaTableNode } from '../built-in/figma-table-node.ts';
-import { type FigmaNode } from '../figma-node.ts';
+import { type GenericFigmaNode } from '../figma-node.ts';
 
-export class FigmaNodesExplorer extends TreeExplorer<FigmaNode> {
+export class FigmaNodesExplorer extends TreeExplorer<GenericFigmaNode> {
   constructor() {
-    super((node: FigmaNode): Iterable<FigmaNode> => {
+    super((node: GenericFigmaNode): Iterable<GenericFigmaNode> => {
       if (
         isFigmaDocumentNode(node) ||
         isFigmaCanvasNode(node) ||

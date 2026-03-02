@@ -4,7 +4,7 @@ export interface FigmaDesignToken<GType extends string, GValue> {
   readonly $type: GType;
   readonly $value: GValue | CurlyReference /* figma reference */;
   readonly $description?: string;
-  readonly $extensions?: Record<string, any>;
+  readonly $extensions?: Record<string, unknown>;
   readonly scopes?: readonly FigmaDesignTokenScope[];
 }
 

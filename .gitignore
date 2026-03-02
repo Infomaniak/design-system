@@ -165,3 +165,4 @@ storybook-static
 
 # Generated files
 apps/docs/src/stories/assets/*.md
+packages/tokens/scripts/scripts/convert-figma-tokens/tokens

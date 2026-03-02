@@ -40,21 +40,7 @@ export function dedent(parts: TemplateStringsArray, ...values: string[]): string
   for (let i: number = 0; i < values.length; i++) {
     const value: string = values[i];
     const part: string = i === 0 ? parts[i].slice(1) : parts[i];
-
-    const partLines: readonly string[] = part
-      .split('\n')
-      .map((line: string, index: number): string => {
-        if (line.startsWith(indent)) {
-          return line.slice(indent.length);
-        } else if (index == 0) {
-          return line;
-        } else {
-          throw new Error(
-            `Line does not start with expected indent.\n  - line: ${JSON.stringify(line)}\n  - expected indent: ${JSON.stringify(indent)}`,
-          );
-        }
-      });
-
+    const partLines: readonly string[] = dedentRaw(part, indent);
     const valueIndent: string = partLines[partLines.length - 1].match(/^(\s*)/)![1];
 
     output +=
@@ -80,7 +66,7 @@ function dedentRaw(text: string, indent: string): string[] {
   return text.split('\n').map((line: string, index: number): string => {
     if (line.startsWith(indent)) {
       return line.slice(indent.length);
-    } else if (index == 0) {
+    } else if (index == 0 || line === '') {
       return line;
     } else {
       throw new Error(

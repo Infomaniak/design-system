@@ -1,4 +1,4 @@
-import { type FigmaNode } from '../figma-node.ts';
+import { type FigmaNode, type GenericFigmaNode } from '../figma-node.ts';
 import { type HavingFigmaNodeChildren } from '../having-figma-node-children.ts';
 
 export interface FigmaSectionNode extends FigmaNode<'SECTION'>, HavingFigmaNodeChildren {
@@ -12,6 +12,6 @@ export interface FigmaSectionNode extends FigmaNode<'SECTION'>, HavingFigmaNodeC
   readonly absoluteRenderBounds: unknown | null;
 }
 
-export function isFigmaSectionNode(input: FigmaNode): input is FigmaSectionNode {
+export function isFigmaSectionNode(input: GenericFigmaNode): input is FigmaSectionNode {
   return input.type === 'SECTION';
 }

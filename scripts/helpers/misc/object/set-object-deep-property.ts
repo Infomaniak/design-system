@@ -1,5 +1,5 @@
 export function setObjectDeepProperty(
-  root: unknown,
+  root: object,
   path: readonly PropertyKey[],
   value: unknown,
 ): void {
@@ -7,7 +7,7 @@ export function setObjectDeepProperty(
     throw new Error('Cannot set property on root');
   }
 
-  let node: any = root;
+  let node: object = root;
   const last: number = path.length - 1;
 
   for (let i: number = 0; i < last; i++) {

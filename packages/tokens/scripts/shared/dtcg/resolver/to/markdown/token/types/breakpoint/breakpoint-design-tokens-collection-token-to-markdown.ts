@@ -7,7 +7,7 @@ import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
 /**
  * Configuration options for breakpoint markdown rendering
  */
-export interface BreakpointMarkdownRenderOptions {}
+export type BreakpointMarkdownRenderOptions = object;
 
 /**
  * Renders a breakpoint design token to a markdown table row.
@@ -40,7 +40,8 @@ export function breakpointDesignTokensCollectionTokenToMarkdown(
 
   // Create a simple text-based preview (breakpoints are too large to visualize)
   const preview = /* HTML */ `
-    <div style="
+    <div
+      style="
       background: #f3f4f6;
       padding: 16px 24px;
       border-radius: 4px;
@@ -52,7 +53,10 @@ export function breakpointDesignTokensCollectionTokenToMarkdown(
       text-align: center;
       display: inline-block;
       min-width: 120px;
-    ">${cssValue}</div>
+    "
+    >
+      ${cssValue}
+    </div>
   `;
 
   return {

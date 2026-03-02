@@ -1,5 +1,6 @@
 import type { CurlyReference } from '../../../../../../design-token/reference/types/curly/curly-reference.ts';
 import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
+import type { ValueOrCurlyReference } from '../../../../../../design-token/reference/types/curly/value-or/value-or-curly-reference.ts';
 import type { TypographyDesignTokensCollectionToken } from '../../../../../token/types/composite/typography/typography-design-tokens-collection-token.ts';
 import type { TypographyDesignTokensCollectionTokenValue } from '../../../../../token/types/composite/typography/value/typography-design-tokens-collection-token-value.ts';
 import { typographyDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/composite/typography/value/typography-design-tokens-collection-token-value-to-css-value.ts';
@@ -52,7 +53,7 @@ function flattenTypographyValue(
     return value;
   }
 
-  const resolveValue = <T>(val: string | T): string | T => {
+  const resolveValue = <T>(val: ValueOrCurlyReference<T>): ValueOrCurlyReference<T> => {
     if (isCurlyReference(val)) {
       const resolved = resolveReference(context, val);
       return resolved !== null ? (resolved as unknown as T) : val;

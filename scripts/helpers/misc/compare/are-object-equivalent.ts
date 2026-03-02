@@ -4,7 +4,7 @@ import type { EqualFunction } from './equal-function.ts';
 export function areObjectEquivalent(
   a: object,
   b: object,
-  equal: EqualFunction<any> = areEquivalent,
+  equal: EqualFunction<object> = areEquivalent,
 ): boolean {
   const keysA: (string | symbol)[] = Reflect.ownKeys(a);
   const keysB: (string | symbol)[] = Reflect.ownKeys(b);

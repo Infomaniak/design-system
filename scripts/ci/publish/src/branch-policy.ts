@@ -1,38 +1,51 @@
 export interface GetPublishContextOptions {
+  readonly eventName: string;
   readonly branchName: string;
-  readonly version: string;
-  readonly strict: boolean;
+  readonly pullRequestLabels?: readonly string[];
 }
 
 export interface PublishContext {
-  readonly tag: 'rc' | 'latest';
+  readonly shouldPublish: boolean;
+  readonly tag: 'dev' | 'rc' | 'latest';
 }
 
-const RC_VERSION_REGEXP: RegExp = /^\d+\.\d+\.\d+-rc\.\d+$/;
-const STABLE_VERSION_REGEXP: RegExp = /^\d+\.\d+\.\d+$/;
-
 export function getPublishContext({
+  eventName,
   branchName,
-  version,
-  strict,
+  pullRequestLabels = [],
 }: GetPublishContextOptions): PublishContext {
-  if (branchName === 'develop') {
-    if (strict && !RC_VERSION_REGEXP.test(version)) {
+  if (eventName === 'pull_request') {
+    if (branchName !== 'main' && branchName !== 'develop') {
       throw new Error(
-        `Version "${version}" must be an rc version (x.y.z-rc.n) on "develop" branch.`,
+        `Unsupported PR target branch "${branchName}". Expected "main" or "develop".`,
       );
     }
 
-    return { tag: 'rc' };
+    const shouldPublish: boolean = pullRequestLabels.includes('dev');
+
+    return {
+      shouldPublish,
+      tag: 'dev',
+    };
   }
 
-  if (branchName === 'main') {
-    if (strict && !STABLE_VERSION_REGEXP.test(version)) {
-      throw new Error(`Version "${version}" must be a stable version (x.y.z) on "main" branch.`);
+  if (eventName === 'push') {
+    if (branchName === 'develop') {
+      return {
+        shouldPublish: true,
+        tag: 'rc',
+      };
     }
 
-    return { tag: 'latest' };
+    if (branchName === 'main') {
+      return {
+        shouldPublish: true,
+        tag: 'latest',
+      };
+    }
+
+    throw new Error(`Unsupported branch "${branchName}". Expected "main" or "develop".`);
   }
 
-  throw new Error(`Unsupported branch "${branchName}". Expected "main" or "develop".`);
+  throw new Error(`Unsupported event "${eventName}". Expected "push" or "pull_request".`);
 }

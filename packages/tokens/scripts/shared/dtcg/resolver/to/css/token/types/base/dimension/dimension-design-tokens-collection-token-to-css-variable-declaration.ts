@@ -6,7 +6,8 @@ import {
 } from '../../../design-tokens-collection-token-with-map-value-to-css-variable-declaration.ts';
 import { dimensionDesignTokensCollectionTokenValueToCssValue } from './value/dimension-design-tokens-collection-token-value-to-css-value.ts';
 
-export interface DimensionDesignTokensCollectionTokenToCssVariableDeclarationOptions extends DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions {}
+export type DimensionDesignTokensCollectionTokenToCssVariableDeclarationOptions =
+  DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions;
 
 export function dimensionDesignTokensCollectionTokenToCssVariableDeclaration(
   token: DimensionDesignTokensCollectionToken,

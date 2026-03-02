@@ -26,7 +26,7 @@ export class TreeExplorer<GInput, GNode = GInput> {
   );
   constructor(
     getChildren: TreeExplorerGetChildrenFunction<GInput, GNode>,
-    map: TreeExplorerMapFunction<GInput, GNode> = (_) => _ as any,
+    map: TreeExplorerMapFunction<GInput, GNode> = (_) => _ as unknown as GNode,
   ) {
     this.#getChildren = getChildren;
     this.#map = map;

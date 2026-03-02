@@ -15,6 +15,20 @@ describe('dedent', () => {
 }`);
     });
 
+    it('should support blank lines', () => {
+      expect(
+        dedent`
+          class A {
+
+            a = 'b';
+          }
+        `,
+      ).toBe(`class A {
+
+  a = 'b';
+}`);
+    });
+
     it('should throw if first line does not start with a new line', () => {
       expect(
         () => dedent` class A {

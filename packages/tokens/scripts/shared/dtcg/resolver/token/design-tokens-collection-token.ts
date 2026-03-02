@@ -1,3 +1,4 @@
+import type { ExplicitAny } from '../../../../../../../scripts/helpers/types/explicit-any.ts';
 import type { CurlyReference } from '../../design-token/reference/types/curly/curly-reference.ts';
 import type { ValueOrCurlyReference } from '../../design-token/reference/types/curly/value-or/value-or-curly-reference.ts';
 import type { ArrayDesignTokenName } from './name/array-design-token-name.ts';
@@ -31,8 +32,8 @@ export function isDesignTokensCollectionTokenWithType<GType extends string, GVal
 }
 
 export type GenericDesignTokensCollectionTokenWithType = DesignTokensCollectionTokenWithType<
-  any,
-  any
+  ExplicitAny,
+  ExplicitAny
 >;
 
 /* WITHOUT TYPE */
@@ -54,7 +55,10 @@ export type DesignTokensCollectionToken<GType extends string, GValue> =
   | DesignTokensCollectionTokenWithType<GType, GValue>
   | DesignTokensCollectionTokenWithoutType;
 
-export type GenericDesignTokensCollectionToken = DesignTokensCollectionToken<any, any>;
+export type GenericDesignTokensCollectionToken = DesignTokensCollectionToken<
+  ExplicitAny,
+  ExplicitAny
+>;
 
 /* RESOLVED */
 
@@ -68,6 +72,6 @@ export interface ResolvedDesignTokensCollectionToken<
 }
 
 export type GenericResolvedDesignTokensCollectionToken = ResolvedDesignTokensCollectionToken<
-  any,
-  any
+  ExplicitAny,
+  ExplicitAny
 >;

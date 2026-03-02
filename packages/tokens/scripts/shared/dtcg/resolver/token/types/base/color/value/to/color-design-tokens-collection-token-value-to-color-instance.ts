@@ -6,7 +6,7 @@ export function colorDesignTokensCollectionTokenValueToColorInstance(
   value: ColorDesignTokensCollectionTokenValue,
 ): Color {
   return new Color({
-    space: value.colorSpace as any,
+    space: value.colorSpace as string,
     coords: value.components.map((component: ColorDesignTokenValueComponent): number | null => {
       return component === 'none' ? null : (component as number);
     }) as Coords,

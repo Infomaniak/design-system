@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { areEquivalent } from './are-equivalent.ts';
 
 describe('areEquivalent', () => {

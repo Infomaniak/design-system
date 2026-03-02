@@ -1,4 +1,4 @@
-import { type FigmaNode } from '../figma-node.ts';
+import { type FigmaNode, type GenericFigmaNode } from '../figma-node.ts';
 import { type HavingFigmaNodeChildren } from '../having-figma-node-children.ts';
 
 export interface FigmaBooleanOperationNode
@@ -6,6 +6,8 @@ export interface FigmaBooleanOperationNode
   readonly booleanOperation: string;
 }
 
-export function isFigmaBooleanOperationNode(input: FigmaNode): input is FigmaBooleanOperationNode {
+export function isFigmaBooleanOperationNode(
+  input: GenericFigmaNode,
+): input is FigmaBooleanOperationNode {
   return input.type === 'BOOLEAN_OPERATION';
 }

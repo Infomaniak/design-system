@@ -1,13 +1,21 @@
-import { join, resolve } from 'node:path';
-import { readJsonFile } from '../../../../../../scripts/helpers/file/read-json-file.ts';
-import { writeJsonFileSafe } from '../../../../../../scripts/helpers/file/write-json-file-safe.ts';
+import { join } from 'node:path';
 import { Logger } from '../../../../../../scripts/helpers/log/logger.ts';
-import { execCommandInherit } from '../../../../../../scripts/helpers/misc/exec-command.ts';
+import {
+  publishNpmPackageDirectory,
+  type PublishNpmPackageDirectoryResult,
+} from '../../../../../../scripts/helpers/npm/publish-package-directory.ts';
+export {
+  buildNpmPublishArgs,
+  resolvePublishVersion,
+  rewriteInternalDependencyVersions,
+} from '../../../../../../scripts/helpers/npm/publish-package-directory.ts';
 
 export interface PublishTokensOptions {
   readonly outputDirectory: string;
-  readonly mode: 'prod' | 'dev';
   readonly tag?: string;
+  readonly publishTimestamp?: number;
+  readonly versionOverride?: string;
+  readonly internalDependencyVersionOverrides?: Readonly<Record<string, string>>;
   readonly logger: Logger;
 }
 
@@ -21,81 +29,32 @@ export interface PublishTokensNpmResult {
   readonly version: string;
 }
 
-export interface BuildNpmPublishArgsOptions {
-  readonly mode: 'prod' | 'dev';
-  readonly tag?: string;
-}
-
-export function buildNpmPublishArgs({ mode, tag }: BuildNpmPublishArgsOptions): string[] {
-  const args: string[] = ['--//registry.npmjs.org/:_authToken=$NPM_TOKEN', 'publish', '--access', 'public'];
-
-  if (mode === 'dev') {
-    args.push('--tag', 'dev');
-    return args;
-  }
-
-  if (tag !== undefined && tag !== '') {
-    args.push('--tag', tag);
-  }
-
-  return args;
-}
-
 export function publishTokens({
   outputDirectory,
-  mode,
   tag,
+  publishTimestamp = Date.now(),
+  versionOverride,
+  internalDependencyVersionOverrides = {},
   logger,
 }: PublishTokensOptions): Promise<PublishTokensResult> {
+  const publishTag: string = tag === undefined || tag === '' ? 'latest' : tag;
+
   return logger.asyncTask(
-    `publish-tokens (${mode})`,
+    `publish-tokens (${publishTag})`,
     async (logger: Logger): Promise<PublishTokensResult> => {
+      const npmResult: PublishNpmPackageDirectoryResult = await publishNpmPackageDirectory({
+        packageDirectory: join(outputDirectory, 'web'),
+        tag,
+        publishTimestamp,
+        versionOverride,
+        internalDependencyVersionOverrides,
+        logger,
+      });
+
       return {
-        npm: await logger.asyncTask(
-          'npm',
-          async (logger: Logger): Promise<PublishTokensNpmResult> => {
-            const webPackageDirectory: string = join(outputDirectory, 'web');
-            const webPackageFile: string = join(webPackageDirectory, 'package.json');
-
-            const packageJsonContent: any = await readJsonFile(webPackageFile);
-
-            const args: string[] = buildNpmPublishArgs({ mode, tag });
-
-            let version: string;
-
-            if (mode === 'dev') {
-              if (packageJsonContent.version.includes('-')) {
-                throw new Error(`Invalid version: ${packageJsonContent.version}.`);
-              }
-
-              version = `${packageJsonContent.version}-dev.${Date.now()}`;
-
-              await writeJsonFileSafe(webPackageFile, {
-                ...packageJsonContent,
-                version,
-              });
-
-            } else {
-              version = packageJsonContent.version;
-            }
-
-            try {
-              await execCommandInherit(logger, 'npm', args, {
-                shell: true,
-                env: process.env,
-                cwd: resolve(webPackageDirectory),
-              });
-
-              return {
-                version,
-              };
-            } finally {
-              if (mode === 'dev') {
-                await writeJsonFileSafe(webPackageFile, packageJsonContent);
-              }
-            }
-          },
-        ),
+        npm: {
+          version: npmResult.version,
+        },
       };
     },
   );

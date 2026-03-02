@@ -30,8 +30,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Run on-pull-request script
-        run: yarn run ci:on-pull-request
+      - name: Run ci:pr-ready-for-review script
+        run: yarn run ci:pr-ready-for-review
         env:
           GITHUB_PULL_REQUEST_DETAILS: ${{ toJson(github.event.pull_request) }}
           KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}

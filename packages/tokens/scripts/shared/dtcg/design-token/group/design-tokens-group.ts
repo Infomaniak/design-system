@@ -1,3 +1,4 @@
+import type { ExplicitAny } from '../../../../../../../scripts/helpers/types/explicit-any.ts';
 import type { CurlyReference } from '../reference/types/curly/curly-reference.ts';
 import type { JsonPointer } from '../reference/types/json/members/pointer/json-pointer.ts';
 import type { DesignTokenNameSegment } from '../token/name/segment/design-token-name-segment.ts';
@@ -32,7 +33,7 @@ export interface DesignTokensGroup {
   /**
    * @inheritDoc https://www.designtokens.org/tr/2025.10/format/#extensions-0
    */
-  readonly $extensions?: Record<string, any>;
+  readonly $extensions?: Record<string, ExplicitAny>;
 
   // Design tokens
   readonly [name: DesignTokenNameSegment]: DesignTokensTree;

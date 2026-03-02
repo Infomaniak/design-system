@@ -6,7 +6,8 @@ import {
 } from '../../../design-tokens-collection-token-with-map-value-to-css-variable-declaration.ts';
 import { fontWeightDesignTokensCollectionTokenValueToCssValue } from './value/font-weight-design-tokens-collection-token-value-to-css-value.ts';
 
-export interface FontWeightDesignTokensCollectionTokenToCssVariableDeclarationOptions extends DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions {}
+export type FontWeightDesignTokensCollectionTokenToCssVariableDeclarationOptions =
+  DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions;
 
 export function fontWeightDesignTokensCollectionTokenToCssVariableDeclaration(
   token: FontWeightDesignTokensCollectionToken,

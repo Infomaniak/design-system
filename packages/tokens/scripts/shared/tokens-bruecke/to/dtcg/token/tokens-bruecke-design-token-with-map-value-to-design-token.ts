@@ -1,5 +1,6 @@
 import { isEmptyObject } from '../../../../../../../../scripts/helpers/misc/object/is-empty-object.ts';
 import { removeUndefinedProperties } from '../../../../../../../../scripts/helpers/misc/object/remove-undefined-properties.ts';
+import type { ExplicitAny } from '../../../../../../../../scripts/helpers/types/explicit-any.ts';
 import { isCurlyReference } from '../../../../dtcg/design-token/reference/types/curly/is-curly-reference.ts';
 import type { DesignToken } from '../../../../dtcg/design-token/token/design-token.ts';
 import type { GenericTokensBrueckeDesignToken } from '../../../tokens-bruecke/token/generic-tokens-bruecke-design-token.ts';
@@ -10,7 +11,7 @@ export function tokensBrueckeDesignTokenWithMapValueToDesignToken<
   GType extends string,
   GValue,
 >(
-  token: TokensBrueckeDesignToken<any, GInputValue>,
+  token: TokensBrueckeDesignToken<ExplicitAny, GInputValue>,
   $type: GType,
   mapValue: (value: GInputValue) => GValue,
 ): DesignToken<GType, GValue> {

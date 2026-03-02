@@ -1,10 +1,10 @@
-import { readdir } from 'node:fs/promises';
 import { Dirent } from 'node:fs';
-import { join } from 'node:path';
+import { readdir } from 'node:fs/promises';
+import { join, normalize, resolve, sep } from 'node:path';
 import process from 'node:process';
 import { readJsonFile } from '../../../helpers/file/read-json-file.ts';
 import { type Logger } from '../../../helpers/log/logger.ts';
-import { execCommandInherit } from '../../../helpers/misc/exec-command.ts';
+import { execCommand, execCommandInherit } from '../../../helpers/misc/exec-command.ts';
 import { getPublishContext, type PublishContext } from './branch-policy.ts';
 import { isNpmVersionPublished as defaultIsNpmVersionPublished } from './npm-package-version.ts';
 import {
@@ -19,7 +19,12 @@ export interface PublishablePackage extends TopologicalPackageNode {
 
 export interface CiPublishOptions {
   readonly rootDirectory: string;
+  readonly eventName: string;
   readonly branchName: string;
+  readonly pullRequestLabels?: readonly string[];
+  readonly gitBaseSha?: string;
+  readonly gitHeadSha?: string;
+  readonly publishTimestamp?: number;
   readonly strictVersionPolicy: boolean;
   readonly dryRun: boolean;
   readonly logger: Logger;
@@ -27,17 +32,36 @@ export interface CiPublishOptions {
 
 export type IsNpmVersionPublished = (name: string, version: string) => Promise<boolean>;
 
-export type PublishWorkspacePackage = (workspaceName: string, tag: PublishContext['tag']) => Promise<void>;
+export interface PublishWorkspacePackageOptions {
+  readonly tag: PublishContext['tag'];
+  readonly version: string;
+  readonly internalDependencyVersionOverrides?: Readonly<Record<string, string>>;
+}
+
+export type PublishWorkspacePackage = (
+  workspaceName: string,
+  options: PublishWorkspacePackageOptions,
+) => Promise<void>;
+
+export type ListChangedFiles = (
+  rootDirectory: string,
+  baseSha: string,
+  headSha: string,
+) => Promise<readonly string[]>;
 
 export interface CiPublishDependencies {
-  readonly discoverPublishablePackages?: (rootDirectory: string) => Promise<readonly PublishablePackage[]>;
+  readonly discoverPublishablePackages?: (
+    rootDirectory: string,
+  ) => Promise<readonly PublishablePackage[]>;
   readonly isNpmVersionPublished?: IsNpmVersionPublished;
+  readonly listChangedFiles?: ListChangedFiles;
   readonly publishWorkspacePackage?: PublishWorkspacePackage;
 }
 
 export interface CiPublishDecision {
   readonly packageName: string;
-  readonly version: string;
+  readonly baseVersion: string;
+  readonly publishVersion: string;
   readonly tag: PublishContext['tag'];
   readonly action: 'skip' | 'publish' | 'publish-dry-run';
 }
@@ -48,6 +72,8 @@ interface PackageJson {
   readonly scripts?: unknown;
   readonly dependencies?: unknown;
 }
+
+const STABLE_VERSION_REGEXP: RegExp = /^\d+\.\d+\.\d+$/;
 
 export async function discoverPublishablePackages(
   rootDirectory: string,
@@ -117,36 +143,188 @@ export async function discoverPublishablePackages(
   return publishablePackages;
 }
 
-function createWorkspacePublisher({
+function getImpactedPackageNames({
+  packages,
+  rootDirectory,
+  changedFiles,
+}: {
+  readonly packages: readonly PublishablePackage[];
+  readonly rootDirectory: string;
+  readonly changedFiles: readonly string[];
+}): ReadonlySet<string> {
+  const directImpactedNames: Set<string> = new Set<string>();
+  const packagesByName: Map<string, PublishablePackage> = new Map(
+    packages.map((pkg): readonly [string, PublishablePackage] => [pkg.name, pkg]),
+  );
+  const dependantsByName: Map<string, string[]> = new Map(
+    packages.map((pkg): readonly [string, string[]] => [pkg.name, []]),
+  );
+
+  for (const pkg of packages) {
+    for (const dependencyName of pkg.dependencies) {
+      if (!packagesByName.has(dependencyName)) {
+        continue;
+      }
+
+      dependantsByName.get(dependencyName)!.push(pkg.name);
+    }
+  }
+
+  for (const changedFile of changedFiles) {
+    const absoluteChangedFilePath: string = normalize(resolve(rootDirectory, changedFile));
+
+    for (const pkg of packages) {
+      const packageDirectoryPath: string = normalize(resolve(pkg.directory));
+
+      if (
+        absoluteChangedFilePath === packageDirectoryPath ||
+        absoluteChangedFilePath.startsWith(`${packageDirectoryPath}${sep}`)
+      ) {
+        directImpactedNames.add(pkg.name);
+      }
+    }
+  }
+
+  const impactedNames: Set<string> = new Set<string>(directImpactedNames);
+  const queue: string[] = Array.from(directImpactedNames);
+
+  while (queue.length > 0) {
+    const packageName: string = queue.shift()!;
+
+    for (const dependantName of dependantsByName.get(packageName) ?? []) {
+      if (impactedNames.has(dependantName)) {
+        continue;
+      }
+
+      impactedNames.add(dependantName);
+      queue.push(dependantName);
+    }
+  }
+
+  return impactedNames;
+}
+
+function computePublishVersion({
+  baseVersion,
+  tag,
+  strict,
+  publishTimestamp,
+}: {
+  readonly baseVersion: string;
+  readonly tag: PublishContext['tag'];
+  readonly strict: boolean;
+  readonly publishTimestamp: number;
+}): string {
+  if (!STABLE_VERSION_REGEXP.test(baseVersion)) {
+    if (strict) {
+      throw new Error(
+        `Version "${baseVersion}" must be a stable version (x.y.z) in package.json. CI computes dev/rc suffixes.`,
+      );
+    }
+
+    return baseVersion;
+  }
+
+  if (tag === 'latest') {
+    return baseVersion;
+  }
+
+  return `${baseVersion}-${tag}.${publishTimestamp}`;
+}
+
+async function listChangedFilesFromGit(
+  logger: Logger,
+  rootDirectory: string,
+  baseSha: string,
+  headSha: string,
+): Promise<readonly string[]> {
+  const output: string = await execCommand(
+    logger,
+    'git',
+    ['diff', '--name-only', baseSha, headSha],
+    {
+      cwd: rootDirectory,
+      shell: true,
+    },
+  );
+
+  return output
+    .split(/\r?\n/)
+    .map((line: string): string => line.trim())
+    .filter((line: string): boolean => line !== '');
+}
+
+export function createWorkspacePublisher({
   logger,
   rootDirectory,
 }: {
   readonly logger: Logger;
   readonly rootDirectory: string;
 }): PublishWorkspacePackage {
-  return async (workspaceName: string, tag: PublishContext['tag']): Promise<void> => {
+  return async (
+    workspaceName: string,
+    { tag, version, internalDependencyVersionOverrides }: PublishWorkspacePackageOptions,
+  ): Promise<void> => {
     await execCommandInherit(logger, 'yarn', ['workspace', workspaceName, 'run', 'publish:ci'], {
       shell: true,
       cwd: rootDirectory,
       env: {
         ...process.env,
         NPM_DIST_TAG: tag,
+        NPM_PUBLISH_VERSION: version,
+        ...(internalDependencyVersionOverrides !== undefined &&
+        Object.keys(internalDependencyVersionOverrides).length > 0
+          ? {
+              NPM_INTERNAL_DEP_OVERRIDES_JSON: JSON.stringify(internalDependencyVersionOverrides),
+            }
+          : {}),
       },
     });
   };
 }
 
 export async function ciPublish(
-  { rootDirectory, branchName, strictVersionPolicy, dryRun, logger }: CiPublishOptions,
+  {
+    rootDirectory,
+    eventName,
+    branchName,
+    pullRequestLabels = [],
+    gitBaseSha,
+    gitHeadSha,
+    publishTimestamp = Date.now(),
+    strictVersionPolicy,
+    dryRun,
+    logger,
+  }: CiPublishOptions,
   {
     discoverPublishablePackages: discover = discoverPublishablePackages,
     isNpmVersionPublished = defaultIsNpmVersionPublished,
+    listChangedFiles = async (
+      listRootDirectory: string,
+      baseSha: string,
+      headSha: string,
+    ): Promise<readonly string[]> =>
+      listChangedFilesFromGit(logger, listRootDirectory, baseSha, headSha),
     publishWorkspacePackage = createWorkspacePublisher({
       logger,
       rootDirectory,
     }),
   }: CiPublishDependencies = {},
 ): Promise<readonly CiPublishDecision[]> {
+  const publishContext: PublishContext = getPublishContext({
+    eventName,
+    branchName,
+    pullRequestLabels,
+  });
+  const { tag } = publishContext;
+
+  if (!publishContext.shouldPublish) {
+    logger.info(
+      `[skip] CI publish disabled for ${eventName}:${branchName} (missing required PR label "dev").`,
+    );
+    return [];
+  }
+
   const discoveredPackages: readonly PublishablePackage[] = await discover(rootDirectory);
   const packages: readonly PublishablePackage[] = topologicalSortPackages(discoveredPackages);
 
@@ -156,21 +334,72 @@ export async function ciPublish(
   }
 
   const decisions: CiPublishDecision[] = [];
+  let candidatePackages: readonly PublishablePackage[] = packages;
 
-  for (const pkg of packages) {
-    const { tag }: PublishContext = getPublishContext({
-      branchName,
-      version: pkg.version,
-      strict: strictVersionPolicy,
-    });
+  if (tag !== 'latest') {
+    if (
+      gitBaseSha === undefined ||
+      gitBaseSha === '' ||
+      gitHeadSha === undefined ||
+      gitHeadSha === ''
+    ) {
+      logger.warn(
+        'Missing CI_PUBLISH_GIT_BASE_SHA/CI_PUBLISH_GIT_HEAD_SHA. Falling back to all publishable packages.',
+      );
+    } else {
+      const changedFiles: readonly string[] = await listChangedFiles(
+        rootDirectory,
+        gitBaseSha,
+        gitHeadSha,
+      );
+      const impactedPackageNames: ReadonlySet<string> = getImpactedPackageNames({
+        packages,
+        rootDirectory,
+        changedFiles,
+      });
 
-    const isPublished: boolean = await isNpmVersionPublished(pkg.name, pkg.version);
+      if (impactedPackageNames.size === 0) {
+        logger.info('[skip] No impacted publishable package detected.');
+        return [];
+      }
+
+      candidatePackages = packages.filter((pkg: PublishablePackage): boolean =>
+        impactedPackageNames.has(pkg.name),
+      );
+    }
+  }
+
+  const publishVersionByPackageName: ReadonlyMap<string, string> = new Map(
+    candidatePackages.map((pkg: PublishablePackage): readonly [string, string] => [
+      pkg.name,
+      computePublishVersion({
+        baseVersion: pkg.version,
+        tag,
+        strict: strictVersionPolicy,
+        publishTimestamp,
+      }),
+    ]),
+  );
+
+  const internalDependencyVersionOverrides: Readonly<Record<string, string>> =
+    tag === 'latest'
+      ? {}
+      : Object.fromEntries(
+          Array.from(publishVersionByPackageName.entries()).filter(
+            ([, version]: readonly [string, string]): boolean => version.includes('-'),
+          ),
+        );
+
+  for (const pkg of candidatePackages) {
+    const publishVersion: string = publishVersionByPackageName.get(pkg.name)!;
+    const isPublished: boolean = await isNpmVersionPublished(pkg.name, publishVersion);
 
     if (isPublished) {
-      logger.info(`[skip] ${pkg.name}@${pkg.version} already exists on npm.`);
+      logger.info(`[skip] ${pkg.name}@${publishVersion} already exists on npm.`);
       decisions.push({
         packageName: pkg.name,
-        version: pkg.version,
+        baseVersion: pkg.version,
+        publishVersion,
         tag,
         action: 'skip',
       });
@@ -178,22 +407,32 @@ export async function ciPublish(
     }
 
     if (dryRun) {
-      logger.info(`[dry-run] Would publish ${pkg.name}@${pkg.version} with tag "${tag}".`);
+      logger.info(`[dry-run] Would publish ${pkg.name}@${publishVersion} with tag "${tag}".`);
       decisions.push({
         packageName: pkg.name,
-        version: pkg.version,
+        baseVersion: pkg.version,
+        publishVersion,
         tag,
         action: 'publish-dry-run',
       });
       continue;
     }
 
-    logger.info(`[publish] ${pkg.name}@${pkg.version} with tag "${tag}".`);
-    await publishWorkspacePackage(pkg.name, tag);
+    logger.info(`[publish] ${pkg.name}@${publishVersion} with tag "${tag}".`);
+    await publishWorkspacePackage(pkg.name, {
+      ...(Object.keys(internalDependencyVersionOverrides).length > 0
+        ? {
+            internalDependencyVersionOverrides,
+          }
+        : {}),
+      tag,
+      version: publishVersion,
+    });
 
     decisions.push({
       packageName: pkg.name,
-      version: pkg.version,
+      baseVersion: pkg.version,
+      publishVersion,
       tag,
       action: 'publish',
     });

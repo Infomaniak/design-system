@@ -1,7 +1,7 @@
 import { areEquivalent } from './are-equivalent.ts';
-import { EqualFunction } from './equal-function.ts';
+import type { EqualFunction } from './equal-function.ts';
 
-export function areArrayEquivalent<GValue = any>(
+export function areArrayEquivalent<GValue>(
   a: ArrayLike<GValue>,
   b: ArrayLike<GValue>,
   equal: EqualFunction<GValue> = areEquivalent,

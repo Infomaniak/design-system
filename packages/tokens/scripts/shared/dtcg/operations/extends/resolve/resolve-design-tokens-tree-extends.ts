@@ -1,4 +1,5 @@
 import { removeUndefinedProperties } from '../../../../../../../../scripts/helpers/misc/object/remove-undefined-properties.ts';
+import type { DesignTokensGroup } from '../../../design-token/group/design-tokens-group.ts';
 import { isDesignTokensGroup } from '../../../design-token/group/is-design-tokens-group.ts';
 import { isCurlyReference } from '../../../design-token/reference/types/curly/is-curly-reference.ts';
 import { curlyReferenceToSegmentsReference } from '../../../design-token/reference/types/curly/to/segments-reference/curly-reference-to-segments-reference.ts';
@@ -96,7 +97,7 @@ export function resolveDesignTokensTreeExtends(
     ctx.cache.set(input, DESIGN_TOKENS_TREE_EXTENDS_RESOLVING);
 
     if (reference !== undefined) {
-      let node: any = ctx.root;
+      let node: DesignTokensTree = ctx.root;
       let inherited: Pick<
         GenericDesignToken,
         '$description' | '$type' | '$deprecated' | '$extensions'
@@ -146,7 +147,7 @@ export function resolveDesignTokensTreeExtends(
         };
       }
 
-      output = extendDesignTokensGroup(output, node);
+      output = extendDesignTokensGroup(output, node as DesignTokensGroup);
     }
 
     ctx.cache.set(input, output);

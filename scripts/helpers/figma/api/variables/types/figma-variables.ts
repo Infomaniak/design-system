@@ -1,3 +1,1 @@
-export interface FigmaVariables {
-  // TODO
-}
+export type FigmaVariables = unknown; // TODO

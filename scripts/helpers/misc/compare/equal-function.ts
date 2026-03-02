@@ -1,1 +1,1 @@
-export type EqualFunction<GValue = any> = (a: GValue, b: GValue) => boolean;
+export type EqualFunction<GValue> = (a: GValue, b: GValue) => boolean;

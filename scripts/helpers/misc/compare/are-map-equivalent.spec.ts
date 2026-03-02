@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { areMapEquivalent } from './are-map-equivalent.ts';
 
 describe('areMapEquivalent', () => {

@@ -1,7 +1,7 @@
 import { type FigmaColor } from '../../types/figma-color.ts';
 import { type FigmaRectangle } from '../../types/figma-rectangle.ts';
 import { type FigmaVector } from '../../types/figma-vector.ts';
-import { type FigmaNode } from '../figma-node.ts';
+import { type FigmaNode, type GenericFigmaNode } from '../figma-node.ts';
 import type { HavingFigmaNodeChildren } from '../having-figma-node-children.ts';
 
 export interface FigmaFrameNodeProperties extends HavingFigmaNodeChildren {
@@ -38,6 +38,6 @@ export interface FigmaFrameNodeProperties extends HavingFigmaNodeChildren {
 
 export interface FigmaFrameNode extends FigmaNode<'FRAME'>, FigmaFrameNodeProperties {}
 
-export function isFigmaFrameNode(input: FigmaNode): input is FigmaFrameNode {
+export function isFigmaFrameNode(input: GenericFigmaNode): input is FigmaFrameNode {
   return input.type === 'FRAME';
 }

@@ -1,6 +1,7 @@
+import type { ExplicitAny } from '../../../../../../../../../scripts/helpers/types/explicit-any.ts';
 import type { DesignTokensCollectionTokenWithType } from '../../../token/design-tokens-collection-token.ts';
-import type { MarkdownTokenRow } from './markdown-token-row.ts';
 import type { MarkdownRenderContext } from './markdown-render-context.ts';
+import type { MarkdownTokenRow } from './markdown-token-row.ts';
 
 /**
  * Interface for token type-specific markdown renderers.
@@ -22,7 +23,7 @@ export interface MarkdownRenderer<GTokenType extends string> {
    * @returns A markdown table row with preview, name, value, and description
    */
   render(
-    token: DesignTokensCollectionTokenWithType<GTokenType, any>,
+    token: DesignTokensCollectionTokenWithType<GTokenType, ExplicitAny>,
     context: MarkdownRenderContext,
   ): MarkdownTokenRow;
 }

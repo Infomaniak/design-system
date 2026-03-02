@@ -7,7 +7,7 @@ export function removeModesFromFigmaTokens(tokens: unknown): unknown {
   }
 
   if (Reflect.has(tokens, '$value')) {
-    const { $extensions, ...properties } = tokens as any;
+    const { $extensions, ...properties } = tokens as { $extensions?: Record<string, unknown> };
 
     return {
       ...properties,

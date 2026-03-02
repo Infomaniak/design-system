@@ -2,7 +2,7 @@ import { isPredefinedStrokeStyleDesignTokenValue } from '../../../../../../../..
 import type { StrokeStyleDesignTokensCollectionTokenValue } from '../../../../../../../token/types/composite/stroke-style/value/stroke-style-design-tokens-collection-token-value.ts';
 import { predefinedStrokeStyleDesignTokenValueToCssValue } from './types/predefined/predefined-stroke-style-design-token-value-to-css-value.ts';
 
-export interface StrokeStyleDesignTokensCollectionTokenValueToCssValueOptions {}
+export type StrokeStyleDesignTokensCollectionTokenValueToCssValueOptions = object;
 
 /**
  * @inheritDoc https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transition

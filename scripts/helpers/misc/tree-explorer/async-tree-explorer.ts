@@ -19,7 +19,7 @@ export class AsyncTreeExplorer<GInput, GNode = GInput> {
   );
   constructor(
     getChildren: AsyncTreeExplorerGetChildrenFunction<GInput, GNode>,
-    map: AsyncTreeExplorerMapFunction<GInput, GNode> = (_) => _ as any,
+    map: AsyncTreeExplorerMapFunction<GInput, GNode> = (_) => _ as unknown as GNode,
   ) {
     this.#getChildren = getChildren;
     this.#map = map;

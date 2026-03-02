@@ -1,3 +1,1 @@
-export interface FigmaStyle {
-  // TODO
-}
+export type FigmaStyle = unknown; // TODO

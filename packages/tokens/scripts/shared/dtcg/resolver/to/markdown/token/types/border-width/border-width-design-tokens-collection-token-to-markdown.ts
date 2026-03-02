@@ -49,19 +49,25 @@ export function borderWidthDesignTokensCollectionTokenToMarkdown(
   // Create the border-width preview HTML
   // Shows a square box with the border-width applied
   const preview = /* HTML */ `
-    <div style="
+    <div
+      style="
       width: ${boxSize}px;
       height: ${boxSize}px;
       background: #f1f5f9;
       border: ${cssValue} solid #374151;
       display: inline-block;
-    "></div>
-    <div style="
+    "
+    ></div>
+    <div
+      style="
       margin-top: 8px;
       font-family: monospace;
       font-size: 12px;
       color: #6b7280;
-    ">${cssValue}</div>
+    "
+    >
+      ${cssValue}
+    </div>
   `;
 
   return {

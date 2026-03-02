@@ -1,4 +1,5 @@
 import { removeUndefinedProperties } from '../../../../../../../../scripts/helpers/misc/object/remove-undefined-properties.ts';
+import type { ExplicitAny } from '../../../../../../../../scripts/helpers/types/explicit-any.ts';
 import type { DesignTokensGroup } from '../../../../dtcg/design-token/group/design-tokens-group.ts';
 import type { TypographyDesignToken } from '../../../../dtcg/design-token/token/types/composite/types/typography/typography-design-token.ts';
 import type { TokensBrueckeDesignTokensGroup } from '../../../tokens-bruecke/group/tokens-bruecke-design-tokens-group.ts';
@@ -47,7 +48,7 @@ export function tokensBrueckeTokensGroupToDesignTokensGroup(
       $extensions,
     }),
     ...Object.fromEntries(
-      Object.entries(children).map(([key, value]: [string, any]): [string, any] => {
+      Object.entries(children).map(([key, value]: [string, ExplicitAny]): [string, ExplicitAny] => {
         return [
           key,
           tokensBrueckeTokensTreeToDesignTokensTree(value, {

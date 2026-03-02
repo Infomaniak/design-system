@@ -5,7 +5,8 @@ import {
   type SegmentsReferenceToCssVariableReferenceOptions,
 } from './segments-reference-to-css-variable-reference.ts';
 
-export interface CurlyReferenceToCssVariableReferenceOptions extends SegmentsReferenceToCssVariableReferenceOptions {}
+export type CurlyReferenceToCssVariableReferenceOptions =
+  SegmentsReferenceToCssVariableReferenceOptions;
 
 export function curlyReferenceToCssVariableReference(
   reference: CurlyReference,

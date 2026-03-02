@@ -8,7 +8,8 @@ import { fontFamilyDesignTokensCollectionTokenValueToCssValue } from '../../../b
 import { fontWeightDesignTokensCollectionTokenValueToCssValue } from '../../../base/font-weight/value/font-weight-design-tokens-collection-token-value-to-css-value.ts';
 import { numberDesignTokensCollectionTokenValueToCssValue } from '../../../base/number/value/number-design-tokens-collection-token-value-to-css-value.ts';
 
-export interface TypographyDesignTokensCollectionTokenValueToCssValueOptions extends ValueOrCurlyReferenceToCssVariableReferenceOptions {}
+export type TypographyDesignTokensCollectionTokenValueToCssValueOptions =
+  ValueOrCurlyReferenceToCssVariableReferenceOptions;
 
 /**
  * @inheritDoc https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font

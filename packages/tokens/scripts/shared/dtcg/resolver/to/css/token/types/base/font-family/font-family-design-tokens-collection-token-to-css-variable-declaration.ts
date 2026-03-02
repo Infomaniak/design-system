@@ -6,7 +6,8 @@ import {
 } from '../../../design-tokens-collection-token-with-map-value-to-css-variable-declaration.ts';
 import { fontFamilyDesignTokensCollectionTokenValueToCssValue } from './value/font-family-design-tokens-collection-token-value-to-css-value.ts';
 
-export interface FontFamilyDesignTokensCollectionTokenToCssVariableDeclarationOptions extends DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions {}
+export type FontFamilyDesignTokensCollectionTokenToCssVariableDeclarationOptions =
+  DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions;
 
 export function fontFamilyDesignTokensCollectionTokenToCssVariableDeclaration(
   token: FontFamilyDesignTokensCollectionToken,
