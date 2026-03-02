@@ -5,14 +5,12 @@ describe('getPublishContext', () => {
   it('maps push on develop to rc publish context', () => {
     expect(getPublishContext({ eventName: 'push', branchName: 'develop' })).toEqual({
       shouldPublish: true,
-      tag: 'rc',
     });
   });
 
   it('maps push on main to stable publish context', () => {
     expect(getPublishContext({ eventName: 'push', branchName: 'main' })).toEqual({
       shouldPublish: true,
-      tag: 'latest',
     });
   });
 
@@ -25,7 +23,6 @@ describe('getPublishContext', () => {
       }),
     ).toEqual({
       shouldPublish: true,
-      tag: 'dev',
     });
   });
 
@@ -38,7 +35,6 @@ describe('getPublishContext', () => {
       }),
     ).toEqual({
       shouldPublish: false,
-      tag: 'dev',
     });
   });
 

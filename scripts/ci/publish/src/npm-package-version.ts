@@ -4,6 +4,7 @@ export async function isNpmVersionPublished(name: string, version: string): Prom
   const encodedName: string = encodeURIComponent(name);
   let response: Response;
 
+  // TODO: try with OPTIONS first to downloading the package
   try {
     response = await fetch(`${NPM_REGISTRY_URL}/${encodedName}/${version}`);
   } catch (error: unknown) {

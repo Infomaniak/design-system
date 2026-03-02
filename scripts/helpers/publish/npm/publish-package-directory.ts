@@ -1,14 +1,14 @@
 import { resolve } from 'node:path';
 import process from 'node:process';
-import { readJsonFile } from '../file/read-json-file.ts';
-import { writeJsonFileSafe } from '../file/write-json-file-safe.ts';
-import { Logger } from '../log/logger.ts';
-import { execCommandInherit } from '../misc/exec-command.ts';
+import { readJsonFile } from '../../file/read-json-file.ts';
+import { writeJsonFileSafe } from '../../file/write-json-file-safe.ts';
+import { Logger } from '../../log/logger.ts';
+import { execCommandInherit } from '../../misc/exec-command.ts';
+import type { PublishMode } from '../publish-mode.ts';
 
 export interface PublishNpmPackageDirectoryOptions {
   readonly packageDirectory: string;
-  readonly mode: 'prod' | 'dev';
-  readonly tag?: string;
+  readonly mode: PublishMode;
   readonly publishTimestamp?: number;
   readonly versionOverride?: string;
   readonly internalDependencyVersionOverrides?: Readonly<Record<string, string>>;

@@ -1,3 +1,5 @@
+import type { PublishMode } from '../../../helpers/publish/publish-mode.ts';
+
 export interface GetPublishContextOptions {
   readonly eventName: string;
   readonly branchName: string;
@@ -5,8 +7,8 @@ export interface GetPublishContextOptions {
 }
 
 export interface PublishContext {
+  readonly mode: PublishMode;
   readonly shouldPublish: boolean;
-  readonly tag: 'dev' | 'rc' | 'latest';
 }
 
 export function getPublishContext({
@@ -25,7 +27,6 @@ export function getPublishContext({
 
     return {
       shouldPublish,
-      tag: 'dev',
     };
   }
 
@@ -33,14 +34,13 @@ export function getPublishContext({
     if (branchName === 'develop') {
       return {
         shouldPublish: true,
-        tag: 'rc',
       };
     }
 
     if (branchName === 'main') {
       return {
+        mode: 'prod',
         shouldPublish: true,
-        tag: 'latest',
       };
     }
 

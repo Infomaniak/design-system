@@ -11,32 +11,34 @@ const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..
 
 const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
-export async function ciPublishScript(): Promise<void> {
-  loadOptionallyEnvFile(logger);
+export function ciPublishScript(): Promise<void> {
+  return logger.asyncTask('ci-publish.script', async (logger: Logger): Promise<void> => {
+    loadOptionallyEnvFile(logger);
 
-  const branchName: string | undefined =
-    process.env['CI_PUBLISH_TARGET_BRANCH'] ?? process.env['GITHUB_REF_NAME'];
+    const branchName: string | undefined =
+      process.env['CI_PUBLISH_TARGET_BRANCH'] ?? process.env['GITHUB_REF_NAME'];
 
-  if (branchName === undefined || branchName === '') {
-    throw new Error(
-      'Missing required env variable "GITHUB_REF_NAME" (or "CI_PUBLISH_TARGET_BRANCH").',
-    );
-  }
+    if (branchName === undefined || branchName === '') {
+      throw new Error(
+        'Missing required env variable "GITHUB_REF_NAME" (or "CI_PUBLISH_TARGET_BRANCH").',
+      );
+    }
 
-  await ciPublish({
-    rootDirectory: ROOT_DIR,
-    eventName: process.env['GITHUB_EVENT_NAME'] ?? 'push',
-    branchName,
-    pullRequestLabels: parseJsonStringArray(
-      process.env['CI_PUBLISH_PR_LABELS'],
-      'CI_PUBLISH_PR_LABELS',
-    ),
-    gitBaseSha: process.env['CI_PUBLISH_GIT_BASE_SHA'],
-    gitHeadSha: process.env['CI_PUBLISH_GIT_HEAD_SHA'],
-    publishTimestamp: parseNumber(process.env['CI_PUBLISH_TIMESTAMP']),
-    strictVersionPolicy: parseBoolean(process.env['CI_PUBLISH_STRICT_VERSION_POLICY'], true),
-    dryRun: parseBoolean(process.env['CI_PUBLISH_DRY_RUN'], false),
-    logger,
+    await ciPublish({
+      rootDirectory: ROOT_DIR,
+      eventName: process.env['GITHUB_EVENT_NAME'] ?? 'push',
+      branchName,
+      pullRequestLabels: parseJsonStringArray(
+        process.env['CI_PUBLISH_PR_LABELS'],
+        'CI_PUBLISH_PR_LABELS',
+      ),
+      gitBaseSha: process.env['CI_PUBLISH_GIT_BASE_SHA'],
+      gitHeadSha: process.env['CI_PUBLISH_GIT_HEAD_SHA'],
+      publishTimestamp: parseNumber(process.env['CI_PUBLISH_TIMESTAMP']),
+      strictVersionPolicy: parseBoolean(process.env['CI_PUBLISH_STRICT_VERSION_POLICY'], true),
+      dryRun: parseBoolean(process.env['CI_PUBLISH_DRY_RUN'], false),
+      logger,
+    });
   });
 }
 

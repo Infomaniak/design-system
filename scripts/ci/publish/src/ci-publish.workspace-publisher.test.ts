@@ -29,7 +29,7 @@ describe('createWorkspacePublisher', () => {
         '@scope/a': '1.0.0-dev.1700000000000',
         '@scope/b': '2.0.0-dev.1700000000000',
       },
-      tag: 'dev',
+      mode: 'dev',
       version: '1.0.0-dev.1700000000000',
     });
 

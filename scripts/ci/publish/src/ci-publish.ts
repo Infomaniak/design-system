@@ -5,6 +5,10 @@ import process from 'node:process';
 import { readJsonFile } from '../../../helpers/file/read-json-file.ts';
 import { type Logger } from '../../../helpers/log/logger.ts';
 import { execCommand, execCommandInherit } from '../../../helpers/misc/exec-command.ts';
+import type { PublishMode } from '../../../helpers/publish/publish-mode.ts';
+import { isNodeJsError } from '../../../helpers/types/node-js-error/is-node-js-error.ts';
+import { packageJsonSchema } from '../../../helpers/types/package-json/package-json.schema.ts';
+import type { PackageJson } from '../../../helpers/types/package-json/package-json.ts';
 import { getPublishContext, type PublishContext } from './branch-policy.ts';
 import { isNpmVersionPublished as defaultIsNpmVersionPublished } from './npm-package-version.ts';
 import {
@@ -33,7 +37,7 @@ export interface CiPublishOptions {
 export type IsNpmVersionPublished = (name: string, version: string) => Promise<boolean>;
 
 export interface PublishWorkspacePackageOptions {
-  readonly tag: PublishContext['tag'];
+  readonly mode: PublishMode;
   readonly version: string;
   readonly internalDependencyVersionOverrides?: Readonly<Record<string, string>>;
 }
@@ -62,15 +66,8 @@ export interface CiPublishDecision {
   readonly packageName: string;
   readonly baseVersion: string;
   readonly publishVersion: string;
-  readonly tag: PublishContext['tag'];
+  readonly mode: PublishMode;
   readonly action: 'skip' | 'publish' | 'publish-dry-run';
-}
-
-interface PackageJson {
-  readonly name?: unknown;
-  readonly version?: unknown;
-  readonly scripts?: unknown;
-  readonly dependencies?: unknown;
 }
 
 const STABLE_VERSION_REGEXP: RegExp = /^\d+\.\d+\.\d+$/;
@@ -96,14 +93,9 @@ export async function discoverPublishablePackages(
     let packageJson: PackageJson;
 
     try {
-      packageJson = (await readJsonFile(packageJsonPath)) as PackageJson;
+      packageJson = packageJsonSchema.parse(await readJsonFile<PackageJson>(packageJsonPath));
     } catch (error: unknown) {
-      if (
-        Error.isError(error) &&
-        'code' in error &&
-        typeof (error as { code?: unknown }).code === 'string' &&
-        (error as { code?: string }).code === 'ENOENT'
-      ) {
+      if (isNodeJsError(error) && error.code === 'ENOENT') {
         continue;
       }
 
@@ -119,18 +111,7 @@ export async function discoverPublishablePackages(
       continue;
     }
 
-    if (typeof packageJson.name !== 'string' || packageJson.name === '') {
-      throw new Error(`Missing "name" in ${packageJsonPath}.`);
-    }
-
-    if (typeof packageJson.version !== 'string' || packageJson.version === '') {
-      throw new Error(`Missing "version" in ${packageJsonPath}.`);
-    }
-
-    const dependencies: readonly string[] =
-      typeof packageJson.dependencies === 'object' && packageJson.dependencies !== null
-        ? Object.keys(packageJson.dependencies as Record<string, unknown>)
-        : [];
+    const dependencies: readonly string[] = Object.keys(packageJson.dependencies ?? {});
 
     publishablePackages.push({
       directory: packageDirectory,
@@ -143,15 +124,21 @@ export async function discoverPublishablePackages(
   return publishablePackages;
 }
 
+function normalizePath(path: string): string {
+  return path.replaceAll('\\', '/').replace(/\/+$/, '');
+}
+
+interface GetImpactedPackageNamesOptions {
+  readonly packages: readonly PublishablePackage[];
+  readonly rootDirectory: string;
+  readonly changedFiles: readonly string[];
+}
+
 function getImpactedPackageNames({
   packages,
   rootDirectory,
   changedFiles,
-}: {
-  readonly packages: readonly PublishablePackage[];
-  readonly rootDirectory: string;
-  readonly changedFiles: readonly string[];
-}): ReadonlySet<string> {
+}: GetImpactedPackageNamesOptions): ReadonlySet<string> {
   const directImpactedNames: Set<string> = new Set<string>();
   const packagesByName: Map<string, PublishablePackage> = new Map(
     packages.map((pkg): readonly [string, PublishablePackage] => [pkg.name, pkg]),
@@ -204,17 +191,19 @@ function getImpactedPackageNames({
   return impactedNames;
 }
 
+interface ComputePublishVersionOptions {
+  readonly baseVersion: string;
+  readonly mode: PublishMode;
+  readonly strict: boolean;
+  readonly publishTimestamp: number;
+}
+
 function computePublishVersion({
   baseVersion,
   tag,
   strict,
   publishTimestamp,
-}: {
-  readonly baseVersion: string;
-  readonly tag: PublishContext['tag'];
-  readonly strict: boolean;
-  readonly publishTimestamp: number;
-}): string {
+}: ComputePublishVersionOptions): string {
   if (!STABLE_VERSION_REGEXP.test(baseVersion)) {
     if (strict) {
       throw new Error(
@@ -225,6 +214,15 @@ function computePublishVersion({
     return baseVersion;
   }
 
+  switch (mode) {
+    case 'stable':
+      return baseVersion;
+    case 'rc':
+    case 'dev':
+      return `${baseVersion}-${mode}.${publishTimestamp}`;
+    default:
+      throw new Error(`Invalid mode: ${mode}.`);
+  }
   if (tag === 'latest') {
     return baseVersion;
   }
@@ -254,23 +252,25 @@ async function listChangedFilesFromGit(
     .filter((line: string): boolean => line !== '');
 }
 
+export interface CreateWorkspacePublisherOptions {
+  readonly logger: Logger;
+  readonly rootDirectory: string;
+}
+
 export function createWorkspacePublisher({
   logger,
   rootDirectory,
-}: {
-  readonly logger: Logger;
-  readonly rootDirectory: string;
-}): PublishWorkspacePackage {
+}: CreateWorkspacePublisherOptions): PublishWorkspacePackage {
   return async (
     workspaceName: string,
-    { tag, version, internalDependencyVersionOverrides }: PublishWorkspacePackageOptions,
+    { mode, version, internalDependencyVersionOverrides }: PublishWorkspacePackageOptions,
   ): Promise<void> => {
     await execCommandInherit(logger, 'yarn', ['workspace', workspaceName, 'run', 'publish:ci'], {
       shell: true,
       cwd: rootDirectory,
       env: {
         ...process.env,
-        NPM_DIST_TAG: tag,
+        NPM_DIST_MODE: mode,
         NPM_PUBLISH_VERSION: version,
         ...(internalDependencyVersionOverrides !== undefined &&
         Object.keys(internalDependencyVersionOverrides).length > 0
@@ -392,6 +392,7 @@ export async function ciPublish(
 
   for (const pkg of candidatePackages) {
     const publishVersion: string = publishVersionByPackageName.get(pkg.name)!;
+    const { mode }: PublishContext = publishContext;
     const isPublished: boolean = await isNpmVersionPublished(pkg.name, publishVersion);
 
     if (isPublished) {
@@ -400,32 +401,32 @@ export async function ciPublish(
         packageName: pkg.name,
         baseVersion: pkg.version,
         publishVersion,
-        tag,
+        mode,
         action: 'skip',
       });
       continue;
     }
 
     if (dryRun) {
-      logger.info(`[dry-run] Would publish ${pkg.name}@${publishVersion} with tag "${tag}".`);
+      logger.info(`[dry-run] Would publish ${pkg.name}@${publishVersion} with mode "${mode}".`);
       decisions.push({
         packageName: pkg.name,
         baseVersion: pkg.version,
         publishVersion,
-        tag,
+        mode,
         action: 'publish-dry-run',
       });
       continue;
     }
 
-    logger.info(`[publish] ${pkg.name}@${publishVersion} with tag "${tag}".`);
+    logger.info(`[publish] ${pkg.name}@${publishVersion} with mode "${mode}".`);
     await publishWorkspacePackage(pkg.name, {
       ...(Object.keys(internalDependencyVersionOverrides).length > 0
         ? {
             internalDependencyVersionOverrides,
           }
         : {}),
-      tag,
+      mode,
       version: publishVersion,
     });
 
@@ -433,7 +434,7 @@ export async function ciPublish(
       packageName: pkg.name,
       baseVersion: pkg.version,
       publishVersion,
-      tag,
+      mode,
       action: 'publish',
     });
   }

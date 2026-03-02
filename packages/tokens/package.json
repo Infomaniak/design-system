@@ -14,6 +14,7 @@
     "=== PUBLISH ===": "",
     "publish": "yarn publish:tokens:dev",
     "publish:tokens:dev": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-tokens/publish-tokens.script.ts --mode=dev",
+    "publish:tokens:rc": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-tokens/publish-tokens.script.ts --mode=rc",
     "publish:tokens:prod": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-tokens/publish-tokens.script.ts --mode=prod",
     "publish:ci": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-tokens/publish-tokens.script.ts --mode=prod --tag=$NPM_DIST_TAG"
   },

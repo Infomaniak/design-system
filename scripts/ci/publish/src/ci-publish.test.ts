@@ -80,7 +80,7 @@ describe('ciPublish', () => {
         '@scope/a': '1.0.0-dev.1700000000000',
         '@scope/b': '1.0.0-dev.1700000000000',
       },
-      tag: 'dev',
+      mode: 'dev',
       version: '1.0.0-dev.1700000000000',
     });
     expect(decisions).toEqual([
@@ -89,14 +89,14 @@ describe('ciPublish', () => {
         baseVersion: '1.0.0',
         packageName: '@scope/a',
         publishVersion: '1.0.0-dev.1700000000000',
-        tag: 'dev',
+        mode: 'dev',
       },
       {
         action: 'skip',
         baseVersion: '1.0.0',
         packageName: '@scope/b',
         publishVersion: '1.0.0-dev.1700000000000',
-        tag: 'dev',
+        mode: 'dev',
       },
     ]);
   });
@@ -158,7 +158,7 @@ describe('ciPublish', () => {
         baseVersion: '1.0.0',
         packageName: '@scope/a',
         publishVersion: '1.0.0-rc.1700000000000',
-        tag: 'rc',
+        mode: 'rc',
       },
     ]);
   });
@@ -189,7 +189,7 @@ describe('ciPublish', () => {
 
     expect(listChangedFiles).not.toHaveBeenCalled();
     expect(publishWorkspacePackage).toHaveBeenCalledWith('@scope/a', {
-      tag: 'latest',
+      mode: 'stable',
       version: '2.0.0',
     });
     expect(decisions[0]).toEqual({
@@ -197,7 +197,7 @@ describe('ciPublish', () => {
       baseVersion: '2.0.0',
       packageName: '@scope/a',
       publishVersion: '2.0.0',
-      tag: 'latest',
+      mode: 'stable',
     });
   });
 

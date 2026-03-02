@@ -3,12 +3,12 @@ import { Logger } from '../../../../../../scripts/helpers/log/logger.ts';
 import {
   publishNpmPackageDirectory,
   type PublishNpmPackageDirectoryResult,
-} from '../../../../../../scripts/helpers/npm/publish-package-directory.ts';
+} from '../../../../../../scripts/helpers/publish/npm/publish-package-directory.ts';
 export {
   buildNpmPublishArgs,
   resolvePublishVersion,
   rewriteInternalDependencyVersions,
-} from '../../../../../../scripts/helpers/npm/publish-package-directory.ts';
+} from '../../../../../../scripts/helpers/publish/npm/publish-package-directory.ts';
 
 export interface PublishTokensOptions {
   readonly outputDirectory: string;
