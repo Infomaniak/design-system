@@ -10,6 +10,7 @@ import { isNpmVersionPublished as defaultIsNpmVersionPublished } from '../../../
 import type { PublishMode } from '../../../helpers/publish/publish-mode/publish-mode.ts';
 import { isNodeJsError } from '../../../helpers/types/node-js-error/is-node-js-error.ts';
 import { getPublishContext, type PublishContext } from './branch-policy.ts';
+import type { CiPublishConfig } from './publish-config/ci-publish-config.ts';
 import {
   topologicalSortPackages,
   type TopologicalPackageNode,
@@ -18,19 +19,6 @@ import {
 export interface PublishablePackage extends TopologicalPackageNode {
   readonly directory: string;
   readonly version: string;
-}
-
-export interface CiPublishOptions {
-  readonly rootDirectory: string;
-  readonly eventName: string;
-  readonly branchName: string;
-  readonly pullRequestLabels?: readonly string[];
-  readonly gitBaseSha?: string;
-  readonly gitHeadSha?: string;
-  readonly publishTimestamp?: number;
-  readonly strictVersionPolicy: boolean;
-  readonly dryRun: boolean;
-  readonly logger: Logger;
 }
 
 export type IsNpmVersionPublished = (name: string, version: string) => Promise<boolean>;
@@ -285,7 +273,20 @@ export function createWorkspacePublisher({
   };
 }
 
-export async function ciPublish(
+export interface CiPublishLegacyOptions {
+  readonly rootDirectory: string;
+  readonly eventName: string;
+  readonly branchName: string;
+  readonly pullRequestLabels?: readonly string[];
+  readonly gitBaseSha?: string;
+  readonly gitHeadSha?: string;
+  readonly publishTimestamp?: number;
+  readonly strictVersionPolicy: boolean;
+  readonly dryRun: boolean;
+  readonly logger: Logger;
+}
+
+export async function ciPublishLegacy(
   {
     rootDirectory,
     eventName,
@@ -297,7 +298,7 @@ export async function ciPublish(
     strictVersionPolicy,
     dryRun,
     logger,
-  }: CiPublishOptions,
+  }: CiPublishLegacyOptions,
   {
     discoverPublishablePackages: discover = discoverPublishablePackages,
     isNpmVersionPublished = defaultIsNpmVersionPublished,
@@ -442,3 +443,26 @@ export async function ciPublish(
 
   return decisions;
 }
+
+/*----------*/
+
+export interface CiPublishOptions extends CiPublishConfig {
+  readonly rootDirectory: string;
+  // readonly eventName: string;
+  // readonly branchName: string;
+  // readonly pullRequestLabels?: readonly string[];
+  // readonly gitBaseSha?: string;
+  // readonly gitHeadSha?: string;
+  // readonly publishTimestamp?: number;
+  // readonly strictVersionPolicy: boolean;
+  // readonly dryRun: boolean;
+  readonly logger: Logger;
+}
+
+export async function ciPublish({
+  rootDirectory,
+  logger,
+  // publish config
+  targetBranch,
+  prLabels,
+}: CiPublishOptions): Promise<void> {}

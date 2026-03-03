@@ -14,6 +14,7 @@ export function ciPublishScript(): Promise<void> {
   return logger.asyncTask('ci-publish.script', async (logger: Logger): Promise<void> => {
     loadOptionallyEnvFile(logger);
 
+    console.log(process.env['GITHUB_CONFIG']);
     const ciPublishConfig: CiPublishConfig = getEnvCiPublishConfig();
 
     console.log(ciPublishConfig);

@@ -54,8 +54,18 @@ jobs:
            contains(github.event.pull_request.labels.*.name, 'dev'))
         run: yarn ci:publish
         env:
+          #          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          #          GITHUB_REF_NAME: ${{ github.ref_name }}
+          #          CI_PUBLISH_TARGET_BRANCH: ${{ github.event_name == 'pull_request' && github.base_ref || github.ref_name }}
+          #          CI_PUBLISH_PR_LABELS: ${{ github.event_name == 'pull_request' && toJson(github.event.pull_request.labels.*.name) || '[]' }}
+          #          CI_PUBLISH_GIT_BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+          #          CI_PUBLISH_GIT_HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          #          CI_PUBLISH_TIMESTAMP: ${{ steps.publish_timestamp.outputs.value }}
+          #          CI_PUBLISH_STRICT_VERSION_POLICY: 'true'
+          GITHUB_CONFIG: ${{ toJson(github) }}
           CI_PUBLISH_CONFIG: |
             {
+              "eventName": "${{ github.event_name }}",
               "targetBranch": "${{ github.event_name == 'pull_request' && github.base_ref || github.ref_name }}",
               "prLabels": ${{ github.event_name == 'pull_request' && toJson(github.event.pull_request.labels.*.name) || '[]' }}
             }
