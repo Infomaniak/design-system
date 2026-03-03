@@ -48,17 +48,15 @@ jobs:
 
       - name: Publish missing package versions
         if: >-
-          ${{
-            github.event_name == 'push' ||
-            (github.event_name == 'pull_request' &&
-             github.event.pull_request.head.repo.full_name == github.repository &&
-             contains(github.event.pull_request.labels.*.name, 'dev'))
-          }}
+          github.event_name == 'push' ||
+          (github.event_name == 'pull_request' &&
+           github.event.pull_request.head.repo.full_name == github.repository &&
+           contains(github.event.pull_request.labels.*.name, 'dev'))
         run: yarn ci:publish
         env:
           CI_PUBLISH_CONFIG: |
             {
-              "targetBranch": "${{ github.event_name == 'pull_request' ? github.base_ref : github.ref_name }}",
-              "prLabels": ${{ github.event_name == 'pull_request' ? toJson(github.event.pull_request.labels.*.name) : '[]' }}
+              "targetBranch": "${{ github.event_name == 'pull_request' && github.base_ref || github.ref_name }}",
+              "prLabels": ${{ github.event_name == 'pull_request' && toJson(github.event.pull_request.labels.*.name) || '[]' }}
             }
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
