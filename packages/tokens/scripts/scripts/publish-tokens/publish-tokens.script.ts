@@ -32,6 +32,8 @@ export async function publishTokensScript(): Promise<void> {
 
   loadOptionallyEnvFile(logger);
 
+  console.log('$NPM_TOKEN', Reflect.has(process.env, 'NPM_TOKEN'));
+
   await publishTokens({
     outputDirectory: OUTPUT_DIR,
     tag,
