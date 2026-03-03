@@ -17,16 +17,20 @@ export async function publishIosPackage({
   versionOverride,
   logger,
 }: PublishIosTokensOptions): Promise<void> {
+  const githubOrganisation: string = 'Infomaniak';
+  const iosRepoName: string = 'ios-design-system';
+
   const iosPublishBranchName: string = await createIosGithubBranch({
     logger,
+    repoName: iosRepoName,
     packageDirectory: join(outputDirectory, 'ios'),
     version: versionOverride!,
   });
 
   if (tag != 'dev') {
     await createGithubPR({
-      owner: 'Infomaniak',
-      repo: 'ios-design-system',
+      owner: githubOrganisation,
+      repo: iosRepoName,
       authToken: process.env['CI_PR_AUTH_TOKEN']!,
       title: `chore: Update to ${iosPublishBranchName}`,
       description: `Update to ${iosPublishBranchName}`,
