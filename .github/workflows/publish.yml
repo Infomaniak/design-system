@@ -62,7 +62,7 @@ jobs:
           #          CI_PUBLISH_GIT_HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
           #          CI_PUBLISH_TIMESTAMP: ${{ steps.publish_timestamp.outputs.value }}
           #          CI_PUBLISH_STRICT_VERSION_POLICY: 'true'
-          GITHUB_CONFIG: ${{ toJson(github) }}
+          GITHUB_CI_CONFIG: ${{ toJson(github) }}
           CI_PUBLISH_CONFIG: |
             {
               "eventName": "${{ github.event_name }}",

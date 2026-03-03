@@ -1,10 +1,10 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadOptionallyEnvFile } from '../../helpers/env/load-env-file.ts';
+import { getEnvGithubCiConfig } from '../../helpers/github/github-ci-config/env/get-env-github-ci-config.ts';
+import type { GithubCiConfig } from '../../helpers/github/github-ci-config/github-ci-config.ts';
 import { DEFAULT_LOG_LEVEL } from '../../helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../helpers/log/logger.ts';
-import type { CiPublishConfig } from './src/publish-config/ci-publish-config.ts';
-import { getEnvCiPublishConfig } from './src/publish-config/env/get-env-ci-publish-config.ts';
 
 const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 
@@ -14,10 +14,9 @@ export function ciPublishScript(): Promise<void> {
   return logger.asyncTask('ci-publish.script', async (logger: Logger): Promise<void> => {
     loadOptionallyEnvFile(logger);
 
-    console.log(process.env['GITHUB_CONFIG']);
-    const ciPublishConfig: CiPublishConfig = getEnvCiPublishConfig();
+    const githubCiConfig: GithubCiConfig = getEnvGithubCiConfig();
 
-    console.log(ciPublishConfig);
+    console.log(githubCiConfig);
     // const branchName: string | undefined =
     //   process.env['CI_PUBLISH_TARGET_BRANCH'] ?? process.env['GITHUB_REF_NAME'];
     //
