@@ -3,11 +3,11 @@ export interface TopologicalPackageNode {
   readonly dependencies: readonly string[];
 }
 
-export function topologicalSortPackages<TPackage extends TopologicalPackageNode>(
-  packages: readonly TPackage[],
-): readonly TPackage[] {
-  const packagesByName: Map<string, TPackage> = new Map<string, TPackage>(
-    packages.map((pkg: TPackage): readonly [string, TPackage] => [pkg.name, pkg]),
+export function topologicalSortPackages<GPackage extends TopologicalPackageNode>(
+  packages: readonly GPackage[],
+): readonly GPackage[] {
+  const packagesByName: Map<string, GPackage> = new Map<string, GPackage>(
+    packages.map((pkg: GPackage): readonly [string, GPackage] => [pkg.name, pkg]),
   );
 
   const inDegreeByName: Map<string, number> = new Map<string, number>();
@@ -34,7 +34,7 @@ export function topologicalSortPackages<TPackage extends TopologicalPackageNode>
     .map(([name]: readonly [string, number]): string => name)
     .sort((a, b) => a.localeCompare(b));
 
-  const sorted: TPackage[] = [];
+  const sorted: GPackage[] = [];
 
   while (queue.length > 0) {
     const name: string = queue.shift()!;

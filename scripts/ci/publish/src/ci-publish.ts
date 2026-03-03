@@ -1,25 +1,14 @@
-import { Dirent } from 'node:fs';
-import { readdir } from 'node:fs/promises';
 import { join, normalize, resolve, sep } from 'node:path';
 import process from 'node:process';
-import type { PackageJson } from '../../../helpers/file/package-json/package-json.ts';
-import { readPackageJsonFile } from '../../../helpers/file/package-json/read-package-json-file.ts';
 import { type Logger } from '../../../helpers/log/logger.ts';
 import { execCommand, execCommandInherit } from '../../../helpers/misc/exec-command.ts';
 import { isNpmVersionPublished as defaultIsNpmVersionPublished } from '../../../helpers/npm/is-npm-version-published/is-npm-version-published.ts';
 import type { PublishMode } from '../../../helpers/publish/publish-mode/publish-mode.ts';
-import { isNodeJsError } from '../../../helpers/types/node-js-error/is-node-js-error.ts';
 import { getPublishContext, type PublishContext } from './branch-policy.ts';
 import type { CiPublishContext } from './context/infer-ci-publish-context.ts';
-import {
-  topologicalSortPackages,
-  type TopologicalPackageNode,
-} from './topological/topological-sort-packages.ts';
-
-export interface PublishablePackage extends TopologicalPackageNode {
-  readonly directory: string;
-  readonly version: string;
-}
+import { discoverPublishablePackages } from './discover/discover-publishable-packages.ts';
+import type { PublishablePackage } from './discover/publishable-package.ts';
+import { topologicalSortPackages } from './topological/topological-sort-packages.ts';
 
 export type IsNpmVersionPublished = (name: string, version: string) => Promise<boolean>;
 
@@ -61,58 +50,6 @@ export interface CiPublishDecision {
 
 const STABLE_VERSION_REGEXP: RegExp = /^\d+\.\d+\.\d+$/;
 
-export async function discoverPublishablePackages(
-  rootDirectory: string,
-): Promise<readonly PublishablePackage[]> {
-  const packagesDirectory: string = join(rootDirectory, 'packages');
-  const entries: readonly Dirent[] = await readdir(packagesDirectory, {
-    withFileTypes: true,
-  });
-
-  const publishablePackages: PublishablePackage[] = [];
-  const sortedEntries = Array.from(entries).sort((a, b) => a.name.localeCompare(b.name));
-  for (const entry of sortedEntries) {
-    if (!entry.isDirectory()) {
-      continue;
-    }
-
-    const packageDirectory: string = join(packagesDirectory, entry.name);
-    const packageJsonPath: string = join(packageDirectory, 'package.json');
-
-    let packageJson: PackageJson;
-
-    try {
-      packageJson = await readPackageJsonFile(packageJsonPath);
-    } catch (error: unknown) {
-      if (isNodeJsError(error) && error.code === 'ENOENT') {
-        continue;
-      }
-
-      throw error;
-    }
-
-    const publishScript: unknown =
-      typeof packageJson.scripts === 'object' && packageJson.scripts !== null
-        ? (packageJson.scripts as Record<string, unknown>)['publish:ci']
-        : undefined;
-
-    if (typeof publishScript !== 'string') {
-      continue;
-    }
-
-    const dependencies: readonly string[] = Object.keys(packageJson.dependencies ?? {});
-
-    publishablePackages.push({
-      directory: packageDirectory,
-      name: packageJson.name,
-      version: packageJson.version,
-      dependencies,
-    });
-  }
-
-  return publishablePackages;
-}
-
 interface GetImpactedPackageNamesOptions {
   readonly packages: readonly PublishablePackage[];
   readonly rootDirectory: string;
@@ -146,7 +83,7 @@ function getImpactedPackageNames({
     const absoluteChangedFilePath: string = normalize(resolve(rootDirectory, changedFile));
 
     for (const pkg of packages) {
-      const packageDirectoryPath: string = normalize(resolve(pkg.directory));
+      const packageDirectoryPath: string = normalize(resolve(pkg.path));
 
       if (
         absoluteChangedFilePath === packageDirectoryPath ||
@@ -467,5 +404,12 @@ export async function ciPublish({
   mode,
   shouldPublish,
 }: CiPublishOptions): Promise<void> {
+  const packagesDirectory: string = join(rootDirectory, 'packages');
+
+  console.log(
+    await discoverPublishablePackages({
+      packagesDirectory,
+    }),
+  );
   // TODO continue here
 }

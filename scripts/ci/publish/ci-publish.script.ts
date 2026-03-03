@@ -5,7 +5,11 @@ import { getEnvGithubCiConfig } from '../../helpers/github/github-ci-config/env/
 import type { GithubCiConfig } from '../../helpers/github/github-ci-config/github-ci-config.ts';
 import { DEFAULT_LOG_LEVEL } from '../../helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../helpers/log/logger.ts';
-import { inferCiPublishContext } from './src/context/infer-ci-publish-context.ts';
+import { ciPublish } from './src/ci-publish.ts';
+import {
+  type CiPublishContext,
+  inferCiPublishContext,
+} from './src/context/infer-ci-publish-context.ts';
 
 const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 
@@ -16,8 +20,23 @@ export function ciPublishScript(): Promise<void> {
     loadOptionallyEnvFile(logger);
 
     const githubCiConfig: GithubCiConfig = getEnvGithubCiConfig();
+    const ciPublishContext: CiPublishContext = inferCiPublishContext(githubCiConfig);
 
-    console.log(inferCiPublishContext(githubCiConfig));
+    if (!ciPublishContext.shouldPublish) {
+      logger.info(
+        `[skip] CI publish disabled for ${githubCiConfig.event_name}:${ciPublishContext.branchName} (missing required PR label "dev").`,
+      );
+      return;
+    }
+
+    // console.log(ciPublishContext);
+
+    await ciPublish({
+      ...ciPublishContext,
+      rootDirectory: ROOT_DIR,
+      logger,
+    });
+
     // console.log(githubCiConfig);
     // const branchName: string | undefined =
     //   process.env['CI_PUBLISH_TARGET_BRANCH'] ?? process.env['GITHUB_REF_NAME'];
