@@ -1,17 +1,26 @@
 import type { PublishMode } from '../../../helpers/publish/publish-mode/publish-mode.ts';
 
+/**
+ * @deprecated
+ */
 export interface GetPublishContextOptions {
   readonly eventName: string;
   readonly branchName: string;
   readonly pullRequestLabels?: readonly string[];
 }
 
+/**
+ * @deprecated
+ */
 export interface PublishContext {
   readonly mode?: PublishMode;
   readonly shouldPublish: boolean;
   readonly tag: 'dev' | 'rc' | 'latest';
 }
 
+/**
+ * @deprecated
+ */
 export function getPublishContext({
   eventName,
   branchName,

@@ -10,7 +10,7 @@ import { isNpmVersionPublished as defaultIsNpmVersionPublished } from '../../../
 import type { PublishMode } from '../../../helpers/publish/publish-mode/publish-mode.ts';
 import { isNodeJsError } from '../../../helpers/types/node-js-error/is-node-js-error.ts';
 import { getPublishContext, type PublishContext } from './branch-policy.ts';
-import type { CiPublishConfig } from './publish-config/ci-publish-config.ts';
+import type { CiPublishContext } from './context/infer-ci-publish-context.ts';
 import {
   topologicalSortPackages,
   type TopologicalPackageNode,
@@ -446,7 +446,7 @@ export async function ciPublishLegacy(
 
 /*----------*/
 
-export interface CiPublishOptions extends CiPublishConfig {
+export interface CiPublishOptions extends CiPublishContext {
   readonly rootDirectory: string;
   // readonly eventName: string;
   // readonly branchName: string;
@@ -462,7 +462,10 @@ export interface CiPublishOptions extends CiPublishConfig {
 export async function ciPublish({
   rootDirectory,
   logger,
-  // publish config
-  targetBranch,
-  prLabels,
-}: CiPublishOptions): Promise<void> {}
+  // publish context
+  branchName,
+  mode,
+  shouldPublish,
+}: CiPublishOptions): Promise<void> {
+  // TODO continue here
+}

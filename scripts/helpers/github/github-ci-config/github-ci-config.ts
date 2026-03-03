@@ -18,7 +18,7 @@ export interface GithubCiConfig {
   readonly workflow: string;
   readonly head_ref: string;
   readonly base_ref: string;
-  readonly event_name: string;
+  readonly event_name: string | 'pull_request' | 'push';
   readonly server_url: string;
   readonly api_url: string;
   readonly graphql_url: string;

@@ -5,6 +5,7 @@ import { getEnvGithubCiConfig } from '../../helpers/github/github-ci-config/env/
 import type { GithubCiConfig } from '../../helpers/github/github-ci-config/github-ci-config.ts';
 import { DEFAULT_LOG_LEVEL } from '../../helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../helpers/log/logger.ts';
+import { inferCiPublishContext } from './src/context/infer-ci-publish-context.ts';
 
 const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 
@@ -16,7 +17,8 @@ export function ciPublishScript(): Promise<void> {
 
     const githubCiConfig: GithubCiConfig = getEnvGithubCiConfig();
 
-    console.log(githubCiConfig);
+    console.log(inferCiPublishContext(githubCiConfig));
+    // console.log(githubCiConfig);
     // const branchName: string | undefined =
     //   process.env['CI_PUBLISH_TARGET_BRANCH'] ?? process.env['GITHUB_REF_NAME'];
     //
