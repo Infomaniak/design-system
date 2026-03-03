@@ -12,7 +12,6 @@ export {
 
 export interface PublishTokensOptions {
   readonly outputDirectory: string;
-  readonly mode: 'prod' | 'dev';
   readonly tag?: string;
   readonly publishTimestamp?: number;
   readonly versionOverride?: string;
@@ -32,19 +31,19 @@ export interface PublishTokensNpmResult {
 
 export function publishTokens({
   outputDirectory,
-  mode,
   tag,
   publishTimestamp = Date.now(),
   versionOverride,
   internalDependencyVersionOverrides = {},
   logger,
 }: PublishTokensOptions): Promise<PublishTokensResult> {
+  const publishTag: string = tag === undefined || tag === '' ? 'latest' : tag;
+
   return logger.asyncTask(
-    `publish-tokens (${mode})`,
+    `publish-tokens (${publishTag})`,
     async (logger: Logger): Promise<PublishTokensResult> => {
       const npmResult: PublishNpmPackageDirectoryResult = await publishNpmPackageDirectory({
         packageDirectory: join(outputDirectory, 'web'),
-        mode,
         tag,
         publishTimestamp,
         versionOverride,

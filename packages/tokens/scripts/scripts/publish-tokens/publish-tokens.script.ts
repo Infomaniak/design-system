@@ -19,29 +19,21 @@ const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
 export async function publishTokensScript(): Promise<void> {
   const {
-    values: { mode, tag },
+    values: { tag },
   } = parseArgs({
     options: {
-      mode: {
-        type: 'string',
-        short: 'm',
-        default: 'dev',
-      },
       tag: {
         type: 'string',
+        short: 't',
+        default: 'dev',
       },
     },
   });
-
-  if (mode !== 'prod' && mode !== 'dev') {
-    throw new Error(`Invalid mode: ${mode}.`);
-  }
 
   loadOptionallyEnvFile(logger);
 
   await publishTokens({
     outputDirectory: OUTPUT_DIR,
-    mode,
     tag,
     publishTimestamp: parseNumber(process.env['CI_PUBLISH_TIMESTAMP']),
     versionOverride: process.env['NPM_PUBLISH_VERSION'],

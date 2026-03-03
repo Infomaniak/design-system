@@ -9,6 +9,7 @@ import type { PublishMode } from '../publish-mode.ts';
 export interface PublishNpmPackageDirectoryOptions {
   readonly packageDirectory: string;
   readonly mode: PublishMode;
+  readonly tag?: string;
   readonly publishTimestamp?: number;
   readonly versionOverride?: string;
   readonly internalDependencyVersionOverrides?: Readonly<Record<string, string>>;
@@ -20,12 +21,11 @@ export interface PublishNpmPackageDirectoryResult {
 }
 
 export interface BuildNpmPublishArgsOptions {
-  readonly mode: 'prod' | 'dev';
   readonly tag?: string;
 }
 
 export interface ResolvePublishVersionOptions {
-  readonly mode: 'prod' | 'dev';
+  readonly tag?: string;
   readonly packageVersion: string;
   readonly publishTimestamp: number;
   readonly versionOverride?: string;
@@ -43,7 +43,11 @@ const DEPENDENCY_FIELD_NAMES = [
   'devDependencies',
 ] as const;
 
-export function buildNpmPublishArgs({ mode, tag }: BuildNpmPublishArgsOptions): string[] {
+function isStableTag(tag?: string): tag is undefined | '' | 'latest' {
+  return tag === undefined || tag === '' || tag === 'latest';
+}
+
+export function buildNpmPublishArgs({ tag }: BuildNpmPublishArgsOptions): string[] {
   const args: string[] = [
     '--//registry.npmjs.org/:_authToken=$NPM_TOKEN',
     'publish',
@@ -51,12 +55,7 @@ export function buildNpmPublishArgs({ mode, tag }: BuildNpmPublishArgsOptions): 
     'public',
   ];
 
-  if (mode === 'dev') {
-    args.push('--tag', 'dev');
-    return args;
-  }
-
-  if (tag !== undefined && tag !== '') {
+  if (!isStableTag(tag)) {
     args.push('--tag', tag);
   }
 
@@ -64,7 +63,7 @@ export function buildNpmPublishArgs({ mode, tag }: BuildNpmPublishArgsOptions): 
 }
 
 export function resolvePublishVersion({
-  mode,
+  tag,
   packageVersion,
   publishTimestamp,
   versionOverride,
@@ -73,15 +72,15 @@ export function resolvePublishVersion({
     return versionOverride;
   }
 
-  if (mode === 'dev') {
-    if (packageVersion.includes('-')) {
-      throw new Error(`Invalid version: ${packageVersion}.`);
-    }
-
-    return `${packageVersion}-dev.${publishTimestamp}`;
+  if (isStableTag(tag)) {
+    return packageVersion;
   }
 
-  return packageVersion;
+  if (packageVersion.includes('-')) {
+    throw new Error(`Invalid version: ${packageVersion}.`);
+  }
+
+  return `${packageVersion}-${tag}.${publishTimestamp}`;
 }
 
 export function rewriteInternalDependencyVersions({
@@ -139,7 +138,6 @@ export function rewriteInternalDependencyVersions({
 
 export async function publishNpmPackageDirectory({
   packageDirectory,
-  mode,
   tag,
   publishTimestamp = Date.now(),
   versionOverride,
@@ -159,9 +157,9 @@ export async function publishNpmPackageDirectory({
         throw new Error(`Missing "version" in ${packageJsonFilePath}.`);
       }
 
-      const args: string[] = buildNpmPublishArgs({ mode, tag });
+      const args: string[] = buildNpmPublishArgs({ tag });
       const version: string = resolvePublishVersion({
-        mode,
+        tag,
         packageVersion,
         publishTimestamp,
         versionOverride,

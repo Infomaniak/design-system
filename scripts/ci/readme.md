@@ -39,7 +39,7 @@ This document describes:
 - `package.json` files in the repo must keep stable versions (`x.y.z`)
 - `-dev` / `-rc` suffixes are generated in CI
 - A single timestamp is shared across the whole CI run
-- Internal dependents of an impacted package are republished in prerelease mode (`dev/rc`)
+- Internal dependents of an impacted package are republished on prerelease tags (`dev`/`rc`)
 
 ## Key Files
 
@@ -56,7 +56,7 @@ This document describes:
 
 This helper centralizes:
 
-- published version resolution (`dev/prod` + CI override)
+- published version resolution (publish `tag` + CI override)
 - temporary rewrite of internal dependencies (`NPM_INTERNAL_DEP_OVERRIDES_JSON`)
 - `npm publish`
 - `package.json` restoration
@@ -91,14 +91,14 @@ These variables are driven by `scripts/ci/publish/ci-publish.script.ts` and/or t
 
 ## Impacted Package Detection (prerelease)
 
-For `dev` / `rc` modes, `scripts/ci/publish/src/ci-publish.ts`:
+For `dev` / `rc` prerelease tags, `scripts/ci/publish/src/ci-publish.ts`:
 
 1. detects changed files via `git diff --name-only <base> <head>`
 2. maps files to publishable packages (`packages/*`)
 3. propagates impact to internal dependents (dependency graph)
 4. publishes in topological order
 
-## Internal Dependency Rewrite in Prerelease Mode
+## Internal Dependency Rewrite for Prerelease Publishes
 
 Problem addressed:
 
@@ -150,7 +150,6 @@ export async function publishMyPackage(): Promise<void> {
 
   await publishNpmPackageDirectory({
     packageDirectory: join(process.cwd(), 'dist/npm'),
-    mode: 'prod',
     tag: process.env['NPM_DIST_TAG'],
     publishTimestamp: parseNumber(process.env['CI_PUBLISH_TIMESTAMP']),
     versionOverride: process.env['NPM_PUBLISH_VERSION'],
@@ -165,7 +164,7 @@ export async function publishMyPackage(): Promise<void> {
 
 Note:
 
-- The mode can stay `'prod'` for `publish:ci` if the version is provided by `NPM_PUBLISH_VERSION`
+- Use `tag: 'latest'` (or omit `tag`) for stable publishes, and `tag: 'dev' | 'rc'` for prereleases
 - The helper handles temporary `package.json` rewrite/restoration
 
 ## Recommended Verification (before merge)

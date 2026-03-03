@@ -6,19 +6,8 @@ import {
 } from './publish-package-directory.ts';
 
 describe('buildNpmPublishArgs', () => {
-  it('uses dev tag in dev mode', () => {
-    expect(buildNpmPublishArgs({ mode: 'dev' })).toEqual([
-      '--//registry.npmjs.org/:_authToken=$NPM_TOKEN',
-      'publish',
-      '--access',
-      'public',
-      '--tag',
-      'dev',
-    ]);
-  });
-
-  it('does not set tag in prod mode by default', () => {
-    expect(buildNpmPublishArgs({ mode: 'prod' })).toEqual([
+  it('does not set tag when publishing to latest', () => {
+    expect(buildNpmPublishArgs({ tag: 'latest' })).toEqual([
       '--//registry.npmjs.org/:_authToken=$NPM_TOKEN',
       'publish',
       '--access',
@@ -26,8 +15,8 @@ describe('buildNpmPublishArgs', () => {
     ]);
   });
 
-  it('sets custom dist-tag in prod mode when provided', () => {
-    expect(buildNpmPublishArgs({ mode: 'prod', tag: 'rc' })).toEqual([
+  it('sets dist-tag when publishing to a prerelease channel', () => {
+    expect(buildNpmPublishArgs({ tag: 'rc' })).toEqual([
       '--//registry.npmjs.org/:_authToken=$NPM_TOKEN',
       'publish',
       '--access',
@@ -42,7 +31,7 @@ describe('resolvePublishVersion', () => {
   it('uses explicit ci override when provided', () => {
     expect(
       resolvePublishVersion({
-        mode: 'prod',
+        tag: 'latest',
         packageVersion: '1.2.3',
         publishTimestamp: 1234,
         versionOverride: '1.2.3-rc.1234',
@@ -50,14 +39,24 @@ describe('resolvePublishVersion', () => {
     ).toBe('1.2.3-rc.1234');
   });
 
-  it('generates dev prerelease in dev mode without override', () => {
+  it('generates dev prerelease from dev tag without override', () => {
     expect(
       resolvePublishVersion({
-        mode: 'dev',
+        tag: 'dev',
         packageVersion: '1.2.3',
         publishTimestamp: 1234,
       }),
     ).toBe('1.2.3-dev.1234');
+  });
+
+  it('generates rc prerelease from rc tag without override', () => {
+    expect(
+      resolvePublishVersion({
+        tag: 'rc',
+        packageVersion: '1.2.3',
+        publishTimestamp: 1234,
+      }),
+    ).toBe('1.2.3-rc.1234');
   });
 });
 
