@@ -1,13 +1,17 @@
 import { join, normalize, resolve, sep } from 'node:path';
 import process from 'node:process';
+import type { PackageJson } from '../../../helpers/file/package-json/package-json.ts';
+import { listGitChangedFiles } from '../../../helpers/git/list-git-changed-files.ts';
 import { type Logger } from '../../../helpers/log/logger.ts';
 import { execCommand, execCommandInherit } from '../../../helpers/misc/exec-command.ts';
 import { isNpmVersionPublished as defaultIsNpmVersionPublished } from '../../../helpers/npm/is-npm-version-published/is-npm-version-published.ts';
+import {
+  discoverPackageJsonFiles,
+  type PackageJsonWithPath,
+} from '../../../helpers/publish/discover/discover-package-json-files.ts';
 import type { PublishMode } from '../../../helpers/publish/publish-mode/publish-mode.ts';
 import { getPublishContext, type PublishContext } from './branch-policy.ts';
 import type { CiPublishContext } from './context/infer-ci-publish-context.ts';
-import { discoverPublishablePackages } from './discover/discover-publishable-packages.ts';
-import type { PublishablePackage } from './discover/publishable-package.ts';
 import { topologicalSortPackages } from './topological/topological-sort-packages.ts';
 
 export type IsNpmVersionPublished = (name: string, version: string) => Promise<boolean>;
@@ -50,17 +54,23 @@ export interface CiPublishDecision {
 
 const STABLE_VERSION_REGEXP: RegExp = /^\d+\.\d+\.\d+$/;
 
-interface GetImpactedPackageNamesOptions {
+/**
+ * @deprecated
+ */
+interface GetImpactedPackageNamesOptionsLegacy {
   readonly packages: readonly PublishablePackage[];
   readonly rootDirectory: string;
   readonly changedFiles: readonly string[];
 }
 
-function getImpactedPackageNames({
+/**
+ * @deprecated
+ */
+function getImpactedPackageNamesLegacy({
   packages,
   rootDirectory,
   changedFiles,
-}: GetImpactedPackageNamesOptions): ReadonlySet<string> {
+}: GetImpactedPackageNamesOptionsLegacy): ReadonlySet<string> {
   const directImpactedNames: Set<string> = new Set<string>();
   const packagesByName: Map<string, PublishablePackage> = new Map(
     packages.map((pkg): readonly [string, PublishablePackage] => [pkg.name, pkg]),
@@ -157,7 +167,10 @@ function computePublishVersion({
   return `${baseVersion}-${tag}.${publishTimestamp}`;
 }
 
-async function listChangedFilesFromGit(
+/**
+ * @deprecated
+ */
+async function listChangedFilesFromGitLegacy(
   logger: Logger,
   rootDirectory: string,
   baseSha: string,
@@ -237,14 +250,14 @@ export async function ciPublishLegacy(
     logger,
   }: CiPublishLegacyOptions,
   {
-    discoverPublishablePackages: discover = discoverPublishablePackages,
+    discoverPublishablePackages: discover = discoverPackageJsonFiles,
     isNpmVersionPublished = defaultIsNpmVersionPublished,
     listChangedFiles = async (
       listRootDirectory: string,
       baseSha: string,
       headSha: string,
     ): Promise<readonly string[]> =>
-      listChangedFilesFromGit(logger, listRootDirectory, baseSha, headSha),
+      listChangedFilesFromGitLegacy(logger, listRootDirectory, baseSha, headSha),
     publishWorkspacePackage = createWorkspacePublisher({
       logger,
       rootDirectory,
@@ -292,7 +305,7 @@ export async function ciPublishLegacy(
         gitBaseSha,
         gitHeadSha,
       );
-      const impactedPackageNames: ReadonlySet<string> = getImpactedPackageNames({
+      const impactedPackageNames: ReadonlySet<string> = getImpactedPackageNamesLegacy({
         packages,
         rootDirectory,
         changedFiles,
@@ -401,15 +414,108 @@ export async function ciPublish({
   logger,
   // publish context
   branchName,
+  baseSha,
+  headSha,
   mode,
   shouldPublish,
 }: CiPublishOptions): Promise<void> {
   const packagesDirectory: string = join(rootDirectory, 'packages');
 
+  const publishablePackages: readonly PackageJson[] = topologicalSortPackages<PackageJson>(
+    (
+      await Array.fromAsync(
+        discoverPackageJsonFiles({
+          packagesDirectory,
+        }),
+      )
+    )
+      .filter(([, { scripts }]: PackageJsonWithPath): boolean => {
+        return scripts !== undefined && Reflect.has(scripts, 'publish');
+      })
+      .map(([, packageJson]: PackageJsonWithPath): PackageJson => {
+        return packageJson;
+      }),
+  );
+
+  console.log(publishablePackages);
+
+  if (publishablePackages.length === 0) {
+    logger.info('[skip] No publishable package found.');
+    return;
+  }
+
   console.log(
-    await discoverPublishablePackages({
-      packagesDirectory,
+    await listGitChangedFiles({
+      logger,
+      fromCommitId: baseSha,
+      toCommitId: headSha,
     }),
   );
+
   // TODO continue here
 }
+
+/*---*/
+
+// interface GetImpactedPackageNamesOptions {
+//   readonly packages: readonly PublishablePackage[];
+//   readonly rootDirectory: string;
+//   readonly changedFiles: readonly string[];
+// }
+//
+// function getImpactedPackageNames({
+//   packages,
+//   rootDirectory,
+//   changedFiles,
+// }: GetImpactedPackageNamesOptions): ReadonlySet<string> {
+//   const directImpactedNames: Set<string> = new Set<string>();
+//   const packagesByName: Map<string, PublishablePackage> = new Map(
+//     packages.map((pkg): readonly [string, PublishablePackage] => [pkg.name, pkg]),
+//   );
+//   const dependantsByName: Map<string, string[]> = new Map(
+//     packages.map((pkg): readonly [string, string[]] => [pkg.name, []]),
+//   );
+//
+//   for (const pkg of packages) {
+//     for (const dependencyName of pkg.dependencies) {
+//       if (!packagesByName.has(dependencyName)) {
+//         continue;
+//       }
+//
+//       dependantsByName.get(dependencyName)!.push(pkg.name);
+//     }
+//   }
+//
+//   for (const changedFile of changedFiles) {
+//     const absoluteChangedFilePath: string = normalize(resolve(rootDirectory, changedFile));
+//
+//     for (const pkg of packages) {
+//       const packageDirectoryPath: string = normalize(resolve(pkg.path));
+//
+//       if (
+//         absoluteChangedFilePath === packageDirectoryPath ||
+//         absoluteChangedFilePath.startsWith(`${packageDirectoryPath}${sep}`)
+//       ) {
+//         directImpactedNames.add(pkg.name);
+//       }
+//     }
+//   }
+//
+//   const impactedNames: Set<string> = new Set<string>(directImpactedNames);
+//   const queue: string[] = Array.from(directImpactedNames);
+//
+//   while (queue.length > 0) {
+//     const packageName: string = queue.shift()!;
+//
+//     for (const dependantName of dependantsByName.get(packageName) ?? []) {
+//       if (impactedNames.has(dependantName)) {
+//         continue;
+//       }
+//
+//       impactedNames.add(dependantName);
+//       queue.push(dependantName);
+//     }
+//   }
+//
+//   return impactedNames;
+// }

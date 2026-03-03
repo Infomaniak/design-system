@@ -1,11 +1,9 @@
-export interface TopologicalPackageNode {
-  readonly name: string;
-  readonly dependencies: readonly string[];
-}
+import type { PackageJson } from '../../../../helpers/file/package-json/package-json.ts';
 
-export function topologicalSortPackages<GPackage extends TopologicalPackageNode>(
-  packages: readonly GPackage[],
-): readonly GPackage[] {
+export function topologicalSortPackages<
+  GPackage extends Pick<PackageJson, 'name' | 'dependencies'>,
+>(packages: readonly GPackage[]): readonly GPackage[] {
+  // TODO improve algorithm
   const packagesByName: Map<string, GPackage> = new Map<string, GPackage>(
     packages.map((pkg: GPackage): readonly [string, GPackage] => [pkg.name, pkg]),
   );
@@ -18,14 +16,17 @@ export function topologicalSortPackages<GPackage extends TopologicalPackageNode>
     dependantsByName.set(pkg.name, []);
   }
 
-  for (const pkg of packages) {
-    for (const dependencyName of pkg.dependencies) {
+  for (const { name, dependencies } of packages) {
+    const dependencyList: readonly string[] =
+      dependencies === undefined ? [] : Object.keys(dependencies);
+
+    for (const dependencyName of dependencyList) {
       if (!packagesByName.has(dependencyName)) {
         continue;
       }
 
-      inDegreeByName.set(pkg.name, (inDegreeByName.get(pkg.name) ?? 0) + 1);
-      dependantsByName.get(dependencyName)!.push(pkg.name);
+      inDegreeByName.set(name, (inDegreeByName.get(name) ?? 0) + 1);
+      dependantsByName.get(dependencyName)!.push(name);
     }
   }
 
