@@ -17,16 +17,26 @@ export async function publishIosPackage({
   versionOverride,
   logger,
 }: PublishIosTokensOptions): Promise<void> {
+  if (!versionOverride) {
+    throw new Error(
+      'publishIosPackage: versionOverride is required. Make sure NPM_PUBLISH_VERSION is set in CI or pass versionOverride explicitly.'
+    );
+  }
+
+  const githubOrganisation: string = 'Infomaniak';
+  const iosRepoName: string = 'ios-design-system';
+
   const iosPublishBranchName: string = await createIosGithubBranch({
     logger,
+    repoName: iosRepoName,
     packageDirectory: join(outputDirectory, 'ios'),
-    version: versionOverride!,
+    version: versionOverride,
   });
 
   if (tag != 'dev') {
     await createGithubPR({
-      owner: 'Infomaniak',
-      repo: 'ios-design-system',
+      owner: githubOrganisation,
+      repo: iosRepoName,
       authToken: process.env['CI_PR_AUTH_TOKEN']!,
       title: `chore: Update to ${iosPublishBranchName}`,
       body: `Update to ${iosPublishBranchName}`,
