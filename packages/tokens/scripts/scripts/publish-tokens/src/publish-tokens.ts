@@ -1,12 +1,10 @@
 import { join } from 'node:path';
-import { rm } from 'node:fs/promises';
-import { join, resolve } from 'node:path';
 import { Logger } from '../../../../../../scripts/helpers/log/logger.ts';
 import {
   publishNpmPackageDirectory,
   type PublishNpmPackageDirectoryResult,
 } from '../../../../../../scripts/helpers/npm/publish-package-directory.ts';
-import { execCommandInherit } from '../../../../../../scripts/helpers/misc/exec-command.ts';
+import { publishIosPackage } from './ios/publish-ios-package.ts';
 
 export {
   buildNpmPublishArgs,
@@ -52,6 +50,8 @@ export function publishTokens({
         publishTimestamp,
         versionOverride,
         internalDependencyVersionOverrides,
+        logger,
+      });
 
       await publishIosPackage({
         outputDirectory,

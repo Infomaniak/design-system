@@ -11,25 +11,39 @@ export interface CreateGithubBranchOptions {
   readonly version: string;
 }
 
+export interface FilesMoveOptions {
+  readonly source: string;
+  readonly destination: string;
+}
+
 async function copyIosFiles({
   logger,
   packageDirectory,
   repoDirectory,
 }: CopyFilesContext): Promise<void> {
-  await execCommandInherit(
-    logger,
-    'cp',
-    [
-      join(packageDirectory, 'EsdsColorRawTokens.swift'),
-      `"${join(repoDirectory, 'CatalogApp/DesignSystem Catalog/')}"`,
-    ],
+  const filesToMove: FilesMoveOptions[] = [
     {
-      cwd: packageDirectory,
-      shell: true,
+      source: join(packageDirectory, 'EsdsColorRawTokens.swift'),
+      destination: join(repoDirectory, 'CatalogApp/DesignSystem Catalog/'),
     },
-  );
+    {
+      source: join(packageDirectory, 'Colors.xcassets'),
+      destination: join(repoDirectory, 'Sources/iOSDesignSystem/'),
+    },
+  ];
+
+  for (const { source, destination } of filesToMove) {
+    await execCommandInherit(logger, 'cp', ['-r', source, destination], {
+      cwd: packageDirectory,
+    });
+  }
 }
 
+/**
+ * Creates a new branch with the updated iOS token files and pushes it to the remote repository.
+ *
+ * @returns The name of the created branch.
+ */
 export function createIosGithubBranch({
   logger,
   repoName,
