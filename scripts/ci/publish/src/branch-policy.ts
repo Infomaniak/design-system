@@ -1,4 +1,4 @@
-import type { PublishMode } from '../../../helpers/publish/publish-mode.ts';
+import type { PublishMode } from '../../../helpers/publish/publish-mode/publish-mode.ts';
 
 export interface GetPublishContextOptions {
   readonly eventName: string;

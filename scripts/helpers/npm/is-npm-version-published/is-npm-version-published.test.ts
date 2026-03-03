@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { isNpmVersionPublished } from './npm-package-version.ts';
+import { isNpmVersionPublished } from './is-npm-version-published.ts';
 
 describe('isNpmVersionPublished', () => {
   afterEach(() => {

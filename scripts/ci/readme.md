@@ -87,7 +87,7 @@ These variables are driven by `scripts/ci/publish/ci-publish.script.ts` and/or t
 - `NPM_DIST_TAG`: `dev` | `rc` | `latest`
 - `NPM_PUBLISH_VERSION`: exact version to publish
 - `NPM_INTERNAL_DEP_OVERRIDES_JSON`: JSON object `<packageName, version>`
-- `NPM_TOKEN`: npm token
+- `NPM_AUTH_TOKEN`: npm token
 
 ## Impacted Package Detection (prerelease)
 
@@ -189,7 +189,7 @@ yarn vitest run scripts/ci/publish/src/*.test.ts \
 
 - The current CI discoverer only scans `packages/*` (not `apps/*`)
 - Each new publishable library still needs a `publish:ci` wrapper (but the heavy logic is now shared)
-- External PRs (forks) do not have access to `NPM_TOKEN`, so real publish is not possible (dry-run is expected)
+- External PRs (forks) do not have access to `NPM_AUTH_TOKEN`, so real publish is not possible (dry-run is expected)
 
 ## Test References (current evidence)
 

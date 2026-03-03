@@ -2,19 +2,18 @@ import { Dirent } from 'node:fs';
 import { readdir } from 'node:fs/promises';
 import { join, normalize, resolve, sep } from 'node:path';
 import process from 'node:process';
-import { readJsonFile } from '../../../helpers/file/read-json-file.ts';
+import type { PackageJson } from '../../../helpers/file/package-json/package-json.ts';
+import { readPackageJsonFile } from '../../../helpers/file/package-json/read-package-json-file.ts';
 import { type Logger } from '../../../helpers/log/logger.ts';
 import { execCommand, execCommandInherit } from '../../../helpers/misc/exec-command.ts';
-import type { PublishMode } from '../../../helpers/publish/publish-mode.ts';
+import { isNpmVersionPublished as defaultIsNpmVersionPublished } from '../../../helpers/npm/is-npm-version-published/is-npm-version-published.ts';
+import type { PublishMode } from '../../../helpers/publish/publish-mode/publish-mode.ts';
 import { isNodeJsError } from '../../../helpers/types/node-js-error/is-node-js-error.ts';
-import { packageJsonSchema } from '../../../helpers/types/package-json/package-json.schema.ts';
-import type { PackageJson } from '../../../helpers/types/package-json/package-json.ts';
 import { getPublishContext, type PublishContext } from './branch-policy.ts';
-import { isNpmVersionPublished as defaultIsNpmVersionPublished } from './npm-package-version.ts';
 import {
   topologicalSortPackages,
   type TopologicalPackageNode,
-} from './topological-sort-packages.ts';
+} from './topological/topological-sort-packages.ts';
 
 export interface PublishablePackage extends TopologicalPackageNode {
   readonly directory: string;
@@ -95,7 +94,7 @@ export async function discoverPublishablePackages(
     let packageJson: PackageJson;
 
     try {
-      packageJson = packageJsonSchema.parse(await readJsonFile<PackageJson>(packageJsonPath));
+      packageJson = await readPackageJsonFile(packageJsonPath);
     } catch (error: unknown) {
       if (isNodeJsError(error) && error.code === 'ENOENT') {
         continue;
@@ -197,6 +196,9 @@ interface ComputePublishVersionOptions {
   readonly publishTimestamp: number;
 }
 
+/**
+ * @deprecated
+ */
 function computePublishVersion({
   baseVersion,
   tag,

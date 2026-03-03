@@ -18,30 +18,32 @@ const OUTPUT_DIR: string = join(ROOT_DIR, 'dist');
 const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
 export async function publishTokensScript(): Promise<void> {
-  const {
-    values: { tag },
-  } = parseArgs({
-    options: {
-      tag: {
-        type: 'string',
-        short: 't',
-        default: 'dev',
+  return logger.asyncTask('publish-tokens.script', async (logger: Logger): Promise<void> => {
+    const {
+      values: { tag },
+    } = parseArgs({
+      options: {
+        tag: {
+          type: 'string',
+          short: 't',
+          default: 'dev',
+        },
       },
-    },
-  });
+    });
 
-  loadOptionallyEnvFile(logger);
+    loadOptionallyEnvFile(logger);
 
-  await publishTokens({
-    outputDirectory: OUTPUT_DIR,
-    tag,
-    publishTimestamp: parseNumber(process.env['CI_PUBLISH_TIMESTAMP']),
-    versionOverride: process.env['NPM_PUBLISH_VERSION'],
-    internalDependencyVersionOverrides: parseJsonStringRecord(
-      process.env['NPM_INTERNAL_DEP_OVERRIDES_JSON'],
-      'NPM_INTERNAL_DEP_OVERRIDES_JSON',
-    ),
-    logger,
+    await publishTokens({
+      outputDirectory: OUTPUT_DIR,
+      tag,
+      publishTimestamp: parseNumber(process.env['CI_PUBLISH_TIMESTAMP']),
+      versionOverride: process.env['NPM_PUBLISH_VERSION'],
+      internalDependencyVersionOverrides: parseJsonStringRecord(
+        process.env['NPM_INTERNAL_DEP_OVERRIDES_JSON'],
+        'NPM_INTERNAL_DEP_OVERRIDES_JSON',
+      ),
+      logger,
+    });
   });
 }
 

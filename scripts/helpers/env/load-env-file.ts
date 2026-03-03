@@ -17,6 +17,6 @@ export function loadOptionallyEnvFile(logger: Logger): void {
   try {
     loadEnvFile();
   } catch {
-    logger.warn('.env file not found.');
+    logger.warn('NON-BLOCKING: .env file not found.');
   }
 }

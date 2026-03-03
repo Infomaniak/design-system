@@ -1,6 +1,9 @@
 import { rm } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import type { BuildConfig } from '../../../../../scripts/helpers/build/build-config/build-config.ts';
+import { getEnvBuildConfig } from '../../../../../scripts/helpers/build/build-config/env/get-env-build-config.ts';
+import { loadOptionallyEnvFile } from '../../../../../scripts/helpers/env/load-env-file.ts';
 import { DEFAULT_LOG_LEVEL } from '../../../../../scripts/helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../../../../scripts/helpers/log/logger.ts';
 import { buildTokens } from './src/build/build-tokens.ts';
@@ -16,20 +19,28 @@ const OUTPUT_DIR: string = join(ROOT_DIR, 'dist');
 
 const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
-export async function buildTokensScript(): Promise<void> {
-  await rm(OUTPUT_DIR, { force: true, recursive: true });
+export function buildTokensScript(): Promise<void> {
+  return logger.asyncTask('build-tokens.script', async (logger: Logger): Promise<void> => {
+    loadOptionallyEnvFile(logger);
 
-  await buildTokens({
-    sourceDirectory: SOURCE_DIR,
-    outputDirectory: OUTPUT_DIR,
-    logger,
-  });
+    await rm(OUTPUT_DIR, { force: true, recursive: true });
 
-  await generatePackage({
-    rootDirectory: ROOT_DIR,
-    workspaceRootDirectory: WORKSPACE_ROOT_DIR,
-    outputDirectory: OUTPUT_DIR,
-    logger,
+    const buildConfig: BuildConfig = getEnvBuildConfig();
+
+    await buildTokens({
+      ...buildConfig,
+      sourceDirectory: SOURCE_DIR,
+      outputDirectory: OUTPUT_DIR,
+      logger,
+    });
+
+    await generatePackage({
+      ...buildConfig,
+      rootDirectory: ROOT_DIR,
+      workspaceRootDirectory: WORKSPACE_ROOT_DIR,
+      outputDirectory: OUTPUT_DIR,
+      logger,
+    });
   });
 }
 
