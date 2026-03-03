@@ -8,7 +8,7 @@ import type { PublishMode } from '../publish-mode.ts';
 
 export interface PublishNpmPackageDirectoryOptions {
   readonly packageDirectory: string;
-  readonly mode: PublishMode;
+  readonly mode?: PublishMode;
   readonly tag?: string;
   readonly publishTimestamp?: number;
   readonly versionOverride?: string;

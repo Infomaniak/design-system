@@ -37,7 +37,8 @@ export interface CiPublishOptions {
 export type IsNpmVersionPublished = (name: string, version: string) => Promise<boolean>;
 
 export interface PublishWorkspacePackageOptions {
-  readonly mode: PublishMode;
+  readonly mode?: PublishMode; // TODO
+  readonly tag: PublishContext['tag'];
   readonly version: string;
   readonly internalDependencyVersionOverrides?: Readonly<Record<string, string>>;
 }
@@ -66,7 +67,8 @@ export interface CiPublishDecision {
   readonly packageName: string;
   readonly baseVersion: string;
   readonly publishVersion: string;
-  readonly mode: PublishMode;
+  readonly mode?: PublishMode; // TODO
+  readonly tag: PublishContext['tag'];
   readonly action: 'skip' | 'publish' | 'publish-dry-run';
 }
 
@@ -122,10 +124,6 @@ export async function discoverPublishablePackages(
   }
 
   return publishablePackages;
-}
-
-function normalizePath(path: string): string {
-  return path.replaceAll('\\', '/').replace(/\/+$/, '');
 }
 
 interface GetImpactedPackageNamesOptions {
@@ -193,7 +191,8 @@ function getImpactedPackageNames({
 
 interface ComputePublishVersionOptions {
   readonly baseVersion: string;
-  readonly mode: PublishMode;
+  readonly tag: PublishContext['tag'];
+  readonly mode?: PublishMode; // TODO
   readonly strict: boolean;
   readonly publishTimestamp: number;
 }
@@ -214,15 +213,16 @@ function computePublishVersion({
     return baseVersion;
   }
 
-  switch (mode) {
-    case 'stable':
-      return baseVersion;
-    case 'rc':
-    case 'dev':
-      return `${baseVersion}-${mode}.${publishTimestamp}`;
-    default:
-      throw new Error(`Invalid mode: ${mode}.`);
-  }
+  // switch (mode) {
+  //   case 'stable':
+  //     return baseVersion;
+  //   case 'rc':
+  //   case 'dev':
+  //     return `${baseVersion}-${mode}.${publishTimestamp}`;
+  //   default:
+  //     throw new Error(`Invalid mode: ${mode}.`);
+  // }
+
   if (tag === 'latest') {
     return baseVersion;
   }
@@ -263,14 +263,14 @@ export function createWorkspacePublisher({
 }: CreateWorkspacePublisherOptions): PublishWorkspacePackage {
   return async (
     workspaceName: string,
-    { mode, version, internalDependencyVersionOverrides }: PublishWorkspacePackageOptions,
+    { tag, version, internalDependencyVersionOverrides }: PublishWorkspacePackageOptions,
   ): Promise<void> => {
     await execCommandInherit(logger, 'yarn', ['workspace', workspaceName, 'run', 'publish:ci'], {
       shell: true,
       cwd: rootDirectory,
       env: {
         ...process.env,
-        NPM_DIST_MODE: mode,
+        NPM_DIST_TAG: tag,
         NPM_PUBLISH_VERSION: version,
         ...(internalDependencyVersionOverrides !== undefined &&
         Object.keys(internalDependencyVersionOverrides).length > 0
@@ -392,7 +392,6 @@ export async function ciPublish(
 
   for (const pkg of candidatePackages) {
     const publishVersion: string = publishVersionByPackageName.get(pkg.name)!;
-    const { mode }: PublishContext = publishContext;
     const isPublished: boolean = await isNpmVersionPublished(pkg.name, publishVersion);
 
     if (isPublished) {
@@ -401,32 +400,32 @@ export async function ciPublish(
         packageName: pkg.name,
         baseVersion: pkg.version,
         publishVersion,
-        mode,
+        tag,
         action: 'skip',
       });
       continue;
     }
 
     if (dryRun) {
-      logger.info(`[dry-run] Would publish ${pkg.name}@${publishVersion} with mode "${mode}".`);
+      logger.info(`[dry-run] Would publish ${pkg.name}@${publishVersion} with tag "${tag}".`);
       decisions.push({
         packageName: pkg.name,
         baseVersion: pkg.version,
         publishVersion,
-        mode,
+        tag,
         action: 'publish-dry-run',
       });
       continue;
     }
 
-    logger.info(`[publish] ${pkg.name}@${publishVersion} with mode "${mode}".`);
+    logger.info(`[publish] ${pkg.name}@${publishVersion} with tag "${tag}".`);
     await publishWorkspacePackage(pkg.name, {
       ...(Object.keys(internalDependencyVersionOverrides).length > 0
         ? {
             internalDependencyVersionOverrides,
           }
         : {}),
-      mode,
+      tag,
       version: publishVersion,
     });
 
@@ -434,7 +433,7 @@ export async function ciPublish(
       packageName: pkg.name,
       baseVersion: pkg.version,
       publishVersion,
-      mode,
+      tag,
       action: 'publish',
     });
   }

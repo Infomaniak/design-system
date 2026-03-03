@@ -7,8 +7,9 @@ export interface GetPublishContextOptions {
 }
 
 export interface PublishContext {
-  readonly mode: PublishMode;
+  readonly mode?: PublishMode;
   readonly shouldPublish: boolean;
+  readonly tag: 'dev' | 'rc' | 'latest';
 }
 
 export function getPublishContext({
@@ -26,14 +27,18 @@ export function getPublishContext({
     const shouldPublish: boolean = pullRequestLabels.includes('dev');
 
     return {
+      mode: 'dev',
       shouldPublish,
+      tag: 'dev',
     };
   }
 
   if (eventName === 'push') {
     if (branchName === 'develop') {
       return {
+        mode: 'rc',
         shouldPublish: true,
+        tag: 'rc',
       };
     }
 
@@ -41,6 +46,7 @@ export function getPublishContext({
       return {
         mode: 'prod',
         shouldPublish: true,
+        tag: 'latest',
       };
     }
 
