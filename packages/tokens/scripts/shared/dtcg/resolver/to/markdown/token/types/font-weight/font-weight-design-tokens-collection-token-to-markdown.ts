@@ -1,5 +1,8 @@
+import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
+import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
+import { curlyReferenceToString } from '../../../../../../design-token/reference/types/curly/to/string/curly-reference-to-string.ts';
 import type { FontWeightDesignTokensCollectionToken } from '../../../../../token/types/base/font-weight/font-weight-design-tokens-collection-token.ts';
-import { valueOrCurlyReferenceToCssVariableReference } from '../../../../css/reference/value-or-curly-reference-to-css-variable-reference.ts';
+import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { fontWeightDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/font-weight/value/font-weight-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
@@ -59,17 +62,28 @@ export function fontWeightDesignTokensCollectionTokenToMarkdown(
     sampleFontFamily = 'system-ui, sans-serif',
   } = options;
 
-  // Convert font weight to CSS value using shared helper
-  const weightValue = valueOrCurlyReferenceToCssVariableReference(
-    token.value,
-    fontWeightDesignTokensCollectionTokenValueToCssValue,
-  );
+  // Generate the CSS variable name for this token
+  const cssVariable = createCssVariableNameGenerator({
+    prefix: CSS_VARIABLE_PREFIX,
+  })(token.name);
 
-  // Create the font weight preview HTML
+  // Get the display value
+  // For T1 (direct values): show the actual weight (e.g., "400")
+  // For T2/T3 (references): show the CSS variable reference they point to
+  let displayValue: string;
+  if (isCurlyReference(token.value)) {
+    displayValue = curlyReferenceToString(token.value);
+  } else {
+    // Token has a direct value - resolve it to show the actual weight
+    displayValue = fontWeightDesignTokensCollectionTokenValueToCssValue(token.value);
+  }
+
+  // Create the font weight preview HTML using CSS variable directly
+  // The browser resolves var(--esds-*) via the CSS cascade
   const preview = /* HTML */ `
     <p
       style="
-      font-weight: ${weightValue};
+      font-weight: var(${cssVariable});
       font-size: ${sampleFontSize}px;
       font-family: ${sampleFontFamily};
       margin: 0;
@@ -89,14 +103,15 @@ export function fontWeightDesignTokensCollectionTokenToMarkdown(
       color: #6b7280;
     "
     >
-      ${weightValue}
+      ${displayValue}
     </div>
   `;
 
   return {
     preview,
     name: token.name.join('.'),
-    value: weightValue,
+    value: displayValue,
+    cssVariable,
     description: token.description ?? '',
   };
 }

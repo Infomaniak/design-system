@@ -165,31 +165,26 @@ function renderTokenToRow(
 }
 
 /**
- * Generates markdown table column headers based on the token types in the category
+ * Generates markdown table column headers.
+ * All token documentation tables use the same 4-column structure:
+ * Preview | Token Name | CSS Variable | Description
  */
-function generateColumnHeaders(category: string): string[] {
-  // Most categories use Preview, Name, Description
-  // Font category shows type since it mixes multiple token types
-  if (category === 'font') {
-    return ['| Preview | Name | Type | Description |', '|---------|------|------|-------------|'];
-  }
-
-  return ['| Preview | Name | Description |', '|---------|------|-------------|'];
+function generateColumnHeaders(_category: string): string[] {
+  return [
+    '| Preview | Token Name | CSS Variable | Description |',
+    '|---------|------------|--------------|-------------|',
+  ];
 }
 
 /**
  * Generates markdown table content for a row
  */
-function generateRowContent(row: MarkdownTokenRow, showType: boolean, tokenType?: string): string {
-  const { preview, name, description } = row;
+function generateRowContent(row: MarkdownTokenRow): string {
+  const { preview, name, cssVariable, description } = row;
   // Normalize HTML to remove newlines and extra whitespace for clean markdown rendering
   const normalizedPreview = normalizeHtml(preview);
 
-  if (showType && tokenType) {
-    return `| ${normalizedPreview} | \`${name}\` | ${tokenType} | ${description} |`;
-  }
-
-  return `| ${normalizedPreview} | \`${name}\` | ${description} |`;
+  return `| ${normalizedPreview} | \`${name}\` | \`${cssVariable}\` | ${description} |`;
 }
 
 /**
@@ -202,7 +197,6 @@ function generateCategoryMarkdown(
   logger: Logger,
 ): string {
   const [headerRow, separatorRow] = generateColumnHeaders(category);
-  const showType = category === 'font';
   const lines: string[] = [headerRow, separatorRow];
 
   // Render each token to a table row
@@ -211,8 +205,7 @@ function generateCategoryMarkdown(
       const row = renderTokenToRow(token, context);
 
       if (row) {
-        const tokenType = isDesignTokensCollectionTokenWithType(token) ? token.type : undefined;
-        lines.push(generateRowContent(row, showType, tokenType));
+        lines.push(generateRowContent(row));
       }
     } catch (error) {
       // Log error but continue with other tokens
