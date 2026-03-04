@@ -36,6 +36,7 @@ export function ciPublishScript(): Promise<void> {
     }
 
     const jobUrl: string = `${githubCiConfig.server_url}/${githubCiConfig.repository}/actions/runs/${githubCiConfig.run_id}`;
+    const shouldNotify: boolean = !dryRun && ciPublishContext.mode !== 'dev';
 
     try {
       await ciPublish({
@@ -45,7 +46,7 @@ export function ciPublishScript(): Promise<void> {
         logger,
       });
     } catch (error: unknown) {
-      if (!dryRun) {
+      if (shouldNotify) {
         await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
           await postKchatWebhookMessage({
             webhookId: getEnvKchatWebhookId(),
@@ -64,7 +65,7 @@ export function ciPublishScript(): Promise<void> {
       throw error;
     }
 
-    if (!dryRun && ciPublishContext.mode !== 'dev') {
+    if (shouldNotify) {
       await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
         await postKchatWebhookMessage({
           webhookId: getEnvKchatWebhookId(),
