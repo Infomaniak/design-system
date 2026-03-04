@@ -34,60 +34,45 @@ This document describes:
 - npm dist-tag: `latest`
 - Only if `name@x.y.z` does not already exist on npm
 
+### Graph
+
+```mermaid
+flowchart LR
+  EVENT("EVENT")
+  HAS_DEV_TAG{"has &quotdev&quot tag ?"}
+  SKIP_BUILD(["skip build"])
+  SEND_NOTIFICATION(["send success/error notification"])
+  BUILD_DEV_PACKAGES["build &quotdev&quot packages"]
+  PUBLISH_DEV_PACKAGES["publish &quotdev&quot packages"]
+  BUILD_RC_PACKAGES["build &quotrc&quot packages"]
+  PUBLISH_RC_PACKAGES["publish &quotrc&quot packages"]
+  BUILD_PROD_PACKAGES["build &quotprod&quot packages"]
+  PUBLISH_PROD_PACKAGES["publish &quotprod&quot packages"]
+  TARGET_BRANCH{"banch"}
+
+  EVENT -- "pull_request" --> HAS_DEV_TAG
+  HAS_DEV_TAG -- "no" --> SKIP_BUILD
+  HAS_DEV_TAG -- "yes" --> BUILD_DEV_PACKAGES
+  BUILD_DEV_PACKAGES --> PUBLISH_DEV_PACKAGES
+  PUBLISH_DEV_PACKAGES --> SEND_NOTIFICATION
+
+  EVENT -- "push" --> TARGET_BRANCH
+
+  TARGET_BRANCH -- "develop" --> BUILD_RC_PACKAGES
+  BUILD_RC_PACKAGES --> PUBLISH_RC_PACKAGES
+  PUBLISH_RC_PACKAGES --> SEND_NOTIFICATION
+
+  TARGET_BRANCH -- "main" --> BUILD_PROD_PACKAGES
+  BUILD_PROD_PACKAGES --> PUBLISH_PROD_PACKAGES
+  PUBLISH_PROD_PACKAGES --> SEND_NOTIFICATION
+```
+
 ## Important Rules
 
 - `package.json` files in the repo must keep stable versions (`x.y.z`)
 - `-dev` / `-rc` suffixes are generated in CI
 - A single timestamp is shared across the whole CI run
 - Internal dependents of an impacted package are republished on prerelease tags (`dev`/`rc`)
-
-## Key Files
-
-### CI Orchestrator (root)
-
-- `.github/workflows/publish.yml`
-- `scripts/ci/publish/ci-publish.script.ts`
-- `scripts/ci/publish/src/ci-publish.ts`
-- `scripts/ci/publish/src/branch-policy.ts`
-
-### Shared Helper (new foundation for publishable libraries)
-
-- `scripts/helpers/npm/publish-package-directory.ts`
-
-This helper centralizes:
-
-- published version resolution (publish `tag` + CI override)
-- temporary rewrite of internal dependencies (`NPM_INTERNAL_DEP_OVERRIDES_JSON`)
-- `npm publish`
-- `package.json` restoration
-
-### Current Implementation (concrete example)
-
-- `packages/tokens/scripts/scripts/publish-tokens/publish-tokens.script.ts`
-- `packages/tokens/scripts/scripts/publish-tokens/src/publish-tokens.ts`
-
-`tokens` is the first consumer of the shared helper.
-
-## CI Environment Contract
-
-These variables are driven by `scripts/ci/publish/ci-publish.script.ts` and/or the GitHub Actions workflow.
-
-### CI Context Variables
-
-- `GITHUB_EVENT_NAME`: `push` | `pull_request`
-- `GITHUB_REF_NAME`: current GitHub ref
-- `CI_PUBLISH_TARGET_BRANCH`: target branch (useful for PRs)
-- `CI_PUBLISH_PR_LABELS`: JSON array of PR labels
-- `CI_PUBLISH_GIT_BASE_SHA`: diff base SHA
-- `CI_PUBLISH_GIT_HEAD_SHA`: diff head SHA
-- `CI_PUBLISH_TIMESTAMP`: run timestamp
-
-### Publish Variables (env passed to package `publish:ci`)
-
-- `NPM_DIST_TAG`: `dev` | `rc` | `latest`
-- `NPM_PUBLISH_VERSION`: exact version to publish
-- `NPM_INTERNAL_DEP_OVERRIDES_JSON`: JSON object `<packageName, version>`
-- `NPM_AUTH_TOKEN`: npm token
 
 ## Impacted Package Detection (prerelease)
 
@@ -97,105 +82,3 @@ For `dev` / `rc` prerelease tags, `scripts/ci/publish/src/ci-publish.ts`:
 2. maps files to publishable packages (`packages/*`)
 3. propagates impact to internal dependents (dependency graph)
 4. publishes in topological order
-
-## Internal Dependency Rewrite for Prerelease Publishes
-
-Problem addressed:
-
-- if `lib-b` depends on `lib-a`, publishing `lib-b` in `rc/dev` without rewriting its dependency may leave it pointing to the stable version of `lib-a`
-
-Implemented solution:
-
-- the orchestrator computes a mapping of prerelease versions published in the run
-- this mapping is passed through `NPM_INTERNAL_DEP_OVERRIDES_JSON`
-- the shared helper temporarily rewrites these fields:
-- `dependencies`
-- `peerDependencies`
-- `optionalDependencies`
-- `devDependencies`
-
-## Add a New Publishable Library (checklist)
-
-### Prerequisites
-
-- The library lives in `packages/<name>` (the CI discoverer scans `packages/*`)
-- The library has a `package.json` with stable `name` and `version` (`x.y.z`)
-- The library exposes a `publish:ci` script
-
-### Recommended Steps
-
-1. Produce a publishable artifact with a `package.json` in a target directory (e.g. `dist/web`, `dist/npm`)
-2. Create a `publish:ci` wrapper that calls the shared helper `publishNpmPackageDirectory(...)`
-3. Parse standard CI env vars:
-
-- `NPM_DIST_TAG`
-- `NPM_PUBLISH_VERSION`
-- `CI_PUBLISH_TIMESTAMP`
-- `NPM_INTERNAL_DEP_OVERRIDES_JSON`
-
-4. Add minimum unit tests for the wrapper (or at least for package-specific logic)
-5. Verify the package is discovered as “publishable” (presence of `scripts.publish:ci`)
-
-## Minimal Template (package wrapper)
-
-```ts
-import process from 'node:process';
-import { join } from 'node:path';
-import { Logger } from '.../scripts/helpers/log/logger.ts';
-import { parseJsonStringRecord, parseNumber } from '.../scripts/helpers/env/parse-value.ts';
-import { publishNpmPackageDirectory } from '.../scripts/helpers/npm/publish-package-directory.ts';
-
-export async function publishMyPackage(): Promise<void> {
-  const logger = Logger.root();
-
-  await publishNpmPackageDirectory({
-    packageDirectory: join(process.cwd(), 'dist/npm'),
-    tag: process.env['NPM_DIST_TAG'],
-    publishTimestamp: parseNumber(process.env['CI_PUBLISH_TIMESTAMP']),
-    versionOverride: process.env['NPM_PUBLISH_VERSION'],
-    internalDependencyVersionOverrides: parseJsonStringRecord(
-      process.env['NPM_INTERNAL_DEP_OVERRIDES_JSON'],
-      'NPM_INTERNAL_DEP_OVERRIDES_JSON',
-    ),
-    logger,
-  });
-}
-```
-
-Note:
-
-- Use `tag: 'latest'` (or omit `tag`) for stable publishes, and `tag: 'dev' | 'rc'` for prereleases
-- The helper handles temporary `package.json` rewrite/restoration
-
-## Recommended Verification (before merge)
-
-### Unit Tests
-
-```bash
-yarn vitest run scripts/ci/publish/src/*.test.ts \
-  scripts/helpers/npm/publish-package-directory.test.ts \
-  packages/<lib>/.../publish-*.test.ts
-```
-
-### GitHub Actions Scenarios to Validate at Least Once
-
-- Internal PR without `dev` label -> no `ci:publish` step
-- Internal PR with `dev` label -> `dev` publish
-- Fork PR with `dev` label -> dry-run
-- push `develop` -> `rc` publish
-- push `main` -> stable publish if version is missing on npm
-
-## Limitations / Watchouts
-
-- The current CI discoverer only scans `packages/*` (not `apps/*`)
-- Each new publishable library still needs a `publish:ci` wrapper (but the heavy logic is now shared)
-- External PRs (forks) do not have access to `NPM_AUTH_TOKEN`, so real publish is not possible (dry-run is expected)
-
-## Test References (current evidence)
-
-Tests covering the workflow and the shared helper:
-
-- `scripts/ci/publish/src/ci-publish.test.ts`
-- `scripts/ci/publish/src/ci-publish.workspace-publisher.test.ts`
-- `scripts/helpers/npm/publish-package-directory.test.ts`
-- `packages/tokens/scripts/scripts/publish-tokens/src/publish-tokens.test.ts`
