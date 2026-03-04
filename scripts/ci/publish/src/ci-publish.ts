@@ -97,6 +97,8 @@ export async function ciPublish({
       mode: buildConfig.mode,
     } satisfies PublishConfig),
   });
+
+  // TODO update PR comment with dev version
 }
 
 /*---*/
