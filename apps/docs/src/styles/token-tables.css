@@ -1,0 +1,141 @@
+/**
+ * Unified styling for token documentation tables.
+ * These styles apply to tables with class="token-table" generated from design tokens.
+ */
+
+.token-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  border: none !important;
+}
+
+.token-table th {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 2px solid var(--esds-color-gray-200, #e5e7eb) !important;
+  font-weight: 600;
+  color: var(--esds-color-gray-700, #374151);
+}
+
+.token-table td {
+  padding: 24px 12px !important;
+  border: none !important;
+  vertical-align: top;
+}
+
+/* Preview column styling (left column, max 20% width) */
+.token-table th:first-child,
+.token-table td:first-child {
+  width: 20%;
+  max-width: 20%;
+}
+
+/* Details column styling - vertical stack layout */
+.token-table td:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Each row of info (Token, CSS, Description) */
+.token-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+/* Copyable button values with data-clipboard attribute */
+.token-value {
+  /* Reset button styles */
+  appearance: none;
+  border: 1px solid transparent;
+  background: var(--esds-color-gray-100, #f3f4f6);
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+
+  /* Make it look like inline code */
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.token-value:hover {
+  background: var(--esds-color-gray-200, #e5e7eb);
+  border-color: var(--esds-color-gray-300, #d1d5db);
+}
+
+.token-value:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--esds-color-info-400, #60a5fa);
+}
+
+.token-value:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--esds-color-info-400, #60a5fa);
+}
+
+/* Description row styling */
+.token-description {
+  margin-top: 4px;
+  color: var(--esds-color-gray-600, #4b5563);
+  line-height: 1.5;
+  flex-wrap: wrap;
+}
+
+/* Hide empty description row */
+.token-description:empty {
+  display: none;
+}
+
+/* Remove Storybook's default zebra striping and borders */
+.token-table tr {
+  padding: 10px !important;
+  border-top: 1px solid var(--esds-color-gray-200, #e5e7eb) !important;
+  background-color: transparent !important;
+}
+
+.token-table tr:first-child {
+  border-top: none !important;
+}
+
+.token-table th {
+  border: none !important;
+  border-bottom: 1px solid var(--esds-color-gray-100, #f3f4f6) !important;
+}
+
+/* Tooltip for copy-to-clipboard functionality */
+.copy-tooltip {
+  position: fixed;
+  background: var(--esds-color-gray-800, #1f2937);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  transform: translateX(-50%);
+  font-family: var(--esds-font-family-sans, system-ui, sans-serif);
+
+  /* Position using CSS custom properties set via JS */
+  left: var(--tooltip-x, 0);
+  top: var(--tooltip-y, 0);
+}
+
+.copy-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border: 5px solid transparent;
+  border-top-color: var(--esds-color-gray-800, #1f2937);
+}

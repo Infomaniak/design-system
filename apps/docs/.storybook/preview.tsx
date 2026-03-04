@@ -5,6 +5,8 @@ import { GLOBALS_UPDATED } from 'storybook/internal/core-events';
 import { Globals, GlobalsUpdatedPayload } from 'storybook/internal/types';
 import Table from '../src/components/Table.tsx';
 
+import '../src/styles/token-tables.css';
+
 // Import base CSS tokens
 import '@infomaniak-design-system/tokens/dist/web/css/tokens.root.css';
 
@@ -34,6 +36,66 @@ const setBodyAttributes = (product: string, theme: string) => {
     document.body.setAttribute('data-esds-theme', theme);
   }
 };
+
+const TOOLTIP_HIDE_DELAY_MS = 1500;
+const TOOLTIP_OFFSET_Y = 35;
+
+/**
+ * Creates and manages tooltip for copy-to-clipboard functionality
+ * Implemented as singleton to prevent multiple instances across re-renders
+ */
+const tooltipManager = (() => {
+  let tooltip: HTMLElement | null = null;
+  let instanceCount = 0;
+
+  const create = () => {
+    if (!tooltip) {
+      tooltip = document.createElement('div');
+      tooltip.className = 'copy-tooltip';
+      tooltip.setAttribute('role', 'status');
+      tooltip.setAttribute('aria-live', 'polite');
+      document.body.appendChild(tooltip);
+    }
+    return tooltip;
+  };
+
+  const show = (text: string, x: number, y: number) => {
+    const el = create();
+    el.textContent = text;
+    // Use CSS custom properties for positioning
+    el.style.setProperty('--tooltip-x', `${x}px`);
+    el.style.setProperty('--tooltip-y', `${y - TOOLTIP_OFFSET_Y}px`);
+    el.style.opacity = '1';
+  };
+
+  const hide = () => {
+    if (tooltip) {
+      tooltip.style.opacity = '0';
+    }
+  };
+
+  const destroy = () => {
+    if (tooltip && tooltip.parentNode) {
+      tooltip.parentNode.removeChild(tooltip);
+      tooltip = null;
+    }
+  };
+
+  const acquire = () => {
+    instanceCount++;
+    return { show, hide, destroy };
+  };
+
+  const release = () => {
+    instanceCount--;
+    if (instanceCount <= 0) {
+      destroy();
+      instanceCount = 0;
+    }
+  };
+
+  return { acquire, release, show, hide, destroy };
+})();
 
 /**
  * Custom wrapper for MDX files
@@ -69,6 +131,84 @@ const CustomDocsContainer = (props: DocsContainerProps) => {
   useEffect(() => {
     setBodyAttributes(product, theme);
   }, [product, theme]);
+
+  // Handle copy-to-clipboard functionality for token tables with tooltip
+  useEffect(() => {
+    let hideTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    const showTooltipForElement = (element: HTMLElement, text: string) => {
+      const rect = element.getBoundingClientRect();
+      tooltipManager.show(text, rect.left + rect.width / 2, rect.top);
+    };
+
+    const handleMouseEnter = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const clipboardEl = target.closest('[data-clipboard]') as HTMLElement;
+
+      if (clipboardEl) {
+        showTooltipForElement(clipboardEl, 'Copy to clipboard');
+      }
+    };
+
+    const handleMouseLeave = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const relatedTarget = e.relatedTarget as HTMLElement;
+      const clipboardEl = target.closest('[data-clipboard]');
+      const relatedClipboardEl = relatedTarget?.closest('[data-clipboard]');
+
+      if (clipboardEl && !relatedClipboardEl) {
+        tooltipManager.hide();
+      }
+    };
+
+    const handleScroll = () => {
+      // Hide tooltip on scroll to prevent it from floating in wrong position
+      tooltipManager.hide();
+    };
+
+    const handleClick = async (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const clipboardEl = target.closest('[data-clipboard]');
+
+      if (clipboardEl) {
+        e.preventDefault();
+        const value = clipboardEl.getAttribute('data-clipboard');
+        if (value) {
+          try {
+            await navigator.clipboard.writeText(value);
+            showTooltipForElement(clipboardEl as HTMLElement, 'Copied!');
+
+            if (hideTimeout) clearTimeout(hideTimeout);
+            hideTimeout = setTimeout(() => tooltipManager.hide(), TOOLTIP_HIDE_DELAY_MS);
+          } catch (err) {
+            console.error('Failed to copy:', err);
+          }
+        }
+      }
+    };
+
+    // Use a flag to track if we've already initialized (prevents duplicate listeners)
+    const isInitialized = document.body.hasAttribute('data-clipboard-initialized');
+
+    if (!isInitialized) {
+      document.body.setAttribute('data-clipboard-initialized', 'true');
+      document.addEventListener('click', handleClick);
+      document.addEventListener('mouseenter', handleMouseEnter, true);
+      document.addEventListener('mouseleave', handleMouseLeave, true);
+      window.addEventListener('scroll', handleScroll, { passive: true });
+
+      // Cleanup on unmount only if this was the initializing instance
+      return () => {
+        document.removeEventListener('click', handleClick);
+        document.removeEventListener('mouseenter', handleMouseEnter, true);
+        document.removeEventListener('mouseleave', handleMouseLeave, true);
+        window.removeEventListener('scroll', handleScroll);
+        if (hideTimeout) clearTimeout(hideTimeout);
+        tooltipManager.release();
+        document.body.removeAttribute('data-clipboard-initialized');
+      };
+    }
+  }, []);
 
   return <DocsContainer {...props} />;
 };
