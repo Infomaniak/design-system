@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { isNpmVersionPublished } from './is-npm-version-published.ts';
+import { isNpmPackagePublished } from './is-npm-package-published.ts';
 
-describe('isNpmVersionPublished', () => {
+describe('isNpmPackagePublished', () => {
   afterEach(() => {
     vi.unstubAllGlobals();
   });
@@ -14,7 +14,7 @@ describe('isNpmVersionPublished', () => {
       }),
     );
 
-    await expect(isNpmVersionPublished('@scope/a', '1.0.0')).resolves.toBe(true);
+    await expect(isNpmPackagePublished({ name: '@scope/a', version: '1.0.0' })).resolves.toBe(true);
   });
 
   it('returns false when npm answers 404', async () => {
@@ -25,7 +25,9 @@ describe('isNpmVersionPublished', () => {
       }),
     );
 
-    await expect(isNpmVersionPublished('@scope/a', '1.0.0')).resolves.toBe(false);
+    await expect(isNpmPackagePublished({ name: '@scope/a', version: '1.0.0' })).resolves.toBe(
+      false,
+    );
   });
 
   it('throws when npm answers an unexpected status', async () => {
@@ -36,7 +38,9 @@ describe('isNpmVersionPublished', () => {
       }),
     );
 
-    await expect(isNpmVersionPublished('@scope/a', '1.0.0')).rejects.toThrow('503');
+    await expect(isNpmPackagePublished({ name: '@scope/a', version: '1.0.0' })).rejects.toThrow(
+      '503',
+    );
   });
 
   it('throws a clear error when registry cannot be reached', async () => {
@@ -47,7 +51,7 @@ describe('isNpmVersionPublished', () => {
       }),
     );
 
-    await expect(isNpmVersionPublished('@scope/a', '1.0.0')).rejects.toThrow(
+    await expect(isNpmPackagePublished({ name: '@scope/a', version: '1.0.0' })).rejects.toThrow(
       'Unable to reach npm registry',
     );
   });

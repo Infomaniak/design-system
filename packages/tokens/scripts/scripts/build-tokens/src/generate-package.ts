@@ -4,9 +4,9 @@ import type { PackageJson } from '../../../../../../scripts/helpers/file/package
 import { readPackageJsonFile } from '../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
 import { writeJsonFileSafe } from '../../../../../../scripts/helpers/file/write-json-file-safe.ts';
 import type { Logger } from '../../../../../../scripts/helpers/log/logger.ts';
-import { block } from '../../../../../../scripts/helpers/misc/block.ts';
 import { execCommandInherit } from '../../../../../../scripts/helpers/misc/exec-command.ts';
 import { removeUndefinedProperties } from '../../../../../../scripts/helpers/misc/object/remove-undefined-properties.ts';
+import { generatePackageJsonBuildVersion } from '../../../../../../scripts/helpers/npm/generate-package-json-build-version/generate-package-json-build-version.ts';
 import { removeTrailingSlash } from '../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 
 export interface GeneratePackageOptions extends BuildConfig {
@@ -24,11 +24,17 @@ export async function generatePackage({
   // shared build options
   mode,
   prerelease,
+  dependenciesOverride,
 }: GeneratePackageOptions): Promise<void> {
   rootDirectory = removeTrailingSlash(rootDirectory);
   workspaceRootDirectory = removeTrailingSlash(workspaceRootDirectory);
   outputDirectory = removeTrailingSlash(outputDirectory);
 
+  console.log({
+    mode,
+    prerelease,
+    dependenciesOverride,
+  });
   return logger.asyncTask('generate-package', async (logger: Logger): Promise<void> => {
     const {
       name,
@@ -41,14 +47,10 @@ export async function generatePackage({
       optionalDependencies,
     }: PackageJson = await readPackageJsonFile(join(rootDirectory, 'package.json'));
 
-    const buildVersion: string = block(() => {
-      if (version.includes('-')) {
-        throw new Error(`Invalid version: ${version}.`);
-      }
-
-      return mode === 'prod'
-        ? version
-        : `${version}-${mode}.${prerelease ?? Date.now().toString(10)}`;
+    const buildVersion: string = generatePackageJsonBuildVersion({
+      version,
+      mode,
+      prerelease,
     });
 
     const { author, license, repository }: PackageJson = await readPackageJsonFile(
@@ -64,7 +66,17 @@ export async function generatePackage({
       author,
       license,
       repository,
-      dependencies,
+      dependencies:
+        dependencies === undefined || dependenciesOverride === undefined
+          ? dependencies
+          : {
+              ...dependencies,
+              ...Object.fromEntries(
+                Object.entries(dependenciesOverride).filter(([name]: [string, string]): boolean => {
+                  return Reflect.has(dependencies, name);
+                }),
+              ),
+            },
       peerDependencies,
       optionalDependencies,
     });

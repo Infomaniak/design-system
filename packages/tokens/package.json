@@ -12,12 +12,7 @@
     "copy:markdown": "cp -r dist/markdown/*.md ../../apps/docs/src/stories/assets/",
     "convert-figma-tokens": "node --no-warnings=ExperimentalWarning scripts/scripts/convert-figma-tokens/convert-figma-tokens.script.ts",
     "=== PUBLISH ===": "",
-    "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-tokens/publish-tokens.script.ts",
-    "publish:legacy": "yarn publish:tokens:dev",
-    "publish:tokens:dev": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-tokens/publish-tokens.script.ts --mode=dev",
-    "publish:tokens:rc": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-tokens/publish-tokens.script.ts --mode=rc",
-    "publish:tokens:prod": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-tokens/publish-tokens.script.ts --mode=prod",
-    "publish:ci": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-tokens/publish-tokens.script.ts --tag=$NPM_DIST_TAG"
+    "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-tokens/publish-tokens.script.ts"
   },
   "description": "Infomaniak's Design System - Tokens",
   "keywords": [

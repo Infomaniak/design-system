@@ -22,7 +22,6 @@
     "test:coverage": "vitest run --coverage",
     "bench": "vitest bench",
     "=== PUBLISH ===": "",
-    "publish:tokens:dev": "yarn workspace @infomaniak-design-system/tokens publish:tokens:dev",
     "ci:publish": "node --no-warnings=ExperimentalWarning scripts/ci/publish/ci-publish.script.ts",
     "=== CI ===": "",
     "ci:pr-ready-for-review": "node --no-warnings=ExperimentalWarning scripts/ci/pr-ready-for-review/pr-ready-for-review.script.ts",

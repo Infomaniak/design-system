@@ -3,7 +3,8 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { BuildConfig } from '../../../../../scripts/helpers/build/build-config/build-config.ts';
 import { getEnvBuildConfig } from '../../../../../scripts/helpers/build/build-config/env/get-env-build-config.ts';
-import { loadOptionallyEnvFile } from '../../../../../scripts/helpers/env/load-env-file.ts';
+
+import { loadOptionallyEnvFile } from '../../../../../scripts/helpers/env/env-file/load-optionally-env-file.ts';
 import { DEFAULT_LOG_LEVEL } from '../../../../../scripts/helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../../../../scripts/helpers/log/logger.ts';
 import { buildTokens } from './src/build/build-tokens.ts';

@@ -1,5 +1,8 @@
 import type { PackageJson } from '../../../../helpers/file/package-json/package-json.ts';
 
+/**
+ * @deprecated use yarn workspace instead
+ */
 export function topologicalSortPackages<
   GPackage extends Pick<PackageJson, 'name' | 'dependencies'>,
 >(packages: readonly GPackage[]): readonly GPackage[] {
