@@ -1,4 +1,9 @@
+import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
+import type { CurlyReference } from '../../../../../../design-token/reference/types/curly/curly-reference.ts';
+import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
+import { curlyReferenceToString } from '../../../../../../design-token/reference/types/curly/to/string/curly-reference-to-string.ts';
 import type { DesignTokensCollectionTokenWithType } from '../../../../../token/design-tokens-collection-token.ts';
+import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
 
@@ -159,9 +164,16 @@ export function genericDesignTokensCollectionTokenToMarkdown(
 ): MarkdownTokenRow {
   const { maxValueLength = 100, prettyPrintJson = false, customPreviewTemplate } = options;
 
-  // Format the value for display
-  const formattedValue = formatValue(token.value, prettyPrintJson);
-  const displayValue = truncate(formattedValue, maxValueLength);
+  // Get the display value
+  // For T1 (direct values): format the raw value
+  // For T2/T3 (references): show the referenced token name
+  let displayValue: string;
+  if (isCurlyReference(token.value as unknown as CurlyReference)) {
+    displayValue = curlyReferenceToString(token.value as unknown as CurlyReference);
+  } else {
+    const formattedValue = formatValue(token.value, prettyPrintJson);
+    displayValue = truncate(formattedValue, maxValueLength);
+  }
 
   // Create preview HTML
   let preview: string;
@@ -173,10 +185,16 @@ export function genericDesignTokensCollectionTokenToMarkdown(
     preview = createFallbackPreview(token.type, displayValue, options);
   }
 
+  // Generate the CSS variable name for this token
+  const cssVariable = createCssVariableNameGenerator({
+    prefix: CSS_VARIABLE_PREFIX,
+  })(token.name);
+
   return {
     preview,
     name: token.name.join('.'),
     value: displayValue,
+    cssVariable,
     description: token.description ?? '',
   };
 }

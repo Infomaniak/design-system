@@ -120,7 +120,24 @@ Tokens follow Design Tokens Community Group format (v3 tiers):
 
 ### Learned Preferences
 
-_(No preferences accumulated yet — this section updates as you work)_
+#### Storybook Conventions
+
+- **Format:** Use CSF Next (Component Story Format Next) for all stories
+  - CSF Next uses the `render` function in the default export (meta)
+  - No named exports for stories - single story per file
+  - Use `satisfies Meta` for type safety
+
+  ```typescript
+  import type { Meta } from '@storybook/react';
+
+  export default {
+    title: 'Path/To/Story',
+    // ... config,
+    render: () => {
+      /* story render */
+    },
+  } satisfies Meta;
+  ```
 
 ---
 
