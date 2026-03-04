@@ -30,11 +30,6 @@ export async function generatePackage({
   workspaceRootDirectory = removeTrailingSlash(workspaceRootDirectory);
   outputDirectory = removeTrailingSlash(outputDirectory);
 
-  console.log({
-    mode,
-    prerelease,
-    dependenciesOverride,
-  });
   return logger.asyncTask('generate-package', async (logger: Logger): Promise<void> => {
     const {
       name,
