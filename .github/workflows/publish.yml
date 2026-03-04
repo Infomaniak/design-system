@@ -59,11 +59,9 @@ jobs:
 
       - name: Publish missing package versions (dry-run for fork PR)
         if: >-
-          ${{
-            github.event_name == 'pull_request' &&
-            github.event.pull_request.head.repo.full_name != github.repository &&
-            contains(github.event.pull_request.labels.*.name, 'dev')
-          }}
+          github.event_name == 'pull_request' &&
+          github.event.pull_request.head.repo.full_name != github.repository &&
+          contains(github.event.pull_request.labels.*.name, 'dev')
         run: yarn ci:publish
         env:
           GITHUB_CI_CONFIG: ${{ toJson(github) }}
