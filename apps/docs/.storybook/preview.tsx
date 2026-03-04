@@ -41,12 +41,10 @@ const TOOLTIP_HIDE_DELAY_MS = 1500;
 const TOOLTIP_OFFSET_Y = 35;
 
 /**
- * Creates and manages tooltip for copy-to-clipboard functionality
- * Implemented as singleton to prevent multiple instances across re-renders
+ * Creates and manages a singleton tooltip for copy-to-clipboard functionality
  */
 const tooltipManager = (() => {
   let tooltip: HTMLElement | null = null;
-  let instanceCount = 0;
 
   const create = () => {
     if (!tooltip) {
@@ -81,20 +79,7 @@ const tooltipManager = (() => {
     }
   };
 
-  const acquire = () => {
-    instanceCount++;
-    return { show, hide, destroy };
-  };
-
-  const release = () => {
-    instanceCount--;
-    if (instanceCount <= 0) {
-      destroy();
-      instanceCount = 0;
-    }
-  };
-
-  return { acquire, release, show, hide, destroy };
+  return { show, hide, destroy };
 })();
 
 /**
@@ -204,7 +189,7 @@ const CustomDocsContainer = (props: DocsContainerProps) => {
         document.removeEventListener('mouseleave', handleMouseLeave, true);
         window.removeEventListener('scroll', handleScroll);
         if (hideTimeout) clearTimeout(hideTimeout);
-        tooltipManager.release();
+        tooltipManager.destroy();
         document.body.removeAttribute('data-clipboard-initialized');
       };
     }
