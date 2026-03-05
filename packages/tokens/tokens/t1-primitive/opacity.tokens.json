@@ -4,7 +4,7 @@
     "0": {
       "$value": {
         "value": 0,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -13,7 +13,7 @@
     "5": {
       "$value": {
         "value": 5,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -22,7 +22,7 @@
     "10": {
       "$value": {
         "value": 10,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -31,7 +31,7 @@
     "15": {
       "$value": {
         "value": 15,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -40,7 +40,7 @@
     "20": {
       "$value": {
         "value": 20,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -49,7 +49,7 @@
     "25": {
       "$value": {
         "value": 25,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -58,7 +58,7 @@
     "30": {
       "$value": {
         "value": 30,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -67,7 +67,7 @@
     "35": {
       "$value": {
         "value": 35,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -76,7 +76,7 @@
     "40": {
       "$value": {
         "value": 40,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -85,7 +85,7 @@
     "45": {
       "$value": {
         "value": 45,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -94,7 +94,7 @@
     "50": {
       "$value": {
         "value": 50,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -103,7 +103,7 @@
     "55": {
       "$value": {
         "value": 55,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -112,7 +112,7 @@
     "60": {
       "$value": {
         "value": 60,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -121,7 +121,7 @@
     "65": {
       "$value": {
         "value": 65,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -130,7 +130,7 @@
     "70": {
       "$value": {
         "value": 70,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -139,7 +139,7 @@
     "75": {
       "$value": {
         "value": 75,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -148,7 +148,7 @@
     "80": {
       "$value": {
         "value": 80,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -157,7 +157,7 @@
     "85": {
       "$value": {
         "value": 85,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -166,7 +166,7 @@
     "90": {
       "$value": {
         "value": 90,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -175,7 +175,7 @@
     "95": {
       "$value": {
         "value": 95,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
@@ -184,7 +184,7 @@
     "100": {
       "$value": {
         "value": 100,
-        "unit": "px"
+        "unit": "%"
       },
       "$extensions": {
         "scopes": []
