@@ -133,6 +133,11 @@ function renderTokenToRow(
     if (tokenWithType.name[0] === 'breakpoint') {
       return breakpointDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
     }
+    // Special handling for opacity tokens - show with transparent grid preview
+    if (tokenWithType.name[0] === 'opacity') {
+      return opacityDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+    }
+
     return dimensionDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
   }
 
@@ -153,10 +158,6 @@ function renderTokenToRow(
   }
 
   if (isNumberDesignTokensCollectionToken(tokenWithType)) {
-    // Special handling for opacity tokens - show with transparent grid preview
-    if (tokenWithType.name[0] === 'opacity') {
-      return opacityDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
-    }
     return numberDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
   }
 
