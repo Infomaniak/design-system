@@ -170,7 +170,6 @@ export function numberDesignTokensCollectionTokenToMarkdown(
 
   // Only show value for T1 (direct value - no curly ref)
   // For T2/T3, skip the value display entirely
-  let displayValue: string = '';
   let preview: string;
 
   if (isCurlyReference(value)) {
@@ -208,6 +207,8 @@ export function numberDesignTokensCollectionTokenToMarkdown(
         formattedValue = decimalFormatted;
       }
     }
+
+    let displayValue: string;
 
     // Show raw value if requested and different from formatted
     displayValue = formattedValue;
