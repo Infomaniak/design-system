@@ -1,11 +1,20 @@
-const NPM_REGISTRY_URL: string = 'https://registry.npmjs.org';
+export interface IsNpmPackagePublishedOptions {
+  readonly name: string;
+  readonly version: string;
+  readonly registryUrl?: string;
+}
 
-export async function isNpmVersionPublished(name: string, version: string): Promise<boolean> {
-  const encodedName: string = encodeURIComponent(name);
+export async function isNpmPackagePublished({
+  name,
+  version,
+  registryUrl = 'https://registry.npmjs.org',
+}: IsNpmPackagePublishedOptions): Promise<boolean> {
   let response: Response;
 
   try {
-    response = await fetch(`${NPM_REGISTRY_URL}/${encodedName}/${version}`);
+    response = await fetch(`${registryUrl}/${encodeURIComponent(name)}/${version}`, {
+      method: 'HEAD',
+    });
   } catch (error: unknown) {
     throw new Error(`Unable to reach npm registry while checking ${name}@${version}.`, {
       cause: error,

@@ -1,13 +1,14 @@
-export interface TopologicalPackageNode {
-  readonly name: string;
-  readonly dependencies: readonly string[];
-}
+import type { PackageJson } from '../../../../helpers/file/package-json/package-json.ts';
 
-export function topologicalSortPackages<TPackage extends TopologicalPackageNode>(
-  packages: readonly TPackage[],
-): readonly TPackage[] {
-  const packagesByName: Map<string, TPackage> = new Map<string, TPackage>(
-    packages.map((pkg: TPackage): readonly [string, TPackage] => [pkg.name, pkg]),
+/**
+ * @deprecated use yarn workspace instead
+ */
+export function topologicalSortPackages<
+  GPackage extends Pick<PackageJson, 'name' | 'dependencies'>,
+>(packages: readonly GPackage[]): readonly GPackage[] {
+  // TODO improve algorithm
+  const packagesByName: Map<string, GPackage> = new Map<string, GPackage>(
+    packages.map((pkg: GPackage): readonly [string, GPackage] => [pkg.name, pkg]),
   );
 
   const inDegreeByName: Map<string, number> = new Map<string, number>();
@@ -18,14 +19,17 @@ export function topologicalSortPackages<TPackage extends TopologicalPackageNode>
     dependantsByName.set(pkg.name, []);
   }
 
-  for (const pkg of packages) {
-    for (const dependencyName of pkg.dependencies) {
+  for (const { name, dependencies } of packages) {
+    const dependencyList: readonly string[] =
+      dependencies === undefined ? [] : Object.keys(dependencies);
+
+    for (const dependencyName of dependencyList) {
       if (!packagesByName.has(dependencyName)) {
         continue;
       }
 
-      inDegreeByName.set(pkg.name, (inDegreeByName.get(pkg.name) ?? 0) + 1);
-      dependantsByName.get(dependencyName)!.push(pkg.name);
+      inDegreeByName.set(name, (inDegreeByName.get(name) ?? 0) + 1);
+      dependantsByName.get(dependencyName)!.push(name);
     }
   }
 
@@ -34,7 +38,7 @@ export function topologicalSortPackages<TPackage extends TopologicalPackageNode>
     .map(([name]: readonly [string, number]): string => name)
     .sort((a, b) => a.localeCompare(b));
 
-  const sorted: TPackage[] = [];
+  const sorted: GPackage[] = [];
 
   while (queue.length > 0) {
     const name: string = queue.shift()!;

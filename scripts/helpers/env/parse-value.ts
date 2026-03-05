@@ -1,3 +1,6 @@
+/**
+ * @deprecated use zod instead
+ */
 export function parseBoolean(value: string | undefined, defaultValue: boolean = false): boolean {
   if (value === undefined) {
     return defaultValue;
@@ -8,6 +11,9 @@ export function parseBoolean(value: string | undefined, defaultValue: boolean = 
   return normalized === '1' || normalized === 'true' || normalized === 'yes' || normalized === 'on';
 }
 
+/**
+ * @deprecated use zod instead
+ */
 export function parseInteger(value: string | undefined, defaultValue: number): number {
   if (value === undefined || value.trim() === '') {
     return defaultValue;
@@ -17,6 +23,9 @@ export function parseInteger(value: string | undefined, defaultValue: number): n
   return Number.isNaN(parsed) ? defaultValue : parsed;
 }
 
+/**
+ * @deprecated use zod instead
+ */
 export function parseNumber(value: string | undefined): number | undefined {
   if (value === undefined || value.trim() === '') {
     return undefined;
@@ -31,6 +40,9 @@ export function parseNumber(value: string | undefined): number | undefined {
   return parsed;
 }
 
+/**
+ * @deprecated use zod instead
+ */
 export function parseStringArray(value: string | undefined): readonly string[] {
   if (value === undefined || value.trim() === '') {
     return [];
@@ -47,6 +59,9 @@ export function parseStringArray(value: string | undefined): readonly string[] {
   });
 }
 
+/**
+ * @deprecated use zod instead
+ */
 export function parseJsonStringArray(
   value: string | undefined,
   variableName: string = 'value',
@@ -75,6 +90,9 @@ export function parseJsonStringArray(
   return parsed;
 }
 
+/**
+ * @deprecated use zod instead
+ */
 export function parseJsonStringRecord(
   value: string | undefined,
   variableName: string = 'value',
