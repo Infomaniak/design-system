@@ -165,45 +165,53 @@ function renderTokenToRow(
 }
 
 /**
- * Generates markdown table column headers based on the token types in the category
+ * Generates HTML table column headers.
+ * Uses a 2-column layout: Preview (20%) | Details (Token, CSS, Description)
  */
-function generateColumnHeaders(category: string): string[] {
-  // Most categories use Preview, Name, Description
-  // Font category shows type since it mixes multiple token types
-  if (category === 'font') {
-    return ['| Preview | Name | Type | Description |', '|---------|------|------|-------------|'];
-  }
-
-  return ['| Preview | Name | Description |', '|---------|------|-------------|'];
+function generateColumnHeaders(): string[] {
+  return [
+    '<table class="token-table">',
+    '  <thead>',
+    '    <tr>',
+    '      <th style="width: 20%;">Preview</th>',
+    '      <th style="width: 80%;">Details</th>',
+    '    </tr>',
+    '  </thead>',
+    '  <tbody>',
+  ];
 }
 
 /**
- * Generates markdown table content for a row
+ * Generates HTML table content for a row
  */
-function generateRowContent(row: MarkdownTokenRow, showType: boolean, tokenType?: string): string {
-  const { preview, name, description } = row;
-  // Normalize HTML to remove newlines and extra whitespace for clean markdown rendering
+function generateRowContent(row: MarkdownTokenRow): string {
+  const { preview, name, cssVariable, description } = row;
   const normalizedPreview = normalizeHtml(preview);
 
-  if (showType && tokenType) {
-    return `| ${normalizedPreview} | \`${name}\` | ${tokenType} | ${description} |`;
-  }
-
-  return `| ${normalizedPreview} | \`${name}\` | ${description} |`;
+  return `    <tr>
+      <td>${normalizedPreview}</td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="${name}" type="button">${name}</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(${cssVariable})" type="button">var(${cssVariable})</button>
+        </div>
+        <div class="token-row token-description">${description}</div>
+      </td>
+    </tr>`;
 }
 
 /**
  * Generates the complete markdown content for a category
  */
 function generateCategoryMarkdown(
-  category: string,
   tokens: GenericDesignTokensCollectionToken[],
   context: MarkdownRenderContext,
   logger: Logger,
 ): string {
-  const [headerRow, separatorRow] = generateColumnHeaders(category);
-  const showType = category === 'font';
-  const lines: string[] = [headerRow, separatorRow];
+  const headerLines = generateColumnHeaders();
+  const lines: string[] = [...headerLines];
 
   // Render each token to a table row
   for (const token of tokens) {
@@ -211,14 +219,16 @@ function generateCategoryMarkdown(
       const row = renderTokenToRow(token, context);
 
       if (row) {
-        const tokenType = isDesignTokensCollectionTokenWithType(token) ? token.type : undefined;
-        lines.push(generateRowContent(row, showType, tokenType));
+        lines.push(generateRowContent(row));
       }
     } catch (error) {
       // Log error but continue with other tokens
       logger.warn(`Failed to render token ${token.name.join('.')}:`, error);
     }
   }
+
+  lines.push('  </tbody>');
+  lines.push('</table>');
 
   return lines.join('\n');
 }
@@ -249,12 +259,7 @@ export async function buildMarkdownTokens({
     // Generate markdown for each tier-category combination
     for (const [key, group] of tokensByTierAndCategory.entries()) {
       await logger.asyncTask(`category: ${key}`, async (): Promise<void> => {
-        const markdownContent = generateCategoryMarkdown(
-          group.category,
-          group.tokens,
-          context,
-          logger,
-        );
+        const markdownContent = generateCategoryMarkdown(group.tokens, context, logger);
         const markdown = `<!-- ${AUTO_GENERATED_FILE_HEADER} -->\n\n` + markdownContent;
         const filePath = join(outputDirectory, 'markdown', `${key}.md`);
         await writeFileSafe(filePath, markdown, { encoding: 'utf-8' });

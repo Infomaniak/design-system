@@ -26,6 +26,12 @@ export interface MarkdownTokenRow {
   readonly value: string;
 
   /**
+   * The CSS variable name for web consumers.
+   * Includes the esds prefix (e.g., `--esds-color-red-500`)
+   */
+  readonly cssVariable: string;
+
+  /**
    * Optional token description from the token definition.
    * Empty string if no description is provided.
    */

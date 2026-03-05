@@ -1,442 +1,153 @@
-import { Dirent } from 'node:fs';
-import { readdir } from 'node:fs/promises';
-import { join, normalize, resolve, sep } from 'node:path';
+import { join } from 'node:path';
 import process from 'node:process';
-import { readJsonFile } from '../../../helpers/file/read-json-file.ts';
-import { type Logger } from '../../../helpers/log/logger.ts';
-import { execCommand, execCommandInherit } from '../../../helpers/misc/exec-command.ts';
-import { getPublishContext, type PublishContext } from './branch-policy.ts';
-import { isNpmVersionPublished as defaultIsNpmVersionPublished } from './npm-package-version.ts';
-import {
-  topologicalSortPackages,
-  type TopologicalPackageNode,
-} from './topological-sort-packages.ts';
+import type { BuildConfig } from '../../../helpers/build/build-config/build-config.ts';
+import { ENV_BUILD_CONFIG } from '../../../helpers/build/build-config/env/get-env-build-config.ts';
+import { ENV_IGNORE_ENV_FILE } from '../../../helpers/env/env-file/get-env-ignore-env-file.ts';
+import type { PackageJsonDependencies } from '../../../helpers/file/package-json/package-json-dependencies/package-json-dependencies.ts';
+import type { Logger } from '../../../helpers/log/logger.ts';
+import { execCommandInherit } from '../../../helpers/misc/exec-command.ts';
+import { generatePackageJsonBuildVersion } from '../../../helpers/npm/generate-package-json-build-version/generate-package-json-build-version.ts';
+import { isNpmPackagePublished } from '../../../helpers/npm/is-npm-version-published/is-npm-package-published.ts';
+import type { PackageJsonWithPath } from '../../../helpers/publish/discover/discover-package-json-files.ts';
+import { getImpactedPackageJsonFiles } from '../../../helpers/publish/discover/get-impacted-package-json-files.ts';
+import { ENV_PUBLISH_CONFIG } from '../../../helpers/publish/publish-config/env/get-env-publish-config.ts';
+import type { PublishConfig } from '../../../helpers/publish/publish-config/publish-config.ts';
+import type { CiPublishContext } from './context/infer-ci-publish-context.ts';
 
-export interface PublishablePackage extends TopologicalPackageNode {
-  readonly directory: string;
-  readonly version: string;
-}
-
-export interface CiPublishOptions {
+export interface CiPublishOptions extends Omit<CiPublishContext, 'branchName' | 'shouldPublish'> {
   readonly rootDirectory: string;
-  readonly eventName: string;
-  readonly branchName: string;
-  readonly pullRequestLabels?: readonly string[];
-  readonly gitBaseSha?: string;
-  readonly gitHeadSha?: string;
-  readonly publishTimestamp?: number;
-  readonly strictVersionPolicy: boolean;
-  readonly dryRun: boolean;
+  readonly dryRun?: boolean;
   readonly logger: Logger;
 }
 
-export type IsNpmVersionPublished = (name: string, version: string) => Promise<boolean>;
-
-export interface PublishWorkspacePackageOptions {
-  readonly tag: PublishContext['tag'];
-  readonly version: string;
-  readonly internalDependencyVersionOverrides?: Readonly<Record<string, string>>;
-}
-
-export type PublishWorkspacePackage = (
-  workspaceName: string,
-  options: PublishWorkspacePackageOptions,
-) => Promise<void>;
-
-export type ListChangedFiles = (
-  rootDirectory: string,
-  baseSha: string,
-  headSha: string,
-) => Promise<readonly string[]>;
-
-export interface CiPublishDependencies {
-  readonly discoverPublishablePackages?: (
-    rootDirectory: string,
-  ) => Promise<readonly PublishablePackage[]>;
-  readonly isNpmVersionPublished?: IsNpmVersionPublished;
-  readonly listChangedFiles?: ListChangedFiles;
-  readonly publishWorkspacePackage?: PublishWorkspacePackage;
-}
-
-export interface CiPublishDecision {
-  readonly packageName: string;
-  readonly baseVersion: string;
-  readonly publishVersion: string;
-  readonly tag: PublishContext['tag'];
-  readonly action: 'skip' | 'publish' | 'publish-dry-run';
-}
-
-interface PackageJson {
-  readonly name?: unknown;
-  readonly version?: unknown;
-  readonly scripts?: unknown;
-  readonly dependencies?: unknown;
-}
-
-const STABLE_VERSION_REGEXP: RegExp = /^\d+\.\d+\.\d+$/;
-
-export async function discoverPublishablePackages(
-  rootDirectory: string,
-): Promise<readonly PublishablePackage[]> {
-  const packagesDirectory: string = join(rootDirectory, 'packages');
-  const entries: readonly Dirent[] = await readdir(packagesDirectory, {
-    withFileTypes: true,
-  });
-
-  const publishablePackages: PublishablePackage[] = [];
-  const sortedEntries = Array.from(entries).sort((a, b) => a.name.localeCompare(b.name));
-  for (const entry of sortedEntries) {
-    if (!entry.isDirectory()) {
-      continue;
-    }
-
-    const packageDirectory: string = join(packagesDirectory, entry.name);
-    const packageJsonPath: string = join(packageDirectory, 'package.json');
-
-    let packageJson: PackageJson;
-
-    try {
-      packageJson = (await readJsonFile(packageJsonPath)) as PackageJson;
-    } catch (error: unknown) {
-      if (
-        Error.isError(error) &&
-        'code' in error &&
-        typeof (error as { code?: unknown }).code === 'string' &&
-        (error as { code?: string }).code === 'ENOENT'
-      ) {
-        continue;
-      }
-
-      throw error;
-    }
-
-    const publishScript: unknown =
-      typeof packageJson.scripts === 'object' && packageJson.scripts !== null
-        ? (packageJson.scripts as Record<string, unknown>)['publish:ci']
-        : undefined;
-
-    if (typeof publishScript !== 'string') {
-      continue;
-    }
-
-    if (typeof packageJson.name !== 'string' || packageJson.name === '') {
-      throw new Error(`Missing "name" in ${packageJsonPath}.`);
-    }
-
-    if (typeof packageJson.version !== 'string' || packageJson.version === '') {
-      throw new Error(`Missing "version" in ${packageJsonPath}.`);
-    }
-
-    const dependencies: readonly string[] =
-      typeof packageJson.dependencies === 'object' && packageJson.dependencies !== null
-        ? Object.keys(packageJson.dependencies as Record<string, unknown>)
-        : [];
-
-    publishablePackages.push({
-      directory: packageDirectory,
-      name: packageJson.name,
-      version: packageJson.version,
-      dependencies,
-    });
-  }
-
-  return publishablePackages;
-}
-
-function getImpactedPackageNames({
-  packages,
+export async function ciPublish({
   rootDirectory,
-  changedFiles,
-}: {
-  readonly packages: readonly PublishablePackage[];
-  readonly rootDirectory: string;
-  readonly changedFiles: readonly string[];
-}): ReadonlySet<string> {
-  const directImpactedNames: Set<string> = new Set<string>();
-  const packagesByName: Map<string, PublishablePackage> = new Map(
-    packages.map((pkg): readonly [string, PublishablePackage] => [pkg.name, pkg]),
-  );
-  const dependantsByName: Map<string, string[]> = new Map(
-    packages.map((pkg): readonly [string, string[]] => [pkg.name, []]),
-  );
+  dryRun = true,
+  logger,
+  // publish context
+  baseSha,
+  headSha,
+  mode,
+}: CiPublishOptions): Promise<void> {
+  const packagesDirectory: string = join(rootDirectory, 'packages');
 
-  for (const pkg of packages) {
-    for (const dependencyName of pkg.dependencies) {
-      if (!packagesByName.has(dependencyName)) {
-        continue;
-      }
-
-      dependantsByName.get(dependencyName)!.push(pkg.name);
-    }
-  }
-
-  for (const changedFile of changedFiles) {
-    const absoluteChangedFilePath: string = normalize(resolve(rootDirectory, changedFile));
-
-    for (const pkg of packages) {
-      const packageDirectoryPath: string = normalize(resolve(pkg.directory));
-
-      if (
-        absoluteChangedFilePath === packageDirectoryPath ||
-        absoluteChangedFilePath.startsWith(`${packageDirectoryPath}${sep}`)
-      ) {
-        directImpactedNames.add(pkg.name);
-      }
-    }
-  }
-
-  const impactedNames: Set<string> = new Set<string>(directImpactedNames);
-  const queue: string[] = Array.from(directImpactedNames);
-
-  while (queue.length > 0) {
-    const packageName: string = queue.shift()!;
-
-    for (const dependantName of dependantsByName.get(packageName) ?? []) {
-      if (impactedNames.has(dependantName)) {
-        continue;
-      }
-
-      impactedNames.add(dependantName);
-      queue.push(dependantName);
-    }
-  }
-
-  return impactedNames;
-}
-
-function computePublishVersion({
-  baseVersion,
-  tag,
-  strict,
-  publishTimestamp,
-}: {
-  readonly baseVersion: string;
-  readonly tag: PublishContext['tag'];
-  readonly strict: boolean;
-  readonly publishTimestamp: number;
-}): string {
-  if (!STABLE_VERSION_REGEXP.test(baseVersion)) {
-    if (strict) {
-      throw new Error(
-        `Version "${baseVersion}" must be a stable version (x.y.z) in package.json. CI computes dev/rc suffixes.`,
-      );
-    }
-
-    return baseVersion;
-  }
-
-  if (tag === 'latest') {
-    return baseVersion;
-  }
-
-  return `${baseVersion}-${tag}.${publishTimestamp}`;
-}
-
-async function listChangedFilesFromGit(
-  logger: Logger,
-  rootDirectory: string,
-  baseSha: string,
-  headSha: string,
-): Promise<readonly string[]> {
-  const output: string = await execCommand(
-    logger,
-    'git',
-    ['diff', '--name-only', baseSha, headSha],
-    {
-      cwd: rootDirectory,
-      shell: true,
+  const publishablePackages: readonly PackageJsonWithPath[] = await logger.asyncTask(
+    'get-impacted-package-json-files',
+    (logger: Logger): Promise<readonly PackageJsonWithPath[]> => {
+      return getImpactedPackageJsonFiles({
+        packagesDirectory,
+        fromCommitId: baseSha,
+        toCommitId: headSha,
+        logger,
+      });
     },
   );
 
-  return output
-    .split(/\r?\n/)
-    .map((line: string): string => line.trim())
-    .filter((line: string): boolean => line !== '');
-}
-
-export function createWorkspacePublisher({
-  logger,
-  rootDirectory,
-}: {
-  readonly logger: Logger;
-  readonly rootDirectory: string;
-}): PublishWorkspacePackage {
-  return async (
-    workspaceName: string,
-    { tag, version, internalDependencyVersionOverrides }: PublishWorkspacePackageOptions,
-  ): Promise<void> => {
-    await execCommandInherit(logger, 'yarn', ['workspace', workspaceName, 'run', 'publish:ci'], {
-      shell: true,
-      cwd: rootDirectory,
-      env: {
-        ...process.env,
-        NPM_DIST_TAG: tag,
-        NPM_PUBLISH_VERSION: version,
-        ...(internalDependencyVersionOverrides !== undefined &&
-        Object.keys(internalDependencyVersionOverrides).length > 0
-          ? {
-              NPM_INTERNAL_DEP_OVERRIDES_JSON: JSON.stringify(internalDependencyVersionOverrides),
-            }
-          : {}),
-      },
-    });
-  };
-}
-
-export async function ciPublish(
-  {
-    rootDirectory,
-    eventName,
-    branchName,
-    pullRequestLabels = [],
-    gitBaseSha,
-    gitHeadSha,
-    publishTimestamp = Date.now(),
-    strictVersionPolicy,
-    dryRun,
-    logger,
-  }: CiPublishOptions,
-  {
-    discoverPublishablePackages: discover = discoverPublishablePackages,
-    isNpmVersionPublished = defaultIsNpmVersionPublished,
-    listChangedFiles = async (
-      listRootDirectory: string,
-      baseSha: string,
-      headSha: string,
-    ): Promise<readonly string[]> =>
-      listChangedFilesFromGit(logger, listRootDirectory, baseSha, headSha),
-    publishWorkspacePackage = createWorkspacePublisher({
-      logger,
-      rootDirectory,
-    }),
-  }: CiPublishDependencies = {},
-): Promise<readonly CiPublishDecision[]> {
-  const publishContext: PublishContext = getPublishContext({
-    eventName,
-    branchName,
-    pullRequestLabels,
-  });
-  const { tag } = publishContext;
-
-  if (!publishContext.shouldPublish) {
-    logger.info(
-      `[skip] CI publish disabled for ${eventName}:${branchName} (missing required PR label "dev").`,
-    );
-    return [];
+  if (publishablePackages.length === 0) {
+    logger.info('SKIP: No publishable package found.');
+    return;
   }
 
-  const discoveredPackages: readonly PublishablePackage[] = await discover(rootDirectory);
-  const packages: readonly PublishablePackage[] = topologicalSortPackages(discoveredPackages);
-
-  if (packages.length === 0) {
-    logger.warn('No publishable package found (missing script "publish:ci").');
-    return [];
-  }
-
-  const decisions: CiPublishDecision[] = [];
-  let candidatePackages: readonly PublishablePackage[] = packages;
-
-  if (tag !== 'latest') {
-    if (
-      gitBaseSha === undefined ||
-      gitBaseSha === '' ||
-      gitHeadSha === undefined ||
-      gitHeadSha === ''
-    ) {
-      logger.warn(
-        'Missing CI_PUBLISH_GIT_BASE_SHA/CI_PUBLISH_GIT_HEAD_SHA. Falling back to all publishable packages.',
-      );
-    } else {
-      const changedFiles: readonly string[] = await listChangedFiles(
-        rootDirectory,
-        gitBaseSha,
-        gitHeadSha,
-      );
-      const impactedPackageNames: ReadonlySet<string> = getImpactedPackageNames({
-        packages,
-        rootDirectory,
-        changedFiles,
+  const { packagesToBuild, ...buildConfig }: GetPackagesToBuildReturn = await logger.asyncTask(
+    'get-packages-to-build',
+    (logger: Logger): Promise<GetPackagesToBuildReturn> => {
+      return getPackagesToBuild({
+        publishablePackages,
+        mode,
+        logger,
       });
-
-      if (impactedPackageNames.size === 0) {
-        logger.info('[skip] No impacted publishable package detected.');
-        return [];
-      }
-
-      candidatePackages = packages.filter((pkg: PublishablePackage): boolean =>
-        impactedPackageNames.has(pkg.name),
-      );
-    }
-  }
-
-  const publishVersionByPackageName: ReadonlyMap<string, string> = new Map(
-    candidatePackages.map((pkg: PublishablePackage): readonly [string, string] => [
-      pkg.name,
-      computePublishVersion({
-        baseVersion: pkg.version,
-        tag,
-        strict: strictVersionPolicy,
-        publishTimestamp,
-      }),
-    ]),
+    },
   );
 
-  const internalDependencyVersionOverrides: Readonly<Record<string, string>> =
-    tag === 'latest'
-      ? {}
-      : Object.fromEntries(
-          Array.from(publishVersionByPackageName.entries()).filter(
-            ([, version]: readonly [string, string]): boolean => version.includes('-'),
-          ),
-        );
+  const runYarnWorkspacesCommand = (
+    command: string,
+    env?: Record<string, string>,
+  ): Promise<void> => {
+    return logger.asyncTask(command, async (logger: Logger): Promise<void> => {
+      const args: string[] = ['workspaces', 'foreach', '--topological-dev', '--recursive'];
 
-  for (const pkg of candidatePackages) {
-    const publishVersion: string = publishVersionByPackageName.get(pkg.name)!;
-    const isPublished: boolean = await isNpmVersionPublished(pkg.name, publishVersion);
+      if (dryRun) {
+        args.push('--dry-run');
+        logger.debug('DRY-RUN');
+      }
 
-    if (isPublished) {
-      logger.info(`[skip] ${pkg.name}@${publishVersion} already exists on npm.`);
-      decisions.push({
-        packageName: pkg.name,
-        baseVersion: pkg.version,
-        publishVersion,
-        tag,
-        action: 'skip',
+      for (const [, { name }] of packagesToBuild) {
+        args.push('--from', name);
+      }
+
+      args.push('run', command);
+
+      await execCommandInherit(logger, 'yarn', args, {
+        shell: true,
+        env: {
+          ...process.env,
+          [ENV_IGNORE_ENV_FILE]: JSON.stringify(true),
+          ...env,
+        },
       });
-      continue;
-    }
+    });
+  };
 
-    if (dryRun) {
-      logger.info(`[dry-run] Would publish ${pkg.name}@${publishVersion} with tag "${tag}".`);
-      decisions.push({
-        packageName: pkg.name,
-        baseVersion: pkg.version,
-        publishVersion,
-        tag,
-        action: 'publish-dry-run',
-      });
-      continue;
-    }
+  await runYarnWorkspacesCommand('build', {
+    [ENV_BUILD_CONFIG]: JSON.stringify(buildConfig),
+  });
 
-    logger.info(`[publish] ${pkg.name}@${publishVersion} with tag "${tag}".`);
-    await publishWorkspacePackage(pkg.name, {
-      ...(Object.keys(internalDependencyVersionOverrides).length > 0
-        ? {
-            internalDependencyVersionOverrides,
-          }
-        : {}),
-      tag,
-      version: publishVersion,
+  await runYarnWorkspacesCommand('publish', {
+    [ENV_PUBLISH_CONFIG]: JSON.stringify({
+      mode: buildConfig.mode,
+    } satisfies PublishConfig),
+  });
+
+  // TODO update PR comment with dev version
+}
+
+/*---*/
+
+interface GetPackagesToBuildOptions extends Pick<CiPublishContext, 'mode'> {
+  readonly publishablePackages: readonly PackageJsonWithPath[];
+  readonly logger: Logger;
+}
+
+interface GetPackagesToBuildReturn extends BuildConfig {
+  readonly packagesToBuild: PackageJsonWithPath[];
+}
+
+async function getPackagesToBuild({
+  mode,
+  publishablePackages,
+  logger,
+}: GetPackagesToBuildOptions): Promise<GetPackagesToBuildReturn> {
+  const prerelease: string | undefined = mode !== 'prod' ? Date.now().toString(10) : undefined;
+  const dependenciesOverride: PackageJsonDependencies = {};
+  const packagesToBuild: PackageJsonWithPath[] = [];
+
+  for (const entry of publishablePackages) {
+    const [, packageJson]: PackageJsonWithPath = entry;
+
+    const buildVersion: string = generatePackageJsonBuildVersion({
+      version: packageJson.version,
+      mode,
+      prerelease,
     });
 
-    decisions.push({
-      packageName: pkg.name,
-      baseVersion: pkg.version,
-      publishVersion,
-      tag,
-      action: 'publish',
-    });
+    if (
+      await isNpmPackagePublished({
+        name: packageJson.name,
+        version: buildVersion,
+      })
+    ) {
+      logger.debug(`OMIT: ${packageJson.name}@${buildVersion} (already exists on npm).`);
+    } else {
+      logger.debug(`ADD: ${packageJson.name}@${buildVersion}`);
+      packagesToBuild.push(entry);
+      Reflect.set(dependenciesOverride, packageJson.name, buildVersion);
+    }
   }
 
-  return decisions;
+  return {
+    packagesToBuild,
+    mode,
+    prerelease,
+    dependenciesOverride,
+  };
 }

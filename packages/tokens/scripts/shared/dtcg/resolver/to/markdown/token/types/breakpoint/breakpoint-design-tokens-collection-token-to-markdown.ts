@@ -1,5 +1,9 @@
+import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
+import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
+import { curlyReferenceToString } from '../../../../../../design-token/reference/types/curly/to/string/curly-reference-to-string.ts';
 import type { DimensionDesignTokensCollectionToken } from '../../../../../token/types/base/dimension/dimension-design-tokens-collection-token.ts';
 import type { DimensionDesignTokensCollectionTokenValue } from '../../../../../token/types/base/dimension/value/dimension-design-tokens-collection-token-value.ts';
+import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { dimensionDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/dimension/value/dimension-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
@@ -34,11 +38,24 @@ export function breakpointDesignTokensCollectionTokenToMarkdown(
   _context: MarkdownRenderContext,
   _options: BreakpointMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
-  // Convert dimension value to CSS value (e.g. "1024px")
-  const value = token.value as DimensionDesignTokensCollectionTokenValue;
-  const cssValue = dimensionDesignTokensCollectionTokenValueToCssValue(value);
+  // Generate the CSS variable name for this token
+  const cssVariable = createCssVariableNameGenerator({
+    prefix: CSS_VARIABLE_PREFIX,
+  })(token.name);
 
-  // Create a simple text-based preview (breakpoints are too large to visualize)
+  // Get the display value
+  // For T1 (direct values): show the actual breakpoint value
+  // For T2/T3 (references): show the referenced token name
+  let displayValue: string;
+  const value = token.value as DimensionDesignTokensCollectionTokenValue;
+  if (isCurlyReference(token.value)) {
+    displayValue = curlyReferenceToString(token.value);
+  } else {
+    displayValue = dimensionDesignTokensCollectionTokenValueToCssValue(value);
+  }
+
+  // Create a simple text-based preview using CSS variable directly
+  // The browser resolves var(--esds-*) via the CSS cascade
   const preview = /* HTML */ `
     <div
       style="
@@ -55,14 +72,15 @@ export function breakpointDesignTokensCollectionTokenToMarkdown(
       min-width: 120px;
     "
     >
-      ${cssValue}
+      ${displayValue}
     </div>
   `;
 
   return {
     preview,
     name: token.name.join('.'),
-    value: cssValue,
+    value: displayValue,
+    cssVariable,
     description: token.description ?? '',
   };
 }
