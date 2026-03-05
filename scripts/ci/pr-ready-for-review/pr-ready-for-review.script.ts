@@ -1,4 +1,4 @@
-import { loadOptionallyEnvFile } from '../../helpers/env/load-env-file.ts';
+import { loadOptionallyEnvFile } from '../../helpers/env/env-file/load-optionally-env-file.ts';
 import {
   getEnvGithubPullRequestDetails,
   type GithubPullRequestDetails,

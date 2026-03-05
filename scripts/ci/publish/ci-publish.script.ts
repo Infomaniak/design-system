@@ -1,42 +1,84 @@
 import { dirname, join } from 'node:path';
-import process from 'node:process';
 import { fileURLToPath } from 'node:url';
-import { loadOptionallyEnvFile } from '../../helpers/env/load-env-file.ts';
-import { parseBoolean, parseJsonStringArray, parseNumber } from '../../helpers/env/parse-value.ts';
+
+import { loadOptionallyEnvFile } from '../../helpers/env/env-file/load-optionally-env-file.ts';
+import { getEnvGithubCiConfig } from '../../helpers/github/github-ci-config/env/get-env-github-ci-config.ts';
+import type { GithubCiConfig } from '../../helpers/github/github-ci-config/github-ci-config.ts';
+import { postKchatWebhookMessage } from '../../helpers/kchat/api/post-kchat-webhook-message.ts';
+import { getEnvKchatWebhookId } from '../../helpers/kchat/env/get-env-kchat-webhook-id.ts';
 import { DEFAULT_LOG_LEVEL } from '../../helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../helpers/log/logger.ts';
+import { dedent } from '../../helpers/misc/string/dedent/dedent.ts';
+import { getEnvCiPublishDryRun } from '../../helpers/publish/env/get-env-ci-publish-dry-run.ts';
 import { ciPublish } from './src/ci-publish.ts';
+import {
+  type CiPublishContext,
+  inferCiPublishContext,
+} from './src/context/infer-ci-publish-context.ts';
 
 const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 
 const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
-export async function ciPublishScript(): Promise<void> {
-  loadOptionallyEnvFile(logger);
+export function ciPublishScript(): Promise<void> {
+  return logger.asyncTask('ci-publish.script', async (logger: Logger): Promise<void> => {
+    loadOptionallyEnvFile(logger);
 
-  const branchName: string | undefined =
-    process.env['CI_PUBLISH_TARGET_BRANCH'] ?? process.env['GITHUB_REF_NAME'];
+    const githubCiConfig: GithubCiConfig = getEnvGithubCiConfig();
+    const ciPublishContext: CiPublishContext = inferCiPublishContext(githubCiConfig);
+    const dryRun: boolean = getEnvCiPublishDryRun();
 
-  if (branchName === undefined || branchName === '') {
-    throw new Error(
-      'Missing required env variable "GITHUB_REF_NAME" (or "CI_PUBLISH_TARGET_BRANCH").',
-    );
-  }
+    if (!ciPublishContext.shouldPublish) {
+      logger.info(
+        `SKIP: CI publish disabled for ${githubCiConfig.event_name}:${ciPublishContext.branchName} (missing required PR label "dev").`,
+      );
+      return;
+    }
 
-  await ciPublish({
-    rootDirectory: ROOT_DIR,
-    eventName: process.env['GITHUB_EVENT_NAME'] ?? 'push',
-    branchName,
-    pullRequestLabels: parseJsonStringArray(
-      process.env['CI_PUBLISH_PR_LABELS'],
-      'CI_PUBLISH_PR_LABELS',
-    ),
-    gitBaseSha: process.env['CI_PUBLISH_GIT_BASE_SHA'],
-    gitHeadSha: process.env['CI_PUBLISH_GIT_HEAD_SHA'],
-    publishTimestamp: parseNumber(process.env['CI_PUBLISH_TIMESTAMP']),
-    strictVersionPolicy: parseBoolean(process.env['CI_PUBLISH_STRICT_VERSION_POLICY'], true),
-    dryRun: parseBoolean(process.env['CI_PUBLISH_DRY_RUN'], false),
-    logger,
+    const jobUrl: string = `${githubCiConfig.server_url}/${githubCiConfig.repository}/actions/runs/${githubCiConfig.run_id}`;
+    const shouldNotify: boolean = !dryRun && ciPublishContext.mode !== 'dev';
+
+    try {
+      await ciPublish({
+        ...ciPublishContext,
+        rootDirectory: ROOT_DIR,
+        dryRun,
+        logger,
+      });
+    } catch (error: unknown) {
+      if (shouldNotify) {
+        await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
+          await postKchatWebhookMessage({
+            webhookId: getEnvKchatWebhookId(),
+            text: dedent`
+              #### ❌ publish job failed
+
+              - 🔗 ${jobUrl}
+              - 🌱 ${ciPublishContext.branchName}
+              - ⚙️ ${ciPublishContext.mode}
+              - 💬 ${Error.isError(error) ? error.message : String(error)}
+            `,
+          });
+        });
+      }
+
+      throw error;
+    }
+
+    if (shouldNotify) {
+      await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
+        await postKchatWebhookMessage({
+          webhookId: getEnvKchatWebhookId(),
+          text: dedent`
+            #### ✅ publish job succeed
+
+              - 🔗 ${jobUrl}
+              - 🌱 ${ciPublishContext.branchName}
+              - ⚙️ ${ciPublishContext.mode}
+          `,
+        });
+      });
+    }
   });
 }
 
