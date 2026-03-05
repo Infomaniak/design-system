@@ -1,1 +1,0 @@
-import{n as e,t}from"./lib-ZlB3MxCM.js";export{t as MDXProvider};

@@ -1,1 +1,0 @@
-import{n as e,t}from"./lib-BJuTmQ7_.js";export{t as MDXProvider};
