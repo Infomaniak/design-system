@@ -1,6 +1,5 @@
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
 import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
-import { curlyReferenceToString } from '../../../../../../design-token/reference/types/curly/to/string/curly-reference-to-string.ts';
 import type { ColorDesignTokensCollectionToken } from '../../../../../token/types/base/color/color-design-tokens-collection-token.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { colorDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/color/value/color-design-tokens-collection-token-value-to-css-value.ts';
@@ -39,7 +38,7 @@ export interface ColorMarkdownRenderOptions {
  * Output: {
  *   preview: '<div style="border-radius: 4px; width: 100%; height: 75px; background: #f4364f; border: 1px solid #ccc;"></div>',
  *   name: 'color.red.500',
- *   value: '#f4364f',
+ *   cssVariable: '--esds-color-red-500',
  *   description: ''
  * }
  */
@@ -53,15 +52,20 @@ export function colorDesignTokensCollectionTokenToMarkdown(
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
 
-  // Get the display value
-  // For T1 (direct values): show the actual hex color
-  // For T2/T3 (references): show the referenced token name (e.g., "color.red.500")
-  let displayValue: string;
-  if (isCurlyReference(token.value)) {
-    displayValue = curlyReferenceToString(token.value);
-  } else {
+  // Show the display value only for T1 (direct value - no curly ref)
+  let displayValue: string = '';
+  if (!isCurlyReference(token.value)) {
     // Token has a direct value - resolve it to show the actual color
-    displayValue = colorDesignTokensCollectionTokenValueToCssValue(token.value);
+    displayValue = /* HTML */ `<div
+      style="
+      margin-top: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #6b7280;
+    "
+    >
+      ${colorDesignTokensCollectionTokenValueToCssValue(token.value)}
+    </div>`;
   }
 
   // Create the color preview HTML using CSS variable directly
@@ -76,22 +80,12 @@ export function colorDesignTokensCollectionTokenToMarkdown(
       border: 1px solid #e5e7eb;
     "
     ></div>
-    <div
-      style="
-      margin-top: 4px;
-      font-family: monospace;
-      font-size: 12px;
-      color: #6b7280;
-    "
-    >
-      ${displayValue}
-    </div>
+    ${displayValue}
   `;
 
   return {
     preview,
     name: token.name.join('.'),
-    value: displayValue,
     cssVariable,
     description: token.description ?? '',
   };

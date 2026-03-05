@@ -10,7 +10,6 @@
 
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
 import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
-import { curlyReferenceToString } from '../../../../../../design-token/reference/types/curly/to/string/curly-reference-to-string.ts';
 import type { ShadowDesignTokensCollectionToken } from '../../../../../token/types/composite/shadow/shadow-design-tokens-collection-token.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { shadowDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/composite/shadow/value/shadow-design-tokens-collection-token-value-to-css-value.ts';
@@ -53,22 +52,28 @@ export function shadowDesignTokensCollectionTokenToMarkdown(
   _context: MarkdownRenderContext,
   options: ShadowMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
+  const { boxSize = 50 } = options;
+
   // Generate the CSS variable name for this token
   const cssVariable = createCssVariableNameGenerator({
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
 
-  // Get the display value
-  // For T1 (direct values): show the actual shadow value
-  // For T2/T3 (references): show the referenced token name
-  let displayValue: string;
-  if (isCurlyReference(token.value)) {
-    displayValue = curlyReferenceToString(token.value);
-  } else {
-    displayValue = shadowDesignTokensCollectionTokenValueToCssValue(token.value);
+  // Show the display value only for T1 (direct value - no curly ref)
+  let displayValue: string = '';
+  if (!isCurlyReference(token.value)) {
+    displayValue = /* HTML */ `<div
+      style="
+      font-family: monospace;
+      font-size: 11px;
+      color: #6b7280;
+      max-width: 200px;
+      word-wrap: break-word;
+    "
+    >
+      ${shadowDesignTokensCollectionTokenValueToCssValue(token.value)}
+    </div>`;
   }
-
-  const { boxSize = 50 } = options;
 
   // Create the shadow preview HTML using CSS variable directly
   // The browser resolves var(--esds-*) via the CSS cascade
@@ -84,23 +89,12 @@ export function shadowDesignTokensCollectionTokenToMarkdown(
       margin: 16px;
     "
     ></div>
-    <div
-      style="
-      font-family: monospace;
-      font-size: 11px;
-      color: #6b7280;
-      max-width: 200px;
-      word-wrap: break-word;
-    "
-    >
-      ${displayValue}
-    </div>
+    ${displayValue}
   `;
 
   return {
     preview,
     name: token.name.join('.'),
-    value: displayValue,
     cssVariable,
     description: token.description ?? '',
   };
