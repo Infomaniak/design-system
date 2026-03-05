@@ -55,6 +55,7 @@ jobs:
         run: yarn ci:publish
         env:
           GITHUB_CI_CONFIG: ${{ toJson(github) }}
+          KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Publish missing package versions (dry-run for fork PR)
