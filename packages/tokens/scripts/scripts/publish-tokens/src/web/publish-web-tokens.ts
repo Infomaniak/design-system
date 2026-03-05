@@ -25,7 +25,7 @@ export function publishWebTokens({
           case 'rc':
             return 'rc';
           case 'prod':
-            return 'lastest';
+            return 'latest';
           default:
             throw new Error(`Invalid mode: ${mode}`);
         }
