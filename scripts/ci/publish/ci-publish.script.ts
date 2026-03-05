@@ -52,7 +52,7 @@ export function ciPublishScript(): Promise<void> {
             webhookId: getEnvKchatWebhookId(),
             text: dedent`
               #### ❌ publish job failed
-    
+
               - 🔗 ${jobUrl}
               - 🌱 ${ciPublishContext.branchName}
               - ⚙️ ${ciPublishContext.mode}
@@ -71,7 +71,7 @@ export function ciPublishScript(): Promise<void> {
           webhookId: getEnvKchatWebhookId(),
           text: dedent`
             #### ✅ publish job succeed
-    
+
               - 🔗 ${jobUrl}
               - 🌱 ${ciPublishContext.branchName}
               - ⚙️ ${ciPublishContext.mode}
