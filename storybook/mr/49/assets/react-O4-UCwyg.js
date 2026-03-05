@@ -1,0 +1,1 @@
+import{n as e,t}from"./lib-BIE9f4sl.js";export{t as MDXProvider};
