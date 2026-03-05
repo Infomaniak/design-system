@@ -165,39 +165,53 @@ function renderTokenToRow(
 }
 
 /**
- * Generates markdown table column headers.
- * All token documentation tables use the same 4-column structure:
- * Preview | Token Name | CSS Variable | Description
+ * Generates HTML table column headers.
+ * Uses a 2-column layout: Preview (20%) | Details (Token, CSS, Description)
  */
-function generateColumnHeaders(_category: string): string[] {
+function generateColumnHeaders(): string[] {
   return [
-    '| Preview | Token Name | CSS Variable | Description |',
-    '|---------|------------|--------------|-------------|',
+    '<table class="token-table">',
+    '  <thead>',
+    '    <tr>',
+    '      <th style="width: 20%;">Preview</th>',
+    '      <th style="width: 80%;">Details</th>',
+    '    </tr>',
+    '  </thead>',
+    '  <tbody>',
   ];
 }
 
 /**
- * Generates markdown table content for a row
+ * Generates HTML table content for a row
  */
 function generateRowContent(row: MarkdownTokenRow): string {
   const { preview, name, cssVariable, description } = row;
-  // Normalize HTML to remove newlines and extra whitespace for clean markdown rendering
   const normalizedPreview = normalizeHtml(preview);
 
-  return `| ${normalizedPreview} | \`${name}\` | \`${cssVariable}\` | ${description} |`;
+  return `    <tr>
+      <td>${normalizedPreview}</td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="${name}" type="button">${name}</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(${cssVariable})" type="button">var(${cssVariable})</button>
+        </div>
+        <div class="token-row token-description">${description}</div>
+      </td>
+    </tr>`;
 }
 
 /**
  * Generates the complete markdown content for a category
  */
 function generateCategoryMarkdown(
-  category: string,
   tokens: GenericDesignTokensCollectionToken[],
   context: MarkdownRenderContext,
   logger: Logger,
 ): string {
-  const [headerRow, separatorRow] = generateColumnHeaders(category);
-  const lines: string[] = [headerRow, separatorRow];
+  const headerLines = generateColumnHeaders();
+  const lines: string[] = [...headerLines];
 
   // Render each token to a table row
   for (const token of tokens) {
@@ -212,6 +226,9 @@ function generateCategoryMarkdown(
       logger.warn(`Failed to render token ${token.name.join('.')}:`, error);
     }
   }
+
+  lines.push('  </tbody>');
+  lines.push('</table>');
 
   return lines.join('\n');
 }
@@ -242,12 +259,7 @@ export async function buildMarkdownTokens({
     // Generate markdown for each tier-category combination
     for (const [key, group] of tokensByTierAndCategory.entries()) {
       await logger.asyncTask(`category: ${key}`, async (): Promise<void> => {
-        const markdownContent = generateCategoryMarkdown(
-          group.category,
-          group.tokens,
-          context,
-          logger,
-        );
+        const markdownContent = generateCategoryMarkdown(group.tokens, context, logger);
         const markdown = `<!-- ${AUTO_GENERATED_FILE_HEADER} -->\n\n` + markdownContent;
         const filePath = join(outputDirectory, 'markdown', `${key}.md`);
         await writeFileSafe(filePath, markdown, { encoding: 'utf-8' });
