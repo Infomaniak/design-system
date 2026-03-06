@@ -1,30 +1,30 @@
 import { join } from 'node:path';
 import type { PackageJson } from '../../../../../../../scripts/helpers/file/package-json/package-json.ts';
 import { readPackageJsonFile } from '../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
+import { ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME } from '../../../../../../../scripts/helpers/github/constants/android-design-system-repository-name.constant.ts';
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
-import { IOS_DESIGN_SYSTEM_REPOSITORY_NAME } from '../../../../../../../scripts/helpers/github/constants/ios-design-system-repository-name.constant.ts';
 import { createGithubPR } from '../../../../../../../scripts/helpers/github/pull-request/create-github-pr.ts';
 import { getEnvCiPrAuthToken } from '../../../../../../../scripts/helpers/github/pull-request/env/get-env-ci-pr-auth-token.ts';
 import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { generatePackageJsonBuildVersion } from '../../../../../../../scripts/helpers/npm/generate-package-json-build-version/generate-package-json-build-version.ts';
 import type { PublishConfig } from '../../../../../../../scripts/helpers/publish/publish-config/publish-config.ts';
-import { createIosPublishGithubBranch } from './create-ios-publish-github-branch.ts';
+import { createAndroidPublishGithubBranch } from './create-android-publish-github-branch.ts';
 
-export interface PublishIosTokensOptions extends PublishConfig {
+export interface PublishAndroidTokensOptions extends PublishConfig {
   readonly rootDirectory: string;
   readonly outputDirectory: string;
   readonly logger: Logger;
 }
 
-export async function publishIosTokens({
+export async function publishAndroidTokens({
   rootDirectory,
   outputDirectory,
   // shared publish options
   mode,
   prerelease,
   logger,
-}: PublishIosTokensOptions): Promise<void> {
-  return logger.asyncTask('ios', async (): Promise<void> => {
+}: PublishAndroidTokensOptions): Promise<void> {
+  return logger.asyncTask('android', async (): Promise<void> => {
     const { version }: PackageJson = await readPackageJsonFile(join(rootDirectory, 'package.json'));
 
     const publishVersion: string = generatePackageJsonBuildVersion({
@@ -33,17 +33,17 @@ export async function publishIosTokens({
       prerelease,
     });
 
-    const publishBranchName: string = await createIosPublishGithubBranch({
+    const publishBranchName: string = await createAndroidPublishGithubBranch({
       logger,
-      repositoryName: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
-      packageDirectory: join(outputDirectory, 'ios'),
+      repositoryName: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
+      packageDirectory: join(outputDirectory, 'android'),
       version: publishVersion,
     });
 
     if (mode !== 'dev') {
       await createGithubPR({
         owner: INFOMANIAK_GITHUB_ORGANIZATION,
-        repository: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
+        repository: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
         authToken: getEnvCiPrAuthToken(),
         title: `chore: Update to ${publishBranchName}`,
         body: `Update to ${publishBranchName}`,

@@ -6,6 +6,7 @@ import { DEFAULT_LOG_LEVEL } from '../../../../../scripts/helpers/log/log-level/
 import { Logger } from '../../../../../scripts/helpers/log/logger.ts';
 import { getEnvPublishConfig } from '../../../../../scripts/helpers/publish/publish-config/env/get-env-publish-config.ts';
 import type { PublishConfig } from '../../../../../scripts/helpers/publish/publish-config/publish-config.ts';
+import { publishAndroidTokens } from './src/android/publish-android-tokens.ts';
 import { publishIosTokens } from './src/ios/publish-ios-tokens.ts';
 import { publishWebTokens } from './src/web/publish-web-tokens.ts';
 
@@ -28,6 +29,13 @@ export async function publishTokensScript(): Promise<void> {
     });
 
     await publishIosTokens({
+      ...publishConfig,
+      rootDirectory: ROOT_DIR,
+      outputDirectory: OUTPUT_DIR,
+      logger,
+    });
+
+    await publishAndroidTokens({
       ...publishConfig,
       rootDirectory: ROOT_DIR,
       outputDirectory: OUTPUT_DIR,
