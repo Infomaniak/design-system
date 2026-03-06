@@ -157,7 +157,6 @@ function renderTokenToRow(
     if (tokenWithType.name[0] === 'opacity') {
       return opacityDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
     }
-
     return numberDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
   }
 
