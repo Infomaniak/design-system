@@ -8,6 +8,9 @@ import { generatePackageJsonBuildVersion } from '../../../../../../../scripts/he
 import type { PublishConfig } from '../../../../../../../scripts/helpers/publish/publish-config/publish-config.ts';
 import { createIosPublishGithubBranch } from './create-ios-publish-github-branch.ts';
 
+const GITHUB_ORGANIZATION = 'Infomaniak';
+const IOS_REPOSITORY_NAME = 'ios-design-system';
+
 export interface PublishIosTokensOptions extends PublishConfig {
   readonly rootDirectory: string;
   readonly outputDirectory: string;
@@ -31,20 +34,17 @@ export async function publishIosTokens({
       prerelease,
     });
 
-    const githubOrganisation: string = 'Infomaniak';
-    const iosRepoName: string = 'ios-design-system';
-
     const iosPublishBranchName: string = await createIosPublishGithubBranch({
       logger,
-      repositoryName: iosRepoName,
+      repositoryName: IOS_REPOSITORY_NAME,
       packageDirectory: join(outputDirectory, 'ios'),
       version: publishVersion,
     });
 
     if (mode !== 'dev') {
       await createGithubPR({
-        owner: githubOrganisation,
-        repository: iosRepoName,
+        owner: GITHUB_ORGANIZATION,
+        repository: IOS_REPOSITORY_NAME,
         authToken: getEnvCiPrAuthToken(),
         title: `chore: Update to ${iosPublishBranchName}`,
         body: `Update to ${iosPublishBranchName}`,

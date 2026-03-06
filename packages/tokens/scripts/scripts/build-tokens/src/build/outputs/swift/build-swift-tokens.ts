@@ -44,7 +44,8 @@ export async function buildSwiftTokens({
         const file = processColorToken(resolvedToken, outputDirectory, colorsByFolder);
         filesToWrite.push(file);
       } else {
-        console.log(resolvedToken);
+        // TODO
+        // console.log(resolvedToken);
       }
     }
 
