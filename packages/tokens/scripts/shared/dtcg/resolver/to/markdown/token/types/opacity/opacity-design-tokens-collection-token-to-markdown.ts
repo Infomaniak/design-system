@@ -65,7 +65,7 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
   // We assert the type since this function only handles T1 opacity tokens
   let displayValue: string = '';
   if (!isCurlyReference(opacity)) {
-    displayValue = `${opacity * 100}%`;
+    displayValue = `${Math.round(opacity * 100)}%`;
   }
 
   // Create the opacity preview HTML using CSS variable directly
