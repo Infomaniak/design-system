@@ -1,0 +1,1 @@
+import{n as e,t}from"./lib-7UcsKL2-.js";export{t as MDXProvider};
