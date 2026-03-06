@@ -1,10 +1,9 @@
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
-import type { DimensionDesignTokensCollectionToken } from '../../../../../token/types/base/dimension/dimension-design-tokens-collection-token.ts';
-import type { DimensionDesignTokensCollectionTokenValue } from '../../../../../token/types/base/dimension/value/dimension-design-tokens-collection-token-value.ts';
+import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
+import type { NumberDesignTokensCollectionToken } from '../../../../../token/types/base/number/number-design-tokens-collection-token.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
-
 /**
  * Configuration options for opacity markdown rendering
  */
@@ -45,7 +44,7 @@ export interface OpacityMarkdownRenderOptions {
  * }
  */
 export function opacityDesignTokensCollectionTokenToMarkdown(
-  token: DimensionDesignTokensCollectionToken,
+  token: NumberDesignTokensCollectionToken,
   _context: MarkdownRenderContext,
   options: OpacityMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
@@ -59,11 +58,15 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
   // TODO: Add support for T2 opacity tokens (curly references) when they are needed
   // Currently only T1 tokens are supported (direct dimension values)
 
+  // Get the opacity value
+  const opacity = token.value;
+
   // T1 tokens have direct dimension values { value: number, unit: string }
   // We assert the type since this function only handles T1 opacity tokens
-  const dimensionValue = token.value as DimensionDesignTokensCollectionTokenValue;
-  const opacityValue = dimensionValue.value;
-  const displayValue = `${opacityValue}%`;
+  let displayValue: string = '';
+  if (!isCurlyReference(opacity)) {
+    displayValue = `${opacity * 100}%`;
+  }
 
   // Create the opacity preview HTML using CSS variable directly
   // The browser resolves var(--esds-*) via the CSS cascade
