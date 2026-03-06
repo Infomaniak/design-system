@@ -95,6 +95,7 @@ export async function ciPublish({
   await runYarnWorkspacesCommand('publish', {
     [ENV_PUBLISH_CONFIG]: JSON.stringify({
       mode: buildConfig.mode,
+      prerelease: buildConfig.prerelease,
     } satisfies PublishConfig),
   });
 
