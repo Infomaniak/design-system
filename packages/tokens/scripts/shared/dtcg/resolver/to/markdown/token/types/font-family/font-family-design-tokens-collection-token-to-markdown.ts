@@ -1,6 +1,5 @@
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
 import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
-import { curlyReferenceToString } from '../../../../../../design-token/reference/types/curly/to/string/curly-reference-to-string.ts';
 import type { FontFamilyDesignTokensCollectionToken } from '../../../../../token/types/base/font-family/font-family-design-tokens-collection-token.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { fontFamilyDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/font-family/value/font-family-design-tokens-collection-token-value-to-css-value.ts';
@@ -57,15 +56,20 @@ export function fontFamilyDesignTokensCollectionTokenToMarkdown(
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
 
-  // Get the display value
-  // For T1 (direct values): show the actual font family list
-  // For T2/T3 (references): show the CSS variable reference they point to
-  let displayValue: string;
-  if (isCurlyReference(token.value)) {
-    displayValue = curlyReferenceToString(token.value);
-  } else {
+  // Show the display value only for T1 (direct value - no curly ref)
+  let displayValue: string = '';
+  if (!isCurlyReference(token.value)) {
     // Token has a direct value - resolve it to show the actual font family
-    displayValue = fontFamilyDesignTokensCollectionTokenValueToCssValue(token.value);
+    displayValue = /* HTML */ `<div
+      style="
+      margin-top: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #6b7280;
+    "
+    >
+      ${fontFamilyDesignTokensCollectionTokenValueToCssValue(token.value)}
+    </div>`;
   }
 
   // Create the font family preview HTML
@@ -85,22 +89,12 @@ export function fontFamilyDesignTokensCollectionTokenToMarkdown(
     >
       ${sampleText}
     </p>
-    <div
-      style="
-      margin-top: 4px;
-      font-family: monospace;
-      font-size: 12px;
-      color: #6b7280;
-    "
-    >
-      ${displayValue}
-    </div>
+    ${displayValue}
   `;
 
   return {
     preview,
     name: token.name.join('.'),
-    value: displayValue,
     cssVariable,
     description: token.description ?? '',
   };

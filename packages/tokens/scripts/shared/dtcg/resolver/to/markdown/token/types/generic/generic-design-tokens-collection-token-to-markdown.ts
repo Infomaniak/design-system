@@ -1,12 +1,9 @@
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
-import type { CurlyReference } from '../../../../../../design-token/reference/types/curly/curly-reference.ts';
 import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
-import { curlyReferenceToString } from '../../../../../../design-token/reference/types/curly/to/string/curly-reference-to-string.ts';
 import type { DesignTokensCollectionTokenWithType } from '../../../../../token/design-tokens-collection-token.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
-
 /**
  * Configuration options for generic markdown rendering
  */
@@ -164,13 +161,18 @@ export function genericDesignTokensCollectionTokenToMarkdown(
 ): MarkdownTokenRow {
   const { maxValueLength = 100, prettyPrintJson = false, customPreviewTemplate } = options;
 
-  // Get the display value
-  // For T1 (direct values): format the raw value
-  // For T2/T3 (references): show the referenced token name
-  let displayValue: string;
-  if (isCurlyReference(token.value as unknown as CurlyReference)) {
-    displayValue = curlyReferenceToString(token.value as unknown as CurlyReference);
-  } else {
+  // Generate the CSS variable name for this token
+  const cssVariable = createCssVariableNameGenerator({
+    prefix: CSS_VARIABLE_PREFIX,
+  })(token.name);
+
+  // Check if this is a T1 token (direct value - no curly ref)
+  const isReference = isCurlyReference(token.value);
+
+  // For T1 (direct values): format the raw value and show in preview
+  // For T2/T3 (references): show a simplified preview without value
+  let displayValue: string = '';
+  if (!isReference) {
     const formattedValue = formatValue(token.value, prettyPrintJson);
     displayValue = truncate(formattedValue, maxValueLength);
   }
@@ -180,20 +182,50 @@ export function genericDesignTokensCollectionTokenToMarkdown(
   if (customPreviewTemplate) {
     preview = customPreviewTemplate
       .replace('{{type}}', token.type)
-      .replace('{{value}}', displayValue);
+      .replace('{{value}}', displayValue || `var(${cssVariable})`);
+  } else if (isReference) {
+    // For references, show a simplified box without the value text
+    preview = /* HTML */ `
+      <div
+        style="
+        background: #f3f4f6;
+        padding: 12px;
+        border-radius: 4px;
+        border: 1px solid #e5e7eb;
+        font-family: monospace;
+        font-size: 13px;
+        color: #6b7280;
+      "
+      >
+        <div
+          style="
+          font-weight: 600;
+          margin-bottom: 4px;
+          color: #4b5563;
+        "
+        >
+          Type: ${token.type}
+        </div>
+        <div>Reference token</div>
+      </div>
+      <div
+        style="
+        margin-top: 4px;
+        font-family: monospace;
+        font-size: 11px;
+        color: #6b7280;
+      "
+      >
+        ${token.type}
+      </div>
+    `;
   } else {
     preview = createFallbackPreview(token.type, displayValue, options);
   }
 
-  // Generate the CSS variable name for this token
-  const cssVariable = createCssVariableNameGenerator({
-    prefix: CSS_VARIABLE_PREFIX,
-  })(token.name);
-
   return {
     preview,
     name: token.name.join('.'),
-    value: displayValue,
     cssVariable,
     description: token.description ?? '',
   };
