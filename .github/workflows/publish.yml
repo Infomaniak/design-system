@@ -43,6 +43,16 @@ jobs:
           always-auth: true
           cache: 'yarn'
 
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "$SSH_DEPLOY_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+
       - name: Install dependencies
         run: yarn install --immutable
 
@@ -57,6 +67,7 @@ jobs:
           GITHUB_CI_CONFIG: ${{ toJson(github) }}
           KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          CI_PR_AUTH_TOKEN: ${{ secrets.CI_PR_AUTH_TOKEN }}
 
       - name: Publish missing package versions (dry-run for fork PR)
         if: >-
