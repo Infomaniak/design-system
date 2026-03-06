@@ -1,191 +1,128 @@
 {
-  "$type": "dimension",
+  "$type": "number",
   "opacity": {
     "0": {
-      "$value": {
-        "value": 0,
-        "unit": "%"
-      },
+      "$value": 0,
       "$extensions": {
         "scopes": []
       }
     },
     "5": {
-      "$value": {
-        "value": 5,
-        "unit": "%"
-      },
+      "$value": 0.05,
       "$extensions": {
         "scopes": []
       }
     },
     "10": {
-      "$value": {
-        "value": 10,
-        "unit": "%"
-      },
+      "$value": 0.1,
       "$extensions": {
         "scopes": []
       }
     },
     "15": {
-      "$value": {
-        "value": 15,
-        "unit": "%"
-      },
+      "$value": 0.15,
       "$extensions": {
         "scopes": []
       }
     },
     "20": {
-      "$value": {
-        "value": 20,
-        "unit": "%"
-      },
+      "$value": 0.2,
       "$extensions": {
         "scopes": []
       }
     },
     "25": {
-      "$value": {
-        "value": 25,
-        "unit": "%"
-      },
+      "$value": 0.25,
       "$extensions": {
         "scopes": []
       }
     },
     "30": {
-      "$value": {
-        "value": 30,
-        "unit": "%"
-      },
+      "$value": 0.3,
       "$extensions": {
         "scopes": []
       }
     },
     "35": {
-      "$value": {
-        "value": 35,
-        "unit": "%"
-      },
+      "$value": 0.35,
       "$extensions": {
         "scopes": []
       }
     },
     "40": {
-      "$value": {
-        "value": 40,
-        "unit": "%"
-      },
+      "$value": 0.4,
       "$extensions": {
         "scopes": []
       }
     },
     "45": {
-      "$value": {
-        "value": 45,
-        "unit": "%"
-      },
+      "$value": 0.45,
       "$extensions": {
         "scopes": []
       }
     },
     "50": {
-      "$value": {
-        "value": 50,
-        "unit": "%"
-      },
+      "$value": 0.5,
       "$extensions": {
         "scopes": []
       }
     },
     "55": {
-      "$value": {
-        "value": 55,
-        "unit": "%"
-      },
+      "$value": 0.55,
       "$extensions": {
         "scopes": []
       }
     },
     "60": {
-      "$value": {
-        "value": 60,
-        "unit": "%"
-      },
+      "$value": 0.6,
       "$extensions": {
         "scopes": []
       }
     },
     "65": {
-      "$value": {
-        "value": 65,
-        "unit": "%"
-      },
+      "$value": 0.65,
       "$extensions": {
         "scopes": []
       }
     },
     "70": {
-      "$value": {
-        "value": 70,
-        "unit": "%"
-      },
+      "$value": 0.7,
       "$extensions": {
         "scopes": []
       }
     },
     "75": {
-      "$value": {
-        "value": 75,
-        "unit": "%"
-      },
+      "$value": 0.75,
       "$extensions": {
         "scopes": []
       }
     },
     "80": {
-      "$value": {
-        "value": 80,
-        "unit": "%"
-      },
+      "$value": 0.8,
       "$extensions": {
         "scopes": []
       }
     },
     "85": {
-      "$value": {
-        "value": 85,
-        "unit": "%"
-      },
+      "$value": 0.85,
       "$extensions": {
         "scopes": []
       }
     },
     "90": {
-      "$value": {
-        "value": 90,
-        "unit": "%"
-      },
+      "$value": 0.9,
       "$extensions": {
         "scopes": []
       }
     },
     "95": {
-      "$value": {
-        "value": 95,
-        "unit": "%"
-      },
+      "$value": 0.95,
       "$extensions": {
         "scopes": []
       }
     },
     "100": {
-      "$value": {
-        "value": 100,
-        "unit": "%"
-      },
+      "$value": 1,
       "$extensions": {
         "scopes": []
       }
