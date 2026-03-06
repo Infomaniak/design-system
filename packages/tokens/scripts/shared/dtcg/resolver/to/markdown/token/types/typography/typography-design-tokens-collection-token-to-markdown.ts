@@ -93,7 +93,7 @@ function flattenTypographyValue(
  * Output: {
  *   preview: Styled text with font settings applied,
  *   name: 'typography.heading',
- *   value: '700 24px/1.5 "Inter"',
+ *   cssVariable: '--esds-typography-heading',
  *   description: ''
  * }
  */
@@ -187,7 +187,6 @@ export function typographyDesignTokensCollectionTokenToMarkdown(
   return {
     preview,
     name: token.name.join('.'),
-    value: cssString,
     cssVariable,
     description: token.description ?? '',
   };

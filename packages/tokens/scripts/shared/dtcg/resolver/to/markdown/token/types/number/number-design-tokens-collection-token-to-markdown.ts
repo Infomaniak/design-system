@@ -1,6 +1,5 @@
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
 import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
-import { curlyReferenceToString } from '../../../../../../design-token/reference/types/curly/to/string/curly-reference-to-string.ts';
 import type { NumberDesignTokensCollectionToken } from '../../../../../token/types/base/number/number-design-tokens-collection-token.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
@@ -164,40 +163,17 @@ export function numberDesignTokensCollectionTokenToMarkdown(
   // Get the numeric value
   const value = token.value;
 
-  // Format the value
-  let displayValue: string;
+  // Generate the CSS variable name for this token
+  const cssVariable = createCssVariableNameGenerator({
+    prefix: CSS_VARIABLE_PREFIX,
+  })(token.name);
 
-  if (isCurlyReference(value)) {
-    displayValue = curlyReferenceToString(value);
-  } else if (Number.isInteger(value)) {
-    // Integer value - show as-is
-    displayValue = value.toString();
-  } else {
-    // Decimal value - format with specified decimal places
-    const formattedValue = value.toFixed(decimalPlaces);
-
-    // Check if this is likely an opacity value
-    if (showPercentageForDecimals && isLikelyOpacity(token.name, value)) {
-      const percentage = Math.round(value * 100);
-      displayValue = `${formattedValue} (${percentage}%)`;
-    } else {
-      displayValue = formattedValue;
-    }
-  }
-
-  // Show raw value if requested and different from formatted
-  if (showRawValue && displayValue !== value.toString()) {
-    displayValue = `${displayValue} [raw: ${value}]`;
-  }
-
-  // Create the number preview HTML
-  // For ratio tokens, show a visual box representing the aspect ratio
-  // For others, show a styled code block
+  // Only show value for T1 (direct value - no curly ref)
+  // For T2/T3, skip the value display entirely
   let preview: string;
 
-  if (isRatioToken(token.name) && !isCurlyReference(value)) {
-    preview = createRatioPreview(value, displayValue, token.name);
-  } else {
+  if (isCurlyReference(value)) {
+    // For T2/T3 references, show a placeholder preview
     preview = /* HTML */ `
       <div
         style="
@@ -207,26 +183,67 @@ export function numberDesignTokensCollectionTokenToMarkdown(
         border: 1px solid #e5e7eb;
         font-family: monospace;
         font-size: 14px;
-        color: #1f2937;
+        color: #9ca3af;
         display: inline-block;
         min-width: 60px;
         text-align: center;
       "
       >
-        ${displayValue}
+        var(${cssVariable})
       </div>
     `;
-  }
+  } else {
+    // Format the value for T1 (direct values)
+    let formattedValue: string;
+    if (Number.isInteger(value)) {
+      formattedValue = value.toString();
+    } else {
+      const decimalFormatted = value.toFixed(decimalPlaces);
+      // Check if this is likely an opacity value
+      if (showPercentageForDecimals && isLikelyOpacity(token.name, value)) {
+        const percentage = Math.round(value * 100);
+        formattedValue = `${decimalFormatted} (${percentage}%)`;
+      } else {
+        formattedValue = decimalFormatted;
+      }
+    }
 
-  // Generate the CSS variable name for this token
-  const cssVariable = createCssVariableNameGenerator({
-    prefix: CSS_VARIABLE_PREFIX,
-  })(token.name);
+    let displayValue: string;
+
+    // Show raw value if requested and different from formatted
+    displayValue = formattedValue;
+    if (showRawValue && displayValue !== value.toString()) {
+      displayValue = `${displayValue} [raw: ${value}]`;
+    }
+
+    // Create the preview
+    if (isRatioToken(token.name)) {
+      preview = createRatioPreview(value, displayValue, token.name);
+    } else {
+      preview = /* HTML */ `
+        <div
+          style="
+          background: #f3f4f6;
+          padding: 8px 12px;
+          border-radius: 4px;
+          border: 1px solid #e5e7eb;
+          font-family: monospace;
+          font-size: 14px;
+          color: #1f2937;
+          display: inline-block;
+          min-width: 60px;
+          text-align: center;
+        "
+        >
+          ${displayValue}
+        </div>
+      `;
+    }
+  }
 
   return {
     preview,
     name: token.name.join('.'),
-    value: displayValue,
     cssVariable,
     description: token.description ?? '',
   };
