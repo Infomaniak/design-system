@@ -1,3 +1,4 @@
+import type { BuildConfig } from '../../../../../../../scripts/helpers/build/build-config/build-config.ts';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { removeTrailingSlash } from '../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import { DesignTokensCollection } from '../../../../shared/dtcg/resolver/design-tokens-collection.ts';
@@ -12,7 +13,7 @@ import { buildKotlinTokens } from './outputs/kotlin/build-kotlin-tokens.ts';
 import { buildMarkdownTokens } from './outputs/markdown/build-markdown-tokens.ts';
 import { buildSwiftTokens } from './outputs/swift/build-swift-tokens.ts';
 
-export interface BuildTokensOptions {
+export interface BuildTokensOptions extends BuildConfig {
   readonly sourceDirectory: string;
   readonly outputDirectory: string;
   readonly logger: Logger;
@@ -72,7 +73,7 @@ export function buildTokens({
       logger,
     });
 
-    // Markdown
+    // MARKDOWN
     await buildMarkdownTokens({
       baseCollection,
       modifiers,

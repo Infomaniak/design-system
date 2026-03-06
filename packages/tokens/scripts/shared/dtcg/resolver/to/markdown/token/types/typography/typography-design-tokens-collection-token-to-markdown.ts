@@ -1,8 +1,11 @@
+import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
 import type { CurlyReference } from '../../../../../../design-token/reference/types/curly/curly-reference.ts';
 import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
+import { curlyReferenceToString } from '../../../../../../design-token/reference/types/curly/to/string/curly-reference-to-string.ts';
 import type { ValueOrCurlyReference } from '../../../../../../design-token/reference/types/curly/value-or/value-or-curly-reference.ts';
 import type { TypographyDesignTokensCollectionToken } from '../../../../../token/types/composite/typography/typography-design-tokens-collection-token.ts';
 import type { TypographyDesignTokensCollectionTokenValue } from '../../../../../token/types/composite/typography/value/typography-design-tokens-collection-token-value.ts';
+import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { typographyDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/composite/typography/value/typography-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
@@ -109,37 +112,54 @@ export function typographyDesignTokensCollectionTokenToMarkdown(
   const styleParts: string[] = [];
 
   if (resolvedValue.fontFamily) {
-    const fontFamily = String(resolvedValue.fontFamily).replace(/[{}]/g, '');
+    const fontFamily = isCurlyReference(resolvedValue.fontFamily)
+      ? curlyReferenceToString(resolvedValue.fontFamily)
+      : String(resolvedValue.fontFamily);
     styleParts.push(`font-family: ${fontFamily}`);
   }
 
   if (resolvedValue.fontSize) {
-    const fontSize = String(resolvedValue.fontSize).replace(/[{}]/g, '');
+    const fontSize = isCurlyReference(resolvedValue.fontSize)
+      ? curlyReferenceToString(resolvedValue.fontSize)
+      : String(resolvedValue.fontSize);
     styleParts.push(`font-size: ${fontSize}`);
   }
 
   if (resolvedValue.fontWeight) {
-    const fontWeight = String(resolvedValue.fontWeight).replace(/[{}]/g, '');
+    const fontWeight = isCurlyReference(resolvedValue.fontWeight)
+      ? curlyReferenceToString(resolvedValue.fontWeight)
+      : String(resolvedValue.fontWeight);
     styleParts.push(`font-weight: ${fontWeight}`);
   }
 
   if (resolvedValue.letterSpacing) {
-    const letterSpacing = String(resolvedValue.letterSpacing).replace(/[{}]/g, '');
+    const letterSpacing = isCurlyReference(resolvedValue.letterSpacing)
+      ? curlyReferenceToString(resolvedValue.letterSpacing)
+      : String(resolvedValue.letterSpacing);
     styleParts.push(`letter-spacing: ${letterSpacing}`);
   }
 
   if (resolvedValue.lineHeight) {
-    const lineHeight = String(resolvedValue.lineHeight).replace(/[{}]/g, '');
+    const lineHeight = isCurlyReference(resolvedValue.lineHeight)
+      ? curlyReferenceToString(resolvedValue.lineHeight)
+      : String(resolvedValue.lineHeight);
     styleParts.push(`line-height: ${lineHeight}`);
   }
 
+  // Get the resolved CSS string for display
   const cssString = typographyDesignTokensCollectionTokenValueToCssValue(resolvedValue);
 
-  // Create the typography preview HTML
+  // Generate the CSS variable name for this token
+  const cssVariable = createCssVariableNameGenerator({
+    prefix: CSS_VARIABLE_PREFIX,
+  })(token.name);
+
+  // Create the typography preview HTML using CSS shorthand variable directly
+  // The browser resolves var(--esds-typography-*) via the CSS cascade
   const preview = /* HTML */ `
     <p
       style="
-      ${styleParts.join('; ')};
+      font: var(${cssVariable});
       margin: 0;
       padding: 12px;
       background: #f9fafb;
@@ -168,6 +188,7 @@ export function typographyDesignTokensCollectionTokenToMarkdown(
     preview,
     name: token.name.join('.'),
     value: cssString,
+    cssVariable,
     description: token.description ?? '',
   };
 }

@@ -26,7 +26,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -56,59 +55,25 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Build workspaces (topological)
-        run: yarn build
-
-      - name: Run tests
-        run: yarn test
-
-      - name: Compute publish timestamp
-        id: publish_timestamp
-        if: >-
-          ${{
-            github.event_name == 'push' ||
-            (github.event_name == 'pull_request' &&
-             contains(github.event.pull_request.labels.*.name, 'dev'))
-          }}
-        run: echo "value=$(date +%s%3N)" >> "$GITHUB_OUTPUT"
-
       - name: Publish missing package versions
         if: >-
-          ${{
-            github.event_name == 'push' ||
-            (github.event_name == 'pull_request' &&
-             github.event.pull_request.head.repo.full_name == github.repository &&
-             contains(github.event.pull_request.labels.*.name, 'dev'))
-          }}
+          github.event_name == 'push' ||
+          (github.event_name == 'pull_request' &&
+           github.event.pull_request.head.repo.full_name == github.repository &&
+           contains(github.event.pull_request.labels.*.name, 'dev'))
         run: yarn ci:publish
         env:
-          GITHUB_EVENT_NAME: ${{ github.event_name }}
-          GITHUB_REF_NAME: ${{ github.ref_name }}
-          CI_PUBLISH_TARGET_BRANCH: ${{ github.event_name == 'pull_request' && github.base_ref || github.ref_name }}
-          CI_PUBLISH_PR_LABELS: ${{ github.event_name == 'pull_request' && toJson(github.event.pull_request.labels.*.name) || '[]' }}
-          CI_PUBLISH_GIT_BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
-          CI_PUBLISH_GIT_HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
-          CI_PUBLISH_TIMESTAMP: ${{ steps.publish_timestamp.outputs.value }}
-          CI_PUBLISH_STRICT_VERSION_POLICY: 'true'
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_CI_CONFIG: ${{ toJson(github) }}
+          KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           CI_PR_AUTH_TOKEN: ${{ secrets.CI_PR_AUTH_TOKEN }}
 
       - name: Publish missing package versions (dry-run for fork PR)
         if: >-
-          ${{
-            github.event_name == 'pull_request' &&
-            github.event.pull_request.head.repo.full_name != github.repository &&
-            contains(github.event.pull_request.labels.*.name, 'dev')
-          }}
+          github.event_name == 'pull_request' &&
+          github.event.pull_request.head.repo.full_name != github.repository &&
+          contains(github.event.pull_request.labels.*.name, 'dev')
         run: yarn ci:publish
         env:
-          GITHUB_EVENT_NAME: ${{ github.event_name }}
-          GITHUB_REF_NAME: ${{ github.ref_name }}
-          CI_PUBLISH_TARGET_BRANCH: ${{ github.base_ref }}
-          CI_PUBLISH_PR_LABELS: ${{ toJson(github.event.pull_request.labels.*.name) }}
-          CI_PUBLISH_GIT_BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          CI_PUBLISH_GIT_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-          CI_PUBLISH_TIMESTAMP: ${{ steps.publish_timestamp.outputs.value }}
-          CI_PUBLISH_STRICT_VERSION_POLICY: 'true'
+          GITHUB_CI_CONFIG: ${{ toJson(github) }}
           CI_PUBLISH_DRY_RUN: 'true'
-          CI_PR_AUTH_TOKEN: ${{ secrets.CI_PR_AUTH_TOKEN }}
