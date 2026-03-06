@@ -1,25 +1,25 @@
-import { AUTO_GENERATED_FILE_HEADER } from "../../../constants/auto-generated-file-header.ts";
+import { AUTO_GENERATED_FILE_HEADER } from '../../../constants/auto-generated-file-header.ts';
 
 export function createSwiftColorEnum(colorsByFolder: Record<string, string[]>): string {
-    const nestedEnums = Object.entries(colorsByFolder)
-        .map(([folder, names]) => {
-            const cases = names.map((name) => `        case ${name}`).join('\n');
+  const nestedEnums = Object.entries(colorsByFolder)
+    .map(([folder, names]) => {
+      const cases = names.map((name) => `        case ${name}`).join('\n');
 
-            return `    public enum ${folder}: String, CaseIterable {
+      return `    public enum ${folder}: String, CaseIterable {
 ${cases}
 
         public var color: Color {
             Color("\\(rawValue)")
         }
     }`;
-        })
-        .join('\n\n');
+    })
+    .join('\n\n');
 
-    const allByCategory = Object.keys(colorsByFolder)
-        .map((folder) => `            ("${folder}", ${folder}.allCases.map(\\.color))`)
-        .join(',\n');
+  const allByCategory = Object.keys(colorsByFolder)
+    .map((folder) => `            ("${folder}", ${folder}.allCases.map(\\.color))`)
+    .join(',\n');
 
-    return `//
+  return `//
 // ${AUTO_GENERATED_FILE_HEADER}
 //
 

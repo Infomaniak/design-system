@@ -41,10 +41,10 @@ export async function publishIosTokens({
       version: publishVersion,
     });
 
-    if (mode != 'dev') {
+    if (mode !== 'dev') {
       await createGithubPR({
         owner: githubOrganisation,
-        repo: iosRepoName,
+        repository: iosRepoName,
         authToken: getEnvCiPrAuthToken(),
         title: `chore: Update to ${iosPublishBranchName}`,
         body: `Update to ${iosPublishBranchName}`,
