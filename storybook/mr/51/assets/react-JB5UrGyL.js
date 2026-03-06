@@ -1,1 +1,0 @@
-import{n as e,t}from"./lib-CIt0_ynr.js";export{t as MDXProvider};
