@@ -9,17 +9,15 @@ export function dimensionTokensBrueckeDesignTokenToNumberDesignToken(
   input: DimensionTokensBrueckeDesignToken,
   ctx: TokensBrueckeToDtcgContext,
 ): NumberDesignToken {
-  const multiplier: number = isTokensBrueckeDesignTokenPercentNumberDesignToken(input, ctx)
-    ? 0.01
-    : 1;
+  const divider: number = isTokensBrueckeDesignTokenPercentNumberDesignToken(input, ctx) ? 100 : 1;
 
   return tokensBrueckeDesignTokenWithMapValueToDesignToken(
     input,
     'number',
     (value: string): number => {
       return (
-        (dimensionTokensBrueckeDesignTokenValueToDimensionDesignTokenValue(value).value as number) *
-        multiplier
+        (dimensionTokensBrueckeDesignTokenValueToDimensionDesignTokenValue(value).value as number) /
+        divider
       );
     },
   );
