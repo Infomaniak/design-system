@@ -1,3 +1,4 @@
+import { type ExpandedMergeRequestSchema } from '@gitbeaker/core';
 import { randomUUID } from 'node:crypto';
 import { basename } from 'node:path';
 import { createGitlabMergeRequest } from '../../helpers/gitlab/create-gitlab-merge-request.ts';
@@ -12,7 +13,6 @@ import {
   execCommandInherit,
 } from '../../helpers/misc/exec-command.ts';
 import { indent } from '../../helpers/misc/indent.ts';
-import { type ExpandedMergeRequestSchema } from '@gitbeaker/core';
 
 export async function createIconsAndIllustrationMergeRequest(
   logger: Logger,

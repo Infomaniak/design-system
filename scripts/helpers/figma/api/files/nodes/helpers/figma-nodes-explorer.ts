@@ -8,7 +8,7 @@ import { isFigmaFrameNode } from '../built-in/figma-frame-node.ts';
 import { isFigmaGroupNode } from '../built-in/figma-group-node.ts';
 import { isFigmaSectionNode } from '../built-in/figma-section-node.ts';
 import { isFigmaTableNode } from '../built-in/figma-table-node.ts';
-import type {  GenericFigmaNode } from '../figma-node.ts';
+import type { GenericFigmaNode } from '../figma-node.ts';
 
 export const FigmaNodesExplorer = new TreeExplorer<GenericFigmaNode>(
   (node: GenericFigmaNode): Iterable<GenericFigmaNode> => {

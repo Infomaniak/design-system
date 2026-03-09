@@ -1,4 +1,4 @@
-import type { FigmaNode, GenericFigmaNode} from '../figma-node.ts';
+import type { FigmaNode, GenericFigmaNode } from '../figma-node.ts';
 import type { HavingFigmaNodeChildren } from '../having-figma-node-children.ts';
 
 export interface FigmaSectionNode extends FigmaNode<'SECTION'>, HavingFigmaNodeChildren {

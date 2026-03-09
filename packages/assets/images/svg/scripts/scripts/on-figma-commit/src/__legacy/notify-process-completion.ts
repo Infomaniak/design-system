@@ -1,10 +1,10 @@
 import { type ExpandedMergeRequestSchema } from '@gitbeaker/core';
-import { type Logger } from '../../helpers/log/logger.ts';
-import { postWebhookMessage } from '../../helpers/kchat/api/post-webhook-message.ts';
-import { getEnvKchatWebhookId } from '../../helpers/kchat/env/get-env-kchat-webhook-id.ts';
-import { getEnvKchatRecipient } from '../../helpers/kchat/env/get-env-kchat-recipient.ts';
-import { getEnvProjectName } from '../../helpers/misc/get-env-project-name.ts';
 import { getEnvGitlabJobUrl } from '../../helpers/gitlab/env/get-env-gitlab-job-url.ts';
+import { postWebhookMessage } from '../../helpers/kchat/api/post-webhook-message.ts';
+import { getEnvKchatRecipient } from '../../helpers/kchat/env/get-env-kchat-recipient.ts';
+import { getEnvKchatWebhookId } from '../../helpers/kchat/env/get-env-kchat-webhook-id.ts';
+import { type Logger } from '../../helpers/log/logger.ts';
+import { getEnvProjectName } from '../../helpers/misc/get-env-project-name.ts';
 
 export interface ProcessResult {
   mr?: ExpandedMergeRequestSchema;

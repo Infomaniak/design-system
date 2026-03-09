@@ -6,6 +6,8 @@ export interface FigmaBooleanOperationNode
   readonly booleanOperation: string;
 }
 
-export function isFigmaBooleanOperationNode(input: GenericFigmaNode): input is FigmaBooleanOperationNode {
+export function isFigmaBooleanOperationNode(
+  input: GenericFigmaNode,
+): input is FigmaBooleanOperationNode {
   return input.type === 'BOOLEAN_OPERATION';
 }
