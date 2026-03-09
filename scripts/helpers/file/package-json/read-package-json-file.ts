@@ -7,5 +7,11 @@ export type ReadPackageJsonFileArguments = ReadJsonFileArguments;
 export async function readPackageJsonFile(
   ...args: ReadPackageJsonFileArguments
 ): Promise<PackageJson> {
-  return packageJsonSchema.parse(await readJsonFile<PackageJson>(...args));
+  try {
+    return packageJsonSchema.parse(await readJsonFile<PackageJson>(...args));
+  } catch (error: unknown) {
+    throw new Error(`Failed to read package.json file: ${JSON.stringify(args[0])}`, {
+      cause: error,
+    });
+  }
 }
