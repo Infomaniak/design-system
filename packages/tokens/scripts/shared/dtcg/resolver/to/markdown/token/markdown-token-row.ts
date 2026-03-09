@@ -1,6 +1,6 @@
 /**
  * Represents a single row in the markdown token documentation table.
- * Each token is displayed as a table row with a visual preview, name, value, and description.
+ * Each token is displayed as a table row with a visual preview, name, CSS variable, and description.
  */
 export interface MarkdownTokenRow {
   /**
@@ -19,11 +19,10 @@ export interface MarkdownTokenRow {
   readonly name: string;
 
   /**
-   * The resolved token value as a string representation.
-   * For CSS-compatible values, this is the CSS value.
-   * For complex types, this may be a JSON string or computed value.
+   * The CSS variable name for web consumers.
+   * Includes the esds prefix (e.g., `--esds-color-red-500`)
    */
-  readonly value: string;
+  readonly cssVariable: string;
 
   /**
    * Optional token description from the token definition.

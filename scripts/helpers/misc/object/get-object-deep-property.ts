@@ -1,7 +1,9 @@
+import type { ExplicitAny } from '../../types/explicit-any.ts';
+
 export const NOT_FOUND = Symbol('NOT_FOUND');
 
 export function getObjectDeepProperty(root: unknown, path: readonly PropertyKey[]): unknown {
-  let node: any = root;
+  let node: ExplicitAny = root;
 
   for (let i: number = 0; i < path.length; i++) {
     const segment: PropertyKey = path[i];

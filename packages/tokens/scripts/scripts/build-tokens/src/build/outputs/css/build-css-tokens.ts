@@ -92,7 +92,7 @@ export function buildCssTokens({
         await logger.asyncTask(modifier, async (logger: Logger): Promise<void> => {
           await logger.asyncTask('context', async (logger: Logger): Promise<void> => {
             for (const [context, collection] of contexts.entries()) {
-              await logger.asyncTask(context, async (_logger: Logger): Promise<void> => {
+              await logger.asyncTask(context, async (): Promise<void> => {
                 const expectedPath: string = `${modifier}/${context}`;
 
                 const toRedeclare: Set<string> = new Set();
@@ -283,6 +283,17 @@ export function buildCssTokens({
                       DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
                         'font',
                         'weight',
+                        ...token.name.slice(2),
+                      ]),
+                    ),
+                  ];
+                } else if (tokenName.startsWith('font.letter-spacing')) {
+                  // --tracking-*
+                  return [
+                    generateTailwindToken(
+                      token,
+                      DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
+                        'tracking',
                         ...token.name.slice(2),
                       ]),
                     ),

@@ -6,7 +6,8 @@ import {
 import { cubicBezierDesignTokensCollectionTokenValueToCssValue } from '../../../base/cubic-bezier/value/cubic-bezier-design-tokens-collection-token-value-to-css-value.ts';
 import { durationDesignTokensCollectionTokenValueToCssValue } from '../../../base/duration/value/duration-design-tokens-collection-token-value-to-css-value.ts';
 
-export interface TransitionDesignTokensCollectionTokenValueToCssValueOptions extends ValueOrCurlyReferenceToCssVariableReferenceOptions {}
+export type TransitionDesignTokensCollectionTokenValueToCssValueOptions =
+  ValueOrCurlyReferenceToCssVariableReferenceOptions;
 
 /**
  * @inheritDoc https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transition

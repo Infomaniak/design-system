@@ -17,7 +17,7 @@ export function sleep(duration: number, signal?: AbortSignal): Promise<void> {
 
     signal?.addEventListener('abort', onAbort);
 
-    const timer: any = setTimeout((): void => {
+    const timer: ReturnType<typeof setTimeout> = setTimeout((): void => {
       end();
       resolve();
     }, duration);

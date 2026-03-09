@@ -1,7 +1,10 @@
 import type { CurlyReference } from '../../../design-token/reference/types/curly/curly-reference.ts';
 import { isCurlyReference } from '../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { UpdateCurlyReference } from '../../../design-token/reference/types/curly/update/update-curly-reference.ts';
-import type { GenericDesignTokensCollectionToken } from '../design-tokens-collection-token.ts';
+import {
+  type GenericDesignTokensCollectionToken,
+  isDesignTokensCollectionTokenWithType,
+} from '../design-tokens-collection-token.ts';
 import { isBorderDesignTokensCollectionToken } from '../types/composite/border/is-border-design-tokens-collection-token.ts';
 import { updateBorderDesignTokensCollectionTokenValueReferences } from '../types/composite/border/value/update/update-border-design-tokens-collection-token-value-references.ts';
 import { isGradientDesignTokensCollectionToken } from '../types/composite/gradient/is-gradient-design-tokens-collection-token.ts';
@@ -24,7 +27,9 @@ export function updateDesignTokensCollectionTokenReferences(
   if (isCurlyReference(token.value)) {
     value = update(token.value);
   } else {
-    console.assert(token.type !== undefined);
+    if (!isDesignTokensCollectionTokenWithType(token)) {
+      throw new Error('Expected token with type.');
+    }
 
     if (isBorderDesignTokensCollectionToken(token)) {
       value = updateBorderDesignTokensCollectionTokenValueReferences(token.value, update);

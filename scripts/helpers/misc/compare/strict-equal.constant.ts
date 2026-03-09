@@ -1,4 +1,5 @@
+import type { ExplicitAny } from '../../types/explicit-any.ts';
 import type { EqualFunction } from './equal-function.ts';
 import { isStrictEqual } from './is-strict-equal.ts';
 
-export const STRICT_EQUALS: EqualFunction = isStrictEqual;
+export const STRICT_EQUALS: EqualFunction<ExplicitAny> = isStrictEqual;

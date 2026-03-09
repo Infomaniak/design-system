@@ -14,6 +14,6 @@ export function designTokenNameSegmentToCssVariableSegment(segment: string): str
       // remove consecutive dashes
       .replace(/--+/g, '-')
       // remove all non-alphanumeric or dash characters
-      .replace(/[^a-z0-9\-]/g, '')
+      .replace(/[^a-z0-9-]/g, '')
   );
 }

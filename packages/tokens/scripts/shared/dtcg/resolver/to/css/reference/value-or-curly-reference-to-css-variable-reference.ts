@@ -5,7 +5,8 @@ import {
   type CurlyReferenceToCssVariableReferenceOptions,
 } from './curly-reference-to-css-variable-reference.ts';
 
-export interface ValueOrCurlyReferenceToCssVariableReferenceOptions extends CurlyReferenceToCssVariableReferenceOptions {}
+export type ValueOrCurlyReferenceToCssVariableReferenceOptions =
+  CurlyReferenceToCssVariableReferenceOptions;
 
 export function valueOrCurlyReferenceToCssVariableReference<GValue>(
   value: ValueOrCurlyReference<GValue>,

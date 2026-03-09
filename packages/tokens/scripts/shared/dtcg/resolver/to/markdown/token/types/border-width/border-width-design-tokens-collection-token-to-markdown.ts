@@ -1,5 +1,8 @@
+import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
+import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { DimensionDesignTokensCollectionToken } from '../../../../../token/types/base/dimension/dimension-design-tokens-collection-token.ts';
 import type { DimensionDesignTokensCollectionTokenValue } from '../../../../../token/types/base/dimension/value/dimension-design-tokens-collection-token-value.ts';
+import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { dimensionDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/dimension/value/dimension-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
@@ -42,32 +45,47 @@ export function borderWidthDesignTokensCollectionTokenToMarkdown(
 ): MarkdownTokenRow {
   const { boxSize = 50 } = options;
 
-  // Convert dimension value to CSS value (e.g. "2px")
-  const value = token.value as DimensionDesignTokensCollectionTokenValue;
-  const cssValue = dimensionDesignTokensCollectionTokenValueToCssValue(value);
+  // Generate the CSS variable name for this token
+  const cssVariable = createCssVariableNameGenerator({
+    prefix: CSS_VARIABLE_PREFIX,
+  })(token.name);
 
-  // Create the border-width preview HTML
-  // Shows a square box with the border-width applied
-  const preview = /* HTML */ `
-    <div style="
-      width: ${boxSize}px;
-      height: ${boxSize}px;
-      background: #f1f5f9;
-      border: ${cssValue} solid #374151;
-      display: inline-block;
-    "></div>
-    <div style="
+  // Show the display value only for T1 (direct value - no curly ref)
+  let displayValue: string = '';
+  if (!isCurlyReference(token.value)) {
+    // Token has a direct value - resolve it to show the actual value
+    const value = token.value as DimensionDesignTokensCollectionTokenValue;
+    displayValue = /* HTML */ `<div
+      style="
       margin-top: 8px;
       font-family: monospace;
       font-size: 12px;
       color: #6b7280;
-    ">${cssValue}</div>
+    "
+    >
+      ${dimensionDesignTokensCollectionTokenValueToCssValue(value)}
+    </div>`;
+  }
+
+  // Create the border-width preview HTML using CSS variable directly
+  // The browser resolves var(--esds-*) via the CSS cascade
+  const preview = /* HTML */ `
+    <div
+      style="
+      width: ${boxSize}px;
+      height: ${boxSize}px;
+      background: #f1f5f9;
+      border: var(${cssVariable}) solid #374151;
+      display: inline-block;
+    "
+    ></div>
+    ${displayValue}
   `;
 
   return {
     preview,
     name: token.name.join('.'),
-    value: cssValue,
+    cssVariable,
     description: token.description ?? '',
   };
 }

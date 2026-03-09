@@ -1,5 +1,6 @@
 import { removeUndefinedProperties } from '../../../../../../../scripts/helpers/misc/object/remove-undefined-properties.ts';
 import type { DesignTokensGroup } from '../../design-token/group/design-tokens-group.ts';
+import type { CurlyReference } from '../../design-token/reference/types/curly/curly-reference.ts';
 import { isDesignToken } from '../../design-token/token/is-design-token.ts';
 import type { DesignTokensTree } from '../../design-token/tree/design-tokens-tree.ts';
 
@@ -14,7 +15,9 @@ export function pickDesignTokensTreeMode(
       const { mode: extensionsMode, ...remainingExtensions } = $extensions;
 
       if (extensionsMode !== undefined) {
-        const $newValue: unknown | undefined = extensionsMode[mode];
+        const $newValue: unknown | undefined = (extensionsMode as Record<string, CurlyReference>)[
+          mode
+        ];
         if ($newValue !== undefined) {
           return {
             $value: $newValue,

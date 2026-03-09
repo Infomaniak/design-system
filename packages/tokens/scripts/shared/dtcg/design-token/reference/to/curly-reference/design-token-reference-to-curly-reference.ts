@@ -6,7 +6,8 @@ import {
   type DesignTokenReferenceToSegmentsReferenceOptions,
 } from '../segments-reference/design-token-reference-to-segments-reference.ts';
 
-export interface DesignTokenReferenceToCurlyReferenceOptions extends DesignTokenReferenceToSegmentsReferenceOptions {}
+export type DesignTokenReferenceToCurlyReferenceOptions =
+  DesignTokenReferenceToSegmentsReferenceOptions;
 
 export function designTokenReferenceToCurlyReference(
   reference: DesignTokenReference,

@@ -1,5 +1,7 @@
+import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
+import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { DimensionDesignTokensCollectionToken } from '../../../../../token/types/base/dimension/dimension-design-tokens-collection-token.ts';
-import { valueOrCurlyReferenceToCssVariableReference } from '../../../../css/reference/value-or-curly-reference-to-css-variable-reference.ts';
+import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { dimensionDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/dimension/value/dimension-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
@@ -40,27 +42,18 @@ export function dimensionDesignTokensCollectionTokenToMarkdown(
   _context: MarkdownRenderContext,
   options: DimensionMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
-  // Convert dimension value to CSS value (e.g. "8px")
-  const cssValue = valueOrCurlyReferenceToCssVariableReference(
-    token.value,
-    dimensionDesignTokensCollectionTokenValueToCssValue,
-  );
+  // Generate the CSS variable name for this token
+  const cssVariable = createCssVariableNameGenerator({
+    prefix: CSS_VARIABLE_PREFIX,
+  })(token.name);
+
   const { previewHeight = 16 } = options;
 
-  // Create the dimension preview HTML
-  // Shows the bar at the exact CSS value (e.g. width: 384px) with no scaling
-  const preview = /* HTML */ `
-    <div
-      style="
-      background: #dcfce8;
-      height: ${previewHeight}px;
-      width: ${cssValue};
-      border-radius: 2px;
-      border: 1px solid #86efad;
-      position: relative;
-    "
-    ></div>
-    <div
+  // Show the display value only for T1 (direct value - no curly ref)
+  let displayValue: string = '';
+  if (!isCurlyReference(token.value)) {
+    // Token has a direct value - resolve it to show the actual value
+    displayValue = /* HTML */ `<div
       style="
       margin-top: 4px;
       font-family: monospace;
@@ -68,14 +61,30 @@ export function dimensionDesignTokensCollectionTokenToMarkdown(
       color: #6b7280;
     "
     >
-      ${cssValue}
-    </div>
+      ${dimensionDesignTokensCollectionTokenValueToCssValue(token.value)}
+    </div>`;
+  }
+
+  // Create the dimension preview HTML using CSS variable directly
+  // The browser resolves var(--esds-*) via the CSS cascade
+  const preview = /* HTML */ `
+    <div
+      style="
+      background: #dcfce8;
+      height: ${previewHeight}px;
+      width: var(${cssVariable});
+      border-radius: 2px;
+      border: 1px solid #86efad;
+      position: relative;
+    "
+    ></div>
+    ${displayValue}
   `;
 
   return {
     preview,
     name: token.name.join('.'),
-    value: cssValue,
+    cssVariable,
     description: token.description ?? '',
   };
 }

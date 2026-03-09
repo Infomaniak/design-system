@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { areArrayEquivalent } from './are-array-equivalent.ts';
 
 describe('areArrayEquivalent', () => {

@@ -1,0 +1,38 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Design Tokens/T1" />
+
+# T1 Primitive Tokens
+
+## What are T1 Tokens?
+
+T1 tokens are the foundational design tokens that define the raw values of your design system. These are the base values that don't reference other tokens.
+
+### Characteristics:
+
+- **Base values**: Colors, spacing, shadows, etc.
+- **No references**: They contain actual values (hex colors, pixel dimensions)
+- **Platform agnostic**: Represent the design intent without assumptions about usage
+- **Source of truth**: Other tiers reference these values
+
+### Token Categories in T1:
+
+<Table
+  headers={['Category', 'Description']}
+  rows={[
+    [<a href="/docs/design-tokens-t1-blur--docs">Blur</a>, 'Background blur effects'],
+    [
+      <a href="/docs/design-tokens-t1-border-width--docs">Border Width</a>,
+      'Border thickness values',
+    ],
+    [<a href="/docs/design-tokens-t1-breakpoint--docs">Breakpoint</a>, 'Responsive breakpoints'],
+    [<a href="/docs/design-tokens-t1-color--docs">Color</a>, 'Color palette'],
+    [<a href="/docs/design-tokens-t1-font--docs">Font</a>, 'Typography tokens'],
+    [<a href="/docs/design-tokens-t1-opacity--docs">Opacity</a>, 'Opacity values'],
+    [<a href="/docs/design-tokens-t1-radius--docs">Radius</a>, 'Border radius values'],
+    [<a href="/docs/design-tokens-t1-ratio--docs">Ratio</a>, 'Aspect ratios'],
+    [<a href="/docs/design-tokens-t1-scale--docs">Scale</a>, 'Scaling values'],
+    [<a href="/docs/design-tokens-t1-shadow--docs">Shadow</a>, 'Shadow effects'],
+    [<a href="/docs/design-tokens-t1-spacing--docs">Spacing</a>, 'Spacing scale'],
+  ]}
+/>

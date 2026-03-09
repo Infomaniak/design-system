@@ -1,5 +1,7 @@
+import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
+import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { ColorDesignTokensCollectionToken } from '../../../../../token/types/base/color/color-design-tokens-collection-token.ts';
-import { valueOrCurlyReferenceToCssVariableReference } from '../../../../css/reference/value-or-curly-reference-to-css-variable-reference.ts';
+import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { colorDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/color/value/color-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
@@ -36,7 +38,7 @@ export interface ColorMarkdownRenderOptions {
  * Output: {
  *   preview: '<div style="border-radius: 4px; width: 100%; height: 75px; background: #f4364f; border: 1px solid #ccc;"></div>',
  *   name: 'color.red.500',
- *   value: '#f4364f',
+ *   cssVariable: '--esds-color-red-500',
  *   description: ''
  * }
  */
@@ -45,26 +47,16 @@ export function colorDesignTokensCollectionTokenToMarkdown(
   _context: MarkdownRenderContext,
   _options: ColorMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
-  // Get the color value as a CSS string (always returns the best representation)
-  // For markdown, we use the default format which typically returns hex for srgb colors
-  const cssValue: string = valueOrCurlyReferenceToCssVariableReference(
-    token.value,
-    colorDesignTokensCollectionTokenValueToCssValue,
-  );
+  // Generate the CSS variable name for this token
+  const cssVariable = createCssVariableNameGenerator({
+    prefix: CSS_VARIABLE_PREFIX,
+  })(token.name);
 
-  // Create the color preview HTML
-  // Shows a rounded rectangle with the color as background
-  const preview = /* HTML */ `
-    <div
-      style="
-      border-radius: 4px;
-      width: 100%;
-      height: 75px;
-      background: ${cssValue};
-      border: 1px solid #e5e7eb;
-    "
-    ></div>
-    <div
+  // Show the display value only for T1 (direct value - no curly ref)
+  let displayValue: string = '';
+  if (!isCurlyReference(token.value)) {
+    // Token has a direct value - resolve it to show the actual color
+    displayValue = /* HTML */ `<div
       style="
       margin-top: 4px;
       font-family: monospace;
@@ -72,14 +64,29 @@ export function colorDesignTokensCollectionTokenToMarkdown(
       color: #6b7280;
     "
     >
-      ${cssValue}
-    </div>
+      ${colorDesignTokensCollectionTokenValueToCssValue(token.value)}
+    </div>`;
+  }
+
+  // Create the color preview HTML using CSS variable directly
+  // The browser resolves var(--esds-*) via the CSS cascade
+  const preview = /* HTML */ `
+    <div
+      style="
+      border-radius: 4px;
+      width: 100%;
+      height: 75px;
+      background: var(${cssVariable});
+      border: 1px solid #e5e7eb;
+    "
+    ></div>
+    ${displayValue}
   `;
 
   return {
     preview,
     name: token.name.join('.'),
-    value: cssValue,
+    cssVariable,
     description: token.description ?? '',
   };
 }

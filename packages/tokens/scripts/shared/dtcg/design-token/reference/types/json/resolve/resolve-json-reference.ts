@@ -21,7 +21,7 @@ export function resolveJsonReference(
 
   while (true) {
     references.push(reference);
-    let value: unknown = resolveSegmentsReference(reference, root);
+    const value: unknown = resolveSegmentsReference(reference, root);
 
     if (recursive && isJsonReference(value)) {
       if (explored.has(value.$ref)) {

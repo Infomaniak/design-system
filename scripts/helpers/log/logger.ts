@@ -24,27 +24,27 @@ export class Logger {
     return this.#name;
   }
 
-  report(level: LogLevel, args: any[]): void {
+  report(level: LogLevel, args: unknown[]): void {
     this.#logLevel.get(level)?.(this.#name, args);
   }
 
-  log(...args: any[]): void {
+  log(...args: unknown[]): void {
     this.report('log', args);
   }
 
-  info(...args: any[]): void {
+  info(...args: unknown[]): void {
     this.report('info', args);
   }
 
-  debug(...args: any[]): void {
+  debug(...args: unknown[]): void {
     this.report('debug', args);
   }
 
-  warn(...args: any[]): void {
+  warn(...args: unknown[]): void {
     this.report('warn', args);
   }
 
-  error(...args: any[]): void {
+  error(...args: unknown[]): void {
     this.report('error', args);
   }
 

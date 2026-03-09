@@ -6,7 +6,8 @@ import {
 } from '../../../design-tokens-collection-token-with-map-value-to-css-variable-declaration.ts';
 import { durationDesignTokensCollectionTokenValueToCssValue } from './value/duration-design-tokens-collection-token-value-to-css-value.ts';
 
-export interface DurationDesignTokensCollectionTokenToCssVariableDeclarationOptions extends DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions {}
+export type DurationDesignTokensCollectionTokenToCssVariableDeclarationOptions =
+  DesignTokensCollectionTokenWithMapValueToCssVariableDeclarationOptions;
 
 export function durationDesignTokensCollectionTokenToCssVariableDeclaration(
   token: DurationDesignTokensCollectionToken,

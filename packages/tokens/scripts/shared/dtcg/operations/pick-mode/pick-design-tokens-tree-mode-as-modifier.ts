@@ -1,4 +1,5 @@
 import type { DesignTokensGroup } from '../../design-token/group/design-tokens-group.ts';
+import type { CurlyReference } from '../../design-token/reference/types/curly/curly-reference.ts';
 import { isCurlyReference } from '../../design-token/reference/types/curly/is-curly-reference.ts';
 import { isDesignToken } from '../../design-token/token/is-design-token.ts';
 import type { DesignTokensTree } from '../../design-token/tree/design-tokens-tree.ts';
@@ -14,7 +15,9 @@ export function pickDesignTokensTreeModeAsModifier(
       const { mode: extensionsMode } = $extensions;
 
       if (extensionsMode !== undefined) {
-        const $newValue: unknown | undefined = extensionsMode[mode];
+        const $newValue: unknown | undefined = (extensionsMode as Record<string, CurlyReference>)[
+          mode
+        ];
         if ($newValue !== undefined) {
           if (!isCurlyReference($newValue)) {
             throw new Error("Expected a curly reference as mode's value.");

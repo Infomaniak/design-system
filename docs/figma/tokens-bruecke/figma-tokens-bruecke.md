@@ -15,7 +15,6 @@ Then opens the `TokensBrücke` plugin, and click on the `Import tokens` button.
 
 ![](assets/figma-tokens-bruecke--import-tokens.png)
 
-
 ---
 
 # LEGACY - DO NOT USE
@@ -36,7 +35,6 @@ Then fill the form with:
 - Base branch: `main`
 - File name: `packages/tokens/dtcg/tokens-bruecke/tokens.json`
 
-
 ![](assets/figma-tokens-bruecke--configure-github-pr-push-server.png)
 
 And click `Save`.
@@ -46,5 +44,3 @@ And click `Save`.
 Click on the `Push to server` button and await the PR to be created (success notification).
 
 ![](assets/figma-tokens-bruecke--push-to-server.png)
-
-

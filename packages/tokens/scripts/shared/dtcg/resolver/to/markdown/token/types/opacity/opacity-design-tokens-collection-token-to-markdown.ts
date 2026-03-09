@@ -1,8 +1,9 @@
+import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
 import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { NumberDesignTokensCollectionToken } from '../../../../../token/types/base/number/number-design-tokens-collection-token.ts';
+import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
-
 /**
  * Configuration options for opacity markdown rendering
  */
@@ -38,7 +39,7 @@ export interface OpacityMarkdownRenderOptions {
  * Output: {
  *   preview: Checkerboard with semi-transparent green overlay,
  *   name: 'opacity.50',
- *   value: '0.5 (50%)',
+ *   cssVariable: '--esds-opacity-50',
  *   description: ''
  * }
  */
@@ -49,29 +50,26 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
 ): MarkdownTokenRow {
   const { boxSize = 100, overlayColor = '#22c55e' } = options;
 
+  // Generate the CSS variable name for this token
+  const cssVariable = createCssVariableNameGenerator({
+    prefix: CSS_VARIABLE_PREFIX,
+  })(token.name);
+
+  // TODO: Add support for T2 opacity tokens (curly references) when they are needed
+  // Currently only T1 tokens are supported (direct dimension values)
+
   // Get the opacity value
   const opacity = token.value;
 
-  if (isCurlyReference(opacity)) {
-    // TODO implement
-    console.warn(
-      `Opacity token "${token.name.join('.')}" references another token, which is not supported yet.`,
-    );
-
-    return {
-      preview: '',
-      name: token.name.join('.'),
-      value: opacity,
-      description: token.description ?? '',
-    };
+  // T1 tokens have direct dimension values { value: number, unit: string }
+  // We assert the type since this function only handles T1 opacity tokens
+  let displayValue: string = '';
+  if (!isCurlyReference(opacity)) {
+    displayValue = `${Math.round(opacity * 100)}%`;
   }
 
-  // Format the display value
-  const percentage = Math.round(opacity * 100);
-  const displayValue = `${opacity} (${percentage}%)`;
-
-  // Create the opacity preview HTML
-  // Shows a checkerboard grid with a green overlay at the specified opacity
+  // Create the opacity preview HTML using CSS variable directly
+  // The browser resolves var(--esds-*) via the CSS cascade
   const preview = /* HTML */ `
     <div
       style="
@@ -108,7 +106,7 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
         right: 0;
         bottom: 0;
         background-color: ${overlayColor};
-        opacity: ${opacity};
+        opacity: var(${cssVariable});
       "
       ></div>
       <div
@@ -120,12 +118,12 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
         font-family: monospace;
         font-size: 14px;
         font-weight: 600;
-        color: ${opacity > 0.5 ? '#fff' : '#374151'};
-        text-shadow: ${opacity > 0.5 ? '0 1px 2px rgba(0,0,0,0.3)' : 'none'};
+        color: #fff;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.8);
         z-index: 10;
       "
       >
-        ${percentage}%
+        ${displayValue}
       </div>
     </div>
     <div
@@ -143,7 +141,7 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
   return {
     preview,
     name: token.name.join('.'),
-    value: displayValue,
+    cssVariable,
     description: token.description ?? '',
   };
 }

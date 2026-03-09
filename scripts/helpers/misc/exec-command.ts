@@ -2,6 +2,7 @@ import { type ChildProcess, spawn, type SpawnOptions } from 'node:child_process'
 import process from 'node:process';
 import { Readable } from 'node:stream';
 import { Logger } from '../log/logger.ts';
+import type { ExplicitAny } from '../types/explicit-any.ts';
 
 export interface ExecCommandErrorOptions extends ErrorOptions {
   readonly command: string;
@@ -54,9 +55,9 @@ export function execCommand(
       });
 
       const getStreamOutput = (stream: Readable): Promise<string> => {
-        return stream.toArray().then((lines: readonly any[]): string => {
+        return stream.toArray().then((lines: readonly ExplicitAny[]): string => {
           return lines
-            .map((line: any): string => {
+            .map((line: ExplicitAny): string => {
               return line.toString();
             })
             .join('\n');

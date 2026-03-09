@@ -1,8 +1,9 @@
 import { writeFile } from 'node:fs/promises';
+import type { ExplicitAny } from '../types/explicit-any.ts';
 import { writeFileSafe } from './write-file-safe.ts';
 
 export type WriteTextFileSafeArguments =
-  Parameters<typeof writeFile> extends [infer GPath, any, ...infer GRest]
+  Parameters<typeof writeFile> extends [infer GPath, ExplicitAny, ...infer GRest]
     ? [GPath, string, ...GRest]
     : never;
 

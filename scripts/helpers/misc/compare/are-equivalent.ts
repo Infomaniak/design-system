@@ -6,7 +6,7 @@ import { areSetEquivalent } from './are-set-equivalent.ts';
 /**
  * @see https://github.com/jashkenas/underscore/blob/master/modules/isEqual.js
  */
-export function areEquivalent<GValue = any>(a: GValue, b: GValue): boolean {
+export function areEquivalent<GValue>(a: GValue, b: GValue): boolean {
   if (a === b || (Number.isNaN(a) && Number.isNaN(b))) {
     return true;
   } else {

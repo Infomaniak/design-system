@@ -8,8 +8,10 @@
  * @module shadow-design-tokens-collection-token-to-markdown
  */
 
+import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
+import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { ShadowDesignTokensCollectionToken } from '../../../../../token/types/composite/shadow/shadow-design-tokens-collection-token.ts';
-import { valueOrCurlyReferenceToCssVariableReference } from '../../../../css/reference/value-or-curly-reference-to-css-variable-reference.ts';
+import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { shadowDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/composite/shadow/value/shadow-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
@@ -52,27 +54,15 @@ export function shadowDesignTokensCollectionTokenToMarkdown(
 ): MarkdownTokenRow {
   const { boxSize = 50 } = options;
 
-  // Construct the CSS box-shadow value using the shared helper
-  const cssShadowValue = valueOrCurlyReferenceToCssVariableReference(
-    token.value,
-    shadowDesignTokensCollectionTokenValueToCssValue,
-  );
+  // Generate the CSS variable name for this token
+  const cssVariable = createCssVariableNameGenerator({
+    prefix: CSS_VARIABLE_PREFIX,
+  })(token.name);
 
-  // Create the shadow preview HTML
-  // Shows a box with the shadow applied
-  const preview = /* HTML */ `
-    <div
-      style="
-      width: ${boxSize}px;
-      height: ${boxSize}px;
-      background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 4px;
-      box-shadow: ${cssShadowValue};
-      margin: 16px;
-    "
-    ></div>
-    <div
+  // Show the display value only for T1 (direct value - no curly ref)
+  let displayValue: string = '';
+  if (!isCurlyReference(token.value)) {
+    displayValue = /* HTML */ `<div
       style="
       font-family: monospace;
       font-size: 11px;
@@ -81,14 +71,31 @@ export function shadowDesignTokensCollectionTokenToMarkdown(
       word-wrap: break-word;
     "
     >
-      ${cssShadowValue}
-    </div>
+      ${shadowDesignTokensCollectionTokenValueToCssValue(token.value)}
+    </div>`;
+  }
+
+  // Create the shadow preview HTML using CSS variable directly
+  // The browser resolves var(--esds-*) via the CSS cascade
+  const preview = /* HTML */ `
+    <div
+      style="
+      width: ${boxSize}px;
+      height: ${boxSize}px;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+      box-shadow: var(${cssVariable});
+      margin: 16px;
+    "
+    ></div>
+    ${displayValue}
   `;
 
   return {
     preview,
     name: token.name.join('.'),
-    value: cssShadowValue,
+    cssVariable,
     description: token.description ?? '',
   };
 }

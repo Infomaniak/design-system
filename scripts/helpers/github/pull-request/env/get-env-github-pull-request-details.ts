@@ -1,5 +1,8 @@
 import { getEnvVariable } from '../../../env/get-env-variable.ts';
 
+/**
+ * @deprecated use GithubCiConfig
+ */
 export interface GithubPullRequestDetails {
   _links: {
     comments: {
@@ -382,6 +385,9 @@ export interface GithubPullRequestDetails {
   };
 }
 
+/**
+ * @deprecated use GithubCiConfig
+ */
 export function getEnvGithubPullRequestDetails(): GithubPullRequestDetails {
   return JSON.parse(getEnvVariable('GITHUB_PULL_REQUEST_DETAILS'));
 }
