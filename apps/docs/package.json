@@ -9,22 +9,22 @@
   },
   "dependencies": {
     "@infomaniak-design-system/tokens": "workspace:^",
-    "markdown-to-jsx": "^9.7.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "markdown-to-jsx": "^9.7.8",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^5.0.0",
-    "@storybook/addon-a11y": "^10.2.3",
-    "@storybook/addon-docs": "^10.2.3",
-    "@storybook/addon-onboarding": "^10.2.3",
-    "@storybook/addon-vitest": "^10.2.3",
-    "@storybook/react-vite": "^10.2.3",
-    "@types/node": "^24.10.1",
-    "@types/react": "^19.2.5",
+    "@chromatic-com/storybook": "^5.0.1",
+    "@storybook/addon-a11y": "^10.2.16",
+    "@storybook/addon-docs": "^10.2.16",
+    "@storybook/addon-onboarding": "^10.2.16",
+    "@storybook/addon-vitest": "^10.2.16",
+    "@storybook/react-vite": "^10.2.16",
+    "@types/node": "^25.3.5",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "storybook": "^10.2.10",
-    "vite": "npm:rolldown-vite@7.2.5"
+    "storybook": "^10.2.16",
+    "vite": "npm:rolldown-vite@7.3.1"
   },
   "resolutions": {
     "vite": "npm:rolldown-vite@7.2.5"
