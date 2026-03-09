@@ -1,7 +1,7 @@
 import { rm } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadOptionallyEnvFile } from '../../../../../../../scripts/helpers/env/load-env-file.ts';
+import { loadOptionallyEnvFile } from '../../../../../../../scripts/helpers/env/env-file/load-optionally-env-file.ts';
 import { getEnvFigmaApiToken } from '../../../../../../../scripts/helpers/figma/env/get-env-figma-api-token.ts';
 import { getEnvFigmaIconFileKey } from '../../../../../../../scripts/helpers/figma/env/get-env-figma-icon-file-key.ts';
 import { DEFAULT_LOG_LEVEL } from '../../../../../../../scripts/helpers/log/log-level/defaults/default-log-level.ts';
