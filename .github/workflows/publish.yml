@@ -47,11 +47,11 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          echo "$SSH_DEPLOY_KEY" > ~/.ssh/id_ed25519
+          echo "$SSH_DEPLOY_KEY_IOS" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan github.com >> ~/.ssh/known_hosts
         env:
-          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+          SSH_DEPLOY_KEY_IOS: ${{ secrets.SSH_DEPLOY_KEY_IOS }}
 
       - name: Install dependencies
         run: yarn install --immutable
