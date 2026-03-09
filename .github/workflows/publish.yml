@@ -47,11 +47,31 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          echo "$SSH_DEPLOY_KEY_IOS" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
+          echo "$SSH_DEPLOY_KEY_IOS" > ~/.ssh/id_ed25519_ios
+          echo "$SSH_DEPLOY_KEY_ANDROID" > ~/.ssh/id_ed25519_android
+          chmod 600 ~/.ssh/id_ed25519_ios
+          chmod 600 ~/.ssh/id_ed25519_android
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+          cat > ~/.ssh/config << EOF
+          # Host name should always match the github repository one
+          Host ios-design-system
+            HostName github.com
+            User git
+            IdentityFile ~/.ssh/id_ed25519_ios
+            IdentitiesOnly yes
+
+          # Host name should always match the github repository one
+          Host android-design-system
+            HostName github.com
+            User git
+            IdentityFile ~/.ssh/id_ed25519_android
+            IdentitiesOnly yes
+          EOF
+          chmod 600 ~/.ssh/config
         env:
           SSH_DEPLOY_KEY_IOS: ${{ secrets.SSH_DEPLOY_KEY_IOS }}
+          SSH_DEPLOY_KEY_ANDROID: ${{ secrets.SSH_DEPLOY_KEY_ANDROID }}
 
       - name: Install dependencies
         run: yarn install --immutable
