@@ -14,7 +14,9 @@ export async function* discoverPackageJsonFiles({
 }: DiscoverPackageJsonFilesOptions): AsyncGenerator<PackageJsonWithPath> {
   packagesDirectory = removeTrailingSlash(packagesDirectory);
 
-  for await (const entry of glob(`${packagesDirectory}/**/package.json`)) {
+  for await (const entry of glob(`${packagesDirectory}/**/package.json`, {
+    exclude: ['**/node_modules/**'],
+  })) {
     yield [entry, await readPackageJsonFile(entry)];
   }
 }
