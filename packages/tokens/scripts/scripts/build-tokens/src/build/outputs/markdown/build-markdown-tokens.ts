@@ -126,7 +126,12 @@ function renderTokenToRow(
       return radiusDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
     }
     // Special handling for border-width tokens - show as boxes with border applied
-    if (tokenWithType.name[0] === 'border-width') {
+    // Matches both T1 (border-width.0) and T2 (border.xs.width) naming patterns
+    if (
+      tokenWithType.name[0] === 'border-width' ||
+      (tokenWithType.name[0] === 'border' &&
+        tokenWithType.name[tokenWithType.name.length - 1] === 'width')
+    ) {
       return borderWidthDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
     }
     // Special handling for breakpoint tokens - show value as text (too large to visualize)
