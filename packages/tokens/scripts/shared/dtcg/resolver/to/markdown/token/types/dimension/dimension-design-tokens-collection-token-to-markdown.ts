@@ -12,9 +12,9 @@ import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
 export interface DimensionMarkdownRenderOptions {
   /**
    * Height of the dimension preview bar in pixels
-   * @default 16
+   * @default "16px"
    */
-  readonly previewHeight?: number;
+  readonly previewHeight?: string;
 }
 
 /**
@@ -33,7 +33,7 @@ export interface DimensionMarkdownRenderOptions {
  * Output: {
  *   preview: '<div style="background: #dcfce8; ...">8px</div>',
  *   name: 'spacing.8',
- *   value: '8px',
+ *   cssVariable: '--esds-...',
  *   description: ''
  * }
  */
@@ -47,7 +47,7 @@ export function dimensionDesignTokensCollectionTokenToMarkdown(
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
 
-  const { previewHeight = 16 } = options;
+  const { previewHeight = '16px' } = options;
 
   // Show the display value only for T1 (direct value - no curly ref)
   let displayValue: string = '';
@@ -71,11 +71,12 @@ export function dimensionDesignTokensCollectionTokenToMarkdown(
     <div
       style="
       background: #dcfce8;
-      height: ${previewHeight}px;
+      height: ${previewHeight};
       width: var(${cssVariable});
       border-radius: 2px;
       border: 1px solid #86efad;
       position: relative;
+      aspect-ratio: 1 / 1;
     "
     ></div>
     ${displayValue}

@@ -138,6 +138,11 @@ function renderTokenToRow(
     if (tokenWithType.name[0] === 'breakpoint') {
       return breakpointDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
     }
+    if (tokenWithType.name[0] === 'icon') {
+      return dimensionDesignTokensCollectionTokenToMarkdown(tokenWithType, context, {
+        previewHeight: 'auto',
+      });
+    }
     return dimensionDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
   }
 
