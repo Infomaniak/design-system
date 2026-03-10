@@ -67,6 +67,11 @@ export async function ciPublish({
       },
     );
 
+    if (packagesToBuild.length === 0) {
+      logger.info('SKIP: No publishable package found.');
+      return;
+    }
+
     const runYarnWorkspacesCommand = (
       command: string,
       env?: Record<string, string>,
