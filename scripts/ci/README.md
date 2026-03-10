@@ -48,7 +48,7 @@ flowchart LR
   PUBLISH_RC_PACKAGES["publish &quotrc&quot packages"]
   BUILD_PROD_PACKAGES["build &quotprod&quot packages"]
   PUBLISH_PROD_PACKAGES["publish &quotprod&quot packages"]
-  TARGET_BRANCH{"banch"}
+  TARGET_BRANCH{"branch"}
 
   EVENT -- "pull_request" --> HAS_DEV_TAG
   HAS_DEV_TAG -- "no" --> SKIP_BUILD
