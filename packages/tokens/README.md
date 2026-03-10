@@ -37,7 +37,7 @@ flowchart TD
         O_CSS["CSS variables"]
         O_TW["Tailwind theme"]
         O_Swift["Swift package"]
-        O_JC["Jetpack Compose"]
+        O_JC["Lib Jetpack Compose"]
         O_FT["figma-tokens.json<br/>(TokensBrücke)"]
     end
 
