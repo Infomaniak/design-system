@@ -14,7 +14,7 @@ flowchart TD
     %% --- Subgraphs ---
 
     subgraph Prototyping["Prototyping"]
-        FigmaDoc["🎨 FIGMA"]
+        FigmaDoc["🎨 Figma"]
     end
 
     subgraph TokensInput["Tokens Input"]
