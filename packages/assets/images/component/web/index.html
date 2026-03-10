@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Icon web component</title>
+
+    <link
+      rel="stylesheet"
+      href="style/main.css"
+    />
+
+    <script
+      type="module"
+      src="src/main.ts"
+    ></script>
+  </head>
+  <body>
+    <table>
+      <tbody>
+        <tr>
+          <th>mode="svg"</th>
+          <td>
+            <esds-svg
+              style="font-size: 32px; color: #333"
+              name="ik:envelope-cog"
+            ></esds-svg>
+          </td>
+        </tr>
+
+        <tr>
+          <th>mode="mask"</th>
+          <td>
+            <esds-svg
+              style="font-size: 32px; color: red"
+              name="ik:envelope-cog"
+              mode="mask"
+            ></esds-svg>
+          </td>
+        </tr>
+
+        <tr>
+          <th>inline="true"</th>
+          <td>
+            <p style="font-size: 16px">
+              Inline:
+              <esds-svg
+                name="ik:envelope-cog"
+                inline
+              ></esds-svg>
+            </p>
+          </td>
+        </tr>
+
+        <tr>
+          <th>house</th>
+          <td>
+            <esds-svg name="ik:house"></esds-svg>
+          </td>
+        </tr>
+
+        <tr>
+          <td
+            colspan="2"
+            style="height: 1500px"
+          ></td>
+        </tr>
+
+        <tr>
+          <th>lazy loaded</th>
+          <td>
+            <esds-svg name="ik:controllers"></esds-svg>
+          </td>
+        </tr>
+        <tr>
+          <th>nolazy</th>
+          <td>
+            <esds-svg
+              name="ik:dots-vertical"
+              nolazy
+            ></esds-svg>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
