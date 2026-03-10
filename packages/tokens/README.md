@@ -43,7 +43,7 @@ flowchart TD
 
     subgraph Distribution["Distribution"]
         D_SB["🌐 Storybook"]
-        D_NPM["📦 NPM<br/>(@edelweiss/design-system/tokens)"]
+        D_NPM["📦 NPM<br/>(@infomaniak-design-system/tokens)"]
         D_iOS["📥 ios-design-system"]
         D_Android["📥 android-design-system"]
         D_Figma["💻 Figma<br/>(TokensBrücke Plugin)"]
