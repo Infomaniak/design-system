@@ -7,6 +7,84 @@
 
 Contains the list of Infomaniak's Design System tokens based on the [Design Tokens Community Group - (DTCG - 2025.10)](https://www.designtokens.org/tr/2025.10/format) format, and scripts to convert them to different formats (CSS, Figma, Tailwind, etc.).
 
+## Project architecture
+
+```mermaid
+flowchart TD
+    %% --- Subgraphs ---
+
+    subgraph Prototyping["Prototyping"]
+        FigmaDoc["🎨 Figma"]
+    end
+
+    subgraph TokensInput["Tokens Input"]
+        Folder["📁 DTCG Token Files<br/>(T1, T2, T3, Modifiers)"]
+    end
+
+    subgraph BuildTokens["Transform & Build Tokens"]
+        Transform["⚙️ Transform"]
+        B_MD["build-markdown-tokens"]
+        B_CSS["build-css-tokens"]
+        B_Swift["build-swift-tokens"]
+        B_Kotlin["build-kotlin-tokens"]
+        B_Figma["build-figma-tokens"]
+
+        Transform --> B_MD & B_CSS & B_Swift & B_Kotlin & B_Figma
+    end
+
+    subgraph Output["Output"]
+        O_MD["Markdown files"]
+        O_CSS["CSS variables"]
+        O_TW["Tailwind theme"]
+        O_Swift["Swift package"]
+        O_JC["Lib Jetpack Compose"]
+        O_FT["figma-tokens.json<br/>(TokensBrücke)"]
+    end
+
+    subgraph Distribution["Distribution"]
+        D_SB["🌐 Storybook"]
+        D_NPM["📦 NPM<br/>(@infomaniak-design-system/tokens)"]
+        D_iOS["📥 ios-design-system"]
+        D_Android["📥 android-design-system"]
+        D_Figma["💻 Figma<br/>(TokensBrücke Plugin)"]
+    end
+
+    %% --- Main Flow and Intermediate Steps ---
+
+    Export["Export TokensBrücke"]
+    Convert["Convert to DTCG"]
+    Manual["Manual review + copy"]
+    Validate["Validate DTCG Tokens"]
+
+    %% Connecting to the Subgraph to force vertical centering
+    FigmaDoc --> Export
+    Export --> Convert
+    Convert --> Manual
+    Manual --> TokensInput
+    TokensInput --> Validate
+    Validate --> Transform
+
+    %% --- Build to Output Connections ---
+
+    B_MD --> O_MD
+    B_CSS --> O_CSS
+    B_CSS --> O_TW
+    B_Swift --> O_Swift
+    B_Kotlin --> O_JC
+    B_Figma --> O_FT
+
+    %% --- Output to Distribution Connections ---
+
+    O_MD --> D_SB
+
+    %% Converging both CSS and Tailwind into NPM
+    O_CSS & O_TW --> D_NPM
+
+    O_Swift --> D_iOS
+    O_JC --> D_Android
+    O_FT --> D_Figma
+```
+
 ## Definition
 
 A `design token` is a pair consisting of a **name** and a **value**.
