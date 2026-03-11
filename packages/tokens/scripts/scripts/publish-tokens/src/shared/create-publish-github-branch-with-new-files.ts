@@ -40,7 +40,7 @@ export async function createPublishGithubBranchWithNewFiles({
   await execCommandInherit(
     logger,
     'git',
-    ['clone', `git@github.com:Infomaniak/${repositoryName}.git`],
+    ['clone', `git@${repositoryName}:Infomaniak/${repositoryName}.git`],
     {
       cwd: packageDirectory,
     },

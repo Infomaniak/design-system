@@ -12,8 +12,11 @@ import { breakpointDesignTokensCollectionTokenToMarkdown } from '../../../../../
 import { colorDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/color/color-design-tokens-collection-token-to-markdown.ts';
 import { dimensionDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/dimension/dimension-design-tokens-collection-token-to-markdown.ts';
 import { fontFamilyDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/font-family/font-family-design-tokens-collection-token-to-markdown.ts';
+import { fontSizeDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/font-size/font-size-design-tokens-collection-token-to-markdown.ts';
 import { fontWeightDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/font-weight/font-weight-design-tokens-collection-token-to-markdown.ts';
 import { genericDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/generic/generic-design-tokens-collection-token-to-markdown.ts';
+import { letterSpacingDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/letter-spacing/letter-spacing-design-tokens-collection-token-to-markdown.ts';
+import { lineHeightDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/line-height/line-height-design-tokens-collection-token-to-markdown.ts';
 import { numberDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/number/number-design-tokens-collection-token-to-markdown.ts';
 import { opacityDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/opacity/opacity-design-tokens-collection-token-to-markdown.ts';
 import { radiusDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/radius/radius-design-tokens-collection-token-to-markdown.ts';
@@ -126,13 +129,32 @@ function renderTokenToRow(
       return radiusDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
     }
     // Special handling for border-width tokens - show as boxes with border applied
-    if (tokenWithType.name[0] === 'border-width') {
+    // Matches both T1 (border-width.0) and T2 (border.xs.width) naming patterns
+    if (
+      tokenWithType.name[0] === 'border-width' ||
+      (tokenWithType.name[0] === 'border' &&
+        tokenWithType.name[tokenWithType.name.length - 1] === 'width')
+    ) {
       return borderWidthDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
     }
     // Special handling for breakpoint tokens - show value as text (too large to visualize)
     if (tokenWithType.name[0] === 'breakpoint') {
       return breakpointDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
     }
+    // Font-size tokens - show sample text with font-size applied
+    if (tokenWithType.name[0] === 'font' && tokenWithType.name[1] === 'size') {
+      return fontSizeDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+    }
+    // Letter-spacing tokens - show sample text with letter-spacing applied
+    if (tokenWithType.name[0] === 'font' && tokenWithType.name[1] === 'letter-spacing') {
+      return letterSpacingDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+    }
+    if (tokenWithType.name[0] === 'icon') {
+      return dimensionDesignTokensCollectionTokenToMarkdown(tokenWithType, context, {
+        previewHeight: 'auto',
+      });
+    }
+
     return dimensionDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
   }
 
@@ -156,6 +178,10 @@ function renderTokenToRow(
     // Special handling for opacity tokens - show with transparent grid preview
     if (tokenWithType.name[0] === 'opacity') {
       return opacityDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+    }
+    // Line-height tokens - show multi-line text paired with corresponding font-size
+    if (tokenWithType.name[0] === 'font' && tokenWithType.name[1] === 'line-height') {
+      return lineHeightDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
     }
     return numberDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
   }
