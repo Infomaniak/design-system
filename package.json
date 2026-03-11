@@ -30,7 +30,7 @@
   "description": "Infomaniak's Design System",
   "keywords": [],
   "author": "Infomaniak",
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "private": true,
   "repository": {
     "type": "git",
