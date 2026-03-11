@@ -17,9 +17,6 @@
   "main": "./dist/esds-svg.umd.cjs",
   "module": "./dist/esds-svg.js",
   "types": "./dist/public-api.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "dev": "vite",
     "build": "yarn build:vite && yarn build:types",
