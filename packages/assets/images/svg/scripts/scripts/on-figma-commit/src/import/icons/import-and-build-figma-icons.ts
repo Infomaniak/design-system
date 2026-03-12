@@ -27,7 +27,8 @@ export function importAndBuildFigmaIcons({
       prefix: 'esds',
       svgImagesOutputDirectory: join(outputDirectory, 'svg/monotone/figma'),
       svgSetOutputDirectory: join(outputDirectory, 'server'),
-      hasStockedVersion: true,
+      // hasStockedVersion: true,
+      hasStockedVersion: false, // TODO
       monotone: true,
     });
   });

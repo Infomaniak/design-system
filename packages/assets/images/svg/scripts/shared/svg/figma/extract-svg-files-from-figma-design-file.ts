@@ -1,4 +1,3 @@
-import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { getFigmaFile } from '../../../../../../../../scripts/helpers/figma/api/files/get-figma-file.ts';
 import { isFigmaFrameNode } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/built-in/figma-frame-node.ts';
@@ -9,6 +8,8 @@ import {
   type FigmaImagesRecord,
   getFigmaImages,
 } from '../../../../../../../../scripts/helpers/figma/api/images/get-figma-images.ts';
+import { writeJsonFileSafe } from '../../../../../../../../scripts/helpers/file/write-json-file-safe.ts';
+import { writeTextFileSafe } from '../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import type { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
 import { block } from '../../../../../../../../scripts/helpers/misc/block.ts';
 import { removeTrailingSlash } from '../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
@@ -59,8 +60,8 @@ export function extractSvgFilesFromFigmaDesignFile({
         for (const id in figmaFile.components) {
           const component: FigmaComponent = figmaFile.components[id];
 
-          // skip `Type` component
-          if (component.name.startsWith('Type=')) {
+          // skip non icon components
+          if (component.name.startsWith('Type=') || component.name.includes('Theme')) {
             continue;
           }
 
@@ -98,9 +99,16 @@ export function extractSvgFilesFromFigmaDesignFile({
               return input.slice(1);
             });
 
+          const name: string = component.name;
+          // const name: string = component.name.replaceAll(/[^\w-]/g, '');
+
+          if (/[^\w-]/g.test(name)) {
+            throw new Error(`Invalid name: ${JSON.stringify(name)}`);
+          }
+
           svgsToLoad.push({
             id: frameId === undefined ? id : frameId,
-            name: component.name,
+            name,
             metadata: {
               tags,
               projects,
@@ -111,6 +119,8 @@ export function extractSvgFilesFromFigmaDesignFile({
         return svgsToLoad;
       },
     );
+
+    console.log(svgsToLoad);
 
     await logger.asyncTask('load-images', async (logger: Logger): Promise<void[]> => {
       const images: FigmaImagesRecord = await logger.asyncTask(
@@ -127,13 +137,10 @@ export function extractSvgFilesFromFigmaDesignFile({
       return Promise.all(
         svgsToLoad.map(async ({ id, name, metadata }: SVGToLoad): Promise<void> => {
           await Promise.all([
-            writeFile(
-              join(outputDirectory, `${name}.metadata.json`),
-              JSON.stringify(metadata, null, 2),
-            ),
+            writeJsonFileSafe(join(outputDirectory, `${name}.metadata.json`), metadata),
             block(async (): Promise<void> => {
               logger.info(images[id]);
-              await writeFile(
+              await writeTextFileSafe(
                 join(outputDirectory, `${name}.svg`),
                 await (await fetch(images[id])).text(),
               );
