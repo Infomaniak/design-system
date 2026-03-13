@@ -6,7 +6,6 @@ import { getEnvBuildConfig } from '../../../../../../../scripts/helpers/build/bu
 import { loadOptionallyEnvFile } from '../../../../../../../scripts/helpers/env/env-file/load-optionally-env-file.ts';
 import { getEnvFigmaApiToken } from '../../../../../../../scripts/helpers/figma/env/get-env-figma-api-token.ts';
 import { getEnvFigmaIconFileKey } from '../../../../../../../scripts/helpers/figma/env/get-env-figma-icon-file-key.ts';
-import type { GithubCiPullRequest } from '../../../../../../../scripts/helpers/github/github-ci-config/github-ci-config.ts';
 import { getEnvCiPullRequestAuthTokenDesignSystem } from '../../../../../../../scripts/helpers/github/pull-request/env/get-env-ci-pull-request-auth-token-design-system.ts';
 import { postKchatWebhookMessage } from '../../../../../../../scripts/helpers/kchat/api/post-kchat-webhook-message.ts';
 import { getEnvKchatWebhookId } from '../../../../../../../scripts/helpers/kchat/env/get-env-kchat-webhook-id.ts';
@@ -26,8 +25,6 @@ const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
 export function importSvgsScript(): Promise<void> {
   return logger.asyncTask('build-svgs.script', async (logger: Logger): Promise<void> => {
-    let pullRequestDetails: GithubCiPullRequest | undefined;
-
     try {
       loadOptionallyEnvFile(logger);
 
@@ -53,7 +50,7 @@ export function importSvgsScript(): Promise<void> {
         logger,
       });
 
-      pullRequestDetails = await createImportSvgPullRequests({
+      await createImportSvgPullRequests({
         outputDirectory: OUTPUT_DIR,
         packageRootDirectory: ROOT_DIR,
         workspaceRootDirectory: WORKSPACE_ROOT_DIR,
@@ -62,33 +59,19 @@ export function importSvgsScript(): Promise<void> {
         logger,
       });
     } catch (error: unknown) {
-      if (false) {
-        // TODO
-        await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
-          await postKchatWebhookMessage({
-            webhookId: getEnvKchatWebhookId(),
-            text: dedent`
-              #### ❌ svg import failed
+      await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
+        await postKchatWebhookMessage({
+          webhookId: getEnvKchatWebhookId(),
+          text: dedent`
+            #### ❌ svg import failed
 
-              - 💬 ${Error.isError(error) ? error.message : String(error)}
-            `,
-          });
+            - 💬 ${Error.isError(error) ? error.message : String(error)}
+          `,
         });
-      }
+      });
 
       throw error;
     }
-
-    await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
-      await postKchatWebhookMessage({
-        webhookId: getEnvKchatWebhookId(),
-        text: dedent`
-          #### 🖼️ new pull request: svg import
-
-          - 🔗 ${pullRequestDetails.html_url}
-        `,
-      });
-    });
   });
 }
 
