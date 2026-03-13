@@ -21,6 +21,8 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "bench": "vitest bench",
+    "=== IMPORT ===": "",
+    "import:assets:images:svg": "yarn workspace @infomaniak-design-system/svg import",
     "=== CI ===": "",
     "ci:publish": "node --no-warnings=ExperimentalWarning scripts/ci/publish/ci-publish.script.ts",
     "ci:pr-ready-for-review": "node --no-warnings=ExperimentalWarning scripts/ci/pr-ready-for-review/pr-ready-for-review.script.ts",
@@ -62,5 +64,5 @@
     "typescript-eslint": "^8.56.1",
     "vitest": "^4.0.18"
   },
-  "packageManager": "yarn@4.12.0"
+  "packageManager": "yarn@4.13.0"
 }

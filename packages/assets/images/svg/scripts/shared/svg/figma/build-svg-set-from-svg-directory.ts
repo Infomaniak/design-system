@@ -43,8 +43,8 @@ export async function buildSvgSetFromSvgDirectory({
   cleanup = true,
   optimize = true,
   compareWithExistingVersion = true,
-}: BuildSvgSetFromSvgDirectoryOptions): Promise<void> {
-  return logger.asyncTask('build-svgs-set', async (logger: Logger): Promise<void> => {
+}: BuildSvgSetFromSvgDirectoryOptions): Promise<boolean> {
+  return logger.asyncTask('build-svgs-set', async (logger: Logger): Promise<boolean> => {
     const iconSet: IconSet = await importDirectory(sourceDirectory, {
       prefix,
     });
@@ -137,11 +137,15 @@ export async function buildSvgSetFromSvgDirectory({
         currentJsonIconSet.lastModified = jsonIconSet.lastModified;
         if (JSON.stringify(currentJsonIconSet, null, 2) === jsonIconSetString) {
           logger.info('Icon set is identical.');
-          return;
+          return false;
         }
-      } catch {}
+      } catch {
+        // do nothing
+      }
     }
 
     await writeJsonFileSafe(jsonIconSetOutputDirectoryPath, jsonIconSet, 'utf8');
+
+    return true;
   });
 }

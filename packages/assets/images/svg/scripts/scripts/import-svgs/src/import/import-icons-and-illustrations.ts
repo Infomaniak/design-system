@@ -11,9 +11,9 @@ export interface ImportIconsAndIllustrationsOptions extends ImportAndBuildFigmaI
 export function importIconsAndIllustrations({
   logger,
   ...options
-}: ImportIconsAndIllustrationsOptions): Promise<void> {
-  return logger.asyncTask('import', async (): Promise<void> => {
-    await importAndBuildFigmaIcons({
+}: ImportIconsAndIllustrationsOptions): Promise<boolean> {
+  return logger.asyncTask('import', async (): Promise<boolean> => {
+    return await importAndBuildFigmaIcons({
       ...options,
       logger,
     });

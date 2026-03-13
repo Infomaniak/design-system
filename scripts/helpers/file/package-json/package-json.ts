@@ -1,4 +1,5 @@
 import type { PackageJsonDependencies } from './package-json-dependencies/package-json-dependencies.ts';
+import type { PackageJsonExports } from './package-json-exports/package-json-exports.ts';
 
 export interface PackageJson {
   readonly name: string;
@@ -9,7 +10,14 @@ export interface PackageJson {
   readonly author?: string;
   readonly license?: string;
   readonly repository?: unknown;
+  // entry points
+  readonly main?: string;
+  readonly module?: string;
+  readonly types?: string;
+  readonly exports?: PackageJsonExports;
+  // scripts
   readonly scripts?: PackageJsonScripts;
+  // dependencies
   readonly dependencies?: PackageJsonDependencies;
   readonly devDependencies?: PackageJsonDependencies;
   readonly peerDependencies?: PackageJsonDependencies;

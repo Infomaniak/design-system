@@ -1,23 +1,23 @@
 import { join } from 'node:path';
-import type { BuildConfig } from '../../../../../../scripts/helpers/build/build-config/build-config.ts';
-import type { PackageJson } from '../../../../../../scripts/helpers/file/package-json/package-json.ts';
-import { readPackageJsonFile } from '../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
-import { writeJsonFileSafe } from '../../../../../../scripts/helpers/file/write-json-file-safe.ts';
-import type { Logger } from '../../../../../../scripts/helpers/log/logger.ts';
-import { execCommandInherit } from '../../../../../../scripts/helpers/misc/exec-command.ts';
-import { removeUndefinedProperties } from '../../../../../../scripts/helpers/misc/object/remove-undefined-properties.ts';
-import { generatePackageJsonBuildVersion } from '../../../../../../scripts/helpers/npm/generate-package-json-build-version/generate-package-json-build-version.ts';
-import { removeTrailingSlash } from '../../../../../../scripts/helpers/path/remove-traling-slash.ts';
+import type { BuildConfig } from '../../build/build-config/build-config.ts';
+import type { PackageJson } from '../../file/package-json/package-json.ts';
+import { readPackageJsonFile } from '../../file/package-json/read-package-json-file.ts';
+import { writeJsonFileSafe } from '../../file/write-json-file-safe.ts';
+import type { Logger } from '../../log/logger.ts';
+import { execCommandInherit } from '../../misc/exec-command.ts';
+import { removeUndefinedProperties } from '../../misc/object/remove-undefined-properties.ts';
+import { removeTrailingSlash } from '../../path/remove-traling-slash.ts';
+import { generatePackageJsonBuildVersion } from '../generate-package-json-build-version/generate-package-json-build-version.ts';
 
-export interface GeneratePackageOptions extends BuildConfig {
-  readonly rootDirectory: string;
+export interface GenerateWorkspaceNpmPackageOptions extends BuildConfig {
+  readonly packageDirectory: string;
   readonly workspaceRootDirectory: string;
   readonly outputDirectory: string;
   readonly logger: Logger;
 }
 
-export async function generatePackage({
-  rootDirectory,
+export async function generateWorkspaceNpmPackage({
+  packageDirectory,
   workspaceRootDirectory,
   outputDirectory,
   logger,
@@ -25,8 +25,8 @@ export async function generatePackage({
   mode,
   prerelease,
   dependenciesOverride,
-}: GeneratePackageOptions): Promise<void> {
-  rootDirectory = removeTrailingSlash(rootDirectory);
+}: GenerateWorkspaceNpmPackageOptions): Promise<void> {
+  packageDirectory = removeTrailingSlash(packageDirectory);
   workspaceRootDirectory = removeTrailingSlash(workspaceRootDirectory);
   outputDirectory = removeTrailingSlash(outputDirectory);
 
@@ -37,10 +37,14 @@ export async function generatePackage({
       type,
       description,
       keywords,
+      main,
+      module,
+      types,
+      exports,
       dependencies,
       peerDependencies,
       optionalDependencies,
-    }: PackageJson = await readPackageJsonFile(join(rootDirectory, 'package.json'));
+    }: PackageJson = await readPackageJsonFile(join(packageDirectory, 'package.json'));
 
     const buildVersion: string = generatePackageJsonBuildVersion({
       version,
@@ -61,6 +65,10 @@ export async function generatePackage({
       author,
       license,
       repository,
+      main,
+      module,
+      types,
+      exports,
       dependencies:
         dependencies === undefined || dependenciesOverride === undefined
           ? dependencies
@@ -82,7 +90,7 @@ export async function generatePackage({
       await Promise.all([
         writeJsonFileSafe(join(webOutputDirectory, 'package.json'), packageObject),
         execCommandInherit(logger, 'cp', ['README.md', join(webOutputDirectory, 'README.md')], {
-          cwd: rootDirectory,
+          cwd: packageDirectory,
         }),
         execCommandInherit(logger, 'cp', ['LICENSE', join(webOutputDirectory, 'LICENSE')], {
           cwd: workspaceRootDirectory,

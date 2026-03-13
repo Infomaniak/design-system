@@ -1,10 +1,11 @@
-name: Commit Figma Illustrations
+name: Import Figma SVG assets
 
 on:
   workflow_dispatch:
 
 jobs:
-  run:
+  import-figma-svg-assets:
+    name: Import Figma SVG assets
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -29,12 +30,14 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Run
-        run: echo "Ready for your custom logic"
+      - name: Import SVG assets
+        run: yarn import:assets:images:svg
+        env:
+          CI_PULL_REQUEST_AUTH_TOKEN_DESIGN_SYSTEM: ${{ secrets.CI_PULL_REQUEST_AUTH_TOKEN_DESIGN_SYSTEM }}
 
 
 #curl -X POST \
 #  -H "Accept: application/vnd.github+json" \
 #  -H "Authorization: Bearer <PAT>" \
-#  https://api.github.com/repos/infomaniak/design-system/actions/workflows/commit-figma-illustrations.yml/dispatches \
+#  https://api.github.com/repos/infomaniak/design-system/actions/workflows/import-figma-svg-assets.yml/dispatches \
 #  -d '{"ref":"main"}'

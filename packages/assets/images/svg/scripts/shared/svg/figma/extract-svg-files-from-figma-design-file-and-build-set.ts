@@ -19,13 +19,13 @@ export async function extractSvgFilesFromFigmaDesignFileAndBuildSet({
   svgImagesOutputDirectory,
   svgSetOutputDirectory,
   ...options
-}: ExtractSvgFilesFromFigmaDesignFileAndBuildSetOptions): Promise<void> {
+}: ExtractSvgFilesFromFigmaDesignFileAndBuildSetOptions): Promise<boolean> {
   await extractSvgFilesFromFigmaDesignFile({
     ...options,
     outputDirectory: svgImagesOutputDirectory,
   });
 
-  await buildSvgSetFromSvgDirectory({
+  return await buildSvgSetFromSvgDirectory({
     ...options,
     sourceDirectory: svgImagesOutputDirectory,
     outputDirectory: svgSetOutputDirectory,

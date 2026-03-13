@@ -12,6 +12,12 @@ export class Logger {
     return new Logger('$ROOT', options);
   }
 
+  static never(): Logger {
+    return new Logger('$NEVER', {
+      logLevel: [],
+    });
+  }
+
   readonly #name: string;
   readonly #logLevel: ReadonlyMap<LogLevel, RawLogger>;
 

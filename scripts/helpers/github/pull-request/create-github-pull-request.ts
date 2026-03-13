@@ -1,4 +1,6 @@
-export interface CreateGithubPROptions {
+import type { GithubCiPullRequest } from '../github-ci-config/github-ci-config.ts';
+
+export interface CreateGithubPullRequestOptions {
   readonly owner: string;
   readonly repository: string;
   readonly authToken: string;
@@ -12,15 +14,13 @@ export interface CreateGithubPROptions {
 
 /**
  * Creates a pull request on a GitHub repository using the GitHub REST API.
- *
- * TODO: Define promise return type
  */
-export async function createGithubPR({
+export async function createGithubPullRequest({
   owner,
   repository,
   authToken,
   ...details
-}: CreateGithubPROptions): Promise<unknown> {
+}: CreateGithubPullRequestOptions): Promise<GithubCiPullRequest> {
   const response: Response = await fetch(
     `https://api.github.com/repos/${owner}/${repository}/pulls`,
     {

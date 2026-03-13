@@ -99,8 +99,8 @@ export function extractSvgFilesFromFigmaDesignFile({
               return input.slice(1);
             });
 
-          const name: string = component.name;
-          // const name: string = component.name.replaceAll(/[^\w-]/g, '');
+          // const name: string = component.name;
+          const name: string = component.name.replaceAll(/[^\w-]/g, '');
 
           if (/[^\w-]/g.test(name)) {
             throw new Error(`Invalid name: ${JSON.stringify(name)}`);
@@ -119,8 +119,6 @@ export function extractSvgFilesFromFigmaDesignFile({
         return svgsToLoad;
       },
     );
-
-    console.log(svgsToLoad);
 
     await logger.asyncTask('load-images', async (logger: Logger): Promise<void[]> => {
       const images: FigmaImagesRecord = await logger.asyncTask(
