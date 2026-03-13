@@ -1,0 +1,14 @@
+{
+  "name": "@infomaniak-design-system/svg",
+  "version": "0.0.1773413703925",
+  "type": "module",
+  "description": "Infomaniak's Design System - SVGs",
+  "scripts": {
+    "import": "node --no-warnings=ExperimentalWarning scripts/scripts/import-svgs/import-svgs.script.ts"
+  },
+  "dependencies": {
+    "@iconify/tools": "^5.0.5",
+    "@iconify/utils": "^3.1.0"
+  },
+  "private": true
+}
