@@ -36,6 +36,7 @@ export function importSvgsScript(): Promise<void> {
         ...buildConfig,
         figmaAPIToken: getEnvFigmaApiToken(),
         figmaSourceFileKey: getEnvFigmaIconFileKey(),
+        // figmaSourceFileKey: getEnvFigmaIllustrationFileKey(), // TODO
         outputDirectory: OUTPUT_ASSETS_DIR,
         logger,
       });

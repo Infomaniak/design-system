@@ -18,6 +18,7 @@ export function importIconsAndIllustrations({
       logger,
     });
 
+    // TODO: add support for illustrations and legacy icons
     // const result: readonly PromiseSettledResult<void>[] = await Promise.allSettled([
     //   importAndBuildFigmaIcons(logger.child('FIGMA ICONS')),
     //   // importAndBuildFigmaIllustrations(),

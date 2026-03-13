@@ -4,28 +4,26 @@ import {
   type ExtractSvgFilesFromFigmaDesignFileAndBuildSetOptions,
 } from '../../../../../shared/svg/figma/extract-svg-files-from-figma-design-file-and-build-set.ts';
 
-export interface ImportAndBuildFigmaIconsOptions extends Omit<
+export interface ImportAndBuildFigmaIllustrationsOptions extends Omit<
   ExtractSvgFilesFromFigmaDesignFileAndBuildSetOptions,
   'prefix' | 'svgImagesOutputDirectory' | 'svgSetOutputDirectory' | 'hasStockedVersion' | 'monotone'
 > {
   readonly outputDirectory: string;
 }
 
-export function importAndBuildFigmaIcons({
+export function importAndBuildFigmaIllustrations({
   outputDirectory,
   logger,
   ...options
-}: ImportAndBuildFigmaIconsOptions): Promise<boolean> {
-  return logger.asyncTask('icons', async (): Promise<boolean> => {
+}: ImportAndBuildFigmaIllustrationsOptions): Promise<boolean> {
+  return logger.asyncTask('illustration', async (): Promise<boolean> => {
     return extractSvgFilesFromFigmaDesignFileAndBuildSet({
       ...options,
       logger,
-      prefix: 'esds',
-      svgImagesOutputDirectory: join(outputDirectory, 'svg/monotone/figma'),
+      prefix: 'ik-illustration',
+      svgImagesOutputDirectory: join(outputDirectory, 'svg/illustrations/figma'),
       svgSetOutputDirectory: join(outputDirectory, 'server'),
-      // hasStockedVersion: true,  // TODO
-      hasStockedVersion: false, // TODO
-      monotone: true,
+      monotone: false,
     });
   });
 }
