@@ -1,11 +1,12 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "../../../../../tsconfig.json",
   "compilerOptions": {
     "noEmit": false,
     "declaration": true,
+    "emitDeclarationOnly": true,
     "declarationDir": "./dist",
     "outDir": "dist",
-    "rootDir": "src"
+    "rootDir": "./src"
   },
   "include": ["src/public-api.ts"],
   "exclude": ["src/**/*.test.ts"]

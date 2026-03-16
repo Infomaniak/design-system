@@ -1,10 +1,10 @@
+import { cp } from 'node:fs/promises';
 import { join } from 'node:path';
 import type { BuildConfig } from '../../build/build-config/build-config.ts';
 import type { PackageJson } from '../../file/package-json/package-json.ts';
 import { readPackageJsonFile } from '../../file/package-json/read-package-json-file.ts';
 import { writeJsonFileSafe } from '../../file/write-json-file-safe.ts';
 import type { Logger } from '../../log/logger.ts';
-import { execCommandInherit } from '../../misc/exec-command.ts';
 import { removeUndefinedProperties } from '../../misc/object/remove-undefined-properties.ts';
 import { removeTrailingSlash } from '../../path/remove-traling-slash.ts';
 import { generatePackageJsonBuildVersion } from '../generate-package-json-build-version/generate-package-json-build-version.ts';
@@ -30,7 +30,7 @@ export async function generateWorkspaceNpmPackage({
   workspaceRootDirectory = removeTrailingSlash(workspaceRootDirectory);
   outputDirectory = removeTrailingSlash(outputDirectory);
 
-  return logger.asyncTask('generate-package', async (logger: Logger): Promise<void> => {
+  return logger.asyncTask('generate-npm-package', async (): Promise<void> => {
     const {
       name,
       version,
@@ -84,18 +84,14 @@ export async function generateWorkspaceNpmPackage({
       optionalDependencies,
     });
 
-    return logger.asyncTask('web', async (logger: Logger): Promise<void> => {
-      const webOutputDirectory: string = join(outputDirectory, 'web');
-
-      await Promise.all([
-        writeJsonFileSafe(join(webOutputDirectory, 'package.json'), packageObject),
-        execCommandInherit(logger, 'cp', ['README.md', join(webOutputDirectory, 'README.md')], {
-          cwd: packageDirectory,
-        }),
-        execCommandInherit(logger, 'cp', ['LICENSE', join(webOutputDirectory, 'LICENSE')], {
-          cwd: workspaceRootDirectory,
-        }),
-      ]);
-    });
+    await Promise.all([
+      writeJsonFileSafe(join(outputDirectory, 'package.json'), packageObject),
+      cp(join(workspaceRootDirectory, 'README.md'), join(outputDirectory, 'README.md'), {
+        force: true,
+      }),
+      cp(join(workspaceRootDirectory, 'LICENSE'), join(outputDirectory, 'LICENSE'), {
+        force: true,
+      }),
+    ]);
   });
 }

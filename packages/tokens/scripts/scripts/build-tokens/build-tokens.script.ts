@@ -39,7 +39,7 @@ export function buildTokensScript(): Promise<void> {
       ...buildConfig,
       packageDirectory: ROOT_DIR,
       workspaceRootDirectory: WORKSPACE_ROOT_DIR,
-      outputDirectory: OUTPUT_DIR,
+      outputDirectory: join(OUTPUT_DIR, 'web'),
       logger,
     });
   });
