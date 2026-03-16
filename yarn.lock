@@ -942,9 +942,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@infomaniak-design-system/svg@workspace:packages/assets/images/svg":
+"@infomaniak-design-system/svg-list@workspace:packages/assets/images/svg":
   version: 0.0.0-use.local
-  resolution: "@infomaniak-design-system/svg@workspace:packages/assets/images/svg"
+  resolution: "@infomaniak-design-system/svg-list@workspace:packages/assets/images/svg"
   dependencies:
     "@iconify/tools": "npm:^5.0.5"
     "@iconify/utils": "npm:^3.1.0"
