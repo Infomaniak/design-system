@@ -86,7 +86,7 @@ export async function generateWorkspaceNpmPackage({
 
     await Promise.all([
       writeJsonFileSafe(join(outputDirectory, 'package.json'), packageObject),
-      cp(join(workspaceRootDirectory, 'README.md'), join(outputDirectory, 'README.md'), {
+      cp(join(packageDirectory, 'README.md'), join(outputDirectory, 'README.md'), {
         force: true,
       }),
       cp(join(workspaceRootDirectory, 'LICENSE'), join(outputDirectory, 'LICENSE'), {
