@@ -71,6 +71,9 @@ curl -X POST \
 
 triggers a Github workflow to import the SVGs from the Figma svg assets design file.
 
+> [!NOTE]
+> Replace `<PAT>` with a personal access token with the `repo` scope.
+
 ### Icons
 
 > An icon is a **monotone** SVG: we may replace the color of each icon.
