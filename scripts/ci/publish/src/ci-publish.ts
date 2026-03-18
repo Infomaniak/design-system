@@ -9,6 +9,7 @@ import { getEnvKchatWebhookId } from '../../../helpers/kchat/env/get-env-kchat-w
 import type { Logger } from '../../../helpers/log/logger.ts';
 import { execCommandInherit } from '../../../helpers/misc/exec-command.ts';
 import { dedent } from '../../../helpers/misc/string/dedent/dedent.ts';
+import { generatePackageJsonBuildVersion } from '../../../helpers/npm/generate-package-json-build-version/generate-package-json-build-version.ts';
 import { isNpmPackagePublished } from '../../../helpers/npm/is-npm-version-published/is-npm-package-published.ts';
 import type { PackageJsonWithPath } from '../../../helpers/publish/discover/discover-package-json-files.ts';
 import { getImpactedPackageJsonFiles } from '../../../helpers/publish/discover/get-impacted-package-json-files.ts';
@@ -165,21 +166,25 @@ async function getPackagesToBuild({
   const packagesToBuild: PackageJsonWithPath[] = [];
 
   for (const entry of publishablePackages) {
-    const [, packageJson]: PackageJsonWithPath = entry;
+    const [, { name, version }]: PackageJsonWithPath = entry;
 
-    const version: string = packageJson.version;
+    const buildVersion: string = generatePackageJsonBuildVersion({
+      version,
+      mode,
+      prerelease,
+    });
 
     if (
       await isNpmPackagePublished({
-        name: packageJson.name,
+        name,
         version,
       })
     ) {
-      logger.debug(`OMIT: ${packageJson.name}@${version} (already exists on npm).`);
+      logger.debug(`OMIT: ${name}@${buildVersion} (@${version} already exists on npm).`);
     } else {
-      logger.debug(`ADD: ${packageJson.name}@${version}`);
+      logger.debug(`ADD: ${name}@${buildVersion}`);
       packagesToBuild.push(entry);
-      Reflect.set(dependenciesOverride, packageJson.name, version);
+      Reflect.set(dependenciesOverride, name, version);
     }
   }
 
