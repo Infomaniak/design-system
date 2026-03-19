@@ -16,7 +16,7 @@ TODO define how icons/illustrations are organized in the Figma design file.
 
 ### Metadata
 
-Metadata can be added to individual svg from the Figma disign file by setting a description with special syntax:
+Metadata can be added to individual svg from the Figma design file by setting a description with special syntax:
 
 #### Tags
 
@@ -83,7 +83,7 @@ The Figma design file is traversed by a script to extract the icons.
 Each icon is converted to an SVG, is optimized by SVGO, we replace the colors by `currentColor` (to make them _monotone_) and,
 for each of them, we store the SVG into the `assets/svg/monotone/figma` directory as well as the metadata.
 
-Then a signle [iconify JSON](https://iconify.design/docs/libraries/tools/export/json.html) file (`assets/server/esds.json`) is generated containing all the icons.
+Then a single [iconify JSON](https://iconify.design/docs/libraries/tools/export/json.html) file (`assets/server/esds.json`) is generated containing all the icons.
 
 ### Illustrations
 
@@ -94,4 +94,4 @@ The Figma design file is traversed by a script to extract the illustrations.
 Each illustration is converted to an SVG, is optimized by SVGO, and,
 for each of them, we store the SVG into the `assets/svg/illustration/figma` directory as well as the metadata.
 
-Then a signle iconify JSON file (`assets/server/esds-illustration.json`) is generated containing all the illustrations.
+Then a single iconify JSON file (`assets/server/esds-illustration.json`) is generated containing all the illustrations.
