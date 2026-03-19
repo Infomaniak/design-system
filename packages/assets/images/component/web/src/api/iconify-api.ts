@@ -246,7 +246,7 @@ export class IconifyApi {
     resourceIndex = 0,
   }: IconifyApiGetSVGUrlOptions): URL {
     if (!(0 <= resourceIndex && resourceIndex < this.resources.length)) {
-      throw new RangeError(`\`ressourceIndex\` must be in range [0, ${this.resources.length}[`);
+      throw new RangeError(`\`resourceIndex\` must be in range [0, ${this.resources.length}[`);
     }
 
     const url = new URL(
