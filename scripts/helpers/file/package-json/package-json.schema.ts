@@ -11,11 +11,14 @@ export const packageJsonSchema = z
     author: z.string().nonempty().optional(),
     license: z.string().nonempty().optional(),
     repository: z.unknown().optional(),
+    // entry points
     main: z.string().nonempty().optional(),
     module: z.string().nonempty().optional(),
     types: z.string().nonempty().optional(),
+    exports: z.any().optional(),
+    // scripts
     scripts: z.record(z.string(), z.string()).optional(),
-    exports: z.unknown().optional(),
+    // dependencies
     dependencies: packageJsonDependenciesSchema.optional(),
     devDependencies: packageJsonDependenciesSchema.optional(),
     peerDependencies: packageJsonDependenciesSchema.optional(),
