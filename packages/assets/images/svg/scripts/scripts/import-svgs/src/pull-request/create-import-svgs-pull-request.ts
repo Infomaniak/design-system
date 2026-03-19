@@ -52,7 +52,7 @@ export function createImportSvgPullRequests({
             cwd,
           }: UpdateGitRepositoryOnNewBranchUpdateFunctionContext): Promise<string> => {
             const packageRootDirectoryRelativeToWorkspaceRootDirectory: string = isAbsolute(
-              outputDirectory,
+              packageRootDirectory,
             )
               ? relative(workspaceRootDirectory, packageRootDirectory)
               : packageRootDirectory;
