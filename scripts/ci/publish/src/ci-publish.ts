@@ -184,7 +184,7 @@ async function getPackagesToBuild({
     } else {
       logger.debug(`ADD: ${name}@${buildVersion}`);
       packagesToBuild.push(entry);
-      Reflect.set(dependenciesOverride, name, version);
+      Reflect.set(dependenciesOverride, name, buildVersion);
     }
   }
 
