@@ -99,12 +99,13 @@ export function extractSvgFilesFromFigmaDesignFile({
               return input.slice(1);
             });
 
+          // TODO update when figma format is defined
           // const name: string = component.name;
-          const name: string = component.name.replaceAll(/[^\w-]/g, '');
+          // if (/[^\w-]/g.test(name)) {
+          //   throw new Error(`Invalid name: ${JSON.stringify(name)}`);
+          // }
 
-          if (/[^\w-]/g.test(name)) {
-            throw new Error(`Invalid name: ${JSON.stringify(name)}`);
-          }
+          const name: string = component.name.replaceAll(/[^\w-]/g, '');
 
           svgsToLoad.push({
             id: frameId === undefined ? id : frameId,
