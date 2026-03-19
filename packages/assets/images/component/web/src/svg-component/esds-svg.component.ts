@@ -1,6 +1,5 @@
 import { IconifyApi } from '../api/iconify-api.ts';
 import { type CustomElement } from '../types/custom-element.ts';
-// @ts-ignore
 import style from './esds-svg.component.css?inline';
 
 const sheet: CSSStyleSheet = new CSSStyleSheet();
@@ -11,9 +10,15 @@ export type EsdsSVGComponentStatus = 'loading' | 'rendered' | 'error';
 
 type AttributeValue = string | null;
 
+/**
+ * A WebComponent to display SVGs loaded from an Iconify server.
+ */
 export class EsdsSVGComponent extends HTMLElement implements CustomElement {
   static api: IconifyApi;
 
+  /**
+   * Initializes the WebComponent.
+   */
   static init(api: IconifyApi = new IconifyApi()): void {
     if (this.api !== undefined) {
       throw new Error('IkSVGComponent already initialized.');
@@ -46,6 +51,9 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
   #prefix: string = '';
   #name: string = '';
 
+  /**
+   * The name of the icon/illustration to display.
+   */
   get name(): string {
     return `${this.#prefix}:${this.#name}`;
   }
@@ -81,6 +89,13 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
 
   #mode: EsdsSVGComponentMode = 'svg';
 
+  /**
+   * The `mode` to apply:
+   *
+   * - `svg`: injects the svg as direct <svg> child of this component.
+   * - `bg`: uses the svg as "background-image" of this component.
+   * - `mask`: injects the svg as "mask-image" of this component: this is useful to apply color to the svg.
+   */
   get mode(): EsdsSVGComponentMode {
     return this.#mode;
   }
@@ -107,6 +122,11 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
 
   #inline: boolean = false;
 
+  /**
+   * Adding `inline` property to the icon component is identical to setting `style="vertical-align: -0.125em"`.
+   *
+   * This is useful to correct ths icon's alignment.
+   */
   get inline(): boolean {
     return this.#inline;
   }
@@ -126,8 +146,13 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
 
   #nolazy: boolean = false;
   #visible: boolean = true;
-  #observer: ResizeObserver | undefined;
+  #observer: IntersectionObserver | undefined;
 
+  /**
+   * By default, icons are rendered only when visible to the visitor.
+   *
+   * You can opt out of this behavior by adding the `nolazy` attribute.
+   */
   get nolazy(): boolean {
     return this.#nolazy;
   }
@@ -148,22 +173,30 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
     this.nolazy = attributeValueToBoolean('nolazy', value);
   }
 
+  /**
+   * Starts an IntersectionObserver to have the icon loaded only when visible.
+   */
   #startObserver(): void {
     if (this.#observer === undefined) {
       this.#visible = false;
-      this.#observer = new IntersectionObserver((entries: IntersectionObserverEntry[]): void => {
-        const intersecting: boolean = entries.some(
-          (entry: IntersectionObserverEntry) => entry.isIntersecting,
-        );
-        if (intersecting !== this.#visible) {
-          this.#visible = intersecting;
-          this.#queueUpdate();
-        }
-      });
+      this.#observer = new IntersectionObserver(
+        (entries: readonly IntersectionObserverEntry[]): void => {
+          const intersecting: boolean = entries.some(
+            (entry: IntersectionObserverEntry): boolean => entry.isIntersecting,
+          );
+          if (intersecting !== this.#visible) {
+            this.#visible = intersecting;
+            this.#queueUpdate();
+          }
+        },
+      );
       this.#observer.observe(this);
     }
   }
 
+  /**
+   * Stops the IntersectionObserver, and assumes that te icon is always visible.
+   */
   #stopObserver(): void {
     if (this.#observer !== undefined) {
       this.#observer.disconnect();
@@ -182,7 +215,7 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
    * @ignore
    */
   connectedCallback() {
-    if (this.#nolazy) {
+    if (!this.#nolazy) {
       this.#startObserver();
     }
   }
@@ -223,10 +256,20 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
   #updateQueued: boolean = false;
   #status: EsdsSVGComponentStatus = 'loading';
 
+  /**
+   * Returns the "loading" status of the icon:
+   *
+   * - `loading`: the icon is currently loading
+   * - `rendered`: the icon is rendered
+   * - `error`: the icon failed to load
+   */
   get status(): EsdsSVGComponentStatus {
     return this.#status;
   }
 
+  /**
+   * Queues multiple updates.
+   */
   #queueUpdate(): void {
     if (!this.#updateQueued) {
       this.#updateQueued = true;
@@ -237,6 +280,13 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
     }
   }
 
+  /**
+   * Updates the icon:
+   *
+   * - cancels the previous/pending update (if any)
+   * - loads (in batch) the icon
+   * - renders it in this WebComponent
+   */
   #update(): void {
     if (this.#loadSVGController !== undefined) {
       this.#loadSVGController.abort();
