@@ -228,10 +228,6 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
    */
   disconnectedCallback() {
     this.#stopObserver();
-    if (this.#loadSVGController !== undefined) {
-      this.#loadSVGController.abort();
-      this.#loadSVGController = undefined;
-    }
   }
 
   /**
