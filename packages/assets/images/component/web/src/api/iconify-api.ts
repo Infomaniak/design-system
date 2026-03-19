@@ -26,15 +26,15 @@ export interface IconifyApiGetSVGUrlOptions {
   readonly rotate?: string | number;
   readonly download?: boolean;
   readonly box?: boolean;
-  readonly ressourceIndex?: number;
+  readonly resourceIndex?: number;
 }
 
 export interface IconifyApiGetSVGOptions
-  extends Omit<IconifyApiGetSVGUrlOptions, 'download'>,
-    Pick<IconifyApiFetchOptions, 'signal'> {}
+  extends Omit<IconifyApiGetSVGUrlOptions, 'download'>, Pick<IconifyApiFetchOptions, 'signal'> {}
 
 export interface IconifyApiGetSVGOptimizedOptions
-  extends Pick<IconifyApiGetSVGUrlOptions, 'prefix' | 'name'>,
+  extends
+    Pick<IconifyApiGetSVGUrlOptions, 'prefix' | 'name'>,
     Pick<IconifyApiFetchOptions, 'signal'> {}
 
 // GET ICONS DATA
@@ -118,8 +118,10 @@ export interface IconifyApiSearchIconsResponse {
 
 // -> optimized
 
-export interface IconifyApiIconSearchOptimizedOptions
-  extends Pick<IconifyApiFetchOptions, 'signal'> {
+export interface IconifyApiIconSearchOptimizedOptions extends Pick<
+  IconifyApiFetchOptions,
+  'signal'
+> {
   readonly prefix: string;
   readonly query?: string;
 }
@@ -241,14 +243,14 @@ export class IconifyApi {
     rotate,
     download,
     box,
-    ressourceIndex = 0,
+    resourceIndex = 0,
   }: IconifyApiGetSVGUrlOptions): URL {
-    if (!(0 <= ressourceIndex && ressourceIndex < this.resources.length)) {
+    if (!(0 <= resourceIndex && resourceIndex < this.resources.length)) {
       throw new RangeError(`\`ressourceIndex\` must be in range [0, ${this.resources.length}[`);
     }
 
     const url = new URL(
-      `${this.resources[ressourceIndex]}/${encodeURIComponent(prefix)}/${encodeURIComponent(name)}.svg`,
+      `${this.resources[resourceIndex]}/${encodeURIComponent(prefix)}/${encodeURIComponent(name)}.svg`,
     );
 
     if (color !== undefined) {
