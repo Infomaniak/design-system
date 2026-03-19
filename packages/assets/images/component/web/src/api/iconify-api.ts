@@ -578,7 +578,7 @@ export class IconifyApi {
     return new Promise<IconifyApiIconListIconsOptimizedIcons>(
       (
         resolve: (value: IconifyApiIconListIconsOptimizedIcons) => void,
-        reject: (reason?: any) => void,
+        reject: (reason?: unknown) => void,
       ): void => {
         signal?.throwIfAborted();
 
