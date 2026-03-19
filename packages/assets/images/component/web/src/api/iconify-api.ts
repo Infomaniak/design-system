@@ -54,7 +54,7 @@ interface RequestedSVGsEntry {
   readonly names: Set<string>;
   readonly controller: AbortController;
   readonly promise: Promise<IconifyJSON>;
-  readonly timer: any;
+  readonly timer: ReturnType<typeof setTimeout>;
 }
 
 // LIST ICON SETS
@@ -314,7 +314,7 @@ export class IconifyApi {
    */
   getSVGOptimized({ prefix, name, signal }: IconifyApiGetSVGOptimizedOptions): Promise<string> {
     return new Promise<string>(
-      (resolve: (value: string) => void, reject: (reason?: any) => void): void => {
+      (resolve: (value: string) => void, reject: (reason?: unknown) => void): void => {
         signal?.throwIfAborted();
 
         const key: string = `${prefix}:${name}`;
@@ -388,7 +388,7 @@ export class IconifyApi {
    */
   #requestSVG({ prefix, name, signal }: IconifyApiGetSVGOptimizedOptions): Promise<string> {
     return new Promise<string>(
-      (resolve: (value: string) => void, reject: (reason?: any) => void): void => {
+      (resolve: (value: string) => void, reject: (reason?: unknown) => void): void => {
         signal?.throwIfAborted();
 
         let requestedSVGs: RequestedSVGsEntry | undefined = this.#requestedSVGs.get(prefix);
@@ -401,7 +401,7 @@ export class IconifyApi {
           const { promise, resolve, reject }: PromiseWithResolvers<IconifyJSON> =
             Promise.withResolvers<IconifyJSON>();
 
-          const timer: any = setTimeout((): void => {
+          const timer: ReturnType<typeof setTimeout> = setTimeout((): void => {
             this.#requestedSVGs.delete(prefix);
             if (names.size > 0) {
               this.getIconsData({
