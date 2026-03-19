@@ -52,6 +52,7 @@ export function extractSvgFilesFromFigmaDesignFile({
           fileKey: figmaSourceFileKey,
         });
 
+        // TODO: DEBUG
         // await writeJsonFileSafe(join(outputDirectory, 'figma-file.json'), figmaFile);
 
         const svgsToLoad: SVGToLoad[] = [];
