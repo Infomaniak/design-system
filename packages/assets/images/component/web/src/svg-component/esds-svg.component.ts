@@ -21,7 +21,7 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
    */
   static init(api: IconifyApi = new IconifyApi()): void {
     if (this.api !== undefined) {
-      throw new Error('IkSVGComponent already initialized.');
+      throw new Error('EsdsSVGComponent already initialized.');
     }
     this.api = api;
     // INFO custom-element is defined AFTER initializing the API, else the "default" API is used too early.
