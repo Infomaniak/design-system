@@ -11,7 +11,7 @@ export type EsdsSVGComponentStatus = 'loading' | 'rendered' | 'error';
 type AttributeValue = string | null;
 
 /**
- * A WebComponent to display SVGs loaded from an Iconify server.
+ * A Custom Element to display SVGs loaded from an Iconify server.
  */
 export class EsdsSVGComponent extends HTMLElement implements CustomElement {
   static api: IconifyApi;
