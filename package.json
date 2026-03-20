@@ -22,7 +22,7 @@
     "test:coverage": "vitest run --coverage",
     "bench": "vitest bench",
     "=== IMPORT ===": "",
-    "import:assets:images:svg": "yarn workspace @infomaniak-design-system/svg-list",
+    "import:assets:images:svg": "yarn workspace @infomaniak-design-system/svg-list import",
     "=== CI ===": "",
     "ci:publish": "node --no-warnings=ExperimentalWarning scripts/ci/publish/ci-publish.script.ts",
     "ci:pr-ready-for-review": "node --no-warnings=ExperimentalWarning scripts/ci/pr-ready-for-review/pr-ready-for-review.script.ts",
