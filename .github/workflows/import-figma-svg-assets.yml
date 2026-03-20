@@ -37,9 +37,3 @@ jobs:
           FIGMA_API_TOKEN: ${{ secrets.FIGMA_API_TOKEN }}
           FIGMA_ICON_FILE_KEY: ${{ secrets.FIGMA_ICON_FILE_KEY }}
           KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
-
-#curl -X POST \
-#  -H "Accept: application/vnd.github+json" \
-#  -H "Authorization: Bearer <PAT>" \
-#  https://api.github.com/repos/infomaniak/design-system/actions/workflows/import-figma-svg-assets.yml/dispatches \
-#  -d '{"ref":"main"}'
