@@ -122,7 +122,7 @@ export async function buildSvgSetFromSvgDirectory({
         name: 'Infomaniak',
       },
       license: {
-        title: 'MIT',
+        title: 'GPL-3.0-only',
       },
     };
 
