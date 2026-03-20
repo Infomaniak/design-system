@@ -16,9 +16,6 @@ type AttributeValue = string | null;
 export class EsdsSVGComponent extends HTMLElement implements CustomElement {
   static api: IconifyApi;
 
-  /**
-   * Initializes the WebComponent.
-   */
   static init(api: IconifyApi = new IconifyApi()): void {
     if (this.api !== undefined) {
       throw new Error('EsdsSVGComponent already initialized.');
