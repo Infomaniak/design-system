@@ -1,3 +1,3 @@
-# Infomaniak's Design System - SVG web component
+# Infomaniak's Design System - SVG custom element
 
-A web component to display SVGs: fetches the SVGs from the server and displays them.
+A custom element to fetches SVGs from the server and displays them.
