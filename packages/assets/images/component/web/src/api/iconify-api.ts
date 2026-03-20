@@ -30,9 +30,6 @@ export interface IconifyApiGetSVGUrlOptions {
 }
 
 export interface IconifyApiGetSVGOptions
-  extends Omit<IconifyApiGetSVGUrlOptions, 'download'>, Pick<IconifyApiFetchOptions, 'signal'> {}
-
-export interface IconifyApiGetSVGOptimizedOptions
   extends
     Pick<IconifyApiGetSVGUrlOptions, 'prefix' | 'name'>,
     Pick<IconifyApiFetchOptions, 'signal'> {}
@@ -67,13 +64,15 @@ export type IconifyApiCollectionsList = Record<string, IconifyInfo>;
 
 // LIST ICONS
 
-export interface IconifyApiListIconsOptions extends IconifyApiSharedFetchJSONOptions {
+// --> raw
+
+export interface IconifyApiRawListIconsOptions extends IconifyApiSharedFetchJSONOptions {
   readonly prefix: string;
   readonly info?: boolean;
   readonly chars?: boolean;
 }
 
-export interface IconifyApiListIconsResponse {
+export interface IconifyApiRawListIconsResponse {
   readonly prefix: string;
   readonly total: number;
   readonly title?: string;
@@ -90,38 +89,18 @@ export interface IconifyApiListIconsResponse {
 
 // -> optimized
 
-export interface IconifyApiIconListIconsOptimizedIcon {
+export type IconifyApiListIconsOptions = Pick<IconifyApiRawListIconsOptions, 'prefix' | 'signal'>;
+
+export interface IconifyApiIconListIconsIcon {
   readonly name: string;
   readonly categories: ReadonlySet<string>;
 }
 
-export type IconifyApiIconListIconsOptimizedIcons = readonly IconifyApiIconListIconsOptimizedIcon[];
+export type IconifyApiIconListIconsIcons = readonly IconifyApiIconListIconsIcon[];
 
 // SEARCH ICONS
 
-export interface IconifyApiSearchIconsOptions extends IconifyApiSharedFetchJSONOptions {
-  readonly query: string;
-  readonly limit?: number;
-  readonly start?: number;
-  readonly prefixes?: readonly string[];
-  readonly category?: string;
-}
-
-export interface IconifyApiSearchIconsResponse {
-  readonly icons: readonly string[];
-  readonly total: number;
-  readonly limit: number;
-  readonly start: number;
-  readonly collections: Record<string, IconifyInfo>;
-  readonly request: Record<string, string>;
-}
-
-// -> optimized
-
-export interface IconifyApiIconSearchOptimizedOptions extends Pick<
-  IconifyApiFetchOptions,
-  'signal'
-> {
+export interface IconifyApiIconSearchOptions extends Pick<IconifyApiFetchOptions, 'signal'> {
   readonly prefix: string;
   readonly query?: string;
 }
@@ -144,6 +123,7 @@ export class IconifyApi {
   readonly bulkDebounce: number;
 
   constructor({
+    // TODO: default on infomaniak endpoint when available
     resources = ['https://api.iconify.design'],
     rotate = 750,
     timeout = 5000,
@@ -284,23 +264,6 @@ export class IconifyApi {
     return url;
   }
 
-  /**
-   * Gets the content of an SVG.
-   */
-  async getSVG({ signal, ...options }: IconifyApiGetSVGOptions): Promise<string> {
-    const url: URL = this.getSVGUrl(options);
-
-    return await (
-      await this.#fetch({
-        path: url.pathname,
-        searchParams: url.searchParams,
-        signal,
-      })
-    ).text();
-  }
-
-  // => OPTIMIZED
-
   readonly #cachedSvg: Map<string /* key: `<prefix>:<name>` */, CachedSVGsEntry> = new Map<
     string,
     CachedSVGsEntry
@@ -312,7 +275,7 @@ export class IconifyApi {
    * - caches the SVGs
    * - load them in bulk
    */
-  getSVGOptimized({ prefix, name, signal }: IconifyApiGetSVGOptimizedOptions): Promise<string> {
+  getSVG({ prefix, name, signal }: IconifyApiGetSVGOptions): Promise<string> {
     return new Promise<string>(
       (resolve: (value: string) => void, reject: (reason?: unknown) => void): void => {
         signal?.throwIfAborted();
@@ -386,7 +349,7 @@ export class IconifyApi {
    * Gets the content of an SVG with an optimized process:
    *  debounce individual requests to perform a "grouped/bulk" request.
    */
-  #requestSVG({ prefix, name, signal }: IconifyApiGetSVGOptimizedOptions): Promise<string> {
+  #requestSVG({ prefix, name, signal }: IconifyApiGetSVGOptions): Promise<string> {
     return new Promise<string>(
       (resolve: (value: string) => void, reject: (reason?: unknown) => void): void => {
         signal?.throwIfAborted();
@@ -452,7 +415,7 @@ export class IconifyApi {
             }
 
             const icon: ExtendedIconifyIcon = result.icons[name];
-            const width: number = icon.width ?? result.width ?? 16;
+            const width: number = icon.width ?? result.width ?? DEFAULT_ICON_WIDTH;
             const height: number = icon.height ?? result.height ?? width;
 
             return `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 ${width} ${height}">${icon.body}</svg>`;
@@ -533,13 +496,13 @@ export class IconifyApi {
    *
    * @inheritDoc https://iconify.design/docs/api/collection.html
    */
-  listIcons({
+  #listIcons({
     prefix,
     info,
     chars,
     pretty = false,
     ...options
-  }: IconifyApiListIconsOptions): Promise<IconifyApiListIconsResponse> {
+  }: IconifyApiRawListIconsOptions): Promise<IconifyApiRawListIconsResponse> {
     const searchParams = new URLSearchParams();
 
     searchParams.set('prefix', prefix);
@@ -563,74 +526,64 @@ export class IconifyApi {
     });
   }
 
-  readonly #listIconsCache: Map<
-    string /* prefix */,
-    Promise<IconifyApiIconListIconsOptimizedIcons>
-  > = new Map<string, Promise<IconifyApiIconListIconsOptimizedIcons>>();
+  readonly #listIconsCache: Map<string /* prefix */, Promise<IconifyApiIconListIconsIcons>> =
+    new Map<string, Promise<IconifyApiIconListIconsIcons>>();
 
-  listIconsOptimized({
-    prefix,
-    signal,
-  }: Pick<
-    IconifyApiListIconsOptions,
-    'prefix' | 'signal'
-  >): Promise<IconifyApiIconListIconsOptimizedIcons> {
-    return new Promise<IconifyApiIconListIconsOptimizedIcons>(
+  /**
+   * Lists the icons of a set with internal optimizations.
+   */
+  listIcons({ prefix, signal }: IconifyApiListIconsOptions): Promise<IconifyApiIconListIconsIcons> {
+    return new Promise<IconifyApiIconListIconsIcons>(
       (
-        resolve: (value: IconifyApiIconListIconsOptimizedIcons) => void,
+        resolve: (value: IconifyApiIconListIconsIcons) => void,
         reject: (reason?: unknown) => void,
       ): void => {
         signal?.throwIfAborted();
 
         const key: string = prefix;
 
-        let cached: Promise<IconifyApiIconListIconsOptimizedIcons> | undefined =
+        let cached: Promise<IconifyApiIconListIconsIcons> | undefined =
           this.#listIconsCache.get(key);
 
         if (cached === undefined) {
-          cached = this.listIcons({
+          cached = this.#listIcons({
             prefix,
           })
-            .then(
-              (response: IconifyApiListIconsResponse): IconifyApiIconListIconsOptimizedIcons => {
-                const allIcons: Set<string> = new Set<string>();
-                const iconNameToIconCategories: Map<string /* name */, Set<string>> = new Map<
-                  string,
-                  Set<string>
-                >();
+            .then((response: IconifyApiRawListIconsResponse): IconifyApiIconListIconsIcons => {
+              const allIcons: Set<string> = new Set<string>();
+              const iconNameToIconCategories: Map<string /* name */, Set<string>> = new Map<
+                string,
+                Set<string>
+              >();
 
-                if (response.uncategorized !== undefined) {
-                  for (const icon of response.uncategorized) {
+              if (response.uncategorized !== undefined) {
+                for (const icon of response.uncategorized) {
+                  allIcons.add(icon);
+                }
+              }
+
+              if (response.categories !== undefined) {
+                for (const [category, icons] of Object.entries(response.categories)) {
+                  for (const icon of icons) {
                     allIcons.add(icon);
-                  }
-                }
 
-                if (response.categories !== undefined) {
-                  for (const [category, icons] of Object.entries(response.categories)) {
-                    for (const icon of icons) {
-                      allIcons.add(icon);
-
-                      let categories: Set<string> | undefined = iconNameToIconCategories.get(icon);
-                      if (categories === undefined) {
-                        categories = new Set<string>();
-                        iconNameToIconCategories.set(icon, categories);
-                      }
-                      categories.add(category);
+                    let categories: Set<string> | undefined = iconNameToIconCategories.get(icon);
+                    if (categories === undefined) {
+                      categories = new Set<string>();
+                      iconNameToIconCategories.set(icon, categories);
                     }
+                    categories.add(category);
                   }
                 }
+              }
 
-                return Array.from(
-                  allIcons,
-                  (name: string): IconifyApiIconListIconsOptimizedIcon => {
-                    return {
-                      name,
-                      categories: iconNameToIconCategories.get(name) ?? new Set<string>(),
-                    };
-                  },
-                );
-              },
-            )
+              return Array.from(allIcons, (name: string): IconifyApiIconListIconsIcon => {
+                return {
+                  name,
+                  categories: iconNameToIconCategories.get(name) ?? new Set<string>(),
+                };
+              });
+            })
             .catch((error: unknown): never => {
               this.#listIconsCache.delete(key);
               throw error;
@@ -650,7 +603,7 @@ export class IconifyApi {
         signal?.addEventListener('abort', onAbort);
 
         cached.then(
-          (value: IconifyApiIconListIconsOptimizedIcons): void => {
+          (value: IconifyApiIconListIconsIcons): void => {
             end();
             resolve(value);
           },
@@ -666,53 +619,6 @@ export class IconifyApi {
   // SEARCH
 
   /**
-   * Searches icons.
-   *
-   * @inheritDoc https://iconify.design/docs/api/search.html
-   */
-  searchIcons({
-    query,
-    limit = 999,
-    start = 0,
-    prefixes = [],
-    category,
-    pretty = false,
-    ...options
-  }: IconifyApiSearchIconsOptions): Promise<IconifyApiSearchIconsResponse> {
-    const searchParams = new URLSearchParams();
-
-    searchParams.set('query', query);
-
-    if (limit !== undefined) {
-      searchParams.set('limit', limit.toString(10));
-    }
-
-    if (start !== undefined) {
-      searchParams.set('start', start.toString(10));
-    }
-
-    if (prefixes.length > 0) {
-      searchParams.set('prefixes', prefixes.join(','));
-    }
-
-    if (category !== undefined) {
-      searchParams.set('category', category);
-    }
-
-    if (pretty) {
-      searchParams.set('pretty', '1');
-    }
-
-    return this.#fetchJSON({
-      ...options,
-      path: '/search',
-      searchParams,
-    });
-  }
-
-  // SEARCH OPTIMIZED
-
-  /**
    * Searches icons in an optimized way.
    *
    * @example
@@ -722,12 +628,12 @@ export class IconifyApi {
    * `@ksuite` => returns icons having `@ksuite` as category.
    * `cog @ksuite` => returns icons having `cog` in their name or in their tags; AND having `@ksuite` as category.
    */
-  async searchIconsOptimized({
+  async searchIcons({
     prefix,
     query = '',
     signal,
-  }: IconifyApiIconSearchOptimizedOptions): Promise<IconifyApiIconListIconsOptimizedIcons> {
-    const icons: IconifyApiIconListIconsOptimizedIcons = await this.listIconsOptimized({
+  }: IconifyApiIconSearchOptions): Promise<IconifyApiIconListIconsIcons> {
+    const icons: IconifyApiIconListIconsIcons = await this.listIcons({
       prefix,
       signal,
     });
@@ -740,7 +646,7 @@ export class IconifyApi {
 
     const parts: readonly string[] = query.split(/\s+/g);
 
-    return icons.filter(({ name, categories }: IconifyApiIconListIconsOptimizedIcon): boolean => {
+    return icons.filter(({ name, categories }: IconifyApiIconListIconsIcon): boolean => {
       const lowercaseName: string = name.toLowerCase();
 
       return parts.every((part: string): boolean => {
@@ -767,3 +673,7 @@ export class IconifyApi {
     });
   }
 }
+
+/* INTERNALS */
+
+const DEFAULT_ICON_WIDTH = 16;

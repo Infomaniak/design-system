@@ -299,7 +299,7 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
     this.#status = 'loading';
 
     EsdsSVGComponent.api
-      .getSVGOptimized({
+      .getSVG({
         prefix: this.#prefix,
         name: this.#name,
         signal,
