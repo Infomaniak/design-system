@@ -1,11 +1,11 @@
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { loadOptionallyEnvFile } from '../../helpers/env/env-file/load-optionally-env-file.ts';
+import type { FigmaWebhookV2Event } from '../../helpers/figma/api/webhooks/types/figma-webhook-v2-event.ts';
+import { getEnvFigmaEventPasscode } from '../../helpers/figma/env/get-env-figma-event-passcode.ts';
 import { getEnvFigmaEvent } from '../../helpers/figma/env/get-env-figma-event.ts';
+import { getEnvFigmaIconFileKey } from '../../helpers/figma/env/get-env-figma-icon-file-key.ts';
 import { DEFAULT_LOG_LEVEL } from '../../helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../helpers/log/logger.ts';
-
-const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..');
+import { execCommandInherit } from '../../helpers/misc/exec-command.ts';
 
 const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
@@ -13,9 +13,22 @@ export async function onFigmaEventScript(): Promise<void> {
   return logger.asyncTask('on-figma-event.script', async (logger: Logger): Promise<void> => {
     loadOptionallyEnvFile(logger);
 
-    logger.info('Figma event received.');
+    const { passcode, ...figmaEvent }: FigmaWebhookV2Event = getEnvFigmaEvent();
+    const expectedFigmaEventPasscode: string = getEnvFigmaEventPasscode();
+    const figmaIconFileKey: string = getEnvFigmaIconFileKey();
 
-    console.log(getEnvFigmaEvent());
+    if (passcode !== expectedFigmaEventPasscode) {
+      throw new Error('Invalid Figma event passcode.');
+    }
+
+    if (
+      figmaEvent.event_type === 'FILE_VERSION_UPDATE' &&
+      figmaEvent.file_key === figmaIconFileKey
+    ) {
+      await execCommandInherit(logger, 'yarn', ['run', 'import:assets:images:svg']);
+    } else {
+      logger.info('Received unknown Figma event:', figmaEvent);
+    }
   });
 }
 
