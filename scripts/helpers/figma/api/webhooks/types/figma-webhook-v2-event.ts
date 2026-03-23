@@ -1,0 +1,8 @@
+export type FigmaWebhookV2Event =
+  | 'PING'
+  | 'FILE_UPDATE'
+  | 'FILE_DELETE'
+  | 'FILE_VERSION_UPDATE'
+  | 'LIBRARY_PUBLISH'
+  | 'FILE_COMMENT'
+  | 'DEV_MODE_STATUS_UPDATE';

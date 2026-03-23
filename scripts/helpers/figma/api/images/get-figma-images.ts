@@ -1,9 +1,9 @@
 import {
-  fetchFigmaJsonApiV1,
-  type FetchFigmaJsonApiV1ForConsumerOptions,
-} from '../fetch-figma-json-api-v1.ts';
+  fetchFigmaJsonApi,
+  type FetchFigmaJsonApiForConsumerOptions,
+} from '../fetch-figma-json-api.ts';
 
-export interface GetFigmaImagesOptions extends FetchFigmaJsonApiV1ForConsumerOptions {
+export interface GetFigmaImagesOptions extends FetchFigmaJsonApiForConsumerOptions {
   readonly fileKey: string;
   readonly ids: readonly string[];
   readonly format?: 'jpg' | 'png' | 'svg' | 'pdf'; // (default: svg)
@@ -22,7 +22,7 @@ export type FigmaImagesRecord = Readonly<Record<string /* id */, string>>;
 /**
  * Gets the images of a figma file.
  *
- * `GET /images/{fileKey}`
+ * `GET /v1/images/{fileKey}`
  *
  * @inheritDoc https://developers.figma.com/docs/rest-api/file-endpoints/#get-images-endpoint
  */
@@ -34,9 +34,9 @@ export async function getFigmaImages({
   useAbsoluteBounds = true,
   ...options
 }: GetFigmaImagesOptions): Promise<FigmaImagesRecord> {
-  const data: FigmaImagesResult | number = await fetchFigmaJsonApiV1<FigmaImagesResult | number>({
+  const data: FigmaImagesResult | number = await fetchFigmaJsonApi<FigmaImagesResult | number>({
     ...options,
-    path: `/images/${fileKey}`,
+    path: `/v1/images/${fileKey}`,
     searchParam: new URLSearchParams({
       format,
       svg_simplify_stroke: svgSimplifyStoke ? 'true' : 'false',
