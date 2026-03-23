@@ -16,10 +16,6 @@ jobs:
       contents: read
 
     steps:
-      - name: Echo received inputs
-        run: |
-          echo "Event input: ${{ inputs.event }}"
-
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
