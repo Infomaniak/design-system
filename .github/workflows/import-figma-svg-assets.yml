@@ -32,7 +32,7 @@ jobs:
 
       - name: Import SVG assets
         # run: yarn import:assets:images:svg
-        run: echo "import:assets:images:svg"
+        run: echo "->import:assets:images:svg"
         env:
           CI_PULL_REQUEST_AUTH_TOKEN_DESIGN_SYSTEM: ${{ secrets.CI_PULL_REQUEST_AUTH_TOKEN_DESIGN_SYSTEM }}
           FIGMA_API_TOKEN: ${{ secrets.FIGMA_API_TOKEN }}
