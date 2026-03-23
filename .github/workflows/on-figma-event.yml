@@ -19,20 +19,20 @@ jobs:
       - name: Validate and mask passcode
         run: |
           # Extract passcode                                                                                             
-            PASSCODE=$(echo '${{ inputs.event }}' | jq -r '.passcode')                                                     
-            
-            # Mask it for subsequent logs                                                                                  
-            echo "::add-mask::$PASSCODE"                                                                                   
-            
-            # Validate against expected value                                                                              
-            if [ "$PASSCODE" != "${{ secrets.FIGMA_EVENT_PASSCODE }}" ]; then                                            
-              echo "::error::Invalid passcode"                                                                             
-              exit 1                                                                                                       
-            fi                                                                                                             
-            
-            # Remove passcode from event before storing in env                                                             
-            CLEAN_EVENT=$(echo '${{ inputs.event }}' | jq 'del(.passcode)')                                                
-            echo "FIGMA_EVENT=$CLEAN_EVENT" >> "$GITHUB_ENV" 
+          PASSCODE=$(echo '${{ inputs.event }}' | jq -r '.passcode')                                                     
+          
+          # Mask it for subsequent logs                                                                                  
+          echo "::add-mask::$PASSCODE"                                                                                   
+          
+          # Validate against expected value                                                                              
+          if [ "$PASSCODE" != "${{ secrets.FIGMA_EVENT_PASSCODE }}" ]; then                                            
+            echo "::error::Invalid passcode"                                                                             
+            exit 1                                                                                                       
+          fi                                                                                                             
+          
+          # Remove passcode from event before storing in env                                                             
+          CLEAN_EVENT=$(echo '${{ inputs.event }}' | jq 'del(.passcode)')                                                
+          echo "FIGMA_EVENT=$CLEAN_EVENT" >> "$GITHUB_ENV" 
 
       - name: Checkout repository
         uses: actions/checkout@v4
