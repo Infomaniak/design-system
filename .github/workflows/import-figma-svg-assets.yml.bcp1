@@ -2,6 +2,11 @@ name: Import Figma SVG assets
 
 on:
   workflow_dispatch:
+    inputs:
+      event:
+        description: 'Figma webhook v2 event'
+        required: true
+        type: string
 
 jobs:
   import-figma-svg-assets:
@@ -11,6 +16,10 @@ jobs:
       contents: read
 
     steps:
+      - name: Echo received inputs
+        run: |
+          echo "Event input: ${{ inputs.event }}"
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:

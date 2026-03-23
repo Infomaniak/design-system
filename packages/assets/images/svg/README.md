@@ -66,7 +66,7 @@ curl -X POST \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer <CI_WORKFLOW_TRIGGER_DESIGN_SYSTEM_TOKEN>" \
   https://api.github.com/repos/infomaniak/design-system/actions/workflows/import-figma-svg-assets.yml/dispatches \
-  -d '{"ref":"feat/figma-webhooks-api"}'
+  -d '{"ref":"main"}'
 ```
 
 triggers a Github workflow to import the SVGs from the Figma svg assets design file.

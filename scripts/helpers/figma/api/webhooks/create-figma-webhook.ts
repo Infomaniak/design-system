@@ -4,12 +4,12 @@ import {
   type FetchFigmaJsonApiForConsumerOptions,
 } from '../fetch-figma-json-api.ts';
 import type { FigmaWebhookV2Context } from './types/figma-webhook-v2-context.ts';
-import type { FigmaWebhookV2Event } from './types/figma-webhook-v2-event.ts';
+import type { FigmaWebhookV2EventType } from './types/figma-webhook-v2-event.ts';
 import type { FigmaWebhookV2Status } from './types/figma-webhook-v2-status.ts';
 import type { FigmaWebhookV2 } from './types/figma-webhook-v2.ts';
 
 export interface CreateFigmaWebhookOptions extends FetchFigmaJsonApiForConsumerOptions {
-  readonly eventType: FigmaWebhookV2Event;
+  readonly eventType: FigmaWebhookV2EventType;
   readonly context: FigmaWebhookV2Context;
   readonly contextId: string;
   readonly endpoint: string;
@@ -35,7 +35,7 @@ export async function createFigmaWebhook({
   description,
   ...options
 }: CreateFigmaWebhookOptions): Promise<FigmaWebhookV2> {
-  const data: FigmaWebhookV2 = await fetchFigmaJsonApi<FigmaWebhookV2>({
+  return fetchFigmaJsonApi<FigmaWebhookV2>({
     ...options,
     method: 'POST',
     path: `/v2/webhooks`,
@@ -51,6 +51,4 @@ export async function createFigmaWebhook({
       }),
     ),
   });
-
-  return data;
 }
