@@ -4,7 +4,6 @@ import { getEnvFigmaEvent } from '../../helpers/figma/env/get-env-figma-event.ts
 import { getEnvFigmaIconFileKey } from '../../helpers/figma/env/get-env-figma-icon-file-key.ts';
 import { DEFAULT_LOG_LEVEL } from '../../helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../helpers/log/logger.ts';
-import { execCommandInherit } from '../../helpers/misc/exec-command.ts';
 
 const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
@@ -24,7 +23,9 @@ export async function onFigmaEventScript(): Promise<void> {
       figmaEvent.event_type === 'FILE_VERSION_UPDATE' &&
       figmaEvent.file_key === figmaIconFileKey
     ) {
-      await execCommandInherit(logger, 'yarn', ['run', 'import:assets:images:svg']);
+      // TODO
+      logger.info('Figma icon file updated.');
+      // await execCommandInherit(logger, 'yarn', ['run', 'import:assets:images:svg']);
     } else {
       throw new Error(`Unexpected Figma event: ${JSON.stringify(figmaEvent)}`);
     }
