@@ -1,6 +1,5 @@
 import { loadOptionallyEnvFile } from '../../helpers/env/env-file/load-optionally-env-file.ts';
 import type { FigmaWebhookV2Event } from '../../helpers/figma/api/webhooks/types/figma-webhook-v2-event.ts';
-import { getEnvFigmaEventPasscode } from '../../helpers/figma/env/get-env-figma-event-passcode.ts';
 import { getEnvFigmaEvent } from '../../helpers/figma/env/get-env-figma-event.ts';
 import { getEnvFigmaIconFileKey } from '../../helpers/figma/env/get-env-figma-icon-file-key.ts';
 import { DEFAULT_LOG_LEVEL } from '../../helpers/log/log-level/defaults/default-log-level.ts';
@@ -14,10 +13,10 @@ export async function onFigmaEventScript(): Promise<void> {
     loadOptionallyEnvFile(logger);
 
     const { passcode, ...figmaEvent }: FigmaWebhookV2Event = getEnvFigmaEvent();
-    const expectedFigmaEventPasscode: string = getEnvFigmaEventPasscode();
     const figmaIconFileKey: string = getEnvFigmaIconFileKey();
 
-    if (passcode !== expectedFigmaEventPasscode) {
+    if (passcode !== undefined) {
+      // NOTE: CI should remove passcode.
       throw new Error('Invalid Figma event passcode.');
     }
 
