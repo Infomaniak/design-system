@@ -64,15 +64,15 @@ A call on the endpoint:
 ```shell
 curl -X POST \
   -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer <PAT>" \
+  -H "Authorization: Bearer <CI_WORKFLOW_TRIGGER_DESIGN_SYSTEM_TOKEN>" \
   https://api.github.com/repos/infomaniak/design-system/actions/workflows/import-figma-svg-assets.yml/dispatches \
-  -d '{"ref":"main"}'
+  -d '{"ref":"feat/figma-webhooks-api"}'
 ```
 
 triggers a Github workflow to import the SVGs from the Figma svg assets design file.
 
 > [!NOTE]
-> Replace `<PAT>` with a personal access token with the `repo` scope.
+> Replace `<CI_WORKFLOW_TRIGGER_DESIGN_SYSTEM_TOKEN>` with a personal access token having the requested permissions.
 
 ### Icons
 
