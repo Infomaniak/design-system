@@ -26,7 +26,7 @@ export async function onFigmaEventScript(): Promise<void> {
     ) {
       await execCommandInherit(logger, 'yarn', ['run', 'import:assets:images:svg']);
     } else {
-      logger.info('Received unknown Figma event:', figmaEvent);
+      throw new Error(`Unexpected Figma event: ${JSON.stringify(figmaEvent)}`);
     }
   });
 }
