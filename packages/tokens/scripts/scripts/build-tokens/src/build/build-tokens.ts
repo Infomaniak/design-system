@@ -90,7 +90,7 @@ export function buildTokens({
 
     // SWIFT
     await buildSwiftTokens({
-      collection: baseCollection,
+      sourceDirectory,
       outputDirectory,
       logger,
     });
