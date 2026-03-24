@@ -1,0 +1,83 @@
+name: On Figma event
+
+on:
+  workflow_dispatch:
+    inputs:
+      event:
+        description: 'Figma WebhookV2 Event'
+        required: true
+        type: string
+
+jobs:
+  on-figma-event:
+    name: On Figma event
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      _FORCE_PASSCODE_MASK: ${{ secrets.FIGMA_WEBHOOK_PASSCODE }}
+
+    steps:
+      - name: Store Figma event securely
+        env:
+          EVENT_DATA: ${{ inputs.event }}
+        run: echo "$EVENT_DATA" > /tmp/event.json
+
+      - name: Validate Figma webhook passcode
+        env:
+          EXPECTED_PASSCODE: ${{ secrets.FIGMA_WEBHOOK_PASSCODE }}
+        run: |
+          set -euo pipefail
+
+          EVENT_JSON=$(cat /tmp/event.json)
+
+          PASSCODE=$(jq -e -r '.passcode // empty' <<< "$EVENT_JSON" || {
+            echo "::error::Invalid JSON or missing passcode field"
+            exit 1
+          })
+
+          if [ -z "$PASSCODE" ]; then
+            echo "::error::Empty passcode"
+            exit 1
+          fi
+
+          echo "::add-mask::$PASSCODE"
+
+          if [ "$PASSCODE" != "$EXPECTED_PASSCODE" ]; then
+            echo "::error::Invalid passcode"
+            exit 1
+          fi
+
+          CLEAN_EVENT=$(jq -c 'del(.passcode)' <<< "$EVENT_JSON")
+          {
+            echo 'FIGMA_WEBHOOK_EVENT<<EOF'
+            echo "$CLEAN_EVENT"
+            echo 'EOF'
+          } >> "$GITHUB_ENV"
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          always-auth: true
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Run ci:figma-event
+        run: yarn ci:figma-event
+        env:
+          CI_PULL_REQUEST_AUTH_TOKEN_DESIGN_SYSTEM: ${{ secrets.CI_PULL_REQUEST_AUTH_TOKEN_DESIGN_SYSTEM }}
+          FIGMA_API_TOKEN: ${{ secrets.FIGMA_API_TOKEN }}
+          FIGMA_ICON_FILE_KEY: ${{ secrets.FIGMA_ICON_FILE_KEY }}
+          KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
