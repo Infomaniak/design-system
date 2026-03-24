@@ -9,9 +9,9 @@ import type { FigmaWebhookV2Status } from './types/figma-webhook-v2-status.ts';
 import type { FigmaWebhookV2 } from './types/figma-webhook-v2.ts';
 
 export interface CreateFigmaWebhookOptions extends FetchFigmaJsonApiForConsumerOptions {
-  readonly eventType: FigmaWebhookV2EventType;
+  readonly event_type: FigmaWebhookV2EventType;
   readonly context: FigmaWebhookV2Context;
-  readonly contextId: string;
+  readonly context_id: string;
   readonly endpoint: string;
   readonly passcode: string;
   readonly status?: FigmaWebhookV2Status;
@@ -26,9 +26,9 @@ export interface CreateFigmaWebhookOptions extends FetchFigmaJsonApiForConsumerO
  * @inheritDoc https://developers.figma.com/docs/rest-api/webhooks-endpoints/#webhooks-v2-post-endpoint
  */
 export async function createFigmaWebhook({
-  eventType,
+  event_type,
   context,
-  contextId,
+  context_id,
   endpoint,
   passcode,
   status,
@@ -39,11 +39,12 @@ export async function createFigmaWebhook({
     ...options,
     method: 'POST',
     path: `/v2/webhooks`,
+    headers: [['Content-Type', 'application/json']],
     body: JSON.stringify(
       removeUndefinedProperties({
-        event_type: eventType,
+        event_type,
         context,
-        context_id: contextId,
+        context_id,
         endpoint,
         passcode,
         status,

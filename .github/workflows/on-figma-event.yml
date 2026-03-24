@@ -25,14 +25,14 @@ jobs:
           echo "::add-mask::$PASSCODE"                                                                                   
           
           # Validate against expected value                                                                              
-          if [ "$PASSCODE" != "${{ secrets.FIGMA_EVENT_PASSCODE }}" ]; then                                            
+          if [ "$PASSCODE" != "${{ secrets.FIGMA_WEBHOOK_PASSCODE }}" ]; then                                            
             echo "::error::Invalid passcode"                                                                             
             exit 1                                                                                                       
           fi                                                                                                             
           
           # Remove passcode from event before storing in env                                                             
           CLEAN_EVENT=$(echo '${{ inputs.event }}' | jq 'del(.passcode)')                                                
-          echo "FIGMA_EVENT=$CLEAN_EVENT" >> "$GITHUB_ENV" 
+          echo "FIGMA_WEBHOOK_EVENT=$CLEAN_EVENT" >> "$GITHUB_ENV" 
 
       - name: Checkout repository
         uses: actions/checkout@v4
