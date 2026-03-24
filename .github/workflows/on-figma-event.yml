@@ -17,7 +17,11 @@ jobs:
 
     steps:
       - name: Mask event input
-        run: echo "::add-mask::${{ inputs.event }}"
+#        run: echo "::add-mask::${{ inputs.event }}"
+        env:
+          FIGMA_WEBHOOK_EVENT: ${{ inputs.event }}
+        run: |
+          echo "::add-mask::$FIGMA_WEBHOOK_EVENT"
 
       - name: Checkout repository
         uses: actions/checkout@v4
