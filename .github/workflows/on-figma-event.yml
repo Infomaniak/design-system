@@ -31,7 +31,7 @@ jobs:
           fi                                                                                                             
           
           # Remove passcode from event before storing in env                                                             
-          CLEAN_EVENT=$(echo '${{ inputs.event }}' | jq 'del(.passcode)')                                                
+          CLEAN_EVENT=$(echo '${{ inputs.event }}' | jq -c 'del(.passcode)')                                                
           echo "FIGMA_WEBHOOK_EVENT=$CLEAN_EVENT" >> "$GITHUB_ENV" 
 
       - name: Checkout repository
