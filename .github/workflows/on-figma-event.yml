@@ -16,23 +16,8 @@ jobs:
       contents: read
 
     steps:
-      - name: Validate and mask passcode
-        run: |
-          # Extract passcode                                                                                             
-          PASSCODE=$(echo '${{ inputs.event }}' | jq -r '.passcode')                                                     
-          
-          # Mask it for subsequent logs                                                                                  
-          echo "::add-mask::$PASSCODE"                                                                                   
-          
-          # Validate against expected value                                                                              
-          if [ "$PASSCODE" != "${{ secrets.FIGMA_WEBHOOK_PASSCODE }}" ]; then                                            
-            echo "::error::Invalid passcode"                                                                             
-            exit 1                                                                                                       
-          fi                                                                                                             
-          
-          # Remove passcode from event before storing in env                                                             
-          CLEAN_EVENT=$(echo '${{ inputs.event }}' | jq -c 'del(.passcode)')                                                
-          echo "FIGMA_WEBHOOK_EVENT=$CLEAN_EVENT" >> "$GITHUB_ENV" 
+      - name: Hide Figma Webhook Event
+        run: echo "::add-mask::${{ inputs.event }}"
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -56,6 +41,7 @@ jobs:
       - name: Run ci:figma-event
         run: yarn ci:figma-event
         env:
+          FIGMA_WEBHOOK_EVENT: ${{ inputs.event }}
           CI_PULL_REQUEST_AUTH_TOKEN_DESIGN_SYSTEM: ${{ secrets.CI_PULL_REQUEST_AUTH_TOKEN_DESIGN_SYSTEM }}
           FIGMA_API_TOKEN: ${{ secrets.FIGMA_API_TOKEN }}
           FIGMA_ICON_FILE_KEY: ${{ secrets.FIGMA_ICON_FILE_KEY }}
