@@ -11,7 +11,7 @@ await runScript('on-figma-event', async (logger: Logger): Promise<void> => {
   const figmaIconFileKey: string = getEnvFigmaIconFileKey();
 
   if (passcode !== undefined) {
-    // NOTE: CI should remove passcode.
+    // NOTE: Intermediate server MUST remove passcode.
     throw new Error('Invalid Figma event passcode.');
   }
 
