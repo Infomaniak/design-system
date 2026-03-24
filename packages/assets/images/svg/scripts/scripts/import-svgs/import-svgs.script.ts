@@ -1,11 +1,14 @@
 import { rm } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { compare } from 'semver';
 import { isFigmaWebhookV2FileVersionUpdateEvent } from '../../../../../../../scripts/helpers/figma/api/webhooks/types/event/built-in/file-version-update/figma-webhook-v2-file-version-update-event.ts';
 import type { FigmaWebhookV2Event } from '../../../../../../../scripts/helpers/figma/api/webhooks/types/event/figma-webhook-v2-event.ts';
 import { getEnvFigmaApiToken } from '../../../../../../../scripts/helpers/figma/env/get-env-figma-api-token.ts';
 import { getEnvFigmaIconFileKey } from '../../../../../../../scripts/helpers/figma/env/get-env-figma-icon-file-key.ts';
 import { getEnvFigmaWebhookEvent } from '../../../../../../../scripts/helpers/figma/env/get-env-figma-webhook-event.ts';
+import type { PackageJson } from '../../../../../../../scripts/helpers/file/package-json/package-json.ts';
+import { readPackageJsonFile } from '../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
 import { getEnvCiPullRequestAuthTokenDesignSystem } from '../../../../../../../scripts/helpers/github/pull-request/env/get-env-ci-pull-request-auth-token-design-system.ts';
 import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { runScript } from '../../../../../../../scripts/helpers/misc/run-script/run-script.ts';
@@ -28,8 +31,14 @@ await runScript('import-svgs', async (logger: Logger): Promise<void> => {
 
   const version: string = figmaWebhookEvent.label;
 
-  if (!/\d+\.\d+\.\d+/.test(version)) {
-    throw new Error(`Figma webhook event version is invalid: ${version}.`);
+  const { version: currentVersion }: PackageJson = await readPackageJsonFile(
+    join(ROOT_DIR, 'package.json'),
+  );
+
+  if (compare(currentVersion, version) !== -1) {
+    throw new Error(
+      `Figma webhook event version "${version}" is should be greater than "${currentVersion}".`,
+    );
   }
 
   const hasNewAssets: boolean = await importIconsAndIllustrations({
