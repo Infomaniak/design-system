@@ -16,35 +16,34 @@ jobs:
       contents: read
 
     steps:
+      - name: Store Figma event securely
+        run: echo '${{ inputs.event }}' > /tmp/event.json
+
       - name: Validate Figma webhook passcode
         env:
-          EVENT_JSON: ${{ inputs.event }}
           EXPECTED_PASSCODE: ${{ secrets.FIGMA_WEBHOOK_PASSCODE }}
         run: |
           set -euo pipefail
 
-          # Extract passcode safely (no template interpolation in shell)
+          EVENT_JSON=$(cat /tmp/event.json)
+
           PASSCODE=$(jq -e -r '.passcode // empty' <<< "$EVENT_JSON" || {
             echo "::error::Invalid JSON or missing passcode field"
             exit 1
           })
 
-          # Validate passcode exists
           if [ -z "$PASSCODE" ]; then
             echo "::error::Empty passcode"
             exit 1
           fi
 
-          # Mask BEFORE any validation output
           echo "::add-mask::$PASSCODE"
 
-          # Compare
           if [ "$PASSCODE" != "$EXPECTED_PASSCODE" ]; then
             echo "::error::Invalid passcode"
             exit 1
           fi
 
-          # Clean event and store using heredoc (handles special chars safely)
           CLEAN_EVENT=$(jq -c 'del(.passcode)' <<< "$EVENT_JSON")
           {
             echo 'FIGMA_WEBHOOK_EVENT<<EOF'
