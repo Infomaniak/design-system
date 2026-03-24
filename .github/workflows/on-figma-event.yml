@@ -16,8 +16,41 @@ jobs:
       contents: read
 
     steps:
-      - name: Hide Figma Webhook Event
-        run: echo "::add-mask::${{ inputs.event }}"
+      - name: Validate Figma webhook passcode
+        env:
+          EVENT_JSON: ${{ inputs.event }}
+          EXPECTED_PASSCODE: ${{ secrets.FIGMA_WEBHOOK_PASSCODE }}
+        run: |
+          set -euo pipefail
+
+          # Extract passcode safely (no template interpolation in shell)
+          PASSCODE=$(jq -e -r '.passcode // empty' <<< "$EVENT_JSON" || {
+            echo "::error::Invalid JSON or missing passcode field"
+            exit 1
+          })
+
+          # Validate passcode exists
+          if [ -z "$PASSCODE" ]; then
+            echo "::error::Empty passcode"
+            exit 1
+          fi
+
+          # Mask BEFORE any validation output
+          echo "::add-mask::$PASSCODE"
+
+          # Compare
+          if [ "$PASSCODE" != "$EXPECTED_PASSCODE" ]; then
+            echo "::error::Invalid passcode"
+            exit 1
+          fi
+
+          # Clean event and store using heredoc (handles special chars safely)
+          CLEAN_EVENT=$(jq -c 'del(.passcode)' <<< "$EVENT_JSON")
+          {
+            echo 'FIGMA_WEBHOOK_EVENT<<EOF'
+            echo "$CLEAN_EVENT"
+            echo 'EOF'
+          } >> "$GITHUB_ENV"
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -41,7 +74,6 @@ jobs:
       - name: Run ci:figma-event
         run: yarn ci:figma-event
         env:
-          FIGMA_WEBHOOK_EVENT: ${{ inputs.event }}
           CI_PULL_REQUEST_AUTH_TOKEN_DESIGN_SYSTEM: ${{ secrets.CI_PULL_REQUEST_AUTH_TOKEN_DESIGN_SYSTEM }}
           FIGMA_API_TOKEN: ${{ secrets.FIGMA_API_TOKEN }}
           FIGMA_ICON_FILE_KEY: ${{ secrets.FIGMA_ICON_FILE_KEY }}
