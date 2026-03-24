@@ -17,7 +17,9 @@ jobs:
 
     steps:
       - name: Store Figma event securely
-        run: echo '${{ inputs.event }}' > /tmp/event.json
+        env:
+          EVENT_DATA: ${{ inputs.event }}
+        run: echo "$EVENT_DATA" > /tmp/event.json
 
       - name: Validate Figma webhook passcode
         env:
