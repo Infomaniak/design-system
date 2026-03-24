@@ -67,9 +67,10 @@ export function createFigmaWebhookScript(): Promise<void> {
 
     logger.info('Webhook create with success:', JSON.stringify(webhook, null, 2));
 
+    // INFO: Example of webhook response:
     // {
     //   id: '4124285',
-    //     team_id: '',
+    //   team_id: '',
     //   event_type: 'FILE_VERSION_UPDATE',
     //   client_id: null,
     //   endpoint: 'https://api.infomaniak.com/1/callback/figma/design-system',

@@ -1,39 +1,31 @@
-import { loadOptionallyEnvFile } from '../../helpers/env/env-file/load-optionally-env-file.ts';
-import type { FigmaWebhookV2Event } from '../../helpers/figma/api/webhooks/types/figma-webhook-v2-event.ts';
+import { isFigmaWebhookV2FileVersionUpdateEvent } from '../../helpers/figma/api/webhooks/types/event/built-in/file-version-update/figma-webhook-v2-file-version-update-event.ts';
+import type { FigmaWebhookV2Event } from '../../helpers/figma/api/webhooks/types/event/figma-webhook-v2-event.ts';
 import { getEnvFigmaIconFileKey } from '../../helpers/figma/env/get-env-figma-icon-file-key.ts';
 import { getEnvFigmaWebhookEvent } from '../../helpers/figma/env/get-env-figma-webhook-event.ts';
-import { DEFAULT_LOG_LEVEL } from '../../helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../helpers/log/logger.ts';
+import { execCommandInherit } from '../../helpers/misc/exec-command.ts';
+import { runScript } from '../../helpers/misc/run-script/run-script.ts';
 
-const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
+await runScript('on-figma-event', async (logger: Logger): Promise<void> => {
+  const { passcode, ...figmaWebhookEvent }: FigmaWebhookV2Event = getEnvFigmaWebhookEvent();
+  const figmaIconFileKey: string = getEnvFigmaIconFileKey();
 
-export async function onFigmaEventScript(): Promise<void> {
-  return logger.asyncTask('on-figma-event.script', async (logger: Logger): Promise<void> => {
-    loadOptionallyEnvFile(logger);
+  if (passcode !== undefined) {
+    // NOTE: CI should remove passcode.
+    throw new Error('Invalid Figma event passcode.');
+  }
 
-    const { passcode, ...figmaEvent }: FigmaWebhookV2Event = getEnvFigmaWebhookEvent();
-    const figmaIconFileKey: string = getEnvFigmaIconFileKey();
-
-    if (passcode !== undefined) {
-      // NOTE: CI should remove passcode.
-      throw new Error('Invalid Figma event passcode.');
-    }
-
-    if (
-      figmaEvent.event_type === 'FILE_VERSION_UPDATE' &&
-      figmaEvent.file_key === figmaIconFileKey
-    ) {
-      // TODO
-      logger.info('Figma icon file updated.');
-      // await execCommandInherit(logger, 'yarn', ['run', 'import:assets:images:svg']);
-    } else {
-      throw new Error(`Unexpected Figma event: ${JSON.stringify(figmaEvent)}`);
-    }
-  });
-}
-
-try {
-  await onFigmaEventScript();
-} catch (error: unknown) {
-  logger.fatal(error);
-}
+  if (
+    isFigmaWebhookV2FileVersionUpdateEvent(figmaWebhookEvent) &&
+    figmaWebhookEvent.file_key === figmaIconFileKey
+  ) {
+    await execCommandInherit(logger, 'yarn', ['run', 'import:assets:images:svg'], {
+      env: {
+        ...process.env,
+        ENV_IS_SUB_SCRIPT: 'true',
+      },
+    });
+  } else {
+    throw new Error(`Unexpected Figma event: ${JSON.stringify(figmaWebhookEvent)}`);
+  }
+});

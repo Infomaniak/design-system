@@ -1,5 +1,5 @@
+import type { FigmaWebhookV2EventType } from './event/figma-webhook-v2-event.ts';
 import type { FigmaWebhookV2Context } from './figma-webhook-v2-context.ts';
-import type { FigmaWebhookV2EventType } from './figma-webhook-v2-event.ts';
 import type { FigmaWebhookV2Status } from './figma-webhook-v2-status.ts';
 
 export interface FigmaWebhookV2 {
