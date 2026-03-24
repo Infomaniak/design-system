@@ -18,10 +18,17 @@ jobs:
     steps:
       - name: Mask event input
 #        run: echo "::add-mask::${{ inputs.event }}"
-        env:
-          FIGMA_WEBHOOK_EVENT: ${{ inputs.event }}
+#        env:
+#          FIGMA_WEBHOOK_EVENT: ${{ inputs.event }}
+#        run: |
+#          echo "::add-mask::$FIGMA_WEBHOOK_EVENT"
         run: |
-          echo "::add-mask::$FIGMA_WEBHOOK_EVENT"
+          EVENT=$(cat <<'DELIMITER'
+          ${{ inputs.event }}
+          DELIMITER
+          )
+          echo "::add-mask::$EVENT"
+          echo "FIGMA_WEBHOOK_EVENT=$EVENT" >> $GITHUB_ENV
 
       - name: Checkout repository
         uses: actions/checkout@v4
