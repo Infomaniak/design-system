@@ -5,7 +5,7 @@ import {
 import { type FigmaFile } from './types/figma-file.ts';
 
 export interface GetFigmaFileOptions extends FetchFigmaJsonApiForConsumerOptions {
-  readonly fileKey: string;
+  readonly file_key: string;
 }
 
 /**
@@ -16,12 +16,12 @@ export interface GetFigmaFileOptions extends FetchFigmaJsonApiForConsumerOptions
  * @inheritDoc https://developers.figma.com/docs/rest-api/file-endpoints/#get-files-endpoint
  */
 export async function getFigmaFile({
-  fileKey,
+  file_key,
   ...options
 }: GetFigmaFileOptions): Promise<FigmaFile> {
   const data: FigmaFile | number = await fetchFigmaJsonApi<FigmaFile | number>({
     ...options,
-    path: `/v1/files/${fileKey}`,
+    path: `/v1/files/${file_key}`,
   });
 
   if (typeof data === 'number') {

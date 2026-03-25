@@ -15,6 +15,10 @@ import { getEnvFigmaWebhookPasscode } from '../../helpers/figma/env/get-env-figm
 import { Logger } from '../../helpers/log/logger.ts';
 import { runScript } from '../../helpers/misc/run-script/run-script.ts';
 
+/**
+ * Helpful doc: https://medium.com/@nour_99023/an-automation-journey-with-figma-webhooks-f4df82be21b3
+ */
+
 await runScript(
   'create-figma-webhook',
   async (logger: Logger): Promise<void> => {
@@ -62,33 +66,6 @@ await runScript(
       logger.info('SKIP (non-blocking): Figma webhook already exists.');
 
       return;
-
-      // DEBUG
-      // NOTES: figma webhooks are currently highly bugged, and we can't safely rely on them, so here's some debug code
-      // https://forum.figma.com/report-a-problem-6/file-version-update-not-triggered-46344
-      // https://forum.figma.com/ask-the-community-7/file-version-update-and-library-publish-webhook-not-triggered-15136
-      // https://forum.figma.com/ask-the-community-7/webhook-events-file-update-and-file-comment-not-working-15860
-
-      // const webhookId: string = existingWebhooks[webhookIndex].id;
-      //
-      // console.log(
-      //   JSON.stringify(
-      //     await getFigmaWebhookRequests({
-      //       token: figmaApiToken,
-      //       webhook_id: webhookId,
-      //     }),
-      //     null,
-      //     2,
-      //   ),
-      // );
-      //
-      //
-      // await logger.asyncTask('delete-webhook', (): Promise<FigmaWebhookV2> => {
-      //   return deleteFigmaWebhook({
-      //     token: figmaApiToken,
-      //     webhook_id: webhookId,
-      //   });
-      // });
     }
 
     const webhook: FigmaWebhookV2 = await logger.asyncTask(

@@ -30,7 +30,8 @@
     "ci:pr-ready-for-review": "node --no-warnings=ExperimentalWarning scripts/ci/pr-ready-for-review/pr-ready-for-review.script.ts",
     "ci:storybook-pr": "node --no-warnings=ExperimentalWarning scripts/ci/storybook-pr/storybook-pr.script.ts",
     "ci:storybook-pages": "node --no-warnings=ExperimentalWarning scripts/ci/storybook-pages/storybook-pages.script.ts",
-    "ci:figma-event": "node --no-warnings=ExperimentalWarning scripts/ci/on-figma-event/on-figma-event.script.ts"
+    "ci:figma-event": "node --no-warnings=ExperimentalWarning scripts/ci/on-figma-event/on-figma-event.script.ts",
+    "ci:fix-figma-webhook": "node --no-warnings=ExperimentalWarning scripts/ci/on-figma-event/fix/fix-figma-webhook.script.ts"
   },
   "description": "Infomaniak's Design System",
   "keywords": [],

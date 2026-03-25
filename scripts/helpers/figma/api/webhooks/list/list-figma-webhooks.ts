@@ -3,6 +3,7 @@ import {
   fetchFigmaJsonApi,
   type FetchFigmaJsonApiForConsumerOptions,
 } from '../../fetch-figma-json-api.ts';
+import type { FigmaPagination } from '../../shared/types/figma-pagination.ts';
 import type { FigmaWebhookV2Context } from '../types/figma-webhook-v2-context.ts';
 import type { FigmaWebhookV2 } from '../types/figma-webhook-v2.ts';
 
@@ -11,10 +12,9 @@ export interface ListFigmaWebhooksUsingContextOptions extends FetchFigmaJsonApiF
   readonly context_id: string;
 }
 
-export interface ListFigmaWebhooksUsingPlanOptions extends FetchFigmaJsonApiForConsumerOptions {
+export interface ListFigmaWebhooksUsingPlanOptions
+  extends FetchFigmaJsonApiForConsumerOptions, FigmaPagination {
   readonly plan_api_id: string;
-  readonly next_page: string;
-  readonly prev_page: string;
 }
 
 export type ListFigmaWebhooksOptions =
@@ -26,10 +26,7 @@ export interface ListFigmaWebhooksResponse {
 }
 
 export interface ListFigmaWebhooksResponseWithPagination extends ListFigmaWebhooksResponse {
-  readonly pagination: {
-    readonly next_page: string;
-    readonly prev_page: string;
-  };
+  readonly pagination: FigmaPagination;
 }
 
 /**
