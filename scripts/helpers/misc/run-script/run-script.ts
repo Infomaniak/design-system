@@ -6,12 +6,17 @@ import { Logger, type LoggerOptions } from '../../log/logger.ts';
 import { dedent } from '../string/dedent/dedent.ts';
 import { getEnvIsSubScript } from './env/get-env-is-sub-script.ts';
 
-export type RunScriptOptions = LoggerOptions;
+export interface RunScriptOptions extends LoggerOptions {
+  readonly skipKChatNotificationOnError?: boolean;
+}
 
 export async function runScript(
   name: string,
   script: (logger: Logger) => PromiseLike<void> | void,
-  { logLevel = DEFAULT_LOG_LEVEL }: RunScriptOptions = {},
+  {
+    skipKChatNotificationOnError = getEnvIsSubScript(),
+    logLevel = DEFAULT_LOG_LEVEL,
+  }: RunScriptOptions = {},
 ): Promise<void> {
   const logger: Logger = Logger.root({ logLevel });
 
@@ -22,7 +27,7 @@ export async function runScript(
 
         await script(logger);
       } catch (error: unknown) {
-        if (!getEnvIsSubScript()) {
+        if (!skipKChatNotificationOnError) {
           try {
             await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
               await postKchatWebhookMessage({

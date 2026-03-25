@@ -1,10 +1,10 @@
-import { removeUndefinedProperties } from '../../../misc/object/remove-undefined-properties.ts';
+import { removeUndefinedProperties } from '../../../../misc/object/remove-undefined-properties.ts';
 import {
   fetchFigmaJsonApi,
   type FetchFigmaJsonApiForConsumerOptions,
-} from '../fetch-figma-json-api.ts';
-import type { FigmaWebhookV2Context } from './types/figma-webhook-v2-context.ts';
-import type { FigmaWebhookV2 } from './types/figma-webhook-v2.ts';
+} from '../../fetch-figma-json-api.ts';
+import type { FigmaWebhookV2Context } from '../types/figma-webhook-v2-context.ts';
+import type { FigmaWebhookV2 } from '../types/figma-webhook-v2.ts';
 
 export interface ListFigmaWebhooksUsingContextOptions extends FetchFigmaJsonApiForConsumerOptions {
   readonly context: FigmaWebhookV2Context;

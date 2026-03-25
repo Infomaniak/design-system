@@ -1,12 +1,12 @@
-import { removeUndefinedProperties } from '../../../misc/object/remove-undefined-properties.ts';
+import { removeUndefinedProperties } from '../../../../misc/object/remove-undefined-properties.ts';
 import {
   fetchFigmaJsonApi,
   type FetchFigmaJsonApiForConsumerOptions,
-} from '../fetch-figma-json-api.ts';
-import type { FigmaWebhookV2EventType } from './types/event/figma-webhook-v2-event.ts';
-import type { FigmaWebhookV2Context } from './types/figma-webhook-v2-context.ts';
-import type { FigmaWebhookV2Status } from './types/figma-webhook-v2-status.ts';
-import type { FigmaWebhookV2 } from './types/figma-webhook-v2.ts';
+} from '../../fetch-figma-json-api.ts';
+import type { FigmaWebhookV2EventType } from '../types/event/figma-webhook-v2-event.ts';
+import type { FigmaWebhookV2Context } from '../types/figma-webhook-v2-context.ts';
+import type { FigmaWebhookV2Status } from '../types/figma-webhook-v2-status.ts';
+import type { FigmaWebhookV2 } from '../types/figma-webhook-v2.ts';
 
 export interface CreateFigmaWebhookOptions extends FetchFigmaJsonApiForConsumerOptions {
   readonly event_type: FigmaWebhookV2EventType;

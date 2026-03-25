@@ -59,6 +59,18 @@ Where `<project>` is a project name.
 
 ## Workflow
 
+### Add a new SVG
+
+UX designers can add a new SVG to the Figma design file following the previous rules.
+
+### Commit the changes
+
+When satisfied, UX designers can commit the changes to the Figma design file by creating a new version.
+
+---
+
+TODO
+
 A call on the endpoint:
 
 ```shell
@@ -95,3 +107,36 @@ Each illustration is converted to an SVG, is optimized by SVGO, and,
 for each of them, we store the SVG into the `assets/svg/illustration/figma` directory as well as the metadata.
 
 Then a single iconify JSON file (`assets/server/esds-illustration.json`) is generated containing all the illustrations.
+
+### Graph
+
+```mermaid
+flowchart LR
+  EVENT("EVENT")
+  HAS_DEV_TAG{"has &quotdev&quot tag ?"}
+  SKIP_BUILD(["skip build"])
+  SEND_NOTIFICATION(["send success/error notification"])
+  BUILD_DEV_PACKAGES["build &quotdev&quot packages"]
+  PUBLISH_DEV_PACKAGES["publish &quotdev&quot packages"]
+  BUILD_RC_PACKAGES["build &quotrc&quot packages"]
+  PUBLISH_RC_PACKAGES["publish &quotrc&quot packages"]
+  BUILD_PROD_PACKAGES["build &quotprod&quot packages"]
+  PUBLISH_PROD_PACKAGES["publish &quotprod&quot packages"]
+  TARGET_BRANCH{"branch"}
+
+  EVENT -- "pull_request" --> HAS_DEV_TAG
+  HAS_DEV_TAG -- "no" --> SKIP_BUILD
+  HAS_DEV_TAG -- "yes" --> BUILD_DEV_PACKAGES
+  BUILD_DEV_PACKAGES --> PUBLISH_DEV_PACKAGES
+  PUBLISH_DEV_PACKAGES --> SEND_NOTIFICATION
+
+  EVENT -- "push" --> TARGET_BRANCH
+
+  TARGET_BRANCH -- "develop" --> BUILD_RC_PACKAGES
+  BUILD_RC_PACKAGES --> PUBLISH_RC_PACKAGES
+  PUBLISH_RC_PACKAGES --> SEND_NOTIFICATION
+
+  TARGET_BRANCH -- "main" --> BUILD_PROD_PACKAGES
+  BUILD_PROD_PACKAGES --> PUBLISH_PROD_PACKAGES
+  PUBLISH_PROD_PACKAGES --> SEND_NOTIFICATION
+```
