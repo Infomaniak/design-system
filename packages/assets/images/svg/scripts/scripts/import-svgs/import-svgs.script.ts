@@ -46,7 +46,11 @@ await runScript(
       return;
     } else if (compareResult === 1) {
       throw new Error(
-        `Figma webhook event version "${importVersion}" is should be greater than "${currentVersion}".`,
+        `The import version "${importVersion}" must be greater than the current version "${currentVersion}".`,
+      );
+    } else {
+      logger.info(
+        `Importing new assets from Figma because the import version "${importVersion}" is greater than the current version "${currentVersion}".`,
       );
     }
 
