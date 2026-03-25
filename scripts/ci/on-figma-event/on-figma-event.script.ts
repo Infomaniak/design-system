@@ -4,6 +4,7 @@ import { getEnvFigmaIconFileKey } from '../../helpers/figma/env/get-env-figma-ic
 import { getEnvFigmaWebhookEvent } from '../../helpers/figma/env/get-env-figma-webhook-event.ts';
 import { Logger } from '../../helpers/log/logger.ts';
 import { execCommandInherit } from '../../helpers/misc/exec-command.ts';
+import { ENV_IS_SUB_SCRIPT } from '../../helpers/misc/run-script/env/get-env-is-sub-script.ts';
 import { runScript } from '../../helpers/misc/run-script/run-script.ts';
 
 await runScript('on-figma-event', async (logger: Logger): Promise<void> => {
@@ -22,10 +23,10 @@ await runScript('on-figma-event', async (logger: Logger): Promise<void> => {
     await execCommandInherit(logger, 'yarn', ['run', 'import:assets:images:svg'], {
       env: {
         ...process.env,
-        ENV_IS_SUB_SCRIPT: 'true',
+        [ENV_IS_SUB_SCRIPT]: 'true',
       },
     });
   } else {
-    throw new Error(`Unexpected Figma event: ${JSON.stringify(figmaWebhookEvent)}`);
+    logger.warn(`Unexpected Figma event: ${JSON.stringify(figmaWebhookEvent)}`);
   }
 });

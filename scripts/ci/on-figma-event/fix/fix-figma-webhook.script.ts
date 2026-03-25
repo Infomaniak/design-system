@@ -39,7 +39,7 @@ await runScript(
     const figmaWebhookEndpoint: string = getEnvFigmaWebhookEndpoint();
     const figmaWebhookPasscode: string = getEnvFigmaWebhookPasscode();
 
-    await logger.asyncTask('icon-file', async (): Promise<void> => {
+    await logger.asyncTask('icon-file', async (logger: Logger): Promise<void> => {
       const figmaIconFileKey: string = getEnvFigmaIconFileKey();
 
       const expectedWebhook: Omit<
@@ -139,7 +139,7 @@ await runScript(
 
               logger.warn('Figma webhook out-of-date.');
 
-              await logger.asyncTask('trigger-webhook', (): Promise<unknown> => {
+              await logger.asyncTask('trigger-webhook (force)', (): Promise<unknown> => {
                 return fetch(getEnvFigmaWebhookEndpoint(), {
                   method: 'POST',
                   headers: [['Content-Type', 'application/json']],
