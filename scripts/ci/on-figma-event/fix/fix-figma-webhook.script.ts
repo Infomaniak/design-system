@@ -139,30 +139,35 @@ await runScript(
 
               logger.warn('Figma webhook out-of-date.');
 
-              await logger.asyncTask('trigger-webhook (force)', (): Promise<unknown> => {
-                return fetch(getEnvFigmaWebhookEndpoint(), {
-                  method: 'POST',
-                  headers: [['Content-Type', 'application/json']],
-                  body: JSON.stringify({
-                    event_type: 'FILE_VERSION_UPDATE',
-                    webhook_id: Number(webhookId),
-                    file_key: figmaIconFileKey,
-                    file_name: 'Unknown',
-                    created_at: new Date().toISOString(),
-                    version_id: version.id,
-                    label: version.label,
-                    description: version.description,
-                    passcode: figmaWebhookPasscode,
-                    triggered_by: {
-                      id: '123',
-                      email: 'unknown',
-                      handle: 'unknown',
-                      img_url: 'unknown',
-                    },
-                    timestamp: new Date().toISOString(),
-                  } satisfies FigmaWebhookV2FileVersionUpdateEvent),
-                });
-              });
+              await logger.asyncTask(
+                'trigger-webhook (force)',
+                (logger: Logger): Promise<unknown> => {
+                  logger.info(`version: ${version.label}`);
+
+                  return fetch(getEnvFigmaWebhookEndpoint(), {
+                    method: 'POST',
+                    headers: [['Content-Type', 'application/json']],
+                    body: JSON.stringify({
+                      event_type: 'FILE_VERSION_UPDATE',
+                      webhook_id: Number(webhookId),
+                      file_key: figmaIconFileKey,
+                      file_name: 'Unknown',
+                      created_at: new Date().toISOString(),
+                      version_id: version.id,
+                      label: version.label,
+                      description: version.description,
+                      passcode: figmaWebhookPasscode,
+                      triggered_by: {
+                        id: '123',
+                        email: 'unknown',
+                        handle: 'unknown',
+                        img_url: 'unknown',
+                      },
+                      timestamp: new Date().toISOString(),
+                    } satisfies FigmaWebhookV2FileVersionUpdateEvent),
+                  });
+                },
+              );
             }
             // skip other versions
             break;

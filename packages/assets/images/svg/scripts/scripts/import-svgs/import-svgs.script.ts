@@ -20,63 +20,58 @@ const OUTPUT_DIR: string = join(ROOT_DIR, 'dist');
 const OUTPUT_ASSETS_DIR: string = join(OUTPUT_DIR, 'assets');
 const WORKSPACE_ROOT_DIR: string = join(ROOT_DIR, '../../../..');
 
-await runScript(
-  'import-svgs',
-  async (logger: Logger): Promise<void> => {
-    await rm(OUTPUT_DIR, { force: true, recursive: true });
+await runScript('import-svgs', async (logger: Logger): Promise<void> => {
+  await rm(OUTPUT_DIR, { force: true, recursive: true });
 
-    const figmaWebhookEvent: FigmaWebhookV2Event = getEnvFigmaWebhookEvent();
+  const figmaWebhookEvent: FigmaWebhookV2Event = getEnvFigmaWebhookEvent();
 
-    if (!isFigmaWebhookV2FileVersionUpdateEvent(figmaWebhookEvent)) {
-      throw new Error('Invalid Figma webhook event.');
-    }
+  if (!isFigmaWebhookV2FileVersionUpdateEvent(figmaWebhookEvent)) {
+    throw new Error('Invalid Figma webhook event.');
+  }
 
-    const importVersion: string = figmaWebhookEvent.label;
+  const importVersion: string = figmaWebhookEvent.label;
 
-    const { version: currentVersion }: PackageJson = await readPackageJsonFile(
-      join(ROOT_DIR, 'package.json'),
+  const { version: currentVersion }: PackageJson = await readPackageJsonFile(
+    join(ROOT_DIR, 'package.json'),
+  );
+
+  const compareResult: number = compare(currentVersion, importVersion);
+
+  if (compareResult === 0) {
+    logger.info(
+      `Skipping import of new assets from Figma because the import version "${importVersion}" is equal to the current version.`,
     );
+    return;
+  } else if (compareResult === 1) {
+    throw new Error(
+      `The import version "${importVersion}" must be greater than the current version "${currentVersion}".`,
+    );
+  } else {
+    // TODO skip if a pr already exists for this version
+    logger.info(
+      `Importing new assets from Figma because the import version "${importVersion}" is greater than the current version "${currentVersion}".`,
+    );
+  }
 
-    const compareResult: number = compare(currentVersion, importVersion);
+  const hasNewAssets: boolean = await importIconsAndIllustrations({
+    figmaAPIToken: getEnvFigmaApiToken(),
+    figmaSourceFileKey: getEnvFigmaIconFileKey(),
+    // figmaSourceFileKey: getEnvFigmaIllustrationFileKey(), // TODO
+    outputDirectory: OUTPUT_ASSETS_DIR,
+    logger,
+  });
 
-    if (compareResult === 0) {
-      logger.info(
-        `Skipping import of new assets from Figma because the import version "${importVersion}" is equal to the current version.`,
-      );
-      return;
-    } else if (compareResult === 1) {
-      throw new Error(
-        `The import version "${importVersion}" must be greater than the current version "${currentVersion}".`,
-      );
-    } else {
-      logger.info(
-        `Importing new assets from Figma because the import version "${importVersion}" is greater than the current version "${currentVersion}".`,
-      );
-    }
+  if (!hasNewAssets) {
+    throw new Error('No new assets have been imported from Figma.');
+  }
 
-    const hasNewAssets: boolean = await importIconsAndIllustrations({
-      figmaAPIToken: getEnvFigmaApiToken(),
-      figmaSourceFileKey: getEnvFigmaIconFileKey(),
-      // figmaSourceFileKey: getEnvFigmaIllustrationFileKey(), // TODO
-      outputDirectory: OUTPUT_ASSETS_DIR,
-      logger,
-    });
-
-    if (!hasNewAssets) {
-      throw new Error('No new assets have been imported from Figma.');
-    }
-
-    await createImportSvgPullRequests({
-      outputDirectory: OUTPUT_DIR,
-      packageRootDirectory: ROOT_DIR,
-      workspaceRootDirectory: WORKSPACE_ROOT_DIR,
-      version: importVersion,
-      updateRepositoryAndCreatePullRequestAuthToken:
-        getEnvCiUpdateDesignSystemRepoAndCreatePullRequestAuthToken(),
-      logger,
-    });
-  },
-  {
-    skipKChatNotificationOnError: true,
-  },
-);
+  await createImportSvgPullRequests({
+    outputDirectory: OUTPUT_DIR,
+    packageRootDirectory: ROOT_DIR,
+    workspaceRootDirectory: WORKSPACE_ROOT_DIR,
+    version: importVersion,
+    updateRepositoryAndCreatePullRequestAuthToken:
+      getEnvCiUpdateDesignSystemRepoAndCreatePullRequestAuthToken(),
+    logger,
+  });
+});
