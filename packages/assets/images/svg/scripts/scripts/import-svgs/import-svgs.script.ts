@@ -31,15 +31,22 @@ await runScript(
       throw new Error('Invalid Figma webhook event.');
     }
 
-    const version: string = figmaWebhookEvent.label;
+    const importVersion: string = figmaWebhookEvent.label;
 
     const { version: currentVersion }: PackageJson = await readPackageJsonFile(
       join(ROOT_DIR, 'package.json'),
     );
 
-    if (compare(currentVersion, version) !== -1) {
+    const compareResult: number = compare(currentVersion, importVersion);
+
+    if (compareResult === 0) {
+      logger.info(
+        `Skipping import of new assets from Figma because the import version "${importVersion}" is equal to the current version.`,
+      );
+      return;
+    } else if (compareResult === 1) {
       throw new Error(
-        `Figma webhook event version "${version}" is should be greater than "${currentVersion}".`,
+        `Figma webhook event version "${importVersion}" is should be greater than "${currentVersion}".`,
       );
     }
 
@@ -59,7 +66,7 @@ await runScript(
       outputDirectory: OUTPUT_DIR,
       packageRootDirectory: ROOT_DIR,
       workspaceRootDirectory: WORKSPACE_ROOT_DIR,
-      version,
+      version: importVersion,
       updateRepositoryAndCreatePullRequestAuthToken:
         getEnvCiUpdateDesignSystemRepoAndCreatePullRequestAuthToken(),
       logger,
