@@ -1,0 +1,54 @@
+{
+  "prefix": "esds",
+  "info": {
+    "name": "Infomaniak \"esds\" icons",
+    "author": {
+      "name": "Infomaniak"
+    },
+    "license": {
+      "title": "GPL-3.0-only"
+    },
+    "total": 6
+  },
+  "lastModified": 1774449129,
+  "icons": {
+    "size16": {
+      "body": "<g fill=\"none\"><g clip-path=\"url(#svgID0)\"><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M6.5 13.5v-4h3v4h4v-6a.5.5 0 00-.146-.354l-5-5a.5.5 0 00-.708 0l-5 5A.5.5 0 002.5 7.5v6z\"/></g><defs><clipPath id=\"svgID0\"><path fill=\"#fff\" d=\"M0 0h16v16H0z\"/></clipPath></defs></g>",
+      "width": 16,
+      "height": 16
+    },
+    "size24": {
+      "body": "<g fill=\"none\"><g clip-path=\"url(#svgID0)\"><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M9.75 20.25v-6h4.5v6h6v-9a.75.75 0 00-.22-.53l-7.5-7.5a.75.75 0 00-1.06 0l-7.5 7.5a.75.75 0 00-.22.53v9z\"/></g><defs><clipPath id=\"svgID0\"><path fill=\"#fff\" d=\"M0 0h24v24H0z\"/></clipPath></defs></g>",
+      "width": 24,
+      "height": 24
+    },
+    "size32": {
+      "body": "<g fill=\"none\"><g clip-path=\"url(#svgID0)\"><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M13 27v-8h6v8h8V15a1 1 0 00-.293-.707l-10-10a1 1 0 00-1.415 0l-10 10A1 1 0 005 15v12z\"/></g><defs><clipPath id=\"svgID0\"><path fill=\"#fff\" d=\"M0 0h32v32H0z\"/></clipPath></defs></g>",
+      "width": 32,
+      "height": 32
+    },
+    "size48": {
+      "body": "<g fill=\"none\"><g clip-path=\"url(#svgID0)\"><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3\" d=\"M19.5 40.5v-12h9v12h12v-18a1.5 1.5 0 00-.439-1.061l-15-15a1.5 1.5 0 00-2.122 0l-15 15A1.5 1.5 0 007.5 22.5v18z\"/></g><defs><clipPath id=\"svgID0\"><path fill=\"#fff\" d=\"M0 0h48v48H0z\"/></clipPath></defs></g>",
+      "width": 48,
+      "height": 48
+    },
+    "stylefilled": {
+      "body": "<path fill=\"currentColor\" d=\"M10 1.667A8.333 8.333 0 0118.333 10 8.333 8.333 0 0110 18.333 8.333 8.333 0 011.667 10 8.333 8.333 0 0110 1.667m2.972 6.194a.67.67 0 00-.944 0l-2.862 2.863-1.194-1.196a.668.668 0 00-.944.943l1.667 1.667c.26.26.682.26.943 0l3.334-3.333a.67.67 0 000-.944\"/>"
+    },
+    "styleoutline": {
+      "body": "<g fill=\"none\"><g clip-path=\"url(#svgID0)\"><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"m7.5 10 1.667 1.667L12.5 8.333M18.333 10a8.333 8.333 0 11-16.666 0 8.333 8.333 0 0116.666 0\"/></g><defs><clipPath id=\"svgID0\"><path fill=\"#fff\" d=\"M0 0h20v20H0z\"/></clipPath></defs></g>"
+    }
+  },
+  "categories": {
+    "@all": [
+      "size16",
+      "size24",
+      "size32",
+      "size48",
+      "stylefilled",
+      "styleoutline"
+    ]
+  },
+  "width": 20,
+  "height": 20
+}
