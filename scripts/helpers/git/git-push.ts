@@ -15,12 +15,12 @@ export async function gitPush({
   branchName,
   upstream = 'origin',
   logger,
-  ...spanOptions
+  ...spawnOptions
 }: GitPushOptions): Promise<void> {
   await execCommandInherit(
     logger,
     'git',
     ['push', '--set-upstream', upstream, branchName],
-    spanOptions,
+    spawnOptions,
   );
 }

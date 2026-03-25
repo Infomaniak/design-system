@@ -22,7 +22,7 @@ export interface CreateImportSvgPullRequestsOptions {
   readonly packageRootDirectory: string;
   readonly workspaceRootDirectory: string;
   readonly version: string;
-  readonly pullRequestAuthToken: string;
+  readonly updateRepositoryAndCreatePullRequestAuthToken: string;
   readonly logger: Logger;
 }
 
@@ -31,7 +31,7 @@ export function createImportSvgPullRequests({
   packageRootDirectory,
   workspaceRootDirectory,
   version,
-  pullRequestAuthToken,
+  updateRepositoryAndCreatePullRequestAuthToken,
   logger,
 }: CreateImportSvgPullRequestsOptions): Promise<GithubCiPullRequest> {
   return logger.asyncTask('pr', async (): Promise<GithubCiPullRequest> => {
@@ -47,6 +47,7 @@ export function createImportSvgPullRequests({
       (logger: Logger): Promise<readonly GitCommitChange[]> => {
         return updateGitRepositoryOnNewBranch({
           repository: INFOMANIAK_DESIGN_SYSTEM_REPOSITORY,
+          accessToken: updateRepositoryAndCreatePullRequestAuthToken,
           branchName,
           update: async ({
             cwd,
@@ -92,7 +93,7 @@ export function createImportSvgPullRequests({
         return createGithubPullRequest({
           owner: INFOMANIAK_GITHUB_ORGANIZATION,
           repository: DESIGN_SYSTEM_REPOSITORY_NAME,
-          authToken: pullRequestAuthToken,
+          authToken: updateRepositoryAndCreatePullRequestAuthToken,
           title: message,
           body: generateSvgPullRequestDescription({
             changes,

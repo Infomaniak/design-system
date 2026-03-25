@@ -1,7 +1,7 @@
 import { getEnvVariable } from '../../../env/get-env-variable.ts';
 
-export const CI_PULL_REQUEST_AUTH_TOKEN_MOBILE = 'CI_PULL_REQUEST_AUTH_TOKEN_MOBILE';
+export const ENV_CI_PULL_REQUEST_AUTH_TOKEN_MOBILE = 'CI_PULL_REQUEST_AUTH_TOKEN_MOBILE';
 
 export function getEnvCiPullRequestAuthTokenMobile(): string {
-  return getEnvVariable(CI_PULL_REQUEST_AUTH_TOKEN_MOBILE);
+  return getEnvVariable(ENV_CI_PULL_REQUEST_AUTH_TOKEN_MOBILE);
 }

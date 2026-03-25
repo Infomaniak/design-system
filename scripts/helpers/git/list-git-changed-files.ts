@@ -12,14 +12,14 @@ export async function listGitChangedFiles({
   fromCommitId,
   toCommitId,
   logger,
-  ...spanOptions
+  ...spawnOptions
 }: ListGitChangedFilesOptions): Promise<readonly string[]> {
   const output: string = await execCommand(
     logger,
     'git',
     ['diff', '--name-only', fromCommitId, toCommitId],
     {
-      ...spanOptions,
+      ...spawnOptions,
       shell: true,
     },
   );

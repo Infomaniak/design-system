@@ -9,7 +9,7 @@ import { getEnvFigmaIconFileKey } from '../../../../../../../scripts/helpers/fig
 import { getEnvFigmaWebhookEvent } from '../../../../../../../scripts/helpers/figma/env/get-env-figma-webhook-event.ts';
 import type { PackageJson } from '../../../../../../../scripts/helpers/file/package-json/package-json.ts';
 import { readPackageJsonFile } from '../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
-import { getEnvCiPullRequestAuthTokenDesignSystem } from '../../../../../../../scripts/helpers/github/pull-request/env/get-env-ci-pull-request-auth-token-design-system.ts';
+import { getEnvCiUpdateDesignSystemRepoAndCreatePullRequestAuthToken } from '../../../../../../../scripts/helpers/github/env/get-env-ci-update-design-system-repo-and-create-pull-request-auth-token.ts';
 import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { runScript } from '../../../../../../../scripts/helpers/misc/run-script/run-script.ts';
 import { importIconsAndIllustrations } from './src/import/import-icons-and-illustrations.ts';
@@ -20,45 +20,52 @@ const OUTPUT_DIR: string = join(ROOT_DIR, 'dist');
 const OUTPUT_ASSETS_DIR: string = join(OUTPUT_DIR, 'assets');
 const WORKSPACE_ROOT_DIR: string = join(ROOT_DIR, '../../../..');
 
-await runScript('import-svgs', async (logger: Logger): Promise<void> => {
-  await rm(OUTPUT_DIR, { force: true, recursive: true });
+await runScript(
+  'import-svgs',
+  async (logger: Logger): Promise<void> => {
+    await rm(OUTPUT_DIR, { force: true, recursive: true });
 
-  const figmaWebhookEvent: FigmaWebhookV2Event = getEnvFigmaWebhookEvent();
+    const figmaWebhookEvent: FigmaWebhookV2Event = getEnvFigmaWebhookEvent();
 
-  if (!isFigmaWebhookV2FileVersionUpdateEvent(figmaWebhookEvent)) {
-    throw new Error('Invalid Figma webhook event.');
-  }
+    if (!isFigmaWebhookV2FileVersionUpdateEvent(figmaWebhookEvent)) {
+      throw new Error('Invalid Figma webhook event.');
+    }
 
-  const version: string = figmaWebhookEvent.label;
+    const version: string = figmaWebhookEvent.label;
 
-  const { version: currentVersion }: PackageJson = await readPackageJsonFile(
-    join(ROOT_DIR, 'package.json'),
-  );
-
-  if (compare(currentVersion, version) !== -1) {
-    throw new Error(
-      `Figma webhook event version "${version}" is should be greater than "${currentVersion}".`,
+    const { version: currentVersion }: PackageJson = await readPackageJsonFile(
+      join(ROOT_DIR, 'package.json'),
     );
-  }
 
-  const hasNewAssets: boolean = await importIconsAndIllustrations({
-    figmaAPIToken: getEnvFigmaApiToken(),
-    figmaSourceFileKey: getEnvFigmaIconFileKey(),
-    // figmaSourceFileKey: getEnvFigmaIllustrationFileKey(), // TODO
-    outputDirectory: OUTPUT_ASSETS_DIR,
-    logger,
-  });
+    if (compare(currentVersion, version) !== -1) {
+      throw new Error(
+        `Figma webhook event version "${version}" is should be greater than "${currentVersion}".`,
+      );
+    }
 
-  if (!hasNewAssets) {
-    throw new Error('No new assets have been imported from Figma.');
-  }
+    const hasNewAssets: boolean = await importIconsAndIllustrations({
+      figmaAPIToken: getEnvFigmaApiToken(),
+      figmaSourceFileKey: getEnvFigmaIconFileKey(),
+      // figmaSourceFileKey: getEnvFigmaIllustrationFileKey(), // TODO
+      outputDirectory: OUTPUT_ASSETS_DIR,
+      logger,
+    });
 
-  await createImportSvgPullRequests({
-    outputDirectory: OUTPUT_DIR,
-    packageRootDirectory: ROOT_DIR,
-    workspaceRootDirectory: WORKSPACE_ROOT_DIR,
-    version,
-    pullRequestAuthToken: getEnvCiPullRequestAuthTokenDesignSystem(),
-    logger,
-  });
-});
+    if (!hasNewAssets) {
+      throw new Error('No new assets have been imported from Figma.');
+    }
+
+    await createImportSvgPullRequests({
+      outputDirectory: OUTPUT_DIR,
+      packageRootDirectory: ROOT_DIR,
+      workspaceRootDirectory: WORKSPACE_ROOT_DIR,
+      version,
+      updateRepositoryAndCreatePullRequestAuthToken:
+        getEnvCiUpdateDesignSystemRepoAndCreatePullRequestAuthToken(),
+      logger,
+    });
+  },
+  {
+    skipKChatNotificationOnError: true,
+  },
+);

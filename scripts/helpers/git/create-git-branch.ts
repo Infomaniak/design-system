@@ -12,7 +12,7 @@ export async function createGitBranch({
   branchName,
   startPoint = 'HEAD',
   logger,
-  ...spanOptions
+  ...spawnOptions
 }: CreateGitBranchOptions): Promise<void> {
-  await execCommandInherit(logger, 'git', ['checkout', '-b', branchName, startPoint], spanOptions);
+  await execCommandInherit(logger, 'git', ['checkout', '-b', branchName, startPoint], spawnOptions);
 }

@@ -20,6 +20,7 @@ export interface UpdateGitRepositoryOnNewBranchUpdateFunctionContext {
 
 export interface UpdateGitRepositoryOnNewBranchOptions {
   readonly repository: string;
+  readonly accessToken?: string;
   readonly branchName: string;
   readonly mainBranchName?: string;
   readonly allowEmpty?: 'yes' | 'no' | 'yes-skip-push';
@@ -30,6 +31,7 @@ export interface UpdateGitRepositoryOnNewBranchOptions {
 
 export async function updateGitRepositoryOnNewBranch({
   repository,
+  accessToken,
   branchName,
   mainBranchName = 'main',
   allowEmpty = 'no',
@@ -49,6 +51,7 @@ export async function updateGitRepositoryOnNewBranch({
 
     await gitClone({
       repository,
+      accessToken,
       depth: 1,
       branchName: mainBranchName,
       destinationDirectory: '.',
@@ -56,13 +59,13 @@ export async function updateGitRepositoryOnNewBranch({
       cwd,
     });
 
-    await createGitBranch({
-      branchName,
+    await setUpGitConfig({
       logger,
       cwd,
     });
 
-    await setUpGitConfig({
+    await createGitBranch({
+      branchName,
       logger,
       cwd,
     });
