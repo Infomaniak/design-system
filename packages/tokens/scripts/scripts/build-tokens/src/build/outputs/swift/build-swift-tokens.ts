@@ -25,6 +25,7 @@ import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-
 
 import { buildXcAssets } from './build-xcassets.ts';
 import { buildSwiftEnumColor } from './build-swift-enum.ts';
+import { buildSwiftFile } from './build-swift-file.ts';
 
 export interface BuildSwiftTokensOptions {
   readonly baseCollection: DesignTokensCollection;
@@ -121,17 +122,12 @@ export async function buildSwiftTokens({
       });
 
       await logger.asyncTask('generate-file', async (): Promise<void> => {
-        const content: string = dedent`
-        /*
-          ${AUTO_GENERATED_FILE_HEADER}
-        */
-        
-        import SwiftUI
-        
-        public enum EsdsTokens {
-          ${swiftEnumDeclarationsToString(declarations)}
-        }
-      `;
+        const content: string = buildSwiftFile({
+          imports: ["SwiftUI"],
+          type: "public enum",
+          name: "EsdsTokens",
+          content: swiftEnumDeclarationsToString(declarations)
+        })
 
         await writeTextFileSafe(join(iosSwitftUiOutputDirectory, 'EsdsTokens.swift'), content);
       });
@@ -150,13 +146,6 @@ export async function buildSwiftTokens({
       );
 
       const content: string = dedent`
-        /*
-          ${AUTO_GENERATED_FILE_HEADER}
-        */
-        
-        import SwiftUI
-        
-        public struct EsdsTheme: Sendable {
           public let name: String
           
           ${iteratorJoin(
@@ -173,7 +162,7 @@ export async function buildSwiftTokens({
             'EsdsTheme',
             name,
           ]);
-          return `${name}: ${structName} = ${structName}()`;
+          return `${name}: ${structName} = ${structName}(),`;
         }),
         '\n',
       )}
@@ -185,12 +174,18 @@ export async function buildSwiftTokens({
         '\n',
       )}
           }
-        }
       `;
+
+      const swiftStruct = buildSwiftFile({
+        imports: ["SwiftUI"],
+        type: "public struct",
+        name: "EsdsTheme",
+        content
+      })
 
       await writeTextFileSafe(
         join(iosSwitftUiOutputDirectory, 'EsdsTheme/EsdsTheme.swift'),
-        content,
+        swiftStruct,
       );
     });
 
