@@ -1,7 +1,6 @@
 export function injectAccessTokenIntoRepositoryUrl(repository: string): string {
   if (repository.startsWith('https://')) {
-    // return repository.replace(/^https:\/\//, `https://x-access-token:$${ENV_ACCESS_TOKEN}@`);
-    return repository.replace(/^https:\/\//, `https://$${ENV_ACCESS_TOKEN}@`);
+    return repository.replace(/^https:\/\//, `https://x-access-token:$${ENV_ACCESS_TOKEN}@`);
   } else {
     throw new Error('Cannot inject access token: unsupported repository URL.');
   }
