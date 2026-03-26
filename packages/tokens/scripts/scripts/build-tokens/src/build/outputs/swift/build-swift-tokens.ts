@@ -1,8 +1,6 @@
 import { join } from 'node:path';
 import { writeTextFileSafe } from '../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
-import { iteratorJoin } from '../../../../../../../../../scripts/helpers/misc/iterator/iterator-join.ts';
-import { dedent } from '../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { removeTrailingSlash } from '../../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type {
@@ -12,7 +10,6 @@ import type {
 import type { SwiftEnumDeclaration } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/swift-enum-declaration.ts';
 import { swiftEnumDeclarationsToString } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/to/swift-enum-declarations-to-string.ts';
 import { designTokensCollectionTokenToSwiftEnumDeclaration } from '../../../../../../shared/dtcg/resolver/to/swift/token/design-tokens-collection-token-to-swift-enum-declaration.ts';
-import { designTokenNameSegmentsReferenceToSwiftStructName } from '../../../../../../shared/dtcg/resolver/to/swift/token/name/design-token-name-segments-reference-to-swift-struct-name.ts';
 import type {
   GenericDesignTokensCollectionToken,
   GenericDesignTokensCollectionTokenWithType,
@@ -21,11 +18,12 @@ import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtc
 import { isFontFamilyDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/font-family/is-font-family-design-tokens-collection-token.ts';
 import { isNumberDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/number/is-number-design-tokens-collection-token.ts';
 import { T1_DIRECTORY_NAME, T2_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
-import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header.ts';
 
-import { buildXcAssets } from './build-xcassets.ts';
-import { buildSwiftEnumColor } from './build-swift-enum.ts';
-import { buildSwiftFile } from './build-swift-file.ts';
+import type { ArrayDesignTokenName } from '../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
+import { buildSwiftThemeStructs } from './build-swift-theme-structs.ts';
+import { buildSwiftEnumColor } from './built-steps/build-swift-enum-color.ts';
+import { buildXcAssets } from './built-steps/build-xcassets.ts';
+import { buildSwiftFile } from './helpers/build-swift-file.ts';
 
 export interface BuildSwiftTokensOptions {
   readonly baseCollection: DesignTokensCollection;
@@ -68,7 +66,11 @@ export async function buildSwiftTokens({
               token.files.some((path: string): boolean => path.includes(T1_DIRECTORY_NAME))
             );
           })) {
-          await buildXcAssets({ token, t1ColorTokenNameToColorsetName, outputDirectory: iosSwitftUiOutputDirectory })
+          await buildXcAssets({
+            token,
+            t1ColorTokenNameToColorsetName,
+            outputDirectory: iosSwitftUiOutputDirectory,
+          });
         }
       });
     });
@@ -89,8 +91,17 @@ export async function buildSwiftTokens({
               !token.files.some((path: string): boolean => path.includes(T1_DIRECTORY_NAME))
             );
           })) {
-          const enumColor = await buildSwiftEnumColor({ token, lightThemeCollection, darkThemeCollection, t1ColorTokenNameToColorsetName })
-          if (enumColor === null) continue;
+          const enumColor: SwiftEnumDeclaration | null = await buildSwiftEnumColor({
+            token,
+            lightThemeCollection,
+            darkThemeCollection,
+            t1ColorTokenNameToColorsetName,
+          });
+
+          if (enumColor === null) {
+            continue;
+          }
+
           declarations.push(enumColor);
         }
       });
@@ -123,90 +134,34 @@ export async function buildSwiftTokens({
 
       await logger.asyncTask('generate-file', async (): Promise<void> => {
         const content: string = buildSwiftFile({
-          imports: ["SwiftUI"],
-          type: "public enum",
-          name: "EsdsTokens",
-          content: swiftEnumDeclarationsToString(declarations)
-        })
+          imports: ['SwiftUI'],
+          type: 'public enum',
+          name: 'EsdsTokens',
+          content: swiftEnumDeclarationsToString(declarations),
+        });
 
         await writeTextFileSafe(join(iosSwitftUiOutputDirectory, 'EsdsTokens.swift'), content);
       });
     });
 
-    await logger.asyncTask('main-theme', async (logger: Logger): Promise<void> => {
-      const names: Set<string> = new Set(
-        baseCollection
+    await logger.asyncTask('main-theme', async (): Promise<void> => {
+      const namesComplete: readonly ArrayDesignTokenName[] = [
+        ...baseCollection
           .tokens()
           .filter((token: GenericDesignTokensCollectionToken): boolean => {
             return token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME));
           })
-          .map((token: GenericDesignTokensCollectionToken): string => {
-            return token.name[0];
+          .map((token: GenericDesignTokensCollectionToken): ArrayDesignTokenName => {
+            return token.name;
           }),
-      );
-
-      const content: string = dedent`
-          public let name: String
-          
-          ${iteratorJoin(
-        names.values().map((name: string): string => {
-          return `public let ${name}: ${designTokenNameSegmentsReferenceToSwiftStructName(['EsdsTheme', name])}`;
-        }),
-        '\n',
-      )}
-          
-          public init(
-            ${iteratorJoin(
-        names.values().map((name: string): string => {
-          const structName: string = designTokenNameSegmentsReferenceToSwiftStructName([
-            'EsdsTheme',
-            name,
-          ]);
-          return `${name}: ${structName} = ${structName}(),`;
-        }),
-        '\n',
-      )}
-          ) {
-           ${iteratorJoin(
-        names.values().map((name: string): string => {
-          return `self.${name} = ${name}`;
-        }),
-        '\n',
-      )}
-          }
-      `;
-
-      const swiftStruct = buildSwiftFile({
-        imports: ["SwiftUI"],
-        type: "public struct",
-        name: "EsdsTheme",
-        content
-      })
-
-      await writeTextFileSafe(
-        join(iosSwitftUiOutputDirectory, 'EsdsTheme/EsdsTheme.swift'),
-        swiftStruct,
-      );
+      ];
+      await buildSwiftThemeStructs({
+        names: namesComplete,
+        outputDirectory: iosSwitftUiOutputDirectory,
+      });
     });
 
-    // registerHooks(StyleDictionary);
-    //
-    // const baseSources = DESIGN_TOKEN_TIERS.map(
-    //     (tier) => `${sourceDirectory}/${tier}/**/*.tokens.json`,
-    // );
-    // const baseTokens = await collectTokens(baseSources);
-    //
-    // const __dirname = dirname(fileURLToPath(import.meta.url));
-    // const ROOT_DIR = join(__dirname, '..');
-    //
-    // const ctx: BuildContext = {
-    //     tokensDir: sourceDirectory,
-    //     distDir: outputDirectory,
-    //     rootDir: ROOT_DIR,
-    //     baseSources,
-    //     baseTokens,
-    // };
-    //
-    // buildSwift(ctx);
+    // DEBUG: Print all the root struct
+    // console.log(JSON.stringify(root, null, 2));
   });
 }
