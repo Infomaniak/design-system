@@ -15,7 +15,7 @@ export interface GetFigmaFileVersionHistoryResponse {
 }
 
 /**
- * Gets a figma file.
+ * Gets a figma file version.
  *
  * `GET /v1/files/:key/versions`
  *
