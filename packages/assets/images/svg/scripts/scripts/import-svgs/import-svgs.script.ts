@@ -10,7 +10,7 @@ import { getEnvFigmaWebhookEvent } from '../../../../../../../scripts/helpers/fi
 import type { PackageJson } from '../../../../../../../scripts/helpers/file/package-json/package-json.ts';
 import { readPackageJsonFile } from '../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
 import { doesGitBranchExistOnRemote } from '../../../../../../../scripts/helpers/git/does-git-branch-exist-on-remote.ts';
-import { getEnvCiUpdateDesignSystemRepoAndCreatePullRequestAuthToken } from '../../../../../../../scripts/helpers/github/env/get-env-ci-update-design-system-repo-and-create-pull-request-auth-token.ts';
+import { getEnvCiDsUpdateAndPrAuthToken } from '../../../../../../../scripts/helpers/github/env/get-env-ci-ds-update-and-pr-auth-token.ts';
 import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { runScript } from '../../../../../../../scripts/helpers/misc/run-script/run-script.ts';
 import { importIconsAndIllustrations } from './src/import/import-icons-and-illustrations.ts';
@@ -85,8 +85,7 @@ await runScript('import-svgs', async (logger: Logger): Promise<void> => {
     workspaceRootDirectory: WORKSPACE_ROOT_DIR,
     version: importVersion,
     branchName,
-    updateRepositoryAndCreatePullRequestAuthToken:
-      getEnvCiUpdateDesignSystemRepoAndCreatePullRequestAuthToken(),
+    updateRepositoryAndCreatePullRequestAuthToken: getEnvCiDsUpdateAndPrAuthToken(),
     logger,
   });
 });
