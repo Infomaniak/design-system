@@ -13,10 +13,7 @@ export interface RunScriptOptions extends LoggerOptions {
 export async function runScript(
   name: string,
   script: (logger: Logger) => PromiseLike<void> | void,
-  {
-    skipKChatNotificationOnError = getEnvIsSubScript(),
-    logLevel = DEFAULT_LOG_LEVEL,
-  }: RunScriptOptions = {},
+  { skipKChatNotificationOnError, logLevel = DEFAULT_LOG_LEVEL }: RunScriptOptions = {},
 ): Promise<void> {
   const logger: Logger = Logger.root({ logLevel });
 
@@ -27,6 +24,7 @@ export async function runScript(
 
         await script(logger);
       } catch (error: unknown) {
+        skipKChatNotificationOnError ??= getEnvIsSubScript();
         if (!skipKChatNotificationOnError) {
           try {
             await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {

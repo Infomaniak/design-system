@@ -22,6 +22,7 @@ export interface CreateImportSvgPullRequestsOptions {
   readonly packageRootDirectory: string;
   readonly workspaceRootDirectory: string;
   readonly version: string;
+  readonly branchName?: string;
   readonly updateRepositoryAndCreatePullRequestAuthToken: string;
   readonly logger: Logger;
 }
@@ -31,6 +32,7 @@ export function createImportSvgPullRequests({
   packageRootDirectory,
   workspaceRootDirectory,
   version,
+  branchName = `feat/import-icons--${version}`,
   updateRepositoryAndCreatePullRequestAuthToken,
   logger,
 }: CreateImportSvgPullRequestsOptions): Promise<GithubCiPullRequest> {
@@ -39,7 +41,6 @@ export function createImportSvgPullRequests({
       throw new Error('git command not available.');
     }
 
-    const branchName: string = `feat/import-icons--${version}`;
     const message: string = `feat(assets/svg): update icons - ${version}`;
 
     const changes: readonly GitCommitChange[] = await logger.asyncTask(
