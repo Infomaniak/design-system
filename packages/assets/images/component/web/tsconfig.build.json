@@ -1,0 +1,15 @@
+{
+  "extends": "../../../../../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "./dist",
+    "outDir": "dist",
+    "rootDir": "./src",
+    "types": ["vite/client"],
+    "typeRoots": ["node_modules/@types", "node_modules"]
+  },
+  "include": ["src/public-api.ts"],
+  "exclude": ["src/**/*.test.ts"]
+}
