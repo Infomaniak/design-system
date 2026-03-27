@@ -25,6 +25,7 @@ await runScript('import-svgs', async (logger: Logger): Promise<void> => {
   await rm(OUTPUT_DIR, { force: true, recursive: true });
 
   const figmaWebhookEvent: FigmaWebhookV2Event = getEnvFigmaWebhookEvent();
+  const updateRepositoryAndCreatePullRequestAuthToken: string = getEnvCiDsUpdateAndPrAuthToken();
 
   if (!isFigmaWebhookV2FileVersionUpdateEvent(figmaWebhookEvent)) {
     throw new Error('Invalid Figma webhook event.');
@@ -85,7 +86,7 @@ await runScript('import-svgs', async (logger: Logger): Promise<void> => {
     workspaceRootDirectory: WORKSPACE_ROOT_DIR,
     version: importVersion,
     branchName,
-    updateRepositoryAndCreatePullRequestAuthToken: getEnvCiDsUpdateAndPrAuthToken(),
+    updateRepositoryAndCreatePullRequestAuthToken,
     logger,
   });
 });
