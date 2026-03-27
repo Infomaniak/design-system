@@ -1,10 +1,11 @@
 import { cp } from 'node:fs/promises';
 import { join } from 'node:path';
-import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import {
-  type CreatePublishGithubBranchCopyFilesContext,
-  createPublishGithubBranchWithNewFiles,
-} from '../shared/create-publish-github-branch-with-new-files.ts';
+  updateGitRepositoryOnNewBranch,
+  type UpdateGitRepositoryOnNewBranchUpdateFunctionContext,
+} from '../../../../../../../scripts/helpers/git/update-git-repository-on-new-branch.ts';
+import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
+import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 
 export interface CreateAndroidPublishGithubBranchOptions {
   readonly logger: Logger;
@@ -18,26 +19,25 @@ export interface CreateAndroidPublishGithubBranchOptions {
  *
  * @returns The name of the created branch.
  */
-export function createAndroidPublishGithubBranch({
+export async function createAndroidPublishGithubBranch({
   logger,
   repositoryName,
   packageDirectory,
   version,
 }: CreateAndroidPublishGithubBranchOptions): Promise<string> {
-  return createPublishGithubBranchWithNewFiles({
-    logger,
-    packageDirectory,
-    repositoryName,
-    version,
-    copyFiles: async ({
-      packageDirectory,
-      repositoryDirectory,
-    }: CreatePublishGithubBranchCopyFilesContext): Promise<void> => {
+  const branchName: string = version;
+
+  await updateGitRepositoryOnNewBranch({
+    repository: `git@${repositoryName}:${INFOMANIAK_GITHUB_ORGANIZATION}/${repositoryName}.git`,
+    branchName,
+    update: async ({
+      cwd,
+    }: UpdateGitRepositoryOnNewBranchUpdateFunctionContext): Promise<string> => {
       await Promise.all([
         cp(
           join(packageDirectory, 'compose/EsdsColorRawTokens.kt'),
           join(
-            repositoryDirectory,
+            cwd,
             'DesignSystem/Compose/src/main/kotlin/com/infomaniak/designsystem/compose/compose/EsdsColorRawTokens.kt',
           ),
           {
@@ -45,6 +45,11 @@ export function createAndroidPublishGithubBranch({
           },
         ),
       ]);
+
+      return `chore: Update to ${version}`;
     },
+    logger,
   });
+
+  return branchName;
 }

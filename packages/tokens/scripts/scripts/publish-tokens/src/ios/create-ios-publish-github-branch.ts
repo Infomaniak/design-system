@@ -1,8 +1,11 @@
 import { cp } from 'node:fs/promises';
 import { join } from 'node:path';
+import {
+  updateGitRepositoryOnNewBranch,
+  type UpdateGitRepositoryOnNewBranchUpdateFunctionContext,
+} from '../../../../../../../scripts/helpers/git/update-git-repository-on-new-branch.ts';
+import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
-import type { CreatePublishGithubBranchCopyFilesContext } from '../shared/create-publish-github-branch-with-new-files.ts';
-import { createPublishGithubBranchWithNewFiles } from '../shared/create-publish-github-branch-with-new-files.ts';
 
 export interface CreateIosPublishGithubBranchOptions {
   readonly logger: Logger;
@@ -16,38 +19,38 @@ export interface CreateIosPublishGithubBranchOptions {
  *
  * @returns The name of the created branch.
  */
-export function createIosPublishGithubBranch({
+export async function createIosPublishGithubBranch({
   logger,
   repositoryName,
   packageDirectory,
   version,
 }: CreateIosPublishGithubBranchOptions): Promise<string> {
-  return createPublishGithubBranchWithNewFiles({
-    logger,
-    packageDirectory,
-    repositoryName,
-    version,
-    copyFiles: async ({
-      packageDirectory,
-      repositoryDirectory,
-    }: CreatePublishGithubBranchCopyFilesContext): Promise<void> => {
+  const branchName: string = version;
+
+  await updateGitRepositoryOnNewBranch({
+    repository: `git@${repositoryName}:${INFOMANIAK_GITHUB_ORGANIZATION}/${repositoryName}.git`,
+    branchName,
+    update: async ({
+      cwd,
+    }: UpdateGitRepositoryOnNewBranchUpdateFunctionContext): Promise<string> => {
       await Promise.all([
         cp(
           join(packageDirectory, 'EsdsColorRawTokens.swift'),
-          join(repositoryDirectory, 'CatalogApp/DesignSystem Catalog/EsdsColorRawTokens.swift'),
+          join(cwd, 'CatalogApp/DesignSystem Catalog/EsdsColorRawTokens.swift'),
           {
             force: true,
           },
         ),
-        cp(
-          join(packageDirectory, 'Colors.xcassets'),
-          join(repositoryDirectory, 'Sources/iOSDesignSystem'),
-          {
-            recursive: true,
-            force: true,
-          },
-        ),
+        cp(join(packageDirectory, 'Colors.xcassets'), join(cwd, 'Sources/iOSDesignSystem'), {
+          recursive: true,
+          force: true,
+        }),
       ]);
+
+      return `chore: Update to ${version}`;
     },
+    logger,
   });
+
+  return branchName;
 }
