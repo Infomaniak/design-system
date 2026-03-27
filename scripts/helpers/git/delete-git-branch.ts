@@ -10,7 +10,7 @@ export interface DeleteGitBranchOptions extends SpawnOptions {
 export async function deleteGitBranch({
   branchName,
   logger,
-  ...spanOptions
+  ...spawnOptions
 }: DeleteGitBranchOptions): Promise<void> {
-  await execCommandInherit(logger, 'git', ['branch', '-D', branchName], spanOptions);
+  await execCommandInherit(logger, 'git', ['branch', '-D', branchName], spawnOptions);
 }

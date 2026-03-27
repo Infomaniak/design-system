@@ -22,7 +22,8 @@ export interface CreateImportSvgPullRequestsOptions {
   readonly packageRootDirectory: string;
   readonly workspaceRootDirectory: string;
   readonly version: string;
-  readonly pullRequestAuthToken: string;
+  readonly branchName?: string;
+  readonly updateRepositoryAndCreatePullRequestAuthToken: string;
   readonly logger: Logger;
 }
 
@@ -31,7 +32,8 @@ export function createImportSvgPullRequests({
   packageRootDirectory,
   workspaceRootDirectory,
   version,
-  pullRequestAuthToken,
+  branchName = `feat/import-icons--${version}`,
+  updateRepositoryAndCreatePullRequestAuthToken,
   logger,
 }: CreateImportSvgPullRequestsOptions): Promise<GithubCiPullRequest> {
   return logger.asyncTask('pr', async (): Promise<GithubCiPullRequest> => {
@@ -39,7 +41,6 @@ export function createImportSvgPullRequests({
       throw new Error('git command not available.');
     }
 
-    const branchName: string = `feat/import-icons--${version}`;
     const message: string = `feat(assets/svg): update icons - ${version}`;
 
     const changes: readonly GitCommitChange[] = await logger.asyncTask(
@@ -47,6 +48,7 @@ export function createImportSvgPullRequests({
       (logger: Logger): Promise<readonly GitCommitChange[]> => {
         return updateGitRepositoryOnNewBranch({
           repository: INFOMANIAK_DESIGN_SYSTEM_REPOSITORY,
+          accessToken: updateRepositoryAndCreatePullRequestAuthToken,
           branchName,
           update: async ({
             cwd,
@@ -92,7 +94,7 @@ export function createImportSvgPullRequests({
         return createGithubPullRequest({
           owner: INFOMANIAK_GITHUB_ORGANIZATION,
           repository: DESIGN_SYSTEM_REPOSITORY_NAME,
-          authToken: pullRequestAuthToken,
+          authToken: updateRepositoryAndCreatePullRequestAuthToken,
           title: message,
           body: generateSvgPullRequestDescription({
             changes,

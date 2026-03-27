@@ -38,8 +38,8 @@ jobs:
       - name: Run ci:figma-event
         run: yarn ci:figma-event
         env:
-          FIGMA_EVENT: ${{ inputs.event }}
-          CI_PULL_REQUEST_AUTH_TOKEN_DESIGN_SYSTEM: ${{ secrets.CI_PULL_REQUEST_AUTH_TOKEN_DESIGN_SYSTEM }}
+          FIGMA_WEBHOOK_EVENT: ${{ inputs.event }}
+          CI_DS_UPDATE_AND_PR_AUTH_TOKEN: ${{ secrets.CI_DS_UPDATE_AND_PR_AUTH_TOKEN }}
           FIGMA_API_TOKEN: ${{ secrets.FIGMA_API_TOKEN }}
           FIGMA_ICON_FILE_KEY: ${{ secrets.FIGMA_ICON_FILE_KEY }}
           KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}

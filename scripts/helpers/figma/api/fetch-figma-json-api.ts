@@ -1,22 +1,22 @@
-export interface FetchFigmaJsonApiV1Options extends RequestInit {
+export interface FetchFigmaJsonApiOptions extends RequestInit {
   readonly path: string;
   readonly searchParam?: URLSearchParams;
   readonly token: string;
 }
 
-export type FetchFigmaJsonApiV1ForConsumerOptions = Omit<
-  FetchFigmaJsonApiV1Options,
+export type FetchFigmaJsonApiForConsumerOptions = Omit<
+  FetchFigmaJsonApiOptions,
   'path' | 'searchParam' | keyof RequestInit
 >;
 
-export async function fetchFigmaJsonApiV1<GResult>({
+export async function fetchFigmaJsonApi<GResult>({
   path,
   searchParam,
   token,
   headers,
   ...options
-}: FetchFigmaJsonApiV1Options): Promise<GResult> {
-  const url = new URL(`https://api.figma.com/v1${path.startsWith('/') ? path : `/${path}`}`);
+}: FetchFigmaJsonApiOptions): Promise<GResult> {
+  const url = new URL(`https://api.figma.com${path.startsWith('/') ? path : `/${path}`}`);
   if (searchParam !== undefined) {
     url.search = searchParam.toString();
   }

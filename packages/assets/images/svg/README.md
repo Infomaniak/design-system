@@ -59,22 +59,23 @@ Where `<project>` is a project name.
 
 ## Workflow
 
-A call on the endpoint:
+### Add a new SVG
 
-```shell
-curl -X POST \
-  -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer <PAT>" \
-  https://api.github.com/repos/infomaniak/design-system/actions/workflows/import-figma-svg-assets.yml/dispatches \
-  -d '{"ref":"main"}'
-```
+UX designers add new SVGs to the Figma design file following the previous rules.
 
-triggers a Github workflow to import the SVGs from the Figma svg assets design file.
+### Commit the changes
 
-> [!NOTE]
-> Replace `<PAT>` with a personal access token with the `repo` scope.
+When satisfied, UX designers commit the changes to the Figma design file by creating a new version.
 
-### Icons
+### Workflow trigger
+
+A figma webhook is configured to trigger the Github workflow `on-figma-event` when a new version is created.
+
+### Build the assets
+
+The script import the Figma design file and generate the SVGs as well as the iconify JSON file.
+
+#### Icons
 
 > An icon is a **monotone** SVG: we may replace the color of each icon.
 
@@ -85,7 +86,7 @@ for each of them, we store the SVG into the `assets/svg/monotone/figma` director
 
 Then a single [iconify JSON](https://iconify.design/docs/libraries/tools/export/json.html) file (`assets/server/esds.json`) is generated containing all the icons.
 
-### Illustrations
+#### Illustrations
 
 > An illustration is a **colored** SVG: a SVG with more than one color.
 
@@ -95,3 +96,36 @@ Each illustration is converted to an SVG, is optimized by SVGO, and,
 for each of them, we store the SVG into the `assets/svg/illustration/figma` directory as well as the metadata.
 
 Then a single iconify JSON file (`assets/server/esds-illustration.json`) is generated containing all the illustrations.
+
+### Merge the assets
+
+A Pull Request is created to merge the assets into the `main` branch.
+
+### Upload the assets
+
+When the Pull Request is merged, the assets are uploaded to the Infomaniak's Design System iconify server.
+
+### Graph
+
+```mermaid
+flowchart TD
+  FIGMA["🎨 FIGMA"]
+  COMMIT("COMMIT (create a new version)")
+  WEBHOOK_SERVER("WEBHOOK SERVER")
+  GITHUB_WORKFLOW("GITHUB WORKFLOW")
+  BUILD_SVGS("BUILD SVGs")
+  CREATE_PR("CREATE PULL REQUEST")
+  MERGE_PR("MERGE PULL REQUEST")
+  UPLOAD_PROD("UPLOAD TO PRODUCTION ICONIFY SERVER")
+  UPLOAD_DEVELOP("UPLOAD TO DEVELOPMENT ICONIFY SERVER")
+
+
+  FIGMA --> COMMIT
+  COMMIT -- "webhook: trigger" --> WEBHOOK_SERVER
+  WEBHOOK_SERVER --> GITHUB_WORKFLOW
+  GITHUB_WORKFLOW --> BUILD_SVGS
+  BUILD_SVGS --> CREATE_PR
+  CREATE_PR --> MERGE_PR
+  MERGE_PR -- "main" --> UPLOAD_PROD
+  MERGE_PR -- "develop" --> UPLOAD_DEVELOP
+```

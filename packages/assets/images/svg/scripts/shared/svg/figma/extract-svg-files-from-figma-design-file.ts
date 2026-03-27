@@ -49,7 +49,7 @@ export function extractSvgFilesFromFigmaDesignFile({
       async (logger: Logger): Promise<readonly SVGToLoad[]> => {
         const figmaFile: FigmaFile = await getFigmaFile({
           token: figmaAPIToken,
-          fileKey: figmaSourceFileKey,
+          file_key: figmaSourceFileKey,
         });
 
         // TODO: DEBUG
@@ -128,7 +128,7 @@ export function extractSvgFilesFromFigmaDesignFile({
         async (): Promise<FigmaImagesRecord> => {
           return getFigmaImages({
             token: figmaAPIToken,
-            fileKey: figmaSourceFileKey,
+            file_key: figmaSourceFileKey,
             ids: svgsToLoad.map(({ id }: SVGToLoad): string => id),
           });
         },
