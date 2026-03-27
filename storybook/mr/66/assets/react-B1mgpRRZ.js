@@ -1,1 +1,0 @@
-import{n as e,t}from"./lib-DbZiN93-.js";export{t as MDXProvider};
