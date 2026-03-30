@@ -5,13 +5,9 @@ import { segmentsReferenceToPascalCase } from '../../../../../../shared/dtcg/des
 import type { ArrayDesignTokenName } from '../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
 import { buildSwiftFile } from './helpers/build-swift-file.ts';
 import { toSwiftVariableName } from './swift-naming-helper.ts';
+import { buildSwiftStructWithInit, type SwiftVariable } from './helpers/build-swift-file-with-init.ts';
 
 type NestedMap = { [key: string]: NestedMap | string };
-
-interface TokenTree {
-  root: NestedMap;
-  leafGroups: Map<string, string[]>;
-}
 
 interface StructContext {
   leafParentNameToStructName: Map<string, string>;
@@ -45,17 +41,17 @@ export async function buildSwiftThemeStructs({
     outputDirectory,
   );
 
-  console.log(segmentsToSwiftStructMap);
+  // console.log(segmentsToSwiftStructMap);
 
   const buildedTree2: NestedMap = buildFlatTree(names, segmentsToSwiftStructMap);
 
   // DEBUG:
   // console.log(JSON.stringify(buildedTree2, null, 2));
 
-  await buildStructLeaves(buildedTree2, [], {
-    leafParentNameToStructName: segmentsToSwiftStructMap,
-    outputDirectory,
-  });
+  // await buildStructLeaves(buildedTree2, [], {
+  //   leafParentNameToStructName: segmentsToSwiftStructMap,
+  //   outputDirectory,
+  // });
 }
 
 // HELPER
@@ -76,7 +72,7 @@ async function buildStructLeaves(
   }
 
   const name = path.length === 0 ? 'EsdsTheme' : 'EsdsTheme' + segmentsReferenceToPascalCase(path);
-  const fields: string[] = [];
+  const variables: SwiftVariable[] = [];
 
   for (const [key, value] of entries) {
     const childPath = [...path, key];
@@ -84,21 +80,16 @@ async function buildStructLeaves(
     const fieldName = toSwiftVariableName([key]);
 
     if (commonStructName) {
-      fields.push(`public let ${fieldName}: ${commonStructName}`);
+      variables.push({ name: fieldName, type: commonStructName });
     } else if (typeof value === 'string') {
-      fields.push(`public let ${fieldName}: String`); // TODO: Change to token type
+      variables.push({ name: fieldName, type: "String" }); // TODO Change to token type
     } else {
-      fields.push(`public let ${fieldName}: EsdsTheme${segmentsReferenceToPascalCase(childPath)}`);
+      variables.push({ name: fieldName, type: `EsdsTheme${segmentsReferenceToPascalCase(childPath)}` });
       await buildStructLeaves(value, childPath, structContext);
     }
   }
 
-  const swiftStruct = buildSwiftFile({
-    imports: ['SwiftUI'],
-    type: 'public struct',
-    name,
-    content: fields.join('\n'),
-  });
+  const swiftStruct = buildSwiftStructWithInit({ name, variables });
 
   await writeTextFileSafe(
     join(structContext.outputDirectory, `EsdsTheme/${name}.swift`),
@@ -164,6 +155,10 @@ async function buildSharedStructs(
   const segmentsToSwiftStructMap: SegmentsToSwiftStructMap = new Map<string, string>();
   const createdStructs = new Set<string>();
 
+  const typeToSwift: Map<string, string> = new Map<string, string>([
+    ["color", "Color"]
+  ]);
+
   for (const [leaf, parents] of leafToParents) {
     if (parents.length < 2) {
       // skip if object is unique
@@ -180,16 +175,15 @@ async function buildSharedStructs(
       continue;
     }
 
-    const swiftStruct: string = buildSwiftFile({
-      imports: ['SwiftUI'],
-      type: 'public struct',
-      name: name,
-      content: (JSON.parse(leaf) as readonly string[])
-        .map((item: string): string => {
-          return `public let ${toSwiftVariableName([item.trim()])}: String`;
-        })
-        .join('\n'), // TODO: Change value
-    });
+    const variables = (JSON.parse(leaf) as readonly string[])
+      .map((item: string): SwiftVariable => {
+        return { name: toSwiftVariableName([item.trim()]), type: `${typeToSwift.get(JSON.parse(parents[0])[0]) ?? "Type"}` }
+      })
+
+    const swiftStruct: string = buildSwiftStructWithInit({
+      name,
+      variables
+    })
 
     // La on construite les fichiers pour chaque type partagé (genre ColorOptions)
     // TODO convert path to constant
@@ -202,7 +196,7 @@ async function buildSharedStructs(
 }
 
 function buildFlatTree(
-  names: ArrayDesignTokenName[],
+  names: readonly ArrayDesignTokenName[],
   leafParentNameToStructName: Map<string, string>,
 ): NestedMap {
   const buildedTree2: NestedMap = {};
