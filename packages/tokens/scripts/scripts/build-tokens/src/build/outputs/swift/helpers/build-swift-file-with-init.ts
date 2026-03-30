@@ -3,6 +3,7 @@ import { buildSwiftFile } from "./build-swift-file.ts";
 export interface SwiftVariable {
   name: string;
   type: string;
+  initValue?: string;
 }
 
 export interface BuildSwiftStructWithInitOptions {
@@ -13,7 +14,10 @@ export interface BuildSwiftStructWithInitOptions {
 export function buildSwiftStructWithInit({ name, variables }: BuildSwiftStructWithInitOptions): string {
   const initContent = `
   init(
-${variables.map(v => `    ${v.name}: ${v.type}`).join(',\n')}
+${variables.map(v => {
+    const defaultVal = v.initValue != undefined ? ` = ${v.initValue}` : "";
+    return `    ${v.name}: ${v.type}${defaultVal}`;
+  }).join(',\n')}
   ) {
 ${variables.map(v => `    self.${v.name} = ${v.name}`).join('\n')}
   }`;

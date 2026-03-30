@@ -43,15 +43,15 @@ export async function buildSwiftThemeStructs({
 
   // console.log(segmentsToSwiftStructMap);
 
-  const buildedTree2: NestedMap = buildFlatTree(names, segmentsToSwiftStructMap);
+  const buildedTree: NestedMap = buildFlatTree(names, segmentsToSwiftStructMap);
 
   // DEBUG:
-  // console.log(JSON.stringify(buildedTree2, null, 2));
+  // console.log(JSON.stringify(buildedTree, null, 2));
 
-  // await buildStructLeaves(buildedTree2, [], {
-  //   leafParentNameToStructName: segmentsToSwiftStructMap,
-  //   outputDirectory,
-  // });
+  await buildStructLeaves(buildedTree, [], {
+    leafParentNameToStructName: segmentsToSwiftStructMap,
+    outputDirectory,
+  });
 }
 
 // HELPER
@@ -76,15 +76,16 @@ async function buildStructLeaves(
 
   for (const [key, value] of entries) {
     const childPath = [...path, key];
-    const commonStructName = structContext.leafParentNameToStructName.get(childPath.join('-'));
+    const sharedStructNames = structContext.leafParentNameToStructName.get(JSON.stringify(childPath));
     const fieldName = toSwiftVariableName([key]);
 
-    if (commonStructName) {
-      variables.push({ name: fieldName, type: commonStructName });
+    if (sharedStructNames) {
+      variables.push({ name: fieldName, type: sharedStructNames });
     } else if (typeof value === 'string') {
       variables.push({ name: fieldName, type: "String" }); // TODO Change to token type
     } else {
-      variables.push({ name: fieldName, type: `EsdsTheme${segmentsReferenceToPascalCase(childPath)}` });
+      const typeName = `EsdsTheme${segmentsReferenceToPascalCase(childPath)}`
+      variables.push({ name: fieldName, type: typeName, initValue: `${typeName}()` });
       await buildStructLeaves(value, childPath, structContext);
     }
   }
@@ -205,9 +206,13 @@ function buildFlatTree(
     let node = buildedTree2;
     for (let i = 0; i < name.length; i++) {
       const key = name[i];
+      const structName = leafParentNameToStructName.get(JSON.stringify(name.slice(0, i + 1)));
+      if (structName) {
+        node[key] = structName;
+        break;
+      }
       if (i === name.length - 1) {
-        node[key] =
-          leafParentNameToStructName.get(name.toSpliced(-1, 1).join('-')) ?? 'TypeOfToken';
+        node[key] = 'String'; // TODO resolve true type
         break;
       }
       if (!node[key]) node[key] = {};
