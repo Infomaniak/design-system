@@ -73,6 +73,7 @@ await runScript('import-svgs', async (logger: Logger): Promise<void> => {
     figmaSourceFileKey: getEnvFigmaIconFileKey(),
     // figmaSourceFileKey: getEnvFigmaIllustrationFileKey(), // TODO
     outputDirectory: OUTPUT_ASSETS_DIR,
+    version: importVersion,
     logger,
   });
 
