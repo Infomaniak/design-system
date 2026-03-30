@@ -23,6 +23,7 @@ export interface BuildSvgSetFromSvgDirectoryOptions {
   readonly sourceDirectory: string;
   readonly outputDirectory: string;
   readonly prefix: string;
+  readonly version: string;
   readonly logger: Logger;
   readonly cleanup?: boolean; // (default: true)
   readonly monotone?: boolean; // (default: true)
@@ -38,6 +39,7 @@ export async function buildSvgSetFromSvgDirectory({
   sourceDirectory,
   outputDirectory,
   prefix,
+  version,
   logger,
   monotone = true,
   cleanup = true,
@@ -118,11 +120,13 @@ export async function buildSvgSetFromSvgDirectory({
     // INFO
     iconSet.info = {
       name: `Infomaniak "${iconSet.prefix}" icons`,
+      version,
       author: {
         name: 'Infomaniak',
       },
       license: {
         title: 'GPL-3.0-only',
+        spdx: 'GPL-3.0-only',
       },
     };
 
@@ -135,6 +139,9 @@ export async function buildSvgSetFromSvgDirectory({
       try {
         const currentJsonIconSet: IconifyJSON = await readJsonFile(jsonIconSetOutputDirectoryPath);
         currentJsonIconSet.lastModified = jsonIconSet.lastModified;
+        if (currentJsonIconSet.info !== undefined && jsonIconSet.info !== undefined) {
+          currentJsonIconSet.info.version = jsonIconSet.info.version;
+        }
         if (JSON.stringify(currentJsonIconSet, null, 2) === jsonIconSetString) {
           logger.info('Icon set is identical.');
           return false;
