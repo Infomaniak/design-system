@@ -1,0 +1,223 @@
+.welcome-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.welcome-hero {
+  padding: 64px 0 48px;
+  margin-bottom: 48px;
+  max-width: 720px;
+}
+
+.welcome-hero h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  color: var(--esds-color-text-primary);
+  line-height: 1.1;
+}
+
+.welcome-subtitle {
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--esds-color-text-secondary);
+  margin: 0;
+}
+
+.welcome-section {
+  margin-bottom: 64px;
+}
+
+.welcome-section h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 32px 0;
+  color: var(--esds-color-text-primary);
+}
+
+.welcome-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.welcome-card {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  background: var(--esds-color-surface-primary);
+  border: 1px solid var(--esds-color-border-subtle);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.welcome-card:hover:not(.welcome-card-coming-soon) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: var(--esds-product-color-primary);
+}
+
+.welcome-card-coming-soon {
+  opacity: 0.7;
+}
+
+.welcome-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: var(--esds-color-text-primary);
+}
+
+.welcome-card p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--esds-color-text-secondary);
+  margin: 0 0 20px 0;
+  flex: 1;
+}
+
+.welcome-card-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--esds-product-color-primary);
+}
+
+.welcome-card:hover:not(.welcome-card-coming-soon) .welcome-card-link svg {
+  transform: translateX(4px);
+}
+
+.welcome-card-link-disabled {
+  color: var(--esds-color-text-tertiary);
+}
+
+.welcome-getting-started {
+  background: var(--esds-color-surface-secondary);
+  border-radius: 12px;
+  padding: 32px;
+}
+
+.welcome-getting-started p {
+  margin: 0 0 16px 0;
+  color: var(--esds-color-text-secondary);
+}
+
+.welcome-getting-started ul {
+  margin: 0 0 20px 0;
+  padding-left: 20px;
+}
+
+.welcome-getting-started li {
+  margin-bottom: 8px;
+  color: var(--esds-color-text-secondary);
+}
+
+.welcome-getting-started a {
+  display: inline-flex;
+  align-items: center;
+  color: var(--esds-product-color-primary);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.welcome-getting-started a:hover svg {
+  transform: translateX(4px);
+}
+
+.welcome-resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.welcome-resource-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 28px;
+  background: var(--esds-color-surface-primary);
+  border: 1px solid var(--esds-color-border-subtle);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.welcome-resource-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: var(--esds-product-color-primary);
+}
+
+.welcome-resource-card:hover .welcome-resource-card-link svg {
+  transform: translateX(4px);
+}
+
+.welcome-resource-card-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--esds-color-surface-secondary);
+  border-radius: 12px;
+  flex-shrink: 0;
+  color: var(--esds-color-text-secondary);
+}
+
+.welcome-resource-card-body {
+  flex: 1;
+}
+
+.welcome-resource-card-body h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: var(--esds-color-text-primary);
+}
+
+.welcome-resource-card-body p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--esds-color-text-secondary);
+  margin: 0 0 16px 0;
+}
+
+.welcome-resource-card-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--esds-product-color-primary);
+}
+
+@media (max-width: 768px) {
+  .welcome-hero {
+    padding: 40px 0 32px;
+  }
+
+  .welcome-hero h1 {
+    font-size: 36px;
+  }
+
+  .welcome-subtitle {
+    font-size: 18px;
+  }
+
+  .welcome-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-resources-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-resource-card {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
