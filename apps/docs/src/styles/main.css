@@ -87,10 +87,6 @@
   color: var(--esds-product-color-primary);
 }
 
-.welcome-card:hover:not(.welcome-card-coming-soon) .welcome-card-link svg {
-  transform: translateX(4px);
-}
-
 .welcome-card-link-disabled {
   color: var(--esds-color-text-tertiary);
 }
