@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: build-on-pr-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  group: gh-pages-deployment
+  cancel-in-progress: false
 
 jobs:
   build-storybook-pr:
