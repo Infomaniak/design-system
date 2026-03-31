@@ -1,0 +1,1 @@
+import{Gt as e,Wt as t,qt as n}from"./iframe-KRwrGA6y.js";var r=(0,n(e(),1).default)(2)(async(e,n)=>e===!1?n:t(n));export{r as formatter};
