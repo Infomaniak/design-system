@@ -19,7 +19,6 @@ import { isFontFamilyDesignTokensCollectionToken } from '../../../../../../share
 import { isNumberDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/number/is-number-design-tokens-collection-token.ts';
 import { T1_DIRECTORY_NAME, T2_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
 
-import type { ArrayDesignTokenName } from '../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
 import { buildSwiftThemeStructs } from './build-swift-theme-structs.ts';
 import { buildSwiftEnumColor } from './built-steps/build-swift-enum-color.ts';
 import { buildXcAssets } from './built-steps/build-xcassets.ts';
@@ -145,18 +144,8 @@ export async function buildSwiftTokens({
     });
 
     await logger.asyncTask('main-theme', async (): Promise<void> => {
-      const namesComplete: readonly ArrayDesignTokenName[] = [
-        ...baseCollection
-          .tokens()
-          .filter((token: GenericDesignTokensCollectionToken): boolean => {
-            return token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME));
-          })
-          .map((token: GenericDesignTokensCollectionToken): ArrayDesignTokenName => {
-            return token.name;
-          }),
-      ];
       await buildSwiftThemeStructs({
-        names: namesComplete,
+        baseCollection,
         outputDirectory: iosSwitftUiOutputDirectory,
       });
     });

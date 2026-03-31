@@ -2,10 +2,20 @@ import { join } from 'node:path';
 import { writeTextFileSafe } from '../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import { mapGetOrInsertComputed } from '../../../../../../../../../scripts/helpers/misc/map/upsert.ts';
 import { segmentsReferenceToPascalCase } from '../../../../../../shared/dtcg/design-token/reference/types/segments/to/pascal-case/segments-reference-to-pascal-case.ts';
+import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
+import {
+  type GenericDesignTokensCollectionToken,
+  type GenericResolvedDesignTokensCollectionToken,
+} from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
-import { buildSwiftFile } from './helpers/build-swift-file.ts';
+import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/color/is-color-design-tokens-collection-token.ts';
+import { isDimensionDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/dimension/is-dimension-design-tokens-collection-token.ts';
+import { T2_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
+import {
+  buildSwiftStructWithInit,
+  type SwiftVariable,
+} from './helpers/build-swift-file-with-init.ts';
 import { toSwiftVariableName } from './swift-naming-helper.ts';
-import { buildSwiftStructWithInit, type SwiftVariable } from './helpers/build-swift-file-with-init.ts';
 
 type NestedMap = { [key: string]: NestedMap | string };
 
@@ -15,14 +25,25 @@ interface StructContext {
 }
 
 export interface BuildSwiftThemeStructOptions {
-  readonly names: readonly ArrayDesignTokenName[];
+  readonly baseCollection: DesignTokensCollection;
   readonly outputDirectory: string;
 }
 
 export async function buildSwiftThemeStructs({
-  names,
+  baseCollection,
   outputDirectory,
 }: BuildSwiftThemeStructOptions) {
+  const names: readonly ArrayDesignTokenName[] = Array.from(
+    baseCollection
+      .tokens()
+      .filter((token: GenericDesignTokensCollectionToken): boolean => {
+        return token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME));
+      })
+      .map((token: GenericDesignTokensCollectionToken): ArrayDesignTokenName => {
+        return token.name;
+      }),
+  );
+
   const tokenNamesGroupedByLastNameSegmentMap: TokenNamesGroupedByLastNameSegmentMap =
     groupTokenNamesByLastNameSegment(names);
   // Là on a genre chaque groupe de token dans le bon chemin, avec les "leaf" à la fin, donc les dernières variable, avant ça c'est des struct à chaque fois.
@@ -34,16 +55,16 @@ export async function buildSwiftThemeStructs({
   const sharedNameSegmentsToTokenNames: SharedNameSegmentsToTokenNames =
     tokensByLastNameAndSharedSegments(tokenNamesGroupedByLastNameSegmentMap);
 
-  // console.log(sharedNameSegmentsToTokenNames);
+  console.log(sharedNameSegmentsToTokenNames);
 
   const segmentsToSwiftStructMap: SegmentsToSwiftStructMap = await buildSharedStructs(
     sharedNameSegmentsToTokenNames,
     outputDirectory,
   );
 
-  // console.log(segmentsToSwiftStructMap);
+  console.log(segmentsToSwiftStructMap);
 
-  const buildedTree: NestedMap = buildFlatTree(names, segmentsToSwiftStructMap);
+  const buildedTree: NestedMap = buildFlatTree(baseCollection, names, segmentsToSwiftStructMap);
 
   // DEBUG:
   // console.log(JSON.stringify(buildedTree, null, 2));
@@ -76,15 +97,17 @@ async function buildStructLeaves(
 
   for (const [key, value] of entries) {
     const childPath = [...path, key];
-    const sharedStructNames = structContext.leafParentNameToStructName.get(JSON.stringify(childPath));
+    const sharedStructNames = structContext.leafParentNameToStructName.get(
+      JSON.stringify(childPath),
+    );
     const fieldName = toSwiftVariableName([key]);
 
     if (sharedStructNames) {
       variables.push({ name: fieldName, type: sharedStructNames });
     } else if (typeof value === 'string') {
-      variables.push({ name: fieldName, type: "String" }); // TODO Change to token type
+      variables.push({ name: fieldName, type: 'String' }); // TODO Change to token type
     } else {
-      const typeName = `EsdsTheme${segmentsReferenceToPascalCase(childPath)}`
+      const typeName = `EsdsTheme${segmentsReferenceToPascalCase(childPath)}`;
       variables.push({ name: fieldName, type: typeName, initValue: `${typeName}()` });
       await buildStructLeaves(value, childPath, structContext);
     }
@@ -133,8 +156,13 @@ function tokensByLastNameAndSharedSegments(
   const sharedNameSegmentsToTokenNames = new Map<string, string[]>();
 
   for (const [parent, leaves] of tokenNamesGroupedByLastNameSegment) {
-    if (leaves.length < 2) {
-      // skip if object is unique
+    const leafKey: string = `${parent.slice(0, -1)},`;
+    if (
+      leaves.length < 2 /* skip if object is unique*/ ||
+      tokenNamesGroupedByLastNameSegment.keys().some((key: string): boolean => {
+        return key.startsWith(leafKey);
+      }) /* skip if parent is not a leaf */
+    ) {
       continue;
     }
 
@@ -156,9 +184,7 @@ async function buildSharedStructs(
   const segmentsToSwiftStructMap: SegmentsToSwiftStructMap = new Map<string, string>();
   const createdStructs = new Set<string>();
 
-  const typeToSwift: Map<string, string> = new Map<string, string>([
-    ["color", "Color"]
-  ]);
+  const typeToSwift: Map<string, string> = new Map<string, string>([['color', 'Color']]);
 
   for (const [leaf, parents] of leafToParents) {
     if (parents.length < 2) {
@@ -176,15 +202,17 @@ async function buildSharedStructs(
       continue;
     }
 
-    const variables = (JSON.parse(leaf) as readonly string[])
-      .map((item: string): SwiftVariable => {
-        return { name: toSwiftVariableName([item.trim()]), type: `${typeToSwift.get(JSON.parse(parents[0])[0]) ?? "Type"}` }
-      })
+    const variables = (JSON.parse(leaf) as readonly string[]).map((item: string): SwiftVariable => {
+      return {
+        name: toSwiftVariableName([item.trim()]),
+        type: `${typeToSwift.get(JSON.parse(parents[0])[0]) ?? 'Type'}`,
+      };
+    });
 
     const swiftStruct: string = buildSwiftStructWithInit({
       name,
-      variables
-    })
+      variables,
+    });
 
     // La on construite les fichiers pour chaque type partagé (genre ColorOptions)
     // TODO convert path to constant
@@ -197,6 +225,7 @@ async function buildSharedStructs(
 }
 
 function buildFlatTree(
+  baseCollection: DesignTokensCollection,
   names: readonly ArrayDesignTokenName[],
   leafParentNameToStructName: Map<string, string>,
 ): NestedMap {
@@ -212,6 +241,16 @@ function buildFlatTree(
         break;
       }
       if (i === name.length - 1) {
+        const resolvedToken: GenericResolvedDesignTokensCollectionToken = baseCollection.resolve(
+          baseCollection.get(name),
+        );
+
+        if (isColorDesignTokensCollectionToken(resolvedToken)) {
+          console.log('is color');
+        } else if (isDimensionDesignTokensCollectionToken(resolvedToken)) {
+          console.log('is dimension');
+        }
+        console.log(resolvedToken.type);
         node[key] = 'String'; // TODO resolve true type
         break;
       }
