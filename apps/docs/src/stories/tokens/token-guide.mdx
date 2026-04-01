@@ -1,0 +1,235 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Design Tokens/Getting Started" />
+
+<div className="welcome-section">
+  <h1>Design Tokens</h1>
+  <p className="welcome-description">
+    Our design system is powered by design tokens: name-value pairs that define the visual language
+    of Infomaniak products. Tokens ensure consistency across platforms while remaining flexible
+    enough for different contexts.
+  </p>
+</div>
+
+- [Token Architecture](#token-architecture)
+- [Consuming Tokens](#consuming-tokens)
+  - [Web](#web)
+    - [Install from NPM](#install-from-npm)
+    - [CSS Files](#css-files)
+    - [Loading Themes (.root files)](#loading-themes-root-files)
+    - [Using Modifiers (.attr files)](#using-modifiers-attr-files)
+    - [Tailwind CSS](#tailwind-css)
+- [How It Works](#how-it-works)
+  - [Token Resolution Chain](#token-resolution-chain)
+  - [Modifiers Override by Path Matching](#modifiers-override-by-path-matching)
+
+## Token Architecture
+
+Our token system follows the Design Tokens Community Group (DTCG) standard with a three-tier architecture:
+
+- <a href="./?path=/docs/design-tokens-t1--docs">T1 Primitive tokens</a> for foundational tokens
+  values
+- <a href="./?path=/docs/design-tokens-t2--docs">T2 Semantic tokens</a> for semantic abstraction
+  tokens
+- <a href="./?path=/docs/design-tokens-t3--docs">T3 Component tokens</a> for component-specific
+  tokens
+
+## Consuming Tokens
+
+### Web
+
+#### Install from NPM
+
+```bash
+npm install @infomaniak-design-system/tokens
+```
+
+#### CSS Files
+
+We offer two CSS file formats:
+
+<Table
+  headers={['File format', 'CSS Selector', 'Usage']}
+  rows={[
+    [
+      <code>*.root.css</code>,
+      <code>:root, :host</code>,
+      <p>
+        <code>*.root.css</code> files apply globally via <code>:root</code> immediately.
+        <br />
+        Use <code>media</code> queries with theme files to prevent conflicts (e.g., loading both
+        light and dark simultaneously).
+      </p>,
+    ],
+    [
+      <code>*.attr.css</code>,
+      <code>[data-esds-&lt;modifier&gt;="&lt;context&gt;"]</code>,
+      <div>
+        <p>
+          <code>.attr.css</code> files only affect elements inside a container with the matching
+          data attribute.
+        </p>
+        <ul>
+          <li>
+            <code>&lt;modifier&gt;</code>: "theme" | "product"
+          </li>
+          <li>
+            <code>&lt;context&gt;</code>: "infomaniak" | "mail" | "euria" | ...
+          </li>
+        </ul>
+      </div>,
+    ],
+  ]}
+/>
+
+#### Using `*.root.css` files
+
+Root CSS files could be loaded using query, for example:
+
+```html
+<link
+  rel="stylesheet"
+  href="@infomaniak-design-system/tokens/css/tokens.root.css"
+/>
+<link
+  rel="stylesheet"
+  href="@infomaniak-design-system/tokens/css/modifiers/product/mail.root.css"
+/>
+
+<!-- Auto-switch based on system preference -->
+<link
+  rel="stylesheet"
+  href="@infomaniak-design-system/tokens/css/modifiers/theme/light.root.css"
+  media="(prefers-color-scheme: light)"
+/>
+<link
+  rel="stylesheet"
+  href="@infomaniak-design-system/tokens/css/modifiers/theme/dark.root.css"
+  media="(prefers-color-scheme: dark)"
+/>
+```
+
+#### Using `*.attr.css` files
+
+Attr CSS file could be imported via CSS and activated using data attributes:
+
+**NOTE**: `*.attr.css` CSS files are **optional** and should be imported only if necessary.
+
+```css
+@import '@infomaniak-design-system/tokens/css/tokens.attr.css';
+@import '@infomaniak-design-system/tokens/css/modifiers/product/mail.attr.css';
+@import '@infomaniak-design-system/tokens/css/modifiers/theme/dark.attr.css';
+```
+
+Modifiers can also be set on container elements:
+
+```html
+<body
+  data-esds-theme="dark"
+  data-esds-product="mail"
+>
+  <!-- Dark theme and product mail applies to children -->
+</body>
+```
+
+#### Tailwind CSS
+
+```css
+@import 'tailwindcss';
+@import '@infomaniak-design-system/tokens/css/tokens.root.css';
+@import '@infomaniak-design-system/tokens/tailwind.css';
+```
+
+```html
+<button class="bg-brand-default">Click me!</button>
+```
+
+## How It Works
+
+### Token Resolution Chain
+
+Token values reference each other in a hierarchy, ensuring consistency across the system:
+
+```
+T3-Component  →  button.background.error
+                    ↓
+T2-Semantic   →  color.background.error.default
+                    ↓
+T1-Primitive  →  color.red.600 (#E21C40)
+```
+
+When a primitive value changes, every token referencing it updates automatically.
+
+### Modifiers Override by Path Matching
+
+Modifiers let you swap the values of existing tokens without changing their names. They work by matching the path of a T2 (semantic) or T3 (component) token and replacing its value for specific contexts.
+
+**How it works:**
+
+1. A modifier file contains the same token path as the base token
+2. When applied, it replaces that path's value in the CSS cascade
+3. Resolution continues with the new value
+
+**Example**: The `euria` product modifier
+
+The `euria.tokens.json` modifier overrides `color.background.brand.default` by including the same path with a different value:
+
+Base `t2-semantic/color.tokens.json`:
+
+```json
+{
+  "color": {
+    "background": {
+      "brand": {
+        "default": { "$value": "{color.sky.700}" }
+      }
+    }
+  }
+}
+```
+
+`modifiers/product/euria.tokens.json`:
+
+```json
+{
+  "color": {
+    "background": {
+      "brand": {
+        "default": { "$value": "{color.ocean.700}" }
+      }
+    }
+  }
+}
+```
+
+**Resolution with modifiers:**
+
+Multiple modifiers can be applied simultaneously. In the example below, the `euria` modifier changes the base brand color, then `dark` further adjusts it for the dark theme:
+
+```
+With data-esds-product="euria" data-esds-theme="dark":
+
+              T3: button.background.brand.default
+                      ↓
+              T2: color.background.brand.default
+                      ↓
+  Euria modifier: color.background.brand.default (color.ocean.700)
+                      ↓
+   Dark modifier: color.background.brand.default (color.ocean.400)
+                      ↓
+              T1: color.ocean.400
+```
+
+**Apply modifiers using data attributes:**
+
+```html
+<body
+  data-esds-product="euria"
+  data-esds-theme="dark"
+>
+  <!-- All children resolve with both modifiers applied -->
+  <button style="background: var(--esds-color-background-brand-default)">
+    Gets a color.ocean.400 background
+  </button>
+</body>
+```
