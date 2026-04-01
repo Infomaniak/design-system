@@ -46,18 +46,19 @@
   display: flex;
   flex-direction: column;
   padding: 32px;
-  background: var(--esds-color-surface-primary);
-  border: 1px solid var(--esds-color-border-subtle);
+  background: var(--esds-color-background-elevation-surface-default);
+  border: 1px solid var(--esds-color-border-subtle-default);
   border-radius: 12px;
   text-decoration: none;
   color: inherit;
   transition: all 0.2s ease;
 }
 
-.welcome-card:hover:not(.welcome-card-coming-soon) {
+.welcome-card:hover:not(.welcome-card-coming-soon),
+.welcome-card:focus-visible {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  border-color: var(--esds-product-color-primary);
+  border-color: var(--esds-color-border-subtle-hover);
 }
 
 .welcome-card-coming-soon {
@@ -84,7 +85,7 @@
   align-items: center;
   font-size: 15px;
   font-weight: 500;
-  color: var(--esds-product-color-primary);
+  color: var(--esds-color-text-brand-default);
 }
 
 .welcome-card-link-disabled {
@@ -92,7 +93,7 @@
 }
 
 .welcome-getting-started {
-  background: var(--esds-color-surface-secondary);
+  background: var(--esds-color-background-elevation-raised-default);
   border-radius: 12px;
   padding: 32px;
 }
@@ -115,7 +116,7 @@
 .welcome-getting-started a {
   display: inline-flex;
   align-items: center;
-  color: var(--esds-product-color-primary);
+  color: var(--esds-color-text-brand-default);
   font-weight: 500;
   text-decoration: none;
 }
@@ -135,8 +136,8 @@
   align-items: flex-start;
   gap: 20px;
   padding: 28px;
-  background: var(--esds-color-surface-primary);
-  border: 1px solid var(--esds-color-border-subtle);
+  background: var(--esds-color-background-elevation-surface-default);
+  border: 1px solid var(--esds-color-border-subtle-default);
   border-radius: 12px;
   text-decoration: none;
   color: inherit;
@@ -146,7 +147,7 @@
 .welcome-resource-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  border-color: var(--esds-product-color-primary);
+  border-color: var(--esds-color-text-brand-default);
 }
 
 .welcome-resource-card:hover .welcome-resource-card-link svg {
@@ -159,7 +160,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--esds-color-surface-secondary);
+  background: var(--esds-color-background-elevation-raised-default);
   border-radius: 12px;
   flex-shrink: 0;
   color: var(--esds-color-text-secondary);
@@ -188,7 +189,7 @@
   align-items: center;
   font-size: 15px;
   font-weight: 500;
-  color: var(--esds-product-color-primary);
+  color: var(--esds-color-text-brand-default);
 }
 
 @media (max-width: 768px) {
