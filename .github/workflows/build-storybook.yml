@@ -10,8 +10,8 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: build-storybook-${{ github.ref }}
-  cancel-in-progress: true
+  group: gh-pages-deployment
+  cancel-in-progress: false
 
 jobs:
   build-storybook:
