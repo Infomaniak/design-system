@@ -36,16 +36,13 @@
   color: var(--esds-color-text-primary);
 }
 
-.welcome-grid {
+.card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 24px;
 }
 
-.welcome-card {
-  display: flex;
-  flex-direction: column;
-  padding: 32px;
+.card {
   background: var(--esds-color-background-elevation-surface-default);
   border: 1px solid var(--esds-color-border-subtle-default);
   border-radius: 12px;
@@ -54,25 +51,42 @@
   transition: all 0.2s ease;
 }
 
-.welcome-card:hover:not(.welcome-card-coming-soon),
-.welcome-card:focus-visible {
+.card:where(:hover, :focus-visible):not(.card--disabled) {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  border-color: var(--esds-color-border-subtle-hover);
+  border-color: var(--esds-color-border-subtle-default);
 }
 
-.welcome-card-coming-soon {
+.card--disabled {
   opacity: 0.7;
 }
 
-.welcome-card h3 {
+.card--vertical {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+}
+
+.card--horizontal {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 28px;
+}
+
+.card__title {
   font-size: 20px;
   font-weight: 600;
   margin: 0 0 12px 0;
   color: var(--esds-color-text-primary);
 }
 
-.welcome-card p {
+.card--horizontal .card__title {
+  font-size: 18px;
+  margin: 0 0 8px 0;
+}
+
+.card__description {
   font-size: 15px;
   line-height: 1.5;
   color: var(--esds-color-text-secondary);
@@ -80,7 +94,11 @@
   flex: 1;
 }
 
-.welcome-card-link {
+.card--horizontal .card__description {
+  margin: 0 0 20px 0;
+}
+
+.card__link {
   display: inline-flex;
   align-items: center;
   font-size: 15px;
@@ -88,7 +106,7 @@
   color: var(--esds-color-text-brand-default);
 }
 
-.welcome-card-link-disabled {
+.card__link--disabled {
   color: var(--esds-color-text-tertiary);
 }
 
@@ -125,36 +143,7 @@
   transform: translateX(4px);
 }
 
-.welcome-resources-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 24px;
-}
-
-.welcome-resource-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 28px;
-  background: var(--esds-color-background-elevation-surface-default);
-  border: 1px solid var(--esds-color-border-subtle-default);
-  border-radius: 12px;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.2s ease;
-}
-
-.welcome-resource-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  border-color: var(--esds-color-text-brand-default);
-}
-
-.welcome-resource-card:hover .welcome-resource-card-link svg {
-  transform: translateX(4px);
-}
-
-.welcome-resource-card-icon {
+.card__icon {
   width: 48px;
   height: 48px;
   display: flex;
@@ -166,30 +155,12 @@
   color: var(--esds-color-text-secondary);
 }
 
-.welcome-resource-card-body {
+.card__body {
   flex: 1;
 }
 
-.welcome-resource-card-body h4 {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0 0 8px 0;
-  color: var(--esds-color-text-primary);
-}
-
-.welcome-resource-card-body p {
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--esds-color-text-secondary);
-  margin: 0 0 16px 0;
-}
-
-.welcome-resource-card-link {
-  display: inline-flex;
-  align-items: center;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--esds-color-text-brand-default);
+.card:hover .card__link svg {
+  transform: translateX(4px);
 }
 
 @media (max-width: 768px) {
@@ -205,15 +176,11 @@
     font-size: 18px;
   }
 
-  .welcome-grid {
+  .card-grid {
     grid-template-columns: 1fr;
   }
 
-  .welcome-resources-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .welcome-resource-card {
+  .card--horizontal {
     flex-direction: column;
     gap: 16px;
   }
