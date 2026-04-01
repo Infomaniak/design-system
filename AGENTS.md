@@ -10,13 +10,13 @@ Infomaniak's Design System featuring design tokens based on DTCG standards and c
 
 **High-Level Tech Stack:**
 
-- **Language:** TypeScript v5.9.3 (ESNext, NodeNext modules)
-- **Package Manager:** Yarn v4.12.0 (workspaces enabled)
+- **Language:** TypeScript v5 (ESNext, NodeNext modules)
+- **Package Manager:** Yarn v4 (workspaces enabled)
 - **Build Tools:** Vite (Rolldown fork), Node.js scripts
-- **Testing:** Vitest v4.0.18 with Istanbul coverage
-- **Documentation:** Storybook v10.2.3
-- **UI Framework:** React v19.2.0
-- **Styling:** Tailwind CSS v4.1.18
+- **Testing:** Vitest v4 with Istanbul coverage
+- **Documentation:** Storybook v10
+- **UI Framework:** React v19
+- **Styling:** Tailwind CSS v4
 - **Node Version:** v24 (use `nvm use`)
 
 ---
@@ -24,7 +24,7 @@ Infomaniak's Design System featuring design tokens based on DTCG standards and c
 ## 2. Context Map
 
 ```
-/Users/victor/dev/github/design-system/
+design-system/
 ├── apps/
 │   └── docs/                    # Storybook documentation app
 │       ├── src/
@@ -47,7 +47,7 @@ Infomaniak's Design System featuring design tokens based on DTCG standards and c
 │   │   └── publish/             # Branch-based npm publish orchestrator
 │   └── helpers/                 # Shared utility functions
 ├── docs/                        # Project documentation
-│   ├── figma/                    # Figma integration docs
+│   ├── figma/                   # Figma integration docs
 │   └── plans/                   # Implementation plans and execution docs
 └── index.js                     # Root entry point
 ```
