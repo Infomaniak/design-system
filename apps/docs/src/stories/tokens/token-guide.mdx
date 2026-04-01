@@ -11,6 +11,20 @@ import { Meta } from '@storybook/addon-docs/blocks';
   </p>
 </div>
 
+- [Token Architecture](#token-architecture)
+- [Consuming Tokens](#consuming-tokens)
+  - [Web](#web)
+    - [Install from NPM](#install-from-npm)
+    - [CSS Files](#css-files)
+    - [Loading Themes (.root files)](#loading-themes-root-files)
+    - [Using Modifiers (.attr files)](#using-modifiers-attr-files)
+    - [Tailwind CSS](#tailwind-css)
+  - Android (TODO)
+  - iOS (TODO)
+- [How It Works](#how-it-works)
+  - [Token Resolution Chain](#token-resolution-chain)
+  - [Context Overrides with Modifiers](#context-overrides-with-modifiers)
+
 ## Token Architecture
 
 Our token system follows the Design Tokens Community Group (DTCG) standard with a three-tier architecture:
@@ -21,6 +35,114 @@ Our token system follows the Design Tokens Community Group (DTCG) standard with 
   tokens
 - <a href="./?path=/docs/design-tokens-t3--docs">T3 Component tokens</a> for component-specific
   tokens
+
+## Consuming Tokens
+
+### Web
+
+#### Install from NPM
+
+```bash
+npm install @infomaniak-design-system/tokens
+```
+
+#### CSS Files
+
+We offer two CSS file formats:
+
+<Table
+  headers={['File format', 'CSS Selector', 'Usage']}
+  rows={[
+    [
+      <code>*.root.css</code>,
+      <code>:root, :host</code>,
+      <p>
+        <code>*.root.css</code> files apply globally via <code>:root</code> immediately.
+        <br />
+        Use <code>media</code> queries with theme files to prevent conflicts (e.g., loading both
+        light and dark simultaneously).
+      </p>,
+    ],
+    [
+      <code>*.attr.css</code>,
+      <code>[data-esds-&lt;modifier&gt;="&lt;context&gt;"]</code>,
+      <div>
+        <p>
+          <code>.attr.css</code> files only affect elements inside a container with the matching
+          data attribute.
+        </p>
+        <ul>
+          <li>
+            <code>&lt;modifier&gt;</code>: "theme" | "product"
+          </li>
+          <li>
+            <code>&lt;context&gt;</code>: "infomaniak" | "mail" | "euria" | ...
+          </li>
+        </ul>
+      </div>,
+    ],
+  ]}
+/>
+
+#### Using `*.root.css` files
+
+Root CSS files could be loaded using query, for example:
+
+```html
+<link
+  rel="stylesheet"
+  href="@infomaniak-design-system/tokens/css/tokens.root.css"
+/>
+<link
+  rel="stylesheet"
+  href="@infomaniak-design-system/tokens/css/modifiers/mail.root.css"
+/>
+
+<!-- Auto-switch based on system preference -->
+<link
+  rel="stylesheet"
+  href="@infomaniak-design-system/tokens/css/modifiers/theme/light.root.css"
+  media="(prefers-color-scheme: light)"
+/>
+<link
+  rel="stylesheet"
+  href="@infomaniak-design-system/tokens/css/modifiers/theme/dark.root.css"
+  media="(prefers-color-scheme: dark)"
+/>
+```
+
+#### Using `*.attr.css` files
+
+Attr CSS file could be imported via CSS and activated using data attributes:
+
+```css
+@import '@infomaniak-design-system/tokens/css/tokens.attr.css';
+@import '@infomaniak-design-system/tokens/css/modifiers/product/mail.attr.css';
+@import '@infomaniak-design-system/tokens/css/modifiers/theme/dark.attr.css';
+```
+
+Modifiers can also be set on container elements:
+
+```html
+<body
+  data-esds-theme="dark"
+  data-esds-product="mail"
+>
+  <!-- Dark theme and product mail applies to children -->
+</body>
+```
+
+#### Tailwind CSS
+
+```css
+@import 'tailwindcss';
+@import '@infomaniak-design-system/tokens/css/tokens.root.css';
+@import '@infomaniak-design-system/tokens/tailwind.css';
+```
+
+```html
+<button class="bg-brand-default">Click me!</button>
+```
 
 ## How It Works
 
@@ -82,62 +204,4 @@ Apply modifiers using data attributes:
 >
   <button style="background: var(--esds-color-background-brand-default)">Click me!</button>
 </div>
-```
-
-## Consuming Tokens
-
-### Web
-
-#### Install via npm
-
-```bash
-npm install @infomaniak-design-system/tokens
-```
-
-#### CSS Variables
-
-Import the base tokens and any modifiers you need:
-
-```css
-/* Base tokens (required) */
-@import '@infomaniak-design-system/tokens/css/tokens.root.css';
-
-/* Theme modifiers */
-@import '@infomaniak-design-system/tokens/css/modifiers/theme/light.root.css';
-@import '@infomaniak-design-system/tokens/css/modifiers/theme/dark.root.css';
-```
-
-Apply modifiers using data attributes:
-
-```html
-<button
-  data-esds-button-size="small"
-  data-esds-button-type="primary"
->
-  Click me!
-</button>
-```
-
-#### Tailwind CSS
-
-If you're using Tailwind, import our theme extension:
-
-```css
-/* src/styles/tailwind.css */
-@import 'tailwindcss';
-@import '@infomaniak-design-system/tokens/tailwind.css';
-```
-
-Tokens automatically map to Tailwind utilities:
-
-```html
-<!-- index.html -->
-<link
-  rel="stylesheet"
-  href="src/styles/tailwind.css"
-/>
-
-<!-- ... -->
-
-<button class="bg-yellow-500">Click Me!</button>
 ```
