@@ -1,1 +1,0 @@
-import{n as e,t}from"./lib-Cex1TyeE.js";export{t as MDXProvider};
