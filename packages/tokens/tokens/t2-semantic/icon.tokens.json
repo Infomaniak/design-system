@@ -5,49 +5,63 @@
       "xs": {
         "$value": "{scale.12}",
         "$extensions": {
-          "scopes": ["CORNER_RADIUS"]
+          "scopes": ["WIDTH_HEIGHT"]
         }
       },
       "sm": {
         "$value": "{scale.14}",
         "$extensions": {
-          "scopes": ["CORNER_RADIUS"]
+          "scopes": ["WIDTH_HEIGHT"]
         }
       },
       "md": {
         "$value": "{scale.16}",
         "$extensions": {
-          "scopes": ["CORNER_RADIUS"]
+          "scopes": ["WIDTH_HEIGHT"]
         }
       },
       "xl": {
         "$value": "{scale.24}",
         "$extensions": {
-          "scopes": ["CORNER_RADIUS"]
+          "scopes": ["WIDTH_HEIGHT"]
         }
       },
       "2xl": {
         "$value": "{scale.32}",
         "$extensions": {
-          "scopes": ["CORNER_RADIUS"]
+          "scopes": ["WIDTH_HEIGHT"]
         }
       },
       "lg": {
         "$value": "{scale.20}",
         "$extensions": {
-          "scopes": ["CORNER_RADIUS"]
+          "scopes": ["WIDTH_HEIGHT"]
         }
       },
       "4xl": {
         "$value": "{scale.96}",
         "$extensions": {
-          "scopes": ["CORNER_RADIUS"]
+          "scopes": ["WIDTH_HEIGHT"]
         }
       },
       "3xl": {
         "$value": "{scale.40}",
         "$extensions": {
-          "scopes": ["CORNER_RADIUS"]
+          "scopes": ["WIDTH_HEIGHT"]
+        }
+      }
+    },
+    "border-width": {
+      "sm": {
+        "$value": "{border-width.1-25}",
+        "$extensions": {
+          "scopes": ["STROKE_FLOAT"]
+        }
+      },
+      "md": {
+        "$value": "{border-width.1-5}",
+        "$extensions": {
+          "scopes": ["STROKE_FLOAT"]
         }
       }
     }

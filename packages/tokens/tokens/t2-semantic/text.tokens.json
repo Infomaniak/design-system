@@ -1,21 +1,23 @@
 {
-  "$type": "dimension",
   "text": {
     "xs": {
       "size": {
         "$value": "{font.size.xs}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.xs}",
+        "$type": "number",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
@@ -24,18 +26,21 @@
     "sm": {
       "size": {
         "$value": "{font.size.sm}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.sm}",
+        "$type": "number",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
@@ -44,18 +49,21 @@
     "md": {
       "size": {
         "$value": "{font.size.md}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.md}",
+        "$type": "number",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
@@ -64,18 +72,21 @@
     "lg": {
       "size": {
         "$value": "{font.size.lg}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.lg}",
+        "$type": "number",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
@@ -84,18 +95,21 @@
     "xl": {
       "size": {
         "$value": "{font.size.xl}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.xl}",
+        "$type": "number",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
@@ -104,18 +118,21 @@
     "2xl": {
       "size": {
         "$value": "{font.size.2xl}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.2xl}",
+        "$type": "number",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
@@ -124,18 +141,21 @@
     "3xl": {
       "size": {
         "$value": "{font.size.3xl}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.3xl}",
+        "$type": "number",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
@@ -144,18 +164,21 @@
     "4xl": {
       "size": {
         "$value": "{font.size.4xl}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.4xl}",
+        "$type": "number",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
@@ -164,18 +187,21 @@
     "5xl": {
       "size": {
         "$value": "{font.size.5xl}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.5xl}",
+        "$type": "number",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$type": "dimension",
         "$extensions": {
           "scopes": []
         }

@@ -4,85 +4,85 @@
     "none": {
       "$value": "{spacing.0}",
       "$extensions": {
-        "scopes": ["CORNER_RADIUS"]
+        "scopes": ["GAP"]
       }
     },
     "xs": {
       "$value": "{spacing.2}",
       "$extensions": {
-        "scopes": ["CORNER_RADIUS"]
+        "scopes": ["GAP"]
       }
     },
     "sm": {
       "$value": "{spacing.4}",
       "$extensions": {
-        "scopes": ["CORNER_RADIUS"]
+        "scopes": ["GAP"]
       }
     },
     "md": {
       "$value": "{spacing.6}",
       "$extensions": {
-        "scopes": ["CORNER_RADIUS"]
+        "scopes": ["GAP"]
       }
     },
     "lg": {
       "$value": "{spacing.8}",
       "$extensions": {
-        "scopes": ["CORNER_RADIUS"]
+        "scopes": ["GAP"]
       }
     },
     "xl": {
       "$value": "{spacing.12}",
       "$extensions": {
-        "scopes": ["CORNER_RADIUS"]
+        "scopes": ["GAP"]
       }
     },
     "2xl": {
       "$value": "{spacing.16}",
       "$extensions": {
-        "scopes": ["CORNER_RADIUS"]
+        "scopes": ["GAP"]
       }
     },
     "3xl": {
       "$value": "{spacing.20}",
       "$extensions": {
-        "scopes": ["CORNER_RADIUS"]
+        "scopes": ["GAP"]
       }
     },
     "4xl": {
       "$value": "{spacing.24}",
       "$extensions": {
-        "scopes": ["CORNER_RADIUS"]
+        "scopes": ["GAP"]
       }
     },
     "5xl": {
       "$value": "{spacing.32}",
       "$extensions": {
-        "scopes": ["CORNER_RADIUS"]
+        "scopes": ["GAP"]
       }
     },
     "6xl": {
       "$value": "{spacing.40}",
       "$extensions": {
-        "scopes": ["CORNER_RADIUS"]
+        "scopes": ["GAP"]
       }
     },
     "7xl": {
       "$value": "{spacing.48}",
       "$extensions": {
-        "scopes": ["CORNER_RADIUS"]
+        "scopes": ["GAP"]
       }
     },
     "8xl": {
       "$value": "{spacing.64}",
       "$extensions": {
-        "scopes": ["CORNER_RADIUS"]
+        "scopes": ["GAP"]
       }
     },
     "9xl": {
       "$value": "{spacing.100}",
       "$extensions": {
-        "scopes": ["CORNER_RADIUS"]
+        "scopes": ["GAP"]
       }
     }
   }

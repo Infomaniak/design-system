@@ -38,6 +38,13 @@ export async function convertFigmaTokens({
     root,
   );
 
+  // remove `test` tokens
+  for (const token of Array.from(rootCollection.tokens())) {
+    if (token.name.some((namePart: string): boolean => namePart.toLowerCase().includes('test'))) {
+      rootCollection.delete(token.name);
+    }
+  }
+
   // replace `@root` segments
   for (const token of Array.from(rootCollection.tokens())) {
     if (token.name.includes('@root')) {
