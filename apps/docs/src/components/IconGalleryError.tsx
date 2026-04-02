@@ -1,8 +1,8 @@
 import React from 'react';
-import type { IconGalleryError } from '../hooks/useIconGallery.ts';
+import type { IconGalleryErrorType } from '../hooks/useIconGallery.ts';
 
 export interface IconGalleryErrorProps {
-  error: IconGalleryError;
+  error: IconGalleryErrorType;
   onRetry: () => void;
 }
 
