@@ -7,7 +7,7 @@ export interface IconItem {
   readonly categories: ReadonlySet<string>;
 }
 
-export interface IconGalleryError {
+export interface IconGalleryErrorType {
   readonly message: string;
   readonly code: IconGalleryErrorCode;
 }
@@ -22,7 +22,7 @@ export interface UseIconGalleryReturn {
   readonly isLoading: boolean;
   readonly isLoadingCollections: boolean;
   readonly isLoadingIcons: boolean;
-  readonly error: IconGalleryError | null;
+  readonly error: IconGalleryErrorType | null;
   readonly setCollection: (collection: string) => void;
   readonly setSearchQuery: (query: string) => void;
   readonly retry: () => void;
@@ -38,7 +38,7 @@ function mapApiIconToIconItem(icon: IconifyApiIconListIconsOptimizedIcon): IconI
   };
 }
 
-function normalizeError(error: unknown): IconGalleryError {
+function normalizeError(error: unknown): IconGalleryErrorType {
   if (error instanceof Error) {
     return {
       message: error.message,
@@ -65,7 +65,7 @@ export function useIconGallery(): UseIconGalleryReturn {
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState<string>('');
   const [isLoadingCollections, setIsLoadingCollections] = useState<boolean>(false);
   const [isLoadingIcons, setIsLoadingIcons] = useState<boolean>(false);
-  const [error, setError] = useState<IconGalleryError | null>(null);
+  const [error, setError] = useState<IconGalleryErrorType | null>(null);
 
   const isLoading = isLoadingCollections || isLoadingIcons;
 

@@ -1,5 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
-import type { IconGalleryError } from '../hooks/useIconGallery.ts';
+import type { IconGalleryErrorType } from '../hooks/useIconGallery.ts';
 
 interface Props {
   children: ReactNode;
@@ -8,10 +8,10 @@ interface Props {
 
 interface State {
   hasError: boolean;
-  error: IconGalleryError | null;
+  error: IconGalleryErrorType | null;
 }
 
-const ERROR_FALLBACK: IconGalleryError = {
+const ERROR_FALLBACK: IconGalleryErrorType = {
   message: 'An unexpected error occurred in the icon gallery',
   code: 'BOUNDARY_ERROR',
 };
