@@ -21,7 +21,6 @@ const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..
 const OUTPUT_DIR: string = join(ROOT_DIR, 'dist');
 const OUTPUT_ASSETS_DIR: string = join(OUTPUT_DIR, 'assets');
 const WORKSPACE_ROOT_DIR: string = join(ROOT_DIR, '../../../..');
-const PACKAGE_JSON_PATH = join(ROOT_DIR, 'package.json');
 
 await runScript('import-svgs', async (logger: Logger): Promise<void> => {
   await rm(OUTPUT_DIR, { force: true, recursive: true });
@@ -36,12 +35,12 @@ await runScript('import-svgs', async (logger: Logger): Promise<void> => {
   const importVersion: string = figmaWebhookEvent.label;
   const branchName: string = `feat/import-icons--${importVersion}`;
 
-  const currentPackageJson: PackageJson = await readPackageJsonFile(PACKAGE_JSON_PATH);
+  const packageJson: PackageJson = await readPackageJsonFile(join(ROOT_DIR, 'package.json'));
 
   const skip: boolean = await logger.asyncTask(
     'check-import-validity',
     async (): Promise<boolean> => {
-      const { version: currentVersion } = currentPackageJson;
+      const { version: currentVersion } = packageJson;
 
       const compareResult: number = compare(currentVersion, importVersion);
 
@@ -83,9 +82,9 @@ await runScript('import-svgs', async (logger: Logger): Promise<void> => {
     throw new Error('No new assets have been imported from Figma.');
   }
 
-  // update package json version
-  await writeJsonFileSafe(PACKAGE_JSON_PATH, {
-    ...currentPackageJson,
+  // update package.json version
+  await writeJsonFileSafe(join(OUTPUT_DIR, 'package.json'), {
+    ...packageJson,
     version: importVersion,
   });
 
