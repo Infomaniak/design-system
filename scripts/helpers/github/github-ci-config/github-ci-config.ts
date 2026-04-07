@@ -221,8 +221,8 @@ export interface GithubCiPullRequest {
   readonly _links: GithubCiPullRequestLinks;
   readonly active_lock_reason: null;
   readonly additions: number;
-  readonly assignee: null;
-  readonly assignees: readonly unknown[];
+  readonly assignee: GithubCiUser;
+  readonly assignees: readonly GithubCiUser[];
   readonly author_association: string;
   readonly auto_merge: null;
   readonly base: GithubCiBranch;
@@ -249,13 +249,13 @@ export interface GithubCiPullRequest {
   readonly mergeable_state: string;
   readonly merged: boolean;
   readonly merged_at: null;
-  readonly merged_by: null;
+  readonly merged_by: GithubCiUser;
   readonly milestone: null;
   readonly node_id: string;
   readonly number: number;
   readonly patch_url: string;
   readonly rebaseable: null;
-  readonly requested_reviewers: readonly unknown[];
+  readonly requested_reviewers: readonly GithubCiUser[];
   readonly requested_teams: readonly unknown[];
   readonly review_comment_url: string;
   readonly review_comments: number;

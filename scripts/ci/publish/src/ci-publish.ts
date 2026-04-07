@@ -166,25 +166,25 @@ async function getPackagesToBuild({
   const packagesToBuild: PackageJsonWithPath[] = [];
 
   for (const entry of publishablePackages) {
-    const [, packageJson]: PackageJsonWithPath = entry;
+    const [, { name, version }]: PackageJsonWithPath = entry;
 
     const buildVersion: string = generatePackageJsonBuildVersion({
-      version: packageJson.version,
+      version,
       mode,
       prerelease,
     });
 
     if (
       await isNpmPackagePublished({
-        name: packageJson.name,
-        version: buildVersion,
+        name,
+        version,
       })
     ) {
-      logger.debug(`OMIT: ${packageJson.name}@${buildVersion} (already exists on npm).`);
+      logger.debug(`OMIT: ${name}@${buildVersion} (@${version} already exists on npm).`);
     } else {
-      logger.debug(`ADD: ${packageJson.name}@${buildVersion}`);
+      logger.debug(`ADD: ${name}@${buildVersion}`);
       packagesToBuild.push(entry);
-      Reflect.set(dependenciesOverride, packageJson.name, buildVersion);
+      Reflect.set(dependenciesOverride, name, buildVersion);
     }
   }
 
