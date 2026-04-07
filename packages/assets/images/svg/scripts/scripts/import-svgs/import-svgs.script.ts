@@ -9,6 +9,7 @@ import { getEnvFigmaIconFileKey } from '../../../../../../../scripts/helpers/fig
 import { getEnvFigmaWebhookEvent } from '../../../../../../../scripts/helpers/figma/env/get-env-figma-webhook-event.ts';
 import type { PackageJson } from '../../../../../../../scripts/helpers/file/package-json/package-json.ts';
 import { readPackageJsonFile } from '../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
+import { writeJsonFileSafe } from '../../../../../../../scripts/helpers/file/write-json-file-safe.ts';
 import { doesGitBranchExistOnRemote } from '../../../../../../../scripts/helpers/git/does-git-branch-exist-on-remote.ts';
 import { getEnvCiDsUpdateAndPrAuthToken } from '../../../../../../../scripts/helpers/github/env/get-env-ci-ds-update-and-pr-auth-token.ts';
 import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
@@ -20,6 +21,7 @@ const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..
 const OUTPUT_DIR: string = join(ROOT_DIR, 'dist');
 const OUTPUT_ASSETS_DIR: string = join(OUTPUT_DIR, 'assets');
 const WORKSPACE_ROOT_DIR: string = join(ROOT_DIR, '../../../..');
+const PACKAGE_JSON_PATH = join(ROOT_DIR, 'package.json');
 
 await runScript('import-svgs', async (logger: Logger): Promise<void> => {
   await rm(OUTPUT_DIR, { force: true, recursive: true });
@@ -34,12 +36,12 @@ await runScript('import-svgs', async (logger: Logger): Promise<void> => {
   const importVersion: string = figmaWebhookEvent.label;
   const branchName: string = `feat/import-icons--${importVersion}`;
 
+  const currentPackageJson: PackageJson = await readPackageJsonFile(PACKAGE_JSON_PATH);
+
   const skip: boolean = await logger.asyncTask(
     'check-import-validity',
     async (): Promise<boolean> => {
-      const { version: currentVersion }: PackageJson = await readPackageJsonFile(
-        join(ROOT_DIR, 'package.json'),
-      );
+      const { version: currentVersion } = currentPackageJson;
 
       const compareResult: number = compare(currentVersion, importVersion);
 
@@ -80,6 +82,12 @@ await runScript('import-svgs', async (logger: Logger): Promise<void> => {
   if (!hasNewAssets) {
     throw new Error('No new assets have been imported from Figma.');
   }
+
+  // update package json version
+  await writeJsonFileSafe(PACKAGE_JSON_PATH, {
+    ...currentPackageJson,
+    version: importVersion,
+  });
 
   await createImportSvgPullRequests({
     outputDirectory: OUTPUT_DIR,
