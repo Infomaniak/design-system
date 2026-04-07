@@ -1,22 +1,21 @@
-import { writeFileSafe } from '../../../../../../../../../scripts/helpers/file/write-file-safe.ts';
+import { writeJsonFileSafe } from '../../../../../../../../../scripts/helpers/file/write-json-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
-import { isDesignToken } from '../../../../../../shared/dtcg/design-token/token/is-design-token.ts';
+import { isCurlyReference } from '../../../../../../shared/dtcg/design-token/reference/types/curly/is-curly-reference.ts';
+import { segmentsReferenceToCurlyReference } from '../../../../../../shared/dtcg/design-token/reference/types/segments/to/curly-reference/segments-reference-to-curly-reference.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { DesignTokenModifiers } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
-import { designTokensCollectionTokenToFigmaDesignTokensTree } from '../../../../../../shared/dtcg/resolver/to/figma/dtcg/token/design-tokens-collection-token-to-figma-design-tokens-tree.ts';
+import { designTokensCollectionToFigmaDesignTokensGroup } from '../../../../../../shared/dtcg/resolver/to/figma/dtcg/design-tokens-collection-to-figma-design-tokens-group.ts';
 import type { FigmaDesignTokensGroup } from '../../../../../../shared/dtcg/resolver/to/figma/figma/group/figma-design-tokens-group.ts';
-import type { GenericFigmaDesignToken } from '../../../../../../shared/dtcg/resolver/to/figma/figma/token/generic-figma-design-token.ts';
-import type { FigmaDesignTokensTree } from '../../../../../../shared/dtcg/resolver/to/figma/figma/tree/figma-design-tokens-tree.ts';
+import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
 import {
-  mergeFigmaDesignTokensTreesAsModes,
-  type NamedFigmaTokens,
-} from '../../../../../../shared/figma/merge/merge-figma-design-tokens-trees-as-modes.ts';
-import {
   DESIGN_TOKEN_TIERS,
+  DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTION_NAMES,
+  type DesignTokenTier,
+  FIGMA_T1_COLLECTION_NAME,
+  FIGMA_T2_COLLECTION_NAME,
+  FIGMA_T3_COLLECTION_NAME,
   T1_DIRECTORY_NAME,
-  T2_DIRECTORY_NAME,
-  T3_DIRECTORY_NAME,
 } from '../../../constants/design-token-tiers.ts';
 
 export interface BuildFigmaTokensOptions {
@@ -33,153 +32,158 @@ export function buildFigmaTokens({
   logger,
 }: BuildFigmaTokensOptions): Promise<void> {
   return logger.asyncTask('figma', async (): Promise<void> => {
-    const t1FigmaCollectionName: string = 't1';
-    const t2FigmaCollectionName: string = 't2';
-    const t3FigmaCollectionName: string = 'Themes';
-
-    // 1) group tokens by tiers (primitive, semantic, component)
     const figmaBaseCollection: DesignTokensCollection = baseCollection.clone();
 
-    for (const token of baseCollection.tokens()) {
-      const tier: string | undefined = DESIGN_TOKEN_TIERS.find((tier: string): boolean => {
+    // for each modifier -> context -> token => add the token in the collection with the associated mode
+    for (const [modifier, contexts] of modifiers.entries()) {
+      for (const [context, collection] of contexts.entries()) {
+        const expectedPath: string = `${modifier}/${context}`;
+
+        for (const token of collection
+          .tokens()
+          .filter((token: GenericDesignTokensCollectionToken): boolean => {
+            return token.files.some((path: string): boolean => path.includes(expectedPath));
+          })) {
+          const newName: ArrayDesignTokenName = [modifier, ...token.name];
+
+          if (!isCurlyReference(token.value)) {
+            throw new Error(
+              `<modifer>(${modifier}), <context>(${context}), <token>(${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)}): token's value must be a curly reference.`,
+            );
+          }
+
+          const mode: Record<string, string> = {
+            ...(figmaBaseCollection.getOptional(newName)?.extensions?.['mode'] as
+              | object
+              | undefined),
+            [context]: token.value,
+          };
+
+          figmaBaseCollection.add(
+            {
+              ...token,
+              name: newName,
+              extensions: {
+                mode,
+              },
+            },
+            {
+              last: false,
+              merge: true,
+            },
+          );
+        }
+      }
+    }
+
+    /*
+      NOTES:
+        modifiers override existing tokens, however, in figma, modifiers must form a chain:
+          - t2, t3 must point to a modifier
+          - references to a modified token must point to a modifier
+          - this forms a chain, ex: t2 -> product -> theme -> t1
+     */
+
+    // for each modifier -> context -> token => make existing tokens point to the corresponding modifier
+    for (const [modifier, contexts] of modifiers.entries()) {
+      for (const [context, collection] of contexts.entries()) {
+        const expectedPath: string = `${modifier}/${context}`;
+
+        for (const token of collection
+          .tokens()
+          .filter((token: GenericDesignTokensCollectionToken): boolean => {
+            return token.files.some((path: string): boolean => path.includes(expectedPath));
+          })) {
+          const existingToken: GenericDesignTokensCollectionToken | undefined =
+            figmaBaseCollection.getOptional(token.name);
+
+          if (existingToken !== undefined) {
+            if (!isCurlyReference(existingToken.value)) {
+              throw new Error(
+                `<modifer>(${modifier}), <context>(${context}), <token>(${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)}): token's value must be a curly reference.`,
+              );
+            }
+
+            if (
+              !tokenBelongsToATier(existingToken) &&
+              !existingToken.files.some((path: string): boolean => path.includes(T1_DIRECTORY_NAME))
+            ) {
+              throw new Error(
+                `<modifer>(${modifier}), <context>(${context}), <token>(${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)}): expected t2 or t3 token.`,
+              );
+            }
+
+            // t2, t3 tokens must point to the modifier
+            figmaBaseCollection.add(
+              {
+                ...existingToken,
+                value: segmentsReferenceToCurlyReference([modifier, ...existingToken.name]),
+              },
+              {
+                last: false,
+                merge: false,
+              },
+            );
+          }
+
+          // references to this token must point now on the modifier
+          figmaBaseCollection.rename(token.name, [modifier, ...token.name], {
+            onExitingTokenBehaviour: 'only-references',
+          });
+        }
+      }
+    }
+
+    // restore "@root" tokens
+    for (const token of Array.from(figmaBaseCollection.tokens())) {
+      if (token.extensions !== undefined && Reflect.has(token.extensions, 'figmaName')) {
+        figmaBaseCollection.rename(
+          token.name,
+          Reflect.get(token.extensions, 'figmaName') as string[],
+        );
+      }
+    }
+
+    // group tokens by tier
+    for (const token of Array.from(figmaBaseCollection.tokens().filter(tokenBelongsToATier))) {
+      const tier: DesignTokenTier | undefined = DESIGN_TOKEN_TIERS.find((tier: string): boolean => {
         return token.files.some((path: string): boolean => path.includes(tier));
       });
 
-      let newTokenName: ArrayDesignTokenName;
-
-      if (tier === T1_DIRECTORY_NAME) {
-        newTokenName = [t1FigmaCollectionName, ...token.name];
-      } else if (tier === T2_DIRECTORY_NAME) {
-        newTokenName = [t2FigmaCollectionName, ...token.name];
-      } else if (tier === T3_DIRECTORY_NAME) {
-        newTokenName = [t3FigmaCollectionName, ...token.name];
-      } else {
+      if (tier === undefined) {
         throw new Error(
           `Token ${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)} does not belong to a tier.`,
         );
       }
 
-      figmaBaseCollection.rename(token.name, newTokenName);
-
-      for (const contexts of modifiers.values()) {
-        for (const contextCollection of contexts.values()) {
-          contextCollection.rename(token.name, newTokenName);
-        }
-      }
+      figmaBaseCollection.rename(token.name, [
+        DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTION_NAMES.get(tier)!,
+        ...token.name,
+      ]);
     }
 
-    // 2) create figma tokens
-    const figmaTokens: FigmaDesignTokensGroup = {};
+    // convert collection to figma format
+    const {
+      [FIGMA_T1_COLLECTION_NAME]: t1,
+      [FIGMA_T2_COLLECTION_NAME]: t2,
+      [FIGMA_T3_COLLECTION_NAME]: t3,
+      ...figmaModifiers
+    }: FigmaDesignTokensGroup = designTokensCollectionToFigmaDesignTokensGroup(figmaBaseCollection);
 
-    const insertFigmaDesignTokensTree = (
-      figmaTokens: FigmaDesignTokensGroup,
-      name: ArrayDesignTokenName,
-      value: FigmaDesignTokensTree,
-    ): void => {
-      if (name.length === 0) {
-        throw new Error('Cannot set property on root');
-      }
-
-      let node: FigmaDesignTokensTree = figmaTokens;
-
-      for (let i: number = 0; i < name.length; i++) {
-        const segment: PropertyKey = name[i];
-
-        if (isDesignToken(node)) {
-          const $root: GenericFigmaDesignToken = { ...node } as GenericFigmaDesignToken;
-          for (const key of Object.keys(node)) {
-            Reflect.deleteProperty(node, key);
-          }
-          Reflect.set(node, 'root', $root);
-        }
-
-        if (i === name.length - 1) {
-          Reflect.set(node, segment, value);
-        } else {
-          if (Reflect.has(node, segment)) {
-            node = Reflect.get(node, segment);
-          } else {
-            const next: FigmaDesignTokensTree = {};
-            Reflect.set(node, segment, next);
-            node = next;
-          }
-        }
-      }
+    // re-order tokens
+    const figmaTokens: FigmaDesignTokensGroup = {
+      t1,
+      t2,
+      t3,
+      ...figmaModifiers,
     };
 
-    // 2.1) t1-primitive -> t1 tokens contain all the values, thus, they don't have alternative modes.
-    for (const token of figmaBaseCollection.tokens()) {
-      if (token.name.at(0) === t1FigmaCollectionName) {
-        insertFigmaDesignTokensTree(
-          figmaTokens,
-          token.name,
-          designTokensCollectionTokenToFigmaDesignTokensTree(
-            token,
-            figmaBaseCollection.resolve(token),
-          ),
-        );
-      }
-    }
-
-    // 2.2) t2-semantic -> t2 tokens contain themes; thus, they need to be merged (as modes).
-    Object.assign(
-      figmaTokens,
-      mergeFigmaDesignTokensTreesAsModes(
-        Array.from(modifiers.get('theme')!.entries()).map(
-          ([themeName, themeCollection]: [string, DesignTokensCollection]): NamedFigmaTokens => {
-            const figmaTokens: FigmaDesignTokensGroup = {};
-
-            for (const token of themeCollection.tokens()) {
-              if (token.name.at(0) === t2FigmaCollectionName) {
-                insertFigmaDesignTokensTree(
-                  figmaTokens,
-                  token.name,
-                  designTokensCollectionTokenToFigmaDesignTokensTree(
-                    token,
-                    figmaBaseCollection.resolve(token),
-                  ),
-                );
-              }
-            }
-
-            return [themeName, figmaTokens];
-          },
-        ),
-      ),
-    );
-
-    // TODO: implement when we work on t3 tokens
-    // // 2.3) t3-component -> t3 tokens contain variants; thus, they need to be merged (as modes).
-    // Object.assign(
-    //   figmaTokens,
-    //   mergeFigmaDesignTokensTreesAsModes(
-    //     DESIGN_TOKEN_VARIANTS.map((variant: string): NamedFigmaTokens => {
-    //       const figmaTokens: FigmaDesignTokensGroup = {};
-    //
-    //       for (const token of figmaBaseCollection.tokens()) {
-    //         if (token.name.at(0) === t3FigmaCollectionName) {
-    //           insertFigmaDesignTokensTree(
-    //             token.name,
-    //             designTokensCollectionTokenToFigmaDesignTokensTree(
-    //               {
-    //                 ...token,
-    //                 value: getTokenValueByVariant(token, variant) ?? token.value,
-    //               },
-    //               figmaBaseCollection.resolve(token),
-    //             ),
-    //           );
-    //         }
-    //       }
-    //
-    //       return [variant, figmaTokens];
-    //     }),
-    //   ),
-    // );
-
-    // 3) write figma tokens to file
-    await writeFileSafe(
-      `${outputDirectory}/figma.tokens.json`,
-      JSON.stringify(figmaTokens, null, 2),
-    );
+    await writeJsonFileSafe(`${outputDirectory}/figma.tokens.json`, figmaTokens);
   });
+}
+
+/*---*/
+
+function tokenBelongsToATier(token: GenericDesignTokensCollectionToken): boolean {
+  return !token.files.some((path: string): boolean => path.includes('modifiers'));
 }

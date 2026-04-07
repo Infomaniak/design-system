@@ -48,6 +48,22 @@ export async function convertFigmaTokens({
   // replace `@root` segments
   for (const token of Array.from(rootCollection.tokens())) {
     if (token.name.includes('@root')) {
+      if (token.name.at(-1) !== '@root') {
+        rootCollection.add(
+          {
+            ...token,
+            extensions: {
+              ...token.extensions,
+              figmaName: token.name.slice(1),
+            },
+          },
+          {
+            last: false,
+            merge: false,
+          },
+        );
+      }
+
       rootCollection.rename(
         token.name,
         token.name.filter((namePart: string): boolean => namePart !== '@root'),

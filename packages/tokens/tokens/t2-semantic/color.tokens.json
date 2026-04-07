@@ -308,19 +308,22 @@
         "default": {
           "$value": "{color.sky.700}",
           "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+            "figmaName": ["color", "background", "brand", "@root", "default"]
           }
         },
         "pressed": {
           "$value": "{color.sky.900}",
           "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+            "figmaName": ["color", "background", "brand", "@root", "pressed"]
           }
         },
         "hover": {
           "$value": "{color.sky.800}",
           "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+            "figmaName": ["color", "background", "brand", "@root", "hover"]
           }
         }
       },
@@ -570,19 +573,22 @@
         "default": {
           "$value": "{color.sky.700}",
           "$extensions": {
-            "scopes": ["TEXT_FILL"]
+            "scopes": ["TEXT_FILL"],
+            "figmaName": ["color", "text", "brand", "@root", "default"]
           }
         },
         "hover": {
           "$value": "{color.sky.800}",
           "$extensions": {
-            "scopes": ["TEXT_FILL"]
+            "scopes": ["TEXT_FILL"],
+            "figmaName": ["color", "text", "brand", "@root", "hover"]
           }
         },
         "pressed": {
           "$value": "{color.sky.900}",
           "$extensions": {
-            "scopes": ["TEXT_FILL"]
+            "scopes": ["TEXT_FILL"],
+            "figmaName": ["color", "text", "brand", "@root", "pressed"]
           }
         }
       },
