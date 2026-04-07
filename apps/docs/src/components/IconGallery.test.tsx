@@ -92,7 +92,7 @@ describe('IconGallery', () => {
   });
 
   it('shows error component when error exists', () => {
-    const error: IconGalleryError = {
+    const error: IconGalleryErrorType = {
       message: 'Failed to fetch icons',
       code: 'API_ERROR',
     };
