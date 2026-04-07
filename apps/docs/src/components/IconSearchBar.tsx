@@ -108,6 +108,7 @@ const IconSearchBar: React.FC<IconSearchBarProps> = ({
         />
         {hasValue && !disabled && (
           <button
+            type="button"
             onClick={handleClearClick}
             className="icon-search-bar__clear"
             aria-label="Clear search"
