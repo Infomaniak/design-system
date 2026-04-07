@@ -8,28 +8,24 @@ import { isFigmaFrameNode } from '../built-in/figma-frame-node.ts';
 import { isFigmaGroupNode } from '../built-in/figma-group-node.ts';
 import { isFigmaSectionNode } from '../built-in/figma-section-node.ts';
 import { isFigmaTableNode } from '../built-in/figma-table-node.ts';
-import { type GenericFigmaNode } from '../figma-node.ts';
+import type { GenericFigmaNode } from '../figma-node.ts';
 
-export class FigmaNodesExplorer extends TreeExplorer<GenericFigmaNode> {
-  constructor() {
-    super((node: GenericFigmaNode): Iterable<GenericFigmaNode> => {
-      if (
-        isFigmaDocumentNode(node) ||
-        isFigmaCanvasNode(node) ||
-        isFigmaFrameNode(node) ||
-        isFigmaGroupNode(node) ||
-        isFigmaSectionNode(node) ||
-        isFigmaBooleanOperationNode(node) ||
-        isFigmaTableNode(node) ||
-        isFigmaComponentNode(node) ||
-        isFigmaComponentSetNode(node)
-      ) {
-        return node.children;
-      } else {
-        return [];
-      }
-    });
-  }
-}
-
-export const FIGMA_NODES_EXPLORER = new FigmaNodesExplorer();
+export const FigmaNodesExplorer = new TreeExplorer<GenericFigmaNode>(
+  (node: GenericFigmaNode): Iterable<GenericFigmaNode> => {
+    if (
+      isFigmaDocumentNode(node) ||
+      isFigmaCanvasNode(node) ||
+      isFigmaFrameNode(node) ||
+      isFigmaGroupNode(node) ||
+      isFigmaSectionNode(node) ||
+      isFigmaBooleanOperationNode(node) ||
+      isFigmaTableNode(node) ||
+      isFigmaComponentNode(node) ||
+      isFigmaComponentSetNode(node)
+    ) {
+      return node.children;
+    } else {
+      return [];
+    }
+  },
+);

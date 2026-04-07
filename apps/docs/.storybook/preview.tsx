@@ -221,7 +221,14 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['Welcome', 'Design Tokens', ['Getting Started', '*'], '*'],
+        order: [
+          'Welcome',
+          'Design Tokens',
+          ['Getting Started', '*'],
+          'Icons',
+          ['Getting Started', '*'],
+          '*',
+        ],
       },
     },
   },

@@ -1,17 +1,17 @@
 import {
-  fetchFigmaJsonApiV1,
-  type FetchFigmaJsonApiV1ForConsumerOptions,
-} from '../fetch-figma-json-api-v1.ts';
+  fetchFigmaJsonApi,
+  type FetchFigmaJsonApiForConsumerOptions,
+} from '../fetch-figma-json-api.ts';
 import { type FigmaVariables } from './types/figma-variables.ts';
 
-export interface GetFigmaPublishedVariablesOptions extends FetchFigmaJsonApiV1ForConsumerOptions {
+export interface GetFigmaPublishedVariablesOptions extends FetchFigmaJsonApiForConsumerOptions {
   readonly fileKey: string;
 }
 
 /**
  * Gets the published variables of a figma file.
  *
- * `GET /files/{fileKey}/variables/published`
+ * `GET /v1/files/{fileKey}/variables/published`
  *
  * **WARN:** This endpoint requires a "full seat" on "enterprise plan".
  *
@@ -21,9 +21,9 @@ export async function getFigmaPublishedVariables({
   fileKey,
   ...options
 }: GetFigmaPublishedVariablesOptions): Promise<FigmaVariables> {
-  const data: FigmaVariables | number = await fetchFigmaJsonApiV1<FigmaVariables | number>({
+  const data: FigmaVariables | number = await fetchFigmaJsonApi<FigmaVariables | number>({
     ...options,
-    path: `/files/${fileKey}/variables/published`,
+    path: `/v1/files/${fileKey}/variables/published`,
   });
 
   if (typeof data === 'number') {

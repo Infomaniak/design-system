@@ -2,6 +2,9 @@
 # https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
 # https://gist.github.com/andreasonny83/b24e38b7772a3ea362d8e8d238d5a7bc
 
+# OS specific
+.DS_Store
+
 # Logs
 logs
 *.log
@@ -166,5 +169,4 @@ storybook-static
 # Generated files
 apps/docs/src/stories/assets/*.md
 packages/tokens/scripts/scripts/convert-figma-tokens/tokens
-
-.DS_Store
+.tmp

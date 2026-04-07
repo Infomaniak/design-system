@@ -12,6 +12,7 @@ export default defineConfig({
   test: {
     // dir: 'src',
     dir: '.',
+    environment: 'happy-dom',
     coverage: {
       provider: 'istanbul',
       // include: ['src/**/*.ts'],

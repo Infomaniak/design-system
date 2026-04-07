@@ -3,8 +3,8 @@ import type { PackageJson } from '../../../../../../../scripts/helpers/file/pack
 import { readPackageJsonFile } from '../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
 import { ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME } from '../../../../../../../scripts/helpers/github/constants/android-design-system-repository-name.constant.ts';
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
-import { createGithubPR } from '../../../../../../../scripts/helpers/github/pull-request/create-github-pr.ts';
-import { getEnvCiPrAuthToken } from '../../../../../../../scripts/helpers/github/pull-request/env/get-env-ci-pr-auth-token.ts';
+import { createGithubPullRequest } from '../../../../../../../scripts/helpers/github/pull-request/create-github-pull-request.ts';
+import { getEnvCiPullRequestAuthTokenMobile } from '../../../../../../../scripts/helpers/github/pull-request/env/get-env-ci-pull-request-auth-token-mobile.ts';
 import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { generatePackageJsonBuildVersion } from '../../../../../../../scripts/helpers/npm/generate-package-json-build-version/generate-package-json-build-version.ts';
 import type { PublishConfig } from '../../../../../../../scripts/helpers/publish/publish-config/publish-config.ts';
@@ -41,10 +41,10 @@ export async function publishAndroidTokens({
     });
 
     if (mode !== 'dev') {
-      await createGithubPR({
+      await createGithubPullRequest({
         owner: INFOMANIAK_GITHUB_ORGANIZATION,
         repository: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
-        authToken: getEnvCiPrAuthToken(),
+        authToken: getEnvCiPullRequestAuthTokenMobile(),
         title: `chore: Update to ${publishBranchName}`,
         body: `Update to ${publishBranchName}`,
         head: publishBranchName,
