@@ -92,7 +92,7 @@ export class IconGalleryErrorBoundary extends Component<Props, State> {
               height="64"
               fill="none"
               viewBox="0 0 24 24"
-              className="icon-gallery-error__icon"
+              className="icon-gallery-error-boundary__icon"
             >
               <path
                 fill="currentColor"
