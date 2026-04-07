@@ -48,7 +48,7 @@ export function buildFigmaTokens({
 
           if (!isCurlyReference(token.value)) {
             throw new Error(
-              `<modifer>(${modifier}), <context>(${context}), <token>(${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)}): token's value must be a curly reference.`,
+              `<modifier>(${modifier}), <context>(${context}), <token>(${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)}): token's value must be a curly reference.`,
             );
           }
 
@@ -100,7 +100,7 @@ export function buildFigmaTokens({
           if (existingToken !== undefined) {
             if (!isCurlyReference(existingToken.value)) {
               throw new Error(
-                `<modifer>(${modifier}), <context>(${context}), <token>(${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)}): token's value must be a curly reference.`,
+                `<modifier>(${modifier}), <context>(${context}), <token>(${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)}): token's value must be a curly reference.`,
               );
             }
 
@@ -109,7 +109,7 @@ export function buildFigmaTokens({
               !existingToken.files.some((path: string): boolean => path.includes(T1_DIRECTORY_NAME))
             ) {
               throw new Error(
-                `<modifer>(${modifier}), <context>(${context}), <token>(${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)}): expected t2 or t3 token.`,
+                `<modifier>(${modifier}), <context>(${context}), <token>(${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)}): expected t2 or t3 token.`,
               );
             }
 
@@ -128,7 +128,7 @@ export function buildFigmaTokens({
 
           // references to this token must point now on the modifier
           figmaBaseCollection.rename(token.name, [modifier, ...token.name], {
-            onExitingTokenBehaviour: 'only-references',
+            onExistingTokenBehaviour: 'only-references',
           });
         }
       }

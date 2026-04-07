@@ -68,7 +68,7 @@ export async function convertFigmaTokens({
         token.name,
         token.name.filter((namePart: string): boolean => namePart !== '@root'),
         {
-          onExitingTokenBehaviour: 'throw',
+          onExistingTokenBehaviour: 'throw',
         },
       );
     }
@@ -78,7 +78,7 @@ export async function convertFigmaTokens({
   for (const token of Array.from(rootCollection.tokens())) {
     if (token.name[0] === 'mode') {
       rootCollection.rename(token.name, ['theme', ...token.name.slice(1)], {
-        onExitingTokenBehaviour: 'throw',
+        onExistingTokenBehaviour: 'throw',
       });
     }
   }
@@ -159,7 +159,7 @@ export async function convertFigmaTokens({
   // remove the figma collections prefixes from the main collection
   for (const token of rootCollection.tokens()) {
     mainCollection.rename(token.name, token.name.slice(1), {
-      onExitingTokenBehaviour: 'only-references',
+      onExistingTokenBehaviour: 'only-references',
     });
   }
 

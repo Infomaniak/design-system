@@ -2,5 +2,5 @@ import type { DesignTokensCollectionRenameExtensionsFunction } from './design-to
 
 export interface DesignTokensCollectionRenameOptions {
   readonly extensions?: DesignTokensCollectionRenameExtensionsFunction;
-  readonly onExitingTokenBehaviour?: 'throw' | 'replace' | 'skip' | 'only-references';
+  readonly onExistingTokenBehaviour?: 'throw' | 'replace' | 'skip' | 'only-references';
 }

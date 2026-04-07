@@ -508,7 +508,7 @@ export class DesignTokensCollection {
     to: DesignTokenNameLike,
     {
       extensions: renameExtensions = designTokensCollectionRenameExtensionsAutomatically,
-      onExitingTokenBehaviour = 'throw',
+      onExistingTokenBehaviour = 'throw',
     }: DesignTokensCollectionRenameOptions = {},
   ): void {
     from = DesignTokensCollection.designTokenNameLikeToArrayDesignTokenName(from);
@@ -521,9 +521,9 @@ export class DesignTokensCollection {
     // TODO: improvement - get "from" token and rename it directly after/before updating rge references
 
     if (this.has(to)) {
-      if (onExitingTokenBehaviour === 'throw') {
+      if (onExistingTokenBehaviour === 'throw') {
         throw new Error(`Replacing an existing token: ${to.join('.')}`);
-      } else if (onExitingTokenBehaviour === 'skip') {
+      } else if (onExistingTokenBehaviour === 'skip') {
         return;
       }
     }
@@ -540,7 +540,7 @@ export class DesignTokensCollection {
 
       if (
         DesignTokensCollection.tokenNamesEqual(token.name, from) &&
-        onExitingTokenBehaviour !== 'only-references'
+        onExistingTokenBehaviour !== 'only-references'
       ) {
         name = to;
       }
