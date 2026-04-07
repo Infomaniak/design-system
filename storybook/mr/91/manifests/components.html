@@ -576,7 +576,7 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">24 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">26 docs ok</a></div>
   </div>
 </header>
 <main>
@@ -643,11 +643,13 @@
         &lt;/span&gt;
       &lt;/a&gt;
 
-      &lt;div className=&quot;card card--vertical card--disabled&quot;&gt;
+      &lt;a href=&quot;./?path=/docs/icons-getting-started--docs&quot; className=&quot;card card--vertical&quot;&gt;
         &lt;h3 className=&quot;card__title&quot;&gt;Icons&lt;/h3&gt;
         &lt;p className=&quot;card__description&quot;&gt;A comprehensive library of icons for consistent visual communication across products.&lt;/p&gt;
-        &lt;span className=&quot;card__link card__link--disabled&quot;&gt;Coming soon&lt;/span&gt;
-      &lt;/div&gt;
+        &lt;span className=&quot;card__link&quot;&gt;
+          Explore icons →
+        &lt;/span&gt;
+      &lt;/a&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;
@@ -1931,6 +1933,99 @@ import Markdown from &#39;markdown-to-jsx&#39;;
 # T3 Typography Tokens
 
 &lt;Markdown&gt;{T3TypographyMarkdown}&lt;/Markdown&gt;
+</code></pre>
+          </div>
+        </div>
+  </div>
+</article>
+<article
+  class="card is-doc no-doc-error"
+  role="listitem"
+  aria-label="Docs">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> Icons/Getting Started</h2>
+      <div class="badges">
+        
+        <label for="doc-24-icons-getting-started-docs-content" class="badge ok as-toggle">view content</label>
+      </div>
+    </div>
+    <div class="meta" title="./src/stories/icons/icon-guide.mdx">icons-getting-started--docs · ./src/stories/icons/icon-guide.mdx</div>
+    
+  </div>
+
+  <!-- Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="doc-24-icons-getting-started-docs-content" class="tg tg-content" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-content">
+          <div class="mdx-content">
+            <pre><code>import { Meta } from &#39;@storybook/addon-docs/blocks&#39;;
+
+&lt;Meta title=&quot;Icons/Getting Started&quot; /&gt;
+
+&lt;div className=&quot;welcome-section&quot;&gt;
+  &lt;h1&gt;Icons&lt;/h1&gt;
+  &lt;p className=&quot;welcome-description&quot;&gt;
+    Our icon system is powered by a self-hosted Iconify server. This enables consistent visual
+    language across all Infomaniak products with all icons coming from this single source of truth.
+  &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;a
+  href=&quot;./?path=/docs/icons-icon-gallery--docs&quot;
+  className=&quot;card card--horizontal card--primary&quot;
+&gt;
+  &lt;div className=&quot;card__body&quot;&gt;
+    &lt;h3 className=&quot;card__title&quot;&gt;View All Icons&lt;/h3&gt;
+    &lt;p className=&quot;card__description&quot;&gt;
+      Browse the complete gallery with search and filter capabilities.
+    &lt;/p&gt;
+    &lt;span className=&quot;card__link&quot;&gt;Open Gallery →&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/a&gt;
+</code></pre>
+          </div>
+        </div>
+  </div>
+</article>
+<article
+  class="card is-doc no-doc-error"
+  role="listitem"
+  aria-label="Docs">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> Icons/Icon Gallery</h2>
+      <div class="badges">
+        
+        <label for="doc-25-icons-icon-gallery-docs-content" class="badge ok as-toggle">view content</label>
+      </div>
+    </div>
+    <div class="meta" title="./src/stories/icons/icon-gallerys.mdx">icons-icon-gallery--docs · ./src/stories/icons/icon-gallerys.mdx</div>
+    
+  </div>
+
+  <!-- Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="doc-25-icons-icon-gallery-docs-content" class="tg tg-content" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-content">
+          <div class="mdx-content">
+            <pre><code>import { Meta } from &#39;@storybook/addon-docs/blocks&#39;;
+import IconGallery from &#39;../../components/IconGallery.tsx&#39;;
+import { IconGalleryErrorBoundary } from &#39;../../components/IconGalleryErrorBoundary.tsx&#39;;
+
+&lt;Meta title=&quot;Icons/Icon Gallery&quot; /&gt;
+
+&lt;IconGalleryErrorBoundary&gt;
+  &lt;IconGallery /&gt;
+&lt;/IconGalleryErrorBoundary&gt;
 </code></pre>
           </div>
         </div>
