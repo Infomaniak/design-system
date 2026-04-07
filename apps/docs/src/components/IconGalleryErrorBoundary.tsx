@@ -90,28 +90,17 @@ export class IconGalleryErrorBoundary extends Component<Props, State> {
             <svg
               width="64"
               height="64"
-              viewBox="0 0 24 24"
               fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              className="icon-gallery-error-boundary__icon"
+              viewBox="0 0 24 24"
+              className="icon-gallery-error__icon"
             >
-              <circle
-                cx="12"
-                cy="12"
-                r="10"
+              <path
+                fill="currentColor"
+                d="M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18m0-16.5a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15"
               />
-              <line
-                x1="12"
-                y1="8"
-                x2="12"
-                y2="12"
-              />
-              <line
-                x1="12"
-                y1="16"
-                x2="12.01"
-                y2="16"
+              <path
+                fill="currentColor"
+                d="M12 13a.76.76 0 0 1-.75-.75v-3.5a.75.75 0 1 1 1.5 0v3.5A.76.76 0 0 1 12 13M12 16a.76.76 0 0 1-.75-.75v-.5a.75.75 0 1 1 1.5 0v.5A.76.76 0 0 1 12 16"
               />
             </svg>
 
