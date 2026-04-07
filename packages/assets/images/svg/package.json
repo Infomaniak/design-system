@@ -1,7 +1,6 @@
 {
   "name": "@infomaniak-design-system/svg-assets",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1",
   "type": "module",
   "description": "Infomaniak's Design System - SVGs",
   "scripts": {
@@ -10,5 +9,6 @@
   "dependencies": {
     "@iconify/tools": "^5.0.5",
     "@iconify/utils": "^3.1.0"
-  }
+  },
+  "private": true
 }
