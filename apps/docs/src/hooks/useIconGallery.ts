@@ -203,7 +203,10 @@ export function useIconGallery(): UseIconGalleryReturn {
 
   const retry = useCallback((): void => {
     if (collections.length === 0) {
+      abortCurrentRequest();
+
       const abortController = new AbortController();
+      abortControllerRef.current = abortController;
       void fetchCollections(abortController.signal);
     } else if (selectedCollection !== '') {
       cacheRef.current.delete(selectedCollection);
