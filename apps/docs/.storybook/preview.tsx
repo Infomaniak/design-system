@@ -5,6 +5,7 @@ import { GLOBALS_UPDATED } from 'storybook/internal/core-events';
 import { Globals, GlobalsUpdatedPayload } from 'storybook/internal/types';
 import Table from '../src/components/Table.tsx';
 
+import '../src/styles/main.css';
 import '../src/styles/token-tables.css';
 
 // Import base CSS tokens
@@ -217,6 +218,11 @@ const preview: Preview = {
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely
       test: 'todo',
+    },
+    options: {
+      storySort: {
+        order: ['Welcome', 'Design Tokens', ['Getting Started', '*'], '*'],
+      },
     },
   },
   decorators: [
