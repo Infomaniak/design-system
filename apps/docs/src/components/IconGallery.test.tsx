@@ -4,7 +4,7 @@
 
 import { cleanup, render } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import type { IconGalleryError, IconItem } from '../hooks/useIconGallery.ts';
+import type { IconGalleryErrorType, IconItem } from '../hooks/useIconGallery.ts';
 import IconGallery from './IconGallery.tsx';
 
 const mockUseIconGallery = vi.fn();
@@ -180,7 +180,7 @@ describe('IconGallery', () => {
 
   it('calls retry when retry button is clicked in error state', () => {
     const retry = vi.fn();
-    const error: IconGalleryError = {
+    const error: IconGalleryErrorType = {
       message: 'Failed to fetch',
       code: 'API_ERROR',
     };
@@ -249,7 +249,7 @@ describe('IconGallery', () => {
   });
 
   it('disables controls when error exists', () => {
-    const error: IconGalleryError = {
+    const error: IconGalleryErrorType = {
       message: 'Failed',
       code: 'API_ERROR',
     };
