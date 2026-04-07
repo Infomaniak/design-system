@@ -48,7 +48,7 @@ await runScript('import-svgs', async (logger: Logger): Promise<void> => {
           `Skipping import of new assets from Figma because the import version "${importVersion}" is equal to the current version.`,
         );
         return true;
-      } else if (compareResult === -1) {
+      } else if (compareResult === 1) {
         throw new Error(
           `The import version "${importVersion}" must be greater than the current version "${currentVersion}".`,
         );
