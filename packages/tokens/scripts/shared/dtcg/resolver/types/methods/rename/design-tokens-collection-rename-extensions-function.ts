@@ -17,3 +17,11 @@ export function designTokensCollectionRenameExtensionsAutomatically(
 ): DesignTokensCollectionTokenExtensions {
   return updateCurlyReferencesRecursively(extensions, update);
 }
+
+export const DO_NOT_RENAME_DESIGN_TOKENS_COLLECTION_EXTENSIONS: DesignTokensCollectionRenameExtensionsFunction =
+  (
+    extensions: DesignTokensCollectionTokenExtensions,
+    _update: UpdateCurlyReference,
+  ): DesignTokensCollectionTokenExtensions => {
+    return extensions;
+  };

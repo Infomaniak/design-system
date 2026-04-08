@@ -529,7 +529,7 @@ export class DesignTokensCollection {
 
     if (this.has(to)) {
       if (onExistingTokenBehaviour === 'throw') {
-        throw new Error(`Replacing an existing token: ${to.join('.')}`);
+        throw new Error(`Replacing an existing token: ${from.join('.')} -> ${to.join('.')}`);
       } else if (onExistingTokenBehaviour === 'skip') {
         return;
       }

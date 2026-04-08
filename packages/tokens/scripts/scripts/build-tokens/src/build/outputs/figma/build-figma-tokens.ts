@@ -126,10 +126,16 @@ export function buildFigmaTokens({
     // restore "@root" tokens
     for (const token of Array.from(figmaBaseCollection.tokens())) {
       if (token.extensions !== undefined && Reflect.has(token.extensions, 'figmaName')) {
-        figmaBaseCollection.rename(
-          token.name,
-          Reflect.get(token.extensions, 'figmaName') as string[],
-        );
+        let figmaName: readonly string[] = Reflect.get(
+          token.extensions,
+          'figmaName',
+        ) as readonly string[];
+
+        if (modifiers.has(token.name[0])) {
+          figmaName = [token.name[0], ...figmaName];
+        }
+
+        figmaBaseCollection.rename(token.name, figmaName);
       }
     }
 
