@@ -40,7 +40,7 @@ export async function convertFigmaTokens({
 
   // remove `test` tokens
   for (const token of Array.from(rootCollection.tokens())) {
-    if (token.name.some((namePart: string): boolean => namePart.toLowerCase().includes('test'))) {
+    if (token.name.some((namePart: string): boolean => namePart.toLowerCase().startsWith('test'))) {
       rootCollection.delete(token.name);
     }
   }
