@@ -3,6 +3,7 @@ import type { Logger } from '../../../../../../../../../scripts/helpers/log/logg
 import { isCurlyReference } from '../../../../../../shared/dtcg/design-token/reference/types/curly/is-curly-reference.ts';
 import { segmentsReferenceToCurlyReference } from '../../../../../../shared/dtcg/design-token/reference/types/segments/to/curly-reference/segments-reference-to-curly-reference.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
+import { getTokensOfDesignTokensCollectionFilteredByPath } from '../../../../../../shared/dtcg/resolver/helpers/filter-by-path/get-tokens-of-design-tokens-collection-filtered-by-path.ts';
 import type { DesignTokenModifiers } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import { designTokensCollectionToFigmaDesignTokensGroup } from '../../../../../../shared/dtcg/resolver/to/figma/dtcg/design-tokens-collection-to-figma-design-tokens-group.ts';
 import type { FigmaDesignTokensGroup } from '../../../../../../shared/dtcg/resolver/to/figma/figma/group/figma-design-tokens-group.ts';
@@ -37,13 +38,10 @@ export function buildFigmaTokens({
     // for each modifier -> context -> token => add the token in the collection with the associated mode
     for (const [modifier, contexts] of modifiers.entries()) {
       for (const [context, collection] of contexts.entries()) {
-        const expectedPath: string = `${modifier}/${context}`;
-
-        for (const token of collection
-          .tokens()
-          .filter((token: GenericDesignTokensCollectionToken): boolean => {
-            return token.files.some((path: string): boolean => path.includes(expectedPath));
-          })) {
+        for (const token of getTokensOfDesignTokensCollectionFilteredByPath(
+          collection,
+          `${modifier}/${context}`,
+        )) {
           const newName: ArrayDesignTokenName = [modifier, ...token.name];
 
           if (!isCurlyReference(token.value)) {
@@ -82,13 +80,10 @@ export function buildFigmaTokens({
     // for each modifier -> context -> token => make existing tokens point to the corresponding modifier
     for (const [modifier, contexts] of modifiers.entries()) {
       for (const [context, collection] of contexts.entries()) {
-        const expectedPath: string = `${modifier}/${context}`;
-
-        for (const token of collection
-          .tokens()
-          .filter((token: GenericDesignTokensCollectionToken): boolean => {
-            return token.files.some((path: string): boolean => path.includes(expectedPath));
-          })) {
+        for (const token of getTokensOfDesignTokensCollectionFilteredByPath(
+          collection,
+          `${modifier}/${context}`,
+        )) {
           const existingToken: GenericDesignTokensCollectionToken | undefined =
             figmaBaseCollection.getOptional(token.name);
 
