@@ -2,16 +2,17 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.5",
+    "version": "0.0.1",
     "author": {
       "name": "Infomaniak"
     },
     "license": {
-      "title": "GPL-3.0-only"
+      "title": "GPL-3.0-only",
+      "spdx": "GPL-3.0-only"
     },
     "total": 6
   },
-  "lastModified": 1774605647,
+  "lastModified": 1775556432,
   "icons": {
     "size16": {
       "body": "<g fill=\"none\"><g clip-path=\"url(#svgID0)\"><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M6.5 13.5v-4h3v4h4v-6a.5.5 0 00-.146-.354l-5-5a.5.5 0 00-.708 0l-5 5A.5.5 0 002.5 7.5v6z\"/></g><defs><clipPath id=\"svgID0\"><path fill=\"#fff\" d=\"M0 0h16v16H0z\"/></clipPath></defs></g>",
