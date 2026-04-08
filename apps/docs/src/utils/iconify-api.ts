@@ -1,6 +1,7 @@
 import { type IconifyInfo } from '@iconify/types';
 
-const BASE_URL = 'https://iconify.preprod.dev.infomaniak.ch/'; // TODO: Move this URL to an environment variable
+const BASE_URL =
+  import.meta.env['VITE_ICONIFY_API_URL'] ?? 'https://iconify.preprod.dev.infomaniak.ch/';
 const DEFAULT_TIMEOUT_MS = 10_000;
 
 export interface IconifyApiFetchOptions {
