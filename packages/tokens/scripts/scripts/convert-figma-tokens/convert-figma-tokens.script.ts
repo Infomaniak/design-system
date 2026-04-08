@@ -11,7 +11,6 @@ const LOCAL_DIR: string = dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR: string = join(LOCAL_DIR, '../../..');
 const TOKENS_DIR: string = join(LOCAL_DIR, 'tokens');
 const TOKENS_PATH: string = join(TOKENS_DIR, 'tokens.json');
-// const OUTPUT_DIR: string = join(TOKENS_DIR, 'dtcg');
 const OUTPUT_DIR: string = join(ROOT_DIR, 'tokens');
 
 const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
