@@ -59,19 +59,14 @@ export function buildFigmaTokens({
             [context]: token.value,
           };
 
-          figmaBaseCollection.add(
-            {
-              ...token,
-              name: newName,
-              extensions: {
-                mode,
-              },
+          figmaBaseCollection.set({
+            ...token,
+            name: newName,
+            extensions: {
+              ...token.extensions,
+              mode,
             },
-            {
-              last: false,
-              merge: true,
-            },
-          );
+          });
         }
       }
     }
@@ -114,16 +109,10 @@ export function buildFigmaTokens({
             }
 
             // t2, t3 tokens must point to the modifier
-            figmaBaseCollection.add(
-              {
-                ...existingToken,
-                value: segmentsReferenceToCurlyReference([modifier, ...existingToken.name]),
-              },
-              {
-                last: false,
-                merge: false,
-              },
-            );
+            figmaBaseCollection.set({
+              ...existingToken,
+              value: segmentsReferenceToCurlyReference([modifier, ...existingToken.name]),
+            });
           }
 
           // references to this token must point now on the modifier

@@ -204,6 +204,13 @@ export class DesignTokensCollection {
     return this;
   }
 
+  set(token: GenericDesignTokensCollectionToken): this {
+    return this.add(token, {
+      last: false,
+      merge: false,
+    });
+  }
+
   /**
    * Checks if the collection contains a specific design token or token name.
    *

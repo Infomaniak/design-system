@@ -49,19 +49,13 @@ export async function convertFigmaTokens({
   for (const token of Array.from(rootCollection.tokens())) {
     if (token.name.includes('@root')) {
       if (token.name.at(-1) !== '@root') {
-        rootCollection.add(
-          {
-            ...token,
-            extensions: {
-              ...token.extensions,
-              figmaName: token.name.slice(1),
-            },
+        rootCollection.set({
+          ...token,
+          extensions: {
+            ...token.extensions,
+            figmaName: token.name.slice(1),
           },
-          {
-            last: false,
-            merge: false,
-          },
-        );
+        });
       }
 
       rootCollection.rename(
@@ -126,7 +120,7 @@ export async function convertFigmaTokens({
     })) {
     const resolved: GenericResolvedDesignTokensCollectionToken = rootCollection.resolve(token);
 
-    mainCollection.add(
+    mainCollection.set(
       updateDesignTokensCollectionTokenReferences(
         token,
         (curlyReference: CurlyReference): CurlyReference => {
@@ -149,10 +143,6 @@ export async function convertFigmaTokens({
           return curlyReference;
         },
       ),
-      {
-        last: false,
-        merge: false,
-      },
     );
   }
 
