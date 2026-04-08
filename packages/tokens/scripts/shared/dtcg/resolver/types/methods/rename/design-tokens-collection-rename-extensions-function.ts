@@ -9,8 +9,11 @@ export interface DesignTokensCollectionRenameExtensionsFunction {
   ): DesignTokensCollectionTokenExtensions;
 }
 
-/*--*/
+/* BUILT-IN FUNCTIONS */
 
+/**
+ * Renames `extensions` of a design token by recursively updating all references present in the object.
+ */
 export function designTokensCollectionRenameExtensionsAutomatically(
   extensions: DesignTokensCollectionTokenExtensions,
   update: UpdateCurlyReference,
@@ -18,6 +21,9 @@ export function designTokensCollectionRenameExtensionsAutomatically(
   return updateCurlyReferencesRecursively(extensions, update);
 }
 
+/**
+ * Skips renaming of `extensions` references of a design token.
+ */
 export const DO_NOT_RENAME_DESIGN_TOKENS_COLLECTION_EXTENSIONS: DesignTokensCollectionRenameExtensionsFunction =
   (
     extensions: DesignTokensCollectionTokenExtensions,
