@@ -30,7 +30,7 @@ import '@infomaniak-design-system/tokens/dist/web/css/modifiers/theme/light.attr
 
 // Initialize EsdsSVGComponent for the <esds-svg> elements
 const iconifyEndpoint =
-  import.meta.env.VITE_ICONIFY_API_URL || 'https://iconify.preprod.dev.infomaniak.ch';
+  import.meta.env.VITE_ICONIFY_API_URL ?? 'https://iconify.preprod.dev.infomaniak.ch';
 EsdsSVGComponent.init(
   new IconifyApi({
     resources: [iconifyEndpoint],
