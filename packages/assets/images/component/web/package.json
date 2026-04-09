@@ -5,18 +5,18 @@
   "exports": {
     ".": {
       "import": {
-        "types": "./public-api.d.ts",
-        "default": "./esds-svg.js"
+        "types": "./dist/public-api.d.ts",
+        "default": "./dist/esds-svg.js"
       },
       "require": {
-        "types": "./public-api.d.ts",
-        "default": "./esds-svg.umd.cjs"
+        "types": "./dist/public-api.d.ts",
+        "default": "./dist/esds-svg.umd.cjs"
       }
     }
   },
-  "main": "./esds-svg.umd.cjs",
-  "module": "./esds-svg.js",
-  "types": "./public-api.d.ts",
+  "main": "./dist/esds-svg.umd.cjs",
+  "module": "./dist/esds-svg.js",
+  "types": "./dist/public-api.d.ts",
   "scripts": {
     "=== DEV ===": "",
     "dev": "vite",

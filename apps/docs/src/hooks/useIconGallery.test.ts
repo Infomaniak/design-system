@@ -7,16 +7,16 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { useIconGallery } from './useIconGallery.ts';
 
 // Mock the IconifyApi class using hoisted mocks
-const { mockListIconSets, mockListIconsOptimized } = vi.hoisted(() => ({
+const { mockListIconSets, mockListIcons } = vi.hoisted(() => ({
   mockListIconSets: vi.fn(),
-  mockListIconsOptimized: vi.fn(),
+  mockListIcons: vi.fn(),
 }));
 
-vi.mock('../utils/iconify-api.ts', () => {
+vi.mock('@infomaniak-design-system/esds-svg', () => {
   return {
     IconifyApi: class MockIconifyApi {
       listIconSets = mockListIconSets;
-      listIconsOptimized = mockListIconsOptimized;
+      listIcons = mockListIcons;
     },
   };
 });
@@ -63,7 +63,7 @@ describe('useIconGallery', () => {
         ic: { name: 'IcoMoon' },
       });
 
-      mockListIconsOptimized.mockResolvedValue([]);
+      mockListIcons.mockResolvedValue([]);
 
       const { result } = renderHook(() => useIconGallery());
 
@@ -123,7 +123,7 @@ describe('useIconGallery', () => {
     });
 
     it('fetches icons when collection is selected', async () => {
-      mockListIconsOptimized.mockResolvedValue([
+      mockListIcons.mockResolvedValue([
         { name: 'home', categories: new Set() },
         { name: 'settings', categories: new Set() },
       ]);
@@ -134,7 +134,7 @@ describe('useIconGallery', () => {
         expect(result.current.isLoading).toBe(false);
       });
 
-      expect(mockListIconsOptimized).toHaveBeenCalledWith({
+      expect(mockListIcons).toHaveBeenCalledWith({
         prefix: 'material',
         signal: expect.any(AbortSignal),
       });
@@ -148,7 +148,7 @@ describe('useIconGallery', () => {
     });
 
     it('caches icons per collection', async () => {
-      mockListIconsOptimized.mockResolvedValue([{ name: 'home', categories: new Set() }]);
+      mockListIcons.mockResolvedValue([{ name: 'home', categories: new Set() }]);
 
       const { result } = renderHook(() => useIconGallery());
 
@@ -156,13 +156,13 @@ describe('useIconGallery', () => {
         expect(result.current.icons).toHaveLength(1);
       });
 
-      expect(mockListIconsOptimized).toHaveBeenCalledTimes(1);
+      expect(mockListIcons).toHaveBeenCalledTimes(1);
 
       // Trigger a re-render by using act
       await act(async () => {});
 
       expect(result.current.icons).toHaveLength(1);
-      expect(mockListIconsOptimized).toHaveBeenCalledTimes(1);
+      expect(mockListIcons).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -172,7 +172,7 @@ describe('useIconGallery', () => {
         material: { name: 'Material Icons' },
       });
 
-      mockListIconsOptimized.mockResolvedValue([
+      mockListIcons.mockResolvedValue([
         { name: 'home', categories: new Set() },
         { name: 'home-work', categories: new Set() },
         { name: 'settings', categories: new Set() },
@@ -367,7 +367,7 @@ describe('useIconGallery', () => {
         material: { name: 'Material Icons' },
       });
 
-      mockListIconsOptimized.mockResolvedValue([]);
+      mockListIcons.mockResolvedValue([]);
 
       act(() => {
         result.current.retry();
@@ -388,7 +388,7 @@ describe('useIconGallery', () => {
 
       const requestSignals: AbortSignal[] = [];
 
-      mockListIconsOptimized.mockImplementation(({ signal }: { signal?: AbortSignal }) => {
+      mockListIcons.mockImplementation(({ signal }: { signal?: AbortSignal }) => {
         if (signal !== undefined) {
           requestSignals.push(signal);
         }
@@ -406,7 +406,7 @@ describe('useIconGallery', () => {
       });
 
       await waitFor(() => {
-        expect(mockListIconsOptimized).toHaveBeenCalledTimes(2);
+        expect(mockListIcons).toHaveBeenCalledTimes(2);
       });
 
       expect(requestSignals).toHaveLength(2);
