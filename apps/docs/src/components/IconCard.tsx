@@ -30,8 +30,8 @@ const IconCard: React.FC<IconCardProps> = ({ icon, prefix }) => {
           background-color: #f9fafb;
         }
         .icon-card__icon {
-          width: 48px;
-          height: 48px;
+          width: 64px;
+          height: 64px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -49,8 +49,11 @@ const IconCard: React.FC<IconCardProps> = ({ icon, prefix }) => {
       `}</style>
       <div className="icon-card">
         <div className="icon-card__icon">
-          ICON
-          {/* TODO: use dedicated component to fetch and render icons */}
+          <esds-svg
+            name={iconId}
+            mode="bg"
+            style={{ width: '48px', height: '48px' }}
+          ></esds-svg>
         </div>
         <code className="icon-card__code">{iconId}</code>
       </div>
