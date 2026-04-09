@@ -3,7 +3,7 @@ import { valueOrJsonReferenceSchema } from '../../../../../../reference/types/js
 import { dimensionDesignTokenValueUnitSchema } from './members/unit/dimension-design-token-value-unit.schema.ts';
 import { dimensionDesignTokenValueValueSchema } from './members/value/dimension-design-token-value-value.schema.ts';
 
-export const dimensionDesignTokenValueSchema = z.object({
+export const dimensionDesignTokenValueSchema = z.strictObject({
   value: valueOrJsonReferenceSchema(dimensionDesignTokenValueValueSchema),
   unit: valueOrJsonReferenceSchema(dimensionDesignTokenValueUnitSchema),
 });

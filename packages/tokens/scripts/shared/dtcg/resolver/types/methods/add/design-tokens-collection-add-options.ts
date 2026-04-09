@@ -12,4 +12,11 @@ export interface DesignTokensCollectionAddOptions {
    * @default 'true'
    */
   readonly merge?: boolean;
+
+  /**
+   * If the token should be validated when inserted.
+   *
+   * @default 'true'
+   */
+  readonly validate?: boolean;
 }
