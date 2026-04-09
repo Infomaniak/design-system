@@ -7,7 +7,7 @@ declare module '*.css' {
 }
 // Extend ImportMetaEnv with custom env variables
 interface ImportMetaEnv {
-  readonly VITE_ICONIFY_API_URL: string;
+  readonly VITE_ICONIFY_API_URL?: string;
 }
 interface ImportMeta {
   readonly env: ImportMetaEnv;
