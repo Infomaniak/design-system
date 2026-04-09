@@ -182,6 +182,11 @@ function tokenBelongsToATier(token: GenericDesignTokensCollectionToken): boolean
   return !token.files.some((path: string): boolean => path.includes('modifiers'));
 }
 
+/**
+ * Sorts the design token contexts to have 'light' and 'infomaniak' as first "modes".
+ *
+ * This helps UX designers as _default_ values/modes.
+ */
 function sortDesignTokenContextEntries(
   modifier: string,
   contexts: DesignTokenContexts,
