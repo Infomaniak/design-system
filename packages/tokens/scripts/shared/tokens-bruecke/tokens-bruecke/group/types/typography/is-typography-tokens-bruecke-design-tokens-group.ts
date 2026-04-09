@@ -23,6 +23,7 @@ export function isTypographyTokensBrueckeDesignTokensGroup(
     );
   };
 
+  // TODO move to DTCG when figma is ready
   return (
     testMember('family', isStringTokensBrueckeDesignToken) &&
     testMember('weight', isStringTokensBrueckeDesignToken) &&

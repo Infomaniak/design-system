@@ -4,7 +4,11 @@ import { isCurlyReference } from '../../../../../../shared/dtcg/design-token/ref
 import { segmentsReferenceToCurlyReference } from '../../../../../../shared/dtcg/design-token/reference/types/segments/to/curly-reference/segments-reference-to-curly-reference.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import { getTokensOfDesignTokensCollectionFilteredByPath } from '../../../../../../shared/dtcg/resolver/helpers/filter-by-path/get-tokens-of-design-tokens-collection-filtered-by-path.ts';
-import type { DesignTokenModifiers } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
+import type {
+  DesignTokenContextEntry,
+  DesignTokenContexts,
+  DesignTokenModifiers,
+} from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import { designTokensCollectionToFigmaDesignTokensGroup } from '../../../../../../shared/dtcg/resolver/to/figma/dtcg/design-tokens-collection-to-figma-design-tokens-group.ts';
 import type { FigmaDesignTokensGroup } from '../../../../../../shared/dtcg/resolver/to/figma/figma/group/figma-design-tokens-group.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
@@ -37,7 +41,7 @@ export function buildFigmaTokens({
 
     // for each modifier -> context -> token => add the token in the collection with the associated mode
     for (const [modifier, contexts] of modifiers.entries()) {
-      for (const [context, collection] of contexts.entries()) {
+      for (const [context, collection] of sortDesignTokenContextEntries(modifier, contexts)) {
         for (const token of getTokensOfDesignTokensCollectionFilteredByPath(
           collection,
           `${modifier}/${context}`,
@@ -176,4 +180,47 @@ export function buildFigmaTokens({
 
 function tokenBelongsToATier(token: GenericDesignTokensCollectionToken): boolean {
   return !token.files.some((path: string): boolean => path.includes('modifiers'));
+}
+
+/**
+ * Sorts the design token contexts to have 'light' and 'infomaniak' as first "modes".
+ *
+ * This helps UX designers as _default_ values/modes.
+ */
+function sortDesignTokenContextEntries(
+  modifier: string,
+  contexts: DesignTokenContexts,
+): IteratorObject<DesignTokenContextEntry> {
+  switch (modifier) {
+    case 'theme':
+      return (function* () {
+        yield* Array.from(contexts.entries()).sort(
+          ([a]: DesignTokenContextEntry, [b]: DesignTokenContextEntry) => {
+            if (a === 'light') {
+              return -1;
+            } else if (b === 'light') {
+              return 1;
+            } else {
+              return 0;
+            }
+          },
+        );
+      })();
+    case 'product':
+      return (function* () {
+        yield* Array.from(contexts.entries()).sort(
+          ([a]: DesignTokenContextEntry, [b]: DesignTokenContextEntry) => {
+            if (a === 'infomaniak') {
+              return -1;
+            } else if (b === 'infomaniak') {
+              return 1;
+            } else {
+              return 0;
+            }
+          },
+        );
+      })();
+    default:
+      return contexts.entries();
+  }
 }

@@ -39,6 +39,7 @@ export async function convertFigmaTokens({
   );
 
   // remove `test` tokens
+  // TODO remove when Figma will be aligned with code
   for (const token of Array.from(rootCollection.tokens())) {
     if (token.name.some((namePart: string): boolean => namePart.toLowerCase().startsWith('test'))) {
       rootCollection.delete(token.name);
@@ -69,6 +70,7 @@ export async function convertFigmaTokens({
   }
 
   // replace `mode` modifier by `theme`
+  // TODO remove when Figma will be aligned with code
   for (const token of Array.from(rootCollection.tokens())) {
     if (token.name[0] === 'mode') {
       rootCollection.rename(token.name, ['theme', ...token.name.slice(1)], {
