@@ -32,7 +32,7 @@ interface PackageJsonWithPaths {
  */
 export function transformPackageJsonPaths<P extends PackageJsonWithPaths>(
   packageJson: P,
-  config: TransformPackageJsonPathsConfig
+  config: TransformPackageJsonPathsConfig,
 ): P {
   const { patterns } = config;
 

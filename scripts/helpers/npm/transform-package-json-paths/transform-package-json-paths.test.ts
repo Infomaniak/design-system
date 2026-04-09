@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { transformPackageJsonPaths, type TransformPackageJsonPathsConfig } from './transform-package-json-paths.ts';
+import {
+  transformPackageJsonPaths,
+  type TransformPackageJsonPathsConfig,
+} from './transform-package-json-paths.ts';
 
 describe('transformPackageJsonPaths', () => {
   const defaultConfig: TransformPackageJsonPathsConfig = {
@@ -164,18 +167,12 @@ describe('transformPackageJsonPaths', () => {
         name: 'test',
         version: '1.0.0',
         exports: {
-          '.': [
-            './dist/esm.mjs',
-            { require: './dist/cjs.cjs', import: './dist/esm.mjs' },
-          ],
+          '.': ['./dist/esm.mjs', { require: './dist/cjs.cjs', import: './dist/esm.mjs' }],
         },
       };
       const result = transformPackageJsonPaths(pkg, defaultConfig);
       expect(result.exports).toEqual({
-        '.': [
-          './esm.mjs',
-          { require: './cjs.cjs', import: './esm.mjs' },
-        ],
+        '.': ['./esm.mjs', { require: './cjs.cjs', import: './esm.mjs' }],
       });
     });
   });
