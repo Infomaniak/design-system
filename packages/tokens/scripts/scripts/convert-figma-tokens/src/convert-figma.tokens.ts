@@ -38,14 +38,31 @@ export async function convertFigmaTokens({
     root,
   );
 
+  // remove `test` tokens
+  for (const token of Array.from(rootCollection.tokens())) {
+    if (token.name.some((namePart: string): boolean => namePart.toLowerCase().startsWith('test'))) {
+      rootCollection.delete(token.name);
+    }
+  }
+
   // replace `@root` segments
   for (const token of Array.from(rootCollection.tokens())) {
     if (token.name.includes('@root')) {
+      if (token.name.at(-1) !== '@root') {
+        rootCollection.set({
+          ...token,
+          extensions: {
+            ...token.extensions,
+            figmaName: token.name.slice(1),
+          },
+        });
+      }
+
       rootCollection.rename(
         token.name,
         token.name.filter((namePart: string): boolean => namePart !== '@root'),
         {
-          onExitingTokenBehaviour: 'throw',
+          onExistingTokenBehaviour: 'throw',
         },
       );
     }
@@ -55,7 +72,7 @@ export async function convertFigmaTokens({
   for (const token of Array.from(rootCollection.tokens())) {
     if (token.name[0] === 'mode') {
       rootCollection.rename(token.name, ['theme', ...token.name.slice(1)], {
-        onExitingTokenBehaviour: 'throw',
+        onExistingTokenBehaviour: 'throw',
       });
     }
   }
@@ -103,7 +120,7 @@ export async function convertFigmaTokens({
     })) {
     const resolved: GenericResolvedDesignTokensCollectionToken = rootCollection.resolve(token);
 
-    mainCollection.add(
+    mainCollection.set(
       updateDesignTokensCollectionTokenReferences(
         token,
         (curlyReference: CurlyReference): CurlyReference => {
@@ -126,17 +143,13 @@ export async function convertFigmaTokens({
           return curlyReference;
         },
       ),
-      {
-        last: false,
-        merge: false,
-      },
     );
   }
 
   // remove the figma collections prefixes from the main collection
   for (const token of rootCollection.tokens()) {
     mainCollection.rename(token.name, token.name.slice(1), {
-      onExitingTokenBehaviour: 'only-references',
+      onExistingTokenBehaviour: 'only-references',
     });
   }
 

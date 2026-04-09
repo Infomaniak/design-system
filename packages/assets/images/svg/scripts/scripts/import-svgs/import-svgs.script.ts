@@ -9,6 +9,7 @@ import { getEnvFigmaIconFileKey } from '../../../../../../../scripts/helpers/fig
 import { getEnvFigmaWebhookEvent } from '../../../../../../../scripts/helpers/figma/env/get-env-figma-webhook-event.ts';
 import type { PackageJson } from '../../../../../../../scripts/helpers/file/package-json/package-json.ts';
 import { readPackageJsonFile } from '../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
+import { writeJsonFileSafe } from '../../../../../../../scripts/helpers/file/write-json-file-safe.ts';
 import { doesGitBranchExistOnRemote } from '../../../../../../../scripts/helpers/git/does-git-branch-exist-on-remote.ts';
 import { getEnvCiDsUpdateAndPrAuthToken } from '../../../../../../../scripts/helpers/github/env/get-env-ci-ds-update-and-pr-auth-token.ts';
 import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
@@ -34,12 +35,12 @@ await runScript('import-svgs', async (logger: Logger): Promise<void> => {
   const importVersion: string = figmaWebhookEvent.label;
   const branchName: string = `feat/import-icons--${importVersion}`;
 
+  const packageJson: PackageJson = await readPackageJsonFile(join(ROOT_DIR, 'package.json'));
+
   const skip: boolean = await logger.asyncTask(
     'check-import-validity',
     async (): Promise<boolean> => {
-      const { version: currentVersion }: PackageJson = await readPackageJsonFile(
-        join(ROOT_DIR, 'package.json'),
-      );
+      const { version: currentVersion } = packageJson;
 
       const compareResult: number = compare(currentVersion, importVersion);
 
@@ -80,6 +81,12 @@ await runScript('import-svgs', async (logger: Logger): Promise<void> => {
   if (!hasNewAssets) {
     throw new Error('No new assets have been imported from Figma.');
   }
+
+  // update package.json version
+  await writeJsonFileSafe(join(OUTPUT_DIR, 'package.json'), {
+    ...packageJson,
+    version: importVersion,
+  });
 
   await createImportSvgPullRequests({
     outputDirectory: OUTPUT_DIR,

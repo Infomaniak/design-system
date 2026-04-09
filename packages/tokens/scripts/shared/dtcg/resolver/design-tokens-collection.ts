@@ -204,6 +204,13 @@ export class DesignTokensCollection {
     return this;
   }
 
+  set(token: GenericDesignTokensCollectionToken): this {
+    return this.add(token, {
+      last: false,
+      merge: false,
+    });
+  }
+
   /**
    * Checks if the collection contains a specific design token or token name.
    *
@@ -508,7 +515,7 @@ export class DesignTokensCollection {
     to: DesignTokenNameLike,
     {
       extensions: renameExtensions = designTokensCollectionRenameExtensionsAutomatically,
-      onExitingTokenBehaviour = 'throw',
+      onExistingTokenBehaviour = 'throw',
     }: DesignTokensCollectionRenameOptions = {},
   ): void {
     from = DesignTokensCollection.designTokenNameLikeToArrayDesignTokenName(from);
@@ -521,9 +528,9 @@ export class DesignTokensCollection {
     // TODO: improvement - get "from" token and rename it directly after/before updating rge references
 
     if (this.has(to)) {
-      if (onExitingTokenBehaviour === 'throw') {
-        throw new Error(`Replacing an existing token: ${to.join('.')}`);
-      } else if (onExitingTokenBehaviour === 'skip') {
+      if (onExistingTokenBehaviour === 'throw') {
+        throw new Error(`Replacing an existing token: ${from.join('.')} -> ${to.join('.')}`);
+      } else if (onExistingTokenBehaviour === 'skip') {
         return;
       }
     }
@@ -540,7 +547,7 @@ export class DesignTokensCollection {
 
       if (
         DesignTokensCollection.tokenNamesEqual(token.name, from) &&
-        onExitingTokenBehaviour !== 'only-references'
+        onExistingTokenBehaviour !== 'only-references'
       ) {
         name = to;
       }

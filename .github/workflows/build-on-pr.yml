@@ -52,6 +52,8 @@ jobs:
         id: build
         if: github.event_name != 'pull_request' || steps.prepare.outputs.should_build == 'true'
         run: yarn build
+        env:
+          VITE_ICONIFY_API_URL: 'https://iconify.preprod.dev.infomaniak.ch/'
 
       - name: Normalize Storybook build for subpath hosting
         if: steps.build.outcome == 'success'

@@ -71,17 +71,6 @@ export function createImportSvgPullRequests({
               }),
             ]);
 
-            // TODO: test and remove if not needed
-            // await Promise.all([
-            //   cp(join(outputDirectory, 'assets'), join(targetDirectory, 'assets'), {
-            //     recursive: true,
-            //     force: true,
-            //   }),
-            //   cp(join(outputDirectory, 'package.json'), join(targetDirectory, 'package.json'), {
-            //     force: true,
-            //   }),
-            // ]);
-
             return message;
           },
           logger,
