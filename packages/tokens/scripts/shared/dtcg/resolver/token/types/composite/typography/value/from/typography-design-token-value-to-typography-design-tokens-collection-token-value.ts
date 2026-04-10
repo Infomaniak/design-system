@@ -1,7 +1,7 @@
 import type { DimensionDesignTokenValue } from '../../../../../../../design-token/token/types/base/types/dimension/value/dimension-design-token-value.ts';
 import type { FontFamilyDesignTokenValue } from '../../../../../../../design-token/token/types/base/types/font-family/value/font-family-design-token-value.ts';
 import type { FontWeightDesignTokenValue } from '../../../../../../../design-token/token/types/base/types/font-weight/value/font-weight-design-token-value.ts';
-import type { NumberDesignTokenValue } from '../../../../../../../design-token/token/types/base/types/number/value/number-design-token-value.ts';
+import type { TypographyDesignTokenValueLineHeight } from '../../../../../../../design-token/token/types/composite/types/typography/value/members/line-height/typography-design-token-value-line-height.ts';
 import type { TypographyDesignTokenValue } from '../../../../../../../design-token/token/types/composite/types/typography/value/typography-design-token-value.ts';
 import type { DimensionDesignTokensCollectionTokenValue } from '../../../../base/dimension/value/dimension-design-tokens-collection-token-value.ts';
 import { dimensionDesignTokenValueToDimensionDesignTokensCollectionTokenValue } from '../../../../base/dimension/value/from/dimension-design-token-value-to-dimension-design-tokens-collection-token-value.ts';
@@ -9,9 +9,9 @@ import type { FontFamilyDesignTokensCollectionTokenValue } from '../../../../bas
 import { fontFamilyDesignTokenValueToFontFamilyDesignTokensCollectionTokenValue } from '../../../../base/font-family/value/from/font-family-design-token-value-to-font-family-design-tokens-collection-token-value.ts';
 import type { FontWeightDesignTokensCollectionTokenValue } from '../../../../base/font-weight/value/font-weight-design-tokens-collection-token-value.ts';
 import { fontWeightDesignTokenValueToFontWeightDesignTokensCollectionTokenValue } from '../../../../base/font-weight/value/from/font-weight-design-token-value-to-font-weight-design-tokens-collection-token-value.ts';
-import { numberDesignTokenValueToNumberDesignTokensCollectionTokenValue } from '../../../../base/number/value/from/number-design-token-value-to-number-design-tokens-collection-token-value.ts';
-import type { NumberDesignTokensCollectionTokenValue } from '../../../../base/number/value/number-design-tokens-collection-token-value.ts';
 import { valueOrDesignTokenReferenceToMappedValueOrCurlyReference } from '../../../value-or-design-token-reference-to-mapped-value-or-curly-reference.ts';
+import { typographyDesignTokenValueLineHeightToTypographyDesignTokensCollectionTokenValueLineHeight } from '../members/line-height/from/typography-design-token-value-line-height-to-typography-design-tokens-collection-token-value-line-height.ts';
+import type { TypographyDesignTokensCollectionTokenValueLineHeight } from '../members/line-height/typography-design-tokens-collection-token-value-line-height.ts';
 import type { TypographyDesignTokensCollectionTokenValue } from '../typography-design-tokens-collection-token-value.ts';
 
 export function typographyDesignTokenValueToTypographyDesignTokensCollectionTokenValue(
@@ -41,8 +41,13 @@ export function typographyDesignTokenValueToTypographyDesignTokensCollectionToke
     ),
     lineHeight: valueOrDesignTokenReferenceToMappedValueOrCurlyReference(
       $value.lineHeight,
-      (value: NumberDesignTokenValue): NumberDesignTokensCollectionTokenValue =>
-        numberDesignTokenValueToNumberDesignTokensCollectionTokenValue(value, root),
+      (
+        value: TypographyDesignTokenValueLineHeight,
+      ): TypographyDesignTokensCollectionTokenValueLineHeight =>
+        typographyDesignTokenValueLineHeightToTypographyDesignTokensCollectionTokenValueLineHeight(
+          value,
+          root,
+        ),
     ),
   };
 }

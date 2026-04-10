@@ -23,12 +23,11 @@ export function isTypographyTokensBrueckeDesignTokensGroup(
     );
   };
 
-  // TODO move to DTCG when figma is ready
   return (
-    testMember('family', isStringTokensBrueckeDesignToken) &&
-    testMember('weight', isStringTokensBrueckeDesignToken) &&
-    testMember('size', isDimensionTokensBrueckeDesignToken) &&
-    testMember('line-height', isDimensionTokensBrueckeDesignToken) &&
-    testMember('letter-spacing', isDimensionTokensBrueckeDesignToken)
+    testMember('fontFamily', isStringTokensBrueckeDesignToken) &&
+    testMember('fontSize', isDimensionTokensBrueckeDesignToken) &&
+    testMember('fontWeight', isStringTokensBrueckeDesignToken) &&
+    testMember('letterSpacing', isDimensionTokensBrueckeDesignToken) &&
+    testMember('lineHeight', isDimensionTokensBrueckeDesignToken)
   );
 }

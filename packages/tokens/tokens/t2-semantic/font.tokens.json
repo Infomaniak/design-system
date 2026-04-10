@@ -67,7 +67,7 @@
       }
     },
     "line-height": {
-      "$type": "number",
+      "$type": "dimension",
       "xs": {
         "$value": "{font.line-height.16}",
         "$extensions": {
