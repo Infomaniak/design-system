@@ -182,7 +182,7 @@ export class DesignTokensCollection {
    */
   add(
     token: GenericDesignTokensCollectionToken,
-    { last = true, merge = true, validate = true }: DesignTokensCollectionAddOptions = {},
+    { last = true, merge = true }: DesignTokensCollectionAddOptions = {},
   ): this {
     const key: string = DesignTokensCollection.#arrayDesignTokenNameToStringKey(token.name);
     const existingToken: GenericDesignTokensCollectionToken | undefined = this.#tokens.get(key);
@@ -195,18 +195,6 @@ export class DesignTokensCollection {
 
       token = merge ? DesignTokensCollection.mergeTokens(existingToken, token) : token;
     }
-
-    // if (validate) {
-    //   if (isDesignTokensCollectionTokenWithType(token)) {
-    //     if (isColorDesignTokensCollectionToken(token)) {
-    //       colorDesignTokenValueSchema.parse(token.value);
-    //     } else if (isCubicBezierDesignTokensCollectionToken(token)) {
-    //       cubicBezierDesignTokenValueSchema.parse(token.value);
-    //     }
-    //   }
-    //   if (isCurlyReference(token.value)) {
-    //   }
-    // }
 
     this.#tokens.set(key, token);
 
