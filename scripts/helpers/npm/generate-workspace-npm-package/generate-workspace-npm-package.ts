@@ -8,12 +8,21 @@ import type { Logger } from '../../log/logger.ts';
 import { removeUndefinedProperties } from '../../misc/object/remove-undefined-properties.ts';
 import { removeTrailingSlash } from '../../path/remove-traling-slash.ts';
 import { generatePackageJsonBuildVersion } from '../generate-package-json-build-version/generate-package-json-build-version.ts';
+import {
+  transformPackageJsonPaths,
+  type TransformPackageJsonPathsConfig,
+} from '../transform-package-json-paths/transform-package-json-paths.ts';
 
 export interface GenerateWorkspaceNpmPackageOptions extends BuildConfig {
   readonly packageDirectory: string;
   readonly workspaceRootDirectory: string;
   readonly outputDirectory: string;
   readonly logger: Logger;
+  /**
+   * Configuration for transforming package.json paths (e.g., stripping /dist prefixes).
+   * When provided, paths in main, module, types, and exports fields will be transformed.
+   */
+  readonly stripDistPaths?: TransformPackageJsonPathsConfig;
 }
 
 export async function generateWorkspaceNpmPackage({
@@ -25,6 +34,7 @@ export async function generateWorkspaceNpmPackage({
   mode,
   prerelease,
   dependenciesOverride,
+  stripDistPaths,
 }: GenerateWorkspaceNpmPackageOptions): Promise<void> {
   packageDirectory = removeTrailingSlash(packageDirectory);
   workspaceRootDirectory = removeTrailingSlash(workspaceRootDirectory);
@@ -56,7 +66,7 @@ export async function generateWorkspaceNpmPackage({
       join(workspaceRootDirectory, 'package.json'),
     );
 
-    const packageObject = removeUndefinedProperties({
+    let packageObject = removeUndefinedProperties({
       name,
       version: buildVersion,
       type,
@@ -83,6 +93,11 @@ export async function generateWorkspaceNpmPackage({
       peerDependencies,
       optionalDependencies,
     });
+
+    // Apply path transformation if configured
+    if (stripDistPaths !== undefined) {
+      packageObject = transformPackageJsonPaths(packageObject, stripDistPaths);
+    }
 
     await Promise.all([
       writeJsonFileSafe(join(outputDirectory, 'package.json'), packageObject),

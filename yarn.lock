@@ -612,6 +612,7 @@ __metadata:
   dependencies:
     "@chromatic-com/storybook": "npm:^5.1.1"
     "@iconify/types": "npm:^2.0.0"
+    "@infomaniak-design-system/esds-svg": "workspace:^"
     "@infomaniak-design-system/tokens": "workspace:^"
     "@storybook/addon-a11y": "npm:^10.3.4"
     "@storybook/addon-docs": "npm:^10.3.4"
@@ -629,7 +630,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@infomaniak-design-system/esds-svg@workspace:packages/assets/images/component/web":
+"@infomaniak-design-system/esds-svg@workspace:^, @infomaniak-design-system/esds-svg@workspace:packages/assets/images/component/web":
   version: 0.0.0-use.local
   resolution: "@infomaniak-design-system/esds-svg@workspace:packages/assets/images/component/web"
   dependencies:

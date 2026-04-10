@@ -1,6 +1,7 @@
+import { IconifyApi, type IconifyApiIconListIconsIcon } from '@infomaniak-design-system/esds-svg';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { iconifyApi } from '../lib/iconify-api.ts';
 import { IconGalleryErrorCode } from '../types/error-codes.ts';
-import { IconifyApi, type IconifyApiIconListIconsOptimizedIcon } from '../utils/iconify-api.ts';
 
 export interface IconItem {
   readonly name: string;
@@ -31,7 +32,7 @@ export interface UseIconGalleryReturn {
 
 const SEARCH_DEBOUNCE_MS = 300;
 
-function mapApiIconToIconItem(icon: IconifyApiIconListIconsOptimizedIcon): IconItem {
+function mapApiIconToIconItem(icon: IconifyApiIconListIconsIcon): IconItem {
   return {
     name: icon.name,
     categories: icon.categories,
@@ -52,8 +53,7 @@ function normalizeError(error: unknown): IconGalleryErrorType {
   };
 }
 
-export function useIconGallery(): UseIconGalleryReturn {
-  const api = useMemo(() => new IconifyApi(), []);
+export function useIconGallery(api: IconifyApi = iconifyApi): UseIconGalleryReturn {
   const abortControllerRef = useRef<AbortController | null>(null);
   const cacheRef = useRef<Map<string, IconItem[]>>(new Map());
   const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -126,7 +126,7 @@ export function useIconGallery(): UseIconGalleryReturn {
           return;
         }
 
-        const iconItems = await api.listIconsOptimized({
+        const iconItems = await api.listIcons({
           prefix,
           signal,
         });
