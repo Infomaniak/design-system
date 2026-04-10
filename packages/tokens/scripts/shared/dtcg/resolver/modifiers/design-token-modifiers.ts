@@ -6,6 +6,8 @@ export type DesignTokenModifiers = Map<string /* modifier */, DesignTokenContext
 
 export type DesignTokenContexts = Map<string /* context */, DesignTokensCollection>;
 
+export type DesignTokenContextEntry = [string /* context */, DesignTokensCollection];
+
 /* EXTRACT */
 
 export interface ExtractDesignTokenModifiersOptions {

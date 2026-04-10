@@ -24,6 +24,7 @@ export function tokensBrueckeTokensGroupToDesignTokensGroup(
       }),
       $type: 'typography',
       $value: {
+        // TODO move to DTCG when figma is ready
         fontFamily: stringTokensBrueckeDesignTokenToFontFamilyDesignToken(children.family, ctx)
           .$value,
         fontSize: dimensionTokensBrueckeDesignTokenToDimensionDesignToken(children.size, ctx)
