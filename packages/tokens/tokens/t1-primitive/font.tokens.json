@@ -113,60 +113,87 @@
     },
     "line-height": {
       "16": {
-        "$value": 16,
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
         "$extensions": {
           "scopes": []
         }
       },
       "20": {
-        "$value": 20,
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        },
         "$extensions": {
           "scopes": []
         }
       },
       "24": {
-        "$value": 24,
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        },
         "$extensions": {
           "scopes": []
         }
       },
       "26": {
-        "$value": 26,
+        "$value": {
+          "value": 26,
+          "unit": "px"
+        },
         "$extensions": {
           "scopes": []
         }
       },
       "28": {
-        "$value": 28,
+        "$value": {
+          "value": 28,
+          "unit": "px"
+        },
         "$extensions": {
           "scopes": []
         }
       },
       "32": {
-        "$value": 32,
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        },
         "$extensions": {
           "scopes": []
         }
       },
       "40": {
-        "$value": 40,
+        "$value": {
+          "value": 40,
+          "unit": "px"
+        },
         "$extensions": {
           "scopes": []
         }
       },
       "48": {
-        "$value": 48,
+        "$value": {
+          "value": 48,
+          "unit": "px"
+        },
         "$extensions": {
           "scopes": []
         }
       },
       "56": {
-        "$value": 56,
+        "$value": {
+          "value": 56,
+          "unit": "px"
+        },
         "$extensions": {
           "scopes": []
         }
       },
-      "$type": "number"
+      "$type": "dimension"
     },
     "family": {
       "$type": "fontFamily",

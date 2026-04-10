@@ -3,10 +3,9 @@ import type { StringTokensBrueckeDesignToken } from '../../../token/types/string
 import type { TokensBrueckeDesignTokensGroup } from '../../tokens-bruecke-design-tokens-group.ts';
 
 export interface TypographyTokensBrueckeDesignTokensGroup extends TokensBrueckeDesignTokensGroup {
-  // TODO move to DTCG when figma is ready
-  readonly family: StringTokensBrueckeDesignToken;
-  readonly weight: StringTokensBrueckeDesignToken;
-  readonly size: DimensionTokensBrueckeDesignToken;
-  readonly 'line-height': DimensionTokensBrueckeDesignToken;
-  readonly 'letter-spacing': DimensionTokensBrueckeDesignToken;
+  readonly fontFamily: StringTokensBrueckeDesignToken;
+  readonly fontSize: DimensionTokensBrueckeDesignToken;
+  readonly fontWeight: StringTokensBrueckeDesignToken;
+  readonly letterSpacing: DimensionTokensBrueckeDesignToken;
+  readonly lineHeight: DimensionTokensBrueckeDesignToken;
 }
