@@ -4,9 +4,9 @@ import type { DesignTokensGroup } from '../../../../dtcg/design-token/group/desi
 import type { TypographyDesignToken } from '../../../../dtcg/design-token/token/types/composite/types/typography/typography-design-token.ts';
 import type { TokensBrueckeDesignTokensGroup } from '../../../tokens-bruecke/group/tokens-bruecke-design-tokens-group.ts';
 import { isTypographyTokensBrueckeDesignTokensGroup } from '../../../tokens-bruecke/group/types/typography/is-typography-tokens-bruecke-design-tokens-group.ts';
+import { isLegacyTypographyTokensBrueckeDesignTokensGroup } from '../../../tokens-bruecke/group/types/typography/legacy/is-legacy-typography-tokens-bruecke-design-tokens-group.ts';
 import type { TokensBrueckeToDtcgContext } from '../context/tokens-bruecke-to-dtcg-context.ts';
 import { dimensionTokensBrueckeDesignTokenToDimensionDesignToken } from '../token/types/dimension/dimension-tokens-bruecke-design-token-to-dimension-design-token.ts';
-import { dimensionTokensBrueckeDesignTokenToNumberDesignToken } from '../token/types/dimension/dimension-tokens-bruecke-design-token-to-number-design-token.ts';
 import { stringTokensBrueckeDesignTokenToFontFamilyDesignToken } from '../token/types/string/string-tokens-bruecke-design-token-to-font-family-design-token.ts';
 import { stringTokensBrueckeDesignTokenToFontWeightDesignToken } from '../token/types/string/string-tokens-bruecke-design-token-to-font-weight-design-token.ts';
 import { tokensBrueckeTokensTreeToDesignTokensTree } from '../tree/tokens-bruecke-tokens-tree-to-design-tokens-tree.ts';
@@ -24,7 +24,33 @@ export function tokensBrueckeTokensGroupToDesignTokensGroup(
       }),
       $type: 'typography',
       $value: {
-        // TODO move to DTCG when figma is ready
+        fontFamily: stringTokensBrueckeDesignTokenToFontFamilyDesignToken(children.fontFamily, ctx)
+          .$value,
+        fontSize: dimensionTokensBrueckeDesignTokenToDimensionDesignToken(children.fontSize, ctx)
+          .$value,
+        fontWeight: stringTokensBrueckeDesignTokenToFontWeightDesignToken(children.fontWeight, ctx)
+          .$value,
+        letterSpacing: dimensionTokensBrueckeDesignTokenToDimensionDesignToken(
+          children.letterSpacing,
+          ctx,
+        ).$value,
+        /* NOTE: UNOFFICIAL CONVERSION TO DIMENSION */
+        lineHeight: dimensionTokensBrueckeDesignTokenToDimensionDesignToken(
+          children.lineHeight,
+          ctx,
+        ).$value,
+      },
+    } satisfies TypographyDesignToken;
+  } else if (isLegacyTypographyTokensBrueckeDesignTokensGroup(children)) {
+    // TODO move to DTCG when figma is ready
+    return {
+      ...removeUndefinedProperties({
+        $description,
+        $deprecated,
+        $extensions,
+      }),
+      $type: 'typography',
+      $value: {
         fontFamily: stringTokensBrueckeDesignTokenToFontFamilyDesignToken(children.family, ctx)
           .$value,
         fontSize: dimensionTokensBrueckeDesignTokenToDimensionDesignToken(children.size, ctx)
@@ -35,13 +61,15 @@ export function tokensBrueckeTokensGroupToDesignTokensGroup(
           children['letter-spacing'],
           ctx,
         ).$value,
-        lineHeight: dimensionTokensBrueckeDesignTokenToNumberDesignToken(
+        /* NOTE: UNOFFICIAL CONVERSION TO DIMENSION */
+        lineHeight: dimensionTokensBrueckeDesignTokenToDimensionDesignToken(
           children['line-height'],
           ctx,
         ).$value,
       },
     } satisfies TypographyDesignToken;
   }
+
   return {
     ...removeUndefinedProperties({
       $description,

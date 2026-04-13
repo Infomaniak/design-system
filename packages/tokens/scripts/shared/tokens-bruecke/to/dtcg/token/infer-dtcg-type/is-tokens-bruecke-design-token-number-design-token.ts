@@ -7,9 +7,7 @@ export function isTokensBrueckeDesignTokenNumberDesignToken(
 ): boolean {
   return (
     ctx.path.join('.').includes('t1.ratio') ||
-    ctx.path.join('.').includes('line-height') ||
     ctx.path.join('.').includes('opacity') ||
-    (input.scopes !== undefined &&
-      (input.scopes.includes('LINE_HEIGHT') || input.scopes.includes('OPACITY')))
+    (input.scopes !== undefined && input.scopes.includes('OPACITY'))
   );
 }
