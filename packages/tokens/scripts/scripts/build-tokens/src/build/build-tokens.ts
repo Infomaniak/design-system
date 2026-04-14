@@ -6,7 +6,7 @@ import {
   type DesignTokenModifiers,
   extractDesignTokenModifiers,
 } from '../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
-import { DESIGN_TOKEN_TIERS } from '../constants/design-token-tiers.ts';
+import { DESIGN_TOKEN_TIERS, MODIFIERS_DIRECTORY_NAME } from '../constants/design-token-tiers.ts';
 import { buildCssTokens } from './outputs/css/build-css-tokens.ts';
 import { buildFigmaTokens } from './outputs/figma/build-figma-tokens.ts';
 import { buildKotlinTokens } from './outputs/kotlin/build-kotlin-tokens.ts';
@@ -39,7 +39,7 @@ export function buildTokens({
 
     // MODIFIERS
     const modifiers: DesignTokenModifiers = await extractDesignTokenModifiers({
-      sourceDirectory: `${sourceDirectory}/modifiers`,
+      sourceDirectory: `${sourceDirectory}/${MODIFIERS_DIRECTORY_NAME}`,
       baseCollection,
     });
 

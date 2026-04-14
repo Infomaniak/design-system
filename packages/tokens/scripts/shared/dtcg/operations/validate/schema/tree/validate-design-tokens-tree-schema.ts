@@ -8,7 +8,7 @@ import { validateDesignTokenSchema } from '../token/validate-design-token-schema
 export function validateDesignTokensTreeSchema(
   input: unknown,
   { file, name, type }: ValidateDesignTokensTreeContext,
-): void {
+): asserts input is DesignTokensTree {
   if (!isObject(input)) {
     throw new Error(
       `Expected tree at ${JSON.stringify(name.join('.'))} from ${JSON.stringify(file)}`,

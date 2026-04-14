@@ -7,7 +7,7 @@ import { validateDesignTokensTreeSchema } from '../tree/validate-design-tokens-t
 export function validateDesignTokensGroupSchema(
   input: unknown,
   { file, name, type }: ValidateDesignTokensTreeContext,
-): void {
+): asserts input is DesignTokensGroup {
   const token: DesignTokensGroup = designTokensGroupSchema.parse(input) as DesignTokensGroup;
 
   if (!isDesignTokensGroup(token)) {
