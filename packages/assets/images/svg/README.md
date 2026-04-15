@@ -129,3 +129,25 @@ flowchart TD
   MERGE_PR -- "main" --> UPLOAD_PROD
   MERGE_PR -- "develop" --> UPLOAD_DEVELOP
 ```
+
+---
+
+## LEGACY
+
+Legacy SVGs are stored in the `assets/svg/monotone/legacy` directory.
+
+They are not used anymore, but they are kept for backward compatibility on existing projects.
+
+### Import new legacy SVGs
+
+1. Create a new branch: `feat/add-legacy-svgs`
+2. Build them `manually` running:
+
+```shell
+yarn build:legacy-svg
+```
+
+This script generates the appropriate `assets/server/*.json` files, and bump this `package.json` version.
+
+3. Commit the changes
+4. Create a Pull Request and follow the CONTRIBUTING guidelines

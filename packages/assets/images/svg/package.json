@@ -4,7 +4,8 @@
   "type": "module",
   "description": "Infomaniak's Design System - SVGs",
   "scripts": {
-    "import": "node --no-warnings=ExperimentalWarning scripts/scripts/import-svgs/import-svgs.script.ts"
+    "import": "node --no-warnings=ExperimentalWarning scripts/scripts/import-svgs/import-svgs.script.ts",
+    "build:legacy-svg": "node --no-warnings=ExperimentalWarning scripts/scripts/build-legacy-svg/build-legacy-svg.script.ts"
   },
   "dependencies": {
     "@iconify/tools": "^5.0.5",
