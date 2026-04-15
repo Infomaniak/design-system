@@ -26,6 +26,10 @@ await runScript('build-legacy-svgs', async (logger: Logger): Promise<void> => {
   let hasNewAssets: boolean = false;
 
   for await (const entry of await opendir(LEGACY_ASSETS_DIR)) {
+    if (!entry.isDirectory()) {
+      throw new Error(`Expected a directory at ${join(LEGACY_ASSETS_DIR, entry.name)}`);
+    }
+
     hasNewAssets =
       (await buildSvgSetFromSvgDirectory({
         version: importVersion,
@@ -38,7 +42,7 @@ await runScript('build-legacy-svgs', async (logger: Logger): Promise<void> => {
   }
 
   if (!hasNewAssets) {
-    throw new Error('No new assets have been build.');
+    throw new Error('No new assets have been built.');
   }
 
   // update package.json version

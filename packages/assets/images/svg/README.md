@@ -144,7 +144,7 @@ They are not used anymore, but they are kept for backward compatibility on exist
 2. Build them `manually` running:
 
 ```shell
-yarn build:legacy-svg
+yarn build:legacy-svgs
 ```
 
 This script generates the appropriate `assets/server/*.json` files, and bump this `package.json` version.
