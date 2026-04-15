@@ -42,7 +42,7 @@ await runScript('build-legacy-svgs', async (logger: Logger): Promise<void> => {
   }
 
   if (!hasNewAssets) {
-    throw new Error('No new assets have been build.');
+    throw new Error('No new assets have been built.');
   }
 
   // update package.json version
