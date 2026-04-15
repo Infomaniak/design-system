@@ -126,11 +126,12 @@ export function useIconGallery(api: IconifyApi = iconifyApi): UseIconGalleryRetu
           return;
         }
 
-        const iconItems = await api.listIcons({
+        const result = await api.listIcons({
           prefix,
           signal,
         });
 
+        const iconItems = result.icons;
         const convertedIcons = iconItems.map(mapApiIconToIconItem);
 
         cacheRef.current.set(prefix, convertedIcons);

@@ -12,6 +12,12 @@ const { mockListIconSets, mockListIcons } = vi.hoisted(() => ({
   mockListIcons: vi.fn(),
 }));
 
+import type { IconifyApiIconListIconsIcon } from '@infomaniak-design-system/esds-svg';
+
+const createListIconsResult = (icons: IconifyApiIconListIconsIcon[]) => ({
+  icons,
+});
+
 vi.mock('@infomaniak-design-system/esds-svg', () => {
   return {
     IconifyApi: class MockIconifyApi {
@@ -63,7 +69,7 @@ describe('useIconGallery', () => {
         ic: { name: 'IcoMoon' },
       });
 
-      mockListIcons.mockResolvedValue([]);
+      mockListIcons.mockResolvedValue(createListIconsResult([]));
 
       const { result } = renderHook(() => useIconGallery());
 
@@ -123,10 +129,12 @@ describe('useIconGallery', () => {
     });
 
     it('fetches icons when collection is selected', async () => {
-      mockListIcons.mockResolvedValue([
-        { name: 'home', categories: new Set() },
-        { name: 'settings', categories: new Set() },
-      ]);
+      mockListIcons.mockResolvedValue(
+        createListIconsResult([
+          { name: 'home', categories: new Set() },
+          { name: 'settings', categories: new Set() },
+        ]),
+      );
 
       const { result } = renderHook(() => useIconGallery());
 
@@ -148,7 +156,9 @@ describe('useIconGallery', () => {
     });
 
     it('caches icons per collection', async () => {
-      mockListIcons.mockResolvedValue([{ name: 'home', categories: new Set() }]);
+      mockListIcons.mockResolvedValue(
+        createListIconsResult([{ name: 'home', categories: new Set() }]),
+      );
 
       const { result } = renderHook(() => useIconGallery());
 
@@ -172,12 +182,14 @@ describe('useIconGallery', () => {
         material: { name: 'Material Icons' },
       });
 
-      mockListIcons.mockResolvedValue([
-        { name: 'home', categories: new Set() },
-        { name: 'home-work', categories: new Set() },
-        { name: 'settings', categories: new Set() },
-        { name: 'delete', categories: new Set() },
-      ]);
+      mockListIcons.mockResolvedValue(
+        createListIconsResult([
+          { name: 'home', categories: new Set() },
+          { name: 'home-work', categories: new Set() },
+          { name: 'settings', categories: new Set() },
+          { name: 'delete', categories: new Set() },
+        ]),
+      );
     });
 
     it('filters icons by search query (case-insensitive)', async () => {
@@ -367,7 +379,7 @@ describe('useIconGallery', () => {
         material: { name: 'Material Icons' },
       });
 
-      mockListIcons.mockResolvedValue([]);
+      mockListIcons.mockResolvedValue(createListIconsResult([]));
 
       act(() => {
         result.current.retry();
@@ -392,7 +404,7 @@ describe('useIconGallery', () => {
         if (signal !== undefined) {
           requestSignals.push(signal);
         }
-        return Promise.resolve([{ name: 'home', categories: new Set() }]);
+        return Promise.resolve(createListIconsResult([{ name: 'home', categories: new Set() }]));
       });
 
       const { result } = renderHook(() => useIconGallery());

@@ -89,7 +89,12 @@ export interface IconifyApiRawListIconsResponse {
 
 // -> optimized
 
-export type IconifyApiListIconsOptions = Pick<IconifyApiRawListIconsOptions, 'prefix' | 'signal'>;
+export type IconifyApiListIconsOptions = Pick<
+  IconifyApiRawListIconsOptions,
+  'prefix' | 'signal'
+> & {
+  readonly info?: boolean;
+};
 
 export interface IconifyApiIconListIconsIcon {
   readonly name: string;
@@ -97,6 +102,11 @@ export interface IconifyApiIconListIconsIcon {
 }
 
 export type IconifyApiIconListIconsIcons = readonly IconifyApiIconListIconsIcon[];
+
+export interface IconifyApiListIconsResult {
+  readonly icons: IconifyApiIconListIconsIcons;
+  readonly info?: IconifyInfo;
+}
 
 // SEARCH ICONS
 
@@ -526,30 +536,37 @@ export class IconifyApi {
     });
   }
 
-  readonly #listIconsCache: Map<string /* prefix */, Promise<IconifyApiIconListIconsIcons>> =
-    new Map<string, Promise<IconifyApiIconListIconsIcons>>();
+  readonly #listIconsCache: Map<
+    string /* key: `<prefix>:<info>` */,
+    Promise<IconifyApiListIconsResult>
+  > = new Map<string, Promise<IconifyApiListIconsResult>>();
 
   /**
    * Lists the icons of a set with internal optimizations.
    */
-  listIcons({ prefix, signal }: IconifyApiListIconsOptions): Promise<IconifyApiIconListIconsIcons> {
-    return new Promise<IconifyApiIconListIconsIcons>(
+  listIcons({
+    prefix,
+    signal,
+    info,
+  }: IconifyApiListIconsOptions): Promise<IconifyApiListIconsResult> {
+    return new Promise<IconifyApiListIconsResult>(
       (
-        resolve: (value: IconifyApiIconListIconsIcons) => void,
+        resolve: (value: IconifyApiListIconsResult) => void,
         reject: (reason?: unknown) => void,
       ): void => {
         signal?.throwIfAborted();
 
-        const key: string = prefix;
+        const cacheKey: string = `${prefix}:${String(info)}`;
 
-        let cached: Promise<IconifyApiIconListIconsIcons> | undefined =
-          this.#listIconsCache.get(key);
+        let cached: Promise<IconifyApiListIconsResult> | undefined =
+          this.#listIconsCache.get(cacheKey);
 
         if (cached === undefined) {
           cached = this.#listIcons({
             prefix,
+            info,
           })
-            .then((response: IconifyApiRawListIconsResponse): IconifyApiIconListIconsIcons => {
+            .then((response: IconifyApiRawListIconsResponse): IconifyApiListIconsResult => {
               const allIcons: Set<string> = new Set<string>();
               const iconNameToIconCategories: Map<string /* name */, Set<string>> = new Map<
                 string,
@@ -577,19 +594,27 @@ export class IconifyApi {
                 }
               }
 
-              return Array.from(allIcons, (name: string): IconifyApiIconListIconsIcon => {
-                return {
-                  name,
-                  categories: iconNameToIconCategories.get(name) ?? new Set<string>(),
-                };
-              });
+              const icons: IconifyApiIconListIconsIcons = Array.from(
+                allIcons,
+                (name: string): IconifyApiIconListIconsIcon => {
+                  return {
+                    name,
+                    categories: iconNameToIconCategories.get(name) ?? new Set<string>(),
+                  };
+                },
+              );
+
+              return {
+                icons,
+                info: response.info,
+              };
             })
             .catch((error: unknown): never => {
-              this.#listIconsCache.delete(key);
+              this.#listIconsCache.delete(cacheKey);
               throw error;
             });
 
-          this.#listIconsCache.set(key, cached);
+          this.#listIconsCache.set(cacheKey, cached);
         }
 
         const end = (): void => {
@@ -603,7 +628,7 @@ export class IconifyApi {
         signal?.addEventListener('abort', onAbort);
 
         cached.then(
-          (value: IconifyApiIconListIconsIcons): void => {
+          (value: IconifyApiListIconsResult): void => {
             end();
             resolve(value);
           },
@@ -633,7 +658,7 @@ export class IconifyApi {
     query = '',
     signal,
   }: IconifyApiIconSearchOptions): Promise<IconifyApiIconListIconsIcons> {
-    const icons: IconifyApiIconListIconsIcons = await this.listIcons({
+    const { icons }: IconifyApiListIconsResult = await this.listIcons({
       prefix,
       signal,
     });

@@ -10,18 +10,18 @@ export default function IconDetailModal({ icon, isOpen, prefix, onClose }: IconD
 
   useEffect(() => {
     if (isOpen && icon) {
-      // Fetch metadata from Iconify API
+      // Fetch metadata from Iconify API with collection info
       iconifyApi
-        .listIcons({ prefix })
-        .then((icons) => {
+        .listIcons({ prefix, info: true })
+        .then(({ icons, info }) => {
           const foundIcon = icons.find((i) => i.name === icon.name);
           if (foundIcon) {
             setMetadata({
               name: foundIcon.name,
               iconId: `${prefix}:${foundIcon.name}`,
               tags: Array.from(foundIcon.categories || new Set()),
-              collection: prefix,
-              license: 'Apache 2.0',
+              collection: info?.name ?? prefix,
+              license: info?.license?.title ?? 'Unknown License',
             });
           } else {
             setMetadata(null);

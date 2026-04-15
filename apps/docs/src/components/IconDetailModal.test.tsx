@@ -2,6 +2,17 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import IconDetailModal from './IconDetailModal.tsx';
 
+// Mock the iconifyApi using hoisted mocks
+const { mockListIcons } = vi.hoisted(() => ({
+  mockListIcons: vi.fn(),
+}));
+
+vi.mock('../lib/iconify-api.ts', () => ({
+  iconifyApi: {
+    listIcons: mockListIcons,
+  },
+}));
+
 describe('IconDetailModal', () => {
   const mockOnClose = vi.fn();
   const mockIcon = {
@@ -11,6 +22,22 @@ describe('IconDetailModal', () => {
 
   beforeEach(() => {
     vi.useFakeTimers();
+    vi.clearAllMocks();
+
+    // Mock listIcons to return icon data with collection info
+    mockListIcons.mockResolvedValue({
+      icons: [
+        { name: 'home', categories: new Set(['buildings', 'navigation']) },
+        { name: 'settings', categories: new Set(['action']) },
+      ],
+      info: {
+        name: 'Material Symbols',
+        license: {
+          title: 'Apache 2.0',
+        },
+      },
+    });
+
     // Create portal root
     const portalRoot = document.createElement('div');
     portalRoot.id = 'modal-root';
@@ -175,5 +202,57 @@ describe('IconDetailModal', () => {
       />,
     );
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+
+  it('displays license value from API response', async () => {
+    render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+
+    // Wait for async data to load
+    await vi.waitFor(() => {
+      expect(screen.getByText('Apache 2.0')).toBeInTheDocument();
+    });
+  });
+
+  it('displays collection name from info', async () => {
+    render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+
+    // Wait for async data to load
+    await vi.waitFor(() => {
+      expect(screen.getByText('Material Symbols')).toBeInTheDocument();
+    });
+  });
+
+  it('displays unknown license when info is missing', async () => {
+    mockListIcons.mockResolvedValueOnce({
+      icons: [{ name: 'home', categories: new Set() }],
+      info: undefined,
+    });
+
+    render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+
+    await vi.waitFor(() => {
+      expect(screen.getByText('Unknown License')).toBeInTheDocument();
+    });
   });
 });
