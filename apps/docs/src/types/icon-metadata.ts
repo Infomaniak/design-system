@@ -32,20 +32,6 @@ export interface IconDetailModalProps {
 }
 
 /**
- * Props for CopyField component
- */
-export interface CopyFieldProps {
-  /** Label shown above the field */
-  readonly label: string;
-  /** Value to display and copy */
-  readonly value: string;
-  /** Whether to use monospace font */
-  readonly monospace?: boolean;
-  /** Optional additional className */
-  readonly className?: string;
-}
-
-/**
  * Props for IconMetadataDisplay component
  */
 export interface IconMetadataDisplayProps {

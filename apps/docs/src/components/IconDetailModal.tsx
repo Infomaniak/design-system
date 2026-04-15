@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { iconifyApi } from '../lib/iconify-api.ts';
 import type { IconDetailModalProps, IconMetadata } from '../types/icon-metadata.ts';
-import CopyField from './CopyField.tsx';
+import CopyableText from './CopyableText.tsx';
 import IconMetadataDisplay from './IconMetadataDisplay.tsx';
 
 export default function IconDetailModal({ icon, isOpen, prefix, onClose }: IconDetailModalProps) {
@@ -129,20 +129,23 @@ export default function IconDetailModal({ icon, isOpen, prefix, onClose }: IconD
           ×
         </button>
 
-        <div>
+        <div style={{ width: '96px', height: '96px' }}>
           <esds-svg name={iconName} />
         </div>
 
-        <h2>{iconName}</h2>
-
-        <CopyField
-          value={iconName}
-          label="Icon name"
-        />
-        <CopyField
-          value={esdsSnippet}
-          label="ESDS SVG"
-        />
+        <div style={{ marginBottom: '16px' }}>
+          <CopyableText
+            value={iconName}
+            label=""
+            size="lg"
+          />
+        </div>
+        <div style={{ marginBottom: '16px' }}>
+          <CopyableText
+            value={esdsSnippet}
+            label="Component"
+          />
+        </div>
 
         {metadata && <IconMetadataDisplay metadata={metadata} />}
       </div>
