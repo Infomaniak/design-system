@@ -99,6 +99,7 @@ export type IconifyApiListIconsOptions = Pick<
 export interface IconifyApiIconListIconsIcon {
   readonly name: string;
   readonly categories: ReadonlySet<string>;
+  readonly aliases: ReadonlySet<string>;
 }
 
 export type IconifyApiIconListIconsIcons = readonly IconifyApiIconListIconsIcon[];
@@ -572,6 +573,22 @@ export class IconifyApi {
                 string,
                 Set<string>
               >();
+              const iconNameToAliases: Map<string /* name */, Set<string>> = new Map<
+                string,
+                Set<string>
+              >();
+
+              // Build reverse mapping: icon name -> set of aliases pointing to it
+              if (response.aliases !== undefined) {
+                for (const [aliasName, canonicalName] of Object.entries(response.aliases)) {
+                  let aliases = iconNameToAliases.get(canonicalName);
+                  if (aliases === undefined) {
+                    aliases = new Set<string>();
+                    iconNameToAliases.set(canonicalName, aliases);
+                  }
+                  aliases.add(aliasName);
+                }
+              }
 
               if (response.uncategorized !== undefined) {
                 for (const icon of response.uncategorized) {
@@ -600,6 +617,7 @@ export class IconifyApi {
                   return {
                     name,
                     categories: iconNameToIconCategories.get(name) ?? new Set<string>(),
+                    aliases: iconNameToAliases.get(name) ?? new Set<string>(),
                   };
                 },
               );
