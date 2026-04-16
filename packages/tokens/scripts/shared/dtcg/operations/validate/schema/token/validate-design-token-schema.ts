@@ -19,7 +19,7 @@ import type { ValidateDesignTokensTreeContext } from '../../validate-design-toke
 export function validateDesignTokenSchema(
   input: unknown,
   { file, name, type }: ValidateDesignTokensTreeContext,
-): void {
+): asserts input is GenericDesignToken {
   const token: GenericDesignToken = genericDesignTokenSchema.parse(input);
 
   type = token.$type ?? type;
