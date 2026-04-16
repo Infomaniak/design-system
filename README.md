@@ -4,8 +4,8 @@
   <img 
     src="./assets/images/infomaniak-logo.svg"
     alt="infomaniak-design-system-logo"
-    width="278px"
-    height="38px"
+    width="278"
+    height="38"
     style="object-fit: contain"
     />
   <br>
