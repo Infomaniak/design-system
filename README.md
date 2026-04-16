@@ -24,7 +24,7 @@
   ·
   <a href="https://github.com/Infomaniak/design-system/issues">Submit an Issue</a>
   ·
-  <a href="https://handbook.design-ik.ch/tag/design-system">Blog (fr)</a>
+  <a href="https://handbook.design-ik.ch/tag/design-system">Blog (internal)</a>
   <br>
   <br>
 </p>
