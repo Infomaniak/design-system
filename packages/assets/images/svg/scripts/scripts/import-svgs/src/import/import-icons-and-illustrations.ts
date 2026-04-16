@@ -13,26 +13,13 @@ export function importIconsAndIllustrations({
   ...options
 }: ImportIconsAndIllustrationsOptions): Promise<boolean> {
   return logger.asyncTask('import', async (): Promise<boolean> => {
-    return await importAndBuildFigmaIcons({
-      ...options,
-      logger,
-    });
-
-    // TODO: add support for illustrations and legacy icons
-    // const result: readonly PromiseSettledResult<void>[] = await Promise.allSettled([
-    //   importAndBuildFigmaIcons(logger.child('FIGMA ICONS')),
-    //   // importAndBuildFigmaIllustrations(),
-    //   // buildLegacyIcons(),
-    //   // buildDemoIllustrations(),
-    // ]);
-    //
-    // const rejected: readonly PromiseRejectedResult[] = result.filter(
-    //   (result: PromiseSettledResult<void>): result is PromiseRejectedResult =>
-    //     result.status === 'rejected',
-    // );
-    //
-    // if (rejected.length > 0) {
-    //   throw new AggregateError(rejected.map((rejected) => rejected.reason));
-    // }
+    return [
+      // NOTE: keep sequential await instead of Promise.allSettled for better logging
+      await importAndBuildFigmaIcons({
+        ...options,
+        logger,
+      }),
+      // TODO: add support for illustrations
+    ].some((changed: boolean): boolean => changed);
   });
 }
