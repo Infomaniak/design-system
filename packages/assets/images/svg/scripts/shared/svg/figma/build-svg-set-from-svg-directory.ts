@@ -46,7 +46,7 @@ export async function buildSvgSetFromSvgDirectory({
   optimize = true,
   compareWithExistingVersion = true,
 }: BuildSvgSetFromSvgDirectoryOptions): Promise<boolean> {
-  return logger.asyncTask('build-svgs-set', async (logger: Logger): Promise<boolean> => {
+  return logger.asyncTask(`build-svgs-set:${prefix}`, async (logger: Logger): Promise<boolean> => {
     const iconSet: IconSet = await importDirectory(sourceDirectory, {
       prefix,
     });
