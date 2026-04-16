@@ -1,5 +1,5 @@
 import React from 'react';
-import { useIconGallery } from '../hooks/useIconGallery.ts';
+import { useUrlPersistence } from '../hooks/useUrlPersistence.ts';
 import IconCollectionFilter from './IconCollectionFilter.tsx';
 import IconGalleryEmpty from './IconGalleryEmpty.tsx';
 import IconGalleryError from './IconGalleryError.tsx';
@@ -22,7 +22,7 @@ const IconGallery: React.FC = () => {
     setSearchQuery,
     retry,
     clearSearch,
-  } = useIconGallery();
+  } = useUrlPersistence();
 
   const handleCollectionChange = (collection: string): void => {
     setCollection(collection);
