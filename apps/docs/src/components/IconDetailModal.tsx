@@ -103,6 +103,7 @@ export default function IconDetailModal({ icon, isOpen, prefix, onClose }: IconD
         aria-modal="true"
         aria-label="Icon details"
         style={{
+          fontFamily: 'inherit',
           backgroundColor: 'white',
           borderRadius: '8px',
           padding: '24px',
@@ -118,30 +119,38 @@ export default function IconDetailModal({ icon, isOpen, prefix, onClose }: IconD
           aria-label="Close dialog"
           style={{
             position: 'absolute',
-            top: '16px',
-            right: '16px',
+            top: '10px',
+            right: '10px',
             background: 'none',
             border: 'none',
             cursor: 'pointer',
-            fontSize: '20px',
+            fontSize: '24px',
           }}
         >
           ×
         </button>
 
-        <esds-svg
-          style={{ fontSize: '96px' }}
-          name={iconName}
-        />
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginBottom: 'var(--esds-spacing-2xl)',
+          }}
+        >
+          <esds-svg
+            style={{ fontSize: 'var(--esds-icon-size-4xl)' }}
+            name={iconName}
+          />
+        </div>
 
-        <div style={{ marginBottom: '16px' }}>
+        <div style={{ marginBottom: 'var(--esds-spacing-2xl)' }}>
           <CopyableText
             value={iconName}
             label=""
             size="lg"
           />
         </div>
-        <div style={{ marginBottom: '16px' }}>
+        <div style={{ marginBottom: 'var(--esds-spacing-2xl)' }}>
           <CopyableText
             value={esdsSnippet}
             label="Component"
