@@ -5,7 +5,7 @@ import { fontFamilyDesignTokenValueSchema } from '../../../../base/types/font-fa
 import { fontWeightDesignTokenValueSchema } from '../../../../base/types/font-weight/value/font-weight-design-token-value.schema.ts';
 import { typographyDesignTokenValueLineHeightSchema } from './members/line-height/typography-design-token-value-line-height.schema.ts';
 
-export const typographyDesignTokenValueSchema = z.object({
+export const typographyDesignTokenValueSchema = z.strictObject({
   fontFamily: valueOrDesignTokenReferenceSchema(fontFamilyDesignTokenValueSchema),
   fontSize: valueOrDesignTokenReferenceSchema(dimensionDesignTokenValueSchema),
   fontWeight: valueOrDesignTokenReferenceSchema(fontWeightDesignTokenValueSchema),

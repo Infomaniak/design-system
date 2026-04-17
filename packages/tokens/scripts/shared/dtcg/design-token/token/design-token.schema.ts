@@ -6,8 +6,7 @@ export function designTokenSchema<GType extends string, GValue extends z.core.So
   $type: GType,
   value: GValue,
 ) {
-  return z.object({
-    ...genericDesignTokenSchema,
+  return genericDesignTokenSchema.extend({
     $value: valueOrDesignTokenReferenceSchema(value),
     $type: z.literal($type).optional(),
   });

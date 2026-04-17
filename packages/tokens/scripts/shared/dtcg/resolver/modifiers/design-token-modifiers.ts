@@ -39,6 +39,7 @@ export async function extractDesignTokenModifiers({
         context,
         await baseCollection
           .clone()
+          // NOTE: this line ensures that the modifier contains only existing tokens (present in t2 and t3)
           .fromFiles([contextEntry], { forEachTokenBehaviour: 'prevent-new-token' }),
       );
     }
