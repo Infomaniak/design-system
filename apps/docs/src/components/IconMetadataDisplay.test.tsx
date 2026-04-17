@@ -15,22 +15,15 @@ describe('IconMetadataDisplay', () => {
   const mockMetadata: IconMetadata = {
     name: 'home',
     iconId: 'material-symbols:home',
-    categories: ['navigation', 'building'],
-    aliases: ['house', 'residence'],
+    tags: ['home', 'house', 'building'],
     collection: 'Material Symbols',
     license: 'Apache 2.0',
   };
 
-  it('renders categories section', () => {
+  it('renders tags section', () => {
     render(<IconMetadataDisplay metadata={mockMetadata} />);
-    expect(screen.getByText('Categories:')).toBeTruthy();
-    expect(screen.getByText('navigation, building')).toBeTruthy();
-  });
-
-  it('renders aliases section', () => {
-    render(<IconMetadataDisplay metadata={mockMetadata} />);
-    expect(screen.getByText('Aliases:')).toBeTruthy();
-    expect(screen.getByText('house, residence')).toBeTruthy();
+    expect(screen.getByText('Tags:')).toBeTruthy();
+    expect(screen.getByText('home, house, building')).toBeTruthy();
   });
 
   it('renders collection', () => {
@@ -45,23 +38,13 @@ describe('IconMetadataDisplay', () => {
     expect(screen.getByText('Apache 2.0')).toBeTruthy();
   });
 
-  it('handles empty categories', () => {
-    const noCategoriesMetadata: IconMetadata = {
+  it('handles empty tags', () => {
+    const noTagsMetadata: IconMetadata = {
       ...mockMetadata,
-      categories: [],
+      tags: [],
     };
-    render(<IconMetadataDisplay metadata={noCategoriesMetadata} />);
-    expect(screen.getByText('Categories:')).toBeTruthy();
-    expect(screen.getByText('No categories')).toBeTruthy();
-  });
-
-  it('handles empty aliases', () => {
-    const noAliasesMetadata: IconMetadata = {
-      ...mockMetadata,
-      aliases: [],
-    };
-    render(<IconMetadataDisplay metadata={noAliasesMetadata} />);
-    expect(screen.getByText('Aliases:')).toBeTruthy();
-    expect(screen.getByText('No aliases')).toBeTruthy();
+    render(<IconMetadataDisplay metadata={noTagsMetadata} />);
+    expect(screen.getByText('Tags:')).toBeTruthy();
+    expect(screen.getByText('No tags')).toBeTruthy();
   });
 });

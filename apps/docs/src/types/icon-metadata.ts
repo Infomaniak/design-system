@@ -6,10 +6,8 @@ export interface IconMetadata {
   readonly name: string;
   /** Full icon ID with prefix (e.g., 'material-symbols:home') */
   readonly iconId: string;
-  /** Categories this icon belongs to */
-  readonly categories: readonly string[];
-  /** Aliases (alternative names that refer to the same icon) */
-  readonly aliases: readonly string[];
+  /** Associated tags and aliases */
+  readonly tags: readonly string[];
   /** Collection/prefix name */
   readonly collection: string;
   /** License information */
@@ -24,7 +22,6 @@ export interface IconDetailModalProps {
   readonly icon: {
     readonly name: string;
     readonly categories: ReadonlySet<string>;
-    readonly aliases: ReadonlySet<string>;
   } | null;
   /** Whether the modal is visible */
   readonly isOpen: boolean;

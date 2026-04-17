@@ -19,8 +19,7 @@ export default function IconDetailModal({ icon, isOpen, prefix, onClose }: IconD
             setMetadata({
               name: foundIcon.name,
               iconId: `${prefix}:${foundIcon.name}`,
-              categories: Array.from(foundIcon.categories || new Set()),
-              aliases: Array.from(foundIcon.aliases || new Set()),
+              tags: Array.from(foundIcon.categories || new Set()),
               collection: info?.name ?? prefix,
               license: info?.license?.title ?? 'Unknown License',
             });

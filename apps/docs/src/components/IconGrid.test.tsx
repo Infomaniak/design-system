@@ -5,9 +5,9 @@ import IconGrid from './IconGrid.tsx';
 
 describe('IconGrid', () => {
   const mockIcons: IconItem[] = [
-    { name: 'home', categories: new Set(['navigation']), aliases: new Set(['house', 'building']) },
-    { name: 'settings', categories: new Set(['action']), aliases: new Set(['gear', 'cog']) },
-    { name: 'user', categories: new Set(['user']), aliases: new Set(['person', 'account']) },
+    { name: 'home', categories: new Set(['navigation']) },
+    { name: 'settings', categories: new Set(['action']) },
+    { name: 'user', categories: new Set(['user']) },
   ];
 
   beforeEach(() => {
@@ -53,9 +53,7 @@ describe('IconGrid', () => {
     const cards = screen.getAllByRole('button');
     fireEvent.click(cards[0]);
 
-    expect(
-      screen.getByRole('button', { name: 'Copy material-symbols:home to clipboard' }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'material-symbols:home' })).toBeInTheDocument();
   });
 
   it('closes modal when close button is clicked', async () => {
