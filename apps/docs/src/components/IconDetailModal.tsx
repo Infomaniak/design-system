@@ -129,9 +129,10 @@ export default function IconDetailModal({ icon, isOpen, prefix, onClose }: IconD
           ×
         </button>
 
-        <div style={{ width: '96px', height: '96px' }}>
-          <esds-svg name={iconName} />
-        </div>
+        <esds-svg
+          style={{ fontSize: '96px' }}
+          name={iconName}
+        />
 
         <div style={{ marginBottom: '16px' }}>
           <CopyableText
