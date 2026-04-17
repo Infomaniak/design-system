@@ -15,15 +15,22 @@ describe('IconMetadataDisplay', () => {
   const mockMetadata: IconMetadata = {
     name: 'home',
     iconId: 'material-symbols:home',
-    tags: ['home', 'house', 'building'],
+    categories: ['navigation', 'building'],
+    aliases: ['house', 'residence'],
     collection: 'Material Symbols',
     license: 'Apache 2.0',
   };
 
-  it('renders tags section', () => {
+  it('renders categories section', () => {
     render(<IconMetadataDisplay metadata={mockMetadata} />);
-    expect(screen.getByText('Tags:')).toBeTruthy();
-    expect(screen.getByText('home, house, building')).toBeTruthy();
+    expect(screen.getByText('Categories:')).toBeTruthy();
+    expect(screen.getByText('navigation, building')).toBeTruthy();
+  });
+
+  it('renders aliases section', () => {
+    render(<IconMetadataDisplay metadata={mockMetadata} />);
+    expect(screen.getByText('Aliases:')).toBeTruthy();
+    expect(screen.getByText('house, residence')).toBeTruthy();
   });
 
   it('renders collection', () => {
@@ -38,13 +45,23 @@ describe('IconMetadataDisplay', () => {
     expect(screen.getByText('Apache 2.0')).toBeTruthy();
   });
 
-  it('handles empty tags', () => {
-    const noTagsMetadata: IconMetadata = {
+  it('handles empty categories', () => {
+    const noCategoriesMetadata: IconMetadata = {
       ...mockMetadata,
-      tags: [],
+      categories: [],
     };
-    render(<IconMetadataDisplay metadata={noTagsMetadata} />);
-    expect(screen.getByText('Tags:')).toBeTruthy();
-    expect(screen.getByText('No tags')).toBeTruthy();
+    render(<IconMetadataDisplay metadata={noCategoriesMetadata} />);
+    expect(screen.getByText('Categories:')).toBeTruthy();
+    expect(screen.getByText('No categories')).toBeTruthy();
+  });
+
+  it('handles empty aliases', () => {
+    const noAliasesMetadata: IconMetadata = {
+      ...mockMetadata,
+      aliases: [],
+    };
+    render(<IconMetadataDisplay metadata={noAliasesMetadata} />);
+    expect(screen.getByText('Aliases:')).toBeTruthy();
+    expect(screen.getByText('No aliases')).toBeTruthy();
   });
 });

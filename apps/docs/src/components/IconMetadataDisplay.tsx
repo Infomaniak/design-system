@@ -18,9 +18,15 @@ const IconMetadataDisplay = ({ metadata }: IconMetadataDisplayProps) => {
         }
       `}</style>
       <div className="metadata-section">
-        <div className="metadata-label">Tags:</div>
+        <div className="metadata-label">Categories:</div>
         <div className="metadata-value">
-          {metadata.tags.length > 0 ? metadata.tags.join(', ') : 'No tags'}
+          {metadata.categories.length > 0 ? metadata.categories.join(', ') : 'No categories'}
+        </div>
+      </div>
+      <div className="metadata-section">
+        <div className="metadata-label">Aliases:</div>
+        <div className="metadata-value">
+          {metadata.aliases.length > 0 ? metadata.aliases.join(', ') : 'No aliases'}
         </div>
       </div>
       <div className="metadata-section">

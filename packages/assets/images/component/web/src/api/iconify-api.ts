@@ -99,7 +99,7 @@ export type IconifyApiListIconsOptions = Pick<
 export interface IconifyApiIconListIconsIcon {
   readonly name: string;
   readonly categories: ReadonlySet<string>;
-  readonly aliases: ReadonlySet<string>;
+  readonly aliases?: ReadonlySet<string>;
 }
 
 export type IconifyApiIconListIconsIcons = readonly IconifyApiIconListIconsIcon[];

@@ -6,6 +6,7 @@ import { IconGalleryErrorCode } from '../types/error-codes.ts';
 export interface IconItem {
   readonly name: string;
   readonly categories: ReadonlySet<string>;
+  readonly aliases?: ReadonlySet<string>;
 }
 
 export interface IconGalleryErrorType {
@@ -36,6 +37,7 @@ function mapApiIconToIconItem(icon: IconifyApiIconListIconsIcon): IconItem {
   return {
     name: icon.name,
     categories: icon.categories,
+    aliases: icon.aliases ?? new Set<string>(),
   };
 }
 
@@ -183,7 +185,13 @@ export function useIconGallery(api: IconifyApi = iconifyApi): UseIconGalleryRetu
       return icons;
     }
 
-    return icons.filter((icon) => icon.name.toLowerCase().includes(debouncedSearchQuery));
+    return icons.filter((icon) => {
+      const nameMatch = icon.name.toLowerCase().includes(debouncedSearchQuery);
+      const aliasMatch = Array.from(icon.aliases ?? new Set<string>()).some((alias) =>
+        alias.toLowerCase().includes(debouncedSearchQuery),
+      );
+      return nameMatch || aliasMatch;
+    });
   }, [icons, debouncedSearchQuery]);
 
   const setCollection = useCallback((collection: string): void => {

@@ -131,8 +131,8 @@ describe('useIconGallery', () => {
     it('fetches icons when collection is selected', async () => {
       mockListIcons.mockResolvedValue(
         createListIconsResult([
-          { name: 'home', categories: new Set() },
-          { name: 'settings', categories: new Set() },
+          { name: 'home', categories: new Set(), aliases: new Set() },
+          { name: 'settings', categories: new Set(), aliases: new Set() },
         ]),
       );
 
@@ -148,8 +148,8 @@ describe('useIconGallery', () => {
       });
 
       expect(result.current.icons).toEqual([
-        { name: 'home', categories: new Set() },
-        { name: 'settings', categories: new Set() },
+        { name: 'home', categories: new Set(), aliases: new Set() },
+        { name: 'settings', categories: new Set(), aliases: new Set() },
       ]);
       expect(result.current.totalCount).toBe(2);
       expect(result.current.filteredCount).toBe(2);
@@ -184,10 +184,10 @@ describe('useIconGallery', () => {
 
       mockListIcons.mockResolvedValue(
         createListIconsResult([
-          { name: 'home', categories: new Set() },
-          { name: 'home-work', categories: new Set() },
-          { name: 'settings', categories: new Set() },
-          { name: 'delete', categories: new Set() },
+          { name: 'home', categories: new Set(), aliases: new Set() },
+          { name: 'home-work', categories: new Set(), aliases: new Set() },
+          { name: 'settings', categories: new Set(), aliases: new Set() },
+          { name: 'delete', categories: new Set(), aliases: new Set() },
         ]),
       );
     });
