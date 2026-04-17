@@ -53,7 +53,9 @@ describe('IconGrid', () => {
     const cards = screen.getAllByRole('button');
     fireEvent.click(cards[0]);
 
-    expect(screen.getByRole('heading', { name: 'material-symbols:home' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Copy material-symbols:home to clipboard' }),
+    ).toBeInTheDocument();
   });
 
   it('closes modal when close button is clicked', async () => {
