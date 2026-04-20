@@ -1,5 +1,8 @@
 import type { IconifyInfo } from '@iconify/types';
 
+/**
+ * Response of the `/search` API call.
+ */
 export interface IconifyApiSearchIconsResponse {
   readonly icons: readonly string[];
   readonly total: number;
