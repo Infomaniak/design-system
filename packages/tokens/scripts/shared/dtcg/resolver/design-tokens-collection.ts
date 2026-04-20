@@ -187,19 +187,20 @@ export class DesignTokensCollection {
     const key: string = DesignTokensCollection.#arrayDesignTokenNameToStringKey(token.name);
     const existingToken: GenericDesignTokensCollectionToken | undefined = this.#tokens.get(key);
 
-    if (existingToken === undefined) {
-      this.#tokens.set(key, token);
-    } else {
+    let tokenToInsert: GenericDesignTokensCollectionToken = token;
+
+    if (existingToken !== undefined) {
       if (last) {
-        // delete token to put it as "last
+        // delete token to put it as "last"
         this.#tokens.delete(key);
       }
 
-      this.#tokens.set(
-        key,
-        merge ? DesignTokensCollection.mergeTokens(existingToken, token) : token,
-      );
+      if (merge) {
+        tokenToInsert = DesignTokensCollection.mergeTokens(existingToken, tokenToInsert);
+      }
     }
+
+    this.#tokens.set(key, tokenToInsert);
 
     return this;
   }

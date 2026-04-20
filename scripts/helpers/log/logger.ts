@@ -71,7 +71,7 @@ export class Logger {
 
   asyncTask<GReturn>(
     name: string,
-    callback: (logger: Logger) => Promise<GReturn>,
+    callback: (logger: Logger) => PromiseLike<GReturn> | GReturn,
     {
       startLevel = 'info',
       successLevel = startLevel,

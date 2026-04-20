@@ -3,7 +3,7 @@ import { valueOrDesignTokenReferenceSchema } from '../../../../../../reference/v
 import { cubicBezierDesignTokenValueSchema } from '../../../../base/types/cubic-bezier/value/cubic-bezier-design-token-value.schema.ts';
 import { durationDesignTokenValueSchema } from '../../../../base/types/duration/value/duration-design-token-value.schema.ts';
 
-export const transitionDesignTokenValueSchema = z.object({
+export const transitionDesignTokenValueSchema = z.strictObject({
   duration: valueOrDesignTokenReferenceSchema(durationDesignTokenValueSchema),
   delay: valueOrDesignTokenReferenceSchema(durationDesignTokenValueSchema),
   timingFunction: valueOrDesignTokenReferenceSchema(cubicBezierDesignTokenValueSchema),

@@ -3,9 +3,11 @@ import { valueOrJsonReferenceSchema } from '../../../../../../reference/types/js
 import { colorDesignTokenAlphaSchema } from './members/alpha/color-design-token-alpha.schema.ts';
 import { colorDesignTokenColorSpaceSchema } from './members/color-space/color-design-token-color-space.schema.ts';
 import { colorDesignTokenValueComponentsSchema } from './members/components/color-design-token-value-components.schema.ts';
+import { colorDesignTokenHexSchema } from './members/hex/color-design-token-hex.schema.ts';
 
-export const colorDesignTokenValueSchema = z.object({
+export const colorDesignTokenValueSchema = z.strictObject({
   colorSpace: valueOrJsonReferenceSchema(colorDesignTokenColorSpaceSchema),
   components: valueOrJsonReferenceSchema(colorDesignTokenValueComponentsSchema),
   alpha: valueOrJsonReferenceSchema(colorDesignTokenAlphaSchema),
+  hex: valueOrJsonReferenceSchema(colorDesignTokenHexSchema),
 });

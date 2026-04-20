@@ -3,7 +3,7 @@ import { valueOrDesignTokenReferenceSchema } from '../../../../../../../../refer
 import { colorDesignTokenValueSchema } from '../../../../../../base/types/color/value/color-design-token-value.schema.ts';
 import { dimensionDesignTokenValueSchema } from '../../../../../../base/types/dimension/value/dimension-design-token-value.schema.ts';
 
-export const objectShadowDesignTokenValueSchema = z.object({
+export const objectShadowDesignTokenValueSchema = z.strictObject({
   color: valueOrDesignTokenReferenceSchema(colorDesignTokenValueSchema),
   offsetX: valueOrDesignTokenReferenceSchema(dimensionDesignTokenValueSchema),
   offsetY: valueOrDesignTokenReferenceSchema(dimensionDesignTokenValueSchema),

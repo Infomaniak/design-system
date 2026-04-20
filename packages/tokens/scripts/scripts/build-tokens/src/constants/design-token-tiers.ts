@@ -15,6 +15,9 @@ export const DESIGN_TOKEN_TIERS: readonly [T1DirectoryName, T2DirectoryName, T3D
   T3_DIRECTORY_NAME,
 ];
 
+export const MODIFIERS_DIRECTORY_NAME = 'modifiers';
+export type ModifiersDirectoryName = typeof MODIFIERS_DIRECTORY_NAME;
+
 /* FIGMA BRIDGE */
 
 // COLLECTIONS

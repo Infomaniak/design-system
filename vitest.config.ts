@@ -21,6 +21,8 @@ export default defineConfig({
         'src/**/*.{test,bench}.ts',
         'src/**/*.skip-test*.ts',
         'src/**/*.skip-test*/**/*.ts',
+        'dist/**/*',
+        'node_modules/**/*',
       ],
       thresholds: {
         100: true,
