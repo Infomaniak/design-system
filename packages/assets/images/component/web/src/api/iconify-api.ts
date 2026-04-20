@@ -347,7 +347,7 @@ export class IconifyApi {
             signal,
           }).catch((error: unknown): never => {
             if (!signal.aborted) {
-              this.#cachedSvg.delete(key);
+              this.#cachedListIcons.delete(key);
             }
             throw error;
           });
@@ -371,7 +371,7 @@ export class IconifyApi {
           cached!.count--;
           if (cached.count === 0) {
             cached!.controller.abort();
-            this.#cachedSvg.delete(key);
+            this.#cachedListIcons.delete(key);
           }
 
           reject(signal!.reason);
