@@ -21,18 +21,12 @@ import {
 import { iconifyApiListIconsResponseToIconifyApiIconList } from './types/custom/search/icon-list/iconify-api-list-icons-response-to-iconify-api-icon-list.ts';
 import type { IconifyApiSearchOptions } from './types/custom/search/iconify-api-search-options.ts';
 
-/* TYPES */
-
-// CONSTRUCTOR
-
 export interface IconifyApiOptions {
   readonly resources?: readonly string[];
   readonly rotate?: number;
   readonly timeout?: number;
   readonly bulkDebounce?: number;
 }
-
-/* CLASS */
 
 export class IconifyApi {
   readonly resources: readonly string[];

@@ -1,15 +1,15 @@
 import { IconifyApi } from './api/iconify-api.ts';
-import { EsdsSVGComponent } from './svg-component/esds-svg.component.ts';
+import { EsdsIconComponent } from './svg-component/esds-icon.component.ts';
 
 function main(): void {
-  EsdsSVGComponent.init(
+  EsdsIconComponent.init(
     new IconifyApi({
       // ALTERNATIVE endpoint: https://iconify.infomaniak.com
       resources: ['https://iconify.preprod.dev.infomaniak.ch'],
     }),
   );
 
-  // EsdsSVGComponent.api.search({ prefix: 'esds', query: 'size 16 @all' }).then(console.log);
+  // EsdsIconComponent.api.search({ prefix: 'esds', query: 'size 16 @all' }).then(console.log);
 }
 
 main();

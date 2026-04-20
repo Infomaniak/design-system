@@ -49,11 +49,11 @@ const IconCard: React.FC<IconCardProps> = ({ icon, prefix }) => {
       `}</style>
       <div className="icon-card">
         <div className="icon-card__icon">
-          <esds-svg
+          <esds-icon
             name={iconId}
             mode="bg"
             style={{ width: '48px', height: '48px' }}
-          ></esds-svg>
+          ></esds-icon>
         </div>
         <code className="icon-card__code">{iconId}</code>
       </div>

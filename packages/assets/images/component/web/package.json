@@ -1,21 +1,21 @@
 {
-  "name": "@infomaniak-design-system/esds-svg",
+  "name": "@infomaniak-design-system/esds-icon",
   "version": "0.0.0",
   "type": "module",
   "exports": {
     ".": {
       "import": {
         "types": "./dist/public-api.d.ts",
-        "default": "./dist/esds-svg.js"
+        "default": "./dist/esds-icon.js"
       },
       "require": {
         "types": "./dist/public-api.d.ts",
-        "default": "./dist/esds-svg.umd.cjs"
+        "default": "./dist/esds-icon.umd.cjs"
       }
     }
   },
-  "main": "./dist/esds-svg.umd.cjs",
-  "module": "./dist/esds-svg.js",
+  "main": "./dist/esds-icon.umd.cjs",
+  "module": "./dist/esds-icon.js",
   "types": "./dist/public-api.d.ts",
   "scripts": {
     "=== DEV ===": "",

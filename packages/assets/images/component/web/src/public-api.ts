@@ -10,4 +10,4 @@ export * from './api/types/api/list-icons/iconify-api-list-icons-response.ts';
 export * from './api/types/custom/get-svg/iconify-api-get-svg-options.ts';
 export * from './api/types/custom/search/icon-list/iconify-api-icon-list.ts';
 export * from './api/types/custom/search/iconify-api-search-options.ts';
-export * from './svg-component/esds-svg.component.ts';
+export * from './svg-component/esds-icon.component.ts';

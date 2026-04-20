@@ -12,7 +12,7 @@ const { mockListIconSets, mockListIcons } = vi.hoisted(() => ({
   mockListIcons: vi.fn(),
 }));
 
-vi.mock('@infomaniak-design-system/esds-svg', () => {
+vi.mock('@infomaniak-design-system/esds-icon', () => {
   return {
     IconifyApi: class MockIconifyApi {
       listIconSets = mockListIconSets;

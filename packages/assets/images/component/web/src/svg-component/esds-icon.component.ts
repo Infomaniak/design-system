@@ -1,28 +1,28 @@
 import { IconifyApi } from '../api/iconify-api.ts';
 import { type CustomElement } from '../types/custom-element.ts';
-import style from './esds-svg.component.css?inline';
+import style from './esds-icon.component.css?inline';
 
 const sheet: CSSStyleSheet = new CSSStyleSheet();
 sheet.replaceSync(style);
 
-export type EsdsSVGComponentMode = 'svg' | 'bg' | 'mask';
-export type EsdsSVGComponentStatus = 'loading' | 'rendered' | 'error';
+export type EsdsIconComponentMode = 'svg' | 'bg' | 'mask';
+export type EsdsIconComponentStatus = 'loading' | 'rendered' | 'error';
 
 type AttributeValue = string | null;
 
 /**
  * A Custom Element to display SVGs loaded from an Iconify server.
  */
-export class EsdsSVGComponent extends HTMLElement implements CustomElement {
+export class EsdsIconComponent extends HTMLElement implements CustomElement {
   static api: IconifyApi;
 
   static init(api: IconifyApi = new IconifyApi()): void {
     if (this.api !== undefined) {
-      throw new Error('EsdsSVGComponent already initialized.');
+      throw new Error('EsdsIconComponent already initialized.');
     }
     this.api = api;
     // INFO custom-element is defined AFTER initializing the API, else the "default" API is used too early.
-    customElements.define('esds-svg', EsdsSVGComponent);
+    customElements.define('esds-icon', EsdsIconComponent);
   }
 
   static get observedAttributes(): readonly string[] {
@@ -84,7 +84,7 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
 
   // MODE
 
-  #mode: EsdsSVGComponentMode = 'svg';
+  #mode: EsdsIconComponentMode = 'svg';
 
   /**
    * The `mode` to apply:
@@ -93,11 +93,11 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
    * - `bg`: uses the svg as "background-image" of this component.
    * - `mask`: injects the svg as "mask-image" of this component: this is useful to apply color to the svg.
    */
-  get mode(): EsdsSVGComponentMode {
+  get mode(): EsdsIconComponentMode {
     return this.#mode;
   }
 
-  set mode(input: EsdsSVGComponentMode) {
+  set mode(input: EsdsIconComponentMode) {
     if (input !== this.#mode) {
       if (!['svg', 'bg', 'mask'].includes(input)) {
         throw new Error(`Invalid mode: ${input}. Expected 'svg', 'bg', or 'mask'.`);
@@ -112,7 +112,7 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
   }
 
   #modeAttributeChange(value: AttributeValue): void {
-    this.mode = value === null ? 'svg' : (value as EsdsSVGComponentMode);
+    this.mode = value === null ? 'svg' : (value as EsdsIconComponentMode);
   }
 
   // INLINE
@@ -251,7 +251,7 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
 
   #loadSVGController: AbortController | undefined;
   #updateQueued: boolean = false;
-  #status: EsdsSVGComponentStatus = 'loading';
+  #status: EsdsIconComponentStatus = 'loading';
 
   /**
    * Returns the "loading" status of the icon:
@@ -260,7 +260,7 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
    * - `rendered`: the icon is rendered
    * - `error`: the icon failed to load
    */
-  get status(): EsdsSVGComponentStatus {
+  get status(): EsdsIconComponentStatus {
     return this.#status;
   }
 
@@ -298,7 +298,7 @@ export class EsdsSVGComponent extends HTMLElement implements CustomElement {
     const signal: AbortSignal = this.#loadSVGController.signal;
     this.#status = 'loading';
 
-    EsdsSVGComponent.api
+    EsdsIconComponent.api
       .getSVG({
         prefix: this.#prefix,
         name: this.#name,
