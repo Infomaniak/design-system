@@ -132,8 +132,12 @@ export function useIconGallery(api: IconifyApi = iconifyApi): UseIconGalleryRetu
           return;
         }
 
+        console.log(
+          'iconifyApiListIconsResponseToIconifyApiIconList',
+          iconifyApiListIconsResponseToIconifyApiIconList,
+        );
         const iconItems: IconifyApiIconList = iconifyApiListIconsResponseToIconifyApiIconList(
-          await api.listIcons({
+          await api.listIconsCached({
             prefix,
             signal,
           }),
