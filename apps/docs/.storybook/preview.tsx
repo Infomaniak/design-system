@@ -1,4 +1,4 @@
-import { EsdsSVGComponent, IconifyApi } from '@infomaniak-design-system/esds-svg';
+import { EsdsIconComponent, IconifyApi } from '@infomaniak-design-system/esds-icon';
 import { DocsContainer, type DocsContainerProps } from '@storybook/addon-docs/blocks';
 import type { Preview } from '@storybook/react-vite';
 import { useEffect, useState } from 'react';
@@ -28,10 +28,10 @@ import '@infomaniak-design-system/tokens/dist/web/css/modifiers/product/swisstra
 import '@infomaniak-design-system/tokens/dist/web/css/modifiers/theme/dark.attr.css';
 import '@infomaniak-design-system/tokens/dist/web/css/modifiers/theme/light.attr.css';
 
-// Initialize EsdsSVGComponent for the <esds-svg> elements
+// Initialize EsdsIconComponent for the <esds-icon> elements
 const iconifyEndpoint =
   import.meta.env.VITE_ICONIFY_API_URL ?? 'https://iconify.preprod.dev.infomaniak.ch';
-EsdsSVGComponent.init(
+EsdsIconComponent.init(
   new IconifyApi({
     resources: [iconifyEndpoint],
   }),

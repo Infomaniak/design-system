@@ -11,21 +11,21 @@ describe('transformPackageJsonPaths', () => {
 
   describe('basic path transformation', () => {
     it('should strip ./dist/ prefix from main field', () => {
-      const pkg = { name: 'test', version: '1.0.0', main: './dist/esds-svg.umd.cjs' };
+      const pkg = { name: 'test', version: '1.0.0', main: './dist/esds-icon.umd.cjs' };
       const result = transformPackageJsonPaths(pkg, defaultConfig);
-      expect(result.main).toBe('./esds-svg.umd.cjs');
+      expect(result.main).toBe('./esds-icon.umd.cjs');
     });
 
     it('should strip /dist/ prefix from main field', () => {
-      const pkg = { name: 'test', version: '1.0.0', main: '/dist/esds-svg.umd.cjs' };
+      const pkg = { name: 'test', version: '1.0.0', main: '/dist/esds-icon.umd.cjs' };
       const result = transformPackageJsonPaths(pkg, defaultConfig);
-      expect(result.main).toBe('./esds-svg.umd.cjs');
+      expect(result.main).toBe('./esds-icon.umd.cjs');
     });
 
     it('should strip ./dist/ prefix from module field', () => {
-      const pkg = { name: 'test', version: '1.0.0', module: './dist/esds-svg.js' };
+      const pkg = { name: 'test', version: '1.0.0', module: './dist/esds-icon.js' };
       const result = transformPackageJsonPaths(pkg, defaultConfig);
-      expect(result.module).toBe('./esds-svg.js');
+      expect(result.module).toBe('./esds-icon.js');
     });
 
     it('should strip ./dist/ prefix from types field', () => {
@@ -62,11 +62,11 @@ describe('transformPackageJsonPaths', () => {
           '.': {
             import: {
               types: './dist/public-api.d.ts',
-              default: './dist/esds-svg.js',
+              default: './dist/esds-icon.js',
             },
             require: {
               types: './dist/public-api.d.ts',
-              default: './dist/esds-svg.umd.cjs',
+              default: './dist/esds-icon.umd.cjs',
             },
           },
         },
@@ -76,11 +76,11 @@ describe('transformPackageJsonPaths', () => {
         '.': {
           import: {
             types: './public-api.d.ts',
-            default: './esds-svg.js',
+            default: './esds-icon.js',
           },
           require: {
             types: './public-api.d.ts',
-            default: './esds-svg.umd.cjs',
+            default: './esds-icon.umd.cjs',
           },
         },
       });
@@ -303,40 +303,40 @@ describe('transformPackageJsonPaths', () => {
   });
 
   describe('real-world scenario', () => {
-    it('should handle the actual esds-svg package structure', () => {
+    it('should handle the actual esds-icon package structure', () => {
       const pkg = {
-        name: '@infomaniak-design-system/esds-svg',
+        name: '@infomaniak-design-system/esds-icon',
         version: '1.0.0',
         type: 'module',
-        main: './dist/esds-svg.umd.cjs',
-        module: './dist/esds-svg.js',
+        main: './dist/esds-icon.umd.cjs',
+        module: './dist/esds-icon.js',
         types: './dist/public-api.d.ts',
         exports: {
           '.': {
             import: {
               types: './dist/public-api.d.ts',
-              default: './dist/esds-svg.js',
+              default: './dist/esds-icon.js',
             },
             require: {
               types: './dist/public-api.d.ts',
-              default: './dist/esds-svg.umd.cjs',
+              default: './dist/esds-icon.umd.cjs',
             },
           },
         },
       };
       const result = transformPackageJsonPaths(pkg, defaultConfig);
-      expect(result.main).toBe('./esds-svg.umd.cjs');
-      expect(result.module).toBe('./esds-svg.js');
+      expect(result.main).toBe('./esds-icon.umd.cjs');
+      expect(result.module).toBe('./esds-icon.js');
       expect(result.types).toBe('./public-api.d.ts');
       expect(result.exports).toEqual({
         '.': {
           import: {
             types: './public-api.d.ts',
-            default: './esds-svg.js',
+            default: './esds-icon.js',
           },
           require: {
             types: './public-api.d.ts',
-            default: './esds-svg.umd.cjs',
+            default: './esds-icon.umd.cjs',
           },
         },
       });

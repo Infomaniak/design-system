@@ -1,4 +1,10 @@
-import { IconifyApi, type IconifyApiIconListIconsIcon } from '@infomaniak-design-system/esds-svg';
+import {
+  type IconifyApiIconList,
+  type IconifyApiIconListIcon,
+  IconifyApi,
+  iconifyApiListIconsResponseToIconifyApiIconList,
+} from '@infomaniak-design-system/esds-icon';
+
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { iconifyApi } from '../lib/iconify-api.ts';
 import { IconGalleryErrorCode } from '../types/error-codes.ts';
@@ -32,7 +38,7 @@ export interface UseIconGalleryReturn {
 
 const SEARCH_DEBOUNCE_MS = 300;
 
-function mapApiIconToIconItem(icon: IconifyApiIconListIconsIcon): IconItem {
+function mapApiIconToIconItem(icon: IconifyApiIconListIcon): IconItem {
   return {
     name: icon.name,
     categories: icon.categories,
@@ -126,10 +132,12 @@ export function useIconGallery(api: IconifyApi = iconifyApi): UseIconGalleryRetu
           return;
         }
 
-        const iconItems = await api.listIcons({
-          prefix,
-          signal,
-        });
+        const iconItems: IconifyApiIconList = iconifyApiListIconsResponseToIconifyApiIconList(
+          await api.listIconsCached({
+            prefix,
+            signal,
+          }),
+        );
 
         const convertedIcons = iconItems.map(mapApiIconToIconItem);
 

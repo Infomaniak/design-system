@@ -21,8 +21,8 @@ export default defineConfig({
     target: 'es2022',
     lib: {
       entry: resolve(__dirname, 'src/public-api.ts'),
-      name: 'EsdsSvg',
-      fileName: 'esds-svg',
+      name: 'EsdsIcon',
+      fileName: 'esds-icon',
       formats: ['es', 'umd'],
     },
   },

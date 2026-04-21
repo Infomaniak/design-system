@@ -12,11 +12,11 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
-// esds-svg custom element JSX types for react-jsx transform
+// esds-icon custom element JSX types for react-jsx transform
 declare module 'react/jsx-runtime' {
   export namespace JSX {
     interface IntrinsicElements extends React.JSX.IntrinsicElements {
-      'esds-svg': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+      'esds-icon': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
         name?: string;
         mode?: 'svg' | 'bg' | 'mask';
         inline?: boolean;
