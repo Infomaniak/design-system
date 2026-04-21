@@ -1,6 +1,4 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import IconGallery from '../../components/IconGallery.tsx';
-import { IconGalleryErrorBoundary } from '../../components/IconGalleryErrorBoundary.tsx';
 
 <Meta title="Icons/Icon Component" />
 
@@ -19,7 +17,10 @@ yarn add @infomaniak-design-system/esds-icon
 #### script + cdn
 
 ```html
-<script type="module">
+<script
+  type="module"
+  async
+>
   import {
     IconifyApi,
     EsdsIconComponent,
