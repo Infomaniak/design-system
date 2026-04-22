@@ -1,0 +1,263 @@
+import { fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import IconDetailModal from './IconDetailModal.tsx';
+
+// Mock the iconifyApi using hoisted mocks
+const { mockListIcons } = vi.hoisted(() => ({
+  mockListIcons: vi.fn(),
+}));
+
+vi.mock('../lib/iconify-api.ts', () => ({
+  iconifyApi: {
+    listIconsCached: mockListIcons,
+  },
+}));
+
+describe('IconDetailModal', () => {
+  const mockOnClose = vi.fn();
+  const mockIcon = {
+    name: 'home',
+    categories: new Set(['buildings', 'navigation']),
+  };
+
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.clearAllMocks();
+
+    // Mock listIconsCached to return icon data with collection info
+    mockListIcons.mockResolvedValue({
+      prefix: 'material-symbols',
+      total: 2,
+      categories: {
+        buildings: ['home'],
+        navigation: ['home'],
+        action: ['settings'],
+      },
+      info: {
+        name: 'Material Symbols',
+        license: {
+          title: 'Apache 2.0',
+        },
+      },
+    });
+
+    // Create portal root
+    const portalRoot = document.createElement('div');
+    portalRoot.id = 'modal-root';
+    document.body.appendChild(portalRoot);
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+    const portalRoot = document.getElementById('modal-root');
+    if (portalRoot) {
+      document.body.removeChild(portalRoot);
+    }
+    vi.clearAllMocks();
+  });
+
+  it('does not render when isOpen is false', () => {
+    render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={false}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+
+  it('renders modal when isOpen is true', () => {
+    render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+  });
+
+  it('displays icon name', () => {
+    render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+    // Icon name appears in both h2 and CopyField, so we use getAllByText
+    const elements = screen.getAllByText('material-symbols:home');
+    expect(elements.length).toBeGreaterThan(0);
+  });
+
+  it('displays esds-icon code snippet', () => {
+    render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+    expect(screen.getByText('<esds-icon name="material-symbols:home" />')).toBeInTheDocument();
+  });
+
+  it('calls onClose when close button is clicked', () => {
+    render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+    const closeButton = screen.getByLabelText('Close dialog');
+    fireEvent.click(closeButton);
+    expect(mockOnClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onClose when backdrop is clicked', () => {
+    render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+    const backdrop = screen.getByTestId('modal-backdrop');
+    fireEvent.click(backdrop);
+    expect(mockOnClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onClose when Escape key is pressed', () => {
+    render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+    fireEvent.keyDown(document, { key: 'Escape' });
+    expect(mockOnClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not close when modal content is clicked', () => {
+    render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+    const modalContent = screen.getByRole('dialog');
+    fireEvent.click(modalContent);
+    expect(mockOnClose).not.toHaveBeenCalled();
+  });
+
+  it('locks body scroll when open', () => {
+    render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+    expect(document.body.style.overflow).toBe('hidden');
+  });
+
+  it('unlocks body scroll when closed', () => {
+    const { rerender } = render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+    expect(document.body.style.overflow).toBe('hidden');
+
+    rerender(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={false}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+    expect(document.body.style.overflow).toBe('');
+  });
+
+  it('renders nothing when icon is null', () => {
+    render(
+      <IconDetailModal
+        icon={null}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+
+  it('displays license value from API response', async () => {
+    render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+
+    // Wait for async data to load
+    await vi.waitFor(() => {
+      expect(screen.getByText('Apache 2.0')).toBeInTheDocument();
+    });
+  });
+
+  it('displays collection name from info', async () => {
+    render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+
+    // Wait for async data to load
+    await vi.waitFor(() => {
+      expect(screen.getByText('Material Symbols')).toBeInTheDocument();
+    });
+  });
+
+  it('displays unknown license when info is missing', async () => {
+    mockListIcons.mockResolvedValueOnce({
+      prefix: 'material-symbols',
+      total: 1,
+      uncategorized: ['home'],
+      info: undefined,
+    });
+
+    render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+
+    await vi.waitFor(() => {
+      expect(screen.getByText('Unknown License')).toBeInTheDocument();
+    });
+  });
+});
