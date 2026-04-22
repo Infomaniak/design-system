@@ -1,6 +1,5 @@
 import { join } from 'node:path';
 import { writeTextFileSafe } from '../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
-import { mapGetOrInsertComputed } from '../../../../../../../../../scripts/helpers/misc/map/upsert.ts';
 import { segmentsReferenceToPascalCase } from '../../../../../../shared/dtcg/design-token/reference/types/segments/to/pascal-case/segments-reference-to-pascal-case.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import {
@@ -8,8 +7,6 @@ import {
   type GenericResolvedDesignTokensCollectionToken,
 } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
-import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/color/is-color-design-tokens-collection-token.ts';
-import { isDimensionDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/dimension/is-dimension-design-tokens-collection-token.ts';
 import { T2_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
 import {
   buildSwiftStructWithInit,
@@ -19,15 +16,18 @@ import { toSwiftVariableName } from './swift-naming-helper.ts';
 
 type NestedMap = { [key: string]: NestedMap | string };
 
-interface StructContext {
-  leafParentNameToStructName: Map<string, string>;
-  outputDirectory: string;
-}
-
 export interface BuildSwiftThemeStructOptions {
   readonly baseCollection: DesignTokensCollection;
   readonly outputDirectory: string;
 }
+
+const TYPE_SWIFT_MAP: Record<string, string> = {
+  color: 'Color',
+  dimension: 'CGFloat',
+  number: 'CGFloat',
+  fontFamily: 'String',
+  fontWeight: 'Font.Weight',
+};
 
 export async function buildSwiftThemeStructs({
   baseCollection,
@@ -44,190 +44,31 @@ export async function buildSwiftThemeStructs({
       }),
   );
 
-  const tokenNamesGroupedByLastNameSegmentMap: TokenNamesGroupedByLastNameSegmentMap =
-    groupTokenNamesByLastNameSegment(names);
-  // Là on a genre chaque groupe de token dans le bon chemin, avec les "leaf" à la fin, donc les dernières variable, avant ça c'est des struct à chaque fois.
-  // Genre: 'color-background-elevation-surface' => [ 'pressed', 'hover', 'default' ],
+  const buildedTree: NestedMap = buildTokenTree(baseCollection, names, TYPE_SWIFT_MAP, "String?");
 
-  // console.log(tokenNamesGroupedByLastNameSegmentMap);
+  const patterns = findRepeatedStructures(buildedTree);
 
-  // Et ici du coup on essaie de regrouper à l'inverse, on fait une array de tout ceux qui ont [ 'pressed', 'hover', 'default' ]
-  const sharedNameSegmentsToTokenNames: SharedNameSegmentsToTokenNames =
-    tokensByLastNameAndSharedSegments(tokenNamesGroupedByLastNameSegmentMap);
+  for (const [sig, paths] of patterns) {
+    const structName = nameForPatternPaths(paths);
+    const swiftStruct = buildSwiftStructWithInit({
+      name: structName,
+      variables: buildVariablesForNode(sig, patterns),
+    });
 
-  console.log(sharedNameSegmentsToTokenNames);
-
-  const segmentsToSwiftStructMap: SegmentsToSwiftStructMap = await buildSharedStructs(
-    sharedNameSegmentsToTokenNames,
-    outputDirectory,
-  );
-
-  console.log(segmentsToSwiftStructMap);
-
-  const buildedTree: NestedMap = buildFlatTree(baseCollection, names, segmentsToSwiftStructMap);
-
-  // DEBUG:
-  // console.log(JSON.stringify(buildedTree, null, 2));
-
-  await buildStructLeaves(buildedTree, [], {
-    leafParentNameToStructName: segmentsToSwiftStructMap,
-    outputDirectory,
-  });
-}
-
-// HELPER
-
-async function buildStructLeaves(
-  node: NestedMap | string,
-  path: string[] = [],
-  structContext: StructContext,
-) {
-  if (typeof node === 'string') return;
-
-  const entries = Object.entries(node);
-
-  if (entries.length === 1) {
-    const [key, value] = entries[0];
-    await buildStructLeaves(value, [...path, key], structContext);
-    return;
-  }
-
-  const name = path.length === 0 ? 'EsdsTheme' : 'EsdsTheme' + segmentsReferenceToPascalCase(path);
-  const variables: SwiftVariable[] = [];
-
-  for (const [key, value] of entries) {
-    const childPath = [...path, key];
-    const sharedStructNames = structContext.leafParentNameToStructName.get(
-      JSON.stringify(childPath),
+    await writeTextFileSafe(
+      join(outputDirectory, `EsdsTheme/Shared/${structName}.swift`),
+      swiftStruct,
     );
-    const fieldName = toSwiftVariableName([key]);
-
-    if (sharedStructNames) {
-      variables.push({ name: fieldName, type: sharedStructNames });
-    } else if (typeof value === 'string') {
-      variables.push({ name: fieldName, type: 'String' }); // TODO Change to token type
-    } else {
-      const typeName = `EsdsTheme${segmentsReferenceToPascalCase(childPath)}`;
-      variables.push({ name: fieldName, type: typeName, initValue: `${typeName}()` });
-      await buildStructLeaves(value, childPath, structContext);
-    }
   }
 
-  const swiftStruct = buildSwiftStructWithInit({ name, variables });
-
-  await writeTextFileSafe(
-    join(structContext.outputDirectory, `EsdsTheme/${name}.swift`),
-    swiftStruct,
-  );
+  await buildStructTree(buildedTree, [], patterns, outputDirectory);
 }
 
-type TokenNamesGroupedByLastNameSegmentMap = Map<
-  string /* name part */,
-  string[] /* last name segment */
->;
-
-/**
- * Constructs a tree-like map structure where token names are grouped by their last segment.
- */
-function groupTokenNamesByLastNameSegment(
-  names: readonly ArrayDesignTokenName[],
-): TokenNamesGroupedByLastNameSegmentMap {
-  const tokenNamesGroupedByLastNameSegment = new Map<
-    string /* name part */,
-    string[] /* last name segment */
-  >();
-
-  for (const name of names) {
-    mapGetOrInsertComputed(
-      tokenNamesGroupedByLastNameSegment,
-      JSON.stringify(name.slice(0, -1)),
-      (): string[] => [],
-    ).push(name.at(-1)!);
-  }
-
-  return tokenNamesGroupedByLastNameSegment;
-}
-
-type SharedNameSegmentsToTokenNames = Map<string /* last segments joined */, string[] /* name */>;
-
-function tokensByLastNameAndSharedSegments(
-  tokenNamesGroupedByLastNameSegment: TokenNamesGroupedByLastNameSegmentMap,
-): SharedNameSegmentsToTokenNames {
-  const sharedNameSegmentsToTokenNames = new Map<string, string[]>();
-
-  for (const [parent, leaves] of tokenNamesGroupedByLastNameSegment) {
-    const leafKey: string = `${parent.slice(0, -1)},`;
-    if (
-      leaves.length < 2 /* skip if object is unique*/ ||
-      tokenNamesGroupedByLastNameSegment.keys().some((key: string): boolean => {
-        return key.startsWith(leafKey);
-      }) /* skip if parent is not a leaf */
-    ) {
-      continue;
-    }
-
-    mapGetOrInsertComputed(
-      sharedNameSegmentsToTokenNames,
-      JSON.stringify(leaves.sort()),
-      (): string[] => [],
-    ).push(parent);
-  }
-  return sharedNameSegmentsToTokenNames;
-}
-
-type SegmentsToSwiftStructMap = Map<string /* last segments joined */, string /* struct name */>;
-
-async function buildSharedStructs(
-  leafToParents: Map<string, string[]>,
-  outputDirectory: string,
-): Promise<SegmentsToSwiftStructMap> {
-  const segmentsToSwiftStructMap: SegmentsToSwiftStructMap = new Map<string, string>();
-  const createdStructs = new Set<string>();
-
-  const typeToSwift: Map<string, string> = new Map<string, string>([['color', 'Color']]);
-
-  for (const [leaf, parents] of leafToParents) {
-    if (parents.length < 2) {
-      // skip if object is unique
-      continue;
-    }
-
-    const name: string = segmentsReferenceToPascalCase([JSON.parse(parents[0])[0], 'options']);
-
-    for (const parent of parents) {
-      segmentsToSwiftStructMap.set(parent, name);
-    }
-
-    if (createdStructs.has(name)) {
-      continue;
-    }
-
-    const variables = (JSON.parse(leaf) as readonly string[]).map((item: string): SwiftVariable => {
-      return {
-        name: toSwiftVariableName([item.trim()]),
-        type: `${typeToSwift.get(JSON.parse(parents[0])[0]) ?? 'Type'}`,
-      };
-    });
-
-    const swiftStruct: string = buildSwiftStructWithInit({
-      name,
-      variables,
-    });
-
-    // La on construite les fichiers pour chaque type partagé (genre ColorOptions)
-    // TODO convert path to constant
-    await writeTextFileSafe(join(outputDirectory, `EsdsTheme/Shared/${name}.swift`), swiftStruct);
-
-    createdStructs.add(name);
-  }
-
-  return segmentsToSwiftStructMap;
-}
-
-function buildFlatTree(
+function buildTokenTree(
   baseCollection: DesignTokensCollection,
   names: readonly ArrayDesignTokenName[],
-  leafParentNameToStructName: Map<string, string>,
+  platformTypeRecord: Record<string, string>,
+  undefinedType: string
 ): NestedMap {
   const buildedTree2: NestedMap = {};
 
@@ -235,23 +76,11 @@ function buildFlatTree(
     let node = buildedTree2;
     for (let i = 0; i < name.length; i++) {
       const key = name[i];
-      const structName = leafParentNameToStructName.get(JSON.stringify(name.slice(0, i + 1)));
-      if (structName) {
-        node[key] = structName;
-        break;
-      }
       if (i === name.length - 1) {
         const resolvedToken: GenericResolvedDesignTokensCollectionToken = baseCollection.resolve(
           baseCollection.get(name),
         );
-
-        if (isColorDesignTokensCollectionToken(resolvedToken)) {
-          console.log('is color');
-        } else if (isDimensionDesignTokensCollectionToken(resolvedToken)) {
-          console.log('is dimension');
-        }
-        console.log(resolvedToken.type);
-        node[key] = 'String'; // TODO resolve true type
+        node[key] = platformTypeRecord[resolvedToken.type] ?? undefinedType;
         break;
       }
       if (!node[key]) node[key] = {};
@@ -260,4 +89,137 @@ function buildFlatTree(
   }
 
   return buildedTree2;
+}
+
+function normalize(obj: NestedMap): NestedMap | string {
+  if (typeof obj === "string") return obj;
+  return Object.fromEntries(
+    Object.entries(obj)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([k, v]) => [k, normalize(v as NestedMap)])
+  );
+}
+
+function collectSignatures(node: NestedMap | string, path: string[], signatures: Map<NestedMap, string[][]>): void {
+  if (typeof node === "string") return;
+
+  const sig = JSON.stringify(normalize(node));
+  const existing = [...signatures.entries()].find(([k]) => JSON.stringify(normalize(k)) === sig);
+
+  if (existing) {
+    existing[1].push(path);
+  } else {
+    signatures.set(node, [path]);
+  }
+
+  for (const [key, value] of Object.entries(node)) {
+    collectSignatures(value as NestedMap, [...path, key], signatures);
+  }
+}
+
+function findRepeatedStructures(obj: NestedMap): Map<NestedMap, string[][]> {
+  const signatures = new Map<NestedMap, string[][]>();
+  collectSignatures(obj, [], signatures);
+  return new Map([...signatures].filter(([, paths]) => paths.length > 1));
+}
+
+function commonSegments(paths: string[][]): string[] {
+  if (paths.length === 0) return [];
+  const maxLen = Math.max(...paths.map(p => p.length));
+  const common: string[] = [];
+  for (let i = 0; i < maxLen; i++) {
+    const values = paths.map(p => p[i]).filter(Boolean);
+    const unique = new Set(values);
+    if (unique.size === 1) common.push(values[0]);
+  }
+  return common;
+}
+
+function nameForPatternPaths(paths: string[][]): string {
+  return segmentsReferenceToPascalCase(commonSegments(paths)) + 'Options';
+}
+
+function getSharedStructName(
+  node: NestedMap,
+  patterns: Map<NestedMap, string[][]>,
+): string | undefined {
+  const sig = JSON.stringify(normalize(node));
+  const entry = [...patterns.entries()].find(([k]) => JSON.stringify(normalize(k)) === sig);
+  return entry ? nameForPatternPaths(entry[1]) : undefined;
+}
+
+async function buildStructTree(
+  node: NestedMap,
+  path: string[],
+  patterns: Map<NestedMap, string[][]>,
+  outputDirectory: string,
+): Promise<void> {
+  const name =
+    path.length === 0 ? 'EsdsTheme' : `EsdsTheme${segmentsReferenceToPascalCase(path)}`;
+
+  // Build variables using the shared helper (handles root grouping + shared struct resolution)
+  const variables = buildVariablesForNode(node, patterns);
+
+  // For object entries that are NOT a shared struct, override with EsdsTheme<Path> type and recurse
+  const objectEntries = Object.entries(node).filter(([, v]) => typeof v !== 'string');
+  for (const [key, value] of objectEntries) {
+    const sharedName = getSharedStructName(value as NestedMap, patterns);
+
+    if (!sharedName) {
+      const idx = variables.findIndex(v => v.name === toSwiftVariableName([key]));
+      const childEntries = Object.entries(value as NestedMap);
+
+      if (childEntries.length === 1 && typeof childEntries[0][1] === 'string') {
+        // Single leaf: inline as combinedName, no sub-struct created
+        const [leafKey, leafType] = childEntries[0];
+        if (idx !== -1) variables[idx] = { name: toSwiftVariableName([key, leafKey]), type: leafType as string };
+      } else {
+        const typeName = name + segmentsReferenceToPascalCase([key]);
+
+        if (idx !== -1) variables[idx] = { name: toSwiftVariableName([key]), type: typeName };
+        await buildStructTree(value as NestedMap, [...path, key], patterns, outputDirectory);
+      }
+    }
+  }
+
+  const swiftStruct = buildSwiftStructWithInit({ name, variables });
+  await writeTextFileSafe(join(outputDirectory, `EsdsTheme/${name}.swift`), swiftStruct);
+}
+
+function resolveType(value: NestedMap | string, patterns: Map<NestedMap, string[][]>): string {
+  if (typeof value === 'string') return value;
+  return getSharedStructName(value, patterns) ?? 'Unknown';
+}
+
+function buildVariablesForNode(
+  node: NestedMap,
+  patterns: Map<NestedMap, string[][]>,
+): SwiftVariable[] {
+  const variables: SwiftVariable[] = [];
+  const stringEntries = Object.entries(node).filter(([, v]) => typeof v === 'string');
+  const objectEntries = Object.entries(node).filter(([, v]) => typeof v !== 'string');
+
+  if (stringEntries.length > 0 && objectEntries.length > 0) {
+    // Root support
+    const stringSubMap = Object.fromEntries(stringEntries) as NestedMap;
+    const rootStructName = getSharedStructName(stringSubMap, patterns);
+    if (rootStructName) {
+      variables.push({ name: 'root', type: rootStructName });
+    } else {
+      for (const [key, value] of stringEntries) {
+        variables.push({ name: toSwiftVariableName([key]), type: value as string });
+      }
+    }
+  } else {
+    for (const [key, value] of stringEntries) {
+      variables.push({ name: toSwiftVariableName([key]), type: value as string });
+    }
+  }
+
+  for (const [key, value] of objectEntries) {
+    const sharedName = getSharedStructName(value as NestedMap, patterns);
+    variables.push({ name: toSwiftVariableName([key]), type: sharedName ?? resolveType(value, patterns) });
+  }
+
+  return variables;
 }
