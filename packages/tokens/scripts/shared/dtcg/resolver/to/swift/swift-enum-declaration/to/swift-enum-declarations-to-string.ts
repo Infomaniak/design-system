@@ -1,8 +1,8 @@
-import type { SwiftEnumDeclaration } from '../swift-enum-declaration.ts';
+import type { SwiftEnumDeclaration, SwiftEnumMark } from '../swift-enum-declaration.ts';
 import { swiftEnumDeclarationToString } from './swift-enum-declaration-to-string.ts';
 
 export function swiftEnumDeclarationsToString(
-  declarations: Iterable<SwiftEnumDeclaration>,
+  declarations: Iterable<SwiftEnumDeclaration | SwiftEnumMark>,
 ): string {
   let output: string = '';
 

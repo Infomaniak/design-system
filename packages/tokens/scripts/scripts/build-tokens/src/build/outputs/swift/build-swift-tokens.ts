@@ -7,7 +7,7 @@ import type {
   DesignTokenContexts,
   DesignTokenModifiers,
 } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
-import type { SwiftEnumDeclaration } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/swift-enum-declaration.ts';
+import type { SwiftEnumDeclaration, SwiftEnumMark } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/swift-enum-declaration.ts';
 import { swiftEnumDeclarationsToString } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/to/swift-enum-declarations-to-string.ts';
 import { designTokensCollectionTokenToSwiftEnumDeclaration } from '../../../../../../shared/dtcg/resolver/to/swift/token/design-tokens-collection-token-to-swift-enum-declaration.ts';
 import type {
@@ -16,7 +16,6 @@ import type {
 } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/color/is-color-design-tokens-collection-token.ts';
 import { isFontFamilyDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/font-family/is-font-family-design-tokens-collection-token.ts';
-import { isNumberDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/number/is-number-design-tokens-collection-token.ts';
 import { T1_DIRECTORY_NAME, T2_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
 
 import { buildSwiftThemeStructs } from './build-swift-theme-structs.ts';
@@ -43,7 +42,7 @@ export async function buildSwiftTokens({
 
     const t1ColorTokenNameToColorsetName = new Map<string, string>();
 
-    const declarations: SwiftEnumDeclaration[] = [];
+    const declarations: (SwiftEnumDeclaration | SwiftEnumMark)[] = [];
 
     const theme: DesignTokenContexts = modifiers.get('theme')!;
     const lightThemeCollection: DesignTokensCollection = theme.get('light')!;
@@ -65,6 +64,7 @@ export async function buildSwiftTokens({
               token.files.some((path: string): boolean => path.includes(T1_DIRECTORY_NAME))
             );
           })) {
+
           await buildXcAssets({
             token,
             t1ColorTokenNameToColorsetName,
@@ -107,6 +107,8 @@ export async function buildSwiftTokens({
 
       // t2 non-color tokens
       await logger.asyncTask('non-color-tokens', async (): Promise<void> => {
+        let lastType: string | undefined;
+
         for await (const token of baseCollection
           .tokens()
           .filter((token: GenericDesignTokensCollectionToken): boolean => {
@@ -118,10 +120,15 @@ export async function buildSwiftTokens({
             return (
               !isColorDesignTokensCollectionToken(resolvedToken) &&
               !isFontFamilyDesignTokensCollectionToken(resolvedToken) &&
-              isNumberDesignTokensCollectionToken(resolvedToken) && // TODO
               token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME))
             );
           })) {
+
+          if (lastType !== token.type) {
+            declarations.push({ name: `${token.type}` });
+            lastType = token.type;
+          }
+
           declarations.push(
             designTokensCollectionTokenToSwiftEnumDeclaration({
               ...token,

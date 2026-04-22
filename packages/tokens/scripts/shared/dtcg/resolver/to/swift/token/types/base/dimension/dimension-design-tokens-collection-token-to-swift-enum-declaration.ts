@@ -6,7 +6,6 @@ import { dimensionDesignTokensCollectionTokenValueToSwiftValue } from './value/d
 export function dimensionDesignTokensCollectionTokenToSwiftEnumDeclaration(
   token: DimensionDesignTokensCollectionToken,
 ): SwiftEnumDeclaration {
-  console.log(token);
   return designTokensCollectionTokenWithMapValueToSwiftEnumDeclaration(
     token,
     'CGFloat',
