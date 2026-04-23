@@ -122,7 +122,7 @@ export class EsdsIconComponent extends HTMLElement implements CustomElement {
   /**
    * Adding `inline` property to the icon component is identical to setting `style="vertical-align: -0.125em"`.
    *
-   * This is useful to correct ths icon's alignment.
+   * This is useful to correct the icon's alignment.
    */
   get inline(): boolean {
     return this.#inline;
