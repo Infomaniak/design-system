@@ -1,0 +1,1 @@
+import{o as e,s as t}from"./iframe-BFKnjAVZ.js";export{e as MDXProvider};
