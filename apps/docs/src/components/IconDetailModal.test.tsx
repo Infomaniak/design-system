@@ -89,7 +89,7 @@ describe('IconDetailModal', () => {
         onClose={mockOnClose}
       />,
     );
-    // Icon name appears in both h2 and CopyField, so we use getAllByText
+
     const elements = screen.getAllByText('material-symbols:home');
     expect(elements.length).toBeGreaterThan(0);
   });
