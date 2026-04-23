@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import type { IconItem } from '../hooks/useIconGallery.ts';
 
 export interface IconCardProps {
   icon: IconItem;
   prefix: string;
+  onClick?: (icon: IconItem) => void;
 }
 
-const IconCard: React.FC<IconCardProps> = ({ icon, prefix }) => {
+const IconCard: React.FC<IconCardProps> = ({ icon, prefix, onClick }) => {
   const iconId = `${prefix}:${icon.name}`;
+
+  const handleClick = useCallback(() => {
+    onClick?.(icon);
+  }, [onClick, icon]);
 
   return (
     <>
@@ -29,6 +34,10 @@ const IconCard: React.FC<IconCardProps> = ({ icon, prefix }) => {
         .icon-card:hover {
           background-color: #f9fafb;
         }
+        .icon-card:focus-visible {
+          outline: 2px solid #3b82f6;
+          outline-offset: 2px;
+        }
         .icon-card__icon {
           width: 64px;
           height: 64px;
@@ -47,7 +56,18 @@ const IconCard: React.FC<IconCardProps> = ({ icon, prefix }) => {
           line-height: 1.4;
         }
       `}</style>
-      <div className="icon-card">
+      <div
+        className="icon-card"
+        onClick={handleClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleClick();
+          }
+        }}
+      >
         <div className="icon-card__icon">
           <esds-icon
             name={iconId}

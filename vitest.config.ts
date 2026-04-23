@@ -13,6 +13,7 @@ export default defineConfig({
     // dir: 'src',
     dir: '.',
     environment: 'happy-dom',
+    setupFiles: ['./apps/docs/src/test.setup.ts'],
     coverage: {
       provider: 'istanbul',
       // include: ['src/**/*.ts'],
