@@ -1,5 +1,5 @@
 import { IconifyApi } from './api/iconify-api.ts';
-import { EsdsIconComponent } from './svg-component/esds-icon.component.ts';
+import { EsdsIconComponent } from './esds-icon/esds-icon.component.ts';
 
 function main(): void {
   EsdsIconComponent.init(
