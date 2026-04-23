@@ -30,9 +30,6 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Build packages
-        run: yarn build
-
       - name: Run "check" script
         run: yarn run check
 
