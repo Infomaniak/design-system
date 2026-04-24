@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import type { IconItem } from '../hooks/useIconGallery.ts';
 
 export interface IconCardProps {
   icon: IconItem;
   prefix: string;
+  onClick?: (icon: IconItem) => void;
 }
 
-const IconCard: React.FC<IconCardProps> = ({ icon, prefix }) => {
+const IconCard: React.FC<IconCardProps> = ({ icon, prefix, onClick }) => {
   const iconId = `${prefix}:${icon.name}`;
+
+  const handleClick = useCallback(() => {
+    onClick?.(icon);
+  }, [onClick, icon]);
 
   return (
     <>
@@ -29,9 +34,13 @@ const IconCard: React.FC<IconCardProps> = ({ icon, prefix }) => {
         .icon-card:hover {
           background-color: #f9fafb;
         }
+        .icon-card:focus-visible {
+          outline: 2px solid #3b82f6;
+          outline-offset: 2px;
+        }
         .icon-card__icon {
-          width: 48px;
-          height: 48px;
+          width: 64px;
+          height: 64px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -47,10 +56,24 @@ const IconCard: React.FC<IconCardProps> = ({ icon, prefix }) => {
           line-height: 1.4;
         }
       `}</style>
-      <div className="icon-card">
+      <div
+        className="icon-card"
+        onClick={handleClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleClick();
+          }
+        }}
+      >
         <div className="icon-card__icon">
-          ICON
-          {/* TODO: use dedicated component to fetch and render icons */}
+          <esds-icon
+            name={iconId}
+            mode="bg"
+            style={{ width: '48px', height: '48px' }}
+          ></esds-icon>
         </div>
         <code className="icon-card__code">{iconId}</code>
       </div>

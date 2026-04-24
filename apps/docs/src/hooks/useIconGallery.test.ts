@@ -7,16 +7,16 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { useIconGallery } from './useIconGallery.ts';
 
 // Mock the IconifyApi class using hoisted mocks
-const { mockListIconSets, mockListIconsOptimized } = vi.hoisted(() => ({
+const { mockListIconSets, mockSearch } = vi.hoisted(() => ({
   mockListIconSets: vi.fn(),
-  mockListIconsOptimized: vi.fn(),
+  mockSearch: vi.fn(),
 }));
 
-vi.mock('../utils/iconify-api.ts', () => {
+vi.mock('@infomaniak-design-system/esds-icon', () => {
   return {
     IconifyApi: class MockIconifyApi {
       listIconSets = mockListIconSets;
-      listIconsOptimized = mockListIconsOptimized;
+      search = mockSearch;
     },
   };
 });
@@ -56,25 +56,6 @@ describe('useIconGallery', () => {
   });
 
   describe('fetch collections on mount', () => {
-    it('fetches and sorts collections on mount', async () => {
-      mockListIconSets.mockResolvedValue({
-        material: { name: 'Material Icons' },
-        bootstrap: { name: 'Bootstrap Icons' },
-        ic: { name: 'IcoMoon' },
-      });
-
-      mockListIconsOptimized.mockResolvedValue([]);
-
-      const { result } = renderHook(() => useIconGallery());
-
-      await waitFor(() => {
-        expect(result.current.collections).toEqual(['bootstrap', 'ic', 'material']);
-      });
-
-      expect(result.current.selectedCollection).toBe('bootstrap');
-      expect(result.current.error).toBeNull();
-    });
-
     it('selects first collection automatically', async () => {
       mockListIconSets.mockResolvedValue({
         material: { name: 'Material Icons' },
@@ -115,302 +96,116 @@ describe('useIconGallery', () => {
     });
   });
 
-  describe('fetch icons for selected collection', () => {
-    beforeEach(() => {
+  describe('fetch icons on collection change', () => {
+    it('fetches icons for selected collection', async () => {
       mockListIconSets.mockResolvedValue({
         material: { name: 'Material Icons' },
       });
-    });
-
-    it('fetches icons when collection is selected', async () => {
-      mockListIconsOptimized.mockResolvedValue([
-        { name: 'home', categories: new Set() },
-        { name: 'settings', categories: new Set() },
+      mockSearch.mockResolvedValue([
+        { name: 'home', categories: new Set(['buildings']) },
+        { name: 'settings', categories: new Set(['action']) },
       ]);
 
       const { result } = renderHook(() => useIconGallery());
-
-      await waitFor(() => {
-        expect(result.current.isLoading).toBe(false);
-      });
-
-      expect(mockListIconsOptimized).toHaveBeenCalledWith({
-        prefix: 'material',
-        signal: expect.any(AbortSignal),
-      });
-
-      expect(result.current.icons).toEqual([
-        { name: 'home', categories: new Set() },
-        { name: 'settings', categories: new Set() },
-      ]);
-      expect(result.current.totalCount).toBe(2);
-      expect(result.current.filteredCount).toBe(2);
-    });
-
-    it('caches icons per collection', async () => {
-      mockListIconsOptimized.mockResolvedValue([{ name: 'home', categories: new Set() }]);
-
-      const { result } = renderHook(() => useIconGallery());
-
-      await waitFor(() => {
-        expect(result.current.icons).toHaveLength(1);
-      });
-
-      expect(mockListIconsOptimized).toHaveBeenCalledTimes(1);
-
-      // Trigger a re-render by using act
-      await act(async () => {});
-
-      expect(result.current.icons).toHaveLength(1);
-      expect(mockListIconsOptimized).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('icon search', () => {
-    beforeEach(() => {
-      mockListIconSets.mockResolvedValue({
-        material: { name: 'Material Icons' },
-      });
-
-      mockListIconsOptimized.mockResolvedValue([
-        { name: 'home', categories: new Set() },
-        { name: 'home-work', categories: new Set() },
-        { name: 'settings', categories: new Set() },
-        { name: 'delete', categories: new Set() },
-      ]);
-    });
-
-    it('filters icons by search query (case-insensitive)', async () => {
-      const { result } = renderHook(() => useIconGallery());
-
-      await waitFor(() => {
-        expect(result.current.icons).toHaveLength(4);
-      });
-
-      act(() => {
-        result.current.setSearchQuery('HOME');
-      });
-
-      // Wait for debounce
-      await new Promise((resolve) => setTimeout(resolve, 350));
-
-      await waitFor(() => {
-        expect(result.current.searchQuery).toBe('HOME');
-        expect(result.current.filteredCount).toBe(2);
-      });
-
-      expect(result.current.icons).toHaveLength(2);
-    });
-
-    it('debounces search input by 300ms', async () => {
-      const { result } = renderHook(() => useIconGallery());
-
-      await waitFor(() => {
-        expect(result.current.icons).toHaveLength(4);
-      });
-
-      act(() => {
-        result.current.setSearchQuery('h');
-      });
-
-      await new Promise((resolve) => setTimeout(resolve, 100));
-
-      expect(result.current.icons).toHaveLength(4);
-
-      act(() => {
-        result.current.setSearchQuery('ho');
-      });
-
-      await new Promise((resolve) => setTimeout(resolve, 100));
-
-      expect(result.current.icons).toHaveLength(4);
-
-      await new Promise((resolve) => setTimeout(resolve, 300));
 
       await waitFor(() => {
         expect(result.current.icons).toHaveLength(2);
       });
+
+      expect(mockSearch).toHaveBeenCalledWith(
+        expect.objectContaining({
+          prefix: 'material',
+          query: '',
+          signal: expect.any(AbortSignal),
+        }),
+      );
+      expect(result.current.totalCount).toBe(2);
+      expect(result.current.filteredCount).toBe(2);
     });
 
-    it('returns empty array when no icons match search', async () => {
-      const { result } = renderHook(() => useIconGallery());
-
-      await waitFor(() => {
-        expect(result.current.icons).toHaveLength(4);
-      });
-
-      act(() => {
-        result.current.setSearchQuery('xyz123');
-      });
-
-      await new Promise((resolve) => setTimeout(resolve, 350));
-
-      await waitFor(() => {
-        expect(result.current.icons).toHaveLength(0);
-        expect(result.current.filteredCount).toBe(0);
-        expect(result.current.totalCount).toBe(4);
-      });
-    });
-
-    it('clears search query and reset icons', async () => {
-      const { result } = renderHook(() => useIconGallery());
-
-      await waitFor(() => {
-        expect(result.current.icons).toHaveLength(4);
-      });
-
-      act(() => {
-        result.current.setSearchQuery('delete');
-      });
-
-      await new Promise((resolve) => setTimeout(resolve, 350));
-
-      await waitFor(() => {
-        expect(result.current.icons).toHaveLength(1);
-      });
-
-      act(() => {
-        result.current.clearSearch();
-      });
-
-      expect(result.current.searchQuery).toBe('');
-      expect(result.current.icons).toHaveLength(4);
-    });
-
-    it('clears search when collection changes', async () => {
+    it('passes abort signal to search', async () => {
       mockListIconSets.mockResolvedValue({
         material: { name: 'Material Icons' },
-        bootstrap: { name: 'Bootstrap Icons' },
+      });
+      mockSearch.mockResolvedValue([]);
+
+      renderHook(() => useIconGallery());
+
+      await waitFor(() => {
+        expect(mockSearch).toHaveBeenCalledWith(
+          expect.objectContaining({
+            signal: expect.any(AbortSignal),
+          }),
+        );
+      });
+    });
+  });
+
+  describe('search query filtering', () => {
+    it('filters icons based on search query', async () => {
+      mockListIconSets.mockResolvedValue({
+        material: { name: 'Material Icons' },
+      });
+      mockSearch.mockImplementation(({ query }: { query: string }) => {
+        if (query === 'home') {
+          return Promise.resolve([{ name: 'home', categories: new Set(['buildings']) }]);
+        }
+        return Promise.resolve([
+          { name: 'home', categories: new Set(['buildings']) },
+          { name: 'settings', categories: new Set(['action']) },
+        ]);
       });
 
       const { result } = renderHook(() => useIconGallery());
 
       await waitFor(() => {
-        expect(result.current.collections).toEqual(['bootstrap', 'material']);
+        expect(result.current.icons).toHaveLength(2);
       });
 
+      // Set search query
       act(() => {
         result.current.setSearchQuery('home');
       });
 
-      await new Promise((resolve) => setTimeout(resolve, 350));
+      // Wait for debounce
+      await waitFor(
+        () => {
+          expect(result.current.icons).toHaveLength(1);
+        },
+        { timeout: 500 },
+      );
 
-      await waitFor(() => {
-        expect(result.current.searchQuery).toBe('home');
-      });
-
-      act(() => {
-        result.current.setCollection('material');
-      });
-
-      expect(result.current.searchQuery).toBe('');
-    });
-  });
-
-  describe('error handling', () => {
-    it('handles API errors when fetching collections', async () => {
-      mockListIconSets.mockRejectedValue(new Error('Network error'));
-
-      const { result } = renderHook(() => useIconGallery());
-
-      await waitFor(() => {
-        expect(result.current.error).not.toBeNull();
-      });
-
-      expect(result.current.error).toEqual({
-        message: 'Network error',
-        code: 'API_ERROR',
-      });
-      expect(result.current.isLoading).toBe(false);
-      expect(result.current.collections).toEqual([]);
+      expect(result.current.icons[0].name).toBe('home');
+      expect(result.current.totalCount).toBe(2);
+      expect(result.current.filteredCount).toBe(1);
     });
 
-    it('handles abort errors gracefully', async () => {
-      const abortError = new Error('AbortError');
-      abortError.name = 'AbortError';
-      mockListIconSets.mockRejectedValue(abortError);
-
-      const { result } = renderHook(() => useIconGallery());
-
-      await waitFor(() => {
-        expect(result.current.isLoading).toBe(false);
-      });
-
-      expect(result.current.collections).toEqual([]);
-    });
-
-    it('handles non-Error exceptions', async () => {
-      mockListIconSets.mockRejectedValue('string error');
-
-      const { result } = renderHook(() => useIconGallery());
-
-      await waitFor(() => {
-        expect(result.current.error).not.toBeNull();
-      });
-
-      expect(result.current.error).toEqual({
-        message: 'An unknown error occurred',
-        code: 'UNKNOWN_ERROR',
-      });
-    });
-
-    it('allows retry after error', async () => {
-      mockListIconSets.mockRejectedValueOnce(new Error('Network error'));
-
-      const { result } = renderHook(() => useIconGallery());
-
-      await waitFor(() => {
-        expect(result.current.error).not.toBeNull();
-      });
-
-      mockListIconSets.mockResolvedValueOnce({
-        material: { name: 'Material Icons' },
-      });
-
-      mockListIconsOptimized.mockResolvedValue([]);
-
-      act(() => {
-        result.current.retry();
-      });
-
-      await waitFor(() => {
-        expect(result.current.collections).toEqual(['material']);
-      });
-
-      expect(result.current.error).toBeNull();
-    });
-
-    it('cancels previous request when selecting new collection', async () => {
+    it('calls search with trimmed and lowercased query', async () => {
       mockListIconSets.mockResolvedValue({
         material: { name: 'Material Icons' },
-        bootstrap: { name: 'Bootstrap Icons' },
       });
-
-      const requestSignals: AbortSignal[] = [];
-
-      mockListIconsOptimized.mockImplementation(({ signal }: { signal?: AbortSignal }) => {
-        if (signal !== undefined) {
-          requestSignals.push(signal);
-        }
-        return Promise.resolve([{ name: 'home', categories: new Set() }]);
-      });
+      mockSearch.mockResolvedValue([]);
 
       const { result } = renderHook(() => useIconGallery());
 
       await waitFor(() => {
-        expect(result.current.collections).toEqual(['bootstrap', 'material']);
+        expect(result.current.isLoadingCollections).toBe(false);
       });
 
       act(() => {
-        result.current.setCollection('material');
+        result.current.setSearchQuery('  HoMe  ');
       });
 
-      await waitFor(() => {
-        expect(mockListIconsOptimized).toHaveBeenCalledTimes(2);
-      });
-
-      expect(requestSignals).toHaveLength(2);
-      expect(requestSignals[0]?.aborted).toBe(true);
+      await waitFor(
+        () => {
+          expect(mockSearch).toHaveBeenCalledWith(
+            expect.objectContaining({
+              query: 'home',
+            }),
+          );
+        },
+        { timeout: 500 },
+      );
     });
   });
 
@@ -425,6 +220,142 @@ describe('useIconGallery', () => {
       });
 
       expect(result.current.searchQuery).toBe('test query');
+    });
+  });
+
+  describe('clear search', () => {
+    it('clears search query and triggers search with empty query', async () => {
+      mockListIconSets.mockResolvedValue({
+        material: { name: 'Material Icons' },
+      });
+      mockSearch.mockResolvedValue([{ name: 'home', categories: new Set(['buildings']) }]);
+
+      const { result } = renderHook(() => useIconGallery());
+
+      await waitFor(() => {
+        expect(result.current.isLoadingCollections).toBe(false);
+      });
+
+      act(() => {
+        result.current.setSearchQuery('home');
+      });
+
+      await waitFor(
+        () => {
+          expect(mockSearch).toHaveBeenCalledWith(
+            expect.objectContaining({
+              query: 'home',
+            }),
+          );
+        },
+        { timeout: 500 },
+      );
+
+      act(() => {
+        result.current.clearSearch();
+      });
+
+      expect(result.current.searchQuery).toBe('');
+    });
+  });
+
+  describe('retry', () => {
+    it('refetches icons when retry is called', async () => {
+      mockListIconSets.mockResolvedValue({
+        material: { name: 'Material Icons' },
+      });
+      mockSearch.mockResolvedValue([{ name: 'home', categories: new Set(['buildings']) }]);
+
+      const { result } = renderHook(() => useIconGallery());
+
+      await waitFor(() => {
+        expect(result.current.icons).toHaveLength(1);
+      });
+
+      // Reset mock to track new calls
+      mockSearch.mockClear();
+      mockSearch.mockResolvedValue([
+        { name: 'home', categories: new Set(['buildings']) },
+        { name: 'settings', categories: new Set(['action']) },
+      ]);
+
+      act(() => {
+        result.current.retry();
+      });
+
+      await waitFor(() => {
+        expect(mockSearch).toHaveBeenCalledTimes(2);
+      });
+    });
+  });
+
+  describe('error handling', () => {
+    it('sets error when search fails', async () => {
+      mockListIconSets.mockResolvedValue({
+        material: { name: 'Material Icons' },
+      });
+      mockSearch.mockRejectedValue(new Error('Search failed'));
+
+      const { result } = renderHook(() => useIconGallery());
+
+      await waitFor(() => {
+        expect(result.current.error).not.toBeNull();
+      });
+
+      expect(result.current.error?.message).toBe('Search failed');
+      expect(result.current.error?.code).toBe('API_ERROR');
+    });
+
+    it('sets abort error when request is aborted', async () => {
+      mockListIconSets.mockResolvedValue({
+        material: { name: 'Material Icons' },
+      });
+
+      const abortError = new Error('Aborted');
+      abortError.name = 'AbortError';
+      mockSearch.mockRejectedValue(abortError);
+
+      const { result } = renderHook(() => useIconGallery());
+
+      await waitFor(() => {
+        expect(result.current.error).not.toBeNull();
+      });
+
+      expect(result.current.error?.code).toBe('ABORTED');
+    });
+  });
+
+  describe('setCollection', () => {
+    it('changes collection and resets search', async () => {
+      mockListIconSets.mockResolvedValue({
+        material: { name: 'Material Icons' },
+        bootstrap: { name: 'Bootstrap Icons' },
+      });
+      mockSearch.mockResolvedValue([{ name: 'home', categories: new Set(['buildings']) }]);
+
+      const { result } = renderHook(() => useIconGallery());
+
+      await waitFor(() => {
+        expect(result.current.selectedCollection).toBe('bootstrap');
+      });
+
+      mockSearch.mockClear();
+
+      act(() => {
+        result.current.setCollection('material');
+      });
+
+      expect(result.current.selectedCollection).toBe('material');
+      expect(result.current.searchQuery).toBe('');
+
+      await waitFor(() => {
+        expect(mockSearch).toHaveBeenCalledWith(
+          expect.objectContaining({
+            prefix: 'material',
+            query: '',
+          }),
+        );
+      });
     });
   });
 });

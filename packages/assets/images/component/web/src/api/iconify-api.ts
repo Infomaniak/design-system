@@ -1,111 +1,25 @@
-import { type ExtendedIconifyIcon, type IconifyInfo, type IconifyJSON } from '@iconify/types';
-
-/* TYPES */
-
-// FETCH
-
-export interface IconifyApiFetchOptions extends Omit<RequestInit, 'body'> {
-  readonly path: string;
-  readonly searchParams?: URLSearchParams;
-  readonly body?: object | null;
-}
-
-export interface IconifyApiSharedFetchJSONOptions extends Pick<IconifyApiFetchOptions, 'signal'> {
-  readonly pretty?: boolean;
-}
-
-// GET SVG
-
-export interface IconifyApiGetSVGUrlOptions {
-  readonly prefix: string;
-  readonly name: string;
-  readonly color?: string;
-  readonly width?: string | number;
-  readonly height?: string | number;
-  readonly flip?: string;
-  readonly rotate?: string | number;
-  readonly download?: boolean;
-  readonly box?: boolean;
-  readonly resourceIndex?: number;
-}
-
-export interface IconifyApiGetSVGOptions
-  extends
-    Pick<IconifyApiGetSVGUrlOptions, 'prefix' | 'name'>,
-    Pick<IconifyApiFetchOptions, 'signal'> {}
-
-// GET ICONS DATA
-
-export interface IconifyApiGetIconsDataOptions extends IconifyApiSharedFetchJSONOptions {
-  readonly prefix: string;
-  readonly icons: readonly string[];
-}
-
-interface CachedSVGsEntry {
-  readonly controller: AbortController;
-  readonly promise: Promise<string>;
-  count: number;
-}
-
-interface RequestedSVGsEntry {
-  readonly names: Set<string>;
-  readonly controller: AbortController;
-  readonly promise: Promise<IconifyJSON>;
-  readonly timer: ReturnType<typeof setTimeout>;
-}
-
-// LIST ICON SETS
-
-export interface IconifyApiListIconSetsOptions extends IconifyApiSharedFetchJSONOptions {
-  readonly prefixes?: readonly string[];
-}
-
-export type IconifyApiCollectionsList = Record<string, IconifyInfo>;
-
-// LIST ICONS
-
-// --> raw
-
-export interface IconifyApiRawListIconsOptions extends IconifyApiSharedFetchJSONOptions {
-  readonly prefix: string;
-  readonly info?: boolean;
-  readonly chars?: boolean;
-}
-
-export interface IconifyApiRawListIconsResponse {
-  readonly prefix: string;
-  readonly total: number;
-  readonly title?: string;
-  readonly info?: IconifyInfo;
-  readonly uncategorized?: readonly string[];
-  readonly categories?: Record<string, string[]>;
-  readonly hidden?: readonly string[];
-  readonly aliases?: Record<string, string>;
-  readonly chars?: Record<string, string>;
-  readonly themes?: IconifyJSON['themes'];
-  readonly prefixes?: IconifyJSON['prefixes'];
-  readonly suffixes?: IconifyJSON['suffixes'];
-}
-
-// -> optimized
-
-export type IconifyApiListIconsOptions = Pick<IconifyApiRawListIconsOptions, 'prefix' | 'signal'>;
-
-export interface IconifyApiIconListIconsIcon {
-  readonly name: string;
-  readonly categories: ReadonlySet<string>;
-}
-
-export type IconifyApiIconListIconsIcons = readonly IconifyApiIconListIconsIcon[];
-
-// SEARCH ICONS
-
-export interface IconifyApiIconSearchOptions extends Pick<IconifyApiFetchOptions, 'signal'> {
-  readonly prefix: string;
-  readonly query?: string;
-}
-
-// CONSTRUCTOR
+import { type ExtendedIconifyIcon, type IconifyJSON } from '@iconify/types';
+import type { IconifyApiGetIconsDataOptions } from './types/api/get-icons-data/iconify-api-get-icons-data-options.ts';
+import type { IconifyApiGetSVGUrlOptions } from './types/api/get-svg-url/iconify-api-get-svg-url-options.ts';
+import type {
+  IconifyApiFetchJSONOptions,
+  IconifyApiFetchOptions,
+} from './types/api/iconify-api-fetch-options.ts';
+import type { IconifyApiGetLastModifiedOptions } from './types/api/last-modified/iconify-api-get-last-modified-options.ts';
+import type { IconifyApiGetLastModifiedResponse } from './types/api/last-modified/iconify-api-get-last-modified-response.ts';
+import type { IconifyApiListIconSetsOptions } from './types/api/list-icon-sets/iconify-api-list-icon-sets-options.ts';
+import type { IconifyApiListIconSetsResponse } from './types/api/list-icon-sets/iconify-api-list-icon-sets-response.ts';
+import type { IconifyApiListIconsOptions } from './types/api/list-icons/iconify-api-list-icons-options.ts';
+import type { IconifyApiListIconsResponse } from './types/api/list-icons/iconify-api-list-icons-response.ts';
+import type { IconifyApiSearchIconsOptions } from './types/api/search-icons/iconify-api-search-icons-options.ts';
+import type { IconifyApiSearchIconsResponse } from './types/api/search-icons/iconify-api-search-icons-response.ts';
+import type { IconifyApiGetSVGOptions } from './types/custom/get-svg/iconify-api-get-svg-options.ts';
+import {
+  type IconifyApiIconList,
+  type IconifyApiIconListIcon,
+} from './types/custom/search/icon-list/iconify-api-icon-list.ts';
+import { iconifyApiListIconsResponseToIconifyApiIconList } from './types/custom/search/icon-list/iconify-api-list-icons-response-to-iconify-api-icon-list.ts';
+import type { IconifyApiSearchOptions } from './types/custom/search/iconify-api-search-options.ts';
 
 export interface IconifyApiOptions {
   readonly resources?: readonly string[];
@@ -114,8 +28,6 @@ export interface IconifyApiOptions {
   readonly bulkDebounce?: number;
 }
 
-/* CLASS */
-
 export class IconifyApi {
   readonly resources: readonly string[];
   readonly rotate: number;
@@ -123,8 +35,7 @@ export class IconifyApi {
   readonly bulkDebounce: number;
 
   constructor({
-    // TODO: default on infomaniak endpoint when available
-    resources = ['https://api.iconify.design'],
+    resources = ['https://iconify.infomaniak.com'],
     rotate = 750,
     timeout = 5000,
     bulkDebounce = 10,
@@ -146,6 +57,12 @@ export class IconifyApi {
     this.timeout = timeout;
     this.bulkDebounce = bulkDebounce;
   }
+
+  /*
+    ==================== API ====================
+
+    Contains the list of possible API calls.
+  */
 
   /**
    * Performs http requests iterating on `this.resources` until one succeed.
@@ -206,12 +123,23 @@ export class IconifyApi {
     throw new Error(`Unable to fetch api: ${path}.`);
   }
 
-  async #fetchJSON<GReturn>(options: IconifyApiFetchOptions): Promise<GReturn> {
-    return (await (await this.#fetch(options)).json()) as GReturn;
+  async #fetchJSON<GReturn>({
+    expectNumberResponse,
+    ...options
+  }: IconifyApiFetchJSONOptions): Promise<GReturn> {
+    const response: unknown = await (await this.#fetch(options)).json();
+
+    if (typeof response === 'number' && !expectNumberResponse) {
+      throw new Error(`fetch failed with error code: ${response}`);
+    }
+
+    return response as GReturn;
   }
 
   /**
    * Returns the url to fetch an SVG.
+   *
+   * @inheritDoc https://iconify.design/docs/api/svg.html
    */
   getSVGUrl({
     prefix,
@@ -263,6 +191,270 @@ export class IconifyApi {
 
     return url;
   }
+
+  /**
+   * Loads many icons data in bulk.
+   *
+   * @inheritDoc https://iconify.design/docs/api/icon-data.html
+   */
+  getIconsData({
+    prefix,
+    icons,
+    pretty = false,
+    ...options
+  }: IconifyApiGetIconsDataOptions): Promise<IconifyJSON> {
+    const searchParams = new URLSearchParams();
+
+    if (icons.length > 0) {
+      searchParams.set('icons', icons.join(','));
+    } else {
+      throw new Error('Must have at least one icon.');
+    }
+
+    if (pretty) {
+      searchParams.set('pretty', '1');
+    }
+
+    return this.#fetchJSON({
+      ...options,
+      path: `/${prefix}.json`,
+      searchParams,
+    });
+  }
+
+  /**
+   * Lists the `lastModified` properties of Iconify collections.
+   *
+   * @inheritDoc https://iconify.design/docs/api/last-modified.html#query
+   */
+  getLastModified({
+    prefixes = [],
+    pretty = false,
+    ...options
+  }: IconifyApiGetLastModifiedOptions): Promise<IconifyApiGetLastModifiedResponse> {
+    const searchParams = new URLSearchParams();
+
+    if (prefixes.length > 0) {
+      searchParams.set('prefixes', prefixes.join(','));
+    }
+
+    if (pretty) {
+      searchParams.set('pretty', '1');
+    }
+
+    return this.#fetchJSON({
+      ...options,
+      path: '/last-modified',
+      searchParams,
+    });
+  }
+
+  /**
+   * Lists the icon sets.
+   *
+   * @inheritDoc https://iconify.design/docs/api/collections.html
+   */
+  listIconSets({
+    prefixes = [],
+    pretty = false,
+    ...options
+  }: IconifyApiListIconSetsOptions = {}): Promise<IconifyApiListIconSetsResponse> {
+    const searchParams = new URLSearchParams();
+
+    if (prefixes.length > 0) {
+      searchParams.set('prefixes', prefixes.join(','));
+    }
+
+    if (pretty) {
+      searchParams.set('pretty', '1');
+    }
+
+    return this.#fetchJSON({
+      ...options,
+      path: '/collections',
+      searchParams,
+    });
+  }
+
+  /**
+   * Lists the icons of a set.
+   *
+   * @inheritDoc https://iconify.design/docs/api/collection.html
+   */
+  listIcons({
+    prefix,
+    info,
+    chars,
+    pretty = false,
+    ...options
+  }: IconifyApiListIconsOptions): Promise<IconifyApiListIconsResponse> {
+    const searchParams = new URLSearchParams();
+
+    searchParams.set('prefix', prefix);
+
+    if (info) {
+      searchParams.set('info', '1');
+    }
+
+    if (chars) {
+      searchParams.set('chars', '1');
+    }
+
+    if (pretty) {
+      searchParams.set('pretty', '1');
+    }
+
+    return this.#fetchJSON({
+      ...options,
+      path: '/collection',
+      searchParams,
+    });
+  }
+
+  readonly #cachedListIcons: Map<string /* cache key */, CachedIconifyApiListIconsResponse> =
+    new Map();
+
+  /**
+   * Lists the icons of a set - uses cache, if any.
+   *
+   * @see listIcons
+   */
+  listIconsCached({
+    prefix,
+    info = false,
+    chars = false,
+    signal,
+  }: Omit<IconifyApiListIconsOptions, 'pretty'>): Promise<IconifyApiListIconsResponse> {
+    return new Promise<IconifyApiListIconsResponse>(
+      (
+        resolve: (value: IconifyApiListIconsResponse) => void,
+        reject: (reason?: unknown) => void,
+      ): void => {
+        signal?.throwIfAborted();
+
+        const key: string = JSON.stringify([prefix, info, chars]);
+
+        let cached: CachedIconifyApiListIconsResponse | undefined = this.#cachedListIcons.get(key);
+
+        if (cached === undefined) {
+          const controller: AbortController = new AbortController();
+          const signal: AbortSignal = controller.signal;
+
+          const promise: Promise<IconifyApiListIconsResponse> = this.listIcons({
+            prefix,
+            info,
+            chars,
+            signal,
+          }).catch((error: unknown): never => {
+            if (!signal.aborted) {
+              this.#cachedListIcons.delete(key);
+            }
+            throw error;
+          });
+
+          cached = {
+            controller,
+            promise,
+            count: 0,
+          };
+
+          this.#cachedListIcons.set(key, cached);
+        }
+
+        cached.count++;
+
+        const end = (): void => {
+          signal?.removeEventListener('abort', onAbort);
+        };
+
+        const onAbort = (): void => {
+          cached!.count--;
+          if (cached.count === 0) {
+            cached!.controller.abort();
+            this.#cachedListIcons.delete(key);
+          }
+
+          reject(signal!.reason);
+        };
+
+        signal?.addEventListener('abort', onAbort);
+
+        cached.promise.then(
+          (value: IconifyApiListIconsResponse): void => {
+            end();
+            resolve(value);
+          },
+          (reason: unknown): void => {
+            end();
+            reject(reason);
+          },
+        );
+      },
+    );
+  }
+
+  /**
+   * Clears the cached `listIcons` responses.
+   *
+   * @see listIcons
+   */
+  clearListIconsCache(): void {
+    this.#cachedListIcons.clear();
+  }
+
+  /**
+   * Search icons.
+   *
+   * @inheritDoc https://iconify.design/docs/api/search.html
+   */
+  searchIcons({
+    query,
+    limit,
+    start,
+    prefixes = [],
+    category,
+    pretty = false,
+    ...options
+  }: IconifyApiSearchIconsOptions): Promise<IconifyApiSearchIconsResponse> {
+    const searchParams = new URLSearchParams();
+
+    searchParams.set('query', query);
+
+    if (limit !== undefined) {
+      searchParams.set('limit', String(limit));
+    }
+
+    if (start !== undefined) {
+      searchParams.set('start', String(start));
+    }
+
+    if (prefixes.length > 0) {
+      searchParams.set('prefixes', prefixes.join(','));
+    }
+
+    if (category) {
+      searchParams.set('category', category);
+    }
+
+    if (pretty) {
+      searchParams.set('pretty', '1');
+    }
+
+    return this.#fetchJSON({
+      ...options,
+      path: '/search',
+      searchParams,
+    });
+  }
+
+  /*
+    ==================== CUSTOM ====================
+
+    Contains a list of "helper" methods.
+    You'll usually prefer to use these methods instead of the direct "API" call
+  */
+
+  // CACHED SVGs
 
   readonly #cachedSvg: Map<string /* key: `<prefix>:<name>` */, CachedSVGsEntry> = new Map<
     string,
@@ -435,191 +627,19 @@ export class IconifyApi {
   }
 
   /**
-   * Loads many icons data in bulk.
+   * Clears the cached `getSVG` responses.
    *
-   * @inheritDoc https://iconify.design/docs/api/icon-data.html
+   * @see getSVG
    */
-  getIconsData({
-    prefix,
-    icons,
-    pretty = false,
-    ...options
-  }: IconifyApiGetIconsDataOptions): Promise<IconifyJSON> {
-    const searchParams = new URLSearchParams();
-
-    if (icons.length > 0) {
-      searchParams.set('icons', icons.join(','));
-    } else {
-      throw new Error('Must have at least one icon.');
-    }
-
-    if (pretty) {
-      searchParams.set('pretty', '1');
-    }
-
-    return this.#fetchJSON({
-      ...options,
-      path: `/${prefix}.json`,
-      searchParams,
-    });
-  }
-
-  /**
-   * Lists the icon sets.
-   *
-   * @inheritDoc https://iconify.design/docs/api/collections.html
-   */
-  listIconSets({
-    prefixes = [],
-    pretty = false,
-    ...options
-  }: IconifyApiListIconSetsOptions = {}): Promise<IconifyApiCollectionsList> {
-    const searchParams = new URLSearchParams();
-
-    if (prefixes.length > 0) {
-      searchParams.set('prefixes', prefixes.join(','));
-    }
-
-    if (pretty) {
-      searchParams.set('pretty', '1');
-    }
-
-    return this.#fetchJSON({
-      ...options,
-      path: '/collections',
-      searchParams,
-    });
-  }
-
-  /**
-   * Lists the icons of a set.
-   *
-   * @inheritDoc https://iconify.design/docs/api/collection.html
-   */
-  #listIcons({
-    prefix,
-    info,
-    chars,
-    pretty = false,
-    ...options
-  }: IconifyApiRawListIconsOptions): Promise<IconifyApiRawListIconsResponse> {
-    const searchParams = new URLSearchParams();
-
-    searchParams.set('prefix', prefix);
-
-    if (info) {
-      searchParams.set('info', '1');
-    }
-
-    if (chars) {
-      searchParams.set('chars', '1');
-    }
-
-    if (pretty) {
-      searchParams.set('pretty', '1');
-    }
-
-    return this.#fetchJSON({
-      ...options,
-      path: '/collection',
-      searchParams,
-    });
-  }
-
-  readonly #listIconsCache: Map<string /* prefix */, Promise<IconifyApiIconListIconsIcons>> =
-    new Map<string, Promise<IconifyApiIconListIconsIcons>>();
-
-  /**
-   * Lists the icons of a set with internal optimizations.
-   */
-  listIcons({ prefix, signal }: IconifyApiListIconsOptions): Promise<IconifyApiIconListIconsIcons> {
-    return new Promise<IconifyApiIconListIconsIcons>(
-      (
-        resolve: (value: IconifyApiIconListIconsIcons) => void,
-        reject: (reason?: unknown) => void,
-      ): void => {
-        signal?.throwIfAborted();
-
-        const key: string = prefix;
-
-        let cached: Promise<IconifyApiIconListIconsIcons> | undefined =
-          this.#listIconsCache.get(key);
-
-        if (cached === undefined) {
-          cached = this.#listIcons({
-            prefix,
-          })
-            .then((response: IconifyApiRawListIconsResponse): IconifyApiIconListIconsIcons => {
-              const allIcons: Set<string> = new Set<string>();
-              const iconNameToIconCategories: Map<string /* name */, Set<string>> = new Map<
-                string,
-                Set<string>
-              >();
-
-              if (response.uncategorized !== undefined) {
-                for (const icon of response.uncategorized) {
-                  allIcons.add(icon);
-                }
-              }
-
-              if (response.categories !== undefined) {
-                for (const [category, icons] of Object.entries(response.categories)) {
-                  for (const icon of icons) {
-                    allIcons.add(icon);
-
-                    let categories: Set<string> | undefined = iconNameToIconCategories.get(icon);
-                    if (categories === undefined) {
-                      categories = new Set<string>();
-                      iconNameToIconCategories.set(icon, categories);
-                    }
-                    categories.add(category);
-                  }
-                }
-              }
-
-              return Array.from(allIcons, (name: string): IconifyApiIconListIconsIcon => {
-                return {
-                  name,
-                  categories: iconNameToIconCategories.get(name) ?? new Set<string>(),
-                };
-              });
-            })
-            .catch((error: unknown): never => {
-              this.#listIconsCache.delete(key);
-              throw error;
-            });
-
-          this.#listIconsCache.set(key, cached);
-        }
-
-        const end = (): void => {
-          signal?.removeEventListener('abort', onAbort);
-        };
-
-        const onAbort = (): void => {
-          reject(signal!.reason);
-        };
-
-        signal?.addEventListener('abort', onAbort);
-
-        cached.then(
-          (value: IconifyApiIconListIconsIcons): void => {
-            end();
-            resolve(value);
-          },
-          (reason: unknown): void => {
-            end();
-            reject(reason);
-          },
-        );
-      },
-    );
+  clearSVGsCache(): void {
+    this.#cachedSvg.clear();
+    this.#requestedSVGs.clear();
   }
 
   // SEARCH
 
   /**
-   * Searches icons in an optimized way.
+   * Searches icons in a more flexible and performant way.
    *
    * @example
    *
@@ -628,15 +648,17 @@ export class IconifyApi {
    * `@ksuite` => returns icons having `@ksuite` as category.
    * `cog @ksuite` => returns icons having `cog` in their name or in their tags; AND having `@ksuite` as category.
    */
-  async searchIcons({
+  async search({
     prefix,
     query = '',
     signal,
-  }: IconifyApiIconSearchOptions): Promise<IconifyApiIconListIconsIcons> {
-    const icons: IconifyApiIconListIconsIcons = await this.listIcons({
-      prefix,
-      signal,
-    });
+  }: IconifyApiSearchOptions): Promise<IconifyApiIconList> {
+    const icons: IconifyApiIconList = iconifyApiListIconsResponseToIconifyApiIconList(
+      await this.listIconsCached({
+        prefix,
+        signal,
+      }),
+    );
 
     query = query.trim();
 
@@ -646,14 +668,14 @@ export class IconifyApi {
 
     const parts: readonly string[] = query.split(/\s+/g);
 
-    return icons.filter(({ name, categories }: IconifyApiIconListIconsIcon): boolean => {
+    return icons.filter(({ name, categories }: IconifyApiIconListIcon): boolean => {
       const lowercaseName: string = name.toLowerCase();
 
       return parts.every((part: string): boolean => {
         const lowercasePart: string = part.toLowerCase();
 
-        if (/^[a-zA-Z#]/.test(part)) {
-          // └> prefixed with a letter or #
+        if (/^[a-zA-Z0-9#]/.test(part)) {
+          // └> prefixed with an alphanumeric char or #
           return (
             // search in name
             lowercaseName.includes(lowercasePart) ||
@@ -677,3 +699,26 @@ export class IconifyApi {
 /* INTERNALS */
 
 const DEFAULT_ICON_WIDTH = 16;
+
+// CACHED LIST
+
+interface CachedIconifyApiListIconsResponse {
+  readonly controller: AbortController;
+  readonly promise: Promise<IconifyApiListIconsResponse>;
+  count: number;
+}
+
+// CACHED SVGs
+
+interface CachedSVGsEntry {
+  readonly controller: AbortController;
+  readonly promise: Promise<string>;
+  count: number;
+}
+
+interface RequestedSVGsEntry {
+  readonly names: Set<string>;
+  readonly controller: AbortController;
+  readonly promise: Promise<IconifyJSON>;
+  readonly timer: ReturnType<typeof setTimeout>;
+}

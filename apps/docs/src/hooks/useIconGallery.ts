@@ -1,6 +1,12 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  type IconifyApiIconList,
+  type IconifyApiIconListIcon,
+  IconifyApi,
+} from '@infomaniak-design-system/esds-icon';
+
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { iconifyApi } from '../lib/iconify-api.ts';
 import { IconGalleryErrorCode } from '../types/error-codes.ts';
-import { IconifyApi, type IconifyApiIconListIconsOptimizedIcon } from '../utils/iconify-api.ts';
 
 export interface IconItem {
   readonly name: string;
@@ -31,7 +37,7 @@ export interface UseIconGalleryReturn {
 
 const SEARCH_DEBOUNCE_MS = 300;
 
-function mapApiIconToIconItem(icon: IconifyApiIconListIconsOptimizedIcon): IconItem {
+function mapApiIconToIconItem(icon: IconifyApiIconListIcon): IconItem {
   return {
     name: icon.name,
     categories: icon.categories,
@@ -52,15 +58,14 @@ function normalizeError(error: unknown): IconGalleryErrorType {
   };
 }
 
-export function useIconGallery(): UseIconGalleryReturn {
-  const api = useMemo(() => new IconifyApi(), []);
+export function useIconGallery(api: IconifyApi = iconifyApi): UseIconGalleryReturn {
   const abortControllerRef = useRef<AbortController | null>(null);
-  const cacheRef = useRef<Map<string, IconItem[]>>(new Map());
   const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [collections, setCollections] = useState<readonly string[]>([]);
   const [selectedCollection, setSelectedCollection] = useState<string>('');
   const [icons, setIcons] = useState<readonly IconItem[]>([]);
+  const [totalIconsCount, setTotalIconsCount] = useState<number>(0);
   const [searchQuery, setSearchQueryState] = useState<string>('');
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState<string>('');
   const [isLoadingCollections, setIsLoadingCollections] = useState<boolean>(false);
@@ -114,26 +119,31 @@ export function useIconGallery(): UseIconGalleryReturn {
     [api],
   );
 
-  const fetchIcons = useCallback(
+  const fetchTotalCount = useCallback(
     async (prefix: string, signal: AbortSignal): Promise<void> => {
+      try {
+        const allIcons = await api.search({ prefix, query: '', signal });
+        setTotalIconsCount(allIcons.length);
+      } catch {
+        // Silently fail for total count - it's secondary
+      }
+    },
+    [api],
+  );
+
+  const fetchIcons = useCallback(
+    async (prefix: string, searchQuery: string, signal: AbortSignal): Promise<void> => {
       try {
         setIsLoadingIcons(true);
         setError(null);
 
-        const cachedIcons = cacheRef.current.get(prefix);
-        if (cachedIcons !== undefined) {
-          setIcons(cachedIcons);
-          return;
-        }
-
-        const iconItems = await api.listIconsOptimized({
+        const iconItems: IconifyApiIconList = await api.search({
           prefix,
+          query: searchQuery,
           signal,
         });
 
         const convertedIcons = iconItems.map(mapApiIconToIconItem);
-
-        cacheRef.current.set(prefix, convertedIcons);
         setIcons(convertedIcons);
       } catch (err) {
         if (signal.aborted) {
@@ -160,7 +170,7 @@ export function useIconGallery(): UseIconGalleryReturn {
     };
   }, [fetchCollections]);
 
-  // Load icons when selected collection changes
+  // Load icons when selected collection or debounced search query changes
   useEffect(() => {
     if (selectedCollection === '') {
       return;
@@ -170,20 +180,14 @@ export function useIconGallery(): UseIconGalleryReturn {
     const abortController = new AbortController();
     abortControllerRef.current = abortController;
 
-    void fetchIcons(selectedCollection, abortController.signal);
+    // Fetch both in parallel
+    void fetchTotalCount(selectedCollection, abortController.signal);
+    void fetchIcons(selectedCollection, debouncedSearchQuery, abortController.signal);
 
     return () => {
       abortController.abort();
     };
-  }, [selectedCollection, fetchIcons, abortCurrentRequest]);
-
-  const filteredIcons = useMemo((): readonly IconItem[] => {
-    if (debouncedSearchQuery === '') {
-      return icons;
-    }
-
-    return icons.filter((icon) => icon.name.toLowerCase().includes(debouncedSearchQuery));
-  }, [icons, debouncedSearchQuery]);
+  }, [selectedCollection, debouncedSearchQuery, fetchTotalCount, fetchIcons, abortCurrentRequest]);
 
   const setCollection = useCallback((collection: string): void => {
     setSelectedCollection(collection);
@@ -209,14 +213,22 @@ export function useIconGallery(): UseIconGalleryReturn {
       abortControllerRef.current = abortController;
       void fetchCollections(abortController.signal);
     } else if (selectedCollection !== '') {
-      cacheRef.current.delete(selectedCollection);
       abortCurrentRequest();
 
       const abortController = new AbortController();
       abortControllerRef.current = abortController;
-      void fetchIcons(selectedCollection, abortController.signal);
+      void fetchTotalCount(selectedCollection, abortController.signal);
+      void fetchIcons(selectedCollection, debouncedSearchQuery, abortController.signal);
     }
-  }, [collections.length, selectedCollection, fetchCollections, fetchIcons, abortCurrentRequest]);
+  }, [
+    collections.length,
+    selectedCollection,
+    debouncedSearchQuery,
+    fetchCollections,
+    fetchTotalCount,
+    fetchIcons,
+    abortCurrentRequest,
+  ]);
 
   useEffect(() => {
     return () => {
@@ -230,9 +242,9 @@ export function useIconGallery(): UseIconGalleryReturn {
 
   return {
     collections,
-    icons: filteredIcons,
-    totalCount: icons.length,
-    filteredCount: filteredIcons.length,
+    icons,
+    totalCount: totalIconsCount,
+    filteredCount: icons.length,
     selectedCollection,
     searchQuery,
     isLoading,

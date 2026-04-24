@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import type { IconItem } from '../hooks/useIconGallery.ts';
 import IconCard from './IconCard.tsx';
+import IconDetailModal from './IconDetailModal.tsx';
 
 export interface IconGridProps {
   icons: readonly IconItem[];
@@ -8,6 +9,18 @@ export interface IconGridProps {
 }
 
 const IconGrid: React.FC<IconGridProps> = ({ icons, prefix }) => {
+  const [selectedIcon, setSelectedIcon] = useState<IconItem | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleIconClick = useCallback((icon: IconItem) => {
+    setSelectedIcon(icon);
+    setIsModalOpen(true);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
+
   if (icons.length === 0) {
     return null;
   }
@@ -37,9 +50,16 @@ const IconGrid: React.FC<IconGridProps> = ({ icons, prefix }) => {
             key={`${prefix}:${icon.name}`}
             icon={icon}
             prefix={prefix}
+            onClick={handleIconClick}
           />
         ))}
       </div>
+      <IconDetailModal
+        icon={selectedIcon}
+        isOpen={isModalOpen}
+        prefix={prefix}
+        onClose={handleCloseModal}
+      />
     </>
   );
 };

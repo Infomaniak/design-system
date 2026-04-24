@@ -33,6 +33,10 @@ export function buildSvgComponentScript(): Promise<void> {
       workspaceRootDirectory: WORKSPACE_ROOT_DIR,
       outputDirectory: OUTPUT_DIR,
       logger,
+      // Strip ./dist/ and /dist/ prefixes from paths since files are now in the dist/ directory
+      stripDistPaths: {
+        patterns: ['./dist/', '/dist/'],
+      },
     });
   });
 }
