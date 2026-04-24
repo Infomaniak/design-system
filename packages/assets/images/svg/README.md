@@ -2,17 +2,109 @@
 
 Contains the list of Infomaniak's Design System SVGs.
 
-## Figma design file
+## Workflow
 
-TODO: add a link to the Figma design file.
+### Add a new SVG
 
-The [Figma svg assets design](https://www.figma.com/design/fjSRAikJq01Dof4iXazaPL/Tests-icons-Valentin?node-id=0-1&p=f&t=FMVSOZJWJiyGBzbW-0) contains all the SVGs used in the Infomaniak's Design System.
+#### Icons
 
-It is the **source of truth** for the SVGs.
+##### [Contribute](https://www.figma.com/design/GiBEx5gisOnNe3cikN0z1U/Edelweiss---System-icons---Contribution?m=auto&fuid=1007627152736665096)
 
-### Rules
+This is the entry point for the UX designers to **propose** additions of new icons, or changes on existing ones.
 
-TODO define how icons/illustrations are organized in the Figma design file.
+Then, the UX designer must inform/request the design-system's team for approval, following our governance process to jump on the next steps.
+
+##### [Source of truth](https://www.figma.com/design/VfpVYoNSwpoUfPTvWU3HdU/ESDS-Team---System-icons---Source-of-truth?node-id=2-8276&p=f&t=oWTzzbQevviolOKO-0)
+
+When the changes/additions are approved, the design-system team's will replicate the additions/changes into the [source of truth](https://www.figma.com/design/VfpVYoNSwpoUfPTvWU3HdU/ESDS-Team---System-icons---Source-of-truth?node-id=2-8276&p=f&t=oWTzzbQevviolOKO-0) Figma file.
+
+##### Rules
+
+- icons must be converted into components.
+- icons must have a name following this format: `esds/icon/<name>`, where `name` is `dash-cased`.
+- icons may have descriptions to add _tags_ and _projects_ (see [Metadata](#Metadata).
+
+### Commit the changes
+
+When complete, design-system's UX designers commit the changes to the Figma design file by creating a new version and updating the corresponding text node.
+
+The version must follow the [semver convention](https://devhints.io/semver).
+
+### Workflow trigger
+
+A figma webhook is configured to trigger the Github workflow `on-figma-event` when a new version is created.
+
+### Build the assets
+
+The script import the Figma design file and generate the SVGs as well as the iconify JSON file.
+
+#### Icons
+
+> An icon is a **monotone** SVG: we may replace the color of each icon.
+
+The Figma design file is traversed by a script to extract the icons.
+
+Each icon is converted to an SVG, is optimized by SVGO, we replace the colors by `currentColor` (to make them _monotone_) and,
+for each of them, we store the SVG into the `assets/svg/monotone/figma` directory as well as the metadata.
+
+Then a single [iconify JSON](https://iconify.design/docs/libraries/tools/export/json.html) file (`assets/server/esds.json`) is generated containing all the icons.
+
+#### Illustrations
+
+> An illustration is a **colored** SVG: a SVG with more than one color.
+
+The Figma design file is traversed by a script to extract the illustrations.
+
+Each illustration is converted to an SVG, is optimized by SVGO, and,
+for each of them, we store the SVG into the `assets/svg/illustration/figma` directory as well as the metadata.
+
+Then a single iconify JSON file (`assets/server/esds-illustration.json`) is generated containing all the illustrations.
+
+### Merge the assets
+
+A Pull Request is created to merge the assets into the `main` branch.
+
+### Upload the assets
+
+When the Pull Request is merged, the assets are uploaded to the Infomaniak's Design System iconify server.
+
+### Update the guidelines
+
+#### [Iconography Guideline](https://www.figma.com/design/nbEPxwoIzXfZVquwR4NfYg/Edelweiss---Iconography?node-id=0-1&p=f&t=50O2v4pgV2smKfy8-0)
+
+The UX designer updates manually the icons present into the reference file used by other UX designers.
+
+### Graph
+
+```mermaid
+flowchart TD
+  FIGMA_CONTRIBUTING["🎨 FIGMA - Contributing file"]
+  REPLICATE("REPLICATE (copy icons)")
+  FIGMA_SOURCE_OF_TRUTH["🎨 FIGMA - Source of truth file"]
+  COMMIT("COMMIT (create a new version)")
+  WEBHOOK_SERVER("WEBHOOK SERVER")
+  GITHUB_WORKFLOW("GITHUB WORKFLOW")
+  BUILD_SVGS("BUILD SVGs")
+  CREATE_PR("CREATE PULL REQUEST")
+  MERGE_PR("MERGE PULL REQUEST")
+  UPLOAD_PROD("UPLOAD TO PRODUCTION ICONIFY SERVER")
+  UPLOAD_DEVELOP("UPLOAD TO DEVELOPMENT ICONIFY SERVER")
+  FIGMA_ICONOGRAPHY_GUIDELINE["🎨 FIGMA - Iconography file"]
+
+  FIGMA_CONTRIBUTING -- "approval" --> REPLICATE
+  REPLICATE --> FIGMA_SOURCE_OF_TRUTH
+  FIGMA_SOURCE_OF_TRUTH --> COMMIT
+  COMMIT -- "webhook: trigger" --> WEBHOOK_SERVER
+  WEBHOOK_SERVER --> GITHUB_WORKFLOW
+  GITHUB_WORKFLOW --> BUILD_SVGS
+  BUILD_SVGS --> CREATE_PR
+  CREATE_PR --> MERGE_PR
+  MERGE_PR -- "main" --> UPLOAD_PROD
+  MERGE_PR -- "develop" --> UPLOAD_DEVELOP
+  UPLOAD_PROD -- "manual update" --> FIGMA_ICONOGRAPHY_GUIDELINE
+```
+
+---
 
 ### Metadata
 
@@ -56,79 +148,6 @@ Where `<project>` is a project name.
 
 > [!NOTE]
 > Tags and projects can be mixed: `#house @kdrive`
-
-## Workflow
-
-### Add a new SVG
-
-UX designers add new SVGs to the Figma design file following the previous rules.
-
-### Commit the changes
-
-When satisfied, UX designers commit the changes to the Figma design file by creating a new version.
-
-### Workflow trigger
-
-A figma webhook is configured to trigger the Github workflow `on-figma-event` when a new version is created.
-
-### Build the assets
-
-The script import the Figma design file and generate the SVGs as well as the iconify JSON file.
-
-#### Icons
-
-> An icon is a **monotone** SVG: we may replace the color of each icon.
-
-The Figma design file is traversed by a script to extract the icons.
-
-Each icon is converted to an SVG, is optimized by SVGO, we replace the colors by `currentColor` (to make them _monotone_) and,
-for each of them, we store the SVG into the `assets/svg/monotone/figma` directory as well as the metadata.
-
-Then a single [iconify JSON](https://iconify.design/docs/libraries/tools/export/json.html) file (`assets/server/esds.json`) is generated containing all the icons.
-
-#### Illustrations
-
-> An illustration is a **colored** SVG: a SVG with more than one color.
-
-The Figma design file is traversed by a script to extract the illustrations.
-
-Each illustration is converted to an SVG, is optimized by SVGO, and,
-for each of them, we store the SVG into the `assets/svg/illustration/figma` directory as well as the metadata.
-
-Then a single iconify JSON file (`assets/server/esds-illustration.json`) is generated containing all the illustrations.
-
-### Merge the assets
-
-A Pull Request is created to merge the assets into the `main` branch.
-
-### Upload the assets
-
-When the Pull Request is merged, the assets are uploaded to the Infomaniak's Design System iconify server.
-
-### Graph
-
-```mermaid
-flowchart TD
-  FIGMA["🎨 FIGMA"]
-  COMMIT("COMMIT (create a new version)")
-  WEBHOOK_SERVER("WEBHOOK SERVER")
-  GITHUB_WORKFLOW("GITHUB WORKFLOW")
-  BUILD_SVGS("BUILD SVGs")
-  CREATE_PR("CREATE PULL REQUEST")
-  MERGE_PR("MERGE PULL REQUEST")
-  UPLOAD_PROD("UPLOAD TO PRODUCTION ICONIFY SERVER")
-  UPLOAD_DEVELOP("UPLOAD TO DEVELOPMENT ICONIFY SERVER")
-
-
-  FIGMA --> COMMIT
-  COMMIT -- "webhook: trigger" --> WEBHOOK_SERVER
-  WEBHOOK_SERVER --> GITHUB_WORKFLOW
-  GITHUB_WORKFLOW --> BUILD_SVGS
-  BUILD_SVGS --> CREATE_PR
-  CREATE_PR --> MERGE_PR
-  MERGE_PR -- "main" --> UPLOAD_PROD
-  MERGE_PR -- "develop" --> UPLOAD_DEVELOP
-```
 
 ---
 
