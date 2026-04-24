@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "author": {
       "name": "Infomaniak"
     },
@@ -10,47 +10,101 @@
       "title": "GPL-3.0-only",
       "spdx": "GPL-3.0-only"
     },
-    "total": 6
+    "total": 2
   },
-  "lastModified": 1775556432,
+  "lastModified": 1777015843,
   "icons": {
-    "size16": {
-      "body": "<g fill=\"none\"><g clip-path=\"url(#svgID0)\"><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M6.5 13.5v-4h3v4h4v-6a.5.5 0 00-.146-.354l-5-5a.5.5 0 00-.708 0l-5 5A.5.5 0 002.5 7.5v6z\"/></g><defs><clipPath id=\"svgID0\"><path fill=\"#fff\" d=\"M0 0h16v16H0z\"/></clipPath></defs></g>",
-      "width": 16,
-      "height": 16
+    "bell": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M10.268 21a2 2 0 003.464 0m-10.47-5.674A1 1 0 004 17h16a1 1 0 00.74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 106 8c0 4.499-1.411 5.956-2.738 7.326\"/>"
     },
-    "size24": {
-      "body": "<g fill=\"none\"><g clip-path=\"url(#svgID0)\"><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M9.75 20.25v-6h4.5v6h6v-9a.75.75 0 00-.22-.53l-7.5-7.5a.75.75 0 00-1.06 0l-7.5 7.5a.75.75 0 00-.22.53v9z\"/></g><defs><clipPath id=\"svgID0\"><path fill=\"#fff\" d=\"M0 0h24v24H0z\"/></clipPath></defs></g>",
-      "width": 24,
-      "height": 24
-    },
-    "size32": {
-      "body": "<g fill=\"none\"><g clip-path=\"url(#svgID0)\"><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M13 27v-8h6v8h8V15a1 1 0 00-.293-.707l-10-10a1 1 0 00-1.415 0l-10 10A1 1 0 005 15v12z\"/></g><defs><clipPath id=\"svgID0\"><path fill=\"#fff\" d=\"M0 0h32v32H0z\"/></clipPath></defs></g>",
-      "width": 32,
-      "height": 32
-    },
-    "size48": {
-      "body": "<g fill=\"none\"><g clip-path=\"url(#svgID0)\"><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3\" d=\"M19.5 40.5v-12h9v12h12v-18a1.5 1.5 0 00-.439-1.061l-15-15a1.5 1.5 0 00-2.122 0l-15 15A1.5 1.5 0 007.5 22.5v18z\"/></g><defs><clipPath id=\"svgID0\"><path fill=\"#fff\" d=\"M0 0h48v48H0z\"/></clipPath></defs></g>",
-      "width": 48,
-      "height": 48
-    },
-    "stylefilled": {
-      "body": "<path fill=\"currentColor\" d=\"M10 1.667A8.333 8.333 0 0118.333 10 8.333 8.333 0 0110 18.333 8.333 8.333 0 011.667 10 8.333 8.333 0 0110 1.667m2.972 6.194a.67.67 0 00-.944 0l-2.862 2.863-1.194-1.196a.668.668 0 00-.944.943l1.667 1.667c.26.26.682.26.943 0l3.334-3.333a.67.67 0 000-.944\"/>"
-    },
-    "styleoutline": {
-      "body": "<g fill=\"none\"><g clip-path=\"url(#svgID0)\"><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"m7.5 10 1.667 1.667L12.5 8.333M18.333 10a8.333 8.333 0 11-16.666 0 8.333 8.333 0 0116.666 0\"/></g><defs><clipPath id=\"svgID0\"><path fill=\"#fff\" d=\"M0 0h20v20H0z\"/></clipPath></defs></g>"
+    "bell-slash": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M10.268 21a2 2 0 003.464 0M17 17H4a1 1 0 01-.74-1.673C4.59 13.956 6 12.499 6 8a6 6 0 01.258-1.742M2 2l20 20M8.668 3.01A6 6 0 0118 8c0 2.687.77 4.653 1.707 6.05\"/>"
     }
   },
   "categories": {
     "@all": [
-      "size16",
-      "size24",
-      "size32",
-      "size48",
-      "stylefilled",
-      "styleoutline"
+      "bell",
+      "bell-slash"
+    ],
+    "#alarm": [
+      "bell"
+    ],
+    "#alert": [
+      "bell"
+    ],
+    "#announcement": [
+      "bell"
+    ],
+    "#badge": [
+      "bell"
+    ],
+    "#blocked": [
+      "bell-slash"
+    ],
+    "#ding": [
+      "bell"
+    ],
+    "#disable": [
+      "bell-slash"
+    ],
+    "#do-not-disturb": [
+      "bell-slash"
+    ],
+    "#ignore": [
+      "bell-slash"
+    ],
+    "#inbox": [
+      "bell"
+    ],
+    "#message": [
+      "bell"
+    ],
+    "#mute": [
+      "bell-slash"
+    ],
+    "#no-alert": [
+      "bell-slash"
+    ],
+    "#notification": [
+      "bell"
+    ],
+    "#notification-off": [
+      "bell-slash"
+    ],
+    "#ping": [
+      "bell"
+    ],
+    "#quiet": [
+      "bell-slash"
+    ],
+    "#reminder": [
+      "bell"
+    ],
+    "#ring": [
+      "bell"
+    ],
+    "#silent": [
+      "bell-slash"
+    ],
+    "#snooze": [
+      "bell-slash"
+    ],
+    "#sound": [
+      "bell"
+    ],
+    "#subscribe": [
+      "bell"
+    ],
+    "#suppress": [
+      "bell-slash"
+    ],
+    "#unsubscribe": [
+      "bell-slash"
+    ],
+    "#update": [
+      "bell"
     ]
   },
-  "width": 20,
-  "height": 20
+  "width": 24,
+  "height": 24
 }
