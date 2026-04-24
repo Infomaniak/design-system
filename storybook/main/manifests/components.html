@@ -576,7 +576,7 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">26 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">27 docs ok</a></div>
   </div>
 </header>
 <main>
@@ -1998,10 +1998,127 @@ import Markdown from &#39;markdown-to-jsx&#39;;
   aria-label="Docs">
   <div class="head">
     <div class="title">
+      <h2><span class="status-dot dot-ok"></span> Icons/Icon Component</h2>
+      <div class="badges">
+        
+        <label for="doc-25-icons-icon-component-docs-content" class="badge ok as-toggle">view content</label>
+      </div>
+    </div>
+    <div class="meta" title="./src/stories/icons/icon-component.mdx">icons-icon-component--docs · ./src/stories/icons/icon-component.mdx</div>
+    
+  </div>
+
+  <!-- Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="doc-25-icons-icon-component-docs-content" class="tg tg-content" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-content">
+          <div class="mdx-content">
+            <pre><code>import { Meta } from &#39;@storybook/addon-docs/blocks&#39;;
+
+&lt;Meta title=&quot;Icons/Icon Component&quot; /&gt;
+
+# Web
+
+## EsdsIconComponent
+
+### Installation
+
+```shell
+yarn add @infomaniak-design-system/esds-icon
+```
+
+### Usage
+
+```html
+&lt;esds-icon
+  style=&quot;font-size: var(--esds-icon-size-md); color: var(--esds-color-text-primary)&quot;
+  name=&quot;esds:home&quot;
+&gt;&lt;/esds-icon&gt;
+```
+
+#### Styling
+
+The icon may be styled using the following CSS properties:
+
+- `color`: to set the icon&#39;s color
+- `font-size`: to set the icon&#39;s size
+
+### API
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Attribute/Property&lt;/th&gt;
+    &lt;th&gt;Type&lt;/th&gt;
+    &lt;th&gt;Description&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;name&lt;/td&gt;
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;prefix&amp;gt;:&amp;lt;name&amp;gt;&lt;/code&gt;
+    &lt;/td&gt;
+    &lt;td&gt;The name of the icon to display.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;mode&lt;/td&gt;
+    &lt;td&gt;
+      &lt;code&gt;EsdsIconComponentMode&lt;/code&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      The &lt;code&gt;mode&lt;/code&gt; to apply:
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;code&gt;svg&lt;/code&gt;: injects the svg as direct &amp;lt;svg&amp;gt; child of this component.
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;code&gt;bg&lt;/code&gt;: uses the svg as &quot;background-image&quot; of this component.
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;code&gt;mask&lt;/code&gt;: injects the svg as &quot;mask-image&quot; of this component: this is useful to
+          apply color to the svg.
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;inline&lt;/td&gt;
+    &lt;td&gt;
+      &lt;code&gt;boolean&lt;/code&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      Adding &lt;code&gt;inline&lt;/code&gt; property to the icon component is identical to setting{&#39; &#39;}
+      &lt;code&gt;style=&quot;vertical-align: -0.125em&quot;&lt;/code&gt;. This is useful to correct the icon&#39;s alignment.
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;nolazy&lt;/td&gt;
+    &lt;td&gt;
+      &lt;code&gt;boolean&lt;/code&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      By default, icons are rendered only when visible to the visitor. You can opt out of this
+      behavior by adding the &lt;code&gt;nolazy&lt;/code&gt; attribute.
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+          </div>
+        </div>
+  </div>
+</article>
+<article
+  class="card is-doc no-doc-error"
+  role="listitem"
+  aria-label="Docs">
+  <div class="head">
+    <div class="title">
       <h2><span class="status-dot dot-ok"></span> Icons/Icon Gallery</h2>
       <div class="badges">
         
-        <label for="doc-25-icons-icon-gallery-docs-content" class="badge ok as-toggle">view content</label>
+        <label for="doc-26-icons-icon-gallery-docs-content" class="badge ok as-toggle">view content</label>
       </div>
     </div>
     <div class="meta" title="./src/stories/icons/icon-gallery.mdx">icons-icon-gallery--docs · ./src/stories/icons/icon-gallery.mdx</div>
@@ -2010,7 +2127,7 @@ import Markdown from &#39;markdown-to-jsx&#39;;
 
   <!-- Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="doc-25-icons-icon-gallery-docs-content" class="tg tg-content" type="checkbox" hidden />
+  <input id="doc-26-icons-icon-gallery-docs-content" class="tg tg-content" type="checkbox" hidden />
 
   <div class="panels">
     
