@@ -1,7 +1,5 @@
 import { join } from 'node:path';
 import { getFigmaFile } from '../../../../../../../../scripts/helpers/figma/api/files/get-figma-file.ts';
-import { isFigmaFrameNode } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/built-in/figma-frame-node.ts';
-import { FigmaNodesExplorer } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/helpers/figma-nodes-explorer.ts';
 import type { FigmaComponent } from '../../../../../../../../scripts/helpers/figma/api/files/types/figma-component.ts';
 import type { FigmaFile } from '../../../../../../../../scripts/helpers/figma/api/files/types/figma-file.ts';
 import {
@@ -21,7 +19,6 @@ export interface ExtractSvgFilesFromFigmaDesignFileOptions {
   readonly figmaAPIToken: string;
   readonly figmaSourceFileKey: string;
   readonly logger: Logger;
-  readonly hasStockedVersion?: boolean;
 }
 
 /**
@@ -33,7 +30,6 @@ export function extractSvgFilesFromFigmaDesignFile({
   figmaAPIToken,
   figmaSourceFileKey,
   logger,
-  hasStockedVersion = false,
 }: ExtractSvgFilesFromFigmaDesignFileOptions): Promise<void> {
   return logger.asyncTask('extract-figma-svgs', async (logger: Logger): Promise<void> => {
     outputDirectory = removeTrailingSlash(outputDirectory);
@@ -46,7 +42,7 @@ export function extractSvgFilesFromFigmaDesignFile({
 
     const svgsToLoad: readonly SVGToLoad[] = await logger.asyncTask(
       'extract-svgs',
-      async (logger: Logger): Promise<readonly SVGToLoad[]> => {
+      async (): Promise<readonly SVGToLoad[]> => {
         const figmaFile: FigmaFile = await getFigmaFile({
           token: figmaAPIToken,
           file_key: figmaSourceFileKey,
@@ -62,24 +58,18 @@ export function extractSvgFilesFromFigmaDesignFile({
           const component: FigmaComponent = figmaFile.components[id];
 
           // skip non icon components
-          if (component.name.startsWith('Type=') || component.name.includes('Theme')) {
+          if (!component.name.startsWith('esds/')) {
             continue;
           }
 
-          let frameId: string | undefined;
+          // extract name
+          let name: string;
+          const match: RegExpMatchArray | null = /^esds\/icon\/([a-z0-9-]+)$/g.exec(component.name);
 
-          if (hasStockedVersion) {
-            // explores the nodes to find the associated "stroked" version
-            for (const node of FigmaNodesExplorer.explore(figmaFile.document)) {
-              if (isFigmaFrameNode(node) && node.name === `stroke--${component.name}`) {
-                frameId = node.id;
-                break;
-              }
-            }
-
-            if (frameId === undefined) {
-              logger.error(`Unable to locate FRAME with name stroke--${component.name}`);
-            }
+          if (match === null) {
+            throw new Error(`Invalid name: ${JSON.stringify(component.name)}`);
+          } else {
+            name = match[1];
           }
 
           const parts: readonly string[] = component.description.split(/\s+/g);
@@ -100,16 +90,8 @@ export function extractSvgFilesFromFigmaDesignFile({
               return input.slice(1);
             });
 
-          // TODO update when figma format is defined
-          // const name: string = component.name;
-          // if (/[^\w-]/g.test(name)) {
-          //   throw new Error(`Invalid name: ${JSON.stringify(name)}`);
-          // }
-
-          const name: string = component.name.replaceAll(/[^\w-]/g, '');
-
           svgsToLoad.push({
-            id: frameId === undefined ? id : frameId,
+            id,
             name,
             metadata: {
               tags,
