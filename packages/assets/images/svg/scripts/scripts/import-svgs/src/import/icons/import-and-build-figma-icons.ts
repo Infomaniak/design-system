@@ -21,9 +21,11 @@ export function importAndBuildFigmaIcons({
       ...options,
       logger,
       prefix: 'esds',
-      svgImagesOutputDirectory: join(outputDirectory, 'svg/monotone/figma'),
+      svgImagesOutputDirectory: join(outputDirectory, FIGMA_ICONS_SUB_DIRECTORY_PATH),
       svgSetOutputDirectory: join(outputDirectory, 'server'),
       monotone: true,
     });
   });
 }
+
+export const FIGMA_ICONS_SUB_DIRECTORY_PATH = 'svg/monotone/figma';

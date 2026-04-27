@@ -1,7 +1,10 @@
-import { cp } from 'node:fs/promises';
+import { cp, rm } from 'node:fs/promises';
 import { basename, isAbsolute, join, relative } from 'node:path';
 import { deleteGitRemoteBranch } from '../../../../../../../../../scripts/helpers/git/delete-git-remote-branch.ts';
-import type { GitCommitChange } from '../../../../../../../../../scripts/helpers/git/git-commit.ts';
+import type {
+  GitChangeMode,
+  GitChanges,
+} from '../../../../../../../../../scripts/helpers/git/git-changes.ts';
 import { isGitSupported } from '../../../../../../../../../scripts/helpers/git/is-git-supported.ts';
 import {
   updateGitRepositoryOnNewBranch,
@@ -16,6 +19,7 @@ import type { Logger } from '../../../../../../../../../scripts/helpers/log/logg
 import { iteratorJoin } from '../../../../../../../../../scripts/helpers/misc/iterator/iterator-join.ts';
 import { mapGetOrInsertComputed } from '../../../../../../../../../scripts/helpers/misc/map/upsert.ts';
 import { dedent } from '../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
+import { FIGMA_ICONS_SUB_DIRECTORY_PATH } from '../import/icons/import-and-build-figma-icons.ts';
 
 export interface CreateImportSvgPullRequestsOptions {
   readonly outputDirectory: string;
@@ -43,9 +47,9 @@ export function createImportSvgPullRequests({
 
     const message: string = `feat(assets/svg): update icons - ${version}`;
 
-    const changes: readonly GitCommitChange[] = await logger.asyncTask(
+    const changes: GitChanges = await logger.asyncTask(
       'create-branch',
-      (logger: Logger): Promise<readonly GitCommitChange[]> => {
+      (logger: Logger): Promise<GitChanges> => {
         return updateGitRepositoryOnNewBranch({
           repository: INFOMANIAK_DESIGN_SYSTEM_REPOSITORY,
           accessToken: updateRepositoryAndCreatePullRequestAuthToken,
@@ -63,6 +67,14 @@ export function createImportSvgPullRequests({
               cwd,
               packageRootDirectoryRelativeToWorkspaceRootDirectory,
             );
+
+            // remove previously imported assets
+            await Promise.all([
+              rm(join(targetDirectory, 'assets', FIGMA_ICONS_SUB_DIRECTORY_PATH), {
+                recursive: true,
+                force: true,
+              }),
+            ]);
 
             await Promise.all([
               cp(outputDirectory, targetDirectory, {
@@ -108,7 +120,7 @@ export function createImportSvgPullRequests({
 /*---*/
 
 interface GenerateSvgPullRequestDescriptionOptions {
-  readonly changes: readonly GitCommitChange[];
+  readonly changes: GitChanges;
   readonly version: string;
 }
 
@@ -119,7 +131,7 @@ function generateSvgPullRequestDescription({
   type IconChangeType = 'svg' | 'metadata';
   const iconsThatChanged: Map<
     string /* icon name */,
-    Map<IconChangeType, GitCommitChange['mode']>
+    Map<IconChangeType, GitChangeMode>
   > = new Map();
 
   for (const { mode, file } of changes) {

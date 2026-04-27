@@ -2,8 +2,9 @@ import { mkdir, rm } from 'node:fs/promises';
 import type { Logger } from '../log/logger.ts';
 import { addGitAllFiles } from './add-git-all-files.ts';
 import { createGitBranch } from './create-git-branch.ts';
+import { gitChanges, type GitChanges } from './git-changes.ts';
 import { gitClone } from './git-clone.ts';
-import { gitCommit, type GitCommitChange } from './git-commit.ts';
+import { gitCommit } from './git-commit.ts';
 import { gitPush } from './git-push.ts';
 import { setUpGitConfig } from './set-up-git-config.ts';
 
@@ -38,7 +39,7 @@ export async function updateGitRepositoryOnNewBranch({
   update,
   cwd = '.tmp',
   logger,
-}: UpdateGitRepositoryOnNewBranchOptions): Promise<readonly GitCommitChange[]> {
+}: UpdateGitRepositoryOnNewBranchOptions): Promise<GitChanges> {
   try {
     await rm(cwd, {
       recursive: true,
@@ -82,9 +83,14 @@ export async function updateGitRepositoryOnNewBranch({
       cwd,
     });
 
-    const changes: readonly GitCommitChange[] = await gitCommit({
+    await gitCommit({
       message: commitMessage,
       allowEmpty: allowEmpty !== 'no',
+      logger,
+      cwd,
+    });
+
+    const changes: GitChanges = await gitChanges({
       logger,
       cwd,
     });
