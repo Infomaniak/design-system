@@ -64,7 +64,7 @@ await runScript(
       );
 
       // DEBUG
-      logger.info('Existing webhooks:', JSON.stringify(existingWebhooks, null, 2));
+      // logger.info('Existing webhooks:', JSON.stringify(existingWebhooks, null, 2));
 
       const webhookIndex: number = existingWebhooks.findIndex(
         ({ event_type, context, context_id, endpoint }: FigmaWebhookV2): boolean => {
