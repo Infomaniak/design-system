@@ -10,6 +10,7 @@ import {
   createFigmaWebhook,
   type CreateFigmaWebhookOptions,
 } from '../../../helpers/figma/api/webhooks/create/create-figma-webhook.ts';
+import { deleteFigmaWebhook } from '../../../helpers/figma/api/webhooks/delete/delete-figma-webhook.ts';
 import { getFigmaWebhookRequests } from '../../../helpers/figma/api/webhooks/get-requests/get-figma-webhook-requests.ts';
 import {
   listFigmaWebhooks,
@@ -25,6 +26,7 @@ import { getEnvFigmaWebhookEndpoint } from '../../../helpers/figma/env/get-env-f
 import { getEnvFigmaWebhookPasscode } from '../../../helpers/figma/env/get-env-figma-webhook-passcode.ts';
 import { Logger } from '../../../helpers/log/logger.ts';
 import { runScript } from '../../../helpers/misc/run-script/run-script.ts';
+import { sleep } from '../../../helpers/misc/sleep.ts';
 
 // NOTE: figma webhooks are currently highly bugged, and we can't safely rely on them. Use this script in when webhooks do not trigger.
 // https://forum.figma.com/report-a-problem-6/file-version-update-not-triggered-46344
@@ -193,7 +195,7 @@ function fixFileVersionUpdateWebhookTrigger({
       // console.log(version);
 
       if (version === undefined) {
-        logger.info('Figma webhook up-to-date.');
+        logger.info('Figma webhook up-to-date: no version found.');
       } else {
         const expectedWebhookRequestPayload: ExpectedWebhookRequestPayload = {
           event_type: 'FILE_VERSION_UPDATE',
@@ -214,34 +216,79 @@ function fixFileVersionUpdateWebhookTrigger({
           logger.warn('Figma webhook out-of-date.');
           logger.info('Initiating "trigger" fix...');
 
-          await logger.asyncTask('trigger-webhook (force)', (logger: Logger): Promise<unknown> => {
-            logger.info(`version: ${version.label}`);
-
-            return fetch(figmaWebhookEndpoint, {
-              method: 'POST',
-              headers: [['Content-Type', 'application/json']],
-              body: JSON.stringify({
-                event_type: 'FILE_VERSION_UPDATE',
-                webhook_id: Number(figmaWebhookId),
-                file_key: figmaFileKey,
-                file_name: 'Unknown',
-                created_at: new Date().toISOString(),
-                version_id: version.id,
-                label: version.label!,
-                description: version.description ?? '',
-                passcode: figmaWebhookPasscode,
-                triggered_by: {
-                  id: '123',
-                  email: 'unknown',
-                  handle: 'unknown',
-                  img_url: 'unknown',
-                },
-                timestamp: new Date().toISOString(),
-              } satisfies FigmaWebhookV2FileVersionUpdateEvent),
+          await logger.asyncTask('delete-webhook', () => {
+            return deleteFigmaWebhook({
+              token: figmaApiToken,
+              webhook_id: figmaWebhookId,
             });
           });
 
-          logger.info('Figma webhook triggered (force) with success !');
+          const webhook: FigmaWebhookV2 = await logger.asyncTask(
+            'recreate-webhook',
+            (): Promise<FigmaWebhookV2> => {
+              return createFigmaWebhook({
+                token: figmaApiToken,
+                event_type: 'FILE_VERSION_UPDATE',
+                context: 'file',
+                context_id: figmaFileKey,
+                endpoint: figmaWebhookEndpoint,
+                passcode: figmaWebhookPasscode,
+              });
+            },
+          );
+
+          const newFigmaWebhookId: string = webhook.id;
+
+          await logger.asyncTask('await-auto-trigger', (): Promise<void> => {
+            return sleep(5000);
+          });
+
+          const newMatchingRequest: FigmaWebhookV2Request | undefined =
+            await getMatchingWebhookRequest({
+              figmaApiToken,
+              figmaWebhookId: newFigmaWebhookId,
+              expectedWebhookRequestPayload,
+            });
+
+          if (newMatchingRequest === undefined) {
+            logger.warn('Failed to trigger Figma webhook using deletion + creation trick.');
+
+            await logger.asyncTask(
+              'trigger-webhook (force)',
+              (logger: Logger): Promise<unknown> => {
+                logger.info(`version: ${version.label}`);
+
+                return fetch(figmaWebhookEndpoint, {
+                  method: 'POST',
+                  headers: [['Content-Type', 'application/json']],
+                  body: JSON.stringify({
+                    event_type: 'FILE_VERSION_UPDATE',
+                    webhook_id: Number(newFigmaWebhookId),
+                    file_key: figmaFileKey,
+                    file_name: 'Unknown',
+                    created_at: new Date().toISOString(),
+                    version_id: version.id,
+                    label: version.label!,
+                    description: version.description ?? '',
+                    passcode: figmaWebhookPasscode,
+                    triggered_by: {
+                      id: '123',
+                      email: 'unknown',
+                      handle: 'unknown',
+                      img_url: 'unknown',
+                    },
+                    timestamp: new Date().toISOString(),
+                  } satisfies FigmaWebhookV2FileVersionUpdateEvent),
+                });
+              },
+            );
+
+            logger.info('Figma webhook triggered (force) with success !');
+          } else {
+            logger.info('Figma webhook triggered with success !');
+          }
+        } else {
+          logger.info('Figma webhook up-to-date: found existing event.');
         }
       }
     },
