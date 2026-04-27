@@ -2,7 +2,7 @@ name: Fix Figma Webhook
 
 on:
   schedule:
-    # Runs every hour from Monday to Friday, between 6:00 and 20:00 UTC
+    # runs every hour from Monday to Friday, between 6:00 and 20:00 UTC
     - cron: '0 6-20 * * 1-5'
   workflow_dispatch:
 
