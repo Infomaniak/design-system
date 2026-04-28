@@ -12,7 +12,7 @@ export interface CheckFigmaFileVersionUpdateWebhookTriggerOptions {
   readonly logger: Logger;
 }
 
-export function checkFigmaFileVersionUpdateWebhookTrigger({
+export async function checkFigmaFileVersionUpdateWebhookTrigger({
   figmaApiToken,
   figmaFileKey,
   figmaWebhookId,
@@ -20,30 +20,25 @@ export function checkFigmaFileVersionUpdateWebhookTrigger({
   figmaWebhookPasscode,
   logger,
 }: CheckFigmaFileVersionUpdateWebhookTriggerOptions): Promise<void> {
-  return logger.asyncTask(
-    'fix-file-version-update-webhook-trigger',
-    async (logger: Logger): Promise<void> => {
-      const version: FigmaFileVersion | undefined = await getLastFigmaFileVersion({
-        figmaApiToken,
-        figmaFileKey,
-      });
+  const version: FigmaFileVersion | undefined = await getLastFigmaFileVersion({
+    figmaApiToken,
+    figmaFileKey,
+  });
 
-      if (version === undefined) {
-        logger.info('Figma webhook up-to-date: no version found.');
-      } else {
-        logger.info(`Last version found: ${version.label}`);
+  if (version === undefined) {
+    logger.info('Figma webhook up-to-date: no version found.');
+  } else {
+    logger.info(`Last version found: ${version.label}`);
 
-        await fixFileVersionUpdateWebhookTrigger({
-          figmaApiToken,
-          figmaFileKey,
-          figmaWebhookId,
-          version,
-          figmaWebhookEndpoint,
-          figmaWebhookPasscode,
-          logger,
-          strategy: 'recreate',
-        });
-      }
-    },
-  );
+    await fixFileVersionUpdateWebhookTrigger({
+      figmaApiToken,
+      figmaFileKey,
+      figmaWebhookId,
+      version,
+      figmaWebhookEndpoint,
+      figmaWebhookPasscode,
+      logger,
+      strategy: 'recreate',
+    });
+  }
 }
