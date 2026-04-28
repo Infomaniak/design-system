@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "author": {
       "name": "Infomaniak"
     },
@@ -12,7 +12,7 @@
     },
     "total": 2
   },
-  "lastModified": 1777015843,
+  "lastModified": 1777290394,
   "icons": {
     "bell": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M10.268 21a2 2 0 003.464 0m-10.47-5.674A1 1 0 004 17h16a1 1 0 00.74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 106 8c0 4.499-1.411 5.956-2.738 7.326\"/>"
