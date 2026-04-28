@@ -1,15 +1,12 @@
 import type { FetchFigmaJsonApiForConsumerOptions } from '../../../helpers/figma/api/fetch-figma-json-api.ts';
-import type { FigmaFileVersion } from '../../../helpers/figma/api/version-history/types/figma-file-version.ts';
 import {
   createFigmaWebhook,
   type CreateFigmaWebhookOptions,
 } from '../../../helpers/figma/api/webhooks/create/create-figma-webhook.ts';
-import { deleteFigmaWebhook } from '../../../helpers/figma/api/webhooks/delete/delete-figma-webhook.ts';
 import {
   listFigmaWebhooks,
   type ListFigmaWebhooksResponse,
 } from '../../../helpers/figma/api/webhooks/list/list-figma-webhooks.ts';
-import type { FigmaWebhookV2Request } from '../../../helpers/figma/api/webhooks/types/figma-webhook-v2-request.ts';
 import type { FigmaWebhookV2 } from '../../../helpers/figma/api/webhooks/types/figma-webhook-v2.ts';
 import { getEnvFigmaApiToken } from '../../../helpers/figma/env/get-env-figma-api-token.ts';
 import { getEnvFigmaIconFileKey } from '../../../helpers/figma/env/get-env-figma-icon-file-key.ts';
@@ -17,13 +14,7 @@ import { getEnvFigmaWebhookEndpoint } from '../../../helpers/figma/env/get-env-f
 import { getEnvFigmaWebhookPasscode } from '../../../helpers/figma/env/get-env-figma-webhook-passcode.ts';
 import { Logger } from '../../../helpers/log/logger.ts';
 import { runScript } from '../../../helpers/misc/run-script/run-script.ts';
-import { sleep } from '../../../helpers/misc/sleep.ts';
-import { emitFakeFigmaFileVersionUpdateWebhookEvent } from './steps/emit-fake-figma-file-version-update-webhook-event.ts';
-import { getLastFigmaFileVersion } from './steps/get-last-figma-file-version.ts';
-import {
-  type ExpectedFigmaWebhookRequestPayload,
-  getMatchingFigmaWebhookRequest,
-} from './steps/get-matching-figma-webhook-request.ts';
+import { checkFigmaFileVersionUpdateWebhookTrigger } from './steps/check-figma-file-version-update-webhook-trigger.ts';
 
 // NOTE: figma webhooks are currently highly bugged, and we can't safely rely on them. Use this script in when webhooks do not trigger.
 // https://forum.figma.com/report-a-problem-6/file-version-update-not-triggered-46344
@@ -63,7 +54,7 @@ await runScript(
       );
 
       // DEBUG
-      // logger.info('Existing webhooks:', JSON.stringify(existingWebhooks, null, 2));
+      logger.info('Existing webhooks:', JSON.stringify(existingWebhooks, null, 2));
 
       const webhookIndex: number = existingWebhooks.findIndex(
         ({ event_type, context, context_id, endpoint }: FigmaWebhookV2): boolean => {
@@ -89,7 +80,7 @@ await runScript(
 
         logger.info('Webhook created with success:', JSON.stringify(webhook, null, 2));
       } else {
-        await fixFileVersionUpdateWebhookTrigger({
+        await checkFigmaFileVersionUpdateWebhookTrigger({
           figmaApiToken,
           figmaFileKey: figmaIconFileKey,
           figmaWebhookId: existingWebhooks[webhookIndex].id,
@@ -104,120 +95,3 @@ await runScript(
     skipKChatNotificationOnError: true,
   },
 );
-
-/*---*/
-
-interface FixFileVersionUpdateWebhookTriggerOptions {
-  readonly figmaApiToken: string;
-  readonly figmaFileKey: string;
-  readonly figmaWebhookId: string;
-  readonly figmaWebhookEndpoint: string;
-  readonly figmaWebhookPasscode: string;
-  readonly logger: Logger;
-}
-
-function fixFileVersionUpdateWebhookTrigger({
-  figmaApiToken,
-  figmaFileKey,
-  figmaWebhookId,
-  figmaWebhookEndpoint,
-  figmaWebhookPasscode,
-  logger,
-}: FixFileVersionUpdateWebhookTriggerOptions): Promise<void> {
-  return logger.asyncTask(
-    'fix-file-version-update-webhook-trigger',
-    async (logger: Logger): Promise<void> => {
-      const version: FigmaFileVersion | undefined = await getLastFigmaFileVersion({
-        figmaApiToken,
-        figmaFileKey,
-      });
-
-      // DEBUG
-      // console.log(version);
-
-      if (version === undefined) {
-        logger.info('Figma webhook up-to-date: no version found.');
-      } else {
-        const expectedWebhookRequestPayload: ExpectedFigmaWebhookRequestPayload = {
-          event_type: 'FILE_VERSION_UPDATE',
-          file_key: figmaFileKey,
-          label: version.label!,
-        };
-
-        const matchingRequest: FigmaWebhookV2Request | undefined =
-          await getMatchingFigmaWebhookRequest({
-            figmaApiToken,
-            figmaWebhookId: figmaWebhookId,
-            expectedWebhookRequestPayload,
-          });
-
-        // DEBUG
-        console.log(matchingRequest);
-
-        if (matchingRequest === undefined) {
-          logger.warn('Figma webhook out-of-date.');
-          logger.info('Initiating "trigger" fix...');
-
-          await logger.asyncTask('delete-webhook', () => {
-            return deleteFigmaWebhook({
-              token: figmaApiToken,
-              webhook_id: figmaWebhookId,
-            });
-          });
-
-          const webhook: FigmaWebhookV2 = await logger.asyncTask(
-            'recreate-webhook',
-            (): Promise<FigmaWebhookV2> => {
-              return createFigmaWebhook({
-                token: figmaApiToken,
-                event_type: 'FILE_VERSION_UPDATE',
-                context: 'file',
-                context_id: figmaFileKey,
-                endpoint: figmaWebhookEndpoint,
-                passcode: figmaWebhookPasscode,
-              });
-            },
-          );
-
-          const newFigmaWebhookId: string = webhook.id;
-
-          await logger.asyncTask('await-auto-trigger', (): Promise<void> => {
-            return sleep(5000);
-          });
-
-          const newMatchingRequest: FigmaWebhookV2Request | undefined =
-            await getMatchingFigmaWebhookRequest({
-              figmaApiToken,
-              figmaWebhookId: newFigmaWebhookId,
-              expectedWebhookRequestPayload,
-            });
-
-          if (newMatchingRequest === undefined) {
-            logger.warn('Failed to trigger Figma webhook using deletion + creation trick.');
-
-            await logger.asyncTask(
-              'trigger-webhook (force)',
-              (logger: Logger): Promise<unknown> => {
-                logger.info(`version: ${version.label}`);
-
-                return emitFakeFigmaFileVersionUpdateWebhookEvent({
-                  figmaFileKey,
-                  figmaWebhookId,
-                  figmaWebhookEndpoint,
-                  figmaWebhookPasscode,
-                  version,
-                });
-              },
-            );
-
-            logger.info('Figma webhook triggered (force) with success !');
-          } else {
-            logger.info('Figma webhook triggered with success !');
-          }
-        } else {
-          logger.info('Figma webhook up-to-date: found existing event.');
-        }
-      }
-    },
-  );
-}
