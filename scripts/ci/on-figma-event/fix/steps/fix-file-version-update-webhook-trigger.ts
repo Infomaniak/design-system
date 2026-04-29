@@ -28,7 +28,7 @@ export async function fixFileVersionUpdateWebhookTrigger({
   logger,
   strategy = 'recreate',
 }: FixFileVersionUpdateWebhookTriggerOptions): Promise<void> {
-  logger.info(`Fixing Figma webbhook (strategy: ${JSON.stringify(strategy)}):`);
+  logger.info(`Fixing Figma webhook (strategy: ${JSON.stringify(strategy)}):`);
 
   const matchingRequest: FigmaWebhookV2Request | undefined = await getMatchingFigmaWebhookRequest({
     figmaApiToken,
