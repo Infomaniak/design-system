@@ -1,0 +1,42 @@
+name: Fix Figma Webhook
+
+on:
+  schedule:
+    # runs every hour from Monday to Friday, between 6:00 and 20:00 UTC
+    - cron: '0 6-20 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  fix-figma-webhook:
+    name: Fix Figma Webhook
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          always-auth: true
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Run ci:fix-figma-webhook
+        run: yarn ci:fix-figma-webhook
+        env:
+          FIGMA_API_TOKEN: ${{ secrets.FIGMA_API_TOKEN }}
+          FIGMA_ICON_FILE_KEY: ${{ secrets.FIGMA_ICON_FILE_KEY }}
+          FIGMA_WEBHOOK_ENDPOINT: ${{ secrets.FIGMA_WEBHOOK_ENDPOINT }}
+          FIGMA_WEBHOOK_PASSCODE: ${{ secrets.FIGMA_WEBHOOK_PASSCODE }}

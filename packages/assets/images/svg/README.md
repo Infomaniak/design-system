@@ -102,6 +102,10 @@ flowchart TD
   MERGE_PR -- "main" --> UPLOAD_PROD
   MERGE_PR -- "develop" --> UPLOAD_DEVELOP
   UPLOAD_PROD -- "manual update" --> FIGMA_ICONOGRAPHY_GUIDELINE
+
+  %% FIX_FIGMA_WEBHOOK
+  FIX_FIGMA_WEBHOOK{{"CRON: fix-figma-webhook"}}
+  FIX_FIGMA_WEBHOOK -. "trigger" .-> WEBHOOK_SERVER
 ```
 
 ---
