@@ -19,7 +19,7 @@ export async function emitFakeFigmaFileVersionUpdateWebhookEvent({
   figmaWebhookPasscode,
   version,
 }: EmitFakeFigmaFileVersionUpdateWebhookEventOptions) {
-  return fetch(figmaWebhookEndpoint, {
+  const response: Response = await fetch(figmaWebhookEndpoint, {
     method: 'POST',
     headers: [['Content-Type', 'application/json']],
     body: JSON.stringify({
@@ -41,4 +41,10 @@ export async function emitFakeFigmaFileVersionUpdateWebhookEvent({
       timestamp: new Date().toISOString(),
     } satisfies FigmaWebhookV2FileVersionUpdateEvent),
   });
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to emit fake Figma file version update webhook event: ${response.statusText}`,
+    );
+  }
 }
