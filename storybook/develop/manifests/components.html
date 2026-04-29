@@ -2031,6 +2031,20 @@ import Markdown from &#39;markdown-to-jsx&#39;;
 yarn add @infomaniak-design-system/esds-icon
 ```
 
+### Initialization
+
+The icon component needs to be initialized before it can be rendered:
+
+```ts
+import { EsdsIconComponent } from &#39;@infomaniak-design-system/esds-icon&#39;;
+
+EsdsIconComponent.init();
+```
+
+This allows defining the API proxy to fetch the icons and registering the custom element.
+
+You should put it in your `main.ts` or `app.ts` file.
+
 ### Usage
 
 ```html
