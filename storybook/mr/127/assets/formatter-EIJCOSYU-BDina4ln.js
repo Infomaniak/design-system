@@ -1,0 +1,1 @@
+import{Ft as e,Pt as t,Zt as n}from"./iframe-agNJALEF.js";var r=(0,n(e(),1).default)(2)(async(e,n)=>e===!1?n:t(n));export{r as formatter};
