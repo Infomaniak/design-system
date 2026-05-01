@@ -1,6 +1,11 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import MaterialBuilderMarkdown from '../../assets/material-builder.md?raw';
 import Markdown from 'markdown-to-jsx';
+import MaterialThemeBuilderFillColors from './assets/material-theme-builder--fill-colors.png';
+import MaterialThemeBuilderPickFonts from './assets/material-theme-builder--pick-fonts.png';
+import MaterialThemeBuilderExportTheme from './assets/material-theme-builder--export-theme.png';
+import MaterialThemeBuilderExport from './assets/material-theme-builder--export.png';
+import MaterialThemeBuilderExportFormat from './assets/material-theme-builder--export-format.png';
 
 <Meta title="Design Tokens/Material/Theme Builder" />
 
@@ -15,19 +20,34 @@ used only by the [Material Theme Builder](https://material-foundation.github.io/
 
 Go to the [Material Theme Builder](https://material-foundation.github.io/material-theme-builder) app and fill the colors matching the corresponding Material Design tokens:
 
-![material-theme-builder--fill-colors](/images/material-theme-builder/material-theme-builder--fill-colors.png)
+<img
+  src={MaterialThemeBuilderFillColors}
+  alt="material-theme-builder--fill-colors"
+/>
 
 Then, click on the following buttons until you reach the export format list:
 
-![material-theme-builder--pick-fonts](/images/material-theme-builder/material-theme-builder--pick-fonts.png)
+<img
+  src={MaterialThemeBuilderPickFonts}
+  alt="material-theme-builder--pick-fonts"
+/>
 
-![material-theme-builder--export-theme](/images/material-theme-builder/material-theme-builder--export-theme.png)
+<img
+  src={MaterialThemeBuilderExportTheme}
+  alt="material-theme-builder--export-theme"
+/>
 
-![material-theme-builder--export](/images/material-theme-builder/material-theme-builder--export.png)
+<img
+  src={MaterialThemeBuilderExport}
+  alt="material-theme-builder--export"
+/>
 
 Finally, select your export format and click on the corresponding button:
 
-![material-theme-builder--export](/images/material-theme-builder/material-theme-builder--export.png)
+<img
+  src={MaterialThemeBuilderExportFormat}
+  alt="material-theme-builder--export-format"
+/>
 
 It will download a file with the theme in the requested format.
 

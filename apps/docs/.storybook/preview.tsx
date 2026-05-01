@@ -218,9 +218,13 @@ const CustomDocsContainer = (props: DocsContainerProps) => {
           document.body
             .querySelectorAll('[data-preview-value]')
             .forEach((element: Element): void => {
-              element.textContent = getComputedStyle(element).getPropertyValue(
+              const value: string = getComputedStyle(element).getPropertyValue(
                 element.getAttribute('data-preview-value')!,
               );
+
+              if (element.textContent !== value) {
+                element.textContent = value;
+              }
             });
 
           setTimeout(loop, 200);
