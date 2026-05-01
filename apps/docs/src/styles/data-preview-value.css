@@ -1,0 +1,6 @@
+[data-preview-value]:not(#never) /* NOTE: to increase selector specificity */ {
+  margin-top: 4px;
+  font-family: monospace;
+  font-size: 12px;
+  color: rgb(107, 114, 128);
+}

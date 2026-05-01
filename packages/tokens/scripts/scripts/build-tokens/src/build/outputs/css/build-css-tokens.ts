@@ -33,6 +33,7 @@ export interface BuildCssTokensOptions {
   readonly baseCollection: DesignTokensCollection;
   readonly modifiers: DesignTokenModifiers;
   readonly outputDirectory: string;
+  readonly subDirectory?: string;
   readonly logger: Logger;
 }
 
@@ -40,11 +41,13 @@ export function buildCssTokens({
   baseCollection,
   modifiers,
   outputDirectory,
+  subDirectory = '',
   logger,
 }: BuildCssTokensOptions): Promise<void> {
   return logger.asyncTask('css', async (logger: Logger): Promise<void> => {
     outputDirectory = removeTrailingSlash(outputDirectory);
-    const cssOutputDirectory: string = `${outputDirectory}/web/css`;
+    subDirectory = removeTrailingSlash(subDirectory);
+    const cssOutputDirectory: string = `${outputDirectory}/web/css${subDirectory === '' ? '' : `/${subDirectory}`}`;
 
     const cssOptions: DesignTokensCollectionTokenToCssVariableDeclarationOptions = {
       generateCssVariableName: createCssVariableNameGenerator({
