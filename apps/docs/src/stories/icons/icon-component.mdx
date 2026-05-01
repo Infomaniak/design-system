@@ -12,6 +12,20 @@ import { Meta } from '@storybook/addon-docs/blocks';
 yarn add @infomaniak-design-system/esds-icon
 ```
 
+### Initialization
+
+The icon component needs to be initialized before it can be rendered:
+
+```ts
+import { EsdsIconComponent } from '@infomaniak-design-system/esds-icon';
+
+EsdsIconComponent.init();
+```
+
+This allows defining the API proxy to fetch the icons and registering the custom element.
+
+You should put it in your `main.ts` or `app.ts` file.
+
 ### Usage
 
 ```html
