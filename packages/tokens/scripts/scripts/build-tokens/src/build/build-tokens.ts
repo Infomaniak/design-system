@@ -71,42 +71,46 @@ export function buildTokens({
       validateModifiers(modifiers);
     });
 
-    // CSS
-    await buildCssTokens({
-      baseCollection,
-      modifiers,
-      outputDirectory,
-      logger,
-    });
+    if (false) {
+      // CSS
+      await buildCssTokens({
+        baseCollection,
+        modifiers,
+        outputDirectory,
+        logger,
+      });
 
-    // FIGMA
-    await buildFigmaTokens({
-      baseCollection,
-      modifiers,
-      outputDirectory,
-      logger,
-    });
+      // FIGMA
+      await buildFigmaTokens({
+        baseCollection,
+        modifiers,
+        outputDirectory,
+        logger,
+      });
 
-    // SWIFT
-    await buildSwiftTokens({
-      collection: baseCollection,
-      outputDirectory,
-      logger,
-    });
-
+      // SWIFT
+      await buildSwiftTokens({
+        collection: baseCollection,
+        outputDirectory,
+        logger,
+      });
+    }
     // KOTLIN
     await buildKotlinTokens({
-      collection: baseCollection,
-      outputDirectory,
-      logger,
-    });
-
-    // MARKDOWN
-    await buildMarkdownTokens({
       baseCollection,
       modifiers,
       outputDirectory,
       logger,
     });
+
+    if (false) {
+      // MARKDOWN
+      await buildMarkdownTokens({
+        baseCollection,
+        modifiers,
+        outputDirectory,
+        logger,
+      });
+    }
   });
 }
