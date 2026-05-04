@@ -2,5 +2,6 @@
   margin-top: 4px;
   font-family: monospace;
   font-size: 12px;
+  min-height: 24px;
   color: rgb(107, 114, 128);
 }
