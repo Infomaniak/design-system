@@ -1,11 +1,13 @@
-import type { KotlinVariableDeclaration } from '../kotlin-variable-declaration.ts';
+import type { KotlinVariableDeclaration } from '../../kotlin-variable-declaration.ts';
 
-export function kotlinVariableDeclarationToString(declaration: KotlinVariableDeclaration): string {
+export function kotlinVariableDeclarationToKotlinValDeclarationString(
+  declaration: KotlinVariableDeclaration,
+): string {
   let output: string = '';
 
   if (declaration.description !== undefined || declaration.deprecated) {
     output += '/*\n';
-    const prefix: string = ' * ';
+    const prefix: string = '  ';
 
     if (declaration.description) {
       for (const line of declaration.description.split('\n')) {

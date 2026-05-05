@@ -1,12 +1,10 @@
 import { writeTextFileSafe } from '../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
-import { indent } from '../../../../../../../../../scripts/helpers/misc/string/indent/indent.ts';
 import { removeTrailingSlash } from '../../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import type { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { DesignTokenModifiers } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import type { KotlinVariableDeclaration } from '../../../../../../shared/dtcg/resolver/to/kotlin/kotlin-variable-declaration/kotlin-variable-declaration.ts';
-import { kotlinVariableDeclarationsToString } from '../../../../../../shared/dtcg/resolver/to/kotlin/kotlin-variable-declaration/to/kotlin-variable-declarations-to-string.ts';
-import { wrapKotlinVariableDeclarationsWithImports } from '../../../../../../shared/dtcg/resolver/to/kotlin/kotlin-variable-declaration/to/wrap-kotlin-variable-declarations-with-imports.ts';
+import { kotlinVariableDeclarationsToRawKotlinTokenFileContent } from '../../../../../../shared/dtcg/resolver/to/kotlin/kotlin-variable-declaration/to/raw-kotlin-tokens-file/kotlin-variable-declarations-to-raw-kotlin-token-file-content.ts';
 import {
   designTokensCollectionTokenToKotlinVariableDeclaration,
   type DesignTokensCollectionTokenToKotlinVariableDeclarationOptions,
@@ -14,13 +12,6 @@ import {
 import { createKotlinVariableNameGenerator } from '../../../../../../shared/dtcg/resolver/to/kotlin/token/name/create-kotlin-variable-name-generator.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { T2_DIRECTORY_NAME, T3_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
-import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header.ts';
-
-const KOTLIN_AUTO_GENERATED_FILE_HEADER = `/*
-  ${indent(AUTO_GENERATED_FILE_HEADER)}
-*/
-
-`;
 
 export interface BuildKotlinTokensOptions {
   readonly baseCollection: DesignTokensCollection;
@@ -45,7 +36,7 @@ export function buildKotlinTokens({
       }),
     };
 
-    const kotlinVariables: string = kotlinVariableDeclarationsToString(
+    const rawKotlinTokens: string = kotlinVariableDeclarationsToRawKotlinTokenFileContent(
       baseCollection
         .tokens()
         .map((token: GenericDesignTokensCollectionToken): KotlinVariableDeclaration => {
@@ -59,27 +50,7 @@ export function buildKotlinTokens({
         }),
     );
 
-    await writeTextFileSafe(
-      `${kotlinOutputDirectory}/tokens.kt`,
-      wrapKotlinVariableDeclarationsWithImports(
-        kotlinVariables,
-        [
-          'package com.example.compose\n',
-          'import androidx.compose.ui.graphics.Color',
-          'import androidx.compose.ui.text.font.FontFamily',
-          'import androidx.compose.ui.unit.Dp',
-          'import androidx.compose.ui.unit.TextUnit',
-          'import androidx.compose.ui.unit.dp',
-          'import androidx.compose.ui.unit.sp',
-          'import androidx.compose.ui.text.font.FontWeight',
-          // composite
-          'import androidx.compose.foundation.BorderStroke',
-          'import androidx.compose.ui.graphics.shadow.Shadow',
-          'import androidx.compose.ui.text.TextStyle',
-        ],
-        KOTLIN_AUTO_GENERATED_FILE_HEADER,
-      ),
-    );
+    await writeTextFileSafe(`${kotlinOutputDirectory}/tokens.kt`, rawKotlinTokens);
 
     for (const [modifier, contexts] of modifiers.entries()) {
       for (const [context, collection] of contexts.entries()) {
