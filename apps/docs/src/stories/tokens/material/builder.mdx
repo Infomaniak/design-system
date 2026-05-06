@@ -1,0 +1,69 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import MaterialBuilderMarkdown from '../../assets/material-builder.md?raw';
+import Markdown from 'markdown-to-jsx';
+import MaterialThemeBuilderFillColors from './assets/material-theme-builder--fill-colors.png';
+import MaterialThemeBuilderPickFonts from './assets/material-theme-builder--pick-fonts.png';
+import MaterialThemeBuilderExportTheme from './assets/material-theme-builder--export-theme.png';
+import MaterialThemeBuilderExport from './assets/material-theme-builder--export.png';
+import MaterialThemeBuilderExportFormat from './assets/material-theme-builder--export-format.png';
+
+<Meta title="Design Tokens/Material/Theme Builder" />
+
+# Material Theme Builder Tokens
+
+## What are Material Theme Builder Tokens?
+
+_Material Theme Builder Tokens_ are material-specific design tokens that reference T1 (primitive) values,
+used only by the Material Theme Builder to create Material Design themes.
+
+## How to use Material Theme Builder Tokens?
+
+### Direct link
+
+<MaterialThemeBuilderLink>Material Theme Builder (with prefilled values)</MaterialThemeBuilderLink>
+
+> **Note:** Currently the `error` color is not filled properly on the material builder website and must be set manually.
+
+### Fill colors manually
+
+Go to the [Material Theme Builder](https://material-foundation.github.io/material-theme-builder) app and fill the colors matching the corresponding Material Design tokens:
+
+<img
+  src={MaterialThemeBuilderFillColors}
+  alt="fill colors"
+/>
+
+<br />
+<br />
+
+#### Tokens
+
+<Markdown>{MaterialBuilderMarkdown}</Markdown>
+
+### Export theme
+
+Click on the following buttons until you reach the export format list:
+
+<img
+  src={MaterialThemeBuilderPickFonts}
+  alt="pick fonts"
+/>
+
+<img
+  src={MaterialThemeBuilderExportTheme}
+  alt="export theme"
+/>
+
+<img
+  src={MaterialThemeBuilderExport}
+  alt="export"
+/>
+
+Select your export format and click on the corresponding button:
+
+<img
+  src={MaterialThemeBuilderExportFormat}
+  alt="pick export format"
+/>
+
+It will download a file with the theme in the requested format.

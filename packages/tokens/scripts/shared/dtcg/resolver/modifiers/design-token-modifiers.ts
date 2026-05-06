@@ -1,5 +1,6 @@
 import { glob, opendir } from 'node:fs/promises';
 import { basename } from 'node:path';
+import { mapGetOrInsertComputed } from '../../../../../../../scripts/helpers/misc/map/upsert.ts';
 import type { DesignTokensCollection } from '../design-tokens-collection.ts';
 
 export type DesignTokenModifiers = Map<string /* modifier */, DesignTokenContexts>;
@@ -11,37 +12,45 @@ export type DesignTokenContextEntry = [string /* context */, DesignTokensCollect
 /* EXTRACT */
 
 export interface ExtractDesignTokenModifiersOptions {
+  readonly sourceDirectories: Iterable<string>;
   readonly baseCollection: DesignTokensCollection;
-  readonly sourceDirectory: string;
 }
 
 export async function extractDesignTokenModifiers({
   baseCollection,
-  sourceDirectory,
+  sourceDirectories,
 }: ExtractDesignTokenModifiersOptions): Promise<DesignTokenModifiers> {
   const modifiers: DesignTokenModifiers = new Map();
 
-  for await (const modifierDir of await opendir(sourceDirectory)) {
-    if (!modifierDir.isDirectory()) {
-      throw new Error(`Expected directory, got file: ${modifierDir.name}`);
-    }
+  for (const sourceDirectory of sourceDirectories) {
+    for await (const modifierDir of await opendir(sourceDirectory)) {
+      if (!modifierDir.isDirectory()) {
+        throw new Error(`Expected directory, got file: ${modifierDir.name}`);
+      }
 
-    const contexts: DesignTokenContexts = new Map<string, DesignTokensCollection>();
+      const modifier: string = basename(modifierDir.name, '.tokens.json');
 
-    const modifier: string = basename(modifierDir.name, '.tokens.json');
-
-    modifiers.set(modifier, contexts);
-
-    for await (const contextEntry of glob(`${sourceDirectory}/${modifier}/*.tokens.json`)) {
-      const context: string = basename(contextEntry, '.tokens.json');
-
-      contexts.set(
-        context,
-        await baseCollection
-          .clone()
-          // NOTE: this line ensures that the modifier contains only existing tokens (present in t2 and t3)
-          .fromFiles([contextEntry], { forEachTokenBehaviour: 'prevent-new-token' }),
+      const contexts: DesignTokenContexts = mapGetOrInsertComputed(
+        modifiers,
+        modifier,
+        (): DesignTokenContexts => new Map<string, DesignTokensCollection>(),
       );
+
+      for await (const contextEntry of glob(`${sourceDirectory}/${modifier}/*.tokens.json`)) {
+        const context: string = basename(contextEntry, '.tokens.json');
+
+        if (contexts.has(context)) {
+          await contexts.get(context)!.fromFiles([contextEntry]);
+        } else {
+          contexts.set(
+            context,
+            await baseCollection
+              .clone()
+              // NOTE: this line ensures that the modifier contains only existing tokens (present in t2 and t3)
+              .fromFiles([contextEntry], { forEachTokenBehaviour: 'prevent-new-token' }),
+          );
+        }
+      }
     }
   }
 

@@ -4,6 +4,8 @@
   "type": "module",
   "main": "./index.js",
   "scripts": {
+    "=== DEV ===": "",
+    "dev:docs": "yarn workspace @infomaniak-design-system/docs dev",
     "=== BUILD ===": "",
     "build": "yarn workspaces foreach -Apt run build",
     "build:tokens": "yarn workspace @infomaniak-design-system/tokens build",

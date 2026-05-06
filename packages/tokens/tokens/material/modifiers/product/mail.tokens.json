@@ -1,0 +1,27 @@
+{
+  "$type": "color",
+  "material": {
+    "builder": {
+      "color": {
+        "primary": {
+          "$value": "{color.gray.500}"
+        },
+        "secondary": {
+          "$value": "{color.gray.500}"
+        },
+        "tertiary": {
+          "$value": "{color.gray.500}"
+        },
+        "error": {
+          "$value": "{color.gray.500}"
+        },
+        "neutral": {
+          "$value": "{color.gray.500}"
+        },
+        "neutral-variant": {
+          "$value": "{color.gray.500}"
+        }
+      }
+    }
+  }
+}
