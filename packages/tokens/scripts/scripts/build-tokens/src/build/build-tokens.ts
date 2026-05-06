@@ -71,7 +71,7 @@ export function buildTokens({
       validateModifiers(modifiers);
     });
 
-    if (false) {
+    if (true) {
       // CSS
       await buildCssTokens({
         baseCollection,

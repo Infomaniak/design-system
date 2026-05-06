@@ -4,9 +4,12 @@ import type { KotlinVariableDeclaration } from '../../kotlin-variable-declaratio
 import { SHARED_KOTLIN_TOKENS_FILE_IMPORTS } from '../shared/shared-kotlin-tokens-file-imports.ts';
 import { kotlinVariableDeclarationsToKotlinValDeclarationsString } from '../val-declaration-string/kotlin-variable-declarations-to-kotlin-val-declarations-string.ts';
 
-export function kotlinVariableDeclarationsToRawKotlinTokenFileContent(
+export function modifierKotlinVariableDeclarationsToDataClassKotlinTokenFileContent(
+  name: string,
   declarations: Iterable<KotlinVariableDeclaration>,
 ): string {
+  const declarationsArray: readonly KotlinVariableDeclaration[] = Array.from(declarations);
+
   return dedent`
     /*
       ${AUTO_GENERATED_FILE_HEADER}
@@ -16,8 +19,14 @@ export function kotlinVariableDeclarationsToRawKotlinTokenFileContent(
     
     ${SHARED_KOTLIN_TOKENS_FILE_IMPORTS}
     
-    ${kotlinVariableDeclarationsToKotlinValDeclarationsString(declarations, {
-      context: 'global',
-    })}
+    fun ${name}(
+      ${kotlinVariableDeclarationsToKotlinValDeclarationsString(declarationsArray, {
+        context: 'fun-argument',
+      })}
+    ): EsdsTokens = EsdsTokens (
+      ${kotlinVariableDeclarationsToKotlinValDeclarationsString(declarationsArray, {
+        context: 'data-class-init',
+      })}
+    )
   `;
 }
