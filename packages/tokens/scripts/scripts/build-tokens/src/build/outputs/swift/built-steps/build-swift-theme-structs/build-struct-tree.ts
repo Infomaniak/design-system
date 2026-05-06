@@ -72,7 +72,7 @@ export async function buildStructTree(
     valueMap: Map<string, string>,
 ): Promise<void> {
     const name =
-        path.length === 0 ? 'EsdsTheme' : `EsdsTheme${segmentsReferenceToPascalCase(path)}`;
+        path.length === 0 ? 'EsdsTheme' : segmentsReferenceToPascalCase(path);
 
     const variables = buildVariablesForNode(node, patterns);
 
