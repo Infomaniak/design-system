@@ -1979,9 +1979,17 @@ import MaterialThemeBuilderExportFormat from &#39;./assets/material-theme-builde
 ## What are Material Theme Builder Tokens?
 
 _Material Theme Builder Tokens_ are material-specific design tokens that reference T1 (primitive) values,
-used only by the [Material Theme Builder](https://material-foundation.github.io/material-theme-builder) to create Material Design themes.
+used only by the Material Theme Builder to create Material Design themes.
 
-## How to create a new Material Theme?
+## How to use Material Theme Builder Tokens?
+
+### Direct link
+
+&lt;MaterialThemeBuilderLink&gt;Material Theme Builder (with prefilled values)&lt;/MaterialThemeBuilderLink&gt;
+
+&gt; **Note:** Currently the `error` color is not filled properly on the material builder website and must be set manually.
+
+### Fill colors manually
 
 Go to the [Material Theme Builder](https://material-foundation.github.io/material-theme-builder) app and fill the colors matching the corresponding Material Design tokens:
 
@@ -1990,7 +1998,16 @@ Go to the [Material Theme Builder](https://material-foundation.github.io/materia
   alt=&quot;fill colors&quot;
 /&gt;
 
-Then, click on the following buttons until you reach the export format list:
+&lt;br /&gt;
+&lt;br /&gt;
+
+#### Tokens
+
+&lt;Markdown&gt;{MaterialBuilderMarkdown}&lt;/Markdown&gt;
+
+### Export theme
+
+Click on the following buttons until you reach the export format list:
 
 &lt;img
   src={MaterialThemeBuilderPickFonts}
@@ -2007,7 +2024,7 @@ Then, click on the following buttons until you reach the export format list:
   alt=&quot;export&quot;
 /&gt;
 
-Finally, select your export format and click on the corresponding button:
+Select your export format and click on the corresponding button:
 
 &lt;img
   src={MaterialThemeBuilderExportFormat}
@@ -2015,10 +2032,6 @@ Finally, select your export format and click on the corresponding button:
 /&gt;
 
 It will download a file with the theme in the requested format.
-
-## Tokens
-
-&lt;Markdown&gt;{MaterialBuilderMarkdown}&lt;/Markdown&gt;
 </code></pre>
           </div>
         </div>
