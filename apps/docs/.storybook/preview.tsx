@@ -4,6 +4,7 @@ import type { Preview } from '@storybook/react-vite';
 import { useEffect, useState } from 'react';
 import { GLOBALS_UPDATED } from 'storybook/internal/core-events';
 import { Globals, GlobalsUpdatedPayload } from 'storybook/internal/types';
+import MaterialThemeBuilderLink from '../src/components/MaterialThemeBuilderLink.tsx';
 import Table from '../src/components/Table.tsx';
 
 import '../src/styles/data-preview-value.css';
@@ -138,23 +139,30 @@ const CustomDocsContainer = (props: DocsContainerProps) => {
       tooltipManager.show(text, rect.left + rect.width / 2, rect.top);
     };
 
-    const handleMouseEnter = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const clipboardEl = target.closest('[data-clipboard]') as HTMLElement;
+    const handleMouseEnter = (event: MouseEvent) => {
+      const target = event.target;
+      if (target instanceof HTMLElement) {
+        const clipboardEl = target.closest('[data-clipboard]') as HTMLElement;
 
-      if (clipboardEl) {
-        showTooltipForElement(clipboardEl, 'Copy to clipboard');
+        if (clipboardEl) {
+          showTooltipForElement(clipboardEl, 'Copy to clipboard');
+        }
       }
     };
 
-    const handleMouseLeave = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const relatedTarget = e.relatedTarget as HTMLElement;
-      const clipboardEl = target.closest('[data-clipboard]');
-      const relatedClipboardEl = relatedTarget?.closest('[data-clipboard]');
+    const handleMouseLeave = (event: MouseEvent) => {
+      const target = event.target;
+      const relatedTarget = event.relatedTarget;
+      if (
+        target instanceof HTMLElement &&
+        (relatedTarget instanceof HTMLElement || relatedTarget === null)
+      ) {
+        const clipboardEl = target.closest('[data-clipboard]');
+        const relatedClipboardEl = relatedTarget?.closest('[data-clipboard]');
 
-      if (clipboardEl && !relatedClipboardEl) {
-        tooltipManager.hide();
+        if (clipboardEl && !relatedClipboardEl) {
+          tooltipManager.hide();
+        }
       }
     };
 
@@ -163,22 +171,24 @@ const CustomDocsContainer = (props: DocsContainerProps) => {
       tooltipManager.hide();
     };
 
-    const handleClick = async (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const clipboardEl = target.closest('[data-clipboard]');
+    const handleClick = async (event: MouseEvent) => {
+      const target = event.target;
+      if (target instanceof HTMLElement) {
+        const clipboardEl = target.closest('[data-clipboard]');
 
-      if (clipboardEl) {
-        e.preventDefault();
-        const value = clipboardEl.getAttribute('data-clipboard');
-        if (value) {
-          try {
-            await navigator.clipboard.writeText(value);
-            showTooltipForElement(clipboardEl as HTMLElement, 'Copied!');
+        if (clipboardEl) {
+          event.preventDefault();
+          const value = clipboardEl.getAttribute('data-clipboard');
+          if (value) {
+            try {
+              await navigator.clipboard.writeText(value);
+              showTooltipForElement(clipboardEl as HTMLElement, 'Copied!');
 
-            if (hideTimeout) clearTimeout(hideTimeout);
-            hideTimeout = setTimeout(() => tooltipManager.hide(), TOOLTIP_HIDE_DELAY_MS);
-          } catch (err) {
-            console.error('Failed to copy:', err);
+              if (hideTimeout) clearTimeout(hideTimeout);
+              hideTimeout = setTimeout(() => tooltipManager.hide(), TOOLTIP_HIDE_DELAY_MS);
+            } catch (err) {
+              console.error('Failed to copy:', err);
+            }
           }
         }
       }
@@ -250,6 +260,7 @@ const preview: Preview = {
       container: CustomDocsContainer,
       components: {
         Table,
+        MaterialThemeBuilderLink,
       },
     },
     a11y: {
