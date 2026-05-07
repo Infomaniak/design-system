@@ -42,6 +42,20 @@ The icon may be styled using the following CSS properties:
 - `color`: to set the icon's color
 - `font-size`: to set the icon's size
 
+#### Preventing Layout Shift
+
+To avoid [layout shift](https://iconify.design/docs/iconify-icon/#layout-shift) when the icon loads, add the following CSS to your project:
+
+```css
+esds-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}
+```
+
+This ensures the component reserves space before the icon is rendered.
+
 ### API
 
 <table>

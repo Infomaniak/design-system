@@ -35,6 +35,7 @@ import { isNumberDesignTokensCollectionToken } from '../../../../../../shared/dt
 import { isShadowDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/composite/shadow/is-shadow-design-tokens-collection-token.ts';
 import { isTypographyDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/composite/typography/is-typography-design-tokens-collection-token.ts';
 import {
+  MATERIAL_DIRECTORY_NAME,
   T1_DIRECTORY_NAME,
   T2_DIRECTORY_NAME,
   T3_DIRECTORY_NAME,
@@ -50,15 +51,16 @@ function normalizeHtml(html: string): string {
 }
 
 /**
- * Extracts the tier prefix (t1, t2, t3) from a file path.
- * Returns undefined if the tier cannot be determined.
+ * Extracts the "group prefix" from a file path.
  */
-function getTierPrefix(filePath: string): string | undefined {
+function getTokenGroupPrefix(filePath: string): string {
   const path = filePath.toLowerCase();
   if (path.includes(`/${T1_DIRECTORY_NAME}/`)) return 't1';
   if (path.includes(`/${T2_DIRECTORY_NAME}/`)) return 't2';
   if (path.includes(`/${T3_DIRECTORY_NAME}/`)) return 't3';
-  return undefined;
+  if (path.includes(`/${MATERIAL_DIRECTORY_NAME}/`)) return 'material';
+
+  throw new Error("Unable to determine token's group.");
 }
 
 export interface BuildMarkdownTokensOptions {
@@ -79,7 +81,6 @@ interface TokenGroup {
  */
 function groupTokensByTierAndCategory(
   tokens: IteratorObject<GenericDesignTokensCollectionToken>,
-  logger: Logger,
 ): Map<string, TokenGroup> {
   const groups = new Map<string, TokenGroup>();
 
@@ -89,17 +90,17 @@ function groupTokensByTierAndCategory(
       continue;
     }
 
-    const tierPrefix = token.files.length > 0 ? getTierPrefix(token.files[0]!) : undefined;
-
-    if (tierPrefix === undefined) {
-      logger.warn(`Unable to determine tier for token: ${token.name.join('.')}`);
-      continue;
+    if (token.files.length === 0) {
+      throw new Error('Unexpected empty token.files');
     }
 
-    const category = getTokenCategory(token.name);
-    const key = `${tierPrefix}-${category}`;
+    const firstTokenFilePath: string = token.files[0];
 
-    const group = mapGetOrInsert(groups, key, { tierPrefix, category, tokens: [] });
+    const groupPrefix: string = getTokenGroupPrefix(firstTokenFilePath);
+    const category = getTokenCategory(firstTokenFilePath);
+    const key = `${groupPrefix}-${category}`;
+
+    const group = mapGetOrInsert(groups, key, { tierPrefix: groupPrefix, category, tokens: [] });
     group.tokens.push(token);
   }
 
@@ -219,11 +220,13 @@ function generateRowContent(row: MarkdownTokenRow): string {
       <td>
         <div class="token-row">
           <button class="token-value" data-clipboard="${name}" type="button">${name}</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(${cssVariable})" type="button">var(${cssVariable})</button>
-        </div>
-        <div class="token-row token-description">${description}</div>
+        </div>${
+          row.name.startsWith('material')
+            ? ''
+            : `<div class="token-row">
+                CSS: <button class="token-value" data-clipboard="var(${cssVariable})" type="button">var(${cssVariable})</button>
+              </div>`
+        }<div class="token-row token-description">${description}</div>
       </td>
     </tr>`;
 }
@@ -280,7 +283,7 @@ export async function buildMarkdownTokens({
     const context: MarkdownRenderContext = { collection: baseCollection };
 
     // Group tokens by tier and category
-    const tokensByTierAndCategory = groupTokensByTierAndCategory(baseCollection.tokens(), logger);
+    const tokensByTierAndCategory = groupTokensByTierAndCategory(baseCollection.tokens());
 
     // Generate markdown for each tier-category combination
     for (const [key, group] of tokensByTierAndCategory.entries()) {

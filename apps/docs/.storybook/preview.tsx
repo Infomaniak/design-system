@@ -4,29 +4,31 @@ import type { Preview } from '@storybook/react-vite';
 import { useEffect, useState } from 'react';
 import { GLOBALS_UPDATED } from 'storybook/internal/core-events';
 import { Globals, GlobalsUpdatedPayload } from 'storybook/internal/types';
+import MaterialThemeBuilderLink from '../src/components/MaterialThemeBuilderLink.tsx';
 import Table from '../src/components/Table.tsx';
 
+import '../src/styles/data-preview-value.css';
 import '../src/styles/main.css';
 import '../src/styles/token-tables.css';
 
 // Import base CSS tokens
-import '@infomaniak-design-system/tokens/dist/web/css/tokens.root.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/tokens.root.css';
 
 // Import all product modifiers (for dynamic switching via data-esds-product attribute)
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/product/calendar.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/product/contacts.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/product/euria.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/product/infomaniak.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/product/kchat.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/product/kdrive.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/product/knote.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/product/mail.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/product/security.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/product/swisstransfer.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/calendar.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/contacts.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/euria.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/infomaniak.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/kchat.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/kdrive.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/knote.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/mail.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/security.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/swisstransfer.attr.css';
 
 // Import all theme modifiers (for dynamic switching via data-esds-theme attribute)
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/theme/dark.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/theme/light.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/dark.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/light.attr.css';
 
 // Initialize EsdsIconComponent for the <esds-icon> elements
 const iconifyEndpoint =
@@ -137,23 +139,30 @@ const CustomDocsContainer = (props: DocsContainerProps) => {
       tooltipManager.show(text, rect.left + rect.width / 2, rect.top);
     };
 
-    const handleMouseEnter = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const clipboardEl = target.closest('[data-clipboard]') as HTMLElement;
+    const handleMouseEnter = (event: MouseEvent) => {
+      const target = event.target;
+      if (target instanceof HTMLElement) {
+        const clipboardEl = target.closest('[data-clipboard]') as HTMLElement;
 
-      if (clipboardEl) {
-        showTooltipForElement(clipboardEl, 'Copy to clipboard');
+        if (clipboardEl) {
+          showTooltipForElement(clipboardEl, 'Copy to clipboard');
+        }
       }
     };
 
-    const handleMouseLeave = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const relatedTarget = e.relatedTarget as HTMLElement;
-      const clipboardEl = target.closest('[data-clipboard]');
-      const relatedClipboardEl = relatedTarget?.closest('[data-clipboard]');
+    const handleMouseLeave = (event: MouseEvent) => {
+      const target = event.target;
+      const relatedTarget = event.relatedTarget;
+      if (
+        target instanceof HTMLElement &&
+        (relatedTarget instanceof HTMLElement || relatedTarget === null)
+      ) {
+        const clipboardEl = target.closest('[data-clipboard]');
+        const relatedClipboardEl = relatedTarget?.closest('[data-clipboard]');
 
-      if (clipboardEl && !relatedClipboardEl) {
-        tooltipManager.hide();
+        if (clipboardEl && !relatedClipboardEl) {
+          tooltipManager.hide();
+        }
       }
     };
 
@@ -162,22 +171,24 @@ const CustomDocsContainer = (props: DocsContainerProps) => {
       tooltipManager.hide();
     };
 
-    const handleClick = async (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const clipboardEl = target.closest('[data-clipboard]');
+    const handleClick = async (event: MouseEvent) => {
+      const target = event.target;
+      if (target instanceof HTMLElement) {
+        const clipboardEl = target.closest('[data-clipboard]');
 
-      if (clipboardEl) {
-        e.preventDefault();
-        const value = clipboardEl.getAttribute('data-clipboard');
-        if (value) {
-          try {
-            await navigator.clipboard.writeText(value);
-            showTooltipForElement(clipboardEl as HTMLElement, 'Copied!');
+        if (clipboardEl) {
+          event.preventDefault();
+          const value = clipboardEl.getAttribute('data-clipboard');
+          if (value) {
+            try {
+              await navigator.clipboard.writeText(value);
+              showTooltipForElement(clipboardEl as HTMLElement, 'Copied!');
 
-            if (hideTimeout) clearTimeout(hideTimeout);
-            hideTimeout = setTimeout(() => tooltipManager.hide(), TOOLTIP_HIDE_DELAY_MS);
-          } catch (err) {
-            console.error('Failed to copy:', err);
+              if (hideTimeout) clearTimeout(hideTimeout);
+              hideTimeout = setTimeout(() => tooltipManager.hide(), TOOLTIP_HIDE_DELAY_MS);
+            } catch (err) {
+              console.error('Failed to copy:', err);
+            }
           }
         }
       }
@@ -206,6 +217,34 @@ const CustomDocsContainer = (props: DocsContainerProps) => {
     }
   }, []);
 
+  useEffect(() => {
+    const isInitialized = document.body.hasAttribute('data-preview-value-initialized');
+
+    if (!isInitialized) {
+      document.body.setAttribute('data-preview-value-initialized', '');
+
+      const loop = () => {
+        requestAnimationFrame(() => {
+          document.body
+            .querySelectorAll('[data-preview-value]')
+            .forEach((element: Element): void => {
+              const value: string = getComputedStyle(element).getPropertyValue(
+                element.getAttribute('data-preview-value')!,
+              );
+
+              if (element.textContent !== value) {
+                element.textContent = value;
+              }
+            });
+
+          setTimeout(loop, 200);
+        });
+      };
+
+      loop();
+    }
+  });
+
   return <DocsContainer {...props} />;
 };
 
@@ -221,6 +260,7 @@ const preview: Preview = {
       container: CustomDocsContainer,
       components: {
         Table,
+        MaterialThemeBuilderLink,
       },
     },
     a11y: {
@@ -234,7 +274,7 @@ const preview: Preview = {
         order: [
           'Welcome',
           'Design Tokens',
-          ['Getting Started', '*'],
+          ['Getting Started', '*', 'Material'],
           'Icons',
           ['Getting Started', '*'],
           '*',
