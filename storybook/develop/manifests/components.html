@@ -576,7 +576,7 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">27 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">28 docs ok</a></div>
   </div>
 </header>
 <main>
@@ -1944,10 +1944,109 @@ import Markdown from &#39;markdown-to-jsx&#39;;
   aria-label="Docs">
   <div class="head">
     <div class="title">
+      <h2><span class="status-dot dot-ok"></span> Design Tokens/Material/Theme Builder</h2>
+      <div class="badges">
+        
+        <label for="doc-24-design-tokens-material-theme-builder-docs-content" class="badge ok as-toggle">view content</label>
+      </div>
+    </div>
+    <div class="meta" title="./src/stories/tokens/material/builder.mdx">design-tokens-material-theme-builder--docs · ./src/stories/tokens/material/builder.mdx</div>
+    
+  </div>
+
+  <!-- Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="doc-24-design-tokens-material-theme-builder-docs-content" class="tg tg-content" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-content">
+          <div class="mdx-content">
+            <pre><code>import { Meta } from &#39;@storybook/addon-docs/blocks&#39;;
+import MaterialBuilderMarkdown from &#39;../../assets/material-builder.md?raw&#39;;
+import Markdown from &#39;markdown-to-jsx&#39;;
+import MaterialThemeBuilderFillColors from &#39;./assets/material-theme-builder--fill-colors.png&#39;;
+import MaterialThemeBuilderPickFonts from &#39;./assets/material-theme-builder--pick-fonts.png&#39;;
+import MaterialThemeBuilderExportTheme from &#39;./assets/material-theme-builder--export-theme.png&#39;;
+import MaterialThemeBuilderExport from &#39;./assets/material-theme-builder--export.png&#39;;
+import MaterialThemeBuilderExportFormat from &#39;./assets/material-theme-builder--export-format.png&#39;;
+
+&lt;Meta title=&quot;Design Tokens/Material/Theme Builder&quot; /&gt;
+
+# Material Theme Builder Tokens
+
+## What are Material Theme Builder Tokens?
+
+_Material Theme Builder Tokens_ are material-specific design tokens that reference T1 (primitive) values,
+used only by the Material Theme Builder to create Material Design themes.
+
+## How to use Material Theme Builder Tokens?
+
+### Direct link
+
+&lt;MaterialThemeBuilderLink&gt;Material Theme Builder (with prefilled values)&lt;/MaterialThemeBuilderLink&gt;
+
+&gt; **Note:** Currently the `error` color is not filled properly on the material builder website and must be set manually.
+
+### Fill colors manually
+
+Go to the [Material Theme Builder](https://material-foundation.github.io/material-theme-builder) app and fill the colors matching the corresponding Material Design tokens:
+
+&lt;img
+  src={MaterialThemeBuilderFillColors}
+  alt=&quot;fill colors&quot;
+/&gt;
+
+&lt;br /&gt;
+&lt;br /&gt;
+
+#### Tokens
+
+&lt;Markdown&gt;{MaterialBuilderMarkdown}&lt;/Markdown&gt;
+
+### Export theme
+
+Click on the following buttons until you reach the export format list:
+
+&lt;img
+  src={MaterialThemeBuilderPickFonts}
+  alt=&quot;pick fonts&quot;
+/&gt;
+
+&lt;img
+  src={MaterialThemeBuilderExportTheme}
+  alt=&quot;export theme&quot;
+/&gt;
+
+&lt;img
+  src={MaterialThemeBuilderExport}
+  alt=&quot;export&quot;
+/&gt;
+
+Select your export format and click on the corresponding button:
+
+&lt;img
+  src={MaterialThemeBuilderExportFormat}
+  alt=&quot;pick export format&quot;
+/&gt;
+
+It will download a file with the theme in the requested format.
+</code></pre>
+          </div>
+        </div>
+  </div>
+</article>
+<article
+  class="card is-doc no-doc-error"
+  role="listitem"
+  aria-label="Docs">
+  <div class="head">
+    <div class="title">
       <h2><span class="status-dot dot-ok"></span> Icons/Getting Started</h2>
       <div class="badges">
         
-        <label for="doc-24-icons-getting-started-docs-content" class="badge ok as-toggle">view content</label>
+        <label for="doc-25-icons-getting-started-docs-content" class="badge ok as-toggle">view content</label>
       </div>
     </div>
     <div class="meta" title="./src/stories/icons/icon-guide.mdx">icons-getting-started--docs · ./src/stories/icons/icon-guide.mdx</div>
@@ -1956,7 +2055,7 @@ import Markdown from &#39;markdown-to-jsx&#39;;
 
   <!-- Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="doc-24-icons-getting-started-docs-content" class="tg tg-content" type="checkbox" hidden />
+  <input id="doc-25-icons-getting-started-docs-content" class="tg tg-content" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -2001,7 +2100,7 @@ import Markdown from &#39;markdown-to-jsx&#39;;
       <h2><span class="status-dot dot-ok"></span> Icons/Icon Component</h2>
       <div class="badges">
         
-        <label for="doc-25-icons-icon-component-docs-content" class="badge ok as-toggle">view content</label>
+        <label for="doc-26-icons-icon-component-docs-content" class="badge ok as-toggle">view content</label>
       </div>
     </div>
     <div class="meta" title="./src/stories/icons/icon-component.mdx">icons-icon-component--docs · ./src/stories/icons/icon-component.mdx</div>
@@ -2010,7 +2109,7 @@ import Markdown from &#39;markdown-to-jsx&#39;;
 
   <!-- Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="doc-25-icons-icon-component-docs-content" class="tg tg-content" type="checkbox" hidden />
+  <input id="doc-26-icons-icon-component-docs-content" class="tg tg-content" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -2060,6 +2159,20 @@ The icon may be styled using the following CSS properties:
 
 - `color`: to set the icon&#39;s color
 - `font-size`: to set the icon&#39;s size
+
+#### Preventing Layout Shift
+
+To avoid [layout shift](https://iconify.design/docs/iconify-icon/#layout-shift) when the icon loads, add the following CSS to your project:
+
+```css
+esds-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}
+```
+
+This ensures the component reserves space before the icon is rendered.
 
 ### API
 
@@ -2132,7 +2245,7 @@ The icon may be styled using the following CSS properties:
       <h2><span class="status-dot dot-ok"></span> Icons/Icon Gallery</h2>
       <div class="badges">
         
-        <label for="doc-26-icons-icon-gallery-docs-content" class="badge ok as-toggle">view content</label>
+        <label for="doc-27-icons-icon-gallery-docs-content" class="badge ok as-toggle">view content</label>
       </div>
     </div>
     <div class="meta" title="./src/stories/icons/icon-gallery.mdx">icons-icon-gallery--docs · ./src/stories/icons/icon-gallery.mdx</div>
@@ -2141,7 +2254,7 @@ The icon may be styled using the following CSS properties:
 
   <!-- Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="doc-26-icons-icon-gallery-docs-content" class="tg tg-content" type="checkbox" hidden />
+  <input id="doc-27-icons-icon-gallery-docs-content" class="tg tg-content" type="checkbox" hidden />
 
   <div class="panels">
     
