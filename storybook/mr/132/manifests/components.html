@@ -879,7 +879,7 @@ Modifiers can also be set on container elements:
 ```
 ### iOS
 
-#### Installation
+##### Installation
 
 ...
 Swift Package Manager — via Xcode or Package.swift :
@@ -894,16 +894,16 @@ swift.target(
 ```
 *Supported platforms: iOS 16+, macOS 13+, visionOS 1+*
 
-### Package structure
+##### Package structure
 ```
 CatalogApp/               ← Demo app
 Sources/DesignSystem/     ← Tokens, SwiftUI components
 Tests/DesignSystemTests/  ← Unit tests
 ```
 
-## Usage
+#### Usage
 
-#### Configure environment
+##### Configure environment
 ```swift
 import DesignSystem
 
@@ -911,7 +911,7 @@ import DesignSystem
 @Environment(\.esdsTheme) var theme
 ```
 
-#### Access tokens in **SwiftUI**
+##### Access tokens in **SwiftUI**
 ```swift
 struct ContentView: View {
     @Environment(\.esdsTheme) var theme
@@ -927,7 +927,7 @@ struct ContentView: View {
 }
 ```
 
-#### Set theme
+##### Set theme
 ```swift
 // In your app
 @main
