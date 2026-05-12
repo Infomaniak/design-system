@@ -13,6 +13,7 @@ import { writeJsonFileSafe } from '../../../../../../../scripts/helpers/file/wri
 import { doesGitBranchExistOnRemote } from '../../../../../../../scripts/helpers/git/does-git-branch-exist-on-remote.ts';
 import { getEnvCiDsUpdateAndPrAuthToken } from '../../../../../../../scripts/helpers/github/env/get-env-ci-ds-update-and-pr-auth-token.ts';
 import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
+import { execCommandInherit } from '../../../../../../../scripts/helpers/misc/exec-command.ts';
 import { runScript } from '../../../../../../../scripts/helpers/misc/run-script/run-script.ts';
 import { importIconsAndIllustrations } from './src/import/import-icons-and-illustrations.ts';
 import { createImportSvgPullRequests } from './src/pull-request/create-import-svgs-pull-request.ts';
@@ -86,6 +87,11 @@ await runScript('import-svgs', async (logger: Logger): Promise<void> => {
   await writeJsonFileSafe(join(OUTPUT_DIR, 'package.json'), {
     ...packageJson,
     version: importVersion,
+  });
+
+  // ensure package.json is properly formatted
+  await execCommandInherit(logger, 'yarn', ['install'], {
+    cwd: WORKSPACE_ROOT_DIR,
   });
 
   await createImportSvgPullRequests({
