@@ -88,7 +88,6 @@ jobs:
         env:
           GITHUB_CI_CONFIG: ${{ toJson(github) }}
           KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
-#          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           CI_PULL_REQUEST_AUTH_TOKEN_MOBILE: ${{ secrets.CI_PULL_REQUEST_AUTH_TOKEN_MOBILE }}
 
       - name: Publish missing package versions (dry-run for fork PR)
