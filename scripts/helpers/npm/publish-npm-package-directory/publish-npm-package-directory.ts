@@ -14,7 +14,7 @@ export async function publishNpmPackageDirectory({
   logger,
 }: PublishNpmPackageDirectoryOptions): Promise<void> {
   const args: string[] = [
-    '--//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN',
+    // '--//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN',
     'publish',
     '--access',
     'public',
