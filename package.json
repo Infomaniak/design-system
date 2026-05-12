@@ -57,9 +57,9 @@
     "@eslint/js": "^10.0.1",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.2",
-    "@types/node": "^25.6.0",
+    "@types/node": "^25.7.0",
     "@types/semver": "^7",
-    "@vitest/coverage-istanbul": "^4.1.5",
+    "@vitest/coverage-istanbul": "^4.1.6",
     "es-toolkit": "^1.46.1",
     "eslint": "^10.3.0",
     "eslint-plugin-prettier": "^5.5.5",
@@ -72,11 +72,11 @@
     "prettier-plugin-organize-imports": "^4.3.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "semver": "^7.7.4",
+    "semver": "^7.8.0",
     "storybook": "^10.3.6",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.2",
-    "vitest": "^4.1.5"
+    "typescript-eslint": "^8.59.3",
+    "vitest": "^4.1.6"
   },
   "packageManager": "yarn@4.14.1"
 }
