@@ -11,6 +11,7 @@ async function buildReapeatedStructures(patterns: Map<string, string[]>, outputD
         const structName = nameForPatternPaths(paths);
         const swiftStruct = buildSwiftStructWithInit({
             name: structName,
+            protocols: ["Sendable"],
             variables: buildVariablesForNode(node, patterns),
         });
 

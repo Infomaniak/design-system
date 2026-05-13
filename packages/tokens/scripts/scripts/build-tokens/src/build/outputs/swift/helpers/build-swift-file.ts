@@ -5,10 +5,12 @@ export interface BuildSwiftFileOption {
   readonly imports: readonly string[];
   readonly type: string;
   readonly name: string;
+  readonly protocols: readonly string[];
   readonly content: string;
 }
 
-export function buildSwiftFile({ imports, type, name, content }: BuildSwiftFileOption): string {
+export function buildSwiftFile({ imports, type, name, protocols, content }: BuildSwiftFileOption): string {
+  const safeProtocols = protocols?.length ? `: ${protocols.join(', ')}` : '';
   return dedent`
     /*
       ${AUTO_GENERATED_FILE_HEADER}
@@ -16,7 +18,7 @@ export function buildSwiftFile({ imports, type, name, content }: BuildSwiftFileO
     
     ${imports.map((importName: string): string => `import ${importName}`).join('\n')}
     
-    ${type} ${name} {
+    ${type} ${name}${safeProtocols} {
       ${content}
     }
   `;

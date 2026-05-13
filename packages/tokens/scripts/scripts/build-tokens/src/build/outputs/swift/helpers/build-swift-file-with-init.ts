@@ -8,10 +8,11 @@ export interface SwiftVariable {
 
 export interface BuildSwiftStructWithInitOptions {
   readonly name: string,
+  readonly protocols: readonly string[],
   readonly variables: SwiftVariable[]
 }
 
-export function buildSwiftStructWithInit({ name, variables }: BuildSwiftStructWithInitOptions): string {
+export function buildSwiftStructWithInit({ name, protocols, variables }: BuildSwiftStructWithInitOptions): string {
   const initContent = `
   init(
 ${variables.map(v => {
@@ -26,6 +27,7 @@ ${variables.map(v => `    self.${v.name} = ${v.name}`).join('\n')}
     imports: ['SwiftUI'],
     type: 'public struct',
     name,
+    protocols,
     content: `${variables.map(v => `public let ${v.name}: ${v.type}`).join('\n')}
 ${initContent}`,
   });

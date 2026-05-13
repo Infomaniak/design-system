@@ -132,6 +132,6 @@ export async function buildStructTree(
         }
     }
 
-    const swiftStruct = buildSwiftStructWithInit({ name, variables });
+    const swiftStruct = buildSwiftStructWithInit({ name, protocols: ["Sendable"], variables });
     await writeTextFileSafe(join(outputDirectory, `EsdsTheme/${name}.swift`), swiftStruct);
 }
