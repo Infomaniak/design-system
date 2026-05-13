@@ -153,6 +153,7 @@ export async function buildSwiftTokens({
     await logger.asyncTask('main-theme', async (): Promise<void> => {
       await buildSwiftThemeStructs({
         baseCollection,
+        modifiers,
         outputDirectory: iosSwitftUiOutputDirectory,
       });
     });

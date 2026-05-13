@@ -91,7 +91,8 @@ export function buildTokens({
 
     // SWIFT
     await buildSwiftTokens({
-      sourceDirectory,
+      baseCollection,
+      modifiers,
       outputDirectory,
       logger,
     });
