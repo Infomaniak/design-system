@@ -7,7 +7,7 @@ import type {
   DesignTokenContexts,
   DesignTokenModifiers,
 } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
-import type { SwiftEnumDeclaration, SwiftEnumMark } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/swift-enum-declaration.ts';
+import { isSwiftEnumMark, type SwiftEnumDeclaration, type SwiftEnumMark } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/swift-enum-declaration.ts';
 import { swiftEnumDeclarationsToString } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/to/swift-enum-declarations-to-string.ts';
 import { designTokensCollectionTokenToSwiftEnumDeclaration } from '../../../../../../shared/dtcg/resolver/to/swift/token/design-tokens-collection-token-to-swift-enum-declaration.ts';
 import type {
@@ -125,7 +125,7 @@ export async function buildSwiftTokens({
           })) {
 
           if (lastType !== token.type) {
-            declarations.push({ name: `${token.type}` });
+            declarations.push({ $type: "mark", name: `${token.type}` });
             lastType = token.type;
           }
 

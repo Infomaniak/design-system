@@ -3,21 +3,29 @@ import { dedent } from '../../../../../../../../../../../scripts/helpers/misc/st
 import { writeTextFileSafe } from '../../../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import { segmentsReferenceToPascalCase } from '../../../../../../../../shared/dtcg/design-token/reference/types/segments/to/pascal-case/segments-reference-to-pascal-case.ts';
 import { buildSwiftStructWithInit } from '../../helpers/build-swift-file-with-init.ts';
-import { getSharedStructName } from './find-repeated-structures.ts';
-import type { NestedMap } from './find-repeated-structures.ts';
+import type { NestedMap } from './LEGACY/find-repeated-structures.ts';
+import { getSharedStructName } from './find-patterns.ts';
 import { buildVariablesForNode } from './build-variables-for-node.ts';
 import { toSwiftVariableName } from '../../swift-naming-helper.ts';
+
+function structNameForPath(path: string[]): string {
+    return path.length === 0 ? 'EsdsTheme' : `Prefix${segmentsReferenceToPascalCase(path)}`;
+}
+
+function sortEntries<T>(entries: Array<[string, T]>): Array<[string, T]> {
+    return [...entries].sort(([a], [b]) => a.localeCompare(b));
+}
 
 function buildInitValue(
     structTypeName: string,
     node: NestedMap,
     path: string[],
-    patterns: Map<NestedMap, string[][]>,
+    patterns: Map<string, string[]>,
     valueMap: Map<string, string>,
 ): string {
     const args: string[] = [];
-    const stringEntries = Object.entries(node).filter(([, v]) => typeof v === 'string');
-    const objectEntries = Object.entries(node).filter(([, v]) => typeof v !== 'string');
+    const stringEntries = sortEntries(Object.entries(node).filter(([, v]) => typeof v === 'string'));
+    const objectEntries = sortEntries(Object.entries(node).filter(([, v]) => typeof v !== 'string'));
 
     if (stringEntries.length > 0 && objectEntries.length > 0) {
         // Root support: mixed string + object entries
@@ -51,7 +59,7 @@ function buildInitValue(
                 args.push(`${toSwiftVariableName([key, leafKey])}: ${val}`);
             } else {
                 // Unique EsdsThemeXxx struct: has its own defaulted init, just call TypeName()
-                const subTypeName = structTypeName + segmentsReferenceToPascalCase([key]);
+                const subTypeName = structNameForPath([...path, key]);
                 args.push(`${toSwiftVariableName([key])}: ${subTypeName}()`);
             }
         }
@@ -67,17 +75,16 @@ function buildInitValue(
 export async function buildStructTree(
     node: NestedMap,
     path: string[],
-    patterns: Map<NestedMap, string[][]>,
+    patterns: Map<string, string[]>,
     outputDirectory: string,
     valueMap: Map<string, string>,
 ): Promise<void> {
-    const name =
-        path.length === 0 ? 'EsdsTheme' : segmentsReferenceToPascalCase(path);
+    const name = structNameForPath(path);
 
     const variables = buildVariablesForNode(node, patterns);
 
     // Set initValue for string (leaf) entries directly in this node
-    const stringEntries = Object.entries(node).filter(([, v]) => typeof v === 'string');
+    const stringEntries = sortEntries(Object.entries(node).filter(([, v]) => typeof v === 'string'));
     const hasObjectEntries = Object.entries(node).some(([, v]) => typeof v !== 'string');
     if (stringEntries.length > 0 && hasObjectEntries) {
         // Root support case
@@ -99,7 +106,7 @@ export async function buildStructTree(
         }
     }
 
-    const objectEntries = Object.entries(node).filter(([, v]) => typeof v !== 'string');
+    const objectEntries = sortEntries(Object.entries(node).filter(([, v]) => typeof v !== 'string'));
     for (const [key, value] of objectEntries) {
         const sharedName = getSharedStructName(value as NestedMap, patterns);
         const idx = variables.findIndex((v) => v.name === toSwiftVariableName([key]));
@@ -113,7 +120,7 @@ export async function buildStructTree(
                 const initVal = valueMap.get(JSON.stringify([...path, key, leafKey]));
                 if (idx !== -1) variables[idx] = { name: toSwiftVariableName([key, leafKey]), type: leafType as string, initValue: initVal };
             } else {
-                const typeName = name + segmentsReferenceToPascalCase([key]);
+                const typeName = structNameForPath([...path, key]);
                 // Unique EsdsThemeXxx struct: has its own defaulted init, just call TypeName()
                 if (idx !== -1) variables[idx] = { name: toSwiftVariableName([key]), type: typeName, initValue: `${typeName}()` };
                 await buildStructTree(value as NestedMap, [...path, key], patterns, outputDirectory, valueMap);

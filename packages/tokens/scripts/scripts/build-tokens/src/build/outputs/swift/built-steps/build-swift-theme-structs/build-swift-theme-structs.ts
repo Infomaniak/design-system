@@ -1,18 +1,20 @@
-import { join } from 'node:path';
-import { writeTextFileSafe } from '../../../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import { DesignTokensCollection } from '../../../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
-import type { GenericDesignTokensCollectionToken } from '../../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
+import type {
+  GenericDesignTokensCollectionToken,
+  GenericDesignTokensCollectionTokenWithType,
+} from '../../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
 import { T2_DIRECTORY_NAME } from '../../../../../constants/design-token-tiers.ts';
-import { buildSwiftStructWithInit } from '../../helpers/build-swift-file-with-init.ts';
 import { buildTokenTree } from './build-token-tree.ts';
-import { findRepeatedStructures, nameForPatternPaths } from './find-repeated-structures.ts';
-import { buildVariablesForNode } from './build-variables-for-node.ts';
 import { buildStructTree } from './build-struct-tree.ts';
-import { buildReapeatedStructures } from './build-repeated-structures.ts';
+import { buildSharedStructs } from './build-repeated-structures.ts';
+import type { DesignTokenModifiers } from '../../../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
+import { isFontFamilyDesignTokensCollectionToken } from '../../../../../../../../shared/dtcg/resolver/token/types/base/font-family/is-font-family-design-tokens-collection-token.ts';
+import { findPatterns } from './find-patterns.ts';
 
 export interface BuildSwiftThemeStructOptions {
   readonly baseCollection: DesignTokensCollection;
+  readonly modifiers: DesignTokenModifiers;
   readonly outputDirectory: string;
 }
 
@@ -26,24 +28,82 @@ const TYPE_SWIFT_MAP: Record<string, string> = {
 
 export async function buildSwiftThemeStructs({
   baseCollection,
+  modifiers,
   outputDirectory,
 }: BuildSwiftThemeStructOptions) {
   const names: readonly ArrayDesignTokenName[] = Array.from(
     baseCollection
       .tokens()
       .filter((token: GenericDesignTokensCollectionToken): boolean => {
-        return token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME));
+        const resolvedToken: GenericDesignTokensCollectionTokenWithType = {
+          ...token,
+          type: baseCollection.resolve(token).type,
+        };
+
+        return (
+          token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME)) &&
+          !isFontFamilyDesignTokensCollectionToken(resolvedToken)
+          // TODO: Set all not iOS Tokens
+        );
       })
       .map((token: GenericDesignTokensCollectionToken): ArrayDesignTokenName => {
         return token.name;
       }),
   );
 
-  const { tree, valueMap, resolvedValueMap } = buildTokenTree(baseCollection, names, TYPE_SWIFT_MAP, 'String?');
+  const { tree, valueMap } = buildTokenTree(baseCollection, names, 'String?', TYPE_SWIFT_MAP);
 
-  const patterns = findRepeatedStructures(tree);
+  // LEGACY
+  // const patterns = findRepeatedStructures(tree);
 
-  await buildReapeatedStructures(patterns, outputDirectory);
+  // await buildReapeatedStructures(patterns, outputDirectory);
+
+  const patterns = findPatterns(tree);
+
+  await buildSharedStructs(patterns, outputDirectory);
 
   await buildStructTree(tree, [], patterns, outputDirectory, valueMap);
+
+  // modifiers.forEach((tokenContext, modifierType) => {
+  //   if (modifierType === 'theme') return; // Avoid on iOS cause light and dark are handle differently
+
+  //   tokenContext.forEach(async (modifierCollection, modifierName) => {
+  //     const modifierNames: readonly ArrayDesignTokenName[] = Array.from(
+  //       modifierCollection
+  //         .tokens()
+  //         .filter((token: GenericDesignTokensCollectionToken): boolean => {
+  //           return token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME));
+  //         })
+  //         .map((token: GenericDesignTokensCollectionToken): ArrayDesignTokenName => {
+  //           return token.name;
+  //         }),
+  //     );
+
+  //     const { tree: modifierTree, valueMap: modifierValueMap } = buildTokenTree(modifierCollection, modifierNames, 'String?', TYPE_SWIFT_MAP);
+
+  //     // console.log(`${JSON.stringify(modifierTree, null, 2)}`);
+  //     // console.log(`modifierValueMap: ${JSON.stringify(Array.from(modifierValueMap.entries()), null, 2)}`);
+
+  //     const differencies = findValueMapDifferences(valueMap, modifierValueMap);
+
+  //     // DEBUG
+  //     // console.log(`[${modifierType}/${modifierName}] differences (${differencies.length}):\n${JSON.stringify(differencies, null, 2)}`);
+
+  //     if (differencies.length === 0) return;
+
+  //     const swiftFileName = `${firstLetterCapitalized(modifierName)}+EsdsTheme`;
+  //     const swiftStruct = buildSwiftThemeExtension(
+  //       modifierName,
+  //       modifierTree,
+  //       patterns,
+  //       modifierValueMap,
+  //       differencies,
+  //     );
+  //     await writeTextFileSafe(join(outputDirectory, `EsdsTheme/${firstLetterCapitalized(modifierType)}/${swiftFileName}.swift`), swiftStruct);
+  //   });
+  // });
+}
+
+function firstLetterCapitalized(string: string): string {
+  return string.charAt(0).toUpperCase() + string.slice(1)
 }

@@ -1,20 +1,24 @@
 import type { SwiftVariable } from '../../helpers/build-swift-file-with-init.ts';
-import { getSharedStructName } from './find-repeated-structures.ts';
-import type { NestedMap } from './find-repeated-structures.ts';
+import type { NestedMap } from './LEGACY/find-repeated-structures.ts';
+import { getSharedStructName } from './find-patterns.ts';
 import { toSwiftVariableName } from '../../swift-naming-helper.ts';
 
-function resolveType(value: NestedMap | string, patterns: Map<NestedMap, string[][]>): string {
+function sortEntries<T>(entries: Array<[string, T]>): Array<[string, T]> {
+    return [...entries].sort(([a], [b]) => a.localeCompare(b));
+}
+
+function resolveType(value: NestedMap | string, patterns: Map<string, string[]>): string {
     if (typeof value === 'string') return value;
     return getSharedStructName(value, patterns) ?? 'Unknown';
 }
 
 export function buildVariablesForNode(
     node: NestedMap,
-    patterns: Map<NestedMap, string[][]>,
+    patterns: Map<string, string[]>,
 ): SwiftVariable[] {
     const variables: SwiftVariable[] = [];
-    const stringEntries = Object.entries(node).filter(([, v]) => typeof v === 'string');
-    const objectEntries = Object.entries(node).filter(([, v]) => typeof v !== 'string');
+    const stringEntries = sortEntries(Object.entries(node).filter(([, v]) => typeof v === 'string'));
+    const objectEntries = sortEntries(Object.entries(node).filter(([, v]) => typeof v !== 'string'));
 
     if (stringEntries.length > 0 && objectEntries.length > 0) {
         // Root support

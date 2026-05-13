@@ -1,4 +1,4 @@
-import { segmentsReferenceToPascalCase } from '../../../../../../../../shared/dtcg/design-token/reference/types/segments/to/pascal-case/segments-reference-to-pascal-case.ts';
+import { segmentsReferenceToPascalCase } from '../../../../../../../../../shared/dtcg/design-token/reference/types/segments/to/pascal-case/segments-reference-to-pascal-case.ts';
 
 export type NestedMap = { [key: string]: NestedMap | string };
 

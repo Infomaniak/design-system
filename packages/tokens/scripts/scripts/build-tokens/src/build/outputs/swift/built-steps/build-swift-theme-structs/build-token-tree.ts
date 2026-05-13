@@ -2,13 +2,13 @@ import { designTokenNameSegmentsReferenceToSwiftName } from '../../../../../../.
 import type { DesignTokensCollection } from '../../../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { GenericResolvedDesignTokensCollectionToken } from '../../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
-import type { NestedMap } from './find-repeated-structures.ts';
+import type { NestedMap } from './LEGACY/find-repeated-structures.ts';
 
 export function buildTokenTree(
     baseCollection: DesignTokensCollection,
     names: readonly ArrayDesignTokenName[],
-    platformTypeRecord: Record<string, string>,
     undefinedType: string,
+    platformTypeRecord: Record<string, string>,
 ): { tree: NestedMap; valueMap: Map<string, string> } {
     const tree: NestedMap = {};
     const valueMap = new Map<string, string>();
