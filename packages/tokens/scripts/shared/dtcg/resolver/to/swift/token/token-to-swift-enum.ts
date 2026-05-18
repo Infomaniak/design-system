@@ -17,53 +17,30 @@ import { dimensionDesignTokensCollectionTokenToSwiftEnumDeclaration } from './ty
 import { fontWeightDesignTokensCollectionTokenToSwiftEnumDeclaration } from './types/base/font-weight/font-weight-design-tokens-collection-token-to-swift-enum-declaration.ts';
 import { numberDesignTokensCollectionTokenToSwiftEnumDeclaration } from './types/base/number/number-design-tokens-collection-token-to-swift-enum-declaration.ts';
 
-// export interface DesignTokensCollectionTokenToCssVariableDeclarationOptions
-//   extends
-//     ColorDesignTokensCollectionTokenToCssVariableDeclarationOptions,
-//     CubicBezierDesignTokensCollectionTokenToCssVariableDeclarationOptions,
-//     DimensionDesignTokensCollectionTokenToCssVariableDeclarationOptions,
-//     DurationDesignTokensCollectionTokenToCssVariableDeclarationOptions,
-//     FontFamilyDesignTokensCollectionTokenToCssVariableDeclarationOptions,
-//     FontWeightDesignTokensCollectionTokenToCssVariableDeclarationOptions,
-//     NumberDesignTokensCollectionTokenToCssVariableDeclarationOptions,
-//     BorderDesignTokensCollectionTokenToCssVariableDeclarationOptions,
-//     GradientDesignTokensCollectionTokenToCssVariableDeclarationOptions,
-//     ShadowDesignTokensCollectionTokenToCssVariableDeclarationOptions,
-//     StrokeStyleDesignTokensCollectionTokenToCssVariableDeclarationOptions,
-//     TransitionDesignTokensCollectionTokenToCssVariableDeclarationOptions,
-//     TypographyDesignTokensCollectionTokenToCssVariableDeclarationOptions {}
-
-export function designTokensCollectionTokenToSwiftEnumDeclaration(
+export function tokenToSwiftEnum(
   token: GenericDesignTokensCollectionTokenWithType,
 ): SwiftEnumDeclaration {
-  if (isColorDesignTokensCollectionToken(token)) {
+  if (
+    isCubicBezierDesignTokensCollectionToken(token) ||
+    isDurationDesignTokensCollectionToken(token) ||
+    isFontFamilyDesignTokensCollectionToken(token) ||
+    isBorderDesignTokensCollectionToken(token) ||
+    isGradientDesignTokensCollectionToken(token) ||
+    isShadowDesignTokensCollectionToken(token) ||
+    isStrokeStyleDesignTokensCollectionToken(token) ||
+    isTransitionDesignTokensCollectionToken(token) ||
+    isTypographyDesignTokensCollectionToken(token)
+  ) {
     throw new Error('Not implemented.');
-  } else if (isCubicBezierDesignTokensCollectionToken(token)) {
-    throw new Error('Not implemented.');
+  } else if (isColorDesignTokensCollectionToken(token)) {
+    throw new Error("Color needs its own builder (buildSwiftEnumColor)");
   } else if (isDimensionDesignTokensCollectionToken(token)) {
     return dimensionDesignTokensCollectionTokenToSwiftEnumDeclaration(token);
-  } else if (isDurationDesignTokensCollectionToken(token)) {
-    throw new Error('Not implemented.');
-  } else if (isFontFamilyDesignTokensCollectionToken(token)) {
-    throw new Error('Not implemented.');
   } else if (isFontWeightDesignTokensCollectionToken(token)) {
     return fontWeightDesignTokensCollectionTokenToSwiftEnumDeclaration(token);
   } else if (isNumberDesignTokensCollectionToken(token)) {
     return numberDesignTokensCollectionTokenToSwiftEnumDeclaration(token);
-    // composite
-  } else if (isBorderDesignTokensCollectionToken(token)) {
-    throw new Error('Not implemented.');
-  } else if (isGradientDesignTokensCollectionToken(token)) {
-    throw new Error('Not implemented.');
-  } else if (isShadowDesignTokensCollectionToken(token)) {
-    throw new Error('Not implemented.');
-  } else if (isStrokeStyleDesignTokensCollectionToken(token)) {
-    throw new Error('Not implemented.');
-  } else if (isTransitionDesignTokensCollectionToken(token)) {
-    throw new Error('Not implemented.');
-  } else if (isTypographyDesignTokensCollectionToken(token)) {
-    throw new Error('Not implemented.');
-  } else {
-    throw new Error(`Unsupported token type: ${token.type}.`);
   }
+
+  throw new Error(`Unsupported token type: ${token.type}.`);
 }

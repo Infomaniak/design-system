@@ -54,7 +54,6 @@ export async function buildSwiftEnumColor({
   );
 
   if (lightColorsetName === undefined || darkColorsetName === undefined) {
-    // not pointing on a t1
     return null;
   }
 
