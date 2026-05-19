@@ -1,11 +1,18 @@
 import type { SegmentsReference } from '../../../../../design-token/reference/types/segments/segments-reference.ts';
-import { cleanSwiftNameSegment } from './clean-swift-name-segment.ts';
+import { cleanSwiftName, cleanSwiftNameSegment } from './clean-swift-name-segment.ts';
 
-export function designTokenNameSegmentsReferenceToSwiftName(segment: SegmentsReference): string {
-  return segment
+export function designTokenNameSegmentsReferenceToSwiftName(segments: SegmentsReference, segmentsToSkip: number): string {
+  if (segmentsToSkip < 0)
+    return ""
+  const name = segments
     .map((segment: string, index: number): string => {
+      if (index < segmentsToSkip)
+        return "";
+
       segment = cleanSwiftNameSegment(segment);
-      return index === 0 ? segment : segment.charAt(0).toUpperCase() + segment.slice(1);
+      return index === segmentsToSkip ? segment : segment.charAt(0).toUpperCase() + segment.slice(1);
     })
     .join('');
+
+  return cleanSwiftName(name)
 }

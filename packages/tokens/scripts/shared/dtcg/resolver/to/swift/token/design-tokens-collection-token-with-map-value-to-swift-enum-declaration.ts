@@ -9,7 +9,7 @@ export function designTokensCollectionTokenWithMapValueToSwiftEnumDeclaration<GV
   mapValue: (value: GValue) => string,
 ): SwiftEnumDeclaration {
   return {
-    name: designTokenNameSegmentsReferenceToSwiftName(token.name),
+    name: designTokenNameSegmentsReferenceToSwiftName(token.name, 1),
     type,
     value: valueOrCurlyReferenceToSwiftEnumReference(token.value, mapValue),
     description: token.description,

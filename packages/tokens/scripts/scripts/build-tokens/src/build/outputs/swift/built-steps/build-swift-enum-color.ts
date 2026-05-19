@@ -58,7 +58,7 @@ export async function buildSwiftEnumColor({
   }
 
   return {
-    name: designTokenNameSegmentsReferenceToSwiftName(token.name),
+    name: designTokenNameSegmentsReferenceToSwiftName(token.name, 1),
     type: 'Color',
     value: `Color(light: Color("${lightColorsetName}"), dark: Color("${darkColorsetName}"))`,
   };
