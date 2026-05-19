@@ -16,6 +16,7 @@ export interface BuildSwiftThemeStructOptions {
   readonly baseCollection: DesignTokensCollection;
   readonly modifiers: DesignTokenModifiers;
   readonly outputDirectory: string;
+  readonly rawTokensPrefix: string;
 }
 
 const TYPE_SWIFT_MAP: Record<string, string> = {
@@ -30,6 +31,7 @@ export async function buildSwiftThemeStructs({
   baseCollection,
   modifiers,
   outputDirectory,
+  rawTokensPrefix
 }: BuildSwiftThemeStructOptions) {
   const names: readonly ArrayDesignTokenName[] = Array.from(
     baseCollection
@@ -51,7 +53,7 @@ export async function buildSwiftThemeStructs({
       }),
   );
 
-  const { tree, valueMap } = buildTokenTree(baseCollection, names, 'String?', TYPE_SWIFT_MAP);
+  const { tree, valueMap } = buildTokenTree(baseCollection, names, 'String?', TYPE_SWIFT_MAP, rawTokensPrefix);
 
   // LEGACY
   // const patterns = findRepeatedStructures(tree);
@@ -104,6 +106,6 @@ export async function buildSwiftThemeStructs({
   // });
 }
 
-function firstLetterCapitalized(string: string): string {
+export function firstLetterCapitalized(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }

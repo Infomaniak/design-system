@@ -3,12 +3,15 @@ import type { DesignTokensCollection } from '../../../../../../../../shared/dtcg
 import type { GenericResolvedDesignTokensCollectionToken } from '../../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
 import type { NestedMap } from './LEGACY/find-repeated-structures.ts';
+import { firstLetterCapitalized } from './build-swift-theme-structs.ts';
+import { cleanSwiftName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/clean-swift-name-segment.ts';
 
 export function buildTokenTree(
     baseCollection: DesignTokensCollection,
     names: readonly ArrayDesignTokenName[],
     undefinedType: string,
     platformTypeRecord: Record<string, string>,
+    rawTokensPrefix: string
 ): { tree: NestedMap; valueMap: Map<string, string> } {
     const tree: NestedMap = {};
     const valueMap = new Map<string, string>();
@@ -21,9 +24,11 @@ export function buildTokenTree(
                 const resolvedToken: GenericResolvedDesignTokensCollectionToken = baseCollection.resolve(
                     baseCollection.get(name),
                 );
+                const groupName = cleanSwiftName(firstLetterCapitalized(resolvedToken.name[0]));
+                const tokenName = designTokenNameSegmentsReferenceToSwiftName(name, 1)
 
                 node[key] = platformTypeRecord[resolvedToken.type] ?? undefinedType;
-                valueMap.set(JSON.stringify(name), `EsdsTokens.${designTokenNameSegmentsReferenceToSwiftName(name)}`);
+                valueMap.set(JSON.stringify(name), `${rawTokensPrefix}.${groupName}.${tokenName}`);
                 break;
             }
             if (!node[key]) node[key] = {};
