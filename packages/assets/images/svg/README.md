@@ -22,7 +22,7 @@ When the changes/additions are approved, the design-system team's will replicate
 
 - icons must be converted into components.
 - icons must have a name following this format: `esds/icon/<name>`, where `name` is `dash-cased`.
-- icons may have descriptions to add _tags_ and _categories_ (see [Metadata](#Metadata).
+- icons may have descriptions to add _tags_ and _categories_ (see [Metadata](#Metadata)).
 
 ### Commit the changes
 
