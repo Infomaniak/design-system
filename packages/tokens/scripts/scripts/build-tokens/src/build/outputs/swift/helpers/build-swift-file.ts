@@ -10,7 +10,11 @@ export interface BuildSwiftFileOption {
 }
 
 export function buildSwiftFile({ imports, type, name, protocols, content }: BuildSwiftFileOption): string {
-  const safeProtocols = protocols?.length ? `: ${protocols.join(', ')}` : '';
+  const safeProtocols = protocols.length ? `: ${protocols.join(', ')}` : '';
+  const safeContent = content.length ? `{
+      ${content}
+    }`: `{}`;
+
   return dedent`
     /*
       ${AUTO_GENERATED_FILE_HEADER}
@@ -18,8 +22,6 @@ export function buildSwiftFile({ imports, type, name, protocols, content }: Buil
     
     ${imports.map((importName: string): string => `import ${importName}`).join('\n')}
     
-    ${type} ${name}${safeProtocols} {
-      ${content}
-    }
+    ${type} ${name}${safeProtocols} ${safeContent}
   `;
 }

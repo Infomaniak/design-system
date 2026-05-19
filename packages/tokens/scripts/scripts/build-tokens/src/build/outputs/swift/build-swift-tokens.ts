@@ -142,8 +142,9 @@ export async function buildSwiftTokens({
         const content: string = buildSwiftFile({
           imports: ['SwiftUI'],
           type: 'public enum',
-          name: 'EsdsTokens',
-          content: swiftEnumDeclarationsToString(declarations),
+          name: rawTokensPrefix,
+          protocols: ['Sendable'],
+          content: '',
         });
 
         await writeTextFileSafe(join(iosSwitftUiOutputDirectory, 'EsdsTokens.swift'), content);
