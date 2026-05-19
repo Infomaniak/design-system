@@ -9,11 +9,19 @@ export interface BuildSwiftFileOption {
   readonly content: string;
 }
 
-export function buildSwiftFile({ imports, type, name, protocols, content }: BuildSwiftFileOption): string {
+export function buildSwiftFile({
+  imports,
+  type,
+  name,
+  protocols,
+  content,
+}: BuildSwiftFileOption): string {
   const safeProtocols = protocols.length ? `: ${protocols.join(', ')}` : '';
-  const safeContent = content.length ? `{
+  const safeContent = content.length
+    ? `{
       ${content}
-    }`: `{}`;
+    }`
+    : `{}`;
 
   return dedent`
     /*

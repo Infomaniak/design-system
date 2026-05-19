@@ -33,7 +33,7 @@ export function tokenToSwiftEnum(
   ) {
     throw new Error('Not implemented.');
   } else if (isColorDesignTokensCollectionToken(token)) {
-    throw new Error("Color needs its own builder (buildSwiftEnumColor)");
+    throw new Error('Color needs its own builder (buildSwiftEnumColor)');
   } else if (isDimensionDesignTokensCollectionToken(token)) {
     return dimensionDesignTokensCollectionTokenToSwiftEnumDeclaration(token);
   } else if (isFontWeightDesignTokensCollectionToken(token)) {

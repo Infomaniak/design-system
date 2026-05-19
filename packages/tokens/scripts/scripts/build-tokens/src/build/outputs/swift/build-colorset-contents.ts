@@ -1,47 +1,47 @@
-import type Color from "colorjs.io";
-import { XCASSETS_INFO } from "./constants/xcassets-info.ts";
+import type Color from 'colorjs.io';
+import { XCASSETS_INFO } from './constants/xcassets-info.ts';
 
 interface XCAssetsColorComponent {
-    readonly alpha: number;
-    readonly blue: number;
-    readonly green: number;
-    readonly red: number;
+  readonly alpha: number;
+  readonly blue: number;
+  readonly green: number;
+  readonly red: number;
 }
 
 interface XCAssetsColor {
-    readonly color: {
-        readonly 'color-space': string;
-        readonly components: XCAssetsColorComponent;
-    };
-    readonly idiom: 'universal';
+  readonly color: {
+    readonly 'color-space': string;
+    readonly components: XCAssetsColorComponent;
+  };
+  readonly idiom: 'universal';
 }
 
 interface XCAssetsColorSet {
-    readonly colors: XCAssetsColor[];
-    readonly info: XCAssetsInfo;
+  readonly colors: XCAssetsColor[];
+  readonly info: XCAssetsInfo;
 }
 
 interface XCAssetsInfo {
-    readonly author: string;
-    readonly version: number;
+  readonly author: string;
+  readonly version: number;
 }
 
 export function buildColorsetContents(color: Color, sRGBColor: Color): XCAssetsColorSet {
-    return {
-        colors: [
-            {
-                color: {
-                    'color-space': color.space.name,
-                    components: {
-                        red: sRGBColor.coords[0] ?? 0,
-                        green: sRGBColor.coords[1] ?? 0,
-                        blue: sRGBColor.coords[2] ?? 0,
-                        alpha: sRGBColor.alpha,
-                    },
-                },
-                idiom: 'universal',
-            },
-        ],
-        info: XCASSETS_INFO,
-    };
+  return {
+    colors: [
+      {
+        color: {
+          'color-space': color.space.name,
+          components: {
+            red: sRGBColor.coords[0] ?? 0,
+            green: sRGBColor.coords[1] ?? 0,
+            blue: sRGBColor.coords[2] ?? 0,
+            alpha: sRGBColor.alpha,
+          },
+        },
+        idiom: 'universal',
+      },
+    ],
+    info: XCASSETS_INFO,
+  };
 }

@@ -7,7 +7,7 @@ import type {
   DesignTokenContexts,
   DesignTokenModifiers,
 } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
-import { isSwiftEnumMark, type SwiftEnumDeclaration, type SwiftEnumMark } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/swift-enum-declaration.ts';
+import { type SwiftEnumDeclaration } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/swift-enum-declaration.ts';
 import { swiftEnumDeclarationsToString } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/to/swift-enum-declarations-to-string.ts';
 import { tokenToSwiftEnum } from '../../../../../../shared/dtcg/resolver/to/swift/token/token-to-swift-enum.ts';
 import type {
@@ -18,11 +18,14 @@ import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtc
 import { isFontFamilyDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/font-family/is-font-family-design-tokens-collection-token.ts';
 import { T1_DIRECTORY_NAME, T2_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
 
-import { buildSwiftThemeStructs, firstLetterCapitalized } from './built-steps/build-swift-theme-structs/build-swift-theme-structs.ts';
+import { cleanSwiftName } from '../../../../../../shared/dtcg/resolver/to/swift/token/name/clean-swift-name-segment.ts';
 import { buildSwiftEnumColor } from './built-steps/build-swift-enum-color.ts';
+import {
+  buildSwiftThemeStructs,
+  firstLetterCapitalized,
+} from './built-steps/build-swift-theme-structs/build-swift-theme-structs.ts';
 import { buildXcAssets } from './built-steps/build-xcassets.ts';
 import { buildSwiftFile } from './helpers/build-swift-file.ts';
-import { cleanSwiftName } from '../../../../../../shared/dtcg/resolver/to/swift/token/name/clean-swift-name-segment.ts';
 
 export interface BuildSwiftTokensOptions {
   readonly baseCollection: DesignTokensCollection;
@@ -40,13 +43,13 @@ export async function buildSwiftTokens({
   return logger.asyncTask('swift', async (): Promise<void> => {
     outputDirectory = removeTrailingSlash(outputDirectory);
 
-    const rawTokensPrefix = "RawToken"
+    const rawTokensPrefix = 'RawToken';
 
     const iosSwitftUiOutputDirectory: string = `${outputDirectory}/ios/swift-ui`;
 
     const t1ColorTokenNameToColorsetName = new Map<string, string>();
 
-    const declarations: Map<string, (SwiftEnumDeclaration)[]> = new Map();
+    const declarations: Map<string, SwiftEnumDeclaration[]> = new Map();
 
     const theme: DesignTokenContexts = modifiers.get('theme')!;
     const lightThemeCollection: DesignTokensCollection = theme.get('light')!;
@@ -68,7 +71,6 @@ export async function buildSwiftTokens({
               token.files.some((path: string): boolean => path.includes(T1_DIRECTORY_NAME))
             );
           })) {
-
           await buildXcAssets({
             token,
             t1ColorTokenNameToColorsetName,
@@ -105,7 +107,7 @@ export async function buildSwiftTokens({
             continue;
           }
 
-          const groupName = enumColor.type
+          const groupName = enumColor.type;
 
           if (!declarations.has(groupName)) {
             declarations.set(groupName, []);
@@ -130,18 +132,19 @@ export async function buildSwiftTokens({
               token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME))
             );
           })) {
-          const groupName = token.name[0]
+          const groupName = token.name[0];
 
           if (!declarations.has(groupName)) {
             declarations.set(groupName, []);
           }
-          declarations.get(groupName)!.push(tokenToSwiftEnum({
-            ...token,
-            ...baseCollection.resolve(token),
-          }));
+          declarations.get(groupName)!.push(
+            tokenToSwiftEnum({
+              ...token,
+              ...baseCollection.resolve(token),
+            }),
+          );
         }
       });
-
 
       await logger.asyncTask('generate-file', async (): Promise<void> => {
         // Build empty enum
@@ -168,7 +171,10 @@ export async function buildSwiftTokens({
             }`,
           });
 
-          await writeTextFileSafe(join(iosSwitftUiOutputDirectory, `${rawTokensPrefix}+${groupName}.swift`), content);
+          await writeTextFileSafe(
+            join(iosSwitftUiOutputDirectory, `${rawTokensPrefix}+${groupName}.swift`),
+            content,
+          );
         }
       });
     });
@@ -178,7 +184,7 @@ export async function buildSwiftTokens({
         baseCollection,
         modifiers,
         outputDirectory: iosSwitftUiOutputDirectory,
-        rawTokensPrefix
+        rawTokensPrefix,
       });
     });
 

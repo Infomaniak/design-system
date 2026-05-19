@@ -5,7 +5,7 @@ import type { SegmentsReference } from '../../../../../../../shared/dtcg/design-
 import { segmentsReferenceToCurlyReference } from '../../../../../../../shared/dtcg/design-token/reference/types/segments/to/curly-reference/segments-reference-to-curly-reference.ts';
 import type { DesignTokensCollection } from '../../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { SwiftEnumDeclaration } from '../../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/swift-enum-declaration.ts';
-import { designTokenNameSegmentsReferenceToSwiftName } from '../../../../../../../shared/dtcg/resolver/to/swift/token/name/design-token-name-segments-reference-to-swift-name.ts';
+import { segmentsToSwiftIdentifier } from '../../../../../../../shared/dtcg/resolver/to/swift/token/name/design-token-name-segments-reference-to-swift-name.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ColorDesignTokensCollectionTokenValue } from '../../../../../../../shared/dtcg/resolver/token/types/base/color/value/color-design-tokens-collection-token-value.ts';
 import type { BuildSwiftEnumColorOptions } from './build-swift-enum.ts';
@@ -58,7 +58,7 @@ export async function buildSwiftEnumColor({
   }
 
   return {
-    name: designTokenNameSegmentsReferenceToSwiftName(token.name, 1),
+    name: segmentsToSwiftIdentifier(token.name, 1),
     type: 'Color',
     value: `Color(light: Color("${lightColorsetName}"), dark: Color("${darkColorsetName}"))`,
   };

@@ -1,15 +1,15 @@
 import { DesignTokensCollection } from '../../../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
+import type { DesignTokenModifiers } from '../../../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import type {
   GenericDesignTokensCollectionToken,
   GenericDesignTokensCollectionTokenWithType,
 } from '../../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
-import { T2_DIRECTORY_NAME } from '../../../../../constants/design-token-tiers.ts';
-import { buildTokenTree } from './build-token-tree.ts';
-import { buildStructTree } from './build-struct-tree.ts';
-import { buildSharedStructs } from './build-repeated-structures.ts';
-import type { DesignTokenModifiers } from '../../../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import { isFontFamilyDesignTokensCollectionToken } from '../../../../../../../../shared/dtcg/resolver/token/types/base/font-family/is-font-family-design-tokens-collection-token.ts';
+import { T2_DIRECTORY_NAME } from '../../../../../constants/design-token-tiers.ts';
+import { buildSharedStructs } from './build-repeated-structures.ts';
+import { buildStructTree } from './build-struct-tree.ts';
+import { buildTokenTree } from './build-token-tree.ts';
 import { findPatterns } from './find-patterns.ts';
 
 export interface BuildSwiftThemeStructOptions {
@@ -31,7 +31,7 @@ export async function buildSwiftThemeStructs({
   baseCollection,
   modifiers,
   outputDirectory,
-  rawTokensPrefix
+  rawTokensPrefix,
 }: BuildSwiftThemeStructOptions) {
   const names: readonly ArrayDesignTokenName[] = Array.from(
     baseCollection
@@ -53,7 +53,13 @@ export async function buildSwiftThemeStructs({
       }),
   );
 
-  const { tree, valueMap } = buildTokenTree(baseCollection, names, 'String?', TYPE_SWIFT_MAP, rawTokensPrefix);
+  const { tree, valueMap } = buildTokenTree(
+    baseCollection,
+    names,
+    'String?',
+    TYPE_SWIFT_MAP,
+    rawTokensPrefix,
+  );
 
   // LEGACY
   // const patterns = findRepeatedStructures(tree);
@@ -107,5 +113,5 @@ export async function buildSwiftThemeStructs({
 }
 
 export function firstLetterCapitalized(string: string): string {
-  return string.charAt(0).toUpperCase() + string.slice(1)
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }

@@ -1,6 +1,12 @@
-import { isSwiftEnumMark, type SwiftEnumDeclaration, type SwiftEnumMark } from '../swift-enum-declaration.ts';
+import {
+  isSwiftEnumMark,
+  type SwiftEnumDeclaration,
+  type SwiftEnumMark,
+} from '../swift-enum-declaration.ts';
 
-export function swiftEnumDeclarationToString(declaration: SwiftEnumDeclaration | SwiftEnumMark): string {
+export function swiftEnumDeclarationToString(
+  declaration: SwiftEnumDeclaration | SwiftEnumMark,
+): string {
   if (isSwiftEnumMark(declaration)) {
     return `\n// MARK: - ${declaration.name}`;
   }
