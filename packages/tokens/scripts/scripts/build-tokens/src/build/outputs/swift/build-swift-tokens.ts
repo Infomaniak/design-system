@@ -17,15 +17,11 @@ import type {
 import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/color/is-color-design-tokens-collection-token.ts';
 import { isFontFamilyDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/font-family/is-font-family-design-tokens-collection-token.ts';
 import { T1_DIRECTORY_NAME, T2_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
-
-import { cleanSwiftName } from '../../../../../../shared/dtcg/resolver/to/swift/token/name/clean-swift-name-segment.ts';
 import { buildSwiftEnumColor } from './built-steps/build-swift-enum-color.ts';
-import {
-  buildSwiftThemeStructs,
-  firstLetterCapitalized,
-} from './built-steps/build-swift-theme-structs/build-swift-theme-structs.ts';
+import { buildSwiftThemeStructs } from './built-steps/build-swift-theme-structs/build-swift-theme-structs.ts';
 import { buildXcAssets } from './built-steps/build-xcassets.ts';
 import { buildSwiftFile } from './helpers/build-swift-file.ts';
+import { getTokenGroupName } from './swift-tokens-format.ts';
 
 export interface BuildSwiftTokensOptions {
   readonly baseCollection: DesignTokensCollection;
@@ -44,11 +40,8 @@ export async function buildSwiftTokens({
     outputDirectory = removeTrailingSlash(outputDirectory);
 
     const rawTokensPrefix = 'RawToken';
-
     const iosSwitftUiOutputDirectory: string = `${outputDirectory}/ios/swift-ui`;
-
     const t1ColorTokenNameToColorsetName = new Map<string, string>();
-
     const declarations: Map<string, SwiftEnumDeclaration[]> = new Map();
 
     const theme: DesignTokenContexts = modifiers.get('theme')!;
@@ -107,7 +100,7 @@ export async function buildSwiftTokens({
             continue;
           }
 
-          const groupName = enumColor.type;
+          const groupName = getTokenGroupName(token);
 
           if (!declarations.has(groupName)) {
             declarations.set(groupName, []);
@@ -132,7 +125,7 @@ export async function buildSwiftTokens({
               token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME))
             );
           })) {
-          const groupName = token.name[0];
+          const groupName = getTokenGroupName(token);
 
           if (!declarations.has(groupName)) {
             declarations.set(groupName, []);
@@ -158,9 +151,7 @@ export async function buildSwiftTokens({
 
         await writeTextFileSafe(join(iosSwitftUiOutputDirectory, 'EsdsTokens.swift'), content);
 
-        for (const [group, declaration] of declarations) {
-          const groupName = cleanSwiftName(firstLetterCapitalized(group));
-
+        for (const [groupName, declaration] of declarations) {
           const content: string = buildSwiftFile({
             imports: ['SwiftUI'],
             type: 'extension',
