@@ -31,7 +31,8 @@ export function buildTokenTree(
                 valueMap.set(JSON.stringify(name), `${tokenSwiftValue}`);
                 break;
             }
-            if (!node[key]) node[key] = {};
+            if (!node[key])
+                node[key] = {};
             node = node[key] as NestedMap;
         }
     }

@@ -89,24 +89,9 @@ export async function buildStructTree(
   const stringEntries = sortEntries(Object.entries(node).filter(([, v]) => typeof v === 'string'));
   const hasObjectEntries = Object.entries(node).some(([, v]) => typeof v !== 'string');
   if (stringEntries.length > 0 && hasObjectEntries) {
-    // Root support case
-    const stringSubMap = Object.fromEntries(stringEntries) as NestedMap;
-    const rootStructName = getSharedStructName(stringSubMap, patterns);
-    if (rootStructName) {
-      const rootIdx = variables.findIndex((v) => v.name === 'root');
-      if (rootIdx !== -1)
-        variables[rootIdx].initValue = buildInitValue(
-          rootStructName,
-          stringSubMap,
-          path,
-          patterns,
-          valueMap,
-        );
-    } else {
-      for (const [key] of stringEntries) {
-        const idx = variables.findIndex((v) => v.name === toSwiftVariableName([key]));
-        if (idx !== -1) variables[idx].initValue = valueMap.get(JSON.stringify([...path, key]));
-      }
+    for (const [key] of stringEntries) {
+      const idx = variables.findIndex((v) => v.name === toSwiftVariableName([key]));
+      if (idx !== -1) variables[idx].initValue = valueMap.get(JSON.stringify([...path, key]));
     }
   } else {
     for (const [key] of stringEntries) {

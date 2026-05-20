@@ -129,6 +129,7 @@ export function buildSwiftThemeExtension(
     imports: ['SwiftUI'],
     type: 'extension',
     name: 'EsdsTheme',
+    protocols: ['Sendable'],
     content: `static let ${modifierName} = ${initCall}`,
   });
 }

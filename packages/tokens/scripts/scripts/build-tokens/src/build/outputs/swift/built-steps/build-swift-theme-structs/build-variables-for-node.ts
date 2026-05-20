@@ -20,21 +20,8 @@ export function buildVariablesForNode(
   const stringEntries = sortEntries(Object.entries(node).filter(([, v]) => typeof v === 'string'));
   const objectEntries = sortEntries(Object.entries(node).filter(([, v]) => typeof v !== 'string'));
 
-  if (stringEntries.length > 0 && objectEntries.length > 0) {
-    // Root support
-    const stringSubMap = Object.fromEntries(stringEntries) as NestedMap;
-    const rootStructName = getSharedStructName(stringSubMap, patterns);
-    if (rootStructName) {
-      variables.push({ name: 'root', type: rootStructName });
-    } else {
-      for (const [key, value] of stringEntries) {
-        variables.push({ name: toSwiftVariableName([key]), type: value as string });
-      }
-    }
-  } else {
-    for (const [key, value] of stringEntries) {
-      variables.push({ name: toSwiftVariableName([key]), type: value as string });
-    }
+  for (const [key, value] of stringEntries) {
+    variables.push({ name: toSwiftVariableName([key]), type: value as string });
   }
 
   for (const [key, value] of objectEntries) {
