@@ -115,7 +115,8 @@ describe('EsdsIconComponent', () => {
       mockObserve = vi.fn();
       mockDisconnect = vi.fn();
       observerInstances = [];
-      global.IntersectionObserver = MockIntersectionObserver as unknown as typeof IntersectionObserver;
+      global.IntersectionObserver =
+        MockIntersectionObserver as unknown as typeof IntersectionObserver;
     });
 
     afterEach(() => {
@@ -137,9 +138,7 @@ describe('EsdsIconComponent', () => {
       container.append(el);
       await el.updateComplete;
 
-      observerInstances[0].callback([
-        { isIntersecting: true } as IntersectionObserverEntry,
-      ]);
+      observerInstances[0].callback([{ isIntersecting: true } as IntersectionObserverEntry]);
       await new Promise((r) => setTimeout(r, 0));
 
       expect(api.getSVG).toHaveBeenCalledWith({
@@ -156,9 +155,7 @@ describe('EsdsIconComponent', () => {
       container.append(el);
       await el.updateComplete;
 
-      observerInstances[0].callback([
-        { isIntersecting: false } as IntersectionObserverEntry,
-      ]);
+      observerInstances[0].callback([{ isIntersecting: false } as IntersectionObserverEntry]);
 
       expect(api.getSVG).not.toHaveBeenCalled();
     });
