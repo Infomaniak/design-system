@@ -621,6 +621,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@infomaniak-design-system/components@workspace:packages/components"
   dependencies:
+    "@infomaniak-design-system/esds-icon": "workspace:*"
     lit: "npm:^3.2.0"
     typescript: "npm:~6.0.3"
     vite: "npm:^8.0.12"
@@ -651,7 +652,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@infomaniak-design-system/esds-icon@workspace:^, @infomaniak-design-system/esds-icon@workspace:packages/assets/images/component/web":
+"@infomaniak-design-system/esds-icon@workspace:*, @infomaniak-design-system/esds-icon@workspace:^, @infomaniak-design-system/esds-icon@workspace:packages/assets/images/component/web":
   version: 0.0.0-use.local
   resolution: "@infomaniak-design-system/esds-icon@workspace:packages/assets/images/component/web"
   dependencies:
