@@ -6,6 +6,11 @@ import { getApi } from '../configure.ts';
 export type EsdsIconComponentMode = 'svg' | 'bg' | 'mask';
 export type EsdsIconComponentStatus = 'loading' | 'rendered' | 'error';
 
+/**
+ * Web component for displaying icons from the Infomaniak Design System icon library.
+ * @summary Icon component
+ * @element esds-icon
+ */
 @customElement('esds-icon')
 export class EsdsIconComponent extends LitElement {
   static override styles = css`
@@ -49,30 +54,80 @@ export class EsdsIconComponent extends LitElement {
     }
   `;
 
+  /**
+   * Icon identifier in `prefix:name` format.
+   * @attr name
+   */
   @property({ type: String })
   accessor name = '';
 
+  /**
+   * The rendering mode to apply.
+   * - `svg`: Renders SVG inline inside the component.
+   * - `bg`: Uses CSS `background-image` with the SVG encoded as a data URL.
+   * - `mask`: Uses CSS `mask-image` for current-color icon rendering.
+   * @attr mode
+   * @default 'svg'
+   */
   @property({ type: String })
   accessor mode: EsdsIconComponentMode = 'svg';
 
+  /**
+   * Adjusts vertical alignment for inline use (shifts by -0.125em).
+   * @attr inline
+   * @reflect
+   */
   @property({ type: Boolean, reflect: true })
   accessor inline = false;
 
+  /**
+   * Disables lazy loading via IntersectionObserver; fetches the icon immediately.
+   * @attr nolazy
+   * @reflect
+   */
   @property({ type: Boolean, reflect: true })
   accessor nolazy = false;
 
+  /**
+   * @internal
+   */
   @state()
   private accessor _status: EsdsIconComponentStatus = 'loading';
 
+  /**
+   * @internal
+   */
   @state()
   private accessor _svgNode: SVGSVGElement | null = null;
 
+  /**
+   * @internal
+   */
   private _prefix = '';
+
+  /**
+   * @internal
+   */
   private _iconName = '';
+
+  /**
+   * @internal
+   */
   private _visible = false;
+
+  /**
+   * @internal
+   */
   private _observer: IntersectionObserver | undefined;
+
+  /**
+   * @internal
+   */
   private _abortController: AbortController | undefined;
 
+  /**
+   * Read-only loading state of the icon.
+   */
   get status(): EsdsIconComponentStatus {
     return this._status;
   }
@@ -142,6 +197,7 @@ export class EsdsIconComponent extends LitElement {
     return html``;
   }
 
+  /** @internal */
   private _parseName(): void {
     if (this.name && this.name.includes(':')) {
       const index = this.name.indexOf(':');
@@ -153,6 +209,7 @@ export class EsdsIconComponent extends LitElement {
     }
   }
 
+  /** @internal */
   private _startObserver(): void {
     if (this._observer === undefined) {
       this._visible = false;
@@ -172,6 +229,7 @@ export class EsdsIconComponent extends LitElement {
     }
   }
 
+  /** @internal */
   private _stopObserver(): void {
     if (this._observer !== undefined) {
       this._observer.disconnect();
@@ -179,6 +237,7 @@ export class EsdsIconComponent extends LitElement {
     }
   }
 
+  /** @internal */
   private _loadIcon(): void {
     this._abortPendingFetch();
 
@@ -223,6 +282,7 @@ export class EsdsIconComponent extends LitElement {
       });
   }
 
+  /** @internal */
   private _abortPendingFetch(): void {
     if (this._abortController !== undefined) {
       this._abortController.abort();
@@ -230,6 +290,7 @@ export class EsdsIconComponent extends LitElement {
     }
   }
 
+  /** @internal */
   private _parseSvgToDom(svgString: string): SVGSVGElement | null {
     const sanitized = DOMPurify.sanitize(svgString, {
       USE_PROFILES: { svg: true },

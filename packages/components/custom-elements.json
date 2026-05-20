@@ -62,15 +62,140 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/index.ts",
-      "declarations": [],
+      "path": "src/esds-icon/esds-icon.component.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Web component for displaying icons from the Infomaniak Design System icon library.",
+          "name": "EsdsIconComponent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Icon identifier in `prefix:name` format.",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "EsdsIconComponentMode"
+              },
+              "default": "'svg'",
+              "description": "The rendering mode to apply.\n- `svg`: Renders SVG inline inside the component.\n- `bg`: Uses CSS `background-image` with the SVG encoded as a data URL.\n- `mask`: Uses CSS `mask-image` for current-color icon rendering.",
+              "attribute": "mode",
+              "parsedType": {
+                "text": "'svg' | 'bg' | 'mask'"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "inline",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Adjusts vertical alignment for inline use (shifts by -0.125em).",
+              "reflects": true,
+              "attribute": "inline"
+            },
+            {
+              "kind": "field",
+              "name": "nolazy",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables lazy loading via IntersectionObserver; fetches the icon immediately.",
+              "reflects": true,
+              "attribute": "nolazy"
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "EsdsIconComponentStatus"
+              },
+              "description": "Read-only loading state of the icon.",
+              "readonly": true,
+              "parsedType": {
+                "text": "'loading' | 'rendered' | 'error'"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Icon identifier in `prefix:name` format.",
+              "fieldName": "name",
+              "attribute": "name"
+            },
+            {
+              "name": "mode",
+              "type": {
+                "text": "EsdsIconComponentMode"
+              },
+              "default": "'svg'",
+              "description": "The rendering mode to apply.\n- `svg`: Renders SVG inline inside the component.\n- `bg`: Uses CSS `background-image` with the SVG encoded as a data URL.\n- `mask`: Uses CSS `mask-image` for current-color icon rendering.",
+              "fieldName": "mode",
+              "attribute": "mode",
+              "parsedType": {
+                "text": "'svg' | 'bg' | 'mask'"
+              }
+            },
+            {
+              "name": "inline",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Adjusts vertical alignment for inline use (shifts by -0.125em).",
+              "fieldName": "inline",
+              "attribute": "inline"
+            },
+            {
+              "name": "nolazy",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables lazy loading via IntersectionObserver; fetches the icon immediately.",
+              "fieldName": "nolazy",
+              "attribute": "nolazy"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "esds-icon",
+          "customElement": true,
+          "summary": "Icon component"
+        }
+      ],
       "exports": [
         {
           "kind": "js",
-          "name": "*",
+          "name": "EsdsIconComponent",
           "declaration": {
-            "name": "*",
-            "module": "src/public-api.ts"
+            "name": "EsdsIconComponent",
+            "module": "src/esds-icon/esds-icon.component.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "esds-icon",
+          "declaration": {
+            "name": "EsdsIconComponent",
+            "module": "src/esds-icon/esds-icon.component.ts"
           }
         }
       ]
@@ -103,6 +228,45 @@
             "name": "IconifyApi",
             "module": "./configure.ts"
           }
+        },
+        {
+          "kind": "js",
+          "name": "EsdsIconComponent",
+          "declaration": {
+            "name": "EsdsIconComponent",
+            "module": "./esds-icon/esds-icon.component.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "EsdsIconComponentMode",
+          "declaration": {
+            "name": "EsdsIconComponentMode",
+            "module": "./esds-icon/esds-icon.component.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "EsdsIconComponentStatus",
+          "declaration": {
+            "name": "EsdsIconComponentStatus",
+            "module": "./esds-icon/esds-icon.component.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/public-api.ts"
+          }
         }
       ]
     },
@@ -116,212 +280,6 @@
           "name": "default",
           "declaration": {
             "module": "src/esds-icon/esds-icon.component.stories.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/esds-icon/esds-icon.component.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "EsdsIconComponent",
-          "members": [
-            {
-              "kind": "field",
-              "name": "styles",
-              "static": true,
-              "default": "css` :host { display: inline-block; vertical-align: 0; } :host([mode='bg']), :host([mode='mask']) { width: 1em; height: 1em; } :host([mode='bg']) { background-color: transparent; background-image: var(--svg); background-repeat: no-repeat; background-size: 100% 100%; } :host([mode='mask']) { background-color: currentcolor; -webkit-mask-image: var(--svg); -webkit-mask-repeat: no-repeat; -webkit-mask-size: 100% 100%; mask-image: var(--svg); mask-repeat: no-repeat; mask-size: 100% 100%; } :host([inline]), :host([inline='']), :host([inline='true']) { vertical-align: -0.125em; } svg { display: block; margin: auto; } `"
-            },
-            {
-              "kind": "field",
-              "name": "name",
-              "type": {
-                "text": "string"
-              },
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "mode",
-              "type": {
-                "text": "EsdsIconComponentMode"
-              },
-              "default": "'svg'"
-            },
-            {
-              "kind": "field",
-              "name": "inline",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "nolazy",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "_status",
-              "type": {
-                "text": "EsdsIconComponentStatus"
-              },
-              "privacy": "private",
-              "default": "'loading'"
-            },
-            {
-              "kind": "field",
-              "name": "_svgContent",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "private",
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "_prefix",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "private",
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "_iconName",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "private",
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "_visible",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "_observer",
-              "type": {
-                "text": "IntersectionObserver | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "_abortController",
-              "type": {
-                "text": "AbortController | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "status",
-              "type": {
-                "text": "EsdsIconComponentStatus"
-              },
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "willUpdate",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "changedProperties",
-                  "type": {
-                    "text": "PropertyValues<this>"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "render"
-            },
-            {
-              "kind": "method",
-              "name": "_parseName",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "_startObserver",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "_stopObserver",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "_loadIcon",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "_abortPendingFetch",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "EsdsIconComponent",
-          "declaration": {
-            "name": "EsdsIconComponent",
-            "module": "src/esds-icon/esds-icon.component.ts"
           }
         }
       ]

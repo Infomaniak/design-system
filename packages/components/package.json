@@ -2,6 +2,10 @@
   "name": "@infomaniak-design-system/components",
   "version": "0.0.0",
   "type": "module",
+  "files": [
+    "dist",
+    "custom-elements.json"
+  ],
   "sideEffects": [
     "dist/**/*.component.js"
   ],
@@ -20,8 +24,8 @@
     }
   },
   "scripts": {
-    "build": "vite build && tsc -p tsconfig.build.json",
-    "analyze:cem": "cem analyze --globs 'src/**/*.ts'"
+    "build": "yarn analyze:cem && vite build && tsc -p tsconfig.build.json",
+    "analyze:cem": "cem analyze --config ./custom-elements-manifest.config.mjs"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +36,7 @@
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.11.0",
     "@types/dompurify": "^3.2.0",
+    "@wc-toolkit/type-parser": "1.2.1",
     "typescript": "~6.0.3",
     "vite": "^8.0.12"
   },

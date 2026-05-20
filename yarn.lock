@@ -662,6 +662,7 @@ __metadata:
     "@custom-elements-manifest/analyzer": "npm:^0.11.0"
     "@infomaniak-design-system/esds-icon": "workspace:*"
     "@types/dompurify": "npm:^3.2.0"
+    "@wc-toolkit/type-parser": "npm:1.2.1"
     dompurify: "npm:^3.2.5"
     lit: "npm:^3.2.0"
     typescript: "npm:~6.0.3"
@@ -2643,6 +2644,13 @@ __metadata:
     convert-source-map: "npm:^2.0.0"
     tinyrainbow: "npm:^3.1.0"
   checksum: 10c0/36437888088a1aae8565e62b9f145de9fb1599725574924477c655c7617ad677b575ac0eb3f2b3288854ed1aafff914a0417dffbb7f5244c821f157119701227
+  languageName: node
+  linkType: hard
+
+"@wc-toolkit/type-parser@npm:1.2.1":
+  version: 1.2.1
+  resolution: "@wc-toolkit/type-parser@npm:1.2.1"
+  checksum: 10c0/0d9ef209b69040b5872cd26fb6a0a0a28791c73cce49a49ba1ca7cb24ec1dcb05713413be91c80ce5495d436b19c2c46321be7ae566e33ad83ea3dfcd9aebefa
   languageName: node
   linkType: hard
 
