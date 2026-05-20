@@ -1,6 +1,6 @@
 import { LitElement, css, html, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import DOMPurify from 'dompurify';
 import { getApi } from '../configure.ts';
 
 export type EsdsIconComponentMode = 'svg' | 'bg' | 'mask';
@@ -65,7 +65,7 @@ export class EsdsIconComponent extends LitElement {
   private accessor _status: EsdsIconComponentStatus = 'loading';
 
   @state()
-  private accessor _svgContent = '';
+  private accessor _svgNode: SVGSVGElement | null = null;
 
   private _prefix = '';
   private _iconName = '';
@@ -110,7 +110,7 @@ export class EsdsIconComponent extends LitElement {
         throw new Error(`Invalid mode: ${this.mode}. Expected 'svg', 'bg', or 'mask'.`);
       }
       if (this.mode !== 'svg') {
-        this._svgContent = '';
+        this._svgNode = null;
       } else {
         this.style.removeProperty('--svg');
       }
@@ -136,8 +136,8 @@ export class EsdsIconComponent extends LitElement {
   }
 
   override render() {
-    if (this.mode === 'svg' && this._svgContent) {
-      return html`${unsafeHTML(this._svgContent)}`;
+    if (this.mode === 'svg' && this._svgNode) {
+      return html`${this._svgNode}`;
     }
     return html``;
   }
@@ -189,7 +189,7 @@ export class EsdsIconComponent extends LitElement {
     this._abortController = new AbortController();
     const signal = this._abortController.signal;
     this._status = 'loading';
-    this._svgContent = '';
+    this._svgNode = null;
 
     getApi()
       .getSVG({
@@ -205,10 +205,13 @@ export class EsdsIconComponent extends LitElement {
         this._status = 'rendered';
         if (this.mode === 'svg') {
           this.style.removeProperty('--svg');
-          this._svgContent = svgContent;
+          this._svgNode = this._parseSvgToDom(svgContent);
         } else {
-          this._svgContent = '';
-          this.style.setProperty('--svg', `url('data:image/svg+xml;base64,${btoa(svgContent)}')`);
+          this._svgNode = null;
+          this.style.setProperty(
+            '--svg',
+            `url('data:image/svg+xml;base64,${btoa(svgContent)}')`,
+          );
         }
       })
       .catch((error: unknown): void => {
@@ -217,7 +220,7 @@ export class EsdsIconComponent extends LitElement {
         }
 
         this._status = 'error';
-        this._svgContent = '';
+        this._svgNode = null;
         this.style.removeProperty('--svg');
         console.error(`Failed to load icon: "${this.name}"`, error);
       });
@@ -228,5 +231,14 @@ export class EsdsIconComponent extends LitElement {
       this._abortController.abort();
       this._abortController = undefined;
     }
+  }
+
+  private _parseSvgToDom(svgString: string): SVGSVGElement | null {
+    const sanitized = DOMPurify.sanitize(svgString, {
+      USE_PROFILES: { svg: true },
+    });
+    const doc = new DOMParser().parseFromString(sanitized, 'image/svg+xml');
+    const svg = doc.querySelector('svg');
+    return svg ? (svg.cloneNode(true) as SVGSVGElement) : null;
   }
 }
