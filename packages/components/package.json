@@ -1,0 +1,26 @@
+{
+  "name": "@infomaniak-design-system/components",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    "./index": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./esds-icon": {
+      "types": "./dist/esds-icon.d.ts",
+      "import": "./dist/esds-icon.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json"
+  },
+  "private": true,
+  "dependencies": {
+    "lit": "^3.2.0"
+  },
+  "devDependencies": {
+    "typescript": "~6.0.3",
+    "vite": "^8.0.12"
+  }
+}

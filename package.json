@@ -48,6 +48,7 @@
     "packages": [
       "packages/tokens",
       "packages/tokens/demo",
+      "packages/components",
       "packages/assets/images/svg",
       "packages/assets/images/component/web",
       "apps/docs"
