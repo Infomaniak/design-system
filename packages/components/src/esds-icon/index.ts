@@ -1,2 +1,2 @@
-// Re-export from the original esds-icon web component package
-export { EsdsIconComponent } from '@infomaniak-design-system/esds-icon';
+export { EsdsIconComponent } from './esds-icon.component.ts';
+export type { EsdsIconComponentMode, EsdsIconComponentStatus } from './esds-icon.component.ts';

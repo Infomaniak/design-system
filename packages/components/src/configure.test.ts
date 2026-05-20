@@ -1,5 +1,5 @@
-import { describe, expect, it, vi } from 'vitest';
 import { IconifyApi } from '@infomaniak-design-system/esds-icon';
+import { describe, expect, it, vi } from 'vitest';
 
 describe('configure', () => {
   it('getApi() returns default instance when configure was never called', async () => {
