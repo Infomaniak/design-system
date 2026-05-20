@@ -30,6 +30,12 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
+      - name: Verify custom-elements.json is up-to-date
+        run: |
+          cd packages/components
+          yarn analyze:cem
+          git diff --exit-code custom-elements.json || (echo "❌ custom-elements.json is stale. Run 'yarn build' in packages/components and commit the updated file." && exit 1)
+
       - name: Build packages
         run: yarn build
 
