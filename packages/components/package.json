@@ -2,6 +2,9 @@
   "name": "@infomaniak-design-system/components",
   "version": "0.0.0",
   "type": "module",
+  "sideEffects": [
+    "dist/**/*.component.js"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

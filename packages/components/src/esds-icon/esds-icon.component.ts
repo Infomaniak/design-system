@@ -1,6 +1,6 @@
+import DOMPurify from 'dompurify';
 import { LitElement, css, html, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import DOMPurify from 'dompurify';
 import { getApi } from '../configure.ts';
 
 export type EsdsIconComponentMode = 'svg' | 'bg' | 'mask';
@@ -208,10 +208,7 @@ export class EsdsIconComponent extends LitElement {
           this._svgNode = this._parseSvgToDom(svgContent);
         } else {
           this._svgNode = null;
-          this.style.setProperty(
-            '--svg',
-            `url('data:image/svg+xml;base64,${btoa(svgContent)}')`,
-          );
+          this.style.setProperty('--svg', `url('data:image/svg+xml;base64,${btoa(svgContent)}')`);
         }
       })
       .catch((error: unknown): void => {

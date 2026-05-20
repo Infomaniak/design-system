@@ -73,7 +73,10 @@ export const Default: StoryObj = {
       <section>
         <h3>Background mode (mode=&quot;bg&quot;)</h3>
         <p style={{ fontSize: 'var(--esds-font-size-body-lg)' }}>
-          <EsdsIcon name="esds:arrow-right" mode="bg" />
+          <EsdsIcon
+            name="esds:arrow-right"
+            mode="bg"
+          />
           esds:arrow-right
         </p>
       </section>
@@ -86,7 +89,10 @@ export const Default: StoryObj = {
             color: 'var(--esds-color-error)',
           }}
         >
-          <EsdsIcon name="esds:arrow-right" mode="mask" />
+          <EsdsIcon
+            name="esds:arrow-right"
+            mode="mask"
+          />
           esds:arrow-right (red)
         </p>
       </section>
@@ -94,7 +100,10 @@ export const Default: StoryObj = {
       <section>
         <h3>Inline alignment (inline attribute)</h3>
         <p style={{ fontSize: 'var(--esds-font-size-body-lg)' }}>
-          <EsdsIcon name="esds:arrow-right" inline />
+          <EsdsIcon
+            name="esds:arrow-right"
+            inline
+          />
           esds:arrow-right (inline)
         </p>
       </section>
@@ -102,7 +111,10 @@ export const Default: StoryObj = {
       <section>
         <h3>Manual loading (nolazy attribute)</h3>
         <p style={{ fontSize: 'var(--esds-font-size-body-lg)' }}>
-          <EsdsIcon name="esds:arrow-right" nolazy />
+          <EsdsIcon
+            name="esds:arrow-right"
+            nolazy
+          />
           esds:arrow-right (nolazy)
         </p>
       </section>

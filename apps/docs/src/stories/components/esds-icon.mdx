@@ -1,0 +1,132 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/esds-icon" />
+
+# esds-icon
+
+Web component for displaying icons from the Infomaniak Design System icon library.
+
+## Installation
+
+```bash
+yarn add @infomaniak-design-system/components
+```
+
+Requires a peer-like dependency on `lit` for the consuming project:
+
+```bash
+yarn add lit
+```
+
+## Configuration
+
+The `configure()` function must be called **once** before using any icon component:
+
+```typescript
+import { configure } from '@infomaniak-design-system/components';
+import { IconifyApi } from '@infomaniak-design-system/esds-icon';
+
+const api = new IconifyApi({
+  url: 'https://your-iconify-instance.com',
+});
+
+configure(api);
+```
+
+Calling `configure()` more than once will throw an error. If not configured, a default `IconifyApi` instance is created internally.
+
+## Usage
+
+```html
+<esds-icon name="esds:bell" mode="svg" inline></esds-icon>
+```
+
+## Styling
+
+The icon may be styled using the following CSS properties:
+
+- `color`: to set the icon's color
+- `font-size`: to set the icon's size
+
+## Preventing Layout Shift
+
+To avoid [layout shift](https://iconify.design/docs/iconify-icon/#layout-shift) when the icon loads, add the following CSS to your project:
+
+```css
+esds-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}
+```
+
+This ensures the component reserves space before the icon is rendered.
+
+## API
+
+### `<esds-icon>`
+
+<table>
+  <tr>
+    <th>Attribute</th>
+    <th>Type</th>
+    <th>Default</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>name</td>
+    <td>string</td>
+    <td>""</td>
+    <td>Icon identifier in <code>prefix:name</code> format</td>
+  </tr>
+  <tr>
+    <td>mode</td>
+    <td>EsdsIconComponentMode</td>
+    <td>"svg"</td>
+    <td>
+      The rendering mode to apply:
+      <ul>
+        <li><code>svg</code>: Renders SVG inline inside the component</li>
+        <li><code>bg</code>: Uses CSS <code>background-image</code> with the SVG encoded as a data URL</li>
+        <li><code>mask</code>: Uses CSS <code>mask-image</code> for color-current icon rendering</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>inline</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>Adjusts vertical alignment for inline use</td>
+  </tr>
+  <tr>
+    <td>nolazy</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>Disables lazy loading, fetches icon immediately</td>
+  </tr>
+</table>
+
+**Properties:**
+
+<table>
+  <tr>
+    <th>Property</th>
+    <th>Type</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>status</td>
+    <td>
+      <code>"loading" | "rendered" | "error"</code>
+    </td>
+    <td>Read-only loading state of the icon</td>
+  </tr>
+</table>
+
+## TypeScript
+
+Type declarations are included. Import types directly:
+
+```typescript
+import type { EsdsIconComponent, EsdsIconComponentMode } from '@infomaniak-design-system/components';
+```

@@ -1,6 +1,6 @@
 # @infomaniak-design-system/components
 
-Web components library for Infomaniak's Design System. Built with Lit and published as standard ES modules with full TypeScript support.
+Web components library for Infomaniak's Design System. Built with [Lit](https://lit.dev) and published as standard ES modules with full TypeScript support.
 
 ## Installation
 
@@ -16,97 +16,71 @@ yarn add lit
 
 ## Quick Start
 
-Import all components:
+Import all components at once:
 
 ```typescript
 import '@infomaniak-design-system/components';
 ```
 
-Import a single component for tree-shaking:
+Import a specific component — it auto-registers and gives you class access:
 
 ```typescript
 import { EsdsIconComponent } from '@infomaniak-design-system/components/esds-icon';
 ```
 
-## Usage Example
+## Usage with Frameworks
 
-```html
-<!-- Configure once with your Iconify API instance -->
-<script type="module">
-  import { configure } from '@infomaniak-design-system/components';
-  import { IconifyApi } from '@infomaniak-design-system/esds-icon';
+### React 19+
 
-  configure(new IconifyApi({ url: 'https://your-iconify-instance.com' }));
-</script>
+Import once in your app entry point to auto-register the component:
 
-<!-- Use the icon component anywhere -->
-<esds-icon name="my-icons:home" mode="svg" inline></esds-icon>
+```tsx
+// main.tsx
+import '@infomaniak-design-system/components';
 ```
 
-## Configuration
+Use in your JSX templates:
 
-The `configure()` function must be called **once** before using any icon component:
+```tsx
+function App() {
+  return (
+    <div>
+      <esds-icon
+        name="esds:bell"
+        mode="svg"
+        inline="true"
+      />
+    </div>
+  );
+}
+```
+
+React 19 has web components support, attributes pass through naturally.
+
+### Angular 20+
+
+Import in your component or module to auto-register the component:
 
 ```typescript
-import { configure } from '@infomaniak-design-system/components';
-import { IconifyApi } from '@infomaniak-design-system/esds-icon';
+// app.component.ts
+import { Component } from '@angular/core';
+import '@infomaniak-design-system/components';
 
-const api = new IconifyApi({
-  url: 'https://your-iconify-instance.com',
-});
-
-configure(api);
+@Component({
+  selector: 'app-root',
+  template: `
+    <esds-icon
+      [attr.name]="iconName"
+      mode="svg"
+      inline
+    ></esds-icon>
+  `,
+})
+export class AppComponent {
+  iconName = 'esds:bell';
+}
 ```
 
-Calling `configure()` more than once will throw an error. If not configured, a default `IconifyApi` instance is created internally.
+Angular handles custom elements as standard HTML. Use `[attr.name]` for dynamic attributes.
 
-## API Reference
-
-### `<esds-icon>`
-
-| Attribute | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `name` | `string` | `""` | Icon identifier in `<prefix>:<name>` format |
-| `mode` | `"svg" | "bg" | "mask"` | `"svg"` | Rendering mode |
-| `inline` | `boolean` | `false` | Adjusts vertical alignment for inline use |
-| `nolazy` | `boolean` | `false` | Disables lazy loading; fetches icon immediately |
-
-**Properties:**
-
-| Property | Type | Description |
-|----------|------|-------------|
-| `status` | `"loading" | "rendered" | "error"` | Read-only loading state of the icon |
-
-**Modes:**
-
-- `svg` (default): Renders SVG inline inside the component
-- `bg`: Uses CSS `background-image` with the SVG encoded as a data URL
-- `mask`: Uses CSS `mask-image` for color-current icon rendering
-
-## Migration from Vanilla Web Components
-
-If you were previously using `esds-icon` as a standalone vanilla web component without the wrapper:
-
-```typescript
-// Before (vanilla)
-import { register } from 'some-vanilla-lib';
-register('esds-icon');
-
-// After (design system)
-import { configure } from '@infomaniak-design-system/components';
-import { EsdsIconComponent } from '@infomaniak-design-system/components/esds-icon';
-import { IconifyApi } from '@infomaniak-design-system/esds-icon';
-
-configure(new IconifyApi({ url: '...' }));
-// EsdsIconComponent auto-registers as <esds-icon>
-```
-
-The component API (attributes, properties, and behavior) remains identical. The main difference is the need to call `configure()` to provide the Iconify API instance.
-
-## TypeScript
-
-Type declarations are included. Import types directly:
-
-```typescript
-import type { EsdsIconComponent, EsdsIconComponentMode } from '@infomaniak-design-system/components/esds-icon';
-```
+For full component documentation, see the Storybook docs.
