@@ -10,7 +10,7 @@ export default defineConfig({
     lib: {
       entry: {
         index: resolve(__dirname, 'src/index.ts'),
-        'esds-icon': resolve(__dirname, 'src/esds-icon/index.ts'),
+        'esds-icon/index': resolve(__dirname, 'src/esds-icon/index.ts'),
       },
       formats: ['es'],
     },

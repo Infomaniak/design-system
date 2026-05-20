@@ -12,12 +12,13 @@
       "import": "./dist/index.js"
     },
     "./esds-icon": {
-      "types": "./dist/esds-icon.d.ts",
-      "import": "./dist/esds-icon.js"
+      "types": "./dist/esds-icon/index.d.ts",
+      "import": "./dist/esds-icon/index.js"
     }
   },
   "scripts": {
-    "build": "vite build && tsc -p tsconfig.build.json"
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "analyze:cem": "cem analyze --globs 'src/**/*.ts'"
   },
   "private": true,
   "dependencies": {
@@ -25,7 +26,9 @@
     "lit": "^3.2.0"
   },
   "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.11.0",
     "typescript": "~6.0.3",
     "vite": "^8.0.12"
-  }
+  },
+  "customElements": "custom-elements.json"
 }
