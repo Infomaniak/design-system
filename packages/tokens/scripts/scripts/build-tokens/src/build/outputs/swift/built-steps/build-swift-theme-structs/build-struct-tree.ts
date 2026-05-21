@@ -7,9 +7,10 @@ import { toSwiftVariableName } from '../../swift-naming-helper.ts';
 import type { NestedMap } from './LEGACY/find-repeated-structures.ts';
 import { buildVariablesForNode } from './build-variables-for-node.ts';
 import { getSharedStructName } from './find-patterns.ts';
+import { structPrefix, swiftMainStruct } from '../../CONSTANTS.ts';
 
 function structNameForPath(path: string[]): string {
-  return path.length === 0 ? 'EsdsTheme' : `Prefix${segmentsReferenceToPascalCase(path)}`;
+  return path.length === 0 ? `${swiftMainStruct}` : `${structPrefix}${segmentsReferenceToPascalCase(path)}`;
 }
 
 function sortEntries<T>(entries: Array<[string, T]>): Array<[string, T]> {
@@ -149,5 +150,5 @@ export async function buildStructTree(
   }
 
   const swiftStruct = buildSwiftStructWithInit({ name, protocols: ['Sendable'], variables });
-  await writeTextFileSafe(join(outputDirectory, `EsdsTheme/${name}.swift`), swiftStruct);
+  await writeTextFileSafe(join(outputDirectory, `${swiftMainStruct}/${name}.swift`), swiftStruct);
 }

@@ -22,6 +22,7 @@ import { buildSwiftThemeStructs } from './built-steps/build-swift-theme-structs/
 import { buildXcAssets } from './built-steps/build-xcassets.ts';
 import { buildSwiftFile } from './helpers/build-swift-file.ts';
 import { getTokenGroupName } from './swift-tokens-format.ts';
+import { rawTokensPrefix } from './CONSTANTS.ts';
 
 export interface BuildSwiftTokensOptions {
   readonly baseCollection: DesignTokensCollection;
@@ -38,8 +39,6 @@ export async function buildSwiftTokens({
 }: BuildSwiftTokensOptions) {
   return logger.asyncTask('swift', async (): Promise<void> => {
     outputDirectory = removeTrailingSlash(outputDirectory);
-
-    const rawTokensPrefix = 'RawToken';
     const iosSwitftUiOutputDirectory: string = `${outputDirectory}/ios/swift-ui`;
     const t1ColorTokenNameToColorsetName = new Map<string, string>();
     const declarations: Map<string, SwiftEnumDeclaration[]> = new Map();

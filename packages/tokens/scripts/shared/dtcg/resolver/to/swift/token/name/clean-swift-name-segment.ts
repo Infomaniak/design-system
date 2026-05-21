@@ -5,9 +5,6 @@ export function cleanSwiftNameSegment(segment: string): string {
 }
 
 export function cleanSwiftName(name: string): string {
-  const RESERVED_WORDS = ['Color', 'Font'];
-
   return name
     .replace(/^(\d)/, '_$1')
-    .replace(/^(.+)$/, (s) => (RESERVED_WORDS.includes(s) ? `_${s}` : s));
 }

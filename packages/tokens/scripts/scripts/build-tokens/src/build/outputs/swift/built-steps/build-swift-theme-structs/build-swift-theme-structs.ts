@@ -1,3 +1,5 @@
+import { join } from 'node:path';
+import { writeTextFileSafe } from '../../../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import { DesignTokensCollection } from '../../../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { DesignTokenModifiers } from '../../../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import type {
@@ -9,8 +11,11 @@ import { isFontFamilyDesignTokensCollectionToken } from '../../../../../../../..
 import { T2_DIRECTORY_NAME } from '../../../../../constants/design-token-tiers.ts';
 import { buildSharedStructs } from './build-repeated-structures.ts';
 import { buildStructTree } from './build-struct-tree.ts';
+import { buildSwiftThemeExtension } from './build-swift-theme-extension.ts';
 import { buildTokenTree } from './build-token-tree.ts';
 import { findPatterns } from './find-patterns.ts';
+import { findValueMapDifferences } from './find-value-map-differences.ts';
+import { swiftMainStruct } from '../../CONSTANTS.ts';
 
 export interface BuildSwiftThemeStructOptions {
   readonly baseCollection: DesignTokensCollection;
@@ -72,44 +77,45 @@ export async function buildSwiftThemeStructs({
 
   await buildStructTree(tree, [], patterns, outputDirectory, valueMap);
 
-  // modifiers.forEach((tokenContext, modifierType) => {
-  //   if (modifierType === 'theme') return; // Avoid on iOS cause light and dark are handle differently
+  modifiers.forEach((tokenContext, modifierType) => {
+    if (modifierType === 'theme') return; // Avoid on iOS cause light and dark are handle differently
 
-  //   tokenContext.forEach(async (modifierCollection, modifierName) => {
-  //     const modifierNames: readonly ArrayDesignTokenName[] = Array.from(
-  //       modifierCollection
-  //         .tokens()
-  //         .filter((token: GenericDesignTokensCollectionToken): boolean => {
-  //           return token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME));
-  //         })
-  //         .map((token: GenericDesignTokensCollectionToken): ArrayDesignTokenName => {
-  //           return token.name;
-  //         }),
-  //     );
+    tokenContext.forEach(async (modifierCollection, modifierName) => {
+      const modifierNames: readonly ArrayDesignTokenName[] = Array.from(
+        modifierCollection
+          .tokens()
+          .filter((token: GenericDesignTokensCollectionToken): boolean => {
+            return token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME));
+          })
+          .map((token: GenericDesignTokensCollectionToken): ArrayDesignTokenName => {
+            return token.name;
+          }),
+      );
 
-  //     const { tree: modifierTree, valueMap: modifierValueMap } = buildTokenTree(modifierCollection, modifierNames, 'String?', TYPE_SWIFT_MAP);
+      const { tree: modifierTree, valueMap: modifierValueMap } = buildTokenTree(modifierCollection, modifierNames, 'String?', TYPE_SWIFT_MAP, rawTokensPrefix);
 
-  //     // console.log(`${JSON.stringify(modifierTree, null, 2)}`);
-  //     // console.log(`modifierValueMap: ${JSON.stringify(Array.from(modifierValueMap.entries()), null, 2)}`);
+      // console.log(`${JSON.stringify(modifierTree, null, 2)}`);
+      // console.log(`modifierValueMap: ${JSON.stringify(Array.from(modifierValueMap.entries()), null, 2)}`);
 
-  //     const differencies = findValueMapDifferences(valueMap, modifierValueMap);
+      const differencies = findValueMapDifferences(valueMap, modifierValueMap);
 
-  //     // DEBUG
-  //     // console.log(`[${modifierType}/${modifierName}] differences (${differencies.length}):\n${JSON.stringify(differencies, null, 2)}`);
+      // DEBUG
+      // console.log(`[${modifierType}/${modifierName}] differences (${differencies.length}):\n${JSON.stringify(differencies, null, 2)}`);
 
-  //     if (differencies.length === 0) return;
+      if (differencies.length === 0) return;
 
-  //     const swiftFileName = `${firstLetterCapitalized(modifierName)}+EsdsTheme`;
-  //     const swiftStruct = buildSwiftThemeExtension(
-  //       modifierName,
-  //       modifierTree,
-  //       patterns,
-  //       modifierValueMap,
-  //       differencies,
-  //     );
-  //     await writeTextFileSafe(join(outputDirectory, `EsdsTheme/${firstLetterCapitalized(modifierType)}/${swiftFileName}.swift`), swiftStruct);
-  //   });
-  // });
+      const swiftFileName = `${firstLetterCapitalized(modifierName)}+${swiftMainStruct}`;
+      const swiftStruct = buildSwiftThemeExtension(
+        modifierName,
+        modifierTree,
+        patterns,
+        modifierValueMap,
+        differencies,
+      );
+
+      await writeTextFileSafe(join(outputDirectory, `${swiftMainStruct}/${firstLetterCapitalized(modifierType)}/${swiftFileName}.swift`), swiftStruct);
+    });
+  });
 }
 
 export function firstLetterCapitalized(string: string): string {

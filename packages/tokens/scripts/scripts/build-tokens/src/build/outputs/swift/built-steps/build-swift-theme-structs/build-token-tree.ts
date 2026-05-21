@@ -23,9 +23,7 @@ export function buildTokenTree(
                 const resolvedToken: GenericResolvedDesignTokensCollectionToken = baseCollection.resolve(
                     baseCollection.get(name),
                 );
-                const groupName = getTokenGroupName(resolvedToken);
-                const tokenName = segmentsToSwiftIdentifier(name, 1);
-                const tokenSwiftValue = tokenToSwiftValue(rawTokensPrefix, groupName, tokenName);
+                const tokenSwiftValue = tokenToSwiftValue(rawTokensPrefix, resolvedToken);
 
                 node[key] = platformTypeRecord[resolvedToken.type] ?? undefinedType;
                 valueMap.set(JSON.stringify(name), `${tokenSwiftValue}`);

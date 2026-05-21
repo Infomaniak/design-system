@@ -3,6 +3,7 @@ import { writeTextFileSafe } from '../../../../../../../../../../../scripts/help
 import { buildSwiftStructWithInit } from '../../helpers/build-swift-file-with-init.ts';
 import { buildVariablesForNode } from './build-variables-for-node.ts';
 import { nameForPatternPaths, type NestedMap } from './LEGACY/find-repeated-structures.ts';
+import { swiftMainStruct } from '../../CONSTANTS.ts';
 
 async function buildReapeatedStructures(patterns: Map<string, string[]>, outputDirectory: string) {
   for (const [signature, pathJsonList] of patterns) {
@@ -16,7 +17,7 @@ async function buildReapeatedStructures(patterns: Map<string, string[]>, outputD
     });
 
     await writeTextFileSafe(
-      join(outputDirectory, `EsdsTheme/Shared/${structName}.swift`),
+      join(outputDirectory, `${swiftMainStruct}/Shared/${structName}.swift`),
       swiftStruct,
     );
   }
