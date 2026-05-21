@@ -134,7 +134,7 @@
         },
         {
           "kind": "custom-element-definition",
-          "name": "esds-icon",
+          "name": "esds-icon-lit",
           "declaration": {
             "name": "EsdsIconComponent",
             "module": "src/esds-icon/esds-icon.component.ts"

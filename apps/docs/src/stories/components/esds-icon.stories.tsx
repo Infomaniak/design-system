@@ -21,7 +21,7 @@ interface EsdsIconProps {
 }
 
 function EsdsIcon({
-  name = 'esds:arrow-right',
+  name = 'esds:bell',
   mode = 'svg',
   inline = false,
   nolazy = false,
@@ -34,7 +34,7 @@ function EsdsIcon({
     const container = ref.current;
     container.innerHTML = '';
 
-    const icon = document.createElement('esds-icon');
+    const icon = document.createElement('esds-icon-lit');
     icon.setAttribute('name', name);
     icon.setAttribute('mode', mode);
     if (inline) icon.setAttribute('inline', '');
@@ -65,8 +65,8 @@ export const Default: StoryObj = {
       <section>
         <h3>Default (SVG mode)</h3>
         <p style={{ fontSize: 'var(--esds-font-size-body-lg)' }}>
-          <EsdsIcon name="esds:arrow-right" />
-          esds:arrow-right
+          <EsdsIcon name="esds:bell" />
+          esds:bell
         </p>
       </section>
 
@@ -74,10 +74,10 @@ export const Default: StoryObj = {
         <h3>Background mode (mode=&quot;bg&quot;)</h3>
         <p style={{ fontSize: 'var(--esds-font-size-body-lg)' }}>
           <EsdsIcon
-            name="esds:arrow-right"
+            name="esds:bell"
             mode="bg"
           />
-          esds:arrow-right
+          esds:bell
         </p>
       </section>
 
@@ -90,10 +90,10 @@ export const Default: StoryObj = {
           }}
         >
           <EsdsIcon
-            name="esds:arrow-right"
+            name="esds:bell"
             mode="mask"
           />
-          esds:arrow-right (red)
+          esds:bell (red)
         </p>
       </section>
 
@@ -101,10 +101,10 @@ export const Default: StoryObj = {
         <h3>Inline alignment (inline attribute)</h3>
         <p style={{ fontSize: 'var(--esds-font-size-body-lg)' }}>
           <EsdsIcon
-            name="esds:arrow-right"
+            name="esds:bell"
             inline
           />
-          esds:arrow-right (inline)
+          esds:bell (inline)
         </p>
       </section>
 
@@ -112,10 +112,10 @@ export const Default: StoryObj = {
         <h3>Manual loading (nolazy attribute)</h3>
         <p style={{ fontSize: 'var(--esds-font-size-body-lg)' }}>
           <EsdsIcon
-            name="esds:arrow-right"
+            name="esds:bell"
             nolazy
           />
-          esds:arrow-right (nolazy)
+          esds:bell (nolazy)
         </p>
       </section>
     </div>

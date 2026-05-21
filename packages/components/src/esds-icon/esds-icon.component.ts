@@ -11,7 +11,7 @@ export type EsdsIconComponentStatus = 'loading' | 'rendered' | 'error';
  * @summary Icon component
  * @element esds-icon
  */
-@customElement('esds-icon')
+@customElement('esds-icon-lit') // TODO: change to `esds-icon` once we don't have a conflict with the other component
 export class EsdsIconComponent extends LitElement {
   static override styles = css`
     :host {
