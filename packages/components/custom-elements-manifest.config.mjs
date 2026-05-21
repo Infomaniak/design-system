@@ -1,7 +1,7 @@
 import { getTsProgram, typeParserPlugin } from '@wc-toolkit/type-parser';
 
 export default {
-  globs: ['src/**/*.ts'],
+  globs: ['src/**/*.component.ts'],
   outdir: '.',
   dev: false,
   litelement: true,
