@@ -261,7 +261,6 @@ export class EsdsIconComponent extends LitElement {
           return;
         }
 
-        this._status = 'rendered';
         if (this.mode === 'svg') {
           this.style.removeProperty('--svg');
           this._svgNode = this._parseSvgToDom(svgContent);
@@ -269,6 +268,8 @@ export class EsdsIconComponent extends LitElement {
           this._svgNode = null;
           this.style.setProperty('--svg', `url('data:image/svg+xml;base64,${btoa(svgContent)}')`);
         }
+
+        this._status = 'rendered';
       })
       .catch((error: unknown): void => {
         if (signal.aborted) {
@@ -291,12 +292,17 @@ export class EsdsIconComponent extends LitElement {
   }
 
   /** @internal */
-  private _parseSvgToDom(svgString: string): SVGSVGElement | null {
+  private _parseSvgToDom(svgString: string): SVGSVGElement {
     const sanitized = DOMPurify.sanitize(svgString, {
       USE_PROFILES: { svg: true },
     });
     const doc = new DOMParser().parseFromString(sanitized, 'image/svg+xml');
     const svg = doc.querySelector('svg');
-    return svg ? (svg.cloneNode(true) as SVGSVGElement) : null;
+
+    if (!svg) {
+      throw new Error('Sanitized SVG contains no <svg> element');
+    }
+
+    return svg.cloneNode(true) as SVGSVGElement;
   }
 }
