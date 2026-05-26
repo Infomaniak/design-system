@@ -78,13 +78,12 @@ function buildInitValue(
 export async function buildStructTree(
   node: NestedMap,
   path: string[],
-  patterns: Map<string, string[]>,
   outputDirectory: string,
   valueMap: Map<string, string>,
 ): Promise<void> {
   const name = structNameForPath(path);
 
-  const variables = buildVariablesForNode(node, patterns);
+  const variables = buildVariablesForNode(node);
 
   // Set initValue for string (leaf) entries directly in this node
   const stringEntries = sortEntries(Object.entries(node).filter(([, v]) => typeof v === 'string'));
@@ -103,50 +102,36 @@ export async function buildStructTree(
 
   const objectEntries = sortEntries(Object.entries(node).filter(([, v]) => typeof v !== 'string'));
   for (const [key, value] of objectEntries) {
-    const sharedName = getSharedStructName(value as NestedMap, patterns);
     const idx = variables.findIndex((v) => v.name === toSwiftVariableName([key]));
+    const childEntries = Object.entries(value as NestedMap);
 
-    if (!sharedName) {
-      const childEntries = Object.entries(value as NestedMap);
-
-      if (childEntries.length === 1 && typeof childEntries[0][1] === 'string') {
-        // Single leaf: inline as combinedName, no sub-struct created
-        const [leafKey, leafType] = childEntries[0];
-        const initVal = valueMap.get(JSON.stringify([...path, key, leafKey]));
-        if (idx !== -1)
-          variables[idx] = {
-            name: toSwiftVariableName([key, leafKey]),
-            type: leafType as string,
-            initValue: initVal,
-          };
-      } else {
-        const typeName = structNameForPath([...path, key]);
-        // Unique EsdsThemeXxx struct: has its own defaulted init, just call TypeName()
-        if (idx !== -1)
-          variables[idx] = {
-            name: toSwiftVariableName([key]),
-            type: typeName,
-            initValue: `${typeName}()`,
-          };
-        await buildStructTree(
-          value as NestedMap,
-          [...path, key],
-          patterns,
-          outputDirectory,
-          valueMap,
-        );
-      }
+    if (childEntries.length === 1 && typeof childEntries[0][1] === 'string') {
+      // Single leaf: inline as combinedName, no sub-struct created
+      const [leafKey, leafType] = childEntries[0];
+      const initVal = valueMap.get(JSON.stringify([...path, key, leafKey]));
+      if (idx !== -1)
+        variables[idx] = {
+          name: toSwiftVariableName([key, leafKey]),
+          type: leafType as string,
+          initValue: initVal,
+        };
     } else {
-      // Shared struct: set initValue
-      const initVal = buildInitValue(
-        sharedName,
+      const typeName = structNameForPath([...path, key]);
+      // Unique EsdsThemeXxx struct: has its own defaulted init, just call TypeName()
+      if (idx !== -1)
+        variables[idx] = {
+          name: toSwiftVariableName([key]),
+          type: typeName,
+          initValue: `${typeName}()`,
+        };
+      await buildStructTree(
         value as NestedMap,
         [...path, key],
-        patterns,
+        outputDirectory,
         valueMap,
       );
-      if (idx !== -1) variables[idx] = { ...variables[idx], initValue: initVal };
     }
+
   }
 
   const swiftStruct = buildSwiftStructWithInit({ name, protocols: ['Sendable'], variables });

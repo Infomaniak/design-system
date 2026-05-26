@@ -39,7 +39,6 @@ function emitDiffNode(
   diffNode: DiffNode,
   treeNode: NestedMap,
   path: string[],
-  patterns: Map<string, string[]>,
   modifierValueMap: Map<string, string>,
 ): string {
   const args: string[] = [];
@@ -56,21 +55,8 @@ function emitDiffNode(
   if (leafEntries.length > 0) {
     const treeHasMixedEntries = Object.values(treeNode).some((v) => typeof v !== 'string');
     if (treeHasMixedEntries) {
-      const treeStringMap = Object.fromEntries(
-        Object.entries(treeNode).filter(([, v]) => typeof v === 'string'),
-      ) as NestedMap;
-      const rootName = getSharedStructName(treeStringMap, patterns);
-      if (rootName) {
-        // Root is a pattern struct (no default init): emit all root leaves from modifierValueMap
-        const rootArgs = Object.keys(treeStringMap).map(
-          (k) =>
-            `${toSwiftVariableName([k])}: ${modifierValueMap.get(JSON.stringify([...path, k])) ?? 'nil'}`,
-        );
-        args.push(`root: ${rootName}(\n  ${rootArgs.join(',\n  ')}\n)`);
-      } else {
-        for (const [key, val] of leafEntries) {
-          args.push(`${toSwiftVariableName([key])}: ${val}`);
-        }
+      for (const [key, val] of leafEntries) {
+        args.push(`${toSwiftVariableName([key])}: ${val}`);
       }
     } else {
       for (const [key, val] of leafEntries) {
@@ -85,11 +71,10 @@ function emitDiffNode(
     const childTreeNode = treeNode[key] as NestedMap | undefined;
     if (!childTreeNode) continue;
 
-    const sharedName = getSharedStructName(childTreeNode, patterns);
-    const childTypeName = sharedName ?? structNameForPath(childPath);
+    const childTypeName = structNameForPath(childPath);
 
     const childEntries = Object.entries(childTreeNode);
-    if (!sharedName && childEntries.length === 1 && typeof childEntries[0][1] === 'string') {
+    if (childEntries.length === 1 && typeof childEntries[0][1] === 'string') {
       // Single-leaf inlined node
       const [leafKey] = childEntries[0];
       args.push(
@@ -101,7 +86,6 @@ function emitDiffNode(
         childDiff,
         childTreeNode,
         childPath,
-        patterns,
         modifierValueMap,
       );
       if (call) args.push(`${toSwiftVariableName([key])}: ${call}`);
@@ -119,12 +103,11 @@ function emitDiffNode(
 export function buildSwiftThemeExtension(
   modifierName: string,
   tree: NestedMap,
-  patterns: Map<string, string[]>,
   modifierValueMap: Map<string, string>,
   differences: ValueMapDifference[],
 ): string {
   const diffTree = buildDiffTree(differences, modifierValueMap);
-  const initCall = emitDiffNode(`${swiftMainStruct}`, diffTree, tree, [], patterns, modifierValueMap);
+  const initCall = emitDiffNode(`${swiftMainStruct}`, diffTree, tree, [], modifierValueMap);
 
   return buildSwiftFile({
     imports: ['SwiftUI'],

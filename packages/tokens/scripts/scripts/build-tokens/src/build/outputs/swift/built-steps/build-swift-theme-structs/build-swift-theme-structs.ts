@@ -66,16 +66,7 @@ export async function buildSwiftThemeStructs({
     rawTokensPrefix,
   );
 
-  // LEGACY
-  // const patterns = findRepeatedStructures(tree);
-
-  // await buildReapeatedStructures(patterns, outputDirectory);
-
-  const patterns = findPatterns(tree);
-
-  await buildSharedStructs(patterns, outputDirectory);
-
-  await buildStructTree(tree, [], patterns, outputDirectory, valueMap);
+  await buildStructTree(tree, [], outputDirectory, valueMap);
 
   modifiers.forEach((tokenContext, modifierType) => {
     if (modifierType === 'theme') return; // Avoid on iOS cause light and dark are handle differently
@@ -108,7 +99,6 @@ export async function buildSwiftThemeStructs({
       const swiftStruct = buildSwiftThemeExtension(
         modifierName,
         modifierTree,
-        patterns,
         modifierValueMap,
         differencies,
       );
