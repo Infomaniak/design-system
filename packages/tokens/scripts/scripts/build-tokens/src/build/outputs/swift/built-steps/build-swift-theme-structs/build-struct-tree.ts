@@ -8,6 +8,7 @@ import type { NestedMap } from './LEGACY/find-repeated-structures.ts';
 import { buildVariablesForNode } from './build-variables-for-node.ts';
 import { getSharedStructName } from './find-patterns.ts';
 import { structPrefix, swiftMainStruct } from '../../CONSTANTS.ts';
+import { firstLetterCapitalized } from './build-swift-theme-structs.ts';
 
 function structNameForPath(path: string[]): string {
   return path.length === 0 ? `${swiftMainStruct}` : `${structPrefix}${segmentsReferenceToPascalCase(path)}`;
@@ -81,8 +82,6 @@ export async function buildStructTree(
   outputDirectory: string,
   valueMap: Map<string, string>,
 ): Promise<void> {
-  const name = structNameForPath(path);
-
   const variables = buildVariablesForNode(node);
 
   // Set initValue for string (leaf) entries directly in this node
@@ -134,6 +133,8 @@ export async function buildStructTree(
 
   }
 
+  const name = structNameForPath(path);
+  const folderName = path.length == 0 ? `` : `${structPrefix}${firstLetterCapitalized(path[0])}/`
   const swiftStruct = buildSwiftStructWithInit({ name, protocols: ['Sendable'], variables });
-  await writeTextFileSafe(join(outputDirectory, `${swiftMainStruct}/${name}.swift`), swiftStruct);
+  await writeTextFileSafe(join(outputDirectory, `${swiftMainStruct}/${folderName}${name}.swift`), swiftStruct);
 }
