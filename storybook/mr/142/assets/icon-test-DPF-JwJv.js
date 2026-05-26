@@ -1,0 +1,2 @@
+import{n as e}from"./chunk-DnJy8xQt.js";import{r as t}from"./react-2PHY_ptJ.js";import{a as n,h as r,o as i}from"./iframe-BqJAIh7h.js";import{t as a}from"./mdx-react-shim-DQIUUSAW.js";function o(e){let r={p:`p`,...t(),...e.components};return(0,c.jsxs)(c.Fragment,{children:[(0,c.jsx)(n,{title:`Icons/Test`}),`
+`,(0,c.jsx)(r.p,{children:`Test`})]})}function s(e={}){let{wrapper:n}={...t(),...e.components};return n?(0,c.jsx)(n,{...e,children:(0,c.jsx)(o,{...e})}):o(e)}var c;e((()=>{c=r(),a(),i()}))();export{s as default};
