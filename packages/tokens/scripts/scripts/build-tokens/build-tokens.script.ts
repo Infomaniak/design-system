@@ -35,13 +35,15 @@ export function buildTokensScript(): Promise<void> {
       logger,
     });
 
-    await generateWorkspaceNpmPackage({
-      ...buildConfig,
-      packageDirectory: ROOT_DIR,
-      workspaceRootDirectory: WORKSPACE_ROOT_DIR,
-      outputDirectory: join(OUTPUT_DIR, 'web'),
-      logger,
-    });
+    if (false) {
+      await generatePackage({
+        ...buildConfig,
+        rootDirectory: ROOT_DIR,
+        workspaceRootDirectory: WORKSPACE_ROOT_DIR,
+        outputDirectory: OUTPUT_DIR,
+        logger,
+      });
+    }
   });
 }
 
