@@ -20,9 +20,9 @@ import { T1_DIRECTORY_NAME, T2_DIRECTORY_NAME } from '../../../constants/design-
 import { buildSwiftEnumColor } from './built-steps/build-swift-enum-color.ts';
 import { buildSwiftThemeStructs } from './built-steps/build-swift-theme-structs/build-swift-theme-structs.ts';
 import { buildXcAssets } from './built-steps/build-xcassets.ts';
+import { rawTokensPrefix } from './CONSTANTS.ts';
 import { buildSwiftFile } from './helpers/build-swift-file.ts';
 import { getTokenGroupName } from './swift-tokens-format.ts';
-import { rawTokensPrefix } from './CONSTANTS.ts';
 
 export interface BuildSwiftTokensOptions {
   readonly baseCollection: DesignTokensCollection;

@@ -7,7 +7,6 @@ import { getEnvBuildConfig } from '../../../../../scripts/helpers/build/build-co
 import { loadOptionallyEnvFile } from '../../../../../scripts/helpers/env/env-file/load-optionally-env-file.ts';
 import { DEFAULT_LOG_LEVEL } from '../../../../../scripts/helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../../../../scripts/helpers/log/logger.ts';
-import { generateWorkspaceNpmPackage } from '../../../../../scripts/helpers/npm/generate-workspace-npm-package/generate-workspace-npm-package.ts';
 import { buildTokens } from './src/build/build-tokens.ts';
 
 const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..');

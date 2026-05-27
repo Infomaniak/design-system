@@ -10,13 +10,10 @@ import {
 } from '../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import {
   DESIGN_TOKEN_TIERS,
-  MATERIAL_DIRECTORY_NAME,
   MODIFIERS_DIRECTORY_NAME,
   T2_DIRECTORY_NAME,
   T3_DIRECTORY_NAME,
 } from '../constants/design-token-tiers.ts';
-import { buildCssTokens } from './outputs/css/build-css-tokens.ts';
-import { buildFigmaTokens } from './outputs/figma/build-figma-tokens.ts';
 import { buildKotlinTokens } from './outputs/kotlin/build-kotlin-tokens.ts';
 import { buildMarkdownTokens } from './outputs/markdown/build-markdown-tokens.ts';
 import { buildSwiftTokens } from './outputs/swift/build-swift-tokens.ts';
