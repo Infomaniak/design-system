@@ -4,9 +4,9 @@ import { isCurlyReference } from '../../../../../../shared/dtcg/design-token/ref
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { GenericDesignTokensCollectionTokenWithType } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/color/is-color-design-tokens-collection-token.ts';
-import { createSwiftColorEnum } from './ColorTokens/create-swift-color-enum.ts';
-import { processColorToken } from './ColorTokens/process-color-token.ts';
-import { defaultXCAssets } from './ColorTokens/XCAssetsIntefaces.ts';
+import { createSwiftColorEnum } from './color-tokens/create-swift-color-enum.ts';
+import { processColorToken } from './color-tokens/process-color-token.ts';
+import { defaultXCAssets } from './color-tokens/XCAssetsIntefaces.ts';
 
 export interface BuildSwiftTokensOptions {
   readonly collection: DesignTokensCollection;
