@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "author": {
       "name": "Infomaniak"
     },
@@ -10,21 +10,104 @@
       "title": "GPL-3.0-only",
       "spdx": "GPL-3.0-only"
     },
-    "total": 2
+    "total": 18
   },
-  "lastModified": 1777290394,
+  "lastModified": 1778597527,
   "icons": {
     "bell": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M10.268 21a2 2 0 003.464 0m-10.47-5.674A1 1 0 004 17h16a1 1 0 00.74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 106 8c0 4.499-1.411 5.956-2.738 7.326\"/>"
     },
     "bell-slash": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M10.268 21a2 2 0 003.464 0M17 17H4a1 1 0 01-.74-1.673C4.59 13.956 6 12.499 6 8a6 6 0 01.258-1.742M2 2l20 20M8.668 3.01A6 6 0 0118 8c0 2.687.77 4.653 1.707 6.05\"/>"
+    },
+    "bubble-left-text": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M7 11h10M7 15h6M7 7h8m7 10a2 2 0 01-2 2H6.828a2 2 0 00-1.414.586l-2.202 2.202A.71.71 0 012 21.286V5a2 2 0 012-2h16a2 2 0 012 2z\"/>"
+    },
+    "bug": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M12 20v-9m0 9a6 6 0 006-6v-3a4 4 0 00-4-4h-4a4 4 0 00-4 4v3a6 6 0 006 6m2.12-16.12L16 2m5 19a4 4 0 00-3.81-4M21 5a4 4 0 01-3.55 3.97M22 13h-4M3 21a4 4 0 013.81-4M3 5a4 4 0 003.55 3.97M6 13H2M8 2l1.88 1.88M9 7.13V6a3 3 0 116 0v1.13\"/>"
+    },
+    "chevron-down": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"m6 9 6 6 6-6\"/>"
+    },
+    "chevron-up": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"m18 15-6-6-6 6\"/>"
+    },
+    "dots-three-vertical": {
+      "body": "<path fill=\"currentColor\" d=\"M12 17.125a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m0-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m0-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75\"/>"
+    },
+    "envelope": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"m22 7-8.991 5.727a2 2 0 01-2.009 0L2 7m2-3h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2\"/>"
+    },
+    "envelope-filled": {
+      "body": "<g fill=\"currentColor\"><path d=\"m10.53 13.465.03.018a2.88 2.88 0 002.92-.018l9.388-5.98v10.569a2.8 2.8 0 01-2.8 2.8H3.928a2.8 2.8 0 01-2.801-2.8V7.48z\"/><path d=\"M20.068 3.146c1.374 0 2.514.99 2.752 2.294l-10.26 6.535a1.13 1.13 0 01-1.116-.003L1.176 5.438a2.8 2.8 0 012.752-2.292z\"/></g>"
+    },
+    "hard-drive": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M10 16h.01m11.936-3.987H2.054M6 16h.01m-3.798-4.423a2 2 0 00-.212.896V18a2 2 0 002 2h16a2 2 0 002-2v-5.527a2 2 0 00-.212-.896L18.55 5.11A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z\"/>"
+    },
+    "hard-drive-filled": {
+      "body": "<g fill=\"currentColor\"><path fill-rule=\"evenodd\" d=\"M22.875 18A2.875 2.875 0 0120 20.875H4A2.875 2.875 0 011.125 18v-5.105h21.75zM6.004 15.125a.877.877 0 100 1.755.877.877 0 000-1.755m3.997 0a.878.878 0 100 1.756.878.878 0 000-1.756\" clip-rule=\"evenodd\"/><path d=\"M16.96 3.132a2.88 2.88 0 012.372 1.586l3.217 6.427H1.45l3.218-6.427a2.88 2.88 0 012.571-1.593h9.522z\"/></g>"
+    },
+    "headset": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M3 11h3a2 2 0 012 2v3a2 2 0 01-2 2H5a2 2 0 01-2-2zm0 0a9 9 0 1118 0m0 0v5m0-5h-3a2 2 0 00-2 2v3a2 2 0 002 2h1a2 2 0 002-2m0 0v2a4 4 0 01-4 4h-5\"/>"
+    },
+    "magnifying-glass": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"m21 21-4.34-4.34M19 11a8 8 0 11-16 0 8 8 0 0116 0\"/>"
+    },
+    "plus": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M5 12h14m-7-7v14\"/>"
+    },
+    "sidebar-left-chevron-right": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M9 3v18m5-12 3 3-3 3M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2\"/>"
+    },
+    "smartphone-tablet": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M5 4a2 2 0 012-2h12a2 2 0 012 2v16a2 2 0 01-2 2h-2.4M8 18h.01M5 8h6a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V10a2 2 0 012-2\"/>"
+    },
+    "squares-four": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M9 3H4a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V4a1 1 0 00-1-1m11 0h-5a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V4a1 1 0 00-1-1m0 11h-5a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1v-5a1 1 0 00-1-1M9 14H4a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1v-5a1 1 0 00-1-1\"/>"
+    },
+    "users-stacked": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M16 3.128a4 4 0 010 7.744M22 21v-2a4 4 0 00-3-3.87M13 7a4 4 0 11-8 0 4 4 0 018 0\"/>"
     }
   },
   "categories": {
     "@all": [
       "bell",
-      "bell-slash"
+      "bell-slash",
+      "bubble-left-text",
+      "bug",
+      "chevron-down",
+      "chevron-up",
+      "dots-three-vertical",
+      "envelope",
+      "envelope-filled",
+      "hard-drive",
+      "hard-drive-filled",
+      "headset",
+      "magnifying-glass",
+      "plus",
+      "sidebar-left-chevron-right",
+      "smartphone-tablet",
+      "squares-four",
+      "users-stacked"
+    ],
+    "@filled": [
+      "envelope-filled",
+      "hard-drive-filled"
+    ],
+    "#actions": [
+      "dots-three-vertical"
+    ],
+    "#add": [
+      "plus"
+    ],
+    "#addition": [
+      "plus"
+    ],
+    "#additional": [
+      "dots-three-vertical"
+    ],
+    "#agent": [
+      "headset"
     ],
     "#alarm": [
       "bell"
@@ -35,11 +118,131 @@
     "#announcement": [
       "bell"
     ],
+    "#append": [
+      "plus"
+    ],
+    "#apps": [
+      "squares-four"
+    ],
+    "#arrow": [
+      "chevron-down",
+      "chevron-up"
+    ],
+    "#assistance": [
+      "headset"
+    ],
+    "#audience": [
+      "users-stacked"
+    ],
+    "#audio": [
+      "headset"
+    ],
+    "#backup": [
+      "hard-drive",
+      "hard-drive-filled"
+    ],
     "#badge": [
       "bell"
     ],
     "#blocked": [
       "bell-slash"
+    ],
+    "#breakpoint": [
+      "smartphone-tablet"
+    ],
+    "#browse": [
+      "magnifying-glass"
+    ],
+    "#bug": [
+      "bug"
+    ],
+    "#call": [
+      "headset"
+    ],
+    "#caret": [
+      "chevron-down",
+      "chevron-up"
+    ],
+    "#categories": [
+      "squares-four"
+    ],
+    "#chat": [
+      "bubble-left-text"
+    ],
+    "#chevron": [
+      "chevron-down",
+      "chevron-up"
+    ],
+    "#close": [
+      "chevron-up"
+    ],
+    "#collapse": [
+      "chevron-down",
+      "chevron-up",
+      "sidebar-left-chevron-right"
+    ],
+    "#comment": [
+      "bubble-left-text"
+    ],
+    "#communication": [
+      "envelope",
+      "envelope-filled"
+    ],
+    "#community": [
+      "users-stacked"
+    ],
+    "#contact": [
+      "envelope",
+      "envelope-filled",
+      "headset"
+    ],
+    "#contacts": [
+      "users-stacked"
+    ],
+    "#context-menu": [
+      "dots-three-vertical"
+    ],
+    "#conversation": [
+      "bubble-left-text"
+    ],
+    "#crash": [
+      "bug"
+    ],
+    "#create": [
+      "plus"
+    ],
+    "#cross-device": [
+      "smartphone-tablet"
+    ],
+    "#crowd": [
+      "users-stacked"
+    ],
+    "#customer-service": [
+      "headset"
+    ],
+    "#dashboard": [
+      "squares-four"
+    ],
+    "#data": [
+      "hard-drive",
+      "hard-drive-filled"
+    ],
+    "#database": [
+      "hard-drive",
+      "hard-drive-filled"
+    ],
+    "#debug": [
+      "bug"
+    ],
+    "#defect": [
+      "bug"
+    ],
+    "#device": [
+      "hard-drive",
+      "hard-drive-filled"
+    ],
+    "#devices": [
+      "smartphone-tablet"
     ],
     "#ding": [
       "bell"
@@ -47,32 +250,276 @@
     "#disable": [
       "bell-slash"
     ],
+    "#discover": [
+      "magnifying-glass"
+    ],
+    "#discussion": [
+      "bubble-left-text"
+    ],
+    "#disk": [
+      "hard-drive",
+      "hard-drive-filled"
+    ],
     "#do-not-disturb": [
       "bell-slash"
+    ],
+    "#down": [
+      "chevron-down"
+    ],
+    "#drawer": [
+      "sidebar-left-chevron-right"
+    ],
+    "#drive": [
+      "hard-drive",
+      "hard-drive-filled"
+    ],
+    "#dropdown": [
+      "chevron-down",
+      "dots-three-vertical"
+    ],
+    "#ellipsis": [
+      "dots-three-vertical"
+    ],
+    "#email": [
+      "envelope",
+      "envelope-filled"
+    ],
+    "#envelope": [
+      "envelope",
+      "envelope-filled"
+    ],
+    "#error": [
+      "bug"
+    ],
+    "#expand": [
+      "chevron-down",
+      "plus",
+      "sidebar-left-chevron-right"
+    ],
+    "#explore": [
+      "magnifying-glass"
+    ],
+    "#feedback": [
+      "bubble-left-text",
+      "bug"
+    ],
+    "#find": [
+      "magnifying-glass"
+    ],
+    "#fold": [
+      "chevron-up"
+    ],
+    "#gallery": [
+      "squares-four"
+    ],
+    "#glitch": [
+      "bug"
+    ],
+    "#grid": [
+      "squares-four"
+    ],
+    "#group": [
+      "users-stacked"
+    ],
+    "#harddrive": [
+      "hard-drive",
+      "hard-drive-filled"
+    ],
+    "#hardware": [
+      "hard-drive",
+      "hard-drive-filled"
+    ],
+    "#headphones": [
+      "headset"
+    ],
+    "#headset": [
+      "headset"
+    ],
+    "#help": [
+      "headset"
+    ],
+    "#helpdesk": [
+      "headset"
+    ],
+    "#hide": [
+      "chevron-up"
     ],
     "#ignore": [
       "bell-slash"
     ],
     "#inbox": [
-      "bell"
+      "bell",
+      "envelope",
+      "envelope-filled"
+    ],
+    "#include": [
+      "plus"
+    ],
+    "#increase": [
+      "plus"
+    ],
+    "#insect": [
+      "bug"
+    ],
+    "#insert": [
+      "plus"
+    ],
+    "#investigate": [
+      "magnifying-glass"
+    ],
+    "#ipad": [
+      "smartphone-tablet"
+    ],
+    "#issue": [
+      "bug"
+    ],
+    "#kebab": [
+      "dots-three-vertical"
+    ],
+    "#layout": [
+      "sidebar-left-chevron-right",
+      "squares-four"
+    ],
+    "#less": [
+      "chevron-up"
+    ],
+    "#letter": [
+      "envelope",
+      "envelope-filled"
+    ],
+    "#livechat": [
+      "bubble-left-text",
+      "headset"
+    ],
+    "#lookup": [
+      "magnifying-glass"
+    ],
+    "#magnifier": [
+      "magnifying-glass"
+    ],
+    "#magnifyingglass": [
+      "magnifying-glass"
+    ],
+    "#mail": [
+      "envelope",
+      "envelope-filled"
+    ],
+    "#members": [
+      "users-stacked"
+    ],
+    "#memory": [
+      "hard-drive",
+      "hard-drive-filled"
+    ],
+    "#menu": [
+      "dots-three-vertical",
+      "sidebar-left-chevron-right",
+      "squares-four"
     ],
     "#message": [
-      "bell"
+      "bell",
+      "bubble-left-text",
+      "envelope",
+      "envelope-filled"
+    ],
+    "#messaging": [
+      "bubble-left-text"
+    ],
+    "#minimize": [
+      "chevron-up"
+    ],
+    "#mobile": [
+      "smartphone-tablet"
+    ],
+    "#mobile-app": [
+      "smartphone-tablet"
+    ],
+    "#modules": [
+      "squares-four"
+    ],
+    "#more": [
+      "chevron-down",
+      "dots-three-vertical",
+      "plus"
+    ],
+    "#moreoptions": [
+      "dots-three-vertical"
+    ],
+    "#multidevice": [
+      "smartphone-tablet"
+    ],
+    "#multiple": [
+      "users-stacked"
     ],
     "#mute": [
       "bell-slash"
     ],
+    "#navigation": [
+      "sidebar-left-chevron-right"
+    ],
+    "#network": [
+      "users-stacked"
+    ],
+    "#new": [
+      "plus"
+    ],
+    "#newsletter": [
+      "envelope",
+      "envelope-filled"
+    ],
     "#no-alert": [
       "bell-slash"
     ],
+    "#note": [
+      "bubble-left-text"
+    ],
     "#notification": [
-      "bell"
+      "bell",
+      "envelope",
+      "envelope-filled"
     ],
     "#notification-off": [
       "bell-slash"
     ],
+    "#open": [
+      "chevron-down",
+      "sidebar-left-chevron-right"
+    ],
+    "#options": [
+      "dots-three-vertical"
+    ],
+    "#overflow": [
+      "dots-three-vertical"
+    ],
+    "#overview": [
+      "squares-four"
+    ],
+    "#panel": [
+      "sidebar-left-chevron-right"
+    ],
+    "#people": [
+      "users-stacked"
+    ],
+    "#phone": [
+      "smartphone-tablet"
+    ],
     "#ping": [
       "bell"
+    ],
+    "#plus": [
+      "plus"
+    ],
+    "#positive": [
+      "plus"
+    ],
+    "#preview": [
+      "smartphone-tablet"
+    ],
+    "#problem": [
+      "bug"
+    ],
+    "#query": [
+      "magnifying-glass"
     ],
     "#quiet": [
       "bell-slash"
@@ -80,11 +527,51 @@
     "#reminder": [
       "bell"
     ],
+    "#reply": [
+      "bubble-left-text"
+    ],
+    "#report": [
+      "bug"
+    ],
+    "#responsive": [
+      "smartphone-tablet"
+    ],
+    "#reveal": [
+      "chevron-down",
+      "sidebar-left-chevron-right"
+    ],
     "#ring": [
       "bell"
     ],
+    "#search": [
+      "magnifying-glass"
+    ],
+    "#seek": [
+      "magnifying-glass"
+    ],
+    "#send": [
+      "envelope",
+      "envelope-filled"
+    ],
+    "#server": [
+      "hard-drive",
+      "hard-drive-filled"
+    ],
+    "#settings": [
+      "dots-three-vertical"
+    ],
+    "#show": [
+      "chevron-down",
+      "sidebar-left-chevron-right"
+    ],
+    "#sidebar": [
+      "sidebar-left-chevron-right"
+    ],
     "#silent": [
       "bell-slash"
+    ],
+    "#smartphone": [
+      "smartphone-tablet"
     ],
     "#snooze": [
       "bell-slash"
@@ -92,17 +579,74 @@
     "#sound": [
       "bell"
     ],
+    "#ssd": [
+      "hard-drive",
+      "hard-drive-filled"
+    ],
+    "#stacked": [
+      "users-stacked"
+    ],
+    "#storage": [
+      "hard-drive",
+      "hard-drive-filled"
+    ],
     "#subscribe": [
-      "bell"
+      "bell",
+      "envelope",
+      "envelope-filled"
+    ],
+    "#support": [
+      "headset"
     ],
     "#suppress": [
       "bell-slash"
     ],
+    "#tablet": [
+      "smartphone-tablet"
+    ],
+    "#talk": [
+      "bubble-left-text"
+    ],
+    "#team": [
+      "users-stacked"
+    ],
+    "#thread": [
+      "bubble-left-text"
+    ],
+    "#thumbnails": [
+      "squares-four"
+    ],
+    "#tiles": [
+      "squares-four"
+    ],
+    "#toggle": [
+      "chevron-down",
+      "chevron-up",
+      "sidebar-left-chevron-right"
+    ],
+    "#top": [
+      "chevron-up"
+    ],
+    "#troubleshoot": [
+      "bug"
+    ],
     "#unsubscribe": [
       "bell-slash"
     ],
+    "#up": [
+      "chevron-up"
+    ],
     "#update": [
       "bell"
+    ],
+    "#users": [
+      "users-stacked"
+    ],
+    "#view": [
+      "squares-four"
+    ],
+    "#zoom": [
+      "magnifying-glass"
     ]
   },
   "width": 24,
