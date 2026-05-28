@@ -22,7 +22,7 @@ When the changes/additions are approved, the design-system team's will replicate
 
 - icons must be converted into components.
 - icons must have a name following this format: `esds/icon/<name>`, where `name` is `dash-cased`.
-- icons may have descriptions to add _tags_ and _projects_ (see [Metadata](#Metadata).
+- icons may have descriptions to add _tags_ and _categories_ (see [Metadata](#Metadata)).
 
 ### Commit the changes
 
@@ -132,17 +132,17 @@ Where `<tag>` is a tag name.
 #house #home #main
 ```
 
-#### Projects
+#### Categories
 
-Projects are a way to group SVGs by projects.
+Categories are a way to group SVGs by projects or categories.
 
 SVGs can be assigned to a project using the following syntax:
 
 ```txt
-@<project>
+@<category>
 ```
 
-Where `<project>` is a project name.
+Where `<category>` is a project name or a category type of icons.
 
 ##### Example
 
@@ -151,7 +151,7 @@ Where `<project>` is a project name.
 ```
 
 > [!NOTE]
-> Tags and projects can be mixed: `#house @kdrive`
+> Tags and categories can be mixed: `#house @kdrive`
 
 ---
 
