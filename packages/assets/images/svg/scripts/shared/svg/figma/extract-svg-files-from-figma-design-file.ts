@@ -82,7 +82,7 @@ export function extractSvgFilesFromFigmaDesignFile({
               return input.slice(1);
             });
 
-          const projects: readonly string[] = parts
+          const categories: readonly string[] = parts
             .filter((input: string): boolean => {
               return input.startsWith('@');
             })
@@ -95,7 +95,7 @@ export function extractSvgFilesFromFigmaDesignFile({
             name,
             metadata: {
               tags,
-              projects,
+              categories,
             },
           });
         }

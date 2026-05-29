@@ -13,12 +13,7 @@ export async function publishNpmPackageDirectory({
   tag,
   logger,
 }: PublishNpmPackageDirectoryOptions): Promise<void> {
-  const args: string[] = [
-    '--//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN',
-    'publish',
-    '--access',
-    'public',
-  ];
+  const args: string[] = ['publish', '--access', 'public'];
 
   if (tag !== undefined) {
     args.push('--tag', tag);
