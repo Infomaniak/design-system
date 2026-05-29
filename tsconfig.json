@@ -6,7 +6,7 @@
     "lib": ["ESNext", "DOM"],
     "types": ["node"],
     "typeRoots": ["node_modules/@types"],
-    "useDefineForClassFields": true,
+    "useDefineForClassFields": false,
     "skipLibCheck": true,
     "declaration": false,
     "experimentalDecorators": true,

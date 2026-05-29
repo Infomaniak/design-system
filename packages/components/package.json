@@ -31,7 +31,7 @@
   "dependencies": {
     "@infomaniak-design-system/esds-icon": "workspace:*",
     "dompurify": "^3.2.5",
-    "lit": "^3.2.0"
+    "lit": "^3.3.3"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.11.0",
