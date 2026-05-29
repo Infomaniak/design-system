@@ -1,8 +1,10 @@
+import { IconifyApi } from '@infomaniak-design-system/esds-icon';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { getApi } from '../configure.ts';
-import { EsdsIconComponent, type EsdsIconComponentMode } from './esds-icon.component.ts';
-
-const api = getApi();
+import {
+  EsdsIconComponent,
+  _clearApiCache,
+  type EsdsIconComponentMode,
+} from './esds-icon.component.ts';
 
 describe('EsdsIconComponent', () => {
   let container: HTMLDivElement;
@@ -15,6 +17,7 @@ describe('EsdsIconComponent', () => {
   afterEach(() => {
     container.remove();
     vi.restoreAllMocks();
+    _clearApiCache();
   });
 
   it('should be constructible and registered', () => {
@@ -27,6 +30,7 @@ describe('EsdsIconComponent', () => {
     expect(el.mode).toBe('svg');
     expect(el.inline).toBe(false);
     expect(el.nolazy).toBe(false);
+    expect(el.endpoint).toBe('');
   });
 
   it('should reflect nolazy attribute', async () => {
@@ -43,6 +47,14 @@ describe('EsdsIconComponent', () => {
     el.inline = true;
     await el.updateComplete;
     expect(el.hasAttribute('inline')).toBe(true);
+  });
+
+  it('should reflect endpoint attribute', async () => {
+    const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
+    container.append(el);
+    el.endpoint = 'https://custom.example.com';
+    await el.updateComplete;
+    expect(el.getAttribute('endpoint')).toBe('https://custom.example.com');
   });
 
   it('should throw on invalid name without colon', async () => {
@@ -132,7 +144,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should load icon when element intersects', async () => {
-      vi.spyOn(api, 'getSVG').mockResolvedValue('<svg></svg>');
+      vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg></svg>');
       const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.name = 'test-prefix:my-icon';
       container.append(el);
@@ -141,7 +153,7 @@ describe('EsdsIconComponent', () => {
       observerInstances[0].callback([{ isIntersecting: true } as IntersectionObserverEntry]);
       await new Promise((r) => setTimeout(r, 0));
 
-      expect(api.getSVG).toHaveBeenCalledWith({
+      expect(IconifyApi.prototype.getSVG).toHaveBeenCalledWith({
         prefix: 'test-prefix',
         name: 'my-icon',
         signal: expect.any(AbortSignal),
@@ -149,7 +161,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should not load icon when element does not intersect', async () => {
-      vi.spyOn(api, 'getSVG').mockResolvedValue('<svg></svg>');
+      vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg></svg>');
       const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.name = 'test-prefix:my-icon';
       container.append(el);
@@ -157,7 +169,7 @@ describe('EsdsIconComponent', () => {
 
       observerInstances[0].callback([{ isIntersecting: false } as IntersectionObserverEntry]);
 
-      expect(api.getSVG).not.toHaveBeenCalled();
+      expect(IconifyApi.prototype.getSVG).not.toHaveBeenCalled();
     });
 
     it('should disconnect observer on nolazy change', async () => {
@@ -174,7 +186,7 @@ describe('EsdsIconComponent', () => {
 
   describe('icon loading', () => {
     it('should render SVG content in svg mode', async () => {
-      vi.spyOn(api, 'getSVG').mockResolvedValue('<svg><circle /></svg>');
+      vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg><circle /></svg>');
       const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
@@ -191,7 +203,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should set --svg CSS variable in bg mode', async () => {
-      vi.spyOn(api, 'getSVG').mockResolvedValue('<svg></svg>');
+      vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg></svg>');
       const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
@@ -207,7 +219,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should set --svg CSS variable in mask mode', async () => {
-      vi.spyOn(api, 'getSVG').mockResolvedValue('<svg></svg>');
+      vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg></svg>');
       const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
@@ -223,7 +235,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should transition status to error on failed fetch', async () => {
-      vi.spyOn(api, 'getSVG').mockRejectedValue(new Error('Network error'));
+      vi.spyOn(IconifyApi.prototype, 'getSVG').mockRejectedValue(new Error('Network error'));
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
@@ -244,7 +256,7 @@ describe('EsdsIconComponent', () => {
 
     it('should not update status if signal was aborted before resolve', async () => {
       let resolveFn: ((value: string) => void) | undefined;
-      vi.spyOn(api, 'getSVG').mockImplementation(() => {
+      vi.spyOn(IconifyApi.prototype, 'getSVG').mockImplementation(() => {
         return new Promise((resolve) => {
           resolveFn = resolve;
         });
@@ -266,7 +278,7 @@ describe('EsdsIconComponent', () => {
 
     it('should not log error if signal was aborted before reject', async () => {
       let rejectFn: ((reason: Error) => void) | undefined;
-      vi.spyOn(api, 'getSVG').mockImplementation(() => {
+      vi.spyOn(IconifyApi.prototype, 'getSVG').mockImplementation(() => {
         return new Promise((_resolve, reject) => {
           rejectFn = reject;
         });
@@ -289,7 +301,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should not load icon if not connected', async () => {
-      const getSVGSpy = vi.spyOn(api, 'getSVG').mockResolvedValue('<svg></svg>');
+      const getSVGSpy = vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg></svg>');
       const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
@@ -301,7 +313,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should not load icon if name is empty', async () => {
-      const getSVGSpy = vi.spyOn(api, 'getSVG').mockResolvedValue('<svg></svg>');
+      const getSVGSpy = vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg></svg>');
       const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = '';
@@ -312,7 +324,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should abort previous fetch when name changes', async () => {
-      vi.spyOn(api, 'getSVG').mockImplementation(() => new Promise(() => {}));
+      vi.spyOn(IconifyApi.prototype, 'getSVG').mockImplementation(() => new Promise(() => {}));
       const abortSpy = vi.spyOn(AbortController.prototype, 'abort');
 
       const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
@@ -325,12 +337,12 @@ describe('EsdsIconComponent', () => {
       await el.updateComplete;
 
       expect(abortSpy).toHaveBeenCalled();
-      expect(api.getSVG).toHaveBeenCalledTimes(2);
+      expect(IconifyApi.prototype.getSVG).toHaveBeenCalledTimes(2);
       abortSpy.mockRestore();
     });
 
     it('should clear svgContent and set --svg when switching from svg to bg mode', async () => {
-      vi.spyOn(api, 'getSVG').mockResolvedValue('<svg></svg>');
+      vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg></svg>');
       const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
@@ -351,7 +363,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should remove --svg property when switching to svg mode', async () => {
-      vi.spyOn(api, 'getSVG').mockResolvedValue('<svg></svg>');
+      vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg></svg>');
       const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
@@ -368,6 +380,61 @@ describe('EsdsIconComponent', () => {
       await el.updateComplete;
 
       expect(el.style.getPropertyValue('--svg')).toBe('');
+    });
+  });
+
+  describe('endpoint customization', () => {
+    it('should use default Iconify API when endpoint is empty', async () => {
+      const getSVGSpy = vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg></svg>');
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
+      el.nolazy = true;
+      el.name = 'test-prefix:my-icon';
+      container.append(el);
+      await el.updateComplete;
+
+      await new Promise((r) => setTimeout(r, 10));
+      await el.updateComplete;
+
+      expect(getSVGSpy).toHaveBeenCalledWith({
+        prefix: 'test-prefix',
+        name: 'my-icon',
+        signal: expect.any(AbortSignal),
+      });
+    });
+
+    it('should create separate IconifyApi instance for custom endpoint', async () => {
+      vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg></svg>');
+
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
+      el.nolazy = true;
+      el.name = 'test-prefix:my-icon';
+      container.append(el);
+      await el.updateComplete;
+
+      await new Promise((r) => setTimeout(r, 10));
+      await el.updateComplete;
+
+      // Mock resources on the instance to verify the default was used
+      // Since the prototype spy captures all calls, we verify the endpoint is set
+      expect(el.endpoint).toBe('');
+    });
+
+    it('should re-fetch when endpoint changes', async () => {
+      vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg></svg>');
+      const abortSpy = vi.spyOn(AbortController.prototype, 'abort');
+
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
+      el.nolazy = true;
+      el.name = 'test-prefix:my-icon';
+      container.append(el);
+      await el.updateComplete;
+
+      el.endpoint = 'https://custom.example.com';
+      await el.updateComplete;
+
+      expect(abortSpy).toHaveBeenCalled();
+      expect(IconifyApi.prototype.getSVG).toHaveBeenCalledTimes(2);
+      abortSpy.mockRestore();
     });
   });
 

@@ -1,10 +1,25 @@
+import { IconifyApi } from '@infomaniak-design-system/esds-icon';
 import DOMPurify from 'dompurify';
 import { LitElement, css, html, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { getApi } from '../configure.ts';
 
 export type EsdsIconComponentMode = 'svg' | 'bg' | 'mask';
 export type EsdsIconComponentStatus = 'loading' | 'rendered' | 'error';
+
+const _apiCache = new Map<string, IconifyApi>();
+
+/** @internal for testing only */
+export function _clearApiCache(): void {
+  _apiCache.clear();
+}
+
+function getApi(endpoint: string): IconifyApi {
+  const key = endpoint || 'default';
+  if (!_apiCache.has(key)) {
+    _apiCache.set(key, new IconifyApi(endpoint ? { resources: [endpoint] } : {}));
+  }
+  return _apiCache.get(key)!;
+}
 
 /**
  * Web component for displaying icons from the Infomaniak Design System icon library.
@@ -87,6 +102,14 @@ export class EsdsIconComponent extends LitElement {
    */
   @property({ type: Boolean, reflect: true })
   accessor nolazy = false;
+
+  /**
+   * Custom Iconify API endpoint URL.
+   * When empty, defaults to `https://iconify.infomaniak.com`.
+   * @attr endpoint
+   */
+  @property({ type: String, reflect: true })
+  accessor endpoint = '';
 
   /**
    * @internal
@@ -187,7 +210,8 @@ export class EsdsIconComponent extends LitElement {
       this._visible &&
       (changedProperties.has('name') ||
         changedProperties.has('mode') ||
-        changedProperties.has('nolazy'))
+        changedProperties.has('nolazy') ||
+        changedProperties.has('endpoint'))
     ) {
       this._loadIcon();
     }
@@ -253,7 +277,7 @@ export class EsdsIconComponent extends LitElement {
     this._status = 'loading';
     this._svgNode = null;
 
-    getApi()
+    getApi(this.endpoint)
       .getSVG({
         prefix: this._prefix,
         name: this._iconName,
