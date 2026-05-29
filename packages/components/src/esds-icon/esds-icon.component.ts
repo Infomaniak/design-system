@@ -9,7 +9,7 @@ export type EsdsIconComponentStatus = 'loading' | 'rendered' | 'error';
 /**
  * Web component for displaying icons from the Infomaniak Design System icon library.
  * @summary Icon component
- * @element esds-icon
+ * @element esds-icon-lit
  */
 @customElement('esds-icon-lit') // TODO: change to `esds-icon` once we don't have a conflict with the other component
 export class EsdsIconComponent extends LitElement {

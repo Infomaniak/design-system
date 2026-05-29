@@ -18,7 +18,7 @@ describe('EsdsIconComponent', () => {
   });
 
   it('should be constructible and registered', () => {
-    const el = document.createElement('esds-icon');
+    const el = document.createElement('esds-icon-lit');
     expect(el).instanceOf(EsdsIconComponent);
   });
 
@@ -30,7 +30,7 @@ describe('EsdsIconComponent', () => {
   });
 
   it('should reflect nolazy attribute', async () => {
-    const el = document.createElement('esds-icon') as EsdsIconComponent;
+    const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
     container.append(el);
     el.nolazy = true;
     await el.updateComplete;
@@ -38,7 +38,7 @@ describe('EsdsIconComponent', () => {
   });
 
   it('should reflect inline attribute', async () => {
-    const el = document.createElement('esds-icon') as EsdsIconComponent;
+    const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
     container.append(el);
     el.inline = true;
     await el.updateComplete;
@@ -46,14 +46,14 @@ describe('EsdsIconComponent', () => {
   });
 
   it('should throw on invalid name without colon', async () => {
-    const el = document.createElement('esds-icon') as EsdsIconComponent;
+    const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
     container.append(el);
     el.name = 'invalid-no-colon';
     await expect(el.updateComplete).rejects.toThrow('Invalid `name`: missing separator `:`');
   });
 
   it('should throw on invalid mode', async () => {
-    const el = document.createElement('esds-icon') as EsdsIconComponent;
+    const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
     container.append(el);
     el.mode = 'invalid' as unknown as EsdsIconComponentMode;
     await expect(el.updateComplete).rejects.toThrow(
@@ -62,7 +62,7 @@ describe('EsdsIconComponent', () => {
   });
 
   it('should parse name correctly', async () => {
-    const el = document.createElement('esds-icon') as EsdsIconComponent;
+    const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
     container.append(el);
     el.name = 'test-prefix:my-icon';
     await el.updateComplete;
@@ -70,7 +70,7 @@ describe('EsdsIconComponent', () => {
   });
 
   it('should update status when loading icon', async () => {
-    const el = document.createElement('esds-icon') as EsdsIconComponent;
+    const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
     el.nolazy = true;
     el.name = 'test-prefix:my-icon';
     container.append(el);
@@ -80,7 +80,7 @@ describe('EsdsIconComponent', () => {
 
   it('should cancel previous fetch on disconnect', async () => {
     const abortSpy = vi.spyOn(AbortController.prototype, 'abort');
-    const el = document.createElement('esds-icon') as EsdsIconComponent;
+    const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
     el.nolazy = true;
     el.name = 'test-prefix:my-icon';
     container.append(el);
@@ -124,7 +124,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should create IntersectionObserver when not nolazy', async () => {
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.name = 'test-prefix:my-icon';
       container.append(el);
       await el.updateComplete;
@@ -133,7 +133,7 @@ describe('EsdsIconComponent', () => {
 
     it('should load icon when element intersects', async () => {
       vi.spyOn(api, 'getSVG').mockResolvedValue('<svg></svg>');
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.name = 'test-prefix:my-icon';
       container.append(el);
       await el.updateComplete;
@@ -150,7 +150,7 @@ describe('EsdsIconComponent', () => {
 
     it('should not load icon when element does not intersect', async () => {
       vi.spyOn(api, 'getSVG').mockResolvedValue('<svg></svg>');
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.name = 'test-prefix:my-icon';
       container.append(el);
       await el.updateComplete;
@@ -161,7 +161,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should disconnect observer on nolazy change', async () => {
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.name = 'test-prefix:my-icon';
       container.append(el);
       await el.updateComplete;
@@ -175,7 +175,7 @@ describe('EsdsIconComponent', () => {
   describe('icon loading', () => {
     it('should render SVG content in svg mode', async () => {
       vi.spyOn(api, 'getSVG').mockResolvedValue('<svg><circle /></svg>');
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
       container.append(el);
@@ -192,7 +192,7 @@ describe('EsdsIconComponent', () => {
 
     it('should set --svg CSS variable in bg mode', async () => {
       vi.spyOn(api, 'getSVG').mockResolvedValue('<svg></svg>');
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
       el.mode = 'bg';
@@ -208,7 +208,7 @@ describe('EsdsIconComponent', () => {
 
     it('should set --svg CSS variable in mask mode', async () => {
       vi.spyOn(api, 'getSVG').mockResolvedValue('<svg></svg>');
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
       el.mode = 'mask';
@@ -225,7 +225,7 @@ describe('EsdsIconComponent', () => {
     it('should transition status to error on failed fetch', async () => {
       vi.spyOn(api, 'getSVG').mockRejectedValue(new Error('Network error'));
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
       container.append(el);
@@ -250,7 +250,7 @@ describe('EsdsIconComponent', () => {
         });
       });
 
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
       container.append(el);
@@ -273,7 +273,7 @@ describe('EsdsIconComponent', () => {
       });
 
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
       container.append(el);
@@ -290,7 +290,7 @@ describe('EsdsIconComponent', () => {
 
     it('should not load icon if not connected', async () => {
       const getSVGSpy = vi.spyOn(api, 'getSVG').mockResolvedValue('<svg></svg>');
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
       el.requestUpdate();
@@ -302,7 +302,7 @@ describe('EsdsIconComponent', () => {
 
     it('should not load icon if name is empty', async () => {
       const getSVGSpy = vi.spyOn(api, 'getSVG').mockResolvedValue('<svg></svg>');
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = '';
       container.append(el);
@@ -315,7 +315,7 @@ describe('EsdsIconComponent', () => {
       vi.spyOn(api, 'getSVG').mockImplementation(() => new Promise(() => {}));
       const abortSpy = vi.spyOn(AbortController.prototype, 'abort');
 
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:icon-1';
       container.append(el);
@@ -331,7 +331,7 @@ describe('EsdsIconComponent', () => {
 
     it('should clear svgContent and set --svg when switching from svg to bg mode', async () => {
       vi.spyOn(api, 'getSVG').mockResolvedValue('<svg></svg>');
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
       container.append(el);
@@ -352,7 +352,7 @@ describe('EsdsIconComponent', () => {
 
     it('should remove --svg property when switching to svg mode', async () => {
       vi.spyOn(api, 'getSVG').mockResolvedValue('<svg></svg>');
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
       el.mode = 'bg';
@@ -373,7 +373,7 @@ describe('EsdsIconComponent', () => {
 
   describe('edge cases', () => {
     it('should handle empty name without error', async () => {
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       container.append(el);
       el.name = '';
       await expect(el.updateComplete).resolves.toBeDefined();
@@ -381,7 +381,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should not throw on reconnect after disconnect', async () => {
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
       container.append(el);
@@ -393,7 +393,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should handle mode change without name', async () => {
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       container.append(el);
       await el.updateComplete;
@@ -403,7 +403,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should render nothing when no svg content in svg mode', async () => {
-      const el = document.createElement('esds-icon') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
       el.nolazy = true;
       el.name = 'test-prefix:my-icon';
       container.append(el);
