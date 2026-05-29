@@ -57,7 +57,9 @@ export function buildKotlinTokens({
     const foundationTokensPackageName: string = `${designSystemPackageName}.core.tokens`;
 
     await logger.asyncTask('PrimitiveTokens', async (): Promise<void> => {
-      const grouped = groupTokensByPrefixes(baseCollection.tokens().filter(filterT1Tokens));
+      const grouped: GroupedTokensByPrefix = groupTokensByPrefixes(
+        baseCollection.tokens().filter(filterT1Tokens),
+      );
 
       for (const [prefix, tokens] of Object.entries(grouped)) {
         const fileName: string = `${toPascalCase(prefix)}PrimitiveTokens`;
@@ -287,6 +289,8 @@ function filterT2T3Tokens(token: GenericDesignTokensCollectionToken): boolean {
   });
 }
 
+/*--*/
+
 type GroupedTokensByPrefix = Record<string, GenericDesignTokensCollectionToken[]>;
 
 function groupTokensByPrefixes(
@@ -296,6 +300,8 @@ function groupTokensByPrefixes(
     return token.name[0];
   }) as GroupedTokensByPrefix;
 }
+
+/*--*/
 
 interface ModifierAndContext {
   readonly modifier: string;
@@ -307,6 +313,18 @@ interface ComposedModifiersEntry {
   readonly collection: DesignTokensCollection;
 }
 
+/**
+ * Composes modifiers by traversing through all possible combinations of modifiers and their associated contexts.
+ * It returns a Generator that yields objects representing the composed modifiers and their corresponding collections.
+ *
+ * @param {readonly [string, DesignTokenContexts][]} modifiers An array of tuples, where each tuple
+ * consists of a modifier name and its associated contexts mapping.
+ * @param {number} [modifierIndex=0] The current index of the modifier being processed in the `modifiers` array.
+ * @param {ComposedModifiersEntry} [composedEntry] An optional parameter representing the current state
+ * of the composed modifier entry being built.
+ * @returns {Generator<ComposedModifiersEntry>} A generator yielding composed modifiers entries, where each entry
+ * contains the path of modifiers and contexts, along with a corresponding collection of tokens.
+ */
 function* composeModifiers(
   modifiers: readonly [string, DesignTokenContexts][],
   modifierIndex: number = 0,
