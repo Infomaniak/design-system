@@ -161,6 +161,9 @@ export class EsdsIconComponent extends LitElement {
     }
 
     if (changedProperties.has('mode')) {
+      if (!this.mode) {
+        this.mode = 'svg';
+      }
       if (!['svg', 'bg', 'mask'].includes(this.mode)) {
         throw new Error(`Invalid mode: ${this.mode}. Expected 'svg', 'bg', or 'mask'.`);
       }
