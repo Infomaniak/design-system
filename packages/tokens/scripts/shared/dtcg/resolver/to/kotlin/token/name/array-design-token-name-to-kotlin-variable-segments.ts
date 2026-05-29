@@ -1,13 +1,18 @@
+import { toCamelCase } from '../../../../../../../../../../scripts/helpers/misc/case/to-camel-case/to-camel-case.ts';
+import { toPascalCase } from '../../../../../../../../../../scripts/helpers/misc/case/to-pascal-case/to-pascal-case.ts';
 import type { ArrayDesignTokenName } from '../../../../token/name/array-design-token-name.ts';
-import { designTokenNameSegmentToKotlinVariableSegment } from './design-token-name-segment-to-kotlin-variable-segment.ts';
 
-export function arrayDesignTokenNameToKotlinVariableSegments(name: ArrayDesignTokenName): string {
-  return name
-    .map((segment: string, index: number): string => {
-      const newSegment: string = designTokenNameSegmentToKotlinVariableSegment(segment);
-      return index === 0 || newSegment.length === 0
-        ? newSegment
-        : `${newSegment.at(0)!.toUpperCase()}${newSegment.slice(1)}`;
-    })
-    .join('');
+export interface ArrayDesignTokenNameToKotlinVariableSegmentsOptions {
+  readonly textCase?: KotlinTextCase;
+}
+
+export type KotlinTextCase = 'pascal' | 'camel';
+
+export function arrayDesignTokenNameToKotlinVariableSegments(
+  name: ArrayDesignTokenName,
+  { textCase = 'pascal' }: ArrayDesignTokenNameToKotlinVariableSegmentsOptions = {},
+): string {
+  const convertToCase = textCase === 'pascal' ? toPascalCase : toCamelCase;
+
+  return convertToCase(name.join('-'));
 }

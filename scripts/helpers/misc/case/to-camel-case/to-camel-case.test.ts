@@ -14,11 +14,15 @@ describe('toCamelCase', () => {
     expect(toCamelCase('Alice Bob')).toBe('aliceBob');
   });
 
-  it('should convert a string to dash-case', () => {
+  it('should convert a string to camelCase', () => {
     expect(toCamelCase('Alice+++bob')).toBe('aliceBob');
   });
 
   it('should remove starting digits', () => {
     expect(toCamelCase('123AliceBob')).toBe('aliceBob');
+  });
+
+  it('should support numbers', () => {
+    expect(toCamelCase('font-size-2xl')).toBe('fontSize2xl');
   });
 });

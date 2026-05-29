@@ -4,20 +4,32 @@ import type { KotlinVariableDeclaration } from '../../kotlin-variable-declaratio
 import { SHARED_KOTLIN_TOKENS_FILE_IMPORTS } from '../shared/shared-kotlin-tokens-file-imports.ts';
 import { kotlinVariableDeclarationsToKotlinValDeclarationsString } from '../val-declaration-string/kotlin-variable-declarations-to-kotlin-val-declarations-string.ts';
 
-export function kotlinVariableDeclarationsToRawKotlinTokenFileContent(
-  declarations: Iterable<KotlinVariableDeclaration>,
-): string {
+export interface KotlinVariableDeclarationsToFoundationKotlinTokenFileContentOptions {
+  readonly packageName: string;
+  readonly className: string;
+  readonly declarations: Iterable<KotlinVariableDeclaration>;
+}
+
+export function kotlinVariableDeclarationsToFoundationKotlinTokenFileContent({
+  packageName,
+  className,
+  declarations,
+}: KotlinVariableDeclarationsToFoundationKotlinTokenFileContentOptions): string {
   return dedent`
     /*
       ${AUTO_GENERATED_FILE_HEADER}
     */
     
-    package com.example.compose
+    package ${packageName}
     
+    import androidx.compose.runtime.Immutable
     ${SHARED_KOTLIN_TOKENS_FILE_IMPORTS}
     
-    ${kotlinVariableDeclarationsToKotlinValDeclarationsString(declarations, {
-      context: 'global',
-    })}
+    @Immutable
+    data class ${className}(
+      ${kotlinVariableDeclarationsToKotlinValDeclarationsString(declarations, {
+        context: 'data-class-member-not-initialized',
+      })}
+    )
   `;
 }

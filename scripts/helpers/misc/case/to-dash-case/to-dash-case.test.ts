@@ -21,4 +21,8 @@ describe('toDashCase', () => {
   it('should remove consecutive dashes', () => {
     expect(toDashCase('Alice---Bob')).toBe('alice-bob');
   });
+
+  it('should support numbers', () => {
+    expect(toDashCase('font-size-2xl')).toBe('font-size-2xl');
+  });
 });

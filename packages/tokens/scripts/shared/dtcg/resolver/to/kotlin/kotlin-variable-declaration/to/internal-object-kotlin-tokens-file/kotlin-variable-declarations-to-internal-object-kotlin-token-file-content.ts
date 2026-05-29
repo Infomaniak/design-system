@@ -4,21 +4,33 @@ import type { KotlinVariableDeclaration } from '../../kotlin-variable-declaratio
 import { SHARED_KOTLIN_TOKENS_FILE_IMPORTS } from '../shared/shared-kotlin-tokens-file-imports.ts';
 import { kotlinVariableDeclarationsToKotlinValDeclarationsString } from '../val-declaration-string/kotlin-variable-declarations-to-kotlin-val-declarations-string.ts';
 
-export function kotlinVariableDeclarationsToDataClassKotlinTokenFileContent(
-  declarations: Iterable<KotlinVariableDeclaration>,
-): string {
+export interface KotlinVariableDeclarationsToInternalObjectKotlinTokenFileContentOptions {
+  readonly packageName: string;
+  readonly primitiveTokensPackageName: string;
+  readonly objectName: string;
+  readonly declarations: Iterable<KotlinVariableDeclaration>;
+}
+
+export function kotlinVariableDeclarationsToInternalObjectKotlinTokenFileContent({
+  packageName,
+  primitiveTokensPackageName,
+  objectName,
+  declarations,
+}: KotlinVariableDeclarationsToInternalObjectKotlinTokenFileContentOptions): string {
   return dedent`
     /*
       ${AUTO_GENERATED_FILE_HEADER}
     */
     
-    package com.example.compose
+    package ${packageName}
     
     ${SHARED_KOTLIN_TOKENS_FILE_IMPORTS}
     
-    data class EsdsTokens(
+    import ${primitiveTokensPackageName}.*
+    
+    internal object ${objectName}(
       ${kotlinVariableDeclarationsToKotlinValDeclarationsString(declarations, {
-        context: 'data-class',
+        context: 'internal-object-member-initialized',
       })}
     )
   `;

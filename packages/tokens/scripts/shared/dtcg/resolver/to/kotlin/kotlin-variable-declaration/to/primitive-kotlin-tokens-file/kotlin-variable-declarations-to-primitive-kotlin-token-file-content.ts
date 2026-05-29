@@ -4,29 +4,29 @@ import type { KotlinVariableDeclaration } from '../../kotlin-variable-declaratio
 import { SHARED_KOTLIN_TOKENS_FILE_IMPORTS } from '../shared/shared-kotlin-tokens-file-imports.ts';
 import { kotlinVariableDeclarationsToKotlinValDeclarationsString } from '../val-declaration-string/kotlin-variable-declarations-to-kotlin-val-declarations-string.ts';
 
-export function modifierKotlinVariableDeclarationsToDataClassKotlinTokenFileContent(
-  name: string,
-  declarations: Iterable<KotlinVariableDeclaration>,
-): string {
-  const declarationsArray: readonly KotlinVariableDeclaration[] = Array.from(declarations);
+export interface KotlinVariableDeclarationsToPrimitiveKotlinTokenFileContentOptions {
+  readonly packageName: string;
+  readonly declarations: Iterable<KotlinVariableDeclaration>;
+}
 
+/**
+ * Generates the primitives tokens
+ */
+export function kotlinVariableDeclarationsToPrimitiveKotlinTokenFileContent({
+  packageName,
+  declarations,
+}: KotlinVariableDeclarationsToPrimitiveKotlinTokenFileContentOptions): string {
   return dedent`
     /*
       ${AUTO_GENERATED_FILE_HEADER}
     */
     
-    package com.example.compose
+    package ${packageName}
     
     ${SHARED_KOTLIN_TOKENS_FILE_IMPORTS}
     
-    fun ${name}(
-      ${kotlinVariableDeclarationsToKotlinValDeclarationsString(declarationsArray, {
-        context: 'fun-argument',
-      })}
-    ): EsdsTokens = EsdsTokens (
-      ${kotlinVariableDeclarationsToKotlinValDeclarationsString(declarationsArray, {
-        context: 'data-class-init',
-      })}
-    )
+    ${kotlinVariableDeclarationsToKotlinValDeclarationsString(declarations, {
+      context: 'global',
+    })}
   `;
 }
