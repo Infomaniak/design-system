@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.5",
+    "version": "0.0.8",
     "author": {
       "name": "Infomaniak"
     },
@@ -10,9 +10,9 @@
       "title": "GPL-3.0-only",
       "spdx": "GPL-3.0-only"
     },
-    "total": 18
+    "total": 56
   },
-  "lastModified": 1778597527,
+  "lastModified": 1780037053,
   "icons": {
     "bell": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M10.268 21a2 2 0 003.464 0m-10.47-5.674A1 1 0 004 17h16a1 1 0 00.74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 106 8c0 4.499-1.411 5.956-2.738 7.326\"/>"
@@ -20,17 +20,68 @@
     "bell-slash": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M10.268 21a2 2 0 003.464 0M17 17H4a1 1 0 01-.74-1.673C4.59 13.956 6 12.499 6 8a6 6 0 01.258-1.742M2 2l20 20M8.668 3.01A6 6 0 0118 8c0 2.687.77 4.653 1.707 6.05\"/>"
     },
+    "briefcase": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M12 12h.01M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m14 7a18.15 18.15 0 01-20 0m2-7h16a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2\"/>"
+    },
     "bubble-left-text": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M7 11h10M7 15h6M7 7h8m7 10a2 2 0 01-2 2H6.828a2 2 0 00-1.414.586l-2.202 2.202A.71.71 0 012 21.286V5a2 2 0 012-2h16a2 2 0 012 2z\"/>"
     },
     "bug": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M12 20v-9m0 9a6 6 0 006-6v-3a4 4 0 00-4-4h-4a4 4 0 00-4 4v3a6 6 0 006 6m2.12-16.12L16 2m5 19a4 4 0 00-3.81-4M21 5a4 4 0 01-3.55 3.97M22 13h-4M3 21a4 4 0 013.81-4M3 5a4 4 0 003.55 3.97M6 13H2M8 2l1.88 1.88M9 7.13V6a3 3 0 116 0v1.13\"/>"
     },
+    "calendar-dots": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M8 2v4m8-4v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2\"/>"
+    },
+    "calendar-number-one": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M11 14h1v4m4-16v4M3 10h18M8 2v4M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2\"/>"
+    },
     "chevron-down": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"m6 9 6 6 6-6\"/>"
     },
+    "chevron-left": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"m15 18-6-6 6-6\"/>"
+    },
     "chevron-up": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"m18 15-6-6-6 6\"/>"
+    },
+    "circle-check": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"m7.59 12 2.94 2.94 5.88-5.88M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\"/>"
+    },
+    "circle-check-filled": {
+      "body": "<path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M12 1.125c6.006 0 10.875 4.869 10.875 10.875S18.006 22.875 12 22.875 1.125 18.006 1.125 12 5.994 1.125 12 1.125m5.028 7.316a.876.876 0 00-1.238 0l-5.26 5.26-2.32-2.32a.876.876 0 00-1.238 1.238l2.94 2.94a.876.876 0 001.237 0l5.88-5.88a.876.876 0 000-1.238\" clip-rule=\"evenodd\"/>"
+    },
+    "circle-cross": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"m15 9-6 6m0-6 6 6m7-3c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\"/>"
+    },
+    "circle-cross-filled": {
+      "body": "<path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M12 1.125c6.006 0 10.875 4.869 10.875 10.875S18.006 22.875 12 22.875 1.125 18.006 1.125 12 5.994 1.125 12 1.125m3.62 7.256a.876.876 0 00-1.24 0L12 10.76 9.62 8.38a.876.876 0 00-1.24 1.238L10.763 12 8.38 14.38a.876.876 0 001.238 1.24L12 13.237l2.38 2.381a.876.876 0 001.24-1.238L13.237 12l2.381-2.38a.876.876 0 000-1.24\" clip-rule=\"evenodd\"/>"
+    },
+    "circle-question": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\"/>"
+    },
+    "circle-question-filled": {
+      "body": "<path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M12 1.125c6.006 0 10.875 4.869 10.875 10.875S18.006 22.875 12 22.875 1.125 18.006 1.125 12 5.994 1.125 12 1.125m0 15a.875.875 0 000 1.75h.01a.875.875 0 000-1.75zm.575-9.948a3.875 3.875 0 00-4.31 2.533.875.875 0 001.65.58 2.127 2.127 0 013.63-.663c.324.384.5.871.5 1.373 0 .535-.413 1.057-1.11 1.521a6.2 6.2 0 01-1.198.615l-.077.028-.016.006h-.002a.875.875 0 00.554 1.66h.003l.004-.002q.004 0 .01-.004l.034-.011.113-.043a8 8 0 001.545-.792c.803-.535 1.89-1.514 1.89-2.978a3.875 3.875 0 00-3.22-3.823\" clip-rule=\"evenodd\"/>"
+    },
+    "circular-arrows-clockwise": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"m17 10 4-4-4-4m4 4H7a4 4 0 00-4 4v1m4 3-4 4 4 4m-4-4h14a4 4 0 004-4v-1\"/>"
+    },
+    "clock": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M12 6v6l4 2m6-2c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\"/>"
+    },
+    "columns-four": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M7.5 3v18M12 3v18m4.5-18v18M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2\"/>"
+    },
+    "columns-three": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M9 3v18m6-18v18M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2\"/>"
+    },
+    "door-open": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M11 20H2m17 0-6.758 1.689a1 1 0 01-1.242-.97V4.562a2.004 2.004 0 011.585-1.956 2 2 0 01.9.016l4 1A2 2 0 0119 5.562zm0 0h3M11 4H8a2 2 0 00-2 2v14m8-8h.01\"/>"
+    },
+    "dots-list": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M3 5h.01M3 12h.01M3 19h.01M8 5h13M8 12h13M8 19h13\"/>"
+    },
+    "dots-nine": {
+      "body": "<path fill=\"currentColor\" d=\"M5 17.125a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m-14-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m-14-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75\"/>"
     },
     "dots-three-vertical": {
       "body": "<path fill=\"currentColor\" d=\"M12 17.125a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m0-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m0-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75\"/>"
@@ -50,11 +101,32 @@
     "headset": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M3 11h3a2 2 0 012 2v3a2 2 0 01-2 2H5a2 2 0 01-2-2zm0 0a9 9 0 1118 0m0 0v5m0-5h-3a2 2 0 00-2 2v3a2 2 0 002 2h1a2 2 0 002-2m0 0v2a4 4 0 01-4 4h-5\"/>"
     },
+    "inbox": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M22 12h-6l-2 3h-4l-2-3H2m0 0 3.45-6.89A2 2 0 017.24 4h9.52a2 2 0 011.79 1.11L22 12v6a2 2 0 01-2 2H4a2 2 0 01-2-2z\"/>"
+    },
+    "link-horizontal": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M9 17H7A5 5 0 017 7h2m6 0h2a5 5 0 110 10h-2m-7-5h8\"/>"
+    },
+    "list": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M4 5h16M4 12h16M4 19h16\"/>"
+    },
     "magnifying-glass": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"m21 21-4.34-4.34M19 11a8 8 0 11-16 0 8 8 0 0116 0\"/>"
     },
+    "map-pin": {
+      "body": "<g fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\"><path d=\"M12.601 21.799C14.461 20.193 20 14.993 20 10a8 8 0 00-16 0c0 4.993 5.539 10.193 7.399 11.799a1 1 0 001.202 0\"/><path d=\"M12 13a3 3 0 100-6 3 3 0 000 6\"/></g>"
+    },
     "plus": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M5 12h14m-7-7v14\"/>"
+    },
+    "rectangle-squares-two": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M20 3H4a1 1 0 00-1 1v5a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1M9 14H4a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1v-5a1 1 0 00-1-1m11 0h-5a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1v-5a1 1 0 00-1-1\"/>"
+    },
+    "rectangle-underline-dashed": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M4 21h1m4 0h1m4 0h1m4 0h1M5 3h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2\"/>"
+    },
+    "rows-four": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M21 7.5H3M21 12H3m18 4.5H3M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2\"/>"
     },
     "sidebar-left-chevron-right": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M9 3v18m5-12 3 3-3 3M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2\"/>"
@@ -62,8 +134,50 @@
     "smartphone-tablet": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M5 4a2 2 0 012-2h12a2 2 0 012 2v16a2 2 0 01-2 2h-2.4M8 18h.01M5 8h6a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V10a2 2 0 012-2\"/>"
     },
+    "sparkles": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M20 2v4m2-2h-4m-6.983-1.186a1 1 0 011.966 0l1.051 5.558a2 2 0 001.594 1.594l5.558 1.051a1 1 0 010 1.966l-5.558 1.051a2 2 0 00-1.594 1.594l-1.051 5.558a1 1 0 01-1.966 0l-1.051-5.558a2 2 0 00-1.594-1.594l-5.558-1.051a1 1 0 010-1.966l5.558-1.051a2 2 0 001.594-1.594zM6 20a2 2 0 11-4 0 2 2 0 014 0\"/>"
+    },
     "squares-four": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M9 3H4a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V4a1 1 0 00-1-1m11 0h-5a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V4a1 1 0 00-1-1m0 11h-5a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1v-5a1 1 0 00-1-1M9 14H4a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1v-5a1 1 0 00-1-1\"/>"
+    },
+    "sun": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41M16 12a4 4 0 11-8 0 4 4 0 018 0\"/>"
+    },
+    "trash": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M10 11v6m4-6v6m5-11v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2\"/>"
+    },
+    "user": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M19 21v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2M16 7a4 4 0 11-8 0 4 4 0 018 0\"/>"
+    },
+    "user-card": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M16 2v2m1.915 18a6 6 0 10-12 0M8 2v2m8 8a4 4 0 11-8 0 4 4 0 018 0M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2\"/>"
+    },
+    "user-cog": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M8 15H7a4 4 0 00-4 4v2m9.13-2.182 1.214-.503m0-3.021-1.214-.504m3.351-1.633-.504-1.215m.505 8.51-.505 1.216m3.526-8.511.504-1.215m-.001 9.726-.503-1.216m2.137-5.158 1.216-.504m-1.216 3.525 1.216.504M14 7a4 4 0 11-8 0 4 4 0 018 0m6.94 9.805a3.948 3.948 0 11-7.896 0 3.948 3.948 0 017.896 0\"/>"
+    },
+    "user-cross": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M17 8l5 5m0-5-5 5m-4-6a4 4 0 11-8 0 4 4 0 018 0\"/>"
+    },
+    "user-key": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M20 11v6m0 0a2 2 0 100 4 2 2 0 000-4m0-4h2M3 21v-2a4 4 0 014-4h6a4 4 0 012.072.578M14 7a4 4 0 11-8 0 4 4 0 018 0\"/>"
+    },
+    "user-lock": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M19 16v-2a2 2 0 00-4 0v2m-5.5-1H7a4 4 0 00-4 4v2M14 7a4 4 0 11-8 0 4 4 0 018 0m-.101 9h6.202c.497 0 .899.402.899.899v3.202a.9.9 0 01-.899.899h-6.202a.9.9 0 01-.899-.899v-3.202c0-.497.402-.899.899-.899\"/>"
+    },
+    "user-magnifying-glass": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M10.3 15H7a4 4 0 00-4 4v2m18 0-1.9-1.9M14 7a4 4 0 11-8 0 4 4 0 018 0m6 10a3 3 0 11-6 0 3 3 0 016 0\"/>"
+    },
+    "user-minus": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2m20-10h-6m-3-4a4 4 0 11-8 0 4 4 0 018 0\"/>"
+    },
+    "user-pen": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M11.5 15H7a4 4 0 00-4 4v2m18.378-4.374a2.124 2.124 0 10-3.004-3.004l-4.01 4.012a2 2 0 00-.506.854l-.837 2.87a.5.5 0 00.62.62l2.87-.837c.323-.094.616-.268.854-.506zM14 7a4 4 0 11-8 0 4 4 0 018 0\"/>"
+    },
+    "user-plus": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M19 8v6m3-3h-6m-3-4a4 4 0 11-8 0 4 4 0 018 0\"/>"
+    },
+    "user-star": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M8 15H7a4 4 0 00-4 4v2m13.051-8.384a1 1 0 011.909.024l.737 1.452a1 1 0 00.737.535l1.634.256a1 1 0 01.588 1.806l-1.172 1.168a1 1 0 00-.282.866l.259 1.613a1 1 0 01-1.541 1.134l-1.465-.75a1 1 0 00-.912 0l-1.465.75a1 1 0 01-1.539-1.133l.258-1.613a1 1 0 00-.282-.866l-1.156-1.153a1 1 0 01.572-1.822l1.633-.256a1 1 0 00.737-.535zM14 7a4 4 0 11-8 0 4 4 0 018 0\"/>"
     },
     "users-stacked": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M16 3.128a4 4 0 010 7.744M22 21v-2a4 4 0 00-3-3.87M13 7a4 4 0 11-8 0 4 4 0 018 0\"/>"
@@ -73,26 +187,87 @@
     "@all": [
       "bell",
       "bell-slash",
+      "briefcase",
       "bubble-left-text",
       "bug",
+      "calendar-dots",
+      "calendar-number-one",
       "chevron-down",
+      "chevron-left",
       "chevron-up",
+      "circle-check",
+      "circle-check-filled",
+      "circle-cross",
+      "circle-cross-filled",
+      "circle-question",
+      "circle-question-filled",
+      "circular-arrows-clockwise",
+      "clock",
+      "columns-four",
+      "columns-three",
+      "door-open",
+      "dots-list",
+      "dots-nine",
       "dots-three-vertical",
       "envelope",
       "envelope-filled",
       "hard-drive",
       "hard-drive-filled",
       "headset",
+      "inbox",
+      "link-horizontal",
+      "list",
       "magnifying-glass",
+      "map-pin",
       "plus",
+      "rectangle-squares-two",
+      "rectangle-underline-dashed",
+      "rows-four",
       "sidebar-left-chevron-right",
       "smartphone-tablet",
+      "sparkles",
       "squares-four",
+      "sun",
+      "trash",
+      "user",
+      "user-card",
+      "user-cog",
+      "user-cross",
+      "user-key",
+      "user-lock",
+      "user-magnifying-glass",
+      "user-minus",
+      "user-pen",
+      "user-plus",
+      "user-star",
       "users-stacked"
     ],
     "@filled": [
+      "circle-check-filled",
+      "circle-cross-filled",
+      "circle-question-filled",
       "envelope-filled",
       "hard-drive-filled"
+    ],
+    "#accepted": [
+      "circle-check",
+      "circle-check-filled"
+    ],
+    "#access": [
+      "door-open",
+      "user-key",
+      "user-lock"
+    ],
+    "#account": [
+      "user",
+      "user-card",
+      "user-lock"
+    ],
+    "#accountsearch": [
+      "user-magnifying-glass"
+    ],
+    "#accountsettings": [
+      "user-cog"
     ],
     "#actions": [
       "dots-three-vertical"
@@ -106,8 +281,29 @@
     "#additional": [
       "dots-three-vertical"
     ],
+    "#addmember": [
+      "user-plus"
+    ],
+    "#address": [
+      "map-pin"
+    ],
+    "#adduser": [
+      "user-plus"
+    ],
+    "#admin": [
+      "user-cog"
+    ],
+    "#agency": [
+      "briefcase"
+    ],
+    "#agenda": [
+      "calendar-dots"
+    ],
     "#agent": [
       "headset"
+    ],
+    "#ai": [
+      "sparkles"
     ],
     "#alarm": [
       "bell"
@@ -115,20 +311,54 @@
     "#alert": [
       "bell"
     ],
+    "#anchor": [
+      "link-horizontal"
+    ],
     "#announcement": [
       "bell"
     ],
     "#append": [
       "plus"
     ],
+    "#appgrid": [
+      "dots-nine"
+    ],
+    "#applist": [
+      "dots-nine"
+    ],
+    "#appointment": [
+      "calendar-number-one"
+    ],
+    "#appointments": [
+      "calendar-dots"
+    ],
+    "#approve": [
+      "circle-check",
+      "circle-check-filled"
+    ],
     "#apps": [
+      "dots-nine",
       "squares-four"
+    ],
+    "#arrange": [
+      "columns-four",
+      "columns-three",
+      "rows-four"
     ],
     "#arrow": [
       "chevron-down",
+      "chevron-left",
       "chevron-up"
     ],
+    "#arrows": [
+      "circular-arrows-clockwise"
+    ],
+    "#ask": [
+      "circle-question",
+      "circle-question-filled"
+    ],
     "#assistance": [
+      "circle-question",
       "headset"
     ],
     "#audience": [
@@ -137,18 +367,50 @@
     "#audio": [
       "headset"
     ],
+    "#authentication": [
+      "user-key"
+    ],
+    "#avatar": [
+      "user"
+    ],
+    "#back": [
+      "chevron-left"
+    ],
     "#backup": [
       "hard-drive",
       "hard-drive-filled"
     ],
     "#badge": [
-      "bell"
+      "bell",
+      "user-card"
+    ],
+    "#ban": [
+      "user-cross"
+    ],
+    "#bin": [
+      "trash"
+    ],
+    "#block": [
+      "user-cross"
     ],
     "#blocked": [
-      "bell-slash"
+      "bell-slash",
+      "user-lock"
+    ],
+    "#border": [
+      "rectangle-underline-dashed"
     ],
     "#breakpoint": [
       "smartphone-tablet"
+    ],
+    "#briefcase": [
+      "briefcase"
+    ],
+    "#bright": [
+      "sun"
+    ],
+    "#brightness": [
+      "sun"
     ],
     "#browse": [
       "magnifying-glass"
@@ -156,8 +418,31 @@
     "#bug": [
       "bug"
     ],
+    "#bullet": [
+      "dots-list"
+    ],
+    "#bulleted": [
+      "dots-list"
+    ],
+    "#bulletpoints": [
+      "list"
+    ],
+    "#business": [
+      "briefcase"
+    ],
+    "#calendar": [
+      "calendar-dots",
+      "calendar-number-one"
+    ],
     "#call": [
       "headset"
+    ],
+    "#cancel": [
+      "circle-cross",
+      "circle-cross-filled"
+    ],
+    "#career": [
+      "briefcase"
     ],
     "#caret": [
       "chevron-down",
@@ -166,20 +451,54 @@
     "#categories": [
       "squares-four"
     ],
+    "#chain": [
+      "link-horizontal"
+    ],
     "#chat": [
       "bubble-left-text"
     ],
+    "#check": [
+      "circle-check",
+      "circle-check-filled"
+    ],
+    "#checkmark": [
+      "circle-check",
+      "circle-check-filled"
+    ],
     "#chevron": [
       "chevron-down",
+      "chevron-left",
       "chevron-up"
     ],
+    "#circular": [
+      "circular-arrows-clockwise"
+    ],
+    "#clear": [
+      "circle-cross",
+      "circle-cross-filled",
+      "sun",
+      "trash"
+    ],
+    "#clock": [
+      "clock"
+    ],
     "#close": [
-      "chevron-up"
+      "chevron-up",
+      "circle-cross",
+      "circle-cross-filled"
+    ],
+    "#cog": [
+      "user-cog"
     ],
     "#collapse": [
       "chevron-down",
       "chevron-up",
       "sidebar-left-chevron-right"
+    ],
+    "#columns": [
+      "columns-four",
+      "columns-three",
+      "rectangle-squares-two"
     ],
     "#comment": [
       "bubble-left-text"
@@ -191,10 +510,29 @@
     "#community": [
       "users-stacked"
     ],
+    "#company": [
+      "briefcase"
+    ],
+    "#complete": [
+      "circle-check",
+      "circle-check-filled"
+    ],
+    "#configure": [
+      "user-cog"
+    ],
+    "#confirm": [
+      "circle-check",
+      "circle-check-filled"
+    ],
+    "#connect": [
+      "link-horizontal"
+    ],
     "#contact": [
       "envelope",
       "envelope-filled",
-      "headset"
+      "headset",
+      "user",
+      "user-card"
     ],
     "#contacts": [
       "users-stacked"
@@ -211,6 +549,17 @@
     "#create": [
       "plus"
     ],
+    "#createaccount": [
+      "user-plus"
+    ],
+    "#credentials": [
+      "user-key"
+    ],
+    "#cross": [
+      "circle-cross",
+      "circle-cross-filled",
+      "user-cross"
+    ],
     "#cross-device": [
       "smartphone-tablet"
     ],
@@ -221,7 +570,11 @@
       "headset"
     ],
     "#dashboard": [
+      "dots-nine",
       "squares-four"
+    ],
+    "#dashed": [
+      "rectangle-underline-dashed"
     ],
     "#data": [
       "hard-drive",
@@ -231,11 +584,47 @@
       "hard-drive",
       "hard-drive-filled"
     ],
+    "#date": [
+      "calendar-number-one"
+    ],
+    "#dates": [
+      "calendar-dots"
+    ],
+    "#day": [
+      "calendar-number-one",
+      "sun"
+    ],
+    "#deactivate": [
+      "user-cross",
+      "user-minus"
+    ],
+    "#deadline": [
+      "clock"
+    ],
     "#debug": [
       "bug"
     ],
+    "#decoration": [
+      "rectangle-underline-dashed"
+    ],
     "#defect": [
       "bug"
+    ],
+    "#delete": [
+      "circle-cross",
+      "trash"
+    ],
+    "#deleteuser": [
+      "user-cross",
+      "user-minus"
+    ],
+    "#deny": [
+      "circle-cross",
+      "circle-cross-filled",
+      "user-cross"
+    ],
+    "#destroy": [
+      "trash"
     ],
     "#device": [
       "hard-drive",
@@ -247,8 +636,14 @@
     "#ding": [
       "bell"
     ],
+    "#direction": [
+      "chevron-left"
+    ],
     "#disable": [
       "bell-slash"
+    ],
+    "#discard": [
+      "trash"
     ],
     "#discover": [
       "magnifying-glass"
@@ -260,8 +655,27 @@
       "hard-drive",
       "hard-drive-filled"
     ],
+    "#dismiss": [
+      "circle-cross",
+      "circle-cross-filled"
+    ],
+    "#divide": [
+      "rectangle-squares-two"
+    ],
     "#do-not-disturb": [
       "bell-slash"
+    ],
+    "#done": [
+      "circle-check",
+      "circle-check-filled"
+    ],
+    "#door": [
+      "door-open"
+    ],
+    "#dots": [
+      "calendar-dots",
+      "dots-list",
+      "dots-nine"
     ],
     "#down": [
       "chevron-down"
@@ -277,19 +691,62 @@
       "chevron-down",
       "dots-three-vertical"
     ],
+    "#duration": [
+      "clock"
+    ],
+    "#editprofile": [
+      "user-pen"
+    ],
+    "#edituser": [
+      "user-pen"
+    ],
+    "#effects": [
+      "sparkles"
+    ],
+    "#eliminate": [
+      "trash"
+    ],
     "#ellipsis": [
       "dots-three-vertical"
     ],
     "#email": [
       "envelope",
-      "envelope-filled"
+      "envelope-filled",
+      "inbox"
+    ],
+    "#enter": [
+      "door-open"
+    ],
+    "#entrance": [
+      "door-open"
+    ],
+    "#entries": [
+      "list"
     ],
     "#envelope": [
       "envelope",
       "envelope-filled"
     ],
+    "#erase": [
+      "trash"
+    ],
     "#error": [
-      "bug"
+      "bug",
+      "circle-cross",
+      "circle-cross-filled"
+    ],
+    "#event": [
+      "calendar-number-one"
+    ],
+    "#events": [
+      "calendar-dots"
+    ],
+    "#exclude": [
+      "user-cross",
+      "user-minus"
+    ],
+    "#exit": [
+      "door-open"
     ],
     "#expand": [
       "chevron-down",
@@ -299,23 +756,79 @@
     "#explore": [
       "magnifying-glass"
     ],
+    "#external": [
+      "link-horizontal"
+    ],
+    "#faq": [
+      "circle-question",
+      "circle-question-filled"
+    ],
+    "#favoriteuser": [
+      "user-star"
+    ],
+    "#featured": [
+      "sparkles",
+      "user-star"
+    ],
     "#feedback": [
       "bubble-left-text",
       "bug"
     ],
+    "#filled": [
+      "circle-check-filled",
+      "circle-cross-filled",
+      "circle-question-filled"
+    ],
     "#find": [
-      "magnifying-glass"
+      "magnifying-glass",
+      "user-magnifying-glass"
+    ],
+    "#finduser": [
+      "user-magnifying-glass"
+    ],
+    "#first": [
+      "calendar-number-one"
     ],
     "#fold": [
       "chevron-up"
     ],
+    "#format": [
+      "rectangle-underline-dashed"
+    ],
+    "#four": [
+      "columns-four",
+      "rows-four"
+    ],
+    "#fourcolumns": [
+      "columns-four"
+    ],
     "#gallery": [
       "squares-four"
+    ],
+    "#gear": [
+      "user-cog"
+    ],
+    "#geo": [
+      "map-pin"
     ],
     "#glitch": [
       "bug"
     ],
+    "#glow": [
+      "sparkles"
+    ],
+    "#go": [
+      "chevron-left"
+    ],
+    "#gps": [
+      "map-pin"
+    ],
     "#grid": [
+      "columns-four",
+      "columns-three",
+      "dots-nine",
+      "rectangle-squares-two",
+      "rows-four",
       "squares-four"
     ],
     "#group": [
@@ -336,6 +849,8 @@
       "headset"
     ],
     "#help": [
+      "circle-question",
+      "circle-question-filled",
       "headset"
     ],
     "#helpdesk": [
@@ -344,19 +859,62 @@
     "#hide": [
       "chevron-up"
     ],
+    "#highlight": [
+      "rectangle-underline-dashed",
+      "user-star"
+    ],
+    "#hint": [
+      "circle-question",
+      "circle-question-filled"
+    ],
+    "#history": [
+      "clock"
+    ],
+    "#horizontal": [
+      "rows-four"
+    ],
+    "#hour": [
+      "clock"
+    ],
+    "#href": [
+      "link-horizontal"
+    ],
+    "#human": [
+      "user"
+    ],
+    "#hyperlink": [
+      "link-horizontal"
+    ],
+    "#idcard": [
+      "user-card"
+    ],
+    "#identity": [
+      "user-card"
+    ],
     "#ignore": [
       "bell-slash"
+    ],
+    "#important": [
+      "user-star"
     ],
     "#inbox": [
       "bell",
       "envelope",
-      "envelope-filled"
+      "envelope-filled",
+      "inbox"
     ],
     "#include": [
       "plus"
     ],
     "#increase": [
       "plus"
+    ],
+    "#individual": [
+      "user"
+    ],
+    "#info": [
+      "circle-question",
+      "circle-question-filled"
     ],
     "#insect": [
       "bug"
@@ -367,18 +925,44 @@
     "#investigate": [
       "magnifying-glass"
     ],
+    "#invite": [
+      "user-plus"
+    ],
     "#ipad": [
       "smartphone-tablet"
     ],
     "#issue": [
       "bug"
     ],
+    "#items": [
+      "dots-list",
+      "list"
+    ],
+    "#job": [
+      "briefcase"
+    ],
     "#kebab": [
       "dots-three-vertical"
     ],
+    "#key": [
+      "user-key"
+    ],
+    "#launcher": [
+      "dots-nine"
+    ],
     "#layout": [
+      "columns-four",
+      "columns-three",
+      "rectangle-squares-two",
+      "rows-four",
       "sidebar-left-chevron-right",
       "squares-four"
+    ],
+    "#leave": [
+      "door-open"
+    ],
+    "#left": [
+      "chevron-left"
     ],
     "#less": [
       "chevron-up"
@@ -387,12 +971,61 @@
       "envelope",
       "envelope-filled"
     ],
+    "#light": [
+      "sun"
+    ],
+    "#lightmode": [
+      "sun"
+    ],
+    "#line": [
+      "rectangle-underline-dashed"
+    ],
+    "#lines": [
+      "list",
+      "rows-four"
+    ],
+    "#link": [
+      "link-horizontal"
+    ],
+    "#list": [
+      "dots-list",
+      "list"
+    ],
+    "#listview": [
+      "dots-list",
+      "list"
+    ],
     "#livechat": [
       "bubble-left-text",
       "headset"
     ],
+    "#localize": [
+      "map-pin"
+    ],
+    "#location": [
+      "map-pin"
+    ],
+    "#lock": [
+      "user-key"
+    ],
+    "#locked": [
+      "user-lock"
+    ],
+    "#lockeduser": [
+      "user-lock"
+    ],
+    "#logout": [
+      "door-open"
+    ],
     "#lookup": [
-      "magnifying-glass"
+      "magnifying-glass",
+      "user-magnifying-glass"
+    ],
+    "#loop": [
+      "circular-arrows-clockwise"
+    ],
+    "#magic": [
+      "sparkles"
     ],
     "#magnifier": [
       "magnifying-glass"
@@ -402,7 +1035,24 @@
     ],
     "#mail": [
       "envelope",
-      "envelope-filled"
+      "envelope-filled",
+      "inbox"
+    ],
+    "#mailbox": [
+      "inbox"
+    ],
+    "#manage": [
+      "user-cog"
+    ],
+    "#map": [
+      "map-pin"
+    ],
+    "#marker": [
+      "map-pin"
+    ],
+    "#member": [
+      "user",
+      "user-card"
     ],
     "#members": [
       "users-stacked"
@@ -412,7 +1062,10 @@
       "hard-drive-filled"
     ],
     "#menu": [
+      "dots-list",
+      "dots-nine",
       "dots-three-vertical",
+      "list",
       "sidebar-left-chevron-right",
       "squares-four"
     ],
@@ -422,11 +1075,17 @@
       "envelope",
       "envelope-filled"
     ],
+    "#messages": [
+      "inbox"
+    ],
     "#messaging": [
       "bubble-left-text"
     ],
     "#minimize": [
       "chevron-up"
+    ],
+    "#minus": [
+      "user-minus"
     ],
     "#mobile": [
       "smartphone-tablet"
@@ -434,8 +1093,17 @@
     "#mobile-app": [
       "smartphone-tablet"
     ],
+    "#mode": [
+      "sun"
+    ],
+    "#modify": [
+      "user-pen"
+    ],
     "#modules": [
       "squares-four"
+    ],
+    "#month": [
+      "calendar-dots"
     ],
     "#more": [
       "chevron-down",
@@ -445,14 +1113,22 @@
     "#moreoptions": [
       "dots-three-vertical"
     ],
+    "#mosaic": [
+      "dots-nine"
+    ],
     "#multidevice": [
       "smartphone-tablet"
     ],
     "#multiple": [
+      "calendar-dots",
       "users-stacked"
     ],
     "#mute": [
       "bell-slash"
+    ],
+    "#navigate": [
+      "chevron-left",
+      "map-pin"
     ],
     "#navigation": [
       "sidebar-left-chevron-right"
@@ -461,11 +1137,18 @@
       "users-stacked"
     ],
     "#new": [
-      "plus"
+      "plus",
+      "sparkles"
     ],
     "#newsletter": [
       "envelope",
       "envelope-filled"
+    ],
+    "#newuser": [
+      "user-plus"
+    ],
+    "#nine": [
+      "dots-nine"
     ],
     "#no-alert": [
       "bell-slash"
@@ -481,12 +1164,32 @@
     "#notification-off": [
       "bell-slash"
     ],
+    "#notifications": [
+      "inbox"
+    ],
+    "#offboard": [
+      "user-minus"
+    ],
+    "#office": [
+      "briefcase"
+    ],
+    "#one": [
+      "calendar-number-one"
+    ],
     "#open": [
       "chevron-down",
+      "door-open",
       "sidebar-left-chevron-right"
     ],
     "#options": [
       "dots-three-vertical"
+    ],
+    "#ordered": [
+      "list"
+    ],
+    "#organize": [
+      "columns-four",
+      "columns-three"
     ],
     "#overflow": [
       "dots-three-vertical"
@@ -497,35 +1200,152 @@
     "#panel": [
       "sidebar-left-chevron-right"
     ],
+    "#passed": [
+      "circle-check"
+    ],
+    "#pen": [
+      "user-pen"
+    ],
     "#people": [
+      "user",
+      "user-magnifying-glass",
       "users-stacked"
+    ],
+    "#permissions": [
+      "user-key"
+    ],
+    "#person": [
+      "user",
+      "user-card",
+      "user-cog",
+      "user-cross",
+      "user-key",
+      "user-lock",
+      "user-magnifying-glass",
+      "user-minus",
+      "user-pen",
+      "user-plus",
+      "user-star"
     ],
     "#phone": [
       "smartphone-tablet"
     ],
+    "#pin": [
+      "map-pin"
+    ],
     "#ping": [
       "bell"
     ],
+    "#place": [
+      "map-pin"
+    ],
+    "#planner": [
+      "calendar-dots"
+    ],
     "#plus": [
-      "plus"
+      "plus",
+      "user-plus"
+    ],
+    "#points": [
+      "dots-list"
+    ],
+    "#portfolio": [
+      "briefcase"
+    ],
+    "#position": [
+      "map-pin"
     ],
     "#positive": [
       "plus"
     ],
+    "#preferences": [
+      "user-cog"
+    ],
+    "#premium": [
+      "sparkles",
+      "user-star"
+    ],
     "#preview": [
       "smartphone-tablet"
+    ],
+    "#previous": [
+      "chevron-left"
+    ],
+    "#prior": [
+      "chevron-left"
+    ],
+    "#privacy": [
+      "user-lock"
     ],
     "#problem": [
       "bug"
     ],
+    "#professional": [
+      "briefcase"
+    ],
+    "#profile": [
+      "user",
+      "user-card",
+      "user-magnifying-glass",
+      "user-minus",
+      "user-pen"
+    ],
     "#query": [
+      "circle-question",
+      "circle-question-filled",
       "magnifying-glass"
+    ],
+    "#question": [
+      "circle-question",
+      "circle-question-filled"
     ],
     "#quiet": [
       "bell-slash"
     ],
+    "#received": [
+      "inbox"
+    ],
+    "#rectangle": [
+      "rectangle-squares-two"
+    ],
+    "#recycle": [
+      "trash"
+    ],
+    "#reference": [
+      "link-horizontal"
+    ],
+    "#refresh": [
+      "circular-arrows-clockwise"
+    ],
+    "#register": [
+      "user-plus"
+    ],
+    "#reject": [
+      "circle-cross",
+      "circle-cross-filled"
+    ],
+    "#reload": [
+      "circular-arrows-clockwise"
+    ],
     "#reminder": [
-      "bell"
+      "bell",
+      "calendar-number-one",
+      "clock"
+    ],
+    "#remove": [
+      "circle-cross",
+      "circle-cross-filled",
+      "trash"
+    ],
+    "#removeuser": [
+      "user-cross",
+      "user-minus"
+    ],
+    "#renew": [
+      "circular-arrows-clockwise"
+    ],
+    "#repeat": [
+      "circular-arrows-clockwise"
     ],
     "#reply": [
       "bubble-left-text"
@@ -536,15 +1356,53 @@
     "#responsive": [
       "smartphone-tablet"
     ],
+    "#restricted": [
+      "user-lock"
+    ],
+    "#retry": [
+      "circular-arrows-clockwise"
+    ],
+    "#return": [
+      "chevron-left"
+    ],
     "#reveal": [
       "chevron-down",
       "sidebar-left-chevron-right"
     ],
+    "#revoke": [
+      "user-cross",
+      "user-minus"
+    ],
     "#ring": [
       "bell"
     ],
+    "#rotate": [
+      "circular-arrows-clockwise"
+    ],
+    "#rows": [
+      "list",
+      "rows-four"
+    ],
+    "#schedule": [
+      "calendar-dots",
+      "calendar-number-one",
+      "clock"
+    ],
     "#search": [
-      "magnifying-glass"
+      "magnifying-glass",
+      "user-magnifying-glass"
+    ],
+    "#sections": [
+      "columns-four",
+      "columns-three",
+      "rectangle-squares-two",
+      "rows-four"
+    ],
+    "#secure": [
+      "user-lock"
+    ],
+    "#security": [
+      "user-key"
     ],
     "#seek": [
       "magnifying-glass"
@@ -558,7 +1416,14 @@
       "hard-drive-filled"
     ],
     "#settings": [
-      "dots-three-vertical"
+      "dots-three-vertical",
+      "user-cog"
+    ],
+    "#share": [
+      "link-horizontal"
+    ],
+    "#shine": [
+      "sparkles"
     ],
     "#show": [
       "chevron-down",
@@ -567,8 +1432,20 @@
     "#sidebar": [
       "sidebar-left-chevron-right"
     ],
+    "#signin": [
+      "door-open"
+    ],
+    "#signout": [
+      "door-open"
+    ],
+    "#signup": [
+      "user-plus"
+    ],
     "#silent": [
       "bell-slash"
+    ],
+    "#smart": [
+      "sparkles"
     ],
     "#smartphone": [
       "smartphone-tablet"
@@ -579,6 +1456,20 @@
     "#sound": [
       "bell"
     ],
+    "#sparkles": [
+      "sparkles"
+    ],
+    "#special": [
+      "sparkles"
+    ],
+    "#split": [
+      "columns-four",
+      "columns-three",
+      "rectangle-squares-two"
+    ],
+    "#squares": [
+      "rectangle-squares-two"
+    ],
     "#ssd": [
       "hard-drive",
       "hard-drive-filled"
@@ -586,20 +1477,46 @@
     "#stacked": [
       "users-stacked"
     ],
+    "#star": [
+      "user-star"
+    ],
     "#storage": [
       "hard-drive",
       "hard-drive-filled"
+    ],
+    "#structure": [
+      "columns-four",
+      "columns-three",
+      "rows-four"
+    ],
+    "#style": [
+      "rectangle-underline-dashed"
     ],
     "#subscribe": [
       "bell",
       "envelope",
       "envelope-filled"
     ],
+    "#success": [
+      "circle-check",
+      "circle-check-filled"
+    ],
+    "#sun": [
+      "sun"
+    ],
+    "#sunny": [
+      "sun"
+    ],
     "#support": [
+      "circle-question",
+      "circle-question-filled",
       "headset"
     ],
     "#suppress": [
       "bell-slash"
+    ],
+    "#sync": [
+      "circular-arrows-clockwise"
     ],
     "#tablet": [
       "smartphone-tablet"
@@ -607,28 +1524,85 @@
     "#talk": [
       "bubble-left-text"
     ],
+    "#tasks": [
+      "list"
+    ],
     "#team": [
       "users-stacked"
+    ],
+    "#text": [
+      "rectangle-underline-dashed"
+    ],
+    "#theme": [
+      "sun"
     ],
     "#thread": [
       "bubble-left-text"
     ],
+    "#three": [
+      "columns-three"
+    ],
+    "#threecolumns": [
+      "columns-three"
+    ],
     "#thumbnails": [
       "squares-four"
     ],
+    "#tick": [
+      "circle-check",
+      "circle-check-filled"
+    ],
     "#tiles": [
       "squares-four"
+    ],
+    "#time": [
+      "clock"
+    ],
+    "#timer": [
+      "clock"
+    ],
+    "#today": [
+      "calendar-number-one"
     ],
     "#toggle": [
       "chevron-down",
       "chevron-up",
       "sidebar-left-chevron-right"
     ],
+    "#tooltip": [
+      "circle-question",
+      "circle-question-filled"
+    ],
     "#top": [
       "chevron-up"
     ],
+    "#topuser": [
+      "user-star"
+    ],
+    "#trash": [
+      "trash"
+    ],
+    "#tray": [
+      "inbox"
+    ],
     "#troubleshoot": [
       "bug"
+    ],
+    "#two": [
+      "rectangle-squares-two"
+    ],
+    "#underline": [
+      "rectangle-underline-dashed"
+    ],
+    "#unknown": [
+      "circle-question",
+      "circle-question-filled"
+    ],
+    "#unordered": [
+      "dots-list"
+    ],
+    "#unread": [
+      "inbox"
     ],
     "#unsubscribe": [
       "bell-slash"
@@ -637,13 +1611,69 @@
       "chevron-up"
     ],
     "#update": [
-      "bell"
+      "bell",
+      "circular-arrows-clockwise"
+    ],
+    "#updateaccount": [
+      "user-pen"
+    ],
+    "#url": [
+      "link-horizontal"
+    ],
+    "#user": [
+      "user",
+      "user-magnifying-glass"
+    ],
+    "#useradd": [
+      "user-plus"
+    ],
+    "#usercard": [
+      "user-card"
+    ],
+    "#useredit": [
+      "user-pen"
+    ],
+    "#userkey": [
+      "user-key"
     ],
     "#users": [
       "users-stacked"
     ],
+    "#usersearch": [
+      "user-magnifying-glass"
+    ],
+    "#usersettings": [
+      "user-cog"
+    ],
+    "#valid": [
+      "circle-check",
+      "circle-check-filled"
+    ],
+    "#verified": [
+      "circle-check",
+      "circle-check-filled"
+    ],
     "#view": [
       "squares-four"
+    ],
+    "#vip": [
+      "user-star"
+    ],
+    "#watch": [
+      "clock"
+    ],
+    "#weather": [
+      "sun"
+    ],
+    "#work": [
+      "briefcase"
+    ],
+    "#write": [
+      "user-pen"
+    ],
+    "#x": [
+      "circle-cross",
+      "circle-cross-filled"
     ],
     "#zoom": [
       "magnifying-glass"
