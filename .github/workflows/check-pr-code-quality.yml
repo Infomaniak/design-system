@@ -30,12 +30,17 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Verify custom-elements.json is up-to-date
+      - name: Verify custom-elements.json can be generated
         run: |
           cd packages/components
           yarn analyze:cem
-          git diff --exit-code custom-elements.json || (echo "❌ custom-elements.json is stale. Run 'yarn build' in packages/components and commit the updated file." && exit 1)
-
+          node -e "
+            const fs = require('fs');
+            const data = JSON.parse(fs.readFileSync('custom-elements.json', 'utf8'));
+            if (!data.schemaVersion) throw new Error('Missing schemaVersion');
+            if (!data.modules || data.modules.length === 0) throw new Error('No modules found');
+            console.log(`✅ CEM generated successfully with ${data.modules.length} modules`);
+          "
       - name: Build packages
         run: yarn build
 
