@@ -59,15 +59,15 @@
     "@storybook/web-components-vite": "^10.4.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.2",
-    "@types/node": "^25.7.0",
+    "@types/node": "^25.9.1",
     "@types/semver": "^7",
-    "@vitest/coverage-istanbul": "^4.1.6",
-    "es-toolkit": "^1.46.1",
-    "eslint": "^10.3.0",
-    "eslint-plugin-prettier": "^5.5.5",
+    "@vitest/coverage-istanbul": "^4.1.7",
+    "es-toolkit": "^1.47.0",
+    "eslint": "^10.4.0",
+    "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
-    "eslint-plugin-storybook": "^10.3.6",
+    "eslint-plugin-storybook": "^10.4.1",
     "globals": "^17.6.0",
     "happy-dom": "^20.9.0",
     "lit": "^3.3.3",
@@ -75,11 +75,11 @@
     "prettier-plugin-organize-imports": "^4.3.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "semver": "^7.8.0",
-    "storybook": "^10.4.0",
+    "semver": "^7.8.1",
+    "storybook": "^10.4.1",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.3",
-    "vitest": "^4.1.6"
+    "typescript-eslint": "^8.60.0",
+    "vitest": "^4.1.7"
   },
-  "packageManager": "yarn@4.14.1"
+  "packageManager": "yarn@4.15.0"
 }
