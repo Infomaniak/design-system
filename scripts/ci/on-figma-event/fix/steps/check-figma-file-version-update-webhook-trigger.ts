@@ -1,7 +1,7 @@
+import { getLastFigmaFileVersion } from '../../../../helpers/figma/api/version-history/helpers/get-last-figma-file-version.ts';
 import type { FigmaFileVersion } from '../../../../helpers/figma/api/version-history/types/figma-file-version.ts';
 import { Logger } from '../../../../helpers/log/logger.ts';
 import { fixFileVersionUpdateWebhookTrigger } from './fix-file-version-update-webhook-trigger.ts';
-import { getLastFigmaFileVersion } from './get-last-figma-file-version.ts';
 
 export interface CheckFigmaFileVersionUpdateWebhookTriggerOptions {
   readonly figmaApiToken: string;

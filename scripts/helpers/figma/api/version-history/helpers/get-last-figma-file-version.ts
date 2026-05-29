@@ -2,9 +2,9 @@ import { valid } from 'semver';
 import {
   getFigmaFileVersionHistory,
   type GetFigmaFileVersionHistoryResponse,
-} from '../../../../helpers/figma/api/version-history/get-figma-file-version-history.ts';
-import { isAutosaveFigmaFileVersion } from '../../../../helpers/figma/api/version-history/helpers/is-autosave-figma-file-version.ts';
-import type { FigmaFileVersion } from '../../../../helpers/figma/api/version-history/types/figma-file-version.ts';
+} from '../get-figma-file-version-history.ts';
+import type { FigmaFileVersion } from '../types/figma-file-version.ts';
+import { isAutosaveFigmaFileVersion } from './is-autosave-figma-file-version.ts';
 
 export interface GetLastFigmaFileVersionOptions {
   readonly figmaApiToken: string;
