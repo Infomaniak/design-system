@@ -18,8 +18,8 @@ describe('toPascalCase', () => {
     expect(toPascalCase('Alice+++bob')).toBe('AliceBob');
   });
 
-  it('should remove starting digits', () => {
-    expect(toPascalCase('123aliceBob')).toBe('AliceBob');
+  it('should handle leading digits', () => {
+    expect(toPascalCase('123aliceBob')).toBe('OneHundredTwentyThreeAliceBob');
   });
 
   it('should support numbers', () => {

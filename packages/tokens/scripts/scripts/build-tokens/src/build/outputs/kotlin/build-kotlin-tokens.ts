@@ -46,11 +46,12 @@ export function buildKotlinTokens({
     outputDirectory = removeTrailingSlash(outputDirectory);
     const kotlinOutputDirectory: string = `${outputDirectory}/kotlin`;
 
-    const kotlinOptions: DesignTokensCollectionTokenToKotlinVariableDeclarationOptions = {
-      generateKotlinVariableName: createKotlinVariableNameGenerator({
-        textCase: 'pascal',
-      }),
-    };
+    const kotlinTokensCollectionOptions: DesignTokensCollectionTokenToKotlinVariableDeclarationOptions =
+      {
+        generateKotlinVariableName: createKotlinVariableNameGenerator({
+          textCase: 'pascal',
+        }),
+      };
 
     const designSystemPackageName: string = 'com.infomaniak.designsystem';
     const primitiveTokensPackageName: string = `${designSystemPackageName}.primitivetokens`;
@@ -73,7 +74,7 @@ export function buildKotlinTokens({
                 return resolveDesignTokensCollectionTokenToKotlinVariableDeclaration(
                   baseCollection,
                   token,
-                  kotlinOptions,
+                  kotlinTokensCollectionOptions,
                 );
               },
             ),
@@ -101,7 +102,7 @@ export function buildKotlinTokens({
                   resolveDesignTokensCollectionTokenToKotlinVariableDeclaration(
                     baseCollection,
                     token,
-                    kotlinOptions,
+                    kotlinTokensCollectionOptions,
                   ),
                   prefix,
                 );
@@ -161,7 +162,7 @@ export function buildKotlinTokens({
                     return resolveDesignTokensCollectionTokenToKotlinVariableDeclaration(
                       baseCollection,
                       token,
-                      kotlinOptions,
+                      kotlinTokensCollectionOptions,
                     );
                   }),
               }),
@@ -190,11 +191,11 @@ export function buildKotlinTokens({
                   declarations: tokens.map(
                     (token: GenericDesignTokensCollectionToken): KotlinVariableDeclaration => {
                       return removePrefixFromKotlinVariableDeclaration(
-                        updateKotlinVariableDeclarationRefValue(
+                        updateKotlinVariableDeclarationValue(
                           resolveDesignTokensCollectionTokenToKotlinVariableDeclaration(
                             baseCollection,
                             token,
-                            kotlinOptions,
+                            kotlinTokensCollectionOptions,
                           ),
                           (declaration: KotlinVariableDeclaration): string => {
                             return `${internalTokensFileName}.${declaration.name}`;
@@ -247,22 +248,17 @@ function resolveDesignTokensCollectionTokenToKotlinVariableDeclaration(
   return declaration;
 }
 
-function updateKotlinVariableDeclarationRefValue(
+function updateKotlinVariableDeclarationValue(
   declaration: KotlinVariableDeclaration,
   update: (reference: KotlinVariableDeclaration) => string,
 ): KotlinVariableDeclaration {
-  if (isKotlinVariableDeclarationRefValue(declaration.value)) {
-    return {
-      ...declaration,
-      value: {
-        ...declaration.value,
-        type: 'ref',
-        value: update(declaration),
-      },
-    };
-  }
-
-  return declaration;
+  return {
+    ...declaration,
+    value: {
+      ...declaration.value,
+      value: update(declaration),
+    },
+  };
 }
 
 function removePrefixFromKotlinVariableDeclaration(

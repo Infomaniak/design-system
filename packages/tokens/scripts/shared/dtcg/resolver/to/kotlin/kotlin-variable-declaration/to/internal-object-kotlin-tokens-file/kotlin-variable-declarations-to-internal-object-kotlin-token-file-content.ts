@@ -28,10 +28,10 @@ export function kotlinVariableDeclarationsToInternalObjectKotlinTokenFileContent
     
     import ${primitiveTokensPackageName}.*
     
-    internal object ${objectName}(
+    internal object ${objectName} {
       ${kotlinVariableDeclarationsToKotlinValDeclarationsString(declarations, {
         context: 'internal-object-member-initialized',
       })}
-    )
+    }
   `;
 }

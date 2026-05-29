@@ -73,7 +73,7 @@ export function kotlinVariableDeclarationToKotlinValDeclarationString(
       output += `val ${declaration.name}: ${getValueType()},`;
       break;
     case 'internal-object-member-initialized':
-      output += `val ${declaration.name}: ${getValueType()} = ${declaration.value.value},`;
+      output += `val ${declaration.name}: ${getValueType()} = ${declaration.value.value}`;
       break;
     case 'data-class-init':
       output += `${declaration.name} = ${declaration.value.value},`;

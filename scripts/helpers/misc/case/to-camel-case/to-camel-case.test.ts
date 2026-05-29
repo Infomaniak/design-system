@@ -18,8 +18,8 @@ describe('toCamelCase', () => {
     expect(toCamelCase('Alice+++bob')).toBe('aliceBob');
   });
 
-  it('should remove starting digits', () => {
-    expect(toCamelCase('123AliceBob')).toBe('aliceBob');
+  it('should support leading digits', () => {
+    expect(toCamelCase('123AliceBob')).toBe('oneHundredTwentyThreeAliceBob');
   });
 
   it('should support numbers', () => {

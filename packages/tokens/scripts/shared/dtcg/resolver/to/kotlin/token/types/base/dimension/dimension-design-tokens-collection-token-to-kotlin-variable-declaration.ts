@@ -24,9 +24,8 @@ export function dimensionDesignTokensCollectionTokenToKotlinVariableDeclaration(
       // NOTE: force casting from "px" to "rem" for the fonts
       const name: string = token.name.join('.');
       if (
-        name.startsWith('font.size') ||
-        name.startsWith('font.letter-spacing') ||
-        name.startsWith('font.line-height')
+        /^font\.(?:size|letter-spacing|line-height)\.\w+$/.test(name) ||
+        /^text\.\w+\.(?:size|letter-spacing|line-height)$/.test(name)
       ) {
         return dimensionDesignTokensCollectionTokenValueToKotlinValue({
           value: value.value,
