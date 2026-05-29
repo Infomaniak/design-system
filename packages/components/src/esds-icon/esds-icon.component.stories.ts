@@ -1,75 +1,25 @@
-import { IconifyApi } from '@infomaniak-design-system/esds-icon';
-import { html } from 'lit';
-import { configure } from '../configure.ts';
-import './esds-icon.component.ts';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+import './esds-icon.component.js';
+import { EsdsIconComponent } from './esds-icon.component.js';
 
-try {
-  configure(
-    new IconifyApi({
-      resources: ['https://iconify.preprod.dev.infomaniak.ch'],
-    }),
-  );
-} catch {
-  // Already configured
-}
+const { args, argTypes, template } = getStorybookHelpers<EsdsIconComponent>('esds-icon-lit');
 
-export default {
-  title: 'Components/esds-icon',
-  render: () => html`
-    <div
-      style="display: flex; flex-direction: column; gap: var(--esds-spacing-400); padding: var(--esds-spacing-500);"
-    >
-      <section>
-        <h3>Default (SVG mode)</h3>
-        <p style="font-size: var(--esds-font-size-body-lg);">
-          <esds-icon name="esds:arrow-right"></esds-icon>
-          esds:arrow-right
-        </p>
-      </section>
+const meta = {
+  title: 'Components/Icon',
+  component: 'esds-icon-lit',
+  tags: ['autodocs'],
+  args,
+  argTypes,
+  render: (args) => template(args),
+} satisfies Meta<EsdsIconComponent>;
 
-      <section>
-        <h3>Background mode (mode="bg")</h3>
-        <p style="font-size: var(--esds-font-size-body-lg);">
-          <esds-icon
-            name="esds:arrow-right"
-            mode="bg"
-          ></esds-icon>
-          esds:arrow-right
-        </p>
-      </section>
+export default meta;
 
-      <section>
-        <h3>Mask mode (mode="mask") with color override</h3>
-        <p style="font-size: var(--esds-font-size-body-lg); color: var(--esds-color-error);">
-          <esds-icon
-            name="esds:arrow-right"
-            mode="mask"
-          ></esds-icon>
-          esds:arrow-right (red)
-        </p>
-      </section>
+type Story = StoryObj<EsdsIconComponent>;
 
-      <section>
-        <h3>Inline alignment (inline attribute)</h3>
-        <p style="font-size: var(--esds-font-size-body-lg);">
-          <esds-icon
-            name="esds:arrow-right"
-            inline
-          ></esds-icon>
-          esds:arrow-right (inline)
-        </p>
-      </section>
-
-      <section>
-        <h3>Manual loading (nolazy attribute)</h3>
-        <p style="font-size: var(--esds-font-size-body-lg);">
-          <esds-icon
-            name="esds:arrow-right"
-            nolazy
-          ></esds-icon>
-          esds:arrow-right (nolazy)
-        </p>
-      </section>
-    </div>
-  `,
+export const Default: Story = {
+  args: {
+    name: 'esds:headset',
+  },
 };
