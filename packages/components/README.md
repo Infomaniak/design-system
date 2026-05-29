@@ -1,86 +1,156 @@
 # @infomaniak-design-system/components
 
-Web components library for Infomaniak's Design System. Built with [Lit](https://lit.dev) and published as standard ES modules with full TypeScript support.
+Web components built with Lit, documented via Storybook using Custom Elements Manifest (CEM).
 
-## Installation
+## Architecture
 
-```bash
-yarn add @infomaniak-design-system/components
+- **Custom Elements Manifest (CEM)** — generated from JSDoc annotations on component classes
+- **Storybook** — reads `custom-elements.json` to auto-generate controls and docs
+- **`@wc-toolkit/storybook-helpers`** — provides `getStorybookHelpers(tagName)` for zero-boilerplate stories
+
+## Adding a new component
+
+### 1. Create component files
+
+```
+src/my-component/
+├── my-component.component.ts         # Lit component + JSDoc
+├── my-component.component.test.ts.   # Tests
+├── my-component.component.stories.ts # Storybook story
+└── index.ts                          # Public API (re-exports)
 ```
 
-Requires a peer-like dependency on `lit` for the consuming project:
+### 2. Write the Lit component with JSDoc
 
-```bash
-yarn add lit
-```
-
-## Quick Start
-
-Import all components at once:
+JSDoc drives the CEM, which drives the Storybook controls:
 
 ```typescript
-import '@infomaniak-design-system/components';
-```
+import { LitElement, css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 
-Import a specific component — it auto-registers and gives you class access:
+/**
+ * Short summary for the component gallery.
+ * @summary My new component
+ * @element my-component
+ */
+@customElement('my-component')
+export class MyComponent extends LitElement {
+  static override styles = css`
+    :host {
+      display: block;
+    }
+  `;
 
-```typescript
-import { EsdsIconComponent } from '@infomaniak-design-system/components/esds-icon';
-```
+  /**
+   * Human-readable label shown to the user.
+   * @attr label
+   */
+  @property({ type: String })
+  accessor label: string = '';
 
-## Usage with Frameworks
+  /**
+   * Whether the component is disabled.
+   * @attr disabled
+   * @reflect
+   */
+  @property({ type: Boolean, reflect: true })
+  accessor disabled: boolean = false;
 
-### React 19+
-
-Import once in your app entry point to auto-register the component:
-
-```tsx
-// main.tsx
-import '@infomaniak-design-system/components';
-```
-
-Use in your JSX templates:
-
-```tsx
-function App() {
-  return (
-    <div>
-      <esds-icon
-        name="esds:bell"
-        mode="svg"
-        inline="true"
-      />
-    </div>
-  );
+  override render() {
+    return html`<span>${this.label}</span>`;
+  }
 }
 ```
 
-React 19 has web components support, attributes pass through naturally.
+Key JSDoc tags for CEM:
 
-### Angular 20+
+- `@summary` — Short description
+- `@element` — Tag name (or use `@customElement` decorator)
+- `@attr` / `@attribute` — Document reflected attributes
+- `@default` — Default value when not obvious from initializer
+- `@internal` — Exclude from public CEM
+- `@fires` / `@event` — Custom events
+- `@slot` — Named/default slots
+- `@csspart` — Shadow DOM parts
+- `@cssprop` / `@cssproperty` — CSS custom properties
 
-Import in your component or module to auto-register the component:
+### 3. Create the story
+
+Import `getStorybookHelpers` and let the CEM generate controls automatically:
 
 ```typescript
-// app.component.ts
-import { Component } from '@angular/core';
-import '@infomaniak-design-system/components';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+import './my-component.component.js';
+import { MyComponent } from './my-component.component.js';
 
-@Component({
-  selector: 'app-root',
-  template: `
-    <esds-icon
-      [attr.name]="iconName"
-      mode="svg"
-      inline
-    ></esds-icon>
-  `,
-})
-export class AppComponent {
-  iconName = 'esds:bell';
-}
+const { args, argTypes, template } = getStorybookHelpers<MyComponent>('my-component');
+
+const meta = {
+  title: 'Components/My Component',
+  component: 'my-component',
+  tags: ['autodocs'],
+  args,
+  argTypes,
+  render: (storyArgs) => template(storyArgs),
+} satisfies Meta<MyComponent>;
+
+export default meta;
+type Story = StoryObj<MyComponent>;
+
+// Default story — uses CEM defaults
+export const Default: Story = {
+  args: {
+    label: 'Hello World',
+  },
+};
+
+// Override specific args for extra stories
+export const Disabled: Story = {
+  args: { disabled: true },
+};
 ```
 
-Angular handles custom elements as standard HTML. Use `[attr.name]` for dynamic attributes.
+No manual `argTypes` needed — controls are inferred from the CEM.
 
-For full component documentation, see the Storybook docs.
+### 4. Export from the package
+
+In `src/public-api.ts`:
+
+```typescript
+export { MyComponent } from './my-component/my-component.component.js';
+```
+
+### 5. Verify
+
+```bash
+# Generate CEM
+cd packages/components
+yarn analyze:cem
+
+# Test in Storybook
+cd ../../apps/docs
+yarn dev
+```
+
+## How it works
+
+1. `yarn analyze:cem` parses JSDoc annotations into `custom-elements.json`
+2. The Storybook preview (`apps/docs/.storybook/preview.tsx`) loads the CEM once via `setCustomElementsManifest()`
+3. `getStorybookHelpers(tagName)` reads the CEM at runtime to produce:
+   - `args` — default values from component property initializers
+   - `argTypes` — control types (text, boolean, select, etc.)
+   - `template` — renders the element with bound attributes
+4. JSDoc descriptions appear in the Storybook Docs tab
+
+## Useful scripts
+
+| Command            | Description                                      |
+| ------------------ | ------------------------------------------------ |
+| `yarn analyze:cem` | Generate `custom-elements.json` from source code |
+| `yarn build`       | Full build: CEM + Vite + TypeScript declarations |
+| `yarn dev`         | Start Storybook dev server                       |
+
+## CEM config
+
+See `custom-elements-manifest.config.mjs` for analyzer settings. The `type-parser` plugin is enabled so union types show as select controls in Storybook.
