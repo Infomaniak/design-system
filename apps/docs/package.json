@@ -4,8 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predev": "yarn workspace @infomaniak-design-system/components analyze:cem",
-    "dev": "storybook dev -p 6006",
+    "dev": "yarn workspace @infomaniak-design-system/components analyze:cem --watch & storybook dev -p 6006",
     "build": "storybook build"
   },
   "dependencies": {
