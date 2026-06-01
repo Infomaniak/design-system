@@ -7,12 +7,14 @@ import type { KotlinVariableDeclarationFontWeightValue } from './built-in/font-w
 import type { KotlinVariableDeclarationListOfFontFamilyValue } from './built-in/list-of-font-family/kotlin-variable-declaration-list-of-font-family-value.ts';
 import type { KotlinVariableDeclarationReferenceValue } from './built-in/ref/kotlin-variable-declaration-reference-value.ts';
 import type { KotlinVariableDeclarationShadowValue } from './built-in/shadow/kotlin-variable-declaration-shadow-value.ts';
+import type { KotlinVariableDeclarationShapeValue } from './built-in/shape/kotlin-variable-declaration-shape-value.ts';
 import type { KotlinVariableDeclarationTextStyleValue } from './built-in/text-style/kotlin-variable-declaration-text-style-value.ts';
 import type { KotlinVariableDeclarationTextUnitValue } from './built-in/text-unit/kotlin-variable-declaration-text-unit-value.ts';
 
 export type KotlinVariableDeclarationValue =
   | KotlinVariableDeclarationColorValue
   | KotlinVariableDeclarationDpValue
+  | KotlinVariableDeclarationShapeValue
   | KotlinVariableDeclarationTextUnitValue
   | KotlinVariableDeclarationFontFamilyValue
   | KotlinVariableDeclarationListOfFontFamilyValue

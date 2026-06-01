@@ -72,30 +72,29 @@ export function buildTokens({
       validateModifiers(modifiers);
     });
 
-    if (false) {
-      // CSS
-      await buildCssTokens({
-        baseCollection,
-        modifiers,
-        outputDirectory,
-        logger,
-      });
+    // CSS
+    await buildCssTokens({
+      baseCollection,
+      modifiers,
+      outputDirectory,
+      logger,
+    });
 
-      // FIGMA
-      await buildFigmaTokens({
-        baseCollection,
-        modifiers,
-        outputDirectory,
-        logger,
-      });
+    // FIGMA
+    await buildFigmaTokens({
+      baseCollection,
+      modifiers,
+      outputDirectory,
+      logger,
+    });
 
-      // SWIFT
-      await buildSwiftTokens({
-        collection: baseCollection,
-        outputDirectory,
-        logger,
-      });
-    }
+    // SWIFT
+    await buildSwiftTokens({
+      collection: baseCollection,
+      outputDirectory,
+      logger,
+    });
+
     // KOTLIN
     await buildKotlinTokens({
       baseCollection,
@@ -104,42 +103,40 @@ export function buildTokens({
       logger,
     });
 
-    if (false) {
-      // MATERIAL
-      await logger.asyncTask('material', async (logger: Logger): Promise<void> => {
-        // IMPORT MATERIAL TOKENS
-        const materialCollection: DesignTokensCollection = await baseCollection
-          .clone()
-          .fromFiles([`${sourceDirectory}/${MATERIAL_DIRECTORY_NAME}/tokens/**/*.tokens.json`], {
-            forEachTokenBehaviour: 'only-new-token',
-          });
-
-        // IMPORT MATERIAL MODIFIERS
-        const materialModifiers: DesignTokenModifiers = await extractDesignTokenModifiers({
-          sourceDirectories: [
-            `${sourceDirectory}/${MODIFIERS_DIRECTORY_NAME}`,
-            `${sourceDirectory}/${MATERIAL_DIRECTORY_NAME}/${MODIFIERS_DIRECTORY_NAME}`,
-          ],
-          baseCollection: materialCollection,
+    // MATERIAL
+    await logger.asyncTask('material', async (logger: Logger): Promise<void> => {
+      // IMPORT MATERIAL TOKENS
+      const materialCollection: DesignTokensCollection = await baseCollection
+        .clone()
+        .fromFiles([`${sourceDirectory}/${MATERIAL_DIRECTORY_NAME}/tokens/**/*.tokens.json`], {
+          forEachTokenBehaviour: 'only-new-token',
         });
 
-        // CSS
-        await buildCssTokens({
-          baseCollection: materialCollection,
-          modifiers: materialModifiers,
-          outputDirectory,
-          subDirectory: 'material',
-          logger,
-        });
-
-        // MARKDOWN
-        await buildMarkdownTokens({
-          baseCollection: materialCollection,
-          modifiers: materialModifiers,
-          outputDirectory,
-          logger,
-        });
+      // IMPORT MATERIAL MODIFIERS
+      const materialModifiers: DesignTokenModifiers = await extractDesignTokenModifiers({
+        sourceDirectories: [
+          `${sourceDirectory}/${MODIFIERS_DIRECTORY_NAME}`,
+          `${sourceDirectory}/${MATERIAL_DIRECTORY_NAME}/${MODIFIERS_DIRECTORY_NAME}`,
+        ],
+        baseCollection: materialCollection,
       });
-    }
+
+      // CSS
+      await buildCssTokens({
+        baseCollection: materialCollection,
+        modifiers: materialModifiers,
+        outputDirectory,
+        subDirectory: 'material',
+        logger,
+      });
+
+      // MARKDOWN
+      await buildMarkdownTokens({
+        baseCollection: materialCollection,
+        modifiers: materialModifiers,
+        outputDirectory,
+        logger,
+      });
+    });
   });
 }

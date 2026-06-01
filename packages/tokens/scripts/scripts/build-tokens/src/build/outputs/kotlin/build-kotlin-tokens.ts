@@ -126,7 +126,7 @@ export function buildKotlinTokens({
       await logger.asyncTask('default-values', async (): Promise<void> => {
         await createKotlinPublicClassInstancesWithInternalFiles({
           outputDirectory: `${foundationCoreDirectory}/defaultvalues`,
-          packageName: `${designSystemPackageName}.defaultvalues`,
+          packageName: `${designSystemPackageName}.core.defaultvalues`,
           prefix: 'Default',
           collection: baseCollection,
           primitiveTokensPackageName,
@@ -315,7 +315,7 @@ async function createKotlinPublicClassInstancesWithInternalFiles({
   outputDirectory = removeTrailingSlash(outputDirectory);
 
   const internalTokensPackageName: string = `${packageName}.internal`;
-  const internalTokensObjectName: string = `${prefix}Intermediate`;
+  const internalTokensObjectName: string = `Intermediate${prefix}`;
 
   await createKotlinInternalObjectFile({
     outputDirectory: `${outputDirectory}/internal`,
@@ -323,7 +323,7 @@ async function createKotlinPublicClassInstancesWithInternalFiles({
     toDeclarationsOptions,
     packageName: internalTokensPackageName,
     primitiveTokensPackageName,
-    objectName: `${prefix}Intermediate`,
+    objectName: internalTokensObjectName,
   });
 
   await createKotlinPublicClassInstancesFiles({
