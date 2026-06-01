@@ -46,6 +46,7 @@ export function createImportSvgPullRequests({
     }
 
     const message: string = `feat(assets/svg): update icons - ${version}`;
+    const targetBranch: string = 'develop';
 
     const changes: GitChanges = await logger.asyncTask(
       'create-branch',
@@ -54,6 +55,7 @@ export function createImportSvgPullRequests({
           repository: INFOMANIAK_DESIGN_SYSTEM_REPOSITORY,
           accessToken: updateRepositoryAndCreatePullRequestAuthToken,
           branchName,
+          mainBranchName: targetBranch,
           update: async ({
             cwd,
           }: UpdateGitRepositoryOnNewBranchUpdateFunctionContext): Promise<string> => {
@@ -102,7 +104,7 @@ export function createImportSvgPullRequests({
             version,
           }),
           head: branchName,
-          base: 'main',
+          base: targetBranch,
         });
       });
     } catch (error: unknown) {
