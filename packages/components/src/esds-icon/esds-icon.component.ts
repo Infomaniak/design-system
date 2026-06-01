@@ -13,6 +13,11 @@ export function _clearApiCache(): void {
   _apiCache.clear();
 }
 
+/** @internal for testing only */
+export function _getApiCacheSize(): number {
+  return _apiCache.size;
+}
+
 function getApi(endpoint: string): IconifyApi {
   const key = endpoint || 'default';
   if (!_apiCache.has(key)) {

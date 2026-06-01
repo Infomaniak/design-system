@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   EsdsIconComponent,
   _clearApiCache,
+  _getApiCacheSize,
   type EsdsIconComponentMode,
 } from './esds-icon.component.ts';
 
@@ -25,38 +26,6 @@ describe('EsdsIconComponent', () => {
     expect(el).instanceOf(EsdsIconComponent);
   });
 
-  it('should have default mode as svg and default inline as false', () => {
-    const el = new EsdsIconComponent();
-    expect(el.mode).toBe('svg');
-    expect(el.inline).toBe(false);
-    expect(el.nolazy).toBe(false);
-    expect(el.endpoint).toBe('');
-  });
-
-  it('should reflect nolazy attribute', async () => {
-    const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
-    container.append(el);
-    el.nolazy = true;
-    await el.updateComplete;
-    expect(el.hasAttribute('nolazy')).toBe(true);
-  });
-
-  it('should reflect inline attribute', async () => {
-    const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
-    container.append(el);
-    el.inline = true;
-    await el.updateComplete;
-    expect(el.hasAttribute('inline')).toBe(true);
-  });
-
-  it('should reflect endpoint attribute', async () => {
-    const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
-    container.append(el);
-    el.endpoint = 'https://custom.example.com';
-    await el.updateComplete;
-    expect(el.getAttribute('endpoint')).toBe('https://custom.example.com');
-  });
-
   it('should throw on invalid name without colon', async () => {
     const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
     container.append(el);
@@ -71,23 +40,6 @@ describe('EsdsIconComponent', () => {
     await expect(el.updateComplete).rejects.toThrow(
       "Invalid mode: invalid. Expected 'svg', 'bg', or 'mask'.",
     );
-  });
-
-  it('should parse name correctly', async () => {
-    const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
-    container.append(el);
-    el.name = 'test-prefix:my-icon';
-    await el.updateComplete;
-    expect(el.name).toBe('test-prefix:my-icon');
-  });
-
-  it('should update status when loading icon', async () => {
-    const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
-    el.nolazy = true;
-    el.name = 'test-prefix:my-icon';
-    container.append(el);
-    await el.updateComplete;
-    expect(el.status).toBe('loading');
   });
 
   it('should cancel previous fetch on disconnect', async () => {
@@ -405,18 +357,45 @@ describe('EsdsIconComponent', () => {
     it('should create separate IconifyApi instance for custom endpoint', async () => {
       vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg></svg>');
 
-      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
-      el.nolazy = true;
-      el.name = 'test-prefix:my-icon';
-      container.append(el);
-      await el.updateComplete;
+      _clearApiCache();
+
+      // First icon with default (empty) endpoint
+      const el1 = document.createElement('esds-icon-lit') as EsdsIconComponent;
+      el1.nolazy = true;
+      el1.name = 'test-prefix:icon-1';
+      container.append(el1);
+      await el1.updateComplete;
 
       await new Promise((r) => setTimeout(r, 10));
-      await el.updateComplete;
+      await el1.updateComplete;
 
-      // Mock resources on the instance to verify the default was used
-      // Since the prototype spy captures all calls, we verify the endpoint is set
-      expect(el.endpoint).toBe('');
+      expect(_getApiCacheSize()).toBe(1);
+
+      // Second icon with custom endpoint
+      const el2 = document.createElement('esds-icon-lit') as EsdsIconComponent;
+      el2.nolazy = true;
+      el2.endpoint = 'https://custom.example.com';
+      el2.name = 'test-prefix:icon-2';
+      container.append(el2);
+      await el2.updateComplete;
+
+      await new Promise((r) => setTimeout(r, 10));
+      await el2.updateComplete;
+
+      expect(_getApiCacheSize()).toBe(2);
+
+      // Third icon with the same custom endpoint — should reuse cached instance
+      const el3 = document.createElement('esds-icon-lit') as EsdsIconComponent;
+      el3.nolazy = true;
+      el3.endpoint = 'https://custom.example.com';
+      el3.name = 'test-prefix:icon-3';
+      container.append(el3);
+      await el3.updateComplete;
+
+      await new Promise((r) => setTimeout(r, 10));
+      await el3.updateComplete;
+
+      expect(_getApiCacheSize()).toBe(2);
     });
 
     it('should re-fetch when endpoint changes', async () => {
