@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "author": {
       "name": "Infomaniak"
     },
@@ -10,9 +10,9 @@
       "title": "GPL-3.0-only",
       "spdx": "GPL-3.0-only"
     },
-    "total": 56
+    "total": 57
   },
-  "lastModified": 1780037053,
+  "lastModified": 1780314470,
   "icons": {
     "bell": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M10.268 21a2 2 0 003.464 0m-10.47-5.674A1 1 0 004 17h16a1 1 0 00.74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 106 8c0 4.499-1.411 5.956-2.738 7.326\"/>"
@@ -137,6 +137,9 @@
     "sparkles": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M20 2v4m2-2h-4m-6.983-1.186a1 1 0 011.966 0l1.051 5.558a2 2 0 001.594 1.594l5.558 1.051a1 1 0 010 1.966l-5.558 1.051a2 2 0 00-1.594 1.594l-1.051 5.558a1 1 0 01-1.966 0l-1.051-5.558a2 2 0 00-1.594-1.594l-5.558-1.051a1 1 0 010-1.966l5.558-1.051a2 2 0 001.594-1.594zM6 20a2 2 0 11-4 0 2 2 0 014 0\"/>"
     },
+    "square-arrow-out-up-right": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M21 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h6m10 0-9 9m9-3V3h-6\"/>"
+    },
     "squares-four": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M9 3H4a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V4a1 1 0 00-1-1m11 0h-5a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V4a1 1 0 00-1-1m0 11h-5a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1v-5a1 1 0 00-1-1M9 14H4a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1v-5a1 1 0 00-1-1\"/>"
     },
@@ -226,6 +229,7 @@
       "sidebar-left-chevron-right",
       "smartphone-tablet",
       "sparkles",
+      "square-arrow-out-up-right",
       "squares-four",
       "sun",
       "trash",
@@ -756,8 +760,12 @@
     "#explore": [
       "magnifying-glass"
     ],
+    "#export": [
+      "square-arrow-out-up-right"
+    ],
     "#external": [
-      "link-horizontal"
+      "link-horizontal",
+      "square-arrow-out-up-right"
     ],
     "#faq": [
       "circle-question",
@@ -883,7 +891,8 @@
       "user"
     ],
     "#hyperlink": [
-      "link-horizontal"
+      "link-horizontal",
+      "square-arrow-out-up-right"
     ],
     "#idcard": [
       "user-card"
@@ -947,6 +956,9 @@
     "#key": [
       "user-key"
     ],
+    "#launch": [
+      "square-arrow-out-up-right"
+    ],
     "#launcher": [
       "dots-nine"
     ],
@@ -985,7 +997,8 @@
       "rows-four"
     ],
     "#link": [
-      "link-horizontal"
+      "link-horizontal",
+      "square-arrow-out-up-right"
     ],
     "#list": [
       "dots-list",
@@ -1128,7 +1141,8 @@
     ],
     "#navigate": [
       "chevron-left",
-      "map-pin"
+      "map-pin",
+      "square-arrow-out-up-right"
     ],
     "#navigation": [
       "sidebar-left-chevron-right"
@@ -1143,6 +1157,9 @@
     "#newsletter": [
       "envelope",
       "envelope-filled"
+    ],
+    "#newtab": [
+      "square-arrow-out-up-right"
     ],
     "#newuser": [
       "user-plus"
@@ -1179,7 +1196,8 @@
     "#open": [
       "chevron-down",
       "door-open",
-      "sidebar-left-chevron-right"
+      "sidebar-left-chevron-right",
+      "square-arrow-out-up-right"
     ],
     "#options": [
       "dots-three-vertical"
@@ -1190,6 +1208,9 @@
     "#organize": [
       "columns-four",
       "columns-three"
+    ],
+    "#outbound": [
+      "square-arrow-out-up-right"
     ],
     "#overflow": [
       "dots-three-vertical"
@@ -1311,6 +1332,9 @@
     "#recycle": [
       "trash"
     ],
+    "#redirect": [
+      "square-arrow-out-up-right"
+    ],
     "#reference": [
       "link-horizontal"
     ],
@@ -1420,7 +1444,8 @@
       "user-cog"
     ],
     "#share": [
-      "link-horizontal"
+      "link-horizontal",
+      "square-arrow-out-up-right"
     ],
     "#shine": [
       "sparkles"
