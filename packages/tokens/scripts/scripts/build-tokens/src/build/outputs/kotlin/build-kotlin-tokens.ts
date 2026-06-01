@@ -2,6 +2,7 @@ import { writeTextFileSafe } from '../../../../../../../../../scripts/helpers/fi
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
 import { toCamelCase } from '../../../../../../../../../scripts/helpers/misc/case/to-camel-case/to-camel-case.ts';
 import { toPascalCase } from '../../../../../../../../../scripts/helpers/misc/case/to-pascal-case/to-pascal-case.ts';
+import { dedent } from '../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { removeTrailingSlash } from '../../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import type { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type {
@@ -10,9 +11,15 @@ import type {
 } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import type { KotlinVariableDeclaration } from '../../../../../../shared/dtcg/resolver/to/kotlin/kotlin-variable-declaration/kotlin-variable-declaration.ts';
 import { kotlinVariableDeclarationsToFoundationKotlinTokenFileContent } from '../../../../../../shared/dtcg/resolver/to/kotlin/kotlin-variable-declaration/to/foundation-kotlin-tokens-file/kotlin-variable-declarations-to-foundation-kotlin-token-file-content.ts';
-import { kotlinVariableDeclarationsToInternalObjectKotlinTokenFileContent } from '../../../../../../shared/dtcg/resolver/to/kotlin/kotlin-variable-declaration/to/internal-object-kotlin-tokens-file/kotlin-variable-declarations-to-internal-object-kotlin-token-file-content.ts';
+import {
+  kotlinVariableDeclarationsToInternalObjectKotlinTokenFileContent,
+  type KotlinVariableDeclarationsToInternalObjectKotlinTokenFileContentOptions,
+} from '../../../../../../shared/dtcg/resolver/to/kotlin/kotlin-variable-declaration/to/internal-object-kotlin-tokens-file/kotlin-variable-declarations-to-internal-object-kotlin-token-file-content.ts';
 import { kotlinVariableDeclarationsToPrimitiveKotlinTokenFileContent } from '../../../../../../shared/dtcg/resolver/to/kotlin/kotlin-variable-declaration/to/primitive-kotlin-tokens-file/kotlin-variable-declarations-to-primitive-kotlin-token-file-content.ts';
-import { kotlinVariableDeclarationsToThemeInstanceKotlinTokenFileContent } from '../../../../../../shared/dtcg/resolver/to/kotlin/kotlin-variable-declaration/to/theme-instance-kotlin-tokens-file/kotlin-variable-declarations-to-theme-instance-kotlin-token-file-content.ts';
+import {
+  kotlinVariableDeclarationsToThemeInstanceKotlinTokenFileContent,
+  type KotlinVariableDeclarationsToThemeInstanceKotlinTokenFileContentOptions,
+} from '../../../../../../shared/dtcg/resolver/to/kotlin/kotlin-variable-declaration/to/theme-instance-kotlin-tokens-file/kotlin-variable-declarations-to-theme-instance-kotlin-token-file-content.ts';
 import { isKotlinVariableDeclarationRefValue } from '../../../../../../shared/dtcg/resolver/to/kotlin/kotlin-variable-declaration/value/built-in/ref/kotlin-variable-declaration-reference-value.ts';
 import {
   designTokensCollectionTokenToKotlinVariableDeclaration,
@@ -83,34 +90,50 @@ export function buildKotlinTokens({
       }
     });
 
-    await logger.asyncTask('Foundation', async (): Promise<void> => {
-      const grouped: GroupedTokensByPrefix = groupTokensByPrefixes(
-        baseCollection.tokens().filter(filterT2T3Tokens),
-      );
+    await logger.asyncTask('Foundation', async (logger: Logger): Promise<void> => {
+      const foundationCoreDirectory: string = `${kotlinOutputDirectory}/Foundation/src/main/kotlin/com/infomaniak/designsystem/core`;
 
-      for (const [prefix, tokens] of Object.entries(grouped)) {
-        const fileName: string = `${toPascalCase(prefix)}Tokens`;
-
-        await writeTextFileSafe(
-          `${kotlinOutputDirectory}/Foundation/src/main/kotlin/com/infomaniak/designsystem/core/tokens/${fileName}.kt`,
-          kotlinVariableDeclarationsToFoundationKotlinTokenFileContent({
-            packageName: foundationTokensPackageName,
-            className: fileName,
-            declarations: tokens.map(
-              (token: GenericDesignTokensCollectionToken): KotlinVariableDeclaration => {
-                return removePrefixFromKotlinVariableDeclaration(
-                  resolveDesignTokensCollectionTokenToKotlinVariableDeclaration(
-                    baseCollection,
-                    token,
-                    kotlinTokensCollectionOptions,
-                  ),
-                  prefix,
-                );
-              },
-            ),
-          }),
+      await logger.asyncTask('tokens', async (): Promise<void> => {
+        const grouped: GroupedTokensByPrefix = groupTokensByPrefixes(
+          baseCollection.tokens().filter(filterT2T3Tokens),
         );
-      }
+
+        for (const [prefix, tokens] of Object.entries(grouped)) {
+          const fileName: string = `${toPascalCase(prefix)}Tokens`;
+
+          await writeTextFileSafe(
+            `${foundationCoreDirectory}/tokens/${fileName}.kt`,
+            kotlinVariableDeclarationsToFoundationKotlinTokenFileContent({
+              packageName: foundationTokensPackageName,
+              className: fileName,
+              declarations: tokens.map(
+                (token: GenericDesignTokensCollectionToken): KotlinVariableDeclaration => {
+                  return removePrefixFromKotlinVariableDeclaration(
+                    resolveDesignTokensCollectionTokenToKotlinVariableDeclaration(
+                      baseCollection,
+                      token,
+                      kotlinTokensCollectionOptions,
+                    ),
+                    prefix,
+                  );
+                },
+              ),
+            }),
+          );
+        }
+      });
+
+      await logger.asyncTask('default-values', async (): Promise<void> => {
+        await createKotlinPublicClassInstancesWithInternalFiles({
+          outputDirectory: `${foundationCoreDirectory}/defaultvalues`,
+          packageName: `${designSystemPackageName}.defaultvalues`,
+          prefix: 'Default',
+          collection: baseCollection,
+          primitiveTokensPackageName,
+          foundationTokensPackageName,
+          toDeclarationsOptions: kotlinTokensCollectionOptions,
+        });
+      });
     });
 
     await logger.asyncTask('Modifiers', async (logger: Logger): Promise<void> => {
@@ -142,72 +165,24 @@ export function buildKotlinTokens({
           throw new Error('Missing theme or product');
         }
 
-        await logger.asyncTask(`${theme}/${product}`, async (logger: Logger): Promise<void> => {
-          const packageRootDirectoryName: string = `Theme${toPascalCase(product)}`;
+        await logger.asyncTask(`${theme}/${product}`, async (): Promise<void> => {
+          const packageRootDirectory: string = `${kotlinOutputDirectory}/Theme${toPascalCase(product)}`;
+          const packageName: string = `${designSystemPackageName}.${product}`;
 
-          const internalTokensPackageName: string = `${designSystemPackageName}.${product}.internal`;
-          const internalTokensFileName: string = `Intermediate${toPascalCase(theme)}`;
-
-          await logger.asyncTask('internal', async (): Promise<void> => {
-            await writeTextFileSafe(
-              `${kotlinOutputDirectory}/${packageRootDirectoryName}/src/main/kotlin/com/infomaniak/designsystem/${product}/internal/${internalTokensFileName}.kt`,
-              kotlinVariableDeclarationsToInternalObjectKotlinTokenFileContent({
-                packageName: internalTokensPackageName,
-                primitiveTokensPackageName,
-                objectName: internalTokensFileName,
-                declarations: entry.collection
-                  .tokens()
-                  .filter(filterT2T3Tokens)
-                  .map((token: GenericDesignTokensCollectionToken): KotlinVariableDeclaration => {
-                    return resolveDesignTokensCollectionTokenToKotlinVariableDeclaration(
-                      baseCollection,
-                      token,
-                      kotlinTokensCollectionOptions,
-                    );
-                  }),
-              }),
-            );
+          await createKotlinGradleFile({
+            outputDirectory: packageRootDirectory,
+            designSystemPackageName,
+            packageName,
           });
 
-          await logger.asyncTask('public', async (): Promise<void> => {
-            const publicTokensPackageName: string = `${designSystemPackageName}.${product}`;
-
-            const grouped: GroupedTokensByPrefix = groupTokensByPrefixes(
-              entry.collection.tokens().filter(filterT2T3Tokens),
-            );
-
-            for (const [prefix, tokens] of Object.entries(grouped)) {
-              const className: string = `${toPascalCase(prefix)}Tokens`;
-              const fileName: string = `${toPascalCase(product)}${toPascalCase(theme)}${className}`;
-
-              await writeTextFileSafe(
-                `${kotlinOutputDirectory}/${packageRootDirectoryName}/src/main/kotlin/com/infomaniak/designsystem/${product}/${fileName}.kt`,
-                kotlinVariableDeclarationsToThemeInstanceKotlinTokenFileContent({
-                  packageName: publicTokensPackageName,
-                  foundationTokensPackageName,
-                  internalTokensPackageName: `${internalTokensPackageName}.${internalTokensFileName}`,
-                  instanceName: fileName,
-                  className,
-                  declarations: tokens.map(
-                    (token: GenericDesignTokensCollectionToken): KotlinVariableDeclaration => {
-                      return removePrefixFromKotlinVariableDeclaration(
-                        updateKotlinVariableDeclarationValue(
-                          resolveDesignTokensCollectionTokenToKotlinVariableDeclaration(
-                            baseCollection,
-                            token,
-                            kotlinTokensCollectionOptions,
-                          ),
-                          (declaration: KotlinVariableDeclaration): string => {
-                            return `${internalTokensFileName}.${declaration.name}`;
-                          },
-                        ),
-                        prefix,
-                      );
-                    },
-                  ),
-                }),
-              );
-            }
+          await createKotlinPublicClassInstancesWithInternalFiles({
+            outputDirectory: `${packageRootDirectory}/src/main/kotlin/com/infomaniak/designsystem/${product}`,
+            packageName,
+            prefix: `${toPascalCase(product)}${toPascalCase(theme)}`,
+            collection: entry.collection,
+            primitiveTokensPackageName,
+            foundationTokensPackageName,
+            toDeclarationsOptions: kotlinTokensCollectionOptions,
           });
         });
       }
@@ -216,6 +191,183 @@ export function buildKotlinTokens({
 }
 
 /* INTERNAL */
+
+interface CreateKotlinInternalObjectFileOptions extends Omit<
+  KotlinVariableDeclarationsToInternalObjectKotlinTokenFileContentOptions,
+  'declarations'
+> {
+  readonly outputDirectory: string;
+  readonly collection: DesignTokensCollection;
+  readonly toDeclarationsOptions: DesignTokensCollectionTokenToKotlinVariableDeclarationOptions;
+}
+
+function createKotlinInternalObjectFile({
+  outputDirectory,
+  collection,
+  objectName,
+  toDeclarationsOptions,
+  ...options
+}: CreateKotlinInternalObjectFileOptions): Promise<void> {
+  outputDirectory = removeTrailingSlash(outputDirectory);
+
+  return writeTextFileSafe(
+    `${outputDirectory}/${objectName}.kt`,
+    kotlinVariableDeclarationsToInternalObjectKotlinTokenFileContent({
+      ...options,
+      objectName,
+      declarations: collection
+        .tokens()
+        .filter(filterT2T3Tokens)
+        .map((token: GenericDesignTokensCollectionToken): KotlinVariableDeclaration => {
+          return resolveDesignTokensCollectionTokenToKotlinVariableDeclaration(
+            collection,
+            token,
+            toDeclarationsOptions,
+          );
+        }),
+    }),
+  );
+}
+
+/*--*/
+
+interface CreateKotlinPublicClassInstancesFilesOptions extends Omit<
+  KotlinVariableDeclarationsToThemeInstanceKotlinTokenFileContentOptions,
+  'internalTokensPackageName' | 'instanceName' | 'className' | 'declarations'
+> {
+  readonly outputDirectory: string;
+  readonly collection: DesignTokensCollection;
+  readonly prefix: string;
+  readonly internalTokensPackageName: string;
+  readonly internalTokensObjectName: string;
+  readonly toDeclarationsOptions: DesignTokensCollectionTokenToKotlinVariableDeclarationOptions;
+}
+
+async function createKotlinPublicClassInstancesFiles({
+  outputDirectory,
+  collection,
+  prefix,
+  internalTokensPackageName,
+  internalTokensObjectName,
+  toDeclarationsOptions,
+  ...options
+}: CreateKotlinPublicClassInstancesFilesOptions): Promise<void> {
+  outputDirectory = removeTrailingSlash(outputDirectory);
+
+  const grouped: GroupedTokensByPrefix = groupTokensByPrefixes(
+    collection.tokens().filter(filterT2T3Tokens),
+  );
+
+  for (const [tokenPrefix, tokens] of Object.entries(grouped)) {
+    const className: string = `${toPascalCase(tokenPrefix)}Tokens`;
+    const instanceName: string = `${prefix}${className}`;
+
+    await writeTextFileSafe(
+      `${outputDirectory}/${instanceName}.kt`,
+      kotlinVariableDeclarationsToThemeInstanceKotlinTokenFileContent({
+        ...options,
+        internalTokensPackageName: `${internalTokensPackageName}.${internalTokensObjectName}`,
+        instanceName,
+        className,
+        declarations: tokens.map(
+          (token: GenericDesignTokensCollectionToken): KotlinVariableDeclaration => {
+            return removePrefixFromKotlinVariableDeclaration(
+              updateKotlinVariableDeclarationValue(
+                resolveDesignTokensCollectionTokenToKotlinVariableDeclaration(
+                  collection,
+                  token,
+                  toDeclarationsOptions,
+                ),
+                (declaration: KotlinVariableDeclaration): string => {
+                  return `${internalTokensObjectName}.${declaration.name}`;
+                },
+              ),
+              tokenPrefix,
+            );
+          },
+        ),
+      }),
+    );
+  }
+}
+
+/*--*/
+
+interface CreateKotlinPublicClassInstancesWithInternalFilesOptions {
+  readonly outputDirectory: string;
+  readonly packageName: string;
+  readonly prefix: string;
+  readonly collection: DesignTokensCollection;
+  readonly primitiveTokensPackageName: string;
+  readonly foundationTokensPackageName: string;
+  readonly toDeclarationsOptions: DesignTokensCollectionTokenToKotlinVariableDeclarationOptions;
+}
+
+async function createKotlinPublicClassInstancesWithInternalFiles({
+  outputDirectory,
+  packageName,
+  prefix,
+  collection,
+  primitiveTokensPackageName,
+  foundationTokensPackageName,
+  toDeclarationsOptions,
+}: CreateKotlinPublicClassInstancesWithInternalFilesOptions): Promise<void> {
+  outputDirectory = removeTrailingSlash(outputDirectory);
+
+  const internalTokensPackageName: string = `${packageName}.internal`;
+  const internalTokensObjectName: string = `${prefix}Intermediate`;
+
+  await createKotlinInternalObjectFile({
+    outputDirectory: `${outputDirectory}/internal`,
+    collection,
+    toDeclarationsOptions,
+    packageName: internalTokensPackageName,
+    primitiveTokensPackageName,
+    objectName: `${prefix}Intermediate`,
+  });
+
+  await createKotlinPublicClassInstancesFiles({
+    outputDirectory,
+    collection,
+    prefix,
+    internalTokensPackageName,
+    internalTokensObjectName,
+    toDeclarationsOptions,
+    packageName,
+    foundationTokensPackageName,
+  });
+}
+
+/*--*/
+
+interface CreateKotlinGradleFileOptions {
+  readonly outputDirectory: string;
+  readonly designSystemPackageName: string;
+  readonly packageName: string;
+}
+
+async function createKotlinGradleFile({
+  outputDirectory,
+  designSystemPackageName,
+  packageName,
+}: CreateKotlinGradleFileOptions): Promise<void> {
+  outputDirectory = removeTrailingSlash(outputDirectory);
+
+  await writeTextFileSafe(
+    `${outputDirectory}/build.gradle.kts`,
+    dedent`
+      plugins {
+          id("${designSystemPackageName}.convention.theme")
+      }
+      
+      android {
+          namespace = "${packageName}"
+      }
+    `,
+  );
+}
+
+/*--*/
 
 function resolveDesignTokensCollectionTokenToKotlinVariableDeclaration(
   collection: DesignTokensCollection,
