@@ -29,6 +29,18 @@ describe('dedent', () => {
 }`);
     });
 
+    it('should support no indent', () => {
+      expect(
+        dedent`
+class A {
+  a = 'b';
+}
+        `,
+      ).toBe(`class A {
+  a = 'b';
+}`);
+    });
+
     it('should throw if first line does not start with a new line', () => {
       expect(
         () => dedent` class A {

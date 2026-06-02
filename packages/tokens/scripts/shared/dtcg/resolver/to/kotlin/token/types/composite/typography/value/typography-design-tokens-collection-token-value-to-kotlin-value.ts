@@ -1,6 +1,8 @@
 import { dedent } from '../../../../../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import type { TypographyDesignTokensCollectionTokenValue } from '../../../../../../../token/types/composite/typography/value/typography-design-tokens-collection-token-value.ts';
+import { isKotlinVariableDeclarationDpValue } from '../../../../../kotlin-variable-declaration/value/built-in/dp/kotlin-variable-declaration-dp-value.ts';
 import { convertKotlinDpToTextUnit } from '../../../../../kotlin-variable-declaration/value/built-in/dp/to/convert-kotlin-dp-to-text-unit.ts';
+import { isKotlinVariableDeclarationFloatValue } from '../../../../../kotlin-variable-declaration/value/built-in/float/kotlin-variable-declaration-float-value.ts';
 import type { KotlinVariableDeclarationTextStyleValue } from '../../../../../kotlin-variable-declaration/value/built-in/text-style/kotlin-variable-declaration-text-style-value.ts';
 import type { KotlinVariableDeclarationValue } from '../../../../../kotlin-variable-declaration/value/kotlin-variable-declaration-value.ts';
 import {
@@ -47,7 +49,7 @@ export function typographyDesignTokensCollectionTokenValueToKotlinValue(
       options,
     );
 
-  if (letterSpacing.type === 'Dp') {
+  if (isKotlinVariableDeclarationDpValue(letterSpacing)) {
     letterSpacing = convertKotlinDpToTextUnit(letterSpacing);
   }
 
@@ -57,9 +59,9 @@ export function typographyDesignTokensCollectionTokenValueToKotlinValue(
     options,
   );
 
-  if (lineHeight.type === 'Dp') {
+  if (isKotlinVariableDeclarationDpValue(lineHeight)) {
     lineHeight = convertKotlinDpToTextUnit(lineHeight);
-  } else if (lineHeight.type === 'Float') {
+  } else if (isKotlinVariableDeclarationFloatValue(lineHeight)) {
     lineHeight = {
       type: 'ref',
       value: 'TextUnit.Unspecified',

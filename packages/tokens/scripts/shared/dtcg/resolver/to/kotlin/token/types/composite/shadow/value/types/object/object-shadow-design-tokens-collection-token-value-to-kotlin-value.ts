@@ -1,6 +1,7 @@
 import { dedent } from '../../../../../../../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import type { ObjectShadowDesignTokensCollectionTokenValue } from '../../../../../../../../../token/types/composite/shadow/value/types/object/object-shadow-design-tokens-collection-token-value.ts';
 import type { KotlinVariableDeclarationShadowValue } from '../../../../../../../kotlin-variable-declaration/value/built-in/shadow/kotlin-variable-declaration-shadow-value.ts';
+import { isKotlinVariableDeclarationTextUnitValue } from '../../../../../../../kotlin-variable-declaration/value/built-in/text-unit/kotlin-variable-declaration-text-unit-value.ts';
 import { convertKotlinTextUnitToDp } from '../../../../../../../kotlin-variable-declaration/value/built-in/text-unit/to/convert-kotlin-text-unit-to-dp.ts';
 import type { KotlinVariableDeclarationValue } from '../../../../../../../kotlin-variable-declaration/value/kotlin-variable-declaration-value.ts';
 import {
@@ -29,7 +30,7 @@ export function objectShadowDesignTokensCollectionTokenValueToKotlinValue(
     options,
   );
 
-  if (offsetX.type === 'TextUnit') {
+  if (isKotlinVariableDeclarationTextUnitValue(offsetX)) {
     offsetX = convertKotlinTextUnitToDp(offsetX);
   }
 
@@ -39,7 +40,7 @@ export function objectShadowDesignTokensCollectionTokenValueToKotlinValue(
     options,
   );
 
-  if (offsetY.type === 'TextUnit') {
+  if (isKotlinVariableDeclarationTextUnitValue(offsetY)) {
     offsetY = convertKotlinTextUnitToDp(offsetY);
   }
 
@@ -49,7 +50,7 @@ export function objectShadowDesignTokensCollectionTokenValueToKotlinValue(
     options,
   );
 
-  if (blur.type === 'TextUnit') {
+  if (isKotlinVariableDeclarationTextUnitValue(blur)) {
     blur = convertKotlinTextUnitToDp(blur);
   }
 
@@ -59,7 +60,7 @@ export function objectShadowDesignTokensCollectionTokenValueToKotlinValue(
     options,
   );
 
-  if (spread.type === 'TextUnit') {
+  if (isKotlinVariableDeclarationTextUnitValue(spread)) {
     spread = convertKotlinTextUnitToDp(spread);
   }
 
