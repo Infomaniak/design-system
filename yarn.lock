@@ -926,6 +926,7 @@ __metadata:
     "@storybook/web-components-vite": "npm:^10.4.1"
     "@wc-toolkit/type-parser": "npm:1.2.1"
     lit: "npm:^3.3.3"
+    signal-utils: "npm:^0.21.1"
     typescript: "npm:~6.0.3"
     vite: "npm:^8.0.12"
   languageName: unknown
@@ -5751,6 +5752,15 @@ __metadata:
   version: 0.2.2
   resolution: "signal-polyfill@npm:0.2.2"
   checksum: 10c0/485b0e66d93961454af32e7fbff88130138dffcbf7bce35e5c873d760ceb9ce33a125dd63cc59454c739c43246980515b1162cbe0ebc975a974ee036fb58d18a
+  languageName: node
+  linkType: hard
+
+"signal-utils@npm:^0.21.1":
+  version: 0.21.1
+  resolution: "signal-utils@npm:0.21.1"
+  peerDependencies:
+    signal-polyfill: ^0.2.0
+  checksum: 10c0/e42ea9b4af0b6054eb4e4f7dd97d9fb2c115fba34c024e4ebbf2879785b8e61c1d6562ccddeef185bbd64f80f985b38a3631e35bfdfd317dcd42224c05aed587
   languageName: node
   linkType: hard
 

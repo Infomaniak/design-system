@@ -1,7 +1,11 @@
 import { IconifyApi } from '@infomaniak-design-system/esds-icon';
-import { LitElement, html, unsafeCSS, type PropertyValues } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { signal, SignalWatcher } from '@lit-labs/signals';
+import { html, LitElement, type TemplateResult, unsafeCSS } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { batch, batchedEffect } from 'signal-utils/subtle/batched-effect';
 
+import { signalProperty } from '../helpers.private/signal/signal-property.ts';
+import type { WritableSignal } from '../helpers.private/signal/writable-signal.ts';
 import style from './esds-icon.component.css?inline';
 
 export type EsdsIconComponentMode = 'svg' | 'bg' | 'mask';
@@ -19,12 +23,11 @@ export function _getApiCacheSize(): number {
   return _apiCache.size;
 }
 
-function getApi(endpoint: string): IconifyApi {
-  const key = endpoint || 'default';
-  if (!_apiCache.has(key)) {
-    _apiCache.set(key, new IconifyApi(endpoint ? { resources: [endpoint] } : {}));
+function getApi(endpoint: string = 'https://iconify.infomaniak.com'): IconifyApi {
+  if (!_apiCache.has(endpoint)) {
+    _apiCache.set(endpoint, new IconifyApi({ resources: [endpoint] }));
   }
-  return _apiCache.get(key)!;
+  return _apiCache.get(endpoint)!;
 }
 
 /**
@@ -33,8 +36,10 @@ function getApi(endpoint: string): IconifyApi {
  * @element esds-icon-lit
  */
 @customElement('esds-icon-lit') // TODO: change to `esds-icon` once we don't have a conflict with the other component
-export class EsdsIconComponent extends LitElement {
+export class EsdsIconComponent extends SignalWatcher(LitElement) {
   static override styles = unsafeCSS(style);
+
+  /* PROPERTIES */
 
   /**
    * Icon identifier in `prefix:name` format.
@@ -42,6 +47,8 @@ export class EsdsIconComponent extends LitElement {
    */
   @property({ type: String })
   accessor name: string = '';
+
+  readonly #name: WritableSignal<string> = signalProperty(this, 'name');
 
   /**
    * The rendering mode to apply.
@@ -51,7 +58,21 @@ export class EsdsIconComponent extends LitElement {
    * @attr mode
    * @default 'svg'
    */
-  @property({ type: String })
+  @property({
+    type: String,
+    reflect: true,
+    converter: (input: string | null): EsdsIconComponentMode => {
+      if (input === null) {
+        return 'svg';
+      }
+
+      if (!['svg', 'bg', 'mask'].includes(input)) {
+        throw new Error(`Invalid mode: ${input}. Expected 'svg', 'bg', or 'mask'.`);
+      }
+
+      return input as EsdsIconComponentMode;
+    },
+  })
   accessor mode: EsdsIconComponentMode = 'svg';
 
   /**
@@ -62,192 +83,116 @@ export class EsdsIconComponent extends LitElement {
   @property({ type: Boolean, reflect: true })
   accessor inline: boolean = false;
 
-  /**
-   * Disables lazy loading via IntersectionObserver; fetches the icon immediately.
-   * @attr nolazy
-   * @reflect
-   */
-  @property({ type: Boolean, reflect: true })
-  accessor nolazy: boolean = false;
-
-  /**
-   * Custom Iconify API endpoint URL.
-   * When empty, defaults to `https://iconify.infomaniak.com`.
-   * @attr endpoint
-   */
-  @property({ type: String, reflect: true })
-  accessor endpoint: string = '';
-
-  /**
-   * @internal
-   */
-  @state()
-  accessor #status: EsdsIconComponentStatus = 'loading';
-
-  /**
-   * @internal
-   */
-  @state()
-  private accessor _svgNode: SVGSVGElement | null = null;
-
-  /**
-   * @internal
-   */
-  private _prefix = '';
-
-  /**
-   * @internal
-   */
-  private _iconName = '';
-
-  /**
-   * @internal
-   */
-  private _visible = false;
-
-  /**
-   * @internal
-   */
-  private _observer: IntersectionObserver | undefined;
-
-  /**
-   * @internal
-   */
-  private _abortController: AbortController | undefined;
+  readonly #status: WritableSignal<EsdsIconComponentStatus> =
+    signal<EsdsIconComponentStatus>('loading');
 
   /**
    * Read-only loading state of the icon.
    */
   get status(): EsdsIconComponentStatus {
-    return this.#status;
+    return this.#status.get();
+  }
+
+  /* INTERNAL */
+
+  constructor() {
+    super();
+
+    batchedEffect((): void => {
+      this.#loadIcon();
+    });
   }
 
   override connectedCallback(): void {
     super.connectedCallback();
-    if (this.nolazy) {
-      this._visible = true;
-    } else {
-      this._startObserver();
-    }
+    this.#startObserver();
   }
 
   override disconnectedCallback(): void {
-    this._stopObserver();
-    this._abortPendingFetch();
+    this.#stopObserver();
     super.disconnectedCallback();
   }
 
-  override willUpdate(changedProperties: PropertyValues<this>): void {
-    super.willUpdate(changedProperties);
+  readonly #svgNode: WritableSignal<SVGSVGElement | null> = signal<SVGSVGElement | null>(null);
 
-    if (changedProperties.has('name')) {
-      if (this.name && !this.name.includes(':')) {
-        throw new Error(
-          'Invalid `name`: missing separator `:` between <prefix> and <name> (`name="<prefix>:<name>"`).',
-        );
-      }
-      this._parseName();
-      this._abortPendingFetch();
-    }
-
-    if (changedProperties.has('mode')) {
-      if (!this.mode) {
-        this.mode = 'svg';
-      }
-      if (!['svg', 'bg', 'mask'].includes(this.mode)) {
-        throw new Error(`Invalid mode: ${this.mode}. Expected 'svg', 'bg', or 'mask'.`);
-      }
-      if (this.mode !== 'svg') {
-        this._svgNode = null;
-      } else {
-        this.style.removeProperty('--svg');
-      }
-    }
-
-    if (changedProperties.has('nolazy')) {
-      if (this.nolazy) {
-        this._stopObserver();
-        this._visible = true;
-      } else {
-        this._startObserver();
-      }
-    }
-
-    if (
-      this._visible &&
-      (changedProperties.has('name') ||
-        changedProperties.has('mode') ||
-        changedProperties.has('nolazy') ||
-        changedProperties.has('endpoint'))
-    ) {
-      this._loadIcon();
-    }
+  override render(): TemplateResult {
+    console.log('render');
+    return html`${this.#svgNode.get()}`;
   }
 
-  override render() {
-    if (this.mode === 'svg' && this._svgNode) {
-      return html`${this._svgNode}`;
-    }
-    return html``;
-  }
+  // OBSERVER
 
-  /** @internal */
-  private _parseName(): void {
-    if (this.name && this.name.includes(':')) {
-      const index = this.name.indexOf(':');
-      this._prefix = this.name.slice(0, index);
-      this._iconName = this.name.slice(index + 1);
-    } else {
-      this._prefix = '';
-      this._iconName = '';
-    }
-  }
+  readonly #visible: WritableSignal<boolean> = signal<boolean>(false);
 
-  /** @internal */
-  private _startObserver(): void {
-    if (this._observer === undefined) {
-      this._visible = false;
-      this._observer = new IntersectionObserver(
+  #observer: IntersectionObserver | undefined;
+
+  /**
+   * Starts an IntersectionObserver to have the icon loaded only when visible.
+   */
+  #startObserver(): void {
+    if (this.#observer === undefined) {
+      batch((): void => {
+        this.#visible.set(false);
+      });
+      this.#observer = new IntersectionObserver(
         (entries: readonly IntersectionObserverEntry[]): void => {
-          const intersecting = entries.some(
+          const intersecting: boolean = entries.some(
             (entry: IntersectionObserverEntry): boolean => entry.isIntersecting,
           );
-          if (intersecting) {
-            this._visible = true;
-            this._stopObserver();
-            this._loadIcon();
-          }
+          batch((): void => {
+            this.#visible.set(intersecting);
+          });
         },
       );
-      this._observer.observe(this);
+      this.#observer.observe(this);
     }
   }
 
-  /** @internal */
-  private _stopObserver(): void {
-    if (this._observer !== undefined) {
-      this._observer.disconnect();
-      this._observer = undefined;
+  /**
+   * Stops the IntersectionObserver, and assumes that te icon is no more visible.
+   */
+  #stopObserver(): void {
+    if (this.#observer !== undefined) {
+      this.#observer.disconnect();
+      this.#observer = undefined;
+      this.#visible.set(false);
     }
   }
 
-  /** @internal */
-  private _loadIcon(): void {
-    this._abortPendingFetch();
+  // LOAD ICON
 
-    if (!this._visible || !this.isConnected || !this._prefix || !this._iconName) {
+  #abortController: AbortController | undefined;
+
+  #loadIcon(): void {
+    console.log('#loadIcon');
+    this.#abortPendingFetch();
+
+    if (!this.#visible.get() || !this.isConnected) {
       return;
     }
 
-    this._abortController = new AbortController();
-    const signal = this._abortController.signal;
-    this.#status = 'loading';
-    this._svgNode = null;
+    const name: string = this.#name.get();
+    const prefixToNameSeparatorIndex: number = name.indexOf(':');
 
-    getApi(this.endpoint)
+    if (prefixToNameSeparatorIndex === -1) {
+      return;
+      // throw new Error(
+      //   'Invalid `name`: missing separator `:` between <prefix> and <name> (`name="<prefix>:<name>"`).',
+      // );
+    }
+
+    this.#abortController = new AbortController();
+    const signal: AbortSignal = this.#abortController.signal;
+
+    batch((): void => {
+      this.#status.set('loading');
+      // this.#svgNode.set(null);
+    });
+
+    getApi()
       .getSVG({
-        prefix: this._prefix,
-        name: this._iconName,
+        prefix: name.slice(0, prefixToNameSeparatorIndex),
+        name: name.slice(prefixToNameSeparatorIndex + 1),
         signal,
       })
       .then((svgContent: string): void => {
@@ -255,45 +200,96 @@ export class EsdsIconComponent extends LitElement {
           return;
         }
 
-        if (this.mode === 'svg') {
-          this.style.removeProperty('--svg');
-          this._svgNode = this._parseSvgToDom(svgContent);
-        } else {
-          this._svgNode = null;
-          this.style.setProperty('--svg', `url('data:image/svg+xml;base64,${btoa(svgContent)}')`);
-        }
+        batch((): void => {
+          this.#status.set('rendered');
 
-        this.#status = 'rendered';
+          if (this.mode === 'svg') {
+            this.style.removeProperty('--svg');
+            this.#svgNode.set(
+              new DOMParser().parseFromString(svgContent, 'image/svg+xml')
+                .documentElement as Element as SVGSVGElement,
+            );
+          } else {
+            this.#svgNode.set(null);
+            this.style.setProperty('--svg', `url('data:image/svg+xml;base64,${btoa(svgContent)}')`);
+          }
+        });
       })
       .catch((error: unknown): void => {
         if (signal.aborted) {
           return;
         }
 
-        this.#status = 'error';
-        this._svgNode = null;
+        batch((): void => {
+          this.#status.set('error');
+          this.#svgNode.set(null);
+        });
+
         this.style.removeProperty('--svg');
-        console.error(`Failed to load icon: "${this.name}"`, error);
+        console.error(`Failed to load icon: "${this.#name.get()}"`, error);
       });
   }
 
-  /** @internal */
-  private _abortPendingFetch(): void {
-    if (this._abortController !== undefined) {
-      this._abortController.abort();
-      this._abortController = undefined;
+  #abortPendingFetch(): void {
+    if (this.#abortController !== undefined) {
+      this.#abortController.abort();
+      this.#abortController = undefined;
     }
   }
 
-  /** @internal */
-  private _parseSvgToDom(svgString: string): SVGSVGElement {
-    const doc = new DOMParser().parseFromString(svgString, 'image/svg+xml');
-    const svg = doc.querySelector('svg');
-
-    if (!svg) {
-      throw new Error('Sanitized SVG contains no <svg> element');
-    }
-
-    return svg.cloneNode(true) as SVGSVGElement;
-  }
+  // override willUpdate(changedProperties: PropertyValues<this>): void {
+  //   super.willUpdate(changedProperties);
+  //
+  //   if (changedProperties.has('name')) {
+  //     if (this.name && !this.name.includes(':')) {
+  //       throw new Error(
+  //         'Invalid `name`: missing separator `:` between <prefix> and <name> (`name="<prefix>:<name>"`).',
+  //       );
+  //     }
+  //     this._parseName();
+  //     this.#abortPendingFetch();
+  //   }
+  //
+  //   if (changedProperties.has('mode')) {
+  //     if (!this.mode) {
+  //       this.mode = 'svg';
+  //     }
+  //     if (!['svg', 'bg', 'mask'].includes(this.mode)) {
+  //       throw new Error(`Invalid mode: ${this.mode}. Expected 'svg', 'bg', or 'mask'.`);
+  //     }
+  //     if (this.mode !== 'svg') {
+  //       this._svgNode = null;
+  //     } else {
+  //       this.style.removeProperty('--svg');
+  //     }
+  //   }
+  //
+  //   if (this._visible && (changedProperties.has('name') || changedProperties.has('mode'))) {
+  //     this.#loadIcon();
+  //   }
+  // }
+  //
+  // /** @internal */
+  // private _parseName(): void {
+  //   if (this.name && this.name.includes(':')) {
+  //     const index = this.name.indexOf(':');
+  //     this._prefix = this.name.slice(0, index);
+  //     this._iconName = this.name.slice(index + 1);
+  //   } else {
+  //     this._prefix = '';
+  //     this._iconName = '';
+  //   }
+  // }
+  //
+  // /** @internal */
+  // private _parseSvgToDom(svgString: string): SVGSVGElement {
+  //   const doc = new DOMParser().parseFromString(svgString, 'image/svg+xml');
+  //   const svg = doc.querySelector('svg');
+  //
+  //   if (!svg) {
+  //     throw new Error('Sanitized SVG contains no <svg> element');
+  //   }
+  //
+  //   return svg.cloneNode(true) as SVGSVGElement;
+  // }
 }
