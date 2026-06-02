@@ -14,16 +14,4 @@ export function objectArrayShadowDesignTokensCollectionTokenValueToKotlinValue(
   throw new Error(
     'Not implemented: objectArrayShadowDesignTokensCollectionTokenValueToKotlinValue',
   );
-  // return value
-  //   .map(
-  //     (component: ValueOrCurlyReference<ObjectShadowDesignTokensCollectionTokenValue>): string => {
-  //       return valueOrCurlyReferenceToKotlinVariableReference(
-  //         component,
-  //         (value: ObjectShadowDesignTokensCollectionTokenValue): KotlinVariableDeclarationShadowValue =>
-  //           objectShadowDesignTokensCollectionTokenValueToKotlinValue(value, options),
-  //         options,
-  //       );
-  //     },
-  //   )
-  //   .join(', ');
 }

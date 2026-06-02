@@ -12,18 +12,4 @@ export function gradientDesignTokensCollectionTokenValueToKotlinValue(
   _options?: GradientDesignTokensCollectionTokenValueToKotlinValueOptions,
 ): never {
   throw new Error('Not implemented: gradientDesignTokensCollectionTokenValueToKotlinValue');
-  // return value
-  //   .map(
-  //     (
-  //       component: ValueOrCurlyReference<ObjectGradientDesignTokensCollectionTokenValue>,
-  //     ): string => {
-  //       return valueOrCurlyReferenceToKotlinVariableReference(
-  //         component,
-  //         (value: ObjectGradientDesignTokensCollectionTokenValue): string =>
-  //           objectGradientDesignTokensCollectionTokenValueToToKotlinValue(value, options),
-  //         options,
-  //       );
-  //     },
-  //   )
-  //   .join(', ');
 }
