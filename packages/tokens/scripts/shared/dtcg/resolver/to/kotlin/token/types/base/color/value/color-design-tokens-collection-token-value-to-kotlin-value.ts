@@ -8,15 +8,16 @@ import type { KotlinVariableDeclarationColorValue } from '../../../../../kotlin-
 export function colorDesignTokensCollectionTokenValueToKotlinValue(
   value: ColorDesignTokensCollectionTokenValue,
 ): KotlinVariableDeclarationColorValue {
+  const hexColor: string = colorDesignTokensCollectionTokenValueToColorInstance(value)
+    .toString({
+      format: 'hex',
+      alpha: true,
+      collapse: false,
+    })
+    .toUpperCase(); // #RRGGBBAA
+
   return {
     type: 'Color',
-    value: `Color(0x${colorDesignTokensCollectionTokenValueToColorInstance(value)
-      .toString({
-        format: 'hex',
-        alpha: true,
-        collapse: false,
-      })
-      .slice(1)
-      .toUpperCase()})`,
+    value: `Color(0x${hexColor.slice(7, 9)}${hexColor.slice(1, 7)})`, // #AARRGGBB
   };
 }
