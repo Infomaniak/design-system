@@ -16,13 +16,17 @@
     "react-dom": "^19.2.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/plugin-proposal-decorators": "^7.29.7",
     "@chromatic-com/storybook": "^5.2.1",
     "@iconify/types": "^2.0.0",
+    "@rolldown/plugin-babel": "^0.2.3",
     "@storybook/addon-a11y": "^10.4.1",
     "@storybook/addon-docs": "^10.4.1",
     "@storybook/addon-onboarding": "^10.4.1",
     "@storybook/addon-vitest": "^10.4.1",
     "@storybook/web-components-vite": "^10.4.1",
+    "@types/babel__core": "^7",
     "@types/node": "^25.9.1",
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",

@@ -1,7 +1,8 @@
 import { IconifyApi } from '@infomaniak-design-system/esds-icon';
-import DOMPurify from 'dompurify';
-import { LitElement, css, html, type PropertyValues } from 'lit';
+import { LitElement, html, unsafeCSS, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+
+import style from './esds-icon.component.css?inline';
 
 export type EsdsIconComponentMode = 'svg' | 'bg' | 'mask';
 export type EsdsIconComponentStatus = 'loading' | 'rendered' | 'error';
@@ -33,53 +34,14 @@ function getApi(endpoint: string): IconifyApi {
  */
 @customElement('esds-icon-lit') // TODO: change to `esds-icon` once we don't have a conflict with the other component
 export class EsdsIconComponent extends LitElement {
-  static override styles = css`
-    :host {
-      display: inline-block;
-      vertical-align: 0;
-    }
-
-    :host([mode='bg']),
-    :host([mode='mask']) {
-      width: 1em;
-      height: 1em;
-    }
-
-    :host([mode='bg']) {
-      background-color: transparent;
-      background-image: var(--svg);
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-    }
-
-    :host([mode='mask']) {
-      background-color: currentcolor;
-      -webkit-mask-image: var(--svg);
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-size: 100% 100%;
-      mask-image: var(--svg);
-      mask-repeat: no-repeat;
-      mask-size: 100% 100%;
-    }
-
-    :host([inline]),
-    :host([inline='']),
-    :host([inline='true']) {
-      vertical-align: -0.125em;
-    }
-
-    svg {
-      display: block;
-      margin: auto;
-    }
-  `;
+  static override styles = unsafeCSS(style);
 
   /**
    * Icon identifier in `prefix:name` format.
    * @attr name
    */
   @property({ type: String })
-  accessor name = '';
+  accessor name: string = '';
 
   /**
    * The rendering mode to apply.
@@ -98,7 +60,7 @@ export class EsdsIconComponent extends LitElement {
    * @reflect
    */
   @property({ type: Boolean, reflect: true })
-  accessor inline = false;
+  accessor inline: boolean = false;
 
   /**
    * Disables lazy loading via IntersectionObserver; fetches the icon immediately.
@@ -106,7 +68,7 @@ export class EsdsIconComponent extends LitElement {
    * @reflect
    */
   @property({ type: Boolean, reflect: true })
-  accessor nolazy = false;
+  accessor nolazy: boolean = false;
 
   /**
    * Custom Iconify API endpoint URL.
@@ -114,13 +76,13 @@ export class EsdsIconComponent extends LitElement {
    * @attr endpoint
    */
   @property({ type: String, reflect: true })
-  accessor endpoint = '';
+  accessor endpoint: string = '';
 
   /**
    * @internal
    */
   @state()
-  private accessor _status: EsdsIconComponentStatus = 'loading';
+  accessor #status: EsdsIconComponentStatus = 'loading';
 
   /**
    * @internal
@@ -157,7 +119,7 @@ export class EsdsIconComponent extends LitElement {
    * Read-only loading state of the icon.
    */
   get status(): EsdsIconComponentStatus {
-    return this._status;
+    return this.#status;
   }
 
   override connectedCallback(): void {
@@ -279,7 +241,7 @@ export class EsdsIconComponent extends LitElement {
 
     this._abortController = new AbortController();
     const signal = this._abortController.signal;
-    this._status = 'loading';
+    this.#status = 'loading';
     this._svgNode = null;
 
     getApi(this.endpoint)
@@ -301,14 +263,14 @@ export class EsdsIconComponent extends LitElement {
           this.style.setProperty('--svg', `url('data:image/svg+xml;base64,${btoa(svgContent)}')`);
         }
 
-        this._status = 'rendered';
+        this.#status = 'rendered';
       })
       .catch((error: unknown): void => {
         if (signal.aborted) {
           return;
         }
 
-        this._status = 'error';
+        this.#status = 'error';
         this._svgNode = null;
         this.style.removeProperty('--svg');
         console.error(`Failed to load icon: "${this.name}"`, error);
@@ -325,10 +287,7 @@ export class EsdsIconComponent extends LitElement {
 
   /** @internal */
   private _parseSvgToDom(svgString: string): SVGSVGElement {
-    const sanitized = DOMPurify.sanitize(svgString, {
-      USE_PROFILES: { svg: true },
-    });
-    const doc = new DOMParser().parseFromString(sanitized, 'image/svg+xml');
+    const doc = new DOMParser().parseFromString(svgString, 'image/svg+xml');
     const svg = doc.querySelector('svg');
 
     if (!svg) {
