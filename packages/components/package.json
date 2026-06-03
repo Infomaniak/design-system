@@ -14,7 +14,7 @@
     }
   },
   "scripts": {
-    "generate": "../../node_modules/.bin/plop",
+    "generate": "plop",
     "build": "yarn analyze:cem && vite build && tsc -p tsconfig.build.json",
     "analyze:cem": "cem analyze --config ./custom-elements-manifest.config.mjs"
   },
