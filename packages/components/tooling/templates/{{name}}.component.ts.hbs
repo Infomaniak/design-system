@@ -1,0 +1,41 @@
+import { signal, SignalWatcher } from '@lit-labs/signals';
+import { html, LitElement, type PropertyValues, unsafeCSS } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+
+import style from './{{name}}.component.css?inline';
+
+/**
+ * {{pascalCase name}} web component.
+ * @summary {{pascalCase name}} component
+ * @element {{name}}
+ * @slot - Default slot. Falls back to the `label` property when empty.
+ */
+@customElement('{{name}}')
+export class {{pascalCase name}} extends SignalWatcher(LitElement) {
+  static override styles = unsafeCSS(style);
+
+  /**
+   * Text label displayed when the default slot is empty.
+   * @attr label
+   */
+  @property({ type: String })
+  accessor label: string = '';
+
+  readonly #label = signal<string>('');
+
+  protected override willUpdate(changed: PropertyValues<this>): void {
+    if (changed.has('label')) {
+      this.#label.set(this.label);
+    }
+  }
+
+  override render() {
+    return html`<slot>${this.#label.get()}</slot>`;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    '{{name}}': {{pascalCase name}};
+  }
+}
