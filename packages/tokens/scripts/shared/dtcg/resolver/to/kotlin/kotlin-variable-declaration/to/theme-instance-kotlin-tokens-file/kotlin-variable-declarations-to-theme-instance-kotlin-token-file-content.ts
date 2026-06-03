@@ -30,7 +30,7 @@ export function kotlinVariableDeclarationsToThemeInstanceKotlinTokenFileContent(
     import ${foundationTokensPackageName}.*
     import ${internalTokensPackageName}
     
-    val ${instanceName} = ${className}(
+    internal val ${instanceName} = ${className}(
       ${kotlinVariableDeclarationsToKotlinValDeclarationsString(declarations, {
         context: 'data-class-init',
       })}
