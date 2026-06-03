@@ -32,6 +32,16 @@ yarn generate component
 # and give your component a name using kebab-case such as `esds-my-component`
 ```
 
+### Export from the package
+
+Export your component by adding it to `public-api.ts`:
+
+```bash
+yarn generate public-api
+```
+
+Note: this runs automatically on build.
+
 ### Guidelines
 
 #### Component architecture
@@ -58,6 +68,11 @@ Key JSDoc tags for CEM:
 - `@slot` — Named/default slots
 - `@csspart` — Shadow DOM parts
 - `@cssprop` / `@cssproperty` — CSS custom properties
+
+#### Internal helpers
+
+Internal utilities and test-only helpers must be placed in `*.private.ts` files.
+These files are automatically excluded from the generated `public-api.ts` by the `yarn generate public-api` command.
 
 ## Useful scripts
 
