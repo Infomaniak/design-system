@@ -24,6 +24,7 @@ export function importAndBuildFigmaIllustrations({
       svgImagesOutputDirectory: join(outputDirectory, 'svg/illustrations/figma'),
       svgSetOutputDirectory: join(outputDirectory, 'server'),
       monotone: false,
+      withOpticalSizes: false,
     });
   });
 }

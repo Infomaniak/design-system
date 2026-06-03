@@ -24,6 +24,7 @@ export function importAndBuildFigmaIcons({
       svgImagesOutputDirectory: join(outputDirectory, FIGMA_ICONS_SUB_DIRECTORY_PATH),
       svgSetOutputDirectory: join(outputDirectory, 'server'),
       monotone: true,
+      withOpticalSizes: true,
     });
   });
 }

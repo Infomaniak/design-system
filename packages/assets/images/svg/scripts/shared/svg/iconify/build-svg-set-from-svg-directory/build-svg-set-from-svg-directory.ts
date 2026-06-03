@@ -12,10 +12,11 @@ import type { IconifyJSON } from '@iconify/types';
 import type { Color } from '@iconify/utils/lib/colors/types';
 import { glob, readFile } from 'node:fs/promises';
 import { basename, join } from 'node:path';
-import { readJsonFile } from '../../../../../../../../scripts/helpers/file/read-json-file.ts';
-import { writeJsonFileSafe } from '../../../../../../../../scripts/helpers/file/write-json-file-safe.ts';
-import type { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
-import type { FigmaSvgMetadata } from './figma-svg-metadata.ts';
+import { readJsonFile } from '../../../../../../../../../scripts/helpers/file/read-json-file.ts';
+import { writeJsonFileSafe } from '../../../../../../../../../scripts/helpers/file/write-json-file-safe.ts';
+import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
+import type { FigmaSvgMetadata } from '../../figma/figma-svg-metadata.ts';
+import { applyOpticalSizes } from './apply-optical-sizes.ts';
 
 export type SVGOOptions = Parameters<typeof runSVGO>[1];
 
@@ -28,6 +29,7 @@ export interface BuildSvgSetFromSvgDirectoryOptions {
   readonly cleanup?: boolean; // (default: true)
   readonly monotone?: boolean; // (default: true)
   readonly optimize?: boolean | SVGOOptions; // (default: true)
+  readonly withOpticalSizes?: boolean; // (default: true)
   readonly compareWithExistingVersion?: boolean; // (default: true)
 }
 
@@ -44,6 +46,7 @@ export async function buildSvgSetFromSvgDirectory({
   monotone = true,
   cleanup = true,
   optimize = true,
+  withOpticalSizes = true,
   compareWithExistingVersion = true,
 }: BuildSvgSetFromSvgDirectoryOptions): Promise<boolean> {
   return logger.asyncTask(`build-svgs-set:${prefix}`, async (logger: Logger): Promise<boolean> => {
@@ -77,6 +80,10 @@ export async function buildSvgSetFromSvgDirectory({
                   return color === null || isEmptyColor(color) ? colorStr : 'currentColor';
                 },
               });
+            }
+
+            if (withOpticalSizes) {
+              applyOpticalSizes(svg);
             }
 
             // optimize
