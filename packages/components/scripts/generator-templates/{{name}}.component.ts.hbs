@@ -1,0 +1,23 @@
+import { LitElement, html, unsafeCSS } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import styles from './{{name}}.component.css?raw';
+
+/**
+ * @summary {{storyTitle name}} component
+ * @element {{name}}
+ */
+@customElement('{{name}}')
+export class {{pascalCase name}} extends LitElement {
+  static override styles = unsafeCSS(styles);
+
+  /**
+   * The label text displayed by the component.
+   * @attr label
+   */
+  @property({ type: String })
+  accessor label = '';
+
+  override render() {
+    return html`<div>${this.label}</div>`;
+  }
+}

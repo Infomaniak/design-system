@@ -11,20 +11,13 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "./index": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "./esds-icon": {
-      "types": "./dist/esds-icon/index.d.ts",
-      "import": "./dist/esds-icon/index.js"
+      "types": "./dist/public-api.d.ts",
+      "import": "./dist/public-api.js"
     }
   },
   "scripts": {
-    "build": "yarn analyze:cem && vite build && tsc -p tsconfig.build.json",
+    "generate": "plop",
+    "build": "yarn generate public-api && yarn analyze:cem && vite build && tsc -p tsconfig.build.json",
     "analyze:cem": "cem analyze --config ./custom-elements-manifest.config.mjs"
   },
   "dependencies": {
@@ -37,6 +30,7 @@
     "@storybook/web-components-vite": "^10.4.1",
     "@types/dompurify": "^3.2.0",
     "@wc-toolkit/type-parser": "1.2.1",
+    "plop": "^4.0.5",
     "typescript": "~6.0.3",
     "vite": "^8.0.12"
   },
