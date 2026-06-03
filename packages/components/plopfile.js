@@ -52,7 +52,7 @@ export default function (plop) {
         execSync('node tooling/generate-public-api.ts', {
           stdio: 'inherit',
         });
-        return '✅ public-api.ts generated';
+        return 'public-api.ts generated';
       },
     ],
   });

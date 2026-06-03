@@ -5,8 +5,8 @@ import { batch, batchedEffect } from 'signal-utils/subtle/batched-effect';
 
 import { signalProperty } from '../helpers.private/signal/signal-property.ts';
 import type { WritableSignal } from '../helpers.private/signal/writable-signal.ts';
-import { getApi } from './esds-icon.component.private.ts';
 import style from './esds-icon.component.css?inline';
+import { getApi } from './esds-icon.component.private.ts';
 
 export type EsdsIconComponentMode = 'svg' | 'bg' | 'mask';
 export type EsdsIconComponentStatus = 'loading' | 'rendered' | 'error';

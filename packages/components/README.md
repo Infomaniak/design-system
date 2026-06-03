@@ -76,12 +76,13 @@ These files are automatically excluded from the generated `public-api.ts` by the
 
 ## Useful scripts
 
-| Command            | Description                                      |
-| ------------------ | ------------------------------------------------ |
-| `yarn generate`    | Generate a new component folder and files        |
-| `yarn analyze:cem` | Generate `custom-elements.json` from source code |
-| `yarn build`       | Full build: CEM + Vite + TypeScript declarations |
-| `yarn dev:docs`    | Start Storybook dev server                       |
+| Command                    | Description                                      |
+| -------------------------- | ------------------------------------------------ |
+| `yarn generate`            | Generate a new component folder and files        |
+| `yarn analyze:cem`         | Generate `custom-elements.json` from source code |
+| `yarn validate:public-api` | Validate that no internal exports leak to public |
+| `yarn build`               | Full build: CEM + Vite + TypeScript declarations |
+| `yarn dev:docs`            | Start Storybook dev server                       |
 
 ## CEM config
 
