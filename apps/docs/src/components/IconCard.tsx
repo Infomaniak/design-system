@@ -71,8 +71,7 @@ const IconCard: React.FC<IconCardProps> = ({ icon, prefix, onClick }) => {
         <div className="icon-card__icon">
           <esds-icon
             name={iconId}
-            mode="bg"
-            style={{ width: '48px', height: '48px' }}
+            style={{ fontSize: '48px' }}
           ></esds-icon>
         </div>
         <code className="icon-card__code">{iconId}</code>
