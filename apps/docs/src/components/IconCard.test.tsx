@@ -26,7 +26,8 @@ describe('IconCard', () => {
         prefix="material-symbols"
       />,
     );
-    const iconElement = screen.getByText('material-symbols:home').previousElementSibling?.firstElementChild;
+    const iconElement =
+      screen.getByText('material-symbols:home').previousElementSibling?.firstElementChild;
     expect(iconElement).toHaveAttribute('style', expect.stringContaining('font-size: 48px'));
   });
 
@@ -38,7 +39,8 @@ describe('IconCard', () => {
         iconSize={24}
       />,
     );
-    const iconElement = screen.getByText('material-symbols:home').previousElementSibling?.firstElementChild;
+    const iconElement =
+      screen.getByText('material-symbols:home').previousElementSibling?.firstElementChild;
     expect(iconElement).toHaveAttribute('style', expect.stringContaining('font-size: 24px'));
   });
 

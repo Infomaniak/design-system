@@ -316,9 +316,7 @@ describe('IconGallery', () => {
   });
 
   it('updates icon size when slider value changes', () => {
-    const mockIcons: IconItem[] = [
-      { name: 'user', categories: new Set(['interface']) },
-    ];
+    const mockIcons: IconItem[] = [{ name: 'user', categories: new Set(['interface']) }];
     mockUseIconGallery.mockReturnValue({
       collections: ['mdi'],
       icons: mockIcons,
