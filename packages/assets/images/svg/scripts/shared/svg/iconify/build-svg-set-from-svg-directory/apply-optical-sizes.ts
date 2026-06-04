@@ -7,16 +7,18 @@ export interface ApplyOpticalSizesOptions {
   readonly equation: string;
 }
 
+const DEFAULT_SVG_SIZE = 24;
+
 /*
-equation:
+Given a default icon size of `24`, the equation for the stroke-width would be:
   => (width / 32) + 1
   => calc((1em / 32 + 1px) / 1em * 24)
   => calc(3/4 + (24px/1em))
  */
 export const DEFAULT_OPTICAL_SIZE_OPTIONS: ApplyOpticalSizesOptions = {
-  expectedSvgSize: 24,
+  expectedSvgSize: DEFAULT_SVG_SIZE,
   expectedStrokeWidthSize: 1.75,
-  equation: 'calc(3/4 + (24px/1em))',
+  equation: `calc(3/4 + (${DEFAULT_SVG_SIZE}px/1em))`,
 };
 
 export function applyOpticalSizes(
