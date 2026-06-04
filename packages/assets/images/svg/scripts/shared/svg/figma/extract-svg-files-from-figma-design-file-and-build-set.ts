@@ -1,7 +1,7 @@
 import {
   buildSvgSetFromSvgDirectory,
   type BuildSvgSetFromSvgDirectoryOptions,
-} from './build-svg-set-from-svg-directory.ts';
+} from '../iconify/build-svg-set-from-svg-directory/build-svg-set-from-svg-directory.ts';
 import {
   extractSvgFilesFromFigmaDesignFile,
   type ExtractSvgFilesFromFigmaDesignFileOptions,
