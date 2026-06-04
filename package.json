@@ -48,6 +48,7 @@
     "packages": [
       "packages/tokens",
       "packages/tokens/demo",
+      "packages/components",
       "packages/assets/images/svg",
       "packages/assets/images/component/web",
       "apps/docs"
@@ -68,6 +69,7 @@
     "eslint-plugin-storybook": "^10.4.1",
     "globals": "^17.6.0",
     "happy-dom": "^20.9.0",
+    "lit": "^3.3.3",
     "prettier": "^3.8.3",
     "prettier-plugin-organize-imports": "^4.3.0",
     "react": "^19.2.6",

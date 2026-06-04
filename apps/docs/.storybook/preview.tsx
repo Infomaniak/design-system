@@ -1,11 +1,27 @@
 import { EsdsIconComponent, IconifyApi } from '@infomaniak-design-system/esds-icon';
 import { DocsContainer, type DocsContainerProps } from '@storybook/addon-docs/blocks';
-import type { Preview } from '@storybook/react-vite';
+import { setCustomElementsManifest } from '@storybook/web-components';
+import type { Preview } from '@storybook/web-components-vite';
+import { setStorybookHelpersConfig } from '@wc-toolkit/storybook-helpers';
 import { useEffect, useState } from 'react';
 import { GLOBALS_UPDATED } from 'storybook/internal/core-events';
 import { Globals, GlobalsUpdatedPayload } from 'storybook/internal/types';
+import customElements from '../../../packages/components/custom-elements.json' with { type: 'json' };
 import MaterialThemeBuilderLink from '../src/components/MaterialThemeBuilderLink.tsx';
 import Table from '../src/components/Table.tsx';
+
+setCustomElementsManifest(customElements);
+
+setStorybookHelpersConfig({
+  /** hides the `arg ref` label on each control */
+  hideArgRef: true,
+  /** sets the custom type reference in the Custom Elements Manifest */
+  typeRef: 'parsedType',
+  /** Adds a <script> tag where a `component` variable will reference the story's component */
+  setComponentVariable: false,
+  /** renders default values for attributes and CSS properties */
+  renderDefaultValues: false,
+});
 
 import '../src/styles/data-preview-value.css';
 import '../src/styles/main.css';
