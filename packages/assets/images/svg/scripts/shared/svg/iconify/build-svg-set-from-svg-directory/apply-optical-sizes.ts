@@ -10,15 +10,16 @@ export interface ApplyOpticalSizesOptions {
 const DEFAULT_SVG_SIZE = 24;
 
 /*
-Given a default icon size of `24`, the equation for the stroke-width would be:
-  => (width / 32) + 1
-  => calc((1em / 32 + 1px) / 1em * 24)
-  => calc(3/4 + (24px/1em))
+  Given a default icon size of `24`, the equation for the stroke-width would be: `(size / 32) + 1`.
+  `1em` is the current size (equivalent of the `size` of the equation) => `calc((1em / 32 + 1px))`
+  **But** the equation is valid only if the "width" and "height" as well as the "viewBox" of the svg, have the same value as the `size` of the equation.
+  Thus, we must "scale" the stroke-width to make it match this "ratio difference" => `calc((1em / 32 + 1px) / 1em * 24)`.-
+  Finally, we may simplify the equation => `calc(3/4 + (24px/1em))` => `calc((24px/1em) + 0.75)`
  */
 export const DEFAULT_OPTICAL_SIZE_OPTIONS: ApplyOpticalSizesOptions = {
   expectedSvgSize: DEFAULT_SVG_SIZE,
   expectedStrokeWidthSize: 1.75,
-  equation: `calc(3/4 + (${DEFAULT_SVG_SIZE}px/1em))`,
+  equation: `calc((${DEFAULT_SVG_SIZE}px/1em) + 0.75)`,
 };
 
 export function applyOpticalSizes(
