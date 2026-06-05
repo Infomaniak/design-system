@@ -2,13 +2,13 @@ import { IconifyApi } from '@infomaniak-design-system/esds-icon';
 import { signal, SignalWatcher } from '@lit-labs/signals';
 import { html, LitElement, type TemplateResult, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { batch, batchedEffect } from 'signal-utils/subtle/batched-effect';
+import { batch } from 'signal-utils/subtle/batched-effect';
+import { componentEffect } from '../helpers.private/signal/component/component-effect/component-effect.ts';
 
-import { signalProperty } from '../helpers.private/signal/signal-property.ts';
-import type { WritableSignal } from '../helpers.private/signal/writable-signal.ts';
+import { signalProperty } from '../helpers.private/signal/component/signal-property/signal-property.ts';
+import type { WritableSignal } from '../helpers.private/signal/signal/writable-signal.ts';
 import style from './esds-icon.component.css?inline';
 
-export type EsdsIconComponentMode = 'svg' | 'bg' | 'mask';
 export type EsdsIconComponentStatus = 'loading' | 'rendered' | 'error';
 
 const _apiCache = new Map<string, IconifyApi>();
@@ -46,34 +46,9 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
    * @attr name
    */
   @property({ type: String })
-  accessor name: string = '';
+  accessor name!: string;
 
   readonly #name: WritableSignal<string> = signalProperty(this, 'name');
-
-  /**
-   * The rendering mode to apply.
-   * - `svg`: Renders SVG inline inside the component.
-   * - `bg`: Uses CSS `background-image` with the SVG encoded as a data URL.
-   * - `mask`: Uses CSS `mask-image` for current-color icon rendering.
-   * @attr mode
-   * @default 'svg'
-   */
-  @property({
-    type: String,
-    reflect: true,
-    converter: (input: string | null): EsdsIconComponentMode => {
-      if (input === null) {
-        return 'svg';
-      }
-
-      if (!['svg', 'bg', 'mask'].includes(input)) {
-        throw new Error(`Invalid mode: ${input}. Expected 'svg', 'bg', or 'mask'.`);
-      }
-
-      return input as EsdsIconComponentMode;
-    },
-  })
-  accessor mode: EsdsIconComponentMode = 'svg';
 
   /**
    * Adjusts vertical alignment for inline use (shifts by -0.125em).
@@ -98,7 +73,7 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
   constructor() {
     super();
 
-    batchedEffect((): void => {
+    componentEffect(this, (): void => {
       this.#loadIcon();
     });
   }
@@ -116,7 +91,6 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
   readonly #svgNode: WritableSignal<SVGSVGElement | null> = signal<SVGSVGElement | null>(null);
 
   override render(): TemplateResult {
-    console.log('render');
     return html`${this.#svgNode.get()}`;
   }
 
@@ -164,7 +138,6 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
   #abortController: AbortController | undefined;
 
   #loadIcon(): void {
-    console.log('#loadIcon');
     this.#abortPendingFetch();
 
     if (!this.#visible.get() || !this.isConnected) {
@@ -175,10 +148,9 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
     const prefixToNameSeparatorIndex: number = name.indexOf(':');
 
     if (prefixToNameSeparatorIndex === -1) {
-      return;
-      // throw new Error(
-      //   'Invalid `name`: missing separator `:` between <prefix> and <name> (`name="<prefix>:<name>"`).',
-      // );
+      throw new Error(
+        'Invalid `name`: missing separator `:` between <prefix> and <name> (`name="<prefix>:<name>"`).',
+      );
     }
 
     this.#abortController = new AbortController();
@@ -186,7 +158,6 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
 
     batch((): void => {
       this.#status.set('loading');
-      // this.#svgNode.set(null);
     });
 
     getApi()
@@ -203,16 +174,10 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
         batch((): void => {
           this.#status.set('rendered');
 
-          if (this.mode === 'svg') {
-            this.style.removeProperty('--svg');
-            this.#svgNode.set(
-              new DOMParser().parseFromString(svgContent, 'image/svg+xml')
-                .documentElement as Element as SVGSVGElement,
-            );
-          } else {
-            this.#svgNode.set(null);
-            this.style.setProperty('--svg', `url('data:image/svg+xml;base64,${btoa(svgContent)}')`);
-          }
+          this.#svgNode.set(
+            new DOMParser().parseFromString(svgContent, 'image/svg+xml')
+              .documentElement as Element as SVGSVGElement,
+          );
         });
       })
       .catch((error: unknown): void => {
@@ -225,7 +190,6 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
           this.#svgNode.set(null);
         });
 
-        this.style.removeProperty('--svg');
         console.error(`Failed to load icon: "${this.#name.get()}"`, error);
       });
   }
@@ -236,60 +200,4 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
       this.#abortController = undefined;
     }
   }
-
-  // override willUpdate(changedProperties: PropertyValues<this>): void {
-  //   super.willUpdate(changedProperties);
-  //
-  //   if (changedProperties.has('name')) {
-  //     if (this.name && !this.name.includes(':')) {
-  //       throw new Error(
-  //         'Invalid `name`: missing separator `:` between <prefix> and <name> (`name="<prefix>:<name>"`).',
-  //       );
-  //     }
-  //     this._parseName();
-  //     this.#abortPendingFetch();
-  //   }
-  //
-  //   if (changedProperties.has('mode')) {
-  //     if (!this.mode) {
-  //       this.mode = 'svg';
-  //     }
-  //     if (!['svg', 'bg', 'mask'].includes(this.mode)) {
-  //       throw new Error(`Invalid mode: ${this.mode}. Expected 'svg', 'bg', or 'mask'.`);
-  //     }
-  //     if (this.mode !== 'svg') {
-  //       this._svgNode = null;
-  //     } else {
-  //       this.style.removeProperty('--svg');
-  //     }
-  //   }
-  //
-  //   if (this._visible && (changedProperties.has('name') || changedProperties.has('mode'))) {
-  //     this.#loadIcon();
-  //   }
-  // }
-  //
-  // /** @internal */
-  // private _parseName(): void {
-  //   if (this.name && this.name.includes(':')) {
-  //     const index = this.name.indexOf(':');
-  //     this._prefix = this.name.slice(0, index);
-  //     this._iconName = this.name.slice(index + 1);
-  //   } else {
-  //     this._prefix = '';
-  //     this._iconName = '';
-  //   }
-  // }
-  //
-  // /** @internal */
-  // private _parseSvgToDom(svgString: string): SVGSVGElement {
-  //   const doc = new DOMParser().parseFromString(svgString, 'image/svg+xml');
-  //   const svg = doc.querySelector('svg');
-  //
-  //   if (!svg) {
-  //     throw new Error('Sanitized SVG contains no <svg> element');
-  //   }
-  //
-  //   return svg.cloneNode(true) as SVGSVGElement;
-  // }
 }

@@ -3,29 +3,6 @@
   vertical-align: 0;
 }
 
-:host([mode='bg']),
-:host([mode='mask']) {
-  width: 1em;
-  height: 1em;
-}
-
-:host([mode='bg']) {
-  background-color: transparent;
-  background-image: var(--svg);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-:host([mode='mask']) {
-  background-color: currentcolor;
-  -webkit-mask-image: var(--svg);
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  mask-image: var(--svg);
-  mask-repeat: no-repeat;
-  mask-size: 100% 100%;
-}
-
 :host([inline]),
 :host([inline='']),
 :host([inline='true']) {
