@@ -60,7 +60,8 @@ We are dynamically adjusting our SVG `stroke-width` based on the rendered size:
           stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
-          stroke-width="calc((24px/1em) + 0.75)"
+          stroke-width="calc((1em / 32) + 1px)"
+          vector-effect="non-scaling-stroke"
           d="M3 11h3a2 2 0 012 2v3a2 2 0 01-2 2H5a2 2 0 01-2-2zm0 0a9 9 0 1118 0m0 0v5m0-5h-3a2 2 0 00-2 2v3a2 2 0 002 2h1a2 2 0 002-2m0 0v2a4 4 0 01-4 4h-5"
         />
       </svg>,
@@ -95,7 +96,8 @@ We are dynamically adjusting our SVG `stroke-width` based on the rendered size:
           stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
-          stroke-width="calc((24px/1em) + 0.75)"
+          stroke-width="calc((1em / 32) + 1px)"
+          vector-effect="non-scaling-stroke"
           d="M3 11h3a2 2 0 012 2v3a2 2 0 01-2 2H5a2 2 0 01-2-2zm0 0a9 9 0 1118 0m0 0v5m0-5h-3a2 2 0 00-2 2v3a2 2 0 002 2h1a2 2 0 002-2m0 0v2a4 4 0 01-4 4h-5"
         />
       </svg>,
@@ -119,10 +121,11 @@ We are dynamically adjusting our SVG `stroke-width` based on the rendered size:
   ]}
 />
 
-During the SVG build process, all stroke-widths are replaced with a relative formula (for a default 24px viewbox size):
+During the SVG build process, all stroke-widths are replaced with a relative formula and the `vector-effect="non-scaling-stroke"` attribute is added so stroke width stays consistent regardless of scaling:
 
 ```
-stroke-width="calc((24px/1em) + 0.75)"
+stroke-width="calc((1em / 32) + 1px)"
+vector-effect="non-scaling-stroke"
 ```
 
 This gives the following approximate stroke-widths:
