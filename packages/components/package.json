@@ -18,6 +18,7 @@
     "analyze:cem": "cem analyze --config ./custom-elements-manifest.config.mjs"
   },
   "dependencies": {
+    "@infomaniak-design-system/esds-icon": "workspace:*",
     "@lit-labs/signals": "^0.3.0",
     "lit": "^3.3.3",
     "signal-utils": "^0.21.1"

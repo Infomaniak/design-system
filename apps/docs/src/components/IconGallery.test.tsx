@@ -2,7 +2,7 @@
  * @vitest-environment happy-dom
  */
 
-import { cleanup, render } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { IconGalleryErrorType, IconItem } from '../hooks/useIconGallery.ts';
 import IconGallery from './IconGallery.tsx';
@@ -292,5 +292,79 @@ describe('IconGallery', () => {
     const { container } = render(<IconGallery />);
     const options = container.querySelectorAll('option');
     expect(options.length).toBeGreaterThan(1);
+  });
+
+  it('renders icon size slider with default value of 48', () => {
+    mockUseIconGallery.mockReturnValue({
+      collections: ['mdi'],
+      icons: [],
+      totalCount: 0,
+      filteredCount: 0,
+      selectedCollection: 'mdi',
+      searchQuery: '',
+      isLoading: false,
+      error: null,
+      setCollection: vi.fn(),
+      setSearchQuery: vi.fn(),
+      retry: vi.fn(),
+      clearSearch: vi.fn(),
+    });
+    render(<IconGallery />);
+    const slider = screen.getByRole('slider');
+    expect(slider).toHaveValue('48');
+    expect(screen.getByText('48px')).toBeInTheDocument();
+  });
+
+  it('updates icon size when slider value changes', () => {
+    const mockIcons: IconItem[] = [{ name: 'user', categories: new Set(['interface']) }];
+    mockUseIconGallery.mockReturnValue({
+      collections: ['mdi'],
+      icons: mockIcons,
+      totalCount: 1,
+      filteredCount: 1,
+      selectedCollection: 'mdi',
+      searchQuery: '',
+      isLoading: false,
+      error: null,
+      setCollection: vi.fn(),
+      setSearchQuery: vi.fn(),
+      retry: vi.fn(),
+      clearSearch: vi.fn(),
+    });
+    const { container } = render(<IconGallery />);
+    const slider = screen.getByRole('slider');
+
+    fireEvent.change(slider, { target: { value: '64' } });
+
+    const iconElement = container.querySelector('esds-icon');
+    expect(iconElement).toHaveAttribute('style', expect.stringContaining('font-size: 64px'));
+    expect(screen.getByText('64px')).toBeInTheDocument();
+  });
+
+  it('forwards icon size to IconGrid', () => {
+    const mockIcons: IconItem[] = [
+      { name: 'user', categories: new Set(['interface']) },
+      { name: 'settings', categories: new Set(['interface']) },
+    ];
+    mockUseIconGallery.mockReturnValue({
+      collections: ['mdi'],
+      icons: mockIcons,
+      totalCount: 2,
+      filteredCount: 2,
+      selectedCollection: 'mdi',
+      searchQuery: '',
+      isLoading: false,
+      error: null,
+      setCollection: vi.fn(),
+      setSearchQuery: vi.fn(),
+      retry: vi.fn(),
+      clearSearch: vi.fn(),
+    });
+    const { container } = render(<IconGallery />);
+
+    const iconElements = container.querySelectorAll('esds-icon');
+    iconElements.forEach((el) => {
+      expect(el).toHaveAttribute('style', expect.stringContaining('font-size: 48px'));
+    });
   });
 });
