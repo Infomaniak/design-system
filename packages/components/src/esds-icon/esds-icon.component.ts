@@ -109,7 +109,10 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
       return (): void => {
         if (observer !== undefined) {
           observer.disconnect();
-          this.#visible.set(false);
+
+          batch((): void => {
+            this.#visible.set(false);
+          });
         }
       };
     });
