@@ -6,9 +6,10 @@ import IconDetailModal from './IconDetailModal.tsx';
 export interface IconGridProps {
   icons: readonly IconItem[];
   prefix: string;
+  iconSize?: number;
 }
 
-const IconGrid: React.FC<IconGridProps> = ({ icons, prefix }) => {
+const IconGrid: React.FC<IconGridProps> = ({ icons, prefix, iconSize }) => {
   const [selectedIcon, setSelectedIcon] = useState<IconItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -50,6 +51,7 @@ const IconGrid: React.FC<IconGridProps> = ({ icons, prefix }) => {
             key={`${prefix}:${icon.name}`}
             icon={icon}
             prefix={prefix}
+            iconSize={iconSize}
             onClick={handleIconClick}
           />
         ))}

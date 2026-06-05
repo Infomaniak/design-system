@@ -8,5 +8,5 @@ export type WriteJsonFileSafeArguments =
     : never;
 
 export async function writeJsonFileSafe(...args: WriteJsonFileSafeArguments): Promise<void> {
-  await writeTextFileSafe(args[0], JSON.stringify(args[1], null, 2), args[2]);
+  await writeTextFileSafe(args[0], JSON.stringify(args[1], null, 2) + '\n', args[2]);
 }
