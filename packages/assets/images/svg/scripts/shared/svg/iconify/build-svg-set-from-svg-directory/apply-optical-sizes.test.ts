@@ -1,10 +1,10 @@
 import { SVG } from '@iconify/tools';
 import { describe, expect, it } from 'vitest';
-import{
+import {
   applyOpticalSizes,
   DEFAULT_OPTICAL_SIZE_OPTIONS,
   type ApplyOpticalSizesOptions,
-}from './apply-optical-sizes.ts';
+} from './apply-optical-sizes.ts';
 
 describe('applyOpticalSizes', () => {
   const createSvg = (content: string): SVG => {
@@ -37,9 +37,7 @@ describe('applyOpticalSizes', () => {
       `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M0 0 L10 10"/></svg>`,
     );
 
-    expect(() => applyOpticalSizes(svg)).toThrowError(
-      /Expected \"1.75\" as stroke-width/,
-    );
+    expect(() => applyOpticalSizes(svg)).toThrowError(/Expected \"1.75\" as stroke-width/);
   });
 
   it('does not modify nodes without stroke-width', () => {
