@@ -922,6 +922,7 @@ __metadata:
   resolution: "@infomaniak-design-system/components@workspace:packages/components"
   dependencies:
     "@custom-elements-manifest/analyzer": "npm:^0.11.0"
+    "@infomaniak-design-system/esds-icon": "workspace:*"
     "@lit-labs/signals": "npm:^0.3.0"
     "@storybook/web-components-vite": "npm:^10.4.1"
     "@wc-toolkit/type-parser": "npm:1.2.1"
@@ -962,7 +963,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@infomaniak-design-system/esds-icon@workspace:^, @infomaniak-design-system/esds-icon@workspace:packages/assets/images/component/web":
+"@infomaniak-design-system/esds-icon@workspace:*, @infomaniak-design-system/esds-icon@workspace:^, @infomaniak-design-system/esds-icon@workspace:packages/assets/images/component/web":
   version: 0.0.0-use.local
   resolution: "@infomaniak-design-system/esds-icon@workspace:packages/assets/images/component/web"
   dependencies:
