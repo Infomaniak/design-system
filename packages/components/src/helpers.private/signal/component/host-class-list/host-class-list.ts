@@ -6,29 +6,6 @@ import { componentEffect } from '../component-effect/component-effect.ts';
 export type ClassListLike = string | readonly string[] | null | undefined;
 
 /**
- * Converts a string, an array of strings, null, or undefined as a list of class names.
- */
-function classListLikeToClassList(input: ClassListLike): readonly string[] {
-  if (Array.isArray(input)) {
-    return normalizeClassList(input);
-  } else if (typeof input === 'string') {
-    // INFO: `'          '.split(/\s+/)` returns `['', '']`, so in any case we have to "normalize"
-    return normalizeClassList(input.split(' '));
-  } else {
-    return [];
-  }
-}
-
-/**
- * Removes invalid classes from a list of class names.
- */
-function normalizeClassList(input: readonly string[]): readonly string[] {
-  return input
-    .map((className: string): string => className.trim())
-    .filter((className: string): boolean => className !== '');
-}
-
-/**
  * Bind's a list of css classes with a signal.
  *
  * @example:
@@ -59,4 +36,29 @@ export function hostClassList(
       host.classList.add(className, className);
     }
   });
+}
+
+/* INTERNAL */
+
+/**
+ * Converts a string, an array of strings, null, or undefined as a list of class names.
+ */
+function classListLikeToClassList(input: ClassListLike): readonly string[] {
+  if (Array.isArray(input)) {
+    return normalizeClassList(input);
+  } else if (typeof input === 'string') {
+    // INFO: `'          '.split(/\s+/)` returns `['', '']`, so in any case we have to "normalize"
+    return normalizeClassList(input.split(' '));
+  } else {
+    return [];
+  }
+}
+
+/**
+ * Removes invalid classes from a list of class names.
+ */
+function normalizeClassList(input: readonly string[]): readonly string[] {
+  return input
+    .map((className: string): string => className.trim())
+    .filter((className: string): boolean => className !== '');
 }

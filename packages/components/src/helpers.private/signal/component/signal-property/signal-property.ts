@@ -7,6 +7,35 @@ import { untracked } from '../../untracked/untracked.ts';
 import { componentEffect } from '../component-effect/component-effect.ts';
 
 /**
+ * Creates a writable signal synced with a specified property on a reactive controller host.
+ *
+ * @template GThis The type of the host that this controller is attached to.
+ * @template GKey The type of the property key in the host which is managed by this controller.
+ * @param {GThis} host - The reactive controller host instance.
+ * @param {GKey} key - The key of the property on the host to bind the signal to.
+ * @param {SignalOptions<GThis[GKey]>} [options] - Optional configuration for the signal.
+ * @return {WritableSignal<GThis[GKey]>} A writable signal associated with the specified property.
+ *
+ * @example:
+ *
+ * ```ts
+ * @property({ type: String })
+ * accessor name!: string;
+ *
+ * readonly #name: WritableSignal<string> = signalProperty(this, 'name');
+ * ```
+ */
+export function signalProperty<GThis extends ReactiveControllerHost, GKey extends keyof GThis>(
+  host: GThis,
+  key: GKey,
+  options?: SignalOptions<GThis[GKey]>,
+): WritableSignal<GThis[GKey]> {
+  return new SignalPropertyController<GThis, GKey>(host, key, options).signal;
+}
+
+/* INTERNAL */
+
+/**
  * A controller that synchronizes a ReactiveControllerHost property with a writable signal.
  *
  * This class manages the two-way synchronization between a host property and a signal,
@@ -72,29 +101,4 @@ class SignalPropertyController<
       }
     });
   }
-}
-
-/**
- * Creates a writable signal synced with a specified property on a reactive controller host.
- *
- * @param {GThis} host - The reactive controller host instance.
- * @param {GKey} key - The key of the property on the host to bind the signal to.
- * @param {SignalOptions<GThis[GKey]>} [options] - Optional configuration for the signal.
- * @return {WritableSignal<GThis[GKey]>} A writable signal associated with the specified property.
- *
- * @example:
- *
- * ```ts
- * @property({ type: String })
- * accessor name!: string;
- *
- * readonly #name: WritableSignal<string> = signalProperty(this, 'name');
- * ```
- */
-export function signalProperty<GThis extends ReactiveControllerHost, GKey extends keyof GThis>(
-  host: GThis,
-  key: GKey,
-  options?: SignalOptions<GThis[GKey]>,
-): WritableSignal<GThis[GKey]> {
-  return new SignalPropertyController<GThis, GKey>(host, key, options).signal;
 }
