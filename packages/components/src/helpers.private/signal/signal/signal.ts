@@ -9,4 +9,4 @@ import type { Signal as TC39Signal } from '@lit-labs/signals';
  *
  * @template GValue - The type of the value of this signal.
  */
-export type Signal<GValue> = TC39Signal.Computed<GValue>;
+export type Signal<GValue> = TC39Signal.State<GValue> | TC39Signal.Computed<GValue>;

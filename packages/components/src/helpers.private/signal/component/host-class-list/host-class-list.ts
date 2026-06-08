@@ -12,8 +12,17 @@ export type ClassListLike = string | readonly string[] | null | undefined;
  *
  * ```ts
  * constructor() {
- *  this.classList = signal(['opened', 'animated']); // or signal('opened animated')
- *  hostClassList(this, this.classList);
+ *  this.disabled = signal(false);
+ *  this.mode = signal('small');
+ *
+ *  hostClassList(this, computed(() => {
+ *    const list: string[] = [];
+ *    if (this.disabled.get()) {
+ *      list.push('disabled');
+ *    }
+ *    list.push(`mode-${this.mode.get()}`);
+ *    return list;
+ *  ));
  * }
  * ```
  */
@@ -25,16 +34,12 @@ export function hostClassList(
 
   return componentEffect(host, (): void => {
     // 1) remove previous classes
-    for (const className of classNames) {
-      host.classList.remove(className, className);
-    }
+    host.classList.remove(...classNames);
 
     classNames = classListLikeToClassList(signal.get());
 
     // 2) add current classes
-    for (const className of classNames) {
-      host.classList.add(className, className);
-    }
+    host.classList.add(...classNames);
   });
 }
 
