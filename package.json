@@ -26,6 +26,7 @@
     "=== IMPORT ===": "",
     "import:assets:images:svg": "yarn workspace @infomaniak-design-system/svg-assets import",
     "=== MISC ===": "",
+    "generate": "yarn workspace @infomaniak-design-system/components run generate",
     "create:figma:webhook": "node --no-warnings=ExperimentalWarning scripts/scripts/create-figma-webhook/create-figma-webhook.script.ts",
     "=== CI ===": "",
     "ci:publish": "node --no-warnings=ExperimentalWarning scripts/ci/publish/ci-publish.script.ts",
