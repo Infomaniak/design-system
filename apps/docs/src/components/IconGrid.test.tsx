@@ -88,4 +88,20 @@ describe('IconGrid', () => {
     );
     expect(container.firstChild).toBeNull();
   });
+
+  it('forwards iconSize to each IconCard', () => {
+    render(
+      <IconGrid
+        icons={mockIcons}
+        prefix="material-symbols"
+        iconSize={32}
+      />,
+    );
+
+    const cards = screen.getAllByRole('button');
+    cards.forEach((card) => {
+      const iconElement = card.querySelector('esds-icon');
+      expect(iconElement).toHaveAttribute('style', expect.stringContaining('font-size: 32px'));
+    });
+  });
 });

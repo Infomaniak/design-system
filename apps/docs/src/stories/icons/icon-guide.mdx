@@ -10,15 +10,131 @@ import { Meta } from '@storybook/addon-docs/blocks';
   </p>
 </div>
 
-<a
-  href="./?path=/docs/icons-icon-gallery--docs"
-  className="card card--horizontal card--primary"
->
-  <div className="card__body">
-    <h3 className="card__title">View All Icons</h3>
+<div className="card-grid">
+  <a
+    href="./?path=/docs/icons-icon-gallery--docs"
+    className="card card--vertical"
+  >
+    <h3 className="card__title">Browse All Icons</h3>
     <p className="card__description">
-      Browse the complete gallery with search and filter capabilities.
+      Explore the complete icon set with search and filter capabilities.
     </p>
     <span className="card__link">Open Gallery →</span>
-  </div>
-</a>
+  </a>
+  <a
+    href="./?path=/docs/icons-icon-component--docs"
+    className="card card--vertical"
+  >
+    <h3 className="card__title">Icon Component - Web</h3>
+    <p className="card__description">esds-icon web component documentation</p>
+    <span className="card__link">Component documentation →</span>
+  </a>
+</div>
+
+## Naming Conventions
+
+All icons follow the `<prefix>:<name>` format (e.g., `esds:home`).
+
+> For detailed naming guidelines, see the [internal icons documentation](https://infomaniak.pages.infomaniak.com/handbook/activites/frontend/convention-nommage-icones/).
+
+## Web
+
+### Optical Sizing
+
+We are dynamically adjusting our SVG `stroke-width` based on the rendered size:
+
+<Table
+  headers={['Size', 'Dynamic stroke-width', 'Fixed 1.75px stroke-width']}
+  rows={[
+    [
+      '24px',
+      <svg
+        key="dyn-24"
+        width="1em"
+        height="1em"
+        viewBox="0 0 24 24"
+        style={{ fontSize: '24px', display: 'inline-block' }}
+      >
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="calc((1em / 32) + 1px)"
+          vector-effect="non-scaling-stroke"
+          d="M3 11h3a2 2 0 012 2v3a2 2 0 01-2 2H5a2 2 0 01-2-2zm0 0a9 9 0 1118 0m0 0v5m0-5h-3a2 2 0 00-2 2v3a2 2 0 002 2h1a2 2 0 002-2m0 0v2a4 4 0 01-4 4h-5"
+        />
+      </svg>,
+      <svg
+        key="fix-24"
+        width="1em"
+        height="1em"
+        viewBox="0 0 24 24"
+        style={{ fontSize: '24px', display: 'inline-block' }}
+      >
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.75"
+          d="M3 11h3a2 2 0 012 2v3a2 2 0 01-2 2H5a2 2 0 01-2-2zm0 0a9 9 0 1118 0m0 0v5m0-5h-3a2 2 0 00-2 2v3a2 2 0 002 2h1a2 2 0 002-2m0 0v2a4 4 0 01-4 4h-5"
+        />
+      </svg>,
+    ],
+    [
+      '48px',
+      <svg
+        key="dyn-48"
+        width="1em"
+        height="1em"
+        viewBox="0 0 24 24"
+        style={{ fontSize: '48px', display: 'inline-block' }}
+      >
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="calc((1em / 32) + 1px)"
+          vector-effect="non-scaling-stroke"
+          d="M3 11h3a2 2 0 012 2v3a2 2 0 01-2 2H5a2 2 0 01-2-2zm0 0a9 9 0 1118 0m0 0v5m0-5h-3a2 2 0 00-2 2v3a2 2 0 002 2h1a2 2 0 002-2m0 0v2a4 4 0 01-4 4h-5"
+        />
+      </svg>,
+      <svg
+        key="fix-48"
+        width="1em"
+        height="1em"
+        viewBox="0 0 24 24"
+        style={{ fontSize: '48px', display: 'inline-block' }}
+      >
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.75"
+          d="M3 11h3a2 2 0 012 2v3a2 2 0 01-2 2H5a2 2 0 01-2-2zm0 0a9 9 0 1118 0m0 0v5m0-5h-3a2 2 0 00-2 2v3a2 2 0 002 2h1a2 2 0 002-2m0 0v2a4 4 0 01-4 4h-5"
+        />
+      </svg>,
+    ],
+  ]}
+/>
+
+During the SVG build process, all stroke-widths are replaced with a relative formula and the `vector-effect="non-scaling-stroke"` attribute is added so stroke width stays consistent regardless of scaling:
+
+```
+stroke-width="calc((1em / 32) + 1px)"
+vector-effect="non-scaling-stroke"
+```
+
+This gives the following approximate stroke-widths:
+
+- **24px** icon → **1.75px** stroke-width
+- **32px** icon → **2px** stroke-width
+- **40px** icon → **2.25px** stroke-width
+- ...
+
+See the [implementation](https://github.com/Infomaniak/design-system/blob/develop/packages/assets/images/svg/scripts/shared/svg/iconify/build-svg-set-from-svg-directory/apply-optical-sizes.ts) for more details.
+
+> ⚠️ **Note:** Mobile platforms (iOS, Android) handle icon sizing differently. This approach is specific to the **web** implementation.

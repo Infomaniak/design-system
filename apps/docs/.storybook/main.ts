@@ -1,8 +1,8 @@
-import babel from '@rolldown/plugin-babel';
 import type { StorybookConfig } from '@storybook/web-components-vite';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { type InlineConfig, mergeConfig } from 'vite';
+import { viteTc39DecoratorsPlugin } from '../../../plugins/vite-tc39-decorators-plugin.ts';
 import { webComponentAutoReload } from './vite-web-component-autoreload.ts';
 
 /**
@@ -30,19 +30,7 @@ const config: StorybookConfig = {
   viteFinal: (config: InlineConfig): InlineConfig => {
     return mergeConfig(config, {
       envDir: '../..', // use .env in the repo root,
-      plugins: [
-        webComponentAutoReload(),
-        babel({
-          presets: [
-            {
-              preset: () => ({
-                plugins: [['@babel/plugin-proposal-decorators', { version: '2023-11' }]],
-              }),
-              rolldown: { filter: { code: '@' } },
-            },
-          ],
-        }),
-      ],
+      plugins: [webComponentAutoReload(), viteTc39DecoratorsPlugin()],
     });
   },
 };

@@ -4,10 +4,11 @@ import type { IconItem } from '../hooks/useIconGallery.ts';
 export interface IconCardProps {
   icon: IconItem;
   prefix: string;
+  iconSize?: number;
   onClick?: (icon: IconItem) => void;
 }
 
-const IconCard: React.FC<IconCardProps> = ({ icon, prefix, onClick }) => {
+const IconCard: React.FC<IconCardProps> = ({ icon, prefix, iconSize = 48, onClick }) => {
   const iconId = `${prefix}:${icon.name}`;
 
   const handleClick = useCallback(() => {
@@ -21,7 +22,6 @@ const IconCard: React.FC<IconCardProps> = ({ icon, prefix, onClick }) => {
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: center;
           padding: 1rem;
           border: 1px solid #e5e7eb;
           border-radius: 8px;
@@ -39,13 +39,12 @@ const IconCard: React.FC<IconCardProps> = ({ icon, prefix, onClick }) => {
           outline-offset: 2px;
         }
         .icon-card__icon {
-          width: 64px;
-          height: 64px;
+          width: 72px;
+          height: 72px;
+          margin-top: 0.5rem;
           display: flex;
           align-items: center;
           justify-content: center;
-          background-color: #f3f4f6;
-          border-radius: 4px;
         }
         .icon-card__code {
           font-size: 12px;
@@ -71,8 +70,7 @@ const IconCard: React.FC<IconCardProps> = ({ icon, prefix, onClick }) => {
         <div className="icon-card__icon">
           <esds-icon
             name={iconId}
-            mode="bg"
-            style={{ width: '48px', height: '48px' }}
+            style={{ fontSize: `${iconSize}px` }}
           ></esds-icon>
         </div>
         <code className="icon-card__code">{iconId}</code>
