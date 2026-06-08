@@ -2,7 +2,7 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
+import { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
 import { buildSvgSetFromSvgDirectory } from './build-svg-set-from-svg-directory.ts';
 
 describe('buildSvgSetFromSvgDirectory', () => {
