@@ -2,7 +2,7 @@ import { Signal as TC39Signal } from '@lit-labs/signals';
 
 /**
  * Executes the provided callback function in an untracked context, ensuring that any reactive tracking
- * mechanisms (ex: `signl.get()` do not observe the execution or its effects. This is useful for scenarios where changes
+ * mechanisms (ex: `signal.get()` do not observe the execution or its effects. This is useful for scenarios where changes
  * triggered within the callback should not cause reactive updates.
  *
  * @example:
