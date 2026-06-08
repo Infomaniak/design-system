@@ -19,10 +19,16 @@ import { componentEffect } from '../component-effect/component-effect.ts';
 export function hostStyle(
   host: HTMLElement & ReactiveControllerHost,
   propertyName: string,
-  signal: Signal<string>,
+  signal: Signal<string | null | undefined>,
 ): StopEffect {
   return componentEffect(host, (): void => {
-    const signalValue: string = signal.get();
+    const signalValue: string | null | undefined = signal.get();
+
+    if (signalValue === null || signalValue === undefined || signalValue === '') {
+      host.style.removeProperty(propertyName);
+      return;
+    }
+
     const priorityIndex: number = signalValue.indexOf(' !');
 
     if (priorityIndex === -1) {
