@@ -35,41 +35,36 @@ export function isExcludedFile(name: string): boolean {
   return EXCLUDED_SUFFIXES.some((suffix) => name.endsWith(`${suffix}${FILE_EXTENSION}`));
 }
 
-function scanDirectory(dirPath: string, basePath: string, results: SourceFile[]): void {
-  const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+function buildGlobExcludePatterns(): string[] {
+  const suffixGlob = EXCLUDED_SUFFIXES.map((s) => s.replace('.', '')).join(',');
 
-  for (const entry of entries) {
-    const absolutePath = path.join(dirPath, entry.name);
-    const relativePath = path.relative(basePath, absolutePath);
-
-    if (entry.isDirectory()) {
-      if (isExcludedDirectory(entry.name)) {
-        continue;
-      }
-      scanDirectory(absolutePath, basePath, results);
-      continue;
-    }
-
-    if (isExcludedFile(entry.name)) {
-      continue;
-    }
-
-    results.push({
-      absolutePath,
-      relativePath,
-    });
-  }
+  return [
+    `**/${EXCLUDED_FILE}`,
+    `**/*.{${suffixGlob}}${FILE_EXTENSION}`,
+    `**/*.{${suffixGlob}}/**/*${FILE_EXTENSION}`,
+  ];
 }
 
-export function getPublicApiSourceFiles(): SourceFile[] {
+export async function getPublicApiSourceFiles(): Promise<SourceFile[]> {
   const srcDir = getSourceDir();
 
   if (!fs.existsSync(srcDir)) {
     throw new Error(`Source directory not found: ${srcDir}`);
   }
 
-  const results: SourceFile[] = [];
-  scanDirectory(srcDir, srcDir, results);
+  const files: string[] = [];
 
-  return results.sort((a, b) => a.relativePath.localeCompare(b.relativePath));
+  for await (const entry of fs.promises.glob('**/*.ts', {
+    cwd: srcDir,
+    exclude: buildGlobExcludePatterns(),
+  })) {
+    files.push(entry as string);
+  }
+
+  return files
+    .map((relativePath) => ({
+      absolutePath: path.join(srcDir, relativePath),
+      relativePath,
+    }))
+    .sort((a, b) => a.relativePath.localeCompare(b.relativePath));
 }

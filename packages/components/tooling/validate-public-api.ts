@@ -121,8 +121,8 @@ function validateFile(filePath: string): Violation[] {
   return checkNode(sourceFile, sourceFile, filePath);
 }
 
-export function validatePublicApi(): boolean {
-  const files = getPublicApiSourceFiles();
+export async function validatePublicApi(): Promise<boolean> {
+  const files = await getPublicApiSourceFiles();
   const allViolations: Violation[] = [];
 
   for (const file of files) {
@@ -152,7 +152,7 @@ export function validatePublicApi(): boolean {
 
 // If this script is run directly, not imported
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const isValid = validatePublicApi();
+  const isValid = await validatePublicApi();
   if (isValid) {
     console.log('✅ No internal/private exports found in public API');
   }

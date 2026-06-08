@@ -3,8 +3,8 @@ import path from 'node:path';
 import { getPublicApiSourceFiles, getSourceDir } from './public-api-scan.ts';
 import { validatePublicApi } from './validate-public-api.ts';
 
-function main(): void {
-  if (!validatePublicApi()) {
+async function main(): Promise<void> {
+  if (!(await validatePublicApi())) {
     process.exit(1);
   }
 
@@ -16,7 +16,7 @@ function main(): void {
     process.exit(1);
   }
 
-  const files = getPublicApiSourceFiles();
+  const files = await getPublicApiSourceFiles();
 
   const sortedExportPaths = files
     .map((file) => {
@@ -33,4 +33,4 @@ function main(): void {
   console.log(`Generated ${outputFile} with ${exportLines.length} export(s)`);
 }
 
-main();
+await main();
