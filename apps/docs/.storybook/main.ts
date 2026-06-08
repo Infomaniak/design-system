@@ -1,6 +1,8 @@
 import type { StorybookConfig } from '@storybook/web-components-vite';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { type InlineConfig, mergeConfig } from 'vite';
+import { viteTc39DecoratorsPlugin } from '../../../plugins/vite-tc39-decorators-plugin.ts';
 import { webComponentAutoReload } from './vite-web-component-autoreload.ts';
 
 /**
@@ -25,11 +27,11 @@ const config: StorybookConfig = {
     getAbsolutePath('@storybook/addon-onboarding'),
   ],
   framework: getAbsolutePath('@storybook/web-components-vite'),
-  viteFinal: async (config) => {
-    config.plugins ||= [];
-    config.plugins.push(webComponentAutoReload());
-    config.envDir = '../..'; // use .env in the repo root
-    return config;
+  viteFinal: (config: InlineConfig): InlineConfig => {
+    return mergeConfig(config, {
+      envDir: '../..', // use .env in the repo root,
+      plugins: [webComponentAutoReload(), viteTc39DecoratorsPlugin()],
+    });
   },
 };
 export default config;

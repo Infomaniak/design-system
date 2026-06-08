@@ -6,21 +6,11 @@
     "dist",
     "custom-elements.json"
   ],
-  "sideEffects": [
-    "dist/**/*.component.js"
-  ],
+  "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "./index": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "./esds-icon": {
-      "types": "./dist/esds-icon/index.d.ts",
-      "import": "./dist/esds-icon/index.js"
+      "types": "./dist/public-api.d.ts",
+      "import": "./dist/public-api.js"
     }
   },
   "scripts": {
@@ -29,13 +19,13 @@
   },
   "dependencies": {
     "@infomaniak-design-system/esds-icon": "workspace:*",
-    "dompurify": "^3.2.5",
-    "lit": "^3.3.3"
+    "@lit-labs/signals": "^0.3.0",
+    "lit": "^3.3.3",
+    "signal-utils": "^0.21.1"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.11.0",
     "@storybook/web-components-vite": "^10.4.1",
-    "@types/dompurify": "^3.2.0",
     "@wc-toolkit/type-parser": "1.2.1",
     "typescript": "~6.0.3",
     "vite": "^8.0.12"

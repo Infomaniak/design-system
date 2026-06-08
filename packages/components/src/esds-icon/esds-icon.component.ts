@@ -1,9 +1,16 @@
 import { IconifyApi } from '@infomaniak-design-system/esds-icon';
-import DOMPurify from 'dompurify';
-import { LitElement, css, html, type PropertyValues } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { signal, SignalWatcher } from '@lit-labs/signals';
+import { html, LitElement, type TemplateResult, unsafeCSS } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { batch } from 'signal-utils/subtle/batched-effect';
+import { onConnected } from '../helpers.private/component/on-connected.ts';
+import type { CleanUpFunction } from '../helpers.private/misc/clean-up-function.ts';
+import { componentEffect } from '../helpers.private/signal/component/component-effect/component-effect.ts';
 
-export type EsdsIconComponentMode = 'svg' | 'bg' | 'mask';
+import { signalProperty } from '../helpers.private/signal/component/signal-property/signal-property.ts';
+import type { WritableSignal } from '../helpers.private/signal/signal/writable-signal.ts';
+import style from './esds-icon.component.css?inline';
+
 export type EsdsIconComponentStatus = 'loading' | 'rendered' | 'error';
 
 const _apiCache = new Map<string, IconifyApi>();
@@ -18,274 +25,145 @@ export function _getApiCacheSize(): number {
   return _apiCache.size;
 }
 
-function getApi(endpoint: string): IconifyApi {
-  const key = endpoint || 'default';
-  if (!_apiCache.has(key)) {
-    _apiCache.set(key, new IconifyApi(endpoint ? { resources: [endpoint] } : {}));
+function getApi(endpoint: string = 'https://iconify.infomaniak.com'): IconifyApi {
+  if (!_apiCache.has(endpoint)) {
+    _apiCache.set(endpoint, new IconifyApi({ resources: [endpoint] }));
   }
-  return _apiCache.get(key)!;
+  return _apiCache.get(endpoint)!;
 }
 
 /**
  * Web component for displaying icons from the Infomaniak Design System icon library.
+ *
  * @summary Icon component
  * @element esds-icon-lit
  */
 @customElement('esds-icon-lit') // TODO: change to `esds-icon` once we don't have a conflict with the other component
-export class EsdsIconComponent extends LitElement {
-  static override styles = css`
-    :host {
-      display: inline-block;
-      vertical-align: 0;
-    }
+export class EsdsIconComponent extends SignalWatcher(LitElement) {
+  static override styles = unsafeCSS(style);
 
-    :host([mode='bg']),
-    :host([mode='mask']) {
-      width: 1em;
-      height: 1em;
-    }
+  /* PUBLIC PROPERTIES */
 
-    :host([mode='bg']) {
-      background-color: transparent;
-      background-image: var(--svg);
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-    }
-
-    :host([mode='mask']) {
-      background-color: currentcolor;
-      -webkit-mask-image: var(--svg);
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-size: 100% 100%;
-      mask-image: var(--svg);
-      mask-repeat: no-repeat;
-      mask-size: 100% 100%;
-    }
-
-    :host([inline]),
-    :host([inline='']),
-    :host([inline='true']) {
-      vertical-align: -0.125em;
-    }
-
-    svg {
-      display: block;
-      margin: auto;
-    }
-  `;
+  // NAME
 
   /**
    * Icon identifier in `prefix:name` format.
+   *
    * @attr name
    */
   @property({ type: String })
-  accessor name = '';
+  accessor name!: string;
 
-  /**
-   * The rendering mode to apply.
-   * - `svg`: Renders SVG inline inside the component.
-   * - `bg`: Uses CSS `background-image` with the SVG encoded as a data URL.
-   * - `mask`: Uses CSS `mask-image` for current-color icon rendering.
-   * @attr mode
-   * @default 'svg'
-   */
-  @property({ type: String })
-  accessor mode: EsdsIconComponentMode = 'svg';
+  readonly #name: WritableSignal<string> = signalProperty(this, 'name');
+
+  // INLINE
 
   /**
    * Adjusts vertical alignment for inline use (shifts by -0.125em).
+   *
    * @attr inline
    * @reflect
    */
   @property({ type: Boolean, reflect: true })
-  accessor inline = false;
+  accessor inline: boolean = false;
 
-  /**
-   * Disables lazy loading via IntersectionObserver; fetches the icon immediately.
-   * @attr nolazy
-   * @reflect
-   */
-  @property({ type: Boolean, reflect: true })
-  accessor nolazy = false;
+  // STATUS
 
-  /**
-   * Custom Iconify API endpoint URL.
-   * When empty, defaults to `https://iconify.infomaniak.com`.
-   * @attr endpoint
-   */
-  @property({ type: String, reflect: true })
-  accessor endpoint = '';
-
-  /**
-   * @internal
-   */
-  @state()
-  private accessor _status: EsdsIconComponentStatus = 'loading';
-
-  /**
-   * @internal
-   */
-  @state()
-  private accessor _svgNode: SVGSVGElement | null = null;
-
-  /**
-   * @internal
-   */
-  private _prefix = '';
-
-  /**
-   * @internal
-   */
-  private _iconName = '';
-
-  /**
-   * @internal
-   */
-  private _visible = false;
-
-  /**
-   * @internal
-   */
-  private _observer: IntersectionObserver | undefined;
-
-  /**
-   * @internal
-   */
-  private _abortController: AbortController | undefined;
+  readonly #status: WritableSignal<EsdsIconComponentStatus> =
+    signal<EsdsIconComponentStatus>('loading');
 
   /**
    * Read-only loading state of the icon.
+   *
+   * @reactive
    */
   get status(): EsdsIconComponentStatus {
-    return this._status;
+    return this.#status.get();
   }
 
-  override connectedCallback(): void {
-    super.connectedCallback();
-    if (this.nolazy) {
-      this._visible = true;
-    } else {
-      this._startObserver();
-    }
-  }
+  /* INTERNAL */
 
-  override disconnectedCallback(): void {
-    this._stopObserver();
-    this._abortPendingFetch();
-    super.disconnectedCallback();
-  }
+  constructor() {
+    super();
 
-  override willUpdate(changedProperties: PropertyValues<this>): void {
-    super.willUpdate(changedProperties);
+    // VISIBLE
 
-    if (changedProperties.has('name')) {
-      if (this.name && !this.name.includes(':')) {
-        throw new Error(
-          'Invalid `name`: missing separator `:` between <prefix> and <name> (`name="<prefix>:<name>"`).',
-        );
-      }
-      this._parseName();
-      this._abortPendingFetch();
-    }
+    onConnected(this, (): CleanUpFunction => {
+      batch((): void => {
+        this.#visible.set(false);
+      });
 
-    if (changedProperties.has('mode')) {
-      if (!this.mode) {
-        this.mode = 'svg';
-      }
-      if (!['svg', 'bg', 'mask'].includes(this.mode)) {
-        throw new Error(`Invalid mode: ${this.mode}. Expected 'svg', 'bg', or 'mask'.`);
-      }
-      if (this.mode !== 'svg') {
-        this._svgNode = null;
-      } else {
-        this.style.removeProperty('--svg');
-      }
-    }
-
-    if (changedProperties.has('nolazy')) {
-      if (this.nolazy) {
-        this._stopObserver();
-        this._visible = true;
-      } else {
-        this._startObserver();
-      }
-    }
-
-    if (
-      this._visible &&
-      (changedProperties.has('name') ||
-        changedProperties.has('mode') ||
-        changedProperties.has('nolazy') ||
-        changedProperties.has('endpoint'))
-    ) {
-      this._loadIcon();
-    }
-  }
-
-  override render() {
-    if (this.mode === 'svg' && this._svgNode) {
-      return html`${this._svgNode}`;
-    }
-    return html``;
-  }
-
-  /** @internal */
-  private _parseName(): void {
-    if (this.name && this.name.includes(':')) {
-      const index = this.name.indexOf(':');
-      this._prefix = this.name.slice(0, index);
-      this._iconName = this.name.slice(index + 1);
-    } else {
-      this._prefix = '';
-      this._iconName = '';
-    }
-  }
-
-  /** @internal */
-  private _startObserver(): void {
-    if (this._observer === undefined) {
-      this._visible = false;
-      this._observer = new IntersectionObserver(
+      const observer = new IntersectionObserver(
         (entries: readonly IntersectionObserverEntry[]): void => {
-          const intersecting = entries.some(
+          const intersecting: boolean = entries.some(
             (entry: IntersectionObserverEntry): boolean => entry.isIntersecting,
           );
-          if (intersecting) {
-            this._visible = true;
-            this._stopObserver();
-            this._loadIcon();
-          }
+          batch((): void => {
+            this.#visible.set(intersecting);
+          });
         },
       );
-      this._observer.observe(this);
-    }
+
+      observer.observe(this);
+
+      return (): void => {
+        if (observer !== undefined) {
+          observer.disconnect();
+
+          batch((): void => {
+            this.#visible.set(false);
+          });
+        }
+      };
+    });
+
+    // LOAD ICON
+
+    componentEffect(this, (): CleanUpFunction => {
+      const controller = new AbortController();
+
+      this.#loadIcon(controller.signal);
+
+      return (): void => {
+        controller.abort();
+      };
+    });
   }
 
-  /** @internal */
-  private _stopObserver(): void {
-    if (this._observer !== undefined) {
-      this._observer.disconnect();
-      this._observer = undefined;
-    }
+  // VISIBLE
+
+  readonly #visible: WritableSignal<boolean> = signal<boolean>(false);
+
+  // LOAD & RENDER ICON
+
+  readonly #svgNode: WritableSignal<SVGSVGElement | null> = signal<SVGSVGElement | null>(null);
+
+  override render(): TemplateResult {
+    return html`${this.#svgNode.get()}`;
   }
 
-  /** @internal */
-  private _loadIcon(): void {
-    this._abortPendingFetch();
-
-    if (!this._visible || !this.isConnected || !this._prefix || !this._iconName) {
+  #loadIcon(signal: AbortSignal): void {
+    if (!this.#visible.get() || !this.isConnected) {
       return;
     }
 
-    this._abortController = new AbortController();
-    const signal = this._abortController.signal;
-    this._status = 'loading';
-    this._svgNode = null;
+    const name: string = this.#name.get();
+    const prefixToNameSeparatorIndex: number = name.indexOf(':');
 
-    getApi(this.endpoint)
+    if (prefixToNameSeparatorIndex === -1) {
+      throw new Error(
+        'Invalid `name`: missing separator `:` between <prefix> and <name> (`name="<prefix>:<name>"`).',
+      );
+    }
+
+    batch((): void => {
+      this.#status.set('loading');
+    });
+
+    getApi()
       .getSVG({
-        prefix: this._prefix,
-        name: this._iconName,
+        prefix: name.slice(0, prefixToNameSeparatorIndex),
+        name: name.slice(prefixToNameSeparatorIndex + 1),
         signal,
       })
       .then((svgContent: string): void => {
@@ -293,48 +171,26 @@ export class EsdsIconComponent extends LitElement {
           return;
         }
 
-        if (this.mode === 'svg') {
-          this.style.removeProperty('--svg');
-          this._svgNode = this._parseSvgToDom(svgContent);
-        } else {
-          this._svgNode = null;
-          this.style.setProperty('--svg', `url('data:image/svg+xml;base64,${btoa(svgContent)}')`);
-        }
+        batch((): void => {
+          this.#status.set('rendered');
 
-        this._status = 'rendered';
+          this.#svgNode.set(
+            new DOMParser().parseFromString(svgContent, 'image/svg+xml')
+              .documentElement as Element as SVGSVGElement,
+          );
+        });
       })
       .catch((error: unknown): void => {
         if (signal.aborted) {
           return;
         }
 
-        this._status = 'error';
-        this._svgNode = null;
-        this.style.removeProperty('--svg');
-        console.error(`Failed to load icon: "${this.name}"`, error);
+        batch((): void => {
+          this.#status.set('error');
+          this.#svgNode.set(null);
+        });
+
+        console.error(`Failed to load icon: "${this.#name.get()}"`, error);
       });
-  }
-
-  /** @internal */
-  private _abortPendingFetch(): void {
-    if (this._abortController !== undefined) {
-      this._abortController.abort();
-      this._abortController = undefined;
-    }
-  }
-
-  /** @internal */
-  private _parseSvgToDom(svgString: string): SVGSVGElement {
-    const sanitized = DOMPurify.sanitize(svgString, {
-      USE_PROFILES: { svg: true },
-    });
-    const doc = new DOMParser().parseFromString(sanitized, 'image/svg+xml');
-    const svg = doc.querySelector('svg');
-
-    if (!svg) {
-      throw new Error('Sanitized SVG contains no <svg> element');
-    }
-
-    return svg.cloneNode(true) as SVGSVGElement;
   }
 }
