@@ -10,9 +10,7 @@
     "ask",
     "query",
     "hint",
-    "filled"
+    "assistance"
   ],
-  "categories": [
-    "filled"
-  ]
+  "categories": []
 }
