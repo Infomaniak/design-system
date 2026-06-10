@@ -109,6 +109,10 @@ export function extractSvgFilesFromFigmaDesignFile({
         return svgsToLoad;
       });
 
+      if (svgsToLoad.length === 0) {
+        throw new Error('No svg to extract.');
+      }
+
       // load all the svgs' urls in one fetch using the figma api
       const images: FigmaImagesRecord = await logger.asyncTask(
         'get-urls',
@@ -201,6 +205,11 @@ export function extractSvgFilesFromFigmaDesignFile({
             cutouts: cutouts.map(figmaNodeToSVGInnerShape),
           };
         });
+
+        if (svgsToLoad.length === 0) {
+          logger.info('No "filled" svg to extract.');
+          return;
+        }
 
         // get all the svgs's urls in one fetch using the figma api -> for the base and the cutouts
         const images: FigmaImagesRecord = await logger.asyncTask(
