@@ -6,7 +6,13 @@ import {
 
 export interface ImportAndBuildFigmaIconsOptions extends Omit<
   ExtractSvgFilesFromFigmaDesignFileAndBuildSetOptions,
-  'prefix' | 'svgImagesOutputDirectory' | 'svgSetOutputDirectory' | 'hasStockedVersion' | 'monotone'
+  | 'prefix'
+  | 'svgImagesOutputDirectory'
+  | 'svgSetOutputDirectory'
+  | 'hasStockedVersion'
+  | 'generateMasks'
+  | 'monotone'
+  | 'withOpticalSizes'
 > {
   readonly outputDirectory: string;
 }
@@ -23,6 +29,7 @@ export function importAndBuildFigmaIcons({
       prefix: 'esds',
       svgImagesOutputDirectory: join(outputDirectory, FIGMA_ICONS_SUB_DIRECTORY_PATH),
       svgSetOutputDirectory: join(outputDirectory, 'server'),
+      generateMasks: true,
       monotone: true,
       withOpticalSizes: true,
     });
