@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.14",
+    "version": "0.0.15",
     "author": {
       "name": "Infomaniak"
     },
@@ -12,7 +12,7 @@
     },
     "total": 96
   },
-  "lastModified": 1781089218,
+  "lastModified": 1781093613,
   "icons": {
     "bell": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M10.268 21a2 2 0 003.464 0m-10.47-5.674A1 1 0 004 17h16a1 1 0 00.74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 106 8c0 4.499-1.411 5.956-2.738 7.326\" vector-effect=\"non-scaling-stroke\"/>"
@@ -66,25 +66,25 @@
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m7.59 12 2.94 2.94 5.88-5.88M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "circle-check-filled": {
-      "body": "<path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M12 1.125c6.006 0 10.875 4.869 10.875 10.875S18.006 22.875 12 22.875 1.125 18.006 1.125 12 5.994 1.125 12 1.125m5.028 7.316a.876.876 0 00-1.238 0l-5.26 5.26-2.32-2.32a.876.876 0 00-1.238 1.238l2.94 2.94a.876.876 0 001.237 0l5.88-5.88a.876.876 0 000-1.238\" clip-rule=\"evenodd\"/>"
+      "body": "<defs><mask id=\"svgID0\" fill=\"transparent\"><path fill=\"#fff\" d=\"M12.125 1.125c6.075 0 11 4.925 11 11s-4.925 11-11 11-11-4.925-11-11 4.925-11 11-11\"/><path stroke=\"#000\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m7.59 12.06 3 3 6-6\" vector-effect=\"non-scaling-stroke\"/></mask></defs><g mask=\"url(#svgID0)\"><path fill=\"currentColor\" d=\"M12.125 1.125c6.075 0 11 4.925 11 11s-4.925 11-11 11-11-4.925-11-11 4.925-11 11-11\"/></g>"
     },
     "circle-cross": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 9-6 6m0-6 6 6m7-3c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "circle-cross-filled": {
-      "body": "<path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M12 1.125c6.006 0 10.875 4.869 10.875 10.875S18.006 22.875 12 22.875 1.125 18.006 1.125 12 5.994 1.125 12 1.125m3.62 7.256a.876.876 0 00-1.24 0L12 10.76 9.62 8.38a.876.876 0 00-1.24 1.238L10.763 12 8.38 14.38a.876.876 0 001.238 1.24L12 13.237l2.38 2.381a.876.876 0 001.24-1.238L13.237 12l2.381-2.38a.876.876 0 000-1.24\" clip-rule=\"evenodd\"/>"
+      "body": "<defs><mask id=\"svgID0\" fill=\"transparent\"><path fill=\"#fff\" d=\"M12.125 1.125c6.075 0 11 4.925 11 11s-4.925 11-11 11-11-4.925-11-11 4.925-11 11-11\"/><path stroke=\"#000\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 9-6 6m0-6 6 6\" vector-effect=\"non-scaling-stroke\"/></mask></defs><g mask=\"url(#svgID0)\"><path fill=\"currentColor\" d=\"M12.125 1.125c6.075 0 11 4.925 11 11s-4.925 11-11 11-11-4.925-11-11 4.925-11 11-11\"/></g>"
     },
     "circle-info": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 16v-4m0-4h.01M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "circle-info-filled": {
-      "body": "<path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M12 1.125c6.006 0 10.875 4.869 10.875 10.875S18.006 22.875 12 22.875 1.125 18.006 1.125 12 5.994 1.125 12 1.125m0 10a.875.875 0 00-.875.875v4a.875.875 0 001.75 0v-4a.875.875 0 00-.875-.875m0-4a.875.875 0 000 1.75h.01a.875.875 0 000-1.75z\" clip-rule=\"evenodd\"/>"
+      "body": "<defs><mask id=\"svgID0\" fill=\"transparent\"><path fill=\"#fff\" d=\"M12.125 1.125c6.075 0 11 4.925 11 11s-4.925 11-11 11-11-4.925-11-11 4.925-11 11-11\"/><path stroke=\"#000\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 16v-4m0-4h.01\" vector-effect=\"non-scaling-stroke\"/></mask></defs><g mask=\"url(#svgID0)\"><path fill=\"currentColor\" d=\"M12.125 1.125c6.075 0 11 4.925 11 11s-4.925 11-11 11-11-4.925-11-11 4.925-11 11-11\"/></g>"
     },
     "circle-question": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "circle-question-filled": {
-      "body": "<path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M12 1.125c6.006 0 10.875 4.869 10.875 10.875S18.006 22.875 12 22.875 1.125 18.006 1.125 12 5.994 1.125 12 1.125m0 15a.875.875 0 000 1.75h.01a.875.875 0 000-1.75zm.575-9.948a3.875 3.875 0 00-4.31 2.533.875.875 0 001.65.58 2.127 2.127 0 013.63-.663c.324.384.5.871.5 1.373 0 .535-.413 1.057-1.11 1.521a6.2 6.2 0 01-1.198.615l-.077.028-.016.006h-.002a.875.875 0 00.554 1.66h.003l.004-.002q.004 0 .01-.004l.034-.011.113-.043a8 8 0 001.545-.792c.803-.535 1.89-1.514 1.89-2.978a3.875 3.875 0 00-3.22-3.823\" clip-rule=\"evenodd\"/>"
+      "body": "<defs><mask id=\"svgID0\" fill=\"transparent\"><path fill=\"#fff\" d=\"M23.125 12.125c0 6.075-4.925 11-11 11s-11-4.925-11-11 4.925-11 11-11 11 4.925 11 11\"/><path stroke=\"#000\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M9.09 9.058a3.087 3.087 0 016 1.03c0 2.057-3.087 3.087-3.087 3.087m.082 4.116h.01\" vector-effect=\"non-scaling-stroke\"/></mask></defs><g mask=\"url(#svgID0)\"><path fill=\"currentColor\" d=\"M23.125 12.125c0 6.075-4.925 11-11 11s-11-4.925-11-11 4.925-11 11-11 11 4.925 11 11\"/></g>"
     },
     "circular-arrows-clockwise": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m17 10 4-4-4-4m4 4H7a4 4 0 00-4 4v1m4 3-4 4 4 4m-4-4h14a4 4 0 004-4v-1\" vector-effect=\"non-scaling-stroke\"/>"
@@ -405,7 +405,7 @@
     "@filled": [
       "circle-check-filled",
       "circle-cross-filled",
-      "circle-question-filled",
+      "circle-info-filled",
       "envelope-filled",
       "hard-drive-filled"
     ],
@@ -552,6 +552,7 @@
       "circle-info",
       "circle-info-filled",
       "circle-question",
+      "circle-question-filled",
       "headset"
     ],
     "#audience": [
@@ -1113,8 +1114,7 @@
     ],
     "#filled": [
       "circle-check-filled",
-      "circle-cross-filled",
-      "circle-question-filled"
+      "circle-cross-filled"
     ],
     "#film": [
       "video-camera"

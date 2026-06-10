@@ -11,5 +11,7 @@
     "assistance",
     "faq"
   ],
-  "categories": []
+  "categories": [
+    "filled"
+  ]
 }
