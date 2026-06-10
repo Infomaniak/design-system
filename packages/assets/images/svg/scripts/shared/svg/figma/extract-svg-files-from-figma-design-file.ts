@@ -259,18 +259,18 @@ export function extractSvgFilesFromFigmaDesignFile({
 
                 // assemble the final svg
                 const svg: string = dedent`
-                <svg width="${String(width)}" height="${String(height)}" viewBox="0 0 ${String(width)} ${String(height)}" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <mask id="${maskId}" fill="transparent">
-                      ${positionedBaseSvgContentForMask}
-                      ${positionedCutoutSvgContentsForMask}
-                    </mask>
-                  </defs>
-                  <g mask="url(#${maskId})">
-                    ${positionedBaseSvgContent}
-                  </g>
-                </svg>
-              `;
+                  <svg width="${String(width)}" height="${String(height)}" viewBox="0 0 ${String(width)} ${String(height)}" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <mask id="${maskId}" fill="transparent">
+                        ${positionedBaseSvgContentForMask}
+                        ${positionedCutoutSvgContentsForMask}
+                      </mask>
+                    </defs>
+                    <g mask="url(#${maskId})">
+                      ${positionedBaseSvgContent}
+                    </g>
+                  </svg>
+                `;
 
                 await writeTextFileSafe(join(outputDirectory, `${name}.mask.svg`), svg);
               },
