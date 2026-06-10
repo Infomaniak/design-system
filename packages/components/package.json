@@ -15,7 +15,8 @@
   },
   "scripts": {
     "generate": "plop",
-    "build": "yarn analyze:cem && vite build && tsc -p tsconfig.build.json",
+    "validate:public-api": "node tooling/validate-public-api.ts",
+    "build": "yarn generate public-api && yarn analyze:cem && vite build && tsc -p tsconfig.build.json",
     "analyze:cem": "cem analyze --config ./custom-elements-manifest.config.mjs"
   },
   "dependencies": {

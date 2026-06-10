@@ -32,6 +32,16 @@ yarn generate component
 # and give your component a name using kebab-case such as `esds-my-component`
 ```
 
+### Export from the package
+
+Export your component by adding it to `public-api.ts`:
+
+```bash
+yarn generate public-api
+```
+
+Note: this runs automatically on build.
+
 ### Guidelines
 
 #### Component architecture
@@ -59,14 +69,20 @@ Key JSDoc tags for CEM:
 - `@csspart` — Shadow DOM parts
 - `@cssprop` / `@cssproperty` — CSS custom properties
 
+#### Internal helpers
+
+Internal utilities and test-only helpers must be placed in `*.private.ts` files.
+These files are automatically excluded from the generated `public-api.ts` by the `yarn generate public-api` command.
+
 ## Useful scripts
 
-| Command            | Description                                      |
-| ------------------ | ------------------------------------------------ |
-| `yarn generate`    | Generate a new component folder and files        |
-| `yarn analyze:cem` | Generate `custom-elements.json` from source code |
-| `yarn build`       | Full build: CEM + Vite + TypeScript declarations |
-| `yarn dev:docs`    | Start Storybook dev server                       |
+| Command                    | Description                                      |
+| -------------------------- | ------------------------------------------------ |
+| `yarn generate`            | Generate a new component folder and files        |
+| `yarn analyze:cem`         | Generate `custom-elements.json` from source code |
+| `yarn validate:public-api` | Validate that no internal exports leak to public |
+| `yarn build`               | Full build: CEM + Vite + TypeScript declarations |
+| `yarn dev:docs`            | Start Storybook dev server                       |
 
 ## CEM config
 

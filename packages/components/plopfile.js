@@ -1,3 +1,5 @@
+import { execSync } from 'node:child_process';
+
 export default function (plop) {
   plop.setWelcomeMessage('🛠️ What would you like to build?');
 
@@ -38,6 +40,19 @@ export default function (plop) {
         base: 'tooling/templates',
         templateFiles: 'tooling/templates/*.hbs',
         stripExtensions: ['hbs'],
+      },
+    ],
+  });
+
+  plop.setGenerator('public-api', {
+    description: 'generate public-api.ts for components',
+    prompts: [],
+    actions: [
+      () => {
+        execSync('node tooling/generate-public-api.ts', {
+          stdio: 'inherit',
+        });
+        return 'public-api.ts generated';
       },
     ],
   });

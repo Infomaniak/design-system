@@ -1,4 +1,3 @@
-import { IconifyApi } from '@infomaniak-design-system/esds-icon';
 import { signal, SignalWatcher } from '@lit-labs/signals';
 import { html, LitElement, type TemplateResult, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
@@ -10,27 +9,9 @@ import { componentEffect } from '../helpers.private/signal/component/component-e
 import { signalProperty } from '../helpers.private/signal/component/signal-property/signal-property.ts';
 import type { WritableSignal } from '../helpers.private/signal/signal/writable-signal.ts';
 import style from './esds-icon.component.css?inline';
+import { getApi } from './esds-icon.component.private.ts';
 
 export type EsdsIconComponentStatus = 'loading' | 'rendered' | 'error';
-
-const _apiCache = new Map<string, IconifyApi>();
-
-/** @internal for testing only */
-export function _clearApiCache(): void {
-  _apiCache.clear();
-}
-
-/** @internal for testing only */
-export function _getApiCacheSize(): number {
-  return _apiCache.size;
-}
-
-function getApi(endpoint: string = 'https://iconify.infomaniak.com'): IconifyApi {
-  if (!_apiCache.has(endpoint)) {
-    _apiCache.set(endpoint, new IconifyApi({ resources: [endpoint] }));
-  }
-  return _apiCache.get(endpoint)!;
-}
 
 /**
  * Web component for displaying icons from the Infomaniak Design System icon library.

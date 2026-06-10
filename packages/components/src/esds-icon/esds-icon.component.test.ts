@@ -1,6 +1,7 @@
 import { IconifyApi } from '@infomaniak-design-system/esds-icon';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { EsdsIconComponent, _clearApiCache } from './esds-icon.component.ts';
+import { _clearApiCache } from './esds-icon.component.private.ts';
+import { EsdsIconComponent } from './esds-icon.component.ts';
 
 describe('EsdsIconComponent', () => {
   let container: HTMLDivElement;
