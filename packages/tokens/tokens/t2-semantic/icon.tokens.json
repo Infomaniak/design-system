@@ -20,6 +20,13 @@
           "scopes": ["WIDTH_HEIGHT"]
         }
       },
+
+      "lg": {
+        "$value": "{scale.20}",
+        "$extensions": {
+          "scopes": ["WIDTH_HEIGHT"]
+        }
+      },
       "xl": {
         "$value": "{scale.24}",
         "$extensions": {
@@ -32,20 +39,14 @@
           "scopes": ["WIDTH_HEIGHT"]
         }
       },
-      "lg": {
-        "$value": "{scale.20}",
+      "3xl": {
+        "$value": "{scale.40}",
         "$extensions": {
           "scopes": ["WIDTH_HEIGHT"]
         }
       },
       "4xl": {
         "$value": "{scale.96}",
-        "$extensions": {
-          "scopes": ["WIDTH_HEIGHT"]
-        }
-      },
-      "3xl": {
-        "$value": "{scale.40}",
         "$extensions": {
           "scopes": ["WIDTH_HEIGHT"]
         }
