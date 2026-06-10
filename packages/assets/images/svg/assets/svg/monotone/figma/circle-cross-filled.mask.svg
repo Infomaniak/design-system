@@ -1,0 +1,17 @@
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <mask id="mask_circle_cross_filled" fill="transparent">
+      <g transform="translate(1.125 1.125)">
+        <path d="M11 0C17.0751 0 22 4.92487 22 11C22 17.0751 17.0751 22 11 22C4.92487 22 0 17.0751 0 11C0 4.92487 4.92487 0 11 0Z" fill="white"/>
+      </g>
+      <g transform="translate(9 9)">
+        <path d="M6 0L0 6M0 0L6 6" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </mask>
+  </defs>
+  <g mask="url(#mask_circle_cross_filled)">
+    <g transform="translate(1.125 1.125)">
+      <path d="M11 0C17.0751 0 22 4.92487 22 11C22 17.0751 17.0751 22 11 22C4.92487 22 0 17.0751 0 11C0 4.92487 4.92487 0 11 0Z" fill="black"/>
+    </g>
+  </g>
+</svg>
