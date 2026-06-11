@@ -103,7 +103,11 @@ export class ConsumerComponent extends LitElement {
   readonly ctx = new InjectionContext([locale.use('fr-FR')]);
 
   override render(): TemplateResult {
-    return html`<div data-inject="${this.ctx.id}"></div>`;
+    return html`
+      <div data-inject="${this.ctx.id}">
+        <esds-component />
+      </div>
+    `;
   }
 }
 ```
