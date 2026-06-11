@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useUrlPersistence } from '../hooks/useUrlPersistence.ts';
 import IconCollectionFilter from './IconCollectionFilter.tsx';
 import IconGalleryEmpty from './IconGalleryEmpty.tsx';
@@ -6,6 +6,9 @@ import IconGalleryError from './IconGalleryError.tsx';
 import IconGallerySkeleton from './IconGallerySkeleton.tsx';
 import IconGrid from './IconGrid.tsx';
 import IconSearchBar from './IconSearchBar.tsx';
+import IconSizeSlider from './IconSizeSlider.tsx';
+
+const DEFAULT_ICON_SIZE = 48;
 
 const IconGallery: React.FC = () => {
   const {
@@ -24,6 +27,8 @@ const IconGallery: React.FC = () => {
     clearSearch,
   } = useUrlPersistence();
 
+  const [iconSize, setIconSize] = useState(DEFAULT_ICON_SIZE);
+
   const handleCollectionChange = (collection: string): void => {
     setCollection(collection);
   };
@@ -38,6 +43,10 @@ const IconGallery: React.FC = () => {
 
   const handleRetry = (): void => {
     retry();
+  };
+
+  const handleIconSizeChange = (size: number): void => {
+    setIconSize(size);
   };
 
   const renderContent = (): React.ReactNode => {
@@ -76,6 +85,7 @@ const IconGallery: React.FC = () => {
       <IconGrid
         icons={icons}
         prefix={selectedCollection}
+        iconSize={iconSize}
       />
     );
   };
@@ -92,7 +102,12 @@ const IconGallery: React.FC = () => {
           display: flex;
           flex-direction: column;
           gap: 1rem;
-          margin-bottom: 1.5rem;
+          margin-bottom: 1rem;
+          padding-bottom: 1rem;
+          position: sticky;
+          top: 0;
+          background-color: #fff;
+          box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.05);
         }
         .icon-gallery__title-row {
           display: flex;
@@ -124,14 +139,20 @@ const IconGallery: React.FC = () => {
         @media (min-width: 640px) {
           .icon-gallery__controls {
             flex-direction: row;
+            flex-wrap: wrap;
           }
         }
         .icon-gallery__search {
-          flex: 1 1 auto;
+          flex: 1 1 200px;
         }
         .icon-gallery__filter {
           flex: 0 0 auto;
           min-width: 200px;
+        }
+        .icon-gallery__slider {
+          flex: 0 0 auto;
+          min-width: 200px;
+          align-content: center;
         }
         .icon-gallery__loading {
           text-align: center;
@@ -167,6 +188,13 @@ const IconGallery: React.FC = () => {
                   collections={collections}
                   selected={selectedCollection}
                   onChange={handleCollectionChange}
+                  disabled={isDisabled}
+                />
+              </div>
+              <div className="icon-gallery__slider">
+                <IconSizeSlider
+                  value={iconSize}
+                  onChange={handleIconSizeChange}
                   disabled={isDisabled}
                 />
               </div>

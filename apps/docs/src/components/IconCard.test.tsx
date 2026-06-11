@@ -19,6 +19,31 @@ describe('IconCard', () => {
     expect(screen.getByText('material-symbols:home')).toBeInTheDocument();
   });
 
+  it('renders with default icon size of 48px', () => {
+    render(
+      <IconCard
+        icon={mockIcon}
+        prefix="material-symbols"
+      />,
+    );
+    const iconElement =
+      screen.getByText('material-symbols:home').previousElementSibling?.firstElementChild;
+    expect(iconElement).toHaveAttribute('style', expect.stringContaining('font-size: 48px'));
+  });
+
+  it('renders with custom icon size when provided', () => {
+    render(
+      <IconCard
+        icon={mockIcon}
+        prefix="material-symbols"
+        iconSize={24}
+      />,
+    );
+    const iconElement =
+      screen.getByText('material-symbols:home').previousElementSibling?.firstElementChild;
+    expect(iconElement).toHaveAttribute('style', expect.stringContaining('font-size: 24px'));
+  });
+
   it('calls onClick when clicked', () => {
     const mockOnClick = vi.fn();
     render(
@@ -77,5 +102,21 @@ describe('IconCard', () => {
     );
     const card = screen.getByRole('button');
     expect(card).toHaveAttribute('tabIndex', '0');
+  });
+
+  it('does not call onClick on other key presses', () => {
+    const mockOnClick = vi.fn();
+    render(
+      <IconCard
+        icon={mockIcon}
+        prefix="material-symbols"
+        onClick={mockOnClick}
+      />,
+    );
+
+    const card = screen.getByRole('button');
+    fireEvent.keyDown(card, { key: 'Tab' });
+
+    expect(mockOnClick).not.toHaveBeenCalled();
   });
 });

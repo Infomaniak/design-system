@@ -36,7 +36,7 @@ export async function publishAndroidTokens({
     const publishBranchName: string = await createAndroidPublishGithubBranch({
       logger,
       repositoryName: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
-      packageDirectory: join(outputDirectory, 'android'),
+      packageDirectory: join(outputDirectory, 'kotlin'),
       version: publishVersion,
     });
 
@@ -48,7 +48,7 @@ export async function publishAndroidTokens({
         title: `chore: Update to ${publishBranchName}`,
         body: `Update to ${publishBranchName}`,
         head: publishBranchName,
-        base: mode === 'rc' ? 'develop' : 'main',
+        base: /*mode === 'rc' ? 'develop' : */ 'main', // TODO add support to `develop` branch when the repo will be ready
       });
     }
   });

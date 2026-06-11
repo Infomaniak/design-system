@@ -19,7 +19,7 @@ export function dedent(parts: TemplateStringsArray, ...values: string[]): string
   const lastIndex: number = parts.length - 1;
   const lastPart: string = parts[lastIndex];
 
-  const indent: string | undefined = firstPart.match(/^\n(\s+)/)?.[1] ?? undefined;
+  const indent: string | undefined = firstPart.match(/^\n(\s*)/)?.[1] ?? undefined;
 
   if (indent === undefined) {
     throw new Error(
@@ -27,7 +27,7 @@ export function dedent(parts: TemplateStringsArray, ...values: string[]): string
     );
   }
 
-  const lastMatchIndex: number = lastPart.search(/\n\s+$/);
+  const lastMatchIndex: number = lastPart.search(/\n\s*$/);
 
   if (lastMatchIndex === -1) {
     throw new Error(

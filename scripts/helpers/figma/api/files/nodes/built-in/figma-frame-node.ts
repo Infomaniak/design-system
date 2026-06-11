@@ -2,9 +2,11 @@ import type { FigmaColor } from '../../types/figma-color.ts';
 import type { FigmaRectangle } from '../../types/figma-rectangle.ts';
 import type { FigmaVector } from '../../types/figma-vector.ts';
 import type { FigmaNode, GenericFigmaNode } from '../figma-node.ts';
-import type { HavingFigmaNodeChildren } from '../having-figma-node-children.ts';
+import type { HavingFigmaAbsoluteBoundingBox } from '../having/having-figma-absolute-bounding-box.ts';
+import type { HavingFigmaNodeChildren } from '../having/having-figma-node-children.ts';
 
-export interface FigmaFrameNodeProperties extends HavingFigmaNodeChildren {
+export interface FigmaFrameNodeProperties
+  extends HavingFigmaNodeChildren, HavingFigmaAbsoluteBoundingBox {
   readonly locked: boolean;
   readonly background: readonly unknown[];
   readonly backgroundColor: FigmaColor;
@@ -26,7 +28,6 @@ export interface FigmaFrameNodeProperties extends HavingFigmaNodeChildren {
   readonly transitionDuration: number;
   readonly transitionEasing: unknown;
   readonly opacity: number;
-  readonly absoluteBoundingBox: FigmaRectangle;
   readonly absoluteRenderBounds: FigmaRectangle | null;
   readonly size: FigmaVector;
   readonly minWidth: number | null;

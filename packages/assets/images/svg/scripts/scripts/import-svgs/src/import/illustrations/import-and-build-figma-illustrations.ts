@@ -6,7 +6,13 @@ import {
 
 export interface ImportAndBuildFigmaIllustrationsOptions extends Omit<
   ExtractSvgFilesFromFigmaDesignFileAndBuildSetOptions,
-  'prefix' | 'svgImagesOutputDirectory' | 'svgSetOutputDirectory' | 'hasStockedVersion' | 'monotone'
+  | 'prefix'
+  | 'svgImagesOutputDirectory'
+  | 'svgSetOutputDirectory'
+  | 'hasStockedVersion'
+  | 'generateMasks'
+  | 'monotone'
+  | 'withOpticalSizes'
 > {
   readonly outputDirectory: string;
 }
@@ -23,7 +29,9 @@ export function importAndBuildFigmaIllustrations({
       prefix: 'ik-illustration',
       svgImagesOutputDirectory: join(outputDirectory, 'svg/illustrations/figma'),
       svgSetOutputDirectory: join(outputDirectory, 'server'),
+      generateMasks: false,
       monotone: false,
+      withOpticalSizes: false,
     });
   });
 }

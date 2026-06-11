@@ -32,13 +32,16 @@ export class TreeExplorer<GInput, GNode = GInput> {
     this.#map = map;
   }
 
-  *explore(input: GInput, pick?: TreeExplorerPickFunction<GInput, GNode>): Generator<GNode> {
+  *explore<GFilteredNode extends GNode>(
+    input: GInput,
+    pick?: TreeExplorerPickFunction<GInput, GNode>,
+  ): Generator<GFilteredNode> {
     const node: GNode = this.#map(input);
 
     const { pickSelf = true, pickChildren = true } = pick?.(node, input) ?? {};
 
     if (pickSelf) {
-      yield node;
+      yield node as GFilteredNode;
     }
 
     if (pickChildren) {

@@ -8,7 +8,7 @@ import { writeJsonFileSafe } from '../../../../../../../scripts/helpers/file/wri
 import { addGitAllFiles } from '../../../../../../../scripts/helpers/git/add-git-all-files.ts';
 import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { runScript } from '../../../../../../../scripts/helpers/misc/run-script/run-script.ts';
-import { buildSvgSetFromSvgDirectory } from '../../shared/svg/figma/build-svg-set-from-svg-directory.ts';
+import { buildSvgSetFromSvgDirectory } from '../../shared/svg/iconify/build-svg-set-from-svg-directory/build-svg-set-from-svg-directory.ts';
 
 const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 const ASSETS_DIR: string = join(ROOT_DIR, 'assets');
@@ -37,6 +37,7 @@ await runScript('build-legacy-svgs', async (logger: Logger): Promise<void> => {
         sourceDirectory: join(LEGACY_ASSETS_DIR, entry.name),
         outputDirectory: join(ASSETS_DIR, 'server'),
         monotone: true,
+        withOpticalSizes: false,
         logger,
       })) || hasNewAssets;
   }

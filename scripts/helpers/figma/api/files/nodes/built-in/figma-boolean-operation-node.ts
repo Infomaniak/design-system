@@ -1,9 +1,10 @@
 import type { FigmaNode, GenericFigmaNode } from '../figma-node.ts';
-import type { HavingFigmaNodeChildren } from '../having-figma-node-children.ts';
+import type { HavingFigmaAbsoluteBoundingBox } from '../having/having-figma-absolute-bounding-box.ts';
+import type { HavingFigmaNodeChildren } from '../having/having-figma-node-children.ts';
 
 export interface FigmaBooleanOperationNode
-  extends FigmaNode<'BOOLEAN_OPERATION'>, HavingFigmaNodeChildren {
-  readonly booleanOperation: string;
+  extends FigmaNode<'BOOLEAN_OPERATION'>, HavingFigmaNodeChildren, HavingFigmaAbsoluteBoundingBox {
+  readonly booleanOperation: 'SUBTRACT' | string;
 }
 
 export function isFigmaBooleanOperationNode(

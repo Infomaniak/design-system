@@ -97,7 +97,8 @@ export function buildTokens({
 
     // KOTLIN
     await buildKotlinTokens({
-      collection: baseCollection,
+      baseCollection,
+      modifiers,
       outputDirectory,
       logger,
     });
