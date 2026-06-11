@@ -36,7 +36,7 @@ function ConsumerComponent() {
   const ctx = new InjectionContext([locale.use('fr-FR')]);
 
   return (
-    <div id={ctx.id}>
+    <div data-inject={ctx.id}>
       {/* every child will inherit the context of the parent*/}
       <esds-component />
     </div>
@@ -71,7 +71,7 @@ export class ConsumerComponent {
 ```
 
 ```html
-<div [id]="ctx.id">
+<div [attr.data-inject]="ctx.id">
   <!-- every child will inherit the context of the parent -->
   <esds-component />
 </div>
@@ -103,7 +103,7 @@ export class ConsumerComponent extends LitElement {
   readonly ctx = new InjectionContext([locale.use('fr-FR')]);
 
   override render(): TemplateResult {
-    return html`<div id="${this.ctx.id}"></div>`;
+    return html`<div data-inject="${this.ctx.id}"></div>`;
   }
 }
 ```
