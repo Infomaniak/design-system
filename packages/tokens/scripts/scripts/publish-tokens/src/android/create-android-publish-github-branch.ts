@@ -1,5 +1,4 @@
 import { cp } from 'node:fs/promises';
-import { join } from 'node:path';
 import {
   updateGitRepositoryOnNewBranch,
   type UpdateGitRepositoryOnNewBranchUpdateFunctionContext,
@@ -33,18 +32,7 @@ export async function createAndroidPublishGithubBranch({
     update: async ({
       cwd,
     }: UpdateGitRepositoryOnNewBranchUpdateFunctionContext): Promise<string> => {
-      await Promise.all([
-        cp(
-          join(packageDirectory, 'compose/EsdsColorRawTokens.kt'),
-          join(
-            cwd,
-            'DesignSystem/Compose/src/main/kotlin/com/infomaniak/designsystem/compose/compose/EsdsColorRawTokens.kt',
-          ),
-          {
-            force: true,
-          },
-        ),
-      ]);
+      await Promise.all([cp(packageDirectory, cwd, { recursive: true, force: true })]);
 
       return `chore: Update to ${version}`;
     },

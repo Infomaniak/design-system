@@ -1,6 +1,6 @@
 import type { DimensionDesignTokenValue } from '../../../../../../../../base/types/dimension/value/dimension-design-token-value.ts';
 
 /**
- * @deprecated UNOFICIAL: use with caution
+ * @deprecated UNOFFICIAL: use with caution
  */
 export type DimensionTypographyDesignTokenValueLineHeight = DimensionDesignTokenValue;

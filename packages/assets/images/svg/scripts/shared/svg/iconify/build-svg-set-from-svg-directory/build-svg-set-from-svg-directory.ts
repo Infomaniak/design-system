@@ -54,8 +54,20 @@ export async function buildSvgSetFromSvgDirectory({
       prefix,
     });
 
+    type IconSetForEachType = 'icon' | 'alias' | 'variation';
+
+    // for each "mask" svg, replace the "filled" one
+    await iconSet.forEach((name: string, type: IconSetForEachType): void => {
+      if (type == 'icon') {
+        if (name.endsWith('-mask')) {
+          const shortName: string = name.slice(0, -5 /* '-mask'.length */);
+          iconSet.rename(name, shortName);
+        }
+      }
+    });
+
     // SVGs
-    await iconSet.forEach((name: string, type: 'icon' | 'alias' | 'variation'): void => {
+    await iconSet.forEach((name: string, type: IconSetForEachType): void => {
       if (type == 'icon') {
         const svg: SVG | null = iconSet.toSVG(name);
 
