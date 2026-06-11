@@ -4,7 +4,7 @@ import type { KotlinVariableDeclarationTextUnitValue } from '../../../../../../.
 import { dimensionDesignTokensCollectionTokenValueToKotlinValue } from '../../../../../../../base/dimension/value/dimension-design-tokens-collection-token-value-to-kotlin-value.ts';
 
 /**
- * @deprecated UNOFICIAL: use with caution
+ * @deprecated UNOFFICIAL: use with caution
  */
 export function dimensionTypographyDesignTokensCollectionTokenValueLineHeightToKotlinValue(
   value: DimensionTypographyDesignTokensCollectionTokenValueLineHeight,

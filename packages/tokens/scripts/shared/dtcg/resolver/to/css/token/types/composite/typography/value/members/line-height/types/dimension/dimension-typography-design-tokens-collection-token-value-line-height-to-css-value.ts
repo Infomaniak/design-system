@@ -2,7 +2,7 @@ import type { DimensionTypographyDesignTokensCollectionTokenValueLineHeight } fr
 import { dimensionDesignTokensCollectionTokenValueToCssValue } from '../../../../../../../base/dimension/value/dimension-design-tokens-collection-token-value-to-css-value.ts';
 
 /**
- * @deprecated UNOFICIAL: use with caution
+ * @deprecated UNOFFICIAL: use with caution
  */
 export function dimensionTypographyDesignTokensCollectionTokenValueLineHeightToCssValue(
   value: DimensionTypographyDesignTokensCollectionTokenValueLineHeight,

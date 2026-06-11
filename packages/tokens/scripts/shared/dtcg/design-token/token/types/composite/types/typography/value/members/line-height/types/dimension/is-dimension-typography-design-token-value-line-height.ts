@@ -2,7 +2,7 @@ import { dimensionTypographyDesignTokenValueLineHeightSchema } from './dimension
 import type { DimensionTypographyDesignTokenValueLineHeight } from './dimension-typography-design-token-value-line-height.ts';
 
 /**
- * @deprecated UNOFICIAL: use with caution
+ * @deprecated UNOFFICIAL: use with caution
  */
 export function isDimensionTypographyDesignTokenValueLineHeight(
   input: unknown,
