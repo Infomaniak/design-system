@@ -102,7 +102,12 @@ const IconGallery: React.FC = () => {
           display: flex;
           flex-direction: column;
           gap: 1rem;
-          margin-bottom: 1.5rem;
+          margin-bottom: 1rem;
+          padding-bottom: 1rem;
+          position: sticky;
+          top: 0;
+          background-color: #fff;
+          box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.05);
         }
         .icon-gallery__title-row {
           display: flex;
