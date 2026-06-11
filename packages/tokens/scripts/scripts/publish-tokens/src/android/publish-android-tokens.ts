@@ -36,7 +36,7 @@ export async function publishAndroidTokens({
     const publishBranchName: string = await createAndroidPublishGithubBranch({
       logger,
       repositoryName: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
-      packageDirectory: join(outputDirectory, 'android'),
+      packageDirectory: join(outputDirectory, 'kotlin'),
       version: publishVersion,
     });
 
