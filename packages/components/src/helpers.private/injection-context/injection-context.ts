@@ -1,113 +1,16 @@
-export type CapturedInjectionContext = ReadonlyMap<symbol, unknown>;
-
 export type InjectedEntry<GValue> = readonly [name: symbol, value: GValue];
 
-export type ExtraInjectedEntries = Iterable<InjectedEntry<unknown>>;
+export type InjectionContextEntries = Iterable<InjectedEntry<unknown>>;
 
-/**
- * Represents a context management system for dependency injection.
- * Provides functionality to capture, restore, and extend injection contexts,
- * as well as retrieve values from the current context.
- *
- * @example
- *
- * ```ts
- * // create a new Injectable instance: `locale`
- * const locale = new Injectable('locale');
- *
- * InjectionContext.extend([locale.inject('en-US')], (): void => {
- *   // code within this block will use the provided context
- *   console.log(InjectionContext.get(locale)); // 'en-US'
- *
- *   InjectionContext.extend([locale.inject('fr-FR')], (): void => {
- *     // code within this block will use the extended context
- *     console.log(InjectionContext.get(locale)); // 'fr-FR'
- *   });
- *
- *   // captures the context for asynchronous operations
- *   const context: CapturedInjectionContext = InjectionContext.capture();
- *
- *   setTimeout((): void => {
- *     // restores the captured context
- *     InjectionContext.restore(context, () => {
- *       // code within this block will use the restored context
- *       console.log(InjectionContext.get(locale)); // 'en-US'
- *     });
- *   }, 1000);
- * });
- * ```
- */
 export class InjectionContext {
-  static #context: CapturedInjectionContext = new Map();
+  static root: InjectionContext | undefined;
 
-  /**
-   * Captures and returns the current injection context.
-   *
-   * @returns {CapturedInjectionContext} The active injection context at the time this method is called.
-   */
-  static capture(): CapturedInjectionContext {
-    return this.#context;
-  }
+  static readonly attributeName = 'data-inject' as const;
 
-  /**
-   * Restores a specific context for the duration of the callback execution.
-   *
-   * @template GArguments The type of the arguments to pass to the callback function.
-   * @template GReturn The type of the return value of the callback function.
-   * @param {CapturedInjectionContext} context The context to temporarily apply.
-   * @param {(...args: GArguments) => GReturn} callback The function to execute with the restored context.
-   * @param {...GArguments} args The arguments to pass to the callback function.
-   * @returns {GReturn} The result of the callback function execution.
-   */
-  static restore<GArguments extends readonly unknown[], GReturn>(
-    context: CapturedInjectionContext,
-    callback: (...args: GArguments) => GReturn,
-    ...args: GArguments
-  ): GReturn {
-    const previous: CapturedInjectionContext = this.#context;
+  static readonly #instances: Map<string, WeakRef<InjectionContext>> = new Map();
 
-    try {
-      this.#context = context;
-      return callback(...args);
-    } finally {
-      this.#context = previous;
-    }
-  }
-
-  /**
-   * Extends the current context with additional entries for the duration of the callback execution.
-   *
-   * @template GArguments The type of the arguments to pass to the callback function.
-   * @template GReturn The type of the return value of the callback function.
-   * @param {ExtraInjectedEntries} context A set of additional key-value pairs to extend the current context.
-   * @param {function(...GArguments): GReturn} callback The function to execute with the new context.
-   * @param {...GArguments} args The arguments to pass to the callback function.
-   * @returns {GReturn} The result of the callback function execution.
-   */
-  static extend<GArguments extends readonly unknown[], GReturn>(
-    context: ExtraInjectedEntries,
-    callback: (...args: GArguments) => GReturn,
-    ...args: GArguments
-  ): GReturn {
-    return this.restore<GArguments, GReturn>(
-      new Map([...this.#context, ...context]),
-      callback,
-      ...args,
-    );
-  }
-
-  /*--*/
-
-  /**
-   * Retrieves a value associated with the specified key from the context.
-   * If the key is not found, returns a default value if provided, otherwise throws an error.
-   *
-   * @param {symbol | Injectable<unknown>} name The key or Injectable object used to retrieve the value from the context.
-   * @param {(() => GValue) | undefined} [_default] Optional function to provide a default value if the key is not found.
-   * @returns {GValue} The value associated with the key in the context, or the default value returned by `_default` if key is not found.
-   * @throws {Error} If the key is not found in the context and no default value is provided.
-   */
   static get<GValue>(
+    source: Node,
     name: symbol | Injectable<unknown>,
     _default?: (() => GValue) | undefined,
   ): GValue {
@@ -115,13 +18,100 @@ export class InjectionContext {
       name = name.key;
     }
 
-    if (this.#context.has(name)) {
-      return this.#context.get(name) as GValue;
+    let node: Node | null = source;
+
+    while (node !== null) {
+      if (isElementNode(node)) {
+        const attributeValue: string | null = node.getAttribute(this.attributeName);
+
+        if (attributeValue !== null) {
+          const context: InjectionContext | undefined = this.#instances
+            .get(attributeValue)
+            ?.deref();
+
+          if (context === undefined) {
+            throw new Error(`Missing InjectionContext instance with id: ${attributeValue}`);
+          }
+
+          if (context.has(name)) {
+            return context.get<GValue>(name);
+          }
+        }
+
+        node = node.parentNode;
+      } else if (isShadowRoot(node)) {
+        node = node.host;
+      } else {
+        node = node.parentNode;
+      }
+    }
+
+    if (InjectionContext.root !== undefined && InjectionContext.root.has(name)) {
+      return InjectionContext.root.get<GValue>(name);
     } else if (_default !== undefined) {
       return _default();
     } else {
       throw new Error(`Missing context's value for ${String(name)}`);
     }
+  }
+
+  readonly #id: string;
+  readonly #context: ReadonlyMap<symbol, unknown>;
+
+  constructor(entries?: InjectionContextEntries) {
+    this.#id = `${Math.floor(Math.random() * 0x1_0000_0000)
+      .toString(16)
+      .padStart(8, '0')}-${Date.now().toString(16).padStart(12, '0')}`;
+
+    this.#context = new Map(entries);
+
+    InjectionContext.#instances.set(this.#id, new WeakRef(this));
+
+    const registry = new FinalizationRegistry<string>((id: string): void => {
+      InjectionContext.#instances.delete(id);
+    });
+
+    registry.register(this, this.#id);
+  }
+
+  get id(): string {
+    return this.#id;
+  }
+
+  get size(): number {
+    return this.#context.size;
+  }
+
+  has(name: symbol): boolean {
+    return this.#context.has(name);
+  }
+
+  get<GValue>(name: symbol): GValue {
+    if (this.#context.has(name)) {
+      return this.#context.get(name) as GValue;
+    } else {
+      throw new Error(`Missing context's value for ${String(name)}`);
+    }
+  }
+
+  getOptional<GValue>(name: symbol): GValue | undefined {
+    return this.#context.get(name) as GValue | undefined;
+  }
+
+  keys(): MapIterator<symbol> {
+    return this.#context.keys();
+  }
+
+  values(): MapIterator<unknown> {
+    return this.#context.values();
+  }
+
+  entries(): MapIterator<InjectedEntry<unknown>> {
+    return this.#context.entries();
+  }
+
+  [Symbol.iterator](): MapIterator<InjectedEntry<unknown>> {
+    return this.#context[Symbol.iterator]();
   }
 }
 
@@ -141,7 +131,17 @@ export class Injectable<GValue> {
     return this.#key;
   }
 
-  inject(value: GValue): InjectedEntry<GValue> {
+  use(value: GValue): InjectedEntry<GValue> {
     return Object.freeze([this.#key, value]);
   }
+}
+
+/* INTERNAL */
+
+function isElementNode(node: Node): node is Element {
+  return node.nodeType === Node.ELEMENT_NODE;
+}
+
+function isShadowRoot(node: Node): node is ShadowRoot {
+  return node instanceof ShadowRoot;
 }
