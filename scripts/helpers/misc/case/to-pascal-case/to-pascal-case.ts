@@ -3,6 +3,7 @@ import numberToWords from 'number-to-words';
 /**
  * Converts a string to PascalCase.
  */
+export function toPascalCase(input: string): string {
   return (
     input
       // remove all non-alphanumeric characters and replace next letter by uppercase
