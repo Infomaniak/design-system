@@ -9,16 +9,12 @@ import { onConnected } from '../../../component/on-connected.ts';
 import type { Signal } from '../../signal/signal.ts';
 
 /**
- * Bind's a css classe with a signal.
+ * Returns a signal that resolves to the value of the specified injection key from a parent `InjectionContext`.
  *
  * @example:
  *
  * ```ts
- * constructor() {
- *  this.disabled = signal(false);
- *
- *  hostClass(this, 'disabled', this.disabled);
- * }
+ * readonly #locale: Signal<string> = hostInject(this, LOCALE, (): string => navigator.language);
  * ```
  */
 export function hostInject<GValue>(
