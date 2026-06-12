@@ -1,22 +1,41 @@
-export type InjectedEntry<GValue> = readonly [name: symbol, value: GValue];
+/* TYPES */
+
+export type InjectedEntry<GValue> = readonly [key: symbol, value: GValue];
 
 export type InjectionContextEntries = Iterable<InjectedEntry<unknown>>;
 
+export type InjectedKeyLike = symbol | InjectableValue<unknown>;
+
+export function injectedKeyLikeToKey(input: InjectedKeyLike): symbol {
+  return input instanceof InjectableValue ? input.key : input;
+}
+
+/* CLASS */
+
+/**
+ * Represents a context for dependency injection. It allows for storing and retrieving values
+ * associated with symbols (`InjectedKeyLike`), providing a mechanism for scoped dependency injection.
+ */
 export class InjectionContext {
+  /**
+   * Represents the **root** `InjectionContext` or is undefined if none is set.
+   */
   static root: InjectionContext | undefined;
 
   static readonly attributeName = 'data-inject' as const;
 
   static readonly #instances: Map<string, WeakRef<InjectionContext>> = new Map();
 
-  static get<GValue>(
-    source: Node,
-    name: symbol | Injectable<unknown>,
-    _default?: (() => GValue) | undefined,
-  ): GValue {
-    if (name instanceof Injectable) {
-      name = name.key;
-    }
+  /**
+   * Retrieves a value associated with the specified key from the nearest context within the provided node's hierarchy.
+   *
+   * @template GValue The type of value to retrieve.
+   * @param {Node} source - The starting node from which to begin searching for the value.
+   * @param {InjectedKeyLike} key - The key used to locate the desired value within the context.
+   * @return {GValue | undefined} The value associated with the key if found, or `undefined` if no matching context is found.
+   */
+  static get<GValue>(source: Node, key: InjectedKeyLike): GValue | undefined {
+    key = injectedKeyLikeToKey(key);
 
     let node: Node | null = source;
 
@@ -33,8 +52,8 @@ export class InjectionContext {
             throw new Error(`Missing InjectionContext instance with id: ${attributeValue}`);
           }
 
-          if (context.has(name)) {
-            return context.get<GValue>(name);
+          if (context.has(key)) {
+            return context.get<GValue>(key);
           }
         }
 
@@ -46,13 +65,9 @@ export class InjectionContext {
       }
     }
 
-    if (InjectionContext.root !== undefined && InjectionContext.root.has(name)) {
-      return InjectionContext.root.get<GValue>(name);
-    } else if (_default !== undefined) {
-      return _default();
-    } else {
-      throw new Error(`Missing context's value for ${String(name)}`);
-    }
+    return InjectionContext.root !== undefined && InjectionContext.root.has(key)
+      ? InjectionContext.root.get<GValue>(key)
+      : undefined;
   }
 
   readonly #id: string;
@@ -78,24 +93,18 @@ export class InjectionContext {
     return this.#id;
   }
 
+  /* MAP LIKE PROPERTIES/METHODS */
+
   get size(): number {
     return this.#context.size;
   }
 
-  has(name: symbol): boolean {
-    return this.#context.has(name);
+  has(key: InjectedKeyLike): boolean {
+    return this.#context.has(injectedKeyLikeToKey(key));
   }
 
-  get<GValue>(name: symbol): GValue {
-    if (this.#context.has(name)) {
-      return this.#context.get(name) as GValue;
-    } else {
-      throw new Error(`Missing context's value for ${String(name)}`);
-    }
-  }
-
-  getOptional<GValue>(name: symbol): GValue | undefined {
-    return this.#context.get(name) as GValue | undefined;
+  get<GValue>(key: InjectedKeyLike): GValue | undefined {
+    return this.#context.get(injectedKeyLikeToKey(key)) as GValue | undefined;
   }
 
   keys(): MapIterator<symbol> {
@@ -120,7 +129,7 @@ export class InjectionContext {
  *
  * @template GValue The type of value that can be injected.
  */
-export class Injectable<GValue> {
+export class InjectableValue<GValue> {
   readonly #key: symbol;
 
   constructor(name: string) {
@@ -131,7 +140,13 @@ export class Injectable<GValue> {
     return this.#key;
   }
 
-  use(value: GValue): InjectedEntry<GValue> {
+  /**
+   * Creates an `InjectedEntry` to use when constructing a new `InjectionContext`.
+   *
+   * @param {GValue} value - The new value to be set.
+   * @returns {InjectedEntry<GValue>} An immutable tuple containing the key and the value.
+   */
+  define(value: GValue): InjectedEntry<GValue> {
     return Object.freeze([this.#key, value]);
   }
 }

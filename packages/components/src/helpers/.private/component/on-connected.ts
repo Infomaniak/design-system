@@ -1,7 +1,7 @@
 import type { ReactiveController, ReactiveControllerHost } from 'lit';
 import type { CleanUpFunction } from '../misc/clean-up-function.ts';
 
-export type OnConnectedFunction = () => CleanUpFunction;
+export type OnConnectedFunction = () => CleanUpFunction | void;
 
 export type StopOnConnected = () => void;
 
@@ -19,7 +19,7 @@ export type StopOnConnected = () => void;
  *  onConnected(this, () => {
  *    const timer = setInterval(() => console.log('tick'), 1000);
  *
- *    return clearInterval(timer);
+ *    return () => clearInterval(timer);
  *  });
  * }
  * ```
@@ -28,7 +28,7 @@ export function onConnected(
   host: ReactiveControllerHost,
   onConnectedFnc: OnConnectedFunction,
 ): StopOnConnected {
-  const ctrl = new OnConnectedController(host, onConnectedFnc).start();
+  const ctrl: OnConnectedController = new OnConnectedController(host, onConnectedFnc).start();
   return (): void => {
     ctrl.stop();
   };
@@ -40,7 +40,7 @@ class OnConnectedController implements ReactiveController {
   readonly #host: ReactiveControllerHost;
   readonly #onConnectedFnc: OnConnectedFunction;
 
-  #cleanupFnc: CleanUpFunction | undefined;
+  #cleanupFnc: CleanUpFunction | undefined | void;
 
   constructor(host: ReactiveControllerHost, onConnectedFnc: OnConnectedFunction) {
     this.#host = host;

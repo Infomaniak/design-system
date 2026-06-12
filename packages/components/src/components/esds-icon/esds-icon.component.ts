@@ -1,17 +1,24 @@
+import { IconifyApi } from '@infomaniak-design-system/esds-icon';
 import { signal, SignalWatcher } from '@lit-labs/signals';
 import { html, LitElement, type TemplateResult, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { batch } from 'signal-utils/subtle/batched-effect';
-import { onConnected } from '../helpers.private/component/on-connected.ts';
-import type { CleanUpFunction } from '../helpers.private/misc/clean-up-function.ts';
-import { componentEffect } from '../helpers.private/signal/component/component-effect/component-effect.ts';
+import { onConnected } from '../../helpers/.private/component/on-connected.ts';
+import type { CleanUpFunction } from '../../helpers/.private/misc/clean-up-function.ts';
+import { componentEffect } from '../../helpers/.private/signal/component/component-effect/component-effect.ts';
+import { hostInject } from '../../helpers/.private/signal/component/host-inject/host-inject.ts';
+import { InjectableValue } from '../../helpers/injection-context/injection-context.ts';
 
-import { signalProperty } from '../helpers.private/signal/component/signal-property/signal-property.ts';
-import type { WritableSignal } from '../helpers.private/signal/signal/writable-signal.ts';
+import { signalProperty } from '../../helpers/.private/signal/component/signal-property/signal-property.ts';
+import type { Signal } from '../../helpers/.private/signal/signal/signal.ts';
+import type { WritableSignal } from '../../helpers/.private/signal/signal/writable-signal.ts';
 import style from './esds-icon.component.css?inline';
-import { getApi } from './esds-icon.component.private.ts';
 
 export type EsdsIconComponentStatus = 'loading' | 'rendered' | 'error';
+
+export const ICONIFY_API: InjectableValue<IconifyApi> = new InjectableValue<IconifyApi>(
+  'IconifyApi',
+);
 
 /**
  * Web component for displaying icons from the Infomaniak Design System icon library.
@@ -63,6 +70,12 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
   }
 
   /* INTERNAL */
+
+  readonly #api: Signal<IconifyApi> = hostInject(
+    this,
+    ICONIFY_API,
+    (): IconifyApi => new IconifyApi(),
+  );
 
   constructor() {
     super();
@@ -141,7 +154,8 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
       this.#status.set('loading');
     });
 
-    getApi()
+    this.#api
+      .get()
       .getSVG({
         prefix: name.slice(0, prefixToNameSeparatorIndex),
         name: name.slice(prefixToNameSeparatorIndex + 1),

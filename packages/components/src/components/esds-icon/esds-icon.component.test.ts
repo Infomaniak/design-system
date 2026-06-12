@@ -1,6 +1,5 @@
 import { IconifyApi } from '@infomaniak-design-system/esds-icon';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { _clearApiCache } from './esds-icon.component.private.ts';
 import { EsdsIconComponent } from './esds-icon.component.ts';
 
 describe('EsdsIconComponent', () => {
@@ -14,7 +13,6 @@ describe('EsdsIconComponent', () => {
   afterEach(() => {
     container.remove();
     vi.restoreAllMocks();
-    _clearApiCache();
   });
 
   it('should be constructible and registered', () => {

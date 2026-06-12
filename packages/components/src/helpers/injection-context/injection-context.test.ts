@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { Injectable, InjectionContext } from './injection-context.ts';
+import { InjectableValue, InjectionContext } from './injection-context.ts';
 
 describe('InjectionContext', () => {
   it('should provide injected values', () => {
-    const locale = new Injectable('locale');
+    const locale = new InjectableValue('locale');
 
-    InjectionContext.root = new InjectionContext([locale.use('en-US')]);
+    InjectionContext.root = new InjectionContext([locale.define('en-US')]);
 
     expect(InjectionContext.get(document, locale)).toBe('en-US');
 
@@ -13,7 +13,7 @@ describe('InjectionContext', () => {
 
     expect(InjectionContext.get(div, locale)).toBe('en-US');
 
-    const ctx = new InjectionContext([locale.use('fr-FR')]);
+    const ctx = new InjectionContext([locale.define('fr-FR')]);
 
     document.body.setAttribute(InjectionContext.attributeName, ctx.id);
 
