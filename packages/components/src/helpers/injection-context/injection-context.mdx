@@ -29,13 +29,9 @@ It's optional, but you probably want to define it.
 
 ### Set a context starting from an Element
 
-An `InjectionContext` can be applied to any DOM element:
+An `InjectionContext` can be applied to any DOM element: the element itself, as well as every child (direct or indirect) of it, will inherit of this context.
 
-The element itself, as well as every child (direct or indirect) of it, will inherit of this context.
-
-Multiple `InjectionContext` can be applied to different nodes in the DOM tree:
-a _key_ (`InjectionContext.get(node, key)`) is resolved exploring the stating _node_ itself, and each parent of it (or `InjectionContext.root` when `document` is reached),
-until a context with the matching key is found.
+Multiple `InjectionContext` can be applied to different nodes in the DOM tree: a _key_ (`InjectionContext.get(node, key)`) is resolved exploring the stating _node_ itself, and each parent of it (or `InjectionContext.root` when `document` is reached), until a context with the matching key is found.
 
 #### Examples
 
@@ -45,7 +41,9 @@ until a context with the matching key is found.
 
 ```tsx
 function MyComponent() {
-  const ctx = new InjectionContext([LOCALE.define('fr-FR')]);
+  const ctx = useMemo(() => {
+    return new InjectionContext([LOCALE.define('fr-FR')]);
+  }, []);
 
   return (
     <div data-inject={ctx.id}>
