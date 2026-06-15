@@ -15,7 +15,7 @@ The producer is responsible for creating the `InjectionContext` and passing it t
 The **root** `InjectionContext` is available globally. It is the terminal point when resolving a value.
 
 ```ts
-// exemple: setup the IconifyApi to point on the preprod environment
+// example: setup the IconifyApi to point on the preprod environment
 InjectionContext.root = new InjectionContext([
   ICONIFY_API.define(
     new IconifyApi({
