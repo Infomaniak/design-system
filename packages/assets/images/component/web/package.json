@@ -34,6 +34,7 @@
   "devDependencies": {
     "@iconify/types": "^2.0.0",
     "@types/node": "^25.7.0",
+    "fake-indexeddb": "^6.2.5",
     "typescript": "~6.0.3",
     "vite": "^8.0.12"
   }
