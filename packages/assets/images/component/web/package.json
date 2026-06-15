@@ -17,6 +17,9 @@
   "main": "./dist/esds-icon.umd.cjs",
   "module": "./dist/esds-icon.js",
   "types": "./dist/public-api.d.ts",
+  "dependencies": {
+    "idb": "^8.0.3"
+  },
   "scripts": {
     "=== DEV ===": "",
     "dev": "vite",
