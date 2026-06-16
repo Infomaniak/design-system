@@ -23,9 +23,9 @@ import {
 import { designTokenValueToDesignTokensCollectionTokenValue } from './token/from/design-token-value-to-design-tokens-collection-token-value.ts';
 import type { ArrayDesignTokenName } from './token/name/array-design-token-name.ts';
 import type { DesignTokenNameLike } from './token/name/design-token-name-like.ts';
+import { isDesignTokensCollectionTokenReferencing } from './token/operations/is-referencing/is-design-tokens-collection-token-referencing.ts';
 import { isBorderDesignTokensCollectionToken } from './token/types/composite/border/is-border-design-tokens-collection-token.ts';
-import { isBorderDesignTokensCollectionTokenValueReferencing } from './token/types/composite/border/value/is-referencing/is-border-design-tokens-collection-token-value-referencing.ts';
-import { updateBorderDesignTokensCollectionTokenValueReferences } from './token/types/composite/border/value/update/update-border-design-tokens-collection-token-value-references.ts';
+import { updateBorderDesignTokensCollectionTokenValueReferences } from './token/types/composite/border/value/operations/update/update-border-design-tokens-collection-token-value-references.ts';
 import { isGradientDesignTokensCollectionToken } from './token/types/composite/gradient/is-gradient-design-tokens-collection-token.ts';
 import { updateGradientDesignTokensCollectionTokenValueReferences } from './token/types/composite/gradient/value/update/update-gradient-design-tokens-collection-token-value-references.ts';
 import { isShadowDesignTokensCollectionToken } from './token/types/composite/shadow/is-shadow-design-tokens-collection-token.ts';
@@ -35,7 +35,6 @@ import { updateStrokeStyleDesignTokensCollectionTokenValueReferences } from './t
 import { isTransitionDesignTokensCollectionToken } from './token/types/composite/transition/is-transition-design-tokens-collection-token.ts';
 import { updateTransitionDesignTokensCollectionTokenValueReferences } from './token/types/composite/transition/value/update/update-transition-design-tokens-collection-token-value-references.ts';
 import { isTypographyDesignTokensCollectionToken } from './token/types/composite/typography/is-typography-design-tokens-collection-token.ts';
-import { isTypographyDesignTokensCollectionTokenValueReferencing } from './token/types/composite/typography/value/is-referencing/is-typography-design-tokens-collection-token-value-referencing.ts';
 import { updateTypographyDesignTokensCollectionTokenValueReferences } from './token/types/composite/typography/value/update/update-typography-design-tokens-collection-token-value-references.ts';
 import type { DesignTokensCollectionAddOptions } from './types/methods/add/design-tokens-collection-add-options.ts';
 import type { DesignTokensCollectionFromDesignTokensTreeOptions } from './types/methods/from-design-tokens-tree/design-tokens-collection-from-design-tokens-tree-options.ts';
@@ -283,35 +282,7 @@ export class DesignTokensCollection {
       DesignTokensCollection.arrayDesignTokenNameToCurlyReference(name);
 
     return this.#tokens.values().filter((token: GenericDesignTokensCollectionToken): boolean => {
-      if (isCurlyReference(token.value)) {
-        return token.value === nameAsCurlyReference;
-      } else {
-        if (!isDesignTokensCollectionTokenWithType(token)) {
-          throw new Error('Expected token with type.');
-        }
-
-        if (isBorderDesignTokensCollectionToken(token)) {
-          return isBorderDesignTokensCollectionTokenValueReferencing(
-            token.value,
-            nameAsCurlyReference,
-          );
-        } else if (isGradientDesignTokensCollectionToken(token)) {
-          throw 'TODO: implement'; // TODO
-        } else if (isShadowDesignTokensCollectionToken(token)) {
-          throw 'TODO: implement'; // TODO
-        } else if (isStrokeStyleDesignTokensCollectionToken(token)) {
-          throw 'TODO: implement'; // TODO
-        } else if (isTransitionDesignTokensCollectionToken(token)) {
-          throw 'TODO: implement'; // TODO
-        } else if (isTypographyDesignTokensCollectionToken(token)) {
-          return isTypographyDesignTokensCollectionTokenValueReferencing(
-            token.value,
-            nameAsCurlyReference,
-          );
-        } else {
-          return false;
-        }
-      }
+      return isDesignTokensCollectionTokenReferencing(token, nameAsCurlyReference);
     });
   }
 

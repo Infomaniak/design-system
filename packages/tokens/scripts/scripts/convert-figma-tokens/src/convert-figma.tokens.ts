@@ -16,7 +16,7 @@ import type {
   GenericResolvedDesignTokensCollectionToken,
 } from '../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
-import { updateDesignTokensCollectionTokenReferences } from '../../../shared/dtcg/resolver/token/update/update-design-tokens-collection-token-references.ts';
+import { updateDesignTokensCollectionTokenReferences } from '../../../shared/dtcg/resolver/token/operations/update/update-design-tokens-collection-token-references.ts';
 import { tokensBrueckeToDtcg } from '../../../shared/tokens-bruecke/to/dtcg/tokens-bruecke-to-dtcg.ts';
 import { FIGMA_COLLECTION_NAMES_TO_DESIGN_TOKEN_TIERS } from '../../build-tokens/src/constants/design-token-tiers.ts';
 
