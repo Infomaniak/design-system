@@ -39,22 +39,7 @@ export class SvgCache {
     }
   }
 
-  async get(key: string): Promise<string | undefined> {
-    if (this.#dbPromise === undefined) {
-      return undefined;
-    }
-
-    try {
-      const db = await this.#dbPromise;
-      const entry = await db.get(STORE_NAME, key);
-
-      return entry?.svg;
-    } catch {
-      return undefined;
-    }
-  }
-
-  async getWithLastModified(key: string): Promise<SvgCacheEntryWithLastModified | undefined> {
+  async get(key: string): Promise<SvgCacheEntryWithLastModified | undefined> {
     if (this.#dbPromise === undefined) {
       return undefined;
     }

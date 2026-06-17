@@ -545,7 +545,7 @@ export class IconifyApi {
 
         const promise: Promise<string> = (async (): Promise<string> => {
           // TIER 2: persistent cache (IndexedDB, cross-session)
-          const cachedWithMeta = await this.#svgCache.getWithLastModified(key);
+          const cachedWithMeta = await this.#svgCache.get(key);
 
           if (cachedWithMeta !== undefined) {
             let serverLastModified: number;

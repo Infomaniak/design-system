@@ -50,25 +50,10 @@ describe('SvgCache', () => {
       expect(result).toBeUndefined();
     });
 
-    it('should return cached SVG when key exists', async () => {
-      await cache.set('test:key', '<svg>icon</svg>', 1000);
-
-      const result = await cache.get('test:key');
-
-      expect(result).toBe('<svg>icon</svg>');
-    });
-  });
-
-  describe('getWithLastModified', () => {
-    it('should return undefined for missing keys', async () => {
-      const result = await cache.getWithLastModified('missing:key');
-      expect(result).toBeUndefined();
-    });
-
     it('should return svg and lastModified when key exists', async () => {
       await cache.set('test:key', '<svg>icon</svg>', 1700000000);
 
-      const result = await cache.getWithLastModified('test:key');
+      const result = await cache.get('test:key');
 
       expect(result).toEqual({
         svg: '<svg>icon</svg>',
@@ -83,13 +68,13 @@ describe('SvgCache', () => {
 
       const result = await cache.get('new:key');
 
-      expect(result).toBe('<svg>new</svg>');
+      expect(result?.svg).toBe('<svg>new</svg>');
     });
 
     it('should store lastModified', async () => {
       await cache.set('test:key', '<svg>icon</svg>', 1700000000);
 
-      const result = await cache.getWithLastModified('test:key');
+      const result = await cache.get('test:key');
 
       expect(result?.lastModified).toBe(1700000000);
     });
@@ -100,14 +85,14 @@ describe('SvgCache', () => {
 
       const result = await cache.get('existing:key');
 
-      expect(result).toBe('<svg>new</svg>');
+      expect(result?.svg).toBe('<svg>new</svg>');
     });
 
     it('should overwrite existing lastModified', async () => {
       await cache.set('existing:key', '<svg>old</svg>', 1000);
       await cache.set('existing:key', '<svg>new</svg>', 2000);
 
-      const result = await cache.getWithLastModified('existing:key');
+      const result = await cache.get('existing:key');
 
       expect(result?.lastModified).toBe(2000);
     });
