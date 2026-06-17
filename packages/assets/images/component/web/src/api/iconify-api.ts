@@ -268,7 +268,6 @@ export class IconifyApi {
       ...options,
       path: '/last-modified',
       searchParams,
-      expectNumberResponse: true,
     });
   }
 
