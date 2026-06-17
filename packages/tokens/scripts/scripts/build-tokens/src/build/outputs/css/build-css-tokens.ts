@@ -317,7 +317,7 @@ export function buildCssTokens({
           ),
         {
           name: '--spacing',
-          value: '1px',
+          value: '0.25rem',
         },
       ]);
 
