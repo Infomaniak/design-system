@@ -1,0 +1,4 @@
+import{i as e}from"./preload-helper-xPQekRTU.js";import{D as t,c as n,f as r,s as i}from"./iframe-h9og39tx.js";import{t as a}from"./mdx-react-shim-CgDCKPtZ.js";function o(e){let t={a:`a`,h1:`h1`,p:`p`,...r(),...e.components};return(0,c.jsxs)(c.Fragment,{children:[(0,c.jsx)(i,{title:`Icons/Icon Component`}),`
+`,(0,c.jsx)(t.h1,{id:`icon-component`,children:`Icon Component`}),`
+`,(0,c.jsx)(t.p,{children:`For full documentation of the esds-icon web component, see:`}),`
+`,(0,c.jsx)(t.p,{children:(0,c.jsx)(t.a,{href:`../?path=/docs/components-esds-icon--docs`,children:`Components/esds-icon`})})]})}function s(e={}){let{wrapper:t}={...r(),...e.components};return t?(0,c.jsx)(t,{...e,children:(0,c.jsx)(o,{...e})}):o(e)}var c;e((()=>{c=t(),a(),n()}))();export{s as default};
