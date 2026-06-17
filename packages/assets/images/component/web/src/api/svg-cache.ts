@@ -6,10 +6,10 @@ const DATABASE_VERSION = 1 as const;
 const MAX_ENTRIES = 5000 as const;
 const EVICT_BATCH = 500 as const;
 
-interface SvgCacheEntry {
+export interface SvgCacheEntry {
   readonly key: string;
   readonly svg: string;
-  readonly cachedAt: number;
+  readonly lastModified: number;
 }
 
 interface SvgCacheSchema extends DBSchema {
@@ -17,6 +17,11 @@ interface SvgCacheSchema extends DBSchema {
     readonly key: string;
     readonly value: SvgCacheEntry;
   };
+}
+
+export interface SvgCacheEntryWithLastModified {
+  readonly svg: string;
+  readonly lastModified: number;
 }
 
 export class SvgCache {
@@ -49,7 +54,29 @@ export class SvgCache {
     }
   }
 
-  async set(key: string, svg: string): Promise<void> {
+  async getWithLastModified(key: string): Promise<SvgCacheEntryWithLastModified | undefined> {
+    if (this.#dbPromise === undefined) {
+      return undefined;
+    }
+
+    try {
+      const db = await this.#dbPromise;
+      const entry = await db.get(STORE_NAME, key);
+
+      if (entry === undefined) {
+        return undefined;
+      }
+
+      return {
+        svg: entry.svg,
+        lastModified: entry.lastModified,
+      };
+    } catch {
+      return undefined;
+    }
+  }
+
+  async set(key: string, svg: string, lastModified: number): Promise<void> {
     if (this.#dbPromise === undefined) {
       return;
     }
@@ -57,7 +84,7 @@ export class SvgCache {
     const entry: SvgCacheEntry = {
       key,
       svg,
-      cachedAt: Date.now(),
+      lastModified,
     };
 
     try {
@@ -70,7 +97,7 @@ export class SvgCache {
       const count = await store.count();
       if (count > MAX_ENTRIES) {
         const all = await store.getAll();
-        all.sort((a: SvgCacheEntry, b: SvgCacheEntry): number => a.cachedAt - b.cachedAt);
+        all.sort((a: SvgCacheEntry, b: SvgCacheEntry): number => a.lastModified - b.lastModified);
 
         const toDelete = all.slice(0, EVICT_BATCH);
         for (const item of toDelete) {

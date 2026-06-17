@@ -64,6 +64,21 @@ export class IconifyApi {
   }
 
   readonly #svgCache = new SvgCache();
+  readonly #prefixLastModifiedPromises: Map<string, Promise<number>> = new Map();
+
+  async #getServerLastModifiedForPrefix(prefix: string): Promise<number> {
+    let promise = this.#prefixLastModifiedPromises.get(prefix);
+
+    if (promise === undefined) {
+      promise = this.getLastModified({ prefixes: [prefix] }).then(
+        (response: IconifyApiGetLastModifiedResponse): number => response.lastModified[prefix] ?? 0,
+      );
+
+      this.#prefixLastModifiedPromises.set(prefix, promise);
+    }
+
+    return promise;
+  }
 
   /*
     ==================== API ====================
@@ -253,6 +268,7 @@ export class IconifyApi {
       ...options,
       path: '/last-modified',
       searchParams,
+      expectNumberResponse: true,
     });
   }
 
@@ -528,29 +544,45 @@ export class IconifyApi {
         const controller: AbortController = new AbortController();
 
         const promise: Promise<string> = (async (): Promise<string> => {
-          // Start the network request immediately for revalidation + IDB update.
-          // Concurrent callers for the same prefix will be batched by #requestSVG.
-          // TIER 3: network request (source of truth)
-          const networkPromise: Promise<string> = this.#requestSVG({
-            prefix,
-            name,
-            signal: controller.signal,
-          });
-
           // TIER 2: persistent cache (IndexedDB, cross-session)
-          let svgFromCache: string | undefined;
-          try {
-            svgFromCache = await this.#svgCache.get(key);
-          } catch {
-            // IDB read failed, fall through to network
-          }
+          const cachedWithMeta = await this.#svgCache.getWithLastModified(key);
 
-          if (svgFromCache !== undefined) {
-            // Return cached value immediately, update in background when network resolves
+          if (cachedWithMeta !== undefined) {
+            let serverLastModified: number;
+
+            try {
+              serverLastModified = await this.#getServerLastModifiedForPrefix(prefix);
+            } catch {
+              serverLastModified = 0;
+            }
+
+            const isValid =
+              serverLastModified > 0 && serverLastModified <= cachedWithMeta.lastModified;
+
+            if (isValid) {
+              // Cache is still valid: skip network entirely
+              return cachedWithMeta.svg;
+            }
+
+            // Stale cache: start network request, but return cached value immediately (stale-while-revalidate)
+            const networkPromise: Promise<string> = this.#requestSVG({
+              prefix,
+              name,
+              signal: controller.signal,
+            });
+
             networkPromise
-              .then((svg: string): void => {
-                this.#svgCache.set(key, svg);
-                if (svg !== svgFromCache) {
+              .then(async (svg: string): Promise<void> => {
+                try {
+                  const lastModified = await this.#getServerLastModifiedForPrefix(prefix);
+                  if (lastModified > 0) {
+                    await this.#svgCache.set(key, svg, lastModified);
+                  }
+                } catch {
+                  // Silently fail to update cache
+                }
+
+                if (svg !== cachedWithMeta.svg) {
                   const existing: CachedSVGsEntry | undefined = this.#cachedSvg.get(key);
                   if (existing !== undefined) {
                     existing.promise = Promise.resolve(svg);
@@ -563,11 +595,25 @@ export class IconifyApi {
                 }
               });
 
-            return svgFromCache;
+            return cachedWithMeta.svg;
           }
 
-          const svg = await networkPromise;
-          this.#svgCache.set(key, svg);
+          // TIER 3: network request (source of truth)
+          const svg: string = await this.#requestSVG({
+            prefix,
+            name,
+            signal: controller.signal,
+          });
+
+          try {
+            const lastModified = await this.#getServerLastModifiedForPrefix(prefix);
+            if (lastModified > 0) {
+              await this.#svgCache.set(key, svg, lastModified);
+            }
+          } catch {
+            // Silently fail to cache
+          }
+
           return svg;
         })().catch((error: unknown): never => {
           if (!controller.signal.aborted) {
@@ -643,6 +689,11 @@ export class IconifyApi {
           const { promise, resolve, reject }: PromiseWithResolvers<IconifyJSON> =
             Promise.withResolvers<IconifyJSON>();
 
+          // Pre-fetch the lastModified timestamp in parallel with icon data
+          const lastModifiedPromise: Promise<number> = this.#getServerLastModifiedForPrefix(
+            prefix,
+          ).catch(() => 0);
+
           const timer: ReturnType<typeof setTimeout> = setTimeout((): void => {
             this.#requestedSVGs.delete(prefix);
             if (names.size > 0) {
@@ -650,17 +701,29 @@ export class IconifyApi {
                 prefix,
                 icons: Array.from(names),
                 signal: controller.signal,
-              }).then((result: IconifyJSON): void => {
-                const defaultWidth: number = result.width ?? DEFAULT_ICON_WIDTH;
-                for (const [iconName, iconData] of Object.entries(result.icons)) {
-                  const iconKey: string = `${prefix}:${iconName}`;
-                  const width: number = iconData.width ?? defaultWidth;
-                  const height: number = iconData.height ?? result.height ?? width;
-                  const svgString: string = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 ${width} ${height}">${iconData.body}</svg>`;
-                  this.#svgCache.set(iconKey, svgString);
-                }
-                resolve(result);
-              }, reject);
+              })
+                .then(async (result: IconifyJSON): Promise<void> => {
+                  const defaultWidth: number = result.width ?? DEFAULT_ICON_WIDTH;
+                  const lastModified: number = await lastModifiedPromise;
+
+                  for (const [iconName, iconData] of Object.entries(result.icons)) {
+                    const iconKey: string = `${prefix}:${iconName}`;
+                    const width: number = iconData.width ?? defaultWidth;
+                    const height: number = iconData.height ?? result.height ?? width;
+                    const svgString: string = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 ${width} ${height}">${iconData.body}</svg>`;
+
+                    if (lastModified > 0) {
+                      try {
+                        await this.#svgCache.set(iconKey, svgString, lastModified);
+                      } catch {
+                        // Silently fail caching
+                      }
+                    }
+                  }
+
+                  resolve(result);
+                })
+                .catch(reject);
             } else {
               reject(new Error('Nothing to load.'));
             }
@@ -685,7 +748,7 @@ export class IconifyApi {
         const onAbort = (): void => {
           end();
 
-          requestedSVGs.names.delete(name);
+          requestedSVGs!.names.delete(name);
           if (requestedSVGs!.names.size === 0) {
             clearTimeout(requestedSVGs!.timer);
             requestedSVGs!.controller.abort();
