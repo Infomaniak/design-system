@@ -48,7 +48,6 @@ And replace the corresponding variables:
 - `FIGMA_TOKENS_FILE_KEY`
 - `FIGMA_ICON_FILE_KEY`
 - `FIGMA_ILLUSTRATION_FILE_KEY`
-- `NPM_AUTH_TOKEN` (required for npm publish workflows)
 - `KCHAT_WEBHOOK_ID` (used by PR ready workflow notifications)
 
 Optional local CI publish variables (for manual checks):
