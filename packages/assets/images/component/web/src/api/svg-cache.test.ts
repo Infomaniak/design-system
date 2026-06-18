@@ -164,8 +164,8 @@ describe('SvgCache', () => {
 
   describe('graceful degradation', () => {
     it('should silently return undefined when IndexedDB is unavailable', async () => {
-      const original = (globalThis as Record<string, unknown>).indexedDB;
-      (globalThis as Record<string, unknown>).indexedDB = undefined;
+      const original = (globalThis as Record<string, unknown>)['indexedDB'];
+      (globalThis as Record<string, unknown>)['indexedDB'] = undefined;
 
       try {
         const fallbackCache = new SvgCache();
@@ -176,7 +176,7 @@ describe('SvgCache', () => {
 
         expect(result).toBeUndefined();
       } finally {
-        (globalThis as Record<string, unknown>).indexedDB = original;
+        (globalThis as Record<string, unknown>)['indexedDB'] = original;
       }
     });
   });
