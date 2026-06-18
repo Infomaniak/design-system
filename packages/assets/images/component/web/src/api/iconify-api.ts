@@ -1,4 +1,5 @@
 import { type ExtendedIconifyIcon, type IconifyJSON } from '@iconify/types';
+import { SvgCache } from './svg-cache.ts';
 import type { IconifyApiGetIconsDataOptions } from './types/api/get-icons-data/iconify-api-get-icons-data-options.ts';
 import type { IconifyApiGetSVGUrlOptions } from './types/api/get-svg-url/iconify-api-get-svg-url-options.ts';
 import type {
@@ -56,6 +57,27 @@ export class IconifyApi {
     this.rotate = rotate;
     this.timeout = timeout;
     this.bulkDebounce = bulkDebounce;
+  }
+
+  clearPersistentSVGCache(): Promise<void> {
+    return this.#svgCache.clear();
+  }
+
+  readonly #svgCache = new SvgCache();
+  readonly #prefixLastModifiedPromises: Map<string, Promise<number>> = new Map();
+
+  async #getServerLastModifiedForPrefix(prefix: string): Promise<number> {
+    let promise = this.#prefixLastModifiedPromises.get(prefix);
+
+    if (promise === undefined) {
+      promise = this.getLastModified({ prefixes: [prefix] }).then(
+        (response: IconifyApiGetLastModifiedResponse): number => response.lastModified[prefix] ?? 0,
+      );
+
+      this.#prefixLastModifiedPromises.set(prefix, promise);
+    }
+
+    return promise;
   }
 
   /*
@@ -369,7 +391,7 @@ export class IconifyApi {
 
         const onAbort = (): void => {
           cached!.count--;
-          if (cached.count === 0) {
+          if (cached!.count === 0) {
             cached!.controller.abort();
             this.#cachedListIcons.delete(key);
           }
@@ -467,59 +489,169 @@ export class IconifyApi {
    * - caches the SVGs
    * - load them in bulk
    */
-  getSVG({ prefix, name, signal }: IconifyApiGetSVGOptions): Promise<string> {
+  getSVG({ prefix, name, signal: userSignal }: IconifyApiGetSVGOptions): Promise<string> {
     return new Promise<string>(
       (resolve: (value: string) => void, reject: (reason?: unknown) => void): void => {
-        signal?.throwIfAborted();
+        if (userSignal?.aborted) {
+          reject(userSignal.reason ?? new DOMException('The operation was aborted.', 'AbortError'));
+          return;
+        }
 
         const key: string = `${prefix}:${name}`;
 
+        // TIER 1: in-memory cache (instant, session-only)
         let cached: CachedSVGsEntry | undefined = this.#cachedSvg.get(key);
 
-        if (cached === undefined) {
-          const controller: AbortController = new AbortController();
-          const signal: AbortSignal = controller.signal;
+        if (cached !== undefined) {
+          cached.count++;
 
-          const promise: Promise<string> = this.#requestSVG({
-            prefix,
-            name,
-            signal,
-          }).catch((error: unknown): never => {
-            if (!signal.aborted) {
-              this.#cachedSvg.delete(key);
-            }
-            throw error;
-          });
-
-          cached = {
-            controller,
-            promise,
-            count: 0,
+          const end = (): void => {
+            userSignal?.removeEventListener('abort', onAbort);
           };
 
-          this.#cachedSvg.set(key, cached);
+          const onAbort = (): void => {
+            cached!.count--;
+            if (cached!.count === 0 && !cached!.resolved) {
+              cached!.controller.abort();
+              this.#cachedSvg.delete(key);
+            }
+
+            reject(
+              userSignal!.reason ?? new DOMException('The operation was aborted.', 'AbortError'),
+            );
+          };
+
+          userSignal?.addEventListener('abort', onAbort);
+
+          cached.promise.then(
+            (value: string): void => {
+              cached!.resolved = true;
+              end();
+              resolve(value);
+            },
+            (reason: unknown): void => {
+              end();
+              reject(reason);
+            },
+          );
+
+          return;
         }
 
+        // Create pending Tier 1 entry synchronously so concurrent callers
+        // see it immediately and share the same resolution promise.
+        const controller: AbortController = new AbortController();
+
+        const promise: Promise<string> = (async (): Promise<string> => {
+          // TIER 2: persistent cache (IndexedDB, cross-session)
+          const cachedWithMeta = await this.#svgCache.get(key);
+
+          if (cachedWithMeta !== undefined) {
+            let serverLastModified: number;
+
+            try {
+              serverLastModified = await this.#getServerLastModifiedForPrefix(prefix);
+            } catch {
+              serverLastModified = 0;
+            }
+
+            const isValid =
+              serverLastModified > 0 && serverLastModified <= cachedWithMeta.lastModified;
+
+            if (isValid) {
+              // Cache is still valid: skip network entirely
+              return cachedWithMeta.svg;
+            }
+
+            // Stale cache: start network request, but return cached value immediately (stale-while-revalidate)
+            const networkPromise: Promise<string> = this.#requestSVG({
+              prefix,
+              name,
+              signal: controller.signal,
+            });
+
+            networkPromise
+              .then(async (svg: string): Promise<void> => {
+                try {
+                  const lastModified = await this.#getServerLastModifiedForPrefix(prefix);
+                  if (lastModified > 0) {
+                    await this.#svgCache.set(key, svg, lastModified);
+                  }
+                } catch {
+                  // Silently fail to update cache
+                }
+
+                if (svg !== cachedWithMeta.svg) {
+                  const existing: CachedSVGsEntry | undefined = this.#cachedSvg.get(key);
+                  if (existing !== undefined) {
+                    existing.promise = Promise.resolve(svg);
+                  }
+                }
+              })
+              .catch((error: unknown): void => {
+                if (error instanceof Error && error.message.startsWith('Missing icon')) {
+                  this.#svgCache.delete(key);
+                }
+              });
+
+            return cachedWithMeta.svg;
+          }
+
+          // TIER 3: network request (source of truth)
+          const svg: string = await this.#requestSVG({
+            prefix,
+            name,
+            signal: controller.signal,
+          });
+
+          try {
+            const lastModified = await this.#getServerLastModifiedForPrefix(prefix);
+            if (lastModified > 0) {
+              await this.#svgCache.set(key, svg, lastModified);
+            }
+          } catch {
+            // Silently fail to cache
+          }
+
+          return svg;
+        })().catch((error: unknown): never => {
+          if (!controller.signal.aborted) {
+            this.#cachedSvg.delete(key);
+          }
+          throw error;
+        });
+
+        cached = {
+          controller,
+          promise,
+          count: 0,
+          resolved: false,
+        };
+
+        this.#cachedSvg.set(key, cached);
         cached.count++;
 
         const end = (): void => {
-          signal?.removeEventListener('abort', onAbort);
+          userSignal?.removeEventListener('abort', onAbort);
         };
 
         const onAbort = (): void => {
           cached!.count--;
-          if (cached.count === 0) {
+          if (cached!.count === 0 && !cached!.resolved) {
             cached!.controller.abort();
             this.#cachedSvg.delete(key);
           }
 
-          reject(signal!.reason);
+          reject(
+            userSignal!.reason ?? new DOMException('The operation was aborted.', 'AbortError'),
+          );
         };
 
-        signal?.addEventListener('abort', onAbort);
+        userSignal?.addEventListener('abort', onAbort);
 
         cached.promise.then(
           (value: string): void => {
+            cached!.resolved = true;
             end();
             resolve(value);
           },
@@ -556,6 +688,11 @@ export class IconifyApi {
           const { promise, resolve, reject }: PromiseWithResolvers<IconifyJSON> =
             Promise.withResolvers<IconifyJSON>();
 
+          // Pre-fetch the lastModified timestamp in parallel with icon data
+          const lastModifiedPromise: Promise<number> = this.#getServerLastModifiedForPrefix(
+            prefix,
+          ).catch(() => 0);
+
           const timer: ReturnType<typeof setTimeout> = setTimeout((): void => {
             this.#requestedSVGs.delete(prefix);
             if (names.size > 0) {
@@ -563,7 +700,29 @@ export class IconifyApi {
                 prefix,
                 icons: Array.from(names),
                 signal: controller.signal,
-              }).then(resolve, reject);
+              })
+                .then(async (result: IconifyJSON): Promise<void> => {
+                  const defaultWidth: number = result.width ?? DEFAULT_ICON_WIDTH;
+                  const lastModified: number = await lastModifiedPromise;
+
+                  for (const [iconName, iconData] of Object.entries(result.icons)) {
+                    const iconKey: string = `${prefix}:${iconName}`;
+                    const width: number = iconData.width ?? defaultWidth;
+                    const height: number = iconData.height ?? result.height ?? width;
+                    const svgString: string = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 ${width} ${height}">${iconData.body}</svg>`;
+
+                    if (lastModified > 0) {
+                      try {
+                        await this.#svgCache.set(iconKey, svgString, lastModified);
+                      } catch {
+                        // Silently fail caching
+                      }
+                    }
+                  }
+
+                  resolve(result);
+                })
+                .catch(reject);
             } else {
               reject(new Error('Nothing to load.'));
             }
@@ -588,7 +747,7 @@ export class IconifyApi {
         const onAbort = (): void => {
           end();
 
-          requestedSVGs.names.delete(name);
+          requestedSVGs!.names.delete(name);
           if (requestedSVGs!.names.size === 0) {
             clearTimeout(requestedSVGs!.timer);
             requestedSVGs!.controller.abort();
@@ -711,9 +870,10 @@ interface CachedIconifyApiListIconsResponse {
 // CACHED SVGs
 
 interface CachedSVGsEntry {
-  readonly controller: AbortController;
-  readonly promise: Promise<string>;
+  controller: AbortController;
+  promise: Promise<string>;
   count: number;
+  resolved: boolean;
 }
 
 interface RequestedSVGsEntry {
