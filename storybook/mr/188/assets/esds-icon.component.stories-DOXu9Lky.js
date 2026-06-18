@@ -1,5 +1,0 @@
-import{i as e}from"./preload-helper-xPQekRTU.js";import{n as t,t as n}from"./iframe-CRzeYNZR.js";var r,i,a,o,s,c;e((()=>{t(),{args:r,argTypes:i,template:a}=n(`esds-icon-lit`),o={title:`Components/Icon`,component:`esds-icon-lit`,tags:[`autodocs`],args:r,argTypes:i,render:e=>a(e)},s={args:{name:`esds:headset`}},s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`{
-  args: {
-    name: 'esds:headset'
-  }
-}`,...s.parameters?.docs?.source}}},c=[`Default`]}))();export{s as Default,c as __namedExportsOrder,o as default};
