@@ -15,20 +15,17 @@ const OUTPUT_DIR: string = join(ROOT_DIR, 'dist');
 const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
 export async function publishComponentsScript(): Promise<void> {
-  return logger.asyncTask(
-    'publish-components.script',
-    async (logger: Logger): Promise<void> => {
-      loadOptionallyEnvFile(logger);
+  return logger.asyncTask('publish-components.script', async (logger: Logger): Promise<void> => {
+    loadOptionallyEnvFile(logger);
 
-      const { mode }: PublishConfig = getEnvPublishConfig();
+    const { mode }: PublishConfig = getEnvPublishConfig();
 
-      await publishNpmPackageDirectory({
-        packageDirectory: OUTPUT_DIR,
-        tag: publishModeToNpmTag(mode),
-        logger,
-      });
-    },
-  );
+    await publishNpmPackageDirectory({
+      packageDirectory: OUTPUT_DIR,
+      tag: publishModeToNpmTag(mode),
+      logger,
+    });
+  });
 }
 
 try {

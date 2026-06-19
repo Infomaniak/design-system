@@ -1,5 +1,4 @@
-import { cp } from 'node:fs/promises';
-import { rm } from 'node:fs/promises';
+import { cp, rm } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { BuildConfig } from '../../../../../scripts/helpers/build/build-config/build-config.ts';
@@ -19,35 +18,32 @@ const OUTPUT_DIR: string = join(ROOT_DIR, 'dist');
 const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
 export function buildComponentsScript(): Promise<void> {
-  return logger.asyncTask(
-    'build-components.script',
-    async (logger: Logger): Promise<void> => {
-      loadOptionallyEnvFile(logger);
+  return logger.asyncTask('build-components.script', async (logger: Logger): Promise<void> => {
+    loadOptionallyEnvFile(logger);
 
-      await rm(OUTPUT_DIR, { force: true, recursive: true });
+    await rm(OUTPUT_DIR, { force: true, recursive: true });
 
-      const buildConfig: BuildConfig = getEnvBuildConfig();
+    const buildConfig: BuildConfig = getEnvBuildConfig();
 
-      await execCommandInherit(logger, 'yarn', ['run', 'build:manual']);
+    await execCommandInherit(logger, 'yarn', ['run', 'build:manual']);
 
-      // Copy custom-elements.json into dist so it's included in the published package
-      await cp(join(ROOT_DIR, 'custom-elements.json'), join(OUTPUT_DIR, 'custom-elements.json'), {
-        force: true,
-      });
+    // Copy custom-elements.json into dist so it's included in the published package
+    await cp(join(ROOT_DIR, 'custom-elements.json'), join(OUTPUT_DIR, 'custom-elements.json'), {
+      force: true,
+    });
 
-      await generateWorkspaceNpmPackage({
-        ...buildConfig,
-        packageDirectory: ROOT_DIR,
-        workspaceRootDirectory: WORKSPACE_ROOT_DIR,
-        outputDirectory: OUTPUT_DIR,
-        logger,
-        // Strip ./dist/ and /dist/ prefixes from paths since files are now in the dist/ directory
-        stripDistPaths: {
-          patterns: ['./dist/', '/dist/'],
-        },
-      });
-    },
-  );
+    await generateWorkspaceNpmPackage({
+      ...buildConfig,
+      packageDirectory: ROOT_DIR,
+      workspaceRootDirectory: WORKSPACE_ROOT_DIR,
+      outputDirectory: OUTPUT_DIR,
+      logger,
+      // Strip ./dist/ and /dist/ prefixes from paths since files are now in the dist/ directory
+      stripDistPaths: {
+        patterns: ['./dist/', '/dist/'],
+      },
+    });
+  });
 }
 
 try {
