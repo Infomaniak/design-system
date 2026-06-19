@@ -94,6 +94,22 @@ export async function generateWorkspaceNpmPackage({
       optionalDependencies,
     });
 
+    // Resolve any remaining `workspace:*` dependencies to actual versions
+    if (packageObject.dependencies !== undefined) {
+      const resolvedDependencies: Record<string, string> = { ...packageObject.dependencies };
+
+      for (const [depName, depVersion] of Object.entries(resolvedDependencies)) {
+        if (typeof depVersion === 'string' && depVersion.startsWith('workspace:')) {
+          const depPackageJson: PackageJson = await readPackageJsonFile(
+            join(workspaceRootDirectory, 'node_modules', depName, 'package.json'),
+          );
+          resolvedDependencies[depName] = depVersion.replace('workspace:*', depPackageJson.version);
+        }
+      }
+
+      packageObject.dependencies = resolvedDependencies;
+    }
+
     // Apply path transformation if configured
     if (stripDistPaths !== undefined) {
       packageObject = transformPackageJsonPaths(packageObject, stripDistPaths);
