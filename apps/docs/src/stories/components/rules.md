@@ -1,0 +1,170 @@
+# Technical Limitations — Figma Kit iOS/iPadOS vs Dev
+
+**Goal:** identify which components can be modified and their related constraints.
+
+---
+
+## System
+
+Hold actions:
+
+- **Title** + **Description**: max 2 lines in standard use (avoid if possible), otherwise 1 line max.
+- **Widgets** cannot be customized (display latency can go up to **15 min**)
+
+## Action Sheets
+
+- Title, short description (single simple sentence), CTAs **Primary**, **Secondary**, **Destructive**.
+- Controls must remain consistent across the entire app.
+- ⚠️ No different **Primary** colors from one screen to another.
+
+## Activity Views
+
+- Only possible to **add actions**.
+
+## Alerts
+
+- Same as Action Sheets, with an additional **input field**.
+
+## Buttons
+
+- **Accent color** modifiable on the Primary only.
+- To go further → build **fully custom** buttons, while staying close to the iOS style.
+- **IC light** and **IC dark** values are handled by Apple (they add an extra layer).
+- **Liquid Glass** — 3 available modes:
+  - Colored Tinted
+  - Colored Transparent Tinted
+  - Transparent
+
+## Color Picker
+
+- ❌ Cannot be edited
+
+## Contextual Menus
+
+- **Very limited** customization.
+- We can use **our own icons**.
+- 💡 Jordan C. is a good reference on this component → reach out to him for any questions about its usage.
+
+## Empty States
+
+- On the dev side: called **"Content unavailable view"**.
+- Contains: title, description, image, action.
+- Rarely used.
+
+## Face ID
+
+- ❌ Cannot be edited
+
+## Lists
+
+### Header
+
+- **Supertitle** and **Subtitle** are poorly handled in terms of backward compatibility → do not put critical information in them.
+- **Nested** version: requires an action on the right in **text** form.
+
+### Row swipe actions
+
+- **Icons** and **actions** are modifiable.
+- For the rest: check directly with the devs.
+
+## Menus
+
+- Same constraints as **Contextual Menus**.
+
+## Notifications
+
+- ❌ Cannot be edited
+
+## Page Control
+
+- ❌ Cannot be edited
+
+## Pickers
+
+- ❌ Cannot be edited
+> Useful for quick flows (e.g. simple event creation).
+
+## Popovers
+
+- 📱 **iPad only**.
+
+## Pop-up Buttons
+
+- **Accent color** modifiable only.
+
+## Progress Indicators
+
+- **Accent color** modifiable only.
+
+## Segmented Controls
+
+- ❌ Cannot be edited
+
+## Sheets
+
+- **Grabber** required if the sheet can be dismissed via swipe.
+- 3 heights enforced by Apple: **small**, **medium**, **large**.
+- **Inspector**: always slightly transparent (see the Maps app).
+- **Full screen cover** = takes the entire screen, **no grabber**.
+
+## Sidebar
+
+- 📱 **iPad only**.
+
+## Sliders
+
+- **Accent color** modifiable only.
+- Scale can be modified but with **linear steps**:
+  - ✅ 5, 10, 15… or 10, 20, 30…
+  - ❌ No random values (3, 7, 19…).
+
+## Status Bar & Menu Bar
+
+- ❌ Cannot be edited
+
+## Steppers
+
+- Either as-is, or **fully custom**. No in-between.
+
+## Tab Bar
+
+- Widths are **not stretchable** — use them as they are.
+- Only **color** and **icon** are modifiable.
+- 📱 On iPad: can be displayed at the top or the bottom → **prefer the top** (like Apple TV).
+
+## Text Fields
+
+- The **accent color bar** (input) is **unique across the entire app**.
+- **List background colors**: easily modifiable.
+- **Placeholders** use transparency → do not touch the colors.
+
+## Toggle
+
+- ❌ Cannot be edited
+
+## Toolbars
+
+- It's possible to **force** large or small title display → but **prefer the native behavior**:
+  - Large title that shrinks on scroll.
+  - Small title when used in a sheet.
+- **Accent color** is modifiable, nothing else.
+
+## Widgets
+
+- ❌ Cannot be edited
+
+## Windows
+
+- ⚪ Not applicable.
+
+---
+
+## Quick summary
+
+| Category | Components |
+|---|---|
+| 🟢 Customizable (accent color) | Buttons, Pop-up Buttons, Progress Indicators, Sliders, Toolbars |
+| 🟡 Partially customizable | System, Action Sheets, Alerts, Activity Views, Contextual Menus, Menus, Lists, Empty States, Text Fields, Sheets, Tab Bar |
+| 🟠 As-is or fully custom | Segmented Controls, Steppers, Pickers |
+| 🔴 Cannot be edited | Color Picker, Face ID, Notifications, Page Control, Status Bar, Menu Bar, Toggle, Widgets |
+| 📱 iPad only | Popovers, Sidebar |
