@@ -38,14 +38,6 @@ export async function convertFigmaTokens({
     root,
   );
 
-  // remove `test` tokens
-  // TODO remove when Figma will be aligned with code
-  for (const token of Array.from(rootCollection.tokens())) {
-    if (token.name.some((namePart: string): boolean => namePart.toLowerCase().startsWith('test'))) {
-      rootCollection.delete(token.name);
-    }
-  }
-
   // replace `@root` segments
   for (const token of Array.from(rootCollection.tokens())) {
     if (token.name.includes('@root')) {
@@ -66,16 +58,6 @@ export async function convertFigmaTokens({
           onExistingTokenBehaviour: 'throw',
         },
       );
-    }
-  }
-
-  // replace `mode` modifier by `theme`
-  // TODO remove when Figma will be aligned with code
-  for (const token of Array.from(rootCollection.tokens())) {
-    if (token.name[0] === 'mode') {
-      rootCollection.rename(token.name, ['theme', ...token.name.slice(1)], {
-        onExistingTokenBehaviour: 'throw',
-      });
     }
   }
 
@@ -178,12 +160,21 @@ export async function convertFigmaTokens({
             extensions,
             ...token
           }: GenericDesignTokensCollectionToken): GenericDesignTokensCollectionToken => {
-            return {
-              ...token,
-              name: name.slice(1),
-              value:
-                (extensions?.['mode'] as Record<string, unknown> | undefined)?.[context] ?? value,
-            };
+            const newName: ArrayDesignTokenName = name.slice(1);
+            const newValue: unknown =
+              (extensions?.['mode'] as Record<string, unknown> | undefined)?.[context] ?? value;
+            return isCurlyReference(newValue)
+              ? {
+                  ...token,
+                  name: newName,
+                  value: newValue,
+                }
+              : {
+                  ...token,
+                  type,
+                  name: newName,
+                  value: newValue,
+                };
           },
         ),
       );

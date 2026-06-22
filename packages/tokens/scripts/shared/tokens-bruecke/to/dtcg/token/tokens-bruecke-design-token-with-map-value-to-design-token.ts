@@ -21,7 +21,7 @@ export function tokensBrueckeDesignTokenWithMapValueToDesignToken<
     ...removeUndefinedProperties({
       $deprecated: token.$deprecated,
       $description: tokensBrueckeDesignTokenToDesignTokenDescription(token),
-      $extensions: tokensBrueckeDesignTokenToDesignTokenExtensions(token),
+      $extensions: tokensBrueckeDesignTokenToDesignTokenExtensions(token, mapValue),
     }),
   };
 }
@@ -38,6 +38,7 @@ function tokensBrueckeDesignTokenToDesignTokenDescription(
 
 function tokensBrueckeDesignTokenToDesignTokenExtensions(
   token: GenericTokensBrueckeDesignToken,
+  mapValue: (value: ExplicitAny) => unknown,
 ): Record<string, unknown> | undefined {
   let $extensions: Record<string, unknown> = token.$extensions ?? {};
 
@@ -45,6 +46,19 @@ function tokensBrueckeDesignTokenToDesignTokenExtensions(
     $extensions = {
       ...$extensions,
       scopes: token.scopes,
+    };
+  }
+
+  if ($extensions['mode'] !== undefined) {
+    $extensions = {
+      ...$extensions,
+      mode: Object.fromEntries(
+        Object.entries($extensions['mode'] as Record<string, unknown>).map(
+          ([key, value]: [string, unknown]): [string, unknown] => {
+            return [key, isCurlyReference(value) ? value : mapValue(value)];
+          },
+        ),
+      ),
     };
   }
 
