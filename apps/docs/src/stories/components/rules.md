@@ -82,7 +82,7 @@ Hold actions:
 ## Pickers
 
 - ❌ Cannot be edited
-> Useful for quick flows (e.g. simple event creation).
+  > Useful for quick flows (e.g. simple event creation).
 
 ## Popovers
 
@@ -161,10 +161,10 @@ Hold actions:
 
 ## Quick summary
 
-| Category | Components |
-|---|---|
-| 🟢 Customizable (accent color) | Buttons, Pop-up Buttons, Progress Indicators, Sliders, Toolbars |
-| 🟡 Partially customizable | System, Action Sheets, Alerts, Activity Views, Contextual Menus, Menus, Lists, Empty States, Text Fields, Sheets, Tab Bar |
-| 🟠 As-is or fully custom | Segmented Controls, Steppers, Pickers |
-| 🔴 Cannot be edited | Color Picker, Face ID, Notifications, Page Control, Status Bar, Menu Bar, Toggle, Widgets |
-| 📱 iPad only | Popovers, Sidebar |
+| Category                       | Components                                                                                                                |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| 🟢 Customizable (accent color) | Buttons, Pop-up Buttons, Progress Indicators, Sliders, Toolbars                                                           |
+| 🟡 Partially customizable      | System, Action Sheets, Alerts, Activity Views, Contextual Menus, Menus, Lists, Empty States, Text Fields, Sheets, Tab Bar |
+| 🟠 As-is or fully custom       | Segmented Controls, Steppers, Pickers                                                                                     |
+| 🔴 Cannot be edited            | Color Picker, Face ID, Notifications, Page Control, Status Bar, Menu Bar, Toggle, Widgets                                 |
+| 📱 iPad only                   | Popovers, Sidebar                                                                                                         |
