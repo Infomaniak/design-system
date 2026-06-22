@@ -9,7 +9,7 @@ export function createSwiftColorEnum(colorsByFolder: Record<string, string[]>): 
 ${cases}
 
         public var color: Color {
-            Color("\\(rawValue)")
+            Color(rawValue)
         }
     }`;
     })
