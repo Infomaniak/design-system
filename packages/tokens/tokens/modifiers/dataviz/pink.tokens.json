@@ -1,0 +1,74 @@
+{
+  "color": {
+    "background": {
+      "dataviz": {
+        "dim1": {
+          "default": {
+            "$value": "{color.background.dataviz.pink.dim1.default}"
+          },
+          "hover": {
+            "$value": "{color.background.dataviz.pink.dim1.hover}"
+          },
+          "pressed": {
+            "$value": "{color.background.dataviz.pink.dim1.pressed}"
+          }
+        },
+        "dim2": {
+          "default": {
+            "$value": "{color.background.dataviz.pink.dim2.default}"
+          },
+          "hover": {
+            "$value": "{color.background.dataviz.pink.dim2.hover}"
+          },
+          "pressed": {
+            "$value": "{color.background.dataviz.pink.dim2.pressed}"
+          }
+        }
+      }
+    },
+    "border": {
+      "dataviz": {
+        "dim1": {
+          "default": {
+            "$value": "{color.border.dataviz.pink.dim1.default}"
+          },
+          "hover": {
+            "$value": "{color.border.dataviz.pink.dim1.hover}"
+          },
+          "pressed": {
+            "$value": "{color.border.dataviz.pink.dim1.pressed}"
+          }
+        },
+        "dim2": {
+          "default": {
+            "$value": "{color.border.dataviz.pink.dim2.default}"
+          },
+          "hover": {
+            "$value": "{color.border.dataviz.pink.dim2.hover}"
+          },
+          "pressed": {
+            "$value": "{color.border.dataviz.pink.dim2.pressed}"
+          }
+        }
+      }
+    },
+    "text": {
+      "on": {
+        "dataviz": {
+          "default": {
+            "$value": "{color.text.on.dataviz.pink.default}"
+          }
+        }
+      }
+    },
+    "icon": {
+      "on": {
+        "dataviz": {
+          "default": {
+            "$value": "{color.icon.on.dataviz.pink.default}"
+          }
+        }
+      }
+    }
+  }
+}
