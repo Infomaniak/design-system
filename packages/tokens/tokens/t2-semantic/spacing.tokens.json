@@ -7,79 +7,79 @@
         "scopes": ["GAP"]
       }
     },
-    "xs": {
+    "2xs": {
       "$value": "{spacing.2}",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
-    "sm": {
+    "xs": {
       "$value": "{spacing.4}",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
-    "md": {
+    "sm": {
       "$value": "{spacing.6}",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
-    "lg": {
+    "md": {
       "$value": "{spacing.8}",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
-    "xl": {
+    "lg": {
       "$value": "{spacing.12}",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
-    "2xl": {
+    "xl": {
       "$value": "{spacing.16}",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
-    "3xl": {
+    "2xl": {
       "$value": "{spacing.20}",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
-    "4xl": {
+    "3xl": {
       "$value": "{spacing.24}",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
-    "5xl": {
+    "4xl": {
       "$value": "{spacing.32}",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
-    "6xl": {
+    "5xl": {
       "$value": "{spacing.40}",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
-    "7xl": {
+    "6xl": {
       "$value": "{spacing.48}",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
-    "8xl": {
+    "7xl": {
       "$value": "{spacing.64}",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
-    "9xl": {
+    "8xl": {
       "$value": "{spacing.100}",
       "$extensions": {
         "scopes": ["GAP"]

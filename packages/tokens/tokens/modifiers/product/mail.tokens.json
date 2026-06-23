@@ -24,6 +24,46 @@
         "pressed": {
           "$value": "{color.text.brand.mail.pressed}"
         }
+      },
+      "on": {
+        "brand": {
+          "default": {
+            "$value": "{color.text.on.brand.mail.default}"
+          }
+        }
+      }
+    },
+    "icon": {
+      "brand": {
+        "default": {
+          "$value": "{color.icon.brand.mail.default}"
+        },
+        "hover": {
+          "$value": "{color.icon.brand.mail.hover}"
+        },
+        "pressed": {
+          "$value": "{color.icon.brand.mail.pressed}"
+        }
+      },
+      "on": {
+        "brand": {
+          "default": {
+            "$value": "{color.icon.on.brand.mail.default}"
+          }
+        }
+      }
+    },
+    "border": {
+      "brand": {
+        "default": {
+          "$value": "{color.border.brand.mail.default}"
+        },
+        "hover": {
+          "$value": "{color.border.brand.mail.hover}"
+        },
+        "pressed": {
+          "$value": "{color.border.brand.mail.pressed}"
+        }
       }
     }
   }

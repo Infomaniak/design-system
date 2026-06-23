@@ -1,7 +1,7 @@
 {
   "$type": "dimension",
   "border": {
-    "xs": {
+    "none": {
       "width": {
         "$value": "{border-width.0}",
         "$extensions": {
@@ -9,7 +9,7 @@
         }
       }
     },
-    "sm": {
+    "xs": {
       "width": {
         "$value": "{border-width.1}",
         "$extensions": {
@@ -17,7 +17,7 @@
         }
       }
     },
-    "md": {
+    "sm": {
       "width": {
         "$value": "{border-width.2}",
         "$extensions": {
@@ -25,7 +25,7 @@
         }
       }
     },
-    "ld": {
+    "md": {
       "width": {
         "$value": "{border-width.3}",
         "$extensions": {
@@ -33,7 +33,7 @@
         }
       }
     },
-    "xl": {
+    "lg": {
       "width": {
         "$value": "{border-width.4}",
         "$extensions": {

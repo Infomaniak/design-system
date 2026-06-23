@@ -24,6 +24,46 @@
         "pressed": {
           "$value": "{color.text.brand.kchat.pressed}"
         }
+      },
+      "on": {
+        "brand": {
+          "default": {
+            "$value": "{color.text.on.brand.kchat.default}"
+          }
+        }
+      }
+    },
+    "icon": {
+      "brand": {
+        "default": {
+          "$value": "{color.icon.brand.kchat.default}"
+        },
+        "hover": {
+          "$value": "{color.icon.brand.kchat.hover}"
+        },
+        "pressed": {
+          "$value": "{color.icon.brand.kchat.pressed}"
+        }
+      },
+      "on": {
+        "brand": {
+          "default": {
+            "$value": "{color.icon.on.brand.kchat.default}"
+          }
+        }
+      }
+    },
+    "border": {
+      "brand": {
+        "default": {
+          "$value": "{color.border.brand.kchat.default}"
+        },
+        "hover": {
+          "$value": "{color.border.brand.kchat.hover}"
+        },
+        "pressed": {
+          "$value": "{color.border.brand.kchat.pressed}"
+        }
       }
     }
   }

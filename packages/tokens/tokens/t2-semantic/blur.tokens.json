@@ -1,0 +1,53 @@
+{
+  "$type": "dimension",
+  "blur": {
+    "none": {
+      "$value": "{blur.0}",
+      "$extensions": {
+        "scopes": ["EFFECT_FLOAT"]
+      }
+    },
+    "xs": {
+      "$value": "{blur.4}",
+      "$extensions": {
+        "scopes": ["EFFECT_FLOAT"]
+      }
+    },
+    "sm": {
+      "$value": "{blur.8}",
+      "$extensions": {
+        "scopes": ["EFFECT_FLOAT"]
+      }
+    },
+    "md": {
+      "$value": "{blur.12}",
+      "$extensions": {
+        "scopes": ["EFFECT_FLOAT"]
+      }
+    },
+    "lg": {
+      "$value": "{blur.16}",
+      "$extensions": {
+        "scopes": ["EFFECT_FLOAT"]
+      }
+    },
+    "xl": {
+      "$value": "{blur.24}",
+      "$extensions": {
+        "scopes": ["EFFECT_FLOAT"]
+      }
+    },
+    "2xl": {
+      "$value": "{blur.40}",
+      "$extensions": {
+        "scopes": ["EFFECT_FLOAT"]
+      }
+    },
+    "3xl": {
+      "$value": "{blur.64}",
+      "$extensions": {
+        "scopes": ["EFFECT_FLOAT"]
+      }
+    }
+  }
+}
