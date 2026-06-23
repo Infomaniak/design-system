@@ -24,6 +24,46 @@
         "pressed": {
           "$value": "{color.text.brand.security.pressed}"
         }
+      },
+      "on": {
+        "brand": {
+          "default": {
+            "$value": "{color.text.on.brand.security.default}"
+          }
+        }
+      }
+    },
+    "icon": {
+      "brand": {
+        "default": {
+          "$value": "{color.icon.brand.security.default}"
+        },
+        "hover": {
+          "$value": "{color.icon.brand.security.hover}"
+        },
+        "pressed": {
+          "$value": "{color.icon.brand.security.pressed}"
+        }
+      },
+      "on": {
+        "brand": {
+          "default": {
+            "$value": "{color.icon.on.brand.security.default}"
+          }
+        }
+      }
+    },
+    "border": {
+      "brand": {
+        "default": {
+          "$value": "{color.border.brand.security.default}"
+        },
+        "hover": {
+          "$value": "{color.border.brand.security.hover}"
+        },
+        "pressed": {
+          "$value": "{color.border.brand.security.pressed}"
+        }
       }
     }
   }

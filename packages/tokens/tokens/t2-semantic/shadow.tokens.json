@@ -1,0 +1,161 @@
+{
+  "$type": "dimension",
+  "shadow": {
+    "xs": {
+      "x": {
+        "$value": "{shadow.1.x}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "y": {
+        "$value": "{shadow.1.y}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "blur": {
+        "$value": "{shadow.1.blur}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "spread": {
+        "$value": "{shadow.1.spread}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      }
+    },
+    "sm": {
+      "x": {
+        "$value": "{shadow.2.x}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "y": {
+        "$value": "{shadow.2.y}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "blur": {
+        "$value": "{shadow.2.blur}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "spread": {
+        "$value": "{shadow.2.spread}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      }
+    },
+    "md": {
+      "x": {
+        "$value": "{shadow.3.x}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "y": {
+        "$value": "{shadow.3.y}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "blur": {
+        "$value": "{shadow.3.blur}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "spread": {
+        "$value": "{shadow.3.spread}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      }
+    },
+    "lg": {
+      "x": {
+        "$value": "{shadow.4.x}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "y": {
+        "$value": "{shadow.4.y}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "blur": {
+        "$value": "{shadow.4.blur}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "spread": {
+        "$value": "{shadow.4.spread}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      }
+    },
+    "xl": {
+      "x": {
+        "$value": "{shadow.5.x}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "y": {
+        "$value": "{shadow.5.y}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "blur": {
+        "$value": "{shadow.5.blur}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "spread": {
+        "$value": "{shadow.5.spread}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      }
+    },
+    "2xl": {
+      "x": {
+        "$value": "{shadow.6.x}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "y": {
+        "$value": "{shadow.6.y}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "blur": {
+        "$value": "{shadow.6.blur}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      },
+      "spread": {
+        "$value": "{shadow.6.spread}",
+        "$extensions": {
+          "scopes": ["EFFECT_FLOAT"]
+        }
+      }
+    }
+  }
+}

@@ -45,24 +45,6 @@
       "$extensions": {
         "scopes": []
       }
-    },
-    "1-25": {
-      "$value": {
-        "value": 1.25,
-        "unit": "px"
-      },
-      "$extensions": {
-        "scopes": ["ALL_SCOPES"]
-      }
-    },
-    "1-5": {
-      "$value": {
-        "value": 1.5,
-        "unit": "px"
-      },
-      "$extensions": {
-        "scopes": ["ALL_SCOPES"]
-      }
     }
   }
 }

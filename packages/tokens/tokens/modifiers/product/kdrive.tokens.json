@@ -24,6 +24,46 @@
         "pressed": {
           "$value": "{color.text.brand.kdrive.pressed}"
         }
+      },
+      "on": {
+        "brand": {
+          "default": {
+            "$value": "{color.text.on.brand.kdrive.default}"
+          }
+        }
+      }
+    },
+    "icon": {
+      "brand": {
+        "default": {
+          "$value": "{color.icon.brand.kdrive.default}"
+        },
+        "hover": {
+          "$value": "{color.icon.brand.kdrive.hover}"
+        },
+        "pressed": {
+          "$value": "{color.icon.brand.kdrive.pressed}"
+        }
+      },
+      "on": {
+        "brand": {
+          "default": {
+            "$value": "{color.icon.on.brand.kdrive.default}"
+          }
+        }
+      }
+    },
+    "border": {
+      "brand": {
+        "default": {
+          "$value": "{color.border.brand.kdrive.default}"
+        },
+        "hover": {
+          "$value": "{color.border.brand.kdrive.hover}"
+        },
+        "pressed": {
+          "$value": "{color.border.brand.kdrive.pressed}"
+        }
       }
     }
   }

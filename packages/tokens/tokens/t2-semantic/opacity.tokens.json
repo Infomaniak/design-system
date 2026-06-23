@@ -1,0 +1,53 @@
+{
+  "$type": "number",
+  "opacity": {
+    "none": {
+      "$value": "{opacity.0}",
+      "$extensions": {
+        "scopes": ["OPACITY"]
+      }
+    },
+    "ghost": {
+      "$value": "{opacity.5}",
+      "$extensions": {
+        "scopes": ["OPACITY"]
+      }
+    },
+    "subtle": {
+      "$value": "{opacity.10}",
+      "$extensions": {
+        "scopes": ["OPACITY"]
+      }
+    },
+    "soft": {
+      "$value": "{opacity.25}",
+      "$extensions": {
+        "scopes": ["OPACITY"]
+      }
+    },
+    "medium": {
+      "$value": "{opacity.50}",
+      "$extensions": {
+        "scopes": ["OPACITY"]
+      }
+    },
+    "strong": {
+      "$value": "{opacity.75}",
+      "$extensions": {
+        "scopes": ["OPACITY"]
+      }
+    },
+    "heavy": {
+      "$value": "{opacity.90}",
+      "$extensions": {
+        "scopes": ["OPACITY"]
+      }
+    },
+    "full": {
+      "$value": "{opacity.100}",
+      "$extensions": {
+        "scopes": ["OPACITY"]
+      }
+    }
+  }
+}
