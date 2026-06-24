@@ -3,6 +3,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { _clearApiCache } from './esds-icon.component.private.ts';
 import { EsdsIconComponent } from './esds-icon.component.ts';
 
+EsdsIconComponent.define();
+
 describe('EsdsIconComponent', () => {
   let container: HTMLDivElement;
 

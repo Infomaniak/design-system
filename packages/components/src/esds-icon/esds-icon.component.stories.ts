@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { EsdsIconComponent } from './esds-icon.component.ts';
 
+EsdsIconComponent.define();
+
 const { args, argTypes, template } = getStorybookHelpers<EsdsIconComponent>('esds-icon-lit');
 
 const meta = {

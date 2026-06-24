@@ -51,6 +51,8 @@ export async function generateWorkspaceNpmPackage({
       module,
       types,
       exports,
+      sideEffects,
+      files,
       dependencies,
       peerDependencies,
       optionalDependencies,
@@ -79,6 +81,8 @@ export async function generateWorkspaceNpmPackage({
       module,
       types,
       exports,
+      sideEffects,
+      files,
       dependencies:
         dependencies === undefined || dependenciesOverride === undefined
           ? dependencies

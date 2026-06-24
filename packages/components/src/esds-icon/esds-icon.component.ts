@@ -1,7 +1,8 @@
 import { signal, SignalWatcher } from '@lit-labs/signals';
 import { html, LitElement, type TemplateResult, unsafeCSS } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { batch } from 'signal-utils/subtle/batched-effect';
+import { defineComponent } from '../helpers.private/component/define-component.ts';
 import { onConnected } from '../helpers.private/component/on-connected.ts';
 import type { CleanUpFunction } from '../helpers.private/misc/clean-up-function.ts';
 import { componentEffect } from '../helpers.private/signal/component/component-effect/component-effect.ts';
@@ -19,8 +20,11 @@ export type EsdsIconComponentStatus = 'loading' | 'rendered' | 'error';
  * @summary Icon component
  * @element esds-icon-lit
  */
-@customElement('esds-icon-lit') // TODO: change to `esds-icon` once we don't have a conflict with the other component
 export class EsdsIconComponent extends SignalWatcher(LitElement) {
+  static define() {
+    defineComponent('esds-icon-lit', this);
+  }
+
   static override styles = unsafeCSS(style);
 
   /* PUBLIC PROPERTIES */
@@ -173,5 +177,11 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
 
         console.error(`Failed to load icon: "${this.#name.get()}"`, error);
       });
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'esds-icon-lit': EsdsIconComponent;
   }
 }

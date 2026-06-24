@@ -16,7 +16,7 @@ export default defineConfig({
     rollupOptions: {
       external: ['lit', /lit\/.*/],
       output: {
-        preserveModules: false,
+        preserveModules: true,
       },
     },
   },
