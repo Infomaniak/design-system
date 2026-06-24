@@ -2,7 +2,7 @@ import Color, { type Coords } from 'colorjs.io';
 import type { ColorDesignTokenValueComponent } from '../../../../../../../design-token/token/types/base/types/color/value/members/components/component/color-design-token-value-component.ts';
 import type { ColorDesignTokensCollectionTokenValue } from '../color-design-tokens-collection-token-value.ts';
 
-export function colorDesignTokensCollectionTokenValueToColorInstance(
+export function colorTokenValueToColor(
   value: ColorDesignTokensCollectionTokenValue,
 ): Color {
   return new Color({
