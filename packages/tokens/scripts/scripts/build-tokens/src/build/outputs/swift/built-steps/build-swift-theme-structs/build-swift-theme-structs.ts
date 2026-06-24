@@ -9,7 +9,7 @@ import { isFontFamilyDesignTokensCollectionToken } from '../../../../../../../..
 import { T2_DIRECTORY_NAME } from '../../../../../constants/design-token-tiers.ts';
 import { buildSwiftStructTree } from './build-swift-struct-tree.ts';
 import { buildSwiftThemeProducts } from './build-swift-theme-products.ts';
-import { buildTokenTree, type TokenTree } from './build-token-tree.ts';
+import { buildSwiftTokenTree, type SwiftTokenTree } from './build-token-tree.ts';
 
 export interface BuildSwiftThemeStructOptions {
   readonly baseCollection: DesignTokensCollection;
@@ -52,7 +52,7 @@ export async function buildSwiftThemeStructs({
       }),
   );
 
-  const baseTokenTree: TokenTree = buildTokenTree(
+  const baseTokenTree: SwiftTokenTree = buildSwiftTokenTree(
     baseCollection,
     names,
     'String?',

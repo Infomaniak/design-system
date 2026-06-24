@@ -3,7 +3,7 @@ import { segmentsReferenceToPascalCase } from '../../../../../../../../shared/dt
 import { structPrefix, swiftMainStruct } from '../../CONSTANTS.ts';
 import { buildSwiftFile } from '../../helpers/build-swift-file.ts';
 import { toSwiftVariableName } from '../../swift-naming-helper.ts';
-import type { NestedMap } from './build-token-tree.ts';
+import type { SwiftNestedMap } from './build-token-tree.ts';
 import type { ValueMapDifference } from './find-value-map-differences.ts';
 
 type DiffNode = { [key: string]: DiffNode | string };
@@ -38,7 +38,7 @@ function buildDiffTree(
 function emitDiffNode(
   typeName: string,
   diffNode: DiffNode,
-  treeNode: NestedMap,
+  treeNode: SwiftNestedMap,
   path: string[],
   modifierValueMap: Map<string, string>,
 ): string {
@@ -58,7 +58,7 @@ function emitDiffNode(
 
   for (const [key, childDiff] of subNodeEntries) {
     const childPath = [...path, key];
-    const childTreeNode = treeNode[key] as NestedMap | undefined;
+    const childTreeNode = treeNode[key] as SwiftNestedMap | undefined;
     if (!childTreeNode) continue;
 
     const childTypeName = structNameForPath(childPath);
@@ -92,7 +92,7 @@ function emitDiffNode(
 
 export function buildSwiftThemeExtension(
   modifierName: string,
-  tree: NestedMap,
+  tree: SwiftNestedMap,
   modifierValueMap: Map<string, string>,
   differences: ValueMapDifference[],
 ): string {

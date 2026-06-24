@@ -4,7 +4,7 @@ import { segmentsReferenceToPascalCase } from '../../../../../../../../shared/dt
 import { structPrefix, swiftMainStruct } from '../../CONSTANTS.ts';
 import { buildSwiftStructWithInit } from '../../helpers/build-swift-file-with-init.ts';
 import { toSwiftVariableName } from '../../swift-naming-helper.ts';
-import type { NestedMap } from './build-token-tree.ts';
+import type { SwiftNestedMap } from './build-token-tree.ts';
 import { buildSwiftVariablesForNode } from './build-variables-for-node.ts';
 import { capitalizeFirstLetter } from '../../../../../../../../../../../scripts/helpers/misc/case/capitalize-first-letter/capitalize-first-letter.ts';
 
@@ -19,7 +19,7 @@ function sortEntries<T>(entries: Array<[string, T]>): Array<[string, T]> {
 }
 
 export async function buildSwiftStructTree(
-  node: NestedMap,
+  node: SwiftNestedMap,
   path: string[],
   outputDirectory: string,
   valueMap: Map<string, string>,
@@ -44,7 +44,7 @@ export async function buildSwiftStructTree(
   const objectEntries = sortEntries(Object.entries(node).filter(([, v]) => typeof v !== 'string'));
   for (const [key, value] of objectEntries) {
     const idx = variables.findIndex((v) => v.name === toSwiftVariableName([key]));
-    const childEntries = Object.entries(value as NestedMap);
+    const childEntries = Object.entries(value as SwiftNestedMap);
 
     if (childEntries.length === 1 && typeof childEntries[0][1] === 'string') {
       // Single leaf: inline as combinedName, no sub-struct created
@@ -65,7 +65,7 @@ export async function buildSwiftStructTree(
           type: typeName,
           initValue: `${typeName}()`,
         };
-      await buildSwiftStructTree(value as NestedMap, [...path, key], outputDirectory, valueMap);
+      await buildSwiftStructTree(value as SwiftNestedMap, [...path, key], outputDirectory, valueMap);
     }
   }
 

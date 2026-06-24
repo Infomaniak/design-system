@@ -5,21 +5,21 @@ import type { ArrayDesignTokenName } from '../../../../../../../../shared/dtcg/r
 import { T2_DIRECTORY_NAME } from '../../../../../constants/design-token-tiers.ts';
 import { tokenToSwiftValue } from '../../swift-tokens-format.ts';
 
-export type NestedMap = { [key: string]: NestedMap | string };
+export type SwiftNestedMap = { [key: string]: SwiftNestedMap | string };
 
-export type TokenTree = {
-  tree: NestedMap;
+export type SwiftTokenTree = {
+  tree: SwiftNestedMap;
   valueMap: Map<string, string>;
 };
 
-export function buildTokenTree(
+export function buildSwiftTokenTree(
   baseCollection: DesignTokensCollection,
   names: readonly ArrayDesignTokenName[],
   undefinedType: string,
   platformTypeRecord: Record<string, string>,
   rawTokensPrefix: string,
-): TokenTree {
-  const tree: NestedMap = {};
+): SwiftTokenTree {
+  const tree: SwiftNestedMap = {};
   const valueMap = new Map<string, string>();
 
   for (const name of names) {
@@ -49,7 +49,7 @@ export function buildTokenTree(
         break;
       }
       if (!node[key]) node[key] = {};
-      node = node[key] as NestedMap;
+      node = node[key] as SwiftNestedMap;
     }
   }
 

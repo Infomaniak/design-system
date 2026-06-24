@@ -6,7 +6,7 @@ import type { ArrayDesignTokenName } from '../../../../../../../../shared/dtcg/r
 import { swiftMainStruct } from '../../CONSTANTS.ts';
 import { buildSwiftThemeExtension } from './build-swift-theme-extension.ts';
 import { capitalizeFirstLetter } from '../../../../../../../../../../../scripts/helpers/misc/case/capitalize-first-letter/capitalize-first-letter.ts';
-import { buildTokenTree, type TokenTree } from './build-token-tree.ts';
+import { buildSwiftTokenTree, type SwiftTokenTree } from './build-token-tree.ts';
 import { findValueMapDifferences } from './find-value-map-differences.ts';
 
 export async function buildSwiftThemeProducts(
@@ -31,7 +31,7 @@ export async function buildSwiftThemeProducts(
           }),
       );
 
-      const productsTokenTree: TokenTree = buildTokenTree(
+      const productsTokenTree: SwiftTokenTree = buildSwiftTokenTree(
         modifierCollection,
         modifierNames,
         'String?',
