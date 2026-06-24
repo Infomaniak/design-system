@@ -23,5 +23,5 @@ const FONT_WEIGHT_MAP: Record<number, string> = {
   700: '.bold',
   800: '.heavy',
   900: '.black',
-  950: '.black'
+  950: '.black',
 };

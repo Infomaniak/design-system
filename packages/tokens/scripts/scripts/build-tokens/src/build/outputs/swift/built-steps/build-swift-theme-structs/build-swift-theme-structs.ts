@@ -62,5 +62,10 @@ export async function buildSwiftThemeStructs({
 
   await buildSwiftStructTree(baseTokenTree.tree, [], outputDirectory, baseTokenTree.valueMap);
 
-  await buildSwiftThemeProducts(modifiers, baseTokenTree.valueMap, rawTokensPrefix, outputDirectory);
+  await buildSwiftThemeProducts(
+    modifiers,
+    baseTokenTree.valueMap,
+    rawTokensPrefix,
+    outputDirectory,
+  );
 }

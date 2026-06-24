@@ -3,7 +3,7 @@ import type { DimensionDesignTokensCollectionTokenValue } from '../../../../../.
 export function dimensionDesignTokensCollectionTokenValueToSwiftValue(
   value: DimensionDesignTokensCollectionTokenValue,
 ): string {
-  if (value.unit != "px") {
+  if (value.unit != 'px') {
     throw new Error(`Unsupported dimension unit for Swift value conversion: ${value.unit}`);
   }
   return value.value.toString(10);

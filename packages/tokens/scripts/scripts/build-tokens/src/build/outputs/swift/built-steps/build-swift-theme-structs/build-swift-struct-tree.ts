@@ -1,12 +1,12 @@
 import { join } from 'node:path';
 import { writeTextFileSafe } from '../../../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
+import { capitalizeFirstLetter } from '../../../../../../../../../../../scripts/helpers/misc/case/capitalize-first-letter/capitalize-first-letter.ts';
 import { segmentsReferenceToPascalCase } from '../../../../../../../../shared/dtcg/design-token/reference/types/segments/to/pascal-case/segments-reference-to-pascal-case.ts';
-import { SWIFT_STRUCT_PREFIX, SWIFT_MAIN_STRUCT } from '../../swift-constants.ts';
 import { buildSwiftStructWithInit } from '../../helpers/build-swift-file-with-init.ts';
+import { SWIFT_MAIN_STRUCT, SWIFT_STRUCT_PREFIX } from '../../swift-constants.ts';
 import { toSwiftVariableName } from '../../swift-naming-helper.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
 import { buildSwiftVariablesForNode } from './build-variables-for-node.ts';
-import { capitalizeFirstLetter } from '../../../../../../../../../../../scripts/helpers/misc/case/capitalize-first-letter/capitalize-first-letter.ts';
 
 function structNameForPath(path: string[]): string {
   return path.length === 0
@@ -65,12 +65,18 @@ export async function buildSwiftStructTree(
           type: typeName,
           initValue: `${typeName}()`,
         };
-      await buildSwiftStructTree(value as SwiftNestedMap, [...path, key], outputDirectory, valueMap);
+      await buildSwiftStructTree(
+        value as SwiftNestedMap,
+        [...path, key],
+        outputDirectory,
+        valueMap,
+      );
     }
   }
 
   const name = structNameForPath(path);
-  const folderName = path.length == 0 ? `` : `${SWIFT_STRUCT_PREFIX}${capitalizeFirstLetter(path[0])}/`;
+  const folderName =
+    path.length == 0 ? `` : `${SWIFT_STRUCT_PREFIX}${capitalizeFirstLetter(path[0])}/`;
   const swiftStruct = buildSwiftStructWithInit({ name, protocols: ['Sendable'], variables });
   await writeTextFileSafe(
     join(outputDirectory, `${SWIFT_MAIN_STRUCT}/${folderName}${name}.swift`),

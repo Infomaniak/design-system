@@ -20,11 +20,11 @@ export function buildSwiftStructWithInit({
   const initContent = `
   init(
 ${variables
-      .map((variable) => {
-        const defaultVal = variable.initValue === undefined ? '' : ` = ${variable.initValue}`;
-        return `    ${variable.name}: ${variable.type}${defaultVal}`;
-      })
-      .join(',\n')}
+  .map((variable) => {
+    const defaultVal = variable.initValue === undefined ? '' : ` = ${variable.initValue}`;
+    return `    ${variable.name}: ${variable.type}${defaultVal}`;
+  })
+  .join(',\n')}
   ) {
 ${variables.map((variable) => `    self.${variable.name} = ${variable.name}`).join('\n')}
   }`;
