@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 import { writeTextFileSafe } from '../../../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import { segmentsReferenceToPascalCase } from '../../../../../../../../shared/dtcg/design-token/reference/types/segments/to/pascal-case/segments-reference-to-pascal-case.ts';
-import { structPrefix, swiftMainStruct } from '../../CONSTANTS.ts';
+import { SWIFT_STRUCT_PREFIX, SWIFT_MAIN_STRUCT } from '../../swift-constants.ts';
 import { buildSwiftStructWithInit } from '../../helpers/build-swift-file-with-init.ts';
 import { toSwiftVariableName } from '../../swift-naming-helper.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
@@ -10,8 +10,8 @@ import { capitalizeFirstLetter } from '../../../../../../../../../../../scripts/
 
 function structNameForPath(path: string[]): string {
   return path.length === 0
-    ? `${swiftMainStruct}`
-    : `${structPrefix}${segmentsReferenceToPascalCase(path)}`;
+    ? `${SWIFT_MAIN_STRUCT}`
+    : `${SWIFT_STRUCT_PREFIX}${segmentsReferenceToPascalCase(path)}`;
 }
 
 function sortEntries<T>(entries: Array<[string, T]>): Array<[string, T]> {
@@ -70,10 +70,10 @@ export async function buildSwiftStructTree(
   }
 
   const name = structNameForPath(path);
-  const folderName = path.length == 0 ? `` : `${structPrefix}${capitalizeFirstLetter(path[0])}/`;
+  const folderName = path.length == 0 ? `` : `${SWIFT_STRUCT_PREFIX}${capitalizeFirstLetter(path[0])}/`;
   const swiftStruct = buildSwiftStructWithInit({ name, protocols: ['Sendable'], variables });
   await writeTextFileSafe(
-    join(outputDirectory, `${swiftMainStruct}/${folderName}${name}.swift`),
+    join(outputDirectory, `${SWIFT_MAIN_STRUCT}/${folderName}${name}.swift`),
     swiftStruct,
   );
 }

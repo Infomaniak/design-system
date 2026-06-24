@@ -20,7 +20,7 @@ import { T1_DIRECTORY_NAME, T2_DIRECTORY_NAME } from '../../../constants/design-
 import { buildSwiftEnumColor } from './built-steps/build-swift-enum-color.ts';
 import { buildSwiftThemeStructs } from './built-steps/build-swift-theme-structs/build-swift-theme-structs.ts';
 import { buildXcAssets } from './built-steps/build-xcassets.ts';
-import { rawTokensPrefix } from './CONSTANTS.ts';
+import { SWIFT_RAW_TOKENS_PREFIX } from './swift-constants.ts';
 import { buildSwiftFile } from './helpers/build-swift-file.ts';
 import { getTokenGroupName } from './swift-tokens-format.ts';
 
@@ -143,7 +143,7 @@ export async function buildSwiftTokens({
         const content: string = buildSwiftFile({
           imports: ['SwiftUI'],
           type: 'public enum',
-          name: rawTokensPrefix,
+          name: SWIFT_RAW_TOKENS_PREFIX,
           protocols: ['Sendable'],
           content: '',
         });
@@ -154,7 +154,7 @@ export async function buildSwiftTokens({
           const content: string = buildSwiftFile({
             imports: ['SwiftUI'],
             type: 'extension',
-            name: rawTokensPrefix,
+            name: SWIFT_RAW_TOKENS_PREFIX,
             protocols: [],
             content: `public enum ${groupName} {
               ${swiftEnumDeclarationsToString(declaration)}
@@ -162,7 +162,7 @@ export async function buildSwiftTokens({
           });
 
           await writeTextFileSafe(
-            join(iosSwitftUiOutputDirectory, `${rawTokensPrefix}+${groupName}.swift`),
+            join(iosSwitftUiOutputDirectory, `${SWIFT_RAW_TOKENS_PREFIX}+${groupName}.swift`),
             content,
           );
         }
@@ -174,7 +174,7 @@ export async function buildSwiftTokens({
         baseCollection,
         modifiers,
         outputDirectory: iosSwitftUiOutputDirectory,
-        rawTokensPrefix,
+        rawTokensPrefix: SWIFT_RAW_TOKENS_PREFIX,
       });
     });
 
