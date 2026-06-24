@@ -1,6 +1,6 @@
 import { dedent } from '../../../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { segmentsReferenceToPascalCase } from '../../../../../../../../shared/dtcg/design-token/reference/types/segments/to/pascal-case/segments-reference-to-pascal-case.ts';
-import { structPrefix, swiftMainStruct } from '../../CONSTANTS.ts';
+import { SWIFT_STRUCT_PREFIX, SWIFT_MAIN_STRUCT } from '../../swift-constants.ts';
 import { buildSwiftFile } from '../../helpers/build-swift-file.ts';
 import { toSwiftVariableName } from '../../swift-naming-helper.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
@@ -10,8 +10,8 @@ type DiffNode = { [key: string]: DiffNode | string };
 
 function structNameForPath(path: string[]): string {
   return path.length === 0
-    ? `${swiftMainStruct}`
-    : `${structPrefix}${segmentsReferenceToPascalCase(path)}`;
+    ? `${SWIFT_MAIN_STRUCT}`
+    : `${SWIFT_STRUCT_PREFIX}${segmentsReferenceToPascalCase(path)}`;
 }
 
 function buildDiffTree(
@@ -97,12 +97,12 @@ export function buildSwiftThemeExtension(
   differences: ValueMapDifference[],
 ): string {
   const diffTree = buildDiffTree(differences, modifierValueMap);
-  const initCall = emitDiffNode(`${swiftMainStruct}`, diffTree, tree, [], modifierValueMap);
+  const initCall = emitDiffNode(`${SWIFT_MAIN_STRUCT}`, diffTree, tree, [], modifierValueMap);
 
   return buildSwiftFile({
     imports: ['SwiftUI'],
     type: 'extension',
-    name: `${swiftMainStruct}`,
+    name: `${SWIFT_MAIN_STRUCT}`,
     protocols: ['Sendable'],
     content: `static let ${modifierName} = ${initCall}`,
   });

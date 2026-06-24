@@ -8,15 +8,18 @@ import { buildColorsetContents } from '../build-colorset-contents.ts';
 
 export interface BuildXcAssetsOptions {
   readonly token: GenericDesignTokensCollectionToken;
-  readonly t1ColorTokenNameToColorsetName: Map<string, string>;
   readonly outputDirectory: string;
+}
+
+export interface BuildXcAssetsResult {
+  readonly tokenName: GenericDesignTokensCollectionToken['name'];
+  readonly colorsetName: string;
 }
 
 export async function buildXcAssets({
   token,
-  t1ColorTokenNameToColorsetName,
   outputDirectory,
-}: BuildXcAssetsOptions): Promise<void> {
+}: BuildXcAssetsOptions): Promise<BuildXcAssetsResult> {
   if (isCurlyReference(token.value)) {
     throw new Error(`Token ${token.name} is a reference, but it should be a value`);
   }
@@ -35,10 +38,10 @@ export async function buildXcAssets({
     colorsetName = token.name.join('');
   }
 
-  t1ColorTokenNameToColorsetName.set(JSON.stringify(token.name), colorsetName);
-
   await writeJsonFileSafe(
     join(outputDirectory, `Colors.xcassets/${category}/${colorsetName}.colorset/Contents.json`),
     buildColorsetContents(sRGBColor),
   );
+
+  return { tokenName: token.name, colorsetName };
 }

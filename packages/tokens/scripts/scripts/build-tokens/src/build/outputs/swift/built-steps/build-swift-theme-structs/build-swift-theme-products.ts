@@ -4,7 +4,7 @@ import { capitalizeFirstLetter } from '../../../../../../../../../../../scripts/
 import type { DesignTokenModifiers } from '../../../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
-import { swiftMainStruct } from '../../CONSTANTS.ts';
+import { SWIFT_MAIN_STRUCT } from '../../swift-constants.ts';
 import { buildSwiftThemeExtension } from './build-swift-theme-extension.ts';
 import { buildSwiftTokenTree, type SwiftTokenTree } from './build-token-tree.ts';
 import { findValueMapDifferences } from './find-value-map-differences.ts';
@@ -43,7 +43,7 @@ export async function buildSwiftThemeProducts(
 
       if (differencies.length === 0) continue;
 
-      const swiftFileName = `${capitalizeFirstLetter(modifierName)}+${swiftMainStruct}`;
+      const swiftFileName = `${capitalizeFirstLetter(modifierName)}+${SWIFT_MAIN_STRUCT}`;
       const swiftStruct = buildSwiftThemeExtension(
         modifierName,
         productsTokenTree.tree,
@@ -54,7 +54,7 @@ export async function buildSwiftThemeProducts(
       await writeTextFileSafe(
         join(
           outputDirectory,
-          `${swiftMainStruct}/${capitalizeFirstLetter(modifierType)}/${swiftFileName}.swift`,
+          `${SWIFT_MAIN_STRUCT}/${capitalizeFirstLetter(modifierType)}/${swiftFileName}.swift`,
         ),
         swiftStruct,
       );

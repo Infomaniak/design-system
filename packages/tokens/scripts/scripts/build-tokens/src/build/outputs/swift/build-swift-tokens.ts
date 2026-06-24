@@ -63,11 +63,12 @@ export async function buildSwiftTokens({
               token.files.some((path: string): boolean => path.includes(T1_DIRECTORY_NAME))
             );
           })) {
-          await buildXcAssets({
+          const { tokenName, colorsetName } = await buildXcAssets({
             token,
-            t1ColorTokenNameToColorsetName,
             outputDirectory: iosSwitftUiOutputDirectory,
           });
+
+          t1ColorTokenNameToColorsetName.set(JSON.stringify(tokenName), colorsetName);
         }
       });
     });
