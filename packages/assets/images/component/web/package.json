@@ -18,7 +18,7 @@
   "module": "./dist/esds-icon.js",
   "types": "./dist/public-api.d.ts",
   "dependencies": {
-    "idb": "^8.0.3"
+    "@infomaniak-design-system/components": "workspace:*"
   },
   "scripts": {
     "=== DEV ===": "",

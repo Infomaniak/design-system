@@ -1,4 +1,4 @@
-import { IconifyApi } from '@infomaniak-design-system/esds-icon';
+import { IconifyApi } from '@infomaniak-design-system/components';
 
 /**
  * Pre-configured IconifyApi instance for the storybook.

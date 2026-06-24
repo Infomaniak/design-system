@@ -1,4 +1,4 @@
-import { iconifyApiListIconsResponseToIconifyApiIconList } from '@infomaniak-design-system/esds-icon';
+import { iconifyApiListIconsResponseToIconifyApiIconList } from '@infomaniak-design-system/components';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { iconifyApi } from '../lib/iconify-api.ts';

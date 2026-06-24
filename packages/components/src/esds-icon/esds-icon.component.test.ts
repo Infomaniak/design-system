@@ -1,5 +1,5 @@
-import { IconifyApi } from '@infomaniak-design-system/esds-icon';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { IconifyApi } from '../iconify-api/iconify-api.ts';
 import { _clearApiCache } from './esds-icon.component.private.ts';
 import { EsdsIconComponent } from './esds-icon.component.ts';
 

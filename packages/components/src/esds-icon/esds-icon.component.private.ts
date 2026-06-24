@@ -1,4 +1,4 @@
-import { IconifyApi } from '@infomaniak-design-system/esds-icon';
+import { IconifyApi } from '../iconify-api/iconify-api.ts';
 
 const _apiCache = new Map<string, IconifyApi>();
 
