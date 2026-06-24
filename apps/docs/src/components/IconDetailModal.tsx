@@ -140,7 +140,7 @@ export default function IconDetailModal({ icon, isOpen, prefix, onClose }: IconD
           }}
         >
           <esds-icon
-            style={{ fontSize: 'var(--esds-icon-size-4xl)' }}
+            style={{ fontSize: 'var(--esds-icon-size-xl)' }}
             name={iconName}
           />
         </div>
