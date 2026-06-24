@@ -193,36 +193,37 @@ export function buildCssTokens({
       };
 
       const cssVariables: string = cssVariableDeclarationsToString([
-        // NOTE: when all namespaces will be bound, we'll remove this comment
-        // ...[
-        //   'color', // ✅
-        //   'font', // ✅
-        //   'text', // ✅
-        //   'font-weight', // ✅
-        //   'tracking',
-        //   'leading',
-        //   'breakpoint',
-        //   'container',
-        //   'spacing', // ✅
-        //   'radius', // ✅
-        //   'shadow',
-        //   'inset-shadow',
-        //   'drop-shadow',
-        //   'blur',
-        //   'perspective',
-        //   'aspect',
-        //   'ease',
-        //   'animate',
-        // ].map((tailwindNamespace: string): CssVariableDeclaration => {
-        //   return {
-        //     name: `--${tailwindNamespace}-*`,
-        //     value: 'initial',
-        //   };
-        // }),
-        {
-          name: `--*`,
-          value: 'initial',
-        },
+        // NOTE: when all namespaces will be bound, we'll swap to `--*: initial`
+        ...[
+          'color',
+          'font',
+          'text',
+          'font-weight',
+          'tracking',
+          // 'leading',
+          // 'breakpoint',
+          // 'container',
+          'spacing',
+          'radius',
+          // 'shadow',
+          // 'inset-shadow',
+          // 'drop-shadow',
+          'blur',
+          // 'perspective',
+          // 'aspect',
+          // 'ease',
+          // 'animate',
+        ].map((tailwindNamespace: string): CssVariableDeclaration => {
+          return {
+            name: `--${tailwindNamespace}-*`,
+            value: 'initial',
+          };
+        }),
+        // NOTE: reset all to initial (example)
+        // {
+        //   name: `--*`,
+        //   value: 'initial',
+        // },
         ...baseCollection
           .tokens()
           .flatMap(
@@ -309,6 +310,14 @@ export function buildCssTokens({
                       RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION(['radius', ...token.name.slice(1)]),
                     ),
                   ];
+                } else if (tokenName.startsWith('blur')) {
+                  // --blur-*
+                  return [
+                    generateTailwindToken(
+                      token,
+                      RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION(['blur', ...token.name.slice(1)]),
+                    ),
+                  ];
                 }
               }
 
@@ -317,7 +326,7 @@ export function buildCssTokens({
           ),
         {
           name: '--spacing',
-          value: '1px',
+          value: '0.25rem',
         },
       ]);
 

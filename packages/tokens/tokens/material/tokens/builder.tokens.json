@@ -4,13 +4,13 @@
     "builder": {
       "color": {
         "primary": {
-          "$value": "{color.sky.800}"
+          "$value": "{color.blue.800}"
         },
         "secondary": {
-          "$value": "{color.sky.300}"
+          "$value": "{color.blue.300}"
         },
         "tertiary": {
-          "$value": "{color.sky.500}"
+          "$value": "{color.blue.500}"
         },
         "error": {
           "$value": "{color.red.600}"
@@ -19,7 +19,7 @@
           "$value": "{color.gray.100}"
         },
         "neutral-variant": {
-          "$value": "{color.sky.900}"
+          "$value": "{color.blue.900}"
         }
       }
     }

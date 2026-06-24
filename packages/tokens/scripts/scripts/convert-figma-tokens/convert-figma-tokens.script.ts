@@ -4,6 +4,10 @@ import { fileURLToPath } from 'node:url';
 import { DEFAULT_LOG_LEVEL } from '../../../../../scripts/helpers/log/log-level/defaults/default-log-level.ts';
 import { Logger } from '../../../../../scripts/helpers/log/logger.ts';
 import { execCommandInherit } from '../../../../../scripts/helpers/misc/exec-command.ts';
+import {
+  DESIGN_TOKEN_TIERS,
+  MODIFIERS_DIRECTORY_NAME,
+} from '../build-tokens/src/constants/design-token-tiers.ts';
 
 import { convertFigmaTokens } from './src/convert-figma.tokens.ts';
 
@@ -16,7 +20,9 @@ const OUTPUT_DIR: string = join(ROOT_DIR, 'tokens');
 const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 
 export async function convertFigmaTokensScript(): Promise<void> {
-  await rm(OUTPUT_DIR, { force: true, recursive: true });
+  for (const subDirectory of [...DESIGN_TOKEN_TIERS, MODIFIERS_DIRECTORY_NAME]) {
+    await rm(join(OUTPUT_DIR, subDirectory), { force: true, recursive: true });
+  }
 
   await convertFigmaTokens({
     tokensPath: TOKENS_PATH,

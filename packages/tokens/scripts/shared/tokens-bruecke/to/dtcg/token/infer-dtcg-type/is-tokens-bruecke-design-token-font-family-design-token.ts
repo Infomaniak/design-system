@@ -7,6 +7,7 @@ export function isTokensBrueckeDesignTokenFontFamilyDesignToken(
 ): boolean {
   return (
     ctx.path.join('.').includes('.family') ||
+    ctx.path.join('.').includes('.fontFamily') ||
     (input.scopes !== undefined && input.scopes.includes('FONT_FAMILY'))
   );
 }

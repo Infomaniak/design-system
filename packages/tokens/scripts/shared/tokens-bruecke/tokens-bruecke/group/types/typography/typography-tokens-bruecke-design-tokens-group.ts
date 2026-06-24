@@ -5,7 +5,7 @@ import type { TokensBrueckeDesignTokensGroup } from '../../tokens-bruecke-design
 export interface TypographyTokensBrueckeDesignTokensGroup extends TokensBrueckeDesignTokensGroup {
   readonly fontFamily: StringTokensBrueckeDesignToken;
   readonly fontSize: DimensionTokensBrueckeDesignToken;
-  readonly fontWeight: StringTokensBrueckeDesignToken;
+  readonly fontWeight: DimensionTokensBrueckeDesignToken;
   readonly letterSpacing: DimensionTokensBrueckeDesignToken;
   readonly lineHeight: DimensionTokensBrueckeDesignToken;
 }

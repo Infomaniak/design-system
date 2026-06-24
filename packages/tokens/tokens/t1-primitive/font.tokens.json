@@ -200,7 +200,7 @@
       "Suisse Int'l": {
         "$value": "Suisse Int'l",
         "$extensions": {
-          "scopes": ["FONT_FAMILY"]
+          "scopes": []
         }
       }
     }

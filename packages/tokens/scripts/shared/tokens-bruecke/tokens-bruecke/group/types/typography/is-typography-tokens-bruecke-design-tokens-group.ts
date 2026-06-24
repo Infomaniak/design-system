@@ -26,7 +26,7 @@ export function isTypographyTokensBrueckeDesignTokensGroup(
   return (
     testMember('fontFamily', isStringTokensBrueckeDesignToken) &&
     testMember('fontSize', isDimensionTokensBrueckeDesignToken) &&
-    testMember('fontWeight', isStringTokensBrueckeDesignToken) &&
+    testMember('fontWeight', isDimensionTokensBrueckeDesignToken) &&
     testMember('letterSpacing', isDimensionTokensBrueckeDesignToken) &&
     testMember('lineHeight', isDimensionTokensBrueckeDesignToken)
   );

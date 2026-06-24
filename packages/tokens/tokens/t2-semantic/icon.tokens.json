@@ -3,66 +3,33 @@
   "icon": {
     "size": {
       "xs": {
-        "$value": "{scale.12}",
+        "$value": "{scale.16}",
         "$extensions": {
-          "scopes": ["WIDTH_HEIGHT"]
-        }
-      },
-      "sm": {
-        "$value": "{scale.14}",
-        "$extensions": {
-          "scopes": ["WIDTH_HEIGHT"]
+          "scopes": []
         }
       },
       "md": {
-        "$value": "{scale.16}",
+        "$value": "{scale.24}",
         "$extensions": {
-          "scopes": ["WIDTH_HEIGHT"]
+          "scopes": []
         }
       },
-
       "lg": {
+        "$value": "{scale.32}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "sm": {
         "$value": "{scale.20}",
         "$extensions": {
-          "scopes": ["WIDTH_HEIGHT"]
+          "scopes": []
         }
       },
       "xl": {
-        "$value": "{scale.24}",
-        "$extensions": {
-          "scopes": ["WIDTH_HEIGHT"]
-        }
-      },
-      "2xl": {
-        "$value": "{scale.32}",
-        "$extensions": {
-          "scopes": ["WIDTH_HEIGHT"]
-        }
-      },
-      "3xl": {
         "$value": "{scale.40}",
         "$extensions": {
-          "scopes": ["WIDTH_HEIGHT"]
-        }
-      },
-      "4xl": {
-        "$value": "{scale.96}",
-        "$extensions": {
-          "scopes": ["WIDTH_HEIGHT"]
-        }
-      }
-    },
-    "border-width": {
-      "sm": {
-        "$value": "{border-width.1-25}",
-        "$extensions": {
-          "scopes": ["STROKE_FLOAT"]
-        }
-      },
-      "md": {
-        "$value": "{border-width.1-5}",
-        "$extensions": {
-          "scopes": ["STROKE_FLOAT"]
+          "scopes": []
         }
       }
     }
