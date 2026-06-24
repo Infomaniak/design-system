@@ -1,14 +1,14 @@
 import type Color from 'colorjs.io';
 import { XCASSETS_INFO } from './constants/xcassets-info.ts';
 
-interface XCAssetsColorComponent {
+export interface XCAssetsColorComponent {
   readonly alpha: number;
   readonly blue: number;
   readonly green: number;
   readonly red: number;
 }
 
-interface XCAssetsColor {
+export interface XCAssetsColor {
   readonly color: {
     readonly 'color-space': string;
     readonly components: XCAssetsColorComponent;
@@ -16,12 +16,12 @@ interface XCAssetsColor {
   readonly idiom: 'universal';
 }
 
-interface XCAssetsColorSet {
+export interface XCAssetsColorSet {
   readonly colors: XCAssetsColor[];
   readonly info: XCAssetsInfo;
 }
 
-interface XCAssetsInfo {
+export interface XCAssetsInfo {
   readonly author: string;
   readonly version: number;
 }
