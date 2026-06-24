@@ -1,4 +1,4 @@
-import type { IconifyApiSharedFetchJSONOptions } from '../iconify-api-fetch-options.ts';
+import type { IconifyApiSharedFetchJSONOptions } from '../iconify-api-fetch-options.private.ts';
 
 /**
  * Options to search icons.
