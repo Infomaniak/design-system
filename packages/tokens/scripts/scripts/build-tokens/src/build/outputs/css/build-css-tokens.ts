@@ -208,7 +208,7 @@ export function buildCssTokens({
           // 'shadow',
           // 'inset-shadow',
           // 'drop-shadow',
-          // 'blur',
+          'blur',
           // 'perspective',
           // 'aspect',
           // 'ease',
@@ -308,6 +308,14 @@ export function buildCssTokens({
                     generateTailwindToken(
                       token,
                       RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION(['radius', ...token.name.slice(1)]),
+                    ),
+                  ];
+                } else if (tokenName.startsWith('blur')) {
+                  // --blur-*
+                  return [
+                    generateTailwindToken(
+                      token,
+                      RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION(['blur', ...token.name.slice(1)]),
                     ),
                   ];
                 }
