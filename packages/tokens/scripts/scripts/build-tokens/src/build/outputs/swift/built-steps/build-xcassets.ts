@@ -39,6 +39,6 @@ export async function buildXcAssets({
 
   await writeJsonFileSafe(
     join(outputDirectory, `Colors.xcassets/${category}/${colorsetName}.colorset/Contents.json`),
-    buildColorsetContents(color, sRGBColor),
+    buildColorsetContents(sRGBColor),
   );
 }

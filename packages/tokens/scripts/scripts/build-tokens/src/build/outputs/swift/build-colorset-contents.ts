@@ -26,12 +26,12 @@ interface XCAssetsInfo {
   readonly version: number;
 }
 
-export function buildColorsetContents(color: Color, sRGBColor: Color): XCAssetsColorSet {
+export function buildColorsetContents(sRGBColor: Color): XCAssetsColorSet {
   return {
     colors: [
       {
         color: {
-          'color-space': color.space.name,
+          'color-space': 'srgb',
           components: {
             red: sRGBColor.coords[0] ?? 0,
             green: sRGBColor.coords[1] ?? 0,
