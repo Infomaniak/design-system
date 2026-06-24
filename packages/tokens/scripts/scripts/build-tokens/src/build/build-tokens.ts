@@ -10,10 +10,13 @@ import {
 } from '../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import {
   DESIGN_TOKEN_TIERS,
+  MATERIAL_DIRECTORY_NAME,
   MODIFIERS_DIRECTORY_NAME,
   T2_DIRECTORY_NAME,
   T3_DIRECTORY_NAME,
 } from '../constants/design-token-tiers.ts';
+import { buildCssTokens } from './outputs/css/build-css-tokens.ts';
+import { buildFigmaTokens } from './outputs/figma/build-figma-tokens.ts';
 import { buildKotlinTokens } from './outputs/kotlin/build-kotlin-tokens.ts';
 import { buildMarkdownTokens } from './outputs/markdown/build-markdown-tokens.ts';
 import { buildSwiftTokens } from './outputs/swift/build-swift-tokens.ts';
@@ -70,20 +73,20 @@ export function buildTokens({
     });
 
     // CSS
-    // await buildCssTokens({
-    //   baseCollection,
-    //   modifiers,
-    //   outputDirectory,
-    //   logger,
-    // });
+    await buildCssTokens({
+      baseCollection,
+      modifiers,
+      outputDirectory,
+      logger,
+    });
 
-    // // FIGMA
-    // await buildFigmaTokens({
-    //   baseCollection,
-    //   modifiers,
-    //   outputDirectory,
-    //   logger,
-    // });
+    // FIGMA
+    await buildFigmaTokens({
+      baseCollection,
+      modifiers,
+      outputDirectory,
+      logger,
+    });
 
     // SWIFT
     await buildSwiftTokens({
@@ -102,56 +105,39 @@ export function buildTokens({
     });
 
     // MATERIAL
-    // await logger.asyncTask('material', async (logger: Logger): Promise<void> => {
-    //   // IMPORT MATERIAL TOKENS
-    //   const materialCollection: DesignTokensCollection = await baseCollection
-    //     .clone()
-    //     .fromFiles([`${sourceDirectory}/${MATERIAL_DIRECTORY_NAME}/tokens/**/*.tokens.json`], {
-    //       forEachTokenBehaviour: 'only-new-token',
-    //     });
+    await logger.asyncTask('material', async (logger: Logger): Promise<void> => {
+      // IMPORT MATERIAL TOKENS
+      const materialCollection: DesignTokensCollection = await baseCollection
+        .clone()
+        .fromFiles([`${sourceDirectory}/${MATERIAL_DIRECTORY_NAME}/tokens/**/*.tokens.json`], {
+          forEachTokenBehaviour: 'only-new-token',
+        });
 
-    //   // IMPORT MATERIAL MODIFIERS
-    //   const materialModifiers: DesignTokenModifiers = await extractDesignTokenModifiers({
-    //     sourceDirectories: [
-    //       `${sourceDirectory}/${MODIFIERS_DIRECTORY_NAME}`,
-    //       `${sourceDirectory}/${MATERIAL_DIRECTORY_NAME}/${MODIFIERS_DIRECTORY_NAME}`,
-    //     ],
-    //     baseCollection: materialCollection,
-    //   });
+      // IMPORT MATERIAL MODIFIERS
+      const materialModifiers: DesignTokenModifiers = await extractDesignTokenModifiers({
+        sourceDirectories: [
+          `${sourceDirectory}/${MODIFIERS_DIRECTORY_NAME}`,
+          `${sourceDirectory}/${MATERIAL_DIRECTORY_NAME}/${MODIFIERS_DIRECTORY_NAME}`,
+        ],
+        baseCollection: materialCollection,
+      });
 
-    //   // CSS
-    //   await buildCssTokens({
-    //     baseCollection: materialCollection,
-    //     modifiers: materialModifiers,
-    //     outputDirectory,
-    //     subDirectory: 'material',
-    //     logger,
-    //   });
-
-    //   // MARKDOWN
-    //   await buildMarkdownTokens({
-    //     baseCollection: materialCollection,
-    //     modifiers: materialModifiers,
-    //     outputDirectory,
-    //     logger,
-    //   });
-    // });
-
-    if (false) {
-      // KOTLIN
-      await buildKotlinTokens({
-        collection: baseCollection,
+      // CSS
+      await buildCssTokens({
+        baseCollection: materialCollection,
+        modifiers: materialModifiers,
         outputDirectory,
+        subDirectory: 'material',
         logger,
       });
 
       // MARKDOWN
       await buildMarkdownTokens({
-        baseCollection,
-        modifiers,
+        baseCollection: materialCollection,
+        modifiers: materialModifiers,
         outputDirectory,
         logger,
       });
-    }
+    });
   });
 }
