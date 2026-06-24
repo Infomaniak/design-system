@@ -1,6 +1,7 @@
 import { signal, SignalWatcher } from '@lit-labs/signals';
 import { html, LitElement, type PropertyValues, unsafeCSS } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
+import { defineComponent } from '../helpers.private/component/define-component.ts';
 
 import style from './draft-component.component.css?inline';
 
@@ -10,8 +11,11 @@ import style from './draft-component.component.css?inline';
  * @element draft-component
  * @slot - Default slot. Falls back to the `label` property when empty.
  */
-@customElement('draft-component')
 export class DraftComponentComponent extends SignalWatcher(LitElement) {
+  static define() {
+    defineComponent('draft-component', this);
+  }
+
   static override styles = unsafeCSS(style);
 
   /**

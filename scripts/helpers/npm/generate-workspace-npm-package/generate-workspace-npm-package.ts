@@ -51,9 +51,12 @@ export async function generateWorkspaceNpmPackage({
       module,
       types,
       exports,
+      sideEffects,
+      files,
       dependencies,
       peerDependencies,
       optionalDependencies,
+      customElements,
     }: PackageJson = await readPackageJsonFile(join(packageDirectory, 'package.json'));
 
     const buildVersion: string = generatePackageJsonBuildVersion({
@@ -79,6 +82,8 @@ export async function generateWorkspaceNpmPackage({
       module,
       types,
       exports,
+      sideEffects,
+      files,
       dependencies:
         dependencies === undefined || dependenciesOverride === undefined
           ? dependencies
@@ -92,6 +97,7 @@ export async function generateWorkspaceNpmPackage({
             },
       peerDependencies,
       optionalDependencies,
+      customElements,
     });
 
     // Resolve any remaining `workspace:*` dependencies to actual versions

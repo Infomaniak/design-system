@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { DraftComponentComponent } from './draft-component.component.ts';
 
+DraftComponentComponent.define();
+
 describe('DraftComponentComponent', () => {
   it('should be constructible and registered', () => {
     const el = document.createElement('draft-component');
