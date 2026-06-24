@@ -1,7 +1,5 @@
 /**
  * The options to perform an Iconify API fetch
- *
- * @i
  */
 export interface IconifyApiFetchOptions extends Omit<RequestInit, 'body'> {
   readonly path: string;
