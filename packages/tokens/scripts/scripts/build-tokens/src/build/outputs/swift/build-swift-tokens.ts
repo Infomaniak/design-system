@@ -38,8 +38,8 @@ export async function buildSwiftTokens({
   logger,
 }: BuildSwiftTokensOptions) {
   return logger.asyncTask('swift', async (): Promise<void> => {
-    outputDirectory = removeTrailingSlash(outputDirectory);
-    const iosSwiftUiOutputDirectory: string = `${outputDirectory}/ios/swift-ui`;
+    const cleanOutputDirectory = removeTrailingSlash(outputDirectory);
+    const iosSwiftUiOutputDirectory: string = `${cleanOutputDirectory}/ios/swift-ui`;
     const t1ColorTokenNameToColorsetName = new Map<string, string>();
     const declarations: Map<string, SwiftEnumDeclaration[]> = new Map();
 
