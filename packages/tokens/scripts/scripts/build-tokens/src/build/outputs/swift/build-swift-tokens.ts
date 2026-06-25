@@ -47,61 +47,57 @@ export async function buildSwiftTokens({
     const lightThemeCollection: DesignTokensCollection = theme.get('light')!;
     const darkThemeCollection: DesignTokensCollection = theme.get('dark')!;
 
-    await logger.asyncTask('t1-tokens', async (logger: Logger): Promise<void> => {
-      // t1 color tokens
-      await logger.asyncTask('color-tokens', async (): Promise<void> => {
-        for await (const token of baseCollection
-          .tokens()
-          .filter((token: GenericDesignTokensCollectionToken): boolean => {
-            const resolvedToken: GenericDesignTokensCollectionTokenWithType = {
-              ...token,
-              type: baseCollection.resolve(token).type,
-            };
+    const t1Colors: GenericDesignTokensCollectionToken[] = [];
+    const t2Colors: GenericDesignTokensCollectionToken[] = [];
+    const t2NonColors: GenericDesignTokensCollectionToken[] = [];
 
-            return (
-              isColorDesignTokensCollectionToken(resolvedToken) &&
-              token.files.some((path: string): boolean => path.includes(T1_DIRECTORY_NAME))
-            );
-          })) {
+    for await (const token of baseCollection.tokens()) {
+      const resolvedToken: GenericDesignTokensCollectionTokenWithType = {
+        ...token,
+        type: baseCollection.resolve(token).type,
+      };
+      const inT1: boolean = token.files.some((path: string): boolean =>
+        path.includes(T1_DIRECTORY_NAME),
+      );
+
+      if (isColorDesignTokensCollectionToken(resolvedToken)) {
+        if (inT1) {
+          t1Colors.push(token);
+        } else {
+          t2Colors.push(token);
+        }
+      } else if (
+        !isFontFamilyDesignTokensCollectionToken(resolvedToken) &&
+        token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME))
+      ) {
+        t2NonColors.push(token);
+      }
+    }
+
+    await logger.asyncTask('t1-tokens', async (logger: Logger): Promise<void> => {
+      await logger.asyncTask('color-tokens', async (): Promise<void> => {
+        for (const token of t1Colors) {
           const { tokenName, colorsetName } = await buildXcAssets({
             token,
             outputDirectory: iosSwiftUiOutputDirectory,
           });
-
           t1ColorTokenNameToColorsetName.set(JSON.stringify(tokenName), colorsetName);
         }
       });
     });
-
     await logger.asyncTask('t2-tokens', async (logger: Logger): Promise<void> => {
-      // t2 color tokens
       await logger.asyncTask('color-tokens', async (): Promise<void> => {
-        for await (const token of baseCollection
-          .tokens()
-          .filter((token: GenericDesignTokensCollectionToken): boolean => {
-            const resolvedToken: GenericDesignTokensCollectionTokenWithType = {
-              ...token,
-              type: baseCollection.resolve(token).type,
-            };
-
-            return (
-              isColorDesignTokensCollectionToken(resolvedToken) &&
-              !token.files.some((path: string): boolean => path.includes(T1_DIRECTORY_NAME))
-            );
-          })) {
+        for (const token of t2Colors) {
           const enumColor: SwiftEnumDeclaration | null = await buildSwiftEnumColor({
             token,
             lightThemeCollection,
             darkThemeCollection,
             t1ColorTokenNameToColorsetName,
           });
-
           if (enumColor === null) {
             continue;
           }
-
           const groupName = getSwiftTokenGroupName(token);
-
           if (!declarations.has(groupName)) {
             declarations.set(groupName, []);
           }
@@ -109,24 +105,9 @@ export async function buildSwiftTokens({
         }
       });
 
-      // t2 non-color tokens
       await logger.asyncTask('non-color-tokens', async (): Promise<void> => {
-        for await (const token of baseCollection
-          .tokens()
-          .filter((token: GenericDesignTokensCollectionToken): boolean => {
-            const resolvedToken: GenericDesignTokensCollectionTokenWithType = {
-              ...token,
-              type: baseCollection.resolve(token).type,
-            };
-
-            return (
-              !isColorDesignTokensCollectionToken(resolvedToken) &&
-              !isFontFamilyDesignTokensCollectionToken(resolvedToken) &&
-              token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME))
-            );
-          })) {
+        for (const token of t2NonColors) {
           const groupName = getSwiftTokenGroupName(token);
-
           if (!declarations.has(groupName)) {
             declarations.set(groupName, []);
           }
@@ -178,8 +159,5 @@ export async function buildSwiftTokens({
         rawTokensPrefix: SWIFT_RAW_TOKENS_PREFIX,
       });
     });
-
-    // DEBUG: Print all the root struct
-    // console.log(JSON.stringify(root, null, 2));
   });
 }
