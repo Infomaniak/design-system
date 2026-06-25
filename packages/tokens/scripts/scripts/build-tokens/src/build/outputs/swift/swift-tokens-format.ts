@@ -3,12 +3,12 @@ import { segmentsToSwiftIdentifier } from '../../../../../../shared/dtcg/resolve
 import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { SWIFT_ENUM_PREFIX } from './swift-constants.ts';
 
-export function getTokenGroupName(token: GenericDesignTokensCollectionToken): string {
+export function getSwiftTokenGroupName(token: GenericDesignTokensCollectionToken): string {
     return `${SWIFT_ENUM_PREFIX}${capitalizeFirstLetter(token.name[0])}`;
 }
 
 export function tokenToSwiftValue(prefix: string, token: GenericDesignTokensCollectionToken) {
-    const groupName = getTokenGroupName(token);
+    const groupName = getSwiftTokenGroupName(token);
     const tokenName = segmentsToSwiftIdentifier(token.name, 1);
 
     return `${prefix}.${groupName}.${tokenName}`;

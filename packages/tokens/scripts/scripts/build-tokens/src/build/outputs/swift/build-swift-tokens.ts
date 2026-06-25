@@ -22,7 +22,7 @@ import { buildSwiftThemeStructs } from './built-steps/build-swift-theme-structs/
 import { buildXcAssets } from './built-steps/build-xcassets.ts';
 import { buildSwiftFile } from './helpers/build-swift-file.ts';
 import { SWIFT_RAW_TOKENS_PREFIX } from './swift-constants.ts';
-import { getTokenGroupName } from './swift-tokens-format.ts';
+import { getSwiftTokenGroupName } from './swift-tokens-format.ts';
 
 export interface BuildSwiftTokensOptions {
   readonly baseCollection: DesignTokensCollection;
@@ -100,7 +100,7 @@ export async function buildSwiftTokens({
             continue;
           }
 
-          const groupName = getTokenGroupName(token);
+          const groupName = getSwiftTokenGroupName(token);
 
           if (!declarations.has(groupName)) {
             declarations.set(groupName, []);
@@ -125,7 +125,7 @@ export async function buildSwiftTokens({
               token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME))
             );
           })) {
-          const groupName = getTokenGroupName(token);
+          const groupName = getSwiftTokenGroupName(token);
 
           if (!declarations.has(groupName)) {
             declarations.set(groupName, []);
