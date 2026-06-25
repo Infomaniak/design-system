@@ -8,7 +8,8 @@ const __dirname = path.resolve(path.dirname(__filename));
 const RELATIVE_SRC_DIR = '../src';
 const EXCLUDED_FILE = 'public-api.ts';
 const EXCLUDED_SUFFIXES = ['.private', '.test', '.stories', '.mock'];
-const FILE_EXTENSION = '.ts';
+const EXCLUDED_EXTENSIONS = ['.d.ts'];
+const ALLOWED_EXTENSIONS = ['.ts'];
 
 export interface SourceFile {
   absolutePath: string;
@@ -28,11 +29,21 @@ export function isExcludedFile(name: string): boolean {
     return true;
   }
 
-  if (!name.endsWith(FILE_EXTENSION)) {
+  if (EXCLUDED_EXTENSIONS.some((ext) => name.endsWith(ext))) {
     return true;
   }
 
-  return EXCLUDED_SUFFIXES.some((suffix) => name.endsWith(`${suffix}${FILE_EXTENSION}`));
+  if (!ALLOWED_EXTENSIONS.some((ext) => name.endsWith(ext))) {
+    return true;
+  }
+
+  return EXCLUDED_SUFFIXES.some((suffix) =>
+    ALLOWED_EXTENSIONS.some((ext) => name.endsWith(`${suffix}${ext}`)),
+  );
+}
+
+function buildGlobPatterns(): string[] {
+  return ALLOWED_EXTENSIONS.map((ext) => `**/*${ext}`);
 }
 
 function buildGlobExcludePatterns(): string[] {
@@ -40,8 +51,9 @@ function buildGlobExcludePatterns(): string[] {
 
   return [
     `**/${EXCLUDED_FILE}`,
-    `**/*.{${suffixGlob}}${FILE_EXTENSION}`,
-    `**/*.{${suffixGlob}}/**/*${FILE_EXTENSION}`,
+    ...EXCLUDED_EXTENSIONS.map((ext) => `**/*${ext}`),
+    `**/*.{${suffixGlob}}.ts`,
+    `**/*.{${suffixGlob}}/**/*.ts`,
   ];
 }
 
@@ -54,10 +66,13 @@ export async function getPublicApiSourceFiles(): Promise<SourceFile[]> {
 
   const files: string[] = [];
 
-  for await (const entry of fs.promises.glob('**/*.ts', {
+  for await (const entry of fs.promises.glob(buildGlobPatterns(), {
     cwd: srcDir,
     exclude: buildGlobExcludePatterns(),
   })) {
+    if (isExcludedFile(entry as string)) {
+      continue;
+    }
     files.push(entry as string);
   }
 
