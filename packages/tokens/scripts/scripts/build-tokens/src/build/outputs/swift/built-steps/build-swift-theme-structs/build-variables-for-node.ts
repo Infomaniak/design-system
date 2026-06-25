@@ -1,5 +1,5 @@
 import type { SwiftVariable } from '../../helpers/build-swift-file-with-init.ts';
-import { toSwiftVariableName } from '../../swift-naming-helper.ts';
+import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
 
 function sortEntries<T>(entries: Array<[string, T]>): Array<[string, T]> {

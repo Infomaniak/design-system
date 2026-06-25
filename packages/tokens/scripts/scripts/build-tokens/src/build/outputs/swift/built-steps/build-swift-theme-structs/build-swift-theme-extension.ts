@@ -2,7 +2,7 @@ import { dedent } from '../../../../../../../../../../../scripts/helpers/misc/st
 import { segmentsReferenceToPascalCase } from '../../../../../../../../shared/dtcg/design-token/reference/types/segments/to/pascal-case/segments-reference-to-pascal-case.ts';
 import { SWIFT_STRUCT_PREFIX, SWIFT_MAIN_STRUCT } from '../../swift-constants.ts';
 import { buildSwiftFile } from '../../helpers/build-swift-file.ts';
-import { toSwiftVariableName } from '../../swift-naming-helper.ts';
+import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
 import type { ValueMapDifference } from './find-value-map-differences.ts';
 
