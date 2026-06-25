@@ -39,7 +39,7 @@ export async function buildSwiftTokens({
 }: BuildSwiftTokensOptions) {
   return logger.asyncTask('swift', async (): Promise<void> => {
     outputDirectory = removeTrailingSlash(outputDirectory);
-    const iosSwitftUiOutputDirectory: string = `${outputDirectory}/ios/swift-ui`;
+    const iosSwiftUiOutputDirectory: string = `${outputDirectory}/ios/swift-ui`;
     const t1ColorTokenNameToColorsetName = new Map<string, string>();
     const declarations: Map<string, SwiftEnumDeclaration[]> = new Map();
 
@@ -65,7 +65,7 @@ export async function buildSwiftTokens({
           })) {
           const { tokenName, colorsetName } = await buildXcAssets({
             token,
-            outputDirectory: iosSwitftUiOutputDirectory,
+            outputDirectory: iosSwiftUiOutputDirectory,
           });
 
           t1ColorTokenNameToColorsetName.set(JSON.stringify(tokenName), colorsetName);
@@ -149,7 +149,7 @@ export async function buildSwiftTokens({
           content: '',
         });
 
-        await writeTextFileSafe(join(iosSwitftUiOutputDirectory, 'EsdsTokens.swift'), content);
+        await writeTextFileSafe(join(iosSwiftUiOutputDirectory, 'EsdsTokens.swift'), content);
 
         for (const [groupName, declaration] of declarations) {
           const content: string = buildSwiftFile({
@@ -163,7 +163,7 @@ export async function buildSwiftTokens({
           });
 
           await writeTextFileSafe(
-            join(iosSwitftUiOutputDirectory, `${SWIFT_RAW_TOKENS_PREFIX}+${groupName}.swift`),
+            join(iosSwiftUiOutputDirectory, `${SWIFT_RAW_TOKENS_PREFIX}+${groupName}.swift`),
             content,
           );
         }
@@ -174,7 +174,7 @@ export async function buildSwiftTokens({
       await buildSwiftThemeStructs({
         baseCollection,
         modifiers,
-        outputDirectory: iosSwitftUiOutputDirectory,
+        outputDirectory: iosSwiftUiOutputDirectory,
         rawTokensPrefix: SWIFT_RAW_TOKENS_PREFIX,
       });
     });

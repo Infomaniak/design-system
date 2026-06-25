@@ -8,7 +8,6 @@ import type { SwiftEnumDeclaration } from '../../../../../../../shared/dtcg/reso
 import { segmentsToSwiftIdentifier } from '../../../../../../../shared/dtcg/resolver/to/swift/token/name/design-token-name-segments-reference-to-swift-name.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ColorDesignTokensCollectionTokenValue } from '../../../../../../../shared/dtcg/resolver/token/types/base/color/value/color-design-tokens-collection-token-value.ts';
-import type { BuildSwiftEnumColorOptions } from './build-swift-enum.ts';
 
 export interface BuildSwiftEnumColorOptions {
   readonly token: GenericDesignTokensCollectionToken;
