@@ -30,7 +30,7 @@ export function swiftEnumDeclarationToString(
     output += ' */\n';
   }
 
-  output += `static public let ${declaration.name}: ${declaration.type} = ${declaration.value}`;
+  output += `static public let ${declaration.name}: ${declaration.valueType} = ${declaration.value}`;
 
   return output;
 }

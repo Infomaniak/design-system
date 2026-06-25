@@ -5,12 +5,13 @@ import { segmentsToSwiftIdentifier } from './name/design-token-name-segments-ref
 
 export function designTokensCollectionTokenWithMapValueToSwiftEnumDeclaration<GValue>(
   token: DesignTokensCollectionTokenWithType<string, GValue>,
-  type: string,
+  valueType: string,
   mapValue: (value: GValue) => string,
 ): SwiftEnumDeclaration {
   return {
+    $type: 'declaration',
     name: segmentsToSwiftIdentifier(token.name, 1),
-    type,
+    valueType,
     value: valueOrCurlyReferenceToSwiftEnumReference(token.value, mapValue),
     description: token.description,
     deprecated: token.deprecated,

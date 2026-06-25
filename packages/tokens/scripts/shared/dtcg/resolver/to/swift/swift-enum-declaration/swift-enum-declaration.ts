@@ -6,7 +6,7 @@ export type GenericSwiftEnumBase = SwiftEnumBase<string>;
 
 export interface SwiftEnumDeclaration extends SwiftEnumBase<'declaration'> {
   readonly name: string;
-  readonly type: string;
+  readonly valueType: string;
   readonly value: string;
   readonly description?: string;
   readonly deprecated?: boolean | string;

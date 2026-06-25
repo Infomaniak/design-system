@@ -1,66 +1,163 @@
-import { writeFileSafe } from '../../../../../../../../../scripts/helpers/file/write-file-safe.ts';
+import { join } from 'node:path';
+import { writeTextFileSafe } from '../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
-import { isCurlyReference } from '../../../../../../shared/dtcg/design-token/reference/types/curly/is-curly-reference.ts';
+import { removeTrailingSlash } from '../../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
-import type { GenericDesignTokensCollectionTokenWithType } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
+import type {
+  DesignTokenContexts,
+  DesignTokenModifiers,
+} from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
+import { type SwiftEnumDeclaration } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/swift-enum-declaration.ts';
+import { swiftEnumDeclarationsToString } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/to/swift-enum-declarations-to-string.ts';
+import { tokenToSwiftEnum } from '../../../../../../shared/dtcg/resolver/to/swift/token/token-to-swift-enum.ts';
+import type {
+  GenericDesignTokensCollectionToken,
+  GenericDesignTokensCollectionTokenWithType,
+} from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/color/is-color-design-tokens-collection-token.ts';
-import { createSwiftColorEnum } from './color-tokens/create-swift-color-enum.ts';
-import { processColorToken } from './color-tokens/process-color-token.ts';
-import { defaultXCAssets } from './color-tokens/XCAssetsIntefaces.ts';
+import { isFontFamilyDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/font-family/is-font-family-design-tokens-collection-token.ts';
+import { T1_DIRECTORY_NAME, T2_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
+import { buildSwiftEnumColor } from './built-steps/build-swift-enum-color.ts';
+import { buildSwiftThemeStructs } from './built-steps/build-swift-theme-structs/build-swift-theme-structs.ts';
+import { buildXcAssets } from './built-steps/build-xcassets.ts';
+import { buildSwiftFile } from './helpers/build-swift-file.ts';
+import { SWIFT_RAW_TOKENS_PREFIX } from './swift-constants.ts';
+import { getSwiftTokenGroupName } from './swift-tokens-format.ts';
 
 export interface BuildSwiftTokensOptions {
-  readonly collection: DesignTokensCollection;
+  readonly baseCollection: DesignTokensCollection;
+  readonly modifiers: DesignTokenModifiers;
   readonly outputDirectory: string;
   readonly logger: Logger;
 }
 
 export async function buildSwiftTokens({
-  collection,
+  baseCollection,
+  modifiers,
   outputDirectory,
   logger,
 }: BuildSwiftTokensOptions) {
   return logger.asyncTask('swift', async (): Promise<void> => {
-    const filesToWrite: { path: string; content: string }[] = [];
-    const colorsByFolder: Record<string, string[]> = {};
-    const rootContentsJson = {
-      info: defaultXCAssets,
-    };
+    outputDirectory = removeTrailingSlash(outputDirectory);
+    const iosSwiftUiOutputDirectory: string = `${outputDirectory}/ios/swift-ui`;
+    const t1ColorTokenNameToColorsetName = new Map<string, string>();
+    const declarations: Map<string, SwiftEnumDeclaration[]> = new Map();
 
-    filesToWrite.push({
-      path: `${outputDirectory}/ios/Colors.xcassets/Contents.json`,
-      content: JSON.stringify(rootContentsJson, null, 2),
-    });
+    const theme: DesignTokenContexts = modifiers.get('theme')!;
+    const lightThemeCollection: DesignTokensCollection = theme.get('light')!;
+    const darkThemeCollection: DesignTokensCollection = theme.get('dark')!;
 
-    for (const token of collection.tokens()) {
+    const t1Colors: GenericDesignTokensCollectionToken[] = [];
+    const t2Colors: GenericDesignTokensCollectionToken[] = [];
+    const t2NonColors: GenericDesignTokensCollectionToken[] = [];
+
+    for await (const token of baseCollection.tokens()) {
       const resolvedToken: GenericDesignTokensCollectionTokenWithType = {
         ...token,
-        type: collection.resolve(token).type,
+        type: baseCollection.resolve(token).type,
       };
+      const inT1: boolean = token.files.some((path: string): boolean =>
+        path.includes(T1_DIRECTORY_NAME),
+      );
 
       if (isColorDesignTokensCollectionToken(resolvedToken)) {
-        if (isCurlyReference(resolvedToken.value)) {
-          continue;
+        if (inT1) {
+          t1Colors.push(token);
+        } else {
+          t2Colors.push(token);
         }
-        const file = processColorToken(resolvedToken, outputDirectory, colorsByFolder);
-        filesToWrite.push(file);
-      } else {
-        // TODO
-        // console.log(resolvedToken);
+      } else if (
+        !isFontFamilyDesignTokensCollectionToken(resolvedToken) &&
+        token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME))
+      ) {
+        t2NonColors.push(token);
       }
     }
 
-    const swiftEnumContent = createSwiftColorEnum(colorsByFolder);
-    filesToWrite.push({
-      path: `${outputDirectory}/ios/EsdsColorRawTokens.swift`,
-      content: swiftEnumContent,
+    await logger.asyncTask('t1-tokens', async (logger: Logger): Promise<void> => {
+      await logger.asyncTask('color-tokens', async (): Promise<void> => {
+        for (const token of t1Colors) {
+          const { tokenName, colorsetName } = await buildXcAssets({
+            token,
+            outputDirectory: iosSwiftUiOutputDirectory,
+          });
+          t1ColorTokenNameToColorsetName.set(JSON.stringify(tokenName), colorsetName);
+        }
+      });
+    });
+    await logger.asyncTask('t2-tokens', async (logger: Logger): Promise<void> => {
+      await logger.asyncTask('color-tokens', async (): Promise<void> => {
+        for (const token of t2Colors) {
+          const enumColor: SwiftEnumDeclaration | null = await buildSwiftEnumColor({
+            token,
+            lightThemeCollection,
+            darkThemeCollection,
+            t1ColorTokenNameToColorsetName,
+          });
+          if (enumColor === null) {
+            continue;
+          }
+          const groupName = getSwiftTokenGroupName(token);
+          if (!declarations.has(groupName)) {
+            declarations.set(groupName, []);
+          }
+          declarations.get(groupName)!.push(enumColor);
+        }
+      });
+
+      await logger.asyncTask('non-color-tokens', async (): Promise<void> => {
+        for (const token of t2NonColors) {
+          const groupName = getSwiftTokenGroupName(token);
+          if (!declarations.has(groupName)) {
+            declarations.set(groupName, []);
+          }
+          declarations.get(groupName)!.push(
+            tokenToSwiftEnum({
+              ...token,
+              ...baseCollection.resolve(token),
+            }),
+          );
+        }
+      });
+
+      await logger.asyncTask('generate-file', async (): Promise<void> => {
+        // Build empty enum
+        const content: string = buildSwiftFile({
+          imports: ['SwiftUI'],
+          type: 'public enum',
+          name: SWIFT_RAW_TOKENS_PREFIX,
+          protocols: ['Sendable'],
+          content: '',
+        });
+
+        await writeTextFileSafe(join(iosSwiftUiOutputDirectory, 'EsdsTokens.swift'), content);
+
+        for (const [groupName, declaration] of declarations) {
+          const content: string = buildSwiftFile({
+            imports: ['SwiftUI'],
+            type: 'extension',
+            name: SWIFT_RAW_TOKENS_PREFIX,
+            protocols: [],
+            content: `public enum ${groupName} {
+              ${swiftEnumDeclarationsToString(declaration)}
+            }`,
+          });
+
+          await writeTextFileSafe(
+            join(iosSwiftUiOutputDirectory, `${SWIFT_RAW_TOKENS_PREFIX}+${groupName}.swift`),
+            content,
+          );
+        }
+      });
     });
 
-    const writePromises: Promise<void>[] = filesToWrite.map(
-      (file: { readonly path: string; readonly content: string }) => {
-        return writeFileSafe(file.path, file.content, { encoding: 'utf-8' });
-      },
-    );
-
-    await Promise.all(writePromises);
+    await logger.asyncTask('main-theme', async (): Promise<void> => {
+      await buildSwiftThemeStructs({
+        baseCollection,
+        modifiers,
+        outputDirectory: iosSwiftUiOutputDirectory,
+        rawTokensPrefix: SWIFT_RAW_TOKENS_PREFIX,
+      });
+    });
   });
 }
