@@ -27,6 +27,10 @@ export interface XCAssetsInfo {
 }
 
 export function buildColorsetContents(sRGBColor: Color): XCAssetsColorSet {
+  if (sRGBColor.space.name !== 'sRGB') {
+    throw new Error('Expected sRGB color');
+  }
+
   return {
     colors: [
       {
