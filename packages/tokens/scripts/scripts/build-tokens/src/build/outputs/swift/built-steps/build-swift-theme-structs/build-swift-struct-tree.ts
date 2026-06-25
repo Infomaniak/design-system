@@ -28,17 +28,9 @@ export async function buildSwiftStructTree(
 
   // Set initValue for string (leaf) entries directly in this node
   const stringEntries = sortEntries(Object.entries(node).filter(([, v]) => typeof v === 'string'));
-  const hasObjectEntries = Object.entries(node).some(([, v]) => typeof v !== 'string');
-  if (stringEntries.length > 0 && hasObjectEntries) {
-    for (const [key] of stringEntries) {
-      const idx = variables.findIndex((v) => v.name === toSwiftVariableName([key]));
-      if (idx !== -1) variables[idx].initValue = valueMap.get(JSON.stringify([...path, key]));
-    }
-  } else {
-    for (const [key] of stringEntries) {
-      const idx = variables.findIndex((v) => v.name === toSwiftVariableName([key]));
-      if (idx !== -1) variables[idx].initValue = valueMap.get(JSON.stringify([...path, key]));
-    }
+  for (const [key] of stringEntries) {
+    const idx = variables.findIndex((v) => v.name === toSwiftVariableName([key]));
+    if (idx !== -1) variables[idx].initValue = valueMap.get(JSON.stringify([...path, key]));
   }
 
   const objectEntries = sortEntries(Object.entries(node).filter(([, v]) => typeof v !== 'string'));
