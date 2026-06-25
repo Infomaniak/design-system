@@ -51,7 +51,7 @@ export async function buildSwiftTokens({
     const t2Colors: GenericDesignTokensCollectionToken[] = [];
     const t2NonColors: GenericDesignTokensCollectionToken[] = [];
 
-    for await (const token of baseCollection.tokens()) {
+    for (const token of baseCollection.tokens()) {
       const resolvedToken: GenericDesignTokensCollectionTokenWithType = {
         ...token,
         type: baseCollection.resolve(token).type,
