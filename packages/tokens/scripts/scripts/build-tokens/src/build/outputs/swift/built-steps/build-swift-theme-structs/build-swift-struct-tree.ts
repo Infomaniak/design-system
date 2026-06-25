@@ -2,9 +2,9 @@ import { join } from 'node:path';
 import { writeTextFileSafe } from '../../../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import { capitalizeFirstLetter } from '../../../../../../../../../../../scripts/helpers/misc/case/capitalize-first-letter/capitalize-first-letter.ts';
 import { segmentsReferenceToPascalCase } from '../../../../../../../../shared/dtcg/design-token/reference/types/segments/to/pascal-case/segments-reference-to-pascal-case.ts';
+import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
 import { buildSwiftStructWithInit } from '../../helpers/build-swift-file-with-init.ts';
 import { SWIFT_MAIN_STRUCT, SWIFT_STRUCT_PREFIX } from '../../swift-constants.ts';
-import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
 import { buildSwiftVariablesForNode } from './build-variables-for-node.ts';
 

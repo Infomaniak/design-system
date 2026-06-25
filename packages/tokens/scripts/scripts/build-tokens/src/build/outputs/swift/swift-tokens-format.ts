@@ -4,12 +4,12 @@ import type { GenericDesignTokensCollectionToken } from '../../../../../../share
 import { SWIFT_ENUM_PREFIX } from './swift-constants.ts';
 
 export function getSwiftTokenGroupName(token: GenericDesignTokensCollectionToken): string {
-    return `${SWIFT_ENUM_PREFIX}${capitalizeFirstLetter(token.name[0])}`;
+  return `${SWIFT_ENUM_PREFIX}${capitalizeFirstLetter(token.name[0])}`;
 }
 
 export function tokenToSwiftValue(prefix: string, token: GenericDesignTokensCollectionToken) {
-    const groupName = getSwiftTokenGroupName(token);
-    const tokenName = segmentsToSwiftIdentifier(token.name, 1);
+  const groupName = getSwiftTokenGroupName(token);
+  const tokenName = segmentsToSwiftIdentifier(token.name, 1);
 
-    return `${prefix}.${groupName}.${tokenName}`;
+  return `${prefix}.${groupName}.${tokenName}`;
 }
