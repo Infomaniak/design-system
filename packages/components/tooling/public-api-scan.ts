@@ -8,7 +8,6 @@ const __dirname = path.resolve(path.dirname(__filename));
 const RELATIVE_SRC_DIR = '../src';
 const EXCLUDED_FILE = 'public-api.ts';
 const EXCLUDED_SUFFIXES = ['.private', '.test', '.stories', '.mock'];
-const EXCLUDED_EXTENSIONS = ['.d.ts'];
 const ALLOWED_EXTENSIONS = ['.ts'];
 
 export interface SourceFile {
@@ -24,41 +23,54 @@ export function isExcludedDirectory(name: string): boolean {
   return EXCLUDED_SUFFIXES.some((suffix) => name.endsWith(suffix));
 }
 
+/**
+ * Strips the trailing `.ts` or `.d.ts` extension so that suffix checks
+ * work uniformly for both declaration and source files.
+ */
+function stripExtension(name: string): string {
+  if (name.endsWith('.d.ts')) {
+    return name.slice(0, -'.d.ts'.length);
+  }
+
+  if (name.endsWith('.ts')) {
+    return name.slice(0, -'.ts'.length);
+  }
+
+  return name;
+}
+
 export function isExcludedFile(name: string): boolean {
   if (name === EXCLUDED_FILE) {
     return true;
   }
 
-  if (EXCLUDED_EXTENSIONS.some((ext) => name.endsWith(ext))) {
+  if (!name.endsWith('.ts')) {
     return true;
   }
 
-  if (!ALLOWED_EXTENSIONS.some((ext) => name.endsWith(ext))) {
-    return true;
-  }
+  const base = stripExtension(name);
 
-  return EXCLUDED_SUFFIXES.some((suffix) =>
-    ALLOWED_EXTENSIONS.some((ext) => name.endsWith(`${suffix}${ext}`)),
-  );
+  return EXCLUDED_SUFFIXES.some((suffix) => base.endsWith(suffix));
 }
 
-function buildGlobPatterns(): string[] {
+export function buildGlobPatterns(): string[] {
   return ALLOWED_EXTENSIONS.map((ext) => `**/*${ext}`);
 }
 
-function buildGlobExcludePatterns(): string[] {
+export function buildGlobExcludePatterns(): string[] {
   const suffixGlob = EXCLUDED_SUFFIXES.map((s) => s.replace('.', '')).join(',');
 
   return [
     `**/${EXCLUDED_FILE}`,
-    ...EXCLUDED_EXTENSIONS.map((ext) => `**/*${ext}`),
     `**/*.{${suffixGlob}}.ts`,
+    `**/*.{${suffixGlob}}.d.ts`,
     `**/*.{${suffixGlob}}/**/*.ts`,
+    `**/*.{${suffixGlob}}/**/*.d.ts`,
   ];
 }
 
-export async function getPublicApiSourceFiles(): Promise<SourceFile[]> {
-  const srcDir = getSourceDir();
+export async function getPublicApiSourceFiles(srcDirOverride?: string): Promise<SourceFile[]> {
+  const srcDir = srcDirOverride ?? getSourceDir();
 
   if (!fs.existsSync(srcDir)) {
     throw new Error(`Source directory not found: ${srcDir}`);
@@ -70,9 +82,6 @@ export async function getPublicApiSourceFiles(): Promise<SourceFile[]> {
     cwd: srcDir,
     exclude: buildGlobExcludePatterns(),
   })) {
-    if (isExcludedFile(entry as string)) {
-      continue;
-    }
     files.push(entry as string);
   }
 
