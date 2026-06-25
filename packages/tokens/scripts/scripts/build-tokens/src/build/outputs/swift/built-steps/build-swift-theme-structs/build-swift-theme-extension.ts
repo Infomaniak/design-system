@@ -1,5 +1,5 @@
-import { dedent } from '../../../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { toPascalCase } from '../../../../../../../../../../../scripts/helpers/misc/case/to-pascal-case/to-pascal-case.ts';
+import { dedent } from '../../../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
 import { buildSwiftFile } from '../../helpers/build-swift-file.ts';
 import { SWIFT_MAIN_STRUCT, SWIFT_STRUCT_PREFIX } from '../../swift-constants.ts';
