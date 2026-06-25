@@ -1,5 +1,5 @@
 import type { ColorDesignTokensCollectionTokenValue } from '../../../../../../../token/types/base/color/value/color-design-tokens-collection-token-value.ts';
-import { colorTokenValueToColor } from '../../../../../../../token/types/base/color/value/to/color-token-value-to-color.ts';
+import { colorDesignTokensCollectionTokenValueToColorInstance } from '../../../../../../../token/types/base/color/value/to/color-design-tokens-collection-token-value-to-color-instance.ts';
 import { DEFAULT_FORMAT_COLOR_FUNCTION } from './default-format-color-function.ts';
 import type { FormatColorFunction } from './format-color-function.ts';
 
@@ -18,5 +18,5 @@ export function colorDesignTokensCollectionTokenValueToCssValue(
     formatColor = DEFAULT_FORMAT_COLOR_FUNCTION,
   }: ColorDesignTokensCollectionTokenValueToCssValueOptions = {},
 ): string {
-  return formatColor(colorTokenValueToColor(value));
+  return formatColor(colorDesignTokensCollectionTokenValueToColorInstance(value));
 }

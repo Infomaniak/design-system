@@ -1,5 +1,5 @@
 import type { ColorDesignTokensCollectionTokenValue } from '../../../../../../../token/types/base/color/value/color-design-tokens-collection-token-value.ts';
-import { colorTokenValueToColor } from '../../../../../../../token/types/base/color/value/to/color-token-value-to-color.ts';
+import { colorDesignTokensCollectionTokenValueToColorInstance } from '../../../../../../../token/types/base/color/value/to/color-design-tokens-collection-token-value-to-color-instance.ts';
 import type { KotlinVariableDeclarationColorValue } from '../../../../../kotlin-variable-declaration/value/built-in/color/kotlin-variable-declaration-color-value.ts';
 
 /**
@@ -8,7 +8,7 @@ import type { KotlinVariableDeclarationColorValue } from '../../../../../kotlin-
 export function colorDesignTokensCollectionTokenValueToKotlinValue(
   value: ColorDesignTokensCollectionTokenValue,
 ): KotlinVariableDeclarationColorValue {
-  const hexColor: string = colorTokenValueToColor(value)
+  const hexColor: string = colorDesignTokensCollectionTokenValueToColorInstance(value)
     .toString({
       format: 'hex',
       alpha: true,

@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { writeJsonFileSafe } from '../../../../../../../../../../scripts/helpers/file/write-json-file-safe.ts';
 import { isCurlyReference } from '../../../../../../../shared/dtcg/design-token/reference/types/curly/is-curly-reference.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
-import { colorTokenValueToColor } from '../../../../../../../shared/dtcg/resolver/token/types/base/color/value/to/color-token-value-to-color.ts';
+import { colorDesignTokensCollectionTokenValueToColorInstance } from '../../../../../../../shared/dtcg/resolver/token/types/base/color/value/to/color-design-tokens-collection-token-value-to-color-instance.ts';
 import { buildColorsetContents } from '../build-colorset-contents.ts';
 
 export interface BuildXcAssetsOptions {
@@ -24,7 +24,7 @@ export async function buildXcAssets({
     throw new Error(`Token ${token.name} is a reference, but it should be a value`);
   }
 
-  const color: Color = colorTokenValueToColor(token.value);
+  const color: Color = colorDesignTokensCollectionTokenValueToColorInstance(token.value);
   const sRGBColor: Color = color.to('sRGB');
 
   let category: string;
