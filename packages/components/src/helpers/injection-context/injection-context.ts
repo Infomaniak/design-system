@@ -15,6 +15,8 @@ export function injectedKeyLikeToKey(input: InjectedKeyLike): symbol {
 /**
  * Represents a context for dependency injection. It allows for storing and retrieving values
  * associated with symbols (`InjectedKeyLike`), providing a mechanism for scoped dependency injection.
+ *
+ * @deprecated
  */
 export class InjectionContext {
   /**
@@ -128,6 +130,7 @@ export class InjectionContext {
  * A generic class used to define injectable values with unique symbolic keys used by `InjectionContext`.
  *
  * @template GValue The type of value that can be injected.
+ * @deprecated
  */
 export class InjectableValue<GValue> {
   readonly #key: symbol;

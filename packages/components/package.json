@@ -27,6 +27,7 @@
   "dependencies": {
     "@infomaniak-design-system/esds-icon": "workspace:*",
     "@lit-labs/signals": "^0.3.0",
+    "@lit/context": "^1.1.6",
     "lit": "^3.3.3",
     "signal-utils": "^0.21.1"
   },

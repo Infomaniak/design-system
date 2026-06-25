@@ -27,7 +27,7 @@ export type ClassListLike = string | readonly string[] | null | undefined;
  * ```
  */
 export function hostClassList(
-  host: Element & ReactiveControllerHost,
+  host: ReactiveControllerHost & Element,
   signal: Signal<ClassListLike>,
 ): StopEffect {
   let classNames: readonly string[] = [];

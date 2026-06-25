@@ -1,9 +1,10 @@
 import { IconifyApi } from '@infomaniak-design-system/esds-icon';
+import { ContextProvider } from '@lit/context';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
-import { InjectionContext } from '../../helpers/injection-context/injection-context.ts';
-import { EsdsIconComponent, ICONIFY_API } from './esds-icon.component.ts';
+import { htmlElementRef } from '../../helpers/.private/component/html-element.ref.ts';
+import { EsdsIconComponent, ICONIFY_API_CONTEXT } from './esds-icon.component.ts';
 
 const { args, argTypes, template } = getStorybookHelpers<EsdsIconComponent>('esds-icon-lit');
 
@@ -33,20 +34,31 @@ export const Preprod: Story = {
     name: 'esds:bug',
   },
   render: ({ name, inline }: EsdsIconComponentStoryArgs) => {
-    const ctx = new InjectionContext([
-      ICONIFY_API.define(
-        new IconifyApi({
-          resources: ['https://iconify.preprod.dev.infomaniak.ch'],
-        }),
-      ),
-    ]);
-
     return html`
-      <esds-icon-lit
-        data-inject="${ctx.id}"
-        name="${name}"
-        inline="${inline}"
-      ></esds-icon-lit>
+      <div
+        ${htmlElementRef((element: HTMLElement) => {
+          const context = new ContextProvider(element, {
+            context: ICONIFY_API_CONTEXT,
+          });
+
+          context.setValue(
+            new IconifyApi({
+              resources: ['https://iconify.preprod.dev.infomaniak.ch'],
+            }),
+          );
+
+          context.hostConnected();
+
+          return (): void => {
+            context.clearCallbacks();
+          };
+        })}
+      >
+        <esds-icon-lit
+          name="${name}"
+          inline="${inline}"
+        ></esds-icon-lit>
+      </div>
     `;
   },
 };
