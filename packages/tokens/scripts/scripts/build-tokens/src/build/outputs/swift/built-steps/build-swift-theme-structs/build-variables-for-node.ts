@@ -7,20 +7,19 @@ function sortEntries<T>(entries: Array<[string, T]>): Array<[string, T]> {
 }
 
 export function buildSwiftVariablesForNode(node: SwiftNestedMap): SwiftVariable[] {
-  const variables: SwiftVariable[] = [];
-  const stringEntries = sortEntries(Object.entries(node).filter(([, v]) => typeof v === 'string'));
-  const objectEntries = sortEntries(Object.entries(node).filter(([, v]) => typeof v !== 'string'));
+  const allEntries = Object.entries(node);
 
-  for (const [key, value] of stringEntries) {
-    variables.push({ name: toSwiftVariableName([key]), type: value as string });
-  }
-
-  for (const [key, value] of objectEntries) {
-    variables.push({
+  const stringVars = sortEntries(allEntries.filter(([, v]) => typeof v === 'string'))
+    .map(([key, value]) => ({
       name: toSwiftVariableName([key]),
-      type: typeof value === 'string' ? value : 'Unknown',
-    });
-  }
+      type: value as string,
+    }));
 
-  return variables;
+  const objectVars = sortEntries(allEntries.filter(([, v]) => typeof v !== 'string'))
+    .map(([key]) => ({
+      name: toSwiftVariableName([key]),
+      type: 'Unknown',
+    }));
+
+  return [...stringVars, ...objectVars];
 }
