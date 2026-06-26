@@ -1,9 +1,8 @@
 import { IconifyApi } from '@infomaniak-design-system/esds-icon';
-import { ContextProvider } from '@lit/context';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
-import { htmlElementRef } from '../../helpers/.private/component/html-element.ref.ts';
+import { provideContext } from '../../helpers/.private/component/provide-context.ts';
 import { EsdsIconComponent, ICONIFY_API_CONTEXT } from './esds-icon.component.ts';
 
 const { args, argTypes, template } = getStorybookHelpers<EsdsIconComponent>('esds-icon-lit');
@@ -36,23 +35,14 @@ export const Preprod: Story = {
   render: ({ name, inline }: EsdsIconComponentStoryArgs) => {
     return html`
       <div
-        ${htmlElementRef((element: HTMLElement) => {
-          const context = new ContextProvider(element, {
-            context: ICONIFY_API_CONTEXT,
-          });
-
-          context.setValue(
+        ${provideContext([
+          [
+            ICONIFY_API_CONTEXT,
             new IconifyApi({
               resources: ['https://iconify.preprod.dev.infomaniak.ch'],
             }),
-          );
-
-          context.hostConnected();
-
-          return (): void => {
-            context.clearCallbacks();
-          };
-        })}
+          ],
+        ])}
       >
         <esds-icon-lit
           name="${name}"
