@@ -1,4 +1,5 @@
-import { cp } from 'node:fs/promises';
+import { cp, rm } from 'node:fs/promises';
+import { join } from 'node:path';
 import {
   updateGitRepositoryOnNewBranch,
   type UpdateGitRepositoryOnNewBranchUpdateFunctionContext,
@@ -32,6 +33,7 @@ export async function createIosPublishGithubBranch({
     update: async ({
       cwd,
     }: UpdateGitRepositoryOnNewBranchUpdateFunctionContext): Promise<string> => {
+      await rm(join(cwd, 'Sources/DesignSystem'), { recursive: true, force: true });
       await Promise.all([cp(packageDirectory, cwd, { recursive: true, force: true })]);
 
       return `chore: Update to ${version}`;
