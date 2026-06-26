@@ -1,6 +1,7 @@
 import { join } from 'node:path';
 import { writeTextFileSafe } from '../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
+import { dedent } from '../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { removeTrailingSlash } from '../../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type {
@@ -138,9 +139,11 @@ export async function buildSwiftTokens({
             type: 'extension',
             name: SWIFT_RAW_TOKENS_PREFIX,
             protocols: [],
-            content: `public enum ${groupName} {
-              ${swiftEnumDeclarationsToString(declaration)}
-            }`,
+            content: dedent`
+              public enum ${groupName} {
+                ${swiftEnumDeclarationsToString(declaration)}
+              }
+            `,
           });
 
           await writeTextFileSafe(
