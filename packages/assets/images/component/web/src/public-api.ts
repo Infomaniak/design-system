@@ -4,8 +4,6 @@ export {
   type IconifyApiOptions,
 } from '@infomaniak-design-system/components';
 export type {
-  IconifyApiFetchJSONOptions,
-  IconifyApiFetchOptions,
   IconifyApiGetIconsDataOptions,
   IconifyApiGetLastModifiedOptions,
   IconifyApiGetLastModifiedResponse,
@@ -20,6 +18,5 @@ export type {
   IconifyApiSearchIconsOptions,
   IconifyApiSearchIconsResponse,
   IconifyApiSearchOptions,
-  IconifyApiSharedFetchJSONOptions,
 } from '@infomaniak-design-system/components';
 export * from './esds-icon/esds-icon.component.ts';

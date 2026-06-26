@@ -10,7 +10,7 @@ describe('{{pascalCase name}}', () => {
   });
 
   it('should display the label when no slot content is provided', async () => {
-    const el = document.createElement('{{name}}') as {{pascalCase name}};
+    const el = document.createElement('{{name}}');
     el.label = 'Hello';
     document.body.append(el);
     await el.updateComplete;
