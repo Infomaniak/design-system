@@ -6,6 +6,10 @@ import {
 } from '../../../../../../../scripts/helpers/git/update-git-repository-on-new-branch.ts';
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
+import {
+  SWIFT_MAIN_STRUCT,
+  SWIFT_RAW_TOKENS_PREFIX,
+} from '../../../build-tokens/src/build/outputs/swift/swift-constants.ts';
 
 export interface CreateIosPublishGithubBranchOptions {
   readonly logger: Logger;
@@ -36,9 +40,11 @@ export async function createIosPublishGithubBranch({
       const mainDirectory: string = join(cwd, 'Sources/DesignSystem');
 
       await Promise.all(
-        ['Colors.xcassets', 'EsdsTheme', 'RawToken'].map((subPath: string): Promise<void> => {
-          return rm(join(mainDirectory, subPath), { recursive: true, force: true });
-        }),
+        ['Colors.xcassets', SWIFT_MAIN_STRUCT, SWIFT_RAW_TOKENS_PREFIX].map(
+          (subPath: string): Promise<void> => {
+            return rm(join(mainDirectory, subPath), { recursive: true, force: true });
+          },
+        ),
       );
 
       await Promise.all([cp(packageDirectory, cwd, { recursive: true, force: true })]);
