@@ -71,7 +71,11 @@ export function transformPackageJsonPaths<P extends PackageJsonWithPaths>(
         return './';
       }
 
-      const unprefixed = bare.startsWith('./') ? bare.slice(2) : bare.startsWith('/') ? bare.slice(1) : bare;
+      const unprefixed = bare.startsWith('./')
+        ? bare.slice(2)
+        : bare.startsWith('/')
+          ? bare.slice(1)
+          : bare;
       if (normalizedPath === unprefixed) {
         return './';
       }
