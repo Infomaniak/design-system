@@ -35,7 +35,6 @@ export function hostInject<GValue>(
   new ContextConsumer(host, {
     context,
     callback: (value: GValue): void => {
-      console.log('set', value);
       batch((): void => {
         signalValue.set(value ?? getDefaultValue());
       });
