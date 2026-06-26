@@ -38,9 +38,14 @@ export async function buildSwiftTokens({
   outputDirectory,
   logger,
 }: BuildSwiftTokensOptions) {
-  return logger.asyncTask('swift', async (): Promise<void> => {
+  return logger.asyncTask('swift', async (logger: Logger): Promise<void> => {
     const cleanOutputDirectory = removeTrailingSlash(outputDirectory);
     const iosSwiftUiOutputDirectory: string = `${cleanOutputDirectory}/ios/swift-ui`;
+    const iosSwiftUiSourceOutputDirectory: string = join(
+      iosSwiftUiOutputDirectory,
+      `Sources/DesignSystem`,
+    );
+
     const t1ColorTokenNameToColorsetName = new Map<string, string>();
     const declarations: Map<string, SwiftEnumDeclaration[]> = new Map();
 
@@ -80,7 +85,7 @@ export async function buildSwiftTokens({
         for (const token of t1Colors) {
           const { tokenName, colorsetName } = await buildXcAssets({
             token,
-            outputDirectory: iosSwiftUiOutputDirectory,
+            outputDirectory: iosSwiftUiSourceOutputDirectory,
           });
           t1ColorTokenNameToColorsetName.set(JSON.stringify(tokenName), colorsetName);
         }
@@ -122,6 +127,11 @@ export async function buildSwiftTokens({
       });
 
       await logger.asyncTask('generate-file', async (): Promise<void> => {
+        const rawTokensOutputDirectory: string = join(
+          iosSwiftUiSourceOutputDirectory,
+          SWIFT_RAW_TOKENS_PREFIX,
+        );
+
         // Build empty enum
         const content: string = buildSwiftFile({
           imports: ['SwiftUI'],
@@ -131,7 +141,7 @@ export async function buildSwiftTokens({
           content: '',
         });
 
-        await writeTextFileSafe(join(iosSwiftUiOutputDirectory, 'EsdsTokens.swift'), content);
+        await writeTextFileSafe(join(rawTokensOutputDirectory, 'EsdsTokens.swift'), content);
 
         for (const [groupName, declaration] of declarations) {
           const content: string = buildSwiftFile({
@@ -147,7 +157,7 @@ export async function buildSwiftTokens({
           });
 
           await writeTextFileSafe(
-            join(iosSwiftUiOutputDirectory, `${SWIFT_RAW_TOKENS_PREFIX}+${groupName}.swift`),
+            join(rawTokensOutputDirectory, `${SWIFT_RAW_TOKENS_PREFIX}+${groupName}.swift`),
             content,
           );
         }
@@ -158,7 +168,7 @@ export async function buildSwiftTokens({
       await buildSwiftThemeStructs({
         baseCollection,
         modifiers,
-        outputDirectory: iosSwiftUiOutputDirectory,
+        outputDirectory: iosSwiftUiSourceOutputDirectory,
         rawTokensPrefix: SWIFT_RAW_TOKENS_PREFIX,
       });
     });

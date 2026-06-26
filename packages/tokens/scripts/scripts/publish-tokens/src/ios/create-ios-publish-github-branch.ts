@@ -1,5 +1,4 @@
 import { cp } from 'node:fs/promises';
-import { join } from 'node:path';
 import {
   updateGitRepositoryOnNewBranch,
   type UpdateGitRepositoryOnNewBranchUpdateFunctionContext,
@@ -33,19 +32,7 @@ export async function createIosPublishGithubBranch({
     update: async ({
       cwd,
     }: UpdateGitRepositoryOnNewBranchUpdateFunctionContext): Promise<string> => {
-      await Promise.all([
-        cp(
-          join(packageDirectory, 'EsdsColorRawTokens.swift'),
-          join(cwd, 'CatalogApp/DesignSystem Catalog/EsdsColorRawTokens.swift'),
-          {
-            force: true,
-          },
-        ),
-        cp(join(packageDirectory, 'Colors.xcassets'), join(cwd, 'Sources/iOSDesignSystem'), {
-          recursive: true,
-          force: true,
-        }),
-      ]);
+      await Promise.all([cp(packageDirectory, cwd, { recursive: true, force: true })]);
 
       return `chore: Update to ${version}`;
     },
