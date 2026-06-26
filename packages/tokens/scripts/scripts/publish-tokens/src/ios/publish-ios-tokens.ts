@@ -40,16 +40,17 @@ export async function publishIosTokens({
       version: publishVersion,
     });
 
-    if (mode !== 'dev') {
-      await createGithubPullRequest({
-        owner: INFOMANIAK_GITHUB_ORGANIZATION,
-        repository: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
-        authToken: getEnvCiPullRequestAuthTokenMobile(),
-        title: `chore: Update to ${publishBranchName}`,
-        body: `Update to ${publishBranchName}`,
-        head: publishBranchName,
-        base: /*mode === 'rc' ? 'develop' : */ 'main', // TODO add support to `develop` branch when the repo will be ready
-      });
-    }
+    // TODO: uncomment after workflow tests
+    // if (mode !== 'dev') {
+    await createGithubPullRequest({
+      owner: INFOMANIAK_GITHUB_ORGANIZATION,
+      repository: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
+      authToken: getEnvCiPullRequestAuthTokenMobile(),
+      title: `chore: Update to ${publishBranchName}`,
+      body: `Update to ${publishBranchName}`,
+      head: publishBranchName,
+      base: /*mode === 'rc' ? 'develop' : */ 'main', // TODO add support to `develop` branch when the repo will be ready
+    });
+    // }
   });
 }
