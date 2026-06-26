@@ -10,13 +10,24 @@ export interface TransformPackageJsonPathsConfig {
 }
 
 interface PackageJsonWithPaths {
-  name: string;
-  version: string;
-  main?: string;
-  module?: string;
-  types?: string;
-  exports?: unknown;
-  files?: string[];
+  readonly name: string;
+  readonly version: string;
+  readonly type?: string;
+  readonly description?: string;
+  readonly keywords?: readonly string[];
+  readonly author?: string;
+  readonly license?: string;
+  readonly repository?: unknown;
+  readonly main?: string;
+  readonly module?: string;
+  readonly types?: string;
+  readonly exports?: unknown;
+  readonly sideEffects?: boolean | readonly string[];
+  readonly files?: readonly string[] | string[];
+  readonly dependencies?: unknown;
+  readonly peerDependencies?: unknown;
+  readonly optionalDependencies?: unknown;
+  readonly customElements?: string;
 }
 
 /**
