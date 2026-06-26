@@ -3,11 +3,11 @@ import { signal, SignalWatcher } from '@lit-labs/signals';
 import { html, LitElement, type TemplateResult, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators.js';
 import { batch } from 'signal-utils/subtle/batched-effect';
+import { defineComponent } from '../../helpers/.private/component/define-component.ts';
 import { onConnected } from '../../helpers/.private/component/on-connected.ts';
 import type { CleanUpFunction } from '../../helpers/.private/misc/clean-up-function.ts';
 import { componentEffect } from '../../helpers/.private/signal/component/component-effect/component-effect.ts';
 import { hostInject } from '../../helpers/.private/signal/component/host-inject/host-inject.ts';
-import { defineComponent } from '../helpers.private/component/define-component.ts';
 
 import { createContext } from '@lit/context';
 import { signalProperty } from '../../helpers/.private/signal/component/signal-property/signal-property.ts';
