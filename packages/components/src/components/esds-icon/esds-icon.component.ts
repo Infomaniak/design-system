@@ -16,7 +16,7 @@ import style from './esds-icon.component.css?inline';
 
 export type EsdsIconComponentStatus = 'loading' | 'rendered' | 'error';
 
-export const ICONIFY_API_CONTEXT = createContext<IconifyApi>(IconifyApi);
+export const ICONIFY_API_CONTEXT = createContext<IconifyApi, 'IconifyApi'>('IconifyApi');
 
 /**
  * Web component for displaying icons from the Infomaniak Design System icon library.

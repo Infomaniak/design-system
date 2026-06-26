@@ -5,9 +5,13 @@ import { batch } from 'signal-utils/subtle/batched-effect';
 import type { Signal } from '../../signal/signal.ts';
 
 /**
- * Returns a signal that resolves to the value of the specified injection key from a parent `InjectionContext`.
+ * Returns a signal that resolves to the value of the specified `Context` from a parent `ContextProducer`.
  *
  * @example:
+ *
+ * ```ts
+ * const LOCALE = createContext<string>('locale');
+ * ```
  *
  * ```ts
  * readonly #locale: Signal<string> = hostInject(this, LOCALE, (): string => navigator.language);
