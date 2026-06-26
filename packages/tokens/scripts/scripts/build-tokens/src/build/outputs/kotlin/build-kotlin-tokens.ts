@@ -30,6 +30,7 @@ import type {
   GenericDesignTokensCollectionToken,
   GenericResolvedDesignTokensCollectionToken,
 } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
+import { sortDesignTokensCollectionTokensByDependencies } from '../../../../../../shared/dtcg/resolver/token/operations/sort/by-dependencies/sort-design-tokens-collection-tokens-by-dependencies.ts';
 import {
   T1_DIRECTORY_NAME,
   T2_DIRECTORY_NAME,
@@ -215,16 +216,16 @@ function createKotlinInternalObjectFile({
     kotlinVariableDeclarationsToInternalObjectKotlinTokenFileContent({
       ...options,
       objectName,
-      declarations: collection
-        .tokens()
-        .filter(filterT2T3Tokens)
-        .map((token: GenericDesignTokensCollectionToken): KotlinVariableDeclaration => {
-          return resolveDesignTokensCollectionTokenToKotlinVariableDeclaration(
-            collection,
-            token,
-            toDeclarationsOptions,
-          );
-        }),
+      declarations: sortDesignTokensCollectionTokensByDependencies(
+        collection,
+        collection.tokens().filter(filterT2T3Tokens),
+      ).map((token: GenericDesignTokensCollectionToken): KotlinVariableDeclaration => {
+        return resolveDesignTokensCollectionTokenToKotlinVariableDeclaration(
+          collection,
+          token,
+          toDeclarationsOptions,
+        );
+      }),
     }),
   );
 }

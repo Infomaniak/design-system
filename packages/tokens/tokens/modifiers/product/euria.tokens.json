@@ -24,6 +24,46 @@
         "pressed": {
           "$value": "{color.text.brand.euria.pressed}"
         }
+      },
+      "on": {
+        "brand": {
+          "default": {
+            "$value": "{color.text.on.brand.euria.default}"
+          }
+        }
+      }
+    },
+    "icon": {
+      "brand": {
+        "default": {
+          "$value": "{color.icon.brand.euria.default}"
+        },
+        "hover": {
+          "$value": "{color.icon.brand.euria.hover}"
+        },
+        "pressed": {
+          "$value": "{color.icon.brand.euria.pressed}"
+        }
+      },
+      "on": {
+        "brand": {
+          "default": {
+            "$value": "{color.icon.on.brand.euria.default}"
+          }
+        }
+      }
+    },
+    "border": {
+      "brand": {
+        "default": {
+          "$value": "{color.border.brand.euria.default}"
+        },
+        "hover": {
+          "$value": "{color.border.brand.euria.hover}"
+        },
+        "pressed": {
+          "$value": "{color.border.brand.euria.pressed}"
+        }
       }
     }
   }

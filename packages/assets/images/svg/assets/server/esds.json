@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.15",
+    "version": "0.0.16",
     "author": {
       "name": "Infomaniak"
     },
@@ -10,9 +10,9 @@
       "title": "GPL-3.0-only",
       "spdx": "GPL-3.0-only"
     },
-    "total": 96
+    "total": 97
   },
-  "lastModified": 1781093613,
+  "lastModified": 1781629602,
   "icons": {
     "bell": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M10.268 21a2 2 0 003.464 0m-10.47-5.674A1 1 0 004 17h16a1 1 0 00.74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 106 8c0 4.499-1.411 5.956-2.738 7.326\" vector-effect=\"non-scaling-stroke\"/>"
@@ -124,6 +124,9 @@
     },
     "file-text": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8m-6-6a2.4 2.4 0 011.704.706l3.588 3.588A2.4 2.4 0 0120 8m-6-6v5a1 1 0 001 1h5M10 9H8m8 4H8m8 4H8\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "flag": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M4 22v-6.472m0 0V4a1 1 0 01.4-.8A6 6 0 018 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0120 4v10a1 1 0 01-.4.8A6 6 0 0116 16c-3 0-5-2-8-2a6 6 0 00-4 1.528\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "grid-three-two": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M15 3v18M3 12h18M9 3v18M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
@@ -342,6 +345,7 @@
       "envelope",
       "envelope-filled",
       "file-text",
+      "flag",
       "grid-three-two",
       "handshake",
       "handshake-heart",
@@ -581,6 +585,9 @@
     "#ban": [
       "user-cross"
     ],
+    "#banner": [
+      "flag"
+    ],
     "#bin": [
       "trash"
     ],
@@ -602,6 +609,9 @@
     ],
     "#booked": [
       "calendar-check"
+    ],
+    "#bookmark": [
+      "flag"
     ],
     "#border": [
       "overline-rectangle-underline",
@@ -822,6 +832,9 @@
     ],
     "#cooperation": [
       "handshake"
+    ],
+    "#country": [
+      "flag"
     ],
     "#crash": [
       "bug"
@@ -1126,11 +1139,17 @@
     "#finduser": [
       "user-magnifying-glass"
     ],
+    "#finish": [
+      "flag"
+    ],
     "#first": [
       "calendar-number-one"
     ],
     "#fix": [
       "wrench"
+    ],
+    "#flag": [
+      "flag"
     ],
     "#fold": [
       "chevron-up"
@@ -1451,6 +1470,7 @@
       "map-pin"
     ],
     "#marker": [
+      "flag",
       "map-pin"
     ],
     "#media": [
@@ -1489,6 +1509,9 @@
     ],
     "#messaging": [
       "bubble-left-text"
+    ],
+    "#milestone": [
+      "flag"
     ],
     "#minimize": [
       "chevron-up"
@@ -1542,6 +1565,9 @@
     ],
     "#mute": [
       "bell-slash"
+    ],
+    "#nation": [
+      "flag"
     ],
     "#navigate": [
       "chevron-left",
@@ -1666,6 +1692,9 @@
     ],
     "#pen": [
       "user-pen"
+    ],
+    "#pennant": [
+      "flag"
     ],
     "#people": [
       "user",
@@ -1848,7 +1877,8 @@
     ],
     "#report": [
       "bug",
-      "file-text"
+      "file-text",
+      "flag"
     ],
     "#responsive": [
       "smartphone-tablet"

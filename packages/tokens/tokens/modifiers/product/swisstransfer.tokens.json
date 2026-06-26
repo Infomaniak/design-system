@@ -24,6 +24,46 @@
         "pressed": {
           "$value": "{color.text.brand.swisstransfer.pressed}"
         }
+      },
+      "on": {
+        "brand": {
+          "default": {
+            "$value": "{color.text.on.brand.swisstransfer.default}"
+          }
+        }
+      }
+    },
+    "icon": {
+      "brand": {
+        "default": {
+          "$value": "{color.icon.brand.swisstransfer.default}"
+        },
+        "hover": {
+          "$value": "{color.icon.brand.swisstransfer.hover}"
+        },
+        "pressed": {
+          "$value": "{color.icon.brand.swisstransfer.pressed}"
+        }
+      },
+      "on": {
+        "brand": {
+          "default": {
+            "$value": "{color.icon.on.brand.swisstransfer.default}"
+          }
+        }
+      }
+    },
+    "border": {
+      "brand": {
+        "default": {
+          "$value": "{color.border.brand.swisstransfer.default}"
+        },
+        "hover": {
+          "$value": "{color.border.brand.swisstransfer.hover}"
+        },
+        "pressed": {
+          "$value": "{color.border.brand.swisstransfer.pressed}"
+        }
       }
     }
   }
