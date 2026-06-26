@@ -33,7 +33,14 @@ export async function createIosPublishGithubBranch({
     update: async ({
       cwd,
     }: UpdateGitRepositoryOnNewBranchUpdateFunctionContext): Promise<string> => {
-      await rm(join(cwd, 'Sources/DesignSystem'), { recursive: true, force: true });
+      const mainDirectory: string = join(cwd, 'Sources/DesignSystem');
+
+      await Promise.all(
+        ['Colors.xcassets', 'EsdsTheme', 'RawToken'].map((subPath: string): Promise<void> => {
+          return rm(join(mainDirectory, subPath), { recursive: true, force: true });
+        }),
+      );
+
       await Promise.all([cp(packageDirectory, cwd, { recursive: true, force: true })]);
 
       return `chore: Update to ${version}`;
