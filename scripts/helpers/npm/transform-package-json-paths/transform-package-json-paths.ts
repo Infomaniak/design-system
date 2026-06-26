@@ -16,6 +16,7 @@ interface PackageJsonWithPaths {
   module?: string;
   types?: string;
   exports?: unknown;
+  files?: string[];
 }
 
 /**
@@ -57,6 +58,27 @@ export function transformPackageJsonPaths<P extends PackageJsonWithPaths>(
       const absolutePattern = pattern.startsWith('/') ? pattern : `/${pattern}`;
       if (path.startsWith(absolutePattern)) {
         return path.replace(absolutePattern, './');
+      }
+    }
+
+    // Fallback for bare directory names (e.g. "dist" or "./dist")
+    // that appear in files[] arrays without a trailing slash.
+    const normalizedPath = path.endsWith('/') ? path.slice(0, -1) : path;
+    for (const pattern of patterns) {
+      const bare = pattern.endsWith('/') ? pattern.slice(0, -1) : pattern;
+
+      if (normalizedPath === bare) {
+        return './';
+      }
+
+      const unprefixed = bare.startsWith('./') ? bare.slice(2) : bare.startsWith('/') ? bare.slice(1) : bare;
+      if (normalizedPath === unprefixed) {
+        return './';
+      }
+
+      const withDotPrefix = `./${unprefixed}`;
+      if (normalizedPath === withDotPrefix) {
+        return './';
       }
     }
 
@@ -184,5 +206,6 @@ export function transformPackageJsonPaths<P extends PackageJsonWithPaths>(
     module: packageJson.module ? transformPath(packageJson.module) : undefined,
     types: packageJson.types ? transformPath(packageJson.types) : undefined,
     exports: packageJson.exports ? transformExports(packageJson.exports) : undefined,
+    files: packageJson.files?.map((file: string) => transformPath(file) ?? file),
   } as P;
 }
