@@ -18,9 +18,11 @@ export function buildSwiftFile({
 }: BuildSwiftFileOption): string {
   const safeProtocols = protocols.length ? `: ${protocols.join(', ')}` : '';
   const safeContent = content.length
-    ? `{
-      ${content}
-    }`
+    ? dedent`
+      {
+        ${content}
+      }
+    `
     : `{}`;
 
   return dedent`
