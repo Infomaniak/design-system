@@ -32,6 +32,7 @@ export type ProvideContextEntries = Iterable<GenericProvideContextEntry>;
 /**
  * Provides context as a `lit` directive to apply to an HTML element.
  *
+ * @inheritDoc https://github.com/webcomponents-cg/community-protocols/blob/main/proposals/context.md
  * @param {ProvideContextEntries} entries - A collection of context-value pairs to be provided.
  * @return {ReturnType<typeof ref>} A `lit` reference that can be assigned to an HTML element to set up the context.
  */
