@@ -5,6 +5,8 @@ import { html } from 'lit';
 import { provideContext } from '../../helpers/.private/component/provide-context.ts';
 import { EsdsIconComponent, ICONIFY_API_CONTEXT } from './esds-icon.component.ts';
 
+EsdsIconComponent.define();
+
 const { args, argTypes, template } = getStorybookHelpers<EsdsIconComponent>('esds-icon-lit');
 
 const meta = {
