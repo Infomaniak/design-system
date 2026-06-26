@@ -1,3 +1,4 @@
+import { dedent } from '../../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { buildSwiftFile } from './build-swift-file.ts';
 
 export interface SwiftVariable {
@@ -17,24 +18,24 @@ export function buildSwiftStructWithInit({
   protocols,
   variables,
 }: BuildSwiftStructWithInitOptions): string {
-  const initContent = `
-  init(
-${variables
-  .map((variable) => {
-    const defaultVal = variable.initValue === undefined ? '' : ` = ${variable.initValue}`;
-    return `    ${variable.name}: ${variable.type}${defaultVal}`;
-  })
-  .join(',\n')}
-  ) {
-${variables.map((variable) => `    self.${variable.name} = ${variable.name}`).join('\n')}
-  }`;
-
   return buildSwiftFile({
     imports: ['SwiftUI'],
     type: 'public struct',
     name,
     protocols,
-    content: `${variables.map((variable) => `public let ${variable.name}: ${variable.type}`).join('\n')}
-${initContent}`,
+    content: dedent`
+      ${variables.map((variable: SwiftVariable): string => `public let ${variable.name}: ${variable.type}`).join('\n')}
+      
+      init(
+        ${variables
+          .map((variable: SwiftVariable): string => {
+            const defaultVal = variable.initValue === undefined ? '' : ` = ${variable.initValue}`;
+            return `${variable.name}: ${variable.type}${defaultVal}`;
+          })
+          .join(',\n')}
+      ) {
+        ${variables.map((variable: SwiftVariable): string => `self.${variable.name} = ${variable.name}`).join('\n')}
+      }
+    `,
   });
 }
