@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto';
 import { openDB } from 'idb';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { SvgCache, type SvgCacheEntry } from './svg-cache.ts';
+import { SvgCache, type SvgCacheEntry } from './svg-cache.private.ts';
 
 const DB_NAME = 'esds-icon-cache' as const;
 const STORE_NAME = 'svg-cache' as const;

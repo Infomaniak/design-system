@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { IconifyApi } from './iconify-api.ts';
-import { SvgCache } from './svg-cache.ts';
+import { SvgCache } from './svg-cache.private.ts';
 
 describe('IconifyApi', () => {
   afterEach(() => {

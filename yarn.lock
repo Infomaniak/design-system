@@ -917,15 +917,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@infomaniak-design-system/components@workspace:^, @infomaniak-design-system/components@workspace:packages/components":
+"@infomaniak-design-system/components@workspace:*, @infomaniak-design-system/components@workspace:^, @infomaniak-design-system/components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "@infomaniak-design-system/components@workspace:packages/components"
   dependencies:
     "@custom-elements-manifest/analyzer": "npm:^0.11.0"
-    "@infomaniak-design-system/esds-icon": "workspace:*"
+    "@iconify/types": "npm:^2.0.0"
     "@lit-labs/signals": "npm:^0.3.0"
     "@storybook/web-components-vite": "npm:^10.4.1"
     "@wc-toolkit/type-parser": "npm:1.2.1"
+    fake-indexeddb: "npm:^6.2.5"
+    idb: "npm:^8.0.3"
     lit: "npm:^3.3.3"
     plop: "npm:^4.0.5"
     signal-utils: "npm:^0.21.1"
@@ -965,14 +967,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@infomaniak-design-system/esds-icon@workspace:*, @infomaniak-design-system/esds-icon@workspace:^, @infomaniak-design-system/esds-icon@workspace:packages/assets/images/component/web":
+"@infomaniak-design-system/esds-icon@workspace:^, @infomaniak-design-system/esds-icon@workspace:packages/assets/images/component/web":
   version: 0.0.0-use.local
   resolution: "@infomaniak-design-system/esds-icon@workspace:packages/assets/images/component/web"
   dependencies:
     "@iconify/types": "npm:^2.0.0"
+    "@infomaniak-design-system/components": "workspace:*"
     "@types/node": "npm:^25.7.0"
     fake-indexeddb: "npm:^6.2.5"
-    idb: "npm:^8.0.3"
     typescript: "npm:~6.0.3"
     vite: "npm:^8.0.12"
   languageName: unknown

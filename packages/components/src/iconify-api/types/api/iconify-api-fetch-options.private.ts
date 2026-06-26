@@ -1,5 +1,5 @@
 /**
- * The options to perform an Iconify API fetch.
+ * The options to perform an Iconify API fetch
  *
  * @internal
  */
