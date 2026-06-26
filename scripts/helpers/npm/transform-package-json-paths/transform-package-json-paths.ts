@@ -22,7 +22,7 @@ interface PackageJsonWithPaths {
 /**
  * Transforms package.json paths by stripping specified prefixes.
  * Only transforms the first occurrence of any matching pattern (conservative).
- * Only supports main, module, types, and exports fields.
+ * Only supports main, module, types, exports, and files fields.
  *
  * @example
  * ```typescript
@@ -206,6 +206,6 @@ export function transformPackageJsonPaths<P extends PackageJsonWithPaths>(
     module: packageJson.module ? transformPath(packageJson.module) : undefined,
     types: packageJson.types ? transformPath(packageJson.types) : undefined,
     exports: packageJson.exports ? transformExports(packageJson.exports) : undefined,
-    files: packageJson.files?.map((file: string) => transformPath(file) ?? file),
+    files: packageJson.files?.map((file: string) => transformPath(file)),
   } as P;
 }
