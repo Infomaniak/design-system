@@ -36,7 +36,7 @@ export async function publishIosTokens({
     const publishBranchName: string = await createIosPublishGithubBranch({
       logger,
       repositoryName: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
-      packageDirectory: join(outputDirectory, 'ios'),
+      packageDirectory: join(outputDirectory, 'ios/swift-ui'),
       version: publishVersion,
     });
 
