@@ -1,7 +1,6 @@
 export * from './draft-component/draft-component.component.ts';
 export * from './esds-icon/esds-icon.component.ts';
 export * from './iconify-api/iconify-api.ts';
-export * from './iconify-api/svg-cache.ts';
 export * from './iconify-api/types/api/get-icons-data/iconify-api-get-icons-data-options.ts';
 export * from './iconify-api/types/api/get-svg-url/iconify-api-get-svg-url-options.ts';
 export * from './iconify-api/types/api/last-modified/iconify-api-get-last-modified-options.ts';

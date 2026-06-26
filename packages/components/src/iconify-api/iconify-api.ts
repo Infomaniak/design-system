@@ -1,5 +1,5 @@
 import { type ExtendedIconifyIcon, type IconifyJSON } from '@iconify/types';
-import { SvgCache } from './svg-cache.ts';
+import { SvgCache } from './svg-cache.private.ts';
 import type { IconifyApiGetIconsDataOptions } from './types/api/get-icons-data/iconify-api-get-icons-data-options.ts';
 import type { IconifyApiGetSVGUrlOptions } from './types/api/get-svg-url/iconify-api-get-svg-url-options.ts';
 import type {
