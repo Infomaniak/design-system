@@ -98,7 +98,7 @@ export function buildSwiftThemeExtension(
     imports: ['SwiftUI'],
     type: 'extension',
     name: `${SWIFT_MAIN_STRUCT}`,
-    protocols: ['Sendable'],
+    protocols: [],
     content: `static let ${modifierName} = ${initCall}`,
   });
 }
