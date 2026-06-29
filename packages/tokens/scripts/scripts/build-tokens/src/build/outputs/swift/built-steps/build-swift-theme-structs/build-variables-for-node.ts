@@ -2,26 +2,32 @@ import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolve
 import type { SwiftVariable } from '../../helpers/build-swift-file-with-init.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
 
-function sortEntries<T>(entries: Array<[string, T]>): Array<[string, T]> {
-  return [...entries].sort(([a], [b]) => a.localeCompare(b));
-}
-
-export function buildSwiftVariablesForNode(node: SwiftNestedMap): SwiftVariable[] {
+export function getSortedSwiftVariables(
+  node: SwiftNestedMap,
+  valueMap: Map<string, string>,
+  path: string[],
+): SwiftVariable[] {
   const allEntries = Object.entries(node);
 
-  const stringVars = sortEntries(allEntries.filter(([, v]) => typeof v === 'string')).map(
-    ([key, value]) => ({
-      name: toSwiftVariableName([key]),
-      type: value as string,
-    }),
-  );
+  const variables: SwiftVariable[] = [];
 
-  const objectVars = sortEntries(allEntries.filter(([, v]) => typeof v !== 'string')).map(
-    ([key]) => ({
-      name: toSwiftVariableName([key]),
-      type: 'Unknown',
-    }),
-  );
+  for (const [key, value] of allEntries) {
+    const fullPath = [...path, key];
 
-  return [...stringVars, ...objectVars];
+    if (typeof value === 'string') {
+      variables.push({
+        name: toSwiftVariableName([key]),
+        type: value,
+        initValue: valueMap.get(JSON.stringify(fullPath)),
+      });
+    } else {
+      variables.push({
+        name: toSwiftVariableName([key]),
+        type: 'Unknown',
+        initValue: undefined,
+      });
+    }
+  }
+
+  return variables.sort((a, b) => a.name.localeCompare(b.name));
 }

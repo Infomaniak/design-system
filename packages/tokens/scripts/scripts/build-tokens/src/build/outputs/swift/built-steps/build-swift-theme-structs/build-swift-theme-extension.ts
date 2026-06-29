@@ -4,6 +4,7 @@ import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolve
 import { buildSwiftFile } from '../../helpers/build-swift-file.ts';
 import { SWIFT_MAIN_STRUCT, SWIFT_STRUCT_PREFIX } from '../../swift-constants.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
+import { getSortedSwiftVariables } from './build-variables-for-node.ts';
 import type { ValueMapDifference } from './find-value-map-differences.ts';
 
 type DiffNode = { [key: string]: DiffNode | string };
@@ -43,34 +44,25 @@ function emitDiffNode(
   modifierValueMap: Map<string, string>,
 ): string {
   const args: string[] = [];
-  const leafEntries = Object.entries(diffNode).filter(([, v]) => typeof v === 'string') as [
-    string,
-    string,
-  ][];
-  const subNodeEntries = Object.entries(diffNode).filter(([, v]) => typeof v !== 'string') as [
-    string,
-    DiffNode,
-  ][];
 
-  for (const [key, val] of leafEntries) {
-    args.push(`${toSwiftVariableName([key])}: ${val}`);
-  }
+  const canonicalFields = getSortedSwiftVariables(treeNode, modifierValueMap, path);
 
-  for (const [key, childDiff] of subNodeEntries) {
-    const childPath = [...path, key];
-    const childTreeNode = treeNode[key] as SwiftNestedMap | undefined;
-    if (!childTreeNode) continue;
+  for (const field of canonicalFields) {
+    const entry = Object.entries(treeNode).find(([k]) => toSwiftVariableName([k]) === field.name);
 
-    const childTypeName = structNameForPath(childPath);
+    if (!entry) continue;
+    const [key, value] = entry;
 
-    const childEntries = Object.entries(childTreeNode);
-    if (childEntries.length === 1 && typeof childEntries[0][1] === 'string') {
-      // Single-leaf inlined node
-      const [leafKey] = childEntries[0];
-      args.push(
-        `${toSwiftVariableName([key, leafKey])}: ${modifierValueMap.get(JSON.stringify([...childPath, leafKey])) ?? 'nil'}`,
-      );
+    if (typeof value === 'string') {
+      if (key in diffNode) {
+        args.push(`${field.name}: ${diffNode[key]}`);
+      }
     } else {
+      const childPath = [...path, key];
+      const childDiff = (diffNode[key] as DiffNode) ?? {};
+      const childTreeNode = treeNode[key] as SwiftNestedMap;
+      const childTypeName = structNameForPath(childPath);
+
       const call = emitDiffNode(
         childTypeName,
         childDiff,
@@ -78,7 +70,10 @@ function emitDiffNode(
         childPath,
         modifierValueMap,
       );
-      if (call) args.push(`${toSwiftVariableName([key])}: ${call}`);
+
+      if (call) {
+        args.push(`${field.name}: ${call}`);
+      }
     }
   }
 
