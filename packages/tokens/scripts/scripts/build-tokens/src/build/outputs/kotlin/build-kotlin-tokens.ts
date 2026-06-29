@@ -433,9 +433,14 @@ function filterT1Tokens(token: GenericDesignTokensCollectionToken): boolean {
 }
 
 function filterT2T3Tokens(token: GenericDesignTokensCollectionToken): boolean {
-  return token.files.some((path: string): boolean => {
-    return path.includes(T2_DIRECTORY_NAME) || path.includes(T3_DIRECTORY_NAME);
-  });
+  return (
+    token.files.some((path: string): boolean => {
+      return path.includes(T2_DIRECTORY_NAME) || path.includes(T3_DIRECTORY_NAME);
+    }) &&
+    /* TODO: kotlin does not support more than 248 properties, thus, we skipp the colors -> remove in the future */ token.name.at(
+      0,
+    ) !== 'color'
+  );
 }
 
 /*--*/
