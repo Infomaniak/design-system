@@ -47,7 +47,8 @@ function emitDiffNode(
 
   const canonicalFields = getSortedSwiftVariables(treeNode, modifierValueMap, path);
 
-  for (const field of canonicalFields) { // TODO: Possible optimization: Use a Map for treeNode entries to avoid O(n) search for each field
+  // TODO: Possible optimization: Use a Map for treeNode entries to avoid O(n) search for each field
+  for (const field of canonicalFields) {
     const entry = Object.entries(treeNode).find(([k]) => toSwiftVariableName([k]) === field.name);
 
     if (!entry) continue;
