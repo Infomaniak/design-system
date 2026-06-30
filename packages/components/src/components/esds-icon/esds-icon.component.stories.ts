@@ -6,6 +6,7 @@ import {
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
+import type { PartialStoryFn } from 'storybook/internal/csf';
 import { IconifyApi } from '../../iconify-api/iconify-api.ts';
 
 EsdsIconComponent.define();
@@ -37,21 +38,21 @@ export const Preprod: Story = {
   args: {
     name: 'esds:bug',
   },
-  render: ({ name, inline }: EsdsIconComponentStoryArgs) => {
-    const ctx = new InjectionContext([
-      ICONIFY_API.define(
-        new IconifyApi({
-          resources: ['https://iconify.preprod.dev.infomaniak.ch'],
-        }),
-      ),
-    ]);
-
-    return html`
-      <esds-icon-lit
-        data-inject="${ctx.id}"
-        name="${name}"
-        inline="${inline}"
-      ></esds-icon-lit>
-    `;
-  },
+  decorators: [
+    (Story: PartialStoryFn) => {
+      const ctx = new InjectionContext([
+        ICONIFY_API.define(
+          new IconifyApi({
+            resources: ['https://iconify.preprod.dev.infomaniak.ch'],
+          }),
+        ),
+      ]);
+      return html`
+        <div data-inject="${ctx.id}">
+          ${Story()}
+          <!-- NOTE: data-inject can be set directly on the component itself -->
+        </div>
+      `;
+    },
+  ],
 };
