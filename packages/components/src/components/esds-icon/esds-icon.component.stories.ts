@@ -1,9 +1,12 @@
-import { InjectionContext } from '@infomaniak-design-system/components';
+import {
+  EsdsIconComponent,
+  ICONIFY_API,
+  InjectionContext,
+} from '@infomaniak-design-system/components';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
 import { IconifyApi } from '../../iconify-api/iconify-api.ts';
-import { EsdsIconComponent, ICONIFY_API } from './esds-icon.component.ts';
 
 EsdsIconComponent.define();
 
