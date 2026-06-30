@@ -1,7 +1,7 @@
 import { signal, SignalWatcher } from '@lit-labs/signals';
 import { html, LitElement, type PropertyValues, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators.js';
-import { defineComponent } from '../helpers.private/component/define-component.ts';
+import { defineComponent } from '../../helpers/.private/component/define-component.ts';
 
 import style from './draft-component.component.css?inline';
 

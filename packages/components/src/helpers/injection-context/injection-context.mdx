@@ -6,6 +6,8 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 An `InjectionContext` is a way to pass data to a component tree.
 
+Its primary purpose is to provide values (like configurations) to the design-system components.
+
 ## Producer perspective
 
 The producer is responsible for creating the `InjectionContext` and passing it to the children.
@@ -96,9 +98,37 @@ export class ConsumerComponent extends LitElement {
 }
 ```
 
+#### Weak vs Strong references
+
+The `InjectionContext` may be used in two modes:
+
+##### Weak (default)
+
+The `InjectionContext` does not create a strong reference to itself, thus, a **strong reference** to it must be keept in the scope of the component using it.
+Later, when the component is destroyed (or there is no more reference to it), the `InjectionContext` is automatically destroyed.
+
+> NOTE: this is the way to go as GC is done automatically.
+
+##### Strong
+
+The `InjectionContext` creates a strong reference to itself, thus, the `destroy()` method must be called manually when the associated component is destroyed.
+
+```ts
+// pseudo example:
+const ctx = new InjectionContext([LOCALE.define('fr-FR')], { weak: false });
+
+onDestroy(element, () => ctx.destroy());
+```
+
+#### Additional notes
+
+The `InjectionContext` is resolved once when the `consumer` is connected to the DOM. This is not a reactive mechanism.
+
 ## Consumer perspective (DS team)
 
 The consumer is responsible for consuming the `InjectionContext`.
+
+> NOTE: The **DS team** does the **consumer** part, this section should not be done by the **producer**. Here it serves only as a reference.
 
 ### Create an `InjectableValue`
 
@@ -157,9 +187,14 @@ class InjectionContext {
    */
   static get<GValue>(source: Node, key: InjectedKeyLike): GValue | undefined;
 
-  constructor(entries?: InjectionContextEntries);
+  constructor(entries: InjectionContextEntries, options?: InjectionContextOptions);
 
   get id(): string;
+
+  /**
+   * Destroys manually the current `InjectionContext` instance.
+   */
+  destroy(): void;
 
   /* MAP LIKE */
   get size(): number;

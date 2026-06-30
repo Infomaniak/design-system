@@ -6,8 +6,12 @@ export type InjectionContextEntries = Iterable<InjectedEntry<unknown>>;
 
 export type InjectedKeyLike = symbol | InjectableValue<unknown>;
 
-export function injectedKeyLikeToKey(input: InjectedKeyLike): symbol {
+function injectedKeyLikeToKey(input: InjectedKeyLike): symbol {
   return input instanceof InjectableValue ? input.key : input;
+}
+
+export interface InjectionContextOptions {
+  readonly weak?: boolean;
 }
 
 /* CLASS */
@@ -15,8 +19,6 @@ export function injectedKeyLikeToKey(input: InjectedKeyLike): symbol {
 /**
  * Represents a context for dependency injection. It allows for storing and retrieving values
  * associated with symbols (`InjectedKeyLike`), providing a mechanism for scoped dependency injection.
- *
- * @deprecated
  */
 export class InjectionContext {
   /**
@@ -26,7 +28,7 @@ export class InjectionContext {
 
   static readonly attributeName = 'data-inject' as const;
 
-  static readonly #instances: Map<string, WeakRef<InjectionContext>> = new Map();
+  static readonly #instances: Map<string, WeakRef<InjectionContext> | InjectionContext> = new Map();
 
   /**
    * Retrieves a value associated with the specified key from the nearest context within the provided node's hierarchy.
@@ -46,12 +48,25 @@ export class InjectionContext {
         const attributeValue: string | null = node.getAttribute(this.attributeName);
 
         if (attributeValue !== null) {
-          const context: InjectionContext | undefined = this.#instances
-            .get(attributeValue)
-            ?.deref();
+          let context: WeakRef<InjectionContext> | InjectionContext | undefined =
+            this.#instances.get(attributeValue);
 
           if (context === undefined) {
-            throw new Error(`Missing InjectionContext instance with id: ${attributeValue}`);
+            throw new Error(
+              `Missing InjectionContext instance with id ${JSON.stringify(attributeValue)}`,
+            );
+          }
+
+          if (context instanceof WeakRef) {
+            context = context.deref();
+
+            if (context === undefined) {
+              this.#instances.delete(attributeValue);
+
+              throw new Error(
+                `Context with id ${JSON.stringify(attributeValue)} was unreferenced: did you forget to keep a referenced onto it ?`,
+              );
+            }
           }
 
           if (context.has(key)) {
@@ -75,24 +90,44 @@ export class InjectionContext {
   readonly #id: string;
   readonly #context: ReadonlyMap<symbol, unknown>;
 
-  constructor(entries?: InjectionContextEntries) {
+  /**
+   * Constructs an instance of the InjectionContext.
+   *
+   * @param {InjectionContextEntries} entries - The initial key-value pairs to populate the context.
+   * @param {InjectionContextOptions} options - Configuration options for the context.
+   * @param {boolean} [options.weak=true] - Determines whether the context should be weakly referenced.
+   * @return {InjectionContext} A new instance of the InjectionContext.
+   */
+  constructor(entries: InjectionContextEntries, { weak = true }: InjectionContextOptions = {}) {
     this.#id = `${Math.floor(Math.random() * 0x1_0000_0000)
       .toString(16)
       .padStart(8, '0')}-${Date.now().toString(16).padStart(12, '0')}`;
 
     this.#context = new Map(entries);
 
-    InjectionContext.#instances.set(this.#id, new WeakRef(this));
+    InjectionContext.#instances.set(this.#id, weak ? new WeakRef(this) : this);
 
-    const registry = new FinalizationRegistry<string>((id: string): void => {
-      InjectionContext.#instances.delete(id);
-    });
+    if (weak) {
+      const registry = new FinalizationRegistry<string>((id: string): void => {
+        InjectionContext.#instances.delete(id);
+      });
 
-    registry.register(this, this.#id);
+      registry.register(this, this.#id);
+    }
   }
 
   get id(): string {
     return this.#id;
+  }
+
+  /**
+   * Destroys manually the current `InjectionContext` instance.
+   */
+  destroy(): void {
+    InjectionContext.#instances.delete(this.#id);
+    if (InjectionContext.root === this) {
+      InjectionContext.root = undefined;
+    }
   }
 
   /* MAP LIKE PROPERTIES/METHODS */
@@ -130,7 +165,6 @@ export class InjectionContext {
  * A generic class used to define injectable values with unique symbolic keys used by `InjectionContext`.
  *
  * @template GValue The type of value that can be injected.
- * @deprecated
  */
 export class InjectableValue<GValue> {
   readonly #key: symbol;

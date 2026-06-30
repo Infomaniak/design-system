@@ -1,7 +1,8 @@
+import { type InjectedKeyLike, InjectionContext } from '@infomaniak-design-system/components';
 import { signal } from '@lit-labs/signals';
-import { type Context, ContextConsumer } from '@lit/context';
 import type { ReactiveControllerHost } from 'lit';
 import { batch } from 'signal-utils/subtle/batched-effect';
+import { onConnected } from '../../../component/on-connected.ts';
 import type { Signal } from '../../signal/signal.ts';
 
 /**
@@ -19,31 +20,27 @@ import type { Signal } from '../../signal/signal.ts';
  */
 export function hostInject<GValue>(
   host: ReactiveControllerHost & HTMLElement,
-  context: Context<unknown, GValue>,
+  key: InjectedKeyLike,
   _default: () => GValue,
 ): Signal<GValue>;
 export function hostInject<GValue>(
   host: ReactiveControllerHost & HTMLElement,
-  context: Context<unknown, GValue>,
+  key: InjectedKeyLike,
   _default?: undefined,
 ): Signal<GValue | undefined>;
 export function hostInject<GValue>(
   host: ReactiveControllerHost & HTMLElement,
-  context: Context<unknown, GValue>,
+  key: InjectedKeyLike,
   _default?: (() => GValue) | undefined,
 ): Signal<GValue | undefined> {
   const getDefaultValue = _default === undefined ? (): undefined => undefined : _default;
 
   const signalValue: Signal<GValue | undefined> = signal<GValue | undefined>(getDefaultValue());
 
-  new ContextConsumer(host, {
-    context,
-    callback: (value: GValue): void => {
-      batch((): void => {
-        signalValue.set(value ?? getDefaultValue());
-      });
-    },
-    subscribe: true,
+  onConnected(host, (): void => {
+    batch((): void => {
+      signalValue.set(InjectionContext.get<GValue>(host, key) ?? getDefaultValue());
+    });
   });
 
   return signalValue;

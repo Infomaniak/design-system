@@ -1,5 +1,6 @@
-export * from './draft-component/draft-component.component.ts';
-export * from './esds-icon/esds-icon.component.ts';
+export * from './components/draft-component/draft-component.component.ts';
+export * from './components/esds-icon/esds-icon.component.ts';
+export * from './helpers/injection-context/injection-context.ts';
 export * from './iconify-api/iconify-api.ts';
 export * from './iconify-api/types/api/get-icons-data/iconify-api-get-icons-data-options.ts';
 export * from './iconify-api/types/api/get-svg-url/iconify-api-get-svg-url-options.ts';
@@ -15,6 +16,3 @@ export * from './iconify-api/types/custom/get-svg/iconify-api-get-svg-options.ts
 export * from './iconify-api/types/custom/search/icon-list/iconify-api-icon-list.ts';
 export * from './iconify-api/types/custom/search/icon-list/iconify-api-list-icons-response-to-iconify-api-icon-list.ts';
 export * from './iconify-api/types/custom/search/iconify-api-search-options.ts';
-export * from './components/draft-component/draft-component.component.ts';
-export * from './components/esds-icon/esds-icon.component.ts';
-export * from './helpers/injection-context/injection-context.ts';

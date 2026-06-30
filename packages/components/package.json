@@ -16,7 +16,7 @@
   "scripts": {
     "=== BUILD ===": "",
     "build": "node --no-warnings=ExperimentalWarning scripts/scripts/build-components/build-components.script.ts",
-    "build:manual": "yarn generate:public-api && yarn analyze:cem && build:ts:vite && yarn build:ts:definitions",
+    "build:manual": "yarn generate:public-api && yarn analyze:cem && yarn build:ts:vite && yarn build:ts:definitions",
     "build:ts:vite": "vite build",
     "build:ts:definitions": "tsc -p tsconfig.build.json",
     "analyze:cem": "cem analyze --config ./custom-elements-manifest.config.mjs",
@@ -28,7 +28,6 @@
   "dependencies": {
     "@lit-labs/signals": "^0.3.0",
     "idb": "^8.0.3",
-    "@lit/context": "^1.1.6",
     "lit": "^3.3.3",
     "signal-utils": "^0.21.1"
   },

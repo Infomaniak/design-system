@@ -1,4 +1,3 @@
-import { IconifyApi } from '@infomaniak-design-system/esds-icon';
 import { signal, SignalWatcher } from '@lit-labs/signals';
 import { html, LitElement, type TemplateResult, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators.js';
@@ -9,15 +8,18 @@ import type { CleanUpFunction } from '../../helpers/.private/misc/clean-up-funct
 import { componentEffect } from '../../helpers/.private/signal/component/component-effect/component-effect.ts';
 import { hostInject } from '../../helpers/.private/signal/component/host-inject/host-inject.ts';
 
-import { createContext } from '@lit/context';
 import { signalProperty } from '../../helpers/.private/signal/component/signal-property/signal-property.ts';
 import type { Signal } from '../../helpers/.private/signal/signal/signal.ts';
 import type { WritableSignal } from '../../helpers/.private/signal/signal/writable-signal.ts';
+import { InjectableValue } from '../../helpers/injection-context/injection-context.ts';
+import { IconifyApi } from '../../iconify-api/iconify-api.ts';
 import style from './esds-icon.component.css?inline';
 
 export type EsdsIconComponentStatus = 'loading' | 'rendered' | 'error';
 
-export const ICONIFY_API_CONTEXT = createContext<IconifyApi, 'IconifyApi'>('IconifyApi');
+export const ICONIFY_API: InjectableValue<IconifyApi> = new InjectableValue<IconifyApi>(
+  'IconifyApi',
+);
 
 /**
  * Web component for displaying icons from the Infomaniak Design System icon library.
@@ -75,7 +77,7 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
 
   readonly #api: Signal<IconifyApi> = hostInject(
     this,
-    ICONIFY_API_CONTEXT,
+    ICONIFY_API,
     (): IconifyApi => new IconifyApi(),
   );
 
