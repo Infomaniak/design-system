@@ -18,8 +18,7 @@ export interface ListFigmaWebhooksUsingPlanOptions
 }
 
 export type ListFigmaWebhooksOptions =
-  | ListFigmaWebhooksUsingContextOptions
-  | ListFigmaWebhooksUsingPlanOptions;
+  ListFigmaWebhooksUsingContextOptions | ListFigmaWebhooksUsingPlanOptions;
 
 export interface ListFigmaWebhooksResponse {
   readonly webhooks: readonly FigmaWebhookV2[];

@@ -4,6 +4,4 @@ export interface DesignTokensCollectionFromDesignTokensTreeOptions {
 }
 
 export type DesignTokensCollectionFromDesignTokensTreeForEachTokenBehaviour =
-  | 'merge'
-  | 'only-new-token'
-  | 'prevent-new-token';
+  'merge' | 'only-new-token' | 'prevent-new-token';

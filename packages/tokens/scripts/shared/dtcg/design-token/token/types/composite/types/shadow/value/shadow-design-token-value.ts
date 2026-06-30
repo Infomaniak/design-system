@@ -2,5 +2,4 @@ import type { ObjectArrayShadowDesignTokenValue } from './types/object-array/obj
 import type { ObjectShadowDesignTokenValue } from './types/object/object-shadow-design-token-value.ts';
 
 export type ShadowDesignTokenValue =
-  | ObjectShadowDesignTokenValue
-  | ObjectArrayShadowDesignTokenValue;
+  ObjectShadowDesignTokenValue | ObjectArrayShadowDesignTokenValue;

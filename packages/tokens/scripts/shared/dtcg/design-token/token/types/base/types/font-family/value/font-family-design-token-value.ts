@@ -2,5 +2,4 @@ import type { StringArrayFontFamilyDesignTokenValue } from './types/string-array
 import type { StringFontFamilyDesignTokenValue } from './types/string/string-font-family-design-token-value.ts';
 
 export type FontFamilyDesignTokenValue =
-  | StringFontFamilyDesignTokenValue
-  | StringArrayFontFamilyDesignTokenValue;
+  StringFontFamilyDesignTokenValue | StringArrayFontFamilyDesignTokenValue;
