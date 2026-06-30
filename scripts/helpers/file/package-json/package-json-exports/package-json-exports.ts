@@ -16,8 +16,7 @@ export type PackageJsonExportsEntry = PackageJsonExportsEntryPath | PackageJsonE
 export type PackageJsonExportsFallback = readonly PackageJsonExportsEntry[];
 
 export type PackageJsonExportsEntryOrFallback =
-  | PackageJsonExportsEntry
-  | PackageJsonExportsFallback;
+  PackageJsonExportsEntry | PackageJsonExportsFallback;
 
 export interface PackageJsonExportEntryObject {
   readonly require?: PackageJsonExportsEntryOrFallback;
