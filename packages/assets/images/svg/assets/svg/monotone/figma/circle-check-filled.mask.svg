@@ -5,7 +5,7 @@
         <path d="M11 0C17.0751 0 22 4.92487 22 11C22 17.0751 17.0751 22 11 22C4.92487 22 0 17.0751 0 11C0 4.92487 4.92487 0 11 0Z" fill="white"/>
       </g>
       <g transform="translate(7.5908203125 9.060546875)">
-        <path d="M0 3L3 6L9 0" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M0 3L3 6L9 0" stroke="black" stroke-width="1.78605" stroke-linecap="round" stroke-linejoin="round"/>
       </g>
     </mask>
   </defs>

@@ -65,7 +65,7 @@ export function sortDesignTokensCollectionTokensByDependencies(
       }
 
       const nameA: CurlyReference = segmentsReferenceToCurlyReference(tokenA.name);
-      const nameB: CurlyReference = segmentsReferenceToCurlyReference(tokenA.name);
+      const nameB: CurlyReference = segmentsReferenceToCurlyReference(tokenB.name);
 
       if (nameA === nameB) {
         return 0;
