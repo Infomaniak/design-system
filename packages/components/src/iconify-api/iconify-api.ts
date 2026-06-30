@@ -1,11 +1,11 @@
 import { type ExtendedIconifyIcon, type IconifyJSON } from '@iconify/types';
-import { SvgCache } from './svg-cache.ts';
+import { SvgCache } from './svg-cache.private.ts';
 import type { IconifyApiGetIconsDataOptions } from './types/api/get-icons-data/iconify-api-get-icons-data-options.ts';
 import type { IconifyApiGetSVGUrlOptions } from './types/api/get-svg-url/iconify-api-get-svg-url-options.ts';
 import type {
   IconifyApiFetchJSONOptions,
   IconifyApiFetchOptions,
-} from './types/api/iconify-api-fetch-options.ts';
+} from './types/api/iconify-api-fetch-options.private.ts';
 import type { IconifyApiGetLastModifiedOptions } from './types/api/last-modified/iconify-api-get-last-modified-options.ts';
 import type { IconifyApiGetLastModifiedResponse } from './types/api/last-modified/iconify-api-get-last-modified-response.ts';
 import type { IconifyApiListIconSetsOptions } from './types/api/list-icon-sets/iconify-api-list-icon-sets-options.ts';

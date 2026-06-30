@@ -1,6 +1,6 @@
 {
   "name": "@infomaniak-design-system/components",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "files": [
     "dist",
@@ -26,16 +26,18 @@
     "validate:public-api": "node tooling/validate-public-api.ts"
   },
   "dependencies": {
-    "@infomaniak-design-system/esds-icon": "workspace:*",
     "@lit-labs/signals": "^0.3.0",
+    "idb": "^8.0.3",
     "@lit/context": "^1.1.6",
     "lit": "^3.3.3",
     "signal-utils": "^0.21.1"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.11.0",
+    "@iconify/types": "^2.0.0",
     "@storybook/web-components-vite": "^10.4.1",
     "@wc-toolkit/type-parser": "1.2.1",
+    "fake-indexeddb": "^6.2.5",
     "plop": "^4.0.5",
     "typescript": "~6.0.3",
     "vite": "^8.0.12"

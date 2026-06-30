@@ -1,4 +1,4 @@
-import type { IconifyApiFetchOptions } from '../../api/iconify-api-fetch-options.ts';
+import type { IconifyApiFetchOptions } from '../../api/iconify-api-fetch-options.private.ts';
 
 /**
  * Searches options.

@@ -1,5 +1,6 @@
-import { IconifyApi } from '@infomaniak-design-system/esds-icon';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { IconifyApi } from '../iconify-api/iconify-api.ts';
+import { _clearApiCache } from './esds-icon.component.private.ts';
 import { EsdsIconComponent } from './esds-icon.component.ts';
 
 EsdsIconComponent.define();
@@ -56,7 +57,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should create IntersectionObserver when not nolazy', async () => {
-      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit');
       el.name = 'test-prefix:my-icon';
       container.append(el);
       await el.updateComplete;
@@ -65,7 +66,7 @@ describe('EsdsIconComponent', () => {
 
     it('should load icon when element intersects', async () => {
       vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg></svg>');
-      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit');
       el.name = 'test-prefix:my-icon';
       container.append(el);
       await el.updateComplete;
@@ -82,7 +83,7 @@ describe('EsdsIconComponent', () => {
 
     it('should not load icon when element does not intersect', async () => {
       vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg></svg>');
-      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit');
       el.name = 'test-prefix:my-icon';
       container.append(el);
       await el.updateComplete;
@@ -102,7 +103,7 @@ describe('EsdsIconComponent', () => {
         });
       });
 
-      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit');
       el.name = 'test-prefix:my-icon';
       container.append(el);
       await el.updateComplete;
@@ -124,7 +125,7 @@ describe('EsdsIconComponent', () => {
       });
 
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit');
       el.name = 'test-prefix:my-icon';
       container.append(el);
       await el.updateComplete;
@@ -140,7 +141,7 @@ describe('EsdsIconComponent', () => {
 
     it('should not load icon if not connected', async () => {
       const getSVGSpy = vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg></svg>');
-      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit');
       el.name = 'test-prefix:my-icon';
       el.requestUpdate();
       // Wait for the update cycle to complete without awaiting updateComplete
@@ -151,7 +152,7 @@ describe('EsdsIconComponent', () => {
 
     it('should not load icon if name is empty', async () => {
       const getSVGSpy = vi.spyOn(IconifyApi.prototype, 'getSVG').mockResolvedValue('<svg></svg>');
-      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit');
       el.name = '';
       container.append(el);
       await el.updateComplete;
@@ -162,7 +163,7 @@ describe('EsdsIconComponent', () => {
 
   describe('edge cases', () => {
     it('should handle empty name without error', async () => {
-      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit');
       container.append(el);
       el.name = '';
       await expect(el.updateComplete).resolves.toBeDefined();
@@ -170,7 +171,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should not throw on reconnect after disconnect', async () => {
-      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit');
       el.name = 'test-prefix:my-icon';
       container.append(el);
       await el.updateComplete;
@@ -181,7 +182,7 @@ describe('EsdsIconComponent', () => {
     });
 
     it('should render nothing when no svg content in svg mode', async () => {
-      const el = document.createElement('esds-icon-lit') as EsdsIconComponent;
+      const el = document.createElement('esds-icon-lit');
       el.name = 'test-prefix:my-icon';
       container.append(el);
       await el.updateComplete;

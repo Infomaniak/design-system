@@ -31,6 +31,9 @@
     "rewriteRelativeImportExtensions": true,
     "erasableSyntaxOnly": true,
     "verbatimModuleSyntax": true,
+    "paths": {
+      "@infomaniak-design-system/components": ["./packages/components/src/public-api.ts"]
+    },
 
     /* Linting */
     "strict": true,

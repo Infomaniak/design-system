@@ -10,7 +10,7 @@ describe('DraftComponentComponent', () => {
   });
 
   it('should display the label when no slot content is provided', async () => {
-    const el = document.createElement('draft-component') as DraftComponentComponent;
+    const el = document.createElement('draft-component');
     el.label = 'Hello';
     document.body.append(el);
     await el.updateComplete;
