@@ -8,7 +8,7 @@ import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/hel
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import {
   SWIFT_MAIN_STRUCT,
-  SWIFT_RAW_TOKENS_PREFIX,
+  SWIFT_PRIMITIVE_TOKENS,
 } from '../../../build-tokens/src/build/outputs/swift/swift-constants.ts';
 
 export interface CreateIosPublishGithubBranchOptions {
@@ -40,7 +40,7 @@ export async function createIosPublishGithubBranch({
       const mainDirectory: string = join(cwd, 'Sources/DesignSystem');
 
       await Promise.all(
-        ['Colors.xcassets', SWIFT_MAIN_STRUCT, SWIFT_RAW_TOKENS_PREFIX].map(
+        ['Colors.xcassets', SWIFT_MAIN_STRUCT, SWIFT_PRIMITIVE_TOKENS].map(
           (subPath: string): Promise<void> => {
             return rm(join(mainDirectory, subPath), { recursive: true, force: true });
           },
