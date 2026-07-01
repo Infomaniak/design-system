@@ -2,5 +2,4 @@ import type { PredefinedStrokeStyleDesignTokenValue } from '../../../../../../de
 import type { ObjectStrokeStyleDesignTokensCollectionTokenValue } from './types/object/object-stroke-style-design-tokens-collection-token-value.ts';
 
 export type StrokeStyleDesignTokensCollectionTokenValue =
-  | PredefinedStrokeStyleDesignTokenValue
-  | ObjectStrokeStyleDesignTokensCollectionTokenValue;
+  PredefinedStrokeStyleDesignTokenValue | ObjectStrokeStyleDesignTokensCollectionTokenValue;
