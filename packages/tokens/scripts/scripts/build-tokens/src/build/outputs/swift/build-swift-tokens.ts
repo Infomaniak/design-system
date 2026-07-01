@@ -154,11 +154,11 @@ export async function buildSwiftTokens({
         for (const [groupName, declaration] of declarations) {
           const content: string = buildSwiftFile({
             imports: ['SwiftUI'],
-            type: 'extension',
+            type: 'public extension',
             name: SWIFT_RAW_TOKENS_PREFIX,
             protocols: [],
             content: dedent`
-              public enum ${groupName} {
+              enum ${groupName} {
                 ${swiftEnumDeclarationsToString(declaration)}
               }
             `,

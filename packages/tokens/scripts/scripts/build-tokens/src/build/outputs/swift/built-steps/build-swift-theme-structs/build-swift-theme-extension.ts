@@ -98,7 +98,7 @@ export function buildSwiftThemeExtension(
 
   return buildSwiftFile({
     imports: ['SwiftUI'],
-    type: 'extension',
+    type: 'public extension',
     name: `${SWIFT_MAIN_STRUCT}`,
     protocols: [],
     content: `static let ${modifierName} = ${initCall}`,

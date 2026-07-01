@@ -69,11 +69,11 @@ export async function buildSwiftStructTree(
 
     const fileContent = buildSwiftFile({
       imports: ['SwiftUI'],
-      type: 'extension',
+      type: 'public extension',
       name: extensionTarget,
       protocols: [],
       content: dedent`
-        public struct ${name}: Sendable {
+        struct ${name}: Sendable {
           ${buildSwiftStructContent(variables)}
         }
       `,
