@@ -17,14 +17,17 @@ npm install @infomaniak-design-system/components
 Import and define the component:
 
 ```ts
-import { EsdsIconComponent, IconifyApi } from '@infomaniak-design-system/components';
+import { EsdsIconComponent, ICONIFY_API, InjectionContext, IconifyApi } from '@infomaniak-design-system/components';
 
-EsdsIconComponent.init(
-  new IconifyApi({
-    resources: ['https://iconify.preprod.dev.infomaniak.ch'],
-  }),
-);
-```
+EsdsIconComponent.define();
+
+InjectionContext.root = new InjectionContext([
+  ICONIFY_API.define(
+    new IconifyApi({
+      resources: ['https://iconify.preprod.dev.infomaniak.ch'],
+    }),
+  ),
+]);
 
 Then use it in your HTML:
 
