@@ -1,4 +1,4 @@
-import { type InjectedKeyLike, InjectionContext } from '@infomaniak-design-system/components';
+import { InjectionContext, type InjectedKeyLike } from '../../../../injection-context/injection-context.ts';
 import { signal } from '@lit-labs/signals';
 import type { ReactiveControllerHost } from 'lit';
 import { batch } from 'signal-utils/subtle/batched-effect';
