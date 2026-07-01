@@ -6,7 +6,7 @@ import { componentEffect } from '../component-effect/component-effect.ts';
 export type StylePropertyValueLike = string | StylePropertyValue | null | undefined;
 
 /**
- * Bind's a style property with a signal.
+ * Binds a style property with a signal.
  *
  * @example:
  *
