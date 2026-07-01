@@ -16,7 +16,6 @@ import type {
   GenericDesignTokensCollectionTokenWithType,
 } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/color/is-color-design-tokens-collection-token.ts';
-import { isFontFamilyDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/font-family/is-font-family-design-tokens-collection-token.ts';
 import { T1_DIRECTORY_NAME, T2_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
 import { buildSwiftEnumColor } from './built-steps/build-swift-enum-color.ts';
 import { buildSwiftThemeStructs } from './built-steps/build-swift-theme-structs/build-swift-theme-structs.ts';

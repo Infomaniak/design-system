@@ -5,8 +5,8 @@ import type {
   GenericDesignTokensCollectionTokenWithType,
 } from '../../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
-import { isExcludedSwiftToken } from '../../swift-constants.ts';
 import { T2_DIRECTORY_NAME } from '../../../../../constants/design-token-tiers.ts';
+import { isExcludedSwiftToken } from '../../swift-constants.ts';
 import { buildSwiftStructTree } from './build-swift-struct-tree.ts';
 import { buildSwiftThemeProducts } from './build-swift-theme-products.ts';
 import { buildSwiftTokenTree, type SwiftTokenTree } from './build-token-tree.ts';
