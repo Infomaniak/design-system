@@ -160,10 +160,7 @@ export async function buildSwiftTokens({
             `,
           });
 
-          await writeTextFileSafe(
-            join(rawTokensOutputDirectory, `${groupName}.swift`),
-            content,
-          );
+          await writeTextFileSafe(join(rawTokensOutputDirectory, `${groupName}.swift`), content);
         }
       });
     });
