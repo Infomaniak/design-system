@@ -10,7 +10,10 @@ import type { ValueMapDifference } from './find-value-map-differences.ts';
 type DiffNode = { [key: string]: DiffNode | string };
 
 function structNameForPath(path: string[]): string {
-  return path.length === 0 ? `${SWIFT_MAIN_STRUCT}` : `${toPascalCase(path[path.length - 1])}`;
+  if (path.length === 0) {
+    return `${SWIFT_MAIN_STRUCT}`;
+  }
+  return `${SWIFT_MAIN_STRUCT}.${path.map((segment) => toPascalCase(segment)).join('.')}`;
 }
 
 function buildDiffTree(
