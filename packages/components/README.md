@@ -26,7 +26,7 @@ Use it in HTML or JSX:
 <esds-icon name="esds:headset"></esds-icon>
 ```
 
-> Each component may have additional configuration. See the component's Storybook docs for specifics.
+> Each component may have an additional configuration. See the component's Storybook docs for specifics.
 
 ### Framework Support
 
