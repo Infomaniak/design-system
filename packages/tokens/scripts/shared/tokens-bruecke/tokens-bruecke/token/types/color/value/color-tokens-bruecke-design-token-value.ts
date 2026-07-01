@@ -1,1 +1,1 @@
-export type ColorTokensBrueckeDesignTokenValue = string /* hex*/;
+export type ColorTokensBrueckeDesignTokenValue = string; /* hex*/

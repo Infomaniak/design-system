@@ -52,8 +52,7 @@ export function isDesignTokensCollectionTokenWithoutType(
 /* TOKEN */
 
 export type DesignTokensCollectionToken<GType extends string, GValue> =
-  | DesignTokensCollectionTokenWithType<GType, GValue>
-  | DesignTokensCollectionTokenWithoutType;
+  DesignTokensCollectionTokenWithType<GType, GValue> | DesignTokensCollectionTokenWithoutType;
 
 export type GenericDesignTokensCollectionToken = DesignTokensCollectionToken<
   ExplicitAny,
