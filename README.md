@@ -35,6 +35,7 @@
 
 - `packages/`: contains the librairies, utilities, ...
   - [tokens/](packages/tokens): contains the design tokens
+  - [components/](packages/components): contains the web components library
   - [assets/images/svg/](packages/assets/images/svg): contains the SVG icons and illustrations
 - `apps/`: contains the deployable apps
   - [docs/](apps/docs): contains the storybook used as documentation support
