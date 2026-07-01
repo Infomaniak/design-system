@@ -2,6 +2,36 @@
 
 Web components built with Lit, documented via Storybook using Custom Elements Manifest (CEM).
 
+## Getting Started
+
+### Installation
+
+```bash
+npm install @infomaniak-design-system/components
+```
+
+### Usage
+
+Import a component and call `.define()` in your entry file before rendering:
+
+```ts
+import { EsdsIconComponent } from '@infomaniak-design-system/components';
+
+EsdsIconComponent.define();
+```
+
+Use it in HTML or JSX:
+
+```html
+<esds-icon name="esds:headset"></esds-icon>
+```
+
+> Each component may have additional configuration. See the component's Storybook docs for specifics.
+
+### Framework Support
+
+Components are standard Web Components (custom elements) and work in any framework — React, Vue, Angular, or vanilla JS. No additional adapters are required.
+
 ## Architecture
 
 ### Overview
@@ -47,8 +77,8 @@ Note: this runs automatically on build.
 #### Component architecture
 
 ```
-src/my-component/
-├── my-component.component.ts         # Lit component + JSDoc
+src/components/my-component/
+├── my-component.component.ts         # Lit component + JSDoc + signals
 ├── my-component.component.css        # CSS style
 ├── my-component.component.test.ts    # Tests
 └── my-component.component.stories.ts # Storybook story
