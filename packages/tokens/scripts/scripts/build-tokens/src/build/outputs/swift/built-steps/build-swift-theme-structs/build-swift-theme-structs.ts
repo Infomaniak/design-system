@@ -5,7 +5,7 @@ import type {
   GenericDesignTokensCollectionTokenWithType,
 } from '../../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
-import { isFontFamilyDesignTokensCollectionToken } from '../../../../../../../../shared/dtcg/resolver/token/types/base/font-family/is-font-family-design-tokens-collection-token.ts';
+import { isExcludedSwiftToken } from '../../swift-constants.ts';
 import { T2_DIRECTORY_NAME } from '../../../../../constants/design-token-tiers.ts';
 import { buildSwiftStructTree } from './build-swift-struct-tree.ts';
 import { buildSwiftThemeProducts } from './build-swift-theme-products.ts';
@@ -43,8 +43,7 @@ export async function buildSwiftThemeStructs({
 
         return (
           token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME)) &&
-          !isFontFamilyDesignTokensCollectionToken(resolvedToken)
-          // NOTE: put here the list of excluded iOS tokens
+          !isExcludedSwiftToken(resolvedToken)
         );
       })
       .map((token: GenericDesignTokensCollectionToken): ArrayDesignTokenName => {
