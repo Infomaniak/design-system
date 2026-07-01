@@ -21,25 +21,24 @@ describe('IconifyApi', () => {
     it('should use in-memory cache for repeated requests', async () => {
       const api = new IconifyApi();
 
-      const fetchSpy = vi.spyOn(global, 'fetch').mockImplementation(
-        (): Promise<Response> =>
-          Promise.resolve(
-            new Response(
-              JSON.stringify({
-                prefix: 'test',
-                icons: {
-                  'my-icon': {
-                    body: '<path d="M0 0h16v16H0z"/>',
-                    width: 16,
-                    height: 16,
-                  },
+      const fetchSpy = vi.spyOn(global, 'fetch').mockImplementation((): Promise<Response> =>
+        Promise.resolve(
+          new Response(
+            JSON.stringify({
+              prefix: 'test',
+              icons: {
+                'my-icon': {
+                  body: '<path d="M0 0h16v16H0z"/>',
+                  width: 16,
+                  height: 16,
                 },
-                width: 16,
-                height: 16,
-              }),
-              { status: 200, headers: { 'Content-Type': 'application/json' } },
-            ),
+              },
+              width: 16,
+              height: 16,
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
           ),
+        ),
       );
 
       // First call - hits the network (lastModified + icons data)
@@ -60,25 +59,24 @@ describe('IconifyApi', () => {
     it('should keep resolved icon in memory even when refcount reaches 0', async () => {
       const api = new IconifyApi();
 
-      const fetchSpy = vi.spyOn(global, 'fetch').mockImplementation(
-        (): Promise<Response> =>
-          Promise.resolve(
-            new Response(
-              JSON.stringify({
-                prefix: 'test',
-                icons: {
-                  'my-icon': {
-                    body: '<path d="M0 0h16v16H0z"/>',
-                    width: 16,
-                    height: 16,
-                  },
+      const fetchSpy = vi.spyOn(global, 'fetch').mockImplementation((): Promise<Response> =>
+        Promise.resolve(
+          new Response(
+            JSON.stringify({
+              prefix: 'test',
+              icons: {
+                'my-icon': {
+                  body: '<path d="M0 0h16v16H0z"/>',
+                  width: 16,
+                  height: 16,
                 },
-                width: 16,
-                height: 16,
-              }),
-              { status: 200, headers: { 'Content-Type': 'application/json' } },
-            ),
+              },
+              width: 16,
+              height: 16,
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
           ),
+        ),
       );
 
       const userController = new AbortController();
@@ -108,25 +106,24 @@ describe('IconifyApi', () => {
     it('should dedupe concurrent requests for the same icon', async () => {
       const api = new IconifyApi();
 
-      const fetchSpy = vi.spyOn(global, 'fetch').mockImplementation(
-        (): Promise<Response> =>
-          Promise.resolve(
-            new Response(
-              JSON.stringify({
-                prefix: 'test',
-                icons: {
-                  'shared-icon': {
-                    body: '<path d="M0 0h16v16H0z"/>',
-                    width: 16,
-                    height: 16,
-                  },
+      const fetchSpy = vi.spyOn(global, 'fetch').mockImplementation((): Promise<Response> =>
+        Promise.resolve(
+          new Response(
+            JSON.stringify({
+              prefix: 'test',
+              icons: {
+                'shared-icon': {
+                  body: '<path d="M0 0h16v16H0z"/>',
+                  width: 16,
+                  height: 16,
                 },
-                width: 16,
-                height: 16,
-              }),
-              { status: 200, headers: { 'Content-Type': 'application/json' } },
-            ),
+              },
+              width: 16,
+              height: 16,
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
           ),
+        ),
       );
 
       const [result1, result2] = await Promise.all([
