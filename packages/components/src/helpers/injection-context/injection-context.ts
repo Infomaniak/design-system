@@ -30,6 +30,12 @@ export class InjectionContext {
 
   static readonly #instances: Map<string, WeakRef<InjectionContext> | InjectionContext> = new Map();
 
+  static readonly #registry: FinalizationRegistry<string> = new FinalizationRegistry<string>(
+    (id: string): void => {
+      InjectionContext.#instances.delete(id);
+    },
+  );
+
   /**
    * Retrieves a value associated with the specified key from the nearest context within the provided node's hierarchy.
    *
@@ -108,11 +114,7 @@ export class InjectionContext {
     InjectionContext.#instances.set(this.#id, weak ? new WeakRef(this) : this);
 
     if (weak) {
-      const registry = new FinalizationRegistry<string>((id: string): void => {
-        InjectionContext.#instances.delete(id);
-      });
-
-      registry.register(this, this.#id);
+      InjectionContext.#registry.register(this, this.#id);
     }
   }
 
