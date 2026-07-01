@@ -22,7 +22,7 @@ import { buildSwiftEnumColor } from './built-steps/build-swift-enum-color.ts';
 import { buildSwiftThemeStructs } from './built-steps/build-swift-theme-structs/build-swift-theme-structs.ts';
 import { buildXcAssets } from './built-steps/build-xcassets.ts';
 import { buildSwiftFile } from './helpers/build-swift-file.ts';
-import { SWIFT_RAW_TOKENS_PREFIX } from './swift-constants.ts';
+import { SWIFT_RAW_TOKENS_PREFIX, SWIFT_RESOURCES_DIR, SWIFT_SOURCES_DIR } from './swift-constants.ts';
 import { getSwiftTokenGroupName } from './swift-tokens-format.ts';
 
 export interface BuildSwiftTokensOptions {
@@ -43,11 +43,11 @@ export async function buildSwiftTokens({
     const iosSwiftUiOutputDirectory: string = `${cleanOutputDirectory}/ios/swift-ui`;
     const iosSwiftUiSourceOutputDirectory: string = join(
       iosSwiftUiOutputDirectory,
-      `Sources/DesignSystem`,
+      SWIFT_SOURCES_DIR,
     );
     const iosSwiftUiResourcesOutputDirectory: string = join(
       iosSwiftUiOutputDirectory,
-      `Ressources`,
+      SWIFT_RESOURCES_DIR,
     );
 
     const t1ColorTokenNameToColorsetName = new Map<string, string>();

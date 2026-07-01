@@ -9,6 +9,8 @@ import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts'
 import {
   SWIFT_MAIN_STRUCT,
   SWIFT_RAW_TOKENS_PREFIX,
+  SWIFT_RESOURCES_DIR,
+  SWIFT_SOURCES_DIR,
 } from '../../../build-tokens/src/build/outputs/swift/swift-constants.ts';
 
 export interface CreateIosPublishGithubBranchOptions {
@@ -37,8 +39,8 @@ export async function createIosPublishGithubBranch({
     update: async ({
       cwd,
     }: UpdateGitRepositoryOnNewBranchUpdateFunctionContext): Promise<string> => {
-      const sourcesDirectory: string = join(cwd, 'Sources/DesignSystem');
-      const resourcesDirectory: string = join(cwd, 'Ressources');
+      const sourcesDirectory: string = join(cwd, SWIFT_SOURCES_DIR);
+      const resourcesDirectory: string = join(cwd, SWIFT_RESOURCES_DIR);
 
       await Promise.all([
         ...[SWIFT_MAIN_STRUCT, SWIFT_RAW_TOKENS_PREFIX].map((subPath: string): Promise<void> => {
