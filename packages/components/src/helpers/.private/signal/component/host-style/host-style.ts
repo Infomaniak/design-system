@@ -19,7 +19,7 @@ export type StylePropertyValueLike = string | StylePropertyValue | null | undefi
  * ```
  */
 export function hostStyle(
-  host: HTMLElement & ReactiveControllerHost,
+  host: ReactiveControllerHost & HTMLElement,
   propertyName: string,
   signal: Signal<StylePropertyValueLike>,
 ): StopEffect {

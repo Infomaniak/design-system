@@ -36,7 +36,7 @@ export default function (plop) {
     actions: [
       {
         type: 'addMany',
-        destination: 'src/{{name}}',
+        destination: 'src/components/{{name}}',
         base: 'tooling/templates',
         templateFiles: 'tooling/templates/*.hbs',
         stripExtensions: ['hbs'],
