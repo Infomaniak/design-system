@@ -45,7 +45,10 @@ export async function buildSwiftTokens({
       iosSwiftUiOutputDirectory,
       `Sources/DesignSystem`,
     );
-    const iosSwiftUiResourcesOutputDirectory: string = join(iosSwiftUiOutputDirectory, `Ressources`);
+    const iosSwiftUiResourcesOutputDirectory: string = join(
+      iosSwiftUiOutputDirectory,
+      `Ressources`,
+    );
 
     const t1ColorTokenNameToColorsetName = new Map<string, string>();
     const declarations: Map<string, SwiftEnumDeclaration[]> = new Map();
