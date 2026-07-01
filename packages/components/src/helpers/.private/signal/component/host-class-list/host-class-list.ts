@@ -6,7 +6,7 @@ import { componentEffect } from '../component-effect/component-effect.ts';
 export type ClassListLike = string | readonly string[] | null | undefined;
 
 /**
- * Bind's a list of css classes with a signal.
+ * Binds a list of CSS classes with a signal.
  *
  * @example:
  *
