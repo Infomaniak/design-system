@@ -59,7 +59,7 @@ export async function buildSwiftEnumColor({
   return {
     $type: 'declaration',
     name: segmentsToSwiftIdentifier(token.name, 1),
-    valueType: 'Color',
-    value: `Color(light: Color("${lightColorsetName}"), dark: Color("${darkColorsetName}"))`,
+    valueType: 'SwiftUI.Color',
+    value: `SwiftUI.Color(light: .init("${lightColorsetName}"), dark: .init("${darkColorsetName}"))`,
   };
 }
