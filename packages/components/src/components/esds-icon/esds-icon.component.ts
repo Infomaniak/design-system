@@ -25,11 +25,11 @@ export const ICONIFY_API: InjectableValue<IconifyApi> = new InjectableValue<Icon
  * Web component for displaying icons from the Infomaniak Design System icon library.
  *
  * @summary Icon component
- * @element esds-icon-lit
+ * @element esds-icon
  */
 export class EsdsIconComponent extends SignalWatcher(LitElement) {
   static define() {
-    defineComponent('esds-icon-lit', this);
+    defineComponent('esds-icon', this);
   }
 
   static override styles = unsafeCSS(style);
@@ -196,6 +196,6 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'esds-icon-lit': EsdsIconComponent;
+    'esds-icon': EsdsIconComponent;
   }
 }
