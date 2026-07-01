@@ -37,15 +37,15 @@ export async function createIosPublishGithubBranch({
     update: async ({
       cwd,
     }: UpdateGitRepositoryOnNewBranchUpdateFunctionContext): Promise<string> => {
-      const mainDirectory: string = join(cwd, 'Sources/DesignSystem');
+      const sourcesDirectory: string = join(cwd, 'Sources/DesignSystem');
+      const resourcesDirectory: string = join(cwd, 'Ressources');
 
-      await Promise.all(
-        ['Colors.xcassets', SWIFT_MAIN_STRUCT, SWIFT_RAW_TOKENS_PREFIX].map(
-          (subPath: string): Promise<void> => {
-            return rm(join(mainDirectory, subPath), { recursive: true, force: true });
-          },
-        ),
-      );
+      await Promise.all([
+        ...[SWIFT_MAIN_STRUCT, SWIFT_RAW_TOKENS_PREFIX].map((subPath: string): Promise<void> => {
+          return rm(join(sourcesDirectory, subPath), { recursive: true, force: true });
+        }),
+        rm(join(resourcesDirectory, 'Colors.xcassets'), { recursive: true, force: true }),
+      ]);
 
       await Promise.all([cp(packageDirectory, cwd, { recursive: true, force: true })]);
 

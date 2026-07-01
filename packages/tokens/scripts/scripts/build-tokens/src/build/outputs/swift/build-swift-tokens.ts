@@ -45,6 +45,7 @@ export async function buildSwiftTokens({
       iosSwiftUiOutputDirectory,
       `Sources/DesignSystem`,
     );
+    const iosSwiftUiResourcesOutputDirectory: string = join(iosSwiftUiOutputDirectory, `Ressources`);
 
     const t1ColorTokenNameToColorsetName = new Map<string, string>();
     const declarations: Map<string, SwiftEnumDeclaration[]> = new Map();
@@ -85,7 +86,7 @@ export async function buildSwiftTokens({
         for (const token of t1Colors) {
           const { tokenName, colorsetName } = await buildXcAssets({
             token,
-            outputDirectory: iosSwiftUiSourceOutputDirectory,
+            outputDirectory: iosSwiftUiResourcesOutputDirectory,
           });
           t1ColorTokenNameToColorsetName.set(JSON.stringify(tokenName), colorsetName);
         }
