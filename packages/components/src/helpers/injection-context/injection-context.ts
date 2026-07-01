@@ -64,7 +64,7 @@ export class InjectionContext {
               this.#instances.delete(attributeValue);
 
               throw new Error(
-                `Context with id ${JSON.stringify(attributeValue)} was unreferenced: did you forget to keep a referenced onto it ?`,
+                `Context with id ${JSON.stringify(attributeValue)} was unreferenced: did you forget to keep a reference to it?`,
               );
             }
           }
