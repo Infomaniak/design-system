@@ -945,7 +945,6 @@ __metadata:
     "@chromatic-com/storybook": "npm:^5.2.1"
     "@iconify/types": "npm:^2.0.0"
     "@infomaniak-design-system/components": "workspace:^"
-    "@infomaniak-design-system/esds-icon": "workspace:^"
     "@infomaniak-design-system/tokens": "workspace:^"
     "@rolldown/plugin-babel": "npm:^0.2.3"
     "@storybook/addon-a11y": "npm:^10.4.5"
@@ -967,7 +966,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@infomaniak-design-system/esds-icon@workspace:^, @infomaniak-design-system/esds-icon@workspace:packages/assets/images/component/web":
+"@infomaniak-design-system/esds-icon@workspace:packages/assets/images/component/web":
   version: 0.0.0-use.local
   resolution: "@infomaniak-design-system/esds-icon@workspace:packages/assets/images/component/web"
   dependencies:
@@ -2594,11 +2593,11 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:^25.7.0":
-  version: 25.7.0
-  resolution: "@types/node@npm:25.7.0"
+  version: 25.9.4
+  resolution: "@types/node@npm:25.9.4"
   dependencies:
-    undici-types: "npm:~7.21.0"
-  checksum: 10c0/47ec7eaca154c36ad6d1ac0270e6e254eedf20b9dc49afe3bc76e4f7eba29ceac705f8903b162aeaf40e3941101ffe76ffb374989359ea3ef8c8509d8b443f55
+    undici-types: "npm:>=7.24.0 <7.24.7"
+  checksum: 10c0/4b19670ef5dbefa836a2d4a9ed0b5ac6befbc0844bfdd12833234ff8fa68da1f65e6362d2ef87acf7e7da9d6ff649bf81c454d12e802b7e7fa9246a15c0edcf6
   languageName: node
   linkType: hard
 
@@ -7321,13 +7320,6 @@ __metadata:
   version: 7.18.2
   resolution: "undici-types@npm:7.18.2"
   checksum: 10c0/85a79189113a238959d7a647368e4f7c5559c3a404ebdb8fc4488145ce9426fcd82252a844a302798dfc0e37e6fb178ff481ed03bc4caf634c5757d9ef43521d
-  languageName: node
-  linkType: hard
-
-"undici-types@npm:~7.21.0":
-  version: 7.21.0
-  resolution: "undici-types@npm:7.21.0"
-  checksum: 10c0/c3b4ae5f066c398acb1962505b56214ecd72843f7d7827fcc2df7a48a63d1639d3608c580ac09f836253d21fa7ba8f1a04440569ed9d332474ad01b8a010db87
   languageName: node
   linkType: hard
 

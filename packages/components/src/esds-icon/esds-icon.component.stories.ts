@@ -4,11 +4,11 @@ import { EsdsIconComponent } from './esds-icon.component.ts';
 
 EsdsIconComponent.define();
 
-const { args, argTypes, template } = getStorybookHelpers<EsdsIconComponent>('esds-icon-lit');
+const { args, argTypes, template } = getStorybookHelpers<EsdsIconComponent>('esds-icon');
 
 const meta = {
   title: 'Components/Icon',
-  component: 'esds-icon-lit',
+  component: 'esds-icon',
   tags: ['autodocs'],
   args,
   argTypes,

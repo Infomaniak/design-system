@@ -1,4 +1,3 @@
-import { EsdsIconComponent, IconifyApi } from '@infomaniak-design-system/esds-icon';
 import { DocsContainer, type DocsContainerProps } from '@storybook/addon-docs/blocks';
 import { setCustomElementsManifest } from '@storybook/web-components';
 import type { Preview } from '@storybook/web-components-vite';
@@ -47,13 +46,13 @@ import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/d
 import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/light.attr.css';
 
 // Initialize EsdsIconComponent for the <esds-icon> elements
-const iconifyEndpoint =
-  import.meta.env.VITE_ICONIFY_API_URL ?? 'https://iconify.preprod.dev.infomaniak.ch';
-EsdsIconComponent.init(
-  new IconifyApi({
-    resources: [iconifyEndpoint],
-  }),
-);
+// const iconifyEndpoint =
+//   import.meta.env.VITE_ICONIFY_API_URL ?? 'https://iconify.preprod.dev.infomaniak.ch';
+// EsdsIconComponent.init(
+//   new IconifyApi({
+//     resources: [iconifyEndpoint],
+//   }),
+// );
 
 /**
  * Utility function to set data attributes on document.body for CSS theming
@@ -292,6 +291,8 @@ const preview: Preview = {
           'Design Tokens',
           ['Getting Started', '*', 'Material'],
           'Icons',
+          ['Getting Started', '*'],
+          'Components',
           ['Getting Started', '*'],
           '*',
         ],

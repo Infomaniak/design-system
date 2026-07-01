@@ -1,0 +1,41 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Getting Started" />
+
+<div className="welcome-section">
+  <h1>Components</h1>
+  <p className="welcome-description">
+    Reusable web components built for Infomaniak products. Each component is framework-agnostic and
+    can be used in any project that supports custom elements.
+  </p>
+</div>
+
+## Installation
+
+```bash
+npm install @infomaniak-design-system/components
+```
+
+## Quick Start
+
+Import and initialize the icon component:
+
+```ts
+import { EsdsIconComponent, IconifyApi } from '@infomaniak-design-system/components';
+
+EsdsIconComponent.init(
+  new IconifyApi({
+    resources: ['https://iconify.preprod.dev.infomaniak.ch'],
+  }),
+);
+```
+
+Use it in your HTML or JSX:
+
+```html
+<esds-icon name="esds:headset"></esds-icon>
+```
+
+## Framework Support
+
+Components are built as standard Web Components and work in any framework (React, Vue, Angular, vanilla JS, etc.). No additional adapters are required.
