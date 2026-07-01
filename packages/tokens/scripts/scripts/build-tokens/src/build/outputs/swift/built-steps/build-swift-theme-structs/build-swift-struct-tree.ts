@@ -3,10 +3,7 @@ import { writeTextFileSafe } from '../../../../../../../../../../../scripts/help
 import { toPascalCase } from '../../../../../../../../../../../scripts/helpers/misc/case/to-pascal-case/to-pascal-case.ts';
 import { dedent } from '../../../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
-import {
-  buildSwiftStructWithInit,
-  type SwiftVariable,
-} from '../../helpers/build-swift-file-with-init.ts';
+import { buildSwiftStructContent } from '../../helpers/build-swift-file-with-init.ts';
 import { buildSwiftFile } from '../../helpers/build-swift-file.ts';
 import { SWIFT_MAIN_STRUCT } from '../../swift-constants.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
@@ -22,35 +19,6 @@ function extensionTargetForPath(path: string[]): string {
   }
   const parentSegments = path.slice(0, -1).map((segment) => toPascalCase(segment));
   return `${SWIFT_MAIN_STRUCT}.${parentSegments.join('.')}`;
-}
-
-function buildSwiftStructBody({
-  name,
-  protocols,
-  variables,
-}: {
-  readonly name: string;
-  readonly protocols: readonly string[];
-  readonly variables: readonly SwiftVariable[];
-}): string {
-  const safeProtocols = protocols.length ? `: ${protocols.join(', ')}` : '';
-
-  return dedent`
-    public struct ${name}${safeProtocols} {
-      ${variables.map((variable: SwiftVariable): string => `public let ${variable.name}: ${variable.type}`).join('\n')}
-      
-      init(
-        ${variables
-          .map((variable: SwiftVariable): string => {
-            const defaultVal = variable.initValue === undefined ? '' : ` = ${variable.initValue}`;
-            return `${variable.name}: ${variable.type}${defaultVal}`;
-          })
-          .join(',\n')}
-      ) {
-        ${variables.map((variable: SwiftVariable): string => `self.${variable.name} = ${variable.name}`).join('\n')}
-      }
-    }
-  `;
 }
 
 export async function buildSwiftStructTree(
@@ -82,10 +50,12 @@ export async function buildSwiftStructTree(
   const name = structNameForPath(path);
 
   if (path.length === 0) {
-    const swiftStruct = buildSwiftStructWithInit({
+    const swiftStruct = buildSwiftFile({
+      imports: ['SwiftUI'],
+      type: 'public struct',
       name,
       protocols: ['Sendable'],
-      variables,
+      content: buildSwiftStructContent(variables),
     });
 
     await writeTextFileSafe(
@@ -102,11 +72,11 @@ export async function buildSwiftStructTree(
       type: 'extension',
       name: extensionTarget,
       protocols: [],
-      content: buildSwiftStructBody({
-        name,
-        protocols: ['Sendable'],
-        variables,
-      }),
+      content: dedent`
+        public struct ${name}: Sendable {
+          ${buildSwiftStructContent(variables)}
+        }
+      `,
     });
 
     await writeTextFileSafe(join(outputDirectory, `${SWIFT_MAIN_STRUCT}/${fileName}`), fileContent);
