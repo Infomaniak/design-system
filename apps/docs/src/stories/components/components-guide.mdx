@@ -18,16 +18,12 @@ npm install @infomaniak-design-system/components
 
 ## Quick Start
 
-Import and initialize the icon component:
+Import and register the components you need. **Call `define()` in your application's entry file** (e.g., `main.ts`) so custom elements are available before any component tries to render them:
 
 ```ts
-import { EsdsIconComponent, IconifyApi } from '@infomaniak-design-system/components';
+import { EsdsIconComponent } from '@infomaniak-design-system/components';
 
-EsdsIconComponent.init(
-  new IconifyApi({
-    resources: ['https://iconify.preprod.dev.infomaniak.ch'],
-  }),
-);
+EsdsIconComponent.define();
 ```
 
 Use it in your HTML or JSX:
@@ -35,6 +31,8 @@ Use it in your HTML or JSX:
 ```html
 <esds-icon name="esds:headset"></esds-icon>
 ```
+
+> Each component may have additional configuration. See the component's documentation for specifics.
 
 ## Framework Support
 

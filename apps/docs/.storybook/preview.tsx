@@ -8,6 +8,12 @@ import { Globals, GlobalsUpdatedPayload } from 'storybook/internal/types';
 import customElements from '../../../packages/components/custom-elements.json' with { type: 'json' };
 import MaterialThemeBuilderLink from '../src/components/MaterialThemeBuilderLink.tsx';
 import Table from '../src/components/Table.tsx';
+import {
+  EsdsIconComponent,
+  ICONIFY_API,
+  InjectionContext,
+} from '@infomaniak-design-system/components';
+import { iconifyApi } from '../src/lib/iconify-api.ts';
 
 setCustomElementsManifest(customElements);
 
@@ -45,14 +51,12 @@ import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product
 import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/dark.attr.css';
 import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/light.attr.css';
 
-// Initialize EsdsIconComponent for the <esds-icon> elements
-// const iconifyEndpoint =
-//   import.meta.env.VITE_ICONIFY_API_URL ?? 'https://iconify.preprod.dev.infomaniak.ch';
-// EsdsIconComponent.init(
-//   new IconifyApi({
-//     resources: [iconifyEndpoint],
-//   }),
-// );
+// Initialize <esds-icon> and provide IconifyApi via root InjectionContext
+EsdsIconComponent.define();
+
+InjectionContext.root = new InjectionContext([
+  ICONIFY_API.define(iconifyApi),
+]);
 
 /**
  * Utility function to set data attributes on document.body for CSS theming
