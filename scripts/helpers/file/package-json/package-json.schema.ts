@@ -16,6 +16,7 @@ export const packageJsonSchema = z
     module: z.string().nonempty().optional(),
     types: z.string().nonempty().optional(),
     exports: z.any().optional(),
+    customElements: z.string().nonempty().optional(),
     // scripts
     scripts: z.record(z.string(), z.string()).optional(),
     // dependencies

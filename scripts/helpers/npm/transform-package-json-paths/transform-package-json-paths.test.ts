@@ -342,4 +342,78 @@ describe('transformPackageJsonPaths', () => {
       });
     });
   });
+
+  describe('files transformation', () => {
+    it('should transform bare "dist" in files to "./"', () => {
+      const pkg = {
+        name: 'test',
+        version: '1.0.0',
+        files: ['dist', 'custom-elements.json'],
+      };
+      const result = transformPackageJsonPaths(pkg, defaultConfig);
+      expect(result.files).toEqual(['./', 'custom-elements.json']);
+    });
+
+    it('should transform bare "./dist" in files to "./"', () => {
+      const pkg = {
+        name: 'test',
+        version: '1.0.0',
+        files: ['./dist', 'custom-elements.json'],
+      };
+      const result = transformPackageJsonPaths(pkg, defaultConfig);
+      expect(result.files).toEqual(['./', 'custom-elements.json']);
+    });
+
+    it('should transform "dist/" with trailing slash in files to "./"', () => {
+      const pkg = {
+        name: 'test',
+        version: '1.0.0',
+        files: ['dist/', 'custom-elements.json'],
+      };
+      const result = transformPackageJsonPaths(pkg, defaultConfig);
+      expect(result.files).toEqual(['./', 'custom-elements.json']);
+    });
+
+    it('should transform "/dist" with absolute prefix (no slash) in files to "./"', () => {
+      const pkg = {
+        name: 'test',
+        version: '1.0.0',
+        files: ['/dist', 'custom-elements.json'],
+      };
+      const result = transformPackageJsonPaths(pkg, defaultConfig);
+      expect(result.files).toEqual(['./', 'custom-elements.json']);
+    });
+
+    it('should transform "/dist/" with absolute prefix (with slash) in files to "./"', () => {
+      const pkg = {
+        name: 'test',
+        version: '1.0.0',
+        files: ['/dist/', 'custom-elements.json'],
+      };
+      const result = transformPackageJsonPaths(pkg, defaultConfig);
+      expect(result.files).toEqual(['./', 'custom-elements.json']);
+    });
+
+    it('should NOT transform nested directory patterns in files (out of scope for bare dir fallback)', () => {
+      const pkg = {
+        name: 'test',
+        version: '1.0.0',
+        files: ['dist/nested', 'custom-elements.json'],
+      };
+      const result = transformPackageJsonPaths(pkg, defaultConfig);
+      // dist/nested is not a bare dir name, so it falls through unchanged
+      expect(result.files).toEqual(['dist/nested', 'custom-elements.json']);
+    });
+
+    it('should NOT transform nested directory patterns with trailing slash in files', () => {
+      const pkg = {
+        name: 'test',
+        version: '1.0.0',
+        files: ['dist/nested/', 'custom-elements.json'],
+      };
+      const result = transformPackageJsonPaths(pkg, defaultConfig);
+      // dist/nested/ is not a bare dir name, so it falls through unchanged
+      expect(result.files).toEqual(['dist/nested/', 'custom-elements.json']);
+    });
+  });
 });
