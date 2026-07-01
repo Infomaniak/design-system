@@ -12,8 +12,8 @@
     "build:docs": "yarn workspace @infomaniak-design-system/docs build",
     "=== CODE QUALITY ===": "",
     "format": "yarn format:fix",
-    "format:check": "prettier --check --ignore-unknown --config .prettierrc \"./**/*.{js,jsx,ts,tsx,html,css,scss,json,md}\"",
-    "format:fix": "prettier --write --ignore-unknown --config .prettierrc \"./**/*.{js,jsx,ts,tsx,html,css,scss,json,md}\"",
+    "format:check": "prettier --check --ignore-unknown --config .prettierrc \"./**/*.{js,jsx,ts,tsx,html,css,scss,json,md,mdx}\"",
+    "format:fix": "prettier --write --ignore-unknown --config .prettierrc \"./**/*.{js,jsx,ts,tsx,html,css,scss,json,md,mdx}\"",
     "lint": "yarn lint:fix",
     "lint:check": "yarn eslint",
     "lint:fix": "yarn eslint --fix",
@@ -34,7 +34,8 @@
     "ci:storybook-pr": "node --no-warnings=ExperimentalWarning scripts/ci/storybook-pr/storybook-pr.script.ts",
     "ci:storybook-pages": "node --no-warnings=ExperimentalWarning scripts/ci/storybook-pages/storybook-pages.script.ts",
     "ci:figma-event": "node --no-warnings=ExperimentalWarning scripts/ci/on-figma-event/on-figma-event.script.ts",
-    "ci:fix-figma-webhook": "node --no-warnings=ExperimentalWarning scripts/ci/on-figma-event/fix/fix-figma-webhook.script.ts"
+    "ci:fix-figma-webhook": "node --no-warnings=ExperimentalWarning scripts/ci/on-figma-event/fix/fix-figma-webhook.script.ts",
+    "prepare": "husky"
   },
   "description": "Infomaniak's Design System",
   "keywords": [],
@@ -53,6 +54,14 @@
       "packages/assets/images/svg",
       "packages/assets/images/component/web",
       "apps/docs"
+    ]
+  },
+  "lint-staged": {
+    "./**/*.{js,jsx,ts,tsx,html,css,scss,json,md,mdx}": [
+      "prettier --write --ignore-unknown --config .prettierrc"
+    ],
+    "./**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
     ]
   },
   "devDependencies": {
@@ -76,6 +85,8 @@
     "eslint-plugin-storybook": "^10.4.6",
     "globals": "^17.7.0",
     "happy-dom": "^20.10.6",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.8",
     "lit": "^3.3.3",
     "number-to-words": "^1.2.4",
     "prettier": "^3.9.1",
