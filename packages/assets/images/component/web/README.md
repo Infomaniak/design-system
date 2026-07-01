@@ -17,7 +17,12 @@ npm install @infomaniak-design-system/components
 Import and define the component:
 
 ```ts
-import { EsdsIconComponent, ICONIFY_API, InjectionContext, IconifyApi } from '@infomaniak-design-system/components';
+import {
+  EsdsIconComponent,
+  ICONIFY_API,
+  InjectionContext,
+  IconifyApi,
+} from '@infomaniak-design-system/components';
 
 EsdsIconComponent.define();
 
@@ -28,6 +33,7 @@ InjectionContext.root = new InjectionContext([
     }),
   ),
 ]);
+```
 
 Then use it in your HTML:
 

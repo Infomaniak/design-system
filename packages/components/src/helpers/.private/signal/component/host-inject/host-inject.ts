@@ -1,7 +1,10 @@
-import { InjectionContext, type InjectedKeyLike } from '../../../../injection-context/injection-context.ts';
 import { signal } from '@lit-labs/signals';
 import type { ReactiveControllerHost } from 'lit';
 import { batch } from 'signal-utils/subtle/batched-effect';
+import {
+  InjectionContext,
+  type InjectedKeyLike,
+} from '../../../../injection-context/injection-context.ts';
 import { onConnected } from '../../../component/on-connected.ts';
 import type { Signal } from '../../signal/signal.ts';
 
