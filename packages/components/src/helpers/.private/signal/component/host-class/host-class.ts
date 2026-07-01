@@ -19,7 +19,7 @@ export type ClassListLike = string | readonly string[] | null | undefined;
  * ```
  */
 export function hostClass(
-  host: HTMLElement & ReactiveControllerHost,
+  host: ReactiveControllerHost & Element,
   className: string,
   signal: Signal<boolean>,
 ): StopEffect {
