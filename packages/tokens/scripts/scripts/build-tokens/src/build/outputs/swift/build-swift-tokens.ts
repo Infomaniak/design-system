@@ -162,13 +162,16 @@ export async function buildSwiftTokens({
             name: SWIFT_PRIMITIVE_TOKENS,
             protocols: [],
             content: dedent`
-              public enum ${groupName} {
+              enum ${groupName} {
                 ${swiftEnumDeclarationsToString(declaration)}
               }
             `,
           });
 
-          await writeTextFileSafe(join(rawTokensOutputDirectory, `${groupName}.swift`), content);
+          await writeTextFileSafe(
+            join(rawTokensOutputDirectory, `${SWIFT_PRIMITIVE_TOKENS}+${groupName}.swift`),
+            content,
+          );
         }
       });
     });

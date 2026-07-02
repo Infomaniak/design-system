@@ -2,7 +2,7 @@ import { toPascalCase } from '../../../../../../../../../../../scripts/helpers/m
 import { dedent } from '../../../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
 import { buildSwiftFile } from '../../helpers/build-swift-file.ts';
-import { SWIFT_MAIN_STRUCT, SWIFT_STRUCT_PREFIX } from '../../swift-constants.ts';
+import { SWIFT_MAIN_STRUCT } from '../../swift-constants.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
 import { getSortedSwiftVariables } from './build-variables-for-node.ts';
 import type { ValueMapDifference } from './find-value-map-differences.ts';
@@ -10,9 +10,10 @@ import type { ValueMapDifference } from './find-value-map-differences.ts';
 type DiffNode = { [key: string]: DiffNode | string };
 
 function structNameForPath(path: string[]): string {
-  return path.length === 0
-    ? `${SWIFT_MAIN_STRUCT}`
-    : `${SWIFT_STRUCT_PREFIX}${toPascalCase(path.join('.'))}`;
+  if (path.length === 0) {
+    return `${SWIFT_MAIN_STRUCT}`;
+  }
+  return `${SWIFT_MAIN_STRUCT}.${path.map((segment) => toPascalCase(segment)).join('.')}`;
 }
 
 function buildDiffTree(
@@ -97,7 +98,7 @@ export function buildSwiftThemeExtension(
 
   return buildSwiftFile({
     imports: ['SwiftUI'],
-    type: 'extension',
+    type: 'public extension',
     name: `${SWIFT_MAIN_STRUCT}`,
     protocols: [],
     content: `static let ${modifierName} = ${initCall}`,
