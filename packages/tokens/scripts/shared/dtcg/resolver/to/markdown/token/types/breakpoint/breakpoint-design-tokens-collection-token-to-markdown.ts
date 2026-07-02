@@ -1,7 +1,5 @@
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
-import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { DimensionDesignTokensCollectionToken } from '../../../../../token/types/base/dimension/dimension-design-tokens-collection-token.ts';
-import type { DimensionDesignTokensCollectionTokenValue } from '../../../../../token/types/base/dimension/value/dimension-design-tokens-collection-token-value.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { dimensionDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/dimension/value/dimension-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
@@ -19,7 +17,7 @@ export type BreakpointMarkdownRenderOptions = object;
  * too large (640px, 768px, 1024px, etc.) to visualize as bars.
  *
  * @param token - The breakpoint design token to render
- * @param _context - The render context (unused for breakpoint tokens)
+ * @param context - The render context used for resolving token references
  * @param _options - Rendering options
  * @returns A markdown table row with breakpoint value display
  *
@@ -34,22 +32,19 @@ export type BreakpointMarkdownRenderOptions = object;
  */
 export function breakpointDesignTokensCollectionTokenToMarkdown(
   token: DimensionDesignTokensCollectionToken,
-  _context: MarkdownRenderContext,
+  context: MarkdownRenderContext,
   _options: BreakpointMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
+  // Resolve the token (works for both T1 direct values and T2 references)
+  const resolved = context.collection.resolve(token);
+
   // Generate the CSS variable name for this token
   const cssVariable = createCssVariableNameGenerator({
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
 
-  // For T1 (direct values): show the actual breakpoint value
-  let displayValue: string = '';
-  const value = token.value as DimensionDesignTokensCollectionTokenValue;
-  if (!isCurlyReference(value)) {
-    displayValue = dimensionDesignTokensCollectionTokenValueToCssValue(value);
-  }
-
-  // TODO: we should have a preview for T2 and T3 once we introduce them
+  // Resolve the concrete value text for both T1 and T2 tokens
+  const displayValue = dimensionDesignTokensCollectionTokenValueToCssValue(resolved.value);
 
   // Create a simple text-based preview using CSS variable directly
   // The browser resolves var(--esds-*) via the CSS cascade

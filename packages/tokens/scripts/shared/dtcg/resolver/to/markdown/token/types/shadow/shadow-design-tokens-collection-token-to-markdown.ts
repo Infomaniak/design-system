@@ -9,7 +9,6 @@
  */
 
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
-import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { ShadowDesignTokensCollectionToken } from '../../../../../token/types/composite/shadow/shadow-design-tokens-collection-token.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { shadowDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/composite/shadow/value/shadow-design-tokens-collection-token-value-to-css-value.ts';
@@ -34,7 +33,7 @@ export interface ShadowMarkdownRenderOptions {
  * The shadow CSS value is displayed as text below the preview.
  *
  * @param token - The shadow design token to render
- * @param _context - The render context (unused for shadow tokens)
+ * @param context - The render context used for resolving token references
  * @param options - Rendering options for customizing the preview
  * @returns A markdown table row with shadow preview
  *
@@ -49,31 +48,21 @@ export interface ShadowMarkdownRenderOptions {
  */
 export function shadowDesignTokensCollectionTokenToMarkdown(
   token: ShadowDesignTokensCollectionToken,
-  _context: MarkdownRenderContext,
+  context: MarkdownRenderContext,
   options: ShadowMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
   const { boxSize = 50 } = options;
+
+  // Resolve the token (works for both T1 direct values and T2 references)
+  const resolved = context.collection.resolve(token);
 
   // Generate the CSS variable name for this token
   const cssVariable = createCssVariableNameGenerator({
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
 
-  // Show the display value only for T1 (direct value - no curly ref)
-  let displayValue: string = '';
-  if (!isCurlyReference(token.value)) {
-    displayValue = /* HTML */ `<div
-      style="
-      font-family: monospace;
-      font-size: 11px;
-      color: #6b7280;
-      max-width: 200px;
-      word-wrap: break-word;
-    "
-    >
-      ${shadowDesignTokensCollectionTokenValueToCssValue(token.value)}
-    </div>`;
-  }
+  // Resolve the concrete value text for both T1 and T2 tokens
+  const displayValue = shadowDesignTokensCollectionTokenValueToCssValue(resolved.value);
 
   // Create the shadow preview HTML using CSS variable directly
   // The browser resolves var(--esds-*) via the CSS cascade
@@ -89,7 +78,17 @@ export function shadowDesignTokensCollectionTokenToMarkdown(
       margin: 16px;
     "
     ></div>
-    ${displayValue}
+    <div
+      style="
+      font-family: monospace;
+      font-size: 11px;
+      color: #6b7280;
+      max-width: 200px;
+      word-wrap: break-word;
+    "
+    >
+      ${displayValue}
+    </div>
   `;
 
   return {

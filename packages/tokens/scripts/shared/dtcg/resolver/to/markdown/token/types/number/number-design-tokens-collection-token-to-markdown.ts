@@ -124,14 +124,39 @@ function createRatioPreview(ratio: number, _value: string, name: readonly string
 }
 
 /**
+ * Formats a numeric value for display with intelligent formatting
+ */
+function formatNumberValue(
+  value: number,
+  name: readonly string[],
+  options: NumberMarkdownRenderOptions,
+): string {
+  const { decimalPlaces = 2, showPercentageForDecimals = true } = options;
+
+  if (Number.isInteger(value)) {
+    return value.toString();
+  }
+
+  const decimalFormatted = value.toFixed(decimalPlaces);
+  // Check if this is likely an opacity value
+  if (showPercentageForDecimals && isLikelyOpacity(name, value)) {
+    const percentage = Math.round(value * 100);
+    return `${decimalFormatted} (${percentage}%)`;
+  }
+
+  return decimalFormatted;
+}
+
+/**
  * Renders a numeric design token to a markdown table row.
  *
  * Creates a visual display of the numeric value with intelligent formatting.
  * For values between 0 and 1 (likely opacity), displays both decimal and percentage.
  * For other numeric values, displays with specified decimal places.
+ * For T2 reference tokens, the value is resolved at build time via collection.resolve().
  *
  * @param token - The number design token to render
- * @param _context - The render context
+ * @param context - The render context used for resolving token references
  * @param options - Rendering options for customizing the display
  * @returns A markdown table row with number display
  *
@@ -155,25 +180,26 @@ function createRatioPreview(ratio: number, _value: string, name: readonly string
  */
 export function numberDesignTokensCollectionTokenToMarkdown(
   token: NumberDesignTokensCollectionToken,
-  _context: MarkdownRenderContext,
+  context: MarkdownRenderContext,
   options: NumberMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
-  const { decimalPlaces = 2, showPercentageForDecimals = true, showRawValue = false } = options;
-
-  // Get the numeric value
-  const value = token.value;
+  const { showRawValue = false } = options;
 
   // Generate the CSS variable name for this token
   const cssVariable = createCssVariableNameGenerator({
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
 
-  // Only show value for T1 (direct value - no curly ref)
-  // For T2/T3, skip the value display entirely
+  // Resolve the token (works for both T1 direct values and T2 references)
+  const resolved = context.collection.resolve(token);
+  const resolvedValue = resolved.value as number;
+  const isReference = isCurlyReference(token.value);
+
   let preview: string;
 
-  if (isCurlyReference(value)) {
-    // For T2/T3 references, show a placeholder preview
+  if (isReference) {
+    // For T2/T3 references, show a preview with the resolved value
+    const displayValue = formatNumberValue(resolvedValue, token.name, options);
     preview = /* HTML */ `
       <div
         style="
@@ -183,25 +209,28 @@ export function numberDesignTokensCollectionTokenToMarkdown(
         border: 1px solid #e5e7eb;
         font-family: monospace;
         font-size: 14px;
-        color: #9ca3af;
+        color: #1f2937;
         display: inline-block;
         min-width: 60px;
         text-align: center;
       "
       >
-        var(${cssVariable})
+        ${displayValue}
       </div>
     `;
   } else {
     // Format the value for T1 (direct values)
     let formattedValue: string;
-    if (Number.isInteger(value)) {
-      formattedValue = value.toString();
+    if (Number.isInteger(resolvedValue)) {
+      formattedValue = resolvedValue.toString();
     } else {
-      const decimalFormatted = value.toFixed(decimalPlaces);
+      const decimalFormatted = resolvedValue.toFixed(options.decimalPlaces ?? 2);
       // Check if this is likely an opacity value
-      if (showPercentageForDecimals && isLikelyOpacity(token.name, value)) {
-        const percentage = Math.round(value * 100);
+      if (
+        options.showPercentageForDecimals !== false &&
+        isLikelyOpacity(token.name, resolvedValue)
+      ) {
+        const percentage = Math.round(resolvedValue * 100);
         formattedValue = `${decimalFormatted} (${percentage}%)`;
       } else {
         formattedValue = decimalFormatted;
@@ -212,13 +241,13 @@ export function numberDesignTokensCollectionTokenToMarkdown(
 
     // Show raw value if requested and different from formatted
     displayValue = formattedValue;
-    if (showRawValue && displayValue !== value.toString()) {
-      displayValue = `${displayValue} [raw: ${value}]`;
+    if (showRawValue && displayValue !== resolvedValue.toString()) {
+      displayValue = `${displayValue} [raw: ${resolvedValue}]`;
     }
 
     // Create the preview
     if (isRatioToken(token.name)) {
-      preview = createRatioPreview(value, displayValue, token.name);
+      preview = createRatioPreview(resolvedValue, displayValue, token.name);
     } else {
       preview = /* HTML */ `
         <div

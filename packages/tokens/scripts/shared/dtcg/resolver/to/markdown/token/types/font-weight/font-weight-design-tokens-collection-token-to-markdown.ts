@@ -1,5 +1,4 @@
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
-import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { FontWeightDesignTokensCollectionToken } from '../../../../../token/types/base/font-weight/font-weight-design-tokens-collection-token.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { fontWeightDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/font-weight/value/font-weight-design-tokens-collection-token-value-to-css-value.ts';
@@ -37,7 +36,7 @@ export interface FontWeightMarkdownRenderOptions {
  * Displays the raw weight value as provided by the token.
  *
  * @param token - The font weight design token to render
- * @param _context - The render context
+ * @param context - The render context used for resolving token references
  * @param options - Rendering options for customizing the preview
  * @returns A markdown table row with font weight preview
  *
@@ -52,7 +51,7 @@ export interface FontWeightMarkdownRenderOptions {
  */
 export function fontWeightDesignTokensCollectionTokenToMarkdown(
   token: FontWeightDesignTokensCollectionToken,
-  _context: MarkdownRenderContext,
+  context: MarkdownRenderContext,
   options: FontWeightMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
   const {
@@ -66,21 +65,11 @@ export function fontWeightDesignTokensCollectionTokenToMarkdown(
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
 
-  // Show the display value only for T1 (direct value - no curly ref)
-  let displayValue: string = '';
-  if (!isCurlyReference(token.value)) {
-    // Token has a direct value - resolve it to show the actual weight
-    displayValue = /* HTML */ `<div
-      style="
-      margin-top: 4px;
-      font-family: monospace;
-      font-size: 12px;
-      color: #6b7280;
-    "
-    >
-      ${fontWeightDesignTokensCollectionTokenValueToCssValue(token.value)}
-    </div>`;
-  }
+  // Resolve the token (works for both T1 direct values and T2 references)
+  const resolved = context.collection.resolve(token);
+
+  // Resolve the concrete value text for both T1 and T2 tokens
+  const displayValue = fontWeightDesignTokensCollectionTokenValueToCssValue(resolved.value);
 
   // Create the font weight preview HTML using CSS variable directly
   // The browser resolves var(--esds-*) via the CSS cascade
@@ -99,7 +88,16 @@ export function fontWeightDesignTokensCollectionTokenToMarkdown(
     >
       ${sampleText}
     </p>
-    ${displayValue}
+    <div
+      style="
+      margin-top: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #6b7280;
+    "
+    >
+      ${displayValue}
+    </div>
   `;
 
   return {

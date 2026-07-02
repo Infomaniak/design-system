@@ -1,7 +1,5 @@
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
-import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { NumberDesignTokensCollectionToken } from '../../../../../token/types/base/number/number-design-tokens-collection-token.ts';
-import type { NumberDesignTokensCollectionTokenValue } from '../../../../../token/types/base/number/value/number-design-tokens-collection-token-value.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { numberDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/number/value/number-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
@@ -76,10 +74,10 @@ function findCorrespondingFontSizeCssVariable(
  * Creates a visual preview showing multi-line sample text with the specified line-height.
  * The renderer intelligently pairs the line-height with its corresponding font-size token
  * (e.g., font.line-height.2xl uses font.size.2xl) for accurate visual representation.
- * The line-height value is displayed below the preview for direct values.
+ * The line-height value is displayed below the preview for both T1 and T2 tokens.
  *
  * @param token - The line-height design token to render
- * @param context - The render context containing the token collection for finding matching font-size
+ * @param context - The render context containing the token collection for finding matching font-size and resolving references
  * @param options - Rendering options for customizing the preview
  * @returns A markdown table row with line-height preview
  *
@@ -110,22 +108,11 @@ export function lineHeightDesignTokensCollectionTokenToMarkdown(
     ? `var(${fontSizeResult.cssVariable})`
     : `${fallbackFontSize}px`;
 
-  // Show the display value only for T1 (direct value - no curly ref)
-  let displayValue: string = '';
-  if (!isCurlyReference(token.value)) {
-    // Token has a direct value - resolve it to show the actual value
-    const value = token.value as NumberDesignTokensCollectionTokenValue;
-    displayValue = /* HTML */ `<div
-      style="
-      margin-top: 4px;
-      font-family: monospace;
-      font-size: 12px;
-      color: #6b7280;
-    "
-    >
-      ${numberDesignTokensCollectionTokenValueToCssValue(value)}
-    </div>`;
-  }
+  // Resolve the token (works for both T1 direct values and T2 references)
+  const resolved = context.collection.resolve(token);
+
+  // Resolve the concrete value text for both T1 and T2 tokens
+  const displayValue = numberDesignTokensCollectionTokenValueToCssValue(resolved.value);
 
   // Create the line-height preview HTML using CSS variables directly
   // The browser resolves var(--esds-*) via the CSS cascade
@@ -143,7 +130,16 @@ export function lineHeightDesignTokensCollectionTokenToMarkdown(
     >
       ${sampleText}
     </p>
-    ${displayValue}
+    <div
+      style="
+      margin-top: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #6b7280;
+    "
+    >
+      ${displayValue}
+    </div>
   `;
 
   return {

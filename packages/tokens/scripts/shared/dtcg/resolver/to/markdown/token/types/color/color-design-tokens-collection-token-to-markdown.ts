@@ -5,36 +5,21 @@ import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
 
 /**
- * Supported color formats for markdown preview
- */
-export type SupportedColorFormat = 'hex' | 'oklch';
-
-/**
- * Configuration options for color markdown rendering
- */
-export interface ColorMarkdownRenderOptions {
-  /**
-   * Color format to display in the value column
-   * @default 'hex'
-   */
-  readonly valueFormat?: SupportedColorFormat;
-}
-
-/**
  * Renders a color design token to a markdown table row.
  *
- * Creates a visual color preview with a swatch box and displays the color value
- * in the specified format (hex or oklch).
+ * Creates a visual color preview with a swatch box.
+ * The color value text is resolved at browser runtime via `data-preview-value`
+ * so it reflects theme/product CSS overrides dynamically.
  *
  * @param token - The color design token to render
- * @param _context - The render context (unused for simple color tokens)
+ * @param _context - The render context (unused — resolution is browser-side)
  * @param _options - Rendering options
  * @returns A markdown table row with color preview
  *
  * @example
- * Input: color.red.500 with value { hex: "#f4364f", components: [0.956, 0.211, 0.309], colorSpace: "srgb" }
+ * Input: color.red.500 with value { hex: "#f4364f", ... }
  * Output: {
- *   preview: '<div style="border-radius: 4px; width: 100%; height: 75px; background: #f4364f; border: 1px solid #ccc;"></div>',
+ *   preview: '<div style="background: var(--esds-color-red-500);"></div><div data-preview-value="--esds-color-red-500"></div>',
  *   name: 'color.red.500',
  *   cssVariable: '--esds-color-red-500',
  *   description: ''
@@ -43,15 +28,16 @@ export interface ColorMarkdownRenderOptions {
 export function colorDesignTokensCollectionTokenToMarkdown(
   token: ColorDesignTokensCollectionToken,
   _context: MarkdownRenderContext,
-  _options: ColorMarkdownRenderOptions = {},
+  _options: object = {},
 ): MarkdownTokenRow {
   // Generate the CSS variable name for this token
   const cssVariable = createCssVariableNameGenerator({
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
 
-  // Create the color preview HTML using CSS variable directly
-  // The browser resolves var(--esds-*) via the CSS cascade
+  // Create the color preview HTML using CSS variable directly.
+  // The visual swatch updates with theme/product CSS overrides.
+  // The text value is filled in at browser runtime via data-preview-value.
   const preview = /* HTML */ `
     <div
       style="

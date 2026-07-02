@@ -1,5 +1,4 @@
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
-import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { FontFamilyDesignTokensCollectionToken } from '../../../../../token/types/base/font-family/font-family-design-tokens-collection-token.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { fontFamilyDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/font-family/value/font-family-design-tokens-collection-token-value-to-css-value.ts';
@@ -31,7 +30,7 @@ export interface FontFamilyMarkdownRenderOptions {
  * The font family values are displayed as a comma-separated list below the preview.
  *
  * @param token - The font family design token to render
- * @param _context - The render context
+ * @param context - The render context used for resolving token references
  * @param options - Rendering options for customizing the preview
  * @returns A markdown table row with font family preview
  *
@@ -46,7 +45,7 @@ export interface FontFamilyMarkdownRenderOptions {
  */
 export function fontFamilyDesignTokensCollectionTokenToMarkdown(
   token: FontFamilyDesignTokensCollectionToken,
-  _context: MarkdownRenderContext,
+  context: MarkdownRenderContext,
   options: FontFamilyMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
   const { sampleText = DEFAULT_SAMPLE_TEXT, sampleFontSize = 16 } = options;
@@ -56,21 +55,11 @@ export function fontFamilyDesignTokensCollectionTokenToMarkdown(
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
 
-  // Show the display value only for T1 (direct value - no curly ref)
-  let displayValue: string = '';
-  if (!isCurlyReference(token.value)) {
-    // Token has a direct value - resolve it to show the actual font family
-    displayValue = /* HTML */ `<div
-      style="
-      margin-top: 4px;
-      font-family: monospace;
-      font-size: 12px;
-      color: #6b7280;
-    "
-    >
-      ${fontFamilyDesignTokensCollectionTokenValueToCssValue(token.value)}
-    </div>`;
-  }
+  // Resolve the token (works for both T1 direct values and T2 references)
+  const resolved = context.collection.resolve(token);
+
+  // Resolve the concrete value text for both T1 and T2 tokens
+  const displayValue = fontFamilyDesignTokensCollectionTokenValueToCssValue(resolved.value);
 
   // Create the font family preview HTML
   // Shows sample text with the font family applied using CSS variable directly
@@ -89,7 +78,16 @@ export function fontFamilyDesignTokensCollectionTokenToMarkdown(
     >
       ${sampleText}
     </p>
-    ${displayValue}
+    <div
+      style="
+      margin-top: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #6b7280;
+    "
+    >
+      ${displayValue}
+    </div>
   `;
 
   return {

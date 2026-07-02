@@ -1,5 +1,4 @@
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
-import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { DimensionDesignTokensCollectionToken } from '../../../../../token/types/base/dimension/dimension-design-tokens-collection-token.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { dimensionDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/dimension/value/dimension-design-tokens-collection-token-value-to-css-value.ts';
@@ -24,7 +23,7 @@ export interface RadiusMarkdownRenderOptions {
  * This helps visualize how the radius value will actually look when applied.
  *
  * @param token - The radius design token to render
- * @param _context - The render context (unused for radius tokens)
+ * @param context - The render context used for resolving token references
  * @param options - Rendering options for customizing the preview
  * @returns A markdown table row with radius preview
  *
@@ -39,29 +38,20 @@ export interface RadiusMarkdownRenderOptions {
  */
 export function radiusDesignTokensCollectionTokenToMarkdown(
   token: DimensionDesignTokensCollectionToken,
-  _context: MarkdownRenderContext,
+  context: MarkdownRenderContext,
   options: RadiusMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
+  // Resolve the token (works for both T1 direct values and T2 references)
+  const resolved = context.collection.resolve(token);
+
   // Generate the CSS variable name for this token
   const cssVariable = createCssVariableNameGenerator({
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
 
-  // Show the display value only for T1 (direct value - no curly ref)
-  let displayValue: string = '';
-  if (!isCurlyReference(token.value)) {
-    // Token has a direct value - resolve it to show the actual value
-    displayValue = /* HTML */ `<div
-      style="
-      margin-top: 8px;
-      font-family: monospace;
-      font-size: 12px;
-      color: #6b7280;
-    "
-    >
-      ${dimensionDesignTokensCollectionTokenValueToCssValue(token.value)}
-    </div>`;
-  }
+  // Resolve the concrete value text for both T1 and T2 tokens
+  const displayValue = dimensionDesignTokensCollectionTokenValueToCssValue(resolved.value);
+
   const { boxSize = 100 } = options;
 
   // Create the radius preview HTML using CSS variable directly
@@ -77,7 +67,16 @@ export function radiusDesignTokensCollectionTokenToMarkdown(
       display: inline-block;
     "
     ></div>
-    ${displayValue}
+    <div
+      style="
+      margin-top: 8px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #6b7280;
+    "
+    >
+      ${displayValue}
+    </div>
   `;
 
   return {

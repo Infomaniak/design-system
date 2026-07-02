@@ -217,33 +217,84 @@ const CustomDocsContainer = (props: DocsContainerProps) => {
     }
   }, []);
 
+  // Resolve color preview values browser-side so they reflect
+  // theme/product CSS overrides dynamically.
   useEffect(() => {
-    const isInitialized = document.body.hasAttribute('data-preview-value-initialized');
-
-    if (!isInitialized) {
-      document.body.setAttribute('data-preview-value-initialized', '');
-
-      const loop = () => {
-        requestAnimationFrame(() => {
-          document.body
-            .querySelectorAll('[data-preview-value]')
-            .forEach((element: Element): void => {
-              const value: string = getComputedStyle(element).getPropertyValue(
-                element.getAttribute('data-preview-value')!,
-              );
-
-              if (element.textContent !== value) {
-                element.textContent = value;
-              }
-            });
-
-          setTimeout(loop, 200);
-        });
-      };
-
-      loop();
+    function rgbToHex(rgb: string): string {
+      const match = rgb.match(/^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*[\d.]+)?\s*\)$/);
+      if (!match) return rgb;
+      const [, r, g, b] = match;
+      return (
+        '#' +
+        [r, g, b]
+          .map((n) => Number(n).toString(16).padStart(2, '0'))
+          .join('')
+          .toUpperCase()
+      );
     }
-  });
+
+    function resolveColorPreviewValues(): void {
+      if (typeof document === 'undefined') return;
+      const elements: NodeListOf<Element> = document.querySelectorAll('[data-preview-value]');
+      if (elements.length === 0) return;
+
+      const temp: HTMLDivElement = document.createElement('div');
+      temp.style.position = 'fixed';
+      temp.style.opacity = '0';
+      temp.style.pointerEvents = 'none';
+      temp.style.left = '-9999px';
+      document.body.appendChild(temp);
+
+      try {
+        elements.forEach((element): void => {
+          const cssVar: string | null = element.getAttribute('data-preview-value');
+          if (!cssVar) return;
+
+          temp.style.backgroundColor = '';
+          temp.style.backgroundColor = `var(${cssVar})`;
+
+          const resolved: string = window
+            .getComputedStyle(temp)
+            .getPropertyValue('background-color');
+          const hexValue: string = rgbToHex(resolved.trim());
+
+          if (element.textContent !== hexValue) {
+            element.textContent = hexValue;
+          }
+        });
+      } finally {
+        document.body.removeChild(temp);
+      }
+    }
+
+    // Resolve immediately and after a short delay (docs render tables asynchronously)
+    resolveColorPreviewValues();
+    const timeout: ReturnType<typeof setTimeout> = setTimeout(resolveColorPreviewValues, 500);
+
+    // Watch for newly added color preview elements (e.g. when navigating between docs pages)
+    const observer: MutationObserver = new MutationObserver((mutations: MutationRecord[]): void => {
+      const hasNewColorElements: boolean = mutations.some((mutation: MutationRecord): boolean => {
+        return Array.from(mutation.addedNodes).some((node: Node): boolean => {
+          if (!(node instanceof Element)) return false;
+          return (
+            node.matches('[data-preview-value]') ||
+            node.querySelector('[data-preview-value]') !== null
+          );
+        });
+      });
+
+      if (hasNewColorElements) {
+        resolveColorPreviewValues();
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return (): void => {
+      clearTimeout(timeout);
+      observer.disconnect();
+    };
+  }, [product, theme]);
 
   return <DocsContainer {...props} />;
 };

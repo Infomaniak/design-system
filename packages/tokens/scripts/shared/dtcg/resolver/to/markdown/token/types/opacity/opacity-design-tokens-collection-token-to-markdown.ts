@@ -4,6 +4,7 @@ import type { NumberDesignTokensCollectionToken } from '../../../../../token/typ
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
+
 /**
  * Configuration options for opacity markdown rendering
  */
@@ -30,7 +31,7 @@ export interface OpacityMarkdownRenderOptions {
  * each value is.
  *
  * @param token - The opacity design token to render
- * @param _context - The render context (unused for opacity tokens)
+ * @param context - The render context used for resolving token references
  * @param options - Rendering options for customizing the preview
  * @returns A markdown table row with opacity preview
  *
@@ -45,7 +46,7 @@ export interface OpacityMarkdownRenderOptions {
  */
 export function opacityDesignTokensCollectionTokenToMarkdown(
   token: NumberDesignTokensCollectionToken,
-  _context: MarkdownRenderContext,
+  context: MarkdownRenderContext,
   options: OpacityMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
   const { boxSize = 100, overlayColor = '#22c55e' } = options;
@@ -55,17 +56,17 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
 
-  // TODO: Add support for T2 opacity tokens (curly references) when they are needed
-  // Currently only T1 tokens are supported (direct dimension values)
+  // Resolve the token (works for both T1 direct values and T2 references)
+  const resolved = context.collection.resolve(token);
+  const resolvedValue = resolved.value as number;
 
-  // Get the opacity value
-  const opacity = token.value;
-
-  // T1 tokens have direct dimension values { value: number, unit: string }
-  // We assert the type since this function only handles T1 opacity tokens
-  let displayValue: string = '';
-  if (!isCurlyReference(opacity)) {
-    displayValue = `${Math.round(opacity * 100)}%`;
+  // Format the resolved value
+  let displayValue: string;
+  if (isCurlyReference(token.value)) {
+    // For T2 tokens, show percentage from resolved value
+    displayValue = `${Math.round(resolvedValue * 100)}%`;
+  } else {
+    displayValue = `${Math.round(resolvedValue * 100)}%`;
   }
 
   // Create the opacity preview HTML using CSS variable directly

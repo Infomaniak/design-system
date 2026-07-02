@@ -4,6 +4,7 @@ import type { DesignTokensCollectionTokenWithType } from '../../../../../token/d
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
+
 /**
  * Configuration options for generic markdown rendering
  */
@@ -141,7 +142,7 @@ function createFallbackPreview(
  * and the JSON representation of the value.
  *
  * @param token - Any design token with a type
- * @param _context - The render context (unused but kept for interface consistency)
+ * @param context - The render context used for resolving token references
  * @param options - Rendering options
  * @returns A markdown table row with a generic preview
  *
@@ -156,7 +157,7 @@ function createFallbackPreview(
  */
 export function genericDesignTokensCollectionTokenToMarkdown(
   token: DesignTokensCollectionTokenWithType<string, unknown>,
-  _context: MarkdownRenderContext,
+  context: MarkdownRenderContext,
   options: GenericMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
   const { maxValueLength = 100, prettyPrintJson = false, customPreviewTemplate } = options;
@@ -166,25 +167,22 @@ export function genericDesignTokensCollectionTokenToMarkdown(
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
 
-  // Check if this is a T1 token (direct value - no curly ref)
+  // Resolve the token (works for both T1 direct values and T2 references)
+  const resolved = context.collection.resolve(token);
   const isReference = isCurlyReference(token.value);
 
-  // For T1 (direct values): format the raw value and show in preview
-  // For T2/T3 (references): show a simplified preview without value
-  let displayValue: string = '';
-  if (!isReference) {
-    const formattedValue = formatValue(token.value, prettyPrintJson);
-    displayValue = truncate(formattedValue, maxValueLength);
-  }
+  // Format the resolved concrete value for display
+  const formattedValue = formatValue(resolved.value, prettyPrintJson);
+  const displayValue = truncate(formattedValue, maxValueLength);
 
   // Create preview HTML
   let preview: string;
   if (customPreviewTemplate) {
     preview = customPreviewTemplate
       .replace('{{type}}', token.type)
-      .replace('{{value}}', displayValue || `var(${cssVariable})`);
+      .replace('{{value}}', displayValue);
   } else if (isReference) {
-    // For references, show a simplified box without the value text
+    // For references, show the resolved value
     preview = /* HTML */ `
       <div
         style="
@@ -194,7 +192,7 @@ export function genericDesignTokensCollectionTokenToMarkdown(
         border: 1px solid #e5e7eb;
         font-family: monospace;
         font-size: 13px;
-        color: #6b7280;
+        color: #374151;
       "
       >
         <div
@@ -206,7 +204,7 @@ export function genericDesignTokensCollectionTokenToMarkdown(
         >
           Type: ${token.type}
         </div>
-        <div>Reference token</div>
+        <div style="word-wrap: break-word;">${truncate(displayValue, 80)}</div>
       </div>
       <div
         style="

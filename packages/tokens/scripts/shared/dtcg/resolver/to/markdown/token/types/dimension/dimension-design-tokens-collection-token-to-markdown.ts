@@ -1,5 +1,4 @@
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
-import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { DimensionDesignTokensCollectionToken } from '../../../../../token/types/base/dimension/dimension-design-tokens-collection-token.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import { dimensionDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/dimension/value/dimension-design-tokens-collection-token-value-to-css-value.ts';
@@ -24,7 +23,7 @@ export interface DimensionMarkdownRenderOptions {
  * Useful for spacing, sizes, radii, and other dimensional tokens.
  *
  * @param token - The dimension design token to render
- * @param _context - The render context (unused for simple dimension tokens)
+ * @param context - The render context used for resolving token references
  * @param options - Rendering options for customizing the preview
  * @returns A markdown table row with dimension preview
  *
@@ -39,9 +38,12 @@ export interface DimensionMarkdownRenderOptions {
  */
 export function dimensionDesignTokensCollectionTokenToMarkdown(
   token: DimensionDesignTokensCollectionToken,
-  _context: MarkdownRenderContext,
+  context: MarkdownRenderContext,
   options: DimensionMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
+  // Resolve the token (works for both T1 direct values and T2 references)
+  const resolved = context.collection.resolve(token);
+
   // Generate the CSS variable name for this token
   const cssVariable = createCssVariableNameGenerator({
     prefix: CSS_VARIABLE_PREFIX,
@@ -49,21 +51,8 @@ export function dimensionDesignTokensCollectionTokenToMarkdown(
 
   const { previewHeight = '16px' } = options;
 
-  // Show the display value only for T1 (direct value - no curly ref)
-  let displayValue: string = '';
-  if (!isCurlyReference(token.value)) {
-    // Token has a direct value - resolve it to show the actual value
-    displayValue = /* HTML */ `<div
-      style="
-      margin-top: 4px;
-      font-family: monospace;
-      font-size: 12px;
-      color: #6b7280;
-    "
-    >
-      ${dimensionDesignTokensCollectionTokenValueToCssValue(token.value)}
-    </div>`;
-  }
+  // Resolve the value text for both T1 and T2 tokens
+  const displayValue = dimensionDesignTokensCollectionTokenValueToCssValue(resolved.value);
 
   // Create the dimension preview HTML using CSS variable directly
   // The browser resolves var(--esds-*) via the CSS cascade
@@ -79,7 +68,16 @@ export function dimensionDesignTokensCollectionTokenToMarkdown(
       aspect-ratio: 1 / 1;
     "
     ></div>
-    ${displayValue}
+    <div
+      style="
+      margin-top: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #6b7280;
+    "
+    >
+      ${displayValue}
+    </div>
   `;
 
   return {
