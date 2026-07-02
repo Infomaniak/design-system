@@ -38,14 +38,20 @@ export function buildSwiftTokenTree(
             nameForSwift = referenceSegments;
           }
         }
-
         const tokenSwiftValue = tokenToSwiftValue(rawTokensPrefix, {
           ...resolvedToken,
           name: nameForSwift,
         });
+        const isRadius = name.length > 0 && name[0] === 'radius';
 
-        node[key] = platformTypeRecord[resolvedToken.type] ?? undefinedType;
-        valueMap.set(JSON.stringify(name), `${tokenSwiftValue}`);
+        if (isRadius) {
+          node[key] = 'RoundedRectangle';
+          valueMap.set(JSON.stringify(name), `RoundedRectangle(cornerRadius: ${tokenSwiftValue})`);
+        } else {
+          node[key] = platformTypeRecord[resolvedToken.type] ?? undefinedType;
+          valueMap.set(JSON.stringify(name), `${tokenSwiftValue}`);
+        }
+
         break;
       }
       if (!node[key]) node[key] = {};
