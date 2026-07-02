@@ -6,5 +6,8 @@ export function dimensionDesignTokensCollectionTokenValueToSwiftValue(
   if (value.unit != 'px') {
     throw new Error(`Unsupported dimension unit for Swift value conversion: ${value.unit}`);
   }
+  if (value.value === 1000) {
+    return '.infinity';
+  }
   return value.value.toString(10);
 }
