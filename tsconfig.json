@@ -9,7 +9,7 @@
     "useDefineForClassFields": true,
     "skipLibCheck": true,
     "declaration": false,
-    "experimentalDecorators": true,
+    "experimentalDecorators": false,
     "emitDecoratorMetadata": false,
     "importHelpers": false,
     "noEmitHelpers": false,
@@ -31,6 +31,9 @@
     "rewriteRelativeImportExtensions": true,
     "erasableSyntaxOnly": true,
     "verbatimModuleSyntax": true,
+    "paths": {
+      "@infomaniak-design-system/components": ["./packages/components/src/public-api.ts"]
+    },
 
     /* Linting */
     "strict": true,
@@ -52,5 +55,6 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true
   },
-  "include": ["./**/*.ts"]
+  "include": ["./**/*.ts"],
+  "exclude": ["**/dist", "node_modules"]
 }

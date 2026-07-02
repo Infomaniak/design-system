@@ -1,1 +1,1 @@
-export type DimensionTokensBrueckeDesignTokenValue = string /* [value][unit]*/;
+export type DimensionTokensBrueckeDesignTokenValue = string; /* [value][unit]*/

@@ -7,6 +7,7 @@
     "declarationDir": "./dist",
     "outDir": "dist",
     "rootDir": "./src",
+    "paths": {},
     "types": ["vite/client", "node"],
     "typeRoots": [
       "node_modules/@types",

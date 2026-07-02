@@ -1,0 +1,15 @@
+{
+  "tags": [
+    "warning",
+    "caution",
+    "error",
+    "danger",
+    "alert",
+    "attention",
+    "exclamation",
+    "notice",
+    "problem",
+    "risk"
+  ],
+  "categories": []
+}

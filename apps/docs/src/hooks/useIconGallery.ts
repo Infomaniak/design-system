@@ -2,7 +2,7 @@ import {
   type IconifyApiIconList,
   type IconifyApiIconListIcon,
   IconifyApi,
-} from '@infomaniak-design-system/esds-icon';
+} from '@infomaniak-design-system/components';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { iconifyApi } from '../lib/iconify-api.ts';

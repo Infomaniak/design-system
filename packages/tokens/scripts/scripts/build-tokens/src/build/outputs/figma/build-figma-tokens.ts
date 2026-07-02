@@ -56,8 +56,7 @@ export function buildFigmaTokens({
 
           const mode: Record<string, string> = {
             ...(figmaBaseCollection.getOptional(newName)?.extensions?.['mode'] as
-              | object
-              | undefined),
+              object | undefined),
             [context]: token.value,
           };
 

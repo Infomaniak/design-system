@@ -1,11 +1,32 @@
-import { EsdsIconComponent, IconifyApi } from '@infomaniak-design-system/esds-icon';
+import {
+  EsdsIconComponent,
+  ICONIFY_API,
+  InjectionContext,
+} from '@infomaniak-design-system/components';
 import { DocsContainer, type DocsContainerProps } from '@storybook/addon-docs/blocks';
-import type { Preview } from '@storybook/react-vite';
+import { setCustomElementsManifest } from '@storybook/web-components';
+import type { Preview } from '@storybook/web-components-vite';
+import { setStorybookHelpersConfig } from '@wc-toolkit/storybook-helpers';
 import { useEffect, useState } from 'react';
 import { GLOBALS_UPDATED } from 'storybook/internal/core-events';
 import { Globals, GlobalsUpdatedPayload } from 'storybook/internal/types';
+import customElements from '../../../packages/components/custom-elements.json' with { type: 'json' };
 import MaterialThemeBuilderLink from '../src/components/MaterialThemeBuilderLink.tsx';
 import Table from '../src/components/Table.tsx';
+import { iconifyApi } from '../src/lib/iconify-api.ts';
+
+setCustomElementsManifest(customElements);
+
+setStorybookHelpersConfig({
+  /** hides the `arg ref` label on each control */
+  hideArgRef: true,
+  /** sets the custom type reference in the Custom Elements Manifest */
+  typeRef: 'parsedType',
+  /** Adds a <script> tag where a `component` variable will reference the story's component */
+  setComponentVariable: false,
+  /** renders default values for attributes and CSS properties */
+  renderDefaultValues: false,
+});
 
 import '../src/styles/data-preview-value.css';
 import '../src/styles/main.css';
@@ -30,14 +51,10 @@ import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product
 import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/dark.attr.css';
 import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/light.attr.css';
 
-// Initialize EsdsIconComponent for the <esds-icon> elements
-const iconifyEndpoint =
-  import.meta.env.VITE_ICONIFY_API_URL ?? 'https://iconify.preprod.dev.infomaniak.ch';
-EsdsIconComponent.init(
-  new IconifyApi({
-    resources: [iconifyEndpoint],
-  }),
-);
+// Initialize <esds-icon> and provide IconifyApi via root InjectionContext
+EsdsIconComponent.define();
+
+InjectionContext.root = new InjectionContext([ICONIFY_API.define(iconifyApi)]);
 
 /**
  * Utility function to set data attributes on document.body for CSS theming
@@ -276,6 +293,8 @@ const preview: Preview = {
           'Design Tokens',
           ['Getting Started', '*', 'Material'],
           'Icons',
+          ['Getting Started', '*'],
+          'Components',
           ['Getting Started', '*'],
           '*',
         ],

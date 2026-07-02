@@ -1,6 +1,7 @@
 {
   "name": "@infomaniak-design-system/esds-icon",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "deprecated": true,
   "type": "module",
   "exports": {
     ".": {
@@ -17,6 +18,9 @@
   "main": "./dist/esds-icon.umd.cjs",
   "module": "./dist/esds-icon.js",
   "types": "./dist/public-api.d.ts",
+  "dependencies": {
+    "@infomaniak-design-system/components": "workspace:*"
+  },
   "scripts": {
     "=== DEV ===": "",
     "dev": "vite",
@@ -30,8 +34,9 @@
   },
   "devDependencies": {
     "@iconify/types": "^2.0.0",
-    "@types/node": "^25.7.0",
+    "@types/node": "^25.9.4",
+    "fake-indexeddb": "^6.2.5",
     "typescript": "~6.0.3",
-    "vite": "^8.0.12"
+    "vite": "^8.1.0"
   }
 }

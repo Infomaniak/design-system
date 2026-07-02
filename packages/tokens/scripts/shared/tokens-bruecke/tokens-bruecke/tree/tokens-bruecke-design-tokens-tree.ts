@@ -2,5 +2,4 @@ import type { TokensBrueckeDesignTokensGroup } from '../group/tokens-bruecke-des
 import type { GenericTokensBrueckeDesignToken } from '../token/generic-tokens-bruecke-design-token.ts';
 
 export type TokensBrueckeDesignTokensTree =
-  | TokensBrueckeDesignTokensGroup
-  | GenericTokensBrueckeDesignToken;
+  TokensBrueckeDesignTokensGroup | GenericTokensBrueckeDesignToken;

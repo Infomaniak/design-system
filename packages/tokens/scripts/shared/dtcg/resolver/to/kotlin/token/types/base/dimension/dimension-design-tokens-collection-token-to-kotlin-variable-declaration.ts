@@ -44,8 +44,7 @@ export function dimensionDesignTokensCollectionTokenToKotlinVariableDeclaration(
 
       if (/^radius\.\w+$/.test(name)) {
         const kotlinVariableDeclaration:
-          | KotlinVariableDeclarationDpValue
-          | KotlinVariableDeclarationTextUnitValue =
+          KotlinVariableDeclarationDpValue | KotlinVariableDeclarationTextUnitValue =
           dimensionDesignTokensCollectionTokenValueToKotlinValue(value);
 
         if (!isKotlinVariableDeclarationDpValue(kotlinVariableDeclaration)) {

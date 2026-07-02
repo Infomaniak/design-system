@@ -34,9 +34,7 @@ export const FIGMA_T3_COLLECTION_NAME = 't3';
 export type FigmaT3CollectionName = typeof FIGMA_T3_COLLECTION_NAME;
 
 export type FigmaTierCollectionName =
-  | FigmaT1CollectionName
-  | FigmaT2CollectionName
-  | FigmaT3CollectionName;
+  FigmaT1CollectionName | FigmaT2CollectionName | FigmaT3CollectionName;
 
 export const DESIGN_TOKEN_TIERS_TO_FIGMA_COLLECTION_NAMES: ReadonlyMap<
   string,
