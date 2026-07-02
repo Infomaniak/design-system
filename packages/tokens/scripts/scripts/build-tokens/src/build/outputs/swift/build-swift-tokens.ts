@@ -157,8 +157,9 @@ export async function buildSwiftTokens({
         );
 
         for (const [groupName, declaration] of declarations) {
+          const imports = groupName === 'Color' ? ['SwiftUI', 'ESDSResources'] : ['SwiftUI'];
           const content: string = buildSwiftFile({
-            imports: ['SwiftUI'],
+            imports,
             type: 'extension',
             name: SWIFT_PRIMITIVE_TOKENS,
             protocols: [],
