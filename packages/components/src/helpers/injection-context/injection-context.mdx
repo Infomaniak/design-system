@@ -1,0 +1,208 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Helpers/InjectionContext" />
+
+# InjectionContext
+
+An `InjectionContext` is a way to pass data to a component tree.
+
+Its primary purpose is to provide values (like configurations) to the design-system components.
+
+## Producer perspective
+
+The producer is responsible for creating the `InjectionContext` and passing it to the children.
+
+### Set the root context
+
+The **root** `InjectionContext` is available globally. It is the terminal point when resolving a value.
+
+```ts
+// example: setup the IconifyApi to point on the preprod environment
+InjectionContext.root = new InjectionContext([
+  ICONIFY_API.define(
+    new IconifyApi({
+      resources: ['https://iconify.preprod.dev.infomaniak.ch'],
+    }),
+  ),
+]);
+```
+
+It's optional, but you probably want to define it.
+
+### Set a context starting from an Element
+
+An `InjectionContext` can be applied to any DOM element: the element itself, as well as every child (direct or indirect) of it, will inherit of this context.
+
+Multiple `InjectionContext` can be applied to different nodes in the DOM tree: a _key_ (`InjectionContext.get(node, key)`) is resolved exploring the stating _node_ itself, and each parent of it (or `InjectionContext.root` when `document` is reached), until a context with the matching key is found.
+
+#### Examples
+
+> NOTE: in the following examples, we'll assume that the DS exports a `LOCALE` of type `InjectableValue`.
+
+##### React
+
+```tsx
+function MyComponent() {
+  const ctx = useMemo(() => {
+    return new InjectionContext([LOCALE.define('fr-FR')]);
+  }, []);
+
+  return (
+    <div data-inject={ctx.id}>
+      {/* every child will inherit the context of the parent */}
+      <span>
+        <esds-component />
+      </span>
+    </div>
+  );
+}
+```
+
+##### Angular
+
+```ts
+@Component({
+  selector: 'my-component',
+  // ...
+})
+export class ConsumerComponent {
+  readonly ctx = new InjectionContext([LOCALE.define('fr-FR')]);
+}
+```
+
+```html
+<div [attr.data-inject]="ctx.id">
+  <!-- every child will inherit the context of the parent -->
+  <span>
+    <esds-component />
+  </span>
+</div>
+```
+
+##### Lit
+
+```ts
+@customElement('my-component')
+export class ConsumerComponent extends LitElement {
+  readonly ctx = new InjectionContext([LOCALE.define('fr-FR')]);
+
+  override render(): TemplateResult {
+    return html`
+      <div data-inject="${this.ctx.id}">
+        <span>
+          <esds-component />
+        </span>
+      </div>
+    `;
+  }
+}
+```
+
+#### Weak vs Strong references
+
+The `InjectionContext` may be used in two modes:
+
+##### Weak (default)
+
+The `InjectionContext` does not create a strong reference to itself, thus, a **strong reference** to it must be keept in the scope of the component using it.
+Later, when the component is destroyed (or there is no more reference to it), the `InjectionContext` is automatically destroyed.
+
+> NOTE: this is the way to go as GC is done automatically.
+
+##### Strong
+
+The `InjectionContext` creates a strong reference to itself, thus, the `destroy()` method must be called manually when the associated component is destroyed.
+
+```ts
+// pseudo example:
+const ctx = new InjectionContext([LOCALE.define('fr-FR')], { weak: false });
+
+onDestroy(element, () => ctx.destroy());
+```
+
+#### Additional notes
+
+The `InjectionContext` is resolved once when the `consumer` is connected to the DOM. This is not a reactive mechanism.
+
+## Consumer perspective (DS team)
+
+The consumer is responsible for consuming the `InjectionContext`.
+
+> NOTE: The **DS team** does the **consumer** part, this section should not be done by the **producer**. Here it serves only as a reference.
+
+### Create an `InjectableValue`
+
+The consummer starts by creating a `InjectableValue`: it is used by the **Producer** to define injectable values, and by the **Consumer** to read them.
+
+```ts
+const LOCALE = new InjectableValue('locale');
+```
+
+### Read/Observe an `InjectableValue`
+
+```ts
+@customElement('esds-component')
+export class ConsumerComponent extends LitElement {
+  readonly #locale: Signal<string> = hostInject(this, LOCALE, (): string => navigator.language);
+
+  override render(): TemplateResult {
+    return html`locale: ${this.#locale.get()}`;
+  }
+}
+```
+
+---
+
+## Documentation
+
+### class `InjectableValue`
+
+This class is used to define injectable values with unique symbolic keys used by `InjectionContext`.
+
+```ts
+class InjectableValue<GValue> {
+  constructor(name: string);
+
+  get key(): symbol;
+
+  /**
+   * Creates an `InjectedEntry` to use when constructing a new `InjectionContext`.
+   */
+  define(value: GValue): InjectedEntry<GValue>;
+}
+```
+
+### class `InjectionContext`
+
+Represents a context for dependency injection. It allows for storing and retrieving values
+associated with symbols, providing a mechanism for scoped dependency injection.
+
+```ts
+class InjectionContext {
+  static root: InjectionContext | undefined;
+  static readonly attributeName: 'data-inject';
+
+  /**
+   * Retrieves a value associated with the specified key from the nearest context within the provided node's hierarchy.
+   */
+  static get<GValue>(source: Node, key: InjectedKeyLike): GValue | undefined;
+
+  constructor(entries: InjectionContextEntries, options?: InjectionContextOptions);
+
+  get id(): string;
+
+  /**
+   * Destroys manually the current `InjectionContext` instance.
+   */
+  destroy(): void;
+
+  /* MAP LIKE */
+  get size(): number;
+  has(key: InjectedKeyLike): boolean;
+  get<GValue>(key: InjectedKeyLike): GValue | undefined;
+  keys(): MapIterator<symbol>;
+  values(): MapIterator<unknown>;
+  entries(): MapIterator<InjectedEntry<unknown>>;
+  [Symbol.iterator](): MapIterator<InjectedEntry<unknown>>;
+}
+```

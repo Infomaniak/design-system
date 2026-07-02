@@ -1,7 +1,7 @@
 <h1 align="center">Infomaniak's Design System</h1>
 
 <p align="center">
-  <img 
+  <img
     src="./assets/images/infomaniak-logo.svg"
     alt="infomaniak-design-system-logo"
     width="278"
@@ -35,8 +35,8 @@
 
 - `packages/`: contains the librairies, utilities, ...
   - [tokens/](packages/tokens): contains the design tokens
+  - [components/](packages/components): contains the web components library
   - [assets/images/svg/](packages/assets/images/svg): contains the SVG icons and illustrations
-  - [assets/images/component/web/](packages/assets/images/component/web): contains the custom-element to display SVG icons and illustrations
 - `apps/`: contains the deployable apps
   - [docs/](apps/docs): contains the storybook used as documentation support
 

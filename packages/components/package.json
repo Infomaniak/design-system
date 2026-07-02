@@ -1,0 +1,47 @@
+{
+  "name": "@infomaniak-design-system/components",
+  "version": "0.1.0",
+  "type": "module",
+  "files": [
+    "dist",
+    "custom-elements.json"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/public-api.d.ts",
+      "import": "./dist/public-api.js"
+    }
+  },
+  "scripts": {
+    "=== BUILD ===": "",
+    "build": "node --no-warnings=ExperimentalWarning scripts/scripts/build-components/build-components.script.ts",
+    "build:manual": "yarn generate:public-api && yarn analyze:cem && yarn build:ts:vite && yarn build:ts:definitions",
+    "build:ts:vite": "vite build",
+    "build:ts:definitions": "tsc -p tsconfig.build.json",
+    "analyze:cem": "cem analyze --config ./custom-elements-manifest.config.mjs",
+    "=== PUBLISH ===": "",
+    "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-components/publish-components.script.ts",
+    "=== GENERATE ===": "",
+    "generate": "plop",
+    "generate:public-api": "yarn generate public-api",
+    "validate:public-api": "node tooling/validate-public-api.ts"
+  },
+  "dependencies": {
+    "@lit-labs/signals": "^0.3.0",
+    "idb": "^8.0.3",
+    "lit": "^3.3.3",
+    "signal-utils": "^0.21.1"
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.11.0",
+    "@iconify/types": "^2.0.0",
+    "@storybook/web-components-vite": "^10.4.1",
+    "@wc-toolkit/type-parser": "1.2.1",
+    "fake-indexeddb": "^6.2.5",
+    "plop": "^4.0.5",
+    "typescript": "~6.0.3",
+    "vite": "^8.0.12"
+  },
+  "customElements": "custom-elements.json"
+}

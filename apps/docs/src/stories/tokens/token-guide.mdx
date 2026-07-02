@@ -146,6 +146,7 @@ Modifiers can also be set on container elements:
 ```html
 <button class="bg-brand-default">Click me!</button>
 ```
+
 ### iOS
 
 #### Installation
@@ -161,9 +162,11 @@ swift.target(
     ]
 )
 ```
-*Supported platforms: iOS 16+, macOS 13+, visionOS 1+*
+
+_Supported platforms: iOS 16+, macOS 13+, visionOS 1+_
 
 ##### Package structure
+
 ```
 CatalogApp/               ← Demo app
 Sources/DesignSystem/     ← Tokens, SwiftUI components
@@ -173,6 +176,7 @@ Tests/DesignSystemTests/  ← Unit tests
 #### Usage
 
 ##### Configure environment
+
 ```swift
 import DesignSystem
 
@@ -181,10 +185,11 @@ import DesignSystem
 ```
 
 ##### Access tokens in **SwiftUI**
+
 ```swift
 struct ContentView: View {
     @Environment(\.esdsTheme) var theme
-    
+
     var body: some View {
         VStack {
             Text("Hello")
@@ -197,6 +202,7 @@ struct ContentView: View {
 ```
 
 ##### Set theme
+
 ```swift
 // In your app
 @main

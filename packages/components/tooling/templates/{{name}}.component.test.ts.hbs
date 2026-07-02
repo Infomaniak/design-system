@@ -1,0 +1,22 @@
+import { describe, expect, it } from 'vitest';
+import { {{pascalCase name}} } from './{{name}}.component.ts';
+
+{{pascalCase name}}.define();
+
+describe('{{pascalCase name}}', () => {
+  it('should be constructible and registered', () => {
+    const el = document.createElement('{{name}}');
+    expect(el).instanceOf({{pascalCase name}});
+  });
+
+  it('should display the label when no slot content is provided', async () => {
+    const el = document.createElement('{{name}}');
+    el.label = 'Hello';
+    document.body.append(el);
+    await el.updateComplete;
+
+    expect(el.shadowRoot?.textContent).toContain('Hello');
+
+    el.remove();
+  });
+});

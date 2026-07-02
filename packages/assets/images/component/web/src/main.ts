@@ -1,4 +1,4 @@
-import { IconifyApi } from './api/iconify-api.ts';
+import { IconifyApi } from '@infomaniak-design-system/components';
 import { EsdsIconComponent } from './esds-icon/esds-icon.component.ts';
 
 function main(): void {

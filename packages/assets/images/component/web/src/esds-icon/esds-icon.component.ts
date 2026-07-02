@@ -1,4 +1,4 @@
-import { IconifyApi } from '../api/iconify-api.ts';
+import { IconifyApi } from '@infomaniak-design-system/components';
 import { type CustomElement } from '../types/custom-element.ts';
 import style from './esds-icon.component.css?inline';
 
