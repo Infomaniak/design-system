@@ -442,9 +442,18 @@ function filterT2T3Tokens(token: GenericDesignTokensCollectionToken): boolean {
   );
 }
 
-//  TODO: Kotlin does not support more than 248 properties, thus, we skip the colors -> remove in the future
 function isExcludedToken(token: GenericDesignTokensCollectionToken): boolean {
-  return token.name.at(0) === 'color';
+  const name: string = token.name.join('.');
+
+  return (
+    // TODO: Kotlin does not support more than 248 properties, thus, we skip the colors -> remove in the future
+    /^color\./.test(name) ||
+    // TODO: Kotlin does not requires some tokens, thus, we skip them -> remove in the future
+    /^breakpoint\./.test(name) ||
+    /^ratio\./.test(name) ||
+    /^scale\./.test(name) ||
+    /^shadow\./.test(name)
+  );
 }
 
 /*--*/
