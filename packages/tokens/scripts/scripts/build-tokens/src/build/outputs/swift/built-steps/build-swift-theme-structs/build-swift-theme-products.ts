@@ -4,7 +4,7 @@ import { capitalizeFirstLetter } from '../../../../../../../../../../../scripts/
 import type { DesignTokenModifiers } from '../../../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
-import { SWIFT_MAIN_STRUCT } from '../../swift-constants.ts';
+import { SWIFT_MAIN_STRUCT, isExcludedSwiftToken } from '../../swift-constants.ts';
 import { buildSwiftThemeExtension } from './build-swift-theme-extension.ts';
 import { buildSwiftTokenTree, type SwiftTokenTree } from './build-token-tree.ts';
 import { findValueMapDifferences } from './find-value-map-differences.ts';
@@ -24,7 +24,10 @@ export async function buildSwiftThemeProducts(
           .tokens()
           .filter((token: GenericDesignTokensCollectionToken): boolean => {
             const expectedPath = `${modifierType}/${modifierName}`;
-            return token.files.some((path: string): boolean => path.includes(expectedPath));
+            return (
+              token.files.some((path: string): boolean => path.includes(expectedPath)) &&
+              !isExcludedSwiftToken(token)
+            );
           })
           .map((token: GenericDesignTokensCollectionToken): ArrayDesignTokenName => {
             return token.name;
