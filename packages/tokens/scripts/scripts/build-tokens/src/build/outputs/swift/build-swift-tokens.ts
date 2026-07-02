@@ -70,6 +70,10 @@ export async function buildSwiftTokens({
         ...token,
         type: baseCollection.resolve(token).type,
       };
+      if (isExcludedSwiftToken(resolvedToken)) {
+        continue;
+      }
+
       const inT1: boolean = token.files.some((path: string): boolean =>
         path.includes(T1_DIRECTORY_NAME),
       );
@@ -80,10 +84,7 @@ export async function buildSwiftTokens({
         } else {
           t2Colors.push(token);
         }
-      } else if (
-        !isExcludedSwiftToken(resolvedToken) &&
-        token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME))
-      ) {
+      } else if (token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME))) {
         t2NonColors.push(token);
       }
     }
