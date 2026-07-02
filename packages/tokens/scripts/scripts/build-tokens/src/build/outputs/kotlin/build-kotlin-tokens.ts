@@ -450,9 +450,15 @@ function isExcludedToken(token: GenericDesignTokensCollectionToken): boolean {
     /^color\./.test(name) ||
     // TODO: Kotlin does not requires some tokens, thus, we skip them -> remove in the future
     /^breakpoint\./.test(name) ||
+    /^font\./.test(name) ||
+    /^text\./.test(name) ||
+    /^border\./.test(name) ||
+    /^border-width\./.test(name) ||
+    /^blur\./.test(name) ||
+    /^opacity\./.test(name) ||
     /^ratio\./.test(name) ||
-    /^scale\./.test(name) ||
-    /^shadow\./.test(name)
+    /^shadow\./.test(name) ||
+    /^typography\./.test(name)
   );
 }
 
