@@ -1,7 +1,7 @@
 export const SWIFT_PRIMITIVE_TOKENS = 'PrimitiveToken';
 export const SWIFT_MAIN_STRUCT = `ESDSTheme`;
 export const SWIFT_SOURCES_DIR = 'Sources/DesignSystem';
-export const SWIFT_RESOURCES_DIR = 'Resources';
+export const SWIFT_RESOURCES_DIR = 'Sources/ESDSResources';
 
 export const EXCLUDED_SWIFT_TOKEN_ROOTS = ['font', 'shadow', 'text', 'border', 'blur', 'opacity'];
 
