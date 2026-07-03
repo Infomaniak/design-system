@@ -5,6 +5,7 @@ import { dimensionDesignTokensCollectionTokenValueToCssValue } from '../../../..
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
 import { DEFAULT_SAMPLE_TEXT } from '../../shared/constants.ts';
+import { createResolvedValueDisplay } from '../../shared/create-resolved-value-display.ts';
 
 export interface FontSizeMarkdownRenderOptions {
   readonly sampleText?: string;
@@ -64,16 +65,7 @@ export function fontSizeDesignTokensCollectionTokenToMarkdown(
     >
       ${sampleText}
     </p>
-    <div
-      style="
-      margin-top: 4px;
-      font-family: monospace;
-      font-size: 12px;
-      color: #6b7280;
-    "
-    >
-      ${displayValue}
-    </div>
+    ${createResolvedValueDisplay(displayValue)}
   `;
 
   return {

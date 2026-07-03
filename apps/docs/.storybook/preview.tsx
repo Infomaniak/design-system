@@ -7,7 +7,6 @@ import { Globals, GlobalsUpdatedPayload } from 'storybook/internal/types';
 import MaterialThemeBuilderLink from '../src/components/MaterialThemeBuilderLink.tsx';
 import Table from '../src/components/Table.tsx';
 
-import '../src/styles/data-preview-value.css';
 import '../src/styles/main.css';
 import '../src/styles/token-tables.css';
 

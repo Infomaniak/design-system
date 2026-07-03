@@ -14,6 +14,7 @@ import { createCssVariableNameGenerator } from '../../../../css/token/name/creat
 import { shadowDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/composite/shadow/value/shadow-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
+import { createResolvedValueDisplay } from '../../shared/create-resolved-value-display.ts';
 
 /**
  * Configuration options for shadow markdown rendering
@@ -78,17 +79,7 @@ export function shadowDesignTokensCollectionTokenToMarkdown(
       margin: 16px;
     "
     ></div>
-    <div
-      style="
-      font-family: monospace;
-      font-size: 11px;
-      color: #6b7280;
-      max-width: 200px;
-      word-wrap: break-word;
-    "
-    >
-      ${displayValue}
-    </div>
+    ${createResolvedValueDisplay(displayValue)}
   `;
 
   return {

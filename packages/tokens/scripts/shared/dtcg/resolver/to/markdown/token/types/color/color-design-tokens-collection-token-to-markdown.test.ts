@@ -28,6 +28,8 @@ describe('colorDesignTokensCollectionTokenToMarkdown', () => {
 
     expect(result.preview).toContain('data-preview-value="--esds-color-red-600"');
     expect(result.preview).toContain('background: var(--esds-color-red-600)');
+    expect(result.preview).toContain('margin-top: 4px');
+    expect(result.preview).toContain('font-size: 12px');
     expect(result.name).toBe('color.red.600');
   });
 
@@ -43,5 +45,7 @@ describe('colorDesignTokensCollectionTokenToMarkdown', () => {
 
     expect(result.preview).toContain('data-preview-value="--esds-color-primary"');
     expect(result.preview).toContain('background: var(--esds-color-primary)');
+    expect(result.preview).toContain('margin-top: 4px');
+    expect(result.preview).toContain('font-size: 12px');
   });
 });

@@ -4,6 +4,7 @@ import type { NumberDesignTokensCollectionToken } from '../../../../../token/typ
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
+import { createResolvedValueDisplay } from '../../shared/create-resolved-value-display.ts';
 
 /**
  * Configuration options for opacity markdown rendering
@@ -127,16 +128,7 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
         ${displayValue}
       </div>
     </div>
-    <div
-      style="
-      margin-top: 8px;
-      font-family: monospace;
-      font-size: 12px;
-      color: #6b7280;
-    "
-    >
-      ${displayValue}
-    </div>
+    ${createResolvedValueDisplay(displayValue)}
   `;
 
   return {

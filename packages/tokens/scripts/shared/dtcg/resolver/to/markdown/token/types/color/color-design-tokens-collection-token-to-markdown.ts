@@ -3,6 +3,7 @@ import type { ColorDesignTokensCollectionToken } from '../../../../../token/type
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
+import { createResolvedValueDisplay } from '../../shared/create-resolved-value-display.ts';
 
 /**
  * Renders a color design token to a markdown table row.
@@ -48,7 +49,7 @@ export function colorDesignTokensCollectionTokenToMarkdown(
       border: 1px solid #e5e7eb;
     "
     ></div>
-    <div data-preview-value="${cssVariable}"></div>
+    ${createResolvedValueDisplay(cssVariable, { dataPreviewValue: cssVariable })}
   `;
 
   return {

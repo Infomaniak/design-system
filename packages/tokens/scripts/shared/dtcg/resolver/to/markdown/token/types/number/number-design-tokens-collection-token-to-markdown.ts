@@ -4,6 +4,7 @@ import type { NumberDesignTokensCollectionToken } from '../../../../../token/typ
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
+import { createResolvedValueDisplay } from '../../shared/create-resolved-value-display.ts';
 
 /**
  * Configuration options for number markdown rendering
@@ -110,16 +111,7 @@ function createRatioPreview(ratio: number, _value: string, name: readonly string
         ${ratioFormat}
       </div>
     </div>
-    <div
-      style="
-      margin-top: 4px;
-      font-family: monospace;
-      font-size: 12px;
-      color: #6b7280;
-    "
-    >
-      ${ratio}
-    </div>
+    ${createResolvedValueDisplay(ratio)}
   `;
 }
 

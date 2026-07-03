@@ -4,6 +4,7 @@ import { createCssVariableNameGenerator } from '../../../../css/token/name/creat
 import { dimensionDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/dimension/value/dimension-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
+import { createResolvedValueDisplay } from '../../shared/create-resolved-value-display.ts';
 
 /**
  * Configuration options for radius markdown rendering
@@ -67,16 +68,7 @@ export function radiusDesignTokensCollectionTokenToMarkdown(
       display: inline-block;
     "
     ></div>
-    <div
-      style="
-      margin-top: 8px;
-      font-family: monospace;
-      font-size: 12px;
-      color: #6b7280;
-    "
-    >
-      ${displayValue}
-    </div>
+    ${createResolvedValueDisplay(displayValue)}
   `;
 
   return {
