@@ -1,8 +1,8 @@
 import type { FigmaNode, GenericFigmaNode } from '../figma-node.ts';
-import type { FigmaFrameNodeProperties } from './figma-frame-node.ts';
+import type { HavingFigmaFrameNodeProperties } from './figma-frame-node.ts';
 
 export interface FigmaComponentSetNode
-  extends FigmaNode<'COMPONENT_SET'>, FigmaFrameNodeProperties {
+  extends FigmaNode<'COMPONENT_SET'>, HavingFigmaFrameNodeProperties {
   readonly componentPropertyDefinitions: Readonly<Record<string, unknown>>;
 }
 

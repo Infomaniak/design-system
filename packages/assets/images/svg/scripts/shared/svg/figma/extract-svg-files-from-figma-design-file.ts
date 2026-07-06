@@ -55,12 +55,35 @@ export function extractSvgFilesFromFigmaDesignFile({
         return getFigmaFile({
           token: figmaAPIToken,
           file_key: figmaSourceFileKey,
+          // geometry: 'paths',
         });
       },
     );
 
     // TODO: DEBUG
-    // await writeJsonFileSafe(join(outputDirectory, 'figma-file.json'), figmaFile);
+    await writeJsonFileSafe(join(outputDirectory, 'figma-file.json'), figmaFile);
+
+    for (const node of FigmaNodesExplorer.explore<FigmaComponentNode>(
+      figmaFile.document,
+      (node: GenericFigmaNode): TreeExplorerPickReturn | void => {
+        if (isFigmaComponentNode(node) && isIconFigmaComponent(node.name)) {
+          return {
+            pickSelf: true,
+            pickChildren: false,
+          };
+        } else {
+          return {
+            pickSelf: false,
+            pickChildren: true,
+          };
+        }
+      },
+    )) {
+      console.log(JSON.stringify(node, null, 2));
+      return;
+    }
+
+    return;
 
     await logger.asyncTask('extract-component-svgs', async (logger: Logger): Promise<void> => {
       interface SVGToLoad {
@@ -78,7 +101,7 @@ export function extractSvgFilesFromFigmaDesignFile({
           const component: FigmaComponent = figmaFile.components[id];
 
           // skip non svg components
-          if (!isIconFigmaComponent(component.name)) {
+          if (!isIconFigmaComponent(component.name) || !component.name.endsWith('filled')) {
             continue;
           }
 
@@ -310,6 +333,10 @@ function extractIconName(name: string): string {
 async function fetchFigmaSvgAsset(url: string): Promise<string> {
   return (await fetch(url)).text();
 }
+
+/*------------*/
+
+/*------------*/
 
 // FILLED SVGS
 
