@@ -40,7 +40,6 @@ export async function runScript(
                   #### ❌ Script "${name}" failed${extraTitle === '' ? '' : ` - ${extraTitle}`}
   
                   - 💬 ${Error.isError(error) ? error.message : String(error)}
-                  ${extraMessage}
                 `,
               });
             });
