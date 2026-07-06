@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 EsdsIconComponent.define();
 
-describe.skip('EsdsIconComponent', () => {
+describe('EsdsIconComponent', () => {
   let container: HTMLDivElement;
 
   beforeEach(() => {
