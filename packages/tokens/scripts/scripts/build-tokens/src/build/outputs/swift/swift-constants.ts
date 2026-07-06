@@ -13,6 +13,7 @@ export const EXCLUDED_SWIFT_TOKEN_ROOTS = [
   'font',
   'shadow',
   'text',
+  'border',
   'border-width',
   'blur',
   'opacity',
