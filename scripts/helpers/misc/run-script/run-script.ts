@@ -4,16 +4,17 @@ import { getEnvKchatWebhookId } from '../../kchat/env/get-env-kchat-webhook-id.t
 import { DEFAULT_LOG_LEVEL } from '../../log/log-level/defaults/default-log-level.ts';
 import { Logger, type LoggerOptions } from '../../log/logger.ts';
 import { dedent } from '../string/dedent/dedent.ts';
-import { getEnvIsSubScript } from './env/get-env-is-sub-script.ts';
+import { getEnvShouldNotify } from './env/get-env-should-notify.ts';
+import { ScriptFailedError } from './script-failed-error.ts';
 
 export interface RunScriptOptions extends LoggerOptions {
-  readonly skipKChatNotificationOnError?: boolean;
+  readonly notifyError?: boolean;
 }
 
 export async function runScript(
   name: string,
   script: (logger: Logger) => PromiseLike<void> | void,
-  { skipKChatNotificationOnError, logLevel = DEFAULT_LOG_LEVEL }: RunScriptOptions = {},
+  { notifyError, logLevel = DEFAULT_LOG_LEVEL }: RunScriptOptions = {},
 ): Promise<void> {
   const logger: Logger = Logger.root({ logLevel });
 
@@ -24,17 +25,23 @@ export async function runScript(
 
         await script(logger);
       } catch (error: unknown) {
-        skipKChatNotificationOnError ??= getEnvIsSubScript();
-        if (!skipKChatNotificationOnError) {
+        notifyError ??= getEnvShouldNotify();
+        if (notifyError) {
           try {
             await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
+              const extraTitle: string =
+                error instanceof ScriptFailedError ? (error.title ?? '') : '';
+              const extraMessage: string =
+                error instanceof ScriptFailedError ? (error.extra ?? '') : '';
+
               await postKchatWebhookMessage({
                 webhookId: getEnvKchatWebhookId(),
                 text: dedent`
-                #### ❌ Script "${name}" failed
-
-                - 💬 ${Error.isError(error) ? error.message : String(error)}
-              `,
+                  #### ❌ Script "${name}" failed${extraTitle === '' ? '' : ` - ${extraTitle}`}
+  
+                  - 💬 ${Error.isError(error) ? error.message : String(error)}
+                  ${extraMessage}
+                `,
               });
             });
           } catch (childError: unknown) {
@@ -48,8 +55,4 @@ export async function runScript(
   } catch (error: unknown) {
     logger.fatal(error);
   }
-}
-
-export class ScriptFailedError extends Error {
-  // TODO
 }

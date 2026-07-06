@@ -2,13 +2,13 @@ import { join } from 'node:path';
 import process from 'node:process';
 import type { BuildConfig } from '../../../helpers/build/build-config/build-config.ts';
 import { ENV_BUILD_CONFIG } from '../../../helpers/build/build-config/env/get-env-build-config.ts';
-import { ENV_IGNORE_ENV_FILE } from '../../../helpers/env/env-file/get-env-ignore-env-file.ts';
 import type { PackageJsonDependencies } from '../../../helpers/file/package-json/package-json-dependencies/package-json-dependencies.ts';
 import { postKchatWebhookMessage } from '../../../helpers/kchat/api/post-kchat-webhook-message.ts';
 import { getEnvKchatWebhookId } from '../../../helpers/kchat/env/get-env-kchat-webhook-id.ts';
 import type { Logger } from '../../../helpers/log/logger.ts';
 import { execCommandInherit } from '../../../helpers/misc/exec-command.ts';
-import { ENV_IS_SUB_SCRIPT } from '../../../helpers/misc/run-script/env/get-env-is-sub-script.ts';
+import { ENV_SHOULD_NOTIFY } from '../../../helpers/misc/run-script/env/get-env-should-notify.ts';
+import { ScriptFailedError } from '../../../helpers/misc/run-script/script-failed-error.ts';
 import { dedent } from '../../../helpers/misc/string/dedent/dedent.ts';
 import { generatePackageJsonBuildVersion } from '../../../helpers/npm/generate-package-json-build-version/generate-package-json-build-version.ts';
 import { isNpmPackagePublished } from '../../../helpers/npm/is-npm-version-published/is-npm-package-published.ts';
@@ -37,7 +37,6 @@ export async function ciPublish({
   mode,
 }: CiPublishOptions): Promise<void> {
   const packagesDirectory: string = join(rootDirectory, 'packages');
-  const shouldNotify: boolean = !dryRun && mode !== 'dev';
 
   try {
     const publishablePackages: readonly PackageJsonWithPath[] = await logger.asyncTask(
@@ -51,6 +50,8 @@ export async function ciPublish({
         });
       },
     );
+
+    throw new Error('debug'); // TODO
 
     if (publishablePackages.length === 0) {
       logger.info('SKIP: No publishable package found.');
@@ -95,8 +96,7 @@ export async function ciPublish({
           shell: true,
           env: {
             ...process.env,
-            [ENV_IGNORE_ENV_FILE]: 'true', // NOTE: probably not necessary
-            [ENV_IS_SUB_SCRIPT]: 'true',
+            [ENV_SHOULD_NOTIFY]: 'true',
             ...env,
           },
         });
@@ -107,6 +107,8 @@ export async function ciPublish({
       [ENV_BUILD_CONFIG]: JSON.stringify(buildConfig),
     });
 
+    throw new Error('debug'); // TODO
+
     await runYarnWorkspacesCommand('publish', {
       [ENV_PUBLISH_CONFIG]: JSON.stringify({
         mode: buildConfig.mode,
@@ -116,34 +118,24 @@ export async function ciPublish({
 
     // TODO update PR comment with dev version
 
-    if (shouldNotify) {
-      await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
-        await postKchatWebhookMessage({
-          webhookId: getEnvKchatWebhookId(),
-          text: dedent`
-            #### ✅ publish job succeed (${mode}) - ${branchName}
+    await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
+      await postKchatWebhookMessage({
+        webhookId: getEnvKchatWebhookId(),
+        text: dedent`
+          #### ✅ publish job succeed (${mode}) - ${branchName}
 
-              - 🔗 ${jobUrl}
-          `,
-        });
+            - 🔗 ${jobUrl}
+        `,
       });
-    }
+    });
   } catch (error: unknown) {
-    if (shouldNotify) {
-      await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
-        await postKchatWebhookMessage({
-          webhookId: getEnvKchatWebhookId(),
-          text: dedent`
-              #### ❌ publish job failed (${mode}) - ${branchName}
-
-              - 🔗 ${jobUrl}
-              - 💬 ${Error.isError(error) ? error.message : String(error)}
-            `,
-        });
-      });
-    }
-
-    throw error;
+    throw new ScriptFailedError({
+      cause: error,
+      title: `(${mode}) ${branchName}`,
+      extra: dedent`
+        - 🔗 ${jobUrl}
+      `,
+    });
   }
 }
 
