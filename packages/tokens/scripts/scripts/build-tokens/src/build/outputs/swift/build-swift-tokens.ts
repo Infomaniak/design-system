@@ -44,13 +44,13 @@ export async function buildSwiftTokens({
 }: BuildSwiftTokensOptions) {
   return logger.asyncTask('swift', async (logger: Logger): Promise<void> => {
     const cleanOutputDirectory = removeTrailingSlash(outputDirectory);
-    const iosSwiftUiOutputDirectory: string = `${cleanOutputDirectory}/ios/swift-ui`;
-    const iosSwiftUiSourceOutputDirectory: string = join(
-      iosSwiftUiOutputDirectory,
+    const iosSwiftOutputDirectory: string = `${cleanOutputDirectory}/ios/swift`;
+    const iosSwiftSourceOutputDirectory: string = join(
+      iosSwiftOutputDirectory,
       SWIFT_SOURCES_DIR,
     );
-    const iosSwiftUiResourcesOutputDirectory: string = join(
-      iosSwiftUiOutputDirectory,
+    const iosSwiftResourcesOutputDirectory: string = join(
+      iosSwiftOutputDirectory,
       SWIFT_RESOURCES_DIR,
     );
 
@@ -94,7 +94,7 @@ export async function buildSwiftTokens({
         for (const token of t1Colors) {
           const { tokenName, colorsetName } = await buildXcAssets({
             token,
-            outputDirectory: iosSwiftUiResourcesOutputDirectory,
+            outputDirectory: iosSwiftResourcesOutputDirectory,
           });
           t1ColorTokenNameToColorsetName.set(JSON.stringify(tokenName), colorsetName);
         }
@@ -138,7 +138,7 @@ export async function buildSwiftTokens({
 
       await logger.asyncTask('generate-file', async (): Promise<void> => {
         const rawTokensOutputDirectory: string = join(
-          iosSwiftUiSourceOutputDirectory,
+          iosSwiftSourceOutputDirectory,
           SWIFT_PRIMITIVE_TOKENS,
         );
 
@@ -182,7 +182,7 @@ export async function buildSwiftTokens({
       await buildSwiftThemeStructs({
         baseCollection,
         modifiers,
-        outputDirectory: iosSwiftUiSourceOutputDirectory,
+        outputDirectory: iosSwiftSourceOutputDirectory,
         rawTokensPrefix: SWIFT_PRIMITIVE_TOKENS,
       });
     });
