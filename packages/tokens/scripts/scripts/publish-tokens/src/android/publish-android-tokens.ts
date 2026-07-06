@@ -45,8 +45,8 @@ export async function publishAndroidTokens({
         owner: INFOMANIAK_GITHUB_ORGANIZATION,
         repository: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
         authToken: getEnvCiPullRequestAuthTokenMobile(),
-        title: `chore: Update to ${publishBranchName}`,
-        body: `Update to ${publishBranchName}`,
+        title: `chore: Update to ${version}`,
+        body: `Update to ${version}`,
         head: publishBranchName,
         base: /*mode === 'rc' ? 'develop' : */ 'main', // TODO add support to `develop` branch when the repo will be ready
       });
