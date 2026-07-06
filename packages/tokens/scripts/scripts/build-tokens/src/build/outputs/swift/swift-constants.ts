@@ -3,9 +3,19 @@ export const SWIFT_MAIN_STRUCT = `ESDSTheme`;
 
 export const SWIFT_SOURCES_DIR = 'Sources/DesignSystem';
 export const SWIFT_PRIMITIVE_TARGET_DIR = 'Sources/ESDSPrimitives';
+export const SWIFT_FOUNDATION_DIR = 'ESDSFoundation';
 export const SWIFT_RESOURCES_DIR = 'Sources/ESDSResources';
 
-export const EXCLUDED_SWIFT_TOKEN_ROOTS = ['font', 'shadow', 'text', 'border-width', 'blur', 'opacity', 'breakpoint', 'ratio'];
+export const EXCLUDED_SWIFT_TOKEN_ROOTS = [
+  'font',
+  'shadow',
+  'text',
+  'border-width',
+  'blur',
+  'opacity',
+  'breakpoint',
+  'ratio',
+];
 export const EXCLUDED_SWIFT_TOKEN_SEGMENTS = ['dataviz'];
 
 export function isExcludedSwiftToken(token: { readonly name: readonly string[] }): boolean {

@@ -4,10 +4,7 @@ import type { Logger } from '../../../../../../../../../scripts/helpers/log/logg
 import { dedent } from '../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { removeTrailingSlash } from '../../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
-import type {
-  DesignTokenContexts,
-  DesignTokenModifiers,
-} from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
+import type { DesignTokenModifiers } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import { type SwiftEnumDeclaration } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/swift-enum-declaration.ts';
 import { swiftEnumDeclarationsToString } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/to/swift-enum-declarations-to-string.ts';
 import { tokenToSwiftEnum } from '../../../../../../shared/dtcg/resolver/to/swift/token/token-to-swift-enum.ts';
@@ -17,15 +14,15 @@ import type {
 } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/color/is-color-design-tokens-collection-token.ts';
 import { T1_DIRECTORY_NAME, T2_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
-import { buildSwiftEnumColor } from './built-steps/build-swift-enum-color.ts';
-import { buildSwiftThemeStructs } from './built-steps/build-swift-theme-structs/build-swift-theme-structs.ts';
+import {
+  buildSwiftT2,
+  buildSwiftThemes,
+} from './built-steps/build-swift-theme-structs/build-swift-theme-structs.ts';
 import { buildXcAssets } from './built-steps/build-xcassets.ts';
 import { buildSwiftFile } from './helpers/build-swift-file.ts';
 import {
   SWIFT_PRIMITIVE_TARGET_DIR,
   SWIFT_PRIMITIVE_TOKENS,
-  SWIFT_RESOURCES_DIR,
-  SWIFT_SOURCES_DIR,
   isExcludedSwiftToken,
 } from './swift-constants.ts';
 import { getSwiftTokenGroupName } from './swift-tokens-format.ts';
@@ -46,25 +43,17 @@ export async function buildSwiftTokens({
   return logger.asyncTask('swift', async (logger: Logger): Promise<void> => {
     const cleanOutputDirectory = removeTrailingSlash(outputDirectory);
     const iosSwiftOutputDirectory: string = `${cleanOutputDirectory}/ios/swift`;
-    const iosSwiftSourceOutputDirectory: string = join(
-      iosSwiftOutputDirectory,
-      SWIFT_SOURCES_DIR,
-    );
     const primitivesTargetDirectory: string = join(
       iosSwiftOutputDirectory,
-      SWIFT_PRIMITIVE_TARGET_DIR
+      SWIFT_PRIMITIVE_TARGET_DIR,
     );
 
     const t1ColorTokenNameToColorSetName = new Map<string, string>();
     const declarations: Map<string, SwiftEnumDeclaration[]> = new Map();
 
-    const theme: DesignTokenContexts = modifiers.get('theme')!;
-    const lightThemeCollection: DesignTokensCollection = theme.get('light')!;
-    const darkThemeCollection: DesignTokensCollection = theme.get('dark')!;
-
     const t1TokenColors: GenericDesignTokensCollectionToken[] = [];
     const t1TokenOthers: GenericDesignTokensCollectionToken[] = [];
-    
+
     const t2TokenColors: GenericDesignTokensCollectionToken[] = [];
     const t2TokenOthers: GenericDesignTokensCollectionToken[] = [];
 
@@ -81,7 +70,7 @@ export async function buildSwiftTokens({
         path.includes(T1_DIRECTORY_NAME),
       );
       const isT2Token: boolean = token.files.some((path: string): boolean =>
-        path.includes(T2_DIRECTORY_NAME)
+        path.includes(T2_DIRECTORY_NAME),
       );
 
       if (isColorDesignTokensCollectionToken(resolvedToken)) {
@@ -161,8 +150,15 @@ export async function buildSwiftTokens({
       });
     });
 
+    // TODO: Reinstate once the struct-tree approach (buildSwiftT2/buildSwiftThemes below)
+    // covers colorset resolution for T2 tokens. Reactivating this requires re-adding:
+    //   import { buildSwiftEnumColor } from './built-steps/build-swift-enum-color.ts';
+    //   const theme: DesignTokenContexts = modifiers.get('theme')!;
+    //   const lightThemeCollection: DesignTokensCollection = theme.get('light')!;
+    //   const darkThemeCollection: DesignTokensCollection = theme.get('dark')!;
+    /*
     await logger.asyncTask('t2-tokens', async (logger: Logger): Promise<void> => {
-      /*await logger.asyncTask('color-tokens', async (): Promise<void> => {
+      await logger.asyncTask('color-tokens', async (): Promise<void> => {
         for (const token of t2TokenColors) {
           const enumColor: SwiftEnumDeclaration | null = await buildSwiftEnumColor({
             token,
@@ -181,9 +177,9 @@ export async function buildSwiftTokens({
           }
           declarations.get(groupName)!.push(enumColor);
         }
-      });*/
+      });
 
-      /*await logger.asyncTask('other-tokens', async (): Promise<void> => {
+      await logger.asyncTask('other-tokens', async (): Promise<void> => {
         for (const token of t2TokenOthers) {
           const groupName = getSwiftTokenGroupName(token);
           if (!declarations.has(groupName)) {
@@ -196,15 +192,26 @@ export async function buildSwiftTokens({
             }),
           );
         }
-      });*/
+      });
     });
+    */
 
-    await logger.asyncTask('main-theme', async (): Promise<void> => {
-      await buildSwiftThemeStructs({
-        baseCollection,
-        modifiers,
-        outputDirectory: iosSwiftSourceOutputDirectory,
-        rawTokensPrefix: SWIFT_PRIMITIVE_TOKENS,
+    await logger.asyncTask('t2-tokens', async (): Promise<void> => {
+      const baseTokenTree = await logger.asyncTask('generate-tokens', () => {
+        return buildSwiftT2({
+          baseCollection,
+          outputDirectory: join(iosSwiftOutputDirectory, 'Sources'),
+          rawTokensPrefix: SWIFT_PRIMITIVE_TOKENS,
+        });
+      });
+
+      await logger.asyncTask('generate-themes', () => {
+        return buildSwiftThemes({
+          modifiers,
+          baseValueMap: baseTokenTree.valueMap,
+          outputDirectory: join(iosSwiftOutputDirectory, 'Sources'),
+          rawTokensPrefix: SWIFT_PRIMITIVE_TOKENS,
+        });
       });
     });
   });

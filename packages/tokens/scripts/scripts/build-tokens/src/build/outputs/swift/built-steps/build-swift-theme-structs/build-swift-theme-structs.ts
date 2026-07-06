@@ -11,9 +11,15 @@ import { buildSwiftStructTree } from './build-swift-struct-tree.ts';
 import { buildSwiftThemeProducts } from './build-swift-theme-products.ts';
 import { buildSwiftTokenTree, type SwiftTokenTree } from './build-token-tree.ts';
 
-export interface BuildSwiftThemeStructOptions {
+export interface BuildSwiftT2Options {
   readonly baseCollection: DesignTokensCollection;
+  readonly outputDirectory: string;
+  readonly rawTokensPrefix: string;
+}
+
+export interface BuildSwiftThemesOptions {
   readonly modifiers: DesignTokenModifiers;
+  readonly baseValueMap: Map<string, string>;
   readonly outputDirectory: string;
   readonly rawTokensPrefix: string;
 }
@@ -26,13 +32,8 @@ const TYPE_SWIFT_MAP: Record<string, string> = {
   fontWeight: 'Font.Weight',
 };
 
-export async function buildSwiftThemeStructs({
-  baseCollection,
-  modifiers,
-  outputDirectory,
-  rawTokensPrefix,
-}: BuildSwiftThemeStructOptions) {
-  const names: readonly ArrayDesignTokenName[] = Array.from(
+function getT2Names(baseCollection: DesignTokensCollection): readonly ArrayDesignTokenName[] {
+  return Array.from(
     baseCollection
       .tokens()
       .filter((token: GenericDesignTokensCollectionToken): boolean => {
@@ -50,7 +51,14 @@ export async function buildSwiftThemeStructs({
         return token.name;
       }),
   );
+}
 
+export async function buildSwiftT2({
+  baseCollection,
+  outputDirectory,
+  rawTokensPrefix,
+}: BuildSwiftT2Options): Promise<SwiftTokenTree> {
+  const names = getT2Names(baseCollection);
   const baseTokenTree: SwiftTokenTree = buildSwiftTokenTree(
     baseCollection,
     names,
@@ -61,10 +69,14 @@ export async function buildSwiftThemeStructs({
 
   await buildSwiftStructTree(baseTokenTree.tree, [], outputDirectory, baseTokenTree.valueMap);
 
-  await buildSwiftThemeProducts(
-    modifiers,
-    baseTokenTree.valueMap,
-    rawTokensPrefix,
-    outputDirectory,
-  );
+  return baseTokenTree;
+}
+
+export async function buildSwiftThemes({
+  modifiers,
+  baseValueMap,
+  outputDirectory,
+  rawTokensPrefix,
+}: BuildSwiftThemesOptions): Promise<void> {
+  await buildSwiftThemeProducts(modifiers, baseValueMap, rawTokensPrefix, outputDirectory);
 }
