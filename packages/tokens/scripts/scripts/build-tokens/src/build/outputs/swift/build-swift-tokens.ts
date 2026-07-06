@@ -14,6 +14,7 @@ import type {
 } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/color/is-color-design-tokens-collection-token.ts';
 import { T1_DIRECTORY_NAME, T2_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
+import { buildSwiftPackage } from './built-steps/build-swift-package.ts';
 import {
   buildSwiftT2,
   buildSwiftThemes,
@@ -197,22 +198,32 @@ export async function buildSwiftTokens({
     });
     */
 
-    await logger.asyncTask('t2-tokens', async (): Promise<void> => {
-      const baseTokenTree = await logger.asyncTask('generate-tokens', () => {
-        return buildSwiftT2({
-          baseCollection,
-          outputDirectory: join(iosSwiftOutputDirectory, SWIFT_SOURCES_DIR),
-          rawTokensPrefix: SWIFT_PRIMITIVE_TOKENS,
+    const productTargetNames = await logger.asyncTask(
+      't2-tokens',
+      async (): Promise<readonly string[]> => {
+        const baseTokenTree = await logger.asyncTask('generate-tokens', () => {
+          return buildSwiftT2({
+            baseCollection,
+            outputDirectory: join(iosSwiftOutputDirectory, SWIFT_SOURCES_DIR),
+            rawTokensPrefix: SWIFT_PRIMITIVE_TOKENS,
+          });
         });
-      });
 
-      await logger.asyncTask('generate-themes', () => {
-        return buildSwiftThemes({
-          modifiers,
-          baseValueMap: baseTokenTree.valueMap,
-          outputDirectory: join(iosSwiftOutputDirectory, SWIFT_SOURCES_DIR),
-          rawTokensPrefix: SWIFT_PRIMITIVE_TOKENS,
+        return logger.asyncTask('generate-themes', () => {
+          return buildSwiftThemes({
+            modifiers,
+            baseValueMap: baseTokenTree.valueMap,
+            outputDirectory: join(iosSwiftOutputDirectory, SWIFT_SOURCES_DIR),
+            rawTokensPrefix: SWIFT_PRIMITIVE_TOKENS,
+          });
         });
+      },
+    );
+
+    await logger.asyncTask('package-manifest', (): Promise<void> => {
+      return buildSwiftPackage({
+        outputDirectory: iosSwiftOutputDirectory,
+        productTargetNames,
       });
     });
   });

@@ -77,6 +77,6 @@ export async function buildSwiftThemes({
   baseValueMap,
   outputDirectory,
   rawTokensPrefix,
-}: BuildSwiftThemesOptions): Promise<void> {
-  await buildSwiftThemeProducts(modifiers, baseValueMap, rawTokensPrefix, outputDirectory);
+}: BuildSwiftThemesOptions): Promise<readonly string[]> {
+  return buildSwiftThemeProducts(modifiers, baseValueMap, rawTokensPrefix, outputDirectory);
 }

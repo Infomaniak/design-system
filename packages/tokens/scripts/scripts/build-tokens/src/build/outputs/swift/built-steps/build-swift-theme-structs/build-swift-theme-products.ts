@@ -18,7 +18,9 @@ export async function buildSwiftThemeProducts(
   baseValueMap: Map<string, string>,
   rawTokensPrefix: string,
   outputDirectory: string,
-) {
+): Promise<readonly string[]> {
+  const generatedProductTargetNames: string[] = [];
+
   for (const [modifierType, tokenContext] of modifiers.entries()) {
     if (modifierType !== 'product') continue; // Only process product modifiers on iOS
 
@@ -63,6 +65,10 @@ export async function buildSwiftThemeProducts(
         join(outputDirectory, `${SWIFT_PRODUCTS_DIR}/${productFolderName}/${swiftFileName}.swift`),
         swiftStruct,
       );
+
+      generatedProductTargetNames.push(productFolderName);
     }
   }
+
+  return generatedProductTargetNames;
 }

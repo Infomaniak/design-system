@@ -2,7 +2,11 @@ import { toPascalCase } from '../../../../../../../../../../../scripts/helpers/m
 import { dedent } from '../../../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
 import { buildSwiftFile } from '../../helpers/build-swift-file.ts';
-import { SWIFT_MAIN_STRUCT } from '../../swift-constants.ts';
+import {
+  SWIFT_FOUNDATION_DIR,
+  SWIFT_MAIN_STRUCT,
+  SWIFT_PRIMITIVE_TARGET_NAME,
+} from '../../swift-constants.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
 import { getSortedSwiftVariables } from './build-variables-for-node.ts';
 import type { ValueMapDifference } from './find-value-map-differences.ts';
@@ -97,7 +101,7 @@ export function buildSwiftThemeExtension(
   const initCall = emitDiffNode(`${SWIFT_MAIN_STRUCT}`, diffTree, tree, [], modifierValueMap);
 
   return buildSwiftFile({
-    imports: ['SwiftUI'],
+    imports: ['SwiftUI', SWIFT_FOUNDATION_DIR, SWIFT_PRIMITIVE_TARGET_NAME],
     type: 'public extension',
     name: `${SWIFT_MAIN_STRUCT}`,
     protocols: [],

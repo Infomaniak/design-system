@@ -5,7 +5,11 @@ import { dedent } from '../../../../../../../../../../../scripts/helpers/misc/st
 import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
 import { buildSwiftStructContent } from '../../helpers/build-swift-file-with-init.ts';
 import { buildSwiftFile } from '../../helpers/build-swift-file.ts';
-import { SWIFT_FOUNDATION_DIR, SWIFT_MAIN_STRUCT } from '../../swift-constants.ts';
+import {
+  SWIFT_FOUNDATION_DIR,
+  SWIFT_MAIN_STRUCT,
+  SWIFT_PRIMITIVE_TARGET_NAME,
+} from '../../swift-constants.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
 import { getSortedSwiftVariables } from './build-variables-for-node.ts';
 
@@ -51,7 +55,7 @@ export async function buildSwiftStructTree(
 
   if (path.length === 0) {
     const swiftStruct = buildSwiftFile({
-      imports: ['SwiftUI'],
+      imports: ['SwiftUI', SWIFT_PRIMITIVE_TARGET_NAME],
       type: 'public struct',
       name,
       protocols: ['Sendable'],
@@ -68,7 +72,7 @@ export async function buildSwiftStructTree(
     const extensionTarget = extensionTargetForPath(path);
 
     const fileContent = buildSwiftFile({
-      imports: ['SwiftUI'],
+      imports: ['SwiftUI', SWIFT_PRIMITIVE_TARGET_NAME],
       type: 'public extension',
       name: extensionTarget,
       protocols: [],
