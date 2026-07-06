@@ -69,7 +69,7 @@ export async function runScript(
           await postKchatWebhookMessage({
             webhookId: getEnvKchatWebhookId(),
             text: dedent`
-              #### ✅ Script "${name}" succeed${notificationTitle === '' ? '' : ` - ${notificationTitle}`}
+              #### ✅ Script "${name}" succeeded${notificationTitle === '' ? '' : ` - ${notificationTitle}`}
 
               ${notificationMessage}
             `,
