@@ -8,6 +8,7 @@ import { postKchatWebhookMessage } from '../../../helpers/kchat/api/post-kchat-w
 import { getEnvKchatWebhookId } from '../../../helpers/kchat/env/get-env-kchat-webhook-id.ts';
 import type { Logger } from '../../../helpers/log/logger.ts';
 import { execCommandInherit } from '../../../helpers/misc/exec-command.ts';
+import { ENV_IS_SUB_SCRIPT } from '../../../helpers/misc/run-script/env/get-env-is-sub-script.ts';
 import { dedent } from '../../../helpers/misc/string/dedent/dedent.ts';
 import { generatePackageJsonBuildVersion } from '../../../helpers/npm/generate-package-json-build-version/generate-package-json-build-version.ts';
 import { isNpmPackagePublished } from '../../../helpers/npm/is-npm-version-published/is-npm-package-published.ts';
@@ -94,7 +95,8 @@ export async function ciPublish({
           shell: true,
           env: {
             ...process.env,
-            [ENV_IGNORE_ENV_FILE]: JSON.stringify(true),
+            [ENV_IGNORE_ENV_FILE]: 'true', // NOTE: probably not necessary
+            [ENV_IS_SUB_SCRIPT]: 'true',
             ...env,
           },
         });

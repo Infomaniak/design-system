@@ -49,3 +49,7 @@ export async function runScript(
     logger.fatal(error);
   }
 }
+
+export class ScriptFailedError extends Error {
+  // TODO
+}
