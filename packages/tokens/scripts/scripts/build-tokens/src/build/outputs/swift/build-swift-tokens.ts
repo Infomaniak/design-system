@@ -22,6 +22,7 @@ import { buildSwiftThemeStructs } from './built-steps/build-swift-theme-structs/
 import { buildXcAssets } from './built-steps/build-xcassets.ts';
 import { buildSwiftFile } from './helpers/build-swift-file.ts';
 import {
+  SWIFT_PRIMITIVE_TARGET_DIR,
   SWIFT_PRIMITIVE_TOKENS,
   SWIFT_RESOURCES_DIR,
   SWIFT_SOURCES_DIR,
@@ -49,9 +50,9 @@ export async function buildSwiftTokens({
       iosSwiftOutputDirectory,
       SWIFT_SOURCES_DIR,
     );
-    const iosSwiftResourcesOutputDirectory: string = join(
+    const primitivesTargetDirectory: string = join(
       iosSwiftOutputDirectory,
-      SWIFT_RESOURCES_DIR,
+      SWIFT_PRIMITIVE_TARGET_DIR
     );
 
     const t1ColorTokenNameToColorSetName = new Map<string, string>();
@@ -62,6 +63,7 @@ export async function buildSwiftTokens({
     const darkThemeCollection: DesignTokensCollection = theme.get('dark')!;
 
     const t1TokenColors: GenericDesignTokensCollectionToken[] = [];
+    const t1TokenOthers: GenericDesignTokensCollectionToken[] = [];
     
     const t2TokenColors: GenericDesignTokensCollectionToken[] = [];
     const t2TokenOthers: GenericDesignTokensCollectionToken[] = [];
@@ -90,7 +92,7 @@ export async function buildSwiftTokens({
         }
       } else {
         if (isT1Token) {
-          // TODO: Handle T1 token here probably?
+          t1TokenOthers.push(token);
         } else if (isT2Token) {
           t2TokenOthers.push(token);
         }
@@ -102,35 +104,14 @@ export async function buildSwiftTokens({
         for (const token of t1TokenColors) {
           const { tokenName, colorsetName } = await buildXcAssets({
             token,
-            outputDirectory: iosSwiftResourcesOutputDirectory,
+            outputDirectory: primitivesTargetDirectory,
           });
           t1ColorTokenNameToColorSetName.set(JSON.stringify(tokenName), colorsetName);
         }
       });
-    });
 
-    await logger.asyncTask('t2-tokens', async (logger: Logger): Promise<void> => {
-      await logger.asyncTask('color-tokens', async (): Promise<void> => {
-        for (const token of t2TokenColors) {
-          const enumColor: SwiftEnumDeclaration | null = await buildSwiftEnumColor({
-            token,
-            lightThemeCollection,
-            darkThemeCollection,
-            t1ColorTokenNameToColorsetName: t1ColorTokenNameToColorSetName,
-          });
-          if (enumColor === null) {
-            continue;
-          }
-          const groupName = getSwiftTokenGroupName(token);
-          if (!declarations.has(groupName)) {
-            declarations.set(groupName, []);
-          }
-          declarations.get(groupName)!.push(enumColor);
-        }
-      });
-
-      await logger.asyncTask('non-color-tokens', async (): Promise<void> => {
-        for (const token of t2TokenOthers) {
+      await logger.asyncTask('other-tokens', async (): Promise<void> => {
+        for (const token of t1TokenOthers) {
           const groupName = getSwiftTokenGroupName(token);
           if (!declarations.has(groupName)) {
             declarations.set(groupName, []);
@@ -144,15 +125,10 @@ export async function buildSwiftTokens({
         }
       });
 
-      await logger.asyncTask('generate-file', async (): Promise<void> => {
-        const rawTokensOutputDirectory: string = join(
-          iosSwiftSourceOutputDirectory,
-          SWIFT_PRIMITIVE_TOKENS,
-        );
-
+      await logger.asyncTask('generate-files', async (): Promise<void> => {
         // Build empty enum
         const content: string = buildSwiftFile({
-          imports: ['SwiftUI'],
+          imports: ['Foundation'],
           type: 'public enum',
           name: SWIFT_PRIMITIVE_TOKENS,
           protocols: ['Sendable'],
@@ -160,30 +136,67 @@ export async function buildSwiftTokens({
         });
 
         await writeTextFileSafe(
-          join(rawTokensOutputDirectory, `${SWIFT_PRIMITIVE_TOKENS}.swift`),
+          join(primitivesTargetDirectory, `${SWIFT_PRIMITIVE_TOKENS}.swift`),
           content,
         );
 
         for (const [groupName, declaration] of declarations) {
-          const imports = groupName === 'Color' ? ['SwiftUI', 'ESDSResources'] : ['SwiftUI'];
           const content: string = buildSwiftFile({
-            imports,
-            type: 'extension',
+            imports: ['Foundation'],
+            type: 'public extension',
             name: SWIFT_PRIMITIVE_TOKENS,
             protocols: [],
             content: dedent`
-              enum ${groupName} {
+              enum ${groupName}: Sendable {
                 ${swiftEnumDeclarationsToString(declaration)}
               }
             `,
           });
 
           await writeTextFileSafe(
-            join(rawTokensOutputDirectory, `${SWIFT_PRIMITIVE_TOKENS}+${groupName}.swift`),
+            join(primitivesTargetDirectory, `${SWIFT_PRIMITIVE_TOKENS}+${groupName}.swift`),
             content,
           );
         }
       });
+    });
+
+    await logger.asyncTask('t2-tokens', async (logger: Logger): Promise<void> => {
+      /*await logger.asyncTask('color-tokens', async (): Promise<void> => {
+        for (const token of t2TokenColors) {
+          const enumColor: SwiftEnumDeclaration | null = await buildSwiftEnumColor({
+            token,
+            lightThemeCollection,
+            darkThemeCollection,
+            t1ColorTokenNameToColorsetName: t1ColorTokenNameToColorSetName,
+          });
+
+          if (enumColor === null) {
+            continue;
+          }
+
+          const groupName = getSwiftTokenGroupName(token);
+          if (!declarations.has(groupName)) {
+            declarations.set(groupName, []);
+          }
+          declarations.get(groupName)!.push(enumColor);
+        }
+      });*/
+
+      /*await logger.asyncTask('other-tokens', async (): Promise<void> => {
+        for (const token of t2TokenOthers) {
+          const groupName = getSwiftTokenGroupName(token);
+          if (!declarations.has(groupName)) {
+            declarations.set(groupName, []);
+          }
+          declarations.get(groupName)!.push(
+            tokenToSwiftEnum({
+              ...token,
+              ...baseCollection.resolve(token),
+            }),
+          );
+        }
+      });*/
     });
 
     await logger.asyncTask('main-theme', async (): Promise<void> => {
