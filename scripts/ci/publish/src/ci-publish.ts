@@ -3,12 +3,11 @@ import process from 'node:process';
 import type { BuildConfig } from '../../../helpers/build/build-config/build-config.ts';
 import { ENV_BUILD_CONFIG } from '../../../helpers/build/build-config/env/get-env-build-config.ts';
 import type { PackageJsonDependencies } from '../../../helpers/file/package-json/package-json-dependencies/package-json-dependencies.ts';
-import { postKchatWebhookMessage } from '../../../helpers/kchat/api/post-kchat-webhook-message.ts';
-import { getEnvKchatWebhookId } from '../../../helpers/kchat/env/get-env-kchat-webhook-id.ts';
 import type { Logger } from '../../../helpers/log/logger.ts';
 import { execCommandInherit } from '../../../helpers/misc/exec-command.ts';
 import { ENV_SHOULD_NOTIFY } from '../../../helpers/misc/run-script/env/get-env-should-notify.ts';
-import { ScriptFailedError } from '../../../helpers/misc/run-script/script-failed-error.ts';
+import type { RunScriptNotification } from '../../../helpers/misc/run-script/notification/run-script-notification.ts';
+import { ScriptFailedError } from '../../../helpers/misc/run-script/notification/script-failed-error.ts';
 import { dedent } from '../../../helpers/misc/string/dedent/dedent.ts';
 import { generatePackageJsonBuildVersion } from '../../../helpers/npm/generate-package-json-build-version/generate-package-json-build-version.ts';
 import { isNpmPackagePublished } from '../../../helpers/npm/is-npm-version-published/is-npm-package-published.ts';
@@ -35,7 +34,7 @@ export async function ciPublish({
   branchName,
   headSha,
   mode,
-}: CiPublishOptions): Promise<void> {
+}: CiPublishOptions): Promise<RunScriptNotification | void> {
   const packagesDirectory: string = join(rootDirectory, 'packages');
 
   try {
@@ -50,8 +49,6 @@ export async function ciPublish({
         });
       },
     );
-
-    throw new Error('debug'); // TODO
 
     if (publishablePackages.length === 0) {
       logger.info('SKIP: No publishable package found.');
@@ -107,8 +104,6 @@ export async function ciPublish({
       [ENV_BUILD_CONFIG]: JSON.stringify(buildConfig),
     });
 
-    throw new Error('debug'); // TODO
-
     await runYarnWorkspacesCommand('publish', {
       [ENV_PUBLISH_CONFIG]: JSON.stringify({
         mode: buildConfig.mode,
@@ -118,21 +113,17 @@ export async function ciPublish({
 
     // TODO update PR comment with dev version
 
-    await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
-      await postKchatWebhookMessage({
-        webhookId: getEnvKchatWebhookId(),
-        text: dedent`
-          #### ✅ publish job succeed (${mode}) - ${branchName}
-
-            - 🔗 ${jobUrl}
-        `,
-      });
-    });
+    return {
+      notificationTitle: `(${mode}) ${branchName}`,
+      notificationMessage: dedent`
+        - 🔗 ${jobUrl}
+      `,
+    };
   } catch (error: unknown) {
     throw new ScriptFailedError({
       cause: error,
-      title: `(${mode}) ${branchName}`,
-      extra: dedent`
+      notificationTitle: `(${mode}) ${branchName}`,
+      notificationMessage: dedent`
         - 🔗 ${jobUrl}
       `,
     });

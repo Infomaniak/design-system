@@ -5,7 +5,8 @@ import { DEFAULT_LOG_LEVEL } from '../../log/log-level/defaults/default-log-leve
 import { Logger, type LoggerOptions } from '../../log/logger.ts';
 import { dedent } from '../string/dedent/dedent.ts';
 import { getEnvShouldNotify } from './env/get-env-should-notify.ts';
-import { ScriptFailedError } from './script-failed-error.ts';
+import type { RunScriptNotification } from './notification/run-script-notification.ts';
+import { ScriptFailedError } from './notification/script-failed-error.ts';
 
 export interface RunScriptOptions extends LoggerOptions {
   readonly notifyError?: boolean;
@@ -13,33 +14,42 @@ export interface RunScriptOptions extends LoggerOptions {
 
 export async function runScript(
   name: string,
-  script: (logger: Logger) => PromiseLike<void> | void,
+  script: (
+    logger: Logger,
+  ) =>
+    | PromiseLike<RunScriptNotification | void | undefined>
+    | RunScriptNotification
+    | void
+    | undefined,
   { notifyError, logLevel = DEFAULT_LOG_LEVEL }: RunScriptOptions = {},
 ): Promise<void> {
   const logger: Logger = Logger.root({ logLevel });
 
   try {
     await logger.asyncTask(`${name}.script`, async (logger: Logger): Promise<void> => {
+      let successNotification: RunScriptNotification | void | undefined;
+
       try {
         loadOptionallyEnvFile(logger);
 
-        await script(logger);
+        successNotification = await script(logger);
       } catch (error: unknown) {
         notifyError ??= getEnvShouldNotify();
         if (notifyError) {
           try {
             await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
-              const extraTitle: string =
-                error instanceof ScriptFailedError ? (error.title ?? '') : '';
-              const extraMessage: string =
-                error instanceof ScriptFailedError ? (error.extra ?? '') : '';
+              const notificationTitle: string =
+                error instanceof ScriptFailedError ? (error.notificationTitle ?? '') : '';
+              const notificationMessage: string =
+                error instanceof ScriptFailedError ? (error.notificationMessage ?? '') : '';
 
               await postKchatWebhookMessage({
                 webhookId: getEnvKchatWebhookId(),
                 text: dedent`
-                  #### ❌ Script "${name}" failed${extraTitle === '' ? '' : ` - ${extraTitle}`}
-  
+                  #### ❌ Script "${name}" failed${notificationTitle === '' ? '' : ` - ${notificationTitle}`}
+
                   - 💬 ${Error.isError(error) ? error.message : String(error)}
+                  ${notificationMessage}
                 `,
               });
             });
@@ -49,6 +59,22 @@ export async function runScript(
         }
 
         throw error;
+      }
+
+      if (successNotification !== undefined && getEnvShouldNotify()) {
+        await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
+          const notificationTitle: string = successNotification.notificationTitle ?? '';
+          const notificationMessage: string = successNotification.notificationMessage ?? '';
+
+          await postKchatWebhookMessage({
+            webhookId: getEnvKchatWebhookId(),
+            text: dedent`
+              #### ✅ Script "${name}" succeed${notificationTitle === '' ? '' : ` - ${notificationTitle}`}
+
+              ${notificationMessage}
+            `,
+          });
+        });
       }
     });
   } catch (error: unknown) {
