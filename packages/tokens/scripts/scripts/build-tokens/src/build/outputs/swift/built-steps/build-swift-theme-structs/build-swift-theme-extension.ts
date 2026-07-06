@@ -1,5 +1,4 @@
 import { toPascalCase } from '../../../../../../../../../../../scripts/helpers/misc/case/to-pascal-case/to-pascal-case.ts';
-import { dedent } from '../../../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
 import { buildSwiftFile } from '../../helpers/build-swift-file.ts';
 import {
@@ -7,98 +6,41 @@ import {
   SWIFT_MAIN_STRUCT,
   SWIFT_PRIMITIVE_TARGET_NAME,
 } from '../../swift-constants.ts';
-import type { SwiftNestedMap } from './build-token-tree.ts';
-import { getSortedSwiftVariables } from './build-variables-for-node.ts';
 import type { ValueMapDifference } from './find-value-map-differences.ts';
 
-type DiffNode = { [key: string]: DiffNode | string };
-
-function structNameForPath(path: string[]): string {
-  if (path.length === 0) {
-    return `${SWIFT_MAIN_STRUCT}`;
-  }
-  return `${SWIFT_MAIN_STRUCT}.${path.map((segment) => toPascalCase(segment)).join('.')}`;
-}
-
-function buildDiffTree(
-  differences: ValueMapDifference[],
-  modifierValueMap: Map<string, string>,
-): DiffNode {
-  const root: DiffNode = {};
-  for (const diff of differences) {
-    const path = JSON.parse(diff.key) as string[];
-    let node = root;
-    for (let i = 0; i < path.length; i++) {
-      const seg = path[i];
-      if (i === path.length - 1) {
-        node[seg] = modifierValueMap.get(diff.key) ?? 'nil';
-      } else {
-        if (!node[seg]) node[seg] = {};
-        node = node[seg] as DiffNode;
-      }
-    }
-  }
-  return root;
-}
-
-function emitDiffNode(
-  typeName: string,
-  diffNode: DiffNode,
-  treeNode: SwiftNestedMap,
-  path: string[],
-  modifierValueMap: Map<string, string>,
-): string {
-  const args: string[] = [];
-
-  const canonicalFields = getSortedSwiftVariables(treeNode, modifierValueMap, path);
-
-  // TODO: Possible optimization: Use a Map for treeNode entries to avoid O(n) search for each field
-  for (const field of canonicalFields) {
-    const entry = Object.entries(treeNode).find(([k]) => toSwiftVariableName([k]) === field.name);
-
-    if (!entry) continue;
-    const [key, value] = entry;
-
-    if (typeof value === 'string') {
-      if (key in diffNode) {
-        args.push(`${field.name}: ${diffNode[key]}`);
-      }
-    } else {
-      const childPath = [...path, key];
-      const childDiff = (diffNode[key] as DiffNode) ?? {};
-      const childTreeNode = treeNode[key] as SwiftNestedMap;
-      const childTypeName = structNameForPath(childPath);
-
-      const call = emitDiffNode(
-        childTypeName,
-        childDiff,
-        childTreeNode,
-        childPath,
-        modifierValueMap,
-      );
-
-      if (call) {
-        args.push(`${field.name}: ${call}`);
-      }
-    }
-  }
-
-  if (args.length === 0) return '';
-  return dedent`
-    ${typeName}(
-      ${args.join(',\n')}
-    )
-  `;
+interface FlatDifference {
+  readonly name: string;
+  readonly value: string;
 }
 
 export function buildSwiftThemeExtension(
   modifierName: string,
-  tree: SwiftNestedMap,
-  modifierValueMap: Map<string, string>,
-  differences: ValueMapDifference[],
+  differences: readonly ValueMapDifference[],
 ): string {
-  const diffTree = buildDiffTree(differences, modifierValueMap);
-  const initCall = emitDiffNode(`${SWIFT_MAIN_STRUCT}`, diffTree, tree, [], modifierValueMap);
+  const differencesByType = new Map<string, FlatDifference[]>();
+
+  for (const diff of differences) {
+    const [typeKey, ...rest] = JSON.parse(diff.key) as string[];
+    const entries = differencesByType.get(typeKey) ?? [];
+    entries.push({ name: toSwiftVariableName(rest), value: diff.value });
+    differencesByType.set(typeKey, entries);
+  }
+
+  const typeArgs = Array.from(differencesByType.entries())
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([typeKey, entries]) => {
+      const typeName = toPascalCase(typeKey);
+      const varName = toSwiftVariableName([typeKey]);
+      const fieldArgs = entries
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((entry) => `${entry.name}: ${entry.value}`)
+        .join(',\n');
+
+      return `${varName}: ${typeName}(\n${fieldArgs}\n)`;
+    })
+    .join(',\n');
+
+  const initCall = `${SWIFT_MAIN_STRUCT}(\n${typeArgs}\n)`;
 
   return buildSwiftFile({
     imports: ['SwiftUI', SWIFT_FOUNDATION_DIR, SWIFT_PRIMITIVE_TARGET_NAME],

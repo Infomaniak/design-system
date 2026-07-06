@@ -1,9 +1,8 @@
 import { join } from 'node:path';
 import { writeTextFileSafe } from '../../../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import { toPascalCase } from '../../../../../../../../../../../scripts/helpers/misc/case/to-pascal-case/to-pascal-case.ts';
-import { dedent } from '../../../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
-import { buildSwiftStructContent } from '../../helpers/build-swift-file-with-init.ts';
+import { buildSwiftStructContent, type SwiftVariable } from '../../helpers/build-swift-file-with-init.ts';
 import { buildSwiftFile } from '../../helpers/build-swift-file.ts';
 import {
   SWIFT_FOUNDATION_DIR,
@@ -11,18 +10,30 @@ import {
   SWIFT_PRIMITIVE_TARGET_NAME,
 } from '../../swift-constants.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
-import { getSortedSwiftVariables } from './build-variables-for-node.ts';
 
 function structNameForPath(path: string[]): string {
   return path.length === 0 ? `${SWIFT_MAIN_STRUCT}` : `${toPascalCase(path[path.length - 1])}`;
 }
 
-function extensionTargetForPath(path: string[]): string {
-  if (path.length <= 1) {
-    return SWIFT_MAIN_STRUCT;
+function collectFlatVariables(
+  node: SwiftNestedMap,
+  path: string[],
+  valueMap: Map<string, string>,
+  variables: SwiftVariable[],
+): void {
+  for (const [key, value] of Object.entries(node)) {
+    const fullPath = [...path, key];
+
+    if (typeof value === 'string') {
+      variables.push({
+        name: toSwiftVariableName(fullPath.slice(1)),
+        type: value,
+        initValue: valueMap.get(JSON.stringify(fullPath)),
+      });
+    } else {
+      collectFlatVariables(value, fullPath, valueMap, variables);
+    }
   }
-  const parentSegments = path.slice(0, -1).map((segment) => toPascalCase(segment));
-  return `${SWIFT_MAIN_STRUCT}.${parentSegments.join('.')}`;
 }
 
 export async function buildSwiftStructTree(
@@ -31,61 +42,45 @@ export async function buildSwiftStructTree(
   outputDirectory: string,
   valueMap: Map<string, string>,
 ): Promise<void> {
-  const variables = getSortedSwiftVariables(node, valueMap, path);
-  const varIndexByName = new Map(variables.map((v, i) => [v.name, i]));
+  const rootVariables: SwiftVariable[] = [];
 
   for (const [key, value] of Object.entries(node)) {
     if (typeof value === 'string') continue;
 
-    const typeName = structNameForPath([...path, key]);
-    const varName = toSwiftVariableName([key]);
-    const idx = varIndexByName.get(varName);
-    if (idx !== undefined) {
-      variables[idx] = {
-        ...variables[idx],
-        type: typeName,
-        initValue: `${typeName}()`,
-      };
-    }
+    const typeName = structNameForPath([key]);
+    rootVariables.push({ name: toSwiftVariableName([key]), type: typeName, initValue: `${typeName}()` });
 
-    await buildSwiftStructTree(value, [...path, key], outputDirectory, valueMap);
-  }
-
-  const name = structNameForPath(path);
-
-  if (path.length === 0) {
-    const swiftStruct = buildSwiftFile({
-      imports: ['SwiftUI', SWIFT_PRIMITIVE_TARGET_NAME],
-      type: 'public struct',
-      name,
-      protocols: ['Sendable'],
-      content: buildSwiftStructContent(variables),
-    });
-
-    await writeTextFileSafe(
-      join(outputDirectory, `${SWIFT_FOUNDATION_DIR}/${name}.swift`),
-      swiftStruct,
-    );
-  } else {
-    const structPath = path.map((segment) => toPascalCase(segment)).join('');
-    const fileName = `${structPath}.swift`;
-    const extensionTarget = extensionTargetForPath(path);
+    const variables: SwiftVariable[] = [];
+    collectFlatVariables(value, [key], valueMap, variables);
+    variables.sort((a, b) => a.name.localeCompare(b.name));
 
     const fileContent = buildSwiftFile({
       imports: ['SwiftUI', SWIFT_PRIMITIVE_TARGET_NAME],
       type: 'public extension',
-      name: extensionTarget,
+      name: SWIFT_MAIN_STRUCT,
       protocols: [],
-      content: dedent`
-        struct ${name}: Sendable {
-          ${buildSwiftStructContent(variables)}
-        }
-      `,
+      content: `struct ${typeName}: Sendable {\n${buildSwiftStructContent(variables)}\n}`,
     });
 
     await writeTextFileSafe(
-      join(outputDirectory, `${SWIFT_FOUNDATION_DIR}/${fileName}`),
+      join(outputDirectory, `${SWIFT_FOUNDATION_DIR}/${typeName}.swift`),
       fileContent,
     );
   }
+
+  rootVariables.sort((a, b) => a.name.localeCompare(b.name));
+
+  const name = structNameForPath(path);
+  const swiftStruct = buildSwiftFile({
+    imports: ['SwiftUI', SWIFT_PRIMITIVE_TARGET_NAME],
+    type: 'public struct',
+    name,
+    protocols: ['Sendable'],
+    content: buildSwiftStructContent(rootVariables),
+  });
+
+  await writeTextFileSafe(
+    join(outputDirectory, `${SWIFT_FOUNDATION_DIR}/${name}.swift`),
+    swiftStruct,
+  );
 }

@@ -54,12 +54,7 @@ export async function buildSwiftThemeProducts(
 
       const swiftFileName = `${capitalizeFirstLetter(modifierName)}+${SWIFT_MAIN_STRUCT}`;
       const productFolderName = `ESDS${capitalizeFirstLetter(modifierName)}`;
-      const swiftStruct = buildSwiftThemeExtension(
-        modifierName,
-        productsTokenTree.tree,
-        productsTokenTree.valueMap,
-        differencies,
-      );
+      const swiftStruct = buildSwiftThemeExtension(modifierName, differencies);
 
       await writeTextFileSafe(
         join(outputDirectory, `${SWIFT_PRODUCTS_DIR}/${productFolderName}/${swiftFileName}.swift`),

@@ -29,9 +29,9 @@ export function buildSwiftFile({
     /*
       ${AUTO_GENERATED_FILE_HEADER}
     */
-    
+
     ${imports.map((importName: string): string => `import ${importName}`).join('\n')}
-    
+
     ${type} ${name}${safeProtocols} ${safeContent}
   `;
 }

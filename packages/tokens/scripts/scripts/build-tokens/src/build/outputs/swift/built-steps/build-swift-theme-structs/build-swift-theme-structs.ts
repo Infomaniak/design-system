@@ -25,7 +25,7 @@ export interface BuildSwiftThemesOptions {
 }
 
 const TYPE_SWIFT_MAP: Record<string, string> = {
-  color: 'Color',
+  color: 'SwiftUI.Color',
   dimension: 'CGFloat',
   number: 'CGFloat',
   fontFamily: 'String',
