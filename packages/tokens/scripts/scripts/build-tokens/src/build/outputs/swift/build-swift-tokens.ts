@@ -1,7 +1,6 @@
 import { join } from 'node:path';
 import { writeTextFileSafe } from '../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
-import { dedent } from '../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { removeTrailingSlash } from '../../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { DesignTokenModifiers } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
@@ -22,7 +21,7 @@ import {
   buildSwiftThemes,
 } from './built-steps/build-swift-theme-structs/build-swift-theme-structs.ts';
 import { buildXcAssets } from './built-steps/build-xcassets.ts';
-import { buildSwiftFile } from './helpers/build-swift-file.ts';
+import { buildSwiftFile, indentSwiftLines } from './helpers/build-swift-file.ts';
 import {
   SWIFT_PRIMITIVE_TARGET_DIR,
   SWIFT_PRIMITIVE_TOKENS,
@@ -39,7 +38,7 @@ export interface BuildSwiftTokensOptions {
 }
 
 const SWIFT_COLOR_LIGHT_DARK_FILE = `/*
-  ${AUTO_GENERATED_FILE_HEADER}
+    ${AUTO_GENERATED_FILE_HEADER}
 */
 
 import SwiftUI
@@ -51,17 +50,17 @@ import AppKit
 #endif
 
 public extension SwiftUI.Color {
-  init(light: SwiftUI.Color, dark: SwiftUI.Color) {
-    #if canImport(UIKit)
-    self.init(uiColor: UIColor { traitCollection in
-      traitCollection.userInterfaceStyle == .dark ? UIColor(dark) : UIColor(light)
-    })
-    #elseif canImport(AppKit)
-    self.init(nsColor: NSColor(name: nil) { appearance in
-      appearance.bestMatch(from: [.aqua, .darkAqua]) == .darkAqua ? NSColor(dark) : NSColor(light)
-    })
-    #endif
-  }
+    init(light: SwiftUI.Color, dark: SwiftUI.Color) {
+        #if canImport(UIKit)
+        self.init(uiColor: UIColor { traitCollection in
+            traitCollection.userInterfaceStyle == .dark ? UIColor(dark) : UIColor(light)
+        })
+        #elseif canImport(AppKit)
+        self.init(nsColor: NSColor(name: nil) { appearance in
+            appearance.bestMatch(from: [.aqua, .darkAqua]) == .darkAqua ? NSColor(dark) : NSColor(light)
+        })
+        #endif
+    }
 }
 `;
 
@@ -165,11 +164,7 @@ export async function buildSwiftTokens({
             type: 'public extension',
             name: SWIFT_PRIMITIVE_TOKENS,
             protocols: [],
-            content: dedent`
-              enum ${groupName}: Sendable {
-                ${swiftEnumDeclarationsToString(declaration)}
-              }
-            `,
+            content: `enum ${groupName}: Sendable {\n${indentSwiftLines(swiftEnumDeclarationsToString(declaration))}\n}`,
           });
 
           await writeTextFileSafe(

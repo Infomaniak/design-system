@@ -20,8 +20,8 @@ export interface BuildSwiftPackageOptions {
 function buildLibraryProduct(targetName: string): string {
   return dedent`
     .library(
-      name: "${targetName}",
-      targets: ["${targetName}"]
+        name: "${targetName}",
+        targets: ["${targetName}"]
     ),
   `;
 }
@@ -29,9 +29,9 @@ function buildLibraryProduct(targetName: string): string {
 function buildProductTarget(targetName: string): string {
   return dedent`
     .target(
-      name: "${targetName}",
-      dependencies: ["${SWIFT_FOUNDATION_DIR}", "${SWIFT_PRIMITIVE_TARGET_NAME}"],
-      path: "${SWIFT_SOURCES_DIR}/${SWIFT_PRODUCTS_DIR}/${targetName}"
+        name: "${targetName}",
+        dependencies: ["${SWIFT_FOUNDATION_DIR}", "${SWIFT_PRIMITIVE_TARGET_NAME}"],
+        path: "${SWIFT_SOURCES_DIR}/${SWIFT_PRODUCTS_DIR}/${targetName}"
     ),
   `;
 }
@@ -51,22 +51,22 @@ export async function buildSwiftPackage({
     import PackageDescription
 
     let package = Package(
-      name: "${SWIFT_PACKAGE_NAME}",
-      platforms: ${SWIFT_PACKAGE_PLATFORMS},
-      products: [
-        ${libraryProducts}
-      ],
-      targets: [
-        .target(
-          name: "${SWIFT_PRIMITIVE_TARGET_NAME}",
-          resources: [.process("Colors.xcassets")]
-        ),
-        .target(
-          name: "${SWIFT_FOUNDATION_DIR}",
-          dependencies: ["${SWIFT_PRIMITIVE_TARGET_NAME}"]
-        ),
-        ${productTargets}
-      ]
+        name: "${SWIFT_PACKAGE_NAME}",
+        platforms: ${SWIFT_PACKAGE_PLATFORMS},
+        products: [
+            ${libraryProducts}
+        ],
+        targets: [
+            .target(
+                name: "${SWIFT_PRIMITIVE_TARGET_NAME}",
+                resources: [.process("Colors.xcassets")]
+            ),
+            .target(
+                name: "${SWIFT_FOUNDATION_DIR}",
+                dependencies: ["${SWIFT_PRIMITIVE_TARGET_NAME}"]
+            ),
+            ${productTargets}
+        ]
     )
   `;
 

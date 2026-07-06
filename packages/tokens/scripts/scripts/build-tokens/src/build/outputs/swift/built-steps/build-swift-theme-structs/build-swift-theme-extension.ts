@@ -1,6 +1,6 @@
 import { toPascalCase } from '../../../../../../../../../../../scripts/helpers/misc/case/to-pascal-case/to-pascal-case.ts';
 import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
-import { buildSwiftFile } from '../../helpers/build-swift-file.ts';
+import { buildSwiftFile, indentSwiftLines } from '../../helpers/build-swift-file.ts';
 import {
   SWIFT_FOUNDATION_DIR,
   SWIFT_MAIN_STRUCT,
@@ -12,13 +12,6 @@ import {
   resolveThemeTokenSwiftValue,
   type ThemeTokenResolutionContext,
 } from './resolve-theme-token-value.ts';
-
-function indentLines(text: string, indent: string): string {
-  return text
-    .split('\n')
-    .map((line: string): string => `${indent}${line}`)
-    .join('\n');
-}
 
 export function buildSwiftThemeExtension(
   modifierName: string,
@@ -34,10 +27,10 @@ export function buildSwiftThemeExtension(
       return `${leaf.name}: ${value}`;
     });
 
-    return `${varName}: ${typeName}(\n${indentLines(args.join(',\n'), '  ')}\n)`;
+    return `${varName}: ${typeName}(\n${indentSwiftLines(args.join(',\n'))}\n)`;
   });
 
-  const initCall = `${SWIFT_MAIN_STRUCT}(\n${indentLines(groupCalls.join(',\n'), '  ')}\n)`;
+  const initCall = `${SWIFT_MAIN_STRUCT}(\n${indentSwiftLines(groupCalls.join(',\n'))}\n)`;
 
   return buildSwiftFile({
     imports: ['SwiftUI', SWIFT_FOUNDATION_DIR, SWIFT_PRIMITIVE_TARGET_NAME],
