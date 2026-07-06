@@ -455,7 +455,7 @@ function isExcludedToken(token: GenericDesignTokensCollectionToken): boolean {
     /^border\./.test(name) ||
     /^border-width\./.test(name) ||
     /^blur\./.test(name) ||
-    /^opacity\./.test(name) ||
+    // /^opacity\./.test(name) ||
     /^ratio\./.test(name) ||
     /^shadow\./.test(name) ||
     /^typography\./.test(name)
