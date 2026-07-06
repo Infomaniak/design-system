@@ -24,7 +24,7 @@ export async function createAndroidPublishGithubBranch({
   packageDirectory,
   version,
 }: CreateAndroidPublishGithubBranchOptions): Promise<string> {
-  const branchName: string = version;
+  const branchName: string = `esds/${version}`;
 
   await updateGitRepositoryOnNewBranch({
     repository: `git@${repositoryName}:${INFOMANIAK_GITHUB_ORGANIZATION}/${repositoryName}.git`,
