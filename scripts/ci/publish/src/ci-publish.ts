@@ -37,6 +37,13 @@ export async function ciPublish({
 }: CiPublishOptions): Promise<RunScriptNotification | void> {
   const packagesDirectory: string = join(rootDirectory, 'packages');
 
+  const runScriptNotification: RunScriptNotification = {
+    notificationTitle: `(${mode}) -> ${branchName}`,
+    notificationMessage: dedent`
+      - 🔗 ${jobUrl}
+    `,
+  };
+
   try {
     const publishablePackages: readonly PackageJsonWithPath[] = await logger.asyncTask(
       'get-impacted-package-json-files',
@@ -113,19 +120,11 @@ export async function ciPublish({
 
     // TODO update PR comment with dev version
 
-    return {
-      notificationTitle: `(${mode}) ${branchName}`,
-      notificationMessage: dedent`
-        - 🔗 ${jobUrl}
-      `,
-    };
+    return runScriptNotification;
   } catch (error: unknown) {
     throw new ScriptFailedError({
+      ...runScriptNotification,
       cause: error,
-      notificationTitle: `(${mode}) ${branchName}`,
-      notificationMessage: dedent`
-        - 🔗 ${jobUrl}
-      `,
     });
   }
 }
