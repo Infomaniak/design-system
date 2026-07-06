@@ -45,8 +45,8 @@ export async function publishIosTokens({
         owner: INFOMANIAK_GITHUB_ORGANIZATION,
         repository: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
         authToken: getEnvCiPullRequestAuthTokenMobile(),
-        title: `chore: Update to ${version}`,
-        body: `Update to ${version}`,
+        title: `chore: Update to ${publishVersion}`,
+        body: `Update to ${publishVersion}`,
         head: publishBranchName,
         base: /*mode === 'rc' ? 'develop' : */ 'main', // TODO add support to `develop` branch when the repo will be ready
       });
