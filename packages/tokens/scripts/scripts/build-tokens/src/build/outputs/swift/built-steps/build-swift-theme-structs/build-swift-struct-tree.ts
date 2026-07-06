@@ -37,6 +37,17 @@ export function collectSortedLeaves(node: SwiftNestedMap, groupKey: string): Swi
   return leaves.sort((a, b) => a.name.localeCompare(b.name));
 }
 
+function importsForVariables(variables: readonly SwiftVariable[]): string[] {
+  const needsSwiftUI = variables.some(
+    (variable: SwiftVariable): boolean =>
+      variable.type.startsWith('SwiftUI.') ||
+      variable.type.startsWith('Font.') ||
+      variable.type === 'RoundedRectangle',
+  );
+
+  return needsSwiftUI ? ['SwiftUI'] : ['Foundation'];
+}
+
 export function sortedGroupEntries(
   tree: SwiftNestedMap,
 ): readonly [string /* group key */, SwiftNestedMap][] {
@@ -58,7 +69,7 @@ export async function buildSwiftStructTree(
     const variables: SwiftVariable[] = collectSortedLeaves(value, key);
 
     const fileContent = buildSwiftFile({
-      imports: ['SwiftUI'],
+      imports: importsForVariables(variables),
       type: 'public extension',
       name: SWIFT_MAIN_STRUCT,
       protocols: [],
@@ -72,7 +83,7 @@ export async function buildSwiftStructTree(
   }
 
   const swiftStruct = buildSwiftFile({
-    imports: ['SwiftUI'],
+    imports: importsForVariables(rootVariables),
     type: 'public struct',
     name: SWIFT_MAIN_STRUCT,
     protocols: ['Sendable'],
