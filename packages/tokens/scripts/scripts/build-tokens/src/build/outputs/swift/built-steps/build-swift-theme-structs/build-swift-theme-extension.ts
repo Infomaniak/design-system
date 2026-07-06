@@ -6,41 +6,38 @@ import {
   SWIFT_MAIN_STRUCT,
   SWIFT_PRIMITIVE_TARGET_NAME,
 } from '../../swift-constants.ts';
-import type { ValueMapDifference } from './find-value-map-differences.ts';
+import { collectSortedLeaves, sortedGroupEntries, type SwiftLeaf } from './build-swift-struct-tree.ts';
+import type { SwiftNestedMap } from './build-token-tree.ts';
+import {
+  resolveThemeTokenSwiftValue,
+  type ThemeTokenResolutionContext,
+} from './resolve-theme-token-value.ts';
 
-interface FlatDifference {
-  readonly name: string;
-  readonly value: string;
+function indentLines(text: string, indent: string): string {
+  return text
+    .split('\n')
+    .map((line: string): string => `${indent}${line}`)
+    .join('\n');
 }
 
 export function buildSwiftThemeExtension(
   modifierName: string,
-  differences: readonly ValueMapDifference[],
+  tree: SwiftNestedMap,
+  context: ThemeTokenResolutionContext,
 ): string {
-  const differencesByType = new Map<string, FlatDifference[]>();
+  const groupCalls = sortedGroupEntries(tree).map(([key, node]): string => {
+    const typeName = toPascalCase(key);
+    const varName = toSwiftVariableName([key]);
 
-  for (const diff of differences) {
-    const [typeKey, ...rest] = JSON.parse(diff.key) as string[];
-    const entries = differencesByType.get(typeKey) ?? [];
-    entries.push({ name: toSwiftVariableName(rest), value: diff.value });
-    differencesByType.set(typeKey, entries);
-  }
+    const args = collectSortedLeaves(node, key).map((leaf: SwiftLeaf): string => {
+      const value = resolveThemeTokenSwiftValue(leaf.path, leaf.type, context);
+      return `${leaf.name}: ${value}`;
+    });
 
-  const typeArgs = Array.from(differencesByType.entries())
-    .sort(([a], [b]) => a.localeCompare(b))
-    .map(([typeKey, entries]) => {
-      const typeName = toPascalCase(typeKey);
-      const varName = toSwiftVariableName([typeKey]);
-      const fieldArgs = entries
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .map((entry) => `${entry.name}: ${entry.value}`)
-        .join(',\n');
+    return `${varName}: ${typeName}(\n${indentLines(args.join(',\n'), '  ')}\n)`;
+  });
 
-      return `${varName}: ${typeName}(\n${fieldArgs}\n)`;
-    })
-    .join(',\n');
-
-  const initCall = `${SWIFT_MAIN_STRUCT}(\n${typeArgs}\n)`;
+  const initCall = `${SWIFT_MAIN_STRUCT}(\n${indentLines(groupCalls.join(',\n'), '  ')}\n)`;
 
   return buildSwiftFile({
     imports: ['SwiftUI', SWIFT_FOUNDATION_DIR, SWIFT_PRIMITIVE_TARGET_NAME],

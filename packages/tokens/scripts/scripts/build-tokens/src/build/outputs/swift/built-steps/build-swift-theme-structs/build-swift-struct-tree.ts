@@ -4,58 +4,61 @@ import { toPascalCase } from '../../../../../../../../../../../scripts/helpers/m
 import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
 import { buildSwiftStructContent, type SwiftVariable } from '../../helpers/build-swift-file-with-init.ts';
 import { buildSwiftFile } from '../../helpers/build-swift-file.ts';
-import {
-  SWIFT_FOUNDATION_DIR,
-  SWIFT_MAIN_STRUCT,
-  SWIFT_PRIMITIVE_TARGET_NAME,
-} from '../../swift-constants.ts';
+import { SWIFT_FOUNDATION_DIR, SWIFT_MAIN_STRUCT } from '../../swift-constants.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
 
-function structNameForPath(path: string[]): string {
-  return path.length === 0 ? `${SWIFT_MAIN_STRUCT}` : `${toPascalCase(path[path.length - 1])}`;
+export interface SwiftLeaf {
+  readonly path: string[];
+  readonly name: string;
+  readonly type: string;
 }
 
-function collectFlatVariables(
-  node: SwiftNestedMap,
-  path: string[],
-  valueMap: Map<string, string>,
-  variables: SwiftVariable[],
-): void {
-  for (const [key, value] of Object.entries(node)) {
-    const fullPath = [...path, key];
+export function collectSortedLeaves(node: SwiftNestedMap, groupKey: string): SwiftLeaf[] {
+  const leaves: SwiftLeaf[] = [];
 
-    if (typeof value === 'string') {
-      variables.push({
-        name: toSwiftVariableName(fullPath.slice(1)),
-        type: value,
-        initValue: valueMap.get(JSON.stringify(fullPath)),
-      });
-    } else {
-      collectFlatVariables(value, fullPath, valueMap, variables);
+  function walk(current: SwiftNestedMap, path: string[]): void {
+    for (const [key, value] of Object.entries(current)) {
+      const fullPath = [...path, key];
+
+      if (typeof value === 'string') {
+        leaves.push({
+          path: fullPath,
+          name: toSwiftVariableName(fullPath.slice(1)),
+          type: value,
+        });
+      } else {
+        walk(value, fullPath);
+      }
     }
   }
+
+  walk(node, [groupKey]);
+
+  return leaves.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+export function sortedGroupEntries(
+  tree: SwiftNestedMap,
+): readonly [string /* group key */, SwiftNestedMap][] {
+  return Object.entries(tree)
+    .filter((entry): entry is [string, SwiftNestedMap] => typeof entry[1] !== 'string')
+    .sort(([a], [b]) => toSwiftVariableName([a]).localeCompare(toSwiftVariableName([b])));
 }
 
 export async function buildSwiftStructTree(
-  node: SwiftNestedMap,
-  path: string[],
+  tree: SwiftNestedMap,
   outputDirectory: string,
-  valueMap: Map<string, string>,
 ): Promise<void> {
   const rootVariables: SwiftVariable[] = [];
 
-  for (const [key, value] of Object.entries(node)) {
-    if (typeof value === 'string') continue;
+  for (const [key, value] of sortedGroupEntries(tree)) {
+    const typeName = toPascalCase(key);
+    rootVariables.push({ name: toSwiftVariableName([key]), type: typeName });
 
-    const typeName = structNameForPath([key]);
-    rootVariables.push({ name: toSwiftVariableName([key]), type: typeName, initValue: `${typeName}()` });
-
-    const variables: SwiftVariable[] = [];
-    collectFlatVariables(value, [key], valueMap, variables);
-    variables.sort((a, b) => a.name.localeCompare(b.name));
+    const variables: SwiftVariable[] = collectSortedLeaves(value, key);
 
     const fileContent = buildSwiftFile({
-      imports: ['SwiftUI', SWIFT_PRIMITIVE_TARGET_NAME],
+      imports: ['SwiftUI'],
       type: 'public extension',
       name: SWIFT_MAIN_STRUCT,
       protocols: [],
@@ -68,19 +71,16 @@ export async function buildSwiftStructTree(
     );
   }
 
-  rootVariables.sort((a, b) => a.name.localeCompare(b.name));
-
-  const name = structNameForPath(path);
   const swiftStruct = buildSwiftFile({
-    imports: ['SwiftUI', SWIFT_PRIMITIVE_TARGET_NAME],
+    imports: ['SwiftUI'],
     type: 'public struct',
-    name,
+    name: SWIFT_MAIN_STRUCT,
     protocols: ['Sendable'],
     content: buildSwiftStructContent(rootVariables),
   });
 
   await writeTextFileSafe(
-    join(outputDirectory, `${SWIFT_FOUNDATION_DIR}/${name}.swift`),
+    join(outputDirectory, `${SWIFT_FOUNDATION_DIR}/${SWIFT_MAIN_STRUCT}.swift`),
     swiftStruct,
   );
 }

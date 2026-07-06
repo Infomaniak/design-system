@@ -9,17 +9,16 @@ import { T2_DIRECTORY_NAME } from '../../../../../constants/design-token-tiers.t
 import { isExcludedSwiftToken } from '../../swift-constants.ts';
 import { buildSwiftStructTree } from './build-swift-struct-tree.ts';
 import { buildSwiftThemeProducts } from './build-swift-theme-products.ts';
-import { buildSwiftTokenTree, type SwiftTokenTree } from './build-token-tree.ts';
+import { buildSwiftTokenTree, type SwiftNestedMap } from './build-token-tree.ts';
 
 export interface BuildSwiftT2Options {
   readonly baseCollection: DesignTokensCollection;
   readonly outputDirectory: string;
-  readonly rawTokensPrefix: string;
 }
 
 export interface BuildSwiftThemesOptions {
   readonly modifiers: DesignTokenModifiers;
-  readonly baseValueMap: Map<string, string>;
+  readonly tree: SwiftNestedMap;
   readonly outputDirectory: string;
   readonly rawTokensPrefix: string;
 }
@@ -56,27 +55,20 @@ function getT2Names(baseCollection: DesignTokensCollection): readonly ArrayDesig
 export async function buildSwiftT2({
   baseCollection,
   outputDirectory,
-  rawTokensPrefix,
-}: BuildSwiftT2Options): Promise<SwiftTokenTree> {
+}: BuildSwiftT2Options): Promise<SwiftNestedMap> {
   const names = getT2Names(baseCollection);
-  const baseTokenTree: SwiftTokenTree = buildSwiftTokenTree(
-    baseCollection,
-    names,
-    'String?',
-    TYPE_SWIFT_MAP,
-    rawTokensPrefix,
-  );
+  const tree: SwiftNestedMap = buildSwiftTokenTree(baseCollection, names, TYPE_SWIFT_MAP);
 
-  await buildSwiftStructTree(baseTokenTree.tree, [], outputDirectory, baseTokenTree.valueMap);
+  await buildSwiftStructTree(tree, outputDirectory);
 
-  return baseTokenTree;
+  return tree;
 }
 
 export async function buildSwiftThemes({
   modifiers,
-  baseValueMap,
+  tree,
   outputDirectory,
   rawTokensPrefix,
 }: BuildSwiftThemesOptions): Promise<readonly string[]> {
-  return buildSwiftThemeProducts(modifiers, baseValueMap, rawTokensPrefix, outputDirectory);
+  return buildSwiftThemeProducts({ modifiers, tree, rawTokensPrefix, outputDirectory });
 }

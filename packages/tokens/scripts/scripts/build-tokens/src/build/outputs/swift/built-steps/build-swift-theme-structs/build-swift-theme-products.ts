@@ -2,67 +2,56 @@ import { join } from 'path';
 import { writeTextFileSafe } from '../../../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import { capitalizeFirstLetter } from '../../../../../../../../../../../scripts/helpers/misc/case/capitalize-first-letter/capitalize-first-letter.ts';
 import type { DesignTokenModifiers } from '../../../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
-import type { GenericDesignTokensCollectionToken } from '../../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
-import type { ArrayDesignTokenName } from '../../../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
-import {
-  SWIFT_MAIN_STRUCT,
-  SWIFT_PRODUCTS_DIR,
-  isExcludedSwiftToken,
-} from '../../swift-constants.ts';
+import { SWIFT_MAIN_STRUCT, SWIFT_PRODUCTS_DIR } from '../../swift-constants.ts';
 import { buildSwiftThemeExtension } from './build-swift-theme-extension.ts';
-import { buildSwiftTokenTree, type SwiftTokenTree } from './build-token-tree.ts';
-import { findValueMapDifferences } from './find-value-map-differences.ts';
+import type { SwiftNestedMap } from './build-token-tree.ts';
 
-export async function buildSwiftThemeProducts(
-  modifiers: DesignTokenModifiers,
-  baseValueMap: Map<string, string>,
-  rawTokensPrefix: string,
-  outputDirectory: string,
-): Promise<readonly string[]> {
+export interface BuildSwiftThemeProductsOptions {
+  readonly modifiers: DesignTokenModifiers;
+  readonly tree: SwiftNestedMap;
+  readonly rawTokensPrefix: string;
+  readonly outputDirectory: string;
+}
+
+export async function buildSwiftThemeProducts({
+  modifiers,
+  tree,
+  rawTokensPrefix,
+  outputDirectory,
+}: BuildSwiftThemeProductsOptions): Promise<readonly string[]> {
+  const themeContexts = modifiers.get('theme');
+  const lightCollection = themeContexts?.get('light');
+  const darkCollection = themeContexts?.get('dark');
+
+  if (lightCollection === undefined || darkCollection === undefined) {
+    throw new Error('Missing light/dark theme modifiers, cannot build Swift product themes');
+  }
+
+  const productContexts = modifiers.get('product');
+
+  if (productContexts === undefined) {
+    throw new Error('Missing product modifiers, cannot build Swift product themes');
+  }
+
   const generatedProductTargetNames: string[] = [];
 
-  for (const [modifierType, tokenContext] of modifiers.entries()) {
-    if (modifierType !== 'product') continue; // Only process product modifiers on iOS
+  for (const [modifierName, productCollection] of productContexts.entries()) {
+    const swiftFileName = `${capitalizeFirstLetter(modifierName)}+${SWIFT_MAIN_STRUCT}`;
+    const productFolderName = `ESDS${capitalizeFirstLetter(modifierName)}`;
 
-    for (const [modifierName, modifierCollection] of tokenContext.entries()) {
-      const modifierNames: readonly ArrayDesignTokenName[] = Array.from(
-        modifierCollection
-          .tokens()
-          .filter((token: GenericDesignTokensCollectionToken): boolean => {
-            const expectedPath = `${modifierType}/${modifierName}`;
-            return (
-              token.files.some((path: string): boolean => path.includes(expectedPath)) &&
-              !isExcludedSwiftToken(token)
-            );
-          })
-          .map((token: GenericDesignTokensCollectionToken): ArrayDesignTokenName => {
-            return token.name;
-          }),
-      );
+    const swiftStruct = buildSwiftThemeExtension(modifierName, tree, {
+      productCollection,
+      lightCollection,
+      darkCollection,
+      rawTokensPrefix,
+    });
 
-      const productsTokenTree: SwiftTokenTree = buildSwiftTokenTree(
-        modifierCollection,
-        modifierNames,
-        'String?',
-        {},
-        rawTokensPrefix,
-      );
+    await writeTextFileSafe(
+      join(outputDirectory, `${SWIFT_PRODUCTS_DIR}/${productFolderName}/${swiftFileName}.swift`),
+      swiftStruct,
+    );
 
-      const differencies = findValueMapDifferences(baseValueMap, productsTokenTree.valueMap);
-
-      if (differencies.length === 0) continue;
-
-      const swiftFileName = `${capitalizeFirstLetter(modifierName)}+${SWIFT_MAIN_STRUCT}`;
-      const productFolderName = `ESDS${capitalizeFirstLetter(modifierName)}`;
-      const swiftStruct = buildSwiftThemeExtension(modifierName, differencies);
-
-      await writeTextFileSafe(
-        join(outputDirectory, `${SWIFT_PRODUCTS_DIR}/${productFolderName}/${swiftFileName}.swift`),
-        swiftStruct,
-      );
-
-      generatedProductTargetNames.push(productFolderName);
-    }
+    generatedProductTargetNames.push(productFolderName);
   }
 
   return generatedProductTargetNames;
