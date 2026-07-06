@@ -1,7 +1,8 @@
-import type { FigmaColor } from '../../types/figma-color.ts';
-import type { FigmaPaint } from '../../types/figma-paint.ts';
+import type { FigmaColor } from '../../types/color/figma-color.ts';
 import type { FigmaRectangle } from '../../types/figma-rectangle.ts';
 import type { FigmaVector } from '../../types/figma-vector.ts';
+import type { FigmaPaint } from '../../types/paint/figma-paint.ts';
+import type { FigmaTransform } from '../../types/transform/figma-transform.ts';
 import type { FigmaNode, GenericFigmaNode } from '../figma-node.ts';
 import type { HavingFigmaAbsoluteBoundingBox } from '../having/having-figma-absolute-bounding-box.ts';
 import type { HavingFigmaNodeChildren } from '../having/having-figma-node-children.ts';
@@ -46,7 +47,7 @@ export interface HavingFigmaFrameNodeProperties
   readonly maxWidth: number | null;
   readonly minHeight: number | null;
   readonly maxHeight: number | null;
-  readonly relativeTransform: unknown /* TODO */;
+  readonly relativeTransform: FigmaTransform;
   // ... TODO
 }
 

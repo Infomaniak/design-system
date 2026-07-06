@@ -1,13 +1,13 @@
 import { join } from 'node:path';
 import { getFigmaFile } from '../../../../../../../../scripts/helpers/figma/api/files/get-figma-file.ts';
 import {
+  type FigmaComponentNode,
+  isFigmaComponentNode,
+} from '../../../../../../../../scripts/helpers/figma/api/files/nodes/built-in/component/figma-component-node.ts';
+import {
   type FigmaBooleanOperationNode,
   isFigmaBooleanOperationNode,
 } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/built-in/figma-boolean-operation-node.ts';
-import {
-  type FigmaComponentNode,
-  isFigmaComponentNode,
-} from '../../../../../../../../scripts/helpers/figma/api/files/nodes/built-in/figma-component-node.ts';
 import type { GenericFigmaNode } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/figma-node.ts';
 import type { HavingFigmaAbsoluteBoundingBox } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/having/having-figma-absolute-bounding-box.ts';
 import { FigmaNodesExplorer } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/helpers/figma-nodes-explorer.ts';
@@ -55,7 +55,7 @@ export function extractSvgFilesFromFigmaDesignFile({
         return getFigmaFile({
           token: figmaAPIToken,
           file_key: figmaSourceFileKey,
-          // geometry: 'paths',
+          geometry: 'paths',
         });
       },
     );

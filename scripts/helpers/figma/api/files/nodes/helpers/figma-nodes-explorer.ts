@@ -1,7 +1,7 @@
 import { TreeExplorer } from '../../../../../misc/tree-explorer/tree-explorer.ts';
+import { isFigmaComponentNode } from '../built-in/component/figma-component-node.ts';
 import { isFigmaBooleanOperationNode } from '../built-in/figma-boolean-operation-node.ts';
 import { isFigmaCanvasNode } from '../built-in/figma-canvas-node.ts';
-import { isFigmaComponentNode } from '../built-in/figma-component-node.ts';
 import { isFigmaComponentSetNode } from '../built-in/figma-component-set-node.ts';
 import { isFigmaDocumentNode } from '../built-in/figma-document-node.ts';
 import { isFigmaFrameNode } from '../built-in/figma-frame-node.ts';

@@ -1,4 +1,4 @@
-import type { FigmaColor } from '../../types/figma-color.ts';
+import type { FigmaColor } from '../../types/color/figma-color.ts';
 import type { FigmaPrototypeDevice } from '../../types/figma-prototype-device.ts';
 import type { FigmaNode, GenericFigmaNode } from '../figma-node.ts';
 import type { HavingFigmaNodeChildren } from '../having/having-figma-node-children.ts';

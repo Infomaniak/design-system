@@ -1,4 +1,4 @@
-import type { FigmaPaint } from './figma-paint.ts';
+import type { FigmaPaint } from './paint/figma-paint.ts';
 
 /**
  * @inheritDoc https://developers.figma.com/docs/rest-api/file-property-types/#paintoverride-type

@@ -95,7 +95,6 @@ await runScript('import-svgs', async (logger: Logger): Promise<void> => {
     return;
   }
 
-  console.log(getEnvFigmaApiToken(), figmaIconFileKey);
   const hasNewAssets: boolean = await importIconsAndIllustrations({
     figmaAPIToken: getEnvFigmaApiToken(),
     figmaSourceFileKey: figmaIconFileKey,
