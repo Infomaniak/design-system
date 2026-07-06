@@ -23,7 +23,7 @@ await runScript('on-figma-event', async (logger: Logger): Promise<void> => {
     await execCommandInherit(logger, 'yarn', ['run', 'import:assets:images:svg'], {
       env: {
         ...process.env,
-        [ENV_SHOULD_NOTIFY]: 'true',
+        [ENV_SHOULD_NOTIFY]: 'false',
       },
     });
   } else {

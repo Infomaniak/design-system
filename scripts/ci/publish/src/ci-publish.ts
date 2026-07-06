@@ -100,7 +100,7 @@ export async function ciPublish({
           shell: true,
           env: {
             ...process.env,
-            [ENV_SHOULD_NOTIFY]: 'true',
+            [ENV_SHOULD_NOTIFY]: 'false',
             ...env,
           },
         });
