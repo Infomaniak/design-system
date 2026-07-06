@@ -25,7 +25,7 @@ export async function createIosPublishGithubBranch({
   packageDirectory,
   version,
 }: CreateIosPublishGithubBranchOptions): Promise<string> {
-  const branchName: string = version;
+  const branchName: string = `esds/${version}`;
 
   await updateGitRepositoryOnNewBranch({
     repository: `git@${repositoryName}:${INFOMANIAK_GITHUB_ORGANIZATION}/${repositoryName}.git`,
