@@ -23,6 +23,7 @@ import { buildSwiftFile } from './helpers/build-swift-file.ts';
 import {
   SWIFT_PRIMITIVE_TARGET_DIR,
   SWIFT_PRIMITIVE_TOKENS,
+  SWIFT_SOURCES_DIR,
   isExcludedSwiftToken,
 } from './swift-constants.ts';
 import { getSwiftTokenGroupName } from './swift-tokens-format.ts';
@@ -200,7 +201,7 @@ export async function buildSwiftTokens({
       const baseTokenTree = await logger.asyncTask('generate-tokens', () => {
         return buildSwiftT2({
           baseCollection,
-          outputDirectory: join(iosSwiftOutputDirectory, 'Sources'),
+          outputDirectory: join(iosSwiftOutputDirectory, SWIFT_SOURCES_DIR),
           rawTokensPrefix: SWIFT_PRIMITIVE_TOKENS,
         });
       });
@@ -209,7 +210,7 @@ export async function buildSwiftTokens({
         return buildSwiftThemes({
           modifiers,
           baseValueMap: baseTokenTree.valueMap,
-          outputDirectory: join(iosSwiftOutputDirectory, 'Sources'),
+          outputDirectory: join(iosSwiftOutputDirectory, SWIFT_SOURCES_DIR),
           rawTokensPrefix: SWIFT_PRIMITIVE_TOKENS,
         });
       });
