@@ -54,16 +54,17 @@ export async function buildSwiftTokens({
       SWIFT_RESOURCES_DIR,
     );
 
-    const t1ColorTokenNameToColorsetName = new Map<string, string>();
+    const t1ColorTokenNameToColorSetName = new Map<string, string>();
     const declarations: Map<string, SwiftEnumDeclaration[]> = new Map();
 
     const theme: DesignTokenContexts = modifiers.get('theme')!;
     const lightThemeCollection: DesignTokensCollection = theme.get('light')!;
     const darkThemeCollection: DesignTokensCollection = theme.get('dark')!;
 
-    const t1Colors: GenericDesignTokensCollectionToken[] = [];
-    const t2Colors: GenericDesignTokensCollectionToken[] = [];
-    const t2NonColors: GenericDesignTokensCollectionToken[] = [];
+    const t1TokenColors: GenericDesignTokensCollectionToken[] = [];
+    
+    const t2TokenColors: GenericDesignTokensCollectionToken[] = [];
+    const t2TokenOthers: GenericDesignTokensCollectionToken[] = [];
 
     for (const token of baseCollection.tokens()) {
       const resolvedToken: GenericDesignTokensCollectionTokenWithType = {
@@ -74,41 +75,48 @@ export async function buildSwiftTokens({
         continue;
       }
 
-      const inT1: boolean = token.files.some((path: string): boolean =>
+      const isT1Token: boolean = token.files.some((path: string): boolean =>
         path.includes(T1_DIRECTORY_NAME),
+      );
+      const isT2Token: boolean = token.files.some((path: string): boolean =>
+        path.includes(T2_DIRECTORY_NAME)
       );
 
       if (isColorDesignTokensCollectionToken(resolvedToken)) {
-        if (inT1) {
-          t1Colors.push(token);
+        if (isT1Token) {
+          t1TokenColors.push(token);
         } else {
-          t2Colors.push(token);
+          t2TokenColors.push(token);
         }
-      } else if (token.files.some((path: string): boolean => path.includes(T2_DIRECTORY_NAME))) {
-        t2NonColors.push(token);
+      } else {
+        if (isT1Token) {
+          // TODO: Handle T1 token here probably?
+        } else if (isT2Token) {
+          t2TokenOthers.push(token);
+        }
       }
     }
 
     await logger.asyncTask('t1-tokens', async (logger: Logger): Promise<void> => {
       await logger.asyncTask('color-tokens', async (): Promise<void> => {
-        for (const token of t1Colors) {
+        for (const token of t1TokenColors) {
           const { tokenName, colorsetName } = await buildXcAssets({
             token,
             outputDirectory: iosSwiftResourcesOutputDirectory,
           });
-          t1ColorTokenNameToColorsetName.set(JSON.stringify(tokenName), colorsetName);
+          t1ColorTokenNameToColorSetName.set(JSON.stringify(tokenName), colorsetName);
         }
       });
     });
 
     await logger.asyncTask('t2-tokens', async (logger: Logger): Promise<void> => {
       await logger.asyncTask('color-tokens', async (): Promise<void> => {
-        for (const token of t2Colors) {
+        for (const token of t2TokenColors) {
           const enumColor: SwiftEnumDeclaration | null = await buildSwiftEnumColor({
             token,
             lightThemeCollection,
             darkThemeCollection,
-            t1ColorTokenNameToColorsetName,
+            t1ColorTokenNameToColorsetName: t1ColorTokenNameToColorSetName,
           });
           if (enumColor === null) {
             continue;
@@ -122,7 +130,7 @@ export async function buildSwiftTokens({
       });
 
       await logger.asyncTask('non-color-tokens', async (): Promise<void> => {
-        for (const token of t2NonColors) {
+        for (const token of t2TokenOthers) {
           const groupName = getSwiftTokenGroupName(token);
           if (!declarations.has(groupName)) {
             declarations.set(groupName, []);
