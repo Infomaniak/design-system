@@ -6,7 +6,11 @@ import {
   SWIFT_MAIN_STRUCT,
   SWIFT_PRIMITIVE_TARGET_NAME,
 } from '../../swift-constants.ts';
-import { collectSortedLeaves, sortedGroupEntries, type SwiftLeaf } from './build-swift-struct-tree.ts';
+import {
+  collectSortedLeaves,
+  sortedGroupEntries,
+  type SwiftLeaf,
+} from './build-swift-struct-tree.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
 import {
   resolveThemeTokenSwiftValue,
