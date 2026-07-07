@@ -1,5 +1,6 @@
 import { join } from 'node:path';
 import { getFigmaFile } from '../../../../../../../../scripts/helpers/figma/api/files/get-figma-file.ts';
+import type { GenericFigmaNodeBase } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/base/figma-node-base.ts';
 import {
   type FigmaComponentNode,
   isFigmaComponentNode,
@@ -8,7 +9,6 @@ import {
   type FigmaBooleanOperationNode,
   isFigmaBooleanOperationNode,
 } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/built-in/figma-boolean-operation-node.ts';
-import type { GenericFigmaNode } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/figma-node.ts';
 import type { HavingFigmaAbsoluteBoundingBox } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/having/having-figma-absolute-bounding-box.ts';
 import { FigmaNodesExplorer } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/helpers/figma-nodes-explorer.ts';
 import type { FigmaComponent } from '../../../../../../../../scripts/helpers/figma/api/files/types/figma-component.ts';
@@ -65,7 +65,7 @@ export function extractSvgFilesFromFigmaDesignFile({
 
     for (const node of FigmaNodesExplorer.explore<FigmaComponentNode>(
       figmaFile.document,
-      (node: GenericFigmaNode): TreeExplorerPickReturn | void => {
+      (node: GenericFigmaNodeBase): TreeExplorerPickReturn | void => {
         if (isFigmaComponentNode(node) && isIconFigmaComponent(node.name)) {
           return {
             pickSelf: true,
@@ -184,7 +184,7 @@ export function extractSvgFilesFromFigmaDesignFile({
         const svgsToLoad: readonly SVGToLoad[] = Array.from(
           FigmaNodesExplorer.explore<FigmaComponentNode>(
             figmaFile.document,
-            (node: GenericFigmaNode): TreeExplorerPickReturn | void => {
+            (node: GenericFigmaNodeBase): TreeExplorerPickReturn | void => {
               if (
                 // "filled" svgs are figma components with a "SUBTRACT" boolean operation
                 isFigmaComponentNode(node) &&
@@ -218,7 +218,7 @@ export function extractSvgFilesFromFigmaDesignFile({
             .children[0] as FigmaBooleanOperationNode;
 
           // a "SUBTRACT" operation contains a "base" and many "cutouts" (what is subtracted)
-          const [base, ...cutouts] = booleanOperation.children as readonly (GenericFigmaNode &
+          const [base, ...cutouts] = booleanOperation.children as readonly (GenericFigmaNodeBase &
             HavingFigmaAbsoluteBoundingBox)[];
 
           return {
@@ -349,7 +349,7 @@ interface SVGInnerShape {
 }
 
 function figmaNodeToSVGInnerShape(
-  node: GenericFigmaNode & HavingFigmaAbsoluteBoundingBox,
+  node: GenericFigmaNodeBase & HavingFigmaAbsoluteBoundingBox,
 ): SVGInnerShape {
   return {
     id: node.id,

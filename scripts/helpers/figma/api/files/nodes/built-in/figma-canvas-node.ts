@@ -1,12 +1,12 @@
 import type { FigmaColor } from '../../types/color/figma-color.ts';
 import type { FigmaPrototypeDevice } from '../../types/figma-prototype-device.ts';
-import type { FigmaNode, GenericFigmaNode } from '../figma-node.ts';
+import type { FigmaNodeBase, GenericFigmaNodeBase } from '../base/figma-node-base.ts';
 import type { HavingFigmaNodeChildren } from '../having/having-figma-node-children.ts';
 
 /**
  * @inheritDoc https://developers.figma.com/docs/rest-api/file-node-types/#canvas-props
  */
-export interface FigmaCanvasNode extends FigmaNode<'CANVAS'>, HavingFigmaNodeChildren {
+export interface FigmaCanvasNode extends FigmaNodeBase<'CANVAS'>, HavingFigmaNodeChildren {
   readonly backgroundColor: FigmaColor;
   /**
    * @deprecated
@@ -18,6 +18,6 @@ export interface FigmaCanvasNode extends FigmaNode<'CANVAS'>, HavingFigmaNodeChi
   readonly measurements: readonly unknown /* TODO */[];
 }
 
-export function isFigmaCanvasNode(input: GenericFigmaNode): input is FigmaCanvasNode {
+export function isFigmaCanvasNode(input: GenericFigmaNodeBase): input is FigmaCanvasNode {
   return input.type === 'CANVAS';
 }

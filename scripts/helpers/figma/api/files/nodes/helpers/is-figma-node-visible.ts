@@ -1,5 +1,5 @@
-import type { GenericFigmaNode } from '../figma-node.ts';
+import type { GenericFigmaNodeBase } from '../base/figma-node-base.ts';
 
-export function isFigmaNodeVisible(node: GenericFigmaNode): boolean {
+export function isFigmaNodeVisible(node: GenericFigmaNodeBase): boolean {
   return node.visible === undefined || node.visible;
 }

@@ -13,8 +13,8 @@ export type FigmaPaintType =
 
 export interface FigmaPaintBase<GType extends FigmaPaintType> {
   readonly type: GType;
-  readonly visible: boolean;
-  readonly opacity: boolean;
+  readonly visible?: boolean; // default: true
+  readonly opacity?: boolean; // default: 1
   readonly blendMode: FigmaBlendMode;
 }
 

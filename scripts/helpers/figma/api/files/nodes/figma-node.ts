@@ -1,22 +1,26 @@
-import type { ExplicitAny } from '../../../../types/explicit-any.ts';
-import type { FigmaVariableAlias } from '../types/figma-variable-alias.ts';
+import type { FigmaComponentNode } from './built-in/component/figma-component-node.ts';
+import type { FigmaBooleanOperationNode } from './built-in/figma-boolean-operation-node.ts';
+import type { FigmaCanvasNode } from './built-in/figma-canvas-node.ts';
+import type { FigmaComponentSetNode } from './built-in/figma-component-set-node.ts';
+import type { FigmaDocumentNode } from './built-in/figma-document-node.ts';
+import type { FigmaFrameNode } from './built-in/figma-frame-node.ts';
+import type { FigmaGroupNode } from './built-in/figma-group-node.ts';
+import type { FigmaSectionNode } from './built-in/figma-section-node.ts';
+import type { FigmaTableNode } from './built-in/figma-table-node.ts';
+import type { FigmaVectorNode } from './built-in/vector/figma-vector-node.ts';
 
-export interface FigmaNode<GType extends string> {
-  readonly id: string;
-  readonly name: string;
-  readonly visible?: boolean; // (default: true)
-  readonly type: GType;
-  readonly rotation?: number; // (default: 0)
-  readonly pluginData?: unknown;
-  readonly sharedPluginData?: unknown;
-  readonly componentPropertyReferences?: Readonly<Record<string, string>>;
-  readonly boundVariables?: Readonly<
-    Record<
-      string,
-      FigmaVariableAlias | FigmaVariableAlias[] | Readonly<Record<string, FigmaVariableAlias>>
-    >
-  >;
-  readonly explicitVariableModes?: Readonly<Record<string, string>>;
-}
-
-export type GenericFigmaNode = FigmaNode<ExplicitAny>;
+export type FigmaNode =
+  | FigmaDocumentNode
+  | FigmaCanvasNode
+  | FigmaFrameNode
+  // | FigmaTransformGroupNode TODO
+  | FigmaGroupNode
+  | FigmaSectionNode
+  | FigmaVectorNode
+  | FigmaBooleanOperationNode
+  // ...TODO
+  | FigmaTableNode
+  // ...TODO
+  | FigmaComponentNode
+  | FigmaComponentSetNode;
+// ...TODO

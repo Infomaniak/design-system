@@ -4,5 +4,5 @@
 export interface FigmaPath {
   readonly path: string;
   readonly windingRule: string;
-  readonly overrideID: number;
+  readonly overrideID?: number;
 }

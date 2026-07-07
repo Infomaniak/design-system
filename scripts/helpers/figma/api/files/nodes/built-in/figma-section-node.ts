@@ -1,18 +1,33 @@
-import type { FigmaNode, GenericFigmaNode } from '../figma-node.ts';
+import type { FigmaNodeBase, GenericFigmaNodeBase } from '../base/figma-node-base.ts';
 import type { HavingFigmaAbsoluteBoundingBox } from '../having/having-figma-absolute-bounding-box.ts';
+import type { HavingFigmaAbsoluteRenderBounds } from '../having/having-figma-absolute-render-bounds.ts';
+import type { HavingOptionalFigmaFills } from '../having/having-figma-fills.ts';
 import type { HavingFigmaNodeChildren } from '../having/having-figma-node-children.ts';
+import type { HavingFigmaStrokeAlign } from '../having/having-figma-stroke-align.ts';
+import type { HavingFigmaStrokeWeight } from '../having/having-figma-stroke-weight.ts';
+import type { HavingOptionalFigmaStrokes } from '../having/having-figma-strokes.ts';
 
 export interface FigmaSectionNode
-  extends FigmaNode<'SECTION'>, HavingFigmaNodeChildren, HavingFigmaAbsoluteBoundingBox {
+  extends
+    FigmaNodeBase<'SECTION'>,
+    HavingFigmaNodeChildren,
+    HavingOptionalFigmaFills,
+    HavingOptionalFigmaStrokes,
+    HavingFigmaStrokeWeight,
+    HavingFigmaStrokeAlign,
+    HavingFigmaAbsoluteBoundingBox,
+    HavingFigmaAbsoluteRenderBounds {
+  // ...HavingFigmaNodeChildren,
   readonly sectionContentsHidden: boolean;
-  readonly devStatus: unknown | null;
-  readonly fills: readonly unknown[];
-  readonly strokes: readonly unknown[];
-  readonly strokeWeight: number;
-  readonly strokeAlign: 'INSIDE' | 'OUTSIDE' | 'CENTER';
-  readonly absoluteRenderBounds: unknown | null;
+  readonly devStatus: unknown /* TODO */ | null;
+  // ...HavingFigmaFills,
+  // ...HavingFigmaStrokes,
+  // ...HavingFigmaStrokeWeight,
+  // ...HavingFigmaStrokeAlign,
+  // ...HavingFigmaAbsoluteBoundingBox,
+  // ...HavingFigmaAbsoluteRenderBounds,
 }
 
-export function isFigmaSectionNode(input: GenericFigmaNode): input is FigmaSectionNode {
+export function isFigmaSectionNode(input: GenericFigmaNodeBase): input is FigmaSectionNode {
   return input.type === 'SECTION';
 }
