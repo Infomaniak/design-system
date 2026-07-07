@@ -1,4 +1,4 @@
-import { cp, rm } from 'node:fs/promises';
+import { cp, readdir, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import {
   updateGitRepositoryOnNewBranch,
@@ -18,6 +18,33 @@ export interface CreateIosPublishGithubBranchOptions {
   readonly repositoryName: string;
   readonly packageDirectory: string;
   readonly version: string;
+}
+
+const PROTECTED_FOUNDATION_ENTRIES: readonly string[] = ['SwiftUI'];
+
+async function removeDirectoryContentsExcept(
+  directory: string,
+  keptEntries: readonly string[],
+): Promise<void> {
+  let entries: readonly string[];
+
+  try {
+    entries = await readdir(directory);
+  } catch (error: unknown) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      return;
+    }
+
+    throw error;
+  }
+
+  await Promise.all(
+    entries
+      .filter((entry: string): boolean => !keptEntries.includes(entry))
+      .map((entry: string): Promise<void> => {
+        return rm(join(directory, entry), { recursive: true, force: true });
+      }),
+  );
 }
 
 /**
@@ -42,16 +69,19 @@ export async function createIosPublishGithubBranch({
       const sourcesDirectory: string = join(cwd, SWIFT_SOURCES_DIR);
 
       const directoriesToRemove: readonly string[] = [
-        join(sourcesDirectory, SWIFT_FOUNDATION_DIR),
         join(sourcesDirectory, SWIFT_PRODUCTS_DIR),
         join(cwd, SWIFT_PRIMITIVE_TARGET_DIR),
       ];
 
-      await Promise.all(
-        directoriesToRemove.map((directory: string): Promise<void> => {
+      await Promise.all([
+        removeDirectoryContentsExcept(
+          join(sourcesDirectory, SWIFT_FOUNDATION_DIR),
+          PROTECTED_FOUNDATION_ENTRIES,
+        ),
+        ...directoriesToRemove.map((directory: string): Promise<void> => {
           return rm(directory, { recursive: true, force: true });
         }),
-      );
+      ]);
 
       await cp(packageDirectory, cwd, { recursive: true, force: true });
 
