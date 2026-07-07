@@ -8,6 +8,7 @@ import type { ArrayDesignTokenName } from '../../../../../../../../shared/dtcg/r
 import { T2_DIRECTORY_NAME } from '../../../../../constants/design-token-tiers.ts';
 import { isExcludedSwiftToken } from '../../swift-constants.ts';
 import { buildSwiftStructTree } from './build-swift-struct-tree.ts';
+import { buildSwiftThemeDummy } from './build-swift-theme-dummy.ts';
 import { buildSwiftThemeProducts } from './build-swift-theme-products.ts';
 import { buildSwiftTokenTree, type SwiftNestedMap } from './build-token-tree.ts';
 
@@ -60,6 +61,7 @@ export async function buildSwiftT2({
   const tree: SwiftNestedMap = buildSwiftTokenTree(baseCollection, names, TYPE_SWIFT_MAP);
 
   await buildSwiftStructTree(tree, outputDirectory);
+  await buildSwiftThemeDummy(tree, outputDirectory);
 
   return tree;
 }

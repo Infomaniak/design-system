@@ -10,6 +10,8 @@ import { buildSwiftFile, indentSwiftLines } from '../../helpers/build-swift-file
 import { SWIFT_FOUNDATION_DIR, SWIFT_MAIN_STRUCT } from '../../swift-constants.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
 
+const SWIFT_TOKENS_DIR = 'Tokens';
+
 export interface SwiftLeaf {
   readonly path: string[];
   readonly name: string;
@@ -80,7 +82,7 @@ export async function buildSwiftStructTree(
     });
 
     await writeTextFileSafe(
-      join(outputDirectory, `${SWIFT_FOUNDATION_DIR}/${typeName}.swift`),
+      join(outputDirectory, `${SWIFT_FOUNDATION_DIR}/${SWIFT_TOKENS_DIR}/${typeName}.swift`),
       fileContent,
     );
   }

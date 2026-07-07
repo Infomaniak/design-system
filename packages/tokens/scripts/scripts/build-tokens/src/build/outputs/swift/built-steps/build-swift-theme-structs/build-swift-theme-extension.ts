@@ -23,10 +23,17 @@ export interface SwiftThemeProductFile {
   readonly content: string;
 }
 
-export function buildSwiftThemeProductFiles(
-  modifierName: string,
+export interface BuildSwiftProductFilesOptions {
+  /** Name of the generated static properties, e.g. `calendar` for `ESDSTheme.calendar` */
+  readonly staticName: string;
+  readonly resolveValue: (leaf: SwiftLeaf) => string;
+  readonly extraGroupImports?: readonly string[];
+  readonly themeImports: readonly string[];
+}
+
+export function buildSwiftProductFiles(
   tree: SwiftNestedMap,
-  context: ThemeTokenResolutionContext,
+  { staticName, resolveValue, extraGroupImports = [], themeImports }: BuildSwiftProductFilesOptions,
 ): readonly SwiftThemeProductFile[] {
   const files: SwiftThemeProductFile[] = [];
   const themeArgs: string[] = [];
@@ -37,38 +44,47 @@ export function buildSwiftThemeProductFiles(
     const leaves = collectSortedLeaves(node, key);
 
     const args = leaves.map((leaf: SwiftLeaf): string => {
-      const value = resolveThemeTokenSwiftValue(leaf.path, leaf.type, context);
-      return `${leaf.name}: ${value}`;
+      return `${leaf.name}: ${resolveValue(leaf)}`;
     });
 
     files.push({
       typeName,
       content: buildSwiftFile({
-        imports: [
-          ...importsForVariables(leaves),
-          SWIFT_FOUNDATION_DIR,
-          SWIFT_PRIMITIVE_TARGET_NAME,
-        ],
+        imports: [...importsForVariables(leaves), ...extraGroupImports],
         type: 'extension',
         name: qualifiedTypeName,
         protocols: [],
-        content: `static let ${modifierName} = ${qualifiedTypeName}(\n${indentSwiftLines(args.join(',\n'))}\n)`,
+        content: `static let ${staticName} = ${qualifiedTypeName}(\n${indentSwiftLines(args.join(',\n'))}\n)`,
       }),
     });
 
-    themeArgs.push(`${toSwiftVariableName([key])}: .${modifierName}`);
+    themeArgs.push(`${toSwiftVariableName([key])}: .${staticName}`);
   }
 
   files.push({
     typeName: SWIFT_MAIN_STRUCT,
     content: buildSwiftFile({
-      imports: [SWIFT_FOUNDATION_DIR],
+      imports: themeImports,
       type: 'public extension',
       name: SWIFT_MAIN_STRUCT,
       protocols: [],
-      content: `static let ${modifierName} = ${SWIFT_MAIN_STRUCT}(\n${indentSwiftLines(themeArgs.join(',\n'))}\n)`,
+      content: `static let ${staticName} = ${SWIFT_MAIN_STRUCT}(\n${indentSwiftLines(themeArgs.join(',\n'))}\n)`,
     }),
   });
 
   return files;
+}
+
+export function buildSwiftThemeProductFiles(
+  modifierName: string,
+  tree: SwiftNestedMap,
+  context: ThemeTokenResolutionContext,
+): readonly SwiftThemeProductFile[] {
+  return buildSwiftProductFiles(tree, {
+    staticName: modifierName,
+    resolveValue: (leaf: SwiftLeaf): string =>
+      resolveThemeTokenSwiftValue(leaf.path, leaf.type, context),
+    extraGroupImports: [SWIFT_FOUNDATION_DIR, SWIFT_PRIMITIVE_TARGET_NAME],
+    themeImports: [SWIFT_FOUNDATION_DIR],
+  });
 }
