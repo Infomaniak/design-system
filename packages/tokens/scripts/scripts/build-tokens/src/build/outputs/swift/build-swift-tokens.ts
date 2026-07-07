@@ -1,30 +1,30 @@
 import { join } from 'node:path';
 import { writeTextFileSafe } from '../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
-import { dedent } from '../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { removeTrailingSlash } from '../../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
-import type {
-  DesignTokenContexts,
-  DesignTokenModifiers,
-} from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
+import type { DesignTokenModifiers } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import { type SwiftEnumDeclaration } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/swift-enum-declaration.ts';
 import { swiftEnumDeclarationsToString } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/to/swift-enum-declarations-to-string.ts';
+import { segmentsToSwiftIdentifier } from '../../../../../../shared/dtcg/resolver/to/swift/token/name/design-token-name-segments-reference-to-swift-name.ts';
 import { tokenToSwiftEnum } from '../../../../../../shared/dtcg/resolver/to/swift/token/token-to-swift-enum.ts';
 import type {
   GenericDesignTokensCollectionToken,
   GenericDesignTokensCollectionTokenWithType,
 } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/color/is-color-design-tokens-collection-token.ts';
-import { T1_DIRECTORY_NAME, T2_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
-import { buildSwiftEnumColor } from './built-steps/build-swift-enum-color.ts';
-import { buildSwiftThemeStructs } from './built-steps/build-swift-theme-structs/build-swift-theme-structs.ts';
+import { T1_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
+import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header.ts';
+import { buildSwiftPackage } from './built-steps/build-swift-package.ts';
+import {
+  buildSwiftT2,
+  buildSwiftThemes,
+} from './built-steps/build-swift-theme-structs/build-swift-theme-structs.ts';
 import { buildXcAssets } from './built-steps/build-xcassets.ts';
-import { buildSwiftFile } from './helpers/build-swift-file.ts';
+import { buildSwiftFile, indentSwiftLines } from './helpers/build-swift-file.ts';
 import {
   SWIFT_PRIMITIVE_TARGET_DIR,
   SWIFT_PRIMITIVE_TOKENS,
-  SWIFT_RESOURCES_DIR,
   SWIFT_SOURCES_DIR,
   isExcludedSwiftToken,
 } from './swift-constants.ts';
@@ -37,6 +37,33 @@ export interface BuildSwiftTokensOptions {
   readonly logger: Logger;
 }
 
+const SWIFT_COLOR_LIGHT_DARK_FILE = `/*
+    ${AUTO_GENERATED_FILE_HEADER}
+*/
+
+import SwiftUI
+
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
+public extension SwiftUI.Color {
+    init(light: SwiftUI.Color, dark: SwiftUI.Color) {
+        #if canImport(UIKit)
+        self.init(uiColor: UIColor { traitCollection in
+            traitCollection.userInterfaceStyle == .dark ? UIColor(dark) : UIColor(light)
+        })
+        #elseif canImport(AppKit)
+        self.init(nsColor: NSColor(name: nil) { appearance in
+            appearance.bestMatch(from: [.aqua, .darkAqua]) == .darkAqua ? NSColor(dark) : NSColor(light)
+        })
+        #endif
+    }
+}
+`;
+
 export async function buildSwiftTokens({
   baseCollection,
   modifiers,
@@ -46,27 +73,15 @@ export async function buildSwiftTokens({
   return logger.asyncTask('swift', async (logger: Logger): Promise<void> => {
     const cleanOutputDirectory = removeTrailingSlash(outputDirectory);
     const iosSwiftOutputDirectory: string = `${cleanOutputDirectory}/ios/swift`;
-    const iosSwiftSourceOutputDirectory: string = join(
-      iosSwiftOutputDirectory,
-      SWIFT_SOURCES_DIR,
-    );
     const primitivesTargetDirectory: string = join(
       iosSwiftOutputDirectory,
-      SWIFT_PRIMITIVE_TARGET_DIR
+      SWIFT_PRIMITIVE_TARGET_DIR,
     );
 
-    const t1ColorTokenNameToColorSetName = new Map<string, string>();
     const declarations: Map<string, SwiftEnumDeclaration[]> = new Map();
-
-    const theme: DesignTokenContexts = modifiers.get('theme')!;
-    const lightThemeCollection: DesignTokensCollection = theme.get('light')!;
-    const darkThemeCollection: DesignTokensCollection = theme.get('dark')!;
 
     const t1TokenColors: GenericDesignTokensCollectionToken[] = [];
     const t1TokenOthers: GenericDesignTokensCollectionToken[] = [];
-    
-    const t2TokenColors: GenericDesignTokensCollectionToken[] = [];
-    const t2TokenOthers: GenericDesignTokensCollectionToken[] = [];
 
     for (const token of baseCollection.tokens()) {
       const resolvedToken: GenericDesignTokensCollectionTokenWithType = {
@@ -80,33 +95,36 @@ export async function buildSwiftTokens({
       const isT1Token: boolean = token.files.some((path: string): boolean =>
         path.includes(T1_DIRECTORY_NAME),
       );
-      const isT2Token: boolean = token.files.some((path: string): boolean =>
-        path.includes(T2_DIRECTORY_NAME)
-      );
+
+      if (!isT1Token) {
+        continue;
+      }
 
       if (isColorDesignTokensCollectionToken(resolvedToken)) {
-        if (isT1Token) {
-          t1TokenColors.push(token);
-        } else {
-          t2TokenColors.push(token);
-        }
+        t1TokenColors.push(token);
       } else {
-        if (isT1Token) {
-          t1TokenOthers.push(token);
-        } else if (isT2Token) {
-          t2TokenOthers.push(token);
-        }
+        t1TokenOthers.push(token);
       }
     }
 
     await logger.asyncTask('t1-tokens', async (logger: Logger): Promise<void> => {
       await logger.asyncTask('color-tokens', async (): Promise<void> => {
         for (const token of t1TokenColors) {
-          const { tokenName, colorsetName } = await buildXcAssets({
+          const { colorsetName } = await buildXcAssets({
             token,
             outputDirectory: primitivesTargetDirectory,
           });
-          t1ColorTokenNameToColorSetName.set(JSON.stringify(tokenName), colorsetName);
+
+          const groupName = getSwiftTokenGroupName(token);
+          if (!declarations.has(groupName)) {
+            declarations.set(groupName, []);
+          }
+          declarations.get(groupName)!.push({
+            $type: 'declaration',
+            name: segmentsToSwiftIdentifier(token.name, 1),
+            valueType: 'SwiftUI.Color',
+            value: `SwiftUI.Color("${colorsetName}", bundle: .module)`,
+          });
         }
       });
 
@@ -142,15 +160,11 @@ export async function buildSwiftTokens({
 
         for (const [groupName, declaration] of declarations) {
           const content: string = buildSwiftFile({
-            imports: ['Foundation'],
+            imports: groupName === 'Color' ? ['SwiftUI'] : ['Foundation'],
             type: 'public extension',
             name: SWIFT_PRIMITIVE_TOKENS,
             protocols: [],
-            content: dedent`
-              enum ${groupName}: Sendable {
-                ${swiftEnumDeclarationsToString(declaration)}
-              }
-            `,
+            content: `enum ${groupName}: Sendable {\n${indentSwiftLines(swiftEnumDeclarationsToString(declaration))}\n}`,
           });
 
           await writeTextFileSafe(
@@ -158,53 +172,39 @@ export async function buildSwiftTokens({
             content,
           );
         }
+
+        await writeTextFileSafe(
+          join(primitivesTargetDirectory, 'Color+LightDark.swift'),
+          SWIFT_COLOR_LIGHT_DARK_FILE,
+        );
       });
     });
 
-    await logger.asyncTask('t2-tokens', async (logger: Logger): Promise<void> => {
-      /*await logger.asyncTask('color-tokens', async (): Promise<void> => {
-        for (const token of t2TokenColors) {
-          const enumColor: SwiftEnumDeclaration | null = await buildSwiftEnumColor({
-            token,
-            lightThemeCollection,
-            darkThemeCollection,
-            t1ColorTokenNameToColorsetName: t1ColorTokenNameToColorSetName,
+    const productTargetNames = await logger.asyncTask(
+      't2-tokens',
+      async (): Promise<readonly string[]> => {
+        const tree = await logger.asyncTask('generate-tokens', () => {
+          return buildSwiftT2({
+            baseCollection,
+            outputDirectory: join(iosSwiftOutputDirectory, SWIFT_SOURCES_DIR),
           });
+        });
 
-          if (enumColor === null) {
-            continue;
-          }
+        return logger.asyncTask('generate-themes', () => {
+          return buildSwiftThemes({
+            modifiers,
+            tree,
+            outputDirectory: join(iosSwiftOutputDirectory, SWIFT_SOURCES_DIR),
+            rawTokensPrefix: SWIFT_PRIMITIVE_TOKENS,
+          });
+        });
+      },
+    );
 
-          const groupName = getSwiftTokenGroupName(token);
-          if (!declarations.has(groupName)) {
-            declarations.set(groupName, []);
-          }
-          declarations.get(groupName)!.push(enumColor);
-        }
-      });*/
-
-      /*await logger.asyncTask('other-tokens', async (): Promise<void> => {
-        for (const token of t2TokenOthers) {
-          const groupName = getSwiftTokenGroupName(token);
-          if (!declarations.has(groupName)) {
-            declarations.set(groupName, []);
-          }
-          declarations.get(groupName)!.push(
-            tokenToSwiftEnum({
-              ...token,
-              ...baseCollection.resolve(token),
-            }),
-          );
-        }
-      });*/
-    });
-
-    await logger.asyncTask('main-theme', async (): Promise<void> => {
-      await buildSwiftThemeStructs({
-        baseCollection,
-        modifiers,
-        outputDirectory: iosSwiftSourceOutputDirectory,
-        rawTokensPrefix: SWIFT_PRIMITIVE_TOKENS,
+    await logger.asyncTask('package-manifest', (): Promise<void> => {
+      return buildSwiftPackage({
+        outputDirectory: iosSwiftOutputDirectory,
+        productTargetNames,
       });
     });
   });

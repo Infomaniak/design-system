@@ -1,106 +1,90 @@
 import { toPascalCase } from '../../../../../../../../../../../scripts/helpers/misc/case/to-pascal-case/to-pascal-case.ts';
-import { dedent } from '../../../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
-import { buildSwiftFile } from '../../helpers/build-swift-file.ts';
-import { SWIFT_MAIN_STRUCT } from '../../swift-constants.ts';
+import { buildSwiftFile, indentSwiftLines } from '../../helpers/build-swift-file.ts';
+import {
+  SWIFT_FOUNDATION_DIR,
+  SWIFT_MAIN_STRUCT,
+  SWIFT_PRIMITIVE_TARGET_NAME,
+} from '../../swift-constants.ts';
+import {
+  collectSortedLeaves,
+  importsForVariables,
+  sortedGroupEntries,
+  type SwiftLeaf,
+} from './build-swift-struct-tree.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
-import { getSortedSwiftVariables } from './build-variables-for-node.ts';
-import type { ValueMapDifference } from './find-value-map-differences.ts';
+import {
+  resolveThemeTokenSwiftValue,
+  type SwiftThemeTokenResolutionContext,
+} from './resolve-theme-token-value.ts';
 
-type DiffNode = { [key: string]: DiffNode | string };
-
-function structNameForPath(path: string[]): string {
-  if (path.length === 0) {
-    return `${SWIFT_MAIN_STRUCT}`;
-  }
-  return `${SWIFT_MAIN_STRUCT}.${path.map((segment) => toPascalCase(segment)).join('.')}`;
+export interface SwiftThemeProductFile {
+  readonly typeName: string;
+  readonly content: string;
 }
 
-function buildDiffTree(
-  differences: ValueMapDifference[],
-  modifierValueMap: Map<string, string>,
-): DiffNode {
-  const root: DiffNode = {};
-  for (const diff of differences) {
-    const path = JSON.parse(diff.key) as string[];
-    let node = root;
-    for (let i = 0; i < path.length; i++) {
-      const seg = path[i];
-      if (i === path.length - 1) {
-        node[seg] = modifierValueMap.get(diff.key) ?? 'nil';
-      } else {
-        if (!node[seg]) node[seg] = {};
-        node = node[seg] as DiffNode;
-      }
-    }
-  }
-  return root;
+export interface BuildSwiftProductFilesOptions {
+  /** Name of the generated static properties, e.g. `calendar` for `ESDSTheme.calendar` */
+  readonly staticName: string;
+  readonly resolveValue: (leaf: SwiftLeaf) => string;
+  readonly extraGroupImports?: readonly string[];
+  readonly themeImports: readonly string[];
 }
 
-function emitDiffNode(
-  typeName: string,
-  diffNode: DiffNode,
-  treeNode: SwiftNestedMap,
-  path: string[],
-  modifierValueMap: Map<string, string>,
-): string {
-  const args: string[] = [];
+export function buildSwiftProductFiles(
+  tree: SwiftNestedMap,
+  { staticName, resolveValue, extraGroupImports = [], themeImports }: BuildSwiftProductFilesOptions,
+): readonly SwiftThemeProductFile[] {
+  const files: SwiftThemeProductFile[] = [];
+  const themeArgs: string[] = [];
 
-  const canonicalFields = getSortedSwiftVariables(treeNode, modifierValueMap, path);
+  for (const [key, node] of sortedGroupEntries(tree)) {
+    const typeName = toPascalCase(key);
+    const qualifiedTypeName = `${SWIFT_MAIN_STRUCT}.${typeName}`;
+    const leaves = collectSortedLeaves(node, key);
 
-  // TODO: Possible optimization: Use a Map for treeNode entries to avoid O(n) search for each field
-  for (const field of canonicalFields) {
-    const entry = Object.entries(treeNode).find(([k]) => toSwiftVariableName([k]) === field.name);
+    const args = leaves.map((leaf: SwiftLeaf): string => {
+      return `${leaf.name}: ${resolveValue(leaf)}`;
+    });
 
-    if (!entry) continue;
-    const [key, value] = entry;
+    files.push({
+      typeName,
+      content: buildSwiftFile({
+        imports: [...importsForVariables(leaves), ...extraGroupImports],
+        type: 'extension',
+        name: qualifiedTypeName,
+        protocols: [],
+        content: `static let ${staticName} = ${qualifiedTypeName}(\n${indentSwiftLines(args.join(',\n'))}\n)`,
+      }),
+    });
 
-    if (typeof value === 'string') {
-      if (key in diffNode) {
-        args.push(`${field.name}: ${diffNode[key]}`);
-      }
-    } else {
-      const childPath = [...path, key];
-      const childDiff = (diffNode[key] as DiffNode) ?? {};
-      const childTreeNode = treeNode[key] as SwiftNestedMap;
-      const childTypeName = structNameForPath(childPath);
-
-      const call = emitDiffNode(
-        childTypeName,
-        childDiff,
-        childTreeNode,
-        childPath,
-        modifierValueMap,
-      );
-
-      if (call) {
-        args.push(`${field.name}: ${call}`);
-      }
-    }
+    themeArgs.push(`${toSwiftVariableName([key])}: .${staticName}`);
   }
 
-  if (args.length === 0) return '';
-  return dedent`
-    ${typeName}(
-      ${args.join(',\n')}
-    )
-  `;
+  files.push({
+    typeName: SWIFT_MAIN_STRUCT,
+    content: buildSwiftFile({
+      imports: themeImports,
+      type: 'public extension',
+      name: SWIFT_MAIN_STRUCT,
+      protocols: [],
+      content: `static let ${staticName} = ${SWIFT_MAIN_STRUCT}(\n${indentSwiftLines(themeArgs.join(',\n'))}\n)`,
+    }),
+  });
+
+  return files;
 }
 
-export function buildSwiftThemeExtension(
+export function buildSwiftThemeProductFiles(
   modifierName: string,
   tree: SwiftNestedMap,
-  modifierValueMap: Map<string, string>,
-  differences: ValueMapDifference[],
-): string {
-  const diffTree = buildDiffTree(differences, modifierValueMap);
-  const initCall = emitDiffNode(`${SWIFT_MAIN_STRUCT}`, diffTree, tree, [], modifierValueMap);
-
-  return buildSwiftFile({
-    imports: ['SwiftUI'],
-    type: 'public extension',
-    name: `${SWIFT_MAIN_STRUCT}`,
-    protocols: [],
-    content: `static let ${modifierName} = ${initCall}`,
+  context: SwiftThemeTokenResolutionContext,
+): readonly SwiftThemeProductFile[] {
+  return buildSwiftProductFiles(tree, {
+    staticName: modifierName,
+    resolveValue: (leaf: SwiftLeaf): string =>
+      resolveThemeTokenSwiftValue(leaf.path, leaf.type, context),
+    extraGroupImports: [SWIFT_FOUNDATION_DIR, SWIFT_PRIMITIVE_TARGET_NAME],
+    themeImports: [SWIFT_FOUNDATION_DIR],
   });
 }

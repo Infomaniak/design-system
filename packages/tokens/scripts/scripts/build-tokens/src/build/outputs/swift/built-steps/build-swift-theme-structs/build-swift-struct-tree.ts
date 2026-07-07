@@ -1,84 +1,102 @@
 import { join } from 'node:path';
 import { writeTextFileSafe } from '../../../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import { toPascalCase } from '../../../../../../../../../../../scripts/helpers/misc/case/to-pascal-case/to-pascal-case.ts';
-import { dedent } from '../../../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
-import { buildSwiftStructContent } from '../../helpers/build-swift-file-with-init.ts';
-import { buildSwiftFile } from '../../helpers/build-swift-file.ts';
-import { SWIFT_MAIN_STRUCT } from '../../swift-constants.ts';
+import {
+  buildSwiftStructContent,
+  type SwiftVariable,
+} from '../../helpers/build-swift-file-with-init.ts';
+import { buildSwiftFile, indentSwiftLines } from '../../helpers/build-swift-file.ts';
+import { SWIFT_FOUNDATION_DIR, SWIFT_MAIN_STRUCT } from '../../swift-constants.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
-import { getSortedSwiftVariables } from './build-variables-for-node.ts';
 
-function structNameForPath(path: string[]): string {
-  return path.length === 0 ? `${SWIFT_MAIN_STRUCT}` : `${toPascalCase(path[path.length - 1])}`;
+const SWIFT_TOKENS_DIR = 'Tokens';
+
+export interface SwiftLeaf {
+  readonly path: string[];
+  readonly name: string;
+  readonly type: string;
 }
 
-function extensionTargetForPath(path: string[]): string {
-  if (path.length <= 1) {
-    return SWIFT_MAIN_STRUCT;
+export function collectSortedLeaves(node: SwiftNestedMap, groupKey: string): SwiftLeaf[] {
+  const leaves: SwiftLeaf[] = [];
+
+  function walk(current: SwiftNestedMap, path: string[]): void {
+    for (const [key, value] of Object.entries(current)) {
+      const fullPath = [...path, key];
+
+      if (typeof value === 'string') {
+        leaves.push({
+          path: fullPath,
+          name: toSwiftVariableName(fullPath.slice(1)),
+          type: value,
+        });
+      } else {
+        walk(value, fullPath);
+      }
+    }
   }
-  const parentSegments = path.slice(0, -1).map((segment) => toPascalCase(segment));
-  return `${SWIFT_MAIN_STRUCT}.${parentSegments.join('.')}`;
+
+  walk(node, [groupKey]);
+
+  return leaves.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+export function importsForVariables(variables: readonly SwiftVariable[]): string[] {
+  const needsSwiftUI = variables.some(
+    (variable: SwiftVariable): boolean =>
+      variable.type.startsWith('SwiftUI.') ||
+      variable.type.startsWith('Font.') ||
+      variable.type === 'RoundedRectangle',
+  );
+
+  return needsSwiftUI ? ['SwiftUI'] : ['Foundation'];
+}
+
+export function sortedGroupEntries(
+  tree: SwiftNestedMap,
+): readonly [string /* group key */, SwiftNestedMap][] {
+  return Object.entries(tree)
+    .filter((entry): entry is [string, SwiftNestedMap] => typeof entry[1] !== 'string')
+    .sort(([a], [b]) => toSwiftVariableName([a]).localeCompare(toSwiftVariableName([b])));
 }
 
 export async function buildSwiftStructTree(
-  node: SwiftNestedMap,
-  path: string[],
+  tree: SwiftNestedMap,
   outputDirectory: string,
-  valueMap: Map<string, string>,
 ): Promise<void> {
-  const variables = getSortedSwiftVariables(node, valueMap, path);
-  const varIndexByName = new Map(variables.map((v, i) => [v.name, i]));
+  const rootVariables: SwiftVariable[] = [];
 
-  for (const [key, value] of Object.entries(node)) {
-    if (typeof value === 'string') continue;
+  for (const [key, value] of sortedGroupEntries(tree)) {
+    const typeName = toPascalCase(key);
+    rootVariables.push({ name: toSwiftVariableName([key]), type: typeName });
 
-    const typeName = structNameForPath([...path, key]);
-    const varName = toSwiftVariableName([key]);
-    const idx = varIndexByName.get(varName);
-    if (idx !== undefined) {
-      variables[idx] = {
-        ...variables[idx],
-        type: typeName,
-        initValue: `${typeName}()`,
-      };
-    }
+    const variables: SwiftVariable[] = collectSortedLeaves(value, key);
 
-    await buildSwiftStructTree(value, [...path, key], outputDirectory, valueMap);
-  }
-
-  const name = structNameForPath(path);
-
-  if (path.length === 0) {
-    const swiftStruct = buildSwiftFile({
-      imports: ['SwiftUI'],
-      type: 'public struct',
-      name,
-      protocols: ['Sendable'],
-      content: buildSwiftStructContent(variables),
+    const fileContent = buildSwiftFile({
+      imports: importsForVariables(variables),
+      type: 'public extension',
+      name: SWIFT_MAIN_STRUCT,
+      protocols: [],
+      content: `struct ${typeName}: Sendable {\n${indentSwiftLines(buildSwiftStructContent(variables))}\n}`,
     });
 
     await writeTextFileSafe(
-      join(outputDirectory, `${SWIFT_MAIN_STRUCT}/${name}.swift`),
-      swiftStruct,
+      join(outputDirectory, `${SWIFT_FOUNDATION_DIR}/${SWIFT_TOKENS_DIR}/${typeName}.swift`),
+      fileContent,
     );
-  } else {
-    const structPath = path.map((segment) => toPascalCase(segment)).join('');
-    const fileName = `${structPath}.swift`;
-    const extensionTarget = extensionTargetForPath(path);
-
-    const fileContent = buildSwiftFile({
-      imports: ['SwiftUI'],
-      type: 'public extension',
-      name: extensionTarget,
-      protocols: [],
-      content: dedent`
-        struct ${name}: Sendable {
-          ${buildSwiftStructContent(variables)}
-        }
-      `,
-    });
-
-    await writeTextFileSafe(join(outputDirectory, `${SWIFT_MAIN_STRUCT}/${fileName}`), fileContent);
   }
+
+  const swiftStruct = buildSwiftFile({
+    imports: importsForVariables(rootVariables),
+    type: 'public struct',
+    name: SWIFT_MAIN_STRUCT,
+    protocols: ['Sendable'],
+    content: buildSwiftStructContent(rootVariables),
+  });
+
+  await writeTextFileSafe(
+    join(outputDirectory, `${SWIFT_FOUNDATION_DIR}/${SWIFT_MAIN_STRUCT}.swift`),
+    swiftStruct,
+  );
 }

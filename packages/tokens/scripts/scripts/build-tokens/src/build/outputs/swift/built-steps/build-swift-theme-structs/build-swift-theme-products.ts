@@ -2,65 +2,62 @@ import { join } from 'path';
 import { writeTextFileSafe } from '../../../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import { capitalizeFirstLetter } from '../../../../../../../../../../../scripts/helpers/misc/case/capitalize-first-letter/capitalize-first-letter.ts';
 import type { DesignTokenModifiers } from '../../../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
-import type { GenericDesignTokensCollectionToken } from '../../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
-import type { ArrayDesignTokenName } from '../../../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
-import { SWIFT_MAIN_STRUCT, isExcludedSwiftToken } from '../../swift-constants.ts';
-import { buildSwiftThemeExtension } from './build-swift-theme-extension.ts';
-import { buildSwiftTokenTree, type SwiftTokenTree } from './build-token-tree.ts';
-import { findValueMapDifferences } from './find-value-map-differences.ts';
+import { SWIFT_PRODUCTS_DIR } from '../../swift-constants.ts';
+import { buildSwiftThemeProductFiles } from './build-swift-theme-extension.ts';
+import type { SwiftNestedMap } from './build-token-tree.ts';
 
-export async function buildSwiftThemeProducts(
-  modifiers: DesignTokenModifiers,
-  baseValueMap: Map<string, string>,
-  rawTokensPrefix: string,
-  outputDirectory: string,
-) {
-  for (const [modifierType, tokenContext] of modifiers.entries()) {
-    if (modifierType !== 'product') continue; // Only process product modifiers on iOS
+export interface BuildSwiftThemeProductsOptions {
+  readonly modifiers: DesignTokenModifiers;
+  readonly tree: SwiftNestedMap;
+  readonly rawTokensPrefix: string;
+  readonly outputDirectory: string;
+}
 
-    for (const [modifierName, modifierCollection] of tokenContext.entries()) {
-      const modifierNames: readonly ArrayDesignTokenName[] = Array.from(
-        modifierCollection
-          .tokens()
-          .filter((token: GenericDesignTokensCollectionToken): boolean => {
-            const expectedPath = `${modifierType}/${modifierName}`;
-            return (
-              token.files.some((path: string): boolean => path.includes(expectedPath)) &&
-              !isExcludedSwiftToken(token)
-            );
-          })
-          .map((token: GenericDesignTokensCollectionToken): ArrayDesignTokenName => {
-            return token.name;
-          }),
-      );
+export async function buildSwiftThemeProducts({
+  modifiers,
+  tree,
+  rawTokensPrefix,
+  outputDirectory,
+}: BuildSwiftThemeProductsOptions): Promise<readonly string[]> {
+  const themeContexts = modifiers.get('theme');
+  const lightCollection = themeContexts?.get('light');
+  const darkCollection = themeContexts?.get('dark');
 
-      const productsTokenTree: SwiftTokenTree = buildSwiftTokenTree(
-        modifierCollection,
-        modifierNames,
-        'String?',
-        {},
-        rawTokensPrefix,
-      );
+  if (lightCollection === undefined || darkCollection === undefined) {
+    throw new Error('Missing light/dark theme modifiers, cannot build Swift product themes');
+  }
 
-      const differencies = findValueMapDifferences(baseValueMap, productsTokenTree.valueMap);
+  const productContexts = modifiers.get('product');
 
-      if (differencies.length === 0) continue;
+  if (productContexts === undefined) {
+    throw new Error('Missing product modifiers, cannot build Swift product themes');
+  }
 
-      const swiftFileName = `${capitalizeFirstLetter(modifierName)}+${SWIFT_MAIN_STRUCT}`;
-      const swiftStruct = buildSwiftThemeExtension(
-        modifierName,
-        productsTokenTree.tree,
-        productsTokenTree.valueMap,
-        differencies,
-      );
+  const generatedProductTargetNames: string[] = [];
 
+  for (const [modifierName, productCollection] of productContexts.entries()) {
+    const productName = capitalizeFirstLetter(modifierName);
+    const productFolderName = `ESDS${productName}`;
+
+    const swiftFiles = buildSwiftThemeProductFiles(modifierName, tree, {
+      productCollection,
+      lightCollection,
+      darkCollection,
+      rawTokensPrefix,
+    });
+
+    for (const swiftFile of swiftFiles) {
       await writeTextFileSafe(
         join(
           outputDirectory,
-          `${SWIFT_MAIN_STRUCT}/${capitalizeFirstLetter(modifierType)}/${swiftFileName}.swift`,
+          `${SWIFT_PRODUCTS_DIR}/${productFolderName}/${productName}+${swiftFile.typeName}.swift`,
         ),
-        swiftStruct,
+        swiftFile.content,
       );
     }
+
+    generatedProductTargetNames.push(productFolderName);
   }
+
+  return generatedProductTargetNames;
 }

@@ -7,9 +7,9 @@ import {
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import {
-  SWIFT_MAIN_STRUCT,
-  SWIFT_PRIMITIVE_TOKENS,
-  SWIFT_RESOURCES_DIR,
+  SWIFT_FOUNDATION_DIR,
+  SWIFT_PRIMITIVE_TARGET_DIR,
+  SWIFT_PRODUCTS_DIR,
   SWIFT_SOURCES_DIR,
 } from '../../../build-tokens/src/build/outputs/swift/swift-constants.ts';
 
@@ -40,16 +40,20 @@ export async function createIosPublishGithubBranch({
       cwd,
     }: UpdateGitRepositoryOnNewBranchUpdateFunctionContext): Promise<string> => {
       const sourcesDirectory: string = join(cwd, SWIFT_SOURCES_DIR);
-      const resourcesDirectory: string = join(cwd, SWIFT_RESOURCES_DIR);
 
-      await Promise.all([
-        ...[SWIFT_MAIN_STRUCT, SWIFT_PRIMITIVE_TOKENS].map((subPath: string): Promise<void> => {
-          return rm(join(sourcesDirectory, subPath), { recursive: true, force: true });
+      const directoriesToRemove: readonly string[] = [
+        join(sourcesDirectory, SWIFT_FOUNDATION_DIR),
+        join(sourcesDirectory, SWIFT_PRODUCTS_DIR),
+        join(cwd, SWIFT_PRIMITIVE_TARGET_DIR),
+      ];
+
+      await Promise.all(
+        directoriesToRemove.map((directory: string): Promise<void> => {
+          return rm(directory, { recursive: true, force: true });
         }),
-        rm(join(resourcesDirectory, 'Colors.xcassets'), { recursive: true, force: true }),
-      ]);
+      );
 
-      await Promise.all([cp(packageDirectory, cwd, { recursive: true, force: true })]);
+      await cp(packageDirectory, cwd, { recursive: true, force: true });
 
       return `chore: Update to ${version}`;
     },

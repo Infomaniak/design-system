@@ -8,31 +8,32 @@ import type { ArrayDesignTokenName } from '../../../../../../../../shared/dtcg/r
 import { T2_DIRECTORY_NAME } from '../../../../../constants/design-token-tiers.ts';
 import { isExcludedSwiftToken } from '../../swift-constants.ts';
 import { buildSwiftStructTree } from './build-swift-struct-tree.ts';
+import { buildSwiftThemeDummy } from './build-swift-theme-dummy.ts';
 import { buildSwiftThemeProducts } from './build-swift-theme-products.ts';
-import { buildSwiftTokenTree, type SwiftTokenTree } from './build-token-tree.ts';
+import { buildSwiftTokenTree, type SwiftNestedMap } from './build-token-tree.ts';
 
-export interface BuildSwiftThemeStructOptions {
+export interface BuildSwiftT2Options {
   readonly baseCollection: DesignTokensCollection;
+  readonly outputDirectory: string;
+}
+
+export interface BuildSwiftThemesOptions {
   readonly modifiers: DesignTokenModifiers;
+  readonly tree: SwiftNestedMap;
   readonly outputDirectory: string;
   readonly rawTokensPrefix: string;
 }
 
 const TYPE_SWIFT_MAP: Record<string, string> = {
-  color: 'Color',
+  color: 'SwiftUI.Color',
   dimension: 'CGFloat',
   number: 'CGFloat',
   fontFamily: 'String',
   fontWeight: 'Font.Weight',
 };
 
-export async function buildSwiftThemeStructs({
-  baseCollection,
-  modifiers,
-  outputDirectory,
-  rawTokensPrefix,
-}: BuildSwiftThemeStructOptions) {
-  const names: readonly ArrayDesignTokenName[] = Array.from(
+function getT2Names(baseCollection: DesignTokensCollection): readonly ArrayDesignTokenName[] {
+  return Array.from(
     baseCollection
       .tokens()
       .filter((token: GenericDesignTokensCollectionToken): boolean => {
@@ -50,21 +51,26 @@ export async function buildSwiftThemeStructs({
         return token.name;
       }),
   );
+}
 
-  const baseTokenTree: SwiftTokenTree = buildSwiftTokenTree(
-    baseCollection,
-    names,
-    'String?',
-    TYPE_SWIFT_MAP,
-    rawTokensPrefix,
-  );
+export async function buildSwiftT2({
+  baseCollection,
+  outputDirectory,
+}: BuildSwiftT2Options): Promise<SwiftNestedMap> {
+  const names = getT2Names(baseCollection);
+  const tree: SwiftNestedMap = buildSwiftTokenTree(baseCollection, names, TYPE_SWIFT_MAP);
 
-  await buildSwiftStructTree(baseTokenTree.tree, [], outputDirectory, baseTokenTree.valueMap);
+  await buildSwiftStructTree(tree, outputDirectory);
+  await buildSwiftThemeDummy(tree, outputDirectory);
 
-  await buildSwiftThemeProducts(
-    modifiers,
-    baseTokenTree.valueMap,
-    rawTokensPrefix,
-    outputDirectory,
-  );
+  return tree;
+}
+
+export async function buildSwiftThemes({
+  modifiers,
+  tree,
+  outputDirectory,
+  rawTokensPrefix,
+}: BuildSwiftThemesOptions): Promise<readonly string[]> {
+  return buildSwiftThemeProducts({ modifiers, tree, rawTokensPrefix, outputDirectory });
 }

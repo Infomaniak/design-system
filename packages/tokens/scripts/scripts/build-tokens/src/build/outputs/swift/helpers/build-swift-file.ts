@@ -1,4 +1,3 @@
-import { dedent } from '../../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { AUTO_GENERATED_FILE_HEADER } from '../../../constants/auto-generated-file-header.ts';
 
 export interface BuildSwiftFileOption {
@@ -9,6 +8,15 @@ export interface BuildSwiftFileOption {
   readonly content: string;
 }
 
+export const SWIFT_INDENT = '    ';
+
+export function indentSwiftLines(text: string, indent: string = SWIFT_INDENT): string {
+  return text
+    .split('\n')
+    .map((line: string): string => (line.length === 0 ? line : `${indent}${line}`))
+    .join('\n');
+}
+
 export function buildSwiftFile({
   imports,
   type,
@@ -17,21 +25,10 @@ export function buildSwiftFile({
   content,
 }: BuildSwiftFileOption): string {
   const safeProtocols = protocols.length ? `: ${protocols.join(', ')}` : '';
-  const safeContent = content.length
-    ? dedent`
-      {
-        ${content}
-      }
-    `
-    : `{}`;
+  const safeContent = content.length ? `{\n${indentSwiftLines(content)}\n}` : `{}`;
+  const importsBlock = imports
+    .map((importName: string): string => `import ${importName}`)
+    .join('\n');
 
-  return dedent`
-    /*
-      ${AUTO_GENERATED_FILE_HEADER}
-    */
-    
-    ${imports.map((importName: string): string => `import ${importName}`).join('\n')}
-    
-    ${type} ${name}${safeProtocols} ${safeContent}
-  `;
+  return `/*\n${SWIFT_INDENT}${AUTO_GENERATED_FILE_HEADER}\n*/\n\n${importsBlock}\n\n${type} ${name}${safeProtocols} ${safeContent}`;
 }
