@@ -2,8 +2,8 @@ import { join } from 'path';
 import { writeTextFileSafe } from '../../../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import { capitalizeFirstLetter } from '../../../../../../../../../../../scripts/helpers/misc/case/capitalize-first-letter/capitalize-first-letter.ts';
 import type { DesignTokenModifiers } from '../../../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
-import { SWIFT_MAIN_STRUCT, SWIFT_PRODUCTS_DIR } from '../../swift-constants.ts';
-import { buildSwiftThemeExtension } from './build-swift-theme-extension.ts';
+import { SWIFT_PRODUCTS_DIR } from '../../swift-constants.ts';
+import { buildSwiftThemeProductFiles } from './build-swift-theme-extension.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';
 
 export interface BuildSwiftThemeProductsOptions {
@@ -36,20 +36,25 @@ export async function buildSwiftThemeProducts({
   const generatedProductTargetNames: string[] = [];
 
   for (const [modifierName, productCollection] of productContexts.entries()) {
-    const swiftFileName = `${capitalizeFirstLetter(modifierName)}+${SWIFT_MAIN_STRUCT}`;
-    const productFolderName = `ESDS${capitalizeFirstLetter(modifierName)}`;
+    const productName = capitalizeFirstLetter(modifierName);
+    const productFolderName = `ESDS${productName}`;
 
-    const swiftStruct = buildSwiftThemeExtension(modifierName, tree, {
+    const swiftFiles = buildSwiftThemeProductFiles(modifierName, tree, {
       productCollection,
       lightCollection,
       darkCollection,
       rawTokensPrefix,
     });
 
-    await writeTextFileSafe(
-      join(outputDirectory, `${SWIFT_PRODUCTS_DIR}/${productFolderName}/${swiftFileName}.swift`),
-      swiftStruct,
-    );
+    for (const swiftFile of swiftFiles) {
+      await writeTextFileSafe(
+        join(
+          outputDirectory,
+          `${SWIFT_PRODUCTS_DIR}/${productFolderName}/${productName}+${swiftFile.typeName}.swift`,
+        ),
+        swiftFile.content,
+      );
+    }
 
     generatedProductTargetNames.push(productFolderName);
   }

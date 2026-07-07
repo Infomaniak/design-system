@@ -37,7 +37,7 @@ export function collectSortedLeaves(node: SwiftNestedMap, groupKey: string): Swi
   return leaves.sort((a, b) => a.name.localeCompare(b.name));
 }
 
-function importsForVariables(variables: readonly SwiftVariable[]): string[] {
+export function importsForVariables(variables: readonly SwiftVariable[]): string[] {
   const needsSwiftUI = variables.some(
     (variable: SwiftVariable): boolean =>
       variable.type.startsWith('SwiftUI.') ||
