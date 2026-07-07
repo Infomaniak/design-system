@@ -2,7 +2,10 @@ import { join } from 'node:path';
 import { writeTextFileSafe } from '../../../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import { toPascalCase } from '../../../../../../../../../../../scripts/helpers/misc/case/to-pascal-case/to-pascal-case.ts';
 import { toSwiftVariableName } from '../../../../../../../../shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
-import { buildSwiftStructContent, type SwiftVariable } from '../../helpers/build-swift-file-with-init.ts';
+import {
+  buildSwiftStructContent,
+  type SwiftVariable,
+} from '../../helpers/build-swift-file-with-init.ts';
 import { buildSwiftFile, indentSwiftLines } from '../../helpers/build-swift-file.ts';
 import { SWIFT_FOUNDATION_DIR, SWIFT_MAIN_STRUCT } from '../../swift-constants.ts';
 import type { SwiftNestedMap } from './build-token-tree.ts';

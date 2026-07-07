@@ -13,8 +13,8 @@ import type {
   GenericDesignTokensCollectionTokenWithType,
 } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/color/is-color-design-tokens-collection-token.ts';
-import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header.ts';
 import { T1_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
+import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header.ts';
 import { buildSwiftPackage } from './built-steps/build-swift-package.ts';
 import {
   buildSwiftT2,

@@ -58,7 +58,12 @@ export function resolveThemeTokenSwiftValue(
   const { rawTokensPrefix } = context;
 
   if (swiftType === 'SwiftUI.Color') {
-    const lightT1 = chaseToT1Token(name, context.lightCollection, THEME_LIGHT_PATH_FRAGMENT, context);
+    const lightT1 = chaseToT1Token(
+      name,
+      context.lightCollection,
+      THEME_LIGHT_PATH_FRAGMENT,
+      context,
+    );
     const darkT1 = chaseToT1Token(name, context.darkCollection, THEME_DARK_PATH_FRAGMENT, context);
 
     const light = tokenToSwiftValue(rawTokensPrefix, lightT1);
