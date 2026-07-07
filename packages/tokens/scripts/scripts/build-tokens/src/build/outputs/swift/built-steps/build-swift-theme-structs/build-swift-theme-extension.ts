@@ -15,7 +15,7 @@ import {
 import type { SwiftNestedMap } from './build-token-tree.ts';
 import {
   resolveThemeTokenSwiftValue,
-  type ThemeTokenResolutionContext,
+  type SwiftThemeTokenResolutionContext,
 } from './resolve-theme-token-value.ts';
 
 export interface SwiftThemeProductFile {
@@ -78,7 +78,7 @@ export function buildSwiftProductFiles(
 export function buildSwiftThemeProductFiles(
   modifierName: string,
   tree: SwiftNestedMap,
-  context: ThemeTokenResolutionContext,
+  context: SwiftThemeTokenResolutionContext,
 ): readonly SwiftThemeProductFile[] {
   return buildSwiftProductFiles(tree, {
     staticName: modifierName,

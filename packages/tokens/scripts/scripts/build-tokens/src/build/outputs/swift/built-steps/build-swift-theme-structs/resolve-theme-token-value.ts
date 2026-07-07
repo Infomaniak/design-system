@@ -8,7 +8,7 @@ import { tokenToSwiftValue } from '../../swift-tokens-format.ts';
 
 const MAX_REFERENCE_DEPTH = 32;
 
-export interface ThemeTokenResolutionContext {
+export interface SwiftThemeTokenResolutionContext {
   readonly productCollection: DesignTokensCollection;
   readonly lightCollection: DesignTokensCollection;
   readonly darkCollection: DesignTokensCollection;
@@ -22,7 +22,7 @@ function chaseToT1Token(
   startName: ArrayDesignTokenName,
   themeCollection: DesignTokensCollection,
   themePathFragment: string,
-  { productCollection }: ThemeTokenResolutionContext,
+  { productCollection }: SwiftThemeTokenResolutionContext,
 ): GenericDesignTokensCollectionToken {
   let current = startName;
 
@@ -53,7 +53,7 @@ function chaseToT1Token(
 export function resolveThemeTokenSwiftValue(
   name: ArrayDesignTokenName,
   swiftType: string,
-  context: ThemeTokenResolutionContext,
+  context: SwiftThemeTokenResolutionContext,
 ): string {
   const { rawTokensPrefix } = context;
 
