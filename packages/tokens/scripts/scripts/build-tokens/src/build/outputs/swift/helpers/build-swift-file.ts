@@ -1,4 +1,4 @@
-import { AUTO_GENERATED_FILE_HEADER } from '../../../constants/auto-generated-file-header.ts';
+import { SWIFT_FILE_HEADER } from './build-swift-file-header.ts';
 
 export interface BuildSwiftFileOption {
   readonly imports: readonly string[];
@@ -30,5 +30,5 @@ export function buildSwiftFile({
     .map((importName: string): string => `import ${importName}`)
     .join('\n');
 
-  return `/*\n${SWIFT_INDENT}${AUTO_GENERATED_FILE_HEADER}\n*/\n\n${importsBlock}\n\n${type} ${name}${safeProtocols} ${safeContent}`;
+  return `${SWIFT_FILE_HEADER}\n\n${importsBlock}\n\n${type} ${name}${safeProtocols} ${safeContent}`;
 }

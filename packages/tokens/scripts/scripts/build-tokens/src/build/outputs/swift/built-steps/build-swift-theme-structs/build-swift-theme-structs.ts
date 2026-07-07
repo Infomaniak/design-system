@@ -14,7 +14,9 @@ import { buildSwiftTokenTree, type SwiftNestedMap } from './build-token-tree.ts'
 
 export interface BuildSwiftT2Options {
   readonly baseCollection: DesignTokensCollection;
+  readonly modifiers: DesignTokenModifiers;
   readonly outputDirectory: string;
+  readonly rawTokensPrefix: string;
 }
 
 export interface BuildSwiftThemesOptions {
@@ -55,13 +57,15 @@ function getT2Names(baseCollection: DesignTokensCollection): readonly ArrayDesig
 
 export async function buildSwiftT2({
   baseCollection,
+  modifiers,
   outputDirectory,
+  rawTokensPrefix,
 }: BuildSwiftT2Options): Promise<SwiftNestedMap> {
   const names = getT2Names(baseCollection);
   const tree: SwiftNestedMap = buildSwiftTokenTree(baseCollection, names, TYPE_SWIFT_MAP);
 
   await buildSwiftStructTree(tree, outputDirectory);
-  await buildSwiftThemeDummy(tree, outputDirectory);
+  await buildSwiftThemeDummy(tree, outputDirectory, { modifiers, rawTokensPrefix });
 
   return tree;
 }

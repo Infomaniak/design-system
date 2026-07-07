@@ -14,13 +14,13 @@ import type {
 } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/color/is-color-design-tokens-collection-token.ts';
 import { T1_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
-import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header.ts';
 import { buildSwiftPackage } from './built-steps/build-swift-package.ts';
 import {
   buildSwiftT2,
   buildSwiftThemes,
 } from './built-steps/build-swift-theme-structs/build-swift-theme-structs.ts';
 import { buildXcAssets } from './built-steps/build-xcassets.ts';
+import { SWIFT_FILE_HEADER } from './helpers/build-swift-file-header.ts';
 import { buildSwiftFile, indentSwiftLines } from './helpers/build-swift-file.ts';
 import {
   SWIFT_PRIMITIVE_TARGET_DIR,
@@ -37,9 +37,7 @@ export interface BuildSwiftTokensOptions {
   readonly logger: Logger;
 }
 
-const SWIFT_COLOR_LIGHT_DARK_FILE = `/*
-    ${AUTO_GENERATED_FILE_HEADER}
-*/
+const SWIFT_COLOR_LIGHT_DARK_FILE = `${SWIFT_FILE_HEADER}
 
 import SwiftUI
 
@@ -186,7 +184,9 @@ export async function buildSwiftTokens({
         const tree = await logger.asyncTask('generate-tokens', () => {
           return buildSwiftT2({
             baseCollection,
+            modifiers,
             outputDirectory: join(iosSwiftOutputDirectory, SWIFT_SOURCES_DIR),
+            rawTokensPrefix: SWIFT_PRIMITIVE_TOKENS,
           });
         });
 
