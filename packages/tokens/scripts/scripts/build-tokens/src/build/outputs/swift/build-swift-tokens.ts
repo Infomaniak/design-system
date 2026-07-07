@@ -186,7 +186,9 @@ export async function buildSwiftTokens({
         const tree = await logger.asyncTask('generate-tokens', () => {
           return buildSwiftT2({
             baseCollection,
+            modifiers,
             outputDirectory: join(iosSwiftOutputDirectory, SWIFT_SOURCES_DIR),
+            rawTokensPrefix: SWIFT_PRIMITIVE_TOKENS,
           });
         });
 
