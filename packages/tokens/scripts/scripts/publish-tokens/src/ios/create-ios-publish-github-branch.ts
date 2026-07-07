@@ -41,14 +41,19 @@ export async function createIosPublishGithubBranch({
     }: UpdateGitRepositoryOnNewBranchUpdateFunctionContext): Promise<string> => {
       const sourcesDirectory: string = join(cwd, SWIFT_SOURCES_DIR);
 
+      const directoriesToRemove: readonly string[] = [
+        join(sourcesDirectory, SWIFT_FOUNDATION_DIR),
+        join(sourcesDirectory, SWIFT_PRODUCTS_DIR),
+        join(cwd, SWIFT_PRIMITIVE_TARGET_DIR),
+      ];
+
       await Promise.all(
-        [SWIFT_FOUNDATION_DIR, SWIFT_PRODUCTS_DIR].map((subPath: string): Promise<void> => {
-          return rm(join(sourcesDirectory, subPath), { recursive: true, force: true });
+        directoriesToRemove.map((directory: string): Promise<void> => {
+          return rm(directory, { recursive: true, force: true });
         }),
       );
-      await rm(join(cwd, SWIFT_PRIMITIVE_TARGET_DIR), { recursive: true, force: true });
 
-      await Promise.all([cp(packageDirectory, cwd, { recursive: true, force: true })]);
+      await cp(packageDirectory, cwd, { recursive: true, force: true });
 
       return `chore: Update to ${version}`;
     },
