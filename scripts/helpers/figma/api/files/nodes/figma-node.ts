@@ -1,5 +1,5 @@
+import type { FigmaBooleanOperationNode } from './built-in/boolean-operation/figma-boolean-operation-node.ts';
 import type { FigmaComponentNode } from './built-in/component/figma-component-node.ts';
-import type { FigmaBooleanOperationNode } from './built-in/figma-boolean-operation-node.ts';
 import type { FigmaCanvasNode } from './built-in/figma-canvas-node.ts';
 import type { FigmaComponentSetNode } from './built-in/figma-component-set-node.ts';
 import type { FigmaDocumentNode } from './built-in/figma-document-node.ts';

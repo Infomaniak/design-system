@@ -1,8 +1,5 @@
 import { dedent } from '../../../../../../../../misc/string/dedent/dedent.ts';
-
-import type { GenericFigmaNodeBase } from '../../../../base/figma-node-base.ts';
-import { figmaNodeWithGeometryToSvgContent } from '../../../../having/geometry/to/svg/figma-node-with-geometry-to-svg-content.ts';
-import { type FigmaVectorNode, isFigmaVectorNode } from '../../../vector/figma-vector-node.ts';
+import { genericFigmaNodeToSvgContent } from '../../../../base/to/svg/generic-figma-node-to-svg-content.ts';
 import type { FigmaComponentNode } from '../../figma-component-node.ts';
 
 export function figmaComponentNodeToSvg({
@@ -14,16 +11,4 @@ export function figmaComponentNodeToSvg({
       ${children.map(genericFigmaNodeToSvgContent).join('\n')}
     </svg>
   `;
-}
-
-export function genericFigmaNodeToSvgContent(node: GenericFigmaNodeBase): string {
-  if (isFigmaVectorNode(node)) {
-    return figmaVectorNodeToSvgContent(node);
-  } else {
-    throw new Error('Unsupported node');
-  }
-}
-
-export function figmaVectorNodeToSvgContent(node: FigmaVectorNode): string {
-  return figmaNodeWithGeometryToSvgContent(node);
 }

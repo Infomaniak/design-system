@@ -22,5 +22,5 @@ export interface FigmaVectorNetworkRegion {
 export interface FigmaVectorNetwork {
   readonly vertices: readonly FigmaVectorNetworkVertex[];
   readonly segments: readonly FigmaVectorNetworkSegment[];
-  readonly regions: readonly FigmaVectorNetworkRegion[];
+  readonly regions: readonly FigmaVectorNetworkRegion[] | null;
 }

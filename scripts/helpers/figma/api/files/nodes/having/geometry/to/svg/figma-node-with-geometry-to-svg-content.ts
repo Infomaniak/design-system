@@ -1,4 +1,3 @@
-import { dedent } from '../../../../../../../../misc/string/dedent/dedent.ts';
 import { figmaColorToHex } from '../../../../../types/color/to/hex/figma-color-to-hex.ts';
 import type { FigmaPaint } from '../../../../../types/paint/figma-paint.ts';
 import { isFigmaSolidPaint } from '../../../../../types/paint/types/solid/figma-solid-paint.ts';
@@ -6,7 +5,7 @@ import type { FigmaPath } from '../../../../../types/path/figma-path.ts';
 import { figmaPathToSvgPath } from '../../../../../types/path/to/svg/figma-path-to-svg-path.ts';
 import { figmaStrokeCapToSvgStrokeLinecap } from '../../../../../types/stroke-cap/to/svg/figma-stroke-cap-to-svg-stroke-linecap.ts';
 import { figmaStrokeJoinToSvgStrokeLinejoin } from '../../../../../types/stroke-join/to/svg/figma-stroke-join-to-svg-stroke-linejoin.ts';
-import { figmaTransformToSvgTransform } from '../../../../../types/transform/to/svg/figma-transform-to-svg-transform.ts';
+import { applyFigmaTransformToSvgContent } from '../../../../../types/transform/to/svg/apply-figma-transform-to-svg-content.ts';
 import { figmaVectorNetworkToFigmaPath } from '../../../../../types/vector-network/to/figma-path/figma-vector-network-to-figma-path.ts';
 import type { FigmaNodeWithGeometry } from '../../figma-node-with-geometry.ts';
 
@@ -22,22 +21,11 @@ export function figmaNodeWithGeometryToSvgContent({
   strokeDashes,
   relativeTransform,
 }: FigmaNodeWithGeometry): string {
-  const transform: string = figmaTransformToSvgTransform(relativeTransform);
-
-  const wrapWithTransform = (input: string): string => {
-    return transform === 'none'
-      ? input
-      : dedent`
-        <g transform="${transform}">
-          ${input}
-        </g>
-      `;
-  };
-
   const generatePaths = (paths: readonly FigmaPath[], attributes: readonly string[]): string => {
     const extraAttributes: string = attributes.join(' ');
 
-    return wrapWithTransform(
+    return applyFigmaTransformToSvgContent(
+      relativeTransform,
       paths
         .map((figmaPath: FigmaPath): string => {
           return figmaPathToSvgPath(figmaPath, extraAttributes);

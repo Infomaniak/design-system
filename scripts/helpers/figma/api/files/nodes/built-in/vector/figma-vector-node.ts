@@ -77,7 +77,7 @@ export interface HavingFigmaVectorNodeProperties
   readonly isMask?: boolean; // default: false
   // ...HavingOptionalFigmaFills,
   // ...HavingOptionalFigmaFillGeometry,
-  readonly fillOverrideTable: Record<number, FigmaPaintOverride | null>;
+  readonly fillOverrideTable?: Record<number, FigmaPaintOverride | null>;
   // ...HavingOptionalFigmaStrokes,
   // ...HavingOptionalComplexStrokeProperties,
   // ...HavingOptionalVariableWidthPoints,

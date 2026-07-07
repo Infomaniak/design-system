@@ -1,15 +1,12 @@
 import { join } from 'node:path';
 import { getFigmaFile } from '../../../../../../../../scripts/helpers/figma/api/files/get-figma-file.ts';
 import type { GenericFigmaNodeBase } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/base/figma-node-base.ts';
+import { isFigmaBooleanOperationNode } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/built-in/boolean-operation/figma-boolean-operation-node.ts';
 import {
   type FigmaComponentNode,
   isFigmaComponentNode,
 } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/built-in/component/figma-component-node.ts';
-import {
-  type FigmaBooleanOperationNode,
-  isFigmaBooleanOperationNode,
-} from '../../../../../../../../scripts/helpers/figma/api/files/nodes/built-in/figma-boolean-operation-node.ts';
-import type { HavingFigmaAbsoluteBoundingBox } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/having/having-figma-absolute-bounding-box.ts';
+import { figmaComponentNodeToSvg } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/built-in/component/to/svg/figma-component-node-to-svg.ts';
 import { FigmaNodesExplorer } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/helpers/figma-nodes-explorer.ts';
 import type { FigmaComponent } from '../../../../../../../../scripts/helpers/figma/api/files/types/figma-component.ts';
 import type { FigmaFile } from '../../../../../../../../scripts/helpers/figma/api/files/types/figma-file.ts';
@@ -21,7 +18,6 @@ import { writeJsonFileSafe } from '../../../../../../../../scripts/helpers/file/
 import { writeTextFileSafe } from '../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import type { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
 import { block } from '../../../../../../../../scripts/helpers/misc/block.ts';
-import { dedent } from '../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import type { TreeExplorerPickReturn } from '../../../../../../../../scripts/helpers/misc/tree-explorer/tree-explorer.ts';
 import { removeTrailingSlash } from '../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 
@@ -63,28 +59,6 @@ export function extractSvgFilesFromFigmaDesignFile({
     // TODO: DEBUG
     await writeJsonFileSafe(join(outputDirectory, 'figma-file.json'), figmaFile);
 
-    for (const node of FigmaNodesExplorer.explore<FigmaComponentNode>(
-      figmaFile.document,
-      (node: GenericFigmaNodeBase): TreeExplorerPickReturn | void => {
-        if (isFigmaComponentNode(node) && isIconFigmaComponent(node.name)) {
-          return {
-            pickSelf: true,
-            pickChildren: false,
-          };
-        } else {
-          return {
-            pickSelf: false,
-            pickChildren: true,
-          };
-        }
-      },
-    )) {
-      console.log(JSON.stringify(node, null, 2));
-      return;
-    }
-
-    return;
-
     await logger.asyncTask('extract-component-svgs', async (logger: Logger): Promise<void> => {
       interface SVGToLoad {
         readonly id: string;
@@ -101,7 +75,7 @@ export function extractSvgFilesFromFigmaDesignFile({
           const component: FigmaComponent = figmaFile.components[id];
 
           // skip non svg components
-          if (!isIconFigmaComponent(component.name) || !component.name.endsWith('filled')) {
+          if (!isIconFigmaComponent(component.name)) {
             continue;
           }
 
@@ -173,15 +147,9 @@ export function extractSvgFilesFromFigmaDesignFile({
         filled component are extracted as "outlined" svgs from the previous operation.
         We'll generate true "mask" svgs from theses "filled" svgs.
      */
-      await logger.asyncTask('extract-filled-svgs', async (logger: Logger): Promise<void> => {
-        interface SVGToLoad extends SVGInnerShape {
-          readonly name: string;
-          readonly base: SVGInnerShape;
-          readonly cutouts: readonly SVGInnerShape[];
-        }
-
+      await logger.asyncTask('extract-filled-svgs', async (): Promise<void> => {
         // extract the "filled" svgs from the list of component nodes present in the figma file
-        const svgsToLoad: readonly SVGToLoad[] = Array.from(
+        await Promise.all(
           FigmaNodesExplorer.explore<FigmaComponentNode>(
             figmaFile.document,
             (node: GenericFigmaNodeBase): TreeExplorerPickReturn | void => {
@@ -204,111 +172,21 @@ export function extractSvgFilesFromFigmaDesignFile({
                 };
               }
             },
-          ),
-        ).map((node: FigmaComponentNode): SVGToLoad => {
-          const name: string = extractIconName(node.name);
+          ).map(async (node: FigmaComponentNode): Promise<void> => {
+            const name: string = extractIconName(node.name);
 
-          if (!name.endsWith('-filled')) {
-            throw new Error(
-              `Found an icon ${JSON.stringify(name)} with SUBTRACT operation not ending with "-filled".`,
+            if (!name.endsWith('-filled')) {
+              throw new Error(
+                `Found an icon ${JSON.stringify(name)} with SUBTRACT operation not ending with "-filled".`,
+              );
+            }
+
+            await writeTextFileSafe(
+              join(outputDirectory, `${name}.mask.svg`),
+              figmaComponentNodeToSvg(node),
             );
-          }
-
-          const booleanOperation: FigmaBooleanOperationNode = node
-            .children[0] as FigmaBooleanOperationNode;
-
-          // a "SUBTRACT" operation contains a "base" and many "cutouts" (what is subtracted)
-          const [base, ...cutouts] = booleanOperation.children as readonly (GenericFigmaNodeBase &
-            HavingFigmaAbsoluteBoundingBox)[];
-
-          return {
-            ...figmaNodeToSVGInnerShape(node),
-            name,
-            base: figmaNodeToSVGInnerShape(base),
-            cutouts: cutouts.map(figmaNodeToSVGInnerShape),
-          };
-        });
-
-        if (svgsToLoad.length === 0) {
-          logger.info('No "filled" svg to extract.');
-          return;
-        }
-
-        // get all the svgs's urls in one fetch using the figma api -> for the base and the cutouts
-        const images: FigmaImagesRecord = await logger.asyncTask(
-          'get-urls',
-          async (): Promise<FigmaImagesRecord> => {
-            return getFigmaImages({
-              token: figmaAPIToken,
-              file_key: figmaSourceFileKey,
-              ids: svgsToLoad.flatMap(({ base, cutouts }: SVGToLoad): readonly string[] => {
-                return [base.id, ...cutouts.map((cutout: SVGInnerShape): string => cutout.id)];
-              }),
-            });
-          },
+          }),
         );
-
-        await logger.asyncTask('store-svgs', async (logger: Logger): Promise<void> => {
-          await Promise.all(
-            svgsToLoad.map(
-              async ({ name, x, y, width, height, base, cutouts }: SVGToLoad): Promise<void> => {
-                logger.info(name);
-
-                // get the svg content for the base and cutouts
-                const [baseSvg, ...cutoutSvgs] = await Promise.all([
-                  fetchFigmaSvgAsset(images[base.id]),
-                  ...cutouts.map((cutout: SVGInnerShape): Promise<string> => {
-                    return fetchFigmaSvgAsset(images[cutout.id]);
-                  }),
-                ]);
-
-                // create a unique mask id
-                const maskId: string = `mask_${name.replace(/\W/g, '_')}`;
-
-                // create the "base" svg content
-                const positionedBaseSvgContent: string = wrapWithSvgTranslation(
-                  extractSvgContent(baseSvg),
-                  base.x - x,
-                  base.y - y,
-                );
-
-                // create the "base" svg content for the mask => it's the same as the "base" one, but with stroke and fill beeing white.
-                const positionedBaseSvgContentForMask: string = replaceSvgFillAndStroke(
-                  positionedBaseSvgContent,
-                  'white',
-                );
-
-                // create the "cutouts" svg content for the mask => the "black" parts that are subtracted in the mask
-                const positionedCutoutSvgContentsForMask: string = cutouts
-                  .map((cutout: SVGInnerShape, index: number) => {
-                    return wrapWithSvgTranslation(
-                      replaceSvgFillAndStroke(extractSvgContent(cutoutSvgs[index]), 'black'),
-                      cutout.x - x,
-                      cutout.y - y,
-                    );
-                  })
-                  .join('\n');
-
-                // assemble the final svg
-                const svg: string = dedent`
-                  <svg width="${String(width)}" height="${String(height)}" viewBox="0 0 ${String(width)} ${String(height)}" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <mask id="${maskId}" fill="transparent">
-                        ${positionedBaseSvgContentForMask}
-                        ${positionedCutoutSvgContentsForMask}
-                      </mask>
-                    </defs>
-                    <g mask="url(#${maskId})">
-                      ${positionedBaseSvgContent}
-                    </g>
-                  </svg>
-                `;
-
-                await writeTextFileSafe(join(outputDirectory, `${name}.mask.svg`), svg);
-              },
-            ),
-          );
-        });
       });
     }
   });
@@ -332,69 +210,4 @@ function extractIconName(name: string): string {
 
 async function fetchFigmaSvgAsset(url: string): Promise<string> {
   return (await fetch(url)).text();
-}
-
-/*------------*/
-
-/*------------*/
-
-// FILLED SVGS
-
-interface SVGInnerShape {
-  readonly id: string;
-  readonly x: number;
-  readonly y: number;
-  readonly width: number;
-  readonly height: number;
-}
-
-function figmaNodeToSVGInnerShape(
-  node: GenericFigmaNodeBase & HavingFigmaAbsoluteBoundingBox,
-): SVGInnerShape {
-  return {
-    id: node.id,
-    x: node.absoluteBoundingBox.x,
-    y: node.absoluteBoundingBox.y,
-    width: node.absoluteBoundingBox.width,
-    height: node.absoluteBoundingBox.height,
-  };
-}
-
-/**
- * Translates a svg content, wrapping it in a "translate" group.
- */
-function wrapWithSvgTranslation(content: string, x: number, y: number): string {
-  return dedent`
-    <g transform="translate(${String(x)} ${String(y)})">
-      ${content}
-    </g>
-  `;
-}
-
-/**
- * Replaces the stroke and fill attributes with another value.
- */
-function replaceSvgFillAndStroke(content: string, value: string): string {
-  return content
-    .replace(/stroke="[^"]*"/g, `stroke="${value}"`)
-    .replace(/fill="[^"]*"/g, `fill="${value}"`);
-}
-
-/**
- * Extracts the content of an svg (removes the `<svg>` tags)
- */
-function extractSvgContent(svg: string): string {
-  svg = svg.trim();
-
-  if (!svg.endsWith('</svg>')) {
-    throw new Error('Invalid svg.');
-  }
-
-  const match: RegExpMatchArray | null = /^<svg[^>]*>/g.exec(svg);
-
-  if (match === null) {
-    throw new Error('Invalid svg.');
-  }
-
-  return svg.slice(match[0].length, -6 /* '</svg>'.length */).trim();
 }
