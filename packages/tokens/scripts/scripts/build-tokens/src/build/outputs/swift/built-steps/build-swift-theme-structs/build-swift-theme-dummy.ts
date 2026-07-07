@@ -11,11 +11,6 @@ import { resolveThemeTokenSwiftValue } from './resolve-theme-token-value.ts';
 const SWIFT_HELPER_DIR = 'Helper';
 const DUMMY_PRODUCT_NAME = 'dummy';
 
-/**
- * Product whose resolved values back the dummy theme. The dummy lives in
- * `ESDSFoundation`, which already depends on `ESDSPrimitives`, so it can reference
- * the same primitive tokens as the real product theme.
- */
 const DUMMY_SOURCE_PRODUCT_NAME = 'infomaniak';
 
 export interface BuildSwiftThemeDummyOptions {
