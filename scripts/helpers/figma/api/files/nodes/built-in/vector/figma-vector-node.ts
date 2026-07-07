@@ -25,6 +25,7 @@ import type { HavingFigmaStrokeWeight } from '../../having/having-figma-stroke-w
 import type { HavingOptionalFigmaStrokes } from '../../having/having-figma-strokes.ts';
 import type { HavingOptionalFigmaStyles } from '../../having/having-figma-styles.ts';
 import type { HavingOptionalFigmaVariableWidthPoints } from '../../having/having-figma-variable-width-points.ts';
+import type { HavingOptionalFigmaVectorNetwork } from '../../having/having-figma-vector-network.ts';
 
 /**
  * @inheritDoc https://developers.figma.com/docs/rest-api/file-node-types/#vector-props
@@ -54,7 +55,8 @@ export interface HavingFigmaVectorNodeProperties
     HavingOptionalFigmaStyles,
     HavingOptionalFigmaAnnotations,
     // NOTE: present in the JSON but not in the DOC
-    HavingFigmaScrollBehavior {
+    HavingFigmaScrollBehavior,
+    HavingOptionalFigmaVectorNetwork {
   readonly locked?: boolean; // default: false
   // NOTE: similar to FigmaFrameNodeProperties
   readonly exportSettings?: readonly unknown /* TODO */[]; // default: []
@@ -89,9 +91,10 @@ export interface HavingFigmaVectorNodeProperties
   // ...HavingFigmaStrokeAlign
   // ...HavingOptionalFigmaStyles
   // ...HavingOptionalFigmaAnnotations,
-  // ...HavingFigmaScrollBehavior,
   // NOTE: present in the JSON but not in the DOC
+  // ...HavingFigmaScrollBehavior,
   readonly interactions: readonly unknown /* TODO */[];
+  // ...HavingOptionalFigmaVectorNetwork,
 }
 
 export interface FigmaVectorNode extends FigmaNodeBase<'VECTOR'>, HavingFigmaVectorNodeProperties {}

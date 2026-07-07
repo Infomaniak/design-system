@@ -1,0 +1,51 @@
+import type { FigmaVectorNetwork } from '../../figma-vector-network.ts';
+
+export function figmaVectorNetworkToSvgPath({ vertices, segments, regions }: FigmaVectorNetwork): string {
+  const paths: string[] = [];
+
+  for (const region of regions) {
+    for (const loop of region.loops) {
+      if (loop.length === 0) {
+        continue;
+      }
+
+      const parts: string[] = [];
+
+      const firstSegment = segments[loop[0]];
+      const lastSegment = segments[loop[loop.length - 1]];
+      const firstVertex = vertices[firstSegment.start];
+
+      parts.push(`M ${svgNum(firstVertex.position.x)} ${svgNum(firstVertex.position.y)}`);
+
+      for (const segmentIndex of loop) {
+        const segment = segments[segmentIndex];
+        const startV = vertices[segment.start];
+        const endV = vertices[segment.end];
+
+        const x1 = startV.position.x + segment.startTangent.x;
+        const y1 = startV.position.y + segment.startTangent.y;
+        const x2 = endV.position.x + segment.endTangent.x;
+        const y2 = endV.position.y + segment.endTangent.y;
+        const x = endV.position.x;
+        const y = endV.position.y;
+
+        parts.push(`C ${svgNum(x1)} ${svgNum(y1)} ${svgNum(x2)} ${svgNum(y2)} ${svgNum(x)} ${svgNum(y)}`);
+      }
+
+      const startVertexIndex: number = firstSegment.start;
+      const endVertexIndex: number = lastSegment.end;
+
+      if (endVertexIndex === startVertexIndex) {
+        parts.push('Z');
+      }
+      paths.push(parts.join(' '));
+    }
+  }
+
+  return paths.join(' ');
+}
+
+function svgNum(n: number): string {
+  const str = n.toFixed(6);
+  return str.replace(/\.0+$/, '').replace(/([0-9])0+$/, '$1');
+}
