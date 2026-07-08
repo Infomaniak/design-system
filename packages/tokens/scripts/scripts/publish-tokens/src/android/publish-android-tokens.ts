@@ -24,7 +24,7 @@ export async function publishAndroidTokens({
   prerelease,
   logger,
 }: PublishAndroidTokensOptions): Promise<void> {
-  return logger.asyncTask('android', async (): Promise<void> => {
+  return logger.asyncTask('android', async (logger: Logger): Promise<void> => {
     const { version }: PackageJson = await readPackageJsonFile(join(rootDirectory, 'package.json'));
 
     const publishVersion: string = generatePackageJsonBuildVersion({
@@ -33,23 +33,30 @@ export async function publishAndroidTokens({
       prerelease,
     });
 
-    const publishBranchName: string = await createAndroidPublishGithubBranch({
-      logger,
-      repositoryName: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
-      packageDirectory: join(outputDirectory, 'kotlin'),
-      version: publishVersion,
-    });
+    const publishBranchName: string = `esds/${publishVersion}`;
 
-    if (mode !== 'dev') {
+    if (
+      (
+        await createAndroidPublishGithubBranch({
+          logger,
+          repositoryName: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
+          packageDirectory: join(outputDirectory, 'kotlin'),
+          version: publishVersion,
+          branchName: publishBranchName,
+        })
+      ).length > 0
+    ) {
       await createGithubPullRequest({
         owner: INFOMANIAK_GITHUB_ORGANIZATION,
         repository: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
         authToken: getEnvCiPullRequestAuthTokenMobile(),
-        title: `chore: Update to ${version}`,
-        body: `Update to ${version}`,
+        title: `chore: Update to ${publishVersion}`,
+        body: `Update to ${publishVersion}`,
         head: publishBranchName,
-        base: /*mode === 'rc' ? 'develop' : */ 'main', // TODO add support to `develop` branch when the repo will be ready
+        base: 'main',
       });
+    } else {
+      logger.info('SKIP (non-blocking): No changes to publish');
     }
   });
 }
