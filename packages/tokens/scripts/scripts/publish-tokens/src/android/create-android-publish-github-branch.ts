@@ -37,6 +37,7 @@ export async function createAndroidPublishGithubBranch({
 
       await execCommandInherit(logger, './gradlew', ['ktlintFormat'], {
         shell: true,
+        cwd,
       });
 
       return `chore: Update to ${version}`;
