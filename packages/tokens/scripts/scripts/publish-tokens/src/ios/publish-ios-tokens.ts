@@ -57,6 +57,8 @@ export async function publishIosTokens({
           base: /*mode === 'rc' ? 'develop' : */ 'main', // TODO add support to `develop` branch when the repo will be ready
         });
       }
+    } else {
+      logger.info('SKIP (non-blocking): No changes to publish');
     }
   });
 }

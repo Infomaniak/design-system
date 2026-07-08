@@ -55,6 +55,8 @@ export async function publishAndroidTokens({
         head: publishBranchName,
         base: 'main',
       });
+    } else {
+      logger.info('SKIP (non-blocking): No changes to publish');
     }
   });
 }
