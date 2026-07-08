@@ -35,7 +35,9 @@ export async function createAndroidPublishGithubBranch({
     }: UpdateGitRepositoryOnNewBranchUpdateFunctionContext): Promise<string> => {
       await Promise.all([cp(packageDirectory, cwd, { recursive: true, force: true })]);
 
-      await execCommandInherit(logger, './gradlew', ['ktlintFormat']);
+      await execCommandInherit(logger, './gradlew', ['ktlintFormat'], {
+        shell: true,
+      });
 
       return `chore: Update to ${version}`;
     },
