@@ -24,7 +24,7 @@ export async function publishAndroidTokens({
   prerelease,
   logger,
 }: PublishAndroidTokensOptions): Promise<void> {
-  return logger.asyncTask('android', async (): Promise<void> => {
+  return logger.asyncTask('android', async (logger: Logger): Promise<void> => {
     const { version }: PackageJson = await readPackageJsonFile(join(rootDirectory, 'package.json'));
 
     const publishVersion: string = generatePackageJsonBuildVersion({

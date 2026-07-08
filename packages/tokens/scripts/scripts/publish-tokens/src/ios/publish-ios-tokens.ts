@@ -24,7 +24,7 @@ export async function publishIosTokens({
   prerelease,
   logger,
 }: PublishIosTokensOptions): Promise<void> {
-  return logger.asyncTask('ios', async (): Promise<void> => {
+  return logger.asyncTask('ios', async (logger: Logger): Promise<void> => {
     const { version }: PackageJson = await readPackageJsonFile(join(rootDirectory, 'package.json'));
 
     const publishVersion: string = generatePackageJsonBuildVersion({
