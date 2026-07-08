@@ -49,5 +49,6 @@ export async function createIosPublishGithubBranch({
       return `chore: Update to ${version}`;
     },
     logger,
+    allowEmpty: 'yes-skip-push',
   });
 }
