@@ -33,23 +33,30 @@ export async function publishIosTokens({
       prerelease,
     });
 
-    const publishBranchName: string = await createIosPublishGithubBranch({
-      logger,
-      repositoryName: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
-      packageDirectory: join(outputDirectory, 'ios'),
-      version: publishVersion,
-    });
+    const publishBranchName: string = `esds/${publishVersion}`;
 
-    if (mode !== 'dev') {
-      await createGithubPullRequest({
-        owner: INFOMANIAK_GITHUB_ORGANIZATION,
-        repository: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
-        authToken: getEnvCiPullRequestAuthTokenMobile(),
-        title: `chore: Update to ${publishVersion}`,
-        body: `Update to ${publishVersion}`,
-        head: publishBranchName,
-        base: /*mode === 'rc' ? 'develop' : */ 'main', // TODO add support to `develop` branch when the repo will be ready
-      });
+    if (
+      (
+        await createIosPublishGithubBranch({
+          logger,
+          repositoryName: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
+          packageDirectory: join(outputDirectory, 'ios'),
+          version: publishVersion,
+          branchName: publishBranchName,
+        })
+      ).length > 0
+    ) {
+      if (mode !== 'dev') {
+        await createGithubPullRequest({
+          owner: INFOMANIAK_GITHUB_ORGANIZATION,
+          repository: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
+          authToken: getEnvCiPullRequestAuthTokenMobile(),
+          title: `chore: Update to ${publishVersion}`,
+          body: `Update to ${publishVersion}`,
+          head: publishBranchName,
+          base: /*mode === 'rc' ? 'develop' : */ 'main', // TODO add support to `develop` branch when the repo will be ready
+        });
+      }
     }
   });
 }

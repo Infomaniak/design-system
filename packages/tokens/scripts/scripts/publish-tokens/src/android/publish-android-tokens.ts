@@ -33,21 +33,28 @@ export async function publishAndroidTokens({
       prerelease,
     });
 
-    const publishBranchName: string = await createAndroidPublishGithubBranch({
-      logger,
-      repositoryName: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
-      packageDirectory: join(outputDirectory, 'kotlin'),
-      version: publishVersion,
-    });
+    const publishBranchName: string = `esds/${publishVersion}`;
 
-    await createGithubPullRequest({
-      owner: INFOMANIAK_GITHUB_ORGANIZATION,
-      repository: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
-      authToken: getEnvCiPullRequestAuthTokenMobile(),
-      title: `chore: Update to ${publishVersion}`,
-      body: `Update to ${publishVersion}`,
-      head: publishBranchName,
-      base: 'main',
-    });
+    if (
+      (
+        await createAndroidPublishGithubBranch({
+          logger,
+          repositoryName: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
+          packageDirectory: join(outputDirectory, 'kotlin'),
+          version: publishVersion,
+          branchName: publishBranchName,
+        })
+      ).length > 0
+    ) {
+      await createGithubPullRequest({
+        owner: INFOMANIAK_GITHUB_ORGANIZATION,
+        repository: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
+        authToken: getEnvCiPullRequestAuthTokenMobile(),
+        title: `chore: Update to ${publishVersion}`,
+        body: `Update to ${publishVersion}`,
+        head: publishBranchName,
+        base: 'main',
+      });
+    }
   });
 }
