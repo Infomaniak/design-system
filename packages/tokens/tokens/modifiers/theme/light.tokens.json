@@ -13,7 +13,7 @@
             "$value": "{color.gray.100}"
           },
           "selected": {
-            "$value": "{color.gray.200}"
+            "$value": "{color.gray.100}"
           }
         },
         "raised": {
@@ -27,7 +27,7 @@
             "$value": "{color.gray.100}"
           },
           "selected": {
-            "$value": "{color.gray.200}"
+            "$value": "{color.gray.100}"
           }
         },
         "overlay": {
@@ -41,7 +41,7 @@
             "$value": "{color.gray.300}"
           },
           "selected": {
-            "$value": "{color.gray.400}"
+            "$value": "{color.gray.300}"
           }
         },
         "sunken": {
@@ -55,7 +55,7 @@
             "$value": "{color.gray.300}"
           },
           "selected": {
-            "$value": "{color.gray.400}"
+            "$value": "{color.gray.300}"
           }
         }
       },

@@ -23,7 +23,7 @@
             }
           },
           "selected": {
-            "$value": "{color.gray.200}",
+            "$value": "{color.gray.100}",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
@@ -49,7 +49,7 @@
             }
           },
           "selected": {
-            "$value": "{color.gray.400}",
+            "$value": "{color.gray.300}",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
@@ -75,7 +75,7 @@
             }
           },
           "selected": {
-            "$value": "{color.gray.200}",
+            "$value": "{color.gray.100}",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
@@ -101,7 +101,7 @@
             }
           },
           "selected": {
-            "$value": "{color.gray.400}",
+            "$value": "{color.gray.300}",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
@@ -440,21 +440,21 @@
         "default": {
           "$value": "{color.blue.500}",
           "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+            "scopes": ["ALL_FILLS"],
             "figmaName": ["color", "background", "brand", "@root", "default"]
           }
         },
         "pressed": {
           "$value": "{color.blue.700}",
           "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+            "scopes": ["ALL_FILLS"],
             "figmaName": ["color", "background", "brand", "@root", "pressed"]
           }
         },
         "hover": {
           "$value": "{color.blue.600}",
           "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+            "scopes": ["ALL_FILLS"],
             "figmaName": ["color", "background", "brand", "@root", "hover"]
           }
         }
@@ -1013,21 +1013,21 @@
         "default": {
           "$value": "{color.blue.700}",
           "$extensions": {
-            "scopes": ["TEXT_FILL"],
+            "scopes": ["ALL_FILLS"],
             "figmaName": ["color", "content", "brand", "@root", "default"]
           }
         },
         "hover": {
           "$value": "{color.blue.800}",
           "$extensions": {
-            "scopes": [],
+            "scopes": ["ALL_FILLS"],
             "figmaName": ["color", "content", "brand", "@root", "hover"]
           }
         },
         "pressed": {
           "$value": "{color.blue.900}",
           "$extensions": {
-            "scopes": [],
+            "scopes": ["ALL_FILLS"],
             "figmaName": ["color", "content", "brand", "@root", "pressed"]
           }
         }
