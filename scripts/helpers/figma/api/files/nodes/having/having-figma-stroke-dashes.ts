@@ -2,6 +2,4 @@ export interface HavingFigmaStrokeDashes {
   readonly strokeDashes: readonly number[];
 }
 
-export interface HavingOptionalFigmaStrokeDashes {
-  readonly strokeDashes?: readonly number[]; // default: []
-}
+export type HavingOptionalFigmaStrokeDashes = Partial<HavingFigmaStrokeDashes>; // default: []

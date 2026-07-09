@@ -4,6 +4,4 @@ export interface HavingFigmaFills {
   readonly fills: readonly FigmaPaint[];
 }
 
-export interface HavingOptionalFigmaFills {
-  readonly fills?: readonly FigmaPaint[]; // default: []
-}
+export type HavingOptionalFigmaFills = Partial<HavingFigmaFills>; // default: []

@@ -2,6 +2,4 @@ export interface HavingFigmaStrokeMiterAngle {
   readonly strokeMiterAngle: number;
 }
 
-export interface HavingOptionalFigmaStrokeMiterAngle {
-  readonly strokeMiterAngle?: number; // default: 28.96
-}
+export type HavingOptionalFigmaStrokeMiterAngle = Partial<HavingFigmaStrokeMiterAngle>; // default: 28.96

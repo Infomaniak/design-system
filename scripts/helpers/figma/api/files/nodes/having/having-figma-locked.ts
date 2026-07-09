@@ -2,6 +2,4 @@ export interface HavingFigmaLocked {
   readonly locked: boolean;
 }
 
-export interface HavingOptionalFigmaLocked {
-  readonly locked?: boolean; // default: false
-}
+export type HavingOptionalFigmaLocked = Partial<HavingFigmaLocked>; // default: false

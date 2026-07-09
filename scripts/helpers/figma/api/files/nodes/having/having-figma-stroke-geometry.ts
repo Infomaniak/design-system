@@ -4,6 +4,4 @@ export interface HavingFigmaStrokeGeometry {
   readonly strokeGeometry: readonly FigmaPath[];
 }
 
-export interface HavingOptionalFigmaStrokeGeometry {
-  readonly strokeGeometry?: readonly FigmaPath[]; // default: []
-}
+export type HavingOptionalFigmaStrokeGeometry = Partial<HavingFigmaStrokeGeometry>; // default: []

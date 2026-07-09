@@ -4,6 +4,4 @@ export interface HavingFigmaStrokeCap {
   readonly strokeCap: FigmaStrokeCap;
 }
 
-export interface HavingOptionalFigmaStrokeCap {
-  readonly strokeCap?: FigmaStrokeCap;
-}
+export type HavingOptionalFigmaStrokeCap = Partial<HavingFigmaStrokeCap>;

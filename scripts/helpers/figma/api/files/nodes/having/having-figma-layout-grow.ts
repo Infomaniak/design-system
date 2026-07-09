@@ -2,6 +2,4 @@ export interface HavingFigmaLayoutGrow {
   readonly layoutGrow: number;
 }
 
-export interface HavingOptionalFigmaLayoutGrow {
-  readonly layoutGrow?: number; // default: 0
-}
+export type HavingOptionalFigmaLayoutGrow = Partial<HavingFigmaLayoutGrow>; // default: 0

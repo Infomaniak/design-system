@@ -4,6 +4,4 @@ export interface HavingFigmaStrokes {
   readonly strokes: readonly FigmaPaint[]; // default: []
 }
 
-export interface HavingOptionalFigmaStrokes {
-  readonly strokes?: readonly FigmaPaint[]; // default: []
-}
+export type HavingOptionalFigmaStrokes = Partial<HavingFigmaStrokes>; // default: []

@@ -4,6 +4,4 @@ export interface HavingFigmaLayoutAlign {
   readonly layoutAlign: FigmaLayoutAlign;
 }
 
-export interface HavingOptionalFigmaLayoutAlign {
-  readonly layoutAlign?: FigmaLayoutAlign; // default: 'INHERIT'
-}
+export type HavingOptionalFigmaLayoutAlign = Partial<HavingFigmaLayoutAlign>; // default: 'INHERIT'

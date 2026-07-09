@@ -4,6 +4,4 @@ export interface HavingFigmaVariableWidthPoints {
   readonly variableWidthPoints: readonly FigmaVariableWidthPoint[];
 }
 
-export interface HavingOptionalFigmaVariableWidthPoints {
-  readonly variableWidthPoints?: readonly FigmaVariableWidthPoint[]; // default: []
-}
+export type HavingOptionalFigmaVariableWidthPoints = Partial<HavingFigmaVariableWidthPoints>; // default: []

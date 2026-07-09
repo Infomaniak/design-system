@@ -4,6 +4,4 @@ export interface HavingFigmaStrokeJoin {
   readonly strokeJoin: FigmaStrokeJoin;
 }
 
-export interface HavingOptionalFigmaStrokeJoin {
-  readonly strokeJoin?: FigmaStrokeJoin;
-}
+export type HavingOptionalFigmaStrokeJoin = Partial<HavingFigmaStrokeJoin>;

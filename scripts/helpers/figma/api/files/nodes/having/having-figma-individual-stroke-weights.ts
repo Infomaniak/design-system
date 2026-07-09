@@ -4,6 +4,4 @@ export interface HavingFigmaIndividualStrokeWeights {
   readonly individualStrokeWeights: FigmaStrokeWeight;
 }
 
-export interface HavingOptionalFigmaIndividualStrokeWeights {
-  readonly individualStrokeWeights?: FigmaStrokeWeight; // default: undefined
-}
+export type HavingOptionalFigmaIndividualStrokeWeights = Partial<HavingFigmaIndividualStrokeWeights>; // default: undefined

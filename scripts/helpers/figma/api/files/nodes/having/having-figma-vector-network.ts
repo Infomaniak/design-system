@@ -4,6 +4,4 @@ export interface HavingFigmaVectorNetwork {
   readonly vectorNetwork: FigmaVectorNetwork;
 }
 
-export interface HavingOptionalFigmaVectorNetwork {
-  readonly vectorNetwork?: FigmaVectorNetwork;
-}
+export type HavingOptionalFigmaVectorNetwork = Partial<HavingFigmaVectorNetwork>;

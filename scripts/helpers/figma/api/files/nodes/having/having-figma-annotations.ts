@@ -2,6 +2,4 @@ export interface HavingFigmaAnnotations {
   readonly annotations: readonly unknown /* TODO */[];
 }
 
-export interface HavingOptionalFigmaAnnotations {
-  readonly annotations?: readonly unknown /* TODO */[]; // default: []
-}
+export type HavingOptionalFigmaAnnotations = Partial<HavingFigmaAnnotations>; // default: []

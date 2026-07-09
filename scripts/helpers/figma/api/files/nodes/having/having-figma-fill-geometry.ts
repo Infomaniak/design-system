@@ -4,6 +4,4 @@ export interface HavingFigmaFillGeometry {
   readonly fillGeometry: readonly FigmaPath[];
 }
 
-export interface HavingOptionalFigmaFillGeometry {
-  readonly fillGeometry?: readonly FigmaPath[]; // default: []
-}
+export type HavingOptionalFigmaFillGeometry = Partial<HavingFigmaFillGeometry>; // default: []
