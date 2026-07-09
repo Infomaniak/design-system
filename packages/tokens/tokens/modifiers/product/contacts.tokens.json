@@ -13,42 +13,22 @@
         }
       }
     },
-    "text": {
+    "content": {
       "brand": {
         "default": {
-          "$value": "{color.text.brand.contacts.default}"
+          "$value": "{color.content.brand.contacts.default}"
         },
         "hover": {
-          "$value": "{color.text.brand.contacts.hover}"
+          "$value": "{color.content.brand.contacts.hover}"
         },
         "pressed": {
-          "$value": "{color.text.brand.contacts.pressed}"
+          "$value": "{color.content.brand.contacts.pressed}"
         }
       },
       "on": {
         "brand": {
           "default": {
-            "$value": "{color.text.on.brand.contacts.default}"
-          }
-        }
-      }
-    },
-    "icon": {
-      "brand": {
-        "default": {
-          "$value": "{color.icon.brand.contacts.default}"
-        },
-        "hover": {
-          "$value": "{color.icon.brand.contacts.hover}"
-        },
-        "pressed": {
-          "$value": "{color.icon.brand.contacts.pressed}"
-        }
-      },
-      "on": {
-        "brand": {
-          "default": {
-            "$value": "{color.icon.on.brand.contacts.default}"
+            "$value": "{color.content.on.brand.contacts.default}"
           }
         }
       }

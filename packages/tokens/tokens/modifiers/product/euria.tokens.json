@@ -13,42 +13,22 @@
         }
       }
     },
-    "text": {
+    "content": {
       "brand": {
         "default": {
-          "$value": "{color.text.brand.euria.default}"
+          "$value": "{color.content.brand.euria.default}"
         },
         "hover": {
-          "$value": "{color.text.brand.euria.hover}"
+          "$value": "{color.content.brand.euria.hover}"
         },
         "pressed": {
-          "$value": "{color.text.brand.euria.pressed}"
+          "$value": "{color.content.brand.euria.pressed}"
         }
       },
       "on": {
         "brand": {
           "default": {
-            "$value": "{color.text.on.brand.euria.default}"
-          }
-        }
-      }
-    },
-    "icon": {
-      "brand": {
-        "default": {
-          "$value": "{color.icon.brand.euria.default}"
-        },
-        "hover": {
-          "$value": "{color.icon.brand.euria.hover}"
-        },
-        "pressed": {
-          "$value": "{color.icon.brand.euria.pressed}"
-        }
-      },
-      "on": {
-        "brand": {
-          "default": {
-            "$value": "{color.icon.on.brand.euria.default}"
+            "$value": "{color.content.on.brand.euria.default}"
           }
         }
       }
