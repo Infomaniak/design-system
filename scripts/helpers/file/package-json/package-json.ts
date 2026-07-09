@@ -22,6 +22,10 @@ export interface PackageJson {
   readonly devDependencies?: PackageJsonDependencies;
   readonly peerDependencies?: PackageJsonDependencies;
   readonly optionalDependencies?: PackageJsonDependencies;
+  // metadata
+  readonly sideEffects?: boolean | readonly string[];
+  readonly files?: readonly string[];
+  readonly customElements?: string;
 }
 
 export type PackageJsonScripts = Record<string, string>;

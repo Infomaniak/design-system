@@ -110,6 +110,24 @@ Tokens follow Design Tokens Community Group format (v3 tiers):
 - **t2-semantic/**: Contextual meanings (bg-primary)
 - **t3-component/**: Component-specific tokens
 
+### Component Documentation (CEM)
+
+All web components in `packages/components` must be documented with JSDoc annotations consumed by `@custom-elements-manifest/analyzer`:
+
+| Annotation                  | Usage                                               | Example                                            |
+| --------------------------- | --------------------------------------------------- | -------------------------------------------------- |
+| `@summary`                  | Short class-level description                       | `/** @summary Icon component */`                   |
+| `@element`                  | (Optional) Tag name if not using `@customElement`   | `/** @element esds-icon */`                        |
+| `@attr` / `@attribute`      | Document reflected attributes                       | On properties with `@property({ reflect: true })`  |
+| `@default`                  | Default value when not obvious from the initializer | `/** @default 'svg' */`                            |
+| `@internal`                 | Exclude member from public CEM                      | On private fields / methods                        |
+| `@fires` / `@event`         | Custom events dispatched                            | `/** @fires loaded - Fired when icon renders */`   |
+| `@slot`                     | Named/default slots usage                           | `/** @slot - Default slot */`                      |
+| `@csspart`                  | Shadow DOM parts                                    | `/** @csspart icon - The icon element */`          |
+| `@cssprop` / `@cssproperty` | CSS custom properties exposed                       | `/** @cssprop --icon-size - Controls icon size */` |
+
+The CEM is auto-generated during `yarn build` and verified in CI via `git diff --exit-code`. Public consumers (IDEs, Storybook) only see non-`@internal` members.
+
 ### PR Requirements
 
 - Branch naming: `feat/`, `fix/`, `docs/` prefixes

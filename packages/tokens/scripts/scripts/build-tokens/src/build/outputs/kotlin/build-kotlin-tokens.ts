@@ -427,15 +427,39 @@ function removePrefixFromKotlinVariableDeclaration(
 }
 
 function filterT1Tokens(token: GenericDesignTokensCollectionToken): boolean {
-  return token.files.some((path: string): boolean => {
-    return path.includes(T1_DIRECTORY_NAME);
-  });
+  return (
+    token.files.some((path: string): boolean => {
+      return path.includes(T1_DIRECTORY_NAME);
+    }) && !isExcludedToken(token)
+  );
 }
 
 function filterT2T3Tokens(token: GenericDesignTokensCollectionToken): boolean {
-  return token.files.some((path: string): boolean => {
-    return path.includes(T2_DIRECTORY_NAME) || path.includes(T3_DIRECTORY_NAME);
-  });
+  return (
+    token.files.some((path: string): boolean => {
+      return path.includes(T2_DIRECTORY_NAME) || path.includes(T3_DIRECTORY_NAME);
+    }) && !isExcludedToken(token)
+  );
+}
+
+function isExcludedToken(token: GenericDesignTokensCollectionToken): boolean {
+  const name: string = token.name.join('.');
+
+  return (
+    // TODO: Kotlin does not support more than 248 properties, thus, we skip the colors -> remove in the future
+    /^color\./.test(name) ||
+    // TODO: Kotlin does not requires some tokens, thus, we skip them -> remove in the future
+    /^breakpoint\./.test(name) ||
+    /^font\./.test(name) ||
+    /^text\./.test(name) ||
+    /^border\./.test(name) ||
+    /^border-width\./.test(name) ||
+    /^blur\./.test(name) ||
+    /^opacity\./.test(name) ||
+    /^ratio\./.test(name) ||
+    /^shadow\./.test(name) ||
+    /^typography\./.test(name)
+  );
 }
 
 /*--*/

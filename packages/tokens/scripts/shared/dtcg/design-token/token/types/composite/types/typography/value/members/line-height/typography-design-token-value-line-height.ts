@@ -3,4 +3,4 @@ import type { NumberTypographyDesignTokenValueLineHeight } from './types/number/
 
 export type TypographyDesignTokenValueLineHeight =
   | NumberTypographyDesignTokenValueLineHeight
-  | DimensionTypographyDesignTokenValueLineHeight /* NOTE: UNOFFICIAL */;
+  | DimensionTypographyDesignTokenValueLineHeight; /* NOTE: UNOFFICIAL */

@@ -4,28 +4,34 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "storybook dev -p 6006",
+    "dev": "yarn workspace @infomaniak-design-system/components analyze:cem --watch & storybook dev -p 6006",
     "build": "storybook build"
   },
   "dependencies": {
-    "@infomaniak-design-system/esds-icon": "workspace:^",
+    "@infomaniak-design-system/components": "workspace:^",
     "@infomaniak-design-system/tokens": "workspace:^",
     "markdown-to-jsx": "^9.8.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/plugin-proposal-decorators": "^7.29.7",
     "@chromatic-com/storybook": "^5.2.1",
     "@iconify/types": "^2.0.0",
-    "@storybook/addon-a11y": "^10.4.5",
-    "@storybook/addon-docs": "^10.4.5",
-    "@storybook/addon-onboarding": "^10.4.5",
-    "@storybook/addon-vitest": "^10.4.5",
-    "@storybook/react-vite": "^10.4.5",
-    "@types/node": "^25.9.3",
+    "@rolldown/plugin-babel": "^0.2.3",
+    "@storybook/addon-a11y": "^10.4.6",
+    "@storybook/addon-docs": "^10.4.6",
+    "@storybook/addon-onboarding": "^10.4.6",
+    "@storybook/addon-vitest": "^10.4.6",
+    "@storybook/react-vite": "^10.4.6",
+    "@storybook/web-components-vite": "^10.4.1",
+    "@types/babel__core": "^7",
+    "@types/node": "^25.9.4",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "storybook": "^10.4.5",
-    "vite": "^8.0.16"
+    "@wc-toolkit/storybook-helpers": "^10.3.0",
+    "storybook": "^10.4.6",
+    "vite": "^8.1.0"
   }
 }

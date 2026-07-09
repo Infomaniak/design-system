@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.19",
+    "version": "0.0.20",
     "author": {
       "name": "Infomaniak"
     },
@@ -10,18 +10,42 @@
       "title": "GPL-3.0-only",
       "spdx": "GPL-3.0-only"
     },
-    "total": 106
+    "total": 138
   },
-  "lastModified": 1782218356,
+  "lastModified": 1782833681,
   "icons": {
+    "arrow-down": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 5v14m-7-7 7 7 7-7\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "arrow-left": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m12 5-7 7 7 7m-7-7h14\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "arrow-right": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M5 12h14m-7 7 7-7-7-7\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "arrow-turn-up-right": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 7 5 5-5 5m5-5H8a4 4 0 00-4 4v2\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "arrow-up": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m19 12-7-7-7 7m7-7v14\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "arrow-up-right": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M17 17V7H7m10 0L7 17\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "arrows-up-down": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m13 16 4 4 4-4m-4 4V4m-6 4L7 4 3 8m4-4v16\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "bell": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M10.268 21a2 2 0 003.464 0m-10.47-5.674A1 1 0 004 17h16a1 1 0 00.74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 106 8c0 4.499-1.411 5.956-2.738 7.326\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "bell-slash": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M10.268 21a2 2 0 003.464 0M17 17H4a1 1 0 01-.74-1.673C4.59 13.956 6 12.499 6 8a6 6 0 01.258-1.742M2 2l20 20M8.668 3.01A6 6 0 0118 8c0 2.687.77 4.653 1.707 6.05\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "bold": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M6 12h8m-8 0v7a1 1 0 001 1h8a4 4 0 100-8h-1m-8 0V5a1 1 0 011-1h7a4 4 0 110 8\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "box-lid": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M4 8v11a2 2 0 002 2h12a2 2 0 002-2V8m-10 4h4M3 3h18a1 1 0 011 1v3a1 1 0 01-1 1H3a1 1 0 01-1-1V4a1 1 0 011-1\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "briefcase": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 12h.01M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m14 7a18.15 18.15 0 01-20 0m2-7h16a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
@@ -65,11 +89,17 @@
     "chevron-up": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m18 15-6-6-6 6\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "chevrons-up-down": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m7 15 5 5 5-5M7 9l5-5 5 5\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "circle-arrow-left": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m12 16-4-4 4-4m-4 4h8m6 0c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "circle-arrow-right": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m12 8 4 4-4 4m4-4H8m14 0c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "circle-arrows-anticlockwise": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M21 12a9 9 0 00-9-9 9.75 9.75 0 00-6.74 2.74L3 8m5 0H3V3m0 9a9 9 0 009 9 9.75 9.75 0 006.74-2.74L21 16m0 5v-5h-5\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "circle-check": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m7.59 12 2.94 2.94 5.88-5.88M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\" vector-effect=\"non-scaling-stroke\"/>"
@@ -85,6 +115,9 @@
     },
     "circle-info-filled": {
       "body": "<defs><mask id=\"svgID0\" fill=\"transparent\"><path fill=\"#fff\" d=\"M12.125 1.125c6.075 0 11 4.925 11 11s-4.925 11-11 11-11-4.925-11-11 4.925-11 11-11\"/><path stroke=\"#000\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 16v-4m0-4h.01\" vector-effect=\"non-scaling-stroke\"/></mask></defs><g mask=\"url(#svgID0)\"><path fill=\"currentColor\" d=\"M12.125 1.125c6.075 0 11 4.925 11 11s-4.925 11-11 11-11-4.925-11-11 4.925-11 11-11\"/></g>"
+    },
+    "circle-open-top-right": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M21 12a9 9 0 11-6.219-8.56\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "circle-question": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\" vector-effect=\"non-scaling-stroke\"/>"
@@ -104,8 +137,14 @@
     "columns-three": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M9 3v18m6-18v18M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "concentric-circles": {
+      "body": "<g fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\"><path d=\"M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10\" vector-effect=\"non-scaling-stroke\"/><path d=\"M12 18a6 6 0 100-12 6 6 0 000 12\" vector-effect=\"non-scaling-stroke\"/><path d=\"M12 14a2 2 0 100-4 2 2 0 000 4\" vector-effect=\"non-scaling-stroke\"/></g>"
+    },
     "cross": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M18 6 6 18M6 6l12 12\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "diamonds-stacked-vertical": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M2 12a1 1 0 00.58.91l8.6 3.91a2 2 0 001.65 0l8.58-3.9A1 1 0 0022 12M2 17a1 1 0 00.58.91l8.6 3.91a2 2 0 001.65 0l8.58-3.9A1 1 0 0022 17M12.83 2.18a2 2 0 00-1.66 0L2.6 6.08a1 1 0 000 1.83l8.58 3.91a2 2 0 001.66 0l8.58-3.9a1 1 0 000-1.83z\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "door-open": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M11 20H2m17 0-6.758 1.689a1 1 0 01-1.242-.97V4.562a2.004 2.004 0 011.585-1.956 2 2 0 01.9.016l4 1A2 2 0 0119 5.562zm0 0h3M11 4H8a2 2 0 00-2 2v14m8-8h.01\" vector-effect=\"non-scaling-stroke\"/>"
@@ -116,6 +155,9 @@
     "dots-nine": {
       "body": "<path fill=\"currentColor\" d=\"M5 17.125a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m-14-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m-14-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75\"/>"
     },
+    "dots-three-horizontal": {
+      "body": "<path fill=\"currentColor\" d=\"M5 10.125a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75\"/>"
+    },
     "dots-three-vertical": {
       "body": "<path fill=\"currentColor\" d=\"M12 17.125a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m0-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m0-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75\"/>"
     },
@@ -125,11 +167,20 @@
     "envelope-filled": {
       "body": "<g fill=\"currentColor\"><path d=\"m10.53 13.465.03.018a2.88 2.88 0 002.92-.018l9.388-5.98v10.569a2.8 2.8 0 01-2.8 2.8H3.928a2.8 2.8 0 01-2.801-2.8V7.48z\"/><path d=\"M20.068 3.146c1.374 0 2.514.99 2.752 2.294l-10.26 6.535a1.13 1.13 0 01-1.116-.003L1.176 5.438a2.8 2.8 0 012.752-2.292z\"/></g>"
     },
+    "file": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8m-6-6a2.4 2.4 0 011.704.706l3.588 3.588A2.4 2.4 0 0120 8m-6-6v5a1 1 0 001 1h5\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "file-text": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8m-6-6a2.4 2.4 0 011.704.706l3.588 3.588A2.4 2.4 0 0120 8m-6-6v5a1 1 0 001 1h5M10 9H8m8 4H8m8 4H8\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "flag": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M4 22v-6.472m0 0V4a1 1 0 01.4-.8A6 6 0 018 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0120 4v10a1 1 0 01-.4.8A6 6 0 0116 16c-3 0-5-2-8-2a6 6 0 00-4 1.528\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "folder": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M20 20a2 2 0 002-2V8a2 2 0 00-2-2h-7.9a2 2 0 01-1.69-.9L9.6 3.9A2 2 0 007.93 3H4a2 2 0 00-2 2v13a2 2 0 002 2z\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "frame-sun-mountain": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m21 15-3.086-3.086a2 2 0 00-2.828 0L6 21M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2m6 6a2 2 0 11-4 0 2 2 0 014 0\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "grid-three-two": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M15 3v18M3 12h18M9 3v18M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
@@ -149,8 +200,17 @@
     "headset": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M3 11h3a2 2 0 012 2v3a2 2 0 01-2 2H5a2 2 0 01-2-2zm0 0a9 9 0 1118 0m0 0v5m0-5h-3a2 2 0 00-2 2v3a2 2 0 002 2h1a2 2 0 002-2m0 0v2a4 4 0 01-4 4h-5\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "heart": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M2 9.5a5.5 5.5 0 019.591-3.676.56.56 0 00.818 0A5.49 5.49 0 0122 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 01-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "inbox": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M22 12h-6l-2 3h-4l-2-3H2m0 0 3.45-6.89A2 2 0 017.24 4h9.52a2 2 0 011.79 1.11L22 12v6a2 2 0 01-2 2H4a2 2 0 01-2-2z\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "italic": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M19 4h-9m4 16H5M15 4 9 20\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "label-cross": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m12 9 6 6m0-6-6 6M10 5a2 2 0 00-1.344.519l-6.328 5.74a1 1 0 000 1.481l6.328 5.741A2 2 0 0010 19h10a2 2 0 002-2V7a2 2 0 00-2-2z\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "link": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71\" vector-effect=\"non-scaling-stroke\"/>"
@@ -161,11 +221,20 @@
     "list": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M4 5h16M4 12h16M4 19h16\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "looped-square": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M15 9V6a3 3 0 113 3zm0 0v6m0-6H9m6 6v3a3 3 0 103-3zm0 0H9m0 0H6a3 3 0 103 3zm0 0V9m0 0V6a3 3 0 10-3 3z\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "magnifying-glass": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m21 21-4.34-4.34M19 11a8 8 0 11-16 0 8 8 0 0116 0\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "map-pin": {
       "body": "<g fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\"><path d=\"M12.601 21.799C14.461 20.193 20 14.993 20 10a8 8 0 00-16 0c0 4.993 5.539 10.193 7.399 11.799a1 1 0 001.202 0\" vector-effect=\"non-scaling-stroke\"/><path d=\"M12 13a3 3 0 100-6 3 3 0 000 6\" vector-effect=\"non-scaling-stroke\"/></g>"
+    },
+    "mic": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 19v3m0-3a7 7 0 007-7v-2m-7 9a7 7 0 01-7-7v-2m7-8a3 3 0 013 3v7a3 3 0 11-6 0V5a3 3 0 013-3\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "minus": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M5 12h14\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "overline-rectangle-underline": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M3 2h18M3 22h18M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
@@ -251,8 +320,20 @@
     "shield-user": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M6.376 18.91a6 6 0 0111.249.003M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 01-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 011-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 011.52 0C14.51 3.81 17 5 19 5a1 1 0 011 1zm-4-2a4 4 0 11-8 0 4 4 0 018 0\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "sidebar-left": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M9 3v18M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "sidebar-left-chevron-left": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M9 3v18m7-6-3-3 3-3M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "sidebar-left-chevron-right": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M9 3v18m5-12 3 3-3 3M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "slash": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M22 2 2 22\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "smartphone": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 18h.01M7 2h10a2 2 0 012 2v16a2 2 0 01-2 2H7a2 2 0 01-2-2V4a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "smartphone-tablet": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M5 4a2 2 0 012-2h12a2 2 0 012 2v16a2 2 0 01-2 2h-2.4M8 18h.01M5 8h6a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V10a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
@@ -281,17 +362,29 @@
     "squares-stacked-plus": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M15 12v6m-3-3h6M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2m-6 4h10a2 2 0 012 2v10a2 2 0 01-2 2H10a2 2 0 01-2-2V10a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "star": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M11.525 2.295a.53.53 0 01.95 0l2.31 4.679a2.12 2.12 0 001.595 1.16l5.166.756a.53.53 0 01.294.904l-3.736 3.638a2.12 2.12 0 00-.611 1.878l.882 5.14a.53.53 0 01-.771.56l-4.618-2.428a2.12 2.12 0 00-1.973 0L6.396 21.01a.53.53 0 01-.77-.56l.881-5.14a2.12 2.12 0 00-.611-1.878L2.16 9.795a.53.53 0 01.294-.906l5.165-.755a2.12 2.12 0 001.597-1.16z\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "sun": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41M16 12a4 4 0 11-8 0 4 4 0 018 0\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "trash": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M10 11v6m4-6v6m5-11v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "tray-arrow-down": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 15V3m5 7-5 5-5-5m14 5v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "tray-arrow-up": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 3v12M7 8l5-5 5 5m4 7v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "tree-palm": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M10 8H6L5 7 4 8H2c0-2.76 2.46-5 5.5-5S13 5.24 13 8c.5 2 3 8.5 1 14h-4c.83-2 1.5-4 1-6.5m2-8.36A5.82 5.82 0 0116.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25 3.53-3.53c-1.95-1.96-5.27-1.8-7.42.35\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "triangle-exclamation-mark": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 9v4m0 4h.01m9.72 1-8-14a2 2 0 00-3.48 0l-8 14A2 2 0 004 21h16a2 2 0 001.73-3\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "underline": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M6 4v6a6 6 0 1012 0V4M4 20h16\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "user": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M19 21v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2M16 7a4 4 0 11-8 0 4 4 0 018 0\" vector-effect=\"non-scaling-stroke\"/>"
@@ -329,15 +422,26 @@
     "video-camera": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m16 13 5.223 3.482a.5.5 0 00.777-.416V7.87a.5.5 0 00-.752-.432L16 10.5M4 6h10a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "waveform": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M2 10v3m4-7v11m4-14v18m4-13v7m4-10v13m4-8v3\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "wrench": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.106-3.105c.32-.322.863-.22.983.218a6.001 6.001 0 01-8.259 7.057l-7.91 7.91a2.121 2.121 0 11-2.999-3l7.91-7.91a6 6 0 017.057-8.259c.438.12.54.662.219.984z\" vector-effect=\"non-scaling-stroke\"/>"
     }
   },
   "categories": {
     "@all": [
+      "arrow-down",
       "arrow-left",
+      "arrow-right",
+      "arrow-turn-up-right",
+      "arrow-up",
+      "arrow-up-right",
+      "arrows-up-down",
       "bell",
       "bell-slash",
+      "bold",
+      "box-lid",
       "briefcase",
       "bubble-left-text",
       "bug",
@@ -352,40 +456,55 @@
       "chevron-left",
       "chevron-right",
       "chevron-up",
+      "chevrons-up-down",
       "circle-arrow-left",
       "circle-arrow-right",
+      "circle-arrows-anticlockwise",
       "circle-check",
       "circle-cross",
       "circle-cross-filled",
       "circle-info",
       "circle-info-filled",
+      "circle-open-top-right",
       "circle-question",
       "circular-arrows-clockwise",
       "clock",
       "cog",
       "columns-four",
       "columns-three",
+      "concentric-circles",
       "cross",
+      "diamonds-stacked-vertical",
       "door-open",
       "dots-list",
       "dots-nine",
+      "dots-three-horizontal",
       "dots-three-vertical",
       "envelope",
       "envelope-filled",
+      "file",
       "file-text",
       "flag",
+      "folder",
+      "frame-sun-mountain",
       "grid-three-two",
       "handshake",
       "handshake-heart",
       "hard-drive",
       "hard-drive-filled",
       "headset",
+      "heart",
       "inbox",
+      "italic",
+      "label-cross",
       "link",
       "link-horizontal",
       "list",
+      "looped-square",
       "magnifying-glass",
       "map-pin",
+      "mic",
+      "minus",
       "overline-rectangle-underline",
       "plus",
       "product-calendar",
@@ -414,7 +533,11 @@
       "scissors",
       "share",
       "shield-user",
+      "sidebar-left",
+      "sidebar-left-chevron-left",
       "sidebar-left-chevron-right",
+      "slash",
+      "smartphone",
       "smartphone-tablet",
       "sparkles",
       "square-arrow-down-left",
@@ -424,10 +547,14 @@
       "squares-stacked",
       "squares-stacked-check",
       "squares-stacked-plus",
+      "star",
       "sun",
       "trash",
+      "tray-arrow-down",
       "tray-arrow-up",
       "tree-palm",
+      "triangle-exclamation-mark",
+      "underline",
       "user",
       "user-cog",
       "user-cross",
@@ -440,6 +567,7 @@
       "user-star",
       "users-stacked",
       "video-camera",
+      "waveform",
       "wrench"
     ],
     "@filled": [
@@ -476,6 +604,7 @@
       "user-cog"
     ],
     "#actions": [
+      "dots-three-horizontal",
       "dots-three-vertical",
       "rectangle-dots-three"
     ],
@@ -505,6 +634,9 @@
     "#admin": [
       "user-cog"
     ],
+    "#advance": [
+      "arrow-right"
+    ],
     "#agency": [
       "briefcase"
     ],
@@ -521,11 +653,18 @@
     "#ai": [
       "sparkles"
     ],
+    "#aim": [
+      "concentric-circles"
+    ],
     "#alarm": [
       "bell"
     ],
     "#alert": [
-      "bell"
+      "bell",
+      "triangle-exclamation-mark"
+    ],
+    "#amplitude": [
+      "waveform"
     ],
     "#anchor": [
       "link",
@@ -537,12 +676,18 @@
     "#announcement": [
       "bell"
     ],
+    "#app": [
+      "smartphone"
+    ],
     "#append": [
       "plus",
       "squares-stacked-plus"
     ],
     "#appgrid": [
       "dots-nine"
+    ],
+    "#apple": [
+      "looped-square"
     ],
     "#applist": [
       "dots-nine"
@@ -565,6 +710,14 @@
       "dots-nine",
       "squares-four"
     ],
+    "#arc": [
+      "circle-open-top-right"
+    ],
+    "#archive": [
+      "box-lid",
+      "folder",
+      "tray-arrow-down"
+    ],
     "#arrange": [
       "columns-four",
       "columns-three",
@@ -584,10 +737,17 @@
       "tray-arrow-up"
     ],
     "#arrows": [
+      "chevrons-up-down",
       "circular-arrows-clockwise"
     ],
     "#article": [
       "file-text"
+    ],
+    "#ascend": [
+      "arrow-up"
+    ],
+    "#aside": [
+      "sidebar-left"
     ],
     "#ask": [
       "circle-question"
@@ -601,11 +761,19 @@
     "#attach": [
       "link"
     ],
+    "#attachment": [
+      "file"
+    ],
+    "#attention": [
+      "triangle-exclamation-mark"
+    ],
     "#audience": [
       "users-stacked"
     ],
     "#audio": [
-      "headset"
+      "headset",
+      "mic",
+      "waveform"
     ],
     "#authentication": [
       "user-key"
@@ -613,10 +781,19 @@
     "#avatar": [
       "user"
     ],
+    "#award": [
+      "star"
+    ],
+    "#b": [
+      "bold"
+    ],
     "#back": [
       "arrow-left",
       "chevron-left",
       "circle-arrow-left"
+    ],
+    "#backspace": [
+      "label-cross"
     ],
     "#backup": [
       "hard-drive",
@@ -639,7 +816,14 @@
     "#beach": [
       "tree-palm"
     ],
+    "#bent-arrow": [
+      "arrow-turn-up-right"
+    ],
+    "#bidirectional": [
+      "arrows-up-down"
+    ],
     "#bin": [
+      "box-lid",
       "trash"
     ],
     "#bind": [
@@ -653,6 +837,9 @@
     ],
     "#blade": [
       "scissors"
+    ],
+    "#blank": [
+      "file"
     ],
     "#block": [
       "user-cross"
@@ -668,13 +855,18 @@
       "calendar-check"
     ],
     "#bookmark": [
-      "flag"
+      "flag",
+      "star"
     ],
     "#border": [
       "overline-rectangle-underline",
       "rectangle-underline-dashed"
     ],
+    "#bottom": [
+      "arrow-down"
+    ],
     "#box": [
+      "box-lid",
       "overline-rectangle-underline"
     ],
     "#branch": [
@@ -692,6 +884,9 @@
     "#brightness": [
       "sun"
     ],
+    "#broadcast": [
+      "mic"
+    ],
     "#browse": [
       "magnifying-glass"
     ],
@@ -707,8 +902,14 @@
     "#bulletpoints": [
       "list"
     ],
+    "#bullseye": [
+      "concentric-circles"
+    ],
     "#business": [
       "briefcase"
+    ],
+    "#busy": [
+      "circle-open-top-right"
     ],
     "#cake": [
       "cake-candles"
@@ -728,7 +929,8 @@
     "#cancel": [
       "circle-cross",
       "circle-cross-filled",
-      "cross"
+      "cross",
+      "label-cross"
     ],
     "#candles": [
       "cake-candles"
@@ -749,8 +951,17 @@
     "#categories": [
       "squares-four"
     ],
+    "#category": [
+      "folder"
+    ],
+    "#caution": [
+      "triangle-exclamation-mark"
+    ],
     "#celebration": [
       "cake-candles"
+    ],
+    "#cell": [
+      "smartphone"
     ],
     "#cells": [
       "grid-three-two"
@@ -775,6 +986,7 @@
       "circle-check"
     ],
     "#chevron": [
+      "arrow-right",
       "chevron-down",
       "chevron-left",
       "chevron-right",
@@ -784,15 +996,18 @@
       "circle-arrow-left",
       "circle-arrow-right",
       "circle-info",
-      "circle-info-filled"
+      "circle-info-filled",
+      "circle-open-top-right"
     ],
     "#circular": [
+      "circle-arrows-anticlockwise",
       "circular-arrows-clockwise"
     ],
     "#clear": [
       "circle-cross",
       "circle-cross-filled",
       "cross",
+      "label-cross",
       "sun",
       "trash"
     ],
@@ -810,7 +1025,17 @@
       "chevron-up",
       "circle-cross",
       "circle-cross-filled",
-      "cross"
+      "cross",
+      "label-cross"
+    ],
+    "#close-sidebar": [
+      "sidebar-left-chevron-left"
+    ],
+    "#clover": [
+      "looped-square"
+    ],
+    "#cmd": [
+      "looped-square"
     ],
     "#coconut": [
       "tree-palm"
@@ -823,8 +1048,12 @@
       "handshake"
     ],
     "#collapse": [
+      "arrow-down",
       "chevron-down",
       "chevron-up",
+      "chevrons-up-down",
+      "minus",
+      "sidebar-left-chevron-left",
       "sidebar-left-chevron-right"
     ],
     "#columns": [
@@ -832,7 +1061,11 @@
       "columns-three",
       "grid-three-two",
       "rectangle-squares-two",
-      "rectangle-two"
+      "rectangle-two",
+      "sidebar-left"
+    ],
+    "#command": [
+      "looped-square"
     ],
     "#comment": [
       "bubble-left-text"
@@ -886,6 +1119,7 @@
       "users-stacked"
     ],
     "#container": [
+      "box-lid",
       "overline-rectangle-underline"
     ],
     "#content": [
@@ -895,6 +1129,7 @@
       "dots-three-vertical"
     ],
     "#continue": [
+      "arrow-right",
       "circle-arrow-right"
     ],
     "#contract": [
@@ -914,11 +1149,17 @@
       "squares-stacked-check",
       "squares-stacked-plus"
     ],
+    "#corner": [
+      "arrow-turn-up-right"
+    ],
     "#country": [
       "flag"
     ],
     "#crash": [
       "bug"
+    ],
+    "#crate": [
+      "box-lid"
     ],
     "#create": [
       "plus",
@@ -945,15 +1186,29 @@
     "#crowd": [
       "users-stacked"
     ],
+    "#cursive": [
+      "italic"
+    ],
     "#customer-service": [
       "headset"
     ],
     "#cut": [
-      "scissors"
+      "scissors",
+      "slash"
+    ],
+    "#cycle": [
+      "circle-arrows-anticlockwise"
+    ],
+    "#danger": [
+      "triangle-exclamation-mark"
+    ],
+    "#dash": [
+      "minus"
     ],
     "#dashboard": [
       "dots-nine",
       "grid-three-two",
+      "sidebar-left",
       "squares-four"
     ],
     "#dashed": [
@@ -994,7 +1249,14 @@
       "bug"
     ],
     "#decoration": [
-      "rectangle-underline-dashed"
+      "rectangle-underline-dashed",
+      "underline"
+    ],
+    "#decrease": [
+      "arrow-down"
+    ],
+    "#decrement": [
+      "minus"
     ],
     "#defect": [
       "bug"
@@ -1002,6 +1264,8 @@
     "#delete": [
       "circle-cross",
       "cross",
+      "label-cross",
+      "minus",
       "trash"
     ],
     "#deleteuser": [
@@ -1012,6 +1276,12 @@
       "circle-cross",
       "circle-cross-filled",
       "user-cross"
+    ],
+    "#depth": [
+      "diamonds-stacked-vertical"
+    ],
+    "#descend": [
+      "arrow-down"
     ],
     "#dessert": [
       "cake-candles"
@@ -1028,21 +1298,32 @@
     ],
     "#device": [
       "hard-drive",
-      "hard-drive-filled"
+      "hard-drive-filled",
+      "smartphone"
     ],
     "#devices": [
       "smartphone-tablet"
+    ],
+    "#diagonal": [
+      "arrow-up-right",
+      "slash"
     ],
     "#ding": [
       "bell"
     ],
     "#direction": [
+      "arrow-down",
       "arrow-left",
+      "arrow-right",
+      "arrow-up",
       "chevron-left",
       "chevron-right",
       "circle-arrow-left",
       "circle-arrow-right",
       "square-arrow-down-left"
+    ],
+    "#directory": [
+      "folder"
     ],
     "#disable": [
       "bell-slash"
@@ -1073,16 +1354,29 @@
     ],
     "#divide": [
       "rectangle-squares-two",
-      "rectangle-two"
+      "rectangle-two",
+      "slash"
+    ],
+    "#divider": [
+      "minus"
+    ],
+    "#division": [
+      "slash"
     ],
     "#do-not-disturb": [
       "bell-slash"
     ],
     "#doc": [
+      "file",
       "file-text"
     ],
     "#document": [
-      "file-text"
+      "file",
+      "file-text",
+      "folder"
+    ],
+    "#donate": [
+      "heart"
     ],
     "#done": [
       "calendar-check",
@@ -1103,15 +1397,25 @@
       "chevron-down",
       "square-arrow-down-left"
     ],
+    "#download": [
+      "arrow-down",
+      "tray-arrow-down"
+    ],
     "#drawer": [
+      "sidebar-left",
+      "sidebar-left-chevron-left",
       "sidebar-left-chevron-right"
     ],
     "#drive": [
       "hard-drive",
       "hard-drive-filled"
     ],
+    "#drop": [
+      "arrow-down"
+    ],
     "#dropdown": [
       "chevron-down",
+      "chevrons-up-down",
       "dots-three-vertical"
     ],
     "#duplicate": [
@@ -1122,8 +1426,16 @@
     "#duration": [
       "clock"
     ],
+    "#east": [
+      "arrow-right"
+    ],
     "#edit": [
       "scissors"
+    ],
+    "#editor": [
+      "bold",
+      "italic",
+      "underline"
     ],
     "#editprofile": [
       "user-pen"
@@ -1134,10 +1446,14 @@
     "#effects": [
       "sparkles"
     ],
+    "#elevate": [
+      "arrow-up"
+    ],
     "#eliminate": [
       "trash"
     ],
     "#ellipsis": [
+      "dots-three-horizontal",
       "dots-three-vertical",
       "rectangle-dots-three"
     ],
@@ -1145,6 +1461,14 @@
       "envelope",
       "envelope-filled",
       "inbox"
+    ],
+    "#emotion": [
+      "heart"
+    ],
+    "#emphasis": [
+      "bold",
+      "italic",
+      "underline"
     ],
     "#enter": [
       "door-open"
@@ -1159,13 +1483,21 @@
       "envelope",
       "envelope-filled"
     ],
+    "#equalizer": [
+      "waveform"
+    ],
     "#erase": [
+      "label-cross",
       "trash"
     ],
     "#error": [
       "bug",
       "circle-cross",
-      "circle-cross-filled"
+      "circle-cross-filled",
+      "triangle-exclamation-mark"
+    ],
+    "#etc": [
+      "dots-three-horizontal"
     ],
     "#event": [
       "cake-candles",
@@ -1176,6 +1508,12 @@
     "#events": [
       "calendar-dots"
     ],
+    "#exchange": [
+      "arrows-up-down"
+    ],
+    "#exclamation": [
+      "triangle-exclamation-mark"
+    ],
     "#exclude": [
       "user-cross",
       "user-minus"
@@ -1185,8 +1523,12 @@
       "door-open"
     ],
     "#expand": [
+      "arrow-up",
+      "arrow-up-right",
       "chevron-down",
       "chevron-right",
+      "chevrons-up-down",
+      "dots-three-horizontal",
       "plus",
       "rectangle-dots-three",
       "sidebar-left-chevron-right"
@@ -1200,6 +1542,7 @@
       "tray-arrow-up"
     ],
     "#external": [
+      "arrow-up-right",
       "link-horizontal",
       "square-arrow-out-up-right"
     ],
@@ -1209,16 +1552,24 @@
     "#faceid": [
       "square-corners-face"
     ],
+    "#fall": [
+      "arrow-down"
+    ],
     "#faq": [
       "circle-info",
       "circle-info-filled",
       "circle-question"
+    ],
+    "#favorite": [
+      "heart",
+      "star"
     ],
     "#favoriteuser": [
       "user-star"
     ],
     "#featured": [
       "sparkles",
+      "star",
       "user-star"
     ],
     "#feedback": [
@@ -1229,9 +1580,14 @@
       "cake-candles"
     ],
     "#file": [
-      "file-text"
+      "file-text",
+      "folder"
+    ],
+    "#file-box": [
+      "box-lid"
     ],
     "#files": [
+      "folder",
       "squares-stacked"
     ],
     "#filled": [
@@ -1259,16 +1615,28 @@
     "#flag": [
       "flag"
     ],
+    "#focus": [
+      "concentric-circles"
+    ],
     "#fold": [
-      "chevron-up"
+      "chevron-up",
+      "sidebar-left-chevron-left"
     ],
     "#format": [
-      "rectangle-underline-dashed"
+      "bold",
+      "italic",
+      "rectangle-underline-dashed",
+      "underline"
     ],
     "#forward": [
+      "arrow-right",
+      "arrow-turn-up-right",
       "chevron-right",
       "circle-arrow-right",
       "share"
+    ],
+    "#forward-slash": [
+      "slash"
     ],
     "#four": [
       "columns-four",
@@ -1284,7 +1652,14 @@
     "#frames": [
       "rectangle-two"
     ],
+    "#frequency": [
+      "waveform"
+    ],
+    "#gadget": [
+      "smartphone"
+    ],
     "#gallery": [
+      "frame-sun-mountain",
       "grid-three-two",
       "squares-four"
     ],
@@ -1295,6 +1670,9 @@
     "#geo": [
       "map-pin"
     ],
+    "#get": [
+      "tray-arrow-down"
+    ],
     "#glitch": [
       "bug"
     ],
@@ -1303,6 +1681,9 @@
     ],
     "#go": [
       "chevron-left"
+    ],
+    "#goal": [
+      "concentric-circles"
     ],
     "#gps": [
       "map-pin"
@@ -1320,11 +1701,15 @@
       "squares-four"
     ],
     "#group": [
+      "diamonds-stacked-vertical",
       "squares-stacked",
       "users-stacked"
     ],
     "#guard": [
       "shield-user"
+    ],
+    "#handset": [
+      "smartphone"
     ],
     "#handshake": [
       "handshake",
@@ -1344,8 +1729,17 @@
     "#headset": [
       "headset"
     ],
+    "#health": [
+      "heart"
+    ],
     "#heart": [
       "handshake-heart"
+    ],
+    "#heavy": [
+      "bold"
+    ],
+    "#height": [
+      "arrows-up-down"
     ],
     "#help": [
       "circle-info",
@@ -1357,10 +1751,12 @@
       "headset"
     ],
     "#hide": [
-      "chevron-up"
+      "chevron-up",
+      "sidebar-left-chevron-left"
     ],
     "#highlight": [
       "rectangle-underline-dashed",
+      "star",
       "user-star"
     ],
     "#hint": [
@@ -1373,6 +1769,7 @@
       "tree-palm"
     ],
     "#horizontal": [
+      "minus",
       "rows-four",
       "rows-three",
       "rows-two"
@@ -1391,6 +1788,12 @@
       "link-horizontal",
       "square-arrow-out-up-right"
     ],
+    "#hyphen": [
+      "minus"
+    ],
+    "#i": [
+      "italic"
+    ],
     "#idcard": [
       "card-user"
     ],
@@ -1401,19 +1804,29 @@
     "#ignore": [
       "bell-slash"
     ],
+    "#image": [
+      "frame-sun-mountain"
+    ],
+    "#import": [
+      "tray-arrow-down"
+    ],
     "#important": [
+      "star",
       "user-star"
     ],
     "#inbox": [
       "bell",
+      "box-lid",
       "envelope",
       "envelope-filled",
-      "inbox"
+      "inbox",
+      "tray-arrow-down"
     ],
     "#include": [
       "plus"
     ],
     "#increase": [
+      "arrow-up",
       "plus"
     ],
     "#individual": [
@@ -1428,12 +1841,18 @@
       "circle-info",
       "circle-info-filled"
     ],
+    "#input": [
+      "mic"
+    ],
     "#insect": [
       "bug"
     ],
     "#insert": [
       "plus",
       "squares-stacked-plus"
+    ],
+    "#install": [
+      "tray-arrow-down"
     ],
     "#investigate": [
       "magnifying-glass"
@@ -1458,20 +1877,35 @@
       "briefcase"
     ],
     "#kebab": [
+      "dots-three-horizontal",
       "dots-three-vertical",
       "rectangle-dots-three"
     ],
     "#key": [
+      "label-cross",
+      "looped-square",
       "user-key"
     ],
+    "#keyboard": [
+      "label-cross",
+      "looped-square"
+    ],
+    "#landscape": [
+      "frame-sun-mountain"
+    ],
     "#launch": [
+      "arrow-up-right",
       "square-arrow-out-up-right"
     ],
     "#launcher": [
       "dots-nine"
     ],
     "#layers": [
+      "diamonds-stacked-vertical",
       "squares-stacked"
+    ],
+    "#layers-three": [
+      "diamonds-stacked-vertical"
     ],
     "#layout": [
       "columns-four",
@@ -1483,6 +1917,8 @@
       "rows-four",
       "rows-three",
       "rows-two",
+      "sidebar-left",
+      "sidebar-left-chevron-left",
       "sidebar-left-chevron-right",
       "squares-four"
     ],
@@ -1493,6 +1929,7 @@
       "arrow-left",
       "chevron-left",
       "circle-arrow-left",
+      "sidebar-left-chevron-left",
       "square-arrow-down-left"
     ],
     "#less": [
@@ -1502,14 +1939,27 @@
       "envelope",
       "envelope-filled"
     ],
+    "#levels": [
+      "diamonds-stacked-vertical"
+    ],
+    "#lid": [
+      "box-lid"
+    ],
     "#light": [
       "sun"
     ],
     "#lightmode": [
       "sun"
     ],
+    "#like": [
+      "heart",
+      "star"
+    ],
     "#line": [
-      "rectangle-underline-dashed"
+      "minus",
+      "rectangle-underline-dashed",
+      "slash",
+      "underline"
     ],
     "#lines": [
       "list",
@@ -1519,6 +1969,7 @@
       "rows-two"
     ],
     "#link": [
+      "arrow-up-right",
       "link",
       "link-horizontal",
       "share",
@@ -1538,10 +1989,17 @@
       "bubble-left-text",
       "headset"
     ],
+    "#loader": [
+      "circle-open-top-right"
+    ],
+    "#loading": [
+      "circle-open-top-right"
+    ],
     "#localize": [
       "map-pin"
     ],
     "#location": [
+      "concentric-circles",
       "map-pin"
     ],
     "#lock": [
@@ -1563,8 +2021,14 @@
     "#loop": [
       "circular-arrows-clockwise"
     ],
+    "#love": [
+      "heart"
+    ],
     "#loyalty": [
       "handshake-heart"
+    ],
+    "#mac": [
+      "looped-square"
     ],
     "#magic": [
       "sparkles"
@@ -1597,6 +2061,7 @@
       "map-pin"
     ],
     "#media": [
+      "frame-sun-mountain",
       "video-camera"
     ],
     "#meeting": [
@@ -1616,9 +2081,12 @@
     "#menu": [
       "dots-list",
       "dots-nine",
+      "dots-three-horizontal",
       "dots-three-vertical",
       "list",
       "rectangle-dots-three",
+      "sidebar-left",
+      "sidebar-left-chevron-left",
       "sidebar-left-chevron-right",
       "squares-four"
     ],
@@ -1634,6 +2102,12 @@
     "#messaging": [
       "bubble-left-text"
     ],
+    "#meta": [
+      "looped-square"
+    ],
+    "#microphone": [
+      "mic"
+    ],
     "#milestone": [
       "flag"
     ],
@@ -1644,6 +2118,7 @@
       "user-minus"
     ],
     "#mobile": [
+      "smartphone",
       "smartphone-tablet"
     ],
     "#mobile-app": [
@@ -1651,6 +2126,9 @@
     ],
     "#mode": [
       "sun"
+    ],
+    "#modifier": [
+      "looped-square"
     ],
     "#modify": [
       "user-pen"
@@ -1665,6 +2143,7 @@
     "#more": [
       "chevron-down",
       "chevron-right",
+      "dots-three-horizontal",
       "dots-three-vertical",
       "plus",
       "rectangle-dots-three"
@@ -1676,6 +2155,7 @@
       "dots-nine"
     ],
     "#move": [
+      "arrows-up-down",
       "circle-arrow-right",
       "square-arrow-down-left"
     ],
@@ -1693,6 +2173,9 @@
     "#multiply": [
       "cross"
     ],
+    "#music": [
+      "waveform"
+    ],
     "#mute": [
       "bell-slash"
     ],
@@ -1700,6 +2183,8 @@
       "flag"
     ],
     "#navigate": [
+      "arrow-right",
+      "arrow-up-right",
       "chevron-left",
       "chevron-right",
       "map-pin",
@@ -1709,6 +2194,8 @@
       "arrow-left",
       "circle-arrow-left",
       "circle-arrow-right",
+      "sidebar-left",
+      "sidebar-left-chevron-left",
       "sidebar-left-chevron-right"
     ],
     "#network": [
@@ -1719,6 +2206,9 @@
       "plus",
       "sparkles",
       "squares-stacked-plus"
+    ],
+    "#new-file": [
+      "file"
     ],
     "#newsletter": [
       "envelope",
@@ -1731,6 +2221,8 @@
       "user-plus"
     ],
     "#next": [
+      "arrow-right",
+      "arrow-turn-up-right",
       "chevron-right",
       "circle-arrow-right"
     ],
@@ -1740,13 +2232,20 @@
     "#no-alert": [
       "bell-slash"
     ],
+    "#north": [
+      "arrow-up"
+    ],
+    "#northeast": [
+      "arrow-up-right"
+    ],
     "#note": [
       "bubble-left-text",
       "file-text"
     ],
     "#notice": [
       "circle-info",
-      "circle-info-filled"
+      "circle-info-filled",
+      "triangle-exclamation-mark"
     ],
     "#notification": [
       "bell",
@@ -1758,6 +2257,13 @@
     ],
     "#notifications": [
       "inbox"
+    ],
+    "#objective": [
+      "concentric-circles"
+    ],
+    "#oblique": [
+      "italic",
+      "slash"
     ],
     "#offboard": [
       "user-minus"
@@ -1772,6 +2278,7 @@
       "calendar-number-one"
     ],
     "#open": [
+      "arrow-up-right",
       "chevron-down",
       "door-open",
       "sidebar-left-chevron-right",
@@ -1779,6 +2286,7 @@
     ],
     "#options": [
       "cog",
+      "dots-three-horizontal",
       "dots-three-vertical",
       "rectangle-dots-three"
     ],
@@ -1787,37 +2295,50 @@
     ],
     "#organize": [
       "columns-four",
-      "columns-three"
+      "columns-three",
+      "folder"
     ],
     "#out": [
       "tray-arrow-up"
     ],
     "#outbound": [
+      "arrow-up-right",
       "square-arrow-out-up-right"
     ],
     "#outbox": [
       "tray-arrow-up"
     ],
     "#overflow": [
+      "dots-three-horizontal",
       "dots-three-vertical",
       "rectangle-dots-three"
+    ],
+    "#overlap": [
+      "diamonds-stacked-vertical"
     ],
     "#overview": [
       "squares-four"
     ],
+    "#package": [
+      "box-lid"
+    ],
     "#page": [
+      "file",
       "file-text"
     ],
     "#palm": [
       "tree-palm"
     ],
     "#panel": [
+      "sidebar-left",
+      "sidebar-left-chevron-left",
       "sidebar-left-chevron-right"
     ],
     "#panels": [
       "rectangle-two"
     ],
     "#paper": [
+      "file",
       "file-text"
     ],
     "#partnership": [
@@ -1859,7 +2380,17 @@
       "user-star"
     ],
     "#phone": [
+      "smartphone",
       "smartphone-tablet"
+    ],
+    "#photo": [
+      "frame-sun-mountain"
+    ],
+    "#photograph": [
+      "frame-sun-mountain"
+    ],
+    "#picture": [
+      "frame-sun-mountain"
     ],
     "#pin": [
       "map-pin"
@@ -1870,6 +2401,12 @@
     "#place": [
       "map-pin"
     ],
+    "#placeholder": [
+      "frame-sun-mountain"
+    ],
+    "#planes": [
+      "diamonds-stacked-vertical"
+    ],
     "#planner": [
       "calendar",
       "calendar-dots"
@@ -1878,6 +2415,9 @@
       "plus",
       "squares-stacked-plus",
       "user-plus"
+    ],
+    "#podcast": [
+      "mic"
     ],
     "#points": [
       "dots-list"
@@ -1890,6 +2430,9 @@
     ],
     "#positive": [
       "plus"
+    ],
+    "#precision": [
+      "concentric-circles"
     ],
     "#preferences": [
       "cog",
@@ -1915,11 +2458,16 @@
       "user-lock"
     ],
     "#problem": [
-      "bug"
+      "bug",
+      "triangle-exclamation-mark"
     ],
     "#proceed": [
+      "arrow-right",
       "chevron-right",
       "circle-arrow-right"
+    ],
+    "#processing": [
+      "circle-open-top-right"
     ],
     "#professional": [
       "briefcase"
@@ -1932,11 +2480,17 @@
       "user-minus",
       "user-pen"
     ],
+    "#progress": [
+      "circle-open-top-right"
+    ],
     "#protection": [
       "shield-user"
     ],
     "#publish": [
       "share"
+    ],
+    "#pull": [
+      "tray-arrow-down"
     ],
     "#query": [
       "circle-question",
@@ -1948,6 +2502,19 @@
     "#quiet": [
       "bell-slash"
     ],
+    "#radar": [
+      "concentric-circles"
+    ],
+    "#rating": [
+      "heart",
+      "star"
+    ],
+    "#ratio": [
+      "slash"
+    ],
+    "#receive": [
+      "tray-arrow-down"
+    ],
     "#received": [
       "inbox"
     ],
@@ -1955,10 +2522,13 @@
       "square-corners-face"
     ],
     "#record": [
+      "file",
+      "mic",
       "video-camera"
     ],
     "#recording": [
-      "video-camera"
+      "video-camera",
+      "waveform"
     ],
     "#rectangle": [
       "overline-rectangle-underline",
@@ -1969,14 +2539,20 @@
       "trash"
     ],
     "#redirect": [
+      "arrow-turn-up-right",
       "square-arrow-down-left",
       "square-arrow-out-up-right"
+    ],
+    "#redo": [
+      "arrow-turn-up-right"
     ],
     "#reference": [
       "link",
       "link-horizontal"
     ],
     "#refresh": [
+      "circle-arrows-anticlockwise",
+      "circle-open-top-right",
       "circular-arrows-clockwise"
     ],
     "#register": [
@@ -1990,6 +2566,7 @@
       "handshake-heart"
     ],
     "#reload": [
+      "circle-arrows-anticlockwise",
       "circular-arrows-clockwise"
     ],
     "#reminder": [
@@ -2001,6 +2578,8 @@
       "circle-cross",
       "circle-cross-filled",
       "cross",
+      "label-cross",
+      "minus",
       "scissors",
       "square-arrow-down-left",
       "trash"
@@ -2012,16 +2591,22 @@
     "#renew": [
       "circular-arrows-clockwise"
     ],
+    "#reorder": [
+      "arrows-up-down",
+      "chevrons-up-down"
+    ],
     "#repair": [
       "wrench"
     ],
     "#repeat": [
+      "circle-arrows-anticlockwise",
       "circular-arrows-clockwise"
     ],
     "#replicate": [
       "squares-stacked"
     ],
     "#reply": [
+      "arrow-turn-up-right",
       "bubble-left-text"
     ],
     "#report": [
@@ -2029,16 +2614,26 @@
       "file-text",
       "flag"
     ],
+    "#repository": [
+      "folder"
+    ],
+    "#resize": [
+      "arrows-up-down"
+    ],
     "#resort": [
       "tree-palm"
     ],
     "#responsive": [
       "smartphone-tablet"
     ],
+    "#restore": [
+      "circle-arrows-anticlockwise"
+    ],
     "#restricted": [
       "user-lock"
     ],
     "#retry": [
+      "circle-arrows-anticlockwise",
       "circular-arrows-clockwise"
     ],
     "#return": [
@@ -2066,8 +2661,24 @@
     "#ring": [
       "bell"
     ],
+    "#rings": [
+      "concentric-circles"
+    ],
+    "#rise": [
+      "arrow-up"
+    ],
+    "#risk": [
+      "triangle-exclamation-mark"
+    ],
+    "#romance": [
+      "heart"
+    ],
     "#rotate": [
+      "circle-arrows-anticlockwise",
       "circular-arrows-clockwise"
+    ],
+    "#route": [
+      "arrow-turn-up-right"
     ],
     "#rows": [
       "list",
@@ -2078,8 +2689,17 @@
     "#safety": [
       "shield-user"
     ],
+    "#save": [
+      "folder",
+      "heart",
+      "star",
+      "tray-arrow-down"
+    ],
     "#scan": [
       "square-corners-face"
+    ],
+    "#scenery": [
+      "frame-sun-mountain"
     ],
     "#schedule": [
       "calendar",
@@ -2092,6 +2712,15 @@
     ],
     "#scissors": [
       "scissors"
+    ],
+    "#screen": [
+      "smartphone"
+    ],
+    "#scroll-down": [
+      "arrow-down"
+    ],
+    "#scroll-up": [
+      "arrow-up"
     ],
     "#search": [
       "magnifying-glass",
@@ -2115,11 +2744,18 @@
     "#seek": [
       "magnifying-glass"
     ],
+    "#selector": [
+      "chevrons-up-down"
+    ],
     "#send": [
+      "arrow-right",
       "envelope",
       "envelope-filled",
       "share",
       "tray-arrow-up"
+    ],
+    "#separator": [
+      "slash"
     ],
     "#server": [
       "hard-drive",
@@ -2130,6 +2766,7 @@
     ],
     "#settings": [
       "cog",
+      "dots-three-horizontal",
       "dots-three-vertical",
       "rectangle-dots-three",
       "user-cog",
@@ -2143,6 +2780,7 @@
       "overline-rectangle-underline"
     ],
     "#share": [
+      "arrow-turn-up-right",
       "link-horizontal",
       "share",
       "square-arrow-out-up-right",
@@ -2151,11 +2789,20 @@
     "#shear": [
       "scissors"
     ],
+    "#sheet": [
+      "file"
+    ],
+    "#sheets": [
+      "diamonds-stacked-vertical"
+    ],
     "#shield": [
       "shield-user"
     ],
     "#shine": [
       "sparkles"
+    ],
+    "#shortcut": [
+      "looped-square"
     ],
     "#show": [
       "chevron-down",
@@ -2163,6 +2810,9 @@
     ],
     "#sidebar": [
       "sidebar-left-chevron-right"
+    ],
+    "#signal": [
+      "waveform"
     ],
     "#signin": [
       "door-open"
@@ -2175,6 +2825,9 @@
     ],
     "#silent": [
       "bell-slash"
+    ],
+    "#slant": [
+      "italic"
     ],
     "#smart": [
       "sparkles"
@@ -2191,21 +2844,40 @@
     "#social": [
       "share"
     ],
+    "#sort": [
+      "arrows-up-down",
+      "chevrons-up-down"
+    ],
     "#sound": [
-      "bell"
+      "bell",
+      "mic",
+      "waveform"
+    ],
+    "#soundwave": [
+      "waveform"
+    ],
+    "#south": [
+      "arrow-down"
     ],
     "#sparkles": [
       "sparkles"
     ],
+    "#speak": [
+      "mic"
+    ],
     "#special": [
       "sparkles"
+    ],
+    "#spinner": [
+      "circle-open-top-right"
     ],
     "#split": [
       "columns-four",
       "columns-three",
       "rectangle-squares-two",
       "rectangle-two",
-      "rows-two"
+      "rows-two",
+      "sidebar-left"
     ],
     "#square": [
       "square-corners-face"
@@ -2219,6 +2891,7 @@
       "hard-drive-filled"
     ],
     "#stack": [
+      "diamonds-stacked-vertical",
       "rows-three",
       "rows-two",
       "squares-stacked",
@@ -2232,25 +2905,43 @@
       "user-star"
     ],
     "#storage": [
+      "box-lid",
+      "folder",
       "hard-drive",
       "hard-drive-filled"
     ],
+    "#store": [
+      "tray-arrow-down"
+    ],
     "#stream": [
       "video-camera"
+    ],
+    "#stroke": [
+      "slash"
+    ],
+    "#strong": [
+      "bold"
     ],
     "#structure": [
       "columns-four",
       "columns-three",
       "overline-rectangle-underline",
-      "rows-four"
+      "rows-four",
+      "sidebar-left"
     ],
     "#style": [
-      "rectangle-underline-dashed"
+      "bold",
+      "italic",
+      "rectangle-underline-dashed",
+      "underline"
     ],
     "#subscribe": [
       "bell",
       "envelope",
       "envelope-filled"
+    ],
+    "#subtract": [
+      "minus"
     ],
     "#success": [
       "check",
@@ -2274,7 +2965,12 @@
     "#suppress": [
       "bell-slash"
     ],
+    "#swap": [
+      "arrows-up-down",
+      "chevrons-up-down"
+    ],
     "#sync": [
+      "circle-arrows-anticlockwise",
       "circular-arrows-clockwise"
     ],
     "#table": [
@@ -2285,7 +2981,11 @@
       "smartphone-tablet"
     ],
     "#talk": [
-      "bubble-left-text"
+      "bubble-left-text",
+      "mic"
+    ],
+    "#target": [
+      "concentric-circles"
     ],
     "#tasks": [
       "list"
@@ -2293,9 +2993,16 @@
     "#team": [
       "users-stacked"
     ],
+    "#telephone": [
+      "smartphone"
+    ],
     "#text": [
+      "bold",
+      "file",
       "file-text",
-      "rectangle-underline-dashed"
+      "italic",
+      "rectangle-underline-dashed",
+      "underline"
     ],
     "#theme": [
       "sun"
@@ -2310,6 +3017,9 @@
     "#threecolumns": [
       "columns-three"
     ],
+    "#thumbnail": [
+      "frame-sun-mountain"
+    ],
     "#thumbnails": [
       "grid-three-two",
       "squares-four"
@@ -2317,6 +3027,9 @@
     "#tick": [
       "check",
       "circle-check"
+    ],
+    "#tiers": [
+      "diamonds-stacked-vertical"
     ],
     "#tiles": [
       "grid-three-two",
@@ -2335,6 +3048,7 @@
     "#toggle": [
       "chevron-down",
       "chevron-up",
+      "chevrons-up-down",
       "sidebar-left-chevron-right"
     ],
     "#tool": [
@@ -2349,12 +3063,17 @@
       "circle-question"
     ],
     "#top": [
+      "arrow-up",
       "chevron-up"
     ],
     "#topuser": [
       "user-star"
     ],
+    "#touchscreen": [
+      "smartphone"
+    ],
     "#transfer": [
+      "arrows-up-down",
       "tray-arrow-up"
     ],
     "#trash": [
@@ -2366,6 +3085,9 @@
     ],
     "#tree": [
       "tree-palm"
+    ],
+    "#trend-up": [
+      "arrow-up-right"
     ],
     "#trim": [
       "scissors"
@@ -2380,16 +3102,31 @@
       "handshake",
       "handshake-heart"
     ],
+    "#turn": [
+      "arrow-turn-up-right"
+    ],
     "#two": [
       "rectangle-squares-two",
       "rectangle-two",
       "rows-two"
     ],
+    "#typography": [
+      "bold",
+      "italic",
+      "underline"
+    ],
+    "#u": [
+      "underline"
+    ],
     "#underline": [
       "rectangle-underline-dashed"
     ],
+    "#underscore": [
+      "underline"
+    ],
     "#undo": [
-      "arrow-left"
+      "arrow-left",
+      "label-cross"
     ],
     "#unknown": [
       "circle-question"
@@ -2409,12 +3146,14 @@
     ],
     "#update": [
       "bell",
+      "circle-arrows-anticlockwise",
       "circular-arrows-clockwise"
     ],
     "#updateaccount": [
       "user-pen"
     ],
     "#upload": [
+      "arrow-up",
       "tray-arrow-up"
     ],
     "#url": [
@@ -2462,6 +3201,10 @@
       "circle-check",
       "squares-stacked-check"
     ],
+    "#vertical": [
+      "arrows-up-down",
+      "chevrons-up-down"
+    ],
     "#video": [
       "video-camera"
     ],
@@ -2473,6 +3216,16 @@
     ],
     "#vip": [
       "user-star"
+    ],
+    "#voice": [
+      "mic",
+      "waveform"
+    ],
+    "#wait": [
+      "circle-open-top-right"
+    ],
+    "#warning": [
+      "triangle-exclamation-mark"
     ],
     "#watch": [
       "clock"
@@ -2486,11 +3239,18 @@
     "#webcam": [
       "video-camera"
     ],
+    "#weight": [
+      "bold"
+    ],
     "#wireframe": [
       "overline-rectangle-underline"
     ],
     "#wish": [
       "cake-candles"
+    ],
+    "#wishlist": [
+      "heart",
+      "star"
     ],
     "#work": [
       "briefcase"

@@ -10,18 +10,30 @@ export interface TransformPackageJsonPathsConfig {
 }
 
 interface PackageJsonWithPaths {
-  name: string;
-  version: string;
-  main?: string;
-  module?: string;
-  types?: string;
-  exports?: unknown;
+  readonly name: string;
+  readonly version: string;
+  readonly type?: string;
+  readonly description?: string;
+  readonly keywords?: readonly string[];
+  readonly author?: string;
+  readonly license?: string;
+  readonly repository?: unknown;
+  readonly main?: string;
+  readonly module?: string;
+  readonly types?: string;
+  readonly exports?: unknown;
+  readonly sideEffects?: boolean | readonly string[];
+  readonly files?: readonly string[] | string[];
+  readonly dependencies?: unknown;
+  readonly peerDependencies?: unknown;
+  readonly optionalDependencies?: unknown;
+  readonly customElements?: string;
 }
 
 /**
  * Transforms package.json paths by stripping specified prefixes.
  * Only transforms the first occurrence of any matching pattern (conservative).
- * Only supports main, module, types, and exports fields.
+ * Only supports main, module, types, exports, and files fields.
  *
  * @example
  * ```typescript
@@ -57,6 +69,31 @@ export function transformPackageJsonPaths<P extends PackageJsonWithPaths>(
       const absolutePattern = pattern.startsWith('/') ? pattern : `/${pattern}`;
       if (path.startsWith(absolutePattern)) {
         return path.replace(absolutePattern, './');
+      }
+    }
+
+    // Fallback for bare directory names (e.g. "dist" or "./dist")
+    // that appear in files[] arrays without a trailing slash.
+    const normalizedPath = path.endsWith('/') ? path.slice(0, -1) : path;
+    for (const pattern of patterns) {
+      const bare = pattern.endsWith('/') ? pattern.slice(0, -1) : pattern;
+
+      if (normalizedPath === bare) {
+        return './';
+      }
+
+      const unprefixed = bare.startsWith('./')
+        ? bare.slice(2)
+        : bare.startsWith('/')
+          ? bare.slice(1)
+          : bare;
+      if (normalizedPath === unprefixed) {
+        return './';
+      }
+
+      const withDotPrefix = `./${unprefixed}`;
+      if (normalizedPath === withDotPrefix) {
+        return './';
       }
     }
 
@@ -184,5 +221,6 @@ export function transformPackageJsonPaths<P extends PackageJsonWithPaths>(
     module: packageJson.module ? transformPath(packageJson.module) : undefined,
     types: packageJson.types ? transformPath(packageJson.types) : undefined,
     exports: packageJson.exports ? transformExports(packageJson.exports) : undefined,
+    files: packageJson.files?.map((file: string) => transformPath(file)),
   } as P;
 }
