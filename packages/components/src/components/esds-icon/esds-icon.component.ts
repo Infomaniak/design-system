@@ -79,6 +79,9 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
     this,
     ICONIFY_API,
     (): IconifyApi => new IconifyApi(),
+    {
+      sharedDefault: true,
+    },
   );
 
   constructor() {

@@ -6,7 +6,7 @@ export type InjectionContextEntries = Iterable<InjectedEntry<unknown>>;
 
 export type InjectedKeyLike = symbol | InjectableValue<unknown>;
 
-function injectedKeyLikeToKey(input: InjectedKeyLike): symbol {
+export function injectedKeyLikeToKey(input: InjectedKeyLike): symbol {
   return input instanceof InjectableValue ? input.key : input;
 }
 
