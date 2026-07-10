@@ -1,5 +1,6 @@
 import { cp, readdir, rm } from 'node:fs/promises';
 import { join } from 'node:path';
+import type { GitChanges } from '../../../../../../../scripts/helpers/git/git-changes.ts';
 import {
   updateGitRepositoryOnNewBranch,
   type UpdateGitRepositoryOnNewBranchUpdateFunctionContext,
@@ -18,6 +19,7 @@ export interface CreateIosPublishGithubBranchOptions {
   readonly repositoryName: string;
   readonly packageDirectory: string;
   readonly version: string;
+  readonly branchName: string;
 }
 
 const PROTECTED_FOUNDATION_ENTRIES: readonly string[] = ['SwiftUI'];
@@ -49,18 +51,15 @@ async function removeDirectoryContentsExcept(
 
 /**
  * Creates a new branch with the updated iOS token files and pushes it to the remote repository.
- *
- * @returns The name of the created branch.
  */
 export async function createIosPublishGithubBranch({
   logger,
   repositoryName,
   packageDirectory,
   version,
-}: CreateIosPublishGithubBranchOptions): Promise<string> {
-  const branchName: string = `esds/${version}`;
-
-  await updateGitRepositoryOnNewBranch({
+  branchName,
+}: CreateIosPublishGithubBranchOptions): Promise<GitChanges> {
+  return updateGitRepositoryOnNewBranch({
     repository: `git@${repositoryName}:${INFOMANIAK_GITHUB_ORGANIZATION}/${repositoryName}.git`,
     branchName,
     update: async ({
@@ -88,7 +87,6 @@ export async function createIosPublishGithubBranch({
       return `chore: Update to ${version}`;
     },
     logger,
+    allowEmpty: 'yes-skip-push',
   });
-
-  return branchName;
 }
