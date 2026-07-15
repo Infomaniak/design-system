@@ -7,6 +7,7 @@ import {
   InjectionContext,
 } from '../../../../injection-context/injection-context.ts';
 import { onConnected } from '../../../component/on-connected.ts';
+import { supportsSymbolsAsWeakKey } from '../../../misc/polyfill/supports-symbols-as-weak-key.ts';
 import type { Signal } from '../../signal/signal.ts';
 
 export interface HostInjectOptions {
@@ -63,7 +64,9 @@ export function hostInject<GValue>(
 
 /* INTERNAL */
 
-const SHARED_DEFAULT_VALUES_MAP = new WeakMap<symbol, unknown>();
+const SHARED_DEFAULT_VALUES_MAP = supportsSymbolsAsWeakKey()
+  ? new WeakMap<symbol, unknown>()
+  : new Map<symbol, unknown>();
 
 function generateSharedDefaultFunction<GValue>(
   key: InjectedKeyLike,
