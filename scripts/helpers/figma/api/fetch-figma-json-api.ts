@@ -1,3 +1,5 @@
+import { dedent } from '../../misc/string/dedent/dedent.ts';
+
 export interface FetchFigmaJsonApiOptions extends RequestInit {
   readonly path: string;
   readonly searchParam?: URLSearchParams;
@@ -30,7 +32,11 @@ export async function fetchFigmaJsonApi<GResult>({
   });
 
   if (!response.ok) {
-    throw new Error(`Network error: ${response.status} - ${response.statusText}`);
+    throw new Error(dedent`
+      Network error: ${String(response.status)} - ${response.statusText}
+      
+      ${await response.text()}
+    `);
   }
 
   return (await response.json()) as GResult;

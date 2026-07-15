@@ -1,3 +1,4 @@
+import { removeUndefinedProperties } from '../../../misc/object/remove-undefined-properties.ts';
 import {
   fetchFigmaJsonApi,
   type FetchFigmaJsonApiForConsumerOptions,
@@ -6,6 +7,9 @@ import { type FigmaFile } from './types/figma-file.ts';
 
 export interface GetFigmaFileOptions extends FetchFigmaJsonApiForConsumerOptions {
   readonly file_key: string;
+  readonly depth?: number;
+  readonly geometry?: 'paths';
+  readonly branch_data?: boolean;
 }
 
 /**
@@ -17,11 +21,21 @@ export interface GetFigmaFileOptions extends FetchFigmaJsonApiForConsumerOptions
  */
 export async function getFigmaFile({
   file_key,
+  depth,
+  geometry,
+  branch_data,
   ...options
 }: GetFigmaFileOptions): Promise<FigmaFile> {
   const data: FigmaFile | number = await fetchFigmaJsonApi<FigmaFile | number>({
     ...options,
     path: `/v1/files/${file_key}`,
+    searchParam: new URLSearchParams(
+      removeUndefinedProperties({
+        depth: depth?.toString(),
+        geometry,
+        branch_data: branch_data ? 'true' : undefined,
+      }) as Record<string, string>,
+    ),
   });
 
   if (typeof data === 'number') {
