@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>storybook - Storybook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    
+    <style>
+      @font-face {
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('./sb-common-assets/nunito-sans-regular.woff2') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Nunito Sans';
+        font-style: italic;
+        font-weight: 400;
+        font-display: swap;
+        src: url('./sb-common-assets/nunito-sans-italic.woff2') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('./sb-common-assets/nunito-sans-bold.woff2') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Nunito Sans';
+        font-style: italic;
+        font-weight: 700;
+        font-display: swap;
+        src: url('./sb-common-assets/nunito-sans-bold-italic.woff2') format('woff2');
+      }
+    </style>
+
+    <link href="./sb-manager/runtime.js" rel="modulepreload" />
+
+    
+    <link href="./sb-addons/storybook-core-server-presets-0/common-manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/chromatic-com-storybook-1/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/vitest-2/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/a11y-3/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/docs-4/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/onboarding-5/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/storybook-6/manager-bundle.js" rel="modulepreload" />
+      <style>
+  .github-sidebar-link svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+</style>
+<script>
+  (function () {
+    const GITHUB_HREF = 'https://github.com/Infomaniak/design-system';
+    const TIMEOUT_MS = 2000;
+    const startTime = Date.now();
+
+    function inject() {
+      if (document.querySelector('.github-sidebar-link')) return true;
+
+      const menu = document.getElementById('storybook-explorer-menu');
+      if (!menu) return false;
+
+      const sourceLink = menu.querySelector('nav a');
+      if (!sourceLink) return false;
+
+      const link = document.createElement('a');
+      link.className = sourceLink.className;
+      link.classList.add('github-sidebar-link');
+      link.href = GITHUB_HREF;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.innerHTML =
+        '<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="display:block;flex-shrink:0"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub';
+
+      menu.parentNode.insertBefore(link, menu);
+      return true;
+    }
+
+    const timer = setInterval(() => {
+      if (inject() || Date.now() - startTime > TIMEOUT_MS) {
+        clearInterval(timer);
+      }
+    }, 100);
+  })();
+</script>
+
+<script>window.__CHROMATIC_STORYBOOK_ID__ = "4e711506e5032697ffa9564e713b89efa7cf0f6d3b9d609df95208fb889de47c";</script> 
+
+    <style>
+      #storybook-root[hidden] {
+        display: none !important;
+      }
+    </style>
+
+    
+  </head>
+  <body>
+    <div id="root"></div>
+
+    
+    <script>
+      
+        
+          window['FEATURES'] = {
+  "actions": true,
+  "argTypeTargetsV7": true,
+  "backgrounds": true,
+  "changeDetection": true,
+  "componentsManifest": false,
+  "controls": true,
+  "disallowImplicitActionsInRenderV8": true,
+  "highlight": true,
+  "interactions": true,
+  "legacyDecoratorFileOrder": false,
+  "measure": true,
+  "outline": true,
+  "sidebarOnboardingChecklist": true,
+  "viewport": true
+};
+        
+      
+        
+          window['REFS'] = {};
+        
+      
+        
+          window['LOGLEVEL'] = "info";
+        
+      
+        
+          window['DOCS_OPTIONS'] = {
+  "defaultName": "Docs"
+};
+        
+      
+        
+          window['CONFIG_TYPE'] = "PRODUCTION";
+        
+      
+        
+      
+        
+      
+        
+          window['TAGS_OPTIONS'] = {};
+        
+      
+        
+          window['STORYBOOK_BUILDER'] = "vite";
+        
+      
+        
+          window['STORYBOOK_FRAMEWORK'] = "web-components-vite";
+        
+      
+        
+          window['STORYBOOK_RENDERER'] = "web-components";
+        
+      
+        
+      
+    </script>
+    
+
+    <script type="module">
+      import './sb-manager/globals-runtime.js';
+
+      
+        import './sb-addons/storybook-core-server-presets-0/common-manager-bundle.js';
+      
+        import './sb-addons/chromatic-com-storybook-1/manager-bundle.js';
+      
+        import './sb-addons/vitest-2/manager-bundle.js';
+      
+        import './sb-addons/a11y-3/manager-bundle.js';
+      
+        import './sb-addons/docs-4/manager-bundle.js';
+      
+        import './sb-addons/onboarding-5/manager-bundle.js';
+      
+        import './sb-addons/storybook-6/manager-bundle.js';
+      
+
+      import './sb-manager/runtime.js';
+    </script>
+  </body>
+</html>
