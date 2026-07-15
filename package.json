@@ -16,8 +16,8 @@
     "format:check": "prettier --check --ignore-unknown --config .prettierrc \"./**/*.{js,jsx,ts,tsx,html,css,scss,json,md,mdx}\"",
     "format:fix": "prettier --write --ignore-unknown --config .prettierrc \"./**/*.{js,jsx,ts,tsx,html,css,scss,json,md,mdx}\"",
     "lint": "yarn lint:fix",
-    "lint:check": "yarn eslint",
-    "lint:fix": "yarn eslint --fix",
+    "lint:check": "NODE_OPTIONS='--require ./hotfixes/eslint-typescript.cjs' yarn eslint",
+    "lint:fix": "NODE_OPTIONS='--require ./hotfixes/eslint-typescript.cjs' yarn eslint --fix",
     "check": "yarn check:types && yarn format:check && yarn lint:check",
     "check:types": "tsc -p tsconfig.json --noEmit",
     "=== TEST ===": "",
@@ -62,7 +62,7 @@
       "prettier --write --ignore-unknown --config .prettierrc"
     ],
     "./**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
+      "NODE_OPTIONS='--require ./hotfixes/eslint-typescript.cjs' eslint --fix"
     ]
   },
   "devDependencies": {
@@ -98,6 +98,7 @@
     "storybook": "^10.5.0",
     "typescript": "^7.0.2",
     "typescript-eslint": "^8.64.0",
+    "typescript6": "npm:typescript@6.0.3",
     "vitest": "^4.1.10"
   },
   "packageManager": "yarn@4.17.1"
