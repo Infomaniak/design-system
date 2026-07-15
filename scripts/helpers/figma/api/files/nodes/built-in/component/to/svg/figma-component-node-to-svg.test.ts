@@ -1,8 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { figmaComponentNodeToSvg } from './figma-component-node-to-svg.ts';
 
-// const __dirname: string = dirname(fileURLToPath(import.meta.url));
-
 describe('figmaComponentNodeToSvg', () => {
   describe('with vectorNetwork', () => {
     test('bell', () => {

@@ -9,6 +9,13 @@ import { applyFigmaTransformToSvgContent } from '../../../../../types/transform/
 import { figmaVectorNetworkToFigmaPath } from '../../../../../types/vector-network/to/figma-path/figma-vector-network-to-figma-path.ts';
 import type { FigmaNodeWithGeometry } from '../../figma-node-with-geometry.ts';
 
+/**
+ * Converts a Figma node with geometric properties into an SVG content string.
+ *
+ * @param {FigmaNodeWithGeometry} node - The FigmaNodeWithGeometry node to be converted.
+ * @returns {string} The SVG content string representing the Figma node's geometry.
+ * @throws {Error} If the provided Figma node has invalid or unsupported geometry.
+ */
 export function figmaNodeWithGeometryToSvgContent({
   vectorNetwork,
   fills = [],

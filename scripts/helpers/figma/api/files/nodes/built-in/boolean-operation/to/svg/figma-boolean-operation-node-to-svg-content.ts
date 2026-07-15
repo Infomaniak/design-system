@@ -4,6 +4,12 @@ import { applyFigmaTransformToSvgContent } from '../../../../../types/transform/
 import { genericFigmaNodeToSvgContent } from '../../../../base/to/svg/generic-figma-node-to-svg-content.ts';
 import type { FigmaBooleanOperationNode } from '../../figma-boolean-operation-node.ts';
 
+/**
+ * Converts a Figma boolean operation node into its corresponding SVG content as a string.
+ *
+ * @param {FigmaBooleanOperationNode} node - The FigmaBooleanOperationNode to be converted.
+ * @return The SVG content as a string representing the given Figma boolean operation node.
+ */
 export function figmaBooleanOperationNodeToSvgContent(node: FigmaBooleanOperationNode): string {
   switch (node.booleanOperation) {
     case 'SUBTRACT':

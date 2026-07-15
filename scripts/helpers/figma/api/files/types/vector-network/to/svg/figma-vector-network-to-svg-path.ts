@@ -5,6 +5,12 @@ interface ChainInfo {
   readonly direction: 'forward' | 'reverse';
 }
 
+/**
+ * Converts a Figma vector network into an SVG path string.
+ *
+ * @param {FigmaVectorNetwork} network - The input Figma vector network.
+ * @return {string} A string representing the SVG path data for the vector network.
+ */
 export function figmaVectorNetworkToSvgPath({
   vertices,
   segments,
