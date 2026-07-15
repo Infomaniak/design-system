@@ -1,8 +1,6 @@
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
-import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { DimensionDesignTokensCollectionToken } from '../../../../../token/types/base/dimension/dimension-design-tokens-collection-token.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
-import { dimensionDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/base/dimension/value/dimension-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
 
@@ -47,21 +45,9 @@ export function radiusDesignTokensCollectionTokenToMarkdown(
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
 
-  // Show the display value only for T1 (direct value - no curly ref)
-  let displayValue: string = '';
-  if (!isCurlyReference(token.value)) {
-    // Token has a direct value - resolve it to show the actual value
-    displayValue = /* HTML */ `<div
-      style="
-      margin-top: 8px;
-      font-family: monospace;
-      font-size: 12px;
-      color: #6b7280;
-    "
-    >
-      ${dimensionDesignTokensCollectionTokenValueToCssValue(token.value)}
-    </div>`;
-  }
+  // Display the resolved CSS value dynamically using data-preview-value
+  // Works for both T1 (direct) and T2 (reference) tokens
+  const displayValue = `<div data-preview-value="${cssVariable}"></div>`;
   const { boxSize = 100 } = options;
 
   // Create the radius preview HTML using CSS variable directly
