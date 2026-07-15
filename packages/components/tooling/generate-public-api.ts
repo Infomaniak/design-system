@@ -3,10 +3,6 @@ import path from 'node:path';
 import { getPublicApiSourceFiles, getSourceDir } from './public-api-scan.ts';
 
 async function main(): Promise<void> {
-  // if (!(await validatePublicApi())) {
-  //   process.exit(1);
-  // }
-
   const absoluteSrcDir = getSourceDir();
   const outputFile = path.join(absoluteSrcDir, 'public-api.ts');
 

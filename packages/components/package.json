@@ -24,8 +24,7 @@
     "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-components/publish-components.script.ts",
     "=== GENERATE ===": "",
     "generate": "plop",
-    "generate:public-api": "yarn generate public-api",
-    "validate:public-api": "node tooling/validate-public-api.ts"
+    "generate:public-api": "yarn generate public-api"
   },
   "dependencies": {
     "@lit-labs/signals": "^0.3.0",
