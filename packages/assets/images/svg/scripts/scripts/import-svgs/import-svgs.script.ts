@@ -45,7 +45,6 @@ await runScript('import-svgs', async (logger: Logger): Promise<void> => {
   const skip: boolean = await logger.asyncTask(
     'check-import-validity',
     async (): Promise<boolean> => {
-      return false; // TODO
       const { version: currentVersion } = packageJson;
 
       const compareResult: number = compare(currentVersion, importVersion);
@@ -103,8 +102,6 @@ await runScript('import-svgs', async (logger: Logger): Promise<void> => {
     version: importVersion,
     logger,
   });
-
-  return; // TODO
 
   if (!hasNewAssets) {
     throw new Error('No new assets have been imported from Figma.');

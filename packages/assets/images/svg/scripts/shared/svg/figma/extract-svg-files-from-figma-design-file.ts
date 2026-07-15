@@ -56,8 +56,8 @@ export function extractSvgFilesFromFigmaDesignFile({
       },
     );
 
-    // TODO: DEBUG
-    await writeJsonFileSafe(join(outputDirectory, 'figma-file.json'), figmaFile);
+    // NOTE: DEBUG
+    // await writeJsonFileSafe(join(outputDirectory, 'figma-file.json'), figmaFile);
 
     await logger.asyncTask('extract-component-svgs', async (logger: Logger): Promise<void> => {
       interface SVGToLoad {
