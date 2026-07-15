@@ -4,49 +4,49 @@
     "none": {
       "$value": "{blur.0}",
       "$extensions": {
-        "scopes": ["EFFECT_FLOAT"]
+        "scopes": []
       }
     },
     "xs": {
       "$value": "{blur.4}",
       "$extensions": {
-        "scopes": ["EFFECT_FLOAT"]
+        "scopes": []
       }
     },
     "sm": {
       "$value": "{blur.8}",
       "$extensions": {
-        "scopes": ["EFFECT_FLOAT"]
+        "scopes": []
       }
     },
     "md": {
       "$value": "{blur.12}",
       "$extensions": {
-        "scopes": ["EFFECT_FLOAT"]
+        "scopes": []
       }
     },
     "lg": {
       "$value": "{blur.16}",
       "$extensions": {
-        "scopes": ["EFFECT_FLOAT"]
+        "scopes": []
       }
     },
     "xl": {
       "$value": "{blur.24}",
       "$extensions": {
-        "scopes": ["EFFECT_FLOAT"]
+        "scopes": []
       }
     },
     "2xl": {
       "$value": "{blur.40}",
       "$extensions": {
-        "scopes": ["EFFECT_FLOAT"]
+        "scopes": []
       }
     },
     "3xl": {
       "$value": "{blur.64}",
       "$extensions": {
-        "scopes": ["EFFECT_FLOAT"]
+        "scopes": []
       }
     }
   }

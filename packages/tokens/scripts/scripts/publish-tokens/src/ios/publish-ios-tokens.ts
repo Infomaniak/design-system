@@ -24,7 +24,7 @@ export async function publishIosTokens({
   prerelease,
   logger,
 }: PublishIosTokensOptions): Promise<void> {
-  return logger.asyncTask('ios', async (): Promise<void> => {
+  return logger.asyncTask('ios', async (logger: Logger): Promise<void> => {
     const { version }: PackageJson = await readPackageJsonFile(join(rootDirectory, 'package.json'));
 
     const publishVersion: string = generatePackageJsonBuildVersion({
@@ -33,14 +33,19 @@ export async function publishIosTokens({
       prerelease,
     });
 
-    const publishBranchName: string = await createIosPublishGithubBranch({
-      logger,
-      repositoryName: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
-      packageDirectory: join(outputDirectory, 'ios'),
-      version: publishVersion,
-    });
+    const publishBranchName: string = `esds/${publishVersion}`;
 
-    if (mode !== 'dev') {
+    if (
+      (
+        await createIosPublishGithubBranch({
+          logger,
+          repositoryName: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
+          packageDirectory: join(outputDirectory, 'ios/swift'),
+          version: publishVersion,
+          branchName: publishBranchName,
+        })
+      ).length > 0
+    ) {
       await createGithubPullRequest({
         owner: INFOMANIAK_GITHUB_ORGANIZATION,
         repository: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
@@ -48,8 +53,10 @@ export async function publishIosTokens({
         title: `chore: Update to ${publishVersion}`,
         body: `Update to ${publishVersion}`,
         head: publishBranchName,
-        base: /*mode === 'rc' ? 'develop' : */ 'main', // TODO add support to `develop` branch when the repo will be ready
+        base: 'main',
       });
+    } else {
+      logger.info('SKIP (non-blocking): No changes to publish');
     }
   });
 }

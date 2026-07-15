@@ -2,12 +2,12 @@ import { join } from 'node:path';
 import process from 'node:process';
 import type { BuildConfig } from '../../../helpers/build/build-config/build-config.ts';
 import { ENV_BUILD_CONFIG } from '../../../helpers/build/build-config/env/get-env-build-config.ts';
-import { ENV_IGNORE_ENV_FILE } from '../../../helpers/env/env-file/get-env-ignore-env-file.ts';
 import type { PackageJsonDependencies } from '../../../helpers/file/package-json/package-json-dependencies/package-json-dependencies.ts';
-import { postKchatWebhookMessage } from '../../../helpers/kchat/api/post-kchat-webhook-message.ts';
-import { getEnvKchatWebhookId } from '../../../helpers/kchat/env/get-env-kchat-webhook-id.ts';
 import type { Logger } from '../../../helpers/log/logger.ts';
 import { execCommandInherit } from '../../../helpers/misc/exec-command.ts';
+import { ENV_SHOULD_NOTIFY } from '../../../helpers/misc/run-script/env/get-env-should-notify.ts';
+import type { RunScriptNotification } from '../../../helpers/misc/run-script/notification/run-script-notification.ts';
+import { ScriptFailedError } from '../../../helpers/misc/run-script/notification/script-failed-error.ts';
 import { dedent } from '../../../helpers/misc/string/dedent/dedent.ts';
 import { generatePackageJsonBuildVersion } from '../../../helpers/npm/generate-package-json-build-version/generate-package-json-build-version.ts';
 import { isNpmPackagePublished } from '../../../helpers/npm/is-npm-version-published/is-npm-package-published.ts';
@@ -34,9 +34,15 @@ export async function ciPublish({
   branchName,
   headSha,
   mode,
-}: CiPublishOptions): Promise<void> {
+}: CiPublishOptions): Promise<RunScriptNotification | void> {
   const packagesDirectory: string = join(rootDirectory, 'packages');
-  const shouldNotify: boolean = !dryRun && mode !== 'dev';
+
+  const runScriptNotification: RunScriptNotification = {
+    notificationTitle: `(${mode}) -> ${branchName}`,
+    notificationMessage: dedent`
+      - 🔗 ${jobUrl}
+    `,
+  };
 
   try {
     const publishablePackages: readonly PackageJsonWithPath[] = await logger.asyncTask(
@@ -94,7 +100,7 @@ export async function ciPublish({
           shell: true,
           env: {
             ...process.env,
-            [ENV_IGNORE_ENV_FILE]: JSON.stringify(true),
+            [ENV_SHOULD_NOTIFY]: 'false',
             ...env,
           },
         });
@@ -114,34 +120,12 @@ export async function ciPublish({
 
     // TODO update PR comment with dev version
 
-    if (shouldNotify) {
-      await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
-        await postKchatWebhookMessage({
-          webhookId: getEnvKchatWebhookId(),
-          text: dedent`
-            #### ✅ publish job succeed (${mode}) - ${branchName}
-
-              - 🔗 ${jobUrl}
-          `,
-        });
-      });
-    }
+    return runScriptNotification;
   } catch (error: unknown) {
-    if (shouldNotify) {
-      await logger.asyncTask('send-kchat-notification', async (): Promise<void> => {
-        await postKchatWebhookMessage({
-          webhookId: getEnvKchatWebhookId(),
-          text: dedent`
-              #### ❌ publish job failed (${mode}) - ${branchName}
-
-              - 🔗 ${jobUrl}
-              - 💬 ${Error.isError(error) ? error.message : String(error)}
-            `,
-        });
-      });
-    }
-
-    throw error;
+    throw new ScriptFailedError({
+      ...runScriptNotification,
+      cause: error,
+    });
   }
 }
 

@@ -23,7 +23,7 @@
             }
           },
           "selected": {
-            "$value": "{color.gray.200}",
+            "$value": "{color.gray.100}",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
@@ -49,7 +49,7 @@
             }
           },
           "selected": {
-            "$value": "{color.gray.400}",
+            "$value": "{color.gray.300}",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
@@ -75,7 +75,7 @@
             }
           },
           "selected": {
-            "$value": "{color.gray.200}",
+            "$value": "{color.gray.100}",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
@@ -101,7 +101,7 @@
             }
           },
           "selected": {
-            "$value": "{color.gray.400}",
+            "$value": "{color.gray.300}",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
@@ -112,19 +112,19 @@
         "error": {
           "dim1": {
             "default": {
-              "$value": "{color.red.500}",
+              "$value": "{color.red.400}",
               "$extensions": {
                 "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "hover": {
-              "$value": "{color.red.600}",
+              "$value": "{color.red.500}",
               "$extensions": {
                 "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "pressed": {
-              "$value": "{color.red.700}",
+              "$value": "{color.red.600}",
               "$extensions": {
                 "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
@@ -440,21 +440,21 @@
         "default": {
           "$value": "{color.blue.500}",
           "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+            "scopes": ["ALL_FILLS"],
             "figmaName": ["color", "background", "brand", "@root", "default"]
           }
         },
         "pressed": {
           "$value": "{color.blue.700}",
           "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+            "scopes": ["ALL_FILLS"],
             "figmaName": ["color", "background", "brand", "@root", "pressed"]
           }
         },
         "hover": {
           "$value": "{color.blue.600}",
           "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+            "scopes": ["ALL_FILLS"],
             "figmaName": ["color", "background", "brand", "@root", "hover"]
           }
         }
@@ -808,7 +808,7 @@
         }
       }
     },
-    "text": {
+    "content": {
       "brand": {
         "infomaniak": {
           "default": {
@@ -852,19 +852,19 @@
         },
         "kdrive": {
           "default": {
-            "$value": "{color.indigo.600}",
+            "$value": "{color.indigo.500}",
             "$extensions": {
               "scopes": []
             }
           },
           "hover": {
-            "$value": "{color.indigo.700}",
+            "$value": "{color.indigo.600}",
             "$extensions": {
               "scopes": []
             }
           },
           "pressed": {
-            "$value": "{color.indigo.800}",
+            "$value": "{color.indigo.700}",
             "$extensions": {
               "scopes": []
             }
@@ -1013,118 +1013,167 @@
         "default": {
           "$value": "{color.blue.700}",
           "$extensions": {
-            "scopes": ["TEXT_FILL"],
-            "figmaName": ["color", "text", "brand", "@root", "default"]
+            "scopes": ["ALL_FILLS"],
+            "figmaName": ["color", "content", "brand", "@root", "default"]
           }
         },
         "hover": {
           "$value": "{color.blue.800}",
           "$extensions": {
-            "scopes": [],
-            "figmaName": ["color", "text", "brand", "@root", "hover"]
+            "scopes": ["ALL_FILLS"],
+            "figmaName": ["color", "content", "brand", "@root", "hover"]
           }
         },
         "pressed": {
           "$value": "{color.blue.900}",
           "$extensions": {
-            "scopes": [],
-            "figmaName": ["color", "text", "brand", "@root", "pressed"]
+            "scopes": ["ALL_FILLS"],
+            "figmaName": ["color", "content", "brand", "@root", "pressed"]
           }
         }
       },
       "primary": {
         "$value": "{color.gray.800}",
         "$extensions": {
-          "scopes": ["TEXT_FILL"]
+          "scopes": ["ALL_FILLS"]
         }
       },
       "secondary": {
         "$value": "{color.gray.600}",
         "$extensions": {
-          "scopes": ["TEXT_FILL"]
+          "scopes": ["ALL_FILLS"]
         }
       },
       "tertiary": {
         "$value": "{color.gray.500}",
         "$extensions": {
-          "scopes": ["TEXT_FILL"]
+          "scopes": ["ALL_FILLS"]
         }
       },
       "inverse": {
         "$value": "{color.gray.100}",
         "$extensions": {
-          "scopes": ["TEXT_FILL"]
+          "scopes": ["ALL_FILLS"]
         }
       },
       "disabled": {
         "$value": "{color.gray.400}",
         "$extensions": {
-          "scopes": ["TEXT_FILL"]
+          "scopes": ["ALL_FILLS"]
         }
       },
       "on": {
         "dataviz": {
           "blue": {
-            "default": {
+            "dim1": {
               "$value": "{color.blue.900}",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.blue.50}",
               "$extensions": {
                 "scopes": []
               }
             }
           },
           "emerald": {
-            "default": {
+            "dim1": {
               "$value": "{color.emerald.900}",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.emerald.50}",
               "$extensions": {
                 "scopes": []
               }
             }
           },
           "orange": {
-            "default": {
+            "dim1": {
               "$value": "{color.orange.900}",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.orange.100}",
               "$extensions": {
                 "scopes": []
               }
             }
           },
           "pink": {
-            "default": {
+            "dim1": {
               "$value": "{color.pink.900}",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.pink.50}",
               "$extensions": {
                 "scopes": []
               }
             }
           },
           "purple": {
-            "default": {
+            "dim1": {
               "$value": "{color.purple.900}",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.purple.50}",
               "$extensions": {
                 "scopes": []
               }
             }
           },
           "violet": {
-            "default": {
+            "dim1": {
               "$value": "{color.violet.900}",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.violet.50}",
               "$extensions": {
                 "scopes": []
               }
             }
           },
           "yellow": {
-            "default": {
+            "dim1": {
               "$value": "{color.yellow.900}",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.yellow.50}",
               "$extensions": {
                 "scopes": []
               }
             }
           },
-          "default": {
+          "dim1": {
             "$value": "{color.violet.900}",
             "$extensions": {
-              "scopes": ["TEXT_FILL"],
-              "figmaName": ["color", "text", "on", "dataviz", "@root", "default"]
+              "scopes": ["ALL_FILLS"],
+              "figmaName": ["color", "content", "on", "dataviz", "@root", "dim1"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.violet.50}",
+            "$extensions": {
+              "scopes": ["ALL_FILLS"],
+              "figmaName": ["color", "content", "on", "dataviz", "@root", "dim2"]
             }
           }
         },
@@ -1212,8 +1261,8 @@
           "default": {
             "$value": "{color.blue.950}",
             "$extensions": {
-              "scopes": ["TEXT_FILL"],
-              "figmaName": ["color", "text", "on", "brand", "@root", "default"]
+              "scopes": ["ALL_FILLS"],
+              "figmaName": ["color", "content", "on", "brand", "@root", "default"]
             }
           }
         },
@@ -1228,41 +1277,41 @@
             "dim2": {
               "$value": "{color.orange.950}",
               "$extensions": {
-                "scopes": ["TEXT_FILL"]
+                "scopes": ["ALL_FILLS"]
               }
             },
             "dim1": {
               "$value": "{color.orange.900}",
               "$extensions": {
-                "scopes": ["TEXT_FILL"]
+                "scopes": ["ALL_FILLS"]
               }
             }
           },
           "success": {
             "dim2": {
-              "$value": "{color.lime.50}",
+              "$value": "{color.lime.950}",
               "$extensions": {
-                "scopes": ["TEXT_FILL"]
+                "scopes": ["ALL_FILLS"]
               }
             },
             "dim1": {
               "$value": "{color.lime.950}",
               "$extensions": {
-                "scopes": ["TEXT_FILL"]
+                "scopes": ["ALL_FILLS"]
               }
             }
           },
           "error": {
             "dim2": {
-              "$value": "{color.red.50}",
+              "$value": "{color.red.950}",
               "$extensions": {
-                "scopes": ["TEXT_FILL"]
+                "scopes": ["ALL_FILLS"]
               }
             },
             "dim1": {
               "$value": "{color.red.900}",
               "$extensions": {
-                "scopes": ["TEXT_FILL"]
+                "scopes": ["ALL_FILLS"]
               }
             }
           }
@@ -2141,529 +2190,6 @@
         "$value": "{color.gray.400-14}",
         "$extensions": {
           "scopes": ["EFFECT_COLOR"]
-        }
-      }
-    },
-    "icon": {
-      "brand": {
-        "infomaniak": {
-          "default": {
-            "$value": "{color.blue.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.blue.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.blue.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "mail": {
-          "default": {
-            "$value": "{color.pink.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.pink.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.pink.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "kdrive": {
-          "default": {
-            "$value": "{color.indigo.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.indigo.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.indigo.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "euria": {
-          "default": {
-            "$value": "{color.ocean.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.ocean.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.ocean.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "kchat": {
-          "default": {
-            "$value": "{color.cyan.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.cyan.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.cyan.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "security": {
-          "default": {
-            "$value": "{color.purple.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.purple.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.purple.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "calendar": {
-          "default": {
-            "$value": "{color.aqua.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.aqua.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.aqua.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "contacts": {
-          "default": {
-            "$value": "{color.violet.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.violet.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.violet.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "knote": {
-          "default": {
-            "$value": "{color.coral.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.coral.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.coral.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "swisstransfer": {
-          "default": {
-            "$value": "{color.emerald.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.emerald.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.emerald.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "default": {
-          "$value": "{color.blue.600}",
-          "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"],
-            "figmaName": ["color", "icon", "brand", "@root", "default"]
-          }
-        },
-        "hover": {
-          "$value": "{color.blue.700}",
-          "$extensions": {
-            "scopes": [],
-            "figmaName": ["color", "icon", "brand", "@root", "hover"]
-          }
-        },
-        "pressed": {
-          "$value": "{color.blue.800}",
-          "$extensions": {
-            "scopes": [],
-            "figmaName": ["color", "icon", "brand", "@root", "pressed"]
-          }
-        }
-      },
-      "primary": {
-        "$value": "{color.gray.800}",
-        "$extensions": {
-          "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-        }
-      },
-      "secondary": {
-        "$value": "{color.gray.600}",
-        "$extensions": {
-          "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-        }
-      },
-      "tertiary": {
-        "$value": "{color.gray.500}",
-        "$extensions": {
-          "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-        }
-      },
-      "inverse": {
-        "$value": "{color.gray.100}",
-        "$extensions": {
-          "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-        }
-      },
-      "disabled": {
-        "$value": "{color.gray.400}",
-        "$extensions": {
-          "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-        }
-      },
-      "on": {
-        "disabled": {
-          "$value": "{color.gray.400}",
-          "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-          }
-        },
-        "dataviz": {
-          "blue": {
-            "default": {
-              "$value": "{color.blue.800}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "emerald": {
-            "default": {
-              "$value": "{color.emerald.800}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "orange": {
-            "default": {
-              "$value": "{color.orange.800}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "pink": {
-            "default": {
-              "$value": "{color.pink.800}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "purple": {
-            "default": {
-              "$value": "{color.purple.800}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "violet": {
-            "default": {
-              "$value": "{color.violet.800}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "yellow": {
-            "default": {
-              "$value": "{color.yellow.800}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "default": {
-            "$value": "{color.violet.800}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"],
-              "figmaName": ["color", "icon", "on", "dataviz", "@root", "default"]
-            }
-          }
-        },
-        "brand": {
-          "infomaniak": {
-            "default": {
-              "$value": "{color.blue.950}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "calendar": {
-            "default": {
-              "$value": "{color.blue.950}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "contacts": {
-            "default": {
-              "$value": "{color.blue.950}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "euria": {
-            "default": {
-              "$value": "{color.blue.950}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "kchat": {
-            "default": {
-              "$value": "{color.blue.950}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "kdrive": {
-            "default": {
-              "$value": "{color.blue.950}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "knote": {
-            "default": {
-              "$value": "{color.blue.950}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "mail": {
-            "default": {
-              "$value": "{color.blue.950}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "security": {
-            "default": {
-              "$value": "{color.blue.950}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "swisstransfer": {
-            "default": {
-              "$value": "{color.blue.950}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "default": {
-            "$value": "{color.blue.950}",
-            "$extensions": {
-              "scopes": ["ALL_SCOPES"],
-              "figmaName": ["color", "icon", "on", "brand", "@root", "default"]
-            }
-          }
-        },
-        "feedback": {
-          "success": {
-            "dim2": {
-              "$value": "{color.lime.50}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            },
-            "dim1": {
-              "$value": "{color.lime.950}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            }
-          },
-          "warning": {
-            "dim2": {
-              "$value": "{color.orange.950}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            },
-            "dim1": {
-              "$value": "{color.orange.900}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            }
-          },
-          "error": {
-            "dim2": {
-              "$value": "{color.red.50}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            },
-            "dim1": {
-              "$value": "{color.red.900}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            }
-          }
-        }
-      },
-      "feedback": {
-        "error": {
-          "default": {
-            "$value": "{color.red.700}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "hover": {
-            "$value": "{color.red.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.red.900}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "success": {
-          "default": {
-            "$value": "{color.lime.700}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "hover": {
-            "$value": "{color.lime.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.lime.900}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "warning": {
-          "default": {
-            "$value": "{color.orange.700}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "hover": {
-            "$value": "{color.orange.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.orange.900}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
         }
       }
     }

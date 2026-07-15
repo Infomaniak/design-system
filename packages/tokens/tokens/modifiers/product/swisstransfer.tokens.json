@@ -13,42 +13,22 @@
         }
       }
     },
-    "text": {
+    "content": {
       "brand": {
         "default": {
-          "$value": "{color.text.brand.swisstransfer.default}"
+          "$value": "{color.content.brand.swisstransfer.default}"
         },
         "hover": {
-          "$value": "{color.text.brand.swisstransfer.hover}"
+          "$value": "{color.content.brand.swisstransfer.hover}"
         },
         "pressed": {
-          "$value": "{color.text.brand.swisstransfer.pressed}"
+          "$value": "{color.content.brand.swisstransfer.pressed}"
         }
       },
       "on": {
         "brand": {
           "default": {
-            "$value": "{color.text.on.brand.swisstransfer.default}"
-          }
-        }
-      }
-    },
-    "icon": {
-      "brand": {
-        "default": {
-          "$value": "{color.icon.brand.swisstransfer.default}"
-        },
-        "hover": {
-          "$value": "{color.icon.brand.swisstransfer.hover}"
-        },
-        "pressed": {
-          "$value": "{color.icon.brand.swisstransfer.pressed}"
-        }
-      },
-      "on": {
-        "brand": {
-          "default": {
-            "$value": "{color.icon.on.brand.swisstransfer.default}"
+            "$value": "{color.content.on.brand.swisstransfer.default}"
           }
         }
       }

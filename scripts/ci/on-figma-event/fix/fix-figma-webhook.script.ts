@@ -92,6 +92,6 @@ await runScript(
     });
   },
   {
-    skipKChatNotificationOnError: true,
+    notifyError: false,
   },
 );

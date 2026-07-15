@@ -72,6 +72,10 @@ export class IconifyApi {
     if (promise === undefined) {
       promise = this.getLastModified({ prefixes: [prefix] }).then(
         (response: IconifyApiGetLastModifiedResponse): number => response.lastModified[prefix] ?? 0,
+        (error: unknown): never => {
+          this.#prefixLastModifiedPromises.delete(prefix);
+          throw error;
+        },
       );
 
       this.#prefixLastModifiedPromises.set(prefix, promise);
