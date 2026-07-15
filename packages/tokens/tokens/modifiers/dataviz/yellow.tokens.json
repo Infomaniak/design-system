@@ -52,20 +52,14 @@
         }
       }
     },
-    "text": {
+    "content": {
       "on": {
         "dataviz": {
-          "default": {
-            "$value": "{color.text.on.dataviz.yellow.default}"
-          }
-        }
-      }
-    },
-    "icon": {
-      "on": {
-        "dataviz": {
-          "default": {
-            "$value": "{color.icon.on.dataviz.yellow.default}"
+          "dim1": {
+            "$value": "{color.content.on.dataviz.yellow.dim1}"
+          },
+          "dim2": {
+            "$value": "{color.content.on.dataviz.yellow.dim2}"
           }
         }
       }

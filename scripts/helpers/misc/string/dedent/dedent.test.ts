@@ -27,6 +27,18 @@ describe('dedent', () => {
 
   a = 'b';
 }`);
+
+      expect(
+        dedent`
+          class A {
+\t
+            a = 'b';
+          }
+        `,
+      ).toBe(`class A {
+
+  a = 'b';
+}`);
     });
 
     it('should support no indent', () => {
@@ -58,6 +70,16 @@ class A {
           class A {
             a = 'b';
           }`,
+      ).toThrow();
+    });
+
+    it('should throw it contains an invalid indentation', () => {
+      expect(
+        () => dedent`
+          class A {
+      a = 'b';
+          }
+        `,
       ).toThrow();
     });
   });

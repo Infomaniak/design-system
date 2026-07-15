@@ -13,42 +13,22 @@
         }
       }
     },
-    "text": {
+    "content": {
       "brand": {
         "default": {
-          "$value": "{color.text.brand.calendar.default}"
+          "$value": "{color.content.brand.calendar.default}"
         },
         "hover": {
-          "$value": "{color.text.brand.calendar.hover}"
+          "$value": "{color.content.brand.calendar.hover}"
         },
         "pressed": {
-          "$value": "{color.text.brand.calendar.pressed}"
+          "$value": "{color.content.brand.calendar.pressed}"
         }
       },
       "on": {
         "brand": {
           "default": {
-            "$value": "{color.text.on.brand.calendar.default}"
-          }
-        }
-      }
-    },
-    "icon": {
-      "brand": {
-        "default": {
-          "$value": "{color.icon.brand.calendar.default}"
-        },
-        "hover": {
-          "$value": "{color.icon.brand.calendar.hover}"
-        },
-        "pressed": {
-          "$value": "{color.icon.brand.calendar.pressed}"
-        }
-      },
-      "on": {
-        "brand": {
-          "default": {
-            "$value": "{color.icon.on.brand.calendar.default}"
+            "$value": "{color.content.on.brand.calendar.default}"
           }
         }
       }

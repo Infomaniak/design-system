@@ -62,7 +62,7 @@
       "base": {
         "$value": "{font.family.Suisse Int'l}",
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       }
     },
