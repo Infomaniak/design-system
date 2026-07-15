@@ -51,7 +51,7 @@ export function extractSvgFilesFromFigmaDesignFile({
         return getFigmaFile({
           token: figmaAPIToken,
           file_key: figmaSourceFileKey,
-          geometry: 'paths',
+          geometry: generateMasks ? 'paths' : undefined,
         });
       },
     );
