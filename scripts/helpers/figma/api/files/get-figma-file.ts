@@ -31,9 +31,9 @@ export async function getFigmaFile({
     path: `/v1/files/${file_key}`,
     searchParam: new URLSearchParams(
       removeUndefinedProperties({
-        depth: depth === undefined ? undefined : String(depth),
+        depth: depth?.toString(),
         geometry,
-        branch_data: branch_data === undefined || !branch_data ? undefined : 'true',
+        branch_data: branch_data ? 'true' : undefined,
       }) as Record<string, string>,
     ),
   });
