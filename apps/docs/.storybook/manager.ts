@@ -5,7 +5,7 @@ import { create } from 'storybook/theming';
 const theme = create({
   base: 'dark',
   brandTitle: 'Edelweiss Design System',
-  brandImage: '/edelweiss.png',
+  brandImage: './edelweiss.png',
   colorPrimary: '#0098ff',
   colorSecondary: '#0066cc',
 });
