@@ -361,7 +361,10 @@ describe('resolvedTokenToYamlValue', () => {
         },
       ],
     });
-    const result = resolvedTokenToYamlValue(collection, resolvedToken) as unknown as Record<string, unknown>[];
+    const result = resolvedTokenToYamlValue(collection, resolvedToken) as unknown as Record<
+      string,
+      unknown
+    >[];
     expect(Array.isArray(result)).toBe(true);
     expect(result[0]['offsetX']).toBe('0px');
     expect(result[0]['inset']).toBe(false);
