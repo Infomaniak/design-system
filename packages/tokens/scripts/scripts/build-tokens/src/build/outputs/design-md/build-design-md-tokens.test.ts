@@ -705,4 +705,41 @@ describe('buildDesignMdTokens', () => {
     expect(content).not.toContain('3. Component Tokens');
     expect(content).toContain('4. AI Implementation Directives');
   });
+
+  it('should escape backslashes in token descriptions and values', async () => {
+    const collectionWithBackslash = new DesignTokensCollection([
+      {
+        files: ['/tokens/t2-semantic/color.tokens.json'],
+        name: ['color', 'path', 'like'],
+        type: 'color',
+        value: { hex: '#000000', components: [0, 0, 0], colorSpace: 'srgb' },
+        description: 'Use \\\\path\\to\\file for Windows paths',
+      },
+    ]);
+
+    const light = collectionWithBackslash.clone();
+    const dark = collectionWithBackslash.clone();
+
+    const modifiers: DesignTokenModifiers = new Map([
+      [
+        'theme',
+        new Map([
+          ['light', light],
+          ['dark', dark],
+        ]),
+      ],
+    ]);
+
+    await buildDesignMdTokens({
+      baseCollection: collectionWithBackslash,
+      modifiers,
+      outputDirectory: tempDir,
+      logger: Logger.never(),
+    });
+
+    const content = await readFile(join(tempDir, 'design-md', 'DESIGN.md'), 'utf-8');
+
+    // The markdown table should have properly escaped backslashes
+    expect(content).toContain('\\\\\\\\path\\\\to\\\\file');
+  });
 });
