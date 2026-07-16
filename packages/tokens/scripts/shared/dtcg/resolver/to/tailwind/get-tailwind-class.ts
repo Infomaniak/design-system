@@ -1,4 +1,4 @@
-import type { ArrayDesignTokenName } from '../../../token/name/array-design-token-name.ts';
+import type { ArrayDesignTokenName } from '../../token/name/array-design-token-name.ts';
 import { arrayDesignTokenNameToCssVariableSegments } from '../css/token/name/array-design-token-name-to-css-variable-segments.ts';
 
 /**
