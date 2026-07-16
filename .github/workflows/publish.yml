@@ -99,3 +99,4 @@ jobs:
         env:
           GITHUB_CI_CONFIG: ${{ toJson(github) }}
           CI_PUBLISH_DRY_RUN: 'true'
+          SHOULD_NOTIFY: 'false'

@@ -31,12 +31,14 @@ export function applyOpticalSizes(
         strokeWidth = Number(strokeWidth);
 
         if (Number.isNaN(strokeWidth)) {
-          throw new Error('Expected "number" as stroke-width.');
+          throw new Error(`Expected "number" as stroke-width, got "${strokeWidth}".`);
         }
       }
 
       if (strokeWidth !== expectedStrokeWidthSize) {
-        throw new Error(`Expected "${expectedStrokeWidthSize}" as stroke-width.`);
+        throw new Error(
+          `Expected "${expectedStrokeWidthSize}" as stroke-width, got "${strokeWidth}".`,
+        );
       }
 
       Reflect.set(node.attribs, 'stroke-width', equation);

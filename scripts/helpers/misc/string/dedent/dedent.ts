@@ -69,6 +69,10 @@ function dedentRaw(text: string, indent: string): string[] {
     } else if (index == 0 || line === '') {
       return line;
     } else {
+      const trimmed: string = line.trim();
+      if (trimmed === '') {
+        return trimmed;
+      }
       throw new Error(
         `Line does not start with expected indent.\n  - line: ${JSON.stringify(line)}\n  - expected indent: ${JSON.stringify(indent)}`,
       );

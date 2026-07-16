@@ -1,6 +1,6 @@
 {
   "name": "@infomaniak-design-system/tokens",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "type": "module",
   "main": "./index.js",
   "scripts": {
@@ -21,7 +21,7 @@
   ],
   "private": true,
   "devDependencies": {
-    "colorjs.io": "^0.6.1",
+    "colorjs.io": "^0.7.0",
     "zod": "^4.4.3"
   }
 }

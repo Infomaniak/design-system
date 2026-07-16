@@ -1,5 +1,4 @@
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
-import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { NumberDesignTokensCollectionToken } from '../../../../../token/types/base/number/number-design-tokens-collection-token.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
@@ -55,19 +54,6 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
 
-  // TODO: Add support for T2 opacity tokens (curly references) when they are needed
-  // Currently only T1 tokens are supported (direct dimension values)
-
-  // Get the opacity value
-  const opacity = token.value;
-
-  // T1 tokens have direct dimension values { value: number, unit: string }
-  // We assert the type since this function only handles T1 opacity tokens
-  let displayValue: string = '';
-  if (!isCurlyReference(opacity)) {
-    displayValue = `${Math.round(opacity * 100)}%`;
-  }
-
   // Create the opacity preview HTML using CSS variable directly
   // The browser resolves var(--esds-*) via the CSS cascade
   const preview = /* HTML */ `
@@ -109,33 +95,8 @@ export function opacityDesignTokensCollectionTokenToMarkdown(
         opacity: var(${cssVariable});
       "
       ></div>
-      <div
-        style="
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-family: monospace;
-        font-size: 14px;
-        font-weight: 600;
-        color: #fff;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-        z-index: 10;
-      "
-      >
-        ${displayValue}
-      </div>
     </div>
-    <div
-      style="
-      margin-top: 8px;
-      font-family: monospace;
-      font-size: 12px;
-      color: #6b7280;
-    "
-    >
-      ${displayValue}
-    </div>
+    <div data-preview-value="${cssVariable}"></div>
   `;
 
   return {

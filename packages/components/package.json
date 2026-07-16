@@ -1,6 +1,6 @@
 {
   "name": "@infomaniak-design-system/components",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "files": [
     "dist",
@@ -24,24 +24,25 @@
     "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-components/publish-components.script.ts",
     "=== GENERATE ===": "",
     "generate": "plop",
-    "generate:public-api": "yarn generate public-api",
-    "validate:public-api": "node tooling/validate-public-api.ts"
+    "generate:public-api": "yarn generate public-api"
   },
   "dependencies": {
     "@lit-labs/signals": "^0.3.0",
     "idb": "^8.0.3",
     "lit": "^3.3.3",
+    "signal-polyfill": "^0.2.2",
     "signal-utils": "^0.21.1"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.11.0",
     "@iconify/types": "^2.0.0",
-    "@storybook/web-components-vite": "^10.4.1",
+    "@storybook/web-components-vite": "^10.5.0",
     "@wc-toolkit/type-parser": "1.2.1",
     "fake-indexeddb": "^6.2.5",
     "plop": "^4.0.5",
-    "typescript": "~6.0.3",
-    "vite": "^8.0.12"
+    "storybook": "^10.5.0",
+    "typescript": "~7.0.2",
+    "vite": "^8.1.4"
   },
   "customElements": "custom-elements.json"
 }

@@ -1,8 +1,8 @@
-import type { FigmaNode, GenericFigmaNode } from '../figma-node.ts';
-import type { FigmaFrameNodeProperties } from './figma-frame-node.ts';
+import type { FigmaNodeBase, GenericFigmaNodeBase } from '../base/figma-node-base.ts';
+import type { HavingFigmaFrameNodeProperties } from './figma-frame-node.ts';
 
-export interface FigmaGroupNode extends FigmaNode<'GROUP'>, FigmaFrameNodeProperties {}
+export interface FigmaGroupNode extends FigmaNodeBase<'GROUP'>, HavingFigmaFrameNodeProperties {}
 
-export function isFigmaGroupNode(input: GenericFigmaNode): input is FigmaGroupNode {
+export function isFigmaGroupNode(input: GenericFigmaNodeBase): input is FigmaGroupNode {
   return input.type === 'GROUP';
 }

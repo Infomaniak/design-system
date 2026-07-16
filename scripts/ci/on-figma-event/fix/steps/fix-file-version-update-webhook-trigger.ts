@@ -2,7 +2,7 @@ import type { FigmaFileVersion } from '../../../../helpers/figma/api/version-his
 import type { FigmaWebhookV2Request } from '../../../../helpers/figma/api/webhooks/types/figma-webhook-v2-request.ts';
 import type { FigmaWebhookV2 } from '../../../../helpers/figma/api/webhooks/types/figma-webhook-v2.ts';
 import { Logger } from '../../../../helpers/log/logger.ts';
-import { sleep } from '../../../../helpers/misc/sleep.ts';
+import { sleep } from '../../../../helpers/misc/async/sleep.ts';
 import { emitFakeFigmaFileVersionUpdateWebhookEvent } from './emit-fake-figma-file-version-update-webhook-event.ts';
 import { getMatchingFigmaWebhookRequest } from './get-matching-figma-webhook-request.ts';
 import { recreateFigmaFileVersionUpdateWebhook } from './recreate-figma-file-version-update-webhook.ts';

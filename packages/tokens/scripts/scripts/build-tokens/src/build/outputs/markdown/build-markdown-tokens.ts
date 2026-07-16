@@ -14,7 +14,6 @@ import { dimensionDesignTokensCollectionTokenToMarkdown } from '../../../../../.
 import { fontFamilyDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/font-family/font-family-design-tokens-collection-token-to-markdown.ts';
 import { fontSizeDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/font-size/font-size-design-tokens-collection-token-to-markdown.ts';
 import { fontWeightDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/font-weight/font-weight-design-tokens-collection-token-to-markdown.ts';
-import { genericDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/generic/generic-design-tokens-collection-token-to-markdown.ts';
 import { letterSpacingDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/letter-spacing/letter-spacing-design-tokens-collection-token-to-markdown.ts';
 import { lineHeightDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/line-height/line-height-design-tokens-collection-token-to-markdown.ts';
 import { numberDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/number/number-design-tokens-collection-token-to-markdown.ts';
@@ -22,6 +21,7 @@ import { opacityDesignTokensCollectionTokenToMarkdown } from '../../../../../../
 import { radiusDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/radius/radius-design-tokens-collection-token-to-markdown.ts';
 import { shadowDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/shadow/shadow-design-tokens-collection-token-to-markdown.ts';
 import { typographyDesignTokensCollectionTokenToMarkdown } from '../../../../../../shared/dtcg/resolver/to/markdown/token/types/typography/typography-design-tokens-collection-token-to-markdown.ts';
+import { getTailwindClass } from '../../../../../../shared/dtcg/resolver/to/tailwind/get-tailwind-class.ts';
 import type {
   GenericDesignTokensCollectionToken,
   GenericDesignTokensCollectionTokenWithType,
@@ -110,85 +110,99 @@ function groupTokensByTierAndCategory(
 /**
  * Renders a single token to a markdown table row using the appropriate renderer
  */
-function renderTokenToRow(
+export function renderTokenToRow(
   token: GenericDesignTokensCollectionToken,
   context: MarkdownRenderContext,
-): MarkdownTokenRow | null {
+): MarkdownTokenRow | undefined {
   const tokenWithType: GenericDesignTokensCollectionTokenWithType = {
     ...token,
     type: context.collection.resolve(token).type,
   };
 
-  // Select the appropriate renderer based on token type
-  if (isColorDesignTokensCollectionToken(tokenWithType)) {
-    return colorDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+  const row = ((): MarkdownTokenRow | undefined => {
+    if (isColorDesignTokensCollectionToken(tokenWithType)) {
+      return colorDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+    }
+
+    if (isDimensionDesignTokensCollectionToken(tokenWithType)) {
+      // Special handling for radius tokens - show as boxes with border-radius applied
+      if (tokenWithType.name[0] === 'radius') {
+        return radiusDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+      }
+      // Special handling for border-width tokens - show as boxes with border applied
+      // Matches both T1 (border-width.0) and T2 (border.xs.width) naming patterns
+      if (
+        tokenWithType.name[0] === 'border-width' ||
+        (tokenWithType.name[0] === 'border' &&
+          tokenWithType.name[tokenWithType.name.length - 1] === 'width')
+      ) {
+        return borderWidthDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+      }
+      // Special handling for breakpoint tokens - show value as text (too large to visualize)
+      if (tokenWithType.name[0] === 'breakpoint') {
+        return breakpointDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+      }
+      // Font-size tokens - show sample text with font-size applied
+      if (tokenWithType.name[0] === 'font' && tokenWithType.name[1] === 'size') {
+        return fontSizeDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+      }
+      // Letter-spacing tokens - show sample text with letter-spacing applied
+      if (tokenWithType.name[0] === 'font' && tokenWithType.name[1] === 'letter-spacing') {
+        return letterSpacingDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+      }
+      if (tokenWithType.name[0] === 'icon') {
+        return dimensionDesignTokensCollectionTokenToMarkdown(tokenWithType, context, {
+          previewHeight: 'auto',
+        });
+      }
+      return dimensionDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+    }
+
+    if (isShadowDesignTokensCollectionToken(tokenWithType)) {
+      return shadowDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+    }
+
+    if (isTypographyDesignTokensCollectionToken(tokenWithType)) {
+      return typographyDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+    }
+
+    if (isFontFamilyDesignTokensCollectionToken(tokenWithType)) {
+      return fontFamilyDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+    }
+
+    if (isFontWeightDesignTokensCollectionToken(tokenWithType)) {
+      return fontWeightDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+    }
+
+    if (isNumberDesignTokensCollectionToken(tokenWithType)) {
+      // Special handling for opacity tokens - show with transparent grid preview
+      if (tokenWithType.name[0] === 'opacity') {
+        return opacityDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+      }
+      // Line-height tokens - show multi-line text paired with corresponding font-size
+      if (tokenWithType.name[0] === 'font' && tokenWithType.name[1] === 'line-height') {
+        return lineHeightDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+      }
+      return numberDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+    }
+
+    // Skip token types without meaningful visual previews
+    return undefined;
+  })();
+
+  if (!row) {
+    return undefined;
   }
 
-  if (isDimensionDesignTokensCollectionToken(tokenWithType)) {
-    // Special handling for radius tokens - show as boxes with border-radius applied
-    if (tokenWithType.name[0] === 'radius') {
-      return radiusDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
-    }
-    // Special handling for border-width tokens - show as boxes with border applied
-    // Matches both T1 (border-width.0) and T2 (border.xs.width) naming patterns
-    if (
-      tokenWithType.name[0] === 'border-width' ||
-      (tokenWithType.name[0] === 'border' &&
-        tokenWithType.name[tokenWithType.name.length - 1] === 'width')
-    ) {
-      return borderWidthDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
-    }
-    // Special handling for breakpoint tokens - show value as text (too large to visualize)
-    if (tokenWithType.name[0] === 'breakpoint') {
-      return breakpointDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
-    }
-    // Font-size tokens - show sample text with font-size applied
-    if (tokenWithType.name[0] === 'font' && tokenWithType.name[1] === 'size') {
-      return fontSizeDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
-    }
-    // Letter-spacing tokens - show sample text with letter-spacing applied
-    if (tokenWithType.name[0] === 'font' && tokenWithType.name[1] === 'letter-spacing') {
-      return letterSpacingDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
-    }
-    if (tokenWithType.name[0] === 'icon') {
-      return dimensionDesignTokensCollectionTokenToMarkdown(tokenWithType, context, {
-        previewHeight: 'auto',
-      });
-    }
-
-    return dimensionDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+  // Attach Tailwind class for T2/T3 tokens only
+  if (context.tierPrefix === 't2' || context.tierPrefix === 't3') {
+    return {
+      ...row,
+      tailwindClasses: getTailwindClass(token.name),
+    };
   }
 
-  if (isShadowDesignTokensCollectionToken(tokenWithType)) {
-    return shadowDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
-  }
-
-  if (isTypographyDesignTokensCollectionToken(tokenWithType)) {
-    return typographyDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
-  }
-
-  if (isFontFamilyDesignTokensCollectionToken(tokenWithType)) {
-    return fontFamilyDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
-  }
-
-  if (isFontWeightDesignTokensCollectionToken(tokenWithType)) {
-    return fontWeightDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
-  }
-
-  if (isNumberDesignTokensCollectionToken(tokenWithType)) {
-    // Special handling for opacity tokens - show with transparent grid preview
-    if (tokenWithType.name[0] === 'opacity') {
-      return opacityDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
-    }
-    // Line-height tokens - show multi-line text paired with corresponding font-size
-    if (tokenWithType.name[0] === 'font' && tokenWithType.name[1] === 'line-height') {
-      return lineHeightDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
-    }
-    return numberDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
-  }
-
-  // Fallback to generic renderer for any other type
-  return genericDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
+  return row;
 }
 
 /**
@@ -211,9 +225,13 @@ function generateColumnHeaders(): string[] {
 /**
  * Generates HTML table content for a row
  */
-function generateRowContent(row: MarkdownTokenRow): string {
-  const { preview, name, cssVariable, description } = row;
+export function generateRowContent(row: MarkdownTokenRow): string {
+  const { preview, name, cssVariable, description, tailwindClasses } = row;
   const normalizedPreview = normalizeHtml(preview);
+
+  const tailwindRow = Array.isArray(tailwindClasses)
+    ? `<div class="token-row">Tailwind: ${tailwindClasses.map((cls) => `<button class="token-value" data-clipboard="${cls}" type="button">${cls}</button>`).join(' ')}</div>`
+    : '';
 
   return `    <tr>
       <td>${normalizedPreview}</td>
@@ -226,7 +244,7 @@ function generateRowContent(row: MarkdownTokenRow): string {
             : `<div class="token-row">
                 CSS: <button class="token-value" data-clipboard="var(${cssVariable})" type="button">var(${cssVariable})</button>
               </div>`
-        }<div class="token-row token-description">${description}</div>
+        }${tailwindRow}<div class="token-row token-description">${description}</div>
       </td>
     </tr>`;
 }
@@ -246,7 +264,6 @@ function generateCategoryMarkdown(
   for (const token of tokens) {
     try {
       const row = renderTokenToRow(token, context);
-
       if (row) {
         lines.push(generateRowContent(row));
       }
@@ -280,15 +297,17 @@ export async function buildMarkdownTokens({
   logger,
 }: BuildMarkdownTokensOptions) {
   return logger.asyncTask('markdown', async (logger: Logger): Promise<void> => {
-    const context: MarkdownRenderContext = { collection: baseCollection };
-
     // Group tokens by tier and category
     const tokensByTierAndCategory = groupTokensByTierAndCategory(baseCollection.tokens());
 
     // Generate markdown for each tier-category combination
     for (const [key, group] of tokensByTierAndCategory.entries()) {
       await logger.asyncTask(`category: ${key}`, async (): Promise<void> => {
-        const markdownContent = generateCategoryMarkdown(group.tokens, context, logger);
+        const groupContext: MarkdownRenderContext = {
+          collection: baseCollection,
+          tierPrefix: group.tierPrefix,
+        };
+        const markdownContent = generateCategoryMarkdown(group.tokens, groupContext, logger);
         const markdown = `<!-- ${AUTO_GENERATED_FILE_HEADER} -->\n\n` + markdownContent;
         const filePath = join(outputDirectory, 'markdown', `${key}.md`);
         await writeFileSafe(filePath, markdown, { encoding: 'utf-8' });
