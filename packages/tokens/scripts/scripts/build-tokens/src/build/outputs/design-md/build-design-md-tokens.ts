@@ -89,7 +89,7 @@ export function toYamlBlock(value: unknown, indent = 0): YamlBlock {
   }
 
   if (typeof value === 'string') {
-    return { lines: [`"${value.replace(/"/g, '\\"')}"`], isSequence: false };
+    return { lines: [`"${value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`], isSequence: false };
   }
 
   if (Array.isArray(value)) {

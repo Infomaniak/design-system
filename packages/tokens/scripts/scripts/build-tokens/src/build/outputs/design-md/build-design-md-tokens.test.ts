@@ -485,9 +485,10 @@ describe('toYaml', () => {
     expect(toYaml(3.14)).toBe('3.14');
   });
 
-  it('should quote strings and escape quotes', () => {
+  it('should quote strings and escape backslashes and quotes', () => {
     expect(toYaml('hello')).toBe('"hello"');
     expect(toYaml('with"quotes')).toBe('"with\\"quotes"');
+    expect(toYaml('path\\to\\file')).toBe('"path\\\\to\\\\file"');
   });
 
   it('should serialise empty arrays and objects', () => {
