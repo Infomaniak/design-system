@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Design Tokens/DESIGN.md" />
+
+<div className="welcome-section">
+  <h1>DESIGN.md</h1>
+  <p className="welcome-description">
+    A machine-readable token reference file for AI agents and LLMs.
+  </p>
+</div>
+
+## What is DESIGN.md?
+
+DESIGN.md is a structured markdown file generated from our design token definitions. It provides a comprehensive, platform-agnostic reference of the entire token system in a format optimized for AI consumption.
+
+<a
+  href="https://stitch.withgoogle.com/docs/design-md/specification"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  View the DESIGN.md specification
+</a>
+
+The file includes:
+
+- **YAML front matter** with the complete token hierarchy and resolved values for all themes
+- **Markdown tables** listing token names, light/dark values, CSS variables, and descriptions
+- **AI implementation directives** instructing consumers to use CSS variables and semantic tokens
+
+## Usage
+
+Use this file to give your agent or LLM full context about our design system so it can generate consistent UI. Point your tool at the raw markdown URL served alongside this Storybook:
+
+- <a
+    href="./DESIGN.md"
+    target="_blank"
+  >
+    See DESIGN.md
+  </a>
+- <a {...{ href: './DESIGN.md', download: true }}>Download DESIGN.md</a>
