@@ -12,4 +12,10 @@ export interface MarkdownRenderContext {
    * to look up related tokens when rendering composite types.
    */
   readonly collection: DesignTokensCollection;
+
+  /**
+   * The tier prefix of the token group being rendered.
+   * One of: 't1', 't2', 't3', 'material'.
+   */
+  readonly tierPrefix: string;
 }
