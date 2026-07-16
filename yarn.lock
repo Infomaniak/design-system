@@ -939,7 +939,9 @@ __metadata:
     idb: "npm:^8.0.3"
     lit: "npm:^3.3.3"
     plop: "npm:^4.0.5"
+    signal-polyfill: "npm:^0.2.2"
     signal-utils: "npm:^0.21.1"
+    storybook: "npm:^10.5.0"
     typescript: "npm:~7.0.2"
     vite: "npm:^8.1.4"
   languageName: unknown
@@ -967,10 +969,13 @@ __metadata:
     "@types/react": "npm:^19.2.17"
     "@types/react-dom": "npm:^19.2.3"
     "@wc-toolkit/storybook-helpers": "npm:^10.5.1"
+    lit: "npm:^3.3.3"
     markdown-to-jsx: "npm:^9.8.2"
     react: "npm:^19.2.7"
     react-dom: "npm:^19.2.7"
+    rolldown: "npm:^1.1.5"
     storybook: "npm:^10.5.0"
+    typescript: "npm:~7.0.2"
     vite: "npm:^8.1.4"
   languageName: unknown
   linkType: soft
@@ -1039,6 +1044,7 @@ __metadata:
     prettier-plugin-organize-imports: "npm:^4.3.0"
     react: "npm:^19.2.7"
     react-dom: "npm:^19.2.7"
+    rolldown: "npm:^1.1.5"
     semver: "npm:^7.8.5"
     storybook: "npm:^10.5.0"
     typescript: "npm:@typescript/typescript6@^6.0.2"
@@ -6129,7 +6135,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rolldown@npm:~1.1.4":
+"rolldown@npm:^1.1.5, rolldown@npm:~1.1.4":
   version: 1.1.5
   resolution: "rolldown@npm:1.1.5"
   dependencies:

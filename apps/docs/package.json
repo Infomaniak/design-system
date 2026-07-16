@@ -31,7 +31,10 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@wc-toolkit/storybook-helpers": "^10.5.1",
+    "lit": "^3.3.3",
+    "rolldown": "^1.1.5",
     "storybook": "^10.5.0",
+    "typescript": "~7.0.2",
     "vite": "^8.1.4"
   }
 }

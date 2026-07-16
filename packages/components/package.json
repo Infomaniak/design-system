@@ -30,6 +30,7 @@
     "@lit-labs/signals": "^0.3.0",
     "idb": "^8.0.3",
     "lit": "^3.3.3",
+    "signal-polyfill": "^0.2.2",
     "signal-utils": "^0.21.1"
   },
   "devDependencies": {
@@ -39,6 +40,7 @@
     "@wc-toolkit/type-parser": "1.2.1",
     "fake-indexeddb": "^6.2.5",
     "plop": "^4.0.5",
+    "storybook": "^10.5.0",
     "typescript": "~7.0.2",
     "vite": "^8.1.4"
   },
