@@ -1,4 +1,0 @@
-import{n as e}from"./rolldown-runtime-DaJ6WEGw.js";import{o as t,s as n}from"./blocks-BAdpgMgA.js";import{a as r}from"./chunk-W22LQPXL-DcDnD_CV.js";import{i}from"./react-XnqUzw--.js";import{t as a}from"./mdx-react-shim-y1jXGhTh.js";function o(e){let n={a:`a`,code:`code`,h1:`h1`,p:`p`,...i(),...e.components};return(0,c.jsxs)(c.Fragment,{children:[(0,c.jsx)(t,{title:`Icons/Icon Component`}),`
-`,(0,c.jsx)(n.h1,{id:`icon-component`,children:`Icon Component`}),`
-`,(0,c.jsxs)(n.p,{children:[`For full documentation of the `,(0,c.jsx)(n.code,{children:`esds-icon`}),` web component, see:`]}),`
-`,(0,c.jsx)(n.p,{children:(0,c.jsx)(n.a,{href:`?path=/docs/components-icon--docs`,children:`Components/esds-icon`})})]})}function s(e={}){let{wrapper:t}={...i(),...e.components};return t?(0,c.jsx)(t,{...e,children:(0,c.jsx)(o,{...e})}):o(e)}var c;e((()=>{c=r(),a(),n()}))();export{s as default};
