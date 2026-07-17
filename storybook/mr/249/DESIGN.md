@@ -1,4 +1,3 @@
-# Do not edit directly, this file was auto-generated.
 ---
 blur:
   none: "0px"
