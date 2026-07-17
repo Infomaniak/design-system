@@ -33,12 +33,18 @@
 
 ## Project structure
 
-- `packages/`: contains the librairies, utilities, ...
+- `packages/`: contains the libraries, utilities, ...
   - [tokens/](packages/tokens): contains the design tokens
+    - web: [@infomaniak-design-system/components ↗](https://www.npmjs.com/package/@infomaniak-design-system/tokens)
+    - ios: [ios-design-system ↗](https://github.com/Infomaniak/ios-design-system)
+    - android: [android-design-system ↗](https://github.com/Infomaniak/android-design-system)
   - [components/](packages/components): contains the web components library
+    - [@infomaniak-design-system/components ↗](https://www.npmjs.com/package/@infomaniak-design-system/components)
   - [assets/images/svg/](packages/assets/images/svg): contains the SVG icons and illustrations
+    - [explore ↗](https://infomaniak.github.io/design-system/storybook/main/?path=/docs/icons-icon-gallery--docs&collection=esds)
 - `apps/`: contains the deployable apps
   - [docs/](apps/docs): contains the storybook used as documentation support
+    - [explore ↗](https://infomaniak.github.io/design-system/storybook/main)
 
 ## Documentation
 
