@@ -1,0 +1,17 @@
+{
+  "name": "@infomaniak-design-system/fonts",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "=== BUILD ===": "",
+    "build": "node --no-warnings=ExperimentalWarning scripts/scripts/build-fonts/build-fonts.script.ts",
+    "=== PUBLISH ===": "",
+    "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-fonts/publish-fonts.script.ts"
+  },
+  "description": "Infomaniak's Design System - Fonts",
+  "keywords": [
+    "Infomaniak",
+    "Font"
+  ],
+  "private": true
+}
