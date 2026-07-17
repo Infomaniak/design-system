@@ -26,6 +26,12 @@
     "generate": "plop",
     "generate:public-api": "yarn generate public-api"
   },
+  "description": "Infomaniak's Design System - Components",
+  "keywords": [
+    "Infomaniak",
+    "Components"
+  ],
+  "private": true,
   "dependencies": {
     "@lit-labs/signals": "^0.3.0",
     "idb": "^8.0.3",

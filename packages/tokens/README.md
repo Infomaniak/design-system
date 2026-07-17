@@ -7,6 +7,8 @@
 
 Contains the list of Infomaniak's Design System tokens based on the [Design Tokens Community Group - (DTCG - 2025.10)](https://www.designtokens.org/tr/2025.10/format) format, and scripts to convert them to different formats (CSS, Figma, Tailwind, etc.).
 
+- [Documentation ↗](https://infomaniak.github.io/design-system/storybook/main/?path=/docs/design-tokens-getting-started--docs)
+
 ## Project architecture
 
 ```mermaid
@@ -123,7 +125,7 @@ and `mobile` OR `desktop` _platform_.
 
 `light`, `dark`, `mobile` and `desktop` are _contexts_ and `theme` and `platform` are _modifiers_.
 
-## Outputs
+## Platforms
 
 ### Web
 
@@ -191,12 +193,12 @@ You may import the CSS files as you prefer, but here's an example of how to use 
 ##### Usage
 
 ```html
-<button
-  data-esds-button-size="small"
-  data-esds-button-type="primary"
+<body
+  data-esds-theme="dark"
+  data-esds-product="mail"
 >
-  Click Me !
-</button>
+  <!-- Dark theme and product mail applies to children -->
+</body>
 ```
 
 #### Tailwind
@@ -206,6 +208,7 @@ The npm package contains a `tailwind.css` file that you can import and use in yo
 ```css
 /* src/styles/tailwind.css */
 @import 'tailwindcss';
+@import '@infomaniak-design-system/tokens/css/tokens.root.css';
 @import '@infomaniak-design-system/tokens/tailwind.css';
 ```
 
@@ -218,10 +221,34 @@ The npm package contains a `tailwind.css` file that you can import and use in yo
 
 /* ... */
 
-<button class="bg-yellow-500">Click Me !</button>
+<button class="bg-brand-default">Click me!</button>
 ```
 
-## Scripts
+### iOS
+
+#### Swift
+
+The package is published into [a dedicated GitHub repository](https://github.com/Infomaniak/ios-design-system).
+
+##### Installation
+
+```swift
+swift.package(url: "https://github.com/Infomaniak/ios-design-system", branch: "main")
+swift.target(
+    name: "MyTarget",
+    dependencies: [
+        .product(name: "DesignSystem", package: "ios-design-system")
+    ]
+)
+```
+
+### Android
+
+#### Kotlin
+
+The package is published into [a dedicated GitHub repository](https://github.com/Infomaniak/android-design-system).
+
+##### Installation
 
 TODO
 
