@@ -11,7 +11,6 @@ import {
   T2_DIRECTORY_NAME,
   T3_DIRECTORY_NAME,
 } from '../../../constants/design-token-tiers.ts';
-import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header.ts';
 import { resolvedTokenToString, resolvedTokenToYamlValue } from './token-to-yaml-value.ts';
 
 export interface BuildDesignMdTokensOptions {
@@ -238,7 +237,6 @@ function generateDesignMdContent({
 `.trim();
 
   const parts = [
-    `# ${AUTO_GENERATED_FILE_HEADER}`,
     '---',
     yamlContent,
     '---',
