@@ -980,18 +980,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@infomaniak-design-system/esds-icon@workspace:packages/assets/images/component/web":
-  version: 0.0.0-use.local
-  resolution: "@infomaniak-design-system/esds-icon@workspace:packages/assets/images/component/web"
-  dependencies:
-    "@iconify/types": "npm:^2.0.0"
-    "@infomaniak-design-system/components": "workspace:*"
-    "@types/node": "npm:^25.9.4"
-    fake-indexeddb: "npm:^6.2.5"
-    typescript: "npm:~6.0.3"
-    vite: "npm:^8.1.0"
-  languageName: unknown
-  linkType: soft
 
 "@infomaniak-design-system/svg-assets@workspace:packages/assets/images/svg":
   version: 0.0.0-use.local
