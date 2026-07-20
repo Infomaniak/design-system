@@ -11,6 +11,10 @@
     ".": {
       "types": "./dist/public-api.d.ts",
       "import": "./dist/public-api.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js"
     }
   },
   "scripts": {
@@ -34,10 +38,19 @@
   "private": true,
   "dependencies": {
     "@lit-labs/signals": "^0.3.0",
+    "@lit/react": "^1.0.8",
     "idb": "^8.0.3",
     "lit": "^3.3.3",
     "signal-polyfill": "^0.2.2",
     "signal-utils": "^0.21.1"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.11.0",

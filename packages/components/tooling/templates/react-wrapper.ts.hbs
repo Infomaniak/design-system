@@ -1,0 +1,11 @@
+import { createComponent } from '@lit/react';
+import { {{pascalCase name}} } from '../components/{{name}}/{{name}}.component.ts';
+import * as React from 'react';
+
+{{pascalCase name}}.define();
+
+export const {{reactPascalCase name}} = createComponent({
+  tagName: '{{name}}',
+  elementClass: {{pascalCase name}},
+  react: React,
+});

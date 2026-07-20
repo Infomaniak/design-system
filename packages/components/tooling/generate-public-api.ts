@@ -2,8 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { getPublicApiSourceFiles, getSourceDir } from './public-api-scan.ts';
 
-async function main(): Promise<void> {
-  const absoluteSrcDir = getSourceDir();
+async function generatePublicApi(absoluteSrcDir: string): Promise<void> {
   const outputFile = path.join(absoluteSrcDir, 'public-api.ts');
 
   if (!fs.existsSync(absoluteSrcDir)) {
@@ -26,6 +25,38 @@ async function main(): Promise<void> {
   fs.writeFileSync(outputFile, content, 'utf-8');
 
   console.log(`Generated ${outputFile} with ${exportLines.length} export(s)`);
+}
+
+async function generateReactBarrel(reactDir: string): Promise<void> {
+  if (!fs.existsSync(reactDir)) {
+    fs.mkdirSync(reactDir, { recursive: true });
+  }
+
+  const files: string[] = [];
+  for await (const entry of fs.promises.glob('*.ts', { cwd: reactDir })) {
+    const file = entry as string;
+    if (file !== 'index.ts') {
+      files.push(file);
+    }
+  }
+
+  const sortedFiles = files.sort();
+  const exportLines = sortedFiles.map((file) => `export * from './${file}';`);
+
+  const content = exportLines.join('\n') + '\n';
+  const outputFile = path.join(reactDir, 'index.ts');
+
+  fs.writeFileSync(outputFile, content, 'utf-8');
+
+  console.log(`Generated ${outputFile} with ${exportLines.length} export(s)`);
+}
+
+async function main(): Promise<void> {
+  const absoluteSrcDir = getSourceDir();
+
+  await generatePublicApi(absoluteSrcDir);
+
+  await generateReactBarrel(path.join(absoluteSrcDir, 'react'));
 }
 
 await main();

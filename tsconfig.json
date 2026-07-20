@@ -32,7 +32,8 @@
     "erasableSyntaxOnly": true,
     "verbatimModuleSyntax": true,
     "paths": {
-      "@infomaniak-design-system/components": ["./packages/components/src/public-api.ts"]
+      "@infomaniak-design-system/components": ["./packages/components/src/public-api.ts"],
+      "@infomaniak-design-system/components/react": ["./packages/components/src/react/index.ts"]
     },
 
     /* Linting */

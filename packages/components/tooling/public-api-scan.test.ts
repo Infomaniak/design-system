@@ -65,6 +65,8 @@ describe('public-api-scan', () => {
         'sub/deep.ts',
         'sub/ignored.test.ts',
         'sub/nested.private.d.ts',
+        'react/wrapper.ts',
+        'react/index.ts',
       ];
 
       for (const file of tree) {
@@ -83,6 +85,14 @@ describe('public-api-scan', () => {
       const relativePaths = result.map((r) => r.relativePath).sort();
 
       expect(relativePaths).toEqual(['bar.d.ts', 'foo.ts', 'sub/deep.ts']);
+    });
+
+    it('should exclude react directory files from main barrel', async () => {
+      const result = await getPublicApiSourceFiles(tmpDir);
+      const relativePaths = result.map((r) => r.relativePath);
+
+      expect(relativePaths).not.toContain('react/wrapper.ts');
+      expect(relativePaths).not.toContain('react/index.ts');
     });
 
     it('should resolve absolute paths inside the given directory', async () => {

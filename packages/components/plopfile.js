@@ -19,6 +19,13 @@ export default function (plop) {
       .join(' ');
   });
 
+  plop.setHelper('reactPascalCase', (text) => {
+    return text
+      .split('-')
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join('');
+  });
+
   plop.setGenerator('component', {
     description: 'create a new component',
     prompts: [
@@ -38,8 +45,13 @@ export default function (plop) {
         type: 'addMany',
         destination: 'src/components/{{name}}',
         base: 'tooling/templates',
-        templateFiles: 'tooling/templates/*.hbs',
+        templateFiles: 'tooling/templates/*.component.*.hbs',
         stripExtensions: ['hbs'],
+      },
+      {
+        type: 'add',
+        path: 'src/react/{{name}}.ts',
+        templateFile: 'tooling/templates/react-wrapper.ts.hbs',
       },
     ],
   });

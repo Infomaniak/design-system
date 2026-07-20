@@ -9,12 +9,14 @@ export default defineConfig({
   build: {
     target: 'es2022',
     lib: {
-      entry: resolve(__dirname, 'src/public-api.ts'),
-      fileName: 'public-api',
+      entry: {
+        'public-api': resolve(__dirname, 'src/public-api.ts'),
+        'react/index': resolve(__dirname, 'src/react/index.ts'),
+      },
       formats: ['es'],
     },
     rolldownOptions: {
-      external: ['lit', /lit\/.*/],
+      external: ['lit', /lit\/.*/, 'react'],
       output: {
         preserveModules: true,
       },

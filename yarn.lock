@@ -933,6 +933,7 @@ __metadata:
     "@custom-elements-manifest/analyzer": "npm:^0.11.0"
     "@iconify/types": "npm:^2.0.0"
     "@lit-labs/signals": "npm:^0.3.0"
+    "@lit/react": "npm:^1.0.8"
     "@storybook/web-components-vite": "npm:^10.5.0"
     "@wc-toolkit/type-parser": "npm:1.2.1"
     fake-indexeddb: "npm:^6.2.5"
@@ -944,6 +945,11 @@ __metadata:
     storybook: "npm:^10.5.0"
     typescript: "npm:~7.0.2"
     vite: "npm:^8.1.4"
+  peerDependencies:
+    react: ^19.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -1174,6 +1180,15 @@ __metadata:
   dependencies:
     "@lit/reactive-element": "npm:^1.6.2 || ^2.1.0"
   checksum: 10c0/203f761eda19c8b37d77f01d9a0148535c5b28c47b76e28b321cb6e5ed0546c45332512e68b1647ce92ca67690d8c66de31972ec115410b080d69fa25a5d86f3
+  languageName: node
+  linkType: hard
+
+"@lit/react@npm:^1.0.8":
+  version: 1.0.8
+  resolution: "@lit/react@npm:1.0.8"
+  peerDependencies:
+    "@types/react": 17 || 18 || 19
+  checksum: 10c0/18bf3eb6584fa989e0ad40988b349a4401da1cecd5bf1c6edfc1c5caed80037852a4ebe5685b04941e5b28ccf93e740676dae32773d7ae44b1479b96538392b1
   languageName: node
   linkType: hard
 

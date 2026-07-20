@@ -66,6 +66,8 @@ export function buildGlobExcludePatterns(): string[] {
     `**/*.{${suffixGlob}}.d.ts`,
     `**/*.{${suffixGlob}}/**/*.ts`,
     `**/*.{${suffixGlob}}/**/*.d.ts`,
+    `**/react/**/*.ts`,
+    `**/react/**/*.d.ts`,
   ];
 }
 
