@@ -934,6 +934,7 @@ __metadata:
     "@iconify/types": "npm:^2.0.0"
     "@lit-labs/signals": "npm:^0.3.0"
     "@storybook/web-components-vite": "npm:^10.5.0"
+    "@wc-toolkit/react-wrappers": "npm:^1.2.6"
     "@wc-toolkit/type-parser": "npm:1.2.1"
     fake-indexeddb: "npm:^6.2.5"
     idb: "npm:^8.0.3"
@@ -944,6 +945,8 @@ __metadata:
     storybook: "npm:^10.5.0"
     typescript: "npm:~7.0.2"
     vite: "npm:^8.1.4"
+  peerDependencies:
+    react: ^19.0.0
   languageName: unknown
   linkType: soft
 
