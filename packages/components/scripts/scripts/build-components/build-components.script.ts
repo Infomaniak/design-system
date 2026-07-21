@@ -1,4 +1,4 @@
-import { cp, rm } from 'node:fs/promises';
+import { cp, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { BuildConfig } from '../../../../../scripts/helpers/build/build-config/build-config.ts';
@@ -25,6 +25,22 @@ await runScript('build-components', async (logger: Logger): Promise<void> => {
   await cp(join(ROOT_DIR, 'custom-elements.json'), join(OUTPUT_DIR, 'custom-elements.json'), {
     force: true,
   });
+
+  // Copy JSX type augmentations into dist so they're shipped with the package
+  const jsxTypesFiles = ['generated-jsx-types.d.ts'];
+  for (const file of jsxTypesFiles) {
+    await cp(join(ROOT_DIR, 'src', file), join(OUTPUT_DIR, file), { force: true });
+  }
+
+  // Ensure the triple-slash reference is present in dist public-api declaration so consumers
+  // automatically load JSX types when importing the package.
+  const distPublicApiDts = join(OUTPUT_DIR, 'public-api.d.ts');
+  const publicApiContent = await readFile(distPublicApiDts, 'utf-8');
+  const referenceDirective = '/// <reference path="./generated-jsx-types.d.ts" />';
+  if (!publicApiContent.includes(referenceDirective)) {
+    const augmentedContent = `${referenceDirective}\n${publicApiContent}`;
+    await writeFile(distPublicApiDts, augmentedContent);
+  }
 
   await generateWorkspaceNpmPackage({
     ...buildConfig,
