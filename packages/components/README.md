@@ -31,10 +31,13 @@ EsdsIconComponent.define();
 
 #### React
 
-Import the React wrapper — the component is automatically registered:
+Import the React wrapper and the component class, then call `.define()` before rendering:
 
 ```tsx
+import { EsdsIconComponent } from '@infomaniak-design-system/components';
 import { EsdsIcon } from '@infomaniak-design-system/components/react';
+
+EsdsIconComponent.define();
 
 function App() {
   return <EsdsIcon name="esds:headset" />;
