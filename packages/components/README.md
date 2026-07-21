@@ -86,7 +86,7 @@ Note: this runs automatically on build.
 ```
 src/components/my-component/
 ├── my-component.component.ts         # Lit component + JSDoc + signals
-├── my-component.component.css        # CSS style
+├── my-component.component.styles.ts  # Lit CSSResult styles
 ├── my-component.component.test.ts    # Tests
 └── my-component.component.stories.ts # Storybook story
 ```

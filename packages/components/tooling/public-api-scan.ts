@@ -7,7 +7,7 @@ const __dirname = path.resolve(path.dirname(__filename));
 
 const RELATIVE_SRC_DIR = '../src';
 const EXCLUDED_FILE = 'public-api.ts';
-const EXCLUDED_SUFFIXES = ['.private', '.test', '.stories', '.mock'];
+const EXCLUDED_SUFFIXES = ['.private', '.styles', '.test', '.stories', '.mock'];
 const ALLOWED_EXTENSIONS = ['.ts'];
 
 export interface SourceFile {

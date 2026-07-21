@@ -21,10 +21,10 @@ describe('public-api-scan', () => {
       const patterns = buildGlobExcludePatterns();
 
       expect(patterns).toContain('**/public-api.ts');
-      expect(patterns).toContain('**/*.{private,test,stories,mock}.ts');
-      expect(patterns).toContain('**/*.{private,test,stories,mock}.d.ts');
-      expect(patterns).toContain('**/*.{private,test,stories,mock}/**/*.ts');
-      expect(patterns).toContain('**/*.{private,test,stories,mock}/**/*.d.ts');
+      expect(patterns).toContain('**/*.{private,styles,test,stories,mock}.ts');
+      expect(patterns).toContain('**/*.{private,styles,test,stories,mock}.d.ts');
+      expect(patterns).toContain('**/*.{private,styles,test,stories,mock}/**/*.ts');
+      expect(patterns).toContain('**/*.{private,styles,test,stories,mock}/**/*.d.ts');
     });
   });
 
@@ -37,6 +37,7 @@ describe('public-api-scan', () => {
       { name: 'foo.test.ts', expected: true },
       { name: 'foo.stories.ts', expected: true },
       { name: 'foo.mock.ts', expected: true },
+      { name: 'foo.styles.ts', expected: true },
       { name: 'public-api.ts', expected: true },
       { name: 'foo.js', expected: true },
       { name: 'foo.json', expected: true },

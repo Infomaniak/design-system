@@ -1,5 +1,5 @@
 import { signal, SignalWatcher } from '@lit-labs/signals';
-import { html, LitElement, type TemplateResult, unsafeCSS } from 'lit';
+import { html, LitElement, type TemplateResult } from 'lit';
 import { property } from 'lit/decorators.js';
 import { batch } from 'signal-utils/subtle/batched-effect';
 import { defineComponent } from '../../helpers/.private/component/define-component.ts';
@@ -13,7 +13,7 @@ import type { Signal } from '../../helpers/.private/signal/signal/signal.ts';
 import type { WritableSignal } from '../../helpers/.private/signal/signal/writable-signal.ts';
 import { InjectableValue } from '../../helpers/injection-context/injection-context.ts';
 import { IconifyApi } from '../../iconify-api/iconify-api.ts';
-import style from './esds-icon.component.css?inline';
+import { iconStyles } from './esds-icon.component.styles.ts';
 
 export type EsdsIconComponentStatus = 'loading' | 'rendered' | 'error';
 
@@ -32,7 +32,7 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
     defineComponent('esds-icon', this);
   }
 
-  static override styles = unsafeCSS(style);
+  static override styles = [iconStyles];
 
   /* PUBLIC PROPERTIES */
 

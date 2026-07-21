@@ -1,10 +1,9 @@
 import { signal, SignalWatcher } from '@lit-labs/signals';
-import { html, LitElement, type PropertyValues, unsafeCSS } from 'lit';
+import { html, LitElement, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 import { defineComponent } from '../helpers.private/component/define-component.ts';
 
-
-import style from './{{name}}.component.css?inline';
+import { {{pascalCase name}}Styles } from './{{name}}.component.styles.ts';
 
 /**
  * {{pascalCase name}} web component.
@@ -17,7 +16,7 @@ export class {{pascalCase name}} extends SignalWatcher(LitElement) {
     defineComponent('{{name}}', this);
   }
 
-  static override styles = unsafeCSS(style);
+  static override styles = [{{pascalCase name}}Styles];
 
   /**
    * Text label displayed when the default slot is empty.
