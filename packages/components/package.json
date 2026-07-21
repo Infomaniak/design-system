@@ -31,7 +31,6 @@
     "Infomaniak",
     "Components"
   ],
-  "private": true,
   "dependencies": {
     "@lit-labs/signals": "^0.3.0",
     "idb": "^8.0.3",
