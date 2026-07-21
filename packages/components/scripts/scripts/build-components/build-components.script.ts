@@ -26,6 +26,12 @@ await runScript('build-components', async (logger: Logger): Promise<void> => {
     force: true,
   });
 
+  // Copy generated React wrappers into dist so they're included in the published package
+  await cp(join(ROOT_DIR, 'react'), join(OUTPUT_DIR, 'react'), {
+    force: true,
+    recursive: true,
+  });
+
   await generateWorkspaceNpmPackage({
     ...buildConfig,
     packageDirectory: ROOT_DIR,

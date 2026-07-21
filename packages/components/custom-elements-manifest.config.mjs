@@ -1,3 +1,4 @@
+import { reactWrapperPlugin } from '@wc-toolkit/react-wrappers';
 import { getTsProgram, typeParserPlugin } from '@wc-toolkit/type-parser';
 
 export default {
@@ -10,6 +11,14 @@ export default {
     typeParserPlugin({
       debug: false,
       typeSrc: 'types',
+    }),
+    reactWrapperPlugin({
+      outdir: './react',
+      stronglyTypedEvents: true,
+      componentNameFormatter: (tagName, componentName) => {
+        return componentName.replace(/Component$/, '');
+      },
+      modulePath: () => '@infomaniak-design-system/components',
     }),
   ],
   overrideModuleCreation({ ts, globs }) {

@@ -4,22 +4,28 @@
   "type": "module",
   "files": [
     "dist",
-    "custom-elements.json"
+    "custom-elements.json",
+    "react/"
   ],
   "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/public-api.d.ts",
       "import": "./dist/public-api.js"
+    },
+    "./react": {
+      "types": "./react/index.d.ts",
+      "import": "./react/index.js"
     }
   },
   "scripts": {
     "=== BUILD ===": "",
     "build": "node --no-warnings=ExperimentalWarning scripts/scripts/build-components/build-components.script.ts",
-    "build:manual": "yarn generate:public-api && yarn analyze:cem && yarn build:ts:vite && yarn build:ts:definitions",
+    "build:manual": "yarn generate:public-api && yarn analyze:cem && yarn patch:react-wrappers && yarn build:ts:vite && yarn build:ts:definitions",
     "build:ts:vite": "vite build",
     "build:ts:definitions": "tsc -p tsconfig.build.json",
     "analyze:cem": "cem analyze --config ./custom-elements-manifest.config.mjs",
+    "patch:react-wrappers": "node scripts/scripts/patch-react-wrappers/patch-react-wrappers.script.ts",
     "=== PUBLISH ===": "",
     "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-components/publish-components.script.ts",
     "=== GENERATE ===": "",
@@ -43,12 +49,16 @@
     "@custom-elements-manifest/analyzer": "^0.11.0",
     "@iconify/types": "^2.0.0",
     "@storybook/web-components-vite": "^10.5.0",
+    "@wc-toolkit/react-wrappers": "^1.2.6",
     "@wc-toolkit/type-parser": "1.2.1",
     "fake-indexeddb": "^6.2.5",
     "plop": "^4.0.5",
     "storybook": "^10.5.0",
     "typescript": "~7.0.2",
     "vite": "^8.1.4"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
   },
   "customElements": "custom-elements.json"
 }

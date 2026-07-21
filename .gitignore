@@ -167,4 +167,5 @@ apps/docs/public/DESIGN.md
 apps/docs/src/stories/assets/*.md
 packages/tokens/scripts/scripts/convert-figma-tokens/tokens
 packages/components/custom-elements.json
+packages/components/react/
 .tmp

@@ -19,12 +19,26 @@ npm install @infomaniak-design-system/components
 
 ### Usage
 
+#### Web Components (Vanilla JS / Vue / Angular / etc.)
+
 Import a component and call `.define()` in your entry file before rendering:
 
 ```ts
 import { EsdsIconComponent } from '@infomaniak-design-system/components';
 
 EsdsIconComponent.define();
+```
+
+#### React
+
+Import the React wrapper — the component is automatically registered:
+
+```tsx
+import { EsdsIcon } from '@infomaniak-design-system/components/react';
+
+function App() {
+  return <EsdsIcon name="esds:headset" />;
+}
 ```
 
 Use it in HTML or JSX:
