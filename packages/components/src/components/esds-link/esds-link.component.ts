@@ -13,19 +13,19 @@ import style from './esds-link.component.css?inline';
  * @csspart base - The internal anchor element
  * @fires esds-link-click - Fired when the link is clicked, contains the original MouseEvent in detail. Always a MouseEvent (Enter key triggers native click synthesis)
  *
- * @cssproperty --esds-link-default-color - Default link color
+ * @cssproperty --esds-link-content - Default link color
  * @cssproperty --esds-link-default-text-decoration - Default link text decoration
- * @cssproperty --esds-link-visited-color - Visited link color
+ * @cssproperty --esds-link-content-visited - Visited link color
  * @cssproperty --esds-link-visited-text-decoration - Visited link text decoration
- * @cssproperty --esds-link-hover-color - Hover link color
+ * @cssproperty --esds-link-content-hover - Hover link color
  * @cssproperty --esds-link-hover-text-decoration - Hover link text decoration
- * @cssproperty --esds-link-pressed-color - Pressed/active link color
+ * @cssproperty --esds-link-content-pressed - Pressed/active link color
  * @cssproperty --esds-link-pressed-text-decoration - Pressed/active link text decoration
- * @cssproperty --esds-link-visited-hover-color - Visited + hover link color
+ * @cssproperty --esds-link-content-visited-hover - Visited + hover link color
  * @cssproperty --esds-link-visited-hover-text-decoration - Visited + hover link decoration
- * @cssproperty --esds-link-visited-pressed-color - Visited + pressed link color
+ * @cssproperty --esds-link-content-visited-pressed - Visited + pressed link color
  * @cssproperty --esds-link-visited-pressed-text-decoration - Visited + pressed link decoration
- * @cssproperty --esds-focus-ring - Focus ring style
+ * @cssproperty --esds-link-focus - Focus ring style
  */
 export class EsdsLinkComponent extends LitElement {
   static override shadowRootOptions: ShadowRootInit = {
