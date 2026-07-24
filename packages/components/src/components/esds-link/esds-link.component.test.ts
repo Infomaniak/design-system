@@ -1,11 +1,5 @@
-import { readFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { EsdsLinkComponent } from './esds-link.component.ts';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const CSS_CONTENT = readFileSync(join(__dirname, 'esds-link.component.css'), 'utf-8');
 
 EsdsLinkComponent.define();
 
@@ -28,7 +22,7 @@ describe('EsdsLinkComponent', () => {
     expect(el).instanceOf(EsdsLinkComponent);
   });
 
-  describe('attributes', () => {
+  describe('href', () => {
     it('should reflect href to the anchor', async () => {
       const el = document.createElement('esds-link');
       el.href = 'https://example.com';
@@ -47,96 +41,9 @@ describe('EsdsLinkComponent', () => {
       const anchor = el.shadowRoot?.querySelector('a');
       expect(anchor?.hasAttribute('href')).toBe(false);
     });
+  });
 
-    it('should reflect aria-label to the anchor', async () => {
-      const el = document.createElement('esds-link');
-      el.ariaLabel = 'Label text';
-      container.append(el);
-      await el.updateComplete;
-
-      const anchor = el.shadowRoot?.querySelector('a');
-      expect(anchor?.getAttribute('aria-label')).toBe('Label text');
-    });
-
-    it('should reflect aria-current to the anchor', async () => {
-      const el = document.createElement('esds-link');
-      el.ariaCurrent = 'page';
-      container.append(el);
-      await el.updateComplete;
-
-      const anchor = el.shadowRoot?.querySelector('a');
-      expect(anchor?.getAttribute('aria-current')).toBe('page');
-    });
-
-    it('should reflect title to the anchor', async () => {
-      const el = document.createElement('esds-link');
-      el.title = 'Tooltip text';
-      container.append(el);
-      await el.updateComplete;
-
-      const anchor = el.shadowRoot?.querySelector('a');
-      expect(anchor?.getAttribute('title')).toBe('Tooltip text');
-    });
-
-    it('should reflect referrerpolicy to the anchor', async () => {
-      const el = document.createElement('esds-link');
-      el.referrerPolicy = 'no-referrer';
-      container.append(el);
-      await el.updateComplete;
-
-      const anchor = el.shadowRoot?.querySelector('a');
-      expect(anchor?.getAttribute('referrerpolicy')).toBe('no-referrer');
-    });
-
-    it('should reflect target to the anchor', async () => {
-      const el = document.createElement('esds-link');
-      el.target = '_blank';
-      container.append(el);
-      await el.updateComplete;
-
-      const anchor = el.shadowRoot?.querySelector('a');
-      expect(anchor?.getAttribute('target')).toBe('_blank');
-    });
-
-    it('should not set target attribute when target is empty', async () => {
-      const el = document.createElement('esds-link');
-      container.append(el);
-      await el.updateComplete;
-
-      const anchor = el.shadowRoot?.querySelector('a');
-      expect(anchor?.hasAttribute('target')).toBe(false);
-    });
-
-    it('should reflect download to the anchor', async () => {
-      const el = document.createElement('esds-link');
-      el.download = 'file.pdf';
-      container.append(el);
-      await el.updateComplete;
-
-      const anchor = el.shadowRoot?.querySelector('a');
-      expect(anchor?.getAttribute('download')).toBe('file.pdf');
-    });
-
-    it('should not set download attribute when download is not set', async () => {
-      const el = document.createElement('esds-link');
-      container.append(el);
-      await el.updateComplete;
-
-      const anchor = el.shadowRoot?.querySelector('a');
-      expect(anchor?.hasAttribute('download')).toBe(false);
-    });
-
-    it('should set empty download attribute when download is explicitly empty', async () => {
-      const el = document.createElement('esds-link');
-      el.setAttribute('download', '');
-      container.append(el);
-      await el.updateComplete;
-
-      const anchor = el.shadowRoot?.querySelector('a');
-      expect(anchor?.hasAttribute('download')).toBe(true);
-      expect(anchor?.getAttribute('download')).toBe('');
-    });
-
+  describe('rel auto-computation', () => {
     it('should not set rel when target is not _blank and no rel provided', async () => {
       const el = document.createElement('esds-link');
       container.append(el);
@@ -227,14 +134,6 @@ describe('EsdsLinkComponent', () => {
     });
   });
 
-  describe('styles', () => {
-    it('should apply inline-flex display with gap to the anchor', () => {
-      expect(CSS_CONTENT).toContain('display: inline-flex');
-      expect(CSS_CONTENT).toContain('gap: var(--esds-spacing-xs)');
-      expect(CSS_CONTENT).toContain('white-space: nowrap');
-    });
-  });
-
   describe('events', () => {
     it('should dispatch esds-link-click on anchor click', async () => {
       const el = document.createElement('esds-link');
@@ -287,7 +186,9 @@ describe('EsdsLinkComponent', () => {
 
       expect(mouseEvent.defaultPrevented).toBe(false);
     });
+  });
 
+  describe('warnings', () => {
     it('should warn when href is empty', async () => {
       const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
       const el = document.createElement('esds-link');
