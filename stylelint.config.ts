@@ -7,7 +7,7 @@ export default {
     'at-rule-no-unknown': [true, { ignoreAtRules: ['reference'] }], // for tailwind support
     'comment-empty-line-before': null, // allow flexibility in comments
     'comment-whitespace-inside': null, // allow flexibility in comments
-    // 'declaration-no-important': true, // TODO: if possible we should tend to forbid !important
+    'declaration-no-important': [true, { severity: 'warning' }], // allow !important, but warn to avoid accidental or over-use
     'import-notation': 'string', // use string instead of url
     'no-unknown-animations': true, // prevent global animations
     'no-unknown-custom-media': true, // prevent global media queries
