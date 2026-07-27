@@ -2,6 +2,10 @@
 
 Contains the list of Infomaniak's Design System SVGs.
 
+- [Documentation ↗](https://infomaniak.github.io/design-system/storybook/main/?path=/docs/components-getting-started--docs)
+- [Gallery ↗](https://infomaniak.github.io/design-system/storybook/main/?path=/docs/icons-icon-gallery--docs&collection=esds)
+- [Iconography Guideline ↗](https://www.figma.com/design/nbEPxwoIzXfZVquwR4NfYg/Edelweiss---Iconography?node-id=0-1&p=f&t=50O2v4pgV2smKfy8-0)
+
 ## Workflow
 
 ### Add a new SVG
