@@ -11,15 +11,28 @@
     ".": {
       "types": "./dist/public-api.d.ts",
       "import": "./dist/public-api.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.ts",
+      "import": "./dist/react/index.js"
+    },
+    "./angular": {
+      "types": "./dist/angular/index.ts",
+      "import": "./dist/angular/index.ts"
+    },
+    "./vue": {
+      "types": "./dist/vue/index.ts",
+      "import": "./dist/vue/index.ts"
     }
   },
   "scripts": {
     "=== BUILD ===": "",
     "build": "node --no-warnings=ExperimentalWarning scripts/scripts/build-components/build-components.script.ts",
-    "build:manual": "yarn generate:public-api && yarn analyze:cem && yarn build:ts:vite && yarn build:ts:definitions",
+    "build:manual": "yarn generate:public-api && yarn analyze:cem && yarn build:ts:vite && yarn build:ts:definitions && yarn build:wrappers",
     "build:ts:vite": "vite build",
     "build:ts:definitions": "tsc -p tsconfig.build.json",
-    "analyze:cem": "cem analyze --config ./custom-elements-manifest.config.mjs",
+    "build:wrappers": "node --no-warnings=ExperimentalWarning scripts/scripts/build-wrappers/build-wrappers.script.ts",
+    "analyze:cem": "node --no-warnings=ExperimentalWarning scripts/scripts/analyze-cem/analyze-cem.script.ts",
     "=== PUBLISH ===": "",
     "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-components/publish-components.script.ts",
     "=== GENERATE ===": "",
@@ -42,6 +55,7 @@
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.11.0",
     "@iconify/types": "^2.0.0",
+    "@pwrs/cem": "^0.11.0",
     "@storybook/web-components-vite": "^10.5.0",
     "@wc-toolkit/type-parser": "1.2.1",
     "fake-indexeddb": "^6.2.5",
@@ -49,6 +63,22 @@
     "storybook": "^10.5.0",
     "typescript": "~7.0.2",
     "vite": "^8.1.4"
+  },
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "@angular/core": ">=19.0.0",
+    "vue": ">=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "@angular/core": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
   },
   "customElements": "custom-elements.json"
 }

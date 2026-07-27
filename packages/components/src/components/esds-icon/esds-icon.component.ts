@@ -46,6 +46,7 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
   @property({ type: String })
   accessor name!: string;
 
+  /** @internal */
   readonly #name: WritableSignal<string> = signalProperty(this, 'name');
 
   // INLINE
@@ -61,6 +62,7 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
 
   // STATUS
 
+  /** @internal */
   readonly #status: WritableSignal<EsdsIconComponentStatus> =
     signal<EsdsIconComponentStatus>('loading');
 
@@ -75,6 +77,7 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
 
   /* INTERNAL */
 
+  /** @internal */
   readonly #api: Signal<IconifyApi> = hostInject(
     this,
     ICONIFY_API,
@@ -133,16 +136,19 @@ export class EsdsIconComponent extends SignalWatcher(LitElement) {
 
   // VISIBLE
 
+  /** @internal */
   readonly #visible: WritableSignal<boolean> = signal<boolean>(false);
 
   // LOAD & RENDER ICON
 
+  /** @internal */
   readonly #svgNode: WritableSignal<SVGSVGElement | null> = signal<SVGSVGElement | null>(null);
 
   override render(): TemplateResult {
     return html`${this.#svgNode.get()}`;
   }
 
+  /** @internal */
   #loadIcon(signal: AbortSignal): void {
     if (!this.#visible.get() || !this.isConnected) {
       return;
