@@ -1,15 +1,16 @@
 @import './components/button.css';
+
 @reference '#tailwind';
 
 body {
   @apply flex flex-col items-start gap-8 p-4;
 
   background-color: var(--esds-color-background-elevation-surface-default);
-  /*  display: flex;*/
-  /*  flex-direction: column;*/
-  /*  align-items: flex-start;*/
-  /*  gap: var(--esde-spacing-4);*/
-  /*  padding: var(--esde-spacing-4);*/
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*align-items: flex-start;*/
+  /*gap: var(--esde-spacing-4);*/
+  /*padding: var(--esde-spacing-4);*/
 }
 
 h1 {
@@ -25,23 +26,23 @@ h1 {
   border-radius: var(--esde-radius-100);
 }
 
-/*h1 {*/
-/*  font: var(--esde-typography-heading-large);*/
-/*  color: var(--esde-color-text-default);*/
-/*}*/
+/* h1 { */
+/*  font: var(--esde-typography-heading-large); */
+/*  color: var(--esde-color-text-default); */
+/* } */
 
-/*.card {*/
-/*  background-color: var(--esde-color-background-secondary);*/
-/*  font: var(--esde-typography-body-medium);*/
-/*  color: var(--esde-color-text-default);*/
-/*  padding: var(--esde-spacing-3);*/
-/*  border-radius: var(--esde-radius-100);*/
-/*}*/
+/* .card { */
+/*  background-color: var(--esde-color-background-secondary); */
+/*  font: var(--esde-typography-body-medium); */
+/*  color: var(--esde-color-text-default); */
+/*  padding: var(--esde-spacing-3); */
+/*  border-radius: var(--esde-radius-100); */
+/* } */
 
-/*button {*/
-/*  padding: var(--esde-spacing-2);*/
-/*  border-radius: var(--esde-spacing-1);*/
-/*  background-color: var(--esde-button-background-color);*/
-/*  font: var(--esde-typography-body-medium);*/
-/*  color: white;*/
-/*}*/
+/* button { */
+/*  padding: var(--esde-spacing-2); */
+/*  border-radius: var(--esde-spacing-1); */
+/*  background-color: var(--esde-button-background-color); */
+/*  font: var(--esde-typography-body-medium); */
+/*  color: white; */
+/* } */
