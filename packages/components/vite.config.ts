@@ -14,11 +14,15 @@ export default defineConfig({
       formats: ['es'],
     },
     rolldownOptions: {
-      external: ['lit', /lit\/.*/],
+      external: ['lit', /lit\/.*/, /@infomaniak-design-system\/tokens\.*/],
       output: {
         preserveModules: true,
       },
     },
+  },
+  css: {
+    postcss: {},
+    lightningcss: {},
   },
   plugins: [viteTc39DecoratorsPlugin()],
 });

@@ -1,4 +1,8 @@
-export function defineComponent(tagName: string, ctor: CustomElementConstructor): void {
+export function defineComponent(
+  tagName: string,
+  ctor: CustomElementConstructor,
+  options?: ElementDefinitionOptions,
+): void {
   const registry = globalThis.customElements;
 
   if (registry === undefined) {
@@ -6,6 +10,6 @@ export function defineComponent(tagName: string, ctor: CustomElementConstructor)
   }
 
   if (!registry.get(tagName)) {
-    registry.define(tagName, ctor);
+    registry.define(tagName, ctor, options);
   }
 }

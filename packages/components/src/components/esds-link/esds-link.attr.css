@@ -1,0 +1,62 @@
+[esds-link] {
+  /* Default */
+  --esds-link-content: currentcolor;
+  --esds-link-text-decoration-default: underline;
+
+  /* Visited */
+  --esds-link-content-visited: currentcolor;
+  --esds-link-text-decoration-visited: underline;
+
+  /* Hover */
+  --esds-link-content-hover: currentcolor;
+  --esds-link-text-decoration-hover: underline;
+
+  /* Pressed */
+  --esds-link-content-pressed: currentcolor;
+  --esds-link-text-decoration-pressed: underline;
+
+  /* Visited + Hover */
+  --esds-link-content-visited-hover: currentcolor;
+  --esds-link-text-decoration-visited-hover: underline;
+
+  /* Visited + Pressed */
+  --esds-link-content-visited-pressed: currentcolor;
+  --esds-link-text-decoration-visited-pressed: underline;
+
+  /* Focus ring */
+  --esds-link-focus: 2px solid currentcolor;
+
+  display: inline;
+  color: var(--esds-link-content);
+  text-decoration: var(--esds-link-text-decoration-default);
+
+  &:focus-visible {
+    outline: var(--esds-link-focus);
+    outline-offset: 2px;
+  }
+
+  &:hover {
+    color: var(--esds-link-content-hover);
+    text-decoration: var(--esds-link-text-decoration-hover);
+  }
+
+  &:active {
+    color: var(--esds-link-content-pressed);
+    text-decoration: var(--esds-link-text-decoration-pressed);
+  }
+
+  &:visited {
+    color: var(--esds-link-content-visited);
+    text-decoration: var(--esds-link-text-decoration-visited);
+
+    &:hover {
+      color: var(--esds-link-content-visited-hover);
+      text-decoration: var(--esds-link-text-decoration-visited-hover);
+    }
+
+    &:active {
+      color: var(--esds-link-content-visited-pressed);
+      text-decoration: var(--esds-link-text-decoration-visited-pressed);
+    }
+  }
+}

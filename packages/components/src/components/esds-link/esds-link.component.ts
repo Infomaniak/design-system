@@ -134,6 +134,7 @@ export class EsdsLinkComponent extends LitElement {
   override render(): TemplateResult {
     return html`
       <a
+        esds-link
         part="base"
         href=${this.href || nothing}
         target=${this.target || nothing}

@@ -2,6 +2,10 @@ import { EsdsIconComponent } from '@infomaniak-design-system/components';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
+import { htmlElementRef } from '../../helpers/.private/component/html-element-ref.ts';
+import { AttributeRegistry } from '../../helpers/custom-attribute/custom-attribute.ts';
+import { EsdsLinkAttr } from './esds-link.attr.ts';
+import documentation from './esds-link.component.md?raw';
 import { EsdsLinkComponent } from './esds-link.component.ts';
 
 EsdsIconComponent.define();
@@ -16,38 +20,7 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: `
-## Usage
-
-Import and register the link component:
-
-\`\`\`ts
-import { EsdsLinkComponent } from '@infomaniak-design-system/components';
-
-EsdsLinkComponent.define();
-\`\`\`
-
-\`\`\`html
-<esds-link href="https://example.com">Link text</esds-link>
-\`\`\`
-
-## Click Interception
-
-Subscribe to the \`esds-link-click\` event to intercept clicks for SPA routing:
-
-\`\`\`ts
-link.addEventListener('esds-link-click', (e) => {
-  e.preventDefault(); // Cancels native navigation
-  router.navigate(e.target.href);
-});
-\`\`\`
-
-## Accessibility
-
-- Uses native \`<a>\` in shadow DOM with \`delegatesFocus\`
-- Tab key focus behaves like a native link
-- Auto-adds \`noopener noreferrer\` when \`target="_blank"\`
-        `,
+        component: documentation,
       },
     },
   },
@@ -64,6 +37,40 @@ export const Default: Story = {
     href: 'https://infomaniak.com',
   },
   render: (args) => html` <esds-link href="${args.href}">Text link</esds-link> `,
+};
+
+export const AttributeBased: Story = {
+  args: {
+    href: 'https://infomaniak.com',
+    target: '_blank',
+    rel: 'noopener noreferrer nofollow',
+  },
+  render: (args) => html`
+    <div style="display: flex; align-content: space-between; gap: 4px; width: 100%">
+      <div>abc</div>
+      <esds-link
+        style="flex-grow: 1"
+        href="${args.href}"
+        target="${args.target}"
+        rel="${args.rel}"
+      >
+        Abc
+      </esds-link>
+      <a
+        esds-link
+        style="flex-grow: 1"
+        ${htmlElementRef((element: Element) => {
+          EsdsLinkAttr.define({
+            registry: AttributeRegistry.of(element.ownerDocument!),
+          });
+        })}
+        href="${args.href}"
+        target="${args.target}"
+        rel="${args.rel}"
+        >def</a
+      >
+    </div>
+  `,
 };
 
 export const External: Story = {
