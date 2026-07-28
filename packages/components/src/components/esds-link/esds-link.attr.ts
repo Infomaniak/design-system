@@ -4,11 +4,11 @@ import {
   CustomAttribute,
   type CustomAttributeDefinition,
 } from '../../helpers/custom-attribute/custom-attribute.ts';
-import { InjectableStyle } from '../../helpers/style/injectable-style.ts';
+import { InjectableStyleSheet } from '../../helpers/style/injectable-style-sheet.ts';
 
 import style from './esds-link.component.css?inline';
 
-const styleSheet = InjectableStyle.parse(style);
+const styleSheet = InjectableStyleSheet.parse(style);
 
 export interface EsdsLinkAttrDefineOptions {
   readonly registry?: AttributeRegistry;

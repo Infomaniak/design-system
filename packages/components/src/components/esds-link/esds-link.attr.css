@@ -1,4 +1,4 @@
-[esds-link] {
+:root {
   /* Default */
   --esds-link-content: currentcolor;
   --esds-link-text-decoration-default: underline;
@@ -25,7 +25,9 @@
 
   /* Focus ring */
   --esds-link-focus: 2px solid currentcolor;
+}
 
+[esds-link] {
   display: inline;
   color: var(--esds-link-content);
   text-decoration: var(--esds-link-text-decoration-default);

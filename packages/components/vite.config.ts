@@ -1,6 +1,6 @@
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
 import { viteTc39DecoratorsPlugin } from '../../plugins/vite-tc39-decorators-plugin.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -13,16 +13,23 @@ export default defineConfig({
       fileName: 'public-api',
       formats: ['es'],
     },
+
     rolldownOptions: {
-      external: ['lit', /lit\/.*/, /@infomaniak-design-system\/tokens\.*/],
+      external: ['lit', /lit\/.*/],
       output: {
         preserveModules: true,
       },
     },
   },
-  css: {
-    postcss: {},
-    lightningcss: {},
-  },
-  plugins: [viteTc39DecoratorsPlugin()],
+  plugins: [viteTc39DecoratorsPlugin(), removeConsoleAssert()],
 });
+
+export function removeConsoleAssert(): Plugin {
+  return {
+    name: 'remove-console-assert',
+
+    transform() {
+      // TODO
+    },
+  };
+}

@@ -5,19 +5,19 @@ import type { CleanUpFunction } from '../.private/misc/clean-up-function.ts';
  * This class ensures that a stylesheet is only injected once per container and provides cleanup
  * functionality to remove injected styles when they are no longer needed.
  */
-export class InjectableStyle {
+export class InjectableStyleSheet {
   /**
    * Parses a CSS string and returns an instance of InjectableStyle.
    *
    * @param {string} css - The CSS string to be parsed and applied to a new CSSStyleSheet instance.
    * @param {CSSStyleSheetInit} [options] - Optional configuration object for the CSSStyleSheet.
-   * @return {InjectableStyle} An instance of InjectableStyle containing the parsed CSSStyleSheet.
+   * @return {InjectableStyleSheet} An instance of InjectableStyle containing the parsed CSSStyleSheet.
    */
-  static parse(css: string, options?: CSSStyleSheetInit): InjectableStyle {
+  static parse(css: string, options?: CSSStyleSheetInit): InjectableStyleSheet {
     const sheet: CSSStyleSheet = new CSSStyleSheet(options);
     sheet.replaceSync(css);
 
-    return new InjectableStyle(sheet);
+    return new InjectableStyleSheet(sheet);
   }
 
   readonly #sheet: CSSStyleSheet;
@@ -101,7 +101,7 @@ export class InjectableStyle {
    * Retrieves the container for a given node. The container can be a Document or a ShadowRoot.
    *
    * @param {Node} node - The starting node from which to find the container.
-   * @returns {DocumentOrShadowRoot} - The document or shadow root containing the node.
+   * @return {DocumentOrShadowRoot} - The document or shadow root containing the node.
    * @throws {Error} If no container is found.
    */
   #getContainer(node: Node): DocumentOrShadowRoot {
@@ -119,12 +119,11 @@ export class InjectableStyle {
   }
 
   /**
-   * Applies this style template from the specified DOM element, injecting styles if necessary,
-   * and setting up an undo function to remove the applied styles.
+   * Injects this stylesheet from the specified DOM element.
    *
-   * @param {Element} node - The DOM element from which the style template should be applied.
-   * @returns {CleanUpFunction} A function that, when called, removes the applied style template
-   *  from the DOM element and its container. Call this function when the Node becomes disconnected from the DOM.
+   * @param {Element} node - The DOM element from which the stylesheet should be applied.
+   * @return {CleanUpFunction} A function that, when called, removes the applied stylesheet.
+   * Call this function when the Node becomes disconnected from the DOM.
    */
   injectFrom(node: Element): CleanUpFunction {
     return this.inject(this.#getContainer(node));

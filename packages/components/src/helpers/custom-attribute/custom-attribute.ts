@@ -16,10 +16,6 @@
  * for handling connection and data changes.
  */
 export interface CustomAttributeDefinition extends Pick<Attr, 'ownerElement' | 'name' | 'value'> {
-  readonly ownerElement: Element | null;
-  readonly name: string;
-  value: string;
-
   /**
    * Invoked when:
    *  - the Attr is added to an element
@@ -238,7 +234,7 @@ export class AttributeRegistry {
    * @param {Node} [from=this.#root] - The node from which to start refreshing the DOM tree. Defaults to the root node of the tree.
    */
   #refreshTree(from: Node = this.#root): void {
-    const treeWalker: TreeWalker = document.createTreeWalker(from, NodeFilter.SHOW_ELEMENT);
+    const treeWalker: TreeWalker = this.#root.createTreeWalker(from, NodeFilter.SHOW_ELEMENT);
 
     if (from.nodeType === Node.ELEMENT_NODE) {
       this.#refreshElement(from as Element);
@@ -265,6 +261,10 @@ export class AttributeRegistry {
     if (attributeNameToAttr !== undefined) {
       for (const attr of attributeNameToAttr.values()) {
         elementAttributes.add(attr);
+
+        if (element.attributes.getNamedItem(attr.name) !== attr) {
+          this.#setIndirectAttrInstance(element as Element, attr.name, undefined);
+        }
       }
     }
 
@@ -273,7 +273,7 @@ export class AttributeRegistry {
       if (this.#registry.has(attr.name) && !elementAttributes.has(attr)) {
         elementAttributes.add(attr);
 
-        this.#setIndirectAttrInstance(element as Element, attr.name!, attr!);
+        this.#setIndirectAttrInstance(element, attr.name, attr);
       }
     }
 
@@ -344,7 +344,7 @@ export class AttributeRegistry {
 
     this.#registry.set(name, ctor);
 
-    this.#observer.disconnect();
+    // `this.#observer.disconnect();` -> implicitly done by `this.#observer.observe`
 
     this.#observer.observe(this.#root, {
       childList: true,
@@ -358,11 +358,16 @@ export class AttributeRegistry {
       this.#refreshElement(element);
     }
 
-    this.#whenDefined
-      .get(name)
-      ?.forEach(({ resolve }: PromiseWithResolvers<CustomAttributeConstructor>): void => {
+    const promiseWithResolvers: PromiseWithResolvers<CustomAttributeConstructor>[] | undefined =
+      this.#whenDefined.get(name);
+
+    if (promiseWithResolvers !== undefined) {
+      for (const { resolve } of promiseWithResolvers) {
         resolve(ctor);
-      });
+      }
+
+      this.#whenDefined.delete(name);
+    }
   }
 
   /**
