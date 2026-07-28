@@ -65,15 +65,15 @@
     "vite": "^8.1.4"
   },
   "peerDependencies": {
-    "react": ">=19.0.0",
     "@angular/core": ">=19.0.0",
+    "react": ">=19.0.0",
     "vue": ">=3.0.0"
   },
   "peerDependenciesMeta": {
-    "react": {
+    "@angular/core": {
       "optional": true
     },
-    "@angular/core": {
+    "react": {
       "optional": true
     },
     "vue": {
