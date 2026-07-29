@@ -13,9 +13,10 @@
 .token-table th {
   text-align: left;
   padding: 12px;
-  border-bottom: 2px solid var(--esds-color-gray-200, #e5e7eb) !important;
   font-weight: 600;
   color: var(--esds-color-gray-700, #374151);
+  border: none !important;
+  border-bottom: 1px solid var(--esds-color-gray-100, #f3f4f6) !important;
 }
 
 .token-table td {
@@ -54,7 +55,6 @@
   color: inherit;
   font: inherit;
   margin: 0;
-  padding: 0;
   cursor: pointer;
 
   /* Make it look like inline code */
@@ -102,11 +102,6 @@
 
 .token-table tr:first-child {
   border-top: none !important;
-}
-
-.token-table th {
-  border: none !important;
-  border-bottom: 1px solid var(--esds-color-gray-100, #f3f4f6) !important;
 }
 
 /* Tooltip for copy-to-clipboard functionality */

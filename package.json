@@ -16,8 +16,12 @@
     "format:check": "prettier --check --ignore-unknown --config .prettierrc \"./**/*.{js,jsx,ts,tsx,html,css,scss,json,md,mdx}\"",
     "format:fix": "prettier --write --ignore-unknown --config .prettierrc \"./**/*.{js,jsx,ts,tsx,html,css,scss,json,md,mdx}\"",
     "lint": "yarn lint:fix",
-    "lint:check": "yarn eslint",
-    "lint:fix": "yarn eslint --fix",
+    "lint:check": "yarn lint:check:eslint && yarn lint:check:stylelint",
+    "lint:fix": "yarn lint:fix:eslint && yarn lint:fix:stylelint",
+    "lint:check:eslint": "yarn eslint",
+    "lint:fix:eslint": "yarn eslint --fix",
+    "lint:check:stylelint": "stylelint \"**/*.css\"",
+    "lint:fix:stylelint": "stylelint \"**/*.css\" --fix",
     "check": "yarn check:types && yarn format:check && yarn lint:check",
     "check:types": "tsc -p tsconfig.json --noEmit",
     "=== TEST ===": "",
@@ -53,7 +57,6 @@
       "packages/tokens/demo",
       "packages/components",
       "packages/assets/images/svg",
-      "packages/assets/images/component/web",
       "apps/docs"
     ]
   },
@@ -63,6 +66,9 @@
     ],
     "./**/*.{js,jsx,ts,tsx}": [
       "eslint --fix"
+    ],
+    "./**/*.{css}": [
+      "stylelint \"**/*.css\" --fix"
     ]
   },
   "devDependencies": {
@@ -98,6 +104,8 @@
     "rolldown": "^1.1.5",
     "semver": "^7.8.5",
     "storybook": "^10.5.0",
+    "stylelint": "^17.14.1",
+    "stylelint-config-standard": "^40.0.0",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "typescript-eslint": "^8.64.0",
     "vitest": "^4.1.10"
