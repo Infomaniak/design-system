@@ -19,11 +19,21 @@ export function tokensBrueckeDesignTokenWithMapValueToDesignToken<
     $value: isCurlyReference(token.$value) ? token.$value : mapValue(token.$value),
     $type,
     ...removeUndefinedProperties({
-      $deprecated: token.$deprecated,
+      $deprecated: tokensBrueckeDesignTokenToDesignTokenDeprecated(token),
       $description: tokensBrueckeDesignTokenToDesignTokenDescription(token),
       $extensions: tokensBrueckeDesignTokenToDesignTokenExtensions(token, mapValue),
     }),
   };
+}
+
+function tokensBrueckeDesignTokenToDesignTokenDeprecated(
+  token: GenericTokensBrueckeDesignToken,
+): string | boolean | undefined {
+  if (token.$deprecated === undefined && token.$description !== undefined) {
+    return /^@deprecated(\s+|$)/.test(token.$description);
+  } else {
+    return token.$deprecated;
+  }
 }
 
 function tokensBrueckeDesignTokenToDesignTokenDescription(
@@ -32,7 +42,7 @@ function tokensBrueckeDesignTokenToDesignTokenDescription(
   if (token.$description === undefined || token.$description === '') {
     return undefined;
   } else {
-    return token.$description;
+    return token.$description.replace(/^@deprecated(\s+|$)/, '');
   }
 }
 

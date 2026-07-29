@@ -252,6 +252,34 @@ The package is published into [a dedicated GitHub repository](https://github.com
 
 TODO
 
-## Import tokens into figma
+## Figma bridge
 
-We use the Figma [TokensBrücke plugin](../../docs/figma/tokens-bruecke/figma-tokens-bruecke.md) to import the figma variables.
+Figma does not provide a way to import or export tokens directly (without the Enterprise plan).
+Thus, we have to perform a manual process.
+
+> [!NOTE]
+> We use the Figma [TokensBrücke plugin](../../docs/figma/tokens-bruecke/figma-tokens-bruecke.md) to import/export the figma variables.
+
+### Export the tokens from figma
+
+Follow [the instructions](../../docs/figma/tokens-bruecke/figma-tokens-bruecke.md) to export the tokens from figma, with the name `tokens.json`.
+
+Then put this file at this destination `packages/tokens/scripts/scripts/convert-figma-tokens/tokens/tokens.json`.
+
+Go to `packages/tokens`, and run the following command:
+
+```shell
+yarn convert-figma-tokens
+```
+
+It will export the tokens into `packages/tokens/tokens/**`, with a valid DTCG format.
+
+### Import the tokens into figma
+
+Go to `packages/tokens`, and run the following command:
+
+```shell
+yarn build
+```
+
+Open the file `packages/tokens/dist/figma.tokens.json`, copy its content, and follow [the instructions](../../docs/figma/tokens-bruecke/figma-tokens-bruecke.md) to import the tokens into figma.

@@ -13,26 +13,6 @@
         }
       }
     },
-    "content": {
-      "brand": {
-        "default": {
-          "$value": "{color.content.brand.swisstransfer.default}"
-        },
-        "hover": {
-          "$value": "{color.content.brand.swisstransfer.hover}"
-        },
-        "pressed": {
-          "$value": "{color.content.brand.swisstransfer.pressed}"
-        }
-      },
-      "on": {
-        "brand": {
-          "default": {
-            "$value": "{color.content.on.brand.swisstransfer.default}"
-          }
-        }
-      }
-    },
     "border": {
       "brand": {
         "default": {
@@ -43,6 +23,26 @@
         },
         "pressed": {
           "$value": "{color.border.brand.swisstransfer.pressed}"
+        }
+      }
+    },
+    "content": {
+      "on": {
+        "brand": {
+          "default": {
+            "$value": "{color.content.on.brand.swisstransfer.default}"
+          }
+        }
+      },
+      "brand": {
+        "default": {
+          "$value": "{color.content.brand.swisstransfer.default}"
+        },
+        "hover": {
+          "$value": "{color.content.brand.swisstransfer.hover}"
+        },
+        "pressed": {
+          "$value": "{color.content.brand.swisstransfer.pressed}"
         }
       }
     }
