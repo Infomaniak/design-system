@@ -38,8 +38,9 @@ export class InjectableStyleSheet {
    * If the container has already been injected with the stylesheet, it increments the injection count.
    *
    * @param {DocumentOrShadowRoot} container - The document or shadow root into which the stylesheet will be injected.
+   * @return {CleanUpFunction} A function that when called, removes the injected stylesheet from the container.
    */
-  #inject(container: DocumentOrShadowRoot): CleanUpFunction {
+  inject(container: DocumentOrShadowRoot): CleanUpFunction {
     const count: number | undefined = this.#injected.get(container);
 
     if (count === undefined) {
@@ -76,25 +77,6 @@ export class InjectableStyleSheet {
     } else {
       this.#injected.set(container, count! - 1);
     }
-  }
-
-  /**
-   * Injects this stylesheet into the given container.
-   *
-   * @param {DocumentOrShadowRoot} container - The document or shadow root into which the stylesheet will be injected.
-   * @return {CleanUpFunction} A function that when called, removes the injected stylesheet from the container.
-   */
-  inject(container: DocumentOrShadowRoot): CleanUpFunction {
-    this.#inject(container);
-
-    let removed: boolean = false;
-
-    return (): void => {
-      if (!removed) {
-        removed = true;
-        this.#remove(container);
-      }
-    };
   }
 
   /**
