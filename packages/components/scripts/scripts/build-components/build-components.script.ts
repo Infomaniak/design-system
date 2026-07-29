@@ -26,12 +26,6 @@ await runScript('build-components', async (logger: Logger): Promise<void> => {
     force: true,
   });
 
-  // Copy JSX type augmentations into dist so they're shipped with the package
-  const jsxTypesFiles = ['generated-jsx-types.d.ts'];
-  for (const file of jsxTypesFiles) {
-    await cp(join(ROOT_DIR, 'src', file), join(OUTPUT_DIR, file), { force: true });
-  }
-
   // Ensure the triple-slash reference is present in dist public-api declaration so consumers
   // automatically load JSX types when importing the package.
   const distPublicApiDts = join(OUTPUT_DIR, 'public-api.d.ts');

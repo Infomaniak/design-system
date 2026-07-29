@@ -13,7 +13,7 @@ export default {
       typeSrc: 'types',
     }),
     jsxTypesPlugin({
-      outdir: './src',
+      outdir: './dist',
       fileName: 'generated-jsx-types.d.ts',
       stronglyTypedEvents: true,
       globalTypePath: '@infomaniak-design-system/components',

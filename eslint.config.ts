@@ -15,7 +15,6 @@ export default defineConfig([
       '**/.svn/**',
       '**/.hg/**',
       '**/node_modules/**',
-      '**/generated-jsx-types.d.ts',
     ],
   },
   {
