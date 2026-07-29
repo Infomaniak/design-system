@@ -1,19 +1,19 @@
 :root {
   /* Default */
-  --esds-link-content: currentcolor;
+  --esds-link-content: var(--esds-color-content-brand-default);
   --esds-link-text-decoration-default: underline;
+
+  /* Hover */
+  --esds-link-content-hover: var(--esds-color-content-brand-hover);
+  --esds-link-text-decoration-hover: underline;
+
+  /* Pressed */
+  --esds-link-content-pressed: var(--esds-color-content-brand-pressed);
+  --esds-link-text-decoration-pressed: underline;
 
   /* Visited */
   --esds-link-content-visited: currentcolor;
   --esds-link-text-decoration-visited: underline;
-
-  /* Hover */
-  --esds-link-content-hover: currentcolor;
-  --esds-link-text-decoration-hover: underline;
-
-  /* Pressed */
-  --esds-link-content-pressed: currentcolor;
-  --esds-link-text-decoration-pressed: underline;
 
   /* Visited + Hover */
   --esds-link-content-visited-hover: currentcolor;

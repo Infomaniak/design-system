@@ -43,7 +43,7 @@ export class EsdsLinkAttr extends CustomAttribute implements CustomAttributeDefi
   #undo: CleanUpFunction | undefined;
 
   constructor(attr: Attr) {
-    if (attr.ownerElement?.tagName !== 'a') {
+    if (attr.ownerElement?.tagName !== 'A') {
       throw new Error('esds-link attribute can only be used on <a> elements');
     }
     super(attr);
