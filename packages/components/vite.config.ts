@@ -1,6 +1,6 @@
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { defineConfig, type Plugin } from 'vite';
+import { defineConfig } from 'vite';
 import { viteTc39DecoratorsPlugin } from '../../plugins/vite-tc39-decorators-plugin.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -21,15 +21,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [viteTc39DecoratorsPlugin(), removeConsoleAssert()],
+  plugins: [viteTc39DecoratorsPlugin()],
 });
-
-export function removeConsoleAssert(): Plugin {
-  return {
-    name: 'remove-console-assert',
-
-    transform() {
-      // TODO
-    },
-  };
-}
