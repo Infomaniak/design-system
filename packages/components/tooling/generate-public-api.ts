@@ -21,7 +21,7 @@ async function main(): Promise<void> {
 
   const exportLines = sortedExportPaths.map((relativePath) => `export * from './${relativePath}';`);
 
-  const content = `/// <reference path="./generated-jsx-types.d.ts" />\n\n${exportLines.join('\n')}\n`;
+  const content = `${exportLines.join('\n')}\n`;
 
   fs.writeFileSync(outputFile, content, 'utf-8');
 
