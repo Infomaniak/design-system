@@ -44,6 +44,10 @@ export function isExcludedFile(name: string): boolean {
     return true;
   }
 
+  if (name.endsWith('.d.ts')) {
+    return true;
+  }
+
   if (!name.endsWith('.ts')) {
     return true;
   }
@@ -82,7 +86,10 @@ export async function getPublicApiSourceFiles(srcDirOverride?: string): Promise<
     cwd: srcDir,
     exclude: buildGlobExcludePatterns(),
   })) {
-    files.push(entry as string);
+    const relativePath = entry as string;
+    if (!isExcludedFile(path.basename(relativePath))) {
+      files.push(relativePath);
+    }
   }
 
   return files

@@ -1,6 +1,13 @@
-# @infomaniak-design-system/components
+[![npm (scoped)](https://img.shields.io/npm/v/@infomaniak-design-system/components.svg)](https://www.npmjs.com/package/@infomaniak-design-system/components)
+![npm](https://img.shields.io/npm/dm/@infomaniak-design-system/components.svg)
+![NPM](https://img.shields.io/npm/l/@infomaniak-design-system/components.svg)
+![npm type definitions](https://img.shields.io/npm/types/@infomaniak-design-system/components.svg)
+
+# Infomaniak's Design System - Components
 
 Web components built with Lit, documented via Storybook using Custom Elements Manifest (CEM).
+
+- [Documentation ↗](https://infomaniak.github.io/design-system/storybook/main/?path=/docs/components-getting-started--docs)
 
 ## Getting Started
 
@@ -106,13 +113,12 @@ These files are automatically excluded from the generated `public-api.ts` by the
 
 ## Useful scripts
 
-| Command                    | Description                                      |
-| -------------------------- | ------------------------------------------------ |
-| `yarn generate`            | Generate a new component folder and files        |
-| `yarn analyze:cem`         | Generate `custom-elements.json` from source code |
-| `yarn validate:public-api` | Validate that no internal exports leak to public |
-| `yarn build`               | Full build: CEM + Vite + TypeScript declarations |
-| `yarn dev:docs`            | Start Storybook dev server                       |
+| Command            | Description                                      |
+| ------------------ | ------------------------------------------------ |
+| `yarn generate`    | Generate a new component folder and files        |
+| `yarn analyze:cem` | Generate `custom-elements.json` from source code |
+| `yarn build`       | Full build: CEM + Vite + TypeScript declarations |
+| `yarn dev:docs`    | Start Storybook dev server                       |
 
 ## CEM config
 

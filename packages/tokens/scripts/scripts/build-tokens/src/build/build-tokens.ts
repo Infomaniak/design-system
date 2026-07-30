@@ -16,6 +16,7 @@ import {
   T3_DIRECTORY_NAME,
 } from '../constants/design-token-tiers.ts';
 import { buildCssTokens } from './outputs/css/build-css-tokens.ts';
+import { buildDesignMdTokens } from './outputs/design-md/build-design-md-tokens.ts';
 import { buildFigmaTokens } from './outputs/figma/build-figma-tokens.ts';
 import { buildKotlinTokens } from './outputs/kotlin/build-kotlin-tokens.ts';
 import { buildMarkdownTokens } from './outputs/markdown/build-markdown-tokens.ts';
@@ -98,6 +99,14 @@ export function buildTokens({
 
     // KOTLIN
     await buildKotlinTokens({
+      baseCollection,
+      modifiers,
+      outputDirectory,
+      logger,
+    });
+
+    // DESIGN.md
+    await buildDesignMdTokens({
       baseCollection,
       modifiers,
       outputDirectory,

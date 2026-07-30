@@ -1,17 +1,15 @@
 <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <mask id="mask_circle_check_filled" fill="transparent">
-      <g transform="translate(1.125 1.125)">
-        <path d="M11 0C17.0751 0 22 4.92487 22 11C22 17.0751 17.0751 22 11 22C4.92487 22 0 17.0751 0 11C0 4.92487 4.92487 0 11 0Z" fill="white"/>
-      </g>
-      <g transform="translate(7.5908203125 9.060546875)">
-        <path d="M0 3L3 6L9 0" stroke="black" stroke-width="1.78605" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>
-    </mask>
-  </defs>
-  <g mask="url(#mask_circle_check_filled)">
-    <g transform="translate(1.125 1.125)">
-      <path d="M11 0C17.0751 0 22 4.92487 22 11C22 17.0751 17.0751 22 11 22C4.92487 22 0 17.0751 0 11C0 4.92487 4.92487 0 11 0Z" fill="black"/>
+  <g transform="translate(1.125 1.125)">
+    <defs>
+      <mask id="mask-537-18" fill="transparent">
+        <rect x="0" y="0" width="999" height="999" fill="white"/>
+        <g transform="translate(6.4658203125 7.935546875)">
+          <path d="M 0 2.939453 L 2.939453 5.878906 L 8.818359 0" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        </g>
+      </mask>
+    </defs>
+    <g mask="url(#mask-537-18)">
+      <path d="M10.875 0C16.8811 0 21.75 4.8689 21.75 10.875C21.75 16.8811 16.8811 21.75 10.875 21.75C4.8689 21.75 0 16.8811 0 10.875C0 4.8689 4.8689 0 10.875 0Z" fill="#000000" />
     </g>
   </g>
 </svg>

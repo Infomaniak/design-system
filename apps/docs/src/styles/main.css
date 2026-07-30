@@ -13,7 +13,7 @@
 .welcome-hero h1 {
   font-size: 48px;
   font-weight: 700;
-  margin: 0 0 16px 0;
+  margin: 0 0 16px;
   color: var(--esds-color-text-primary);
   line-height: 1.1;
 }
@@ -32,7 +32,7 @@
 .welcome-section h2 {
   font-size: 28px;
   font-weight: 600;
-  margin: 0 0 32px 0;
+  margin: 0 0 32px;
   color: var(--esds-color-text-primary);
 }
 
@@ -57,7 +57,7 @@ a.card {
 
 .card:where(:hover, :focus-visible):not(.card--disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
   border-color: var(--esds-color-border-subtle-default);
 }
 
@@ -81,25 +81,25 @@ a.card {
 .card__title {
   font-size: 20px;
   font-weight: 600;
-  margin: 0 0 12px 0;
+  margin: 0 0 12px;
   color: var(--esds-color-text-primary);
 }
 
 .card--horizontal .card__title {
   font-size: 18px;
-  margin: 0 0 8px 0;
+  margin: 0 0 8px;
 }
 
 .card__description {
   font-size: 15px;
   line-height: 1.5;
   color: var(--esds-color-text-secondary);
-  margin: 0 0 20px 0;
+  margin: 0 0 20px;
   flex: 1;
 }
 
 .card--horizontal .card__description {
-  margin: 0 0 20px 0;
+  margin: 0 0 20px;
 }
 
 .card__link {
@@ -121,12 +121,12 @@ a.card {
 }
 
 .welcome-getting-started p {
-  margin: 0 0 16px 0;
+  margin: 0 0 16px;
   color: var(--esds-color-text-secondary);
 }
 
 .welcome-getting-started ul {
-  margin: 0 0 20px 0;
+  margin: 0 0 20px;
   padding-left: 20px;
 }
 
@@ -167,7 +167,7 @@ a.card {
   transform: translateX(4px);
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .welcome-hero {
     padding: 40px 0 32px;
   }

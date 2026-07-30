@@ -1,6 +1,6 @@
 {
   "name": "@infomaniak-design-system/components",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "files": [
     "dist",
@@ -16,7 +16,7 @@
   "scripts": {
     "=== BUILD ===": "",
     "build": "node --no-warnings=ExperimentalWarning scripts/scripts/build-components/build-components.script.ts",
-    "build:manual": "yarn generate:public-api && yarn analyze:cem && yarn build:ts:vite && yarn build:ts:definitions",
+    "build:manual": "yarn generate:public-api && yarn build:ts:vite && yarn build:ts:definitions && yarn analyze:cem",
     "build:ts:vite": "vite build",
     "build:ts:definitions": "tsc -p tsconfig.build.json",
     "analyze:cem": "cem analyze --config ./custom-elements-manifest.config.mjs",
@@ -26,6 +26,12 @@
     "generate": "plop",
     "generate:public-api": "yarn generate public-api"
   },
+  "description": "Infomaniak's Design System - Components",
+  "keywords": [
+    "Infomaniak",
+    "Components"
+  ],
+  "private": true,
   "dependencies": {
     "@lit-labs/signals": "^0.3.0",
     "idb": "^8.0.3",
@@ -37,6 +43,7 @@
     "@custom-elements-manifest/analyzer": "^0.11.0",
     "@iconify/types": "^2.0.0",
     "@storybook/web-components-vite": "^10.5.0",
+    "@wc-toolkit/jsx-types": "^1.1.0",
     "@wc-toolkit/type-parser": "1.2.1",
     "fake-indexeddb": "^6.2.5",
     "plop": "^4.0.5",

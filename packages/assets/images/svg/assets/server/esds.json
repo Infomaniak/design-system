@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.22",
+    "version": "0.0.23",
     "author": {
       "name": "Infomaniak"
     },
@@ -10,9 +10,9 @@
       "title": "GPL-3.0-only",
       "spdx": "GPL-3.0-only"
     },
-    "total": 226
+    "total": 236
   },
-  "lastModified": 1784103830,
+  "lastModified": 1785336651,
   "icons": {
     "a-large-small": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 16 2.536-7.328a1.02 1.02 0 011.928 0L22 16m-6.303-2h5.606M2 16l4.039-9.69a.5.5 0 01.923 0L11 16m-7.696-3h6.392\" vector-effect=\"non-scaling-stroke\"/>"
@@ -137,6 +137,9 @@
     "chevron-left": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 18-6-6 6-6\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "chevron-left-slash-chevron-right": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m18 16 4-4-4-4M6 8l-4 4 4 4m8.5-12-5 16\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "chevron-right": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m9 18 6-6-6-6\" vector-effect=\"non-scaling-stroke\"/>"
     },
@@ -164,11 +167,14 @@
     "circle-check": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m7.59 12 2.94 2.94 5.88-5.88M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "circle-check-filled": {
+      "body": "<g transform=\"translate(1.125 1.125)\"><defs><mask id=\"svgID0\" fill=\"transparent\"><path fill=\"#fff\" d=\"M0 0h999v999H0z\"/><path fill=\"none\" stroke=\"#000\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m6.466 10.875 2.94 2.94 5.878-5.879\" vector-effect=\"non-scaling-stroke\"/></mask></defs><g mask=\"url(#svgID0)\"><path fill=\"currentColor\" d=\"M10.875 0C16.881 0 21.75 4.869 21.75 10.875S16.881 21.75 10.875 21.75 0 16.881 0 10.875 4.869 0 10.875 0\"/></g></g>"
+    },
     "circle-cross": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 9-6 6m0-6 6 6m7-3c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "circle-cross-filled": {
-      "body": "<defs><mask id=\"svgID0\" fill=\"transparent\"><path fill=\"#fff\" d=\"M12.125 1.125c6.075 0 11 4.925 11 11s-4.925 11-11 11-11-4.925-11-11 4.925-11 11-11\"/><path stroke=\"#000\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 9-6 6m0-6 6 6\" vector-effect=\"non-scaling-stroke\"/></mask></defs><g mask=\"url(#svgID0)\"><path fill=\"currentColor\" d=\"M12.125 1.125c6.075 0 11 4.925 11 11s-4.925 11-11 11-11-4.925-11-11 4.925-11 11-11\"/></g>"
+      "body": "<g transform=\"translate(1.125 1.125)\"><defs><mask id=\"svgID0\" fill=\"transparent\"><path fill=\"#fff\" d=\"M0 0h999v999H0z\"/><path fill=\"none\" stroke=\"#000\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m13.875 7.875-6 6m0-6 6 6\" vector-effect=\"non-scaling-stroke\"/></mask></defs><g mask=\"url(#svgID0)\"><path fill=\"currentColor\" d=\"M10.875 0C16.881 0 21.75 4.869 21.75 10.875S16.881 21.75 10.875 21.75 0 16.881 0 10.875 4.869 0 10.875 0\"/></g></g>"
     },
     "circle-ellipsis": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M17 12h.01M12 12h.01M7 12h.01M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\" vector-effect=\"non-scaling-stroke\"/>"
@@ -180,7 +186,7 @@
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 16v-4m0-4h.01M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "circle-info-filled": {
-      "body": "<defs><mask id=\"svgID0\" fill=\"transparent\"><path fill=\"#fff\" d=\"M12.125 1.125c6.075 0 11 4.925 11 11s-4.925 11-11 11-11-4.925-11-11 4.925-11 11-11\"/><path stroke=\"#000\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 16v-4m0-4h.01\" vector-effect=\"non-scaling-stroke\"/></mask></defs><g mask=\"url(#svgID0)\"><path fill=\"currentColor\" d=\"M12.125 1.125c6.075 0 11 4.925 11 11s-4.925 11-11 11-11-4.925-11-11 4.925-11 11-11\"/></g>"
+      "body": "<g transform=\"translate(1.125 1.125)\"><defs><mask id=\"svgID0\" fill=\"transparent\"><path fill=\"#fff\" d=\"M0 0h999v999H0z\"/><path fill=\"none\" stroke=\"#000\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M10.875 14.875v-4m0-4h.01\" vector-effect=\"non-scaling-stroke\"/></mask></defs><g mask=\"url(#svgID0)\"><path fill=\"currentColor\" d=\"M10.875 0C16.881 0 21.75 4.869 21.75 10.875S16.881 21.75 10.875 21.75 0 16.881 0 10.875 4.869 0 10.875 0\"/></g></g>"
     },
     "circle-line-circle": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M6 16a4 4 0 100-8 4 4 0 000 8m0 0h12m0 0a4 4 0 100-8 4 4 0 000 8\" vector-effect=\"non-scaling-stroke\"/>"
@@ -193,6 +199,9 @@
     },
     "circle-question": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "circle-question-filled": {
+      "body": "<g transform=\"translate(1.125 1.125)\"><defs><mask id=\"svgID0\" fill=\"transparent\"><path fill=\"#fff\" d=\"M0 0h999v999H0z\"/><path fill=\"none\" stroke=\"#000\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M7.965 7.874a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01\" vector-effect=\"non-scaling-stroke\"/></mask></defs><g mask=\"url(#svgID0)\"><path fill=\"currentColor\" d=\"M21.75 10.875c0 6.006-4.869 10.875-10.875 10.875S0 16.881 0 10.875 4.869 0 10.875 0 21.75 4.869 21.75 10.875\"/></g></g>"
     },
     "circle-user": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M7 20.662V19a2 2 0 012-2h6a2 2 0 012 2v1.662M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10m-7-2a3 3 0 11-6 0 3 3 0 016 0\" vector-effect=\"non-scaling-stroke\"/>"
@@ -210,13 +219,13 @@
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M17.5 19H9a7 7 0 116.71-9h1.79a4.5 4.5 0 110 9\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "cloud-arrow-anticlockwise": {
-      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M21 15.25A4.499 4.499 0 0017.5 8h-1.79a6.999 6.999 0 00-13.377-.111A7 7 0 003 13.607M11 15H7v-4m0 4 2.09-2.09a4.82 4.82 0 013.41-1.41A4.5 4.5 0 0117 16a5 5 0 01-9 3\" vector-effect=\"non-scaling-stroke\"/>"
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M21 15.25A4.5 4.5 0 0017.5 8h-1.79a7.001 7.001 0 00-13.377-.111A7 7 0 003 13.607M11 15H7v-4m0 4 2.09-2.09a4.82 4.82 0 013.41-1.41A4.5 4.5 0 0117 16a5 5 0 01-9 3\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "cloud-arrow-down": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 13v8m4-4-4 4-4-4m-3.607-1.73A7 7 0 1115.71 8h1.79a4.5 4.5 0 012.436 8.284\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "cloud-arrow-up": {
-      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 13v8m4-4-4-4-4 4m-4-2.101A7 7 0 1115.71 8h1.79a4.5 4.5 0 012.5 8.242\" vector-effect=\"non-scaling-stroke\"/>"
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 13v8m4-4-4-4-4 4m-4-2.101a7 7 0 1111.71-6.9h1.79a4.5 4.5 0 012.5 8.243\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "cloud-check": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m17 15-5.5 5.5L9 18m-3.484-1.93A7 7 0 1115.71 8h1.79a4.5 4.5 0 013.501 7.327\" vector-effect=\"non-scaling-stroke\"/>"
@@ -299,6 +308,9 @@
     "eye-closed": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 18-.722-3.25M2 8a10.645 10.645 0 0020 0m-2 7-1.726-2.05M4 15l1.726-2.05M9 18l.722-3.25\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "eye-slash": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M10.733 5.076a10.744 10.744 0 0111.205 6.575 1 1 0 010 .696 10.8 10.8 0 01-1.444 2.49m-6.41-.679a3 3 0 01-4.242-4.242m7.637 7.583a10.75 10.75 0 01-15.417-5.151 1 1 0 010-.696 10.75 10.75 0 014.446-5.143M2 2l20 20\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "file": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8m-6-6a2.4 2.4 0 011.704.706l3.588 3.588A2.4 2.4 0 0120 8m-6-6v5a1 1 0 001 1h5\" vector-effect=\"non-scaling-stroke\"/>"
     },
@@ -339,7 +351,7 @@
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m11 17 2 2a2.12 2.12 0 103-3m-2-2 2.5 2.5a2.121 2.121 0 003-3l-3.88-3.88a3 3 0 00-4.24 0l-.88.88a2.121 2.121 0 01-3-3l2.81-2.81a5.79 5.79 0 017.06-.87l.47.28a2 2 0 001.42.25L21 4m0-1 1 11h-2M3 3 2 14l6.5 6.5a2.121 2.121 0 003-3M3 4h8\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "handshake-heart": {
-      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12.409 5.824 9.586 8.586a2 2 0 002.828 2.828l1.71-1.71a2.41 2.41 0 013.409 0l1.881 1.882a2 2 0 010 2.828C21 12.828 22 11.5 22 9.5a5.5 5.5 0 00-9.591-3.676m7.005 8.59a2.12 2.12 0 01-2.927.074M12.41 5.824a.6.6 0 01-.818.001A5.5 5.5 0 002 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 002.879.052 2.12 2.12 0 00.072-2.92m0 0a2.124 2.124 0 003.001-3.006m0 0\" vector-effect=\"non-scaling-stroke\"/>"
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12.409 5.824 9.586 8.586a2 2 0 002.828 2.828l1.71-1.71a2.41 2.41 0 013.409 0l1.881 1.882a2 2 0 010 2.828C21 12.828 22 11.5 22 9.5a5.5 5.5 0 00-9.591-3.676m7.005 8.59a2.12 2.12 0 01-2.927.074M12.41 5.824a.6.6 0 01-.818.001A5.5 5.5 0 002 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 002.879.052 2.12 2.12 0 00.072-2.92m0 0zm0 0a2.124 2.124 0 003.001-3.006m0 0z\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "hard-drive": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M10 16h.01m11.936-3.987H2.054M6 16h.01m-3.798-4.423a2 2 0 00-.212.896V18a2 2 0 002 2h16a2 2 0 002-2v-5.527a2 2 0 00-.212-.896L18.55 5.11A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z\" vector-effect=\"non-scaling-stroke\"/>"
@@ -422,6 +434,9 @@
     "minus": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M5 12h14\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "monitor": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M8 21h8m-4-4v4M4 3h16a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "mouse-pointer": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M4.037 4.688a.495.495 0 01.651-.651l16 6.5a.5.5 0 01-.063.947l-6.124 1.58a2 2 0 00-1.438 1.435l-1.579 6.126a.5.5 0 01-.947.063z\" vector-effect=\"non-scaling-stroke\"/>"
     },
@@ -430,6 +445,9 @@
     },
     "music-note": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0m12-2a3 3 0 11-6 0 3 3 0 016 0M9 9l12-2\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "network": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M5 16v-3a1 1 0 011-1h12a1 1 0 011 1v3m-7-4V8m5 8h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4a1 1 0 011-1M3 16h4a1 1 0 011 1v4a1 1 0 01-1 1H3a1 1 0 01-1-1v-4a1 1 0 011-1m7-14h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V3a1 1 0 011-1\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "overline-rectangle-underline": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M3 2h18M3 22h18M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
@@ -445,6 +463,9 @@
     },
     "pencil-sparkles": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M10 3H8m7.007 2.008 3.987 3.986M20 15v4m2-2h-4M4 5v4m2-2H2m7-5v2m12.174 2.813a2.82 2.82 0 00-3.986-3.987L3.842 16.175a2 2 0 00-.5.83l-1.321 4.352a.5.5 0 00.623.622l4.353-1.32a2 2 0 00.83-.497z\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "pie-slice": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M21.21 15.89A10 10 0 118 2.83M21 12c.552 0 1.005-.45.95-.998a10 10 0 00-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 001 1z\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "pin": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 17v5M9 10.76a2 2 0 01-1.11 1.79l-1.78.9A2 2 0 005 15.24V16a1 1 0 001 1h12a1 1 0 001-1v-.76a2 2 0 00-1.11-1.79l-1.78-.9A2 2 0 0115 10.76V7a1 1 0 011-1 2 2 0 000-4H8a2 2 0 100 4 1 1 0 011 1z\" vector-effect=\"non-scaling-stroke\"/>"
@@ -578,6 +599,9 @@
     "sparkles": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M20 2v4m2-2h-4m-6.983-1.186a1 1 0 011.966 0l1.051 5.558a2 2 0 001.594 1.594l5.558 1.051a1 1 0 010 1.966l-5.558 1.051a2 2 0 00-1.594 1.594l-1.051 5.558a1 1 0 01-1.966 0l-1.051-5.558a2 2 0 00-1.594-1.594l-5.558-1.051a1 1 0 010-1.966l5.558-1.051a2 2 0 001.594-1.594zM6 20a2 2 0 11-4 0 2 2 0 014 0\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "speaker-waves": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M16 9a5 5 0 010 6m3.364 3.364a9 9 0 000-12.728M11 4.702a.706.706 0 00-1.203-.498L6.413 7.587A1.4 1.4 0 015.416 8H3a1 1 0 00-1 1v6a1 1 0 001 1h2.416a1.4 1.4 0 01.997.413l3.383 3.384A.705.705 0 0011 19.298z\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "square": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2\" vector-effect=\"non-scaling-stroke\"/>"
     },
@@ -596,6 +620,9 @@
     "square-corners-face": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M3 7V5a2 2 0 012-2h2m10 0h2a2 2 0 012 2v2m0 10v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2m5-3s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "square-split-top": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v6M3 9v10a2 2 0 002 2h4M3 9h6m12 0v10a2 2 0 01-2 2H9M21 9H9m0 0v12\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "squares-four": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M9 3H4a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V4a1 1 0 00-1-1m11 0h-5a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V4a1 1 0 00-1-1m0 11h-5a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1v-5a1 1 0 00-1-1M9 14H4a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1v-5a1 1 0 00-1-1\" vector-effect=\"non-scaling-stroke\"/>"
     },
@@ -612,7 +639,7 @@
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M11.525 2.295a.53.53 0 01.95 0l2.31 4.679a2.12 2.12 0 001.595 1.16l5.166.756a.53.53 0 01.294.904l-3.736 3.638a2.12 2.12 0 00-.611 1.878l.882 5.14a.53.53 0 01-.771.56l-4.618-2.428a2.12 2.12 0 00-1.973 0L6.396 21.01a.53.53 0 01-.77-.56l.881-5.14a2.12 2.12 0 00-.611-1.878L2.16 9.795a.53.53 0 01.294-.906l5.165-.755a2.12 2.12 0 001.597-1.16z\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "store": {
-      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M15 21v-5a1 1 0 00-1-1h-4a1 1 0 00-1 1v5m8.774-10.69a1.12 1.12 0 00-1.549 0 2.5 2.5 0 01-3.451 0 1.12 1.12 0 00-1.548 0 2.5 2.5 0 01-3.452 0 1.12 1.12 0 00-1.549 0 2.5 2.5 0 01-3.77-3.248l2.889-4.184A2 2 0 017 2h10a2 2 0 011.653.873l2.895 4.192a2.5 2.5 0 01-3.774 3.244M4 10.95V19a2 2 0 002 2h12a2 2 0 002-2v-8.05\" vector-effect=\"non-scaling-stroke\"/>"
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M15 21v-5a1 1 0 00-1-1h-4a1 1 0 00-1 1v5m8.774-10.69a1.12 1.12 0 00-1.549 0 2.5 2.5 0 01-3.451 0 1.12 1.12 0 00-1.548 0 2.5 2.5 0 01-3.452 0 1.12 1.12 0 00-1.55 0 2.5 2.5 0 01-3.769-3.248l2.889-4.184A2 2 0 017 2h10a2 2 0 011.653.873l2.895 4.192a2.5 2.5 0 01-3.774 3.244M4 10.95V19a2 2 0 002 2h12a2 2 0 002-2v-8.05\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "sun": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41M16 12a4 4 0 11-8 0 4 4 0 018 0\" vector-effect=\"non-scaling-stroke\"/>"
@@ -686,6 +713,9 @@
     "video-camera": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m16 13 5.223 3.482a.5.5 0 00.777-.416V7.87a.5.5 0 00-.752-.432L16 10.5M4 6h10a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "wave-arcs-up": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 20h.01M2 8.82a15 15 0 0120 0M5 12.86a10 10 0 0114 0M8.5 16.43a5 5 0 017 0\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "waveform": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M2 10v3m4-7v11m4-14v18m4-13v7m4-10v13m4-8v3\" vector-effect=\"non-scaling-stroke\"/>"
     },
@@ -736,6 +766,7 @@
       "check",
       "chevron-down",
       "chevron-left",
+      "chevron-left-slash-chevron-right",
       "chevron-right",
       "chevron-up",
       "chevrons-left-right",
@@ -745,6 +776,7 @@
       "circle-arrow-right",
       "circle-arrows-anticlockwise",
       "circle-check",
+      "circle-check-filled",
       "circle-cross",
       "circle-cross-filled",
       "circle-ellipsis",
@@ -755,6 +787,7 @@
       "circle-open-top-right",
       "circle-plus",
       "circle-question",
+      "circle-question-filled",
       "circle-user",
       "circular-arrows-clockwise",
       "clipboard-arrow-left",
@@ -790,6 +823,7 @@
       "envelope-question-mark",
       "eye",
       "eye-closed",
+      "eye-slash",
       "file",
       "file-text",
       "file-zipper",
@@ -831,14 +865,17 @@
       "map-pin",
       "mic",
       "minus",
+      "monitor",
       "mouse-pointer",
       "mouse-pointer-sparkle",
       "music-note",
+      "network",
       "overline-rectangle-underline",
       "paper-plane",
       "paperclip",
       "pen",
       "pencil-sparkles",
+      "pie-slice",
       "pin",
       "plus",
       "power",
@@ -883,12 +920,14 @@
       "smartphone-tablet",
       "smile",
       "sparkles",
+      "speaker-waves",
       "square",
       "square-arrow-anticlockwise",
       "square-arrow-clockwise",
       "square-arrow-down-left",
       "square-arrow-out-up-right",
       "square-corners-face",
+      "square-split-top",
       "squares-four",
       "squares-stacked",
       "squares-stacked-check",
@@ -919,10 +958,12 @@
       "user-star",
       "users-stacked",
       "video-camera",
+      "wave-arcs-up",
       "waveform",
       "wrench"
     ],
     "@filled": [
+      "circle-check-filled",
       "circle-cross-filled",
       "circle-info-filled",
       "envelope-filled",
@@ -939,7 +980,8 @@
       "check"
     ],
     "#accepted": [
-      "circle-check"
+      "circle-check",
+      "circle-check-filled"
     ],
     "#access": [
       "door-open",
@@ -1050,6 +1092,9 @@
     "#amplitude": [
       "waveform"
     ],
+    "#analytics": [
+      "pie-slice"
+    ],
     "#anchor": [
       "link",
       "link-horizontal"
@@ -1063,9 +1108,15 @@
     "#announcement": [
       "bell"
     ],
+    "#antenna": [
+      "wave-arcs-up"
+    ],
     "#anticlockwise": [
       "cloud-arrow-anticlockwise",
       "square-arrow-anticlockwise"
+    ],
+    "#api": [
+      "chevron-left-slash-chevron-right"
     ],
     "#app": [
       "smartphone"
@@ -1096,6 +1147,7 @@
     ],
     "#approve": [
       "circle-check",
+      "circle-check-filled",
       "thumbs-up"
     ],
     "#approved": [
@@ -1108,6 +1160,9 @@
     ],
     "#arc": [
       "circle-open-top-right"
+    ],
+    "#architecture": [
+      "network"
     ],
     "#archive": [
       "box-lid",
@@ -1161,12 +1216,14 @@
       "sidebar-left"
     ],
     "#ask": [
-      "circle-question"
+      "circle-question",
+      "circle-question-filled"
     ],
     "#assistance": [
       "circle-info",
       "circle-info-filled",
       "circle-question",
+      "circle-question-filled",
       "headset"
     ],
     "#at": [
@@ -1193,6 +1250,7 @@
       "headset",
       "mic",
       "music-note",
+      "speaker-waves",
       "waveform"
     ],
     "#authentication": [
@@ -1305,7 +1363,8 @@
       "rectangle-two"
     ],
     "#board": [
-      "clipboard-arrow-left"
+      "clipboard-arrow-left",
+      "square-split-top"
     ],
     "#book": [
       "book",
@@ -1342,9 +1401,11 @@
       "square"
     ],
     "#brackets": [
+      "chevron-left-slash-chevron-right",
       "corner-brackets"
     ],
     "#branch": [
+      "network",
       "square-arrow-down-left"
     ],
     "#breakpoint": [
@@ -1361,7 +1422,8 @@
       "sun"
     ],
     "#broadcast": [
-      "mic"
+      "mic",
+      "wave-arcs-up"
     ],
     "#broken": [
       "link-broken"
@@ -1504,6 +1566,9 @@
     "#charity": [
       "handshake-heart"
     ],
+    "#chart": [
+      "pie-slice"
+    ],
     "#chat": [
       "bubble-left-text"
     ],
@@ -1511,10 +1576,12 @@
       "calendar-check",
       "check",
       "circle-check",
+      "circle-check-filled",
       "squares-stacked-check"
     ],
     "#checkmark": [
-      "circle-check"
+      "circle-check",
+      "circle-check-filled"
     ],
     "#checkout": [
       "shopping-cart"
@@ -1613,6 +1680,9 @@
     "#coconut": [
       "tree-palm"
     ],
+    "#code": [
+      "chevron-left-slash-chevron-right"
+    ],
     "#cog": [
       "cog",
       "user-cog"
@@ -1637,7 +1707,8 @@
       "grid-three-two",
       "rectangle-squares-two",
       "rectangle-two",
-      "sidebar-left"
+      "sidebar-left",
+      "square-split-top"
     ],
     "#command": [
       "key-option-apple",
@@ -1666,6 +1737,7 @@
     "#complete": [
       "check",
       "circle-check",
+      "circle-check-filled",
       "cloud-check",
       "squares-stacked-check"
     ],
@@ -1678,8 +1750,12 @@
       "arrows-two-diagonal-in",
       "file-zipper"
     ],
+    "#computer": [
+      "monitor"
+    ],
     "#conceal": [
-      "eye-closed"
+      "eye-closed",
+      "eye-slash"
     ],
     "#configuration": [
       "cog",
@@ -1691,6 +1767,7 @@
     "#confirm": [
       "check",
       "circle-check",
+      "circle-check-filled",
       "squares-stacked-check"
     ],
     "#confirmed": [
@@ -1702,6 +1779,9 @@
       "link",
       "link-horizontal",
       "share"
+    ],
+    "#connection": [
+      "wave-arcs-up"
     ],
     "#contact": [
       "at-sign",
@@ -1851,7 +1931,9 @@
     "#dashboard": [
       "dots-nine",
       "grid-three-two",
+      "pie-slice",
       "sidebar-left",
+      "square-split-top",
       "squares-four"
     ],
     "#dashed": [
@@ -1860,11 +1942,15 @@
     "#data": [
       "cloud",
       "hard-drive",
-      "hard-drive-filled"
+      "hard-drive-filled",
+      "pie-slice"
     ],
     "#database": [
       "hard-drive",
       "hard-drive-filled"
+    ],
+    "#dataset": [
+      "square-split-top"
     ],
     "#date": [
       "calendar",
@@ -1940,6 +2026,9 @@
     "#descend": [
       "arrow-down"
     ],
+    "#desktop": [
+      "monitor"
+    ],
     "#dessert": [
       "cake-candles"
     ],
@@ -1957,9 +2046,13 @@
     "#detect": [
       "square-corners-face"
     ],
+    "#developer": [
+      "chevron-left-slash-chevron-right"
+    ],
     "#device": [
       "hard-drive",
       "hard-drive-filled",
+      "monitor",
       "smartphone"
     ],
     "#devices": [
@@ -1971,6 +2064,9 @@
       "arrows-four-diagonal-out",
       "arrows-two-diagonal-in",
       "slash"
+    ],
+    "#diagram": [
+      "network"
     ],
     "#ding": [
       "bell"
@@ -2045,7 +2141,8 @@
       "paper-plane"
     ],
     "#display": [
-      "eye"
+      "eye",
+      "monitor"
     ],
     "#distribute": [
       "share"
@@ -2089,6 +2186,7 @@
       "calendar-check",
       "check",
       "circle-check",
+      "circle-check-filled",
       "cloud-check",
       "squares-stacked-check"
     ],
@@ -2205,6 +2303,9 @@
       "envelope-question-mark",
       "inbox",
       "paper-plane"
+    ],
+    "#embed": [
+      "chevron-left-slash-chevron-right"
     ],
     "#emoji": [
       "smile"
@@ -2339,6 +2440,9 @@
       "eye",
       "eye-closed"
     ],
+    "#eyeoff": [
+      "eye-slash"
+    ],
     "#face": [
       "smile",
       "square-corners-face"
@@ -2356,6 +2460,7 @@
       "circle-info",
       "circle-info-filled",
       "circle-question",
+      "circle-question-filled",
       "shield-question-mark"
     ],
     "#fast": [
@@ -2407,6 +2512,7 @@
       "squares-stacked"
     ],
     "#filled": [
+      "circle-check-filled",
       "circle-cross-filled"
     ],
     "#film": [
@@ -2510,7 +2616,8 @@
       "waveform"
     ],
     "#fullscreen": [
-      "arrows-four-diagonal-out"
+      "arrows-four-diagonal-out",
+      "monitor"
     ],
     "#funnel": [
       "funnel"
@@ -2572,6 +2679,10 @@
     "#gps": [
       "map-pin"
     ],
+    "#graph": [
+      "network",
+      "pie-slice"
+    ],
     "#greeting": [
       "handshake"
     ],
@@ -2582,6 +2693,7 @@
       "grid-three-two",
       "rectangle-squares-two",
       "rows-four",
+      "square-split-top",
       "squares-four"
     ],
     "#group": [
@@ -2618,6 +2730,7 @@
     "#hardware": [
       "hard-drive",
       "hard-drive-filled",
+      "monitor",
       "tool-case"
     ],
     "#hash": [
@@ -2651,6 +2764,7 @@
       "circle-info",
       "circle-info-filled",
       "circle-question",
+      "circle-question-filled",
       "envelope-question-mark",
       "headset",
       "shield-question-mark"
@@ -2658,10 +2772,17 @@
     "#helpdesk": [
       "headset"
     ],
+    "#hidden": [
+      "eye-slash"
+    ],
     "#hide": [
       "chevron-up",
       "eye-closed",
+      "eye-slash",
       "sidebar-left-chevron-left"
+    ],
+    "#hierarchy": [
+      "network"
     ],
     "#highlight": [
       "mouse-pointer-sparkle",
@@ -2670,7 +2791,8 @@
       "user-star"
     ],
     "#hint": [
-      "circle-question"
+      "circle-question",
+      "circle-question-filled"
     ],
     "#history": [
       "clock",
@@ -2693,6 +2815,9 @@
     "#hosting": [
       "cloud"
     ],
+    "#hotspot": [
+      "wave-arcs-up"
+    ],
     "#hour": [
       "clock"
     ],
@@ -2701,6 +2826,9 @@
     ],
     "#href": [
       "link-horizontal"
+    ],
+    "#html": [
+      "chevron-left-slash-chevron-right"
     ],
     "#human": [
       "user"
@@ -2768,6 +2896,9 @@
       "folder-plus",
       "plus"
     ],
+    "#incognito": [
+      "eye-slash"
+    ],
     "#increase": [
       "arrow-up",
       "circle-fading-arrow-up",
@@ -2784,7 +2915,8 @@
     "#info": [
       "circle-info",
       "circle-info-filled",
-      "circle-question"
+      "circle-question",
+      "circle-question-filled"
     ],
     "#information": [
       "circle-info",
@@ -2813,6 +2945,12 @@
     "#insight": [
       "lightbulb"
     ],
+    "#insights": [
+      "pie-slice"
+    ],
+    "#inspect": [
+      "chevron-left-slash-chevron-right"
+    ],
     "#inspiration": [
       "lightbulb"
     ],
@@ -2830,11 +2968,15 @@
       "globe",
       "languages"
     ],
+    "#internet": [
+      "wave-arcs-up"
+    ],
     "#investigate": [
       "magnifying-glass"
     ],
     "#invisible": [
-      "eye-closed"
+      "eye-closed",
+      "eye-slash"
     ],
     "#invite": [
       "user-plus"
@@ -2858,6 +3000,12 @@
     ],
     "#job": [
       "briefcase"
+    ],
+    "#json": [
+      "chevron-left-slash-chevron-right"
+    ],
+    "#kanban": [
+      "square-split-top"
     ],
     "#kebab": [
       "circle-ellipsis",
@@ -2926,6 +3074,7 @@
       "sidebar-left",
       "sidebar-left-chevron-left",
       "sidebar-left-chevron-right",
+      "square-split-top",
       "squares-four"
     ],
     "#leader": [
@@ -3075,6 +3224,12 @@
     "#loop": [
       "circular-arrows-clockwise"
     ],
+    "#loud": [
+      "speaker-waves"
+    ],
+    "#loudspeaker": [
+      "speaker-waves"
+    ],
     "#love": [
       "heart"
     ],
@@ -3145,6 +3300,12 @@
     "#market": [
       "store"
     ],
+    "#markup": [
+      "chevron-left-slash-chevron-right"
+    ],
+    "#masked": [
+      "eye-slash"
+    ],
     "#maximize": [
       "arrows-four-diagonal-out"
     ],
@@ -3152,6 +3313,7 @@
       "circle-line-circle",
       "frame-sun-mountain",
       "music-note",
+      "speaker-waves",
       "video-camera"
     ],
     "#meeting": [
@@ -3217,6 +3379,9 @@
     "#metadata": [
       "tag"
     ],
+    "#metrics": [
+      "pie-slice"
+    ],
     "#microphone": [
       "mic"
     ],
@@ -3260,6 +3425,9 @@
     ],
     "#modules": [
       "squares-four"
+    ],
+    "#monitor": [
+      "monitor"
     ],
     "#month": [
       "calendar",
@@ -3348,8 +3516,10 @@
     ],
     "#network": [
       "globe",
+      "network",
       "share",
-      "users-stacked"
+      "users-stacked",
+      "wave-arcs-up"
     ],
     "#new": [
       "calendar-plus",
@@ -3388,6 +3558,12 @@
     ],
     "#no-alert": [
       "bell-slash"
+    ],
+    "#nodes": [
+      "network"
+    ],
+    "#noise": [
+      "speaker-waves"
     ],
     "#north": [
       "arrow-up"
@@ -3436,6 +3612,9 @@
       "italic",
       "slash"
     ],
+    "#obscure": [
+      "eye-slash"
+    ],
     "#off": [
       "bookmark-slash",
       "cloud-slash",
@@ -3463,7 +3642,8 @@
       "calendar-number-one"
     ],
     "#online": [
-      "cloud"
+      "cloud",
+      "wave-arcs-up"
     ],
     "#open": [
       "arrow-up-right",
@@ -3505,6 +3685,9 @@
       "columns-three",
       "folder"
     ],
+    "#orgchart": [
+      "network"
+    ],
     "#out": [
       "arrows-four-diagonal-out",
       "tray-arrow-up"
@@ -3519,6 +3702,10 @@
     "#outline": [
       "circle",
       "square"
+    ],
+    "#output": [
+      "monitor",
+      "speaker-waves"
     ],
     "#overflow": [
       "circle-ellipsis",
@@ -3553,7 +3740,8 @@
     "#panel": [
       "sidebar-left",
       "sidebar-left-chevron-left",
-      "sidebar-left-chevron-right"
+      "sidebar-left-chevron-right",
+      "square-split-top"
     ],
     "#panels": [
       "rectangle-two"
@@ -3580,11 +3768,15 @@
     ],
     "#password": [
       "eye-closed",
+      "eye-slash",
       "lock",
       "lock-open"
     ],
     "#paste": [
       "clipboard-arrow-left"
+    ],
+    "#pc": [
+      "monitor"
     ],
     "#pen": [
       "pen",
@@ -3603,6 +3795,9 @@
       "user",
       "user-magnifying-glass",
       "users-stacked"
+    ],
+    "#percentage": [
+      "pie-slice"
     ],
     "#permissions": [
       "shield-user",
@@ -3641,6 +3836,9 @@
     "#picture": [
       "frame-sun-mountain"
     ],
+    "#piechart": [
+      "pie-slice"
+    ],
     "#pin": [
       "map-pin",
       "pin"
@@ -3671,7 +3869,8 @@
       "music-note"
     ],
     "#playback": [
-      "circle-line-circle"
+      "circle-line-circle",
+      "speaker-waves"
     ],
     "#plus": [
       "calendar-plus",
@@ -3746,6 +3945,9 @@
       "shield-user",
       "user-lock"
     ],
+    "#private": [
+      "eye-slash"
+    ],
     "#problem": [
       "bug",
       "cloud-exclamation-mark",
@@ -3806,6 +4008,7 @@
     ],
     "#query": [
       "circle-question",
+      "circle-question-filled",
       "envelope-magnifying-glass",
       "envelope-question-mark",
       "list-magnifying-class",
@@ -3814,6 +4017,7 @@
     ],
     "#question": [
       "circle-question",
+      "circle-question-filled",
       "envelope-question-mark",
       "shield-question-mark"
     ],
@@ -3846,6 +4050,9 @@
     ],
     "#received": [
       "inbox"
+    ],
+    "#reception": [
+      "wave-arcs-up"
     ],
     "#recognition": [
       "square-corners-face"
@@ -3984,7 +4191,8 @@
     "#report": [
       "bug",
       "file-text",
-      "flag"
+      "flag",
+      "pie-slice"
     ],
     "#reposition": [
       "arrows-cross-out"
@@ -4101,7 +4309,8 @@
       "list-filter",
       "rows-four",
       "rows-three",
-      "rows-two"
+      "rows-two",
+      "square-split-top"
     ],
     "#royal": [
       "crown"
@@ -4154,7 +4363,11 @@
       "scissors"
     ],
     "#screen": [
+      "monitor",
       "smartphone"
+    ],
+    "#script": [
+      "chevron-left-slash-chevron-right"
     ],
     "#scroll-down": [
       "arrow-down"
@@ -4199,6 +4412,9 @@
     ],
     "#seek": [
       "magnifying-glass"
+    ],
+    "#segment": [
+      "pie-slice"
     ],
     "#select": [
       "funnel",
@@ -4321,6 +4537,7 @@
       "hash-sign"
     ],
     "#signal": [
+      "wave-arcs-up",
       "waveform"
     ],
     "#signature": [
@@ -4337,6 +4554,9 @@
     ],
     "#silent": [
       "bell-slash"
+    ],
+    "#sitemap": [
+      "network"
     ],
     "#size": [
       "a-large-small"
@@ -4367,6 +4587,9 @@
     "#snip": [
       "scissors"
     ],
+    "#snippet": [
+      "chevron-left-slash-chevron-right"
+    ],
     "#snooze": [
       "bell-slash"
     ],
@@ -4392,10 +4615,14 @@
       "circle-line-circle",
       "mic",
       "music-note",
+      "speaker-waves",
       "waveform"
     ],
     "#soundwave": [
       "waveform"
+    ],
+    "#source": [
+      "chevron-left-slash-chevron-right"
     ],
     "#south": [
       "arrow-down"
@@ -4413,6 +4640,9 @@
     "#speak": [
       "languages",
       "mic"
+    ],
+    "#speaker": [
+      "speaker-waves"
     ],
     "#special": [
       "sparkles"
@@ -4434,6 +4664,9 @@
       "rectangle-two",
       "rows-two",
       "sidebar-left"
+    ],
+    "#spreadsheet": [
+      "square-split-top"
     ],
     "#square": [
       "square",
@@ -4471,6 +4704,9 @@
     ],
     "#startup": [
       "rocket"
+    ],
+    "#statistics": [
+      "pie-slice"
     ],
     "#sticker": [
       "tag"
@@ -4519,9 +4755,11 @@
       "building",
       "columns-four",
       "columns-three",
+      "network",
       "overline-rectangle-underline",
       "rows-four",
-      "sidebar-left"
+      "sidebar-left",
+      "square-split-top"
     ],
     "#style": [
       "bold",
@@ -4544,6 +4782,7 @@
     "#success": [
       "check",
       "circle-check",
+      "circle-check-filled",
       "cloud-check",
       "squares-stacked-check"
     ],
@@ -4561,6 +4800,7 @@
     ],
     "#support": [
       "circle-question",
+      "circle-question-filled",
       "envelope-question-mark",
       "handshake-heart",
       "headset",
@@ -4601,7 +4841,8 @@
     ],
     "#table": [
       "rows-three",
-      "rows-two"
+      "rows-two",
+      "square-split-top"
     ],
     "#tablet": [
       "smartphone-tablet"
@@ -4671,7 +4912,8 @@
     ],
     "#tick": [
       "check",
-      "circle-check"
+      "circle-check",
+      "circle-check-filled"
     ],
     "#tidy": [
       "broom"
@@ -4720,7 +4962,8 @@
     "#tooltip": [
       "circle-info",
       "circle-info-filled",
-      "circle-question"
+      "circle-question",
+      "circle-question-filled"
     ],
     "#top": [
       "arrow-up",
@@ -4729,6 +4972,9 @@
     ],
     "#topic": [
       "hash-sign"
+    ],
+    "#topology": [
+      "network"
     ],
     "#topuser": [
       "user-star"
@@ -4758,6 +5004,7 @@
       "tray-arrow-up"
     ],
     "#tree": [
+      "network",
       "tree-palm"
     ],
     "#trend-up": [
@@ -4791,6 +5038,9 @@
       "arrows-turn-up-left",
       "square-arrow-anticlockwise",
       "square-arrow-clockwise"
+    ],
+    "#tv": [
+      "monitor"
     ],
     "#two": [
       "rectangle-squares-two",
@@ -4834,6 +5084,7 @@
     ],
     "#unknown": [
       "circle-question",
+      "circle-question-filled",
       "envelope-question-mark",
       "shield-question-mark"
     ],
@@ -4842,6 +5093,9 @@
     ],
     "#unlock": [
       "lock-open"
+    ],
+    "#unmuted": [
+      "speaker-waves"
     ],
     "#unordered": [
       "dots-list"
@@ -4859,6 +5113,9 @@
     "#unsubscribe": [
       "bell-slash",
       "envelope-minus"
+    ],
+    "#unwatch": [
+      "eye-slash"
     ],
     "#up": [
       "chevron-up",
@@ -4934,7 +5191,8 @@
     ],
     "#valid": [
       "check",
-      "circle-check"
+      "circle-check",
+      "circle-check-filled"
     ],
     "#validated": [
       "calendar-check",
@@ -4946,6 +5204,7 @@
     ],
     "#verified": [
       "circle-check",
+      "circle-check-filled",
       "cloud-check",
       "shield-check",
       "squares-stacked-check"
@@ -4975,6 +5234,9 @@
       "crown",
       "user-star"
     ],
+    "#visibility": [
+      "eye-slash"
+    ],
     "#visible": [
       "eye"
     ],
@@ -4985,6 +5247,9 @@
     ],
     "#voicemail": [
       "circle-line-circle"
+    ],
+    "#volume": [
+      "speaker-waves"
     ],
     "#vote": [
       "thumbs-down",
@@ -5006,6 +5271,10 @@
       "clock",
       "eye"
     ],
+    "#waves": [
+      "speaker-waves",
+      "wave-arcs-up"
+    ],
     "#weather": [
       "cloud",
       "sun"
@@ -5020,8 +5289,14 @@
     "#weight": [
       "bold"
     ],
+    "#wifi": [
+      "wave-arcs-up"
+    ],
     "#wireframe": [
       "overline-rectangle-underline"
+    ],
+    "#wireless": [
+      "wave-arcs-up"
     ],
     "#wish": [
       "cake-candles"
@@ -5032,6 +5307,9 @@
     ],
     "#work": [
       "briefcase"
+    ],
+    "#workstation": [
+      "monitor"
     ],
     "#world": [
       "globe"
