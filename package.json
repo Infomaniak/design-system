@@ -23,7 +23,7 @@
     "lint:check:stylelint": "stylelint \"**/*.css\"",
     "lint:fix:stylelint": "stylelint \"**/*.css\" --fix",
     "check": "yarn check:types && yarn format:check && yarn lint:check",
-    "check:types": "tsc -p tsconfig.json --noEmit",
+    "check:types": "tsc -p tsconfig.json --noEmit && yarn workspace @infomaniak-design-system/docs run check:types",
     "=== TEST ===": "",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
