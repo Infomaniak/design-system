@@ -101,9 +101,7 @@ describe('AttributeRegistry', () => {
 
       registry.define('test-duplicate', TestAttribute);
 
-      expect(() => registry.define('test-duplicate', TestAttribute)).toThrow(
-        'already registered',
-      );
+      expect(() => registry.define('test-duplicate', TestAttribute)).toThrow('already registered');
     });
   });
 
