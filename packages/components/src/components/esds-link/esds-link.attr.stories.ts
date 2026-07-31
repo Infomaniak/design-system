@@ -1,8 +1,8 @@
 import { EsdsIconComponent } from '@infomaniak-design-system/components';
-import { storybookInteractiveControls } from '@infomaniak-design-system/docs/src/helpers/storybook-interactive-controls.ts';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
+import { storybookInteractiveControls } from '../../../../../apps/docs/src/helpers/storybook-interactive-controls.ts';
 import { htmlElementRef } from '../../helpers/.private/component/html-element-ref.ts';
 import { AttributeRegistry } from '../../helpers/custom-attribute/custom-attribute.ts';
 import documentation from './esds-link.attr.md?raw';
