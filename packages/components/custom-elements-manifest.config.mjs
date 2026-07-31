@@ -1,4 +1,5 @@
 import { getTsProgram, typeParserPlugin } from '@wc-toolkit/type-parser';
+import { jsxTypesPlugin } from '@wc-toolkit/jsx-types';
 
 export default {
   globs: ['src/**/*.component.ts', 'src/**/*.attr.ts'],
@@ -10,6 +11,12 @@ export default {
     typeParserPlugin({
       debug: false,
       typeSrc: 'types',
+    }),
+    jsxTypesPlugin({
+      outdir: './dist',
+      fileName: 'generated-jsx-types.d.ts',
+      stronglyTypedEvents: true,
+      globalTypePath: '@infomaniak-design-system/components',
     }),
   ],
   overrideModuleCreation({ ts, globs }) {
