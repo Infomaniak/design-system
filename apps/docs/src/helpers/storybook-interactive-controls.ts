@@ -28,6 +28,12 @@ function storyPropertyConfigLikeToStoryPropertyConfig(
   return typeof input === 'string' ? { value: input } : input;
 }
 
+/**
+ * Generates Storybook interactive controls configuration for a given set of properties.
+ *
+ * @param {Record<string, StoryPropertyConfigLike>} properties - An object where keys represent property names and values represent their configuration.
+ * @return {Pick<StoryHelpers<EsdsLinkAttr>, 'args' | 'argTypes'>} Returns an object containing `args` and `argTypes` for Storybook interactive controls.
+ */
 export function storybookInteractiveControls(
   properties: Record<string, StoryPropertyConfigLike>,
 ): Pick<StoryHelpers<EsdsLinkAttr>, 'args' | 'argTypes'> {

@@ -34,6 +34,10 @@ export interface CustomAttributeDefinition extends Pick<Attr, 'ownerElement' | '
   /**
    * Invoked when:
    *  - the Attr's value change
+   *
+   *  NOTE: this function is not called when:
+   *   - the attribute is added (value is set to a non-null value) -> `CustomAttributeDefinition` is constructed instead
+   *   - the attribute is removed (value is set to `null`) -> `disconnectedCallback` is called instead
    */
   changedCallback?(oldValue: string, newValue: string): void;
 }
@@ -126,21 +130,29 @@ export class AttributeRegistry {
         if (type === 'attributes') {
           // => attribute mutation
 
-          console.assert(target instanceof Element);
-          console.assert(attributeName !== null);
+          if (!(target instanceof Element)) {
+            throw new Error('Expected Element.');
+          }
+
+          if (attributeName === null) {
+            throw new Error('Expected attributeName not to be null.');
+          }
 
           const attr: Attr | undefined =
             (target as Element).attributes.getNamedItem(
               attributeName!,
             ) /* get the current element's Attr -> it could be null if the attribute was removed */ ??
-            this.#getIndirectAttrInstance(target as Element, attributeName!);
+            this.#getIndirectAttrInstance(target as Element, attributeName);
 
-          console.assert(attr !== undefined);
+          if (attr === undefined) {
+            // could append if attribute was added, then removed in the same "tick"
+            continue;
+          }
 
-          this.#setIndirectAttrInstance(target as Element, attributeName!, attr!);
+          this.#setIndirectAttrInstance(target as Element, attributeName, attr);
 
           // search for the next attribute's value -> default on the current attribute's value
-          let currentValue: string | null = attr!.value;
+          let currentValue: string | null = attr.value;
 
           // search for the next mutation -> the attribute's value may have changed multiple times
           for (let j: number = i + 1; j < mutations.length; j++) {
@@ -148,15 +160,15 @@ export class AttributeRegistry {
 
             if (
               nextMutation.type === 'attributes' &&
-              nextMutation.target === attr!.ownerElement &&
-              nextMutation.attributeName === attr!.name
+              nextMutation.target === attr.ownerElement &&
+              nextMutation.attributeName === attr.name
             ) {
               currentValue = nextMutation.oldValue;
               break;
             }
           }
 
-          this.#refreshAttr(attr!, currentValue);
+          this.#refreshAttr(attr, currentValue);
         } else if (type === 'childList') {
           for (const node of removedNodes) {
             this.#refreshTree(node);
@@ -234,6 +246,11 @@ export class AttributeRegistry {
    * @param {Node} [from=this.#root] - The node from which to start refreshing the DOM tree. Defaults to the root node of the tree.
    */
   #refreshTree(from: Node = this.#root): void {
+    if (from.nodeType === Node.COMMENT_NODE || from.nodeType === Node.TEXT_NODE) {
+      // skip if node is a leaf.
+      return;
+    }
+
     const treeWalker: TreeWalker = this.#root.createTreeWalker(from, NodeFilter.SHOW_ELEMENT);
 
     if (from.nodeType === Node.ELEMENT_NODE) {
@@ -241,7 +258,6 @@ export class AttributeRegistry {
     }
 
     while (treeWalker.nextNode()) {
-      console.assert(treeWalker.currentNode instanceof Element);
       this.#refreshElement(treeWalker.currentNode as Element);
     }
   }
@@ -334,7 +350,11 @@ export class AttributeRegistry {
    * @throws {Error} Throws an error if a custom attribute with the same name is already registered.
    */
   define(name: string, ctor: CustomAttributeConstructor): void {
-    if (!/^[a-z]+(-[a-z]+)+$/.test(name) || name.startsWith('aria-') || name.startsWith('data-')) {
+    if (
+      !/^[a-z]+(-[a-z\d]+)+$/.test(name) ||
+      name.startsWith('aria-') ||
+      name.startsWith('data-')
+    ) {
       throw new Error(`Invalid name ${JSON.stringify(name)}`);
     }
 

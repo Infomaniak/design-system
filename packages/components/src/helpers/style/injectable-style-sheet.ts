@@ -67,12 +67,10 @@ export class InjectableStyleSheet {
    */
   #remove(container: DocumentOrShadowRoot): void {
     const count: number | undefined = this.#injected.get(container);
-    console.assert(count !== undefined);
 
     if (count === 1) {
       this.#injected.delete(container);
       const index: number = container.adoptedStyleSheets.indexOf(this.#sheet);
-      console.assert(index !== -1);
       container.adoptedStyleSheets.splice(index, 1);
     } else {
       this.#injected.set(container, count! - 1);
