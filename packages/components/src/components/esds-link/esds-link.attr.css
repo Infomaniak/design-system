@@ -1,36 +1,28 @@
-:root {
-  /* Default */
-  --esds-link-content: var(--esds-color-content-brand-default);
-  --esds-link-text-decoration-default: underline;
-
-  /* Hover */
-  --esds-link-content-hover: var(--esds-color-content-brand-hover);
-  --esds-link-text-decoration-hover: underline;
-
-  /* Pressed */
-  --esds-link-content-pressed: var(--esds-color-content-brand-pressed);
-  --esds-link-text-decoration-pressed: underline;
-
-  /* Visited */
-  --esds-link-content-visited: currentcolor;
-  --esds-link-text-decoration-visited: underline;
-
-  /* Visited + Hover */
-  --esds-link-content-visited-hover: currentcolor;
-  --esds-link-text-decoration-visited-hover: underline;
-
-  /* Visited + Pressed */
-  --esds-link-content-visited-pressed: currentcolor;
-  --esds-link-text-decoration-visited-pressed: underline;
-
-  /* Focus ring */
-  --esds-link-focus: 2px solid currentcolor;
-}
-
 [esds-link] {
   display: inline;
   color: var(--esds-link-content);
-  text-decoration: var(--esds-link-text-decoration-default);
+  text-decoration: none;
+
+  /* Default */
+  --esds-link-content: var(--esds-color-content-brand-default);
+
+  /* Hover */
+  --esds-link-content-hover: var(--esds-color-content-brand-hover);
+
+  /* Pressed */
+  --esds-link-content-pressed: var(--esds-color-content-brand-pressed);
+
+  /* Visited */
+  --esds-link-content-visited: var(--esds-color-content-visited-default);
+
+  /* Visited + Hover */
+  --esds-link-content-visited-hover: var(--esds-color-content-visited-hover);
+
+  /* Visited + Pressed */
+  --esds-link-content-visited-pressed: var(--esds-color-content-visited-pressed);
+
+  /* Focus ring */
+  --esds-link-focus: 2px solid currentcolor;
 
   &:focus-visible {
     outline: var(--esds-link-focus);
@@ -39,26 +31,31 @@
 
   &:hover {
     color: var(--esds-link-content-hover);
-    text-decoration: var(--esds-link-text-decoration-hover);
   }
 
   &:active {
     color: var(--esds-link-content-pressed);
-    text-decoration: var(--esds-link-text-decoration-pressed);
   }
 
   &:visited {
     color: var(--esds-link-content-visited);
-    text-decoration: var(--esds-link-text-decoration-visited);
 
     &:hover {
       color: var(--esds-link-content-visited-hover);
-      text-decoration: var(--esds-link-text-decoration-visited-hover);
     }
 
     &:active {
       color: var(--esds-link-content-visited-pressed);
-      text-decoration: var(--esds-link-text-decoration-visited-pressed);
     }
+  }
+
+  &[underline] {
+    /*
+      NOTE: potential options: https://mui.com/material-ui/react-link/#underline
+       - underline="none"
+       - underline="hover"
+       - underline="always"
+     */
+    text-decoration: underline;
   }
 }

@@ -21,18 +21,6 @@ export interface EsdsLinkAttrDefineOptions {
  * @summary Link attribute
  * @element esds-link
  *
- * @cssproperty --esds-link-content - Default link color
- * @cssproperty --esds-link-default-text-decoration - Default link text decoration
- * @cssproperty --esds-link-content-visited - Visited link color
- * @cssproperty --esds-link-visited-text-decoration - Visited link text decoration
- * @cssproperty --esds-link-content-hover - Hover link color
- * @cssproperty --esds-link-hover-text-decoration - Hover link text decoration
- * @cssproperty --esds-link-content-pressed - Pressed/active link color
- * @cssproperty --esds-link-pressed-text-decoration - Pressed/active link text decoration
- * @cssproperty --esds-link-content-visited-hover - Visited + hover link color
- * @cssproperty --esds-link-visited-hover-text-decoration - Visited + hover link decoration
- * @cssproperty --esds-link-content-visited-pressed - Visited + pressed link color
- * @cssproperty --esds-link-visited-pressed-text-decoration - Visited + pressed link decoration
  * @cssproperty --esds-link-focus - Focus ring style
  */
 export class EsdsLinkAttr extends CustomAttribute implements CustomAttributeDefinition {

@@ -54,6 +54,7 @@ export const External: Story = {
   ...storybookInteractiveControls({
     href: 'https://infomaniak.com',
     target: '_blank',
+    rel: 'noopener noreferrer nofollow',
   }),
   render: (args) => html`
     <a
@@ -61,6 +62,7 @@ export const External: Story = {
       esds-link
       href="${args.href}"
       target="${args.target}"
+      rel="${args.rel}"
       >Opens in new tab</a
     >
   `,
@@ -100,21 +102,18 @@ export const WithIcon: Story = {
   `,
 };
 
-export const CustomRel: Story = {
+export const Underline: Story = {
   ...storybookInteractiveControls({
     href: 'https://infomaniak.com',
-    target: '_blank',
-    rel: 'noopener noreferrer nofollow',
   }),
   render: (args) => html`
     <a
       ${defineEsdsLinkAttr}
       esds-link
+      underline
       href="${args.href}"
-      target="${args.target}"
-      rel="${args.rel}"
     >
-      Set "noopener noreferrer nofollow" rel
+      Underlined link
     </a>
   `,
 };
