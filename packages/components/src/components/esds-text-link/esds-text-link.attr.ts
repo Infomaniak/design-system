@@ -6,7 +6,7 @@ import {
 } from '../../helpers/custom-attribute/custom-attribute.ts';
 import { InjectableStyleSheet } from '../../helpers/style/injectable-style-sheet.ts';
 
-import style from './esds-link.attr.css?inline';
+import style from './esds-text-link.attr.css?inline';
 
 const styleSheet = InjectableStyleSheet.parse(style);
 
@@ -19,20 +19,18 @@ export interface EsdsLinkAttrDefineOptions {
  * Supports click interception via a cancelable custom event.
  *
  * @summary Link attribute
- * @element esds-link
- *
- * @cssproperty --esds-link-focus - Focus ring style
+ * @element esds-text-link
  */
-export class EsdsLinkAttr extends CustomAttribute implements CustomAttributeDefinition {
+export class EsdsTextLinkAttr extends CustomAttribute implements CustomAttributeDefinition {
   static define({ registry = AttributeRegistry.root }: EsdsLinkAttrDefineOptions = {}): void {
-    registry.defineOptionally('esds-link', EsdsLinkAttr);
+    registry.defineOptionally('esds-text-link', EsdsTextLinkAttr);
   }
 
   #undo: CleanUpFunction | undefined;
 
   constructor(attr: Attr) {
     if (attr.ownerElement?.tagName !== 'A') {
-      throw new Error('esds-link attribute can only be used on <a> elements');
+      throw new Error('esds-text-link attribute can only be used on <a> elements');
     }
     super(attr);
   }

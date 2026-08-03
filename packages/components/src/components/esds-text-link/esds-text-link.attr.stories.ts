@@ -5,22 +5,22 @@ import { html } from 'lit';
 import { storybookInteractiveControls } from '../../../../../apps/docs/src/helpers/storybook-interactive-controls.ts';
 import { htmlElementRef } from '../../helpers/.private/component/html-element-ref.ts';
 import { AttributeRegistry } from '../../helpers/custom-attribute/custom-attribute.ts';
-import documentation from './esds-link.attr.md?raw';
-import { EsdsLinkAttr } from './esds-link.attr.ts';
+import documentation from './esds-text-link.attr.md?raw';
+import { EsdsTextLinkAttr } from './esds-text-link.attr.ts';
 
 EsdsIconComponent.define();
 
 const defineEsdsLinkAttr = htmlElementRef((element: Element) => {
-  EsdsLinkAttr.define({
+  EsdsTextLinkAttr.define({
     registry: AttributeRegistry.of(element.ownerDocument!),
   });
 });
 
-const { args, argTypes } = getStorybookHelpers<EsdsLinkAttr>('esds-link');
+const { args, argTypes } = getStorybookHelpers<EsdsTextLinkAttr>('esds-text-link');
 
 const meta = {
   title: 'Components/Link',
-  component: 'esds-link',
+  component: 'esds-text-link',
   tags: ['autodocs'],
   parameters: {
     docs: {
@@ -31,11 +31,11 @@ const meta = {
   },
   args,
   argTypes,
-} satisfies Meta<EsdsLinkAttr>;
+} satisfies Meta<EsdsTextLinkAttr>;
 
 export default meta;
 
-type Story = StoryObj<EsdsLinkAttr & HTMLAnchorElement>;
+type Story = StoryObj<EsdsTextLinkAttr & HTMLAnchorElement>;
 
 export const Default: Story = {
   ...storybookInteractiveControls({
@@ -44,7 +44,7 @@ export const Default: Story = {
   render: (args) =>
     html`<a
       ${defineEsdsLinkAttr}
-      esds-link
+      esds-text-link
       href="${args.href}"
       >Text link</a
     >`,
@@ -59,7 +59,7 @@ export const External: Story = {
   render: (args) => html`
     <a
       ${defineEsdsLinkAttr}
-      esds-link
+      esds-text-link
       href="${args.href}"
       target="${args.target}"
       rel="${args.rel}"
@@ -76,7 +76,7 @@ export const Download: Story = {
   render: (args) => html`
     <a
       ${defineEsdsLinkAttr}
-      esds-link
+      esds-text-link
       href="${args.href}"
       download="${args.download}"
     >
@@ -89,7 +89,7 @@ export const WithIcon: Story = {
   render: () => html`
     <a
       ${defineEsdsLinkAttr}
-      esds-link
+      esds-text-link
       href="https://infomaniak.com"
       target="_blank"
     >
@@ -109,11 +109,11 @@ export const Underline: Story = {
   render: (args) => html`
     <a
       ${defineEsdsLinkAttr}
-      esds-link
+      esds-text-link
       underline
       href="${args.href}"
     >
-      Underlined link
+      Link with underline
     </a>
   `,
 };

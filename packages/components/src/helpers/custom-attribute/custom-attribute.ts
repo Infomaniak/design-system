@@ -14,6 +14,8 @@
  * This interface defines the structure and behavior for custom attributes,
  * including properties for accessing attribute metadata and optional lifecycle callbacks
  * for handling connection and data changes.
+ *
+ * @internal
  */
 export interface CustomAttributeDefinition extends Pick<Attr, 'ownerElement' | 'name' | 'value'> {
   /**

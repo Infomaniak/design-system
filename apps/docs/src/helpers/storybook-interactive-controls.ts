@@ -1,4 +1,3 @@
-import { EsdsLinkAttr } from '@infomaniak-design-system/components';
 import type { StoryHelpers } from '@wc-toolkit/storybook-helpers';
 
 export interface StoryPropertyConfig {
@@ -31,12 +30,13 @@ function storyPropertyConfigLikeToStoryPropertyConfig(
 /**
  * Generates Storybook interactive controls configuration for a given set of properties.
  *
+ * @template T - The type of the component being documented.
  * @param {Record<string, StoryPropertyConfigLike>} properties - An object where keys represent property names and values represent their configuration.
- * @return {Pick<StoryHelpers<EsdsLinkAttr>, 'args' | 'argTypes'>} Returns an object containing `args` and `argTypes` for Storybook interactive controls.
+ * @return {Pick<StoryHelpers<T>, 'args' | 'argTypes'>} Returns an object containing `args` and `argTypes` for Storybook interactive controls.
  */
-export function storybookInteractiveControls(
+export function storybookInteractiveControls<T>(
   properties: Record<string, StoryPropertyConfigLike>,
-): Pick<StoryHelpers<EsdsLinkAttr>, 'args' | 'argTypes'> {
+): Pick<StoryHelpers<T>, 'args' | 'argTypes'> {
   return {
     args: Object.fromEntries(
       Object.entries(properties).map(
@@ -45,7 +45,7 @@ export function storybookInteractiveControls(
           return [key, value];
         },
       ),
-    ),
+    ) as StoryHelpers<T>['args'],
     argTypes: Object.fromEntries(
       Object.entries(properties).map(
         ([key, property]: [string, StoryPropertyConfigLike]): [

@@ -4,6 +4,8 @@ import type { CleanUpFunction } from '../.private/misc/clean-up-function.ts';
  * A class used to manage the injection and removal of CSS stylesheets into documents or shadow roots.
  * This class ensures that a stylesheet is only injected once per container and provides cleanup
  * functionality to remove injected styles when they are no longer needed.
+ *
+ * @internal
  */
 export class InjectableStyleSheet {
   /**
