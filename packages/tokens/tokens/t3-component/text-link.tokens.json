@@ -1,0 +1,26 @@
+{
+  "text-link": {
+    "content": {
+      "default": {
+        "$value": "{color.content.brand.default}"
+      },
+      "hover": {
+        "$value": "{color.content.brand.hover}"
+      },
+      "pressed": {
+        "$value": "{color.content.brand.hover}"
+      },
+      "visited": {
+        "default": {
+          "$value": "{color.content.visited.default}"
+        },
+        "hover": {
+          "$value": "{color.content.visited.hover}"
+        },
+        "pressed": {
+          "$value": "{color.content.visited.hover}"
+        }
+      }
+    }
+  }
+}
