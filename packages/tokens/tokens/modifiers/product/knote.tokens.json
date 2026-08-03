@@ -13,26 +13,6 @@
         }
       }
     },
-    "content": {
-      "brand": {
-        "default": {
-          "$value": "{color.content.brand.knote.default}"
-        },
-        "hover": {
-          "$value": "{color.content.brand.knote.hover}"
-        },
-        "pressed": {
-          "$value": "{color.content.brand.knote.pressed}"
-        }
-      },
-      "on": {
-        "brand": {
-          "default": {
-            "$value": "{color.content.on.brand.knote.default}"
-          }
-        }
-      }
-    },
     "border": {
       "brand": {
         "default": {
@@ -43,6 +23,26 @@
         },
         "pressed": {
           "$value": "{color.border.brand.knote.pressed}"
+        }
+      }
+    },
+    "content": {
+      "on": {
+        "brand": {
+          "default": {
+            "$value": "{color.content.on.brand.knote.default}"
+          }
+        }
+      },
+      "brand": {
+        "default": {
+          "$value": "{color.content.brand.knote.default}"
+        },
+        "hover": {
+          "$value": "{color.content.brand.knote.hover}"
+        },
+        "pressed": {
+          "$value": "{color.content.brand.knote.pressed}"
         }
       }
     }

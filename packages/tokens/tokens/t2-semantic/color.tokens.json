@@ -3,9 +3,35 @@
   "color": {
     "background": {
       "elevation": {
-        "surface": {
-          "pressed": {
+        "sunken": {
+          "default": {
             "$value": "{color.gray.100}",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "hover": {
+            "$value": "{color.gray.200}",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "pressed": {
+            "$value": "{color.gray.300}",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "selected": {
+            "$value": "{color.gray.300}",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          }
+        },
+        "surface": {
+          "default": {
+            "$value": "{color.white}",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
@@ -16,8 +42,34 @@
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           },
+          "pressed": {
+            "$value": "{color.gray.100}",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "selected": {
+            "$value": "{color.gray.100}",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          }
+        },
+        "raised": {
           "default": {
             "$value": "{color.white}",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "hover": {
+            "$value": "{color.gray.50}",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "pressed": {
+            "$value": "{color.gray.100}",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
@@ -54,77 +106,248 @@
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           }
-        },
-        "raised": {
+        }
+      },
+      "brand": {
+        "infomaniak": {
           "default": {
-            "$value": "{color.white}",
+            "$value": "{color.blue.600}",
             "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+              "scopes": []
             }
           },
           "hover": {
-            "$value": "{color.gray.50}",
+            "$value": "{color.blue.700}",
             "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+              "scopes": []
             }
           },
           "pressed": {
-            "$value": "{color.gray.100}",
+            "$value": "{color.blue.800}",
             "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "selected": {
-            "$value": "{color.gray.100}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+              "scopes": []
             }
           }
         },
-        "sunken": {
-          "pressed": {
-            "$value": "{color.gray.300}",
+        "mail": {
+          "default": {
+            "$value": "{color.pink.600}",
             "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+              "scopes": []
             }
           },
           "hover": {
-            "$value": "{color.gray.200}",
+            "$value": "{color.pink.700}",
             "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+              "scopes": []
             }
           },
+          "pressed": {
+            "$value": "{color.pink.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "kdrive": {
           "default": {
-            "$value": "{color.gray.100}",
+            "$value": "{color.indigo.500}",
             "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+              "scopes": []
             }
           },
-          "selected": {
-            "$value": "{color.gray.300}",
+          "hover": {
+            "$value": "{color.indigo.600}",
             "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+              "scopes": []
             }
+          },
+          "pressed": {
+            "$value": "{color.indigo.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "euria": {
+          "default": {
+            "$value": "{color.ocean.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.ocean.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.ocean.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "kchat": {
+          "default": {
+            "$value": "{color.cyan.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.cyan.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.cyan.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "security": {
+          "default": {
+            "$value": "{color.purple.600}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.purple.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.purple.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "calendar": {
+          "default": {
+            "$value": "{color.aqua.600}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.aqua.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.aqua.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "contacts": {
+          "default": {
+            "$value": "{color.violet.500}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.violet.600}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.violet.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "knote": {
+          "default": {
+            "$value": "{color.coral.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.coral.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.coral.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "swisstransfer": {
+          "default": {
+            "$value": "{color.emerald.600}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "hover": {
+            "$value": "{color.emerald.700}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.emerald.800}",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "default": {
+          "$value": "{color.blue.600}",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"],
+            "figmaName": ["color", "background", "brand", "@root", "default"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.blue.800}",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"],
+            "figmaName": ["color", "background", "brand", "@root", "pressed"]
+          }
+        },
+        "hover": {
+          "$value": "{color.blue.700}",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"],
+            "figmaName": ["color", "background", "brand", "@root", "hover"]
           }
         }
       },
       "feedback": {
-        "error": {
+        "success": {
           "dim1": {
             "default": {
-              "$value": "{color.red.400}",
+              "$value": "{color.lime.500}",
               "$extensions": {
                 "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "hover": {
-              "$value": "{color.red.500}",
+              "$value": "{color.lime.600}",
               "$extensions": {
                 "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "pressed": {
-              "$value": "{color.red.600}",
+              "$value": "{color.lime.700}",
               "$extensions": {
                 "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
@@ -132,19 +355,19 @@
           },
           "dim2": {
             "default": {
-              "$value": "{color.red.200}",
+              "$value": "{color.lime.200}",
               "$extensions": {
                 "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "hover": {
-              "$value": "{color.red.300}",
+              "$value": "{color.lime.300}",
               "$extensions": {
                 "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "pressed": {
-              "$value": "{color.red.400}",
+              "$value": "{color.lime.400}",
               "$extensions": {
                 "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
@@ -193,22 +416,22 @@
             }
           }
         },
-        "success": {
+        "error": {
           "dim1": {
             "default": {
-              "$value": "{color.lime.500}",
+              "$value": "{color.red.400}",
               "$extensions": {
                 "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "hover": {
-              "$value": "{color.lime.600}",
+              "$value": "{color.red.500}",
               "$extensions": {
                 "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "pressed": {
-              "$value": "{color.lime.700}",
+              "$value": "{color.red.600}",
               "$extensions": {
                 "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
@@ -216,246 +439,23 @@
           },
           "dim2": {
             "default": {
-              "$value": "{color.lime.200}",
+              "$value": "{color.red.200}",
               "$extensions": {
                 "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "hover": {
-              "$value": "{color.lime.300}",
+              "$value": "{color.red.300}",
               "$extensions": {
                 "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "pressed": {
-              "$value": "{color.lime.400}",
+              "$value": "{color.red.400}",
               "$extensions": {
                 "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             }
-          }
-        }
-      },
-      "brand": {
-        "infomaniak": {
-          "default": {
-            "$value": "{color.blue.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.blue.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.blue.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "mail": {
-          "default": {
-            "$value": "{color.pink.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.pink.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.pink.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "kdrive": {
-          "default": {
-            "$value": "{color.indigo.400}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.indigo.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.indigo.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "euria": {
-          "default": {
-            "$value": "{color.ocean.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.ocean.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.ocean.900}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "kchat": {
-          "default": {
-            "$value": "{color.cyan.400}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.cyan.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.cyan.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "security": {
-          "default": {
-            "$value": "{color.purple.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.purple.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.purple.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "calendar": {
-          "default": {
-            "$value": "{color.aqua.400}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.aqua.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.aqua.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "contacts": {
-          "default": {
-            "$value": "{color.violet.300}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.violet.400}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.violet.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "knote": {
-          "default": {
-            "$value": "{color.coral.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.coral.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.coral.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "swisstransfer": {
-          "default": {
-            "$value": "{color.emerald.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.emerald.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.emerald.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "default": {
-          "$value": "{color.blue.500}",
-          "$extensions": {
-            "scopes": ["ALL_FILLS"],
-            "figmaName": ["color", "background", "brand", "@root", "default"]
-          }
-        },
-        "pressed": {
-          "$value": "{color.blue.700}",
-          "$extensions": {
-            "scopes": ["ALL_FILLS"],
-            "figmaName": ["color", "background", "brand", "@root", "pressed"]
-          }
-        },
-        "hover": {
-          "$value": "{color.blue.600}",
-          "$extensions": {
-            "scopes": ["ALL_FILLS"],
-            "figmaName": ["color", "background", "brand", "@root", "hover"]
           }
         }
       },
@@ -721,19 +721,19 @@
         "yellow": {
           "dim1": {
             "default": {
-              "$value": "{color.yellow.600}",
+              "$value": "{color.yellow.500}",
               "$extensions": {
                 "scopes": []
               }
             },
             "hover": {
-              "$value": "{color.yellow.700}",
+              "$value": "{color.yellow.600}",
               "$extensions": {
                 "scopes": []
               }
             },
             "pressed": {
-              "$value": "{color.yellow.800}",
+              "$value": "{color.yellow.700}",
               "$extensions": {
                 "scopes": []
               }
@@ -754,6 +754,48 @@
             },
             "pressed": {
               "$value": "{color.yellow.400}",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          }
+        },
+        "gray": {
+          "dim1": {
+            "default": {
+              "$value": "{color.gray.500}",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "hover": {
+              "$value": "{color.gray.600}",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "pressed": {
+              "$value": "{color.gray.700}",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "dim2": {
+            "default": {
+              "$value": "{color.gray.200}",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "hover": {
+              "$value": "{color.gray.300}",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "pressed": {
+              "$value": "{color.gray.400}",
               "$extensions": {
                 "scopes": []
               }
@@ -809,22 +851,339 @@
       }
     },
     "content": {
+      "on": {
+        "disabled": {
+          "$value": "{color.gray.400}",
+          "$extensions": {
+            "scopes": ["TEXT_FILL"]
+          }
+        },
+        "brand": {
+          "infomaniak": {
+            "default": {
+              "$value": "{color.white}",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "calendar": {
+            "default": {
+              "$value": "{color.white}",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "contacts": {
+            "default": {
+              "$value": "{color.white}",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "euria": {
+            "default": {
+              "$value": "{color.white}",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "kchat": {
+            "default": {
+              "$value": "{color.white}",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "kdrive": {
+            "default": {
+              "$value": "{color.white}",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "knote": {
+            "default": {
+              "$value": "{color.white}",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "mail": {
+            "default": {
+              "$value": "{color.white}",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "security": {
+            "default": {
+              "$value": "{color.white}",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "swisstransfer": {
+            "default": {
+              "$value": "{color.white}",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "default": {
+            "$value": "{color.white}",
+            "$extensions": {
+              "scopes": ["ALL_FILLS"],
+              "figmaName": ["color", "content", "on", "brand", "@root", "default"]
+            }
+          }
+        },
+        "feedback": {
+          "success": {
+            "dim1": {
+              "default": {
+                "$value": "{color.lime.950}",
+                "$extensions": {
+                  "scopes": ["ALL_FILLS"]
+                }
+              }
+            },
+            "dim2": {
+              "default": {
+                "$value": "{color.lime.950}",
+                "$extensions": {
+                  "scopes": ["ALL_FILLS"]
+                }
+              }
+            }
+          },
+          "warning": {
+            "dim1": {
+              "default": {
+                "$value": "{color.orange.900}",
+                "$extensions": {
+                  "scopes": ["ALL_FILLS"]
+                }
+              }
+            },
+            "dim2": {
+              "default": {
+                "$value": "{color.orange.950}",
+                "$extensions": {
+                  "scopes": ["ALL_FILLS"]
+                }
+              }
+            }
+          },
+          "error": {
+            "dim1": {
+              "default": {
+                "$value": "{color.red.900}",
+                "$extensions": {
+                  "scopes": ["ALL_FILLS"]
+                }
+              }
+            },
+            "dim2": {
+              "default": {
+                "$value": "{color.red.950}",
+                "$extensions": {
+                  "scopes": ["ALL_FILLS"]
+                }
+              }
+            }
+          }
+        },
+        "dataviz": {
+          "blue": {
+            "dim1": {
+              "default": {
+                "$value": "{color.blue.900}",
+                "$extensions": {
+                  "scopes": []
+                }
+              }
+            },
+            "dim2": {
+              "default": {
+                "$value": "{color.blue.50}",
+                "$extensions": {
+                  "scopes": []
+                }
+              }
+            }
+          },
+          "emerald": {
+            "dim1": {
+              "default": {
+                "$value": "{color.emerald.900}",
+                "$extensions": {
+                  "scopes": []
+                }
+              }
+            },
+            "dim2": {
+              "default": {
+                "$value": "{color.emerald.50}",
+                "$extensions": {
+                  "scopes": []
+                }
+              }
+            }
+          },
+          "orange": {
+            "dim1": {
+              "default": {
+                "$value": "{color.orange.900}",
+                "$extensions": {
+                  "scopes": []
+                }
+              }
+            },
+            "dim2": {
+              "default": {
+                "$value": "{color.orange.100}",
+                "$extensions": {
+                  "scopes": []
+                }
+              }
+            }
+          },
+          "pink": {
+            "dim1": {
+              "default": {
+                "$value": "{color.pink.900}",
+                "$extensions": {
+                  "scopes": []
+                }
+              }
+            },
+            "dim2": {
+              "default": {
+                "$value": "{color.pink.50}",
+                "$extensions": {
+                  "scopes": []
+                }
+              }
+            }
+          },
+          "purple": {
+            "dim1": {
+              "default": {
+                "$value": "{color.purple.900}",
+                "$extensions": {
+                  "scopes": []
+                }
+              }
+            },
+            "dim2": {
+              "default": {
+                "$value": "{color.purple.50}",
+                "$extensions": {
+                  "scopes": []
+                }
+              }
+            }
+          },
+          "violet": {
+            "dim1": {
+              "default": {
+                "$value": "{color.violet.900}",
+                "$extensions": {
+                  "scopes": []
+                }
+              }
+            },
+            "dim2": {
+              "default": {
+                "$value": "{color.violet.50}",
+                "$extensions": {
+                  "scopes": []
+                }
+              }
+            }
+          },
+          "yellow": {
+            "dim1": {
+              "default": {
+                "$value": "{color.yellow.900}",
+                "$extensions": {
+                  "scopes": []
+                }
+              }
+            },
+            "dim2": {
+              "default": {
+                "$value": "{color.yellow.50}",
+                "$extensions": {
+                  "scopes": []
+                }
+              }
+            }
+          },
+          "gray": {
+            "dim1": {
+              "default": {
+                "$value": "{color.gray.900}",
+                "$extensions": {
+                  "scopes": []
+                }
+              }
+            },
+            "dim2": {
+              "default": {
+                "$value": "{color.gray.50}",
+                "$extensions": {
+                  "scopes": []
+                }
+              }
+            }
+          },
+          "dim1": {
+            "default": {
+              "$value": "{color.violet.900}",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"],
+                "figmaName": ["color", "content", "on", "dataviz", "@root", "dim1", "default"]
+              }
+            }
+          },
+          "dim2": {
+            "default": {
+              "$value": "{color.violet.50}",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"],
+                "figmaName": ["color", "content", "on", "dataviz", "@root", "dim2", "default"]
+              }
+            }
+          }
+        }
+      },
       "brand": {
         "infomaniak": {
           "default": {
-            "$value": "{color.blue.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
             "$value": "{color.blue.800}",
             "$extensions": {
               "scopes": []
             }
           },
-          "pressed": {
+          "hover": {
             "$value": "{color.blue.900}",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "pressed": {
+            "$value": "{color.blue.950}",
             "$extensions": {
               "scopes": []
             }
@@ -932,19 +1291,19 @@
         },
         "calendar": {
           "default": {
-            "$value": "{color.aqua.500}",
+            "$value": "{color.aqua.700}",
             "$extensions": {
               "scopes": []
             }
           },
           "hover": {
-            "$value": "{color.aqua.600}",
+            "$value": "{color.aqua.800}",
             "$extensions": {
               "scopes": []
             }
           },
           "pressed": {
-            "$value": "{color.aqua.700}",
+            "$value": "{color.aqua.900}",
             "$extensions": {
               "scopes": []
             }
@@ -1011,21 +1370,21 @@
           }
         },
         "default": {
-          "$value": "{color.blue.700}",
+          "$value": "{color.blue.800}",
           "$extensions": {
             "scopes": ["ALL_FILLS"],
             "figmaName": ["color", "content", "brand", "@root", "default"]
           }
         },
         "hover": {
-          "$value": "{color.blue.800}",
+          "$value": "{color.blue.900}",
           "$extensions": {
             "scopes": ["ALL_FILLS"],
             "figmaName": ["color", "content", "brand", "@root", "hover"]
           }
         },
         "pressed": {
-          "$value": "{color.blue.900}",
+          "$value": "{color.blue.950}",
           "$extensions": {
             "scopes": ["ALL_FILLS"],
             "figmaName": ["color", "content", "brand", "@root", "pressed"]
@@ -1050,270 +1409,35 @@
           "scopes": ["ALL_FILLS"]
         }
       },
-      "inverse": {
-        "$value": "{color.gray.100}",
-        "$extensions": {
-          "scopes": ["ALL_FILLS"]
-        }
-      },
       "disabled": {
         "$value": "{color.gray.400}",
         "$extensions": {
           "scopes": ["ALL_FILLS"]
         }
       },
-      "on": {
-        "dataviz": {
-          "blue": {
-            "dim1": {
-              "$value": "{color.blue.900}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "dim2": {
-              "$value": "{color.blue.50}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "emerald": {
-            "dim1": {
-              "$value": "{color.emerald.900}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "dim2": {
-              "$value": "{color.emerald.50}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "orange": {
-            "dim1": {
-              "$value": "{color.orange.900}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "dim2": {
-              "$value": "{color.orange.100}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "pink": {
-            "dim1": {
-              "$value": "{color.pink.900}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "dim2": {
-              "$value": "{color.pink.50}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "purple": {
-            "dim1": {
-              "$value": "{color.purple.900}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "dim2": {
-              "$value": "{color.purple.50}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "violet": {
-            "dim1": {
-              "$value": "{color.violet.900}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "dim2": {
-              "$value": "{color.violet.50}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "yellow": {
-            "dim1": {
-              "$value": "{color.yellow.900}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "dim2": {
-              "$value": "{color.yellow.50}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "dim1": {
-            "$value": "{color.violet.900}",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"],
-              "figmaName": ["color", "content", "on", "dataviz", "@root", "dim1"]
-            }
-          },
-          "dim2": {
-            "$value": "{color.violet.50}",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"],
-              "figmaName": ["color", "content", "on", "dataviz", "@root", "dim2"]
-            }
-          }
-        },
-        "brand": {
-          "infomaniak": {
-            "default": {
-              "$value": "{color.blue.950}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "calendar": {
-            "default": {
-              "$value": "{color.aqua.950}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "contacts": {
-            "default": {
-              "$value": "{color.violet.950}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "euria": {
-            "default": {
-              "$value": "{color.ocean.50}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "kchat": {
-            "default": {
-              "$value": "{color.cyan.950}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "kdrive": {
-            "default": {
-              "$value": "{color.indigo.50}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "knote": {
-            "default": {
-              "$value": "{color.coral.50}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "mail": {
-            "default": {
-              "$value": "{color.pink.50}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "security": {
-            "default": {
-              "$value": "{color.purple.50}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "swisstransfer": {
-            "default": {
-              "$value": "{color.emerald.950}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "default": {
-            "$value": "{color.blue.950}",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"],
-              "figmaName": ["color", "content", "on", "brand", "@root", "default"]
-            }
-          }
-        },
-        "disabled": {
-          "$value": "{color.gray.400}",
+      "inverse": {
+        "$value": "{color.gray.100}",
+        "$extensions": {
+          "scopes": ["ALL_FILLS"]
+        }
+      },
+      "visited": {
+        "default": {
+          "$value": "{color.violet.500}",
           "$extensions": {
             "scopes": ["TEXT_FILL"]
           }
         },
-        "feedback": {
-          "warning": {
-            "dim2": {
-              "$value": "{color.orange.950}",
-              "$extensions": {
-                "scopes": ["ALL_FILLS"]
-              }
-            },
-            "dim1": {
-              "$value": "{color.orange.900}",
-              "$extensions": {
-                "scopes": ["ALL_FILLS"]
-              }
-            }
-          },
-          "success": {
-            "dim2": {
-              "$value": "{color.lime.950}",
-              "$extensions": {
-                "scopes": ["ALL_FILLS"]
-              }
-            },
-            "dim1": {
-              "$value": "{color.lime.950}",
-              "$extensions": {
-                "scopes": ["ALL_FILLS"]
-              }
-            }
-          },
-          "error": {
-            "dim2": {
-              "$value": "{color.red.950}",
-              "$extensions": {
-                "scopes": ["ALL_FILLS"]
-              }
-            },
-            "dim1": {
-              "$value": "{color.red.900}",
-              "$extensions": {
-                "scopes": ["ALL_FILLS"]
-              }
-            }
+        "hover": {
+          "$value": "{color.violet.600}",
+          "$extensions": {
+            "scopes": ["TEXT_FILL"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.violet.700}",
+          "$extensions": {
+            "scopes": ["TEXT_FILL"]
           }
         }
       },
@@ -1381,26 +1505,6 @@
       }
     },
     "border": {
-      "dim1": {
-        "default": {
-          "$value": "{color.gray.400}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
-        },
-        "hover": {
-          "$value": "{color.gray.500}",
-          "$extensions": {
-            "scopes": []
-          }
-        },
-        "pressed": {
-          "$value": "{color.gray.600}",
-          "$extensions": {
-            "scopes": []
-          }
-        }
-      },
       "brand": {
         "infomaniak": {
           "default": {
@@ -1524,19 +1628,19 @@
         },
         "calendar": {
           "default": {
-            "$value": "{color.aqua.400}",
+            "$value": "{color.aqua.700}",
             "$extensions": {
               "scopes": []
             }
           },
           "hover": {
-            "$value": "{color.aqua.500}",
+            "$value": "{color.aqua.800}",
             "$extensions": {
               "scopes": []
             }
           },
           "pressed": {
-            "$value": "{color.aqua.600}",
+            "$value": "{color.aqua.900}",
             "$extensions": {
               "scopes": []
             }
@@ -1919,6 +2023,48 @@
             }
           }
         },
+        "gray": {
+          "dim1": {
+            "default": {
+              "$value": "{color.gray.600}",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "hover": {
+              "$value": "{color.gray.700}",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "pressed": {
+              "$value": "{color.gray.800}",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "dim2": {
+            "default": {
+              "$value": "{color.gray.200}",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "hover": {
+              "$value": "{color.gray.300}",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "pressed": {
+              "$value": "{color.gray.400}",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          }
+        },
         "dim1": {
           "default": {
             "$value": "{color.violet.600}",
@@ -2091,6 +2237,26 @@
                 "scopes": []
               }
             }
+          }
+        }
+      },
+      "dim1": {
+        "default": {
+          "$value": "{color.gray.400}",
+          "$extensions": {
+            "scopes": ["STROKE_COLOR"]
+          }
+        },
+        "hover": {
+          "$value": "{color.gray.500}",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "pressed": {
+          "$value": "{color.gray.600}",
+          "$extensions": {
+            "scopes": []
           }
         }
       },

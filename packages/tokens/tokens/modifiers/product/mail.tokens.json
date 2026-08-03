@@ -13,26 +13,6 @@
         }
       }
     },
-    "content": {
-      "brand": {
-        "default": {
-          "$value": "{color.content.brand.mail.default}"
-        },
-        "hover": {
-          "$value": "{color.content.brand.mail.hover}"
-        },
-        "pressed": {
-          "$value": "{color.content.brand.mail.pressed}"
-        }
-      },
-      "on": {
-        "brand": {
-          "default": {
-            "$value": "{color.content.on.brand.mail.default}"
-          }
-        }
-      }
-    },
     "border": {
       "brand": {
         "default": {
@@ -43,6 +23,26 @@
         },
         "pressed": {
           "$value": "{color.border.brand.mail.pressed}"
+        }
+      }
+    },
+    "content": {
+      "on": {
+        "brand": {
+          "default": {
+            "$value": "{color.content.on.brand.mail.default}"
+          }
+        }
+      },
+      "brand": {
+        "default": {
+          "$value": "{color.content.brand.mail.default}"
+        },
+        "hover": {
+          "$value": "{color.content.brand.mail.hover}"
+        },
+        "pressed": {
+          "$value": "{color.content.brand.mail.pressed}"
         }
       }
     }
