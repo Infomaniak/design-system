@@ -685,6 +685,16 @@ colors:
     inverse:
       light: "#f1f5f9"
       dark: "#192334"
+    visited:
+      default:
+        light: "#9346ff"
+        dark: "#cab1ff"
+      hover:
+        light: "#8f30f7"
+        dark: "#e0d4ff"
+      pressed:
+        light: "#811ee3"
+        dark: "#b185ff"
     feedback:
       error:
         default:
@@ -1597,6 +1607,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.tertiary | #62748e | #90a1b9 | var(--esds-color-content-tertiary) | N/A |
 | color.content.disabled | #90a1b9 | #62748e | var(--esds-color-content-disabled) | N/A |
 | color.content.inverse | #f1f5f9 | #192334 | var(--esds-color-content-inverse) | N/A |
+| color.content.visited.default | #9346ff | #cab1ff | var(--esds-color-content-visited-default) | N/A |
+| color.content.visited.hover | #8f30f7 | #e0d4ff | var(--esds-color-content-visited-hover) | N/A |
+| color.content.visited.pressed | #811ee3 | #b185ff | var(--esds-color-content-visited-pressed) | N/A |
 | color.content.feedback.error.default | #d70000 | #ff9494 | var(--esds-color-content-feedback-error-default) | N/A |
 | color.content.feedback.error.hover | #b10303 | #ffc0c0 | var(--esds-color-content-feedback-error-hover) | N/A |
 | color.content.feedback.error.pressed | #920a0a | #ff5757 | var(--esds-color-content-feedback-error-pressed) | N/A |
