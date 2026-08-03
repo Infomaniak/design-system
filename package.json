@@ -58,7 +58,7 @@
       "packages/tokens/demo",
       "packages/components",
       "packages/assets/images/svg",
-      "packages/fonts",
+      "packages/assets/fonts",
       "apps/docs"
     ]
   },

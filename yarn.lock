@@ -5,6 +5,13 @@ __metadata:
   version: 10
   cacheKey: 10c0
 
+"@0x6b/ttf2woff2-wasm@npm:^0.13.2":
+  version: 0.13.2
+  resolution: "@0x6b/ttf2woff2-wasm@npm:0.13.2"
+  checksum: 10c0/f8eaf6ead87de1d3209df3b72c16590f4ea17218138ac2add4f0d2e58aa5ee8a2e1c1df7d9df20047e02881c8bfea1e3c6ccbf9bd20885a888e00f003b533aab
+  languageName: node
+  linkType: hard
+
 "@adobe/css-tools@npm:^4.4.0":
   version: 4.5.0
   resolution: "@adobe/css-tools@npm:4.5.0"
@@ -1066,6 +1073,14 @@ __metadata:
     storybook: "npm:^10.5.0"
     typescript: "npm:~7.0.2"
     vite: "npm:^8.1.4"
+  languageName: unknown
+  linkType: soft
+
+"@infomaniak-design-system/fonts@workspace:packages/assets/fonts":
+  version: 0.0.0-use.local
+  resolution: "@infomaniak-design-system/fonts@workspace:packages/assets/fonts"
+  dependencies:
+    "@0x6b/ttf2woff2-wasm": "npm:^0.13.2"
   languageName: unknown
   linkType: soft
 
