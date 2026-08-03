@@ -42,11 +42,12 @@ function tokensBrueckeDesignTokenToDesignTokenDeprecated(
 function tokensBrueckeDesignTokenToDesignTokenDescription(
   token: GenericTokensBrueckeDesignToken,
 ): string | undefined {
-  if (token.$description === undefined || token.$description === '') {
-    return undefined;
-  } else {
-    return token.$description.replace(/^@deprecated(\s+|$)/, '');
-  }
+  const $description: string =
+    token.$description === undefined
+      ? ''
+      : token.$description.trim().replace(/^@deprecated(\s+|$)/, '');
+
+  return $description === '' ? undefined : $description;
 }
 
 function tokensBrueckeDesignTokenToDesignTokenExtensions(
