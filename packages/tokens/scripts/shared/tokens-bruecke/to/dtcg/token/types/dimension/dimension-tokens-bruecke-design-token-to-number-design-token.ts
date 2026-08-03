@@ -1,5 +1,6 @@
 import type { NumberDesignToken } from '../../../../../../dtcg/design-token/token/types/base/types/number/number-design-token.ts';
 import type { DimensionTokensBrueckeDesignToken } from '../../../../../tokens-bruecke/token/types/dimension/dimension-tokens-bruecke-design-token.ts';
+import type { DimensionTokensBrueckeDesignTokenValue } from '../../../../../tokens-bruecke/token/types/dimension/value/dimension-tokens-bruecke-design-token-value.ts';
 import type { TokensBrueckeToDtcgContext } from '../../../context/tokens-bruecke-to-dtcg-context.ts';
 import { isTokensBrueckeDesignTokenPercentNumberDesignToken } from '../../infer-dtcg-type/is-tokens-bruecke-design-token-percent-number-design-token.ts';
 import { tokensBrueckeDesignTokenWithMapValueToDesignToken } from '../../tokens-bruecke-design-token-with-map-value-to-design-token.ts';
@@ -14,7 +15,7 @@ export function dimensionTokensBrueckeDesignTokenToNumberDesignToken(
   return tokensBrueckeDesignTokenWithMapValueToDesignToken(
     input,
     'number',
-    (value: string): number => {
+    (value: DimensionTokensBrueckeDesignTokenValue): number => {
       return (
         (dimensionTokensBrueckeDesignTokenValueToDimensionDesignTokenValue(value).value as number) /
         divider
