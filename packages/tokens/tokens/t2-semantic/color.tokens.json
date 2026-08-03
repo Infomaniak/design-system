@@ -908,43 +908,55 @@
         "feedback": {
           "success": {
             "dim1": {
-              "$value": "{color.lime.950}",
-              "$extensions": {
-                "scopes": ["ALL_FILLS"]
+              "default": {
+                "$value": "{color.lime.950}",
+                "$extensions": {
+                  "scopes": ["ALL_FILLS"]
+                }
               }
             },
             "dim2": {
-              "$value": "{color.lime.950}",
-              "$extensions": {
-                "scopes": ["ALL_FILLS"]
+              "default": {
+                "$value": "{color.lime.950}",
+                "$extensions": {
+                  "scopes": ["ALL_FILLS"]
+                }
               }
             }
           },
           "warning": {
             "dim1": {
-              "$value": "{color.orange.900}",
-              "$extensions": {
-                "scopes": ["ALL_FILLS"]
+              "default": {
+                "$value": "{color.orange.900}",
+                "$extensions": {
+                  "scopes": ["ALL_FILLS"]
+                }
               }
             },
             "dim2": {
-              "$value": "{color.orange.950}",
-              "$extensions": {
-                "scopes": ["ALL_FILLS"]
+              "default": {
+                "$value": "{color.orange.950}",
+                "$extensions": {
+                  "scopes": ["ALL_FILLS"]
+                }
               }
             }
           },
           "error": {
             "dim1": {
-              "$value": "{color.red.900}",
-              "$extensions": {
-                "scopes": ["ALL_FILLS"]
+              "default": {
+                "$value": "{color.red.900}",
+                "$extensions": {
+                  "scopes": ["ALL_FILLS"]
+                }
               }
             },
             "dim2": {
-              "$value": "{color.red.950}",
-              "$extensions": {
-                "scopes": ["ALL_FILLS"]
+              "default": {
+                "$value": "{color.red.950}",
+                "$extensions": {
+                  "scopes": ["ALL_FILLS"]
+                }
               }
             }
           }
@@ -952,114 +964,146 @@
         "dataviz": {
           "blue": {
             "dim1": {
-              "$value": "{color.blue.900}",
-              "$extensions": {
-                "scopes": []
+              "default": {
+                "$value": "{color.blue.900}",
+                "$extensions": {
+                  "scopes": []
+                }
               }
             },
             "dim2": {
-              "$value": "{color.blue.50}",
-              "$extensions": {
-                "scopes": []
+              "default": {
+                "$value": "{color.blue.50}",
+                "$extensions": {
+                  "scopes": []
+                }
               }
             }
           },
           "emerald": {
             "dim1": {
-              "$value": "{color.emerald.900}",
-              "$extensions": {
-                "scopes": []
+              "default": {
+                "$value": "{color.emerald.900}",
+                "$extensions": {
+                  "scopes": []
+                }
               }
             },
             "dim2": {
-              "$value": "{color.emerald.50}",
-              "$extensions": {
-                "scopes": []
+              "default": {
+                "$value": "{color.emerald.50}",
+                "$extensions": {
+                  "scopes": []
+                }
               }
             }
           },
           "orange": {
             "dim1": {
-              "$value": "{color.orange.900}",
-              "$extensions": {
-                "scopes": []
+              "default": {
+                "$value": "{color.orange.900}",
+                "$extensions": {
+                  "scopes": []
+                }
               }
             },
             "dim2": {
-              "$value": "{color.orange.100}",
-              "$extensions": {
-                "scopes": []
+              "default": {
+                "$value": "{color.orange.100}",
+                "$extensions": {
+                  "scopes": []
+                }
               }
             }
           },
           "pink": {
             "dim1": {
-              "$value": "{color.pink.900}",
-              "$extensions": {
-                "scopes": []
+              "default": {
+                "$value": "{color.pink.900}",
+                "$extensions": {
+                  "scopes": []
+                }
               }
             },
             "dim2": {
-              "$value": "{color.pink.50}",
-              "$extensions": {
-                "scopes": []
+              "default": {
+                "$value": "{color.pink.50}",
+                "$extensions": {
+                  "scopes": []
+                }
               }
             }
           },
           "purple": {
             "dim1": {
-              "$value": "{color.purple.900}",
-              "$extensions": {
-                "scopes": []
+              "default": {
+                "$value": "{color.purple.900}",
+                "$extensions": {
+                  "scopes": []
+                }
               }
             },
             "dim2": {
-              "$value": "{color.purple.50}",
-              "$extensions": {
-                "scopes": []
+              "default": {
+                "$value": "{color.purple.50}",
+                "$extensions": {
+                  "scopes": []
+                }
               }
             }
           },
           "violet": {
             "dim1": {
-              "$value": "{color.violet.900}",
-              "$extensions": {
-                "scopes": []
+              "default": {
+                "$value": "{color.violet.900}",
+                "$extensions": {
+                  "scopes": []
+                }
               }
             },
             "dim2": {
-              "$value": "{color.violet.50}",
-              "$extensions": {
-                "scopes": []
+              "default": {
+                "$value": "{color.violet.50}",
+                "$extensions": {
+                  "scopes": []
+                }
               }
             }
           },
           "yellow": {
             "dim1": {
-              "$value": "{color.yellow.900}",
-              "$extensions": {
-                "scopes": []
+              "default": {
+                "$value": "{color.yellow.900}",
+                "$extensions": {
+                  "scopes": []
+                }
               }
             },
             "dim2": {
-              "$value": "{color.yellow.50}",
-              "$extensions": {
-                "scopes": []
+              "default": {
+                "$value": "{color.yellow.50}",
+                "$extensions": {
+                  "scopes": []
+                }
               }
             }
           },
           "dim1": {
-            "$value": "{color.violet.900}",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"],
-              "figmaName": ["color", "content", "on", "dataviz", "@root", "dim1"]
+            "default": {
+              "$value": "{color.violet.900}",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"],
+                "figmaName": ["color", "content", "on", "dataviz", "@root", "dim1", "default"]
+              }
             }
           },
           "dim2": {
-            "$value": "{color.violet.50}",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"],
-              "figmaName": ["color", "content", "on", "dataviz", "@root", "dim2"]
+            "default": {
+              "$value": "{color.violet.50}",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"],
+                "figmaName": ["color", "content", "on", "dataviz", "@root", "dim2", "default"]
+              }
             }
           }
         }

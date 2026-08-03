@@ -29,11 +29,14 @@ export function tokensBrueckeDesignTokenWithMapValueToDesignToken<
 function tokensBrueckeDesignTokenToDesignTokenDeprecated(
   token: GenericTokensBrueckeDesignToken,
 ): string | boolean | undefined {
-  if (token.$deprecated === undefined && token.$description !== undefined) {
-    return /^@deprecated(\s+|$)/.test(token.$description);
-  } else {
-    return token.$deprecated;
-  }
+  const $deprecated: string | boolean | undefined =
+    token.$deprecated === undefined && token.$description !== undefined
+      ? /^@deprecated(\s+|$)/.test(token.$description)
+      : token.$deprecated;
+
+  // NOTE: If the token is NOT deprecated, it is more readable and compact if it is not be present in the JSON.
+  // NOTE: $deprecated could be a string, so we need to check if it is false explicitly.
+  return $deprecated === false ? undefined : $deprecated;
 }
 
 function tokensBrueckeDesignTokenToDesignTokenDescription(
