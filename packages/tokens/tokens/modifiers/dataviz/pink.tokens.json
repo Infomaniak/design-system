@@ -56,10 +56,14 @@
       "on": {
         "dataviz": {
           "dim1": {
-            "$value": "{color.content.on.dataviz.pink.dim1}"
+            "default": {
+              "$value": "{color.content.on.dataviz.pink.dim1.default}"
+            }
           },
           "dim2": {
-            "$value": "{color.content.on.dataviz.pink.dim2}"
+            "default": {
+              "$value": "{color.content.on.dataviz.pink.dim2.default}"
+            }
           }
         }
       }
