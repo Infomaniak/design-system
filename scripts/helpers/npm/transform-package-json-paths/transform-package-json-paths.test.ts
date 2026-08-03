@@ -11,21 +11,21 @@ describe('transformPackageJsonPaths', () => {
 
   describe('basic path transformation', () => {
     it('should strip ./dist/ prefix from main field', () => {
-      const pkg = { name: 'test', version: '1.0.0', main: './dist/esds-icon.umd.cjs' };
+      const pkg = { name: 'test', version: '1.0.0', main: './dist/test-app.umd.cjs' };
       const result = transformPackageJsonPaths(pkg, defaultConfig);
-      expect(result.main).toBe('./esds-icon.umd.cjs');
+      expect(result.main).toBe('./test-app.umd.cjs');
     });
 
     it('should strip /dist/ prefix from main field', () => {
-      const pkg = { name: 'test', version: '1.0.0', main: '/dist/esds-icon.umd.cjs' };
+      const pkg = { name: 'test', version: '1.0.0', main: '/dist/test-app.umd.cjs' };
       const result = transformPackageJsonPaths(pkg, defaultConfig);
-      expect(result.main).toBe('./esds-icon.umd.cjs');
+      expect(result.main).toBe('./test-app.umd.cjs');
     });
 
     it('should strip ./dist/ prefix from module field', () => {
-      const pkg = { name: 'test', version: '1.0.0', module: './dist/esds-icon.js' };
+      const pkg = { name: 'test', version: '1.0.0', module: './dist/test-app.js' };
       const result = transformPackageJsonPaths(pkg, defaultConfig);
-      expect(result.module).toBe('./esds-icon.js');
+      expect(result.module).toBe('./test-app.js');
     });
 
     it('should strip ./dist/ prefix from types field', () => {
@@ -62,11 +62,11 @@ describe('transformPackageJsonPaths', () => {
           '.': {
             import: {
               types: './dist/public-api.d.ts',
-              default: './dist/esds-icon.js',
+              default: './dist/test-app.js',
             },
             require: {
               types: './dist/public-api.d.ts',
-              default: './dist/esds-icon.umd.cjs',
+              default: './dist/test-app.umd.cjs',
             },
           },
         },
@@ -76,11 +76,11 @@ describe('transformPackageJsonPaths', () => {
         '.': {
           import: {
             types: './public-api.d.ts',
-            default: './esds-icon.js',
+            default: './test-app.js',
           },
           require: {
             types: './public-api.d.ts',
-            default: './esds-icon.umd.cjs',
+            default: './test-app.umd.cjs',
           },
         },
       });
@@ -303,40 +303,40 @@ describe('transformPackageJsonPaths', () => {
   });
 
   describe('real-world scenario', () => {
-    it('should handle the actual esds-icon package structure', () => {
+    it('should handle a complex package structure', () => {
       const pkg = {
-        name: '@infomaniak-design-system/esds-icon',
+        name: '@scope/package',
         version: '1.0.0',
         type: 'module',
-        main: './dist/esds-icon.umd.cjs',
-        module: './dist/esds-icon.js',
+        main: './dist/index.umd.cjs',
+        module: './dist/index.js',
         types: './dist/public-api.d.ts',
         exports: {
           '.': {
             import: {
               types: './dist/public-api.d.ts',
-              default: './dist/esds-icon.js',
+              default: './dist/index.js',
             },
             require: {
               types: './dist/public-api.d.ts',
-              default: './dist/esds-icon.umd.cjs',
+              default: './dist/index.umd.cjs',
             },
           },
         },
       };
       const result = transformPackageJsonPaths(pkg, defaultConfig);
-      expect(result.main).toBe('./esds-icon.umd.cjs');
-      expect(result.module).toBe('./esds-icon.js');
+      expect(result.main).toBe('./index.umd.cjs');
+      expect(result.module).toBe('./index.js');
       expect(result.types).toBe('./public-api.d.ts');
       expect(result.exports).toEqual({
         '.': {
           import: {
             types: './public-api.d.ts',
-            default: './esds-icon.js',
+            default: './index.js',
           },
           require: {
             types: './public-api.d.ts',
-            default: './esds-icon.umd.cjs',
+            default: './index.umd.cjs',
           },
         },
       });

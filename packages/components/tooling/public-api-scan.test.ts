@@ -31,7 +31,7 @@ describe('public-api-scan', () => {
   describe('isExcludedFile', () => {
     it.each([
       { name: 'foo.ts', expected: false },
-      { name: 'foo.d.ts', expected: false },
+      { name: 'foo.d.ts', expected: true },
       { name: 'foo.private.ts', expected: true },
       { name: 'foo.private.d.ts', expected: true },
       { name: 'foo.test.ts', expected: true },
@@ -53,7 +53,6 @@ describe('public-api-scan', () => {
 
       const tree = [
         'foo.ts',
-        'bar.d.ts',
         'quz.private.ts',
         'quz.private.d.ts',
         'baz.test.ts',
@@ -77,11 +76,11 @@ describe('public-api-scan', () => {
       fs.rmSync(tmpDir, { recursive: true, force: true });
     });
 
-    it('should include plain .ts and .d.ts files', async () => {
+    it('should include plain .ts files only', async () => {
       const result = await getPublicApiSourceFiles(tmpDir);
       const relativePaths = result.map((r) => r.relativePath).sort();
 
-      expect(relativePaths).toEqual(['bar.d.ts', 'foo.ts', 'sub/deep.ts']);
+      expect(relativePaths).toEqual(['foo.ts', 'sub/deep.ts']);
     });
 
     it('should resolve absolute paths inside the given directory', async () => {
