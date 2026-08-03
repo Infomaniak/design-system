@@ -780,6 +780,17 @@
       },
       "inverse": {
         "$value": "{color.gray.800}"
+      },
+      "visited": {
+        "default": {
+          "$value": "{color.violet.300}"
+        },
+        "hover": {
+          "$value": "{color.violet.200}"
+        },
+        "pressed": {
+          "$value": "{color.violet.400}"
+        }
       }
     },
     "border": {

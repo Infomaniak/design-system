@@ -1421,6 +1421,26 @@
           "scopes": ["ALL_FILLS"]
         }
       },
+      "visited": {
+        "default": {
+          "$value": "{color.violet.500}",
+          "$extensions": {
+            "scopes": ["TEXT_FILL"]
+          }
+        },
+        "hover": {
+          "$value": "{color.violet.600}",
+          "$extensions": {
+            "scopes": ["TEXT_FILL"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.violet.700}",
+          "$extensions": {
+            "scopes": ["TEXT_FILL"]
+          }
+        }
+      },
       "feedback": {
         "error": {
           "default": {
