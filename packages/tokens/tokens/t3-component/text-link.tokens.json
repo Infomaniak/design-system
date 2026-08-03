@@ -1,6 +1,6 @@
 {
   "text-link": {
-    "content": {
+    "color": {
       "default": {
         "$value": "{color.content.brand.default}"
       },
@@ -8,7 +8,7 @@
         "$value": "{color.content.brand.hover}"
       },
       "pressed": {
-        "$value": "{color.content.brand.hover}"
+        "$value": "{color.content.brand.pressed}"
       },
       "visited": {
         "default": {
@@ -18,7 +18,7 @@
           "$value": "{color.content.visited.hover}"
         },
         "pressed": {
-          "$value": "{color.content.visited.hover}"
+          "$value": "{color.content.visited.pressed}"
         }
       }
     }
