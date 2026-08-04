@@ -6,9 +6,9 @@ import { readJsonFile } from '../../../../../../../scripts/helpers/file/read-jso
 import { writeFileSafe } from '../../../../../../../scripts/helpers/file/write-file-safe.ts';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { removeTrailingSlash } from '../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
-import { fontFaceSchema } from '../../../shared/font-face/font-face.schema.ts';
-import type { FontFaceDefinition } from '../../../shared/font-face/font-face.ts';
-import { fontFaceToCss } from '../../../shared/font-face/to/css/font-face-to-css.ts';
+import { fontFaceSchema } from '../../../shared/font-description/__v1/font-face.schema.ts';
+import type { FontFaceDefinition } from '../../../shared/font-description/__v1/font-face.ts';
+import { fontFaceToCss } from '../../../shared/font-description/__v1/to/css/font-face-to-css.ts';
 
 export interface BuildFontOptions {
   readonly sourceFile: string; // JSON path

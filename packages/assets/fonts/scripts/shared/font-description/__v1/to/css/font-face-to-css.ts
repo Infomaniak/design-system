@@ -1,4 +1,4 @@
-import { dedent } from '../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
+import { dedent } from '../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import type { FontFaceDefinition } from '../../font-face.ts';
 import { fontFaceFontWeightToCss } from '../../font-weight/to/css/font-face-font-weight-to-css.ts';
 
