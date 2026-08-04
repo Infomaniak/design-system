@@ -13,7 +13,6 @@ export default defineConfig({
       fileName: 'public-api',
       formats: ['es'],
     },
-
     rolldownOptions: {
       external: ['lit', /lit\/.*/],
       output: {
