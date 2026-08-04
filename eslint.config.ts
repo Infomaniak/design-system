@@ -15,6 +15,11 @@ export default defineConfig([
       '**/.svn/**',
       '**/.hg/**',
       '**/node_modules/**',
+      '**/playwright-vr-report/**',
+      '**/playwright-e2e-report/**',
+      '**/playwright-vr-results.json',
+      '**/playwright-vr-results-metadata.json',
+      '**/__screenshots__/**',
     ],
   },
   {

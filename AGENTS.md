@@ -13,7 +13,7 @@ Infomaniak's Design System featuring design tokens based on DTCG standards and c
 - **Language:** TypeScript v5 (ESNext, NodeNext modules)
 - **Package Manager:** Yarn v4 (workspaces enabled)
 - **Build Tools:** Vite (Rolldown fork), Node.js scripts
-- **Testing:** Vitest v4 with Istanbul coverage
+- **Testing:** Vitest v4 with Istanbul coverage, Playwright for visual regression and E2E tests
 - **Documentation:** Storybook v10
 - **UI Framework:** React v19
 - **Styling:** Tailwind CSS v4
@@ -35,16 +35,23 @@ design-system/
 │       ├── .storybook/          # Storybook configuration
 │       └── dist/                # Built docs output
 ├── packages/
-│   └── tokens/                  # Design tokens library (DTCG format)
-│       ├── tokens/              # Token definitions (t1-primitive, t2-semantic, t3-component)
-│       ├── scripts/             # Token build/validation scripts
-│       ├── demo/                # Live demo app for tokens
-│       └── dist/                # Output: CSS, JSON, Markdown
+│   ├── tokens/                  # Design tokens library (DTCG format)
+│   │   ├── tokens/              # Token definitions (t1-primitive, t2-semantic, t3-component)
+│   │   ├── scripts/             # Token build/validation scripts
+│   │   ├── demo/                # Live demo app for tokens
+│   │   └── dist/                # Output: CSS, JSON, Markdown
+│   └── components/              # Web components library
+│       ├── src/                 # Component source + stories
+│       └── tests/visual-regression/      # Playwright visual regression suite
+│           ├── visual-regression.spec.ts # Orchestrator (loops manifest, diffs per story)
+│           └── helpers.ts                # URL builder, manifest fetcher, story filter
 ├── scripts/
 │   ├── ci/                      # CI/CD automation scripts
-│   │   ├── on-pull-request/     # PR validation
-│   │   ├── on-tag/              # Release automation
-│   │   └── publish/             # Branch-based npm publish orchestrator
+│   │   ├── storybook-pr/        # PR Storybook build decision + comment
+│   │   ├── storybook-pages/     # Storybook pages deploy context + normalization
+│   │   ├── visual-regression/   # Visual regression PR comment automation
+│   │   ├── publish/             # Branch-based npm publish orchestrator
+│   │   └── on-figma-event/      # Figma webhook handlers
 │   └── helpers/                 # Shared utility functions
 ├── docs/                        # Project documentation
 │   ├── figma/                   # Figma integration docs
@@ -58,19 +65,21 @@ design-system/
 
 ### Command Patterns
 
-| Task                   | Command                                      |
-| ---------------------- | -------------------------------------------- |
-| Install deps           | `yarn install`                               |
-| Dev server (docs)      | `cd apps/docs && yarn dev`                   |
-| Dev server (Storybook) | `cd apps/docs && yarn storybook`             |
-| Build all packages     | `yarn build`                                 |
-| Build tokens only      | `yarn build:tokens`                          |
-| Validate tokens        | `cd packages/tokens && yarn validate:tokens` |
-| Run tests              | `yarn test`                                  |
-| Test coverage          | `yarn test:coverage`                         |
-| Format code            | `yarn format`                                |
-| PR validation          | `yarn ci:on-pull-request`                    |
-| CI publish (manual)    | `GITHUB_REF_NAME=develop yarn ci:publish`    |
+| Task                         | Command                                      |
+| ---------------------------- | -------------------------------------------- |
+| Install deps                 | `yarn install`                               |
+| Dev server (docs)            | `cd apps/docs && yarn dev`                   |
+| Dev server (Storybook)       | `cd apps/docs && yarn storybook`             |
+| Build all packages           | `yarn build`                                 |
+| Build tokens only            | `yarn build:tokens`                          |
+| Validate tokens              | `cd packages/tokens && yarn validate:tokens` |
+| Run tests                    | `yarn test`                                  |
+| Test coverage                | `yarn test:coverage`                         |
+| Visual regression tests      | `yarn test:vrt`                              |
+| Format code                  | `yarn format`                                |
+| PR validation                | `yarn ci:on-pull-request`                    |
+| CI publish (manual)          | `GITHUB_REF_NAME=develop yarn ci:publish`    |
+| CI visual regression comment | `yarn ci:visual-regression --mode=comment`   |
 
 ### Code Style
 
@@ -156,6 +165,16 @@ The CEM is auto-generated during `yarn build` and verified in CI via `git diff -
     },
   } satisfies Meta;
   ```
+
+#### Visual Regression Tagging
+
+Add `'vr-test'` to a story's `tags` array to include it in visual regression tests. The suite diffs the PR's deployed Storybook against `develop`. Stories not present on `develop` are skipped (new components). The job is advisory (non-blocking).
+
+```typescript
+const meta = {
+  tags: ['autodocs', 'vr-test'],
+} satisfies Meta;
+```
 
 ---
 

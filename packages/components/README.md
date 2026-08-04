@@ -111,6 +111,33 @@ Key JSDoc tags for CEM:
 Internal utilities and test-only helpers must be placed in `*.private.ts` files.
 These files are automatically excluded from the generated `public-api.ts` by the `yarn generate public-api` command.
 
+## Visual Regression Tests
+
+Components are automatically checked for visual regressions on every PR. The suite screenshots each tagged story on the PR's deployed Storybook and diffs it against the `develop` branch baseline.
+
+### Tagging a story
+
+Add the `vr-test` tag to a story's `tags` array to include it in visual regression:
+
+```ts
+const meta = {
+  title: 'Components/MyComponent',
+  tags: ['autodocs', 'vr-test'],
+} satisfies Meta;
+```
+
+Stories not present on `develop` (new components) are automatically skipped. The job is advisory (non-blocking).
+
+### Running locally
+
+```bash
+yarn dev:docs   # start Storybook on :6006
+yarn test:vrt   # run visual regression tests (localhost vs develop)
+```
+
+> [!NOTE]
+> use `VR_STORYBOOK_URL=http://localhost:XXXX yarn test:vrt` if Storybook does not run on `:6006`
+
 ## Useful scripts
 
 | Command            | Description                                      |
@@ -119,6 +146,8 @@ These files are automatically excluded from the generated `public-api.ts` by the
 | `yarn analyze:cem` | Generate `custom-elements.json` from source code |
 | `yarn build`       | Full build: CEM + Vite + TypeScript declarations |
 | `yarn dev:docs`    | Start Storybook dev server                       |
+| `yarn test:e2e`    | Run Playwright E2E tests (`*.component.e2e.ts`)  |
+| `yarn test:vrt`    | Run Playwright visual regression tests           |
 
 ## CEM config
 
