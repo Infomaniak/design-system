@@ -1,4 +1,4 @@
-import { isAbsolute } from 'pathe';
+import { isAbsolute } from 'node:path';
 
 export function verifyAbsolute(path: string): void {
   if (!isAbsolute(path)) {

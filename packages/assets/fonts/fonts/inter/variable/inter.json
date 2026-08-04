@@ -1,0 +1,17 @@
+{
+  "family": "Inter",
+  "variants": [
+    {
+      "src": "./inter.variable.normal.[opsz,wght].ttf",
+      "style": "normal",
+      "weight": [100, 900],
+      "opticalSizing": "auto"
+    },
+    {
+      "src": "./inter.variable.italic.[opsz,wght].ttf",
+      "style": "italic",
+      "weight": [100, 900],
+      "opticalSizing": "auto"
+    }
+  ]
+}
