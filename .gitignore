@@ -162,6 +162,14 @@ dist
 *storybook.log
 storybook-static
 
+# Playwright
+playwright-vr-report/
+playwright-e2e-report/
+playwright-vr-results.json
+playwright-vr-results-metadata.json
+packages/components/tests/visual-regression/__screenshots__/
+test-results/
+
 # Generated files
 apps/docs/public/DESIGN.md
 apps/docs/src/stories/assets/*.md

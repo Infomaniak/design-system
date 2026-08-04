@@ -16,6 +16,9 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+    outputs:
+      should_build: ${{ steps.prepare.outputs.should_build }}
+      deployment_url: ${{ steps.pages.outputs.public_url }}
 
     steps:
       - name: Checkout repository
@@ -95,3 +98,58 @@ jobs:
           STORYBOOK_BUILD_OUTCOME: ${{ steps.build.outcome }}
           STORYBOOK_DEPLOY_OUTCOME: ${{ steps.deploy.outcome }}
           STORYBOOK_DEPLOYMENT_URL: ${{ steps.pages.outputs.public_url }}
+
+  visual-regression:
+    name: Visual Regression
+    needs: [build-storybook-pr]
+    if: github.event_name == 'pull_request' && needs.build-storybook-pr.outputs.should_build == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run visual regression tests
+        id: vrt
+        run: yarn test:vrt
+        env:
+          VR_STORYBOOK_URL: ${{ needs.build-storybook-pr.outputs.deployment_url }}
+          VR_DEVELOP_URL: https://infomaniak.github.io/design-system/storybook/develop
+        continue-on-error: true
+
+      - name: Upload HTML report artifact
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: visual-regression-report-${{ github.event.pull_request.number }}
+          path: playwright-vr-report/
+          retention-days: 3
+          if-no-files-found: warn
+
+      - name: Post/Update PR comment
+        if: always()
+        run: yarn ci:visual-regression --mode=comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VR_REPORT_PATH: playwright-vr-results.json
+          VR_METADATA_PATH: playwright-vr-results-metadata.json
+          VR_ARTIFACT_NAME: visual-regression-report-${{ github.event.pull_request.number }}
+          VR_ARTIFACT_RETENTION_DAYS: '3'
