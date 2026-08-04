@@ -16,7 +16,7 @@ const { args, argTypes, template } = getStorybookHelpers<EsdsIconComponent>('esd
 const meta = {
   title: 'Components/Icon',
   component: 'esds-icon',
-  tags: ['autodocs'],
+  tags: ['autodocs', 'vr-test'],
   parameters: {
     docs: {
       description: {
