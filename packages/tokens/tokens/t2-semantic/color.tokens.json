@@ -765,19 +765,19 @@
             "default": {
               "$value": "{color.gray.500}",
               "$extensions": {
-                "scopes": []
+                "scopes": ["ALL_SCOPES"]
               }
             },
             "hover": {
               "$value": "{color.gray.600}",
               "$extensions": {
-                "scopes": []
+                "scopes": ["ALL_SCOPES"]
               }
             },
             "pressed": {
               "$value": "{color.gray.700}",
               "$extensions": {
-                "scopes": []
+                "scopes": ["ALL_SCOPES"]
               }
             }
           },
@@ -785,40 +785,40 @@
             "default": {
               "$value": "{color.gray.200}",
               "$extensions": {
-                "scopes": []
+                "scopes": ["ALL_SCOPES"]
               }
             },
             "hover": {
               "$value": "{color.gray.300}",
               "$extensions": {
-                "scopes": []
+                "scopes": ["ALL_SCOPES"]
               }
             },
             "pressed": {
               "$value": "{color.gray.400}",
               "$extensions": {
-                "scopes": []
+                "scopes": ["ALL_SCOPES"]
               }
             }
           }
         },
         "dim1": {
           "default": {
-            "$value": "{color.violet.600}",
+            "$value": "{color.blue.600}",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"],
               "figmaName": ["color", "background", "dataviz", "dim1", "@root", "default"]
             }
           },
           "hover": {
-            "$value": "{color.violet.700}",
+            "$value": "{color.blue.700}",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"],
               "figmaName": ["color", "background", "dataviz", "dim1", "@root", "hover"]
             }
           },
           "pressed": {
-            "$value": "{color.violet.800}",
+            "$value": "{color.blue.800}",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"],
               "figmaName": ["color", "background", "dataviz", "dim1", "@root", "pressed"]
@@ -827,21 +827,21 @@
         },
         "dim2": {
           "default": {
-            "$value": "{color.violet.200}",
+            "$value": "{color.blue.200}",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"],
               "figmaName": ["color", "background", "dataviz", "dim2", "@root", "default"]
             }
           },
           "hover": {
-            "$value": "{color.violet.300}",
+            "$value": "{color.blue.300}",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"],
               "figmaName": ["color", "background", "dataviz", "dim2", "@root", "hover"]
             }
           },
           "pressed": {
-            "$value": "{color.violet.400}",
+            "$value": "{color.blue.400}",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"],
               "figmaName": ["color", "background", "dataviz", "dim2", "@root", "pressed"]
@@ -1135,7 +1135,7 @@
               "default": {
                 "$value": "{color.gray.900}",
                 "$extensions": {
-                  "scopes": []
+                  "scopes": ["ALL_SCOPES"]
                 }
               }
             },
@@ -1143,14 +1143,14 @@
               "default": {
                 "$value": "{color.gray.50}",
                 "$extensions": {
-                  "scopes": []
+                  "scopes": ["ALL_SCOPES"]
                 }
               }
             }
           },
           "dim1": {
             "default": {
-              "$value": "{color.violet.900}",
+              "$value": "{color.blue.900}",
               "$extensions": {
                 "scopes": ["ALL_FILLS"],
                 "figmaName": ["color", "content", "on", "dataviz", "@root", "dim1", "default"]
@@ -1159,7 +1159,7 @@
           },
           "dim2": {
             "default": {
-              "$value": "{color.violet.50}",
+              "$value": "{color.blue.50}",
               "$extensions": {
                 "scopes": ["ALL_FILLS"],
                 "figmaName": ["color", "content", "on", "dataviz", "@root", "dim2", "default"]
@@ -1421,26 +1421,6 @@
           "scopes": ["ALL_FILLS"]
         }
       },
-      "visited": {
-        "default": {
-          "$value": "{color.violet.500}",
-          "$extensions": {
-            "scopes": ["TEXT_FILL"]
-          }
-        },
-        "hover": {
-          "$value": "{color.violet.600}",
-          "$extensions": {
-            "scopes": ["TEXT_FILL"]
-          }
-        },
-        "pressed": {
-          "$value": "{color.violet.700}",
-          "$extensions": {
-            "scopes": ["TEXT_FILL"]
-          }
-        }
-      },
       "feedback": {
         "error": {
           "default": {
@@ -1500,6 +1480,26 @@
             "$extensions": {
               "scopes": []
             }
+          }
+        }
+      },
+      "visited": {
+        "default": {
+          "$value": "{color.violet.500}",
+          "$extensions": {
+            "scopes": ["TEXT_FILL"]
+          }
+        },
+        "hover": {
+          "$value": "{color.violet.600}",
+          "$extensions": {
+            "scopes": ["TEXT_FILL"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.violet.700}",
+          "$extensions": {
+            "scopes": ["TEXT_FILL"]
           }
         }
       }
@@ -2028,19 +2028,19 @@
             "default": {
               "$value": "{color.gray.600}",
               "$extensions": {
-                "scopes": []
+                "scopes": ["ALL_SCOPES"]
               }
             },
             "hover": {
               "$value": "{color.gray.700}",
               "$extensions": {
-                "scopes": []
+                "scopes": ["ALL_SCOPES"]
               }
             },
             "pressed": {
               "$value": "{color.gray.800}",
               "$extensions": {
-                "scopes": []
+                "scopes": ["ALL_SCOPES"]
               }
             }
           },
@@ -2048,40 +2048,40 @@
             "default": {
               "$value": "{color.gray.200}",
               "$extensions": {
-                "scopes": []
+                "scopes": ["ALL_SCOPES"]
               }
             },
             "hover": {
               "$value": "{color.gray.300}",
               "$extensions": {
-                "scopes": []
+                "scopes": ["ALL_SCOPES"]
               }
             },
             "pressed": {
               "$value": "{color.gray.400}",
               "$extensions": {
-                "scopes": []
+                "scopes": ["ALL_SCOPES"]
               }
             }
           }
         },
         "dim1": {
           "default": {
-            "$value": "{color.violet.600}",
+            "$value": "{color.blue.600}",
             "$extensions": {
               "scopes": ["STROKE_COLOR"],
               "figmaName": ["color", "border", "dataviz", "dim1", "@root", "default"]
             }
           },
           "hover": {
-            "$value": "{color.violet.700}",
+            "$value": "{color.blue.700}",
             "$extensions": {
               "scopes": [],
               "figmaName": ["color", "border", "dataviz", "dim1", "@root", "hover"]
             }
           },
           "pressed": {
-            "$value": "{color.violet.800}",
+            "$value": "{color.blue.800}",
             "$extensions": {
               "scopes": [],
               "figmaName": ["color", "border", "dataviz", "dim1", "@root", "pressed"]
@@ -2090,21 +2090,21 @@
         },
         "dim2": {
           "default": {
-            "$value": "{color.violet.200}",
+            "$value": "{color.blue.200}",
             "$extensions": {
               "scopes": ["STROKE_COLOR"],
               "figmaName": ["color", "border", "dataviz", "dim2", "@root", "default"]
             }
           },
           "hover": {
-            "$value": "{color.violet.300}",
+            "$value": "{color.blue.300}",
             "$extensions": {
               "scopes": [],
               "figmaName": ["color", "border", "dataviz", "dim2", "@root", "hover"]
             }
           },
           "pressed": {
-            "$value": "{color.violet.400}",
+            "$value": "{color.blue.400}",
             "$extensions": {
               "scopes": [],
               "figmaName": ["color", "border", "dataviz", "dim2", "@root", "pressed"]
