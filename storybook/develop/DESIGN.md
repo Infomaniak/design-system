@@ -413,13 +413,13 @@ colors:
             light: "#90a1b9"
             dark: "#020618"
       dim1:
-        default: "#8f30f7"
-        hover: "#811ee3"
-        pressed: "#6c18bf"
+        default: "#0077cf"
+        hover: "#015ca3"
+        pressed: "#064e86"
       dim2:
-        default: "#e0d4ff"
-        hover: "#cab1ff"
-        pressed: "#b185ff"
+        default: "#b9e0fe"
+        hover: "#7cc8fd"
+        pressed: "#36adfa"
   content:
     on:
       disabled:
@@ -563,9 +563,9 @@ colors:
               light: "#f8fafc"
               dark: "#020618"
         dim1:
-          default: "#59169c"
+          default: "#0b426f"
         dim2:
-          default: "#f6f2ff"
+          default: "#f0f8ff"
     brand:
       infomaniak:
         default:
@@ -685,16 +685,6 @@ colors:
     inverse:
       light: "#f1f5f9"
       dark: "#192334"
-    visited:
-      default:
-        light: "#9346ff"
-        dark: "#cab1ff"
-      hover:
-        light: "#8f30f7"
-        dark: "#e0d4ff"
-      pressed:
-        light: "#811ee3"
-        dark: "#b185ff"
     feedback:
       error:
         default:
@@ -726,6 +716,16 @@ colors:
         pressed:
           light: "#7a200d"
           dark: "#ffa032"
+    visited:
+      default:
+        light: "#9346ff"
+        dark: "#cab1ff"
+      hover:
+        light: "#8f30f7"
+        dark: "#e0d4ff"
+      pressed:
+        light: "#811ee3"
+        dark: "#b185ff"
   border:
     brand:
       infomaniak:
@@ -999,13 +999,13 @@ colors:
             light: "#90a1b9"
             dark: "#0f172b"
       dim1:
-        default: "#8f30f7"
-        hover: "#811ee3"
-        pressed: "#6c18bf"
+        default: "#0077cf"
+        hover: "#015ca3"
+        pressed: "#064e86"
       dim2:
-        default: "#e0d4ff"
-        hover: "#cab1ff"
-        pressed: "#b185ff"
+        default: "#b9e0fe"
+        hover: "#7cc8fd"
+        pressed: "#36adfa"
     feedback:
       error:
         dim1:
@@ -1527,12 +1527,12 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.dataviz.gray.dim2.default | #e2e8f0 | #192334 | var(--esds-color-background-dataviz-gray-dim2-default) | N/A |
 | color.background.dataviz.gray.dim2.hover | #cad5e2 | #314158 | var(--esds-color-background-dataviz-gray-dim2-hover) | N/A |
 | color.background.dataviz.gray.dim2.pressed | #90a1b9 | #020618 | var(--esds-color-background-dataviz-gray-dim2-pressed) | N/A |
-| color.background.dataviz.dim1.default | #8f30f7 | #8f30f7 | var(--esds-color-background-dataviz-dim1-default) | N/A |
-| color.background.dataviz.dim1.hover | #811ee3 | #811ee3 | var(--esds-color-background-dataviz-dim1-hover) | N/A |
-| color.background.dataviz.dim1.pressed | #6c18bf | #6c18bf | var(--esds-color-background-dataviz-dim1-pressed) | N/A |
-| color.background.dataviz.dim2.default | #e0d4ff | #e0d4ff | var(--esds-color-background-dataviz-dim2-default) | N/A |
-| color.background.dataviz.dim2.hover | #cab1ff | #cab1ff | var(--esds-color-background-dataviz-dim2-hover) | N/A |
-| color.background.dataviz.dim2.pressed | #b185ff | #b185ff | var(--esds-color-background-dataviz-dim2-pressed) | N/A |
+| color.background.dataviz.dim1.default | #0077cf | #0077cf | var(--esds-color-background-dataviz-dim1-default) | N/A |
+| color.background.dataviz.dim1.hover | #015ca3 | #015ca3 | var(--esds-color-background-dataviz-dim1-hover) | N/A |
+| color.background.dataviz.dim1.pressed | #064e86 | #064e86 | var(--esds-color-background-dataviz-dim1-pressed) | N/A |
+| color.background.dataviz.dim2.default | #b9e0fe | #b9e0fe | var(--esds-color-background-dataviz-dim2-default) | N/A |
+| color.background.dataviz.dim2.hover | #7cc8fd | #7cc8fd | var(--esds-color-background-dataviz-dim2-hover) | N/A |
+| color.background.dataviz.dim2.pressed | #36adfa | #36adfa | var(--esds-color-background-dataviz-dim2-pressed) | N/A |
 | color.content.on.disabled | #90a1b9 | #62748e | var(--esds-color-content-on-disabled) | N/A |
 | color.content.on.brand.infomaniak.default | #fff | #072a4a | var(--esds-color-content-on-brand-infomaniak-default) | N/A |
 | color.content.on.brand.calendar.default | #fff | #001f23 | var(--esds-color-content-on-brand-calendar-default) | N/A |
@@ -1567,8 +1567,8 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.on.dataviz.yellow.dim2.default | #fefce8 | #422006 | var(--esds-color-content-on-dataviz-yellow-dim2-default) | N/A |
 | color.content.on.dataviz.gray.dim1.default | #0f172b | #f1f5f9 | var(--esds-color-content-on-dataviz-gray-dim1-default) | N/A |
 | color.content.on.dataviz.gray.dim2.default | #f8fafc | #020618 | var(--esds-color-content-on-dataviz-gray-dim2-default) | N/A |
-| color.content.on.dataviz.dim1.default | #59169c | #59169c | var(--esds-color-content-on-dataviz-dim1-default) | N/A |
-| color.content.on.dataviz.dim2.default | #f6f2ff | #f6f2ff | var(--esds-color-content-on-dataviz-dim2-default) | N/A |
+| color.content.on.dataviz.dim1.default | #0b426f | #0b426f | var(--esds-color-content-on-dataviz-dim1-default) | N/A |
+| color.content.on.dataviz.dim2.default | #f0f8ff | #f0f8ff | var(--esds-color-content-on-dataviz-dim2-default) | N/A |
 | color.content.brand.infomaniak.default | #064e86 | #36adfa | var(--esds-color-content-brand-infomaniak-default) | N/A |
 | color.content.brand.infomaniak.hover | #0b426f | #7cc8fd | var(--esds-color-content-brand-infomaniak-hover) | N/A |
 | color.content.brand.infomaniak.pressed | #072a4a | #0c93eb | var(--esds-color-content-brand-infomaniak-pressed) | N/A |
@@ -1607,9 +1607,6 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.tertiary | #62748e | #90a1b9 | var(--esds-color-content-tertiary) | N/A |
 | color.content.disabled | #90a1b9 | #62748e | var(--esds-color-content-disabled) | N/A |
 | color.content.inverse | #f1f5f9 | #192334 | var(--esds-color-content-inverse) | N/A |
-| color.content.visited.default | #9346ff | #cab1ff | var(--esds-color-content-visited-default) | N/A |
-| color.content.visited.hover | #8f30f7 | #e0d4ff | var(--esds-color-content-visited-hover) | N/A |
-| color.content.visited.pressed | #811ee3 | #b185ff | var(--esds-color-content-visited-pressed) | N/A |
 | color.content.feedback.error.default | #d70000 | #ff9494 | var(--esds-color-content-feedback-error-default) | N/A |
 | color.content.feedback.error.hover | #b10303 | #ffc0c0 | var(--esds-color-content-feedback-error-hover) | N/A |
 | color.content.feedback.error.pressed | #920a0a | #ff5757 | var(--esds-color-content-feedback-error-pressed) | N/A |
@@ -1619,6 +1616,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.feedback.warning.default | #b73206 | #ffb34a | var(--esds-color-content-feedback-warning-default) | N/A |
 | color.content.feedback.warning.hover | #94260c | #ffd188 | var(--esds-color-content-feedback-warning-hover) | N/A |
 | color.content.feedback.warning.pressed | #7a200d | #ffa032 | var(--esds-color-content-feedback-warning-pressed) | N/A |
+| color.content.visited.default | #9346ff | #cab1ff | var(--esds-color-content-visited-default) | N/A |
+| color.content.visited.hover | #8f30f7 | #e0d4ff | var(--esds-color-content-visited-hover) | N/A |
+| color.content.visited.pressed | #811ee3 | #b185ff | var(--esds-color-content-visited-pressed) | N/A |
 | color.border.brand.infomaniak.default | #0c93eb | #36adfa | var(--esds-color-border-brand-infomaniak-default) | N/A |
 | color.border.brand.infomaniak.hover | #0077cf | #7cc8fd | var(--esds-color-border-brand-infomaniak-hover) | N/A |
 | color.border.brand.infomaniak.pressed | #015ca3 | #0c93eb | var(--esds-color-border-brand-infomaniak-pressed) | N/A |
@@ -1700,12 +1700,12 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.dataviz.gray.dim2.default | #e2e8f0 | #314158 | var(--esds-color-border-dataviz-gray-dim2-default) | N/A |
 | color.border.dataviz.gray.dim2.hover | #cad5e2 | #45556c | var(--esds-color-border-dataviz-gray-dim2-hover) | N/A |
 | color.border.dataviz.gray.dim2.pressed | #90a1b9 | #0f172b | var(--esds-color-border-dataviz-gray-dim2-pressed) | N/A |
-| color.border.dataviz.dim1.default | #8f30f7 | #8f30f7 | var(--esds-color-border-dataviz-dim1-default) | N/A |
-| color.border.dataviz.dim1.hover | #811ee3 | #811ee3 | var(--esds-color-border-dataviz-dim1-hover) | N/A |
-| color.border.dataviz.dim1.pressed | #6c18bf | #6c18bf | var(--esds-color-border-dataviz-dim1-pressed) | N/A |
-| color.border.dataviz.dim2.default | #e0d4ff | #e0d4ff | var(--esds-color-border-dataviz-dim2-default) | N/A |
-| color.border.dataviz.dim2.hover | #cab1ff | #cab1ff | var(--esds-color-border-dataviz-dim2-hover) | N/A |
-| color.border.dataviz.dim2.pressed | #b185ff | #b185ff | var(--esds-color-border-dataviz-dim2-pressed) | N/A |
+| color.border.dataviz.dim1.default | #0077cf | #0077cf | var(--esds-color-border-dataviz-dim1-default) | N/A |
+| color.border.dataviz.dim1.hover | #015ca3 | #015ca3 | var(--esds-color-border-dataviz-dim1-hover) | N/A |
+| color.border.dataviz.dim1.pressed | #064e86 | #064e86 | var(--esds-color-border-dataviz-dim1-pressed) | N/A |
+| color.border.dataviz.dim2.default | #b9e0fe | #b9e0fe | var(--esds-color-border-dataviz-dim2-default) | N/A |
+| color.border.dataviz.dim2.hover | #7cc8fd | #7cc8fd | var(--esds-color-border-dataviz-dim2-hover) | N/A |
+| color.border.dataviz.dim2.pressed | #36adfa | #36adfa | var(--esds-color-border-dataviz-dim2-pressed) | N/A |
 | color.border.feedback.error.dim1.default | #f00 | #ff5757 | var(--esds-color-border-feedback-error-dim1-default) | N/A |
 | color.border.feedback.error.dim1.hover | #d70000 | #ff9494 | var(--esds-color-border-feedback-error-dim1-hover) | N/A |
 | color.border.feedback.error.dim1.pressed | #b10303 | #ff2323 | var(--esds-color-border-feedback-error-dim1-pressed) | N/A |
@@ -1857,6 +1857,12 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 
 | Token Name | Light Value | Dark Value | CSS Variable | Description |
 |---|---|---|---|---|
+| text-link.color.default | #064e86 | #064e86 | var(--esds-text-link-color-default) | N/A |
+| text-link.color.hover | #0b426f | #0b426f | var(--esds-text-link-color-hover) | N/A |
+| text-link.color.pressed | #072a4a | #072a4a | var(--esds-text-link-color-pressed) | N/A |
+| text-link.color.visited.default | #9346ff | #cab1ff | var(--esds-text-link-color-visited-default) | N/A |
+| text-link.color.visited.hover | #8f30f7 | #e0d4ff | var(--esds-text-link-color-visited-hover) | N/A |
+| text-link.color.visited.pressed | #811ee3 | #b185ff | var(--esds-text-link-color-visited-pressed) | N/A |
 | typography.display.md.base | 400 48px/56px Suisse Int'l | 400 48px/56px Suisse Int'l | var(--esds-typography-display-md-base) | N/A |
 | typography.display.md.emphasized | 500 48px/56px Suisse Int'l | 500 48px/56px Suisse Int'l | var(--esds-typography-display-md-emphasized) | N/A |
 | typography.heading.lg.base | 400 40px/48px Suisse Int'l | 400 40px/48px Suisse Int'l | var(--esds-typography-heading-lg-base) | N/A |
