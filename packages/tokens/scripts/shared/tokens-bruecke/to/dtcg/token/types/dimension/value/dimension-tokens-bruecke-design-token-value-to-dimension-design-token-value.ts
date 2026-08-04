@@ -5,24 +5,32 @@ import type { DimensionTokensBrueckeDesignTokenValue } from '../../../../../../t
 export function dimensionTokensBrueckeDesignTokenValueToDimensionDesignTokenValue(
   input: DimensionTokensBrueckeDesignTokenValue,
 ): DimensionDesignTokenValue {
-  let unit: DimensionDesignTokenValueUnit;
+  if (typeof input === 'string') {
+    let unit: DimensionDesignTokenValueUnit;
 
-  if (input.endsWith('px')) {
-    unit = 'px';
-  } else if (input.endsWith('rem')) {
-    unit = 'rem';
+    if (input.endsWith('px')) {
+      unit = 'px';
+    } else if (input.endsWith('rem')) {
+      unit = 'rem';
+    } else {
+      throw new Error(`Unsupported unit: ${input}`);
+    }
+
+    const value: number = Number(input.slice(0, -unit.length));
+
+    if (Number.isNaN(value) || !Number.isFinite(value)) {
+      throw new Error(`Invalid value: ${input}`);
+    }
+
+    return {
+      value,
+      unit,
+    };
   } else {
-    throw new Error(`Unsupported unit: ${input}`);
+    if (!['px', 'rem'].includes(input.unit)) {
+      throw new Error(`Unsupported unit: ${input.unit}`);
+    }
+
+    return input as DimensionDesignTokenValue;
   }
-
-  const value: number = Number(input.slice(0, -unit.length));
-
-  if (Number.isNaN(value) || !Number.isFinite(value)) {
-    throw new Error(`Invalid value: ${input}`);
-  }
-
-  return {
-    value,
-    unit,
-  };
 }

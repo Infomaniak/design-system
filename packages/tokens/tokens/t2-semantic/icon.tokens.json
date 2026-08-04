@@ -8,6 +8,12 @@
           "scopes": []
         }
       },
+      "sm": {
+        "$value": "{scale.20}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
       "md": {
         "$value": "{scale.24}",
         "$extensions": {
@@ -16,12 +22,6 @@
       },
       "lg": {
         "$value": "{scale.32}",
-        "$extensions": {
-          "scopes": []
-        }
-      },
-      "sm": {
-        "$value": "{scale.20}",
         "$extensions": {
           "scopes": []
         }
