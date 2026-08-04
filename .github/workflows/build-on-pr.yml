@@ -112,6 +112,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
+      - name: Wait for PR Storybook deployment
+        run: |
+          url="${{ needs.build-storybook-pr.outputs.deployment_url }}/index.json"
+          echo "Waiting for Storybook deployment to be reachable at $url"
+          timeout=180
+          elapsed=0
+          while [ $elapsed -lt $timeout ]; do
+            status=$(curl -s -o /dev/null -w "%{http_code}" "$url" || echo "000")
+            if [ "$status" = "200" ]; then
+              echo "Storybook deployment is reachable (HTTP $status after ${elapsed}s)."
+              exit 0
+            fi
+            echo "  -> HTTP $status, retrying in 10s..."
+            sleep 10
+            elapsed=$((elapsed + 10))
+          done
+          echo "::error::PR Storybook deployment not reachable at $url after ${timeout}s. Check the 'Build Storybook (PR)' job."
+          exit 1
+
       - name: Enable Corepack
         run: corepack enable
 

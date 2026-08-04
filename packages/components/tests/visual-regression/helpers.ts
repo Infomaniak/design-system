@@ -49,29 +49,73 @@ export async function navigateToStory(
   await page.waitForSelector('#storybook-root');
 }
 
-export async function fetchManifest(storybookUrl: string): Promise<StoryManifest> {
-  const baseUrl: string = storybookUrl.replace(/\/+$/, '');
-  const controller: AbortController = new AbortController();
-  const timeoutId: NodeJS.Timeout = setTimeout((): void => controller.abort(), 30_000);
+const MANIFEST_FETCH_MAX_ATTEMPTS: number = 3;
+const MANIFEST_FETCH_BACKOFF_MS: readonly number[] = [5_000, 15_000];
+const MANIFEST_FETCH_TIMEOUT_MS: number = 30_000;
 
-  let response: Response;
+function sleep(duration: number): Promise<void> {
+  return new Promise((resolve: () => void): void => {
+    setTimeout(resolve, duration);
+  });
+}
+
+async function fetchManifestOnce(baseUrl: string): Promise<Response> {
+  const controller: AbortController = new AbortController();
+  const timeoutId: NodeJS.Timeout = setTimeout(
+    (): void => controller.abort(),
+    MANIFEST_FETCH_TIMEOUT_MS,
+  );
 
   try {
-    response = await fetch(`${baseUrl}/index.json`, { signal: controller.signal });
-  } catch (error: unknown) {
-    throw new Error(
-      `Failed to fetch manifest from ${baseUrl}: ${error instanceof Error ? error.message : String(error)}`,
-      { cause: error },
-    );
+    return await fetch(`${baseUrl}/index.json`, { signal: controller.signal });
   } finally {
     clearTimeout(timeoutId);
   }
+}
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch manifest from ${baseUrl} (${response.status})`);
+export async function fetchManifest(storybookUrl: string): Promise<StoryManifest> {
+  const baseUrl: string = storybookUrl.replace(/\/+$/, '');
+  let lastError: Error | undefined;
+
+  for (let attempt: number = 0; attempt < MANIFEST_FETCH_MAX_ATTEMPTS; attempt++) {
+    let response: Response;
+
+    try {
+      response = await fetchManifestOnce(baseUrl);
+    } catch (error: unknown) {
+      lastError = new Error(
+        `Failed to fetch manifest from ${baseUrl}: ${error instanceof Error ? error.message : String(error)}`,
+        { cause: error },
+      );
+
+      if (attempt < MANIFEST_FETCH_MAX_ATTEMPTS - 1) {
+        await sleep(MANIFEST_FETCH_BACKOFF_MS[attempt] ?? 0);
+        continue;
+      }
+
+      throw lastError;
+    }
+
+    if (!response.ok) {
+      lastError = new Error(`Failed to fetch manifest from ${baseUrl} (${response.status})`);
+
+      if (attempt < MANIFEST_FETCH_MAX_ATTEMPTS - 1) {
+        await sleep(MANIFEST_FETCH_BACKOFF_MS[attempt] ?? 0);
+        continue;
+      }
+
+      throw lastError;
+    }
+
+    return (await response.json()) as StoryManifest;
   }
 
-  return (await response.json()) as StoryManifest;
+  throw (
+    lastError ??
+    new Error(
+      `Failed to fetch manifest from ${baseUrl} after ${MANIFEST_FETCH_MAX_ATTEMPTS} attempts`,
+    )
+  );
 }
 
 export function filterVisualStories(manifest: StoryManifest): readonly StoryEntry[] {
