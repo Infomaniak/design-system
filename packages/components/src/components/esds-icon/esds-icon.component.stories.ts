@@ -8,6 +8,7 @@ import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
 import type { PartialStoryFn } from 'storybook/internal/csf';
 import { IconifyApi } from '../../iconify-api/iconify-api.ts';
+import documentation from './esds-icon.component.md?raw';
 
 EsdsIconComponent.define();
 
@@ -20,37 +21,7 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: `
-## Setup
-
-Import and register the icon component in your application's entry file (e.g., \`main.ts\` or \`index.ts\`):
-
-\`\`\`ts
-import { EsdsIconComponent } from '@infomaniak-design-system/components';
-
-EsdsIconComponent.define();
-\`\`\`
-
-> **Important:** \`define()\` must be called before any component renders \`<esds-icon>\`.
-
-## Configuration (Optional)
-
-If you need custom icon resources (e.g., a specific icon server), set the \`InjectionContext\`:
-
-\`\`\`ts
-import { ICONIFY_API, InjectionContext, IconifyApi } from '@infomaniak-design-system/components';
-
-InjectionContext.root = new InjectionContext([
-  ICONIFY_API.define(new IconifyApi({
-    resources: ['https://iconify.preprod.dev.infomaniak.ch'],
-  })),
-]);
-\`\`\`
-
-> \`InjectionContext\` is only required when the default icon resources are insufficient.
-
-## Demo
-        `,
+        component: documentation,
       },
     },
   },
