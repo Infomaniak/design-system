@@ -3,7 +3,9 @@ import { getCliArgValue } from '../../helpers/ci/get-cli-arg-value.ts';
 import { writeGithubOutput } from '../../helpers/ci/write-github-output.ts';
 import { loadOptionallyEnvFile } from '../../helpers/env/env-file/load-optionally-env-file.ts';
 import { getEnvVariable } from '../../helpers/env/get-env-variable.ts';
-import { parseBoolean, parseInteger, parseStringArray } from '../../helpers/env/parse-value.ts';
+import { getBooleanEnvVariable } from '../../helpers/env/types/get-boolean-env-variable.ts';
+import { getIntegerEnvVariable } from '../../helpers/env/types/get-integer-env-variable.ts';
+import { getStringArrayEnvVariable } from '../../helpers/env/types/get-string-array-env-variable.ts';
 import {
   buildRunUrl,
   parseRepository,
@@ -164,21 +166,22 @@ async function runCommentMode(): Promise<void> {
     throw new Error('Expected pull_request object in event payload.');
   }
 
-  const shouldBuild: boolean = parseBoolean(process.env['STORYBOOK_SHOULD_BUILD']);
+  const shouldBuild: boolean = getBooleanEnvVariable('STORYBOOK_SHOULD_BUILD', false);
   const buildStepOutcome: string = process.env['STORYBOOK_BUILD_OUTCOME'] ?? 'failure';
   const deployStepOutcome: string | undefined = process.env['STORYBOOK_DEPLOY_OUTCOME'];
   const reason: StorybookPrBuildReason = parseReason(process.env['STORYBOOK_DECISION_REASON']);
-  const changedFilesCount: number = parseInteger(process.env['STORYBOOK_CHANGED_FILES_COUNT'], 0);
-  const relevantFiles: readonly string[] = parseStringArray(
-    process.env['STORYBOOK_RELEVANT_FILES_JSON'],
+  const changedFilesCount: number = getIntegerEnvVariable('STORYBOOK_CHANGED_FILES_COUNT', 0);
+  const relevantFiles: readonly string[] = getStringArrayEnvVariable(
+    'STORYBOOK_RELEVANT_FILES_JSON',
+    [],
   );
   const artifactNameFromEnv: string | undefined = process.env['STORYBOOK_ARTIFACT_NAME'];
   const artifactName: string | undefined =
     artifactNameFromEnv === undefined || artifactNameFromEnv.trim() === ''
       ? undefined
       : artifactNameFromEnv;
-  const artifactRetentionDays: number = parseInteger(
-    process.env['STORYBOOK_ARTIFACT_RETENTION_DAYS'],
+  const artifactRetentionDays: number = getIntegerEnvVariable(
+    'STORYBOOK_ARTIFACT_RETENTION_DAYS',
     3,
   );
   const deploymentUrl: string | undefined = process.env['STORYBOOK_DEPLOYMENT_URL'];
