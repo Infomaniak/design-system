@@ -32,7 +32,6 @@ jobs:
         with:
           node-version: '24'
           registry-url: 'https://npm.pkg.github.com'
-          always-auth: true
           cache: 'yarn'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
