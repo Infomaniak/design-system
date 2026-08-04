@@ -21,7 +21,7 @@ const { args, argTypes } = getStorybookHelpers<EsdsTextLinkAttr>('esds-text-link
 const meta = {
   title: 'Components/Link',
   component: 'esds-text-link',
-  tags: ['autodocs'],
+  tags: ['autodocs', 'vr-test'],
   parameters: {
     docs: {
       description: {
