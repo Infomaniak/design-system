@@ -26,7 +26,7 @@ export class EsdsTextLinkAttr extends CustomAttribute implements CustomAttribute
     registry.defineOptionally('esds-text-link', EsdsTextLinkAttr);
   }
 
-  #undo: CleanUpFunction | undefined;
+  #cleanup: CleanUpFunction | undefined;
 
   constructor(attr: Attr) {
     if (attr.ownerElement?.tagName !== 'A') {
@@ -36,11 +36,11 @@ export class EsdsTextLinkAttr extends CustomAttribute implements CustomAttribute
   }
 
   connectedCallback(): void {
-    this.#undo = styleSheet.injectFrom(this.ownerElement!);
+    this.#cleanup = styleSheet.injectFrom(this.ownerElement!);
   }
 
   disconnectedCallback(): void {
-    this.#undo?.();
-    this.#undo = undefined;
+    this.#cleanup?.();
+    this.#cleanup = undefined;
   }
 }
