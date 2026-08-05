@@ -79,15 +79,21 @@ interface TokenGroup {
 /**
  * Groups tokens by their tier (t1, t2, t3) and semantic category
  */
-function groupTokensByTierAndCategory(
+export function groupTokensByTierAndCategory(
   tokens: IteratorObject<GenericDesignTokensCollectionToken>,
+  collection: DesignTokensCollection,
 ): Map<string, TokenGroup> {
   const groups = new Map<string, TokenGroup>();
 
-  for (const token of tokens) {
-    // Skip tokens without a type (they are references to other tokens)
+  for (let token of tokens) {
+    // Skip tokens without a type. Reference-only tokens (no `$type` in their file)
+    // inherit the type of the token they reference, so resolve it before skipping.
     if (!isDesignTokensCollectionTokenWithType(token)) {
-      continue;
+      try {
+        token = { ...token, type: collection.resolve(token).type };
+      } catch {
+        continue;
+      }
     }
 
     if (token.files.length === 0) {
@@ -298,7 +304,10 @@ export async function buildMarkdownTokens({
 }: BuildMarkdownTokensOptions) {
   return logger.asyncTask('markdown', async (logger: Logger): Promise<void> => {
     // Group tokens by tier and category
-    const tokensByTierAndCategory = groupTokensByTierAndCategory(baseCollection.tokens());
+    const tokensByTierAndCategory = groupTokensByTierAndCategory(
+      baseCollection.tokens(),
+      baseCollection,
+    );
 
     // Generate markdown for each tier-category combination
     for (const [key, group] of tokensByTierAndCategory.entries()) {

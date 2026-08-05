@@ -8,7 +8,11 @@ import {
   T2_DIRECTORY_NAME,
   T3_DIRECTORY_NAME,
 } from '../../../constants/design-token-tiers.ts';
-import { generateRowContent, renderTokenToRow } from './build-markdown-tokens.ts';
+import {
+  generateRowContent,
+  groupTokensByTierAndCategory,
+  renderTokenToRow,
+} from './build-markdown-tokens.ts';
 
 function createMockColorToken(fileTier: string): GenericDesignTokensCollectionToken {
   return {
@@ -206,5 +210,48 @@ describe('generateRowContent', () => {
     expect(html).toContain('Primary red 500');
     expect(html).toContain('<tr>');
     expect(html).toContain('</tr>');
+  });
+});
+
+describe('groupTokensByTierAndCategory — reference-only tokens', () => {
+  it('should group reference-only tokens (no $type) by resolving the referenced token type', () => {
+    const baseToken: GenericDesignTokensCollectionToken = {
+      files: ['/tokens/t1-primitive/color.tokens.json'],
+      name: ['color', 'brand', 'default'],
+      type: 'color',
+      value: { hex: '#f4364f', components: [0.956, 0.211, 0.309], colorSpace: 'srgb' },
+      description: 'Base brand color',
+    };
+
+    const referenceToken: GenericDesignTokensCollectionToken = {
+      files: ['/tokens/t3-component/text-link.tokens.json'],
+      name: ['text-link', 'color', 'default'],
+      value: '{color.brand.default}',
+      description: 'Text link default color',
+    } as GenericDesignTokensCollectionToken;
+
+    const collection = new DesignTokensCollection([baseToken, referenceToken]);
+
+    const groups = groupTokensByTierAndCategory(collection.tokens(), collection);
+
+    const group = groups.get('t3-text-link');
+    expect(group).toBeDefined();
+    expect(group!.tokens).toHaveLength(1);
+    expect(group!.tokens[0].name).toEqual(['text-link', 'color', 'default']);
+  });
+
+  it('should skip reference-only tokens whose reference cannot be resolved', () => {
+    const danglingReferenceToken: GenericDesignTokensCollectionToken = {
+      files: ['/tokens/t3-component/text-link.tokens.json'],
+      name: ['text-link', 'color', 'hover'],
+      value: '{color.does-not-exist}',
+      description: 'Dangling reference',
+    } as GenericDesignTokensCollectionToken;
+
+    const collection = new DesignTokensCollection([danglingReferenceToken]);
+
+    const groups = groupTokensByTierAndCategory(collection.tokens(), collection);
+
+    expect(groups.has('t3-text-link')).toBe(false);
   });
 });
