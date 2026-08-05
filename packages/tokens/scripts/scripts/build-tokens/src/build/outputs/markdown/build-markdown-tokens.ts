@@ -26,7 +26,6 @@ import type {
   GenericDesignTokensCollectionToken,
   GenericDesignTokensCollectionTokenWithType,
 } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
-import { isDesignTokensCollectionTokenWithType } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/color/is-color-design-tokens-collection-token.ts';
 import { isDimensionDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/dimension/is-dimension-design-tokens-collection-token.ts';
 import { isFontFamilyDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/font-family/is-font-family-design-tokens-collection-token.ts';
@@ -80,22 +79,11 @@ interface TokenGroup {
  * Groups tokens by their tier (t1, t2, t3) and semantic category
  */
 export function groupTokensByTierAndCategory(
-  tokens: IteratorObject<GenericDesignTokensCollectionToken>,
-  collection: DesignTokensCollection,
+  tokens: IteratorObject<GenericDesignTokensCollectionTokenWithType>,
 ): Map<string, TokenGroup> {
   const groups = new Map<string, TokenGroup>();
 
-  for (let token of tokens) {
-    // Skip tokens without a type. Reference-only tokens (no `$type` in their file)
-    // inherit the type of the token they reference, so resolve it before skipping.
-    if (!isDesignTokensCollectionTokenWithType(token)) {
-      try {
-        token = { ...token, type: collection.resolve(token).type };
-      } catch {
-        continue;
-      }
-    }
-
+  for (const token of tokens) {
     if (token.files.length === 0) {
       throw new Error('Unexpected empty token.files');
     }
@@ -304,10 +292,17 @@ export async function buildMarkdownTokens({
 }: BuildMarkdownTokensOptions) {
   return logger.asyncTask('markdown', async (logger: Logger): Promise<void> => {
     // Group tokens by tier and category
-    const tokensByTierAndCategory = groupTokensByTierAndCategory(
-      baseCollection.tokens(),
-      baseCollection,
-    );
+    const typedTokens = baseCollection
+      .tokens()
+      .map(
+        (
+          token: GenericDesignTokensCollectionToken,
+        ): GenericDesignTokensCollectionTokenWithType => ({
+          ...token,
+          type: baseCollection.resolve(token).type,
+        }),
+      );
+    const tokensByTierAndCategory = groupTokensByTierAndCategory(typedTokens);
 
     // Generate markdown for each tier-category combination
     for (const [key, group] of tokensByTierAndCategory.entries()) {

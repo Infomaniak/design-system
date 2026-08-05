@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { MarkdownTokenRow } from '../../../../../../shared/dtcg/resolver/to/markdown/token/markdown-token-row.ts';
-import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
+import type {
+  GenericDesignTokensCollectionToken,
+  GenericDesignTokensCollectionTokenWithType,
+} from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import {
   MATERIAL_DIRECTORY_NAME,
   T1_DIRECTORY_NAME,
@@ -232,26 +235,21 @@ describe('groupTokensByTierAndCategory — reference-only tokens', () => {
 
     const collection = new DesignTokensCollection([baseToken, referenceToken]);
 
-    const groups = groupTokensByTierAndCategory(collection.tokens(), collection);
+    const typedTokens = collection
+      .tokens()
+      .map(
+        (
+          token: GenericDesignTokensCollectionToken,
+        ): GenericDesignTokensCollectionTokenWithType => ({
+          ...token,
+          type: collection.resolve(token).type,
+        }),
+      );
+    const groups = groupTokensByTierAndCategory(typedTokens);
 
     const group = groups.get('t3-text-link');
     expect(group).toBeDefined();
     expect(group!.tokens).toHaveLength(1);
     expect(group!.tokens[0].name).toEqual(['text-link', 'color', 'default']);
-  });
-
-  it('should skip reference-only tokens whose reference cannot be resolved', () => {
-    const danglingReferenceToken: GenericDesignTokensCollectionToken = {
-      files: ['/tokens/t3-component/text-link.tokens.json'],
-      name: ['text-link', 'color', 'hover'],
-      value: '{color.does-not-exist}',
-      description: 'Dangling reference',
-    } as GenericDesignTokensCollectionToken;
-
-    const collection = new DesignTokensCollection([danglingReferenceToken]);
-
-    const groups = groupTokensByTierAndCategory(collection.tokens(), collection);
-
-    expect(groups.has('t3-text-link')).toBe(false);
   });
 });
