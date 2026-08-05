@@ -1,0 +1,1 @@
+import{t as e}from"./iframe-BCj5oERp.js";e();
