@@ -80,7 +80,7 @@ export const Download: Story = {
       href="${args.href}"
       download="${args.download}"
     >
-      Download file
+      Download folder
     </a>
   `,
 };
