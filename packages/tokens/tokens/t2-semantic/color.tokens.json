@@ -10,37 +10,25 @@
           "default": {
             "$value": "{color.gray.100}",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           },
           "hover": {
             "$value": "{color.gray.200}",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           },
           "pressed": {
             "$value": "{color.gray.300}",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           },
           "selected": {
             "$value": "{color.gray.300}",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           }
         },
@@ -49,37 +37,25 @@
           "default": {
             "$value": "{color.white}",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           },
           "hover": {
             "$value": "{color.gray.50}",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           },
           "pressed": {
             "$value": "{color.gray.100}",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           },
           "selected": {
             "$value": "{color.gray.100}",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           }
         },
@@ -88,37 +64,25 @@
           "default": {
             "$value": "{color.white}",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           },
           "hover": {
             "$value": "{color.gray.50}",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           },
           "pressed": {
             "$value": "{color.gray.100}",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           },
           "selected": {
             "$value": "{color.gray.100}",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           }
         },
@@ -127,37 +91,25 @@
           "default": {
             "$value": "{color.gray.100}",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           },
           "hover": {
             "$value": "{color.gray.200}",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           },
           "pressed": {
             "$value": "{color.gray.300}",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           },
           "selected": {
             "$value": "{color.gray.300}",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           }
         }
@@ -378,48 +330,24 @@
           "$value": "{color.blue.600}",
           "$description": "Default brand background (Infomaniak).",
           "$extensions": {
-            "scopes": [
-              "ALL_FILLS"
-            ],
-            "figmaName": [
-              "color",
-              "background",
-              "brand",
-              "@root",
-              "default"
-            ]
+            "scopes": ["ALL_FILLS"],
+            "figmaName": ["color", "background", "brand", "@root", "default"]
           }
         },
         "pressed": {
           "$value": "{color.blue.800}",
           "$description": "Pressed state of the default brand background.",
           "$extensions": {
-            "scopes": [
-              "ALL_FILLS"
-            ],
-            "figmaName": [
-              "color",
-              "background",
-              "brand",
-              "@root",
-              "pressed"
-            ]
+            "scopes": ["ALL_FILLS"],
+            "figmaName": ["color", "background", "brand", "@root", "pressed"]
           }
         },
         "hover": {
           "$value": "{color.blue.700}",
           "$description": "Hover state of the default brand background.",
           "$extensions": {
-            "scopes": [
-              "ALL_FILLS"
-            ],
-            "figmaName": [
-              "color",
-              "background",
-              "brand",
-              "@root",
-              "hover"
-            ]
+            "scopes": ["ALL_FILLS"],
+            "figmaName": ["color", "background", "brand", "@root", "hover"]
           }
         }
       },
@@ -432,28 +360,19 @@
             "default": {
               "$value": "{color.lime.500}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "hover": {
               "$value": "{color.lime.600}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "pressed": {
               "$value": "{color.lime.700}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             }
           },
@@ -462,28 +381,19 @@
             "default": {
               "$value": "{color.lime.200}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "hover": {
               "$value": "{color.lime.300}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "pressed": {
               "$value": "{color.lime.400}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             }
           }
@@ -495,28 +405,19 @@
             "default": {
               "$value": "{color.orange.400}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "hover": {
               "$value": "{color.orange.500}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "pressed": {
               "$value": "{color.orange.600}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             }
           },
@@ -525,28 +426,19 @@
             "default": {
               "$value": "{color.orange.200}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "hover": {
               "$value": "{color.orange.300}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "pressed": {
               "$value": "{color.orange.400}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             }
           }
@@ -558,28 +450,19 @@
             "default": {
               "$value": "{color.red.400}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "hover": {
               "$value": "{color.red.500}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "pressed": {
               "$value": "{color.red.600}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             }
           },
@@ -588,28 +471,19 @@
             "default": {
               "$value": "{color.red.200}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "hover": {
               "$value": "{color.red.300}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             },
             "pressed": {
               "$value": "{color.red.400}",
               "$extensions": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ]
+                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
               }
             }
           }
@@ -619,9 +493,7 @@
         "$value": "{color.gray.200}",
         "$description": "Background for disabled, non-interactive elements.",
         "$extensions": {
-          "scopes": [
-            "FRAME_FILL"
-          ]
+          "scopes": ["FRAME_FILL"]
         }
       },
       "dataviz": {
@@ -948,25 +820,19 @@
             "default": {
               "$value": "{color.gray.500}",
               "$extensions": {
-                "scopes": [
-                  "ALL_SCOPES"
-                ]
+                "scopes": ["ALL_SCOPES"]
               }
             },
             "hover": {
               "$value": "{color.gray.600}",
               "$extensions": {
-                "scopes": [
-                  "ALL_SCOPES"
-                ]
+                "scopes": ["ALL_SCOPES"]
               }
             },
             "pressed": {
               "$value": "{color.gray.700}",
               "$extensions": {
-                "scopes": [
-                  "ALL_SCOPES"
-                ]
+                "scopes": ["ALL_SCOPES"]
               }
             }
           },
@@ -975,25 +841,19 @@
             "default": {
               "$value": "{color.gray.200}",
               "$extensions": {
-                "scopes": [
-                  "ALL_SCOPES"
-                ]
+                "scopes": ["ALL_SCOPES"]
               }
             },
             "hover": {
               "$value": "{color.gray.300}",
               "$extensions": {
-                "scopes": [
-                  "ALL_SCOPES"
-                ]
+                "scopes": ["ALL_SCOPES"]
               }
             },
             "pressed": {
               "$value": "{color.gray.400}",
               "$extensions": {
-                "scopes": [
-                  "ALL_SCOPES"
-                ]
+                "scopes": ["ALL_SCOPES"]
               }
             }
           }
@@ -1004,54 +864,24 @@
             "$value": "{color.blue.600}",
             "$description": "Default dim1 data-viz background.",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "figmaName": [
-                "color",
-                "background",
-                "dataviz",
-                "dim1",
-                "@root",
-                "default"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+              "figmaName": ["color", "background", "dataviz", "dim1", "@root", "default"]
             }
           },
           "hover": {
             "$value": "{color.blue.700}",
             "$description": "Dim1 data-viz background on hover.",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "figmaName": [
-                "color",
-                "background",
-                "dataviz",
-                "dim1",
-                "@root",
-                "hover"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+              "figmaName": ["color", "background", "dataviz", "dim1", "@root", "hover"]
             }
           },
           "pressed": {
             "$value": "{color.blue.800}",
             "$description": "Dim1 data-viz background on press.",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "figmaName": [
-                "color",
-                "background",
-                "dataviz",
-                "dim1",
-                "@root",
-                "pressed"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+              "figmaName": ["color", "background", "dataviz", "dim1", "@root", "pressed"]
             }
           }
         },
@@ -1061,54 +891,24 @@
             "$value": "{color.blue.200}",
             "$description": "Default dim2 data-viz background.",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "figmaName": [
-                "color",
-                "background",
-                "dataviz",
-                "dim2",
-                "@root",
-                "default"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+              "figmaName": ["color", "background", "dataviz", "dim2", "@root", "default"]
             }
           },
           "hover": {
             "$value": "{color.blue.300}",
             "$description": "Dim2 data-viz background on hover.",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "figmaName": [
-                "color",
-                "background",
-                "dataviz",
-                "dim2",
-                "@root",
-                "hover"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+              "figmaName": ["color", "background", "dataviz", "dim2", "@root", "hover"]
             }
           },
           "pressed": {
             "$value": "{color.blue.400}",
             "$description": "Dim2 data-viz background on press.",
             "$extensions": {
-              "scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "figmaName": [
-                "color",
-                "background",
-                "dataviz",
-                "dim2",
-                "@root",
-                "pressed"
-              ]
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+              "figmaName": ["color", "background", "dataviz", "dim2", "@root", "pressed"]
             }
           }
         }
@@ -1122,9 +922,7 @@
           "$value": "{color.gray.400}",
           "$description": "Content color for disabled states on backgrounds.",
           "$extensions": {
-            "scopes": [
-              "TEXT_FILL"
-            ]
+            "scopes": ["TEXT_FILL"]
           }
         },
         "brand": {
@@ -1223,17 +1021,8 @@
             "$value": "{color.white}",
             "$description": "Default foreground on brand backgrounds.",
             "$extensions": {
-              "scopes": [
-                "ALL_FILLS"
-              ],
-              "figmaName": [
-                "color",
-                "content",
-                "on",
-                "brand",
-                "@root",
-                "default"
-              ]
+              "scopes": ["ALL_FILLS"],
+              "figmaName": ["color", "content", "on", "brand", "@root", "default"]
             }
           }
         },
@@ -1246,9 +1035,7 @@
               "default": {
                 "$value": "{color.lime.950}",
                 "$extensions": {
-                  "scopes": [
-                    "ALL_FILLS"
-                  ]
+                  "scopes": ["ALL_FILLS"]
                 }
               }
             },
@@ -1257,9 +1044,7 @@
               "default": {
                 "$value": "{color.lime.950}",
                 "$extensions": {
-                  "scopes": [
-                    "ALL_FILLS"
-                  ]
+                  "scopes": ["ALL_FILLS"]
                 }
               }
             }
@@ -1271,9 +1056,7 @@
               "default": {
                 "$value": "{color.orange.900}",
                 "$extensions": {
-                  "scopes": [
-                    "ALL_FILLS"
-                  ]
+                  "scopes": ["ALL_FILLS"]
                 }
               }
             },
@@ -1282,9 +1065,7 @@
               "default": {
                 "$value": "{color.orange.950}",
                 "$extensions": {
-                  "scopes": [
-                    "ALL_FILLS"
-                  ]
+                  "scopes": ["ALL_FILLS"]
                 }
               }
             }
@@ -1296,9 +1077,7 @@
               "default": {
                 "$value": "{color.red.900}",
                 "$extensions": {
-                  "scopes": [
-                    "ALL_FILLS"
-                  ]
+                  "scopes": ["ALL_FILLS"]
                 }
               }
             },
@@ -1307,9 +1086,7 @@
               "default": {
                 "$value": "{color.red.950}",
                 "$extensions": {
-                  "scopes": [
-                    "ALL_FILLS"
-                  ]
+                  "scopes": ["ALL_FILLS"]
                 }
               }
             }
@@ -1471,9 +1248,7 @@
               "default": {
                 "$value": "{color.gray.900}",
                 "$extensions": {
-                  "scopes": [
-                    "ALL_SCOPES"
-                  ]
+                  "scopes": ["ALL_SCOPES"]
                 }
               }
             },
@@ -1482,9 +1257,7 @@
               "default": {
                 "$value": "{color.gray.50}",
                 "$extensions": {
-                  "scopes": [
-                    "ALL_SCOPES"
-                  ]
+                  "scopes": ["ALL_SCOPES"]
                 }
               }
             }
@@ -1495,18 +1268,8 @@
               "$value": "{color.blue.900}",
               "$description": "Default foreground on data-viz dim1 backgrounds.",
               "$extensions": {
-                "scopes": [
-                  "ALL_FILLS"
-                ],
-                "figmaName": [
-                  "color",
-                  "content",
-                  "on",
-                  "dataviz",
-                  "@root",
-                  "dim1",
-                  "default"
-                ]
+                "scopes": ["ALL_FILLS"],
+                "figmaName": ["color", "content", "on", "dataviz", "@root", "dim1", "default"]
               }
             }
           },
@@ -1516,18 +1279,8 @@
               "$value": "{color.blue.50}",
               "$description": "Default foreground on data-viz dim2 backgrounds.",
               "$extensions": {
-                "scopes": [
-                  "ALL_FILLS"
-                ],
-                "figmaName": [
-                  "color",
-                  "content",
-                  "on",
-                  "dataviz",
-                  "@root",
-                  "dim2",
-                  "default"
-                ]
+                "scopes": ["ALL_FILLS"],
+                "figmaName": ["color", "content", "on", "dataviz", "@root", "dim2", "default"]
               }
             }
           }
@@ -1749,48 +1502,24 @@
           "$value": "{color.blue.600}",
           "$description": "Default brand foreground color.",
           "$extensions": {
-            "scopes": [
-              "ALL_FILLS"
-            ],
-            "figmaName": [
-              "color",
-              "content",
-              "brand",
-              "@root",
-              "default"
-            ]
+            "scopes": ["ALL_FILLS"],
+            "figmaName": ["color", "content", "brand", "@root", "default"]
           }
         },
         "hover": {
           "$value": "{color.blue.700}",
           "$description": "Hover state of the default brand foreground.",
           "$extensions": {
-            "scopes": [
-              "ALL_FILLS"
-            ],
-            "figmaName": [
-              "color",
-              "content",
-              "brand",
-              "@root",
-              "hover"
-            ]
+            "scopes": ["ALL_FILLS"],
+            "figmaName": ["color", "content", "brand", "@root", "hover"]
           }
         },
         "pressed": {
           "$value": "{color.blue.800}",
           "$description": "Pressed state of the default brand foreground.",
           "$extensions": {
-            "scopes": [
-              "ALL_FILLS"
-            ],
-            "figmaName": [
-              "color",
-              "content",
-              "brand",
-              "@root",
-              "pressed"
-            ]
+            "scopes": ["ALL_FILLS"],
+            "figmaName": ["color", "content", "brand", "@root", "pressed"]
           }
         }
       },
@@ -1798,45 +1527,35 @@
         "$value": "{color.gray.800}",
         "$description": "Primary content color for main text and headings.",
         "$extensions": {
-          "scopes": [
-            "ALL_FILLS"
-          ]
+          "scopes": ["ALL_FILLS"]
         }
       },
       "secondary": {
         "$value": "{color.gray.600}",
         "$description": "Secondary content color for supporting text.",
         "$extensions": {
-          "scopes": [
-            "ALL_FILLS"
-          ]
+          "scopes": ["ALL_FILLS"]
         }
       },
       "tertiary": {
         "$value": "{color.gray.500}",
         "$description": "Tertiary content color for subtle, low-emphasis text.",
         "$extensions": {
-          "scopes": [
-            "ALL_FILLS"
-          ]
+          "scopes": ["ALL_FILLS"]
         }
       },
       "disabled": {
         "$value": "{color.gray.400}",
         "$description": "Content color for disabled text and icons.",
         "$extensions": {
-          "scopes": [
-            "ALL_FILLS"
-          ]
+          "scopes": ["ALL_FILLS"]
         }
       },
       "inverse": {
         "$value": "{color.gray.100}",
         "$description": "Inverse content color for use on dark backgrounds.",
         "$extensions": {
-          "scopes": [
-            "ALL_FILLS"
-          ]
+          "scopes": ["ALL_FILLS"]
         }
       },
       "feedback": {
@@ -1846,9 +1565,7 @@
           "default": {
             "$value": "{color.red.700}",
             "$extensions": {
-              "scopes": [
-                "TEXT_FILL"
-              ]
+              "scopes": ["TEXT_FILL"]
             }
           },
           "hover": {
@@ -1869,9 +1586,7 @@
           "default": {
             "$value": "{color.lime.700}",
             "$extensions": {
-              "scopes": [
-                "TEXT_FILL"
-              ]
+              "scopes": ["TEXT_FILL"]
             }
           },
           "hover": {
@@ -1892,9 +1607,7 @@
           "default": {
             "$value": "{color.orange.700}",
             "$extensions": {
-              "scopes": [
-                "TEXT_FILL"
-              ]
+              "scopes": ["TEXT_FILL"]
             }
           },
           "hover": {
@@ -1916,25 +1629,19 @@
         "default": {
           "$value": "{color.violet.600}",
           "$extensions": {
-            "scopes": [
-              "TEXT_FILL"
-            ]
+            "scopes": ["TEXT_FILL"]
           }
         },
         "hover": {
           "$value": "{color.violet.700}",
           "$extensions": {
-            "scopes": [
-              "TEXT_FILL"
-            ]
+            "scopes": ["TEXT_FILL"]
           }
         },
         "pressed": {
           "$value": "{color.violet.800}",
           "$extensions": {
-            "scopes": [
-              "TEXT_FILL"
-            ]
+            "scopes": ["TEXT_FILL"]
           }
         }
       }
@@ -2157,16 +1864,8 @@
           "$value": "{color.blue.500}",
           "$description": "Default brand border color.",
           "$extensions": {
-            "scopes": [
-              "STROKE_COLOR"
-            ],
-            "figmaName": [
-              "color",
-              "border",
-              "brand",
-              "@root",
-              "default"
-            ]
+            "scopes": ["STROKE_COLOR"],
+            "figmaName": ["color", "border", "brand", "@root", "default"]
           }
         },
         "hover": {
@@ -2174,13 +1873,7 @@
           "$description": "Hover state of the default brand border.",
           "$extensions": {
             "scopes": [],
-            "figmaName": [
-              "color",
-              "border",
-              "brand",
-              "@root",
-              "hover"
-            ]
+            "figmaName": ["color", "border", "brand", "@root", "hover"]
           }
         },
         "pressed": {
@@ -2188,13 +1881,7 @@
           "$description": "Pressed state of the default brand border.",
           "$extensions": {
             "scopes": [],
-            "figmaName": [
-              "color",
-              "border",
-              "brand",
-              "@root",
-              "pressed"
-            ]
+            "figmaName": ["color", "border", "brand", "@root", "pressed"]
           }
         }
       },
@@ -2522,25 +2209,19 @@
             "default": {
               "$value": "{color.gray.600}",
               "$extensions": {
-                "scopes": [
-                  "ALL_SCOPES"
-                ]
+                "scopes": ["ALL_SCOPES"]
               }
             },
             "hover": {
               "$value": "{color.gray.700}",
               "$extensions": {
-                "scopes": [
-                  "ALL_SCOPES"
-                ]
+                "scopes": ["ALL_SCOPES"]
               }
             },
             "pressed": {
               "$value": "{color.gray.800}",
               "$extensions": {
-                "scopes": [
-                  "ALL_SCOPES"
-                ]
+                "scopes": ["ALL_SCOPES"]
               }
             }
           },
@@ -2549,25 +2230,19 @@
             "default": {
               "$value": "{color.gray.200}",
               "$extensions": {
-                "scopes": [
-                  "ALL_SCOPES"
-                ]
+                "scopes": ["ALL_SCOPES"]
               }
             },
             "hover": {
               "$value": "{color.gray.300}",
               "$extensions": {
-                "scopes": [
-                  "ALL_SCOPES"
-                ]
+                "scopes": ["ALL_SCOPES"]
               }
             },
             "pressed": {
               "$value": "{color.gray.400}",
               "$extensions": {
-                "scopes": [
-                  "ALL_SCOPES"
-                ]
+                "scopes": ["ALL_SCOPES"]
               }
             }
           }
@@ -2578,17 +2253,8 @@
             "$value": "{color.blue.600}",
             "$description": "Default dim1 data-viz border.",
             "$extensions": {
-              "scopes": [
-                "STROKE_COLOR"
-              ],
-              "figmaName": [
-                "color",
-                "border",
-                "dataviz",
-                "dim1",
-                "@root",
-                "default"
-              ]
+              "scopes": ["STROKE_COLOR"],
+              "figmaName": ["color", "border", "dataviz", "dim1", "@root", "default"]
             }
           },
           "hover": {
@@ -2596,14 +2262,7 @@
             "$description": "Dim1 data-viz border on hover.",
             "$extensions": {
               "scopes": [],
-              "figmaName": [
-                "color",
-                "border",
-                "dataviz",
-                "dim1",
-                "@root",
-                "hover"
-              ]
+              "figmaName": ["color", "border", "dataviz", "dim1", "@root", "hover"]
             }
           },
           "pressed": {
@@ -2611,14 +2270,7 @@
             "$description": "Dim1 data-viz border on press.",
             "$extensions": {
               "scopes": [],
-              "figmaName": [
-                "color",
-                "border",
-                "dataviz",
-                "dim1",
-                "@root",
-                "pressed"
-              ]
+              "figmaName": ["color", "border", "dataviz", "dim1", "@root", "pressed"]
             }
           }
         },
@@ -2628,17 +2280,8 @@
             "$value": "{color.blue.200}",
             "$description": "Default dim2 data-viz border.",
             "$extensions": {
-              "scopes": [
-                "STROKE_COLOR"
-              ],
-              "figmaName": [
-                "color",
-                "border",
-                "dataviz",
-                "dim2",
-                "@root",
-                "default"
-              ]
+              "scopes": ["STROKE_COLOR"],
+              "figmaName": ["color", "border", "dataviz", "dim2", "@root", "default"]
             }
           },
           "hover": {
@@ -2646,14 +2289,7 @@
             "$description": "Dim2 data-viz border on hover.",
             "$extensions": {
               "scopes": [],
-              "figmaName": [
-                "color",
-                "border",
-                "dataviz",
-                "dim2",
-                "@root",
-                "hover"
-              ]
+              "figmaName": ["color", "border", "dataviz", "dim2", "@root", "hover"]
             }
           },
           "pressed": {
@@ -2661,14 +2297,7 @@
             "$description": "Dim2 data-viz border on press.",
             "$extensions": {
               "scopes": [],
-              "figmaName": [
-                "color",
-                "border",
-                "dataviz",
-                "dim2",
-                "@root",
-                "pressed"
-              ]
+              "figmaName": ["color", "border", "dataviz", "dim2", "@root", "pressed"]
             }
           }
         }
@@ -2682,9 +2311,7 @@
             "default": {
               "$value": "{color.red.600}",
               "$extensions": {
-                "scopes": [
-                  "STROKE_COLOR"
-                ]
+                "scopes": ["STROKE_COLOR"]
               }
             },
             "hover": {
@@ -2705,9 +2332,7 @@
             "default": {
               "$value": "{color.red.200}",
               "$extensions": {
-                "scopes": [
-                  "STROKE_COLOR"
-                ]
+                "scopes": ["STROKE_COLOR"]
               }
             },
             "hover": {
@@ -2731,9 +2356,7 @@
             "default": {
               "$value": "{color.lime.600}",
               "$extensions": {
-                "scopes": [
-                  "STROKE_COLOR"
-                ]
+                "scopes": ["STROKE_COLOR"]
               }
             },
             "hover": {
@@ -2754,9 +2377,7 @@
             "default": {
               "$value": "{color.lime.200}",
               "$extensions": {
-                "scopes": [
-                  "STROKE_COLOR"
-                ]
+                "scopes": ["STROKE_COLOR"]
               }
             },
             "hover": {
@@ -2780,9 +2401,7 @@
             "default": {
               "$value": "{color.orange.600}",
               "$extensions": {
-                "scopes": [
-                  "STROKE_COLOR"
-                ]
+                "scopes": ["STROKE_COLOR"]
               }
             },
             "hover": {
@@ -2803,9 +2422,7 @@
             "default": {
               "$value": "{color.orange.200}",
               "$extensions": {
-                "scopes": [
-                  "STROKE_COLOR"
-                ]
+                "scopes": ["STROKE_COLOR"]
               }
             },
             "hover": {
@@ -2828,9 +2445,7 @@
         "default": {
           "$value": "{color.gray.400}",
           "$extensions": {
-            "scopes": [
-              "STROKE_COLOR"
-            ]
+            "scopes": ["STROKE_COLOR"]
           }
         },
         "hover": {
@@ -2851,9 +2466,7 @@
         "default": {
           "$value": "{color.gray.300}",
           "$extensions": {
-            "scopes": [
-              "STROKE_COLOR"
-            ]
+            "scopes": ["STROKE_COLOR"]
           }
         },
         "hover": {
@@ -2874,9 +2487,7 @@
         "default": {
           "$value": "{color.gray.200}",
           "$extensions": {
-            "scopes": [
-              "STROKE_COLOR"
-            ]
+            "scopes": ["STROKE_COLOR"]
           }
         },
         "hover": {
@@ -2897,9 +2508,7 @@
         "default": {
           "$value": "{color.gray.100}",
           "$extensions": {
-            "scopes": [
-              "STROKE_COLOR"
-            ]
+            "scopes": ["STROKE_COLOR"]
           }
         },
         "hover": {
@@ -2922,54 +2531,42 @@
         "$value": "{color.transparent}",
         "$description": "Shadow color for the xs elevation.",
         "$extensions": {
-          "scopes": [
-            "EFFECT_COLOR"
-          ]
+          "scopes": ["EFFECT_COLOR"]
         }
       },
       "sm": {
         "$value": "{color.gray.400-6}",
         "$description": "Shadow color for the sm elevation.",
         "$extensions": {
-          "scopes": [
-            "EFFECT_COLOR"
-          ]
+          "scopes": ["EFFECT_COLOR"]
         }
       },
       "md": {
         "$value": "{color.gray.400-8}",
         "$description": "Shadow color for the md elevation.",
         "$extensions": {
-          "scopes": [
-            "EFFECT_COLOR"
-          ]
+          "scopes": ["EFFECT_COLOR"]
         }
       },
       "lg": {
         "$value": "{color.gray.400-10}",
         "$description": "Shadow color for the lg elevation.",
         "$extensions": {
-          "scopes": [
-            "EFFECT_COLOR"
-          ]
+          "scopes": ["EFFECT_COLOR"]
         }
       },
       "xl": {
         "$value": "{color.gray.400-10}",
         "$description": "Shadow color for the xl elevation.",
         "$extensions": {
-          "scopes": [
-            "EFFECT_COLOR"
-          ]
+          "scopes": ["EFFECT_COLOR"]
         }
       },
       "2xl": {
         "$value": "{color.gray.400-14}",
         "$description": "Shadow color for the 2xl elevation.",
         "$extensions": {
-          "scopes": [
-            "EFFECT_COLOR"
-          ]
+          "scopes": ["EFFECT_COLOR"]
         }
       }
     }
