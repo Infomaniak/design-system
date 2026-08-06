@@ -106,6 +106,13 @@ export const Underline: Story = {
   ...storybookInteractiveControls({
     href: 'https://infomaniak.com',
   }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Add the **underline** attribute to add an _underline_ effect on the link.',
+      },
+    },
+  },
   render: (args) => html`
     <a
       ${defineEsdsLinkAttr}
