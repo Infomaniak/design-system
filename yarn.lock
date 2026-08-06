@@ -1094,6 +1094,7 @@ __metadata:
   resolution: "@infomaniak-design-system/fonts@workspace:packages/assets/fonts"
   dependencies:
     "@0x6b/ttf2woff2-wasm": "npm:^0.13.2"
+    lightningcss: "npm:^1.33.0"
   languageName: unknown
   linkType: soft
 

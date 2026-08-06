@@ -1,5 +1,6 @@
 {
   "family": "Inter",
+  "license": "OFL",
   "variants": [
     {
       "src": "./inter.variable.normal.[opsz,wght].ttf",
