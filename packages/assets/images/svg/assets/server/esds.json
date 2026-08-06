@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.23",
+    "version": "0.0.24",
     "author": {
       "name": "Infomaniak"
     },
@@ -10,9 +10,9 @@
       "title": "GPL-3.0-only",
       "spdx": "GPL-3.0-only"
     },
-    "total": 236
+    "total": 243
   },
-  "lastModified": 1785336651,
+  "lastModified": 1785944915,
   "icons": {
     "a-large-small": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 16 2.536-7.328a1.02 1.02 0 011.928 0L22 16m-6.303-2h5.606M2 16l4.039-9.69a.5.5 0 01.923 0L11 16m-7.696-3h6.392\" vector-effect=\"non-scaling-stroke\"/>"
@@ -94,6 +94,9 @@
     },
     "bubble-left-text": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M7 11h10M7 15h6M7 7h8m7 10a2 2 0 01-2 2H6.828a2 2 0 00-1.414.586l-2.202 2.202A.71.71 0 012 21.286V5a2 2 0 012-2h16a2 2 0 012 2z\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "bubble-top-right-circle": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12.7 3H4a2 2 0 00-2 2v16.286a.71.71 0 001.212.502l2.202-2.202A2 2 0 016.828 19H20a2 2 0 002-2v-4.7M22 6a3 3 0 11-6 0 3 3 0 016 0\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "bug": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 20v-9m0 9a6 6 0 006-6v-3a4 4 0 00-4-4h-4a4 4 0 00-4 4v3a6 6 0 006 6m2.12-16.12L16 2m5 19a4 4 0 00-3.81-4M21 5a4 4 0 01-3.55 3.97M22 13h-4M3 21a4 4 0 013.81-4M3 5a4 4 0 003.55 3.97M6 13H2M8 2l1.88 1.88M9 7.13V6a3 3 0 116 0v1.13\" vector-effect=\"non-scaling-stroke\"/>"
@@ -269,6 +272,9 @@
     "dots-nine": {
       "body": "<path fill=\"currentColor\" d=\"M5 17.125a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m-14-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m-14-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75\"/>"
     },
+    "dots-six": {
+      "body": "<path fill=\"currentColor\" d=\"M9 17.125a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m6 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m-6-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m6 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m-6-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m6 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75\"/>"
+    },
     "dots-three-horizontal": {
       "body": "<path fill=\"currentColor\" d=\"M5 10.125a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75\"/>"
     },
@@ -313,6 +319,18 @@
     },
     "file": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8m-6-6a2.4 2.4 0 011.704.706l3.588 3.588A2.4 2.4 0 0120 8m-6-6v5a1 1 0 001 1h5\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "file-braces": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8m-6-6a2.4 2.4 0 011.704.706l3.588 3.588A2.4 2.4 0 0120 8m-6-6v5a1 1 0 001 1h5m-10 4a1 1 0 00-1 1v1a1 1 0 01-1 1 1 1 0 011 1v1a1 1 0 001 1m4 0a1 1 0 001-1v-1a1 1 0 011-1 1 1 0 01-1-1v-1a1 1 0 00-1-1\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "file-bullet-lines": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8m-6-6a2.4 2.4 0 011.704.706l3.588 3.588A2.4 2.4 0 0120 8m-6-6v5a1 1 0 001 1h5M8 13h2m4 0h2m-8 4h2m4 0h2\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "file-chart": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8m-6-6a2.4 2.4 0 011.704.706l3.588 3.588A2.4 2.4 0 0120 8m-6-6v5a1 1 0 001 1h5M8 18v-2m4 2v-4m4 4v-6\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "file-sun-mountain": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8m-6-6a2.4 2.4 0 011.704.706l3.588 3.588A2.4 2.4 0 0120 8m-6-6v5a1 1 0 001 1h5m0 9-1.296-1.296a2.41 2.41 0 00-3.408 0L9 22m3-10a2 2 0 11-4 0 2 2 0 014 0\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "file-text": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8m-6-6a2.4 2.4 0 011.704.706l3.588 3.588A2.4 2.4 0 0120 8m-6-6v5a1 1 0 001 1h5M10 9H8m8 4H8m8 4H8\" vector-effect=\"non-scaling-stroke\"/>"
@@ -403,6 +421,9 @@
     },
     "list-filter": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M2 5h20M6 12h12m-9 7h6\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "list-left": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M15 12H3m0-7h18M9 19H3\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "list-magnifying-class": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M21 5H3m7 7H3m7 7H3m18 0-1.9-1.9M20 15a3 3 0 11-6 0 3 3 0 016 0\" vector-effect=\"non-scaling-stroke\"/>"
@@ -752,6 +773,7 @@
       "briefcase",
       "broom",
       "bubble-left-text",
+      "bubble-top-right-circle",
       "bug",
       "building",
       "cake-candles",
@@ -810,6 +832,7 @@
       "door-open",
       "dots-list",
       "dots-nine",
+      "dots-six",
       "dots-three-horizontal",
       "dots-three-vertical",
       "envelope",
@@ -825,6 +848,10 @@
       "eye-closed",
       "eye-slash",
       "file",
+      "file-braces",
+      "file-bullet-lines",
+      "file-chart",
+      "file-sun-mountain",
       "file-text",
       "file-zipper",
       "flag",
@@ -855,6 +882,7 @@
       "link-horizontal",
       "list",
       "list-filter",
+      "list-left",
       "list-magnifying-class",
       "lock",
       "lock-open",
@@ -1081,10 +1109,17 @@
     "#alert": [
       "alarm-clock",
       "bell",
+      "bubble-top-right-circle",
       "cloud-exclamation-mark",
       "envelope-exclamation-mark",
       "shield-exclamation-mark",
       "triangle-exclamation-mark"
+    ],
+    "#align": [
+      "list-left"
+    ],
+    "#alignleft": [
+      "list-left"
     ],
     "#alt": [
       "key-option-apple"
@@ -1093,6 +1128,7 @@
       "waveform"
     ],
     "#analytics": [
+      "file-chart",
       "pie-slice"
     ],
     "#anchor": [
@@ -1116,7 +1152,8 @@
       "square-arrow-anticlockwise"
     ],
     "#api": [
-      "chevron-left-slash-chevron-right"
+      "chevron-left-slash-chevron-right",
+      "file-braces"
     ],
     "#app": [
       "smartphone"
@@ -1207,6 +1244,7 @@
       "circular-arrows-clockwise"
     ],
     "#article": [
+      "file-bullet-lines",
       "file-text"
     ],
     "#ascend": [
@@ -1218,6 +1256,9 @@
     "#ask": [
       "circle-question",
       "circle-question-filled"
+    ],
+    "#asset": [
+      "file-sun-mountain"
     ],
     "#assistance": [
       "circle-info",
@@ -1297,6 +1338,7 @@
     ],
     "#badge": [
       "bell",
+      "bubble-top-right-circle",
       "card-user"
     ],
     "#ban": [
@@ -1400,6 +1442,9 @@
       "overline-rectangle-underline",
       "square"
     ],
+    "#braces": [
+      "file-braces"
+    ],
     "#brackets": [
       "chevron-left-slash-chevron-right",
       "corner-brackets"
@@ -1438,6 +1483,9 @@
     ],
     "#brush": [
       "broom"
+    ],
+    "#bubble": [
+      "bubble-top-right-circle"
     ],
     "#bug": [
       "bug"
@@ -1567,10 +1615,12 @@
       "handshake-heart"
     ],
     "#chart": [
+      "file-chart",
       "pie-slice"
     ],
     "#chat": [
-      "bubble-left-text"
+      "bubble-left-text",
+      "bubble-top-right-circle"
     ],
     "#check": [
       "calendar-check",
@@ -1681,7 +1731,8 @@
       "tree-palm"
     ],
     "#code": [
-      "chevron-left-slash-chevron-right"
+      "chevron-left-slash-chevron-right",
+      "file-braces"
     ],
     "#cog": [
       "cog",
@@ -1715,7 +1766,8 @@
       "looped-square"
     ],
     "#comment": [
-      "bubble-left-text"
+      "bubble-left-text",
+      "bubble-top-right-circle"
     ],
     "#commerce": [
       "store"
@@ -1756,6 +1808,9 @@
     "#conceal": [
       "eye-closed",
       "eye-slash"
+    ],
+    "#config": [
+      "file-braces"
     ],
     "#configuration": [
       "cog",
@@ -1804,6 +1859,7 @@
       "overline-rectangle-underline"
     ],
     "#content": [
+      "file-bullet-lines",
       "file-text"
     ],
     "#context-menu": [
@@ -1824,7 +1880,8 @@
       "sliders-vertical"
     ],
     "#conversation": [
-      "bubble-left-text"
+      "bubble-left-text",
+      "bubble-top-right-circle"
     ],
     "#cooperation": [
       "handshake"
@@ -1896,6 +1953,9 @@
     "#crown": [
       "crown"
     ],
+    "#csv": [
+      "file-chart"
+    ],
     "#cube": [
       "iso-cube"
     ],
@@ -1930,6 +1990,7 @@
     ],
     "#dashboard": [
       "dots-nine",
+      "file-chart",
       "grid-three-two",
       "pie-slice",
       "sidebar-left",
@@ -1941,6 +2002,8 @@
     ],
     "#data": [
       "cloud",
+      "file-braces",
+      "file-chart",
       "hard-drive",
       "hard-drive-filled",
       "pie-slice"
@@ -2047,7 +2110,8 @@
       "square-corners-face"
     ],
     "#developer": [
-      "chevron-left-slash-chevron-right"
+      "chevron-left-slash-chevron-right",
+      "file-braces"
     ],
     "#device": [
       "hard-drive",
@@ -2166,11 +2230,13 @@
     ],
     "#doc": [
       "file",
+      "file-bullet-lines",
       "file-text"
     ],
     "#document": [
       "book",
       "file",
+      "file-bullet-lines",
       "file-text",
       "file-zipper",
       "folder",
@@ -2201,6 +2267,7 @@
       "circle-ellipsis",
       "dots-list",
       "dots-nine",
+      "dots-six",
       "rectangle-dots-three"
     ],
     "#down": [
@@ -2216,7 +2283,11 @@
       "pen"
     ],
     "#drag": [
-      "arrows-cross-out"
+      "arrows-cross-out",
+      "dots-six"
+    ],
+    "#draghandle": [
+      "dots-six"
     ],
     "#drawer": [
       "sidebar-left",
@@ -2424,6 +2495,7 @@
     ],
     "#export": [
       "cloud-arrow-up",
+      "file-chart",
       "share",
       "square-arrow-out-up-right",
       "tray-arrow-up"
@@ -2486,6 +2558,7 @@
     ],
     "#feedback": [
       "bubble-left-text",
+      "bubble-top-right-circle",
       "bug",
       "smile"
     ],
@@ -2496,6 +2569,8 @@
       "cloud-arrow-down"
     ],
     "#file": [
+      "file-braces",
+      "file-bullet-lines",
       "file-text",
       "file-zipper",
       "folder",
@@ -2578,6 +2653,7 @@
       "a-large-small",
       "bold",
       "italic",
+      "list-left",
       "rectangle-underline-dashed",
       "toggle-case",
       "underline"
@@ -2626,6 +2702,7 @@
       "smartphone"
     ],
     "#gallery": [
+      "file-sun-mountain",
       "frame-sun-mountain",
       "grid-three-two",
       "squares-four"
@@ -2679,9 +2756,16 @@
     "#gps": [
       "map-pin"
     ],
+    "#grabber": [
+      "dots-six"
+    ],
     "#graph": [
+      "file-chart",
       "network",
       "pie-slice"
+    ],
+    "#graphic": [
+      "file-sun-mountain"
     ],
     "#greeting": [
       "handshake"
@@ -2695,6 +2779,9 @@
       "rows-four",
       "square-split-top",
       "squares-four"
+    ],
+    "#grip": [
+      "dots-six"
     ],
     "#group": [
       "diamonds-stacked-vertical",
@@ -2711,7 +2798,8 @@
       "book"
     ],
     "#handle": [
-      "at-sign"
+      "at-sign",
+      "dots-six"
     ],
     "#handset": [
       "smartphone"
@@ -2859,6 +2947,7 @@
       "bell-slash"
     ],
     "#image": [
+      "file-sun-mountain",
       "frame-sun-mountain"
     ],
     "#import": [
@@ -2906,6 +2995,9 @@
       "magnifying-glass-plus",
       "plus"
     ],
+    "#indent": [
+      "list-left"
+    ],
     "#index": [
       "list-magnifying-class"
     ],
@@ -2946,6 +3038,7 @@
       "lightbulb"
     ],
     "#insights": [
+      "file-chart",
       "pie-slice"
     ],
     "#inspect": [
@@ -3001,14 +3094,19 @@
     "#job": [
       "briefcase"
     ],
+    "#jpg": [
+      "file-sun-mountain"
+    ],
     "#json": [
-      "chevron-left-slash-chevron-right"
+      "chevron-left-slash-chevron-right",
+      "file-braces"
     ],
     "#kanban": [
       "square-split-top"
     ],
     "#kebab": [
       "circle-ellipsis",
+      "dots-six",
       "dots-three-horizontal",
       "dots-three-vertical",
       "rectangle-dots-three"
@@ -3139,6 +3237,7 @@
     "#lines": [
       "list",
       "list-filter",
+      "list-left",
       "overline-rectangle-underline",
       "rows-four",
       "rows-three",
@@ -3155,8 +3254,10 @@
     ],
     "#list": [
       "dots-list",
+      "file-bullet-lines",
       "list",
       "list-filter",
+      "list-left",
       "list-magnifying-class",
       "rows-three",
       "rows-two"
@@ -3282,6 +3383,9 @@
     "#manage": [
       "user-cog"
     ],
+    "#manifest": [
+      "file-braces"
+    ],
     "#manual": [
       "book"
     ],
@@ -3311,6 +3415,7 @@
     ],
     "#media": [
       "circle-line-circle",
+      "file-sun-mountain",
       "frame-sun-mountain",
       "music-note",
       "speaker-waves",
@@ -3336,16 +3441,19 @@
       "hard-drive-filled"
     ],
     "#mention": [
-      "at-sign"
+      "at-sign",
+      "bubble-top-right-circle"
     ],
     "#menu": [
       "circle-ellipsis",
       "dots-list",
       "dots-nine",
+      "dots-six",
       "dots-three-horizontal",
       "dots-three-vertical",
       "list",
       "list-filter",
+      "list-left",
       "rectangle-dots-three",
       "sidebar-left",
       "sidebar-left-chevron-left",
@@ -3355,6 +3463,7 @@
     "#message": [
       "bell",
       "bubble-left-text",
+      "bubble-top-right-circle",
       "circle-line-circle",
       "envelope",
       "envelope-cross",
@@ -3380,6 +3489,7 @@
       "tag"
     ],
     "#metrics": [
+      "file-chart",
       "pie-slice"
     ],
     "#microphone": [
@@ -3460,6 +3570,7 @@
       "arrows-up-down",
       "circle-arrow-right",
       "clipboard-arrow-left",
+      "dots-six",
       "square-arrow-down-left"
     ],
     "#movie": [
@@ -3580,6 +3691,9 @@
       "music-note",
       "pin"
     ],
+    "#notes": [
+      "file-bullet-lines"
+    ],
     "#notice": [
       "circle-info",
       "circle-info-filled",
@@ -3590,6 +3704,7 @@
     "#notification": [
       "alarm-clock",
       "bell",
+      "bubble-top-right-circle",
       "envelope",
       "envelope-filled"
     ],
@@ -3672,6 +3787,7 @@
       "rectangle-dots-three"
     ],
     "#order": [
+      "list-left",
       "shopping-cart"
     ],
     "#ordered": [
@@ -3726,6 +3842,7 @@
     ],
     "#page": [
       "file",
+      "file-bullet-lines",
       "file-text"
     ],
     "#pages": [
@@ -3756,6 +3873,9 @@
     "#paperplane": [
       "paper-plane"
     ],
+    "#paragraph": [
+      "list-left"
+    ],
     "#partnership": [
       "handshake",
       "handshake-heart"
@@ -3774,6 +3894,9 @@
     ],
     "#paste": [
       "clipboard-arrow-left"
+    ],
+    "#payload": [
+      "file-braces"
     ],
     "#pc": [
       "monitor"
@@ -3828,12 +3951,14 @@
       "smartphone-tablet"
     ],
     "#photo": [
+      "file-sun-mountain",
       "frame-sun-mountain"
     ],
     "#photograph": [
       "frame-sun-mountain"
     ],
     "#picture": [
+      "file-sun-mountain",
       "frame-sun-mountain"
     ],
     "#piechart": [
@@ -3881,6 +4006,9 @@
       "plus",
       "squares-stacked-plus",
       "user-plus"
+    ],
+    "#png": [
+      "file-sun-mountain"
     ],
     "#podcast": [
       "mic"
@@ -4044,6 +4172,9 @@
       "bookmark",
       "envelope-open"
     ],
+    "#rearrange": [
+      "dots-six"
+    ],
     "#receive": [
       "cloud-arrow-down",
       "tray-arrow-down"
@@ -4166,7 +4297,8 @@
     ],
     "#reorder": [
       "arrows-up-down",
-      "chevrons-up-down"
+      "chevrons-up-down",
+      "dots-six"
     ],
     "#repair": [
       "tool-case",
@@ -4183,13 +4315,16 @@
       "arrow-turn-up-left",
       "arrow-turn-up-right",
       "arrows-turn-up-left",
-      "bubble-left-text"
+      "bubble-left-text",
+      "bubble-top-right-circle"
     ],
     "#replyall": [
       "arrows-turn-up-left"
     ],
     "#report": [
       "bug",
+      "file-bullet-lines",
+      "file-chart",
       "file-text",
       "flag",
       "pie-slice"
@@ -4359,6 +4494,9 @@
     "#scheduled": [
       "calendar-check"
     ],
+    "#schema": [
+      "file-braces"
+    ],
     "#scissors": [
       "scissors"
     ],
@@ -4367,7 +4505,8 @@
       "smartphone"
     ],
     "#script": [
-      "chevron-left-slash-chevron-right"
+      "chevron-left-slash-chevron-right",
+      "file-braces"
     ],
     "#scroll-down": [
       "arrow-down"
@@ -4608,7 +4747,11 @@
       "arrows-up-down",
       "chevrons-up-down",
       "funnel",
-      "list-filter"
+      "list-filter",
+      "list-left"
+    ],
+    "#sortable": [
+      "dots-six"
     ],
     "#sound": [
       "bell",
@@ -4666,6 +4809,7 @@
       "sidebar-left"
     ],
     "#spreadsheet": [
+      "file-chart",
       "square-split-top"
     ],
     "#square": [
@@ -4706,6 +4850,7 @@
       "rocket"
     ],
     "#statistics": [
+      "file-chart",
       "pie-slice"
     ],
     "#sticker": [
@@ -4788,6 +4933,9 @@
     ],
     "#suggestion": [
       "lightbulb"
+    ],
+    "#summary": [
+      "file-bullet-lines"
     ],
     "#summer": [
       "tree-palm"
@@ -4873,9 +5021,11 @@
       "a-large-small",
       "bold",
       "file",
+      "file-bullet-lines",
       "file-text",
       "italic",
       "languages",
+      "list-left",
       "list-magnifying-class",
       "rectangle-underline-dashed",
       "toggle-case",
@@ -4895,6 +5045,7 @@
       "columns-three"
     ],
     "#thumbnail": [
+      "file-sun-mountain",
       "frame-sun-mountain"
     ],
     "#thumbnails": [
@@ -5047,6 +5198,9 @@
       "rectangle-two",
       "rows-two"
     ],
+    "#txt": [
+      "file-bullet-lines"
+    ],
     "#type": [
       "a-large-small"
     ],
@@ -5054,6 +5208,7 @@
       "a-large-small",
       "bold",
       "italic",
+      "list-left",
       "toggle-case",
       "underline"
     ],
@@ -5101,6 +5256,7 @@
       "dots-list"
     ],
     "#unread": [
+      "bubble-top-right-circle",
       "envelope-open",
       "inbox"
     ],
@@ -5138,6 +5294,7 @@
       "circle-fading-arrow-up",
       "cloud",
       "cloud-arrow-up",
+      "file-sun-mountain",
       "tray-arrow-up"
     ],
     "#uploaded": [
@@ -5239,6 +5396,9 @@
     ],
     "#visible": [
       "eye"
+    ],
+    "#visual": [
+      "file-sun-mountain"
     ],
     "#voice": [
       "circle-line-circle",
