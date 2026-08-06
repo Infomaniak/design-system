@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.24",
+    "version": "0.0.25",
     "author": {
       "name": "Infomaniak"
     },
@@ -10,9 +10,9 @@
       "title": "GPL-3.0-only",
       "spdx": "GPL-3.0-only"
     },
-    "total": 243
+    "total": 244
   },
-  "lastModified": 1785944915,
+  "lastModified": 1786016910,
   "icons": {
     "a-large-small": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 16 2.536-7.328a1.02 1.02 0 011.928 0L22 16m-6.303-2h5.606M2 16l4.039-9.69a.5.5 0 01.923 0L11 16m-7.696-3h6.392\" vector-effect=\"non-scaling-stroke\"/>"
@@ -458,6 +458,9 @@
     "monitor": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M8 21h8m-4-4v4M4 3h16a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "moon": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M20.985 12.486a9 9 0 11-9.473-9.472c.405-.022.617.46.402.803a6 6 0 008.268 8.268c.344-.215.825-.004.803.4\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "mouse-pointer": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M4.037 4.688a.495.495 0 01.651-.651l16 6.5a.5.5 0 01-.063.947l-6.124 1.58a2 2 0 00-1.438 1.435l-1.579 6.126a.5.5 0 01-.947.063z\" vector-effect=\"non-scaling-stroke\"/>"
     },
@@ -894,6 +897,7 @@
       "mic",
       "minus",
       "monitor",
+      "moon",
       "mouse-pointer",
       "mouse-pointer-sparkle",
       "music-note",
@@ -1931,6 +1935,9 @@
     "#credentials": [
       "user-key"
     ],
+    "#crescent": [
+      "moon"
+    ],
     "#crop": [
       "corner-brackets",
       "scissors"
@@ -1984,6 +1991,12 @@
     "#danger": [
       "shield-exclamation-mark",
       "triangle-exclamation-mark"
+    ],
+    "#dark": [
+      "moon"
+    ],
+    "#darkmode": [
+      "moon"
     ],
     "#dash": [
       "minus"
@@ -2225,6 +2238,9 @@
     "#division": [
       "slash"
     ],
+    "#dnd": [
+      "moon"
+    ],
     "#do-not-disturb": [
       "bell-slash"
     ],
@@ -2255,6 +2271,9 @@
       "circle-check-filled",
       "cloud-check",
       "squares-stacked-check"
+    ],
+    "#donotdisturb": [
+      "moon"
     ],
     "#door": [
       "door-open"
@@ -3340,6 +3359,9 @@
     "#loyalty": [
       "handshake-heart"
     ],
+    "#lunar": [
+      "moon"
+    ],
     "#mac": [
       "key-option-apple",
       "looped-square"
@@ -3546,6 +3568,9 @@
     "#mood": [
       "smile"
     ],
+    "#moon": [
+      "moon"
+    ],
     "#more": [
       "chevron-down",
       "chevron-right",
@@ -3660,6 +3685,12 @@
       "arrow-turn-up-right",
       "chevron-right",
       "circle-arrow-right"
+    ],
+    "#night": [
+      "moon"
+    ],
+    "#nighttime": [
+      "moon"
     ],
     "#nine": [
       "dots-nine"
@@ -4709,6 +4740,9 @@
     "#slash": [
       "cloud-slash"
     ],
+    "#sleep": [
+      "moon"
+    ],
     "#sliders": [
       "sliders-horizontal",
       "sliders-vertical"
@@ -4730,7 +4764,8 @@
       "chevron-left-slash-chevron-right"
     ],
     "#snooze": [
-      "bell-slash"
+      "bell-slash",
+      "moon"
     ],
     "#social": [
       "at-sign",
@@ -5032,6 +5067,7 @@
       "underline"
     ],
     "#theme": [
+      "moon",
       "sun"
     ],
     "#thread": [
