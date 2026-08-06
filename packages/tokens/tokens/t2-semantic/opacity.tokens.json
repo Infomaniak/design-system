@@ -1,5 +1,4 @@
 {
-  "$type": "number",
   "opacity": {
     "none": {
       "$value": "{opacity.0}",

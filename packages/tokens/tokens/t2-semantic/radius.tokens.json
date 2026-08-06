@@ -1,5 +1,4 @@
 {
-  "$type": "dimension",
   "radius": {
     "none": {
       "$value": "{radius.0}",

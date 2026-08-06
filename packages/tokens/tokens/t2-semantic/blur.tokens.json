@@ -1,5 +1,4 @@
 {
-  "$type": "dimension",
   "blur": {
     "none": {
       "$value": "{blur.0}",

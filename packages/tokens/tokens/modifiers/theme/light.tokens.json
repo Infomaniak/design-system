@@ -603,17 +603,17 @@
               }
             }
           },
-          "warning": {
-            "dim1": {
-              "default": {
-                "$value": "{color.orange.900}"
-              }
-            }
-          },
           "error": {
             "dim1": {
               "default": {
                 "$value": "{color.red.900}"
+              }
+            }
+          },
+          "warning": {
+            "dim1": {
+              "default": {
+                "$value": "{color.orange.900}"
               }
             }
           }
@@ -622,13 +622,13 @@
       "brand": {
         "infomaniak": {
           "default": {
-            "$value": "{color.blue.800}"
+            "$value": "{color.blue.600}"
           },
           "hover": {
-            "$value": "{color.blue.900}"
+            "$value": "{color.blue.700}"
           },
           "pressed": {
-            "$value": "{color.blue.950}"
+            "$value": "{color.blue.800}"
           }
         },
         "mail": {
@@ -783,13 +783,13 @@
       },
       "visited": {
         "default": {
-          "$value": "{color.violet.500}"
-        },
-        "hover": {
           "$value": "{color.violet.600}"
         },
-        "pressed": {
+        "hover": {
           "$value": "{color.violet.700}"
+        },
+        "pressed": {
+          "$value": "{color.violet.800}"
         }
       }
     },

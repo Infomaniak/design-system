@@ -1,5 +1,4 @@
 {
-  "$type": "color",
   "color": {
     "background": {
       "elevation": {
@@ -1171,19 +1170,19 @@
       "brand": {
         "infomaniak": {
           "default": {
-            "$value": "{color.blue.800}",
+            "$value": "{color.blue.600}",
             "$extensions": {
               "scopes": []
             }
           },
           "hover": {
-            "$value": "{color.blue.900}",
+            "$value": "{color.blue.700}",
             "$extensions": {
               "scopes": []
             }
           },
           "pressed": {
-            "$value": "{color.blue.950}",
+            "$value": "{color.blue.800}",
             "$extensions": {
               "scopes": []
             }
@@ -1370,21 +1369,21 @@
           }
         },
         "default": {
-          "$value": "{color.blue.800}",
+          "$value": "{color.blue.600}",
           "$extensions": {
             "scopes": ["ALL_FILLS"],
             "figmaName": ["color", "content", "brand", "@root", "default"]
           }
         },
         "hover": {
-          "$value": "{color.blue.900}",
+          "$value": "{color.blue.700}",
           "$extensions": {
             "scopes": ["ALL_FILLS"],
             "figmaName": ["color", "content", "brand", "@root", "hover"]
           }
         },
         "pressed": {
-          "$value": "{color.blue.950}",
+          "$value": "{color.blue.800}",
           "$extensions": {
             "scopes": ["ALL_FILLS"],
             "figmaName": ["color", "content", "brand", "@root", "pressed"]
@@ -1485,19 +1484,19 @@
       },
       "visited": {
         "default": {
-          "$value": "{color.violet.500}",
-          "$extensions": {
-            "scopes": ["TEXT_FILL"]
-          }
-        },
-        "hover": {
           "$value": "{color.violet.600}",
           "$extensions": {
             "scopes": ["TEXT_FILL"]
           }
         },
-        "pressed": {
+        "hover": {
           "$value": "{color.violet.700}",
+          "$extensions": {
+            "scopes": ["TEXT_FILL"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.violet.800}",
           "$extensions": {
             "scopes": ["TEXT_FILL"]
           }

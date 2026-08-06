@@ -2,23 +2,41 @@
   "text-link": {
     "color": {
       "default": {
-        "$value": "{color.content.brand.default}"
+        "$value": "{color.content.brand.default}",
+        "$extensions": {
+          "scopes": ["ALL_FILLS"]
+        }
       },
       "hover": {
-        "$value": "{color.content.brand.hover}"
+        "$value": "{color.content.brand.hover}",
+        "$extensions": {
+          "scopes": ["ALL_FILLS"]
+        }
       },
       "pressed": {
-        "$value": "{color.content.brand.pressed}"
+        "$value": "{color.content.brand.pressed}",
+        "$extensions": {
+          "scopes": ["ALL_FILLS"]
+        }
       },
       "visited": {
         "default": {
-          "$value": "{color.content.visited.default}"
+          "$value": "{color.content.visited.default}",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
         },
         "hover": {
-          "$value": "{color.content.visited.hover}"
+          "$value": "{color.content.visited.hover}",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
         },
         "pressed": {
-          "$value": "{color.content.visited.pressed}"
+          "$value": "{color.content.visited.pressed}",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
         }
       }
     }

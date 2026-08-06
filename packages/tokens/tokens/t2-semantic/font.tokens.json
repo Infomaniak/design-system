@@ -1,7 +1,6 @@
 {
   "font": {
     "size": {
-      "$type": "dimension",
       "xs": {
         "$value": "{font.size.12}",
         "$extensions": {
@@ -58,7 +57,6 @@
       }
     },
     "family": {
-      "$type": "fontFamily",
       "base": {
         "$value": "{font.family.Suisse Int'l}",
         "$extensions": {
@@ -67,7 +65,6 @@
       }
     },
     "line-height": {
-      "$type": "dimension",
       "xs": {
         "$value": "{font.line-height.16}",
         "$extensions": {
@@ -124,7 +121,6 @@
       }
     },
     "letter-spacing": {
-      "$type": "dimension",
       "md": {
         "$value": "{font.letter-spacing.0}",
         "$extensions": {
@@ -133,7 +129,6 @@
       }
     },
     "weight": {
-      "$type": "fontWeight",
       "regular": {
         "$value": "{font.weight.400}",
         "$extensions": {
