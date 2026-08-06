@@ -1,8 +1,10 @@
 {
   "border": {
+    "$description": "Semantic border width scale for element outlines and dividers.",
     "none": {
       "width": {
         "$value": "{border-width.0}",
+        "$description": "No border width.",
         "$extensions": {
           "scopes": ["STROKE_FLOAT"]
         }
@@ -11,6 +13,7 @@
     "xs": {
       "width": {
         "$value": "{border-width.1}",
+        "$description": "Extra-small border width for fine hairline borders.",
         "$extensions": {
           "scopes": ["STROKE_FLOAT"]
         }
@@ -19,6 +22,7 @@
     "sm": {
       "width": {
         "$value": "{border-width.2}",
+        "$description": "Small border width for subtle outlines.",
         "$extensions": {
           "scopes": ["STROKE_FLOAT"]
         }
@@ -27,6 +31,7 @@
     "md": {
       "width": {
         "$value": "{border-width.3}",
+        "$description": "Medium border width for default element outlines.",
         "$extensions": {
           "scopes": ["STROKE_FLOAT"]
         }
@@ -35,6 +40,7 @@
     "lg": {
       "width": {
         "$value": "{border-width.4}",
+        "$description": "Large border width for emphasized outlines.",
         "$extensions": {
           "scopes": ["STROKE_FLOAT"]
         }

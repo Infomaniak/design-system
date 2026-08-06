@@ -1,180 +1,217 @@
 {
   "text": {
+    "$description": "Semantic typography presets bundling font size, line-height, and letter-spacing.",
     "xs": {
+      "$description": "Extra-small text style for captions and metadata.",
       "size": {
         "$value": "{font.size.xs}",
+        "$description": "Font size for extra-small text.",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.xs}",
+        "$description": "Line-height for extra-small text.",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$description": "Letter spacing for extra-small text.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "sm": {
+      "$description": "Small text style for helper text and compact UI.",
       "size": {
         "$value": "{font.size.sm}",
+        "$description": "Font size for small text.",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.sm}",
+        "$description": "Line-height for small text.",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$description": "Letter spacing for small text.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "md": {
+      "$description": "Medium (base) text style for body copy and default text.",
       "size": {
         "$value": "{font.size.md}",
+        "$description": "Font size for medium text.",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.md}",
+        "$description": "Line-height for medium text.",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$description": "Letter spacing for medium text.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "lg": {
+      "$description": "Large text style for emphasized body text.",
       "size": {
         "$value": "{font.size.lg}",
+        "$description": "Font size for large text.",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.lg}",
+        "$description": "Line-height for large text.",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$description": "Letter spacing for large text.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "xl": {
+      "$description": "Extra-large text style for subtitles and subheadings.",
       "size": {
         "$value": "{font.size.xl}",
+        "$description": "Font size for extra-large text.",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.xl}",
+        "$description": "Line-height for extra-large text.",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$description": "Letter spacing for extra-large text.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "2xl": {
+      "$description": "2x-large text style for section headings.",
       "size": {
         "$value": "{font.size.2xl}",
+        "$description": "Font size for 2x-large text.",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.2xl}",
+        "$description": "Line-height for 2x-large text.",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$description": "Letter spacing for 2x-large text.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "3xl": {
+      "$description": "3x-large text style for prominent headings.",
       "size": {
         "$value": "{font.size.3xl}",
+        "$description": "Font size for 3x-large text.",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.3xl}",
+        "$description": "Line-height for 3x-large text.",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$description": "Letter spacing for 3x-large text.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "4xl": {
+      "$description": "4x-large text style for display headings.",
       "size": {
         "$value": "{font.size.4xl}",
+        "$description": "Font size for 4x-large text.",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.4xl}",
+        "$description": "Line-height for 4x-large text.",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$description": "Letter spacing for 4x-large text.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "5xl": {
+      "$description": "5x-large text style for hero display text.",
       "size": {
         "$value": "{font.size.5xl}",
+        "$description": "Font size for 5x-large text.",
         "$extensions": {
           "scopes": []
         }
       },
       "line-height": {
         "$value": "{font.line-height.5xl}",
+        "$description": "Line-height for 5x-large text.",
         "$extensions": {
           "scopes": []
         }
       },
       "letter-spacing": {
         "$value": "{font.letter-spacing.md}",
+        "$description": "Letter spacing for 5x-large text.",
         "$extensions": {
           "scopes": []
         }

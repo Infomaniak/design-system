@@ -1,156 +1,187 @@
 {
   "shadow": {
+    "$description": "Semantic drop-shadow scale defined by x, y, blur, and spread components.",
     "xs": {
+      "$description": "Extra-small shadow for subtle elevation.",
       "x": {
         "$value": "{shadow.1.x}",
+        "$description": "Horizontal offset of the xs shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "y": {
         "$value": "{shadow.1.y}",
+        "$description": "Vertical offset of the xs shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "blur": {
         "$value": "{shadow.1.blur}",
+        "$description": "Blur radius of the xs shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "spread": {
         "$value": "{shadow.1.spread}",
+        "$description": "Spread of the xs shadow.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "sm": {
+      "$description": "Small shadow for light elevation.",
       "x": {
         "$value": "{shadow.2.x}",
+        "$description": "Horizontal offset of the sm shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "y": {
         "$value": "{shadow.2.y}",
+        "$description": "Vertical offset of the sm shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "blur": {
         "$value": "{shadow.2.blur}",
+        "$description": "Blur radius of the sm shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "spread": {
         "$value": "{shadow.2.spread}",
+        "$description": "Spread of the sm shadow.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "md": {
+      "$description": "Medium shadow for default elevation.",
       "x": {
         "$value": "{shadow.3.x}",
+        "$description": "Horizontal offset of the md shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "y": {
         "$value": "{shadow.3.y}",
+        "$description": "Vertical offset of the md shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "blur": {
         "$value": "{shadow.3.blur}",
+        "$description": "Blur radius of the md shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "spread": {
         "$value": "{shadow.3.spread}",
+        "$description": "Spread of the md shadow.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "lg": {
+      "$description": "Large shadow for emphasized elevation.",
       "x": {
         "$value": "{shadow.4.x}",
+        "$description": "Horizontal offset of the lg shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "y": {
         "$value": "{shadow.4.y}",
+        "$description": "Vertical offset of the lg shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "blur": {
         "$value": "{shadow.4.blur}",
+        "$description": "Blur radius of the lg shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "spread": {
         "$value": "{shadow.4.spread}",
+        "$description": "Spread of the lg shadow.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "xl": {
+      "$description": "Extra-large shadow for prominent elevation.",
       "x": {
         "$value": "{shadow.5.x}",
+        "$description": "Horizontal offset of the xl shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "y": {
         "$value": "{shadow.5.y}",
+        "$description": "Vertical offset of the xl shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "blur": {
         "$value": "{shadow.5.blur}",
+        "$description": "Blur radius of the xl shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "spread": {
         "$value": "{shadow.5.spread}",
+        "$description": "Spread of the xl shadow.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "2xl": {
+      "$description": "2x-large shadow for maximum elevation.",
       "x": {
         "$value": "{shadow.6.x}",
+        "$description": "Horizontal offset of the 2xl shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "y": {
         "$value": "{shadow.6.y}",
+        "$description": "Vertical offset of the 2xl shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "blur": {
         "$value": "{shadow.6.blur}",
+        "$description": "Blur radius of the 2xl shadow.",
         "$extensions": {
           "scopes": []
         }
       },
       "spread": {
         "$value": "{shadow.6.spread}",
+        "$description": "Spread of the 2xl shadow.",
         "$extensions": {
           "scopes": []
         }
