@@ -120,6 +120,8 @@ This prompts you to:
 
 Commit the generated `.changeset/*.md` file alongside your code changes.
 
+> **Tip — AI agents:** An agent skill is available to automate this step. The `generate-changeset` skill analyzes your branch's diff against `develop`, determines the bump type, and writes a properly-formatted `.changeset/*.md` file for you. See `.agents/skills/generate-changeset/SKILL.md`.
+
 ### Versioning and changelogs
 
 Changeset files accumulate on `develop` as PRs merge. The release flow is automated:
