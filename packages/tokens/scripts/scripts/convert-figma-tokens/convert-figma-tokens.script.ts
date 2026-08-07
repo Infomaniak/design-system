@@ -29,7 +29,7 @@ export async function convertFigmaTokensScript(): Promise<void> {
     outputDirectory: OUTPUT_DIR,
   });
 
-  await execCommandInherit(logger, 'yarn', ['format:fix']);
+  await execCommandInherit(logger, 'yarn', ['format:fix:tokens']);
 }
 
 await convertFigmaTokensScript();
