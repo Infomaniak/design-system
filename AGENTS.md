@@ -80,6 +80,8 @@ design-system/
 | PR validation                | `yarn ci:on-pull-request`                    |
 | CI publish (manual)          | `GITHUB_REF_NAME=develop yarn ci:publish`    |
 | CI visual regression comment | `yarn ci:visual-regression --mode=comment`   |
+| Create changeset             | `yarn changeset`                             |
+| Version + changelog (manual) | `yarn changeset:version`                    |
 
 ### Code Style
 
@@ -175,6 +177,14 @@ const meta = {
   tags: ['autodocs', 'vr-test'],
 } satisfies Meta;
 ```
+
+#### Changesets
+
+- **Purpose:** Collect structured change descriptions, automate version bumps, and generate `CHANGELOG.md` files. Changesets do **not** handle publishing — `ci:publish` remains the publish mechanism.
+- **Config:** `.changeset/config.json` with `baseBranch: "develop"`, `access: "public"`, ignores non-publishable packages.
+- **Creating a changeset:** Run `yarn changeset` on a feature branch, select affected package(s), choose bump type (patch/minor/major), write a description. Commit the generated `.changeset/*.md` file.
+- **Versioning:** Automated via `.github/workflows/release-pr.yml`. A draft `develop → main` PR is created automatically when changes land on `develop`. Marking it as **Ready for review** triggers `yarn changeset:version` (bumps `package.json` versions, generates `CHANGELOG.md`, pushes to `develop`). The maintainer then merges the PR to `main` for production publish. Can also be run manually with `yarn changeset:version`.
+- **Only publishable packages are versioned:** `@infomaniak-design-system/tokens` and `@infomaniak-design-system/components` (those with a `publish` script). PRs touching only docs/apps/scripts don't need a changeset.
 
 ---
 

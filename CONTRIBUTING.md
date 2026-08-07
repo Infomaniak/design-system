@@ -97,6 +97,45 @@ Create a new branch from `main` following the [Conventional Commits](https://www
 
 Fork the repository, update the code, create a PR from your repository to the upstream repository, explaining clearly what was added/fixed.
 
+## Changesets
+
+Every PR that modifies a publishable package (`@infomaniak-design-system/tokens` or `@infomaniak-design-system/components`) **must** include a changeset. PRs that only touch docs, apps, scripts, or tooling do not need one.
+
+### Creating a changeset
+
+Before opening your PR, run:
+
+```shell
+yarn changeset
+```
+
+This prompts you to:
+
+1. Select the affected package(s) (`tokens`, `components`, or both)
+2. Choose a bump type following [semver](https://semver.org):
+   - `patch` — bug fixes, internal refactors, no behavior change
+   - `minor` — new features, backwards-compatible
+   - `major` — breaking changes
+3. Write a short description of the change — this text becomes the changelog entry
+
+Commit the generated `.changeset/*.md` file alongside your code changes.
+
+### Versioning and changelogs
+
+Changeset files accumulate on `develop` as PRs merge. The release flow is automated:
+
+1. When changes land on `develop`, the `release-pr.yml` workflow automatically creates a **draft PR** from `develop` to `main` (if one doesn't already exist)
+2. The draft PR stays open and auto-updates as more changes merge to `develop`
+3. When ready to release, a maintainer marks the PR as **Ready for review**
+4. This triggers the `version-bump` job, which runs `yarn changeset:version` automatically — bumping `package.json` versions, generating `CHANGELOG.md` files, and pushing the result to `develop`
+5. The maintainer merges the PR to `main`, triggering the production publish
+
+If needed, the version bump can also be run manually:
+
+```shell
+yarn changeset:version
+```
+
 ## Code
 
 - The repository is a monorepo:

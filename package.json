@@ -35,6 +35,8 @@
     "=== MISC ===": "",
     "generate": "yarn workspace @infomaniak-design-system/components run generate",
     "create:figma:webhook": "node --no-warnings=ExperimentalWarning scripts/scripts/create-figma-webhook/create-figma-webhook.script.ts",
+    "changeset": "changeset",
+    "changeset:version": "changeset version",
     "=== CI ===": "",
     "ci:publish": "node --no-warnings=ExperimentalWarning scripts/ci/publish/ci-publish.script.ts",
     "ci:pr-ready-for-review": "node --no-warnings=ExperimentalWarning scripts/ci/pr-ready-for-review/pr-ready-for-review.script.ts",
@@ -77,6 +79,7 @@
   "devDependencies": {
     "@babel/core": "^8.0.1",
     "@babel/plugin-proposal-decorators": "^8.0.2",
+    "@changesets/cli": "^2.31.1",
     "@eslint/js": "^10.0.1",
     "@lit/context": "^1.1.6",
     "@playwright/test": "1.62.1",
