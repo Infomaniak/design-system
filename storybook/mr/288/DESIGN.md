@@ -4,13 +4,13 @@ typography:
     md:
       base:
         fontFamily: "Suisse Int'l"
-        fontSize: "48px"
+        fontSize: "3rem"
         fontWeight: "400"
         lineHeight: "56px"
         letterSpacing: "0px"
       emphasized:
         fontFamily: "Suisse Int'l"
-        fontSize: "48px"
+        fontSize: "3rem"
         fontWeight: "500"
         lineHeight: "56px"
         letterSpacing: "0px"
@@ -18,39 +18,39 @@ typography:
     lg:
       base:
         fontFamily: "Suisse Int'l"
-        fontSize: "40px"
+        fontSize: "2.5rem"
         fontWeight: "400"
         lineHeight: "48px"
         letterSpacing: "0px"
       emphasized:
         fontFamily: "Suisse Int'l"
-        fontSize: "40px"
+        fontSize: "2.5rem"
         fontWeight: "500"
         lineHeight: "48px"
         letterSpacing: "0px"
     md:
       base:
         fontFamily: "Suisse Int'l"
-        fontSize: "32px"
+        fontSize: "2rem"
         fontWeight: "400"
         lineHeight: "40px"
         letterSpacing: "0px"
       emphasized:
         fontFamily: "Suisse Int'l"
-        fontSize: "32px"
+        fontSize: "2rem"
         fontWeight: "500"
         lineHeight: "40px"
         letterSpacing: "0px"
     sm:
       base:
         fontFamily: "Suisse Int'l"
-        fontSize: "24px"
+        fontSize: "1.5rem"
         fontWeight: "400"
         lineHeight: "32px"
         letterSpacing: "0px"
       emphasized:
         fontFamily: "Suisse Int'l"
-        fontSize: "24px"
+        fontSize: "1.5rem"
         fontWeight: "500"
         lineHeight: "32px"
         letterSpacing: "0px"
@@ -58,13 +58,13 @@ typography:
     md:
       base:
         fontFamily: "Suisse Int'l"
-        fontSize: "20px"
+        fontSize: "1.25rem"
         fontWeight: "400"
         lineHeight: "28px"
         letterSpacing: "0px"
       emphasized:
         fontFamily: "Suisse Int'l"
-        fontSize: "20px"
+        fontSize: "1.25rem"
         fontWeight: "500"
         lineHeight: "28px"
         letterSpacing: "0px"
@@ -72,39 +72,39 @@ typography:
     lg:
       base:
         fontFamily: "Suisse Int'l"
-        fontSize: "18px"
+        fontSize: "1.125rem"
         fontWeight: "400"
         lineHeight: "26px"
         letterSpacing: "0px"
       emphasized:
         fontFamily: "Suisse Int'l"
-        fontSize: "18px"
+        fontSize: "1.125rem"
         fontWeight: "500"
         lineHeight: "26px"
         letterSpacing: "0px"
     md:
       base:
         fontFamily: "Suisse Int'l"
-        fontSize: "16px"
+        fontSize: "1rem"
         fontWeight: "400"
         lineHeight: "24px"
         letterSpacing: "0px"
       emphasized:
         fontFamily: "Suisse Int'l"
-        fontSize: "16px"
+        fontSize: "1rem"
         fontWeight: "500"
         lineHeight: "24px"
         letterSpacing: "0px"
     sm:
       base:
         fontFamily: "Suisse Int'l"
-        fontSize: "14px"
+        fontSize: "0.875rem"
         fontWeight: "400"
         lineHeight: "20px"
         letterSpacing: "0px"
       emphasized:
         fontFamily: "Suisse Int'l"
-        fontSize: "14px"
+        fontSize: "0.875rem"
         fontWeight: "500"
         lineHeight: "20px"
         letterSpacing: "0px"
@@ -112,13 +112,13 @@ typography:
     md:
       base:
         fontFamily: "Suisse Int'l"
-        fontSize: "12px"
+        fontSize: "0.75rem"
         fontWeight: "400"
         lineHeight: "16px"
         letterSpacing: "0px"
       emphasized:
         fontFamily: "Suisse Int'l"
-        fontSize: "12px"
+        fontSize: "0.75rem"
         fontWeight: "500"
         lineHeight: "16px"
         letterSpacing: "0px"
@@ -478,15 +478,15 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.shadow.lg | #90a1b91a | #0206181a | var(--esds-color-shadow-lg) | Shadow color for the lg elevation. |
 | color.shadow.xl | #90a1b91a | #0206181a | var(--esds-color-shadow-xl) | Shadow color for the xl elevation. |
 | color.shadow.2xl | #90a1b924 | #02061824 | var(--esds-color-shadow-2xl) | Shadow color for the 2xl elevation. |
-| font.size.xs | 12px | 12px | var(--esds-font-size-xs) | Extra-small font size for captions and metadata. |
-| font.size.sm | 14px | 14px | var(--esds-font-size-sm) | Small font size for helper text and compact UI. |
-| font.size.md | 16px | 16px | var(--esds-font-size-md) | Medium (base) font size for body copy and default text. |
-| font.size.lg | 18px | 18px | var(--esds-font-size-lg) | Large font size for emphasized body text. |
-| font.size.xl | 20px | 20px | var(--esds-font-size-xl) | Extra-large font size for subtitles and subheadings. |
-| font.size.2xl | 24px | 24px | var(--esds-font-size-2xl) | 2x-large font size for section headings. |
-| font.size.3xl | 32px | 32px | var(--esds-font-size-3xl) | 3x-large font size for prominent headings. |
-| font.size.4xl | 40px | 40px | var(--esds-font-size-4xl) | 4x-large font size for display headings. |
-| font.size.5xl | 48px | 48px | var(--esds-font-size-5xl) | 5x-large font size for hero display text. |
+| font.size.xs | 0.75rem | 0.75rem | var(--esds-font-size-xs) | Extra-small font size for captions and metadata. |
+| font.size.sm | 0.875rem | 0.875rem | var(--esds-font-size-sm) | Small font size for helper text and compact UI. |
+| font.size.md | 1rem | 1rem | var(--esds-font-size-md) | Medium (base) font size for body copy and default text. |
+| font.size.lg | 1.125rem | 1.125rem | var(--esds-font-size-lg) | Large font size for emphasized body text. |
+| font.size.xl | 1.25rem | 1.25rem | var(--esds-font-size-xl) | Extra-large font size for subtitles and subheadings. |
+| font.size.2xl | 1.5rem | 1.5rem | var(--esds-font-size-2xl) | 2x-large font size for section headings. |
+| font.size.3xl | 2rem | 2rem | var(--esds-font-size-3xl) | 3x-large font size for prominent headings. |
+| font.size.4xl | 2.5rem | 2.5rem | var(--esds-font-size-4xl) | 4x-large font size for display headings. |
+| font.size.5xl | 3rem | 3rem | var(--esds-font-size-5xl) | 5x-large font size for hero display text. |
 | font.family.base | "Suisse Int'l" | "Suisse Int'l" | var(--esds-font-family-base) | Base font family used across the design system. |
 | font.line-height.xs | 16px | 16px | var(--esds-font-line-height-xs) | Extra-small line-height for the tightest text. |
 | font.line-height.sm | 20px | 20px | var(--esds-font-line-height-sm) | Small line-height for compact text blocks. |
@@ -561,31 +561,31 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | spacing.6xl | 48px | 48px | var(--esds-spacing-6xl) | 6x-large spacing for very large layout gaps. |
 | spacing.7xl | 64px | 64px | var(--esds-spacing-7xl) | 7x-large spacing for major page-level separation. |
 | spacing.8xl | 100px | 100px | var(--esds-spacing-8xl) | 8x-large spacing for the largest layout gaps. |
-| text.xs.size | 12px | 12px | var(--esds-text-xs-size) | Font size for extra-small text. |
+| text.xs.size | 0.75rem | 0.75rem | var(--esds-text-xs-size) | Font size for extra-small text. |
 | text.xs.line-height | 16px | 16px | var(--esds-text-xs-line-height) | Line-height for extra-small text. |
 | text.xs.letter-spacing | 0px | 0px | var(--esds-text-xs-letter-spacing) | Letter spacing for extra-small text. |
-| text.sm.size | 14px | 14px | var(--esds-text-sm-size) | Font size for small text. |
+| text.sm.size | 0.875rem | 0.875rem | var(--esds-text-sm-size) | Font size for small text. |
 | text.sm.line-height | 20px | 20px | var(--esds-text-sm-line-height) | Line-height for small text. |
 | text.sm.letter-spacing | 0px | 0px | var(--esds-text-sm-letter-spacing) | Letter spacing for small text. |
-| text.md.size | 16px | 16px | var(--esds-text-md-size) | Font size for medium text. |
+| text.md.size | 1rem | 1rem | var(--esds-text-md-size) | Font size for medium text. |
 | text.md.line-height | 24px | 24px | var(--esds-text-md-line-height) | Line-height for medium text. |
 | text.md.letter-spacing | 0px | 0px | var(--esds-text-md-letter-spacing) | Letter spacing for medium text. |
-| text.lg.size | 18px | 18px | var(--esds-text-lg-size) | Font size for large text. |
+| text.lg.size | 1.125rem | 1.125rem | var(--esds-text-lg-size) | Font size for large text. |
 | text.lg.line-height | 26px | 26px | var(--esds-text-lg-line-height) | Line-height for large text. |
 | text.lg.letter-spacing | 0px | 0px | var(--esds-text-lg-letter-spacing) | Letter spacing for large text. |
-| text.xl.size | 20px | 20px | var(--esds-text-xl-size) | Font size for extra-large text. |
+| text.xl.size | 1.25rem | 1.25rem | var(--esds-text-xl-size) | Font size for extra-large text. |
 | text.xl.line-height | 28px | 28px | var(--esds-text-xl-line-height) | Line-height for extra-large text. |
 | text.xl.letter-spacing | 0px | 0px | var(--esds-text-xl-letter-spacing) | Letter spacing for extra-large text. |
-| text.2xl.size | 24px | 24px | var(--esds-text-2xl-size) | Font size for 2x-large text. |
+| text.2xl.size | 1.5rem | 1.5rem | var(--esds-text-2xl-size) | Font size for 2x-large text. |
 | text.2xl.line-height | 32px | 32px | var(--esds-text-2xl-line-height) | Line-height for 2x-large text. |
 | text.2xl.letter-spacing | 0px | 0px | var(--esds-text-2xl-letter-spacing) | Letter spacing for 2x-large text. |
-| text.3xl.size | 32px | 32px | var(--esds-text-3xl-size) | Font size for 3x-large text. |
+| text.3xl.size | 2rem | 2rem | var(--esds-text-3xl-size) | Font size for 3x-large text. |
 | text.3xl.line-height | 40px | 40px | var(--esds-text-3xl-line-height) | Line-height for 3x-large text. |
 | text.3xl.letter-spacing | 0px | 0px | var(--esds-text-3xl-letter-spacing) | Letter spacing for 3x-large text. |
-| text.4xl.size | 40px | 40px | var(--esds-text-4xl-size) | Font size for 4x-large text. |
+| text.4xl.size | 2.5rem | 2.5rem | var(--esds-text-4xl-size) | Font size for 4x-large text. |
 | text.4xl.line-height | 48px | 48px | var(--esds-text-4xl-line-height) | Line-height for 4x-large text. |
 | text.4xl.letter-spacing | 0px | 0px | var(--esds-text-4xl-letter-spacing) | Letter spacing for 4x-large text. |
-| text.5xl.size | 48px | 48px | var(--esds-text-5xl-size) | Font size for 5x-large text. |
+| text.5xl.size | 3rem | 3rem | var(--esds-text-5xl-size) | Font size for 5x-large text. |
 | text.5xl.line-height | 56px | 56px | var(--esds-text-5xl-line-height) | Line-height for 5x-large text. |
 | text.5xl.letter-spacing | 0px | 0px | var(--esds-text-5xl-letter-spacing) | Letter spacing for 5x-large text. |
 
@@ -599,24 +599,24 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | text-link.color.visited.default | #8f30f7 | #cab1ff | var(--esds-text-link-color-visited-default) | Default visited text link color. |
 | text-link.color.visited.hover | #811ee3 | #e0d4ff | var(--esds-text-link-color-visited-hover) | Visited text link color on hover. |
 | text-link.color.visited.pressed | #6c18bf | #b185ff | var(--esds-text-link-color-visited-pressed) | Visited text link color on press. |
-| typography.display.md.base | 400 48px/56px Suisse Int'l | 400 48px/56px Suisse Int'l | var(--esds-typography-display-md-base) | Medium display style, the largest typography preset. |
-| typography.display.md.emphasized | 500 48px/56px Suisse Int'l | 500 48px/56px Suisse Int'l | var(--esds-typography-display-md-emphasized) | Medium display style, the largest typography preset. |
-| typography.heading.lg.base | 400 40px/48px Suisse Int'l | 400 40px/48px Suisse Int'l | var(--esds-typography-heading-lg-base) | Large heading style for primary page titles. |
-| typography.heading.lg.emphasized | 500 40px/48px Suisse Int'l | 500 40px/48px Suisse Int'l | var(--esds-typography-heading-lg-emphasized) | Large heading style for primary page titles. |
-| typography.heading.md.base | 400 32px/40px Suisse Int'l | 400 32px/40px Suisse Int'l | var(--esds-typography-heading-md-base) | Medium heading style for section titles. |
-| typography.heading.md.emphasized | 500 32px/40px Suisse Int'l | 500 32px/40px Suisse Int'l | var(--esds-typography-heading-md-emphasized) | Medium heading style for section titles. |
-| typography.heading.sm.base | 400 24px/32px Suisse Int'l | 400 24px/32px Suisse Int'l | var(--esds-typography-heading-sm-base) | Small heading style for subsection titles. |
-| typography.heading.sm.emphasized | 500 24px/32px Suisse Int'l | 500 24px/32px Suisse Int'l | var(--esds-typography-heading-sm-emphasized) | Small heading style for subsection titles. |
-| typography.title.md.base | 400 20px/28px Suisse Int'l | 400 20px/28px Suisse Int'l | var(--esds-typography-title-md-base) | Medium title style for component titles. |
-| typography.title.md.emphasized | 500 20px/28px Suisse Int'l | 500 20px/28px Suisse Int'l | var(--esds-typography-title-md-emphasized) | Medium title style for component titles. |
-| typography.body.lg.base | 400 18px/26px Suisse Int'l | 400 18px/26px Suisse Int'l | var(--esds-typography-body-lg-base) | Large body style for emphasized paragraph text. |
-| typography.body.lg.emphasized | 500 18px/26px Suisse Int'l | 500 18px/26px Suisse Int'l | var(--esds-typography-body-lg-emphasized) | Large body style for emphasized paragraph text. |
-| typography.body.md.base | 400 16px/24px Suisse Int'l | 400 16px/24px Suisse Int'l | var(--esds-typography-body-md-base) | Medium (default) body style for standard paragraph text. |
-| typography.body.md.emphasized | 500 16px/24px Suisse Int'l | 500 16px/24px Suisse Int'l | var(--esds-typography-body-md-emphasized) | Medium (default) body style for standard paragraph text. |
-| typography.body.sm.base | 400 14px/20px Suisse Int'l | 400 14px/20px Suisse Int'l | var(--esds-typography-body-sm-base) | Small body style for compact paragraph text. |
-| typography.body.sm.emphasized | 500 14px/20px Suisse Int'l | 500 14px/20px Suisse Int'l | var(--esds-typography-body-sm-emphasized) | Small body style for compact paragraph text. |
-| typography.caption.md.base | 400 12px/16px Suisse Int'l | 400 12px/16px Suisse Int'l | var(--esds-typography-caption-md-base) | Medium caption style for small metadata and labels. |
-| typography.caption.md.emphasized | 500 12px/16px Suisse Int'l | 500 12px/16px Suisse Int'l | var(--esds-typography-caption-md-emphasized) | Medium caption style for small metadata and labels. |
+| typography.display.md.base | 400 3rem/56px Suisse Int'l | 400 3rem/56px Suisse Int'l | var(--esds-typography-display-md-base) | Medium display style, the largest typography preset. |
+| typography.display.md.emphasized | 500 3rem/56px Suisse Int'l | 500 3rem/56px Suisse Int'l | var(--esds-typography-display-md-emphasized) | Medium display style, the largest typography preset. |
+| typography.heading.lg.base | 400 2.5rem/48px Suisse Int'l | 400 2.5rem/48px Suisse Int'l | var(--esds-typography-heading-lg-base) | Large heading style for primary page titles. |
+| typography.heading.lg.emphasized | 500 2.5rem/48px Suisse Int'l | 500 2.5rem/48px Suisse Int'l | var(--esds-typography-heading-lg-emphasized) | Large heading style for primary page titles. |
+| typography.heading.md.base | 400 2rem/40px Suisse Int'l | 400 2rem/40px Suisse Int'l | var(--esds-typography-heading-md-base) | Medium heading style for section titles. |
+| typography.heading.md.emphasized | 500 2rem/40px Suisse Int'l | 500 2rem/40px Suisse Int'l | var(--esds-typography-heading-md-emphasized) | Medium heading style for section titles. |
+| typography.heading.sm.base | 400 1.5rem/32px Suisse Int'l | 400 1.5rem/32px Suisse Int'l | var(--esds-typography-heading-sm-base) | Small heading style for subsection titles. |
+| typography.heading.sm.emphasized | 500 1.5rem/32px Suisse Int'l | 500 1.5rem/32px Suisse Int'l | var(--esds-typography-heading-sm-emphasized) | Small heading style for subsection titles. |
+| typography.title.md.base | 400 1.25rem/28px Suisse Int'l | 400 1.25rem/28px Suisse Int'l | var(--esds-typography-title-md-base) | Medium title style for component titles. |
+| typography.title.md.emphasized | 500 1.25rem/28px Suisse Int'l | 500 1.25rem/28px Suisse Int'l | var(--esds-typography-title-md-emphasized) | Medium title style for component titles. |
+| typography.body.lg.base | 400 1.125rem/26px Suisse Int'l | 400 1.125rem/26px Suisse Int'l | var(--esds-typography-body-lg-base) | Large body style for emphasized paragraph text. |
+| typography.body.lg.emphasized | 500 1.125rem/26px Suisse Int'l | 500 1.125rem/26px Suisse Int'l | var(--esds-typography-body-lg-emphasized) | Large body style for emphasized paragraph text. |
+| typography.body.md.base | 400 1rem/24px Suisse Int'l | 400 1rem/24px Suisse Int'l | var(--esds-typography-body-md-base) | Medium (default) body style for standard paragraph text. |
+| typography.body.md.emphasized | 500 1rem/24px Suisse Int'l | 500 1rem/24px Suisse Int'l | var(--esds-typography-body-md-emphasized) | Medium (default) body style for standard paragraph text. |
+| typography.body.sm.base | 400 0.875rem/20px Suisse Int'l | 400 0.875rem/20px Suisse Int'l | var(--esds-typography-body-sm-base) | Small body style for compact paragraph text. |
+| typography.body.sm.emphasized | 500 0.875rem/20px Suisse Int'l | 500 0.875rem/20px Suisse Int'l | var(--esds-typography-body-sm-emphasized) | Small body style for compact paragraph text. |
+| typography.caption.md.base | 400 0.75rem/16px Suisse Int'l | 400 0.75rem/16px Suisse Int'l | var(--esds-typography-caption-md-base) | Medium caption style for small metadata and labels. |
+| typography.caption.md.emphasized | 500 0.75rem/16px Suisse Int'l | 500 0.75rem/16px Suisse Int'l | var(--esds-typography-caption-md-emphasized) | Medium caption style for small metadata and labels. |
 
 ## 4. AI Implementation Directives
 
