@@ -1,14 +1,21 @@
 import { describe, expect, it } from 'vitest';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { MarkdownTokenRow } from '../../../../../../shared/dtcg/resolver/to/markdown/token/markdown-token-row.ts';
-import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
+import type {
+  GenericDesignTokensCollectionToken,
+  GenericDesignTokensCollectionTokenWithType,
+} from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import {
   MATERIAL_DIRECTORY_NAME,
   T1_DIRECTORY_NAME,
   T2_DIRECTORY_NAME,
   T3_DIRECTORY_NAME,
 } from '../../../constants/design-token-tiers.ts';
-import { generateRowContent, renderTokenToRow } from './build-markdown-tokens.ts';
+import {
+  generateRowContent,
+  groupTokensByTierAndCategory,
+  renderTokenToRow,
+} from './build-markdown-tokens.ts';
 
 function createMockColorToken(fileTier: string): GenericDesignTokensCollectionToken {
   return {
@@ -206,5 +213,43 @@ describe('generateRowContent', () => {
     expect(html).toContain('Primary red 500');
     expect(html).toContain('<tr>');
     expect(html).toContain('</tr>');
+  });
+});
+
+describe('groupTokensByTierAndCategory — reference-only tokens', () => {
+  it('should group reference-only tokens (no $type) by resolving the referenced token type', () => {
+    const baseToken: GenericDesignTokensCollectionToken = {
+      files: ['/tokens/t1-primitive/color.tokens.json'],
+      name: ['color', 'brand', 'default'],
+      type: 'color',
+      value: { hex: '#f4364f', components: [0.956, 0.211, 0.309], colorSpace: 'srgb' },
+      description: 'Base brand color',
+    };
+
+    const referenceToken: GenericDesignTokensCollectionToken = {
+      files: ['/tokens/t3-component/text-link.tokens.json'],
+      name: ['text-link', 'color', 'default'],
+      value: '{color.brand.default}',
+      description: 'Text link default color',
+    } as GenericDesignTokensCollectionToken;
+
+    const collection = new DesignTokensCollection([baseToken, referenceToken]);
+
+    const typedTokens = collection
+      .tokens()
+      .map(
+        (
+          token: GenericDesignTokensCollectionToken,
+        ): GenericDesignTokensCollectionTokenWithType => ({
+          ...token,
+          type: collection.resolve(token).type,
+        }),
+      );
+    const groups = groupTokensByTierAndCategory(typedTokens);
+
+    const group = groups.get('t3-text-link');
+    expect(group).toBeDefined();
+    expect(group!.tokens).toHaveLength(1);
+    expect(group!.tokens[0].name).toEqual(['text-link', 'color', 'default']);
   });
 });
