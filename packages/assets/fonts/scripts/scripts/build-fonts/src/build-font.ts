@@ -1,3 +1,4 @@
+import { join } from 'node:path';
 import { readJsonFile } from '../../../../../../../scripts/helpers/file/read-json-file.ts';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { removeTrailingSlash } from '../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
@@ -29,7 +30,7 @@ export async function buildFont({
       await buildCssFont({
         sourceFile,
         fontDescription,
-        outputDirectory,
+        outputDirectory: join(outputDirectory, 'web'),
         serverURL,
         logger,
       });

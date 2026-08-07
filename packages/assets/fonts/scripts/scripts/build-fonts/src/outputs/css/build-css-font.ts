@@ -33,7 +33,6 @@ export async function buildCssFont({
 
     const baseName: string = toDashCase(family);
 
-    const cssFileName: string = `${baseName}.css`;
     let css: string = '';
 
     for (const fontVariant of variants) {
@@ -58,21 +57,22 @@ export async function buildCssFont({
           fontVariantToCss(fontVariant, {
             family,
             display: 'swap',
-            src: `url(${src.toString()}) format('woff2');`,
+            src: `url(${JSON.stringify(src.toString())}) format('woff2');`,
           }) + `\n\n`;
       });
     }
 
     const { code, map } = transform({
-      filename: cssFileName,
+      filename: `${baseName}.css`,
       code: new TextEncoder().encode(css),
       minify: true,
       sourceMap: true,
     });
 
     await Promise.all([
-      writeFileSafe(join(outputDirectory, cssFileName), code),
-      writeFileSafe(join(outputDirectory, `${cssFileName}.map`), map!),
+      writeFileSafe(join(outputDirectory, `${baseName}.css`), css),
+      writeFileSafe(join(outputDirectory, `${baseName}.min.css`), code),
+      writeFileSafe(join(outputDirectory, `${baseName}.min.css.map`), map!),
     ]);
   });
 }

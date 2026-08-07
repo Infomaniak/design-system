@@ -5,6 +5,7 @@
 - https://fonts.google.com/specimen/Inter
 - https://fonts.google.com/selection#how-to-use
 - https://github.com/github/mona-sans
+- handbook: https://handbook.design-ik.ch/procedure-inter-infomaniaksans/
 
 ## Questions
 

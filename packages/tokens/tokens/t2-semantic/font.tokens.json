@@ -60,7 +60,7 @@
     "family": {
       "$type": "fontFamily",
       "base": {
-        "$value": "{font.family.Suisse Int'l}",
+        "$value": "{font.family.infomaniak-sans}",
         "$extensions": {
           "scopes": []
         }

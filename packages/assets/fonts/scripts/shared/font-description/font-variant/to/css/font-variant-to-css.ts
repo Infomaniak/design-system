@@ -1,5 +1,4 @@
 import { dedent } from '../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
-import { fontOpticalSizingToCss } from '../../font-optical-sizing/to/css/font-optical-sizing-to-css.ts';
 import type { FontVariant } from '../../font-variant.ts';
 import { fontWeightToCss } from '../../font-weight/to/css/font-weight-to-css.ts';
 
@@ -13,13 +12,13 @@ export interface FontVariantToCssOptions {
  * @inheritDoc https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@font-face
  */
 export function fontVariantToCss(
-  { style, weight, opticalSizing }: Omit<FontVariant, 'src'>,
+  { style, weight }: Omit<FontVariant, 'src' | 'opticalSizing'>,
   { family, display, src }: FontVariantToCssOptions,
 ): string {
   const properties: (readonly [name: string, value: string])[] = [];
 
   if (family !== undefined) {
-    properties.push(['font-family', family]);
+    properties.push(['font-family', /[^a-zA-Z]/.test(family) ? JSON.stringify(family) : family]);
   }
 
   if (src !== undefined) {
@@ -32,10 +31,6 @@ export function fontVariantToCss(
 
   if (weight !== undefined) {
     properties.push(['font-weight', fontWeightToCss(weight)]);
-  }
-
-  if (opticalSizing !== undefined) {
-    properties.push(['font-optical-sizing', fontOpticalSizingToCss(opticalSizing)]);
   }
 
   if (display !== undefined) {

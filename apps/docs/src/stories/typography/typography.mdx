@@ -1,0 +1,87 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Typography" />
+
+# Typography
+
+This page describes the typography basics of the design system.
+
+## Font Family
+
+The main font family is "**Infomaniak Sans**".
+
+It is available in different font weights.
+
+<table>
+  <tr>
+    <td style={{ fontWeight: 'var(--esds-font-weight-regular)' }}>
+      <FontPreview></FontPreview>
+    </td>
+    <td>font.weight.regular</td>
+  </tr>
+  <tr>
+    <td style={{ fontWeight: 'var(--esds-font-weight-medium)' }}>
+      <FontPreview></FontPreview>
+    </td>
+    <td>font.weight.medium</td>
+  </tr>
+</table>
+
+### Usage
+
+The CSS file including the @font-face definitions is available on our CDN under the following URL:
+
+> [https://fonts.storage.infomaniak.com/latest/infomaniak-sans.css](https://fonts.storage.infomaniak.com/latest/infomaniak-sans.css)
+
+Embed code in the `<head>` of your html:
+
+```html
+<link
+  rel="preconnect"
+  href="https://fonts.storage.infomaniak.com"
+/>
+<link
+  href="https://fonts.storage.infomaniak.com/latest/infomaniak-sans.css"
+  rel="stylesheet"
+/>
+```
+
+Or using `@import` in your CSS:
+
+```css
+@import url('https://fonts.storage.infomaniak.com/latest/infomaniak-sans.css');
+```
+
+### Applying the font
+
+Use the CSS variable `--esds-font-family-base` to apply the font to the `<html>` element:
+
+```css
+html {
+  font-family: var(--esds-font-family-base);
+}
+```
+
+> It's a good practice to apply the font-family to the `<html>` element, as it allows you to later use a different font-family based on the user's language: .
+>
+> ```css
+> html[lang^='zh-'] {
+>   font-family: var(--esds-font-family-zh);
+> }
+> ```
+
+## Font Sizes & Line Heights
+
+### Elements
+
+#### Body
+
+TODO
+
+#### Headings
+
+TODO
+
+#### Paragraphs
+
+TODO
