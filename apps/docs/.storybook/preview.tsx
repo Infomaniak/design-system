@@ -291,11 +291,11 @@ const preview: Preview = {
         order: [
           'Welcome',
           'Design Tokens',
-          ['Getting Started', '*', 'Material'],
+          ['Getting Started', '*', 'Material', 'CHANGELOG'],
           'Icons',
           ['Getting Started', '*'],
           'Components',
-          ['Getting Started', '*'],
+          ['Getting Started', '*', 'CHANGELOG'],
           '*',
         ],
       },
