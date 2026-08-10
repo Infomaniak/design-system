@@ -18,3 +18,9 @@
   - https://fonts.google.com/knowledge/using_variable_fonts_on_the_web/variable_fonts_are_here
   - https://fonts.google.com/knowledge/using_variable_fonts_on_the_web/web_font_comparisons_variable_vs_static
   - https://fonts.google.com/knowledge/using_type/switching_from_static_to_variable_fonts
+
+## Other DS:
+
+- https://atlassian.design/foundations/typography
+- https://design-system.post.ch/?path=/docs/677cfabf-dbf0-4de2-ad07-6d5bfb9e2375--docs
+- https://gitlab.infomaniak.ch/infomaniak/font-assets/-/tree/master/fonts?ref_type=heads
