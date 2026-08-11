@@ -603,17 +603,17 @@
               }
             }
           },
-          "warning": {
-            "dim1": {
-              "default": {
-                "$value": "{color.orange.50}"
-              }
-            }
-          },
           "error": {
             "dim1": {
               "default": {
                 "$value": "{color.red.100}"
+              }
+            }
+          },
+          "warning": {
+            "dim1": {
+              "default": {
+                "$value": "{color.orange.50}"
               }
             }
           }

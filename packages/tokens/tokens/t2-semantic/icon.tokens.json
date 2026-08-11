@@ -1,33 +1,38 @@
 {
-  "$type": "dimension",
   "icon": {
     "size": {
+      "$description": "Semantic icon size scale for consistent iconography.",
       "xs": {
         "$value": "{scale.16}",
+        "$description": "Extra-small icon size for dense, inline iconography.",
         "$extensions": {
           "scopes": []
         }
       },
       "sm": {
         "$value": "{scale.20}",
+        "$description": "Small icon size for compact UI icons.",
         "$extensions": {
           "scopes": []
         }
       },
       "md": {
         "$value": "{scale.24}",
+        "$description": "Medium (default) icon size for standard UI icons.",
         "$extensions": {
           "scopes": []
         }
       },
       "lg": {
         "$value": "{scale.32}",
+        "$description": "Large icon size for emphasized or feature icons.",
         "$extensions": {
           "scopes": []
         }
       },
       "xl": {
         "$value": "{scale.40}",
+        "$description": "Extra-large icon size for prominent display icons.",
         "$extensions": {
           "scopes": []
         }
