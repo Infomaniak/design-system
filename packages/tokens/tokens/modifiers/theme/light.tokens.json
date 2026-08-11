@@ -106,13 +106,13 @@
         },
         "kchat": {
           "default": {
-            "$value": "{color.cyan.700}"
+            "$value": "{color.cyan.600}"
           },
           "hover": {
-            "$value": "{color.cyan.800}"
+            "$value": "{color.cyan.700}"
           },
           "pressed": {
-            "$value": "{color.cyan.900}"
+            "$value": "{color.cyan.800}"
           }
         },
         "security": {
@@ -128,13 +128,13 @@
         },
         "calendar": {
           "default": {
-            "$value": "{color.aqua.600}"
+            "$value": "{color.aqua.500}"
           },
           "hover": {
-            "$value": "{color.aqua.700}"
+            "$value": "{color.aqua.600}"
           },
           "pressed": {
-            "$value": "{color.aqua.800}"
+            "$value": "{color.aqua.700}"
           }
         },
         "contacts": {
@@ -150,13 +150,13 @@
         },
         "knote": {
           "default": {
-            "$value": "{color.coral.700}"
+            "$value": "{color.coral.600}"
           },
           "hover": {
-            "$value": "{color.coral.800}"
+            "$value": "{color.coral.700}"
           },
           "pressed": {
-            "$value": "{color.coral.900}"
+            "$value": "{color.coral.800}"
           }
         },
         "swisstransfer": {
@@ -603,17 +603,17 @@
               }
             }
           },
-          "warning": {
-            "dim1": {
-              "default": {
-                "$value": "{color.orange.900}"
-              }
-            }
-          },
           "error": {
             "dim1": {
               "default": {
                 "$value": "{color.red.900}"
+              }
+            }
+          },
+          "warning": {
+            "dim1": {
+              "default": {
+                "$value": "{color.orange.900}"
               }
             }
           }
@@ -622,13 +622,13 @@
       "brand": {
         "infomaniak": {
           "default": {
-            "$value": "{color.blue.800}"
+            "$value": "{color.blue.600}"
           },
           "hover": {
-            "$value": "{color.blue.900}"
+            "$value": "{color.blue.700}"
           },
           "pressed": {
-            "$value": "{color.blue.950}"
+            "$value": "{color.blue.800}"
           }
         },
         "mail": {
@@ -783,13 +783,13 @@
       },
       "visited": {
         "default": {
-          "$value": "{color.violet.500}"
-        },
-        "hover": {
           "$value": "{color.violet.600}"
         },
-        "pressed": {
+        "hover": {
           "$value": "{color.violet.700}"
+        },
+        "pressed": {
+          "$value": "{color.violet.800}"
         }
       }
     },

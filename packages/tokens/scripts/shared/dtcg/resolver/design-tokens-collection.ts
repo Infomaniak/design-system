@@ -577,7 +577,10 @@ export class DesignTokensCollection {
     return DesignTokensCollection.#new(new Map(this.#tokens.entries()));
   }
 
-  toJSON({ ascendCommonTypes = true }: DesignTokensCollectionToJsonOptions = {}): DesignTokensTree {
+  toJSON({
+    ascendCommonTypes = true,
+    removeReferenceTypes = true,
+  }: DesignTokensCollectionToJsonOptions = {}): DesignTokensTree {
     let tree: DesignTokensTree = {};
 
     for (const token of this.#tokens.values()) {
@@ -586,7 +589,7 @@ export class DesignTokensCollection {
         {
           $value: token.value,
           ...removeUndefinedProperties({
-            $type: token.type,
+            $type: removeReferenceTypes && isCurlyReference(token.value) ? undefined : token.type,
             $deprecated: token.deprecated,
             $description: token.description,
             $extensions: token.extensions,

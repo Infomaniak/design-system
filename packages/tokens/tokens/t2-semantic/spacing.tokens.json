@@ -1,86 +1,100 @@
 {
-  "$type": "dimension",
   "spacing": {
+    "$description": "Semantic spacing scale for padding, margins, and gaps.",
     "none": {
       "$value": "{spacing.0}",
+      "$description": "No spacing; zero gap.",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
     "2xs": {
       "$value": "{spacing.2}",
+      "$description": "2x-small spacing for tight, dense layouts.",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
     "xs": {
       "$value": "{spacing.4}",
+      "$description": "Extra-small spacing for compact groupings.",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
     "sm": {
       "$value": "{spacing.6}",
+      "$description": "Small spacing for closely related elements.",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
     "md": {
       "$value": "{spacing.8}",
+      "$description": "Medium spacing for default gaps between elements.",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
     "lg": {
       "$value": "{spacing.12}",
+      "$description": "Large spacing for relaxed groupings.",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
     "xl": {
       "$value": "{spacing.16}",
+      "$description": "Extra-large spacing for distinct sections.",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
     "2xl": {
       "$value": "{spacing.20}",
+      "$description": "2x-large spacing for separated sections.",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
     "3xl": {
       "$value": "{spacing.24}",
+      "$description": "3x-large spacing for clearly separated blocks.",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
     "4xl": {
       "$value": "{spacing.32}",
+      "$description": "4x-large spacing for major layout separation.",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
     "5xl": {
       "$value": "{spacing.40}",
+      "$description": "5x-large spacing for large layout gaps.",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
     "6xl": {
       "$value": "{spacing.48}",
+      "$description": "6x-large spacing for very large layout gaps.",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
     "7xl": {
       "$value": "{spacing.64}",
+      "$description": "7x-large spacing for major page-level separation.",
       "$extensions": {
         "scopes": ["GAP"]
       }
     },
     "8xl": {
       "$value": "{spacing.100}",
+      "$description": "8x-large spacing for the largest layout gaps.",
       "$extensions": {
         "scopes": ["GAP"]
       }

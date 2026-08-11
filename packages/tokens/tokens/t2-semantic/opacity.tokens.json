@@ -1,50 +1,58 @@
 {
-  "$type": "number",
   "opacity": {
+    "$description": "Semantic opacity scale for layering, overlays, and disabled states.",
     "none": {
       "$value": "{opacity.0}",
+      "$description": "Fully transparent; invisible element.",
       "$extensions": {
         "scopes": ["OPACITY"]
       }
     },
     "ghost": {
       "$value": "{opacity.5}",
+      "$description": "Near-transparent ghost used for faint hints.",
       "$extensions": {
         "scopes": ["OPACITY"]
       }
     },
     "subtle": {
       "$value": "{opacity.10}",
+      "$description": "Subtle opacity for barely-visible overlays.",
       "$extensions": {
         "scopes": ["OPACITY"]
       }
     },
     "soft": {
       "$value": "{opacity.25}",
+      "$description": "Soft opacity for light overlays and washes.",
       "$extensions": {
         "scopes": ["OPACITY"]
       }
     },
     "medium": {
       "$value": "{opacity.50}",
+      "$description": "Medium opacity for balanced translucency.",
       "$extensions": {
         "scopes": ["OPACITY"]
       }
     },
     "strong": {
       "$value": "{opacity.75}",
+      "$description": "Strong opacity for prominent but translucent elements.",
       "$extensions": {
         "scopes": ["OPACITY"]
       }
     },
     "heavy": {
       "$value": "{opacity.90}",
+      "$description": "Heavy opacity for near-opaque elements.",
       "$extensions": {
         "scopes": ["OPACITY"]
       }
     },
     "full": {
       "$value": "{opacity.100}",
+      "$description": "Fully opaque; no translucency.",
       "$extensions": {
         "scopes": ["OPACITY"]
       }

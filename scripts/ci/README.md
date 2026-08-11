@@ -74,6 +74,38 @@ flowchart LR
 - A single timestamp is shared across the whole CI run
 - Internal dependents of an impacted package are republished on prerelease tags (`dev`/`rc`)
 
+## Changesets (Versioning + Changelog)
+
+Changesets are used to collect structured change descriptions and automate version bumps + changelog generation. They do **not** replace the custom publish system — `ci:publish` remains the publish mechanism.
+
+### Flow
+
+1. Developers create changeset files (`yarn changeset`) on their feature branches and commit them alongside code changes
+2. Changesets accumulate on `develop` as PRs merge
+3. The `release-pr.yml` workflow automatically creates a **draft PR** from `develop` to `main` (if one doesn't already exist)
+4. When ready to release, a maintainer marks the draft PR as **Ready for review**
+5. This triggers the `version-bump` job which runs `yarn changeset:version` on `develop`:
+   - Consumes all pending `.changeset/*.md` files
+   - Bumps `package.json` versions (e.g. `0.2.4` -> `0.3.0`)
+   - Generates/updates `CHANGELOG.md` per package
+   - Deletes consumed changeset files
+   - Commits and pushes the result to `develop`
+6. The maintainer merges the PR to `main` — `ci:publish` publishes the bumped `x.y.z` as `latest`
+
+The version bump can also be run manually with `yarn changeset:version` if needed.
+
+### What changesets do NOT affect
+
+- The `ci:publish` flow (dev/rc/prod modes, timestamped prereleases, dist generation, npm idempotency)
+- The `publish.yml` workflow
+- iOS/Android cross-repo publishing
+
+### Config
+
+- `.changeset/config.json` — `baseBranch: develop`, `access: public`, ignores non-publishable packages
+- Only `@infomaniak-design-system/tokens` and `@infomaniak-design-system/components` are versioned (packages with a `publish` script)
+- `.github/workflows/release-pr.yml` — automates the release PR creation and version bump
+
 ## Impacted Package Detection (prerelease)
 
 For `dev` / `rc` prerelease tags, `scripts/ci/publish/src/ci-publish.ts`:

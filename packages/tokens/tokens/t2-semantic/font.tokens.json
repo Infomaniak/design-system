@@ -1,147 +1,168 @@
 {
   "font": {
+    "$description": "Semantic font properties: size, family, line-height, letter-spacing, and weight.",
     "size": {
-      "$type": "dimension",
+      "$description": "Semantic font size scale for typographic hierarchy.",
       "xs": {
         "$value": "{font.size.12}",
+        "$description": "Extra-small font size for captions and metadata.",
         "$extensions": {
           "scopes": []
         }
       },
       "sm": {
         "$value": "{font.size.14}",
+        "$description": "Small font size for helper text and compact UI.",
         "$extensions": {
           "scopes": []
         }
       },
       "md": {
         "$value": "{font.size.16}",
+        "$description": "Medium (base) font size for body copy and default text.",
         "$extensions": {
           "scopes": []
         }
       },
       "lg": {
         "$value": "{font.size.18}",
+        "$description": "Large font size for emphasized body text.",
         "$extensions": {
           "scopes": []
         }
       },
       "xl": {
         "$value": "{font.size.20}",
+        "$description": "Extra-large font size for subtitles and subheadings.",
         "$extensions": {
           "scopes": []
         }
       },
       "2xl": {
         "$value": "{font.size.24}",
+        "$description": "2x-large font size for section headings.",
         "$extensions": {
           "scopes": []
         }
       },
       "3xl": {
         "$value": "{font.size.32}",
+        "$description": "3x-large font size for prominent headings.",
         "$extensions": {
           "scopes": []
         }
       },
       "4xl": {
         "$value": "{font.size.40}",
+        "$description": "4x-large font size for display headings.",
         "$extensions": {
           "scopes": []
         }
       },
       "5xl": {
         "$value": "{font.size.48}",
+        "$description": "5x-large font size for hero display text.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "family": {
-      "$type": "fontFamily",
       "base": {
         "$value": "{font.family.infomaniak-sans}",
+        "$description": "Base font family used across the design system.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "line-height": {
-      "$type": "dimension",
+      "$description": "Semantic line-height scale paired with font sizes for readable text.",
       "xs": {
         "$value": "{font.line-height.16}",
+        "$description": "Extra-small line-height for the tightest text.",
         "$extensions": {
           "scopes": []
         }
       },
       "sm": {
         "$value": "{font.line-height.20}",
+        "$description": "Small line-height for compact text blocks.",
         "$extensions": {
           "scopes": []
         }
       },
       "md": {
         "$value": "{font.line-height.24}",
+        "$description": "Medium line-height for default body text.",
         "$extensions": {
           "scopes": []
         }
       },
       "xl": {
         "$value": "{font.line-height.28}",
+        "$description": "Large line-height for relaxed headings.",
         "$extensions": {
           "scopes": []
         }
       },
       "2xl": {
         "$value": "{font.line-height.32}",
+        "$description": "2x-large line-height for prominent headings.",
         "$extensions": {
           "scopes": []
         }
       },
       "3xl": {
         "$value": "{font.line-height.40}",
+        "$description": "3x-large line-height for display headings.",
         "$extensions": {
           "scopes": []
         }
       },
       "4xl": {
         "$value": "{font.line-height.48}",
+        "$description": "4x-large line-height for large display text.",
         "$extensions": {
           "scopes": []
         }
       },
       "5xl": {
         "$value": "{font.line-height.56}",
+        "$description": "5x-large line-height for hero display text.",
         "$extensions": {
           "scopes": []
         }
       },
       "lg": {
         "$value": "{font.line-height.26}",
+        "$description": "Large line-height for the lg font size.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "letter-spacing": {
-      "$type": "dimension",
       "md": {
         "$value": "{font.letter-spacing.0}",
+        "$description": "Default letter spacing for body and UI text.",
         "$extensions": {
           "scopes": []
         }
       }
     },
     "weight": {
-      "$type": "fontWeight",
+      "$description": "Font weight scale for textual emphasis.",
       "regular": {
         "$value": "{font.weight.400}",
+        "$description": "Regular weight for body copy and default text.",
         "$extensions": {
           "scopes": []
         }
       },
       "medium": {
         "$value": "{font.weight.500}",
+        "$description": "Medium weight for emphasized labels and headings.",
         "$extensions": {
           "scopes": []
         }

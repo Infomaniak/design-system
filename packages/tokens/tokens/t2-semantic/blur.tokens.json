@@ -1,50 +1,58 @@
 {
-  "$type": "dimension",
   "blur": {
+    "$description": "Semantic blur scale for focus and depth effects.",
     "none": {
       "$value": "{blur.0}",
+      "$description": "No blur; sharp, unaffected element.",
       "$extensions": {
         "scopes": []
       }
     },
     "xs": {
       "$value": "{blur.4}",
+      "$description": "Extra-small blur for subtle focus effects.",
       "$extensions": {
         "scopes": []
       }
     },
     "sm": {
       "$value": "{blur.8}",
+      "$description": "Small blur for soft focus and light depth.",
       "$extensions": {
         "scopes": []
       }
     },
     "md": {
       "$value": "{blur.12}",
+      "$description": "Medium blur for moderate focus and depth.",
       "$extensions": {
         "scopes": []
       }
     },
     "lg": {
       "$value": "{blur.16}",
+      "$description": "Large blur for prominent depth and focus.",
       "$extensions": {
         "scopes": []
       }
     },
     "xl": {
       "$value": "{blur.24}",
+      "$description": "Extra-large blur for strong focus effects.",
       "$extensions": {
         "scopes": []
       }
     },
     "2xl": {
       "$value": "{blur.40}",
+      "$description": "2x-large blur for heavy depth effects.",
       "$extensions": {
         "scopes": []
       }
     },
     "3xl": {
       "$value": "{blur.64}",
+      "$description": "3x-large blur for maximum blur effects.",
       "$extensions": {
         "scopes": []
       }

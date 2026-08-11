@@ -1,62 +1,72 @@
 {
-  "$type": "dimension",
   "radius": {
+    "$description": "Semantic corner radius scale for shaping elements.",
     "none": {
       "$value": "{radius.0}",
+      "$description": "No corner radius; sharp corners.",
       "$extensions": {
         "scopes": ["CORNER_RADIUS"]
       }
     },
     "xs": {
       "$value": "{radius.2}",
+      "$description": "Extra-small radius for subtle rounding.",
       "$extensions": {
         "scopes": ["CORNER_RADIUS"]
       }
     },
     "sm": {
       "$value": "{radius.4}",
+      "$description": "Small radius for slightly rounded corners.",
       "$extensions": {
         "scopes": ["CORNER_RADIUS"]
       }
     },
     "md": {
       "$value": "{radius.6}",
+      "$description": "Medium radius for default rounded corners.",
       "$extensions": {
         "scopes": ["CORNER_RADIUS"]
       }
     },
     "lg": {
       "$value": "{radius.8}",
+      "$description": "Large radius for comfortably rounded corners.",
       "$extensions": {
         "scopes": ["CORNER_RADIUS"]
       }
     },
     "xl": {
       "$value": "{radius.12}",
+      "$description": "Extra-large radius for prominently rounded corners.",
       "$extensions": {
         "scopes": ["CORNER_RADIUS"]
       }
     },
     "2xl": {
       "$value": "{radius.16}",
+      "$description": "2x-large radius for very rounded corners.",
       "$extensions": {
         "scopes": ["CORNER_RADIUS"]
       }
     },
     "3xl": {
       "$value": "{radius.24}",
+      "$description": "3x-large radius for heavily rounded corners.",
       "$extensions": {
         "scopes": ["CORNER_RADIUS"]
       }
     },
     "4xl": {
       "$value": "{radius.32}",
+      "$description": "4x-large radius for extremely rounded corners.",
       "$extensions": {
         "scopes": ["CORNER_RADIUS"]
       }
     },
     "full": {
       "$value": "{radius.1000}",
+      "$description": "Fully rounded radius for pill and circular shapes.",
       "$extensions": {
         "scopes": ["CORNER_RADIUS"]
       }

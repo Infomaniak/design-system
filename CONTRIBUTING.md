@@ -97,6 +97,10 @@ Create a new branch from `main` following the [Conventional Commits](https://www
 
 Fork the repository, update the code, create a PR from your repository to the upstream repository, explaining clearly what was added/fixed.
 
+## Release notes
+
+When your PR modifies a publishable package (`@infomaniak-design-system/tokens` or `@infomaniak-design-system/components`), include a changeset describing the change. Create one with `yarn changeset`, or use the `generate-changeset` agent skill (`.agents/skills/generate-changeset/SKILL.md`) which automates the process based on your branch's diff. PRs that only touch docs, apps, scripts, or tooling don't need a changeset.
+
 ## Code
 
 - The repository is a monorepo:

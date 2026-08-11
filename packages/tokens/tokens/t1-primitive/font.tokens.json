@@ -3,8 +3,8 @@
     "size": {
       "12": {
         "$value": {
-          "value": 12,
-          "unit": "px"
+          "value": 0.75,
+          "unit": "rem"
         },
         "$extensions": {
           "scopes": []
@@ -12,8 +12,8 @@
       },
       "14": {
         "$value": {
-          "value": 14,
-          "unit": "px"
+          "value": 0.875,
+          "unit": "rem"
         },
         "$extensions": {
           "scopes": []
@@ -21,8 +21,8 @@
       },
       "16": {
         "$value": {
-          "value": 16,
-          "unit": "px"
+          "value": 1,
+          "unit": "rem"
         },
         "$extensions": {
           "scopes": []
@@ -30,8 +30,8 @@
       },
       "18": {
         "$value": {
-          "value": 18,
-          "unit": "px"
+          "value": 1.125,
+          "unit": "rem"
         },
         "$extensions": {
           "scopes": []
@@ -39,8 +39,8 @@
       },
       "20": {
         "$value": {
-          "value": 20,
-          "unit": "px"
+          "value": 1.25,
+          "unit": "rem"
         },
         "$extensions": {
           "scopes": []
@@ -48,8 +48,8 @@
       },
       "24": {
         "$value": {
-          "value": 24,
-          "unit": "px"
+          "value": 1.5,
+          "unit": "rem"
         },
         "$extensions": {
           "scopes": []
@@ -57,8 +57,8 @@
       },
       "32": {
         "$value": {
-          "value": 32,
-          "unit": "px"
+          "value": 2,
+          "unit": "rem"
         },
         "$extensions": {
           "scopes": []
@@ -66,8 +66,8 @@
       },
       "40": {
         "$value": {
-          "value": 40,
-          "unit": "px"
+          "value": 2.5,
+          "unit": "rem"
         },
         "$extensions": {
           "scopes": []
@@ -75,8 +75,8 @@
       },
       "48": {
         "$value": {
-          "value": 48,
-          "unit": "px"
+          "value": 3,
+          "unit": "rem"
         },
         "$extensions": {
           "scopes": []

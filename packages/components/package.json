@@ -15,11 +15,12 @@
   },
   "scripts": {
     "=== BUILD ===": "",
-    "build": "node --no-warnings=ExperimentalWarning scripts/scripts/build-components/build-components.script.ts",
+    "build": "node --no-warnings=ExperimentalWarning scripts/scripts/build-components/build-components.script.ts && yarn copy:changelog",
     "build:manual": "yarn generate:public-api && yarn build:ts:vite && yarn build:ts:definitions && yarn analyze:cem",
     "build:ts:vite": "vite build",
     "build:ts:definitions": "tsc -p tsconfig.build.json",
     "analyze:cem": "cem analyze --config ./custom-elements-manifest.config.mjs",
+    "copy:changelog": "cp CHANGELOG.md ../../apps/docs/src/stories/assets/components-changelog.md",
     "=== PUBLISH ===": "",
     "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-components/publish-components.script.ts",
     "=== GENERATE ===": "",

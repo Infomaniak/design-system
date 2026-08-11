@@ -56,6 +56,8 @@ design-system/
 ├── docs/                        # Project documentation
 │   ├── figma/                   # Figma integration docs
 │   └── plans/                   # Implementation plans and execution docs
+├── .agents/skills/              # Agent skills
+│   └── generate-changeset/      # SKILL.md — analyzes diff, writes changeset file
 └── index.js                     # Root entry point
 ```
 
@@ -80,6 +82,8 @@ design-system/
 | PR validation                | `yarn ci:on-pull-request`                    |
 | CI publish (manual)          | `GITHUB_REF_NAME=develop yarn ci:publish`    |
 | CI visual regression comment | `yarn ci:visual-regression --mode=comment`   |
+| Create changeset             | `yarn changeset`                             |
+| Version + changelog (manual) | `yarn changeset:version`                     |
 
 ### Code Style
 
@@ -175,6 +179,14 @@ const meta = {
   tags: ['autodocs', 'vr-test'],
 } satisfies Meta;
 ```
+
+#### Changesets
+
+- **Purpose:** Collect structured change descriptions, automate version bumps, and generate `CHANGELOG.md` files. Changesets do **not** handle publishing — `ci:publish` remains the publish mechanism.
+- **Config:** `.changeset/config.json` with `baseBranch: "develop"`, `access: "public"`, ignores non-publishable packages.
+- **Versioning:** Automated via `.github/workflows/release-pr.yml`. A draft `develop → main` PR is created automatically when changes land on `develop`. Marking it as **Ready for review** triggers `yarn changeset:version` (bumps `package.json` versions, generates `CHANGELOG.md`, pushes to `develop`). The maintainer then merges the PR to `main` for production publish. Can also be run manually with `yarn changeset:version`.
+- **Only publishable packages are versioned:** `@infomaniak-design-system/tokens` and `@infomaniak-design-system/components` (those with a `publish` script). PRs touching only docs/apps/scripts don't need a changeset.
+- **Creating a changeset:** Use the `generate-changeset` skill (`.agents/skills/generate-changeset/SKILL.md`) — it runs `git diff develop...HEAD`, determines the semver bump, identifies affected packages, and writes a formatted `.changeset/*.md` file. Prefer this over the manual `yarn changeset` flow.
 
 ---
 
