@@ -83,7 +83,7 @@ design-system/
 | CI publish (manual)          | `GITHUB_REF_NAME=develop yarn ci:publish`    |
 | CI visual regression comment | `yarn ci:visual-regression --mode=comment`   |
 | Create changeset             | `yarn changeset`                             |
-| Version + changelog (manual) | `yarn changeset:version`                    |
+| Version + changelog (manual) | `yarn changeset:version`                     |
 
 ### Code Style
 
