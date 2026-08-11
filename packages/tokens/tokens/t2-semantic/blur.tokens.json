@@ -1,6 +1,6 @@
 {
   "blur": {
-    "$description": "Semantic blur scale for focus, depth, and frosted-glass effects.",
+    "$description": "Semantic blur scale for focus and depth effects.",
     "none": {
       "$value": "{blur.0}",
       "$description": "No blur; sharp, unaffected element.",
@@ -45,14 +45,14 @@
     },
     "2xl": {
       "$value": "{blur.40}",
-      "$description": "2x-large blur for heavy depth and frosted effects.",
+      "$description": "2x-large blur for heavy depth effects.",
       "$extensions": {
         "scopes": []
       }
     },
     "3xl": {
       "$value": "{blur.64}",
-      "$description": "3x-large blur for maximum frosted-glass effects.",
+      "$description": "3x-large blur for maximum blur effects.",
       "$extensions": {
         "scopes": []
       }
