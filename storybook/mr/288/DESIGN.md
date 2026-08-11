@@ -140,8 +140,8 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | blur.md | 12px | 12px | var(--esds-blur-md) | Medium blur for moderate focus and depth. |
 | blur.lg | 16px | 16px | var(--esds-blur-lg) | Large blur for prominent depth and focus. |
 | blur.xl | 24px | 24px | var(--esds-blur-xl) | Extra-large blur for strong focus effects. |
-| blur.2xl | 40px | 40px | var(--esds-blur-2xl) | 2x-large blur for heavy depth and frosted effects. |
-| blur.3xl | 64px | 64px | var(--esds-blur-3xl) | 3x-large blur for maximum frosted-glass effects. |
+| blur.2xl | 40px | 40px | var(--esds-blur-2xl) | 2x-large blur for heavy depth effects. |
+| blur.3xl | 64px | 64px | var(--esds-blur-3xl) | 3x-large blur for maximum blur effects. |
 | border.none.width | 0px | 0px | var(--esds-border-none-width) | No border width. |
 | border.xs.width | 1px | 1px | var(--esds-border-xs-width) | Extra-small border width for fine hairline borders. |
 | border.sm.width | 2px | 2px | var(--esds-border-sm-width) | Small border width for subtle outlines. |
