@@ -1,6 +1,6 @@
 {
-  "$type": "typography",
   "$description": "Component-level typography presets bundling family, size, weight, letter-spacing, and line-height.",
+  "$type": "typography",
   "typography": {
     "display": {
       "$description": "Display typography for hero and large marketing text.",
