@@ -8,9 +8,6 @@ import { execCommandInherit } from '../../../../../scripts/helpers/misc/exec-com
 import {
   DESIGN_TOKEN_TIERS,
   MODIFIERS_DIRECTORY_NAME,
-  T1_DIRECTORY_NAME,
-  T2_DIRECTORY_NAME,
-  T3_DIRECTORY_NAME,
 } from '../build-tokens/src/constants/design-token-tiers.ts';
 
 import { convertFigmaTokens } from './src/convert-figma.tokens.ts';
@@ -26,11 +23,9 @@ const logger = Logger.root({ logLevel: DEFAULT_LOG_LEVEL });
 export async function convertFigmaTokensScript(): Promise<void> {
   const previousTokens = new Map();
 
-  for await (const entry of glob([
-    `${OUTPUT_DIR}/${T1_DIRECTORY_NAME}/*.tokens.json`,
-    `${OUTPUT_DIR}/${T2_DIRECTORY_NAME}/*.tokens.json`,
-    `${OUTPUT_DIR}/${T3_DIRECTORY_NAME}/*.tokens.json`,
-  ])) {
+  for await (const entry of glob(
+    DESIGN_TOKEN_TIERS.map((tier: string): string => `${OUTPUT_DIR}/${tier}/**/*.tokens.json`),
+  )) {
     previousTokens.set(relative(OUTPUT_DIR, entry), await readJsonFile(entry));
   }
 
