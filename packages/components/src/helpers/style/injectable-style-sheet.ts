@@ -73,7 +73,9 @@ export class InjectableStyleSheet {
     if (count === 1) {
       this.#injected.delete(container);
       const index: number = container.adoptedStyleSheets.indexOf(this.#sheet);
-      container.adoptedStyleSheets.splice(index, 1);
+      if (index !== -1) {
+        container.adoptedStyleSheets.splice(index, 1);
+      }
     } else {
       this.#injected.set(container, count! - 1);
     }
