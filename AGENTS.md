@@ -13,7 +13,7 @@ Infomaniak's Design System featuring design tokens based on DTCG standards and c
 - **Language:** TypeScript v5 (ESNext, NodeNext modules)
 - **Package Manager:** Yarn v4 (workspaces enabled)
 - **Build Tools:** Vite (Rolldown fork), Node.js scripts
-- **Testing:** Vitest v4 with Istanbul coverage
+- **Testing:** Vitest v4 with Istanbul coverage, Playwright for visual regression and E2E tests
 - **Documentation:** Storybook v10
 - **UI Framework:** React v19
 - **Styling:** Tailwind CSS v4
@@ -35,20 +35,29 @@ design-system/
 │       ├── .storybook/          # Storybook configuration
 │       └── dist/                # Built docs output
 ├── packages/
-│   └── tokens/                  # Design tokens library (DTCG format)
-│       ├── tokens/              # Token definitions (t1-primitive, t2-semantic, t3-component)
-│       ├── scripts/             # Token build/validation scripts
-│       ├── demo/                # Live demo app for tokens
-│       └── dist/                # Output: CSS, JSON, Markdown
+│   ├── tokens/                  # Design tokens library (DTCG format)
+│   │   ├── tokens/              # Token definitions (t1-primitive, t2-semantic, t3-component)
+│   │   ├── scripts/             # Token build/validation scripts
+│   │   ├── demo/                # Live demo app for tokens
+│   │   └── dist/                # Output: CSS, JSON, Markdown
+│   └── components/              # Web components library
+│       ├── src/                 # Component source + stories
+│       └── tests/visual-regression/      # Playwright visual regression suite
+│           ├── visual-regression.spec.ts # Orchestrator (loops manifest, diffs per story)
+│           └── helpers.ts                # URL builder, manifest fetcher, story filter
 ├── scripts/
 │   ├── ci/                      # CI/CD automation scripts
-│   │   ├── on-pull-request/     # PR validation
-│   │   ├── on-tag/              # Release automation
-│   │   └── publish/             # Branch-based npm publish orchestrator
+│   │   ├── storybook-pr/        # PR Storybook build decision + comment
+│   │   ├── storybook-pages/     # Storybook pages deploy context + normalization
+│   │   ├── visual-regression/   # Visual regression PR comment automation
+│   │   ├── publish/             # Branch-based npm publish orchestrator
+│   │   └── on-figma-event/      # Figma webhook handlers
 │   └── helpers/                 # Shared utility functions
 ├── docs/                        # Project documentation
 │   ├── figma/                   # Figma integration docs
 │   └── plans/                   # Implementation plans and execution docs
+├── .agents/skills/              # Agent skills
+│   └── generate-changeset/      # SKILL.md — analyzes diff, writes changeset file
 └── index.js                     # Root entry point
 ```
 
@@ -58,19 +67,23 @@ design-system/
 
 ### Command Patterns
 
-| Task                   | Command                                      |
-| ---------------------- | -------------------------------------------- |
-| Install deps           | `yarn install`                               |
-| Dev server (docs)      | `cd apps/docs && yarn dev`                   |
-| Dev server (Storybook) | `cd apps/docs && yarn storybook`             |
-| Build all packages     | `yarn build`                                 |
-| Build tokens only      | `yarn build:tokens`                          |
-| Validate tokens        | `cd packages/tokens && yarn validate:tokens` |
-| Run tests              | `yarn test`                                  |
-| Test coverage          | `yarn test:coverage`                         |
-| Format code            | `yarn format`                                |
-| PR validation          | `yarn ci:on-pull-request`                    |
-| CI publish (manual)    | `GITHUB_REF_NAME=develop yarn ci:publish`    |
+| Task                         | Command                                      |
+| ---------------------------- | -------------------------------------------- |
+| Install deps                 | `yarn install`                               |
+| Dev server (docs)            | `cd apps/docs && yarn dev`                   |
+| Dev server (Storybook)       | `cd apps/docs && yarn storybook`             |
+| Build all packages           | `yarn build`                                 |
+| Build tokens only            | `yarn build:tokens`                          |
+| Validate tokens              | `cd packages/tokens && yarn validate:tokens` |
+| Run tests                    | `yarn test`                                  |
+| Test coverage                | `yarn test:coverage`                         |
+| Visual regression tests      | `yarn test:vrt`                              |
+| Format code                  | `yarn format`                                |
+| PR validation                | `yarn ci:on-pull-request`                    |
+| CI publish (manual)          | `GITHUB_REF_NAME=develop yarn ci:publish`    |
+| CI visual regression comment | `yarn ci:visual-regression --mode=comment`   |
+| Create changeset             | `yarn changeset`                             |
+| Version + changelog (manual) | `yarn changeset:version`                     |
 
 ### Code Style
 
@@ -156,6 +169,24 @@ The CEM is auto-generated during `yarn build` and verified in CI via `git diff -
     },
   } satisfies Meta;
   ```
+
+#### Visual Regression Tagging
+
+Add `'vr-test'` to a story's `tags` array to include it in visual regression tests. The suite diffs the PR's deployed Storybook against `develop`. Stories not present on `develop` are skipped (new components). The job is advisory (non-blocking).
+
+```typescript
+const meta = {
+  tags: ['autodocs', 'vr-test'],
+} satisfies Meta;
+```
+
+#### Changesets
+
+- **Purpose:** Collect structured change descriptions, automate version bumps, and generate `CHANGELOG.md` files. Changesets do **not** handle publishing — `ci:publish` remains the publish mechanism.
+- **Config:** `.changeset/config.json` with `baseBranch: "develop"`, `access: "public"`, ignores non-publishable packages.
+- **Versioning:** Automated via `.github/workflows/release-pr.yml`. A draft `develop → main` PR is created automatically when changes land on `develop`. Marking it as **Ready for review** triggers `yarn changeset:version` (bumps `package.json` versions, generates `CHANGELOG.md`, pushes to `develop`). The maintainer then merges the PR to `main` for production publish. Can also be run manually with `yarn changeset:version`.
+- **Only publishable packages are versioned:** `@infomaniak-design-system/tokens` and `@infomaniak-design-system/components` (those with a `publish` script). PRs touching only docs/apps/scripts don't need a changeset.
+- **Creating a changeset:** Use the `generate-changeset` skill (`.agents/skills/generate-changeset/SKILL.md`) — it runs `git diff develop...HEAD`, determines the semver bump, identifies affected packages, and writes a formatted `.changeset/*.md` file. Prefer this over the manual `yarn changeset` flow.
 
 ---
 

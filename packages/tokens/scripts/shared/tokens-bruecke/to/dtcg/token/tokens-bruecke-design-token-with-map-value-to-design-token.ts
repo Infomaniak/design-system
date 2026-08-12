@@ -19,21 +19,35 @@ export function tokensBrueckeDesignTokenWithMapValueToDesignToken<
     $value: isCurlyReference(token.$value) ? token.$value : mapValue(token.$value),
     $type,
     ...removeUndefinedProperties({
-      $deprecated: token.$deprecated,
+      $deprecated: tokensBrueckeDesignTokenToDesignTokenDeprecated(token),
       $description: tokensBrueckeDesignTokenToDesignTokenDescription(token),
       $extensions: tokensBrueckeDesignTokenToDesignTokenExtensions(token, mapValue),
     }),
   };
 }
 
+function tokensBrueckeDesignTokenToDesignTokenDeprecated(
+  token: GenericTokensBrueckeDesignToken,
+): string | boolean | undefined {
+  const $deprecated: string | boolean | undefined =
+    token.$deprecated === undefined && token.$description !== undefined
+      ? /^@deprecated(\s+|$)/.test(token.$description)
+      : token.$deprecated;
+
+  // NOTE: If the token is NOT deprecated, it is more readable and compact if it is not be present in the JSON.
+  // NOTE: $deprecated could be a string, so we need to check if it is false explicitly.
+  return $deprecated === false ? undefined : $deprecated;
+}
+
 function tokensBrueckeDesignTokenToDesignTokenDescription(
   token: GenericTokensBrueckeDesignToken,
 ): string | undefined {
-  if (token.$description === undefined || token.$description === '') {
-    return undefined;
-  } else {
-    return token.$description;
-  }
+  const $description: string =
+    token.$description === undefined
+      ? ''
+      : token.$description.trim().replace(/^@deprecated(\s+|$)/, '');
+
+  return $description === '' ? undefined : $description;
 }
 
 function tokensBrueckeDesignTokenToDesignTokenExtensions(

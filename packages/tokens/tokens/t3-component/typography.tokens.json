@@ -1,8 +1,11 @@
 {
+  "$description": "Component-level typography presets bundling family, size, weight, letter-spacing, and line-height.",
   "$type": "typography",
   "typography": {
     "display": {
+      "$description": "Display typography for hero and large marketing text.",
       "md": {
+        "$description": "Medium display style, the largest typography preset.",
         "base": {
           "$value": {
             "fontFamily": "{font.family.base}",
@@ -24,7 +27,9 @@
       }
     },
     "heading": {
+      "$description": "Heading typography for page and section titles.",
       "lg": {
+        "$description": "Large heading style for primary page titles.",
         "base": {
           "$value": {
             "fontFamily": "{font.family.base}",
@@ -45,6 +50,7 @@
         }
       },
       "md": {
+        "$description": "Medium heading style for section titles.",
         "base": {
           "$value": {
             "fontFamily": "{font.family.base}",
@@ -65,6 +71,7 @@
         }
       },
       "sm": {
+        "$description": "Small heading style for subsection titles.",
         "base": {
           "$value": {
             "fontFamily": "{font.family.base}",
@@ -86,7 +93,9 @@
       }
     },
     "title": {
+      "$description": "Title typography for card and panel titles.",
       "md": {
+        "$description": "Medium title style for component titles.",
         "base": {
           "$value": {
             "fontFamily": "{font.family.base}",
@@ -108,7 +117,9 @@
       }
     },
     "body": {
+      "$description": "Body typography for paragraph and general text content.",
       "lg": {
+        "$description": "Large body style for emphasized paragraph text.",
         "base": {
           "$value": {
             "fontFamily": "{font.family.base}",
@@ -129,6 +140,7 @@
         }
       },
       "md": {
+        "$description": "Medium (default) body style for standard paragraph text.",
         "base": {
           "$value": {
             "fontFamily": "{font.family.base}",
@@ -149,6 +161,7 @@
         }
       },
       "sm": {
+        "$description": "Small body style for compact paragraph text.",
         "base": {
           "$value": {
             "fontFamily": "{font.family.base}",
@@ -170,7 +183,9 @@
       }
     },
     "caption": {
+      "$description": "Caption typography for metadata, labels, and supplementary text.",
       "md": {
+        "$description": "Medium caption style for small metadata and labels.",
         "base": {
           "$value": {
             "fontFamily": "{font.family.base}",

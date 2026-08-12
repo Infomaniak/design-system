@@ -21,7 +21,6 @@ const config: StorybookConfig = {
     '../../../packages/components/src/**/*.stories.ts',
   ],
   addons: [
-    getAbsolutePath('@chromatic-com/storybook'),
     getAbsolutePath('@storybook/addon-vitest'),
     getAbsolutePath('@storybook/addon-a11y'),
     getAbsolutePath('@storybook/addon-docs'),

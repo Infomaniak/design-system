@@ -2,7 +2,7 @@ import { getTsProgram, typeParserPlugin } from '@wc-toolkit/type-parser';
 import { jsxTypesPlugin } from '@wc-toolkit/jsx-types';
 
 export default {
-  globs: ['src/**/*.component.ts'],
+  globs: ['src/**/*.component.ts', 'src/**/*.attr.ts'],
   outdir: '.',
   dev: false,
   litelement: true,

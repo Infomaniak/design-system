@@ -1,0 +1,91 @@
+name: Release PR
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - main
+    types:
+      - ready_for_review
+
+jobs:
+  ensure-release-pr:
+    name: Ensure release PR exists
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Create release PR if none exists
+        run: |
+          EXISTING=$(gh pr list --base main --head develop --state open --json number --jq '.[0].number')
+          if [ -z "$EXISTING" ]; then
+            gh pr create \
+              --base main \
+              --head develop \
+              --title "release: develop → main" \
+              --body "$(cat <<'EOF'
+          Merge this PR to release accumulated changes from `develop` to `main`.
+
+          Mark this PR as **Ready for review** to trigger automatic version bumping and changelog generation via changesets.
+          EOF
+          )" \
+              --draft
+          else
+            echo "Release PR #$EXISTING already exists"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  version-bump:
+    name: Version bump via changesets
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.ref == 'develop' && github.event.action == 'ready_for_review'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Run changeset version
+        run: yarn changeset:version
+
+      - name: Validate and push version bump
+        run: |
+          if git diff --quiet; then
+            echo "No changeset files to consume — skipping"
+          else
+            yarn build
+            yarn run check
+            yarn run test
+            git add -A
+            git commit -m "chore: version packages via changesets"
+            git push origin develop
+          fi

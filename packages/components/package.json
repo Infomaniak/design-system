@@ -1,6 +1,6 @@
 {
   "name": "@infomaniak-design-system/components",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "type": "module",
   "files": [
     "dist",
@@ -15,11 +15,12 @@
   },
   "scripts": {
     "=== BUILD ===": "",
-    "build": "node --no-warnings=ExperimentalWarning scripts/scripts/build-components/build-components.script.ts",
+    "build": "node --no-warnings=ExperimentalWarning scripts/scripts/build-components/build-components.script.ts && yarn copy:changelog",
     "build:manual": "yarn generate:public-api && yarn build:ts:vite && yarn build:ts:definitions && yarn analyze:cem",
     "build:ts:vite": "vite build",
     "build:ts:definitions": "tsc -p tsconfig.build.json",
     "analyze:cem": "cem analyze --config ./custom-elements-manifest.config.mjs",
+    "copy:changelog": "cp CHANGELOG.md ../../apps/docs/src/stories/assets/components-changelog.md",
     "=== PUBLISH ===": "",
     "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-components/publish-components.script.ts",
     "=== GENERATE ===": "",
@@ -42,14 +43,14 @@
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.11.0",
     "@iconify/types": "^2.0.0",
-    "@storybook/web-components-vite": "^10.5.0",
-    "@wc-toolkit/jsx-types": "^1.1.0",
-    "@wc-toolkit/type-parser": "1.2.1",
+    "@storybook/web-components-vite": "^10.5.5",
+    "@wc-toolkit/jsx-types": "^1.7.1",
+    "@wc-toolkit/type-parser": "1.3.0",
     "fake-indexeddb": "^6.2.5",
     "plop": "^4.0.5",
-    "storybook": "^10.5.0",
+    "storybook": "^10.5.5",
     "typescript": "~7.0.2",
-    "vite": "^8.1.4"
+    "vite": "^8.2.0"
   },
   "customElements": "custom-elements.json"
 }

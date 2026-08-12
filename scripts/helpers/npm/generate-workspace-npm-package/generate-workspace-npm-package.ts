@@ -129,6 +129,9 @@ export async function generateWorkspaceNpmPackage({
       cp(join(workspaceRootDirectory, 'LICENSE'), join(outputDirectory, 'LICENSE'), {
         force: true,
       }),
+      cp(join(packageDirectory, 'CHANGELOG.md'), join(outputDirectory, 'CHANGELOG.md'), {
+        force: true,
+      }),
     ]);
   });
 }

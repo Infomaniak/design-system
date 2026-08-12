@@ -10,12 +10,25 @@ export function getJsonEnvVariable<GValue>(
   name: string,
   { defaultValue, schema }: GetJsonEnvVariableOptions<GValue> = {},
 ): GValue {
-  if (name in process.env) {
-    const data: GValue = JSON.parse(process.env[name]!);
+  const raw: string | undefined = process.env[name];
+
+  if (raw !== undefined && raw.trim() !== '') {
+    let data: GValue;
+
+    try {
+      data = JSON.parse(raw);
+    } catch (error: unknown) {
+      throw new Error(`Invalid JSON for .env variable "${name}".`, {
+        cause: error,
+      });
+    }
+
     return schema === undefined ? data : schema.parse(data);
-  } else if (defaultValue === undefined) {
-    throw new Error(`Missing .env variable "${name}"`);
-  } else {
-    return defaultValue;
   }
+
+  if (defaultValue === undefined) {
+    throw new Error(`Missing .env variable "${name}"`);
+  }
+
+  return defaultValue;
 }

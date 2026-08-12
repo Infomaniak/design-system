@@ -9,6 +9,7 @@ import { curlyReferenceToSegmentsReference } from '../../../shared/dtcg/design-t
 import type { SegmentsReference } from '../../../shared/dtcg/design-token/reference/types/segments/segments-reference.ts';
 import { segmentsReferenceToCurlyReference } from '../../../shared/dtcg/design-token/reference/types/segments/to/curly-reference/segments-reference-to-curly-reference.ts';
 import type { DesignTokensTree } from '../../../shared/dtcg/design-token/tree/design-tokens-tree.ts';
+import { mergeDesignTokensTreeDescriptions } from '../../../shared/dtcg/operations/merge/merge-design-tokens-tree-descriptions.ts';
 import { removeDesignTokensTreeModes } from '../../../shared/dtcg/operations/pick-mode/remove-design-tokens-tree-modes.ts';
 import { DesignTokensCollection } from '../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type {
@@ -22,11 +23,13 @@ import { FIGMA_COLLECTION_NAMES_TO_DESIGN_TOKEN_TIERS } from '../../build-tokens
 
 export interface ConvertFigmaTokensOptions {
   readonly tokensPath: string;
+  readonly previousTokens: Map<string /* path: `${tier}/${category}.json` */, DesignTokensTree>;
   readonly outputDirectory: string;
 }
 
 export async function convertFigmaTokens({
   tokensPath,
+  previousTokens,
   outputDirectory,
 }: ConvertFigmaTokensOptions): Promise<void> {
   outputDirectory = removeTrailingSlash(outputDirectory);
@@ -225,9 +228,16 @@ export async function convertFigmaTokens({
       groupName,
       tokensGroupedByNamespaceCollection,
     ] of tokensGroupedByNamespaceMap.entries()) {
+      const relativePath: string = `${tier}/${groupName}.tokens.json`;
+
       await writeJsonFileSafe(
-        `${outputDirectory}/${tier}/${groupName}.tokens.json`,
-        removeDesignTokensTreeModes(tokensGroupedByNamespaceCollection.toJSON()),
+        `${outputDirectory}/${relativePath}`,
+        removeDesignTokensTreeModes(
+          mergeDesignTokensTreeDescriptions(
+            tokensGroupedByNamespaceCollection.toJSON(),
+            previousTokens.get(relativePath) ?? {},
+          ),
+        ),
       );
     }
   }
