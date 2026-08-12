@@ -1,4 +1,4 @@
-import type { CleanUpFunction } from '../.private/misc/clean-up-function.ts';
+import type { CleanUpFunction } from '../misc/clean-up-function.ts';
 
 /**
  * A class used to manage the injection and removal of CSS stylesheets into documents or shadow roots.
