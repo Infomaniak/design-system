@@ -39,15 +39,15 @@ This document describes:
 ```mermaid
 flowchart LR
   EVENT("EVENT")
-  HAS_DEV_TAG{"has &quotdev&quot tag ?"}
+  HAS_DEV_TAG{"has 'dev' tag ?"}
   SKIP_BUILD(["skip build"])
   SEND_NOTIFICATION(["send success/error notification"])
-  BUILD_DEV_PACKAGES["build &quotdev&quot packages"]
-  PUBLISH_DEV_PACKAGES["publish &quotdev&quot packages"]
-  BUILD_RC_PACKAGES["build &quotrc&quot packages"]
-  PUBLISH_RC_PACKAGES["publish &quotrc&quot packages"]
-  BUILD_PROD_PACKAGES["build &quotprod&quot packages"]
-  PUBLISH_PROD_PACKAGES["publish &quotprod&quot packages"]
+  BUILD_DEV_PACKAGES["build 'dev' packages"]
+  PUBLISH_DEV_PACKAGES["publish 'dev' packages"]
+  BUILD_RC_PACKAGES["build 'rc' packages"]
+  PUBLISH_RC_PACKAGES["publish 'rc' packages"]
+  BUILD_PROD_PACKAGES["build 'prod' packages"]
+  PUBLISH_PROD_PACKAGES["publish 'prod' packages"]
   TARGET_BRANCH{"branch"}
 
   EVENT -- "pull_request" --> HAS_DEV_TAG
