@@ -15,8 +15,7 @@ export interface EsdsLinkAttrDefineOptions {
 }
 
 /**
- * A custom attribute for displaying a link with native anchor behavior.
- * Supports click interception via a cancelable custom event.
+ * A custom attribute for styling links while preserving native anchor behavior.
  *
  * @summary Link attribute
  * @element esds-text-link
