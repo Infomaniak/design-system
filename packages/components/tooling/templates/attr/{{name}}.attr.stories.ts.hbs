@@ -1,0 +1,50 @@
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+import { html } from 'lit';
+import { storybookInteractiveControls } from '../../../../../apps/docs/src/helpers/storybook-interactive-controls.ts';
+import { htmlElementRef } from '../../helpers/.private/component/html-element-ref.ts';
+import { AttributeRegistry } from '../../helpers/custom-attribute/custom-attribute.ts';
+import { {{attrClass name}} } from './{{name}}.attr.ts';
+import documentation from './{{name}}.attr.md?raw';
+
+{{attrClass name}}.define();
+
+const define{{attrClass name}} = htmlElementRef((element: Element) => {
+  {{attrClass name}}.define({
+    registry: AttributeRegistry.of(element.ownerDocument!),
+  });
+});
+
+const { args, argTypes, template } = getStorybookHelpers<{{attrClass name}}>('{{name}}');
+
+const meta = {
+  title: 'Components/{{storyTitle name}}',
+  component: '{{name}}',
+  tags: ['autodocs', 'vr-test'],
+  parameters: {
+    docs: {
+      description: {
+        component: documentation,
+      },
+    },
+  },
+  args,
+  argTypes,
+  render: (args) => template(args),
+} satisfies Meta<{{attrClass name}}>;
+
+export default meta;
+
+type Story = StoryObj<{{attrClass name}} & HTMLElement>;
+
+export const Default: Story = {
+  ...storybookInteractiveControls({
+    label: 'TODO',
+  }),
+  render: (args) =>
+    html`<todo
+      ${define{{attrClass name}} }
+      {{name}}
+      >TODO</todo
+    >`,
+};

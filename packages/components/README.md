@@ -65,8 +65,14 @@ Simply use our code generator to create a new component following our guidelines
 
 ```bash
 cd packages/components
+
+# to create a new component
 yarn generate component
-# and give your component a name using kebab-case such as `esds-my-component`
+
+# OR for a custom attribute
+yarn generate attr
+
+# and give your component/attr a name using kebab-case such as `esds-my-component`
 ```
 
 ### Export from the package
@@ -77,7 +83,8 @@ Export your component by adding it to `public-api.ts`:
 yarn generate public-api
 ```
 
-Note: this runs automatically on build.
+> [!NOTE]
+> this runs automatically on build.
 
 ### Guidelines
 
@@ -89,6 +96,16 @@ src/components/my-component/
 ├── my-component.component.css        # CSS style
 ├── my-component.component.test.ts    # Tests
 └── my-component.component.stories.ts # Storybook story
+```
+
+#### Custom attribute architecture
+
+```
+src/components/my-attr/
+├── my-attr.attr.ts         # Custom Attribute + JSDoc
+├── my-attr.attr.css        # CSS style
+├── my-attr.attr.test.ts    # Tests
+└── my-attr.attr.stories.ts # Storybook story
 ```
 
 #### JSDoc
@@ -140,14 +157,14 @@ yarn test:vrt   # run visual regression tests (localhost vs develop)
 
 ## Useful scripts
 
-| Command            | Description                                      |
-| ------------------ | ------------------------------------------------ |
-| `yarn generate`    | Generate a new component folder and files        |
-| `yarn analyze:cem` | Generate `custom-elements.json` from source code |
-| `yarn build`       | Full build: CEM + Vite + TypeScript declarations |
-| `yarn dev:docs`    | Start Storybook dev server                       |
-| `yarn test:e2e`    | Run Playwright E2E tests (`*.component.e2e.ts`)  |
-| `yarn test:vrt`    | Run Playwright visual regression tests           |
+| Command            | Description                                                   |
+| ------------------ | ------------------------------------------------------------- |
+| `yarn generate`    | Generate a new component or custom attribute folder and files |
+| `yarn analyze:cem` | Generate `custom-elements.json` from source code              |
+| `yarn build`       | Full build: CEM + Vite + TypeScript declarations              |
+| `yarn dev:docs`    | Start Storybook dev server                                    |
+| `yarn test:e2e`    | Run Playwright E2E tests (`*.component.e2e.ts`)               |
+| `yarn test:vrt`    | Run Playwright visual regression tests                        |
 
 ## CEM config
 
