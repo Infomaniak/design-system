@@ -1,10 +1,10 @@
 import type { CleanUpFunction } from '../../helpers/.private/misc/clean-up-function.ts';
+import { InjectableStyleSheet } from '../../helpers/.private/style/injectable-style-sheet.ts';
 import {
   AttributeRegistry,
   CustomAttribute,
   type CustomAttributeDefinition,
 } from '../../helpers/custom-attribute/custom-attribute.ts';
-import { InjectableStyleSheet } from '../../helpers/style/injectable-style-sheet.ts';
 
 import style from './esds-text-link.attr.css?inline';
 
@@ -15,8 +15,7 @@ export interface EsdsLinkAttrDefineOptions {
 }
 
 /**
- * A custom attribute for displaying a link with native anchor behavior.
- * Supports click interception via a cancelable custom event.
+ * A custom attribute for styling links while preserving native anchor behavior.
  *
  * @summary Link attribute
  * @element esds-text-link

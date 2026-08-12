@@ -2,7 +2,6 @@ export * from './components/esds-icon/esds-icon.component.ts';
 export * from './components/esds-text-link/esds-text-link.attr.ts';
 export * from './helpers/custom-attribute/custom-attribute.ts';
 export * from './helpers/injection-context/injection-context.ts';
-export * from './helpers/style/injectable-style-sheet.ts';
 export * from './iconify-api/iconify-api.ts';
 export * from './iconify-api/types/api/get-icons-data/iconify-api-get-icons-data-options.ts';
 export * from './iconify-api/types/api/get-svg-url/iconify-api-get-svg-url-options.ts';
