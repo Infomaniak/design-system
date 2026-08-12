@@ -131,7 +131,7 @@ export async function generateWorkspaceNpmPackage({
       }),
       cp(join(packageDirectory, 'CHANGELOG.md'), join(outputDirectory, 'CHANGELOG.md'), {
         force: true,
-      }).catch(() => {}),
+      }),
     ]);
   });
 }
