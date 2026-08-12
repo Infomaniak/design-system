@@ -60,7 +60,6 @@ export default function (plop) {
         type: 'input',
         name: 'name',
         message: 'attr name (kebab-case)',
-
         validate: (value) => {
           if (!value) return 'name is required';
           if (!/^[a-z][a-z0-9-]*$/.test(value)) return 'name must be valid kebab-case';
