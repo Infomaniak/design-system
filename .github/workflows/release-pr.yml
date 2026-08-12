@@ -77,11 +77,14 @@ jobs:
       - name: Run changeset version
         run: yarn changeset:version
 
-      - name: Commit and push version bump
+      - name: Validate and push version bump
         run: |
           if git diff --quiet; then
             echo "No changeset files to consume — skipping"
           else
+            yarn build
+            yarn run check
+            yarn run test
             git add -A
             git commit -m "chore: version packages via changesets"
             git push origin develop
