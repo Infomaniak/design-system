@@ -52,9 +52,6 @@ import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product
 import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/dark.attr.css';
 import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/light.attr.css';
 
-// Import fonts
-import '@infomaniak-design-system/fonts/dist/web/infomaniak-sans.css';
-
 // Initialize <esds-icon> and provide IconifyApi via root InjectionContext
 EsdsIconComponent.define();
 
