@@ -13,7 +13,7 @@ const define{{attrClass name}} = htmlElementRef((element: Element) => {
   });
 });
 
-const { args, argTypes, template } = getStorybookHelpers<{{attrClass name}}>('{{name}}');
+const { args, argTypes } = getStorybookHelpers<{{attrClass name}}>('{{name}}');
 
 const meta = {
   title: 'Components/{{storyTitle name}}',
@@ -28,7 +28,6 @@ const meta = {
   },
   args,
   argTypes,
-  render: (args) => template(args),
 } satisfies Meta<{{attrClass name}}>;
 
 export default meta;
