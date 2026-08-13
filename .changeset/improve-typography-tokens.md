@@ -2,16 +2,4 @@
 '@infomaniak-design-system/tokens': minor
 ---
 
-## Docs
-
-- Added a new section on typography tokens.
-
-## Breaking changes
-
-- Operate on the T3 `typography` tokens:
-  - split its component parts into separate `body` and `heading` component token sets (T3).
-  - created a new T2 `typography` set to represent text sizes from `xs` to `5xl`.
-
-## Fixes
-
-- Fixed a missing `error.dim1.default` color token in both light and dark themes.
+Split the T3 `typography` token set into separate `body` and `heading` component tokens, and introduced a new T2 `typography` set covering sizes `xs`–`5xl` with `base` and `emphasized` weight variants. Added typography documentation with a font preview component. Fixed a missing `error.dim1.default` color token in light and dark themes.
