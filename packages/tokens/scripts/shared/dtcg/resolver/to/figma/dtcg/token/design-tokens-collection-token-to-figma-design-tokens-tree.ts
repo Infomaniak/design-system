@@ -66,7 +66,7 @@ export function designTokensCollectionTokenToFigmaDesignTokensTree(
   } else if (isTransitionDesignTokensCollectionToken(tokenWithType)) {
     return transitionDesignTokensCollectionTokenToFigmaDesignTokensGroup(resolvedToken);
   } else if (isTypographyDesignTokensCollectionToken(tokenWithType)) {
-    return typographyDesignTokensCollectionTokenToFigmaDesignTokensGroup(resolvedToken);
+    return typographyDesignTokensCollectionTokenToFigmaDesignTokensGroup(tokenWithType);
   } else {
     throw new Error(`Unsupported token type: ${token.type}.`);
   }

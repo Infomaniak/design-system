@@ -1,12 +1,6 @@
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
-import type { CurlyReference } from '../../../../../../design-token/reference/types/curly/curly-reference.ts';
-import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
-import { curlyReferenceToString } from '../../../../../../design-token/reference/types/curly/to/string/curly-reference-to-string.ts';
-import type { ValueOrCurlyReference } from '../../../../../../design-token/reference/types/curly/value-or/value-or-curly-reference.ts';
 import type { TypographyDesignTokensCollectionToken } from '../../../../../token/types/composite/typography/typography-design-tokens-collection-token.ts';
-import type { TypographyDesignTokensCollectionTokenValue } from '../../../../../token/types/composite/typography/value/typography-design-tokens-collection-token-value.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
-import { typographyDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/composite/typography/value/typography-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
 import { DEFAULT_SAMPLE_TEXT } from '../../shared/constants.ts';
@@ -20,57 +14,6 @@ export interface TypographyMarkdownRenderOptions {
    * @default "Edelweiss prefers rocky limestone locations"
    */
   readonly sampleText?: string;
-
-  /**
-   * Whether to resolve token references and show actual values
-   * @default true
-   */
-  readonly resolveReferences?: boolean;
-}
-
-/**
- * Resolves a token reference and returns its raw value.
- * Returns `unknown` to preserve the original type (e.g., dimension objects).
- */
-function resolveReference(
-  context: MarkdownRenderContext,
-  reference: CurlyReference,
-): unknown | null {
-  try {
-    const resolved = context.collection.resolve(context.collection.get(reference));
-    return resolved.value;
-  } catch {
-    return null;
-  }
-}
-
-/**
- * Flattens a typography value, resolving references where possible
- */
-function flattenTypographyValue(
-  value: TypographyDesignTokensCollectionTokenValue,
-  context: MarkdownRenderContext,
-  resolve: boolean,
-): TypographyDesignTokensCollectionTokenValue {
-  if (!resolve) {
-    return value;
-  }
-
-  const resolveValue = <T>(val: ValueOrCurlyReference<T>): ValueOrCurlyReference<T> => {
-    if (isCurlyReference(val)) {
-      const resolved = resolveReference(context, val);
-      return resolved !== null ? (resolved as unknown as T) : val;
-    }
-    return val;
-  };
-
-  return {
-    fontFamily: resolveValue(value.fontFamily),
-    fontSize: resolveValue(value.fontSize),
-    fontWeight: resolveValue(value.fontWeight),
-    letterSpacing: resolveValue(value.letterSpacing),
-    lineHeight: resolveValue(value.lineHeight),
-  };
 }
 
 /**
@@ -84,7 +27,7 @@ function flattenTypographyValue(
  * actual computed values instead of just reference names.
  *
  * @param token - The typography design token to render
- * @param context - The render context used for resolving token references
+ * @param _context - The render context used for resolving token references
  * @param options - Rendering options for customizing the preview
  * @returns A markdown table row with typography preview
  *
@@ -99,60 +42,17 @@ function flattenTypographyValue(
  */
 export function typographyDesignTokensCollectionTokenToMarkdown(
   token: TypographyDesignTokensCollectionToken,
-  context: MarkdownRenderContext,
+  _context: MarkdownRenderContext,
   options: TypographyMarkdownRenderOptions = {},
 ): MarkdownTokenRow {
-  const { sampleText = DEFAULT_SAMPLE_TEXT, resolveReferences = true } = options;
-
-  // Try to resolve references to get actual values
-  const value = token.value as TypographyDesignTokensCollectionTokenValue;
-  const resolvedValue = flattenTypographyValue(value, context, resolveReferences);
-
-  // Build the CSS style string for inline styles
-  const styleParts: string[] = [];
-
-  if (resolvedValue.fontFamily) {
-    const fontFamily = isCurlyReference(resolvedValue.fontFamily)
-      ? curlyReferenceToString(resolvedValue.fontFamily)
-      : String(resolvedValue.fontFamily);
-    styleParts.push(`font-family: ${fontFamily}`);
-  }
-
-  if (resolvedValue.fontSize) {
-    const fontSize = isCurlyReference(resolvedValue.fontSize)
-      ? curlyReferenceToString(resolvedValue.fontSize)
-      : String(resolvedValue.fontSize);
-    styleParts.push(`font-size: ${fontSize}`);
-  }
-
-  if (resolvedValue.fontWeight) {
-    const fontWeight = isCurlyReference(resolvedValue.fontWeight)
-      ? curlyReferenceToString(resolvedValue.fontWeight)
-      : String(resolvedValue.fontWeight);
-    styleParts.push(`font-weight: ${fontWeight}`);
-  }
-
-  if (resolvedValue.letterSpacing) {
-    const letterSpacing = isCurlyReference(resolvedValue.letterSpacing)
-      ? curlyReferenceToString(resolvedValue.letterSpacing)
-      : String(resolvedValue.letterSpacing);
-    styleParts.push(`letter-spacing: ${letterSpacing}`);
-  }
-
-  if (resolvedValue.lineHeight) {
-    const lineHeight = isCurlyReference(resolvedValue.lineHeight)
-      ? curlyReferenceToString(resolvedValue.lineHeight)
-      : String(resolvedValue.lineHeight);
-    styleParts.push(`line-height: ${lineHeight}`);
-  }
-
-  // Get the resolved CSS string for display
-  const cssString = typographyDesignTokensCollectionTokenValueToCssValue(resolvedValue);
+  const { sampleText = DEFAULT_SAMPLE_TEXT } = options;
 
   // Generate the CSS variable name for this token
   const cssVariable = createCssVariableNameGenerator({
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
+
+  const displayValue = `<div data-preview-value="${cssVariable}"></div>`;
 
   // Create the typography preview HTML using CSS shorthand variable directly
   // The browser resolves var(--esds-typography-*) via the CSS cascade
@@ -170,18 +70,7 @@ export function typographyDesignTokensCollectionTokenToMarkdown(
     >
       ${sampleText}
     </p>
-    <div
-      style="
-      margin-top: 4px;
-      font-family: monospace;
-      font-size: 11px;
-      color: #6b7280;
-      max-width: 300px;
-      word-wrap: break-word;
-    "
-    >
-      ${cssString}
-    </div>
+    ${displayValue}
   `;
 
   return {

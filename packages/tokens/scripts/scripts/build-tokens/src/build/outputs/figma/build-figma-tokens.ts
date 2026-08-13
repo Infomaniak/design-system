@@ -118,6 +118,10 @@ export function buildFigmaTokens({
             onExistingTokenBehaviour: 'only-references',
           });
         }
+
+        // we've made all tokens of this modifier present into `figmaBaseCollection` point to this corresponding modifier
+        // as tokens present into the different context collections have the same names, we don't have to iterate further
+        break;
       }
     }
 
