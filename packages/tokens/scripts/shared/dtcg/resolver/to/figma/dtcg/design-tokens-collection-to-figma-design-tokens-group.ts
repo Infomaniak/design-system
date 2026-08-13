@@ -12,7 +12,10 @@ export function designTokensCollectionToFigmaDesignTokensGroup(
     insertFigmaDesignTokensTreeIntoFigmaDesignTokensGroup(
       figmaTokens,
       token.name,
-      designTokensCollectionTokenToFigmaDesignTokensTree(token, collection.resolve(token)),
+      designTokensCollectionTokenToFigmaDesignTokensTree({
+        ...token,
+        type: collection.resolve(token).type,
+      }),
     );
   }
 

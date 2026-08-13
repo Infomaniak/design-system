@@ -1,8 +1,4 @@
-import type {
-  GenericDesignTokensCollectionToken,
-  GenericDesignTokensCollectionTokenWithType,
-  GenericResolvedDesignTokensCollectionToken,
-} from '../../../../token/design-tokens-collection-token.ts';
+import type { GenericDesignTokensCollectionTokenWithType } from '../../../../token/design-tokens-collection-token.ts';
 import { isColorDesignTokensCollectionToken } from '../../../../token/types/base/color/is-color-design-tokens-collection-token.ts';
 import { isCubicBezierDesignTokensCollectionToken } from '../../../../token/types/base/cubic-bezier/is-cubic-bezier-design-tokens-collection-token.ts';
 import { isDimensionDesignTokensCollectionToken } from '../../../../token/types/base/dimension/is-dimension-design-tokens-collection-token.ts';
@@ -32,14 +28,8 @@ import { transitionDesignTokensCollectionTokenToFigmaDesignTokensGroup } from '.
 import { typographyDesignTokensCollectionTokenToFigmaDesignTokensGroup } from './types/composite/typography.ts';
 
 export function designTokensCollectionTokenToFigmaDesignTokensTree(
-  token: GenericDesignTokensCollectionToken,
-  resolvedToken: GenericResolvedDesignTokensCollectionToken,
+  tokenWithType: GenericDesignTokensCollectionTokenWithType,
 ): FigmaDesignTokensTree {
-  const tokenWithType: GenericDesignTokensCollectionTokenWithType = {
-    type: resolvedToken.type,
-    ...token,
-  };
-
   if (isColorDesignTokensCollectionToken(tokenWithType)) {
     return colorDesignTokensCollectionTokenToColorFigmaDesignToken(tokenWithType);
   } else if (isCubicBezierDesignTokensCollectionToken(tokenWithType)) {
@@ -56,18 +46,18 @@ export function designTokensCollectionTokenToFigmaDesignTokensTree(
     return numberDesignTokensCollectionTokenToNumberFigmaDesignToken(tokenWithType);
     // composite
   } else if (isBorderDesignTokensCollectionToken(tokenWithType)) {
-    return borderDesignTokensCollectionTokenToFigmaDesignTokensGroup(resolvedToken);
+    return borderDesignTokensCollectionTokenToFigmaDesignTokensGroup(tokenWithType);
   } else if (isGradientDesignTokensCollectionToken(tokenWithType)) {
-    return gradientDesignTokensCollectionTokenToFigmaDesignTokensGroup(resolvedToken);
+    return gradientDesignTokensCollectionTokenToFigmaDesignTokensGroup(tokenWithType);
   } else if (isShadowDesignTokensCollectionToken(tokenWithType)) {
-    return shadowDesignTokensCollectionTokenToFigmaDesignTokensGroup(resolvedToken);
+    return shadowDesignTokensCollectionTokenToFigmaDesignTokensGroup(tokenWithType);
   } else if (isStrokeStyleDesignTokensCollectionToken(tokenWithType)) {
     return strokeStyleDesignTokensCollectionTokenToStringFigmaDesignToken(tokenWithType);
   } else if (isTransitionDesignTokensCollectionToken(tokenWithType)) {
-    return transitionDesignTokensCollectionTokenToFigmaDesignTokensGroup(resolvedToken);
+    return transitionDesignTokensCollectionTokenToFigmaDesignTokensGroup(tokenWithType);
   } else if (isTypographyDesignTokensCollectionToken(tokenWithType)) {
     return typographyDesignTokensCollectionTokenToFigmaDesignTokensGroup(tokenWithType);
   } else {
-    throw new Error(`Unsupported token type: ${token.type}.`);
+    throw new Error(`Unsupported token type: ${tokenWithType.type}.`);
   }
 }
