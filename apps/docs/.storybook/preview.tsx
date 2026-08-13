@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { GLOBALS_UPDATED } from 'storybook/internal/core-events';
 import { Globals, GlobalsUpdatedPayload } from 'storybook/internal/types';
 import customElements from '../../../packages/components/custom-elements.json' with { type: 'json' };
+import FontPreview from '../src/components/FontPreview.tsx';
 import MaterialThemeBuilderLink from '../src/components/MaterialThemeBuilderLink.tsx';
 import Table from '../src/components/Table.tsx';
 import { iconifyApi } from '../src/lib/iconify-api.ts';
@@ -277,6 +278,7 @@ const preview: Preview = {
       container: CustomDocsContainer,
       components: {
         Table,
+        FontPreview,
         MaterialThemeBuilderLink,
       },
     },
@@ -294,6 +296,8 @@ const preview: Preview = {
           ['Getting Started', '*', 'Material', 'CHANGELOG'],
           'Icons',
           ['Getting Started', '*'],
+          'Typography',
+          ['*'],
           'Components',
           ['Getting Started', '*', 'CHANGELOG'],
           '*',

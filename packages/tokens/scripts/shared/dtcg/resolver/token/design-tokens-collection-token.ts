@@ -59,6 +59,10 @@ export type GenericDesignTokensCollectionToken = DesignTokensCollectionToken<
   ExplicitAny
 >;
 
+export type InferDesignTokensCollectionTokenValue<
+  GToken extends GenericDesignTokensCollectionToken,
+> = GToken extends DesignTokensCollectionTokenWithType<string, infer GValue> ? GValue : never;
+
 /* RESOLVED */
 
 export interface ResolvedDesignTokensCollectionToken<

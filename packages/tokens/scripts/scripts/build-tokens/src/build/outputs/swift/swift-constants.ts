@@ -19,6 +19,7 @@ export const EXCLUDED_SWIFT_TOKEN_ROOTS = [
   'opacity',
   'breakpoint',
   'ratio',
+  'typography',
 ];
 
 export function isExcludedSwiftToken(token: { readonly name: readonly string[] }): boolean {
