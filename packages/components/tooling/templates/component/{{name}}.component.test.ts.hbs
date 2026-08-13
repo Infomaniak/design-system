@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { {{pascalCase name}} } from './{{name}}.component.ts';
+import { {{componentClass name}} } from './{{name}}.component.ts';
 
-{{pascalCase name}}.define();
+{{componentClass name}}.define();
 
-describe('{{pascalCase name}}', () => {
+describe('{{componentClass name}}', () => {
   it('should be constructible and registered', () => {
     const el = document.createElement('{{name}}');
-    expect(el).instanceOf({{pascalCase name}});
+    expect(el).instanceOf({{componentClass name}});
   });
 
   it('should display the label when no slot content is provided', async () => {

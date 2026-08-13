@@ -3,12 +3,21 @@ import { execSync } from 'node:child_process';
 export default function (plop) {
   plop.setWelcomeMessage('🛠️ What would you like to build?');
 
-  plop.setHelper('pascalCase', (text) => {
+  plop.setHelper('componentClass', (text) => {
     return (
       text
         .split('-')
         .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
         .join('') + 'Component'
+    );
+  });
+
+  plop.setHelper('attrClass', (text) => {
+    return (
+      text
+        .split('-')
+        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+        .join('') + 'Attr'
     );
   });
 
@@ -37,8 +46,33 @@ export default function (plop) {
       {
         type: 'addMany',
         destination: 'src/components/{{name}}',
-        base: 'tooling/templates',
-        templateFiles: 'tooling/templates/*.hbs',
+        base: 'tooling/templates/component',
+        templateFiles: 'tooling/templates/component/*.hbs',
+        stripExtensions: ['hbs'],
+      },
+    ],
+  });
+
+  plop.setGenerator('attr', {
+    description: 'create a new custom attribute',
+    prompts: [
+      {
+        type: 'input',
+        name: 'name',
+        message: 'attr name (kebab-case)',
+        validate: (value) => {
+          if (!value) return 'name is required';
+          if (!/^[a-z][a-z0-9-]*$/.test(value)) return 'name must be valid kebab-case';
+          return true;
+        },
+      },
+    ],
+    actions: [
+      {
+        type: 'addMany',
+        destination: 'src/components/{{name}}',
+        base: 'tooling/templates/attr',
+        templateFiles: 'tooling/templates/attr/*.hbs',
         stripExtensions: ['hbs'],
       },
     ],
