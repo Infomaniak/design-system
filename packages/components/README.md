@@ -103,6 +103,7 @@ src/components/my-component/
 ```
 src/components/my-attr/
 ├── my-attr.attr.ts         # Custom Attribute + JSDoc
+├── my-attr.attr.md         # Documentation
 ├── my-attr.attr.css        # CSS style
 ├── my-attr.attr.test.ts    # Tests
 └── my-attr.attr.stories.ts # Storybook story
