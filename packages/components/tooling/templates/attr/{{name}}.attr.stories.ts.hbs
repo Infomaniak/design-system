@@ -7,8 +7,6 @@ import { AttributeRegistry } from '../../helpers/custom-attribute/custom-attribu
 import { {{attrClass name}} } from './{{name}}.attr.ts';
 import documentation from './{{name}}.attr.md?raw';
 
-{{attrClass name}}.define();
-
 const define{{attrClass name}} = htmlElementRef((element: Element) => {
   {{attrClass name}}.define({
     registry: AttributeRegistry.of(element.ownerDocument!),
