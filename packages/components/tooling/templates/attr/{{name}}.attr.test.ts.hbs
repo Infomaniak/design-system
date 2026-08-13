@@ -1,0 +1,12 @@
+import { describe, expect, it } from 'vitest';
+import { {{attrClass name}} } from './{{name}}.attr.ts';
+
+{{attrClass name}}.define();
+
+describe.todo('{{attrClass name}}', () => {
+  it.todo('should ...', () => {
+    const el = document.createElement('div');
+    el.setAttribute('{{name}}', '');
+    expect(true).toBe(true);
+  });
+});
