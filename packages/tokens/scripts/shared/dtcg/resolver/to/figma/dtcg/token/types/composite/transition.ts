@@ -33,7 +33,7 @@ export function transitionDesignTokensCollectionTokenToFigmaDesignTokensGroup(
     timingFunction: (
       _value: ValueOrCurlyReference<CubicBezierDesignTokensCollectionTokenValue>,
     ): StringFigmaDesignToken => {
-      console.warn('Timing function is not supported yet by figma.');
+      console.warn('Timing function is not supported yet by Figma.');
       return {
         $type: 'string',
         $value: 'linear',
