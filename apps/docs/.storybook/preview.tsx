@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { GLOBALS_UPDATED } from 'storybook/internal/core-events';
 import { Globals, GlobalsUpdatedPayload } from 'storybook/internal/types';
 import customElements from '../../../packages/components/custom-elements.json' with { type: 'json' };
+import FontPreview from '../src/components/FontPreview.tsx';
 import MaterialThemeBuilderLink from '../src/components/MaterialThemeBuilderLink.tsx';
 import Table from '../src/components/Table.tsx';
 import { iconifyApi } from '../src/lib/iconify-api.ts';
@@ -50,6 +51,9 @@ import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product
 // Import all theme modifiers (for dynamic switching via data-esds-theme attribute)
 import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/dark.attr.css';
 import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/light.attr.css';
+
+// Import fonts
+import '@infomaniak-design-system/fonts/dist/web/infomaniak-sans.css';
 
 // Initialize <esds-icon> and provide IconifyApi via root InjectionContext
 EsdsIconComponent.define();
@@ -277,6 +281,7 @@ const preview: Preview = {
       container: CustomDocsContainer,
       components: {
         Table,
+        FontPreview,
         MaterialThemeBuilderLink,
       },
     },
@@ -294,6 +299,8 @@ const preview: Preview = {
           ['Getting Started', '*', 'Material', 'CHANGELOG'],
           'Icons',
           ['Getting Started', '*'],
+          'Typography',
+          ['*'],
           'Components',
           ['Getting Started', '*', 'CHANGELOG'],
           '*',

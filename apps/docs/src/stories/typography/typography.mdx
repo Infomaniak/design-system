@@ -1,0 +1,102 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Typography" />
+
+# Typography
+
+This page describes the typography basics of the design system.
+
+## Font Family
+
+The main font family is "**Suisse Int\'l**".
+
+It is available in different font weights.
+
+<table>
+  <tr>
+    <td style={{ fontWeight: 'var(--esds-font-weight-regular)' }}>
+      <FontPreview></FontPreview>
+    </td>
+    <td>font.weight.regular</td>
+  </tr>
+  <tr>
+    <td style={{ fontWeight: 'var(--esds-font-weight-medium)' }}>
+      <FontPreview></FontPreview>
+    </td>
+    <td>font.weight.medium</td>
+  </tr>
+</table>
+
+### Usage
+
+> [!WARNING]
+> This section is not yet complete.
+
+### Applying the font
+
+Use the CSS variable `--esds-font-family-base` to apply the font to the `<html>` element:
+
+```css
+html {
+  font-family: var(--esds-font-family-base);
+}
+```
+
+> It's a good practice to apply the font-family to the `<html>` element, as it allows you to later use a different font-family based on the user's language: .
+>
+> ```css
+> html[lang^='zh-'] {
+>   font-family: var(--esds-font-family-zh);
+> }
+> ```
+
+## Font Sizes & Line Heights
+
+### Base Font Size
+
+The default font size is `16px`. This corresponds to the CSS value of `1rem`.
+Users are able to change the default font size in their browser.
+By using `rem`, the font-sizes scale nicely with the user defined value.
+
+### Tokens
+
+[Text tokens](/docs/design-tokens-t2-text--docs) (font sizes and line-heights) are defined by the `text.{xs..5xl}.{size|line-height|letter-spacing}` design tokens.
+
+## Typography
+
+[Typography tokens](/docs/design-tokens-t2-typography--docs) group the font family, size, weight, etc. into a single token: `typography.{xs..5xl}.{base|emphasized}`.
+
+It makes it easier to apply the expected font:
+
+```css
+font: var(--esds-typography-md-base);
+```
+
+## Elements
+
+### Headings
+
+Headings are used to break up content into sections to provide a clear hierarchy of information.
+
+[Heading tokens](/docs/design-tokens-t3-heading--docs) are defined by the `heading.{xs..xl}.{font}` design tokens.
+
+```html
+<h1 style="font: var(--esds-heading-xl-font)">Heading 1</h1>
+```
+
+### Body Text
+
+Body texts are used as blocks or lines of text.
+
+[Body tokens](/docs/design-tokens-t3-body--docs) are defined by the `body.{xs..lg}.{font}` design tokens.
+
+```html
+<p style="font: var(--esds-body-md-font)">
+  This is a sample paragraph showing how text will appear in your application. It demonstrates the
+  font style, size, and spacing that will be used throughout your content.
+</p>
+```
+
+```html
+<label style="font: var(--esds-body-sm-font)"> Input label </label>
+```
