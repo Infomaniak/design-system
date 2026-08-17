@@ -38,7 +38,7 @@ Use the CSS variable `--esds-font-family-base` to apply the font to the `<html>`
 
 ```css
 html {
-  font-family: var(--esds-font-family-base);
+  font-family: var(--esds-font-family-base), sans-serif;
 }
 ```
 
@@ -46,7 +46,7 @@ html {
 >
 > ```css
 > html[lang^='zh-'] {
->   font-family: var(--esds-font-family-zh);
+>   font-family: var(--esds-font-family-zh), sans-serif;
 > }
 > ```
 
@@ -78,7 +78,19 @@ font: var(--esds-typography-md-base);
 
 Headings are used to break up content into sections to provide a clear hierarchy of information.
 
-[Heading tokens](/docs/design-tokens-t3-heading--docs) are defined by the `heading.{xs..xl}.{font}` design tokens.
+#### Custom attribute
+
+The [esds-heading](/docs/components-heading--docs) attribute **must** be used to apply `heading` text styles to elements:
+
+```html
+<h1 esds-heading="xl">Large text</h1>
+```
+
+#### Tokens
+
+[Heading tokens](/docs/design-tokens-t3-heading--docs) are defined by the `heading.{xs..xl}.{font}` design tokens, and are used by the `esds-heading` custom attribute.
+
+Here's an example of how to apply raw styles:
 
 ```html
 <h1 style="font: var(--esds-heading-xl-font)">Heading 1</h1>
@@ -88,7 +100,26 @@ Headings are used to break up content into sections to provide a clear hierarchy
 
 Body texts are used as blocks or lines of text.
 
-[Body tokens](/docs/design-tokens-t3-body--docs) are defined by the `body.{xs..lg}.{font}` design tokens.
+#### Custom attribute
+
+The [esds-body](/docs/components-body--docs) attribute **must** be used to apply `body` text styles to elements:
+
+```html
+<p esds-body="md">
+  This is a sample paragraph showing how text will appear in your application. It demonstrates the
+  font style, size, and spacing that will be used throughout your content.
+</p>
+```
+
+```html
+<label esds-body="sm">Input label</label>
+```
+
+#### Tokens
+
+[Body tokens](/docs/design-tokens-t3-body--docs) are defined by the `body.{xs..lg}.{font}` design tokens, and are used by the `esds-body` custom attribute.
+
+Here's an example of how to apply raw styles:
 
 ```html
 <p style="font: var(--esds-body-md-font)">
@@ -98,5 +129,5 @@ Body texts are used as blocks or lines of text.
 ```
 
 ```html
-<label style="font: var(--esds-body-sm-font)"> Input label </label>
+<label style="font: var(--esds-body-sm-font)">Input label</label>
 ```
