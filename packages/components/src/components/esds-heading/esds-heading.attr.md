@@ -14,6 +14,6 @@ EsdsHeadingAttr.define();
 
 ## Description
 
-A custom attribute for styling headings (h1..h6) while preserving native semantic.
+A custom attribute for styling headings (h1..h6) while preserving native semantics.
 
 ## Demo
