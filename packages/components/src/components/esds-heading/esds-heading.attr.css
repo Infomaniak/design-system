@@ -1,0 +1,35 @@
+[esds-heading] {
+  font: var(--esds-heading-font);
+}
+
+[esds-heading='xs'] {
+  --esds-heading-font: var(--esds-heading-xs-font);
+}
+
+[esds-heading='sm'] {
+  --esds-heading-font: var(--esds-heading-sm-font);
+}
+
+[esds-heading='md'] {
+  --esds-heading-font: var(--esds-heading-md-font);
+}
+
+[esds-heading='lg'] {
+  --esds-heading-font: var(--esds-heading-lg-font);
+}
+
+[esds-heading='xl'] {
+  --esds-heading-font: var(--esds-heading-xl-font);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  &[esds-heading] {
+    margin-block: var(--esds-heading-margin-block, 0);
+    margin-inline: var(--esds-heading-margin-inline, 0);
+  }
+}

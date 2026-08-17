@@ -1,4 +1,6 @@
 import type { CleanUpFunction } from '../misc/clean-up-function.ts';
+import { isDocumentNode } from '../misc/node-type/is-document-node.ts';
+import { isShadowRoot } from '../misc/node-type/is-shadow-root.ts';
 
 /**
  * A class used to manage the injection and removal of CSS stylesheets into documents or shadow roots.
@@ -92,7 +94,7 @@ export class InjectableStyleSheet {
     let container: Node | null = node;
 
     while (container !== null) {
-      if (container instanceof Document || container instanceof ShadowRoot) {
+      if (isDocumentNode(container) || isShadowRoot(container)) {
         return container;
       } else {
         container = container.parentNode;
@@ -103,13 +105,13 @@ export class InjectableStyleSheet {
   }
 
   /**
-   * Injects this stylesheet from the specified DOM element.
+   * Injects this stylesheet from the specified DOM node.
    *
-   * @param {Element} node - The DOM element from which the stylesheet should be applied.
+   * @param {Node} node - The DOM node from which the stylesheet should be applied.
    * @return {CleanUpFunction} A function that, when called, removes the applied stylesheet.
    * Call this function when the Node becomes disconnected from the DOM.
    */
-  injectFrom(node: Element): CleanUpFunction {
+  injectFrom(node: Node): CleanUpFunction {
     return this.inject(this.#getContainer(node));
   }
 }
