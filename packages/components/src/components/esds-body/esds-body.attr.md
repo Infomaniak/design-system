@@ -14,6 +14,6 @@ EsdsBodyAttr.define();
 
 ## Description
 
-A custom attribute for styling text contents (p, div, span) while preserving native semantic.
+A custom attribute for applying body text styles to elements while preserving native semantics.
 
 ## Demo
