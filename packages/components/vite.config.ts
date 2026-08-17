@@ -1,5 +1,6 @@
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import type { PreRenderedChunk } from 'rolldown';
 import { defineConfig } from 'vite';
 import { viteTc39DecoratorsPlugin } from '../../plugins/vite-tc39-decorators-plugin.ts';
 
@@ -17,6 +18,25 @@ export default defineConfig({
       external: ['lit', /lit\/.*/],
       output: {
         preserveModules: true,
+        entryFileNames: (chunkInfo: PreRenderedChunk): string => {
+          let name: string = chunkInfo.name;
+
+          if (name.startsWith('node_modules/')) {
+            name = `external/${name.slice(13)}`;
+          } else if (name.startsWith('packages/components/src/')) {
+            name = name.slice(24);
+          }
+
+          {
+            const index: number = name.indexOf('?');
+
+            if (index !== -1) {
+              name = name.slice(0, index);
+            }
+          }
+
+          return `${name}.js`;
+        },
       },
     },
   },
