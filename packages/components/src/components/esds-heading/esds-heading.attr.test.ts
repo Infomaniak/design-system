@@ -11,5 +11,11 @@ describe('EsdsHeadingAttr', () => {
     await Promise.resolve();
 
     expect(document.adoptedStyleSheets.length).toBe(1);
+
+    el.removeAttribute('esds-heading');
+
+    await Promise.resolve();
+
+    expect(document.adoptedStyleSheets.length).toBe(0);
   });
 });

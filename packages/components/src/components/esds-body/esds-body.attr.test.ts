@@ -11,5 +11,11 @@ describe('EsdsBodyAttr', () => {
     await Promise.resolve();
 
     expect(document.adoptedStyleSheets.length).toBe(1);
+
+    el.removeAttribute('esds-body');
+
+    await Promise.resolve();
+
+    expect(document.adoptedStyleSheets.length).toBe(0);
   });
 });
