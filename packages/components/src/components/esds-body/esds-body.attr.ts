@@ -19,8 +19,8 @@ export interface EsdsBodyAttrDefineOptions {
  *
  * @summary EsdsBodyAttr custom attribute
  * @element esds-body
- * @cssproperty --esds-body-margin-block The "block" margin to apply to the element (only available for p).
- * @cssproperty --esds-body-margin-inline The "inline" margin to apply to the element (only available for p).
+ * @cssproperty --esds-body-margin-block The "block" margin to apply to the element (default: 0, only available for p).
+ * @cssproperty --esds-body-margin-inline The "inline" margin to apply to the element (default: 0, only available for p).
  */
 export class EsdsBodyAttr extends CustomAttribute implements CustomAttributeDefinition {
   static define({ registry = AttributeRegistry.root }: EsdsBodyAttrDefineOptions = {}): void {

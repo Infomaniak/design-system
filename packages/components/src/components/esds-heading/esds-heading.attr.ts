@@ -19,8 +19,8 @@ export interface EsdsHeadingAttrDefineOptions {
  *
  * @summary EsdsHeadingAttr custom attribute
  * @element esds-heading
- * @cssproperty --esds-heading-margin-block The "block" margin to apply to the element (only available for h1..h6).
- * @cssproperty --esds-heading-margin-inline The "inline" margin to apply to the element (only available for h1..h6).
+ * @cssproperty --esds-heading-margin-block The "block" margin to apply to the element (default: 0, only available for h1..h6).
+ * @cssproperty --esds-heading-margin-inline The "inline" margin to apply to the element (default: 0, only available for h1..h6).
  */
 export class EsdsHeadingAttr extends CustomAttribute implements CustomAttributeDefinition {
   static define({ registry = AttributeRegistry.root }: EsdsHeadingAttrDefineOptions = {}): void {
