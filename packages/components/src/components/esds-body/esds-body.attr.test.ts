@@ -3,7 +3,7 @@ import { EsdsBodyAttr } from './esds-body.attr.ts';
 
 EsdsBodyAttr.define();
 
-describe.only('EsdsBodyAttr', () => {
+describe('EsdsBodyAttr', () => {
   it('should have css applied', async () => {
     const el = document.body.appendChild(document.createElement('div'));
     el.setAttribute('esds-body', 'sm');

@@ -3,7 +3,7 @@ import { EsdsHeadingAttr } from './esds-heading.attr.ts';
 
 EsdsHeadingAttr.define();
 
-describe.only('EsdsHeadingAttr', () => {
+describe('EsdsHeadingAttr', () => {
   it('should have css applied', async () => {
     const el = document.body.appendChild(document.createElement('div'));
     el.setAttribute('esds-heading', 'lg');
