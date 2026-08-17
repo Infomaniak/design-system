@@ -22,12 +22,15 @@ export default defineConfig({
           let name: string = chunkInfo.name;
 
           if (name.startsWith('node_modules/')) {
+            // to avoid conflict with local node_modules (avec the consumer does `npm i`)
             name = `external/${name.slice(13)}`;
           } else if (name.startsWith('packages/components/src/')) {
             name = name.slice(24);
           }
 
           {
+            // remove the query string from the chunk name
+            // ex: abc.component.css?inline -> abc.component.css
             const index: number = name.indexOf('?');
 
             if (index !== -1) {
