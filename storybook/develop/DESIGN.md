@@ -1,127 +1,122 @@
 ---
 typography:
-  display:
-    md:
-      base:
-        fontFamily: "Suisse Int'l"
-        fontSize: "3rem"
-        fontWeight: "400"
-        lineHeight: "56px"
-        letterSpacing: "0px"
-      emphasized:
-        fontFamily: "Suisse Int'l"
-        fontSize: "3rem"
-        fontWeight: "500"
-        lineHeight: "56px"
-        letterSpacing: "0px"
-  heading:
-    lg:
-      base:
-        fontFamily: "Suisse Int'l"
-        fontSize: "2.5rem"
-        fontWeight: "400"
-        lineHeight: "48px"
-        letterSpacing: "0px"
-      emphasized:
-        fontFamily: "Suisse Int'l"
-        fontSize: "2.5rem"
-        fontWeight: "500"
-        lineHeight: "48px"
-        letterSpacing: "0px"
-    md:
-      base:
-        fontFamily: "Suisse Int'l"
-        fontSize: "2rem"
-        fontWeight: "400"
-        lineHeight: "40px"
-        letterSpacing: "0px"
-      emphasized:
-        fontFamily: "Suisse Int'l"
-        fontSize: "2rem"
-        fontWeight: "500"
-        lineHeight: "40px"
-        letterSpacing: "0px"
-    sm:
-      base:
-        fontFamily: "Suisse Int'l"
-        fontSize: "1.5rem"
-        fontWeight: "400"
-        lineHeight: "32px"
-        letterSpacing: "0px"
-      emphasized:
-        fontFamily: "Suisse Int'l"
-        fontSize: "1.5rem"
-        fontWeight: "500"
-        lineHeight: "32px"
-        letterSpacing: "0px"
-  title:
-    md:
-      base:
-        fontFamily: "Suisse Int'l"
-        fontSize: "1.25rem"
-        fontWeight: "400"
-        lineHeight: "28px"
-        letterSpacing: "0px"
-      emphasized:
-        fontFamily: "Suisse Int'l"
-        fontSize: "1.25rem"
-        fontWeight: "500"
-        lineHeight: "28px"
-        letterSpacing: "0px"
-  body:
-    lg:
-      base:
-        fontFamily: "Suisse Int'l"
-        fontSize: "1.125rem"
-        fontWeight: "400"
-        lineHeight: "26px"
-        letterSpacing: "0px"
-      emphasized:
-        fontFamily: "Suisse Int'l"
-        fontSize: "1.125rem"
-        fontWeight: "500"
-        lineHeight: "26px"
-        letterSpacing: "0px"
-    md:
-      base:
-        fontFamily: "Suisse Int'l"
-        fontSize: "1rem"
-        fontWeight: "400"
-        lineHeight: "24px"
-        letterSpacing: "0px"
-      emphasized:
-        fontFamily: "Suisse Int'l"
-        fontSize: "1rem"
-        fontWeight: "500"
-        lineHeight: "24px"
-        letterSpacing: "0px"
-    sm:
-      base:
-        fontFamily: "Suisse Int'l"
-        fontSize: "0.875rem"
-        fontWeight: "400"
-        lineHeight: "20px"
-        letterSpacing: "0px"
-      emphasized:
-        fontFamily: "Suisse Int'l"
-        fontSize: "0.875rem"
-        fontWeight: "500"
-        lineHeight: "20px"
-        letterSpacing: "0px"
-  caption:
-    md:
-      base:
-        fontFamily: "Suisse Int'l"
-        fontSize: "0.75rem"
-        fontWeight: "400"
-        lineHeight: "16px"
-        letterSpacing: "0px"
-      emphasized:
-        fontFamily: "Suisse Int'l"
-        fontSize: "0.75rem"
-        fontWeight: "500"
-        lineHeight: "16px"
-        letterSpacing: "0px"
+  xs:
+    base:
+      fontFamily: "Suisse Int'l"
+      fontSize: "0.75rem"
+      fontWeight: "400"
+      lineHeight: "16px"
+      letterSpacing: "0px"
+    emphasized:
+      fontFamily: "Suisse Int'l"
+      fontSize: "0.75rem"
+      fontWeight: "500"
+      lineHeight: "16px"
+      letterSpacing: "0px"
+  sm:
+    base:
+      fontFamily: "Suisse Int'l"
+      fontSize: "0.875rem"
+      fontWeight: "400"
+      lineHeight: "20px"
+      letterSpacing: "0px"
+    emphasized:
+      fontFamily: "Suisse Int'l"
+      fontSize: "0.875rem"
+      fontWeight: "500"
+      lineHeight: "20px"
+      letterSpacing: "0px"
+  md:
+    base:
+      fontFamily: "Suisse Int'l"
+      fontSize: "1rem"
+      fontWeight: "400"
+      lineHeight: "24px"
+      letterSpacing: "0px"
+    emphasized:
+      fontFamily: "Suisse Int'l"
+      fontSize: "1rem"
+      fontWeight: "500"
+      lineHeight: "24px"
+      letterSpacing: "0px"
+  lg:
+    base:
+      fontFamily: "Suisse Int'l"
+      fontSize: "1.125rem"
+      fontWeight: "400"
+      lineHeight: "26px"
+      letterSpacing: "0px"
+    emphasized:
+      fontFamily: "Suisse Int'l"
+      fontSize: "1.125rem"
+      fontWeight: "500"
+      lineHeight: "26px"
+      letterSpacing: "0px"
+  xl:
+    base:
+      fontFamily: "Suisse Int'l"
+      fontSize: "1.25rem"
+      fontWeight: "400"
+      lineHeight: "28px"
+      letterSpacing: "0px"
+    emphasized:
+      fontFamily: "Suisse Int'l"
+      fontSize: "1.25rem"
+      fontWeight: "500"
+      lineHeight: "28px"
+      letterSpacing: "0px"
+  2xl:
+    base:
+      fontFamily: "Suisse Int'l"
+      fontSize: "1.5rem"
+      fontWeight: "400"
+      lineHeight: "32px"
+      letterSpacing: "0px"
+    emphasized:
+      fontFamily: "Suisse Int'l"
+      fontSize: "1.5rem"
+      fontWeight: "500"
+      lineHeight: "32px"
+      letterSpacing: "0px"
+  3xl:
+    base:
+      fontFamily: "Suisse Int'l"
+      fontSize: "2rem"
+      fontWeight: "400"
+      lineHeight: "40px"
+      letterSpacing: "0px"
+    emphasized:
+      fontFamily: "Suisse Int'l"
+      fontSize: "2rem"
+      fontWeight: "500"
+      lineHeight: "40px"
+      letterSpacing: "0px"
+  4xl:
+    base:
+      fontFamily: "Suisse Int'l"
+      fontSize: "2.5rem"
+      fontWeight: "400"
+      lineHeight: "48px"
+      letterSpacing: "0px"
+    emphasized:
+      fontFamily: "Suisse Int'l"
+      fontSize: "2.5rem"
+      fontWeight: "500"
+      lineHeight: "48px"
+      letterSpacing: "0px"
+  5xl:
+    base:
+      fontFamily: "Suisse Int'l"
+      fontSize: "3rem"
+      fontWeight: "400"
+      lineHeight: "56px"
+      letterSpacing: "0px"
+    emphasized:
+      fontFamily: "Suisse Int'l"
+      fontSize: "3rem"
+      fontWeight: "500"
+      lineHeight: "56px"
+      letterSpacing: "0px"
 ---
 
 # Design Tokens Reference
@@ -208,7 +203,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.feedback.warning.dim2.default | #ffd188 | #7a200d | var(--esds-color-background-feedback-warning-dim2-default) | Soft warning background (dim2). |
 | color.background.feedback.warning.dim2.hover | #ffb34a | #94260c | var(--esds-color-background-feedback-warning-dim2-hover) | Soft warning background (dim2). |
 | color.background.feedback.warning.dim2.pressed | #ffa032 | #460d02 | var(--esds-color-background-feedback-warning-dim2-pressed) | Soft warning background (dim2). |
-| color.background.feedback.error.dim1.default | #ff5757 | #ff5757 | var(--esds-color-background-feedback-error-dim1-default) | Strong error background (dim1). |
+| color.background.feedback.error.dim1.default | #ff5757 | #ffc0c0 | var(--esds-color-background-feedback-error-dim1-default) | Strong error background (dim1). |
 | color.background.feedback.error.dim1.hover | #ff2323 | #ff9494 | var(--esds-color-background-feedback-error-dim1-hover) | Strong error background (dim1). |
 | color.background.feedback.error.dim1.pressed | #f00 | #ff2323 | var(--esds-color-background-feedback-error-dim1-pressed) | Strong error background (dim1). |
 | color.background.feedback.error.dim2.default | #ffc0c0 | #920a0a | var(--esds-color-background-feedback-error-dim2-default) | Soft error background (dim2). |
@@ -588,35 +583,44 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | text.5xl.size | 3rem | 3rem | var(--esds-text-5xl-size) | Font size for 5x-large text. |
 | text.5xl.line-height | 56px | 56px | var(--esds-text-5xl-line-height) | Line-height for 5x-large text. |
 | text.5xl.letter-spacing | 0px | 0px | var(--esds-text-5xl-letter-spacing) | Letter spacing for 5x-large text. |
+| typography.xs.base | 400 0.75rem/16px Suisse Int'l | 400 0.75rem/16px Suisse Int'l | var(--esds-typography-xs-base) | N/A |
+| typography.xs.emphasized | 500 0.75rem/16px Suisse Int'l | 500 0.75rem/16px Suisse Int'l | var(--esds-typography-xs-emphasized) | N/A |
+| typography.sm.base | 400 0.875rem/20px Suisse Int'l | 400 0.875rem/20px Suisse Int'l | var(--esds-typography-sm-base) | N/A |
+| typography.sm.emphasized | 500 0.875rem/20px Suisse Int'l | 500 0.875rem/20px Suisse Int'l | var(--esds-typography-sm-emphasized) | N/A |
+| typography.md.base | 400 1rem/24px Suisse Int'l | 400 1rem/24px Suisse Int'l | var(--esds-typography-md-base) | N/A |
+| typography.md.emphasized | 500 1rem/24px Suisse Int'l | 500 1rem/24px Suisse Int'l | var(--esds-typography-md-emphasized) | N/A |
+| typography.lg.base | 400 1.125rem/26px Suisse Int'l | 400 1.125rem/26px Suisse Int'l | var(--esds-typography-lg-base) | N/A |
+| typography.lg.emphasized | 500 1.125rem/26px Suisse Int'l | 500 1.125rem/26px Suisse Int'l | var(--esds-typography-lg-emphasized) | N/A |
+| typography.xl.base | 400 1.25rem/28px Suisse Int'l | 400 1.25rem/28px Suisse Int'l | var(--esds-typography-xl-base) | N/A |
+| typography.xl.emphasized | 500 1.25rem/28px Suisse Int'l | 500 1.25rem/28px Suisse Int'l | var(--esds-typography-xl-emphasized) | N/A |
+| typography.2xl.base | 400 1.5rem/32px Suisse Int'l | 400 1.5rem/32px Suisse Int'l | var(--esds-typography-2xl-base) | N/A |
+| typography.2xl.emphasized | 500 1.5rem/32px Suisse Int'l | 500 1.5rem/32px Suisse Int'l | var(--esds-typography-2xl-emphasized) | N/A |
+| typography.3xl.base | 400 2rem/40px Suisse Int'l | 400 2rem/40px Suisse Int'l | var(--esds-typography-3xl-base) | N/A |
+| typography.3xl.emphasized | 500 2rem/40px Suisse Int'l | 500 2rem/40px Suisse Int'l | var(--esds-typography-3xl-emphasized) | N/A |
+| typography.4xl.base | 400 2.5rem/48px Suisse Int'l | 400 2.5rem/48px Suisse Int'l | var(--esds-typography-4xl-base) | N/A |
+| typography.4xl.emphasized | 500 2.5rem/48px Suisse Int'l | 500 2.5rem/48px Suisse Int'l | var(--esds-typography-4xl-emphasized) | N/A |
+| typography.5xl.base | 400 3rem/56px Suisse Int'l | 400 3rem/56px Suisse Int'l | var(--esds-typography-5xl-base) | N/A |
+| typography.5xl.emphasized | 500 3rem/56px Suisse Int'l | 500 3rem/56px Suisse Int'l | var(--esds-typography-5xl-emphasized) | N/A |
 
 ## 3. Component Tokens
 
 | Token Name | Light Value | Dark Value | CSS Variable | Description |
 |---|---|---|---|---|
+| body.xs.font | 400 0.75rem/16px Suisse Int'l | 400 0.75rem/16px Suisse Int'l | var(--esds-body-xs-font) | N/A |
+| body.sm.font | 400 0.875rem/20px Suisse Int'l | 400 0.875rem/20px Suisse Int'l | var(--esds-body-sm-font) | N/A |
+| body.md.font | 400 1rem/24px Suisse Int'l | 400 1rem/24px Suisse Int'l | var(--esds-body-md-font) | N/A |
+| body.lg.font | 400 1.125rem/26px Suisse Int'l | 400 1.125rem/26px Suisse Int'l | var(--esds-body-lg-font) | N/A |
+| heading.xs.font | 500 1.25rem/28px Suisse Int'l | 500 1.25rem/28px Suisse Int'l | var(--esds-heading-xs-font) | N/A |
+| heading.sm.font | 500 1.5rem/32px Suisse Int'l | 500 1.5rem/32px Suisse Int'l | var(--esds-heading-sm-font) | N/A |
+| heading.md.font | 500 2rem/40px Suisse Int'l | 500 2rem/40px Suisse Int'l | var(--esds-heading-md-font) | N/A |
+| heading.lg.font | 500 2.5rem/48px Suisse Int'l | 500 2.5rem/48px Suisse Int'l | var(--esds-heading-lg-font) | N/A |
+| heading.xl.font | 500 3rem/56px Suisse Int'l | 500 3rem/56px Suisse Int'l | var(--esds-heading-xl-font) | N/A |
 | text-link.color.default | #0077cf | #0077cf | var(--esds-text-link-color-default) | Default text link color. |
 | text-link.color.hover | #015ca3 | #015ca3 | var(--esds-text-link-color-hover) | Text link color on hover. |
 | text-link.color.pressed | #064e86 | #064e86 | var(--esds-text-link-color-pressed) | Text link color on press. |
 | text-link.color.visited.default | #8f30f7 | #cab1ff | var(--esds-text-link-color-visited-default) | Default visited text link color. |
 | text-link.color.visited.hover | #811ee3 | #e0d4ff | var(--esds-text-link-color-visited-hover) | Visited text link color on hover. |
 | text-link.color.visited.pressed | #6c18bf | #b185ff | var(--esds-text-link-color-visited-pressed) | Visited text link color on press. |
-| typography.display.md.base | 400 3rem/56px Suisse Int'l | 400 3rem/56px Suisse Int'l | var(--esds-typography-display-md-base) | Medium display style, the largest typography preset. |
-| typography.display.md.emphasized | 500 3rem/56px Suisse Int'l | 500 3rem/56px Suisse Int'l | var(--esds-typography-display-md-emphasized) | Medium display style, the largest typography preset. |
-| typography.heading.lg.base | 400 2.5rem/48px Suisse Int'l | 400 2.5rem/48px Suisse Int'l | var(--esds-typography-heading-lg-base) | Large heading style for primary page titles. |
-| typography.heading.lg.emphasized | 500 2.5rem/48px Suisse Int'l | 500 2.5rem/48px Suisse Int'l | var(--esds-typography-heading-lg-emphasized) | Large heading style for primary page titles. |
-| typography.heading.md.base | 400 2rem/40px Suisse Int'l | 400 2rem/40px Suisse Int'l | var(--esds-typography-heading-md-base) | Medium heading style for section titles. |
-| typography.heading.md.emphasized | 500 2rem/40px Suisse Int'l | 500 2rem/40px Suisse Int'l | var(--esds-typography-heading-md-emphasized) | Medium heading style for section titles. |
-| typography.heading.sm.base | 400 1.5rem/32px Suisse Int'l | 400 1.5rem/32px Suisse Int'l | var(--esds-typography-heading-sm-base) | Small heading style for subsection titles. |
-| typography.heading.sm.emphasized | 500 1.5rem/32px Suisse Int'l | 500 1.5rem/32px Suisse Int'l | var(--esds-typography-heading-sm-emphasized) | Small heading style for subsection titles. |
-| typography.title.md.base | 400 1.25rem/28px Suisse Int'l | 400 1.25rem/28px Suisse Int'l | var(--esds-typography-title-md-base) | Medium title style for component titles. |
-| typography.title.md.emphasized | 500 1.25rem/28px Suisse Int'l | 500 1.25rem/28px Suisse Int'l | var(--esds-typography-title-md-emphasized) | Medium title style for component titles. |
-| typography.body.lg.base | 400 1.125rem/26px Suisse Int'l | 400 1.125rem/26px Suisse Int'l | var(--esds-typography-body-lg-base) | Large body style for emphasized paragraph text. |
-| typography.body.lg.emphasized | 500 1.125rem/26px Suisse Int'l | 500 1.125rem/26px Suisse Int'l | var(--esds-typography-body-lg-emphasized) | Large body style for emphasized paragraph text. |
-| typography.body.md.base | 400 1rem/24px Suisse Int'l | 400 1rem/24px Suisse Int'l | var(--esds-typography-body-md-base) | Medium (default) body style for standard paragraph text. |
-| typography.body.md.emphasized | 500 1rem/24px Suisse Int'l | 500 1rem/24px Suisse Int'l | var(--esds-typography-body-md-emphasized) | Medium (default) body style for standard paragraph text. |
-| typography.body.sm.base | 400 0.875rem/20px Suisse Int'l | 400 0.875rem/20px Suisse Int'l | var(--esds-typography-body-sm-base) | Small body style for compact paragraph text. |
-| typography.body.sm.emphasized | 500 0.875rem/20px Suisse Int'l | 500 0.875rem/20px Suisse Int'l | var(--esds-typography-body-sm-emphasized) | Small body style for compact paragraph text. |
-| typography.caption.md.base | 400 0.75rem/16px Suisse Int'l | 400 0.75rem/16px Suisse Int'l | var(--esds-typography-caption-md-base) | Medium caption style for small metadata and labels. |
-| typography.caption.md.emphasized | 500 0.75rem/16px Suisse Int'l | 500 0.75rem/16px Suisse Int'l | var(--esds-typography-caption-md-emphasized) | Medium caption style for small metadata and labels. |
 
 ## 4. AI Implementation Directives
 
