@@ -15,7 +15,7 @@ export interface EsdsHeadingAttrDefineOptions {
 }
 
 /**
- * A custom attribute for styling headings (h1..h6) while preserving native semantic.
+ * A custom attribute for styling headings (h1..h6) while preserving native semantics.
  *
  * @summary EsdsHeadingAttr custom attribute
  * @element esds-heading
