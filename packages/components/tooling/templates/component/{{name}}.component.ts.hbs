@@ -1,18 +1,18 @@
 import { signal, SignalWatcher } from '@lit-labs/signals';
 import { html, LitElement, type PropertyValues, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators.js';
-import { defineComponent } from '../helpers.private/component/define-component.ts';
-
+import { defineComponent } from '../../helpers/.private/component/define-component.ts';
 
 import style from './{{name}}.component.css?inline';
 
 /**
- * {{pascalCase name}} web component.
- * @summary {{pascalCase name}} component
+ * {{componentClass name}} web component.
+ *
+ * @summary {{componentClass name}} component
  * @element {{name}}
  * @slot - Default slot. Falls back to the `label` property when empty.
  */
-export class {{pascalCase name}} extends SignalWatcher(LitElement) {
+export class {{componentClass name}} extends SignalWatcher(LitElement) {
   static define() {
     defineComponent('{{name}}', this);
   }
@@ -41,6 +41,6 @@ export class {{pascalCase name}} extends SignalWatcher(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    '{{name}}': {{pascalCase name}};
+    '{{name}}': {{componentClass name}};
   }
 }

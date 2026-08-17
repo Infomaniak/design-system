@@ -1,0 +1,46 @@
+import type { CleanUpFunction } from '../../helpers/.private/misc/clean-up-function.ts';
+import { InjectableStyleSheet } from '../../helpers/.private/style/injectable-style-sheet.ts';
+import {
+  AttributeRegistry,
+  CustomAttribute,
+  type CustomAttributeDefinition,
+} from '../../helpers/custom-attribute/custom-attribute.ts';
+
+import style from './{{name}}.attr.css?inline';
+
+const styleSheet = InjectableStyleSheet.parse(style);
+
+export interface {{attrClass name}}DefineOptions {
+  readonly registry?: AttributeRegistry;
+}
+
+/**
+ * {{attrClass name}} custom attribute.
+ *
+ * @summary {{attrClass name}} custom attribute
+ * @element {{name}}
+ */
+export class {{attrClass name}} extends CustomAttribute implements CustomAttributeDefinition  {
+  static define({ registry = AttributeRegistry.root }: {{attrClass name}}DefineOptions = {}): void {
+    registry.defineOptionally('{{name}}', {{attrClass name}});
+  }
+
+  #cleanup: CleanUpFunction | undefined;
+
+  constructor(attr: Attr) {
+    if (attr.ownerElement?.tagName !== 'TODO') {
+      throw new Error('{{name}} attribute can only be used on <todo> elements');
+    }
+    super(attr);
+  }
+
+  connectedCallback(): void {
+    this.#cleanup = styleSheet.injectFrom(this.ownerElement!);
+  }
+
+  disconnectedCallback(): void {
+    this.#cleanup?.();
+    this.#cleanup = undefined;
+  }
+}
+

@@ -68,8 +68,8 @@ Optional local CI publish variables (for manual checks):
 - The commits as well as the PR title must follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention.
   - NOTE: to preserve the commit history, do not squash the commits when working on or merging a PR.
 - The PR must be based:
-  - on the `main` branch and target the `main` branch for a `stable` release.
-  - on the `develop` branch and target the `develop` branch for an `rc`release.
+  - on the `develop` branch and target the `develop` branch. This is the default flow — all features and fixes go through `develop` first, then are periodically released to `main` (see [Release workflow](#release-workflow)).
+  - on the `main` branch and target the `main` branch — **reserved for urgent hotfixes only** that must reach production without waiting for the next release from `develop`.
 - The PR must be marked as `Draft` while you're working on the feature/fix.
 - The PR must be marked as `Ready` for review when all the following conditions are met:
   - The PR must be up to date with the `main`/`develop` branches.
@@ -89,17 +89,38 @@ Optional local CI publish variables (for manual checks):
   - If the author is a maintainer: the author merges the PR.
   - If the author is an external contributor: a maintainer merges the PR (usually the one having done the review).
 
-### For infomaniak's team / project's maintainers
+### How to contribute
 
-Create a new branch from `main` following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention, and create the associated `Draft` PR.
+**Internal contributors:** Create a new branch from `develop` (or from `main` for an urgent hotfix) and open a PR.
 
-### For external contributors
-
-Fork the repository, update the code, create a PR from your repository to the upstream repository, explaining clearly what was added/fixed.
+**External contributors:** Fork the repository, make your changes on a branch from `develop`, and open a PR from your fork to the upstream `develop` branch, explaining clearly what was added/fixed.
 
 ## Release notes
 
 When your PR modifies a publishable package (`@infomaniak-design-system/tokens` or `@infomaniak-design-system/components`), include a changeset describing the change. Create one with `yarn changeset`, or use the `generate-changeset` agent skill (`.agents/skills/generate-changeset/SKILL.md`) which automates the process based on your branch's diff. PRs that only touch docs, apps, scripts, or tooling don't need a changeset.
+
+## Release workflow
+
+The project follows a two-branch model:
+
+- **`develop`** is the integration branch. All features, fixes, and improvements land here first.
+- **`main`** is the stable release branch. Merges to `main` trigger a `latest` npm publish.
+
+### How releases happen
+
+1. Changes accumulate on `develop` as PRs merge.
+2. The [`release-pr.yml`](.github/workflows/release-pr.yml) workflow automatically creates a **draft PR** from `develop` → `main` whenever new changes land on `develop` (if no such PR already exists).
+3. When ready to release, a maintainer marks the draft PR as **Ready for review**.
+4. This triggers an automatic version bump via changesets (`yarn changeset:version`):
+   - Consumes all pending `.changeset/*.md` files
+   - Bumps `package.json` versions (e.g. `0.2.4` → `0.3.0`)
+   - Generates/updates `CHANGELOG.md` per package
+   - Commits and pushes the result to `develop`
+5. The maintainer then merges the PR to `main`, which triggers `ci:publish` to publish the bumped versions as `latest` on npm.
+
+The version bump can also be run manually with `yarn changeset:version`, if needed.
+
+For the full technical handover (dist-tags, prerelease versions, impacted-package detection), see [`scripts/ci/README.md`](scripts/ci/README.md).
 
 ## Code
 
@@ -140,6 +161,11 @@ When your PR modifies a publishable package (`@infomaniak-design-system/tokens` 
     - With `CI_PUBLISH_STRICT_VERSION_POLICY=true`:
       - `develop` requires `x.y.z-rc.n`
       - `main` requires stable `x.y.z`
+
+- `.github/workflows/release-pr.yml`
+  - Trigger: `push` on `develop`; `pull_request` on `main` (`ready_for_review`)
+  - `ensure-release-pr` job: automatically creates a draft PR from `develop` → `main` if one doesn't already exist.
+  - `version-bump` job: triggered when the release PR is marked **Ready for review**. Runs `yarn changeset:version` to bump versions and generate changelogs, then commits and pushes the result to `develop`.
 
 - `.github/workflows/build-on-pr.yml`
   - Trigger: PR events (`opened`, `synchronize`, `reopened`, `ready_for_review`, `converted_to_draft`, `closed`) and manual dispatch.

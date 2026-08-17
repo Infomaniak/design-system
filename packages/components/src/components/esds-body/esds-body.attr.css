@@ -1,0 +1,26 @@
+[esds-body] {
+  font: var(--esds-body-font);
+}
+
+[esds-body='xs'] {
+  --esds-body-font: var(--esds-body-xs-font);
+}
+
+[esds-body='sm'] {
+  --esds-body-font: var(--esds-body-sm-font);
+}
+
+[esds-body='md'] {
+  --esds-body-font: var(--esds-body-md-font);
+}
+
+[esds-body='lg'] {
+  --esds-body-font: var(--esds-body-lg-font);
+}
+
+p {
+  &[esds-body] {
+    margin-block: var(--esds-body-margin-block, 0);
+    margin-inline: var(--esds-body-margin-inline, 0);
+  }
+}

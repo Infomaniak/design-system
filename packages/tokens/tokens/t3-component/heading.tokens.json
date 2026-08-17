@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "xs": {
+      "font": {
+        "$value": "{typography.xl.emphasized}"
+      }
+    },
+    "sm": {
+      "font": {
+        "$value": "{typography.2xl.emphasized}"
+      }
+    },
+    "md": {
+      "font": {
+        "$value": "{typography.3xl.emphasized}"
+      }
+    },
+    "lg": {
+      "font": {
+        "$value": "{typography.4xl.emphasized}"
+      }
+    },
+    "xl": {
+      "font": {
+        "$value": "{typography.5xl.emphasized}"
+      }
+    }
+  }
+}

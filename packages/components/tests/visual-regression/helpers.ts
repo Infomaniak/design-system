@@ -53,7 +53,7 @@ const MANIFEST_FETCH_MAX_ATTEMPTS: number = 3;
 const MANIFEST_FETCH_BACKOFF_MS: readonly number[] = [5_000, 15_000];
 const MANIFEST_FETCH_TIMEOUT_MS: number = 30_000;
 
-function sleep(duration: number): Promise<void> {
+export function sleep(duration: number): Promise<void> {
   return new Promise((resolve: () => void): void => {
     setTimeout(resolve, duration);
   });

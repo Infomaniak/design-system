@@ -191,6 +191,10 @@ export class AttributeRegistry {
     this.#root = root;
   }
 
+  get root(): Document {
+    return this.#root;
+  }
+
   /**
    * Retrieves an instance of a custom attribute definition associated with the specified attribute.
    * If an instance does not already exist, a new one is created and stored for future retrieval.
