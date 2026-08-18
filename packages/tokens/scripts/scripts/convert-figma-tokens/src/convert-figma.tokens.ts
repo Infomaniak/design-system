@@ -41,19 +41,22 @@ export async function convertFigmaTokens({
     root,
   );
 
+  // store `@root` segments
+  for (const token of rootCollection.tokens()) {
+    if (token.name.includes('@root') && token.name.at(-1) !== '@root') {
+      rootCollection.set({
+        ...token,
+        extensions: {
+          ...token.extensions,
+          figmaName: token.name.slice(1),
+        },
+      });
+    }
+  }
+
   // replace `@root` segments
   for (const token of Array.from(rootCollection.tokens())) {
     if (token.name.includes('@root')) {
-      if (token.name.at(-1) !== '@root') {
-        rootCollection.set({
-          ...token,
-          extensions: {
-            ...token.extensions,
-            figmaName: token.name.slice(1),
-          },
-        });
-      }
-
       rootCollection.rename(
         token.name,
         token.name.filter((namePart: string): boolean => namePart !== '@root'),
