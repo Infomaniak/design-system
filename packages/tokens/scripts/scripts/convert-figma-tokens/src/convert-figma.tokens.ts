@@ -41,19 +41,22 @@ export async function convertFigmaTokens({
     root,
   );
 
+  // store `@root` segments
+  for (const token of rootCollection.tokens()) {
+    if (token.name.includes('@root') && token.name.at(-1) !== '@root') {
+      rootCollection.set({
+        ...token,
+        extensions: {
+          ...token.extensions,
+          figmaName: token.name.slice(1),
+        },
+      });
+    }
+  }
+
   // replace `@root` segments
   for (const token of Array.from(rootCollection.tokens())) {
     if (token.name.includes('@root')) {
-      if (token.name.at(-1) !== '@root') {
-        rootCollection.set({
-          ...token,
-          extensions: {
-            ...token.extensions,
-            figmaName: token.name.slice(1),
-          },
-        });
-      }
-
       rootCollection.rename(
         token.name,
         token.name.filter((namePart: string): boolean => namePart !== '@root'),
@@ -161,6 +164,7 @@ export async function convertFigmaTokens({
             value,
             type,
             extensions,
+            description, // NOTE: description is voluntarily removed from modifiers
             ...token
           }: GenericDesignTokensCollectionToken): GenericDesignTokensCollectionToken => {
             const newName: ArrayDesignTokenName = name.slice(1);

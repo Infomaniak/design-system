@@ -232,7 +232,7 @@
           "hex": "#90a1b90f"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400-8": {
@@ -243,7 +243,7 @@
           "hex": "#90a1b914"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400-10": {
@@ -254,7 +254,7 @@
           "hex": "#90a1b91a"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "400-14": {
@@ -265,7 +265,7 @@
           "hex": "#90a1b924"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950-6": {
@@ -276,7 +276,7 @@
           "hex": "#0206180f"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950-8": {
@@ -287,7 +287,7 @@
           "hex": "#02061814"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950-10": {
@@ -298,7 +298,7 @@
           "hex": "#0206181a"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       },
       "950-14": {
@@ -309,7 +309,7 @@
           "hex": "#02061824"
         },
         "$extensions": {
-          "scopes": ["ALL_SCOPES"]
+          "scopes": []
         }
       }
     },
@@ -789,7 +789,7 @@
         "hex": "#0000"
       },
       "$extensions": {
-        "scopes": ["ALL_SCOPES"]
+        "scopes": []
       }
     },
     "lime": {
