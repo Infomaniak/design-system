@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { compactCompositeTokenValue } from './compact-composite-token-value.ts';
 
 describe('compactCompositeTokenValue', () => {
-  it('should return an identical object if it has less than  properties', () => {
+  it('should return an identical object if it has fewer than two properties', () => {
     expect(
       compactCompositeTokenValue({
         a: 1,
