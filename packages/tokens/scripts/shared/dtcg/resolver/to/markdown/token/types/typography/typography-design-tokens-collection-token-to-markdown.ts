@@ -27,7 +27,7 @@ export interface TypographyMarkdownRenderOptions {
  * actual computed values instead of just reference names.
  *
  * @param token - The typography design token to render
- * @param _context - The render context used for resolving token references
+ * @param _context - Reserved render context; currently unused
  * @param options - Rendering options for customizing the preview
  * @returns A markdown table row with typography preview
  *
