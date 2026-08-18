@@ -161,6 +161,7 @@ export async function convertFigmaTokens({
             value,
             type,
             extensions,
+            description, // NOTE: description is voluntarily removed from modifiers
             ...token
           }: GenericDesignTokensCollectionToken): GenericDesignTokensCollectionToken => {
             const newName: ArrayDesignTokenName = name.slice(1);
