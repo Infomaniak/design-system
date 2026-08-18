@@ -23,7 +23,6 @@ export function mergeDesignTokensTreeDescriptions(
         $extensions,
       }: GenericDesignToken = mainTree;
 
-      console.log('$description === parentDescription', $description === parentDescription);
       return removeUndefinedProperties({
         $value,
         $type,
