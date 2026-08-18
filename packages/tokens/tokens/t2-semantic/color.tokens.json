@@ -1266,7 +1266,6 @@
             "$description": "Default foreground on data-viz dim1 backgrounds.",
             "default": {
               "$value": "{color.blue.900}",
-              "$description": "Default foreground on data-viz dim1 backgrounds.",
               "$extensions": {
                 "scopes": ["ALL_FILLS"],
                 "figmaName": ["color", "content", "on", "dataviz", "@root", "dim1", "default"]
@@ -1277,7 +1276,6 @@
             "$description": "Default foreground on data-viz dim2 backgrounds.",
             "default": {
               "$value": "{color.blue.50}",
-              "$description": "Default foreground on data-viz dim2 backgrounds.",
               "$extensions": {
                 "scopes": ["ALL_FILLS"],
                 "figmaName": ["color", "content", "on", "dataviz", "@root", "dim2", "default"]
