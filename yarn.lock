@@ -518,6 +518,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@changesets/changelog-github@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@changesets/changelog-github@npm:1.0.0"
+  dependencies:
+    "@changesets/get-github-info": "npm:^1.0.0"
+    "@changesets/types": "npm:^7.0.0"
+  checksum: 10c0/c53082e33b9b78330324634407e8ec06e3d1466d6266e0cd8cb3d72955b0a12009d09b3b09e560fe444b47fca31029ad442ba1af55aa04db401f6f7bbf1353a0
+  languageName: node
+  linkType: hard
+
 "@changesets/cli@npm:^3.0.0":
   version: 3.0.0
   resolution: "@changesets/cli@npm:3.0.0"
@@ -586,6 +596,15 @@ __metadata:
     "@changesets/types": "npm:^7.0.0"
     semver: "npm:^7.8.1"
   checksum: 10c0/ab675098db0b92f61115952fb793620bb5b76e502bad5f7f63bcc85a50e5515f70e08957be87381a58141ab2078bf94dd92df86efa55e73227e7604ba6a3968b
+  languageName: node
+  linkType: hard
+
+"@changesets/get-github-info@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@changesets/get-github-info@npm:1.0.0"
+  dependencies:
+    dataloader: "npm:^2.2.3"
+  checksum: 10c0/ae395c58bb360a425e09f07b342f6de49fdb1e21e9c196a9a821f87d6999fdbaab0e3c588ab5a748e54921d143912b2a9f44c4e7f1761944a7c6106a8449073f
   languageName: node
   linkType: hard
 
@@ -1281,6 +1300,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^8.0.1"
     "@babel/plugin-proposal-decorators": "npm:^8.0.2"
+    "@changesets/changelog-github": "npm:^1.0.0"
     "@changesets/cli": "npm:^3.0.0"
     "@eslint/js": "npm:^10.0.1"
     "@lit/context": "npm:^1.1.6"
@@ -4151,6 +4171,13 @@ __metadata:
   version: 1.0.0
   resolution: "custom-elements-manifest@npm:1.0.0"
   checksum: 10c0/6e8e4dcc6ae4f846e92b6ec0ef5c8d155889dae6df7210cbf3e9c47387ffab83fce8fde96a1aaa9766304cb08afa17198da4ef8560745311bdf3ba280fc77b40
+  languageName: node
+  linkType: hard
+
+"dataloader@npm:^2.2.3":
+  version: 2.2.3
+  resolution: "dataloader@npm:2.2.3"
+  checksum: 10c0/9b9a056fbc863ca86da87d59e053e871e263b4966aa4d55e40d61a65e96815fae5530ca220629064ca5f8e3000c0c4ec93292e170c38ff393fb34256b4d7c1aa
   languageName: node
   linkType: hard
 
