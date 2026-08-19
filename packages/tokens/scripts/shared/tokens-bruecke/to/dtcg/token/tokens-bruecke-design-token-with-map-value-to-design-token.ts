@@ -59,7 +59,7 @@ function tokensBrueckeDesignTokenToDesignTokenExtensions(
   if (token.scopes !== undefined) {
     $extensions = {
       ...$extensions,
-      scopes: token.scopes,
+      scopes: token.scopes.length === 1 && token.scopes[0] === 'ALL_SCOPES' ? [] : token.scopes,
     };
   }
 
