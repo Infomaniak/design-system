@@ -82,9 +82,9 @@ jobs:
         uses: actions/github-script@v9
         with:
           script: |
-            const { exec } = require('child_process');
+            const { exec: execChild } = require('child_process');
             const { promisify } = require('util');
-            const execAsync = promisify(exec);
+            const execAsync = promisify(execChild);
             
             // Check for changes
             const { stdout: gitStatus } = await execAsync('git status --porcelain');
