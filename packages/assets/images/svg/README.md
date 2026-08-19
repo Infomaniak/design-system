@@ -178,3 +178,34 @@ This script generates the appropriate `assets/server/*.json` files, and bump thi
 
 3. Commit the changes
 4. Create a Pull Request and follow the CONTRIBUTING guidelines
+
+---
+
+### SF Symbols (iOS)
+
+Converts the Figma source SVGs into Apple Custom SF Symbols (`.symbolset`) inside an `Icons.xcassets` catalog.
+
+All 9 Apple font weights (Ultralight through Black) are generated dynamically by applying a mathematical multiplier to the stroke width.
+
+> [!NOTE]
+> Fill-based icons receive all 9 weights with identical content.
+
+#### Build
+
+```bash
+yarn build:sf-symbols
+```
+
+#### Output
+
+```
+dist/ios/sf-symbols/Icons.xcassets/
+├── Contents.json
+├── esds-heart.symbolset/
+│   ├── Contents.json
+│   └── esds-heart.svg
+├── esds-arrow-left.symbolset/
+│   ├── Contents.json
+│   └── esds-arrow-left.svg
+└── ... (one .symbolset per icon)
+```
