@@ -69,23 +69,38 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Configure git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
       - name: Run changeset version
         run: yarn changeset:version
 
-      - name: Validate and push version bump
+      - name: Validate
         run: |
-          if git diff --quiet; then
-            echo "No changeset files to consume — skipping"
+          yarn build
+          yarn run check
+          yarn run test
+
+      # Context: https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#signing-commits-in-a-workflow
+      # Link: https://github.com/crazy-max/ghaction-import-gpg/releases
+      - name: Import bot's GPG key for signing commits
+        id: import-gpg
+        uses: crazy-max/ghaction-import-gpg@e89d40939c28e39f97cf32126055eeae86ba74ec # v6.3.0
+        with:
+          gpg_private_key: ${{ secrets.BOT_MOBILE_GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.BOT_MOBILE_GPG_PASSPHRASE }}
+          git_config_global: true
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+
+      - name: Configure git user
+        run: |
+          git config --global user.name "dev-mobile-bot"
+          git config --global user.email "mobile+github-bot@infomaniak-dev.ch"
+
+      - name: Commit and push version bump
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
           else
-            yarn build
-            yarn run check
-            yarn run test
-            git add -A
             git commit -m "chore: version packages via changesets"
-            git push origin develop
+            git push
           fi
