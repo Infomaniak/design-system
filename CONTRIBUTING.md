@@ -118,7 +118,7 @@ The project follows a two-branch model:
    - Commits and pushes the result to `develop`
 5. The maintainer then merges the PR to `main`, which triggers `ci:publish` to publish the bumped versions as `latest` on npm.
 
-The version bump can also be run manually with `yarn changeset:version`, if needed.
+The version bump can also be run manually with `yarn changeset:version`, if needed. It requires `GITHUB_TOKEN` so the changelog generator can link commits and PRs — run `export GITHUB_TOKEN=$(gh auth token)` first, or add it to your `.env` (see `.env.example`).
 
 For the full technical handover (dist-tags, prerelease versions, impacted-package detection), see [`scripts/ci/README.md`](scripts/ci/README.md).
 
