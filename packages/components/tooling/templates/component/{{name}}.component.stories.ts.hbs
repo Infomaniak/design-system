@@ -1,0 +1,34 @@
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+import { {{componentClass name}} } from './{{name}}.component.ts';
+import documentation from './{{name}}.component.md?raw';
+
+{{componentClass name}}.define();
+
+const { args, argTypes, template } = getStorybookHelpers<{{componentClass name}}>('{{name}}');
+
+const meta = {
+  title: 'Components/{{storyTitle name}}',
+  component: '{{name}}',
+  tags: ['autodocs', 'vr-test'],
+  parameters: {
+    docs: {
+      description: {
+        component: documentation,
+      },
+    },
+  },
+  args,
+  argTypes,
+  render: (args) => template(args),
+} satisfies Meta<{{componentClass name}}>;
+
+export default meta;
+
+type Story = StoryObj<{{componentClass name}}>;
+
+export const Default: Story = {
+  args: {
+    label: '{{storyTitle name}}',
+  },
+};

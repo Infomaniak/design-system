@@ -1,5 +1,6 @@
 import { writeTextFileSafe } from '../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
+import { block } from '../../../../../../../../../scripts/helpers/misc/block.ts';
 import { dedent } from '../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { indent } from '../../../../../../../../../scripts/helpers/misc/string/indent/indent.ts';
 import { removeTrailingSlash } from '../../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
@@ -240,10 +241,21 @@ export function buildCssTokens({
                   return [
                     generateTailwindToken(
                       token,
-                      DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
-                        'color',
-                        ...token.name.slice(1),
-                      ]),
+                      DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(
+                        block((): string[] => {
+                          // NOTE: https://github.com/tailwindlabs/tailwindcss/blob/90f8ff41c8e2a4d17bc76921e23e9d672123da76/packages/tailwindcss/src/utilities.ts#L2952
+                          //  not in the documentation, but we may associate color tokens to specific tailwind utilities.
+                          if (tokenName.startsWith('color.background')) {
+                            return ['background-color', ...token.name.slice(2)];
+                          } else if (tokenName.startsWith('color.border')) {
+                            return ['border-color', ...token.name.slice(2)];
+                          } else if (tokenName.startsWith('color.content')) {
+                            return ['text-color', ...token.name.slice(2)];
+                          } else {
+                            return ['color', ...token.name.slice(1)];
+                          }
+                        }),
+                      ),
                     ),
                   ];
                 } else if (tokenName.startsWith('font.family')) {

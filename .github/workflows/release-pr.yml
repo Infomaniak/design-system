@@ -69,23 +69,64 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Configure git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
       - name: Run changeset version
         run: yarn changeset:version
 
-      - name: Validate and push version bump
+      - name: Validate
         run: |
-          if git diff --quiet; then
-            echo "No changeset files to consume — skipping"
-          else
-            yarn build
-            yarn run check
-            yarn run test
-            git add -A
-            git commit -m "chore: version packages via changesets"
-            git push origin develop
-          fi
+          yarn build
+          yarn run check
+          yarn run test
+
+      - name: Create signed commit via GitHub API
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const { exec: execChild } = require('child_process');
+            const { promisify } = require('util');
+            const execAsync = promisify(execChild);
+            
+            // Check for changes
+            const { stdout: gitStatus } = await execAsync('git status --porcelain');
+            if (!gitStatus.trim()) {
+              core.info('No changes to commit');
+              return;
+            }
+            
+            // Stage all changes
+            await execAsync('git add -A');
+            
+            // Get current HEAD (parent commit)
+            const { stdout: parentSha } = await execAsync('git rev-parse HEAD');
+            
+            // Create tree from staged changes (local operation)
+            const { stdout: treeSha } = await execAsync('git write-tree');
+            
+            // Create commit via GitHub API (auto-signed by GitHub)
+            const { data: commit } = await github.rest.git.createCommit({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              message: 'chore: version packages via changesets',
+              tree: treeSha.trim(),
+              parents: [parentSha.trim()],
+              author: {
+                name: 'github-actions[bot]',
+                email: '41898282+github-actions[bot]@users.noreply.github.com'
+              },
+              committer: {
+                name: 'github-actions[bot]',
+                email: '41898282+github-actions[bot]@users.noreply.github.com'
+              }
+            });
+            
+            core.info(`Created signed commit ${commit.sha}`);
+            
+            // Update branch reference (push to develop)
+            await github.rest.git.updateRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'heads/develop',
+              sha: commit.sha
+            });
+            
+            core.info('Successfully pushed signed commit to develop branch');

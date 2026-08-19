@@ -416,6 +416,9 @@
         },
         "error": {
           "dim1": {
+            "default": {
+              "$value": "{color.red.400}"
+            },
             "hover": {
               "$value": "{color.red.500}"
             },

@@ -17,6 +17,7 @@ export interface StoryPropertyConfig {
     | 'color'
     | 'date'
     | 'text'; /* ControlType*/
+  readonly options?: readonly unknown[];
 }
 
 export type StoryPropertyConfigLike = StoryPropertyConfig | string;
@@ -52,16 +53,17 @@ export function storybookInteractiveControls<T>(
           string,
           StoryHelpers<unknown>['argTypes'][string],
         ] => {
-          const { type } = storyPropertyConfigLikeToStoryPropertyConfig(property);
+          const { type, options } = storyPropertyConfigLikeToStoryPropertyConfig(property);
           return [
             key,
             {
-              control: {
-                type,
-              },
               table: {
                 category: 'Interactive Controls',
               },
+              control: {
+                type,
+              },
+              options,
             },
           ];
         },

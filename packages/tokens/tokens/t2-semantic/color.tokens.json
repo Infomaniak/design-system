@@ -865,7 +865,7 @@
             "$description": "Default dim1 data-viz background.",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"],
-              "figmaName": ["color", "background", "dataviz", "dim1", "@root", "default"]
+              "figmaName": ["color", "background", "dataviz", "@root", "dim1", "default"]
             }
           },
           "hover": {
@@ -873,7 +873,7 @@
             "$description": "Dim1 data-viz background on hover.",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"],
-              "figmaName": ["color", "background", "dataviz", "dim1", "@root", "hover"]
+              "figmaName": ["color", "background", "dataviz", "@root", "dim1", "hover"]
             }
           },
           "pressed": {
@@ -881,7 +881,7 @@
             "$description": "Dim1 data-viz background on press.",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"],
-              "figmaName": ["color", "background", "dataviz", "dim1", "@root", "pressed"]
+              "figmaName": ["color", "background", "dataviz", "@root", "dim1", "pressed"]
             }
           }
         },
@@ -892,7 +892,7 @@
             "$description": "Default dim2 data-viz background.",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"],
-              "figmaName": ["color", "background", "dataviz", "dim2", "@root", "default"]
+              "figmaName": ["color", "background", "dataviz", "@root", "dim2", "default"]
             }
           },
           "hover": {
@@ -900,7 +900,7 @@
             "$description": "Dim2 data-viz background on hover.",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"],
-              "figmaName": ["color", "background", "dataviz", "dim2", "@root", "hover"]
+              "figmaName": ["color", "background", "dataviz", "@root", "dim2", "hover"]
             }
           },
           "pressed": {
@@ -908,7 +908,7 @@
             "$description": "Dim2 data-viz background on press.",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"],
-              "figmaName": ["color", "background", "dataviz", "dim2", "@root", "pressed"]
+              "figmaName": ["color", "background", "dataviz", "@root", "dim2", "pressed"]
             }
           }
         }
@@ -1266,7 +1266,6 @@
             "$description": "Default foreground on data-viz dim1 backgrounds.",
             "default": {
               "$value": "{color.blue.900}",
-              "$description": "Default foreground on data-viz dim1 backgrounds.",
               "$extensions": {
                 "scopes": ["ALL_FILLS"],
                 "figmaName": ["color", "content", "on", "dataviz", "@root", "dim1", "default"]
@@ -1277,7 +1276,6 @@
             "$description": "Default foreground on data-viz dim2 backgrounds.",
             "default": {
               "$value": "{color.blue.50}",
-              "$description": "Default foreground on data-viz dim2 backgrounds.",
               "$extensions": {
                 "scopes": ["ALL_FILLS"],
                 "figmaName": ["color", "content", "on", "dataviz", "@root", "dim2", "default"]
@@ -2254,7 +2252,7 @@
             "$description": "Default dim1 data-viz border.",
             "$extensions": {
               "scopes": ["STROKE_COLOR"],
-              "figmaName": ["color", "border", "dataviz", "dim1", "@root", "default"]
+              "figmaName": ["color", "border", "dataviz", "@root", "dim1", "default"]
             }
           },
           "hover": {
@@ -2262,7 +2260,7 @@
             "$description": "Dim1 data-viz border on hover.",
             "$extensions": {
               "scopes": [],
-              "figmaName": ["color", "border", "dataviz", "dim1", "@root", "hover"]
+              "figmaName": ["color", "border", "dataviz", "@root", "dim1", "hover"]
             }
           },
           "pressed": {
@@ -2270,7 +2268,7 @@
             "$description": "Dim1 data-viz border on press.",
             "$extensions": {
               "scopes": [],
-              "figmaName": ["color", "border", "dataviz", "dim1", "@root", "pressed"]
+              "figmaName": ["color", "border", "dataviz", "@root", "dim1", "pressed"]
             }
           }
         },
@@ -2281,7 +2279,7 @@
             "$description": "Default dim2 data-viz border.",
             "$extensions": {
               "scopes": ["STROKE_COLOR"],
-              "figmaName": ["color", "border", "dataviz", "dim2", "@root", "default"]
+              "figmaName": ["color", "border", "dataviz", "@root", "dim2", "default"]
             }
           },
           "hover": {
@@ -2289,7 +2287,7 @@
             "$description": "Dim2 data-viz border on hover.",
             "$extensions": {
               "scopes": [],
-              "figmaName": ["color", "border", "dataviz", "dim2", "@root", "hover"]
+              "figmaName": ["color", "border", "dataviz", "@root", "dim2", "hover"]
             }
           },
           "pressed": {
@@ -2297,7 +2295,7 @@
             "$description": "Dim2 data-viz border on press.",
             "$extensions": {
               "scopes": [],
-              "figmaName": ["color", "border", "dataviz", "dim2", "@root", "pressed"]
+              "figmaName": ["color", "border", "dataviz", "@root", "dim2", "pressed"]
             }
           }
         }

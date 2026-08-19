@@ -1,7 +1,11 @@
 import { removeUndefinedProperties } from '../../../../../../../../scripts/helpers/misc/object/remove-undefined-properties.ts';
 import type { ExplicitAny } from '../../../../../../../../scripts/helpers/types/explicit-any.ts';
 import type { DesignTokensGroup } from '../../../../dtcg/design-token/group/design-tokens-group.ts';
+import type { CurlyReference } from '../../../../dtcg/design-token/reference/types/curly/curly-reference.ts';
+import { isCurlyReference } from '../../../../dtcg/design-token/reference/types/curly/is-curly-reference.ts';
+import { compactCompositeTokenValue } from '../../../../dtcg/design-token/token/types/composite/operations/compact-composite-token-value.ts';
 import type { TypographyDesignToken } from '../../../../dtcg/design-token/token/types/composite/types/typography/typography-design-token.ts';
+import type { TypographyDesignTokenValue } from '../../../../dtcg/design-token/token/types/composite/types/typography/value/typography-design-token-value.ts';
 import type { TokensBrueckeDesignTokensGroup } from '../../../tokens-bruecke/group/tokens-bruecke-design-tokens-group.ts';
 import { isTypographyTokensBrueckeDesignTokensGroup } from '../../../tokens-bruecke/group/types/typography/is-typography-tokens-bruecke-design-tokens-group.ts';
 import type { TokensBrueckeToDtcgContext } from '../context/tokens-bruecke-to-dtcg-context.ts';
@@ -15,14 +19,8 @@ export function tokensBrueckeTokensGroupToDesignTokensGroup(
   ctx: TokensBrueckeToDtcgContext,
 ): DesignTokensGroup | TypographyDesignToken {
   if (isTypographyTokensBrueckeDesignTokensGroup(children)) {
-    return {
-      ...removeUndefinedProperties({
-        $description,
-        $deprecated,
-        $extensions,
-      }),
-      $type: 'typography',
-      $value: {
+    const $value: TypographyDesignTokenValue | CurlyReference =
+      compactCompositeTokenValue<TypographyDesignTokenValue>({
         fontFamily: stringTokensBrueckeDesignTokenToFontFamilyDesignToken(children.fontFamily, ctx)
           .$value,
         fontSize: dimensionTokensBrueckeDesignTokenToDimensionDesignToken(children.fontSize, ctx)
@@ -38,8 +36,26 @@ export function tokensBrueckeTokensGroupToDesignTokensGroup(
           children.lineHeight,
           ctx,
         ).$value,
-      },
-    } satisfies TypographyDesignToken;
+      });
+
+    return isCurlyReference($value)
+      ? {
+          $value,
+          ...removeUndefinedProperties({
+            $description,
+            $deprecated,
+            $extensions,
+          }),
+        }
+      : ({
+          $type: 'typography',
+          $value,
+          ...removeUndefinedProperties({
+            $description,
+            $deprecated,
+            $extensions,
+          }),
+        } satisfies TypographyDesignToken);
   }
 
   return {
