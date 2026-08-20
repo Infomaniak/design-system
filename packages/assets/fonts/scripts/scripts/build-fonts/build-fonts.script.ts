@@ -5,7 +5,6 @@ import type { BuildConfig } from '../../../../../../scripts/helpers/build/build-
 import { getEnvBuildConfig } from '../../../../../../scripts/helpers/build/build-config/env/get-env-build-config.ts';
 import type { Logger } from '../../../../../../scripts/helpers/log/logger.ts';
 import { runScript } from '../../../../../../scripts/helpers/misc/run-script/run-script.ts';
-import { generateWorkspaceNpmPackage } from '../../../../../../scripts/helpers/npm/generate-workspace-npm-package/generate-workspace-npm-package.ts';
 import { buildFonts } from './src/build-fonts.ts';
 
 const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..');
@@ -35,13 +34,6 @@ await runScript('build-fonts', async (logger: Logger): Promise<void> => {
   });
 
   // TODO: should we publish as npm package ? Or maybe host on S3 ?
-  await generateWorkspaceNpmPackage({
-    ...buildConfig,
-    packageDirectory: ROOT_DIR,
-    workspaceRootDirectory: WORKSPACE_ROOT_DIR,
-    outputDirectory: join(OUTPUT_DIR, 'web'),
-    logger,
-  });
 });
 
 /*--*/
