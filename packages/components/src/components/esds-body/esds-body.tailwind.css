@@ -1,0 +1,17 @@
+@layer components {
+  .esds-body-xs {
+    font: var(--esds-body-xs-font);
+  }
+
+  .esds-body-sm {
+    font: var(--esds-body-sm-font);
+  }
+
+  .esds-body-md {
+    font: var(--esds-body-md-font);
+  }
+
+  .esds-body-lg {
+    font: var(--esds-body-lg-font);
+  }
+}
