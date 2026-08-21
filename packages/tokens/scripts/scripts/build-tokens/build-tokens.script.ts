@@ -15,8 +15,6 @@ const WORKSPACE_ROOT_DIR: string = join(ROOT_DIR, '../..');
 
 const SOURCE_DIR: string = join(ROOT_DIR, 'tokens');
 
-const COMPONENTS_SOURCE_DIR: string = join(WORKSPACE_ROOT_DIR, 'packages/components/src');
-
 const OUTPUT_DIR: string = join(ROOT_DIR, 'dist');
 
 await runScript('build-tokens', async (logger: Logger): Promise<void> => {
@@ -27,7 +25,6 @@ await runScript('build-tokens', async (logger: Logger): Promise<void> => {
   await buildTokens({
     ...buildConfig,
     sourceDirectory: SOURCE_DIR,
-    componentsSourceDirectory: COMPONENTS_SOURCE_DIR,
     outputDirectory: OUTPUT_DIR,
     logger,
   });
