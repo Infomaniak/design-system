@@ -139,7 +139,7 @@ export function buildTailwindTokens({
                       DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(['font', ...token.name.slice(2)]),
                     ),
                   ];
-                } else if (tokenName.startsWith('text')) {
+                } else if (tokenName.startsWith('text.')) {
                   // --text-*
                   if (tokenName.endsWith('size')) {
                     return [
