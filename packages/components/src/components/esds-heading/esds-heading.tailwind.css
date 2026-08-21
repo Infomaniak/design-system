@@ -1,0 +1,21 @@
+@layer components {
+  .esds-heading-xs {
+    font: var(--esds-heading-xs-font);
+  }
+
+  .esds-heading-sm {
+    font: var(--esds-heading-sm-font);
+  }
+
+  .esds-heading-md {
+    font: var(--esds-heading-md-font);
+  }
+
+  .esds-heading-lg {
+    font: var(--esds-heading-lg-font);
+  }
+
+  .esds-heading-xl {
+    font: var(--esds-heading-xl-font);
+  }
+}
