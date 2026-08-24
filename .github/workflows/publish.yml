@@ -96,22 +96,19 @@ jobs:
         run: yarn install --immutable
 
       - name: Run changeset version
-        run: yarn changeset:version
+        run: |
+          yarn changeset:version
+          git add -A
+          git commit --allow-empty -m "chore: version packages via changesets"
 
-      - name: Commit and push version bump
+      - name: Push CHANGELOG
         if: >-
           github.event_name == 'pull_request' &&
           github.event.pull_request.head.repo.full_name == github.repository &&
           github.event.pull_request.head.ref == 'develop' &&
           github.event.action == 'ready_for_review'
         run: |
-          git add -A
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "chore: version packages via changesets"
-            git push
-          fi
+          git push
 
       - name: Publish missing package versions
         if: >-
