@@ -8,7 +8,6 @@ on:
 jobs:
   ensure-release-pr:
     name: Ensure release PR exists
-    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
