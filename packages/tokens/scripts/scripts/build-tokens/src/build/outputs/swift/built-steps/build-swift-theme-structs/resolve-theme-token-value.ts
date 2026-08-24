@@ -1,5 +1,6 @@
 import { isCurlyReference } from '../../../../../../../../shared/dtcg/design-token/reference/types/curly/is-curly-reference.ts';
 import { curlyReferenceToSegmentsReference } from '../../../../../../../../shared/dtcg/design-token/reference/types/curly/to/segments-reference/curly-reference-to-segments-reference.ts';
+import type { SegmentsReference } from '../../../../../../../../shared/dtcg/design-token/reference/types/segments/segments-reference.ts';
 import type { DesignTokensCollection } from '../../../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
@@ -24,7 +25,9 @@ function chaseToT1Token(
   themePathFragment: string,
   { productCollection }: SwiftThemeTokenResolutionContext,
 ): GenericDesignTokensCollectionToken {
-  let current = startName;
+  let current: SegmentsReference = startName.filter(
+    (segment: string): boolean => segment !== '$root',
+  );
 
   for (let depth = 0; depth < MAX_REFERENCE_DEPTH; depth++) {
     const themeToken = themeCollection.has(current) ? themeCollection.get(current) : undefined;
