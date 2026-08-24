@@ -144,8 +144,6 @@ export function buildFigmaTokens({
         }
       }
 
-      console.log(rootTokens);
-
       for (const token of rootTokens) {
         figmaBaseCollection.rename(token.name, [...token.name, '@root']);
 
