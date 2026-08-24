@@ -89,8 +89,8 @@ jobs:
 
       - name: Configure git user
         run: |
-          git config --global user.name "dev-mobile-bot"
-          git config --global user.email "mobile+github-bot@infomaniak-dev.ch"
+          git config --global user.name "${{ vars.INFOMANIAK_BOT_USERNAME }}"
+          git config --global user.email "${{ vars.INFOMANIAK_BOT_EMAIL }}"
 
       - name: Install dependencies
         run: yarn install --immutable
