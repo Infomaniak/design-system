@@ -21,16 +21,19 @@ import { buildFigmaTokens } from './outputs/figma/build-figma-tokens.ts';
 import { buildKotlinTokens } from './outputs/kotlin/build-kotlin-tokens.ts';
 import { buildMarkdownTokens } from './outputs/markdown/build-markdown-tokens.ts';
 import { buildSwiftTokens } from './outputs/swift/build-swift-tokens.ts';
+import { buildTailwindTokens } from './outputs/tailwind/build-tailwind-tokens.ts';
 import { validateModifiers } from './validate/validate-modifiers.ts';
 
 export interface BuildTokensOptions extends BuildConfig {
   readonly sourceDirectory: string;
+  readonly componentsSourceDirectory: string;
   readonly outputDirectory: string;
   readonly logger: Logger;
 }
 
 export function buildTokens({
   sourceDirectory,
+  componentsSourceDirectory,
   outputDirectory,
   logger,
 }: BuildTokensOptions): Promise<void> {
@@ -77,6 +80,14 @@ export function buildTokens({
     await buildCssTokens({
       baseCollection,
       modifiers,
+      outputDirectory,
+      logger,
+    });
+
+    // TAILWIND
+    await buildTailwindTokens({
+      baseCollection,
+      componentsSourceDirectory,
       outputDirectory,
       logger,
     });
