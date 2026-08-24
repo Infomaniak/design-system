@@ -100,6 +100,8 @@ jobs:
           yarn changeset:version
           git add -A
           git commit --allow-empty -m "chore: version packages via changesets"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push CHANGELOG
         if: >-
