@@ -40,7 +40,7 @@
           "$value": "{color.blue.600}",
           "$description": "Default brand background (Infomaniak).",
           "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            "scopes": ["ALL_FILLS"]
           }
         },
         "infomaniak": {
@@ -339,7 +339,7 @@
           "$value": "{color.gray.400}",
           "$description": "Content color for disabled states on backgrounds.",
           "$extensions": {
-            "scopes": ["ALL_FILLS"]
+            "scopes": ["TEXT_FILL"]
           }
         },
         "brand": {
@@ -1076,88 +1076,88 @@
         }
       }
     },
-    "state": {
-      "hover": {
-        "$value": "{color.blue.900-12}",
-        "$extensions": {
-          "scopes": []
-        }
-      },
-      "pressed": {
-        "$value": "{color.blue.900-16}",
-        "$extensions": {
-          "scopes": []
-        }
-      },
-      "selected": {
-        "$value": "{color.blue.900-12}",
-        "$extensions": {
-          "scopes": []
-        }
-      },
-      "strong": {
-        "hover": {
-          "$value": "{color.blue.900-60}",
-          "$extensions": {
-            "scopes": []
-          }
-        },
-        "pressed": {
-          "$value": "{color.blue.900-80}",
-          "$extensions": {
-            "scopes": []
-          }
-        },
-        "selected": {
-          "$value": "{color.blue.900-80}",
-          "$extensions": {
-            "scopes": []
-          }
-        }
-      }
-    },
     "shadow": {
       "$description": "Semantic shadow colors for elevation and depth effects.",
       "xs": {
         "$value": "{color.gray.400-6}",
         "$description": "Shadow color for the xs elevation.",
         "$extensions": {
-          "scopes": []
+          "scopes": ["EFFECT_COLOR"]
         }
       },
       "sm": {
         "$value": "{color.gray.400-6}",
         "$description": "Shadow color for the sm elevation.",
         "$extensions": {
-          "scopes": []
+          "scopes": ["EFFECT_COLOR"]
         }
       },
       "md": {
         "$value": "{color.gray.400-8}",
         "$description": "Shadow color for the md elevation.",
         "$extensions": {
-          "scopes": []
+          "scopes": ["EFFECT_COLOR"]
         }
       },
       "lg": {
         "$value": "{color.gray.400-10}",
         "$description": "Shadow color for the lg elevation.",
         "$extensions": {
-          "scopes": []
+          "scopes": ["EFFECT_COLOR"]
         }
       },
       "xl": {
         "$value": "{color.gray.400-10}",
         "$description": "Shadow color for the xl elevation.",
         "$extensions": {
-          "scopes": []
+          "scopes": ["EFFECT_COLOR"]
         }
       },
       "2xl": {
         "$value": "{color.gray.400-14}",
         "$description": "Shadow color for the 2xl elevation.",
         "$extensions": {
-          "scopes": []
+          "scopes": ["EFFECT_COLOR"]
+        }
+      }
+    },
+    "state": {
+      "hover": {
+        "$value": "{color.blue.900-12}",
+        "$extensions": {
+          "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+        }
+      },
+      "pressed": {
+        "$value": "{color.blue.900-16}",
+        "$extensions": {
+          "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+        }
+      },
+      "selected": {
+        "$value": "{color.blue.900-12}",
+        "$extensions": {
+          "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+        }
+      },
+      "strong": {
+        "hover": {
+          "$value": "{color.blue.900-60}",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+          }
+        },
+        "pressed": {
+          "$value": "{color.blue.900-80}",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+          }
+        },
+        "selected": {
+          "$value": "{color.blue.900-80}",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+          }
         }
       }
     }

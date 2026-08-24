@@ -461,6 +461,26 @@
         "$value": "{color.gray.800}"
       }
     },
+    "shadow": {
+      "sm": {
+        "$value": "{color.gray.950-6}"
+      },
+      "md": {
+        "$value": "{color.gray.950-8}"
+      },
+      "lg": {
+        "$value": "{color.gray.950-10}"
+      },
+      "xl": {
+        "$value": "{color.gray.950-10}"
+      },
+      "2xl": {
+        "$value": "{color.gray.950-14}"
+      },
+      "xs": {
+        "$value": "{color.gray.950-6}"
+      }
+    },
     "state": {
       "hover": {
         "$value": "{color.gray.50-12}"
@@ -481,26 +501,6 @@
         "selected": {
           "$value": "{color.gray.50-40}"
         }
-      }
-    },
-    "shadow": {
-      "xs": {
-        "$value": "{color.gray.950-6}"
-      },
-      "sm": {
-        "$value": "{color.gray.950-6}"
-      },
-      "md": {
-        "$value": "{color.gray.950-8}"
-      },
-      "lg": {
-        "$value": "{color.gray.950-10}"
-      },
-      "xl": {
-        "$value": "{color.gray.950-10}"
-      },
-      "2xl": {
-        "$value": "{color.gray.950-14}"
       }
     }
   }
