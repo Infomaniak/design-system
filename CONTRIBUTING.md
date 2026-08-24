@@ -85,7 +85,7 @@ For the full technical handover (dist-tags, prerelease versions, impacted-packag
   - The PR must include tests for the new feature/fix with good code coverage (`yarn test:coverage`)
   - The PR must be formated using `yarn format`, and linted using `yarn lint`.
   - The PR must pass `yarn check`.
-  - The PR must include a `changeset` describing the change.
+  - The PR must include a `changeset` describing the change if it modifies a publishable package.
 - Approval must meet these conditions:
   - The PR must be reviewed by at least one of the maintainers, different from the author.
   - All comments on the PR must be resolved:
