@@ -58,6 +58,15 @@ Optional local CI publish variables (for manual checks):
 
 ## Submit a pull request
 
+### Release workflow
+
+The project follows a two-branch model:
+
+- **`develop`** is the integration branch. All features, fixes, and improvements land here first.
+- **`main`** is the stable release branch. Merges to `main` trigger a `latest` npm publish.
+
+For the full technical handover (dist-tags, prerelease versions, impacted-package detection), see [`scripts/ci/README.md`](scripts/ci/README.md).
+
 ### Rules
 
 - The branches must follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) convention:
@@ -76,6 +85,7 @@ Optional local CI publish variables (for manual checks):
   - The PR must include tests for the new feature/fix with good code coverage (`yarn test:coverage`)
   - The PR must be formated using `yarn format`, and linted using `yarn lint`.
   - The PR must pass `yarn check`.
+  - The PR must include a `changeset` describing the change.
 - Approval must meet these conditions:
   - The PR must be reviewed by at least one of the maintainers, different from the author.
   - All comments on the PR must be resolved:
@@ -95,32 +105,20 @@ Optional local CI publish variables (for manual checks):
 
 **External contributors:** Fork the repository, make your changes on a branch from `develop`, and open a PR from your fork to the upstream `develop` branch, explaining clearly what was added/fixed.
 
-## Release notes
+### Changesets
 
-When your PR modifies a publishable package (`@infomaniak-design-system/tokens` or `@infomaniak-design-system/components`), include a changeset describing the change. Create one with `yarn changeset`, or use the `generate-changeset` agent skill (`.agents/skills/generate-changeset/SKILL.md`) which automates the process based on your branch's diff. PRs that only touch docs, apps, scripts, or tooling don't need a changeset.
+When your PR modifies a publishable package (ex: `@infomaniak-design-system/tokens` or `@infomaniak-design-system/components`), you **MUST** include a changeset describing the change.
 
-## Release workflow
+You may create one using the CLI:
 
-The project follows a two-branch model:
+```shell
+yarn changeset
+```
 
-- **`develop`** is the integration branch. All features, fixes, and improvements land here first.
-- **`main`** is the stable release branch. Merges to `main` trigger a `latest` npm publish.
+Or use the `generate-changeset` agent skill (`.agents/skills/generate-changeset/SKILL.md`) which automates the process based on your branch's diff.
 
-### How releases happen
-
-1. Changes accumulate on `develop` as PRs merge.
-2. The [`release-pr.yml`](.github/workflows/release-pr.yml) workflow automatically creates a **draft PR** from `develop` → `main` whenever new changes land on `develop` (if no such PR already exists).
-3. When ready to release, a maintainer marks the draft PR as **Ready for review**.
-4. This triggers an automatic version bump via changesets (`yarn changeset:version`):
-   - Consumes all pending `.changeset/*.md` files
-   - Bumps `package.json` versions (e.g. `0.2.4` → `0.3.0`)
-   - Generates/updates `CHANGELOG.md` per package
-   - Commits and pushes the result to `develop`
-5. The maintainer then merges the PR to `main`, which triggers `ci:publish` to publish the bumped versions as `latest` on npm.
-
-The version bump can also be run manually with `yarn changeset:version`, if needed. It requires `GITHUB_TOKEN` so the changelog generator can link commits and PRs — run `export GITHUB_TOKEN=$(gh auth token)` first, or add it to your `.env` (see `.env.example`).
-
-For the full technical handover (dist-tags, prerelease versions, impacted-package detection), see [`scripts/ci/README.md`](scripts/ci/README.md).
+> [!NOTE]
+> PRs that only touch docs, apps, scripts, or tooling don't need a changeset.
 
 ## Code
 
@@ -150,22 +148,22 @@ For the full technical handover (dist-tags, prerelease versions, impacted-packag
 
 ## CI Workflows
 
+- `.github/workflows/create-release-pr.yml`
+  - Trigger: `push` on `develop`
+  - `ensure-release-pr` job: automatically creates a draft PR from `develop` → `main` if one doesn't already exist.
+
 - `.github/workflows/publish.yml`
   - Trigger: `push` on `main` and `develop`
   - Steps: `yarn install --immutable`, `yarn build`, `yarn test`, `yarn ci:publish`
   - Publish behavior:
     - Reads package `name` and `version` from each package `package.json`
+    - Bumps versions using `changesets`
     - Checks npm registry first (`name@version`)
     - Publishes only missing versions (idempotent workflow)
     - Uses branch dist-tags: `develop => rc`, `main => latest`
     - With `CI_PUBLISH_STRICT_VERSION_POLICY=true`:
       - `develop` requires `x.y.z-rc.n`
       - `main` requires stable `x.y.z`
-
-- `.github/workflows/release-pr.yml`
-  - Trigger: `push` on `develop`; `pull_request` on `main` (`ready_for_review`)
-  - `ensure-release-pr` job: automatically creates a draft PR from `develop` → `main` if one doesn't already exist.
-  - `version-bump` job: triggered when the release PR is marked **Ready for review**. Runs `yarn changeset:version` to bump versions and generate changelogs, then commits and pushes the result to `develop`.
 
 - `.github/workflows/build-on-pr.yml`
   - Trigger: PR events (`opened`, `synchronize`, `reopened`, `ready_for_review`, `converted_to_draft`, `closed`) and manual dispatch.

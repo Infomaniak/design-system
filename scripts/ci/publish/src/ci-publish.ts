@@ -51,7 +51,8 @@ export async function ciPublish({
         return getImpactedPackageJsonFiles({
           packagesDirectory,
           fromCommitId: baseSha,
-          toCommitId: 'HEAD',
+          toCommitId: headSha,
+          // toCommitId: 'HEAD', // NOTE: for debug purpose
           logger,
         });
       },
