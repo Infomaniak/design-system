@@ -3,52 +3,20 @@
     "background": {
       "dataviz": {
         "dim1": {
-          "default": {
-            "$value": "{color.background.dataviz.pink.dim1.default}"
-          },
-          "hover": {
-            "$value": "{color.background.dataviz.pink.dim1.hover}"
-          },
-          "pressed": {
-            "$value": "{color.background.dataviz.pink.dim1.pressed}"
-          }
+          "$value": "{color.background.dataviz.pink.dim1}"
         },
         "dim2": {
-          "default": {
-            "$value": "{color.background.dataviz.pink.dim2.default}"
-          },
-          "hover": {
-            "$value": "{color.background.dataviz.pink.dim2.hover}"
-          },
-          "pressed": {
-            "$value": "{color.background.dataviz.pink.dim2.pressed}"
-          }
+          "$value": "{color.background.dataviz.pink.dim2}"
         }
       }
     },
     "border": {
       "dataviz": {
         "dim1": {
-          "default": {
-            "$value": "{color.border.dataviz.pink.dim1.default}"
-          },
-          "hover": {
-            "$value": "{color.border.dataviz.pink.dim1.hover}"
-          },
-          "pressed": {
-            "$value": "{color.border.dataviz.pink.dim1.pressed}"
-          }
+          "$value": "{color.border.dataviz.pink.dim1}"
         },
         "dim2": {
-          "default": {
-            "$value": "{color.border.dataviz.pink.dim2.default}"
-          },
-          "hover": {
-            "$value": "{color.border.dataviz.pink.dim2.hover}"
-          },
-          "pressed": {
-            "$value": "{color.border.dataviz.pink.dim2.pressed}"
-          }
+          "$value": "{color.border.dataviz.pink.dim2}"
         }
       }
     },
@@ -56,14 +24,10 @@
       "on": {
         "dataviz": {
           "dim1": {
-            "default": {
-              "$value": "{color.content.on.dataviz.pink.dim1.default}"
-            }
+            "$value": "{color.content.on.dataviz.pink.dim1}"
           },
           "dim2": {
-            "default": {
-              "$value": "{color.content.on.dataviz.pink.dim2.default}"
-            }
+            "$value": "{color.content.on.dataviz.pink.dim2}"
           }
         }
       }

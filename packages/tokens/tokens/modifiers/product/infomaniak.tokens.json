@@ -2,48 +2,22 @@
   "color": {
     "background": {
       "brand": {
-        "default": {
-          "$value": "{color.background.brand.infomaniak.default}"
-        },
-        "hover": {
-          "$value": "{color.background.brand.infomaniak.hover}"
-        },
-        "pressed": {
-          "$value": "{color.background.brand.infomaniak.pressed}"
-        }
+        "$value": "{color.background.brand.infomaniak}"
       }
     },
     "border": {
       "brand": {
-        "default": {
-          "$value": "{color.border.brand.infomaniak.default}"
-        },
-        "hover": {
-          "$value": "{color.border.brand.infomaniak.hover}"
-        },
-        "pressed": {
-          "$value": "{color.border.brand.infomaniak.pressed}"
-        }
+        "$value": "{color.border.brand.infomaniak}"
       }
     },
     "content": {
       "on": {
         "brand": {
-          "default": {
-            "$value": "{color.content.on.brand.infomaniak.default}"
-          }
+          "$value": "{color.content.on.brand.infomaniak}"
         }
       },
       "brand": {
-        "default": {
-          "$value": "{color.content.brand.infomaniak.default}"
-        },
-        "hover": {
-          "$value": "{color.content.brand.infomaniak.hover}"
-        },
-        "pressed": {
-          "$value": "{color.content.brand.infomaniak.pressed}"
-        }
+        "$value": "{color.content.brand.infomaniak}"
       }
     }
   }
