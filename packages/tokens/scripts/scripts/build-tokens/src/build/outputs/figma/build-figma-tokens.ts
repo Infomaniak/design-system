@@ -125,6 +125,36 @@ export function buildFigmaTokens({
       }
     }
 
+    // handle "$root" tokens
+    {
+      const rootTokens: Set<GenericDesignTokensCollectionToken> = new Set();
+
+      for (const tokenA of figmaBaseCollection.tokens()) {
+        for (const tokenB of figmaBaseCollection.tokens()) {
+          if (
+            tokenB.name.length > tokenA.name.length &&
+            tokenA.name.every((segment: string, index: number): boolean => {
+              return tokenB.name[index] === segment;
+            })
+          ) {
+            // tokenA is a $root token of tokenB
+            rootTokens.add(tokenA);
+            break;
+          }
+        }
+      }
+
+      console.log(rootTokens);
+
+      for (const token of rootTokens) {
+        figmaBaseCollection.rename(token.name, [...token.name, '@root']);
+
+        for (const [modifier] of modifiers.entries()) {
+          figmaBaseCollection.rename([modifier, ...token.name], [modifier, ...token.name, '@root']);
+        }
+      }
+    }
+
     // restore "@root" tokens
     for (const token of Array.from(figmaBaseCollection.tokens())) {
       if (token.extensions !== undefined && Reflect.has(token.extensions, 'figmaName')) {
