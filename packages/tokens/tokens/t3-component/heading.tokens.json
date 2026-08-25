@@ -1,26 +1,32 @@
 {
   "heading": {
+    "$description": "Component tokens for heading text across sizes.",
     "xs": {
+      "$description": "Extra-small heading style.",
       "font": {
         "$value": "{typography.xl.emphasized}"
       }
     },
     "sm": {
+      "$description": "Small heading style.",
       "font": {
         "$value": "{typography.2xl.emphasized}"
       }
     },
     "md": {
+      "$description": "Medium heading style.",
       "font": {
         "$value": "{typography.3xl.emphasized}"
       }
     },
     "lg": {
+      "$description": "Large heading style.",
       "font": {
         "$value": "{typography.4xl.emphasized}"
       }
     },
     "xl": {
+      "$description": "Extra-large heading style.",
       "font": {
         "$value": "{typography.5xl.emphasized}"
       }

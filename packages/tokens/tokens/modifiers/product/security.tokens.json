@@ -2,48 +2,22 @@
   "color": {
     "background": {
       "brand": {
-        "default": {
-          "$value": "{color.background.brand.security.default}"
-        },
-        "hover": {
-          "$value": "{color.background.brand.security.hover}"
-        },
-        "pressed": {
-          "$value": "{color.background.brand.security.pressed}"
-        }
+        "$value": "{color.background.brand.security}"
       }
     },
     "border": {
       "brand": {
-        "default": {
-          "$value": "{color.border.brand.security.default}"
-        },
-        "hover": {
-          "$value": "{color.border.brand.security.hover}"
-        },
-        "pressed": {
-          "$value": "{color.border.brand.security.pressed}"
-        }
+        "$value": "{color.border.brand.security}"
       }
     },
     "content": {
       "on": {
         "brand": {
-          "default": {
-            "$value": "{color.content.on.brand.security.default}"
-          }
+          "$value": "{color.content.on.brand.security}"
         }
       },
       "brand": {
-        "default": {
-          "$value": "{color.content.brand.security.default}"
-        },
-        "hover": {
-          "$value": "{color.content.brand.security.hover}"
-        },
-        "pressed": {
-          "$value": "{color.content.brand.security.pressed}"
-        }
+        "$value": "{color.content.brand.security}"
       }
     }
   }

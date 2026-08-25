@@ -2,48 +2,22 @@
   "color": {
     "background": {
       "brand": {
-        "default": {
-          "$value": "{color.background.brand.euria.default}"
-        },
-        "hover": {
-          "$value": "{color.background.brand.euria.hover}"
-        },
-        "pressed": {
-          "$value": "{color.background.brand.euria.pressed}"
-        }
+        "$value": "{color.background.brand.euria}"
       }
     },
     "border": {
       "brand": {
-        "default": {
-          "$value": "{color.border.brand.euria.default}"
-        },
-        "hover": {
-          "$value": "{color.border.brand.euria.hover}"
-        },
-        "pressed": {
-          "$value": "{color.border.brand.euria.pressed}"
-        }
+        "$value": "{color.border.brand.euria}"
       }
     },
     "content": {
       "on": {
         "brand": {
-          "default": {
-            "$value": "{color.content.on.brand.euria.default}"
-          }
+          "$value": "{color.content.on.brand.euria}"
         }
       },
       "brand": {
-        "default": {
-          "$value": "{color.content.brand.euria.default}"
-        },
-        "hover": {
-          "$value": "{color.content.brand.euria.hover}"
-        },
-        "pressed": {
-          "$value": "{color.content.brand.euria.pressed}"
-        }
+        "$value": "{color.content.brand.euria}"
       }
     }
   }

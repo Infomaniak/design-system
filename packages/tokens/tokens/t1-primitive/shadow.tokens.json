@@ -1,44 +1,6 @@
 {
   "$type": "dimension",
   "shadow": {
-    "0": {
-      "x": {
-        "$value": {
-          "value": 0,
-          "unit": "px"
-        },
-        "$extensions": {
-          "scopes": []
-        }
-      },
-      "y": {
-        "$value": {
-          "value": 0,
-          "unit": "px"
-        },
-        "$extensions": {
-          "scopes": []
-        }
-      },
-      "blur": {
-        "$value": {
-          "value": 0,
-          "unit": "px"
-        },
-        "$extensions": {
-          "scopes": []
-        }
-      },
-      "spread": {
-        "$value": {
-          "value": 0,
-          "unit": "px"
-        },
-        "$extensions": {
-          "scopes": []
-        }
-      }
-    },
     "1": {
       "x": {
         "$value": {
