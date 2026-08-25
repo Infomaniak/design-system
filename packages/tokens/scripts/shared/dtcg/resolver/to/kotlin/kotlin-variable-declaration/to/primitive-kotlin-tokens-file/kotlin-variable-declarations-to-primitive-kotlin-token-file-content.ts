@@ -1,7 +1,7 @@
 import { dedent } from '../../../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { AUTO_GENERATED_FILE_HEADER } from '../../../../../../../../scripts/build-tokens/src/build/constants/auto-generated-file-header.ts';
 import type { KotlinVariableDeclaration } from '../../kotlin-variable-declaration.ts';
-import { SHARED_KOTLIN_TOKENS_FILE_IMPORTS } from '../shared/shared-kotlin-tokens-file-imports.ts';
+import { generateKotlinTokensFileImports } from '../shared/generate-kotlin-tokens-file-imports.ts';
 import { kotlinVariableDeclarationsToKotlinValDeclarationsString } from '../val-declaration-string/kotlin-variable-declarations-to-kotlin-val-declarations-string.ts';
 
 export interface KotlinVariableDeclarationsToPrimitiveKotlinTokenFileContentOptions {
@@ -16,6 +16,10 @@ export function kotlinVariableDeclarationsToPrimitiveKotlinTokenFileContent({
   packageName,
   declarations,
 }: KotlinVariableDeclarationsToPrimitiveKotlinTokenFileContentOptions): string {
+  const content: string = kotlinVariableDeclarationsToKotlinValDeclarationsString(declarations, {
+    context: 'global',
+  });
+
   return dedent`
     /*
       ${AUTO_GENERATED_FILE_HEADER}
@@ -23,10 +27,8 @@ export function kotlinVariableDeclarationsToPrimitiveKotlinTokenFileContent({
     
     package ${packageName}
     
-    ${SHARED_KOTLIN_TOKENS_FILE_IMPORTS}
+    ${generateKotlinTokensFileImports(content)}
     
-    ${kotlinVariableDeclarationsToKotlinValDeclarationsString(declarations, {
-      context: 'global',
-    })}
+    ${content}
   `;
 }

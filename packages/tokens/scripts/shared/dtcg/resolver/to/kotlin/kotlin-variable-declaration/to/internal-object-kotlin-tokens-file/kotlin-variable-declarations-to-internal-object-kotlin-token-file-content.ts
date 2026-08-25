@@ -1,7 +1,7 @@
 import { dedent } from '../../../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { AUTO_GENERATED_FILE_HEADER } from '../../../../../../../../scripts/build-tokens/src/build/constants/auto-generated-file-header.ts';
 import type { KotlinVariableDeclaration } from '../../kotlin-variable-declaration.ts';
-import { SHARED_KOTLIN_TOKENS_FILE_IMPORTS } from '../shared/shared-kotlin-tokens-file-imports.ts';
+import { generateKotlinTokensFileImports } from '../shared/generate-kotlin-tokens-file-imports.ts';
 import { kotlinVariableDeclarationsToKotlinValDeclarationsString } from '../val-declaration-string/kotlin-variable-declarations-to-kotlin-val-declarations-string.ts';
 
 export interface KotlinVariableDeclarationsToInternalObjectKotlinTokenFileContentOptions {
@@ -17,6 +17,10 @@ export function kotlinVariableDeclarationsToInternalObjectKotlinTokenFileContent
   objectName,
   declarations,
 }: KotlinVariableDeclarationsToInternalObjectKotlinTokenFileContentOptions): string {
+  const content: string = kotlinVariableDeclarationsToKotlinValDeclarationsString(declarations, {
+    context: 'internal-object-member-initialized',
+  });
+
   return dedent`
     /*
       ${AUTO_GENERATED_FILE_HEADER}
@@ -24,14 +28,12 @@ export function kotlinVariableDeclarationsToInternalObjectKotlinTokenFileContent
     
     package ${packageName}
     
-    ${SHARED_KOTLIN_TOKENS_FILE_IMPORTS}
+    ${generateKotlinTokensFileImports(content)}
     
     import ${primitiveTokensPackageName}.*
     
     internal object ${objectName} {
-      ${kotlinVariableDeclarationsToKotlinValDeclarationsString(declarations, {
-        context: 'internal-object-member-initialized',
-      })}
+      ${content}
     }
   `;
 }
