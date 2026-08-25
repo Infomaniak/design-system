@@ -310,9 +310,6 @@
       "tertiary": {
         "$value": "{color.gray.600}"
       },
-      "muted": {
-        "$value": "{color.gray.500}"
-      },
       "disabled": {
         "$value": "{color.gray.400}"
       },
@@ -321,6 +318,9 @@
       },
       "visited": {
         "$value": "{color.violet.600}"
+      },
+      "muted": {
+        "$value": "{color.gray.500}"
       }
     },
     "border": {
@@ -346,14 +346,14 @@
         "calendar": {
           "$value": "{color.aqua.500}"
         },
-        "contacts": {
-          "$value": "{color.violet.500}"
-        },
         "knote": {
           "$value": "{color.coral.600}"
         },
         "swisstransfer": {
           "$value": "{color.emerald.600}"
+        },
+        "contacts": {
+          "$value": "{color.violet.500}"
         }
       },
       "dataviz": {
@@ -483,24 +483,31 @@
     },
     "state": {
       "hover": {
-        "$value": "{color.blue.900-12}"
+        "medium": {
+          "$value": "{color.blue.900-12}"
+        },
+        "strong": {
+          "$value": "{color.blue.900-60}"
+        }
       },
       "pressed": {
-        "$value": "{color.blue.900-16}"
-      },
-      "selected": {
-        "$value": "{color.blue.900-12}"
-      },
-      "strong": {
-        "hover": {
-          "$value": "{color.blue.900-60}"
+        "medium": {
+          "$value": "{color.blue.900-16}"
         },
-        "pressed": {
-          "$value": "{color.blue.900-80}"
-        },
-        "selected": {
+        "strong": {
           "$value": "{color.blue.900-80}"
         }
+      },
+      "selected": {
+        "medium": {
+          "$value": "{color.blue.900-12}"
+        },
+        "strong": {
+          "$value": "{color.blue.900-80}"
+        }
+      },
+      "focus": {
+        "$value": "{color.blue.600}"
       }
     }
   }

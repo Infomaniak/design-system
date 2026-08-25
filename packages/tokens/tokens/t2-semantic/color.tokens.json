@@ -168,6 +168,13 @@
           }
         }
       },
+      "disabled": {
+        "$value": "{color.gray.200}",
+        "$description": "Background for disabled, non-interactive elements.",
+        "$extensions": {
+          "scopes": ["FRAME_FILL"]
+        }
+      },
       "dataviz": {
         "$description": "Data-visualization background colors across hues, each in two dimensions.",
         "orange": {
@@ -322,13 +329,6 @@
             "figmaName": ["color", "background", "dataviz", "@root", "dim2"]
           }
         }
-      },
-      "disabled": {
-        "$value": "{color.gray.200}",
-        "$description": "Background for disabled, non-interactive elements.",
-        "$extensions": {
-          "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-        }
       }
     },
     "content": {
@@ -419,30 +419,6 @@
             "$description": "Foreground on SwissTransfer brand backgrounds.",
             "$extensions": {
               "scopes": []
-            }
-          }
-        },
-        "feedback": {
-          "$description": "Foreground colors placed on feedback backgrounds.",
-          "success": {
-            "$value": "{color.lime.950}",
-            "$description": "Foreground on strong success backgrounds (dim1).",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
-            }
-          },
-          "warning": {
-            "$value": "{color.orange.900}",
-            "$description": "Foreground on strong warning backgrounds (dim1).",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
-            }
-          },
-          "error": {
-            "$value": "{color.red.900}",
-            "$description": "Foreground on strong error backgrounds (dim1).",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
             }
           }
         },
@@ -600,6 +576,30 @@
               "figmaName": ["color", "content", "on", "dataviz", "@root", "dim2"]
             }
           }
+        },
+        "feedback": {
+          "$description": "Foreground colors placed on feedback backgrounds.",
+          "success": {
+            "$value": "{color.lime.950}",
+            "$description": "Foreground on strong success backgrounds (dim1).",
+            "$extensions": {
+              "scopes": ["ALL_FILLS"]
+            }
+          },
+          "warning": {
+            "$value": "{color.orange.900}",
+            "$description": "Foreground on strong warning backgrounds (dim1).",
+            "$extensions": {
+              "scopes": ["ALL_FILLS"]
+            }
+          },
+          "error": {
+            "$value": "{color.red.900}",
+            "$description": "Foreground on strong error backgrounds (dim1).",
+            "$extensions": {
+              "scopes": ["ALL_FILLS"]
+            }
+          }
         }
       },
       "brand": {
@@ -703,13 +703,6 @@
           "scopes": ["ALL_FILLS"]
         }
       },
-      "muted": {
-        "$value": "{color.gray.500}",
-        "$description": "Tertiary content color for subtle, low-emphasis text.",
-        "$extensions": {
-          "scopes": ["ALL_FILLS"]
-        }
-      },
       "disabled": {
         "$value": "{color.gray.400}",
         "$description": "Content color for disabled text and icons.",
@@ -751,6 +744,13 @@
       "visited": {
         "$value": "{color.violet.600}",
         "$description": "Visited-link content colors with interaction states.",
+        "$extensions": {
+          "scopes": ["ALL_FILLS"]
+        }
+      },
+      "muted": {
+        "$value": "{color.gray.500}",
+        "$description": "Tertiary content color for subtle, low-emphasis text.",
         "$extensions": {
           "scopes": ["ALL_FILLS"]
         }
@@ -1122,39 +1122,55 @@
       }
     },
     "state": {
-      "hover": {
-        "$value": "{color.blue.900-12}",
+      "focus": {
+        "$value": "{color.blue.600}",
         "$extensions": {
-          "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+          "scopes": []
+        }
+      },
+      "hover": {
+        "medium": {
+          "$value": "{color.blue.900-12}",
+          "$description": "Semantic color tokens for backgrounds, content, borders, and shadows.",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+          }
+        },
+        "strong": {
+          "$value": "{color.blue.900-60}",
+          "$description": "Semantic color tokens for backgrounds, content, borders, and shadows.",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+          }
         }
       },
       "pressed": {
-        "$value": "{color.blue.900-16}",
-        "$extensions": {
-          "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+        "medium": {
+          "$value": "{color.blue.900-16}",
+          "$description": "Semantic color tokens for backgrounds, content, borders, and shadows.",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+          }
+        },
+        "strong": {
+          "$value": "{color.blue.900-80}",
+          "$description": "Semantic color tokens for backgrounds, content, borders, and shadows.",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+          }
         }
       },
       "selected": {
-        "$value": "{color.blue.900-12}",
-        "$extensions": {
-          "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-        }
-      },
-      "strong": {
-        "hover": {
-          "$value": "{color.blue.900-60}",
+        "medium": {
+          "$value": "{color.blue.900-12}",
+          "$description": "Semantic color tokens for backgrounds, content, borders, and shadows.",
           "$extensions": {
             "scopes": ["FRAME_FILL", "SHAPE_FILL"]
           }
         },
-        "pressed": {
+        "strong": {
           "$value": "{color.blue.900-80}",
-          "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-          }
-        },
-        "selected": {
-          "$value": "{color.blue.900-80}",
+          "$description": "Semantic color tokens for backgrounds, content, borders, and shadows.",
           "$extensions": {
             "scopes": ["FRAME_FILL", "SHAPE_FILL"]
           }

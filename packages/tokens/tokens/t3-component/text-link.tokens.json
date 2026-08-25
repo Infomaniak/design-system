@@ -4,17 +4,24 @@
     "color": {
       "$description": "Text link colors for default, hover, pressed, and visited states.",
       "$root": {
-        "$value": "{color.blue.600}",
+        "$value": "{color.content.brand}",
         "$description": "Default text link color.",
         "$extensions": {
           "scopes": ["ALL_FILLS"]
         }
       },
       "visited": {
-        "$value": "{color.violet.600}",
+        "$value": "{color.content.visited}",
         "$description": "Default visited text link color.",
         "$extensions": {
           "scopes": ["ALL_FILLS"]
+        }
+      },
+      "focus": {
+        "$value": "{color.state.focus}",
+        "$description": "Default focus text link color.",
+        "$extensions": {
+          "scopes": ["STROKE_COLOR"]
         }
       }
     }
