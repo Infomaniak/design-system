@@ -52,6 +52,7 @@ export async function ciPublish({
           packagesDirectory,
           fromCommitId: baseSha,
           toCommitId: headSha,
+          // toCommitId: 'HEAD', // NOTE: for debug purpose
           logger,
         });
       },
