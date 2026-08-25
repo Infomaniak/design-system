@@ -8,7 +8,8 @@
   "fixed": [],
   "linked": [],
   "access": "public",
-  "baseBranch": "develop",
+  "baseBranch": "main",
+  "privatePackages": { "version": true, "tag": false },
   "updateInternalDependencies": "patch",
   "ignore": ["demo", "@infomaniak-design-system/docs", "@infomaniak-design-system/svg-assets"]
 }
