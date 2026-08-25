@@ -750,7 +750,7 @@
       },
       "muted": {
         "$value": "{color.gray.500}",
-        "$description": "Tertiary content color for subtle, low-emphasis text.",
+        "$description": "Muted content color for de-emphasized, secondary text.",
         "$extensions": {
           "scopes": ["ALL_FILLS"]
         }
@@ -1122,55 +1122,60 @@
       }
     },
     "state": {
+      "$description": "Interaction state colors for focus, hover, pressed, and selected states.",
       "focus": {
         "$value": "{color.blue.600}",
+        "$description": "Focus ring color for focused interactive elements.",
         "$extensions": {
           "scopes": []
         }
       },
       "hover": {
+        "$description": "Hover state overlay colors in medium and strong intensities.",
         "medium": {
           "$value": "{color.blue.900-12}",
-          "$description": "Semantic color tokens for backgrounds, content, borders, and shadows.",
+          "$description": "Medium hover overlay for subtle interactive feedback.",
           "$extensions": {
             "scopes": ["FRAME_FILL", "SHAPE_FILL"]
           }
         },
         "strong": {
           "$value": "{color.blue.900-60}",
-          "$description": "Semantic color tokens for backgrounds, content, borders, and shadows.",
+          "$description": "Strong hover overlay for prominent interactive feedback.",
           "$extensions": {
             "scopes": ["FRAME_FILL", "SHAPE_FILL"]
           }
         }
       },
       "pressed": {
+        "$description": "Pressed state overlay colors in medium and strong intensities.",
         "medium": {
           "$value": "{color.blue.900-16}",
-          "$description": "Semantic color tokens for backgrounds, content, borders, and shadows.",
+          "$description": "Medium pressed overlay for subtle active feedback.",
           "$extensions": {
             "scopes": ["FRAME_FILL", "SHAPE_FILL"]
           }
         },
         "strong": {
           "$value": "{color.blue.900-80}",
-          "$description": "Semantic color tokens for backgrounds, content, borders, and shadows.",
+          "$description": "Strong pressed overlay for prominent active feedback.",
           "$extensions": {
             "scopes": ["FRAME_FILL", "SHAPE_FILL"]
           }
         }
       },
       "selected": {
+        "$description": "Selected state overlay colors in medium and strong intensities.",
         "medium": {
           "$value": "{color.blue.900-12}",
-          "$description": "Semantic color tokens for backgrounds, content, borders, and shadows.",
+          "$description": "Medium selected overlay for subtle selection feedback.",
           "$extensions": {
             "scopes": ["FRAME_FILL", "SHAPE_FILL"]
           }
         },
         "strong": {
           "$value": "{color.blue.900-80}",
-          "$description": "Semantic color tokens for backgrounds, content, borders, and shadows.",
+          "$description": "Strong selected overlay for prominent selection feedback.",
           "$extensions": {
             "scopes": ["FRAME_FILL", "SHAPE_FILL"]
           }
