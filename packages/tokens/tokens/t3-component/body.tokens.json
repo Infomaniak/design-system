@@ -1,21 +1,26 @@
 {
   "body": {
+    "$description": "Component tokens for body text across sizes.",
     "xs": {
+      "$description": "Extra-small body text style.",
       "font": {
         "$value": "{typography.xs.base}"
       }
     },
     "sm": {
+      "$description": "Small body text style.",
       "font": {
         "$value": "{typography.sm.base}"
       }
     },
     "md": {
+      "$description": "Medium (default) body text style.",
       "font": {
         "$value": "{typography.md.base}"
       }
     },
     "lg": {
+      "$description": "Large body text style.",
       "font": {
         "$value": "{typography.lg.base}"
       }

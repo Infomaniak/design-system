@@ -1,5 +1,6 @@
 {
   "icon": {
+    "$description": "Semantic icon tokens for iconography sizing.",
     "size": {
       "$description": "Semantic icon size scale for consistent iconography.",
       "xs": {
