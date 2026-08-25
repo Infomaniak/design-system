@@ -2,7 +2,7 @@
   "text-link": {
     "$description": "Component tokens for text links across interaction and visited states.",
     "color": {
-      "$description": "Text link colors for default, hover, pressed, and visited states.",
+      "$description": "Text link colors for different states.",
       "$root": {
         "$value": "{color.content.brand}",
         "$description": "Default text link color.",
