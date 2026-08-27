@@ -46,7 +46,7 @@ export const Default: Story = {
       ${defineEsdsLinkAttr}
       esds-text-link
       href="${args.href}"
-      >Text link</a
+      >Text link <strong style="color: red">with red content</strong></a
     >`,
 };
 
