@@ -1,0 +1,36 @@
+name: Create release PR
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  ensure-release-pr:
+    name: Ensure release PR exists
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Create release PR if none exists
+        run: |
+          EXISTING=$(gh pr list --base main --head develop --state open --json number --jq '.[0].number')
+          if [ -z "$EXISTING" ]; then
+            gh pr create \
+              --base main \
+              --head develop \
+              --title "release: develop → main" \
+              --body "$(cat <<'EOF'
+          Merge this PR to release accumulated changes from `develop` to `main`.
+          EOF
+          )" \
+              --draft
+          else
+            echo "Release PR #$EXISTING already exists"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

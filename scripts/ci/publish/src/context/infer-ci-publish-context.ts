@@ -7,7 +7,6 @@ import type { PublishMode } from '../../../../helpers/publish/publish-mode/publi
 export interface CiPublishContext {
   readonly branchName: string;
   readonly baseSha: string;
-  readonly headSha: string;
   readonly mode: PublishMode;
   readonly shouldPublish: boolean;
 }
@@ -15,14 +14,12 @@ export interface CiPublishContext {
 export function inferCiPublishContext(githubCiConfig: GithubCiConfig): CiPublishContext {
   let branchName: string;
   let baseSha: string;
-  let headSha: string;
   let mode: PublishMode;
   let shouldPublish: boolean;
 
   if (githubCiConfig.event_name === 'pull_request') {
     branchName = verifyBranchTargetsMainOrDevelop(githubCiConfig.base_ref);
     baseSha = githubCiConfig.event.pull_request.base.sha;
-    headSha = githubCiConfig.event.pull_request.head.sha;
     mode = 'dev';
     shouldPublish = githubCiConfig.event.pull_request.labels.some(
       (label: GithubCiLabel): boolean => {
@@ -32,7 +29,6 @@ export function inferCiPublishContext(githubCiConfig: GithubCiConfig): CiPublish
   } else if (githubCiConfig.event_name === 'push') {
     branchName = verifyBranchTargetsMainOrDevelop(githubCiConfig.ref_name);
     baseSha = githubCiConfig.event.before;
-    headSha = githubCiConfig.sha;
     mode = branchName === 'develop' ? 'rc' : 'prod';
     shouldPublish = true;
   } else {
@@ -44,7 +40,6 @@ export function inferCiPublishContext(githubCiConfig: GithubCiConfig): CiPublish
   return {
     branchName,
     baseSha,
-    headSha,
     mode,
     shouldPublish,
   };
