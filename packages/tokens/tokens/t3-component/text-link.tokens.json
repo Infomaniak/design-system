@@ -1,27 +1,21 @@
 {
   "text-link": {
     "$description": "Component tokens for text links across interaction and visited states.",
-    "color": {
-      "$description": "Text link colors for different states.",
-      "$root": {
-        "$value": "{color.content.brand}",
-        "$description": "Default text link color.",
-        "$extensions": {
-          "scopes": ["ALL_FILLS"]
-        }
-      },
-      "visited": {
-        "$value": "{color.content.visited}",
-        "$description": "Default visited text link color.",
-        "$extensions": {
-          "scopes": ["ALL_FILLS"]
-        }
-      },
-      "focus": {
-        "$value": "{color.state.focus}",
-        "$description": "Default focus text link color.",
-        "$extensions": {
-          "scopes": ["STROKE_COLOR"]
+    "content": {
+      "color": {
+        "default": {
+          "$value": "{color.content.brand}",
+          "$description": "Default text link color.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "visited": {
+          "$value": "{color.content.visited}",
+          "$description": "Default visited text link color.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
         }
       }
     }

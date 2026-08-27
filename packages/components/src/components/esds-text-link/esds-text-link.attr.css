@@ -1,6 +1,6 @@
 [esds-text-link] {
   display: inline;
-  color: var(--esds-text-link-color-default);
+  color: var(--esds-text-link-color);
   text-decoration: none;
 
   &:focus-visible {
@@ -12,12 +12,12 @@
     color: var(--esds-text-link-color-hover);
   }
 
-  &:active {
-    color: var(--esds-text-link-color-pressed);
-  }
+  /*&:active {*/
+  /*  color: var(--esds-text-link-color-pressed);*/
+  /*}*/
 
   &:visited {
-    color: var(--esds-text-link-color-visited-default);
+    color: var(--esds-text-link-color-visited);
 
     &:hover {
       color: var(--esds-text-link-color-visited-hover);

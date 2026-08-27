@@ -1,0 +1,25 @@
+{
+  "focus": {
+    "border": {
+      "color": {
+        "$value": "{color.blue.600}",
+        "$description": "Default focus text link color.",
+        "$extensions": {
+          "scopes": ["STROKE_COLOR"]
+        }
+      },
+      "radius": {
+        "$value": "{radius.xs}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "width": {
+        "$value": "{border.xs.width}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    }
+  }
+}
