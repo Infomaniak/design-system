@@ -3,7 +3,6 @@
     "border": {
       "color": {
         "$value": "{color.blue.600}",
-        "$description": "Default focus text link color.",
         "$extensions": {
           "scopes": ["STROKE_COLOR"]
         }
