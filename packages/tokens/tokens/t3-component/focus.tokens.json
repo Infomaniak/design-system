@@ -15,7 +15,7 @@
         }
       },
       "width": {
-        "$value": "{border.xs.width}",
+        "$value": "{border.sm.width}",
         "$extensions": {
           "scopes": []
         }
