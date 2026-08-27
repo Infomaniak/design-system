@@ -33,6 +33,7 @@
     "bench": "vitest bench",
     "=== IMPORT ===": "",
     "import:assets:images:svg": "yarn workspace @infomaniak-design-system/svg-assets import",
+    "import:outlined:icons": "yarn workspace @infomaniak-design-system/svg-assets import:outlined",
     "=== MISC ===": "",
     "generate": "yarn workspace @infomaniak-design-system/components run generate",
     "create:figma:webhook": "node --no-warnings=ExperimentalWarning scripts/scripts/create-figma-webhook/create-figma-webhook.script.ts",

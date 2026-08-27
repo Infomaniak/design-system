@@ -4,8 +4,7 @@ import { basename, join, parse, sep } from 'node:path';
 import { writeJsonFileSafe } from '../../../../../../../../scripts/helpers/file/write-json-file-safe.ts';
 import { writeTextFileSafe } from '../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import type { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
-import { APPLE_SYMBOL_TEMPLATE } from './apple-symbol-template.ts';
-import { BASE_STROKE_WIDTH, WEIGHT_MULTIPLIERS } from './weight-multipliers.ts';
+import { APPLE_SYMBOL_TEMPLATE, SVG_PROLOG } from './apple-symbol-template.ts';
 
 export interface ConvertSvgToSymbolsetOptions {
   readonly inputDirectory: string;
@@ -18,48 +17,35 @@ const ROOT_CONTENTS_JSON = { info: { author: 'xcode', version: 1 } };
 
 const XCASSETS_NAME = 'Icons.xcassets';
 
-type OrderedNode = {
+const WIREFRAME_CLASS = 'SFSymbolsPreviewWireframe';
+
+const MASTER_WEIGHT_IDS = ['Ultralight-S', 'Regular-S', 'Black-S'] as const;
+
+const SVG_VIEWBOX_SIZE = 24;
+const SF_SYMBOL_SIZE = 100;
+const SCALE_FACTOR = SF_SYMBOL_SIZE / SVG_VIEWBOX_SIZE;
+
+export type OrderedNode = {
   readonly [key: string]: unknown;
   readonly ':@'?: Record<string, string>;
 };
 
-function buildSymbolContentsJson(iconName: string): { symbols: unknown[]; info: unknown } {
+export function buildSymbolContentsJson(iconName: string): { symbols: unknown[]; info: unknown } {
   return {
     symbols: [{ filename: `${iconName}.svg`, idiom: 'universal' }],
     info: { author: 'xcode', version: 1 },
   };
 }
 
-function extractSvgInnerContent(parsedSvg: OrderedNode[]): OrderedNode[] {
-  const svgRoot: OrderedNode | undefined = parsedSvg.find((node: OrderedNode): boolean =>
-    Object.prototype.hasOwnProperty.call(node, 'svg'),
-  );
-
-  if (svgRoot === undefined) {
-    throw new Error('No <svg> root element found in input SVG.');
-  }
-
-  const innerContent: unknown = svgRoot['svg'];
-  if (!Array.isArray(innerContent)) {
-    return [];
-  }
-
-  return innerContent as OrderedNode[];
-}
-
-function findGroupById(parsed: OrderedNode[], id: string): OrderedNode | undefined {
+export function findGroupById(parsed: OrderedNode[], id: string): OrderedNode | undefined {
   const svgRoot: OrderedNode | undefined = parsed.find((node: OrderedNode): boolean =>
     Object.prototype.hasOwnProperty.call(node, 'svg'),
   );
 
-  if (svgRoot === undefined) {
-    return undefined;
-  }
+  if (svgRoot === undefined) return undefined;
 
   const children: unknown = svgRoot['svg'];
-  if (!Array.isArray(children)) {
-    return undefined;
-  }
+  if (!Array.isArray(children)) return undefined;
 
   return (children as OrderedNode[]).find((child: OrderedNode): boolean => {
     const attrs: Record<string, string> | undefined = child[':@'];
@@ -67,104 +53,119 @@ function findGroupById(parsed: OrderedNode[], id: string): OrderedNode | undefin
   });
 }
 
-function isFillPath(attrs: Record<string, string>): boolean {
-  return attrs['@_fill'] !== undefined && attrs['@_fill'] !== 'none';
+function buildPathNode(pathData: string): OrderedNode {
+  return {
+    path: [],
+    ':@': {
+      '@_d': pathData,
+      '@_class': WIREFRAME_CLASS,
+    },
+  };
 }
 
-function convertZeroBBoxPath(d: string, strokeWidth: number): string | undefined {
-  const horizontalMatch = d.match(/^M\s*(-?[\d.]+)\s+(-?[\d.]+)\s*H\s*(-?[\d.]+)$/);
-  if (horizontalMatch) {
-    const x1 = Math.min(parseFloat(horizontalMatch[1]), parseFloat(horizontalMatch[3]));
-    const x2 = Math.max(parseFloat(horizontalMatch[1]), parseFloat(horizontalMatch[3]));
-    const y = parseFloat(horizontalMatch[2]);
-    const r = strokeWidth / 2;
-    return (
-      `M${x1.toFixed(4)} ${(y - r).toFixed(4)} ` +
-      `L${x2.toFixed(4)} ${(y - r).toFixed(4)} ` +
-      `A${r.toFixed(4)} ${r.toFixed(4)} 0 0 1 ${x2.toFixed(4)} ${(y + r).toFixed(4)} ` +
-      `L${x1.toFixed(4)} ${(y + r).toFixed(4)} ` +
-      `A${r.toFixed(4)} ${r.toFixed(4)} 0 0 1 ${x1.toFixed(4)} ${(y - r).toFixed(4)} ` +
-      `Z`
-    );
+function extractPathData(svgString: string): string[] {
+  const parser = new XMLParser({ ignoreAttributes: false, preserveOrder: true });
+  const parsed = parser.parse(svgString) as OrderedNode[];
+
+  const result: string[] = [];
+
+  function walk(nodes: OrderedNode[]): void {
+    for (const node of nodes) {
+      if (Object.prototype.hasOwnProperty.call(node, 'path')) {
+        const attrs = node[':@'];
+        if (attrs !== undefined && attrs['@_d'] !== undefined) {
+          result.push(attrs['@_d']);
+        }
+      }
+
+      for (const key of Object.keys(node)) {
+        if (key === ':@') continue;
+        const children = node[key];
+        if (Array.isArray(children)) {
+          walk(children as OrderedNode[]);
+        }
+      }
+    }
   }
 
-  const verticalMatch = d.match(/^M\s*(-?[\d.]+)\s+(-?[\d.]+)\s*V\s*(-?[\d.]+)$/);
-  if (verticalMatch) {
-    const x = parseFloat(verticalMatch[1]);
-    const y1 = Math.min(parseFloat(verticalMatch[2]), parseFloat(verticalMatch[3]));
-    const y2 = Math.max(parseFloat(verticalMatch[2]), parseFloat(verticalMatch[3]));
-    const r = strokeWidth / 2;
-    return (
-      `M${(x - r).toFixed(4)} ${y1.toFixed(4)} ` +
-      `L${(x - r).toFixed(4)} ${y2.toFixed(4)} ` +
-      `A${r.toFixed(4)} ${r.toFixed(4)} 0 0 1 ${(x + r).toFixed(4)} ${y2.toFixed(4)} ` +
-      `L${(x + r).toFixed(4)} ${y1.toFixed(4)} ` +
-      `A${r.toFixed(4)} ${r.toFixed(4)} 0 0 1 ${(x - r).toFixed(4)} ${y1.toFixed(4)} ` +
-      `Z`
-    );
+  walk(parsed);
+  return result;
+}
+
+function transformPathData(pathData: string): string {
+  const commands = pathData.match(/[MLHVCSQTAZmlhvcsqtaz]|-?\d+(?:\.\d+)?/g);
+  if (commands === null) return pathData;
+
+  let i = 0;
+  let isX = true;
+  let result = '';
+
+  while (i < commands.length) {
+    const token = commands[i];
+
+    if (/[MLHVCSQTAZmlhvcsqtaz]/.test(token)) {
+      isX = true;
+      result += token;
+
+      switch (token.toUpperCase()) {
+        case 'H':
+          i++;
+          while (i < commands.length && !/[MLHVCSQTAZmlhvcsqtaz]/.test(commands[i]!)) {
+            result += ' ' + transformX(parseFloat(commands[i]!));
+            i++;
+          }
+          break;
+        case 'V':
+          i++;
+          while (i < commands.length && !/[MLHVCSQTAZmlhvcsqtaz]/.test(commands[i]!)) {
+            result += ' ' + transformY(parseFloat(commands[i]!));
+            i++;
+          }
+          break;
+        case 'A':
+          i++;
+          while (i < commands.length && !/[MLHVCSQTAZmlhvcsqtaz]/.test(commands[i]!)) {
+            const rx = parseFloat(commands[i]!);
+            const ry = parseFloat(commands[i + 1]!);
+            const xRot = parseFloat(commands[i + 2]!);
+            const largeArc = parseFloat(commands[i + 3]!);
+            const sweep = parseFloat(commands[i + 4]!);
+            const x = parseFloat(commands[i + 5]!);
+            const y = parseFloat(commands[i + 6]!);
+            result += ` ${transformX(rx)} ${transformY(ry)} ${xRot} ${largeArc} ${sweep} ${transformX(x)} ${transformY(y)}`;
+            i += 7;
+          }
+          break;
+        default:
+          i++;
+          isX = true;
+          while (i < commands.length && !/[MLHVCSQTAZmlhvcsqtaz]/.test(commands[i]!)) {
+            const val = parseFloat(commands[i]!);
+            result += ' ' + (isX ? transformX(val) : transformY(val));
+            isX = !isX;
+            i++;
+          }
+          break;
+      }
+    } else {
+      i++;
+    }
   }
 
-  return undefined;
+  return result;
 }
 
-function applyWeightToPaths(innerContent: OrderedNode[], targetWidth: string): OrderedNode[] {
-  const strokeWidth: number = parseFloat(targetWidth);
-
-  return innerContent.map((node: OrderedNode): OrderedNode => {
-    const attrs: Record<string, string> | undefined = node[':@'];
-    if (attrs === undefined) {
-      return node;
-    }
-
-    if (isFillPath(attrs)) {
-      const filledAttrs: Record<string, string> = { ...attrs };
-      delete filledAttrs['@_stroke'];
-      delete filledAttrs['@_stroke-width'];
-      delete filledAttrs['@_stroke-linecap'];
-      delete filledAttrs['@_stroke-linejoin'];
-      delete filledAttrs['@_fill'];
-
-      filledAttrs['@_fill'] = 'currentColor';
-
-      return { ...node, ':@': filledAttrs };
-    }
-
-    const d: string | undefined = attrs['@_d'];
-    const outlinedD: string | undefined =
-      d !== undefined ? convertZeroBBoxPath(d, strokeWidth) : undefined;
-
-    if (outlinedD !== undefined) {
-      const filledAttrs: Record<string, string> = { ...attrs };
-      delete filledAttrs['@_stroke'];
-      delete filledAttrs['@_stroke-width'];
-      delete filledAttrs['@_stroke-linecap'];
-      delete filledAttrs['@_stroke-linejoin'];
-      delete filledAttrs['@_fill'];
-
-      filledAttrs['@_d'] = outlinedD;
-      filledAttrs['@_fill'] = 'currentColor';
-
-      return { ...node, ':@': filledAttrs };
-    }
-
-    const cleanedAttrs: Record<string, string> = { ...attrs };
-    delete cleanedAttrs['@_stroke'];
-    delete cleanedAttrs['@_stroke-width'];
-    delete cleanedAttrs['@_fill'];
-
-    cleanedAttrs['@_stroke'] = 'currentColor';
-    cleanedAttrs['@_stroke-width'] = targetWidth;
-    cleanedAttrs['@_stroke-linecap'] = 'round';
-    cleanedAttrs['@_stroke-linejoin'] = 'round';
-    cleanedAttrs['@_fill'] = 'none';
-
-    return { ...node, ':@': cleanedAttrs };
-  });
+function transformX(value: number): string {
+  return String(parseFloat((value * SCALE_FACTOR).toFixed(4)));
 }
 
-function injectWeightsIntoTemplate(
+function transformY(value: number): string {
+  return String(parseFloat((value * SCALE_FACTOR - SF_SYMBOL_SIZE).toFixed(4)));
+}
+
+export function injectMastersIntoTemplate(
   parsedTemplate: OrderedNode[],
-  innerContent: OrderedNode[],
+  svgString: string,
 ): void {
   const symbolsGroup: OrderedNode | undefined = findGroupById(parsedTemplate, 'Symbols');
 
@@ -177,27 +178,19 @@ function injectWeightsIntoTemplate(
     throw new Error('Symbols group has no child elements.');
   }
 
+  const pathDataList: string[] = extractPathData(svgString).map(transformPathData);
+
   for (const group of weightGroups as OrderedNode[]) {
     const groupAttrs: Record<string, string> | undefined = group[':@'];
-    if (groupAttrs === undefined) {
-      continue;
-    }
+    if (groupAttrs === undefined) continue;
 
     const weightId: string | undefined = groupAttrs['@_id'];
-    if (weightId === undefined) {
-      continue;
-    }
+    if (weightId === undefined) continue;
+    if (!(MASTER_WEIGHT_IDS as readonly string[]).includes(weightId)) continue;
 
-    const multiplier: number | undefined = WEIGHT_MULTIPLIERS[weightId];
-    if (multiplier === undefined) {
-      continue;
-    }
+    const pathNodes: OrderedNode[] = pathDataList.map(buildPathNode);
 
-    const targetWidth: string = (BASE_STROKE_WIDTH * multiplier).toFixed(2);
-
-    const weightedPaths: OrderedNode[] = applyWeightToPaths(innerContent, targetWidth);
-
-    (group as Record<string, unknown>)['g'] = weightedPaths;
+    (group as Record<string, unknown>)['g'] = pathNodes;
   }
 }
 
@@ -208,11 +201,16 @@ export async function convertSvgToSymbolset({
   logger,
 }: ConvertSvgToSymbolsetOptions): Promise<void> {
   return logger.asyncTask('sf-symbols', async (logger: Logger): Promise<void> => {
-    const parser: XMLParser = new XMLParser({ ignoreAttributes: false, preserveOrder: true });
+    const parser: XMLParser = new XMLParser({
+      ignoreAttributes: false,
+      preserveOrder: true,
+      commentPropName: '#comment',
+    });
     const builder: XMLBuilder = new XMLBuilder({
       ignoreAttributes: false,
       preserveOrder: true,
       format: true,
+      commentPropName: '#comment',
     });
 
     const xcassetsPath: string = join(outputDirectory, XCASSETS_NAME);
@@ -242,13 +240,10 @@ export async function convertSvgToSymbolset({
       await logger.asyncTask(`convert:${iconName}`, async (): Promise<void> => {
         const inputSvgStr: string = await readFile(svgFile, 'utf-8');
 
-        const parsedWebSvg: OrderedNode[] = parser.parse(inputSvgStr) as OrderedNode[];
-        const innerContent: OrderedNode[] = extractSvgInnerContent(parsedWebSvg);
-
         const parsedTemplate: OrderedNode[] = parser.parse(APPLE_SYMBOL_TEMPLATE) as OrderedNode[];
-        injectWeightsIntoTemplate(parsedTemplate, innerContent);
+        injectMastersIntoTemplate(parsedTemplate, inputSvgStr);
 
-        const outputSvgStr: string = builder.build(parsedTemplate);
+        const outputSvgStr: string = SVG_PROLOG + builder.build(parsedTemplate);
 
         await writeTextFileSafe(join(symbolsetPath, `${iconName}.svg`), outputSvgStr);
         await writeJsonFileSafe(

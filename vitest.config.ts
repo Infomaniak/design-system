@@ -34,6 +34,7 @@ export default defineConfig({
         'src/**/*.{test,bench}.ts',
         'src/**/*.skip-test*.ts',
         'src/**/*.skip-test*/**/*.ts',
+        '**/*.test.ts',
         'dist/**/*',
         'node_modules/**/*',
         '**/*.e2e.ts',

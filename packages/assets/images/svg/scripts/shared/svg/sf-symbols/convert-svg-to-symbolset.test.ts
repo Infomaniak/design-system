@@ -1,30 +1,29 @@
+import { XMLParser } from 'fast-xml-parser';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { XMLParser } from 'fast-xml-parser';
 import { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
 import {
+  buildSymbolContentsJson,
   convertSvgToSymbolset,
   type ConvertSvgToSymbolsetOptions,
+  findGroupById,
+  injectMastersIntoTemplate,
+  type OrderedNode,
 } from './convert-svg-to-symbolset.ts';
-import { BASE_STROKE_WIDTH, WEIGHT_MULTIPLIERS } from './weight-multipliers.ts';
-
-const STROKE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 const FILL_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1.125C18.0061 1.125 22.875 5.9939 22.875 12C22.875 18.0061 18.0061 22.875 12 22.875C5.9939 22.875 1.125 18.0061 1.125 12C1.125 5.9939 5.9939 1.125 12 1.125Z" fill="black"/></svg>`;
 
-const MULTI_ELEMENT_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18" stroke="black" stroke-width="1.75"/><circle cx="12" cy="12" r="5" stroke="black" stroke-width="1.75"/><line x1="0" y1="0" x2="24" y2="24" stroke="black" stroke-width="1.75"/></svg>`;
+const MULTI_SUBPATH_FILL_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1.125C18.0061 1.125 22.875 5.9939 22.875 12C22.875 18.0061 18.0061 22.875 12 22.875C5.9939 22.875 1.125 18.0061 1.125 12C1.125 5.9939 5.9939 1.125 12 1.125ZM12 11.125C11.5168 11.125 11.125 11.5168 11.125 12V16C11.125 16.4832 11.5168 16.875 12 16.875C12.4832 16.875 12.875 16.4832 12.875 16V12C12.875 11.5168 12.4832 11.125 12 11.125ZM12 7.125C11.5168 7.125 11.125 7.51675 11.125 8C11.125 8.48325 11.5168 8.875 12 8.875H12.0098C12.493 8.875 12.8848 8.48325 12.8848 8C12.8848 7.51675 12.493 7.125 12.0098 7.125H12Z" fill="black"/></svg>`;
+
+const MULTI_PATH_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1.125C18.0061 1.125 22.875 5.9939 22.875 12C22.875 18.0061 18.0061 22.875 12 22.875C5.9939 22.875 1.125 18.0061 1.125 12C1.125 5.9939 5.9939 1.125 12 1.125Z" fill="black"/><path d="M12 11.125C11.5168 11.125 11.125 11.5168 11.125 12V16C11.125 16.4832 11.5168 16.875 12 16.875C12.4832 16.875 12.875 16.4832 12.875 16V12C12.875 11.5168 12.4832 11.125 12 11.125Z" fill="black"/></svg>`;
+
+const EVENODD_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M22.875 18C22.875 18.7625 22.5724 19.494 22.0332 20.0332C21.494 20.5724 20.7625 20.875 20 20.875H4C3.2375 20.875 2.50596 20.5724 1.9668 20.0332C1.42763 19.494 1.125 18.7625 1.125 18V12.8945H22.875V18ZM6.00391 15.125C5.51929 15.1251 5.12695 15.5183 5.12695 16.0029C5.12709 16.4875 5.51937 16.8807 6.00391 16.8809C6.48856 16.8809 6.8817 16.4875 6.88184 16.0029C6.88184 15.5182 6.48864 15.125 6.00391 15.125ZM10.001 15.125C9.51624 15.125 9.12305 15.5182 9.12305 16.0029C9.12318 16.4875 9.51633 16.8809 10.001 16.8809C10.4856 16.8809 10.8788 16.4875 10.8789 16.0029C10.8789 15.5182 10.4857 15.125 10.001 15.125Z" fill="black"/><path d="M16.96 3.13184C17.425 3.16443 17.8765 3.30991 18.2744 3.55664C18.728 3.83795 19.094 4.24014 19.332 4.71777L22.5488 11.1445H1.4502L4.66797 4.71777C4.90598 4.24014 5.27205 3.83794 5.72559 3.55664C6.18007 3.27481 6.70448 3.12534 7.23926 3.125H16.7607L16.96 3.13184Z" fill="black"/></svg>`;
 
 const MASK_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><mask id="m"><rect width="24" height="24" fill="white"/><path d="M6 6L18 18" stroke="black" stroke-width="1.75"/></mask></defs><rect width="24" height="24" fill="black" mask="url(#m)"/></svg>`;
 
-const ZERO_HEIGHT_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M5 12H19" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-
-const ZERO_WIDTH_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 5V19" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-
-const MIXED_ZERO_AND_NORMAL_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M5 12H19" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 6L6 18M6 6L18 18" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-
-const WEIGHT_IDS = Object.keys(WEIGHT_MULTIPLIERS);
+const WEIGHT_IDS = ['Ultralight-S', 'Regular-S', 'Black-S'];
 
 const PREFIX = 'esds';
 
@@ -36,8 +35,6 @@ function createOptions(inputDir: string, outputDir: string): ConvertSvgToSymbols
     logger: Logger.root(),
   };
 }
-
-type OrderedNode = { [key: string]: unknown; ':@'?: Record<string, string> };
 
 function parseOutputSvg(svgStr: string): OrderedNode[] {
   const parser = new XMLParser({ ignoreAttributes: false, preserveOrder: true });
@@ -61,14 +58,14 @@ function findSymbolsGroup(parsed: OrderedNode[]): OrderedNode | undefined {
 
 function findWeightGroups(
   parsed: OrderedNode[],
-): Record<string, { strokeWidth: string; paths: OrderedNode[] }> {
+): Record<string, { pathData: string; paths: OrderedNode[] }> {
   const symbolsGroup = findSymbolsGroup(parsed);
   if (!symbolsGroup) throw new Error('No Symbols group found');
 
   const weightGroups = symbolsGroup['g'] as OrderedNode[];
   if (!Array.isArray(weightGroups)) throw new Error('Symbols group has no children');
 
-  const result: Record<string, { strokeWidth: string; paths: OrderedNode[] }> = {};
+  const result: Record<string, { pathData: string; paths: OrderedNode[] }> = {};
 
   for (const group of weightGroups) {
     const attrs = group[':@'];
@@ -77,13 +74,13 @@ function findWeightGroups(
     const id = attrs['@_id'];
     if (!WEIGHT_IDS.includes(id)) continue;
 
-    const paths = group['g'] as OrderedNode[];
-    if (!Array.isArray(paths)) continue;
+    const children = group['g'] as OrderedNode[] | undefined;
+    if (!Array.isArray(children)) continue;
 
-    const firstPathAttrs = paths.find((p) => p[':@'])?.[':@'];
-    const strokeWidth = firstPathAttrs?.['@_stroke-width'] ?? '';
+    const firstPathAttrs = children.find((p) => p[':@'])?.[':@'];
+    const pathData = firstPathAttrs?.['@_d'] ?? '';
 
-    result[id] = { strokeWidth, paths };
+    result[id] = { pathData, paths: children };
   }
 
   return result;
@@ -107,7 +104,7 @@ describe('convertSvgToSymbolset', () => {
   });
 
   it('generates root Contents.json with correct schema', async () => {
-    await writeFile(join(inputDir, 'test-icon.svg'), STROKE_SVG);
+    await writeFile(join(inputDir, 'test-icon.svg'), FILL_SVG);
 
     await convertSvgToSymbolset(createOptions(inputDir, outputDir));
 
@@ -117,8 +114,8 @@ describe('convertSvgToSymbolset', () => {
     expect(contents).toEqual({ info: { author: 'xcode', version: 1 } });
   });
 
-  it('converts a stroke-based SVG with all 9 weights and correct stroke-widths', async () => {
-    await writeFile(join(inputDir, 'heart.svg'), STROKE_SVG);
+  it('generates 3 master weights (Ultralight-S, Regular-S, Black-S)', async () => {
+    await writeFile(join(inputDir, 'heart.svg'), FILL_SVG);
 
     await convertSvgToSymbolset(createOptions(inputDir, outputDir));
 
@@ -132,19 +129,14 @@ describe('convertSvgToSymbolset', () => {
     const parsed = parseOutputSvg(svgStr);
     const weightGroups = findWeightGroups(parsed);
 
-    expect(Object.keys(weightGroups)).toHaveLength(9);
-
-    for (const weightId of WEIGHT_IDS) {
-      const group = weightGroups[weightId];
-      expect(group, `weight ${weightId} should exist`).toBeDefined();
-
-      const expectedWidth = (BASE_STROKE_WIDTH * WEIGHT_MULTIPLIERS[weightId]).toFixed(2);
-      expect(group.strokeWidth, `weight ${weightId} stroke-width`).toBe(expectedWidth);
-    }
+    expect(Object.keys(weightGroups)).toHaveLength(3);
+    expect(weightGroups['Ultralight-S']).toBeDefined();
+    expect(weightGroups['Regular-S']).toBeDefined();
+    expect(weightGroups['Black-S']).toBeDefined();
   });
 
-  it('uses the real Apple template with correct viewBox and structure', async () => {
-    await writeFile(join(inputDir, 'heart.svg'), STROKE_SVG);
+  it('uses the Apple variable template with correct viewBox and structure', async () => {
+    await writeFile(join(inputDir, 'heart.svg'), FILL_SVG);
 
     await convertSvgToSymbolset(createOptions(inputDir, outputDir));
 
@@ -157,21 +149,66 @@ describe('convertSvgToSymbolset', () => {
     const svgStr = await readFile(svgPath, 'utf-8');
 
     expect(svgStr).toContain('viewBox="0 0 3300 2200"');
+    expect(svgStr).toContain('<!DOCTYPE svg');
+    expect(svgStr).toContain('Generator: Apple Native CoreSVG');
     expect(svgStr).toContain('id="Notes"');
     expect(svgStr).toContain('id="template-version"');
     expect(svgStr).toContain('Template v.7.0');
+    expect(svgStr).toContain('Requires Xcode 26 or greater');
+    expect(svgStr).toContain('Generated from symbol');
+    expect(svgStr).toContain('Typeset at 100.0 points');
     expect(svgStr).toContain('id="Guides"');
     expect(svgStr).toContain('id="Baseline-S"');
-    expect(svgStr).toContain('id="Baseline-M"');
-    expect(svgStr).toContain('id="Baseline-L"');
     expect(svgStr).toContain('id="Capline-S"');
+    expect(svgStr).toContain('id="Baseline-M"');
     expect(svgStr).toContain('id="Capline-M"');
+    expect(svgStr).toContain('id="Baseline-L"');
     expect(svgStr).toContain('id="Capline-L"');
+    expect(svgStr).toContain('id="H-reference"');
     expect(svgStr).toContain('id="Symbols"');
   });
 
-  it('includes the SFSymbolsPreviewWireframe style for SF Symbols app preview', async () => {
-    await writeFile(join(inputDir, 'heart.svg'), STROKE_SVG);
+  it('includes left and right margins for all 3 weights', async () => {
+    await writeFile(join(inputDir, 'heart.svg'), FILL_SVG);
+
+    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
+
+    const svgPath = join(
+      outputDir,
+      'Icons.xcassets',
+      `${PREFIX}-heart.symbolset`,
+      `${PREFIX}-heart.svg`,
+    );
+    const svgStr = await readFile(svgPath, 'utf-8');
+
+    expect(svgStr).toContain('left-margin-Ultralight-S');
+    expect(svgStr).toContain('right-margin-Ultralight-S');
+    expect(svgStr).toContain('left-margin-Regular-S');
+    expect(svgStr).toContain('right-margin-Regular-S');
+    expect(svgStr).toContain('left-margin-Black-S');
+    expect(svgStr).toContain('right-margin-Black-S');
+  });
+
+  it('includes 3 H-reference guides (one per scale: S, M, L)', async () => {
+    await writeFile(join(inputDir, 'heart.svg'), FILL_SVG);
+
+    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
+
+    const svgPath = join(
+      outputDir,
+      'Icons.xcassets',
+      `${PREFIX}-heart.symbolset`,
+      `${PREFIX}-heart.svg`,
+    );
+    const svgStr = await readFile(svgPath, 'utf-8');
+
+    const hRefMatches = svgStr.match(/id="H-reference"/g);
+    expect(hRefMatches).not.toBeNull();
+    expect(hRefMatches!.length).toBe(3);
+  });
+
+  it('includes the SFSymbolsPreviewWireframe style', async () => {
+    await writeFile(join(inputDir, 'heart.svg'), FILL_SVG);
 
     await convertSvgToSymbolset(createOptions(inputDir, outputDir));
 
@@ -187,35 +224,8 @@ describe('convertSvgToSymbolset', () => {
     expect(svgStr).toContain('<style>');
   });
 
-  it('preserves all child elements from the source SVG', async () => {
-    await writeFile(join(inputDir, 'multi.svg'), MULTI_ELEMENT_SVG);
-
-    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
-
-    const svgPath = join(
-      outputDir,
-      'Icons.xcassets',
-      `${PREFIX}-multi.symbolset`,
-      `${PREFIX}-multi.svg`,
-    );
-    const svgStr = await readFile(svgPath, 'utf-8');
-    const parsed = parseOutputSvg(svgStr);
-    const weightGroups = findWeightGroups(parsed);
-
-    const regularGroup = weightGroups['Regular-M'];
-    expect(regularGroup).toBeDefined();
-
-    const paths = regularGroup.paths;
-    expect(paths.length).toBeGreaterThanOrEqual(3);
-
-    const elementTags = paths.map((node) => Object.keys(node).filter((k) => k !== ':@'));
-    expect(elementTags).toContainEqual(['path']);
-    expect(elementTags).toContainEqual(['circle']);
-    expect(elementTags).toContainEqual(['line']);
-  });
-
-  it('strips stroke and stroke-width from inner paths and uses currentColor', async () => {
-    await writeFile(join(inputDir, 'heart.svg'), STROKE_SVG);
+  it('applies class="SFSymbolsPreviewWireframe" to all paths', async () => {
+    await writeFile(join(inputDir, 'heart.svg'), FILL_SVG);
 
     await convertSvgToSymbolset(createOptions(inputDir, outputDir));
 
@@ -224,156 +234,6 @@ describe('convertSvgToSymbolset', () => {
       'Icons.xcassets',
       `${PREFIX}-heart.symbolset`,
       `${PREFIX}-heart.svg`,
-    );
-    const svgStr = await readFile(svgPath, 'utf-8');
-
-    expect(svgStr).toContain('stroke="currentColor"');
-    expect(svgStr).not.toContain('stroke="black"');
-  });
-
-  it('sets stroke-width directly on paths, not on wrapper groups', async () => {
-    await writeFile(join(inputDir, 'heart.svg'), STROKE_SVG);
-
-    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
-
-    const svgPath = join(
-      outputDir,
-      'Icons.xcassets',
-      `${PREFIX}-heart.symbolset`,
-      `${PREFIX}-heart.svg`,
-    );
-    const svgStr = await readFile(svgPath, 'utf-8');
-    const parsed = parseOutputSvg(svgStr);
-    const weightGroups = findWeightGroups(parsed);
-
-    const regularGroup = weightGroups['Regular-M'];
-    const paths = regularGroup.paths;
-
-    for (const node of paths) {
-      const attrs = node[':@'];
-      if (!attrs) continue;
-
-      expect(attrs['@_stroke-width']).toBe('1.75');
-      expect(attrs['@_stroke']).toBe('currentColor');
-      expect(attrs['@_fill']).toBe('none');
-    }
-  });
-
-  it('puts paths as direct children of weight groups (no wrapper <g>)', async () => {
-    await writeFile(join(inputDir, 'heart.svg'), STROKE_SVG);
-
-    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
-
-    const svgPath = join(
-      outputDir,
-      'Icons.xcassets',
-      `${PREFIX}-heart.symbolset`,
-      `${PREFIX}-heart.svg`,
-    );
-    const svgStr = await readFile(svgPath, 'utf-8');
-    const parsed = parseOutputSvg(svgStr);
-    const symbolsGroup = findSymbolsGroup(parsed);
-    if (!symbolsGroup) throw new Error('No Symbols group');
-
-    const weightGroups = symbolsGroup['g'] as OrderedNode[];
-    const regularGroup = weightGroups.find((g) => g[':@']?.['@_id'] === 'Regular-M');
-    if (!regularGroup) throw new Error('No Regular-M group');
-
-    const children = regularGroup['g'] as OrderedNode[];
-    expect(Array.isArray(children)).toBe(true);
-
-    for (const child of children) {
-      const tag = Object.keys(child).find((k) => k !== ':@');
-      expect(tag, 'should be a path element, not a nested <g>').toBe('path');
-    }
-  });
-
-  it('preserves fill-based paths with fill="currentColor" and no stroke across all 9 weights', async () => {
-    await writeFile(join(inputDir, 'circle-check-filled.svg'), FILL_SVG);
-
-    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
-
-    const svgPath = join(
-      outputDir,
-      'Icons.xcassets',
-      `${PREFIX}-circle-check-filled.symbolset`,
-      `${PREFIX}-circle-check-filled.svg`,
-    );
-    const svgStr = await readFile(svgPath, 'utf-8');
-    const parsed = parseOutputSvg(svgStr);
-    const weightGroups = findWeightGroups(parsed);
-
-    expect(Object.keys(weightGroups)).toHaveLength(9);
-
-    for (const weightId of WEIGHT_IDS) {
-      const group = weightGroups[weightId];
-      expect(group, `weight ${weightId} should exist`).toBeDefined();
-
-      const paths = group.paths;
-      expect(paths.length).toBeGreaterThanOrEqual(1);
-
-      for (const node of paths) {
-        const attrs = node[':@'];
-        if (!attrs) continue;
-
-        expect(attrs['@_fill'], `weight ${weightId} should have fill="currentColor"`).toBe(
-          'currentColor',
-        );
-        expect(attrs['@_stroke'], `weight ${weightId} should not have stroke`).toBeUndefined();
-        expect(
-          attrs['@_stroke-width'],
-          `weight ${weightId} should not have stroke-width`,
-        ).toBeUndefined();
-      }
-    }
-  });
-
-  it('preserves fill paths in mixed stroke+fill SVGs per-path', async () => {
-    const mixedSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 1.125C18.0061 1.125 22.875 5.9939 22.875 12C22.875 18.0061 18.0061 22.875 12 22.875C5.9939 22.875 1.125 18.0061 1.125 12C1.125 5.9939 5.9939 1.125 12 1.125Z" fill="black"/></svg>`;
-    await writeFile(join(inputDir, 'mixed-stroke-fill.svg'), mixedSvg);
-
-    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
-
-    const svgPath = join(
-      outputDir,
-      'Icons.xcassets',
-      `${PREFIX}-mixed-stroke-fill.symbolset`,
-      `${PREFIX}-mixed-stroke-fill.svg`,
-    );
-    const svgStr = await readFile(svgPath, 'utf-8');
-    const parsed = parseOutputSvg(svgStr);
-    const weightGroups = findWeightGroups(parsed);
-
-    const regularGroup = weightGroups['Regular-M'];
-    expect(regularGroup).toBeDefined();
-
-    const paths = regularGroup.paths;
-    expect(paths).toHaveLength(2);
-
-    const strokeAttrs = paths[0][':@'];
-    expect(strokeAttrs).toBeDefined();
-    expect(strokeAttrs!['@_stroke']).toBe('currentColor');
-    expect(strokeAttrs!['@_fill']).toBe('none');
-    expect(strokeAttrs!['@_stroke-width']).toBe('1.75');
-
-    const fillAttrs = paths[1][':@'];
-    expect(fillAttrs).toBeDefined();
-    expect(fillAttrs!['@_fill']).toBe('currentColor');
-    expect(fillAttrs!['@_stroke']).toBeUndefined();
-    expect(fillAttrs!['@_stroke-width']).toBeUndefined();
-  });
-
-  it('preserves fill paths in icons without -filled suffix (e.g. dots)', async () => {
-    const dotsSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M9 17.125C10.0355 17.125 10.875 17.9645 10.875 19C10.875 20.0355 10.0355 20.875 9 20.875C7.96447 20.875 7.125 20.0355 7.125 19C7.125 17.9645 7.96447 17.125 9 17.125Z" fill="black"/><path d="M15 17.125C16.0355 17.125 16.875 17.9645 16.875 19C16.875 20.0355 16.0355 20.875 15 20.875C13.9645 20.875 13.125 20.0355 13.125 19C13.125 17.9645 13.9645 17.125 15 17.125Z" fill="black"/></svg>`;
-    await writeFile(join(inputDir, 'dots-six.svg'), dotsSvg);
-
-    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
-
-    const svgPath = join(
-      outputDir,
-      'Icons.xcassets',
-      `${PREFIX}-dots-six.symbolset`,
-      `${PREFIX}-dots-six.svg`,
     );
     const svgStr = await readFile(svgPath, 'utf-8');
     const parsed = parseOutputSvg(svgStr);
@@ -387,16 +247,161 @@ describe('convertSvgToSymbolset', () => {
         const attrs = node[':@'];
         if (!attrs) continue;
 
-        expect(attrs['@_fill'], `weight ${weightId} should have fill="currentColor"`).toBe(
-          'currentColor',
+        expect(attrs['@_class'], `weight ${weightId} path should have wireframe class`).toBe(
+          'SFSymbolsPreviewWireframe',
         );
-        expect(attrs['@_stroke'], `weight ${weightId} should not have stroke`).toBeUndefined();
       }
     }
   });
 
+  it('does not use stroke attributes on paths', async () => {
+    await writeFile(join(inputDir, 'heart.svg'), FILL_SVG);
+
+    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
+
+    const svgPath = join(
+      outputDir,
+      'Icons.xcassets',
+      `${PREFIX}-heart.symbolset`,
+      `${PREFIX}-heart.svg`,
+    );
+    const svgStr = await readFile(svgPath, 'utf-8');
+
+    const symbolsStart = svgStr.indexOf('<g id="Symbols">');
+    const symbolsEnd = svgStr.lastIndexOf('</g>');
+    const symbolsSection = svgStr.substring(symbolsStart, symbolsEnd);
+
+    expect(symbolsSection).not.toContain('stroke="currentColor"');
+    expect(symbolsSection).not.toContain('stroke="black"');
+    expect(symbolsSection).not.toContain('stroke-width');
+    expect(symbolsSection).not.toContain('stroke-linecap');
+    expect(symbolsSection).not.toContain('stroke-linejoin');
+  });
+
+  it('uses identity transforms (matrix(1 0 0 1 ...) not scaled)', async () => {
+    await writeFile(join(inputDir, 'heart.svg'), FILL_SVG);
+
+    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
+
+    const svgPath = join(
+      outputDir,
+      'Icons.xcassets',
+      `${PREFIX}-heart.symbolset`,
+      `${PREFIX}-heart.svg`,
+    );
+    const svgStr = await readFile(svgPath, 'utf-8');
+
+    expect(svgStr).toContain('matrix(1 0 0 1');
+    expect(svgStr).not.toContain('matrix(4.166667');
+  });
+
+  it('fill-based icons produce identical paths for all 3 weights', async () => {
+    await writeFile(join(inputDir, 'circle.svg'), FILL_SVG);
+
+    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
+
+    const svgPath = join(
+      outputDir,
+      'Icons.xcassets',
+      `${PREFIX}-circle.symbolset`,
+      `${PREFIX}-circle.svg`,
+    );
+    const svgStr = await readFile(svgPath, 'utf-8');
+    const parsed = parseOutputSvg(svgStr);
+    const weightGroups = findWeightGroups(parsed);
+
+    expect(Object.keys(weightGroups)).toHaveLength(3);
+
+    const ultra = weightGroups['Ultralight-S'].pathData;
+    const regular = weightGroups['Regular-S'].pathData;
+    const black = weightGroups['Black-S'].pathData;
+
+    expect(ultra).toBe(regular);
+    expect(regular).toBe(black);
+  });
+
+  it('multi-subpath fill icons (with holes) work correctly', async () => {
+    await writeFile(join(inputDir, 'info.svg'), MULTI_SUBPATH_FILL_SVG);
+
+    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
+
+    const svgPath = join(
+      outputDir,
+      'Icons.xcassets',
+      `${PREFIX}-info.symbolset`,
+      `${PREFIX}-info.svg`,
+    );
+    const svgStr = await readFile(svgPath, 'utf-8');
+    const parsed = parseOutputSvg(svgStr);
+    const weightGroups = findWeightGroups(parsed);
+
+    for (const weightId of WEIGHT_IDS) {
+      const group = weightGroups[weightId];
+      expect(group, `weight ${weightId} should exist`).toBeDefined();
+      expect(group.paths.length).toBeGreaterThanOrEqual(1);
+    }
+
+    const ultra = weightGroups['Ultralight-S'].pathData;
+    const regular = weightGroups['Regular-S'].pathData;
+    const black = weightGroups['Black-S'].pathData;
+
+    expect(ultra).toBe(regular);
+    expect(regular).toBe(black);
+  });
+
+  it('multi-path SVGs produce one path element per source path', async () => {
+    await writeFile(join(inputDir, 'multi.svg'), MULTI_PATH_SVG);
+
+    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
+
+    const svgPath = join(
+      outputDir,
+      'Icons.xcassets',
+      `${PREFIX}-multi.symbolset`,
+      `${PREFIX}-multi.svg`,
+    );
+    const svgStr = await readFile(svgPath, 'utf-8');
+    const parsed = parseOutputSvg(svgStr);
+    const weightGroups = findWeightGroups(parsed);
+
+    for (const weightId of WEIGHT_IDS) {
+      const group = weightGroups[weightId];
+      expect(group, `weight ${weightId} should exist`).toBeDefined();
+      expect(group.paths).toHaveLength(2);
+    }
+  });
+
+  it('evenodd fill-rule icons are preserved as-is', async () => {
+    await writeFile(join(inputDir, 'hard-drive.svg'), EVENODD_SVG);
+
+    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
+
+    const svgPath = join(
+      outputDir,
+      'Icons.xcassets',
+      `${PREFIX}-hard-drive.symbolset`,
+      `${PREFIX}-hard-drive.svg`,
+    );
+    const svgStr = await readFile(svgPath, 'utf-8');
+    const parsed = parseOutputSvg(svgStr);
+    const weightGroups = findWeightGroups(parsed);
+
+    for (const weightId of WEIGHT_IDS) {
+      const group = weightGroups[weightId];
+      expect(group, `weight ${weightId} should exist`).toBeDefined();
+      expect(group.paths.length).toBeGreaterThanOrEqual(1);
+    }
+
+    const ultra = weightGroups['Ultralight-S'].pathData;
+    const regular = weightGroups['Regular-S'].pathData;
+    const black = weightGroups['Black-S'].pathData;
+
+    expect(ultra).toBe(regular);
+    expect(regular).toBe(black);
+  });
+
   it('generates per-symbol Contents.json with correct schema', async () => {
-    await writeFile(join(inputDir, 'arrow-left.svg'), STROKE_SVG);
+    await writeFile(join(inputDir, 'arrow-left.svg'), FILL_SVG);
 
     await convertSvgToSymbolset(createOptions(inputDir, outputDir));
 
@@ -429,7 +434,7 @@ describe('convertSvgToSymbolset', () => {
   });
 
   it('ignores non-svg files in the input directory', async () => {
-    await writeFile(join(inputDir, 'heart.svg'), STROKE_SVG);
+    await writeFile(join(inputDir, 'heart.svg'), FILL_SVG);
     await writeFile(join(inputDir, 'heart.metadata.json'), '{"tags":[],"categories":[]}');
 
     await convertSvgToSymbolset(createOptions(inputDir, outputDir));
@@ -442,7 +447,7 @@ describe('convertSvgToSymbolset', () => {
   });
 
   it('uses the provided prefix for symbolset naming', async () => {
-    await writeFile(join(inputDir, 'heart.svg'), STROKE_SVG);
+    await writeFile(join(inputDir, 'heart.svg'), FILL_SVG);
 
     await convertSvgToSymbolset({
       inputDirectory: inputDir,
@@ -458,9 +463,9 @@ describe('convertSvgToSymbolset', () => {
   });
 
   it('converts multiple SVG files in a single run', async () => {
-    await writeFile(join(inputDir, 'heart.svg'), STROKE_SVG);
-    await writeFile(join(inputDir, 'arrow-left.svg'), STROKE_SVG);
-    await writeFile(join(inputDir, 'user.svg'), FILL_SVG);
+    await writeFile(join(inputDir, 'heart.svg'), FILL_SVG);
+    await writeFile(join(inputDir, 'arrow-left.svg'), FILL_SVG);
+    await writeFile(join(inputDir, 'user.svg'), MULTI_SUBPATH_FILL_SVG);
 
     await convertSvgToSymbolset(createOptions(inputDir, outputDir));
 
@@ -479,188 +484,144 @@ describe('convertSvgToSymbolset', () => {
     );
   });
 
-  it('includes stroke-linecap and stroke-linejoin round on paths', async () => {
-    await writeFile(join(inputDir, 'heart.svg'), STROKE_SVG);
+  it('transforms coordinates from 24px Y-down to 100pt Y-up', async () => {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12" fill="black"/></svg>`;
+    await writeFile(join(inputDir, 'point.svg'), svg);
 
     await convertSvgToSymbolset(createOptions(inputDir, outputDir));
 
     const svgPath = join(
       outputDir,
       'Icons.xcassets',
-      `${PREFIX}-heart.symbolset`,
-      `${PREFIX}-heart.svg`,
-    );
-    const svgStr = await readFile(svgPath, 'utf-8');
-
-    expect(svgStr).toContain('stroke-linecap="round"');
-    expect(svgStr).toContain('stroke-linejoin="round"');
-  });
-
-  it('uses positive scale factor (no Y-flip) in group transforms', async () => {
-    await writeFile(join(inputDir, 'heart.svg'), STROKE_SVG);
-
-    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
-
-    const svgPath = join(
-      outputDir,
-      'Icons.xcassets',
-      `${PREFIX}-heart.symbolset`,
-      `${PREFIX}-heart.svg`,
-    );
-    const svgStr = await readFile(svgPath, 'utf-8');
-
-    expect(svgStr).toContain('matrix(4.166667 0 0 4.166667');
-    expect(svgStr).not.toContain('-4.166667');
-  });
-
-  it('includes left and right margins for Regular-M', async () => {
-    await writeFile(join(inputDir, 'heart.svg'), STROKE_SVG);
-
-    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
-
-    const svgPath = join(
-      outputDir,
-      'Icons.xcassets',
-      `${PREFIX}-heart.symbolset`,
-      `${PREFIX}-heart.svg`,
-    );
-    const svgStr = await readFile(svgPath, 'utf-8');
-
-    expect(svgStr).toContain('left-margin-Regular-M');
-    expect(svgStr).toContain('right-margin-Regular-M');
-  });
-
-  it('converts zero-bbox horizontal paths to filled capsule outlines', async () => {
-    await writeFile(join(inputDir, 'minus.svg'), ZERO_HEIGHT_SVG);
-
-    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
-
-    const svgPath = join(
-      outputDir,
-      'Icons.xcassets',
-      `${PREFIX}-minus.symbolset`,
-      `${PREFIX}-minus.svg`,
+      `${PREFIX}-point.symbolset`,
+      `${PREFIX}-point.svg`,
     );
     const svgStr = await readFile(svgPath, 'utf-8');
     const parsed = parseOutputSvg(svgStr);
     const weightGroups = findWeightGroups(parsed);
 
-    const regularGroup = weightGroups['Regular-M'];
-    expect(regularGroup).toBeDefined();
-
-    const paths = regularGroup.paths;
-    expect(paths).toHaveLength(1);
-
-    const attrs = paths[0][':@'];
-    expect(attrs).toBeDefined();
-    expect(attrs!['@_fill']).toBe('currentColor');
-    expect(attrs!['@_stroke']).toBeUndefined();
-    expect(attrs!['@_stroke-width']).toBeUndefined();
-    expect(attrs!['@_stroke-linecap']).toBeUndefined();
-    expect(attrs!['@_stroke-linejoin']).toBeUndefined();
-
-    const d = attrs!['@_d'];
-    expect(d).toContain('A');
-    expect(d).toContain('Z');
+    const regularPath = weightGroups['Regular-S'].pathData;
+    const coordMatch = regularPath.match(/M\s+([\d.]+)\s+([-\d.]+)/);
+    expect(coordMatch).toBeDefined();
+    const x = parseFloat(coordMatch![1]);
+    const y = parseFloat(coordMatch![2]);
+    expect(x).toBeCloseTo(50, 1);
+    expect(y).toBeCloseTo(-50, 1);
   });
 
-  it('converts zero-bbox vertical paths to filled capsule outlines', async () => {
-    await writeFile(join(inputDir, 'divider.svg'), ZERO_WIDTH_SVG);
+  it('handles SVGs with no path elements gracefully', async () => {
+    const emptySvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><text x="0" y="0">hello</text></svg>`;
+    await writeFile(join(inputDir, 'empty.svg'), emptySvg);
 
     await convertSvgToSymbolset(createOptions(inputDir, outputDir));
 
     const svgPath = join(
       outputDir,
       'Icons.xcassets',
-      `${PREFIX}-divider.symbolset`,
-      `${PREFIX}-divider.svg`,
+      `${PREFIX}-empty.symbolset`,
+      `${PREFIX}-empty.svg`,
     );
     const svgStr = await readFile(svgPath, 'utf-8');
-    const parsed = parseOutputSvg(svgStr);
-    const weightGroups = findWeightGroups(parsed);
 
-    const regularGroup = weightGroups['Regular-M'];
-    expect(regularGroup).toBeDefined();
-
-    const paths = regularGroup.paths;
-    expect(paths).toHaveLength(1);
-
-    const attrs = paths[0][':@'];
-    expect(attrs).toBeDefined();
-    expect(attrs!['@_fill']).toBe('currentColor');
-    expect(attrs!['@_stroke']).toBeUndefined();
-
-    const d = attrs!['@_d'];
-    expect(d).toContain('A');
-    expect(d).toContain('Z');
+    expect(svgStr).toContain('id="Symbols"');
+    expect(svgStr).toContain('id="Ultralight-S"');
+    expect(svgStr).toContain('id="Regular-S"');
+    expect(svgStr).toContain('id="Black-S"');
   });
 
-  it('only converts zero-bbox paths, leaves normal paths stroke-based in mixed SVG', async () => {
-    await writeFile(join(inputDir, 'mixed.svg'), MIXED_ZERO_AND_NORMAL_SVG);
+  it('handles SVGs with no inner content', async () => {
+    const bareSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg>`;
+    await writeFile(join(inputDir, 'bare.svg'), bareSvg);
 
     await convertSvgToSymbolset(createOptions(inputDir, outputDir));
 
     const svgPath = join(
       outputDir,
       'Icons.xcassets',
-      `${PREFIX}-mixed.symbolset`,
-      `${PREFIX}-mixed.svg`,
+      `${PREFIX}-bare.symbolset`,
+      `${PREFIX}-bare.svg`,
     );
     const svgStr = await readFile(svgPath, 'utf-8');
-    const parsed = parseOutputSvg(svgStr);
-    const weightGroups = findWeightGroups(parsed);
 
-    const regularGroup = weightGroups['Regular-M'];
-    expect(regularGroup).toBeDefined();
+    expect(svgStr).toContain('id="Symbols"');
+  });
+});
 
-    const paths = regularGroup.paths;
-    expect(paths).toHaveLength(2);
+describe('findGroupById', () => {
+  it('returns undefined when no svg root exists in parsed nodes', () => {
+    const parsed: OrderedNode[] = [{ notSvg: [] }];
 
-    const firstAttrs = paths[0][':@'];
-    expect(firstAttrs).toBeDefined();
-    expect(firstAttrs!['@_fill']).toBe('currentColor');
-    expect(firstAttrs!['@_stroke']).toBeUndefined();
-
-    const secondAttrs = paths[1][':@'];
-    expect(secondAttrs).toBeDefined();
-    expect(secondAttrs!['@_stroke']).toBe('currentColor');
-    expect(secondAttrs!['@_fill']).toBe('none');
-    expect(secondAttrs!['@_stroke-width']).toBe('1.75');
+    expect(findGroupById(parsed, 'Symbols')).toBeUndefined();
   });
 
-  it('applies correct capsule radius for zero-bbox paths across all weights', async () => {
-    await writeFile(join(inputDir, 'minus.svg'), ZERO_HEIGHT_SVG);
+  it('returns undefined when svg children is not an array', () => {
+    const parsed: OrderedNode[] = [{ svg: 'not-an-array' }];
 
-    await convertSvgToSymbolset(createOptions(inputDir, outputDir));
+    expect(findGroupById(parsed, 'Symbols')).toBeUndefined();
+  });
 
-    const svgPath = join(
-      outputDir,
-      'Icons.xcassets',
-      `${PREFIX}-minus.symbolset`,
-      `${PREFIX}-minus.svg`,
+  it('returns undefined when the id is not found among svg children', () => {
+    const parsed: OrderedNode[] = [{ svg: [{ g: [], ':@': { '@_id': 'Other' } }] }];
+
+    expect(findGroupById(parsed, 'Symbols')).toBeUndefined();
+  });
+
+  it('finds the group by id', () => {
+    const parsed: OrderedNode[] = [{ svg: [{ g: [], ':@': { '@_id': 'Symbols' } }] }];
+
+    const result = findGroupById(parsed, 'Symbols');
+    expect(result).toBeDefined();
+    expect(result?.[':@']?.['@_id']).toBe('Symbols');
+  });
+});
+
+describe('injectMastersIntoTemplate', () => {
+  const FILL_SVG_LOCAL = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1.125" fill="black"/></svg>`;
+
+  it('throws when no Symbols group is found', () => {
+    const parsed: OrderedNode[] = [{ svg: [{ g: [], ':@': { '@_id': 'Notes' } }] }];
+
+    expect(() => injectMastersIntoTemplate(parsed, FILL_SVG_LOCAL)).toThrow(
+      'No <g id="Symbols"> found in Apple template.',
     );
-    const svgStr = await readFile(svgPath, 'utf-8');
-    const parsed = parseOutputSvg(svgStr);
-    const weightGroups = findWeightGroups(parsed);
+  });
 
-    for (const weightId of WEIGHT_IDS) {
-      const group = weightGroups[weightId];
-      expect(group, `weight ${weightId} should exist`).toBeDefined();
+  it('throws when Symbols group has no child elements (g is not an array)', () => {
+    const parsed: OrderedNode[] = [{ svg: [{ g: 'not-an-array', ':@': { '@_id': 'Symbols' } }] }];
 
-      const paths = group.paths;
-      expect(paths).toHaveLength(1);
+    expect(() => injectMastersIntoTemplate(parsed, FILL_SVG_LOCAL)).toThrow(
+      'Symbols group has no child elements.',
+    );
+  });
 
-      const attrs = paths[0][':@'];
-      expect(attrs).toBeDefined();
-      expect(attrs!['@_fill'], `weight ${weightId} should be filled`).toBe('currentColor');
-      expect(attrs!['@_stroke'], `weight ${weightId} should not have stroke`).toBeUndefined();
+  it('skips groups without attrs, without id, or with non-master id', () => {
+    const parsed: OrderedNode[] = [
+      {
+        svg: [
+          {
+            g: [
+              { path: [], ':@': { '@_id': 'Unknown-Weight' } },
+              { path: [] },
+              { path: [], ':@': { '@_class': 'other' } },
+              { g: [], ':@': { '@_id': 'Regular-S' } },
+            ],
+            ':@': { '@_id': 'Symbols' },
+          },
+        ],
+      },
+    ];
 
-      const expectedWidth = BASE_STROKE_WIDTH * WEIGHT_MULTIPLIERS[weightId];
-      const d = attrs!['@_d'];
-      const radiusMatch = d.match(/A([\d.]+)\s+([\d.]+)/);
-      expect(radiusMatch, `weight ${weightId} should have arc radius`).toBeDefined();
-      const radius = parseFloat(radiusMatch![1]);
-      expect(radius).toBeCloseTo(expectedWidth / 2, 1);
-    }
+    expect(() => injectMastersIntoTemplate(parsed, FILL_SVG_LOCAL)).not.toThrow();
+  });
+});
+
+describe('buildSymbolContentsJson', () => {
+  it('produces correct schema with icon name and universal idiom', () => {
+    const result = buildSymbolContentsJson('esds-heart');
+
+    expect(result).toEqual({
+      symbols: [{ filename: 'esds-heart.svg', idiom: 'universal' }],
+      info: { author: 'xcode', version: 1 },
+    });
   });
 });

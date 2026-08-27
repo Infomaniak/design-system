@@ -6,7 +6,7 @@ import { runScript } from '../../../../../../../scripts/helpers/misc/run-script/
 import { convertSvgToSymbolset } from '../../shared/svg/sf-symbols/convert-svg-to-symbolset.ts';
 
 const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..');
-const FIGMA_ICONS_DIR: string = join(ROOT_DIR, 'assets/svg/monotone/figma');
+const FIGMA_ICONS_DIR: string = join(ROOT_DIR, 'dist/assets/svg/outlined/figma');
 const OUTPUT_DIR: string = join(ROOT_DIR, 'dist/ios/sf-symbols');
 const PREFIX: string = 'esds';
 

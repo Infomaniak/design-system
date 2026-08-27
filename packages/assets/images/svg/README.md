@@ -183,12 +183,17 @@ This script generates the appropriate `assets/server/*.json` files, and bump thi
 
 ### SF Symbols (iOS)
 
-Converts the Figma source SVGs into Apple Custom SF Symbols (`.symbolset`) inside an `Icons.xcassets` catalog.
+Converts the Figma source SVGs into Apple Custom SF Symbols (`.symbolset`) inside an `Icons.xcassets` catalog using a **variable template** format.
 
-All 9 Apple font weights (Ultralight through Black) are generated dynamically by applying a mathematical multiplier to the stroke width.
+#### How it works
 
-> [!NOTE]
-> Fill-based icons receive all 9 weights with identical content.
+Each icon is exported as a **variable SF Symbol** with 3 master weights (Ultralight, Regular, Black) at Small scale. iOS interpolates the remaining weights (Thin, Light, Medium, Semibold, Bold, Heavy) automatically at runtime.
+
+Outlined SVGs are fetched from Figma (via `yarn import:outlined`) — these are pre-filled outline paths, so no stroke-to-outline conversion is needed. The same path data is used for all 3 master weights.
+
+**Coordinate transformation**: Source SVGs (24px, Y-down) are transformed to SF Symbol font coordinates (100pt, Y-up) with the transform baked into path data, allowing identity group transforms.
+
+Paths use the `SFSymbolsPreviewWireframe` CSS class (no inline `stroke`/`fill` attributes), matching Apple's native template format.
 
 #### Build
 

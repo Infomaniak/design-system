@@ -5,6 +5,7 @@
   "description": "Infomaniak's Design System - SVGs",
   "scripts": {
     "import": "node --no-warnings=ExperimentalWarning scripts/scripts/import-svgs/import-svgs.script.ts",
+    "import:outlined": "node --no-warnings=ExperimentalWarning scripts/scripts/import-outlined-icons/import-outlined-icons.script.ts",
     "build:legacy-svgs": "node --no-warnings=ExperimentalWarning scripts/scripts/build-legacy-svgs/build-legacy-svgs.script.ts",
     "build:sf-symbols": "node --no-warnings=ExperimentalWarning scripts/scripts/build-sf-symbols/build-sf-symbols.script.ts"
   },

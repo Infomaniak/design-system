@@ -1,5 +1,4 @@
 import { join } from 'node:path';
-import { getFigmaFile } from '../../../../../../../../scripts/helpers/figma/api/files/get-figma-file.ts';
 import type { GenericFigmaNodeBase } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/base/figma-node-base.ts';
 import { isFigmaBooleanOperationNode } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/built-in/boolean-operation/figma-boolean-operation-node.ts';
 import {
@@ -10,18 +9,15 @@ import { figmaComponentNodeToSvg } from '../../../../../../../../scripts/helpers
 import { FigmaNodesExplorer } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/helpers/figma-nodes-explorer.ts';
 import type { FigmaComponent } from '../../../../../../../../scripts/helpers/figma/api/files/types/figma-component.ts';
 import type { FigmaFile } from '../../../../../../../../scripts/helpers/figma/api/files/types/figma-file.ts';
-import {
-  type FigmaImagesRecord,
-  getFigmaImages,
-} from '../../../../../../../../scripts/helpers/figma/api/images/get-figma-images.ts';
-import { writeJsonFileSafe } from '../../../../../../../../scripts/helpers/file/write-json-file-safe.ts';
 import { writeTextFileSafe } from '../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import type { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
-import { block } from '../../../../../../../../scripts/helpers/misc/block.ts';
 import type { TreeExplorerPickReturn } from '../../../../../../../../scripts/helpers/misc/tree-explorer/tree-explorer.ts';
-import { removeTrailingSlash } from '../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 
-import { type FigmaSvgMetadata } from './figma-svg-metadata.ts';
+import {
+  extractSvgsFromFigma,
+  extractIconName,
+  type SVGToLoad,
+} from './extract-svgs-from-figma.ts';
 
 export interface ExtractSvgFilesFromFigmaDesignFileOptions {
   readonly outputDirectory: string;
@@ -35,179 +31,97 @@ export interface ExtractSvgFilesFromFigmaDesignFileOptions {
  * Extracts SVG files from a Figma design file, saving individual components as SVG files
  * along with their associated metadata.
  */
-export function extractSvgFilesFromFigmaDesignFile({
+export async function extractSvgFilesFromFigmaDesignFile({
   outputDirectory,
   figmaAPIToken,
   figmaSourceFileKey,
   generateMasks,
   logger,
 }: ExtractSvgFilesFromFigmaDesignFileOptions): Promise<void> {
-  return logger.asyncTask('extract-figma-svgs', async (logger: Logger): Promise<void> => {
-    outputDirectory = removeTrailingSlash(outputDirectory);
-
-    const figmaFile: FigmaFile = await logger.asyncTask(
-      'get-figma-file',
-      (): Promise<FigmaFile> => {
-        return getFigmaFile({
-          token: figmaAPIToken,
-          file_key: figmaSourceFileKey,
-          geometry: generateMasks ? 'paths' : undefined,
-        });
-      },
-    );
-
-    // NOTE: DEBUG
-    // await writeJsonFileSafe(join(outputDirectory, 'figma-file.json'), figmaFile);
-
-    await logger.asyncTask('extract-component-svgs', async (logger: Logger): Promise<void> => {
-      interface SVGToLoad {
-        readonly id: string;
-        readonly name: string;
-        readonly metadata: FigmaSvgMetadata;
-      }
-
-      // extract the svgs ids/names/metadata from the list of components present in the figma file
-      const svgsToLoad: readonly SVGToLoad[] = block((): readonly SVGToLoad[] => {
-        const svgsToLoad: SVGToLoad[] = [];
-
-        // for each figma components
-        for (const id in figmaFile.components) {
-          const component: FigmaComponent = figmaFile.components[id];
-
-          // skip non svg components
-          if (!isIconFigmaComponent(component.name)) {
-            continue;
-          }
-
-          const parts: readonly string[] = component.description.split(/\s+/g);
-
-          svgsToLoad.push({
-            id,
-            name: extractIconName(component.name),
-            metadata: {
-              tags: parts
-                .filter((input: string): boolean => {
-                  return input.startsWith('#');
-                })
-                .map((input: string): string => {
-                  return input.slice(1);
-                }),
-              categories: parts
-                .filter((input: string): boolean => {
-                  return input.startsWith('@');
-                })
-                .map((input: string): string => {
-                  return input.slice(1);
-                }),
-            },
-          });
-        }
-
-        return svgsToLoad;
-      });
-
-      if (svgsToLoad.length === 0) {
-        throw new Error('No svg to extract.');
-      }
-
-      // load all the svgs' urls in one fetch using the figma api
-      const images: FigmaImagesRecord = await logger.asyncTask(
-        'get-urls',
-        async (): Promise<FigmaImagesRecord> => {
-          return getFigmaImages({
-            token: figmaAPIToken,
-            file_key: figmaSourceFileKey,
-            ids: svgsToLoad.map(({ id }: SVGToLoad): string => id),
-          });
-        },
-      );
-
-      // store the svgs with their metadata in the local filesystem
-      await logger.asyncTask('store-svgs', async (): Promise<void> => {
-        await Promise.all(
-          svgsToLoad.map(async ({ id, name, metadata }: SVGToLoad): Promise<void> => {
-            await Promise.all([
-              writeJsonFileSafe(join(outputDirectory, `${name}.metadata.json`), metadata),
-              block(async (): Promise<void> => {
-                logger.info(name, images[id]);
-                await writeTextFileSafe(
-                  join(outputDirectory, `${name}.svg`),
-                  await fetchFigmaSvgAsset(images[id]),
-                );
-              }),
-            ]);
-          }),
-        );
-      });
-    });
-
-    if (generateMasks) {
-      /*
-      NOTE:
-        filled component are extracted as "outlined" svgs from the previous operation.
-        We'll generate true "mask" svgs from theses "filled" svgs.
-     */
-      await logger.asyncTask('extract-filled-svgs', async (): Promise<void> => {
-        // extract the "filled" svgs from the list of component nodes present in the figma file
-        await Promise.all(
-          FigmaNodesExplorer.explore<FigmaComponentNode>(
-            figmaFile.document,
-            (node: GenericFigmaNodeBase): TreeExplorerPickReturn | void => {
-              if (
-                // "filled" svgs are figma components with a "SUBTRACT" boolean operation
-                isFigmaComponentNode(node) &&
-                isIconFigmaComponent(node.name) &&
-                node.children.length === 1 &&
-                isFigmaBooleanOperationNode(node.children[0]) &&
-                node.children[0].booleanOperation === 'SUBTRACT'
-              ) {
-                return {
-                  pickSelf: true,
-                  pickChildren: false,
-                };
-              } else {
-                return {
-                  pickSelf: false,
-                  pickChildren: true,
-                };
-              }
-            },
-          ).map(async (node: FigmaComponentNode): Promise<void> => {
-            const name: string = extractIconName(node.name);
-
-            if (!name.endsWith('-filled')) {
-              throw new Error(
-                `Found an icon ${JSON.stringify(name)} with SUBTRACT operation not ending with "-filled".`,
-              );
-            }
-
-            await writeTextFileSafe(
-              join(outputDirectory, `${name}.mask.svg`),
-              figmaComponentNodeToSvg(node),
-            );
-          }),
-        );
-      });
-    }
+  await extractSvgsFromFigma({
+    outputDirectory,
+    figmaAPIToken,
+    figmaSourceFileKey,
+    geometry: generateMasks ? 'paths' : undefined,
+    resolveSvgsToLoad: (figmaFile: FigmaFile): readonly SVGToLoad[] =>
+      resolveFlatComponents(figmaFile),
+    onExtracted: generateMasks
+      ? (figmaFile: FigmaFile, logger: Logger): Promise<void> =>
+          generateMaskSvgs(figmaFile, outputDirectory, logger)
+      : undefined,
+    logger,
   });
 }
 
-/* INTERNAL */
+function resolveFlatComponents(figmaFile: FigmaFile): readonly SVGToLoad[] {
+  const svgsToLoad: SVGToLoad[] = [];
+
+  for (const id in figmaFile.components) {
+    const component: FigmaComponent = figmaFile.components[id];
+
+    if (!isIconFigmaComponent(component.name)) {
+      continue;
+    }
+
+    const parts: readonly string[] = component.description.split(/\s+/g);
+
+    svgsToLoad.push({
+      id,
+      name: extractIconName(component.name),
+      metadata: {
+        tags: parts
+          .filter((input: string): boolean => input.startsWith('#'))
+          .map((input: string): string => input.slice(1)),
+        categories: parts
+          .filter((input: string): boolean => input.startsWith('@'))
+          .map((input: string): string => input.slice(1)),
+      },
+    });
+  }
+
+  return svgsToLoad;
+}
+
+async function generateMaskSvgs(
+  figmaFile: FigmaFile,
+  outputDirectory: string,
+  logger: Logger,
+): Promise<void> {
+  await logger.asyncTask('extract-filled-svgs', async (): Promise<void> => {
+    await Promise.all(
+      FigmaNodesExplorer.explore<FigmaComponentNode>(
+        figmaFile.document,
+        (node: GenericFigmaNodeBase): TreeExplorerPickReturn | void => {
+          if (
+            isFigmaComponentNode(node) &&
+            isIconFigmaComponent(node.name) &&
+            node.children.length === 1 &&
+            isFigmaBooleanOperationNode(node.children[0]) &&
+            node.children[0].booleanOperation === 'SUBTRACT'
+          ) {
+            return { pickSelf: true, pickChildren: false };
+          }
+
+          return { pickSelf: false, pickChildren: true };
+        },
+      ).map(async (node: FigmaComponentNode): Promise<void> => {
+        const name: string = extractIconName(node.name);
+
+        if (!name.endsWith('-filled')) {
+          throw new Error(
+            `Found an icon ${JSON.stringify(name)} with SUBTRACT operation not ending with "-filled".`,
+          );
+        }
+
+        await writeTextFileSafe(
+          join(outputDirectory, `${name}.mask.svg`),
+          figmaComponentNodeToSvg(node),
+        );
+      }),
+    );
+  });
+}
 
 function isIconFigmaComponent(name: string): boolean {
   return name.startsWith('esds/');
-}
-
-function extractIconName(name: string): string {
-  const match: RegExpMatchArray | null = /^esds\/icon\/([a-z0-9-]+)$/g.exec(name);
-
-  if (match === null) {
-    throw new Error(`Invalid name: ${JSON.stringify(name)}`);
-  }
-
-  return match[1];
-}
-
-async function fetchFigmaSvgAsset(url: string): Promise<string> {
-  return (await fetch(url)).text();
 }
