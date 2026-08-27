@@ -4,12 +4,13 @@
   color: var(--esds-text-link-content-color-default);
 
   &:focus-visible {
-    outline: 2px solid currentcolor;
-    outline-offset: 2px;
+    outline: var(--esds-focus-border-width) solid var(--esds-focus-border-color);
+    border-radius: var(--esds-focus-border-radius);
   }
 
   &:hover,
   &:active {
+    text-decoration: underline;
     color: color-mix(
       in srgb,
       rgb(from var(--esds-color-state-hover-strong) r g b / 100%)
@@ -48,5 +49,10 @@
        - underline="always"
      */
     text-decoration: underline;
+
+    &:hover,
+    &:active {
+      text-decoration: initial;
+    }
   }
 }
