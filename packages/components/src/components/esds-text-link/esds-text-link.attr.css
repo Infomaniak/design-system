@@ -11,6 +11,9 @@
   &:hover,
   &:active {
     text-decoration: underline;
+  }
+
+  &:hover {
     color: color-mix(
       in srgb,
       rgb(from var(--esds-color-state-hover-strong) r g b / 100%)
@@ -23,11 +26,23 @@
     );
   }
 
+  &:active {
+    color: color-mix(
+      in srgb,
+      rgb(from var(--esds-color-state-pressed-strong) r g b / 100%)
+        calc(var(--esds-color-state-pressed-strong-a) * 100%),
+      rgb(from var(--esds-text-link-content-color-default) r g b / 100%)
+        calc(
+          var(--esds-text-link-content-color-default-a) *
+            (1 - var(--esds-color-state-pressed-strong-a)) * 100%
+        )
+    );
+  }
+
   &:visited {
     color: var(--esds-text-link-content-color-visited);
 
-    &:hover,
-    &:active {
+    &:hover {
       color: color-mix(
         in srgb,
         rgb(from var(--esds-color-state-hover-medium) r g b / 100%)
@@ -36,6 +51,19 @@
           calc(
             var(--esds-text-link-content-color-visited-a) *
               (1 - var(--esds-color-state-hover-medium-a)) * 100%
+          )
+      );
+    }
+
+    &:active {
+      color: color-mix(
+        in srgb,
+        rgb(from var(--esds-color-state-pressed-medium) r g b / 100%)
+          calc(var(--esds-color-state-pressed-medium-a) * 100%),
+        rgb(from var(--esds-text-link-content-color-visited) r g b / 100%)
+          calc(
+            var(--esds-text-link-content-color-visited-a) *
+              (1 - var(--esds-color-state-pressed-medium-a)) * 100%
           )
       );
     }
