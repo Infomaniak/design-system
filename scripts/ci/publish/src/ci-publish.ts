@@ -32,7 +32,6 @@ export async function ciPublish({
   baseSha,
   jobUrl,
   branchName,
-  headSha,
   mode,
 }: CiPublishOptions): Promise<RunScriptNotification | void> {
   const packagesDirectory: string = join(rootDirectory, 'packages');
@@ -51,7 +50,7 @@ export async function ciPublish({
         return getImpactedPackageJsonFiles({
           packagesDirectory,
           fromCommitId: baseSha,
-          toCommitId: headSha,
+          toCommitId: 'HEAD',
           logger,
         });
       },

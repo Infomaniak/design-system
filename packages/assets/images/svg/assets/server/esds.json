@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.25",
+    "version": "0.0.26",
     "author": {
       "name": "Infomaniak"
     },
@@ -10,9 +10,9 @@
       "title": "GPL-3.0-only",
       "spdx": "GPL-3.0-only"
     },
-    "total": 244
+    "total": 246
   },
-  "lastModified": 1786016910,
+  "lastModified": 1787212406,
   "icons": {
     "a-large-small": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 16 2.536-7.328a1.02 1.02 0 011.928 0L22 16m-6.303-2h5.606M2 16l4.039-9.69a.5.5 0 01.923 0L11 16m-7.696-3h6.392\" vector-effect=\"non-scaling-stroke\"/>"
@@ -157,6 +157,12 @@
     },
     "circle": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "circle-arrow-anticlockwise": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8m5 0H3V3\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "circle-arrow-clockwise": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M21 12a9 9 0 11-9-9c2.52 0 4.93 1 6.74 2.74L21 8m-5 0h5V3\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "circle-arrow-left": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m12 16-4-4 4-4m-4 4h8m6 0c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\" vector-effect=\"non-scaling-stroke\"/>"
@@ -797,6 +803,8 @@
       "chevrons-left-right",
       "chevrons-up-down",
       "circle",
+      "circle-arrow-anticlockwise",
+      "circle-arrow-clockwise",
       "circle-arrow-left",
       "circle-arrow-right",
       "circle-arrows-anticlockwise",
@@ -1152,6 +1160,7 @@
       "wave-arcs-up"
     ],
     "#anticlockwise": [
+      "circle-arrow-anticlockwise",
       "cloud-arrow-anticlockwise",
       "square-arrow-anticlockwise"
     ],
@@ -1320,6 +1329,7 @@
       "arrow-turn-up-left",
       "arrows-turn-up-left",
       "chevron-left",
+      "circle-arrow-anticlockwise",
       "circle-arrow-left"
     ],
     "#backspace": [
@@ -1694,6 +1704,7 @@
       "clock"
     ],
     "#clockwise": [
+      "circle-arrow-clockwise",
       "square-arrow-clockwise"
     ],
     "#clone": [
@@ -1907,6 +1918,9 @@
     ],
     "#corporate": [
       "building"
+    ],
+    "#counterclockwise": [
+      "circle-arrow-anticlockwise"
     ],
     "#country": [
       "flag"
@@ -2681,6 +2695,7 @@
       "arrow-right",
       "arrow-turn-up-right",
       "chevron-right",
+      "circle-arrow-clockwise",
       "circle-arrow-right",
       "paper-plane",
       "share"
@@ -2902,6 +2917,7 @@
       "circle-question-filled"
     ],
     "#history": [
+      "circle-arrow-anticlockwise",
       "clock",
       "cloud-arrow-anticlockwise"
     ],
@@ -3342,6 +3358,7 @@
       "user-magnifying-glass"
     ],
     "#loop": [
+      "circle-arrow-clockwise",
       "circular-arrows-clockwise"
     ],
     "#loud": [
@@ -4089,6 +4106,7 @@
     "#previous": [
       "arrow-left",
       "chevron-left",
+      "circle-arrow-anticlockwise",
       "circle-arrow-left"
     ],
     "#price": [
@@ -4249,7 +4267,8 @@
       "square-arrow-out-up-right"
     ],
     "#redo": [
-      "arrow-turn-up-right"
+      "arrow-turn-up-right",
+      "circle-arrow-clockwise"
     ],
     "#reduce": [
       "arrows-four-diagonal-in",
@@ -4265,6 +4284,7 @@
       "list-filter"
     ],
     "#refresh": [
+      "circle-arrow-clockwise",
       "circle-arrows-anticlockwise",
       "circle-open-top-right",
       "circular-arrows-clockwise",
@@ -4289,6 +4309,7 @@
       "handshake-heart"
     ],
     "#reload": [
+      "circle-arrow-clockwise",
       "circle-arrows-anticlockwise",
       "circular-arrows-clockwise",
       "square-arrow-anticlockwise",
@@ -4336,6 +4357,7 @@
       "wrench"
     ],
     "#repeat": [
+      "circle-arrow-clockwise",
       "circle-arrows-anticlockwise",
       "circular-arrows-clockwise"
     ],
@@ -4368,6 +4390,7 @@
     ],
     "#reset": [
       "broom",
+      "circle-arrow-anticlockwise",
       "square-arrow-clockwise"
     ],
     "#resize": [
@@ -4390,7 +4413,11 @@
     "#responsive": [
       "smartphone-tablet"
     ],
+    "#restart": [
+      "circle-arrow-clockwise"
+    ],
     "#restore": [
+      "circle-arrow-anticlockwise",
       "circle-arrows-anticlockwise",
       "cloud-arrow-anticlockwise"
     ],
@@ -4403,6 +4430,7 @@
       "store"
     ],
     "#retry": [
+      "circle-arrow-clockwise",
       "circle-arrows-anticlockwise",
       "circular-arrows-clockwise"
     ],
@@ -4420,9 +4448,11 @@
     ],
     "#reverse": [
       "arrow-left",
+      "circle-arrow-anticlockwise",
       "circle-arrow-left"
     ],
     "#revert": [
+      "circle-arrow-anticlockwise",
       "cloud-arrow-anticlockwise"
     ],
     "#revoke": [
@@ -4455,10 +4485,15 @@
     "#rocket": [
       "rocket"
     ],
+    "#rollback": [
+      "circle-arrow-anticlockwise"
+    ],
     "#romance": [
       "heart"
     ],
     "#rotate": [
+      "circle-arrow-anticlockwise",
+      "circle-arrow-clockwise",
       "circle-arrows-anticlockwise",
       "circular-arrows-clockwise",
       "square-arrow-anticlockwise",
@@ -5009,6 +5044,7 @@
       "key-option-apple"
     ],
     "#sync": [
+      "circle-arrow-clockwise",
       "circle-arrows-anticlockwise",
       "circular-arrows-clockwise",
       "cloud",
@@ -5266,6 +5302,7 @@
     "#undo": [
       "arrow-left",
       "arrow-turn-up-left",
+      "circle-arrow-anticlockwise",
       "cloud-arrow-anticlockwise",
       "label-cross",
       "square-arrow-anticlockwise"
@@ -5316,6 +5353,7 @@
     ],
     "#update": [
       "bell",
+      "circle-arrow-clockwise",
       "circle-arrows-anticlockwise",
       "circular-arrows-clockwise"
     ],
