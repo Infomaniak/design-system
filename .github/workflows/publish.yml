@@ -45,6 +45,12 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           cache: 'yarn'
 
+      # Mise is required by the iOS workflow
+      - name: Setup mise
+        uses: jdx/mise-action@6d1e696aa24c1aa1bcc1adea0212707c71ab78a8
+        with:
+          install: false
+
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
