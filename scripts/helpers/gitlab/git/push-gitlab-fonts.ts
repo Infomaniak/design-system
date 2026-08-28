@@ -2,11 +2,12 @@ import { execFile } from 'node:child_process';
 import { copyFile, mkdir, readdir, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 
-export interface PushGitlabFontsArchiveOptions {
+export interface PushGitlabFontsOptions {
   readonly repositoryUrl: string;
   readonly repositoryToken: string;
-  readonly archivePath: string;
-  readonly archiveName: string;
+  readonly sourceDirectory: string;
+  readonly fileNames: readonly string[];
+  readonly targetDirectoryName: string;
   readonly commitMessage: string;
   readonly workDirectory: string;
 }
@@ -38,21 +39,22 @@ function runGit(args: readonly string[], repositoryToken: string, cwd: string): 
   });
 }
 
-export async function pushGitlabFontsArchive({
+export async function pushGitlabFonts({
   repositoryUrl,
   repositoryToken,
-  archivePath,
-  archiveName,
+  sourceDirectory,
+  fileNames,
+  targetDirectoryName,
   commitMessage,
   workDirectory,
-}: PushGitlabFontsArchiveOptions): Promise<void> {
+}: PushGitlabFontsOptions): Promise<void> {
   const repositoryUrlWithAuth: string = repositoryUrl.replace(
     'https://',
     `https://oauth2:${repositoryToken}@`,
   );
 
   const repositoryDirectory: string = join(workDirectory, 'repository');
-  const archivesDirectory: string = join(repositoryDirectory, 'archives');
+  const fontsDirectory: string = join(repositoryDirectory, targetDirectoryName);
 
   await runGit(
     ['clone', '--depth', '1', repositoryUrlWithAuth, repositoryDirectory],
@@ -60,17 +62,19 @@ export async function pushGitlabFontsArchive({
     workDirectory,
   );
 
-  await mkdir(archivesDirectory, { recursive: true });
+  await mkdir(fontsDirectory, { recursive: true });
 
-  const existingFileNames: string[] = await readdir(archivesDirectory);
+  const existingFileNames: string[] = await readdir(fontsDirectory);
 
-  for (const fileName of existingFileNames) {
-    if (fileName.endsWith('.tar.gz')) {
-      await rm(join(archivesDirectory, fileName));
+  for (const existingFileName of existingFileNames) {
+    if (existingFileName !== '.gitkeep') {
+      await rm(join(fontsDirectory, existingFileName));
     }
   }
 
-  await copyFile(archivePath, join(archivesDirectory, archiveName));
+  for (const fileName of fileNames) {
+    await copyFile(join(sourceDirectory, fileName), join(fontsDirectory, fileName));
+  }
 
   await runGit(['add', '-A'], repositoryToken, repositoryDirectory);
 
