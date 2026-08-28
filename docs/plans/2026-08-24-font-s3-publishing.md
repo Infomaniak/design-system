@@ -724,10 +724,21 @@ Expected: All tests pass; the deleted helpers' tests are gone.
 - [ ] **Step 2: Run scoped coverage**
 
 Run:
-`npx vitest run --coverage --coverage.include='scripts/helpers/gitlab/**' --coverage.include='scripts/helpers/publish/**'`
-Expected: 100% coverage on the new/kept helper files (scoped flags required in Vitest v4.1.10;
+
+```bash
+npx vitest run --coverage \
+  --coverage.include='scripts/helpers/gitlab/**' \
+  --coverage.include='scripts/helpers/publish/publish-mode/publish-mode-to-font-publish-directory.ts' \
+  scripts/helpers/gitlab/ scripts/helpers/publish/
+```
+
+Expected: exit 0 with 100% coverage for `push-gitlab-fonts.ts`,
+`get-env-gitlab-fonts-repository-url.ts`, `get-env-gitlab-fonts-repository-token.ts`, and
+`publish-mode-to-font-publish-directory.ts` (scoped flags required in Vitest v4.1.10;
 a bare `--coverage` instruments everything and fails on a pre-existing unrelated resolution
-issue in `apps/docs`).
+issue in `apps/docs`). The includes are narrowed to exactly the revision's helper files
+because sibling legacy helpers under `scripts/helpers/publish/**` are out of scope, have no
+tests, and would otherwise drag the aggregate below the global 100% threshold.
 
 - [ ] **Step 3: Run typecheck**
 
