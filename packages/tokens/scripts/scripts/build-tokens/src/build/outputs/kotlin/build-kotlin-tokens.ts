@@ -31,11 +31,7 @@ import type {
   GenericResolvedDesignTokensCollectionToken,
 } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { sortDesignTokensCollectionTokensByDependencies } from '../../../../../../shared/dtcg/resolver/token/operations/sort/by-dependencies/sort-design-tokens-collection-tokens-by-dependencies.ts';
-import {
-  T1_DIRECTORY_NAME,
-  T2_DIRECTORY_NAME,
-  T3_DIRECTORY_NAME,
-} from '../../../constants/design-token-tiers.ts';
+import { T1_DIRECTORY_NAME, T2_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
 
 export interface BuildKotlinTokensOptions {
   readonly baseCollection: DesignTokensCollection;
@@ -437,7 +433,8 @@ function filterT1Tokens(token: GenericDesignTokensCollectionToken): boolean {
 function filterT2T3Tokens(token: GenericDesignTokensCollectionToken): boolean {
   return (
     token.files.some((path: string): boolean => {
-      return path.includes(T2_DIRECTORY_NAME) || path.includes(T3_DIRECTORY_NAME);
+      // TODO: Kotlin does not require yet T3 tokens, thus we skip them -> remove in the future
+      return path.includes(T2_DIRECTORY_NAME); /* || path.includes(T3_DIRECTORY_NAME)*/
     }) && !isExcludedToken(token)
   );
 }
