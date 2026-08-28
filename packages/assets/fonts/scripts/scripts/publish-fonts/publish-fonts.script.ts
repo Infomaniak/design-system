@@ -2,7 +2,6 @@ import { glob, mkdtemp } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { basename, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getEnvVariable } from '../../../../../../scripts/helpers/env/get-env-variable.ts';
 import { createTarGzArchive } from '../../../../../../scripts/helpers/file/archive/create-tar-gz-archive.ts';
 import { getEnvGithubCiConfig } from '../../../../../../scripts/helpers/github/github-ci-config/env/get-env-github-ci-config.ts';
 import { triggerGitlabFontsPipeline } from '../../../../../../scripts/helpers/gitlab/api/trigger-gitlab-fonts-pipeline.ts';
@@ -14,18 +13,15 @@ import { getEnvGitlabFontsTriggerUrl } from '../../../../../../scripts/helpers/g
 import { pushGitlabFontsArchive } from '../../../../../../scripts/helpers/gitlab/git/push-gitlab-fonts-archive.ts';
 import type { Logger } from '../../../../../../scripts/helpers/log/logger.ts';
 import { runScript } from '../../../../../../scripts/helpers/misc/run-script/run-script.ts';
+import { getEnvCiPublishDryRun } from '../../../../../../scripts/helpers/publish/env/get-env-ci-publish-dry-run.ts';
 import { getEnvPublishConfig } from '../../../../../../scripts/helpers/publish/publish-config/env/get-env-publish-config.ts';
 
 const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 
 const DIST_WEB_DIR: string = join(ROOT_DIR, 'dist', 'web');
 
-const ENV_CI_PUBLISH_DRY_RUN = 'CI_PUBLISH_DRY_RUN';
-
 await runScript('publish-fonts', async (logger: Logger): Promise<void> => {
-  const isDryRun: boolean = getEnvVariable(ENV_CI_PUBLISH_DRY_RUN, 'false') === 'true';
-
-  if (isDryRun) {
+  if (getEnvCiPublishDryRun()) {
     logger.info('Dry run: skipping fonts archive publication.');
     return;
   }
