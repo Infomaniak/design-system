@@ -26,7 +26,7 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     permissions:
-      id-token: write  # for OIDC
+      id-token: write # for OIDC
       contents: read
 
     steps:
@@ -123,6 +123,11 @@ jobs:
           GITHUB_CI_CONFIG: ${{ toJson(github) }}
           KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
           CI_PULL_REQUEST_AUTH_TOKEN_MOBILE: ${{ secrets.CI_PULL_REQUEST_AUTH_TOKEN_MOBILE }}
+          GITLAB_FONTS_REPOSITORY_URL: ${{ secrets.GITLAB_FONTS_REPOSITORY_URL }}
+          GITLAB_FONTS_REPOSITORY_TOKEN: ${{ secrets.GITLAB_FONTS_REPOSITORY_TOKEN }}
+          GITLAB_FONTS_TRIGGER_URL: ${{ secrets.GITLAB_FONTS_TRIGGER_URL }}
+          GITLAB_FONTS_TRIGGER_TOKEN: ${{ secrets.GITLAB_FONTS_TRIGGER_TOKEN }}
+          GITLAB_FONTS_TRIGGER_REF: main
 
       - name: Publish missing package versions (dry-run for fork PR)
         if: >-
