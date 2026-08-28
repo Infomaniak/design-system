@@ -26,11 +26,8 @@ export async function createTarGzArchive({
       ['-czf', archivePath, '-C', sourceDirectory, ...fileNames],
       (error, _stdout, stderr) => {
         if (error !== null) {
-          reject(
-            new Error(
-              `Failed to create tar.gz archive "${archivePath}": ${error.message}${stderr === '' ? '' : ` — ${stderr}`}`,
-            ),
-          );
+          const errorDetails: string = [error.message, stderr.trim()].filter(Boolean).join(' — ');
+          reject(new Error(`Failed to create tar.gz archive "${archivePath}": ${errorDetails}`));
           return;
         }
 
