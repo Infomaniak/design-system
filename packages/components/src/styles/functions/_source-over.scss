@@ -1,0 +1,8 @@
+@function source-over($destination, $source) {
+  @return color-mix(
+    in srgb,
+    rgb(from var(#{$source}) r g b / 100%) calc(var(#{$source}-a) * 100%),
+    rgb(from var(#{$destination}) r g b / 100%)
+      calc(var(#{$destination}-a) * (1 - var(#{$source}-a)) * 100%)
+  );
+}
