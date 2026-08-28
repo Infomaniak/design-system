@@ -309,7 +309,8 @@ git commit -m "refactor(fonts): remove archive and trigger helpers"
 - Produces: `pushGitlabFonts({ repositoryUrl, repositoryToken, sourceDirectory, fileNames,
 targetDirectoryName, commitMessage, workDirectory })` → `Promise<void>`. Clones the repository
   (depth 1, HTTPS + GitLab token injected as `oauth2` user, token redacted from all error
-  messages), replaces the contents of `fonts/{targetDirectoryName}/` (preserving `.gitkeep`),
+  messages), replaces the contents of `{targetDirectoryName}/` at the repository root (preserving
+  `.gitkeep`),
   commits with `--allow-empty` and an inline git identity, pushes `HEAD`.
 - Keeps from the previous version: `redact`/`runGit` helpers, `GIT_USER_NAME`/`GIT_USER_EMAIL`,
   `--allow-empty`.
