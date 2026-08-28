@@ -5,208 +5,208 @@
     "xs": {
       "$description": "Extra-small typography style for captions and metadata.",
       "base": {
-        "$description": "Extra-small base typography (regular weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.xs.size}",
           "fontWeight": "{font.weight.regular}",
           "letterSpacing": "{text.xs.letter-spacing}",
           "lineHeight": "{text.xs.line-height}"
-        }
+        },
+        "$description": "Extra-small base typography (regular weight)."
       },
       "emphasized": {
-        "$description": "Extra-small emphasized typography (medium weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.xs.size}",
           "fontWeight": "{font.weight.medium}",
           "letterSpacing": "{text.xs.letter-spacing}",
           "lineHeight": "{text.xs.line-height}"
-        }
+        },
+        "$description": "Extra-small emphasized typography (medium weight)."
       }
     },
     "sm": {
       "$description": "Small typography style for helper text and compact UI.",
       "base": {
-        "$description": "Small base typography (regular weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.sm.size}",
           "fontWeight": "{font.weight.regular}",
           "letterSpacing": "{text.sm.letter-spacing}",
           "lineHeight": "{text.sm.line-height}"
-        }
+        },
+        "$description": "Small base typography (regular weight)."
       },
       "emphasized": {
-        "$description": "Small emphasized typography (medium weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.sm.size}",
           "fontWeight": "{font.weight.medium}",
           "letterSpacing": "{text.sm.letter-spacing}",
           "lineHeight": "{text.sm.line-height}"
-        }
+        },
+        "$description": "Small emphasized typography (medium weight)."
       }
     },
     "md": {
       "$description": "Medium (base) typography style for body copy and default text.",
       "base": {
-        "$description": "Medium base typography (regular weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.md.size}",
           "fontWeight": "{font.weight.regular}",
           "letterSpacing": "{text.md.letter-spacing}",
           "lineHeight": "{text.md.line-height}"
-        }
+        },
+        "$description": "Medium base typography (regular weight)."
       },
       "emphasized": {
-        "$description": "Medium emphasized typography (medium weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.md.size}",
           "fontWeight": "{font.weight.medium}",
           "letterSpacing": "{text.md.letter-spacing}",
           "lineHeight": "{text.md.line-height}"
-        }
+        },
+        "$description": "Medium emphasized typography (medium weight)."
       }
     },
     "lg": {
       "$description": "Large typography style for emphasized body text.",
       "base": {
-        "$description": "Large base typography (regular weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.lg.size}",
           "fontWeight": "{font.weight.regular}",
           "letterSpacing": "{text.lg.letter-spacing}",
           "lineHeight": "{text.lg.line-height}"
-        }
+        },
+        "$description": "Large base typography (regular weight)."
       },
       "emphasized": {
-        "$description": "Large emphasized typography (medium weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.lg.size}",
           "fontWeight": "{font.weight.medium}",
           "letterSpacing": "{text.lg.letter-spacing}",
           "lineHeight": "{text.lg.line-height}"
-        }
+        },
+        "$description": "Large emphasized typography (medium weight)."
       }
     },
     "xl": {
       "$description": "Extra-large typography style for subtitles and subheadings.",
       "base": {
-        "$description": "Extra-large base typography (regular weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.xl.size}",
           "fontWeight": "{font.weight.regular}",
           "letterSpacing": "{text.xl.letter-spacing}",
           "lineHeight": "{text.xl.line-height}"
-        }
+        },
+        "$description": "Extra-large base typography (regular weight)."
       },
       "emphasized": {
-        "$description": "Extra-large emphasized typography (medium weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.xl.size}",
           "fontWeight": "{font.weight.medium}",
           "letterSpacing": "{text.xl.letter-spacing}",
           "lineHeight": "{text.xl.line-height}"
-        }
+        },
+        "$description": "Extra-large emphasized typography (medium weight)."
       }
     },
     "2xl": {
       "$description": "2x-large typography style for section headings.",
       "base": {
-        "$description": "2x-large base typography (regular weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.2xl.size}",
           "fontWeight": "{font.weight.regular}",
           "letterSpacing": "{text.2xl.letter-spacing}",
           "lineHeight": "{text.2xl.line-height}"
-        }
+        },
+        "$description": "2x-large base typography (regular weight)."
       },
       "emphasized": {
-        "$description": "2x-large emphasized typography (medium weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.2xl.size}",
           "fontWeight": "{font.weight.medium}",
           "letterSpacing": "{text.2xl.letter-spacing}",
           "lineHeight": "{text.2xl.line-height}"
-        }
+        },
+        "$description": "2x-large emphasized typography (medium weight)."
       }
     },
     "3xl": {
       "$description": "3x-large typography style for prominent headings.",
       "base": {
-        "$description": "3x-large base typography (regular weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.3xl.size}",
           "fontWeight": "{font.weight.regular}",
           "letterSpacing": "{text.3xl.letter-spacing}",
           "lineHeight": "{text.3xl.line-height}"
-        }
+        },
+        "$description": "3x-large base typography (regular weight)."
       },
       "emphasized": {
-        "$description": "3x-large emphasized typography (medium weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.3xl.size}",
           "fontWeight": "{font.weight.medium}",
           "letterSpacing": "{text.3xl.letter-spacing}",
           "lineHeight": "{text.3xl.line-height}"
-        }
+        },
+        "$description": "3x-large emphasized typography (medium weight)."
       }
     },
     "4xl": {
       "$description": "4x-large typography style for display headings.",
       "base": {
-        "$description": "4x-large base typography (regular weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.4xl.size}",
           "fontWeight": "{font.weight.regular}",
           "letterSpacing": "{text.4xl.letter-spacing}",
           "lineHeight": "{text.4xl.line-height}"
-        }
+        },
+        "$description": "4x-large base typography (regular weight)."
       },
       "emphasized": {
-        "$description": "4x-large emphasized typography (medium weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.4xl.size}",
           "fontWeight": "{font.weight.medium}",
           "letterSpacing": "{text.4xl.letter-spacing}",
           "lineHeight": "{text.4xl.line-height}"
-        }
+        },
+        "$description": "4x-large emphasized typography (medium weight)."
       }
     },
     "5xl": {
       "$description": "5x-large typography style for hero display text.",
       "base": {
-        "$description": "5x-large base typography (regular weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.5xl.size}",
           "fontWeight": "{font.weight.regular}",
           "letterSpacing": "{text.5xl.letter-spacing}",
           "lineHeight": "{text.5xl.line-height}"
-        }
+        },
+        "$description": "5x-large base typography (regular weight)."
       },
       "emphasized": {
-        "$description": "5x-large emphasized typography (medium weight).",
         "$value": {
           "fontFamily": "{font.family.base}",
           "fontSize": "{text.5xl.size}",
           "fontWeight": "{font.weight.medium}",
           "letterSpacing": "{text.5xl.letter-spacing}",
           "lineHeight": "{text.5xl.line-height}"
-        }
+        },
+        "$description": "5x-large emphasized typography (medium weight)."
       }
     }
   }
