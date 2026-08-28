@@ -15,11 +15,21 @@ const GIT_USER_NAME = 'design-system-ci';
 
 const GIT_USER_EMAIL = 'design-system-ci@infomaniak.com';
 
-function runGit(args: readonly string[], cwd: string): Promise<void> {
+const REDACTED = '***';
+
+function redact(value: string, secret: string): string {
+  return secret.length === 0 ? value : value.replaceAll(secret, REDACTED);
+}
+
+function runGit(args: readonly string[], repositoryToken: string, cwd: string): Promise<void> {
   return new Promise<void>((resolve, reject): void => {
     execFile('git', [...args], { cwd }, (error) => {
       if (error !== null) {
-        reject(new Error(`git ${args.join(' ')} failed: ${error.message}`));
+        const message = `git ${redact(args.join(' '), repositoryToken)} failed: ${redact(
+          error.message,
+          repositoryToken,
+        )}`;
+        reject(new Error(message));
         return;
       }
 
@@ -46,6 +56,7 @@ export async function pushGitlabFontsArchive({
 
   await runGit(
     ['clone', '--depth', '1', repositoryUrlWithAuth, repositoryDirectory],
+    repositoryToken,
     workDirectory,
   );
 
@@ -61,7 +72,7 @@ export async function pushGitlabFontsArchive({
 
   await copyFile(archivePath, join(archivesDirectory, archiveName));
 
-  await runGit(['add', '-A'], repositoryDirectory);
+  await runGit(['add', '-A'], repositoryToken, repositoryDirectory);
 
   await runGit(
     [
@@ -70,11 +81,13 @@ export async function pushGitlabFontsArchive({
       '-c',
       `user.email=${GIT_USER_EMAIL}`,
       'commit',
+      '--allow-empty',
       '-m',
       commitMessage,
     ],
+    repositoryToken,
     repositoryDirectory,
   );
 
-  await runGit(['push', 'origin', 'HEAD'], repositoryDirectory);
+  await runGit(['push', 'origin', 'HEAD'], repositoryToken, repositoryDirectory);
 }

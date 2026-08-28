@@ -65,6 +65,7 @@ describe('pushGitlabFontsArchive', () => {
           '-c',
           'user.email=design-system-ci@infomaniak.com',
           'commit',
+          '--allow-empty',
           '-m',
           'chore: publish fonts prod abc123d',
         ],
@@ -102,6 +103,41 @@ describe('pushGitlabFontsArchive', () => {
 
     await expect(pushGitlabFontsArchive(defaultOptions)).rejects.toThrow(
       'git push origin HEAD failed: push failed',
+    );
+  });
+
+  it('redacts the repository token from clone failure errors', async () => {
+    execFileMock.mockImplementation((...args: unknown[]) => {
+      const command = args[1] as string[];
+      const callback = args.at(-1) as (error: Error | null) => void;
+      callback(
+        command[0] === 'clone'
+          ? new Error('Command failed: git clone https://oauth2:glpat-token@gitlab.example.com')
+          : null,
+      );
+    });
+
+    const error: unknown = await pushGitlabFontsArchive(defaultOptions).catch(
+      (rejected: unknown) => rejected,
+    );
+
+    expect(error).toBeInstanceOf(Error);
+    expect((error as Error).message).not.toContain('glpat-token');
+    expect((error as Error).message).toContain('git clone --depth 1 https://oauth2:***@');
+    expect((error as Error).message).toContain('failed: Command failed: git clone');
+  });
+
+  it('leaves error messages intact when the repository token is empty', async () => {
+    execFileMock.mockImplementation((...args: unknown[]) => {
+      const command = args[1] as string[];
+      const callback = args.at(-1) as (error: Error | null) => void;
+      callback(command[0] === 'clone' ? new Error('clone failed') : null);
+    });
+
+    await expect(
+      pushGitlabFontsArchive({ ...defaultOptions, repositoryToken: '' }),
+    ).rejects.toThrow(
+      'git clone --depth 1 https://oauth2:@gitlab.infomaniak.ch/infomaniak/fonts-delivery.git',
     );
   });
 });

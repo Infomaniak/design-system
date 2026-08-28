@@ -82,6 +82,10 @@ S3: fonts.storage.infomaniak.com/{dev|latest}/
   runners) — no new npm dependency.
 - **Dedicated GitLab repo as transport** — the archive is committed to the repo; the GitLab job
   reads it directly from its own checkout (no download step, no artifact API).
+- **Push→trigger race is accepted** — concurrent publishes across refs could replace the archive
+  between push and trigger, making the GitLab job fail on a missing archive; a retry re-publishes.
+  Passing the pushed commit SHA as trigger `ref` is a possible hardening if the GitLab instance
+  accepts SHAs.
 - **Previous archives are removed** at each push (`git add -A` after clearing `archives/`) so the
   repo tree always holds a single current archive; git history growth is an accepted tradeoff.
 - **Dry-run safe** — when `CI_PUBLISH_DRY_RUN=true` (fork PRs, no secrets available), the script
