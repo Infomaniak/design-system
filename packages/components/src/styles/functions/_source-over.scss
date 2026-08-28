@@ -1,3 +1,25 @@
+/*
+  Composites a source color on top of a destination color (Porter-Duff
+  "source-over"), resolving colors and alphas from custom properties.
+  Resulting opacity: `α_source + α_destination * (1 - α_source)`.
+
+  @param {string} $destination - Unquoted name of the custom property holding
+    the base color. A companion `#{$destination}-a` custom property must
+    define its alpha (0–1).
+  @param {string} $source - Unquoted name of the custom property holding the
+    overlay color. A companion `#{$source}-a` custom property must define its
+    alpha (0–1).
+
+  @return {color} The composited color, emitted as a `color-mix()` expression.
+
+  @example scss
+    &:hover {
+      color: styles.source-over(
+        --esds-text-link-content-color-default,
+        --esds-color-state-hover-strong
+      );
+    }
+*/
 @function source-over($destination, $source) {
   @return color-mix(
     in srgb,
