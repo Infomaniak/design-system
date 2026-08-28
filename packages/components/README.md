@@ -8,6 +8,7 @@
 Web components built with Lit, documented via Storybook using Custom Elements Manifest (CEM).
 
 - [Documentation ↗](https://infomaniak.github.io/design-system/storybook/main/?path=/docs/components-getting-started--docs)
+- [CONTRIBUTING](./CONTRIBUTING.md)
 
 ## Getting Started
 

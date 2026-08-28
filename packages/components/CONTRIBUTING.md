@@ -95,8 +95,9 @@ These files are automatically excluded from the generated `public-api.ts` by the
 #### CSS / Sass
 
 > [!WARNING]
-> CSS must be preferred over Sass: it garanties standard support and is easier to maintain in the long term.
+> CSS must be preferred over Sass: it guarantees standard support and is easier to maintain in the long term.
 > Sass is only used when it provides a feature not available in CSS but planned for the future.
+> Styles must stay as close as possible to native CSS.
 
 ## Visual Regression Tests
 
