@@ -95,33 +95,33 @@ S3: fonts.storage.infomaniak.com/{dev|latest}/
 
 ### Files to Create (design-system repo)
 
-| File                                                              | Responsibility                                                |
-|-------------------------------------------------------------------|---------------------------------------------------------------|
-| `scripts/helpers/file/archive/create-tar-gz-archive.ts`           | Create a tar.gz archive from selected files of a directory    |
-| `scripts/helpers/file/archive/create-tar-gz-archive.test.ts`      | Integration test (real tar binary)                            |
-| `scripts/helpers/gitlab/env/get-env-gitlab-fonts-repository-url.ts`   | Read `GITLAB_FONTS_REPOSITORY_URL` env var            |
-| `scripts/helpers/gitlab/env/get-env-gitlab-fonts-repository-token.ts` | Read `GITLAB_FONTS_REPOSITORY_TOKEN` env var          |
-| `scripts/helpers/gitlab/env/get-env-gitlab-fonts-trigger-url.ts`      | Read `GITLAB_FONTS_TRIGGER_URL` env var               |
-| `scripts/helpers/gitlab/env/get-env-gitlab-fonts-trigger-token.ts`    | Read `GITLAB_FONTS_TRIGGER_TOKEN` env var             |
-| `scripts/helpers/gitlab/env/get-env-gitlab-fonts-trigger-ref.ts`      | Read `GITLAB_FONTS_TRIGGER_REF` env var               |
-| `scripts/helpers/gitlab/git/push-gitlab-fonts-archive.ts`         | Clone dedicated repo, replace archive, commit, push           |
-| `scripts/helpers/gitlab/git/push-gitlab-fonts-archive.test.ts`    | Test the git push sequence (mocked `execFile`)                |
-| `scripts/helpers/gitlab/api/trigger-gitlab-fonts-pipeline.ts`     | POST trigger pipeline request with variables                  |
-| `scripts/helpers/gitlab/api/trigger-gitlab-fonts-pipeline.test.ts`| Test the trigger request                                      |
+| File                                                                  | Responsibility                                             |
+| --------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `scripts/helpers/file/archive/create-tar-gz-archive.ts`               | Create a tar.gz archive from selected files of a directory |
+| `scripts/helpers/file/archive/create-tar-gz-archive.test.ts`          | Integration test (real tar binary)                         |
+| `scripts/helpers/gitlab/env/get-env-gitlab-fonts-repository-url.ts`   | Read `GITLAB_FONTS_REPOSITORY_URL` env var                 |
+| `scripts/helpers/gitlab/env/get-env-gitlab-fonts-repository-token.ts` | Read `GITLAB_FONTS_REPOSITORY_TOKEN` env var               |
+| `scripts/helpers/gitlab/env/get-env-gitlab-fonts-trigger-url.ts`      | Read `GITLAB_FONTS_TRIGGER_URL` env var                    |
+| `scripts/helpers/gitlab/env/get-env-gitlab-fonts-trigger-token.ts`    | Read `GITLAB_FONTS_TRIGGER_TOKEN` env var                  |
+| `scripts/helpers/gitlab/env/get-env-gitlab-fonts-trigger-ref.ts`      | Read `GITLAB_FONTS_TRIGGER_REF` env var                    |
+| `scripts/helpers/gitlab/git/push-gitlab-fonts-archive.ts`             | Clone dedicated repo, replace archive, commit, push        |
+| `scripts/helpers/gitlab/git/push-gitlab-fonts-archive.test.ts`        | Test the git push sequence (mocked `execFile`)             |
+| `scripts/helpers/gitlab/api/trigger-gitlab-fonts-pipeline.ts`         | POST trigger pipeline request with variables               |
+| `scripts/helpers/gitlab/api/trigger-gitlab-fonts-pipeline.test.ts`    | Test the trigger request                                   |
 
 ### Files to Modify (design-system repo)
 
-| File                                                                          | Change                                                       |
-|-------------------------------------------------------------------------------|--------------------------------------------------------------|
+| File                                                                          | Change                                                             |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------ |
 | `packages/assets/fonts/scripts/scripts/publish-fonts/publish-fonts.script.ts` | Replace npm publish with: archive → push GitLab → trigger pipeline |
-| `.env.example`                                                                | Add the 5 `GITLAB_FONTS_*` variables                         |
-| `.github/workflows/publish.yml`                                               | Pass the new GitLab secrets as env to `yarn ci:publish`      |
+| `.env.example`                                                                | Add the 5 `GITLAB_FONTS_*` variables                               |
+| `.github/workflows/publish.yml`                                               | Pass the new GitLab secrets as env to `yarn ci:publish`            |
 
 ### External (out of scope for this plan — dedicated GitLab repository)
 
-| File                    | Responsibility                                    |
-|-------------------------|---------------------------------------------------|
-| `<dedicated-repo>/.gitlab-ci.yml` | Pipeline: extract archive → upload S3   |
+| File                              | Responsibility                        |
+| --------------------------------- | ------------------------------------- |
+| `<dedicated-repo>/.gitlab-ci.yml` | Pipeline: extract archive → upload S3 |
 
 ---
 
@@ -246,18 +246,22 @@ export async function createTarGzArchive({
   const archivePath: string = join(outputDirectory, archiveName);
 
   await new Promise<void>((resolve, reject): void => {
-    execFile('tar', ['-czf', archivePath, '-C', sourceDirectory, ...fileNames], (error, _stdout, stderr) => {
-      if (error !== null) {
-        reject(
-          new Error(
-            `Failed to create tar.gz archive "${archivePath}": ${error.message}${stderr === '' ? '' : ` — ${stderr}`}`,
-          ),
-        );
-        return;
-      }
+    execFile(
+      'tar',
+      ['-czf', archivePath, '-C', sourceDirectory, ...fileNames],
+      (error, _stdout, stderr) => {
+        if (error !== null) {
+          reject(
+            new Error(
+              `Failed to create tar.gz archive "${archivePath}": ${error.message}${stderr === '' ? '' : ` — ${stderr}`}`,
+            ),
+          );
+          return;
+        }
 
-      resolve();
-    });
+        resolve();
+      },
+    );
   });
 
   return archivePath;
@@ -375,7 +379,7 @@ git commit -m "feat(fonts): add GitLab fonts env helpers"
 
 - Consumes: `node:child_process.execFile` (system `git`), `node:fs/promises`
 - Produces: `pushGitlabFontsArchive({ repositoryUrl, repositoryToken, archivePath, archiveName,
-  commitMessage, workDirectory })` → `Promise<void>`. Clones the repository (depth 1, HTTPS + GitLab
+commitMessage, workDirectory })` → `Promise<void>`. Clones the repository (depth 1, HTTPS + GitLab
   token injected as `oauth2` user), clears previous `*.tar.gz` files from `archives/`, copies the
   new archive, commits with an inline git identity, pushes `HEAD`.
 
@@ -547,7 +551,10 @@ export async function pushGitlabFontsArchive({
   const repositoryDirectory: string = join(workDirectory, 'repository');
   const archivesDirectory: string = join(repositoryDirectory, 'archives');
 
-  await runGit(['clone', '--depth', '1', repositoryUrlWithAuth, repositoryDirectory], workDirectory);
+  await runGit(
+    ['clone', '--depth', '1', repositoryUrlWithAuth, repositoryDirectory],
+    workDirectory,
+  );
 
   await mkdir(archivesDirectory, { recursive: true });
 
@@ -755,32 +762,16 @@ import { fileURLToPath } from 'node:url';
 import { createTarGzArchive } from '../../../../../../scripts/helpers/file/archive/create-tar-gz-archive.ts';
 import { getEnvVariable } from '../../../../../../scripts/helpers/env/get-env-variable.ts';
 import { getEnvGithubCiConfig } from '../../../../../../scripts/helpers/github/github-ci-config/env/get-env-github-ci-config.ts';
-import {
-  triggerGitlabFontsPipeline,
-} from '../../../../../../scripts/helpers/gitlab/api/trigger-gitlab-fonts-pipeline.ts';
-import {
-  getEnvGitlabFontsRepositoryToken,
-} from '../../../../../../scripts/helpers/gitlab/env/get-env-gitlab-fonts-repository-token.ts';
-import {
-  getEnvGitlabFontsRepositoryUrl,
-} from '../../../../../../scripts/helpers/gitlab/env/get-env-gitlab-fonts-repository-url.ts';
-import {
-  getEnvGitlabFontsTriggerRef,
-} from '../../../../../../scripts/helpers/gitlab/env/get-env-gitlab-fonts-trigger-ref.ts';
-import {
-  getEnvGitlabFontsTriggerToken,
-} from '../../../../../../scripts/helpers/gitlab/env/get-env-gitlab-fonts-trigger-token.ts';
-import {
-  getEnvGitlabFontsTriggerUrl,
-} from '../../../../../../scripts/helpers/gitlab/env/get-env-gitlab-fonts-trigger-url.ts';
-import {
-  pushGitlabFontsArchive,
-} from '../../../../../../scripts/helpers/gitlab/git/push-gitlab-fonts-archive.ts';
+import { triggerGitlabFontsPipeline } from '../../../../../../scripts/helpers/gitlab/api/trigger-gitlab-fonts-pipeline.ts';
+import { getEnvGitlabFontsRepositoryToken } from '../../../../../../scripts/helpers/gitlab/env/get-env-gitlab-fonts-repository-token.ts';
+import { getEnvGitlabFontsRepositoryUrl } from '../../../../../../scripts/helpers/gitlab/env/get-env-gitlab-fonts-repository-url.ts';
+import { getEnvGitlabFontsTriggerRef } from '../../../../../../scripts/helpers/gitlab/env/get-env-gitlab-fonts-trigger-ref.ts';
+import { getEnvGitlabFontsTriggerToken } from '../../../../../../scripts/helpers/gitlab/env/get-env-gitlab-fonts-trigger-token.ts';
+import { getEnvGitlabFontsTriggerUrl } from '../../../../../../scripts/helpers/gitlab/env/get-env-gitlab-fonts-trigger-url.ts';
+import { pushGitlabFontsArchive } from '../../../../../../scripts/helpers/gitlab/git/push-gitlab-fonts-archive.ts';
 import type { Logger } from '../../../../../../scripts/helpers/log/logger.ts';
 import { runScript } from '../../../../../../scripts/helpers/misc/run-script/run-script.ts';
-import {
-  getEnvPublishConfig,
-} from '../../../../../../scripts/helpers/publish/publish-config/env/get-env-publish-config.ts';
+import { getEnvPublishConfig } from '../../../../../../scripts/helpers/publish/publish-config/env/get-env-publish-config.ts';
 
 const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 
@@ -876,15 +867,15 @@ Add the new GitLab secrets to the `env` block of the **"Publish missing package 
 (the fork dry-run step needs no change — the script skips on `CI_PUBLISH_DRY_RUN`):
 
 ```yaml
-        env:
-          GITHUB_CI_CONFIG: ${{ toJson(github) }}
-          KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
-          CI_PULL_REQUEST_AUTH_TOKEN_MOBILE: ${{ secrets.CI_PULL_REQUEST_AUTH_TOKEN_MOBILE }}
-          GITLAB_FONTS_REPOSITORY_URL: ${{ secrets.GITLAB_FONTS_REPOSITORY_URL }}
-          GITLAB_FONTS_REPOSITORY_TOKEN: ${{ secrets.GITLAB_FONTS_REPOSITORY_TOKEN }}
-          GITLAB_FONTS_TRIGGER_URL: ${{ secrets.GITLAB_FONTS_TRIGGER_URL }}
-          GITLAB_FONTS_TRIGGER_TOKEN: ${{ secrets.GITLAB_FONTS_TRIGGER_TOKEN }}
-          GITLAB_FONTS_TRIGGER_REF: main
+env:
+  GITHUB_CI_CONFIG: ${{ toJson(github) }}
+  KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
+  CI_PULL_REQUEST_AUTH_TOKEN_MOBILE: ${{ secrets.CI_PULL_REQUEST_AUTH_TOKEN_MOBILE }}
+  GITLAB_FONTS_REPOSITORY_URL: ${{ secrets.GITLAB_FONTS_REPOSITORY_URL }}
+  GITLAB_FONTS_REPOSITORY_TOKEN: ${{ secrets.GITLAB_FONTS_REPOSITORY_TOKEN }}
+  GITLAB_FONTS_TRIGGER_URL: ${{ secrets.GITLAB_FONTS_TRIGGER_URL }}
+  GITLAB_FONTS_TRIGGER_TOKEN: ${{ secrets.GITLAB_FONTS_TRIGGER_TOKEN }}
+  GITLAB_FONTS_TRIGGER_REF: main
 ```
 
 No permission change is needed: no GitHub Release or tag is created anymore, `contents: read`
@@ -966,7 +957,7 @@ upload-fonts-to-s3:
       esac
     - aws s3 sync /tmp/fonts/ "s3://${S3_BUCKET}/${S3_PATH}/" --exclude "*" --include "*.woff2" --include "*.min.css"
   variables:
-    S3_BUCKET: "fonts.storage.infomaniak.com"
+    S3_BUCKET: 'fonts.storage.infomaniak.com'
     AWS_ACCESS_KEY_ID: $S3_ACCESS_KEY_ID
     AWS_SECRET_ACCESS_KEY: $S3_SECRET_ACCESS_KEY
 ```
