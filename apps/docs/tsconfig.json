@@ -6,7 +6,19 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "typeRoots": [
+      "node_modules/@types",
+      "node_modules",
+      "../../node_modules/@types",
+      "../../node_modules"
+    ],
+    "exactOptionalPropertyTypes": true,
+    "paths": {
+      "@infomaniak-design-system/components": [
+        "../../packages/components/dist/public-api.d.ts"
+      ]
+    }
   },
   "include": ["src", ".storybook", "src/types/*.d.ts"]
 }
