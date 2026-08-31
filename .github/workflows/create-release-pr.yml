@@ -26,7 +26,8 @@ jobs:
               --title "release: develop → main" \
               --body "$(cat <<'EOF'
           Merge this PR to release accumulated changes from `develop` to `main`.
-          EOF
+
+          Mark this PR as **Ready for review** to trigger automatic version bumping and changelog generation via changesets.
           )" \
               --draft
           else
