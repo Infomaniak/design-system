@@ -28,6 +28,7 @@ jobs:
           Merge this PR to release accumulated changes from `develop` to `main`.
 
           Mark this PR as **Ready for review** to trigger automatic version bumping and changelog generation via changesets.
+          EOF
           )" \
               --draft
           else
