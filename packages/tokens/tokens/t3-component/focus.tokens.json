@@ -2,7 +2,7 @@
   "focus": {
     "border": {
       "color": {
-        "$value": "{color.blue.600}",
+        "$value": "{color.state.focus}",
         "$extensions": {
           "scopes": ["STROKE_COLOR"]
         }
