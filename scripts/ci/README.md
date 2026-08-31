@@ -82,7 +82,7 @@ flowchart LR
 ## Changesets (Versioning + Changelog)
 
 Changesets are used to collect structured change descriptions and automate version bumps + changelog generation.
-They operate during the `publish.yml` workflow and are configured in.
+They operate during the `publish.yml` workflow and are configured in `.changeset/config.json`.
 
 ### Flow
 
