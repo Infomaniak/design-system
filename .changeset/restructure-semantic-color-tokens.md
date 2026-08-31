@@ -10,4 +10,4 @@ Added new semantic background tokens: per-product brand colors (including Euria)
 
 Added new alpha-variant primitive colors (e.g. `color.blue.50-12`, `color.blue.900-80`).
 
-Removed the unused `shadow.0` primitive token and simplified the text-link component tokens to a `$root` default and a `visited` state.
+Removed the unused `shadow.0` primitive token and simplified the text-link component tokens to `content.color.default` and `content.color.visited`.
