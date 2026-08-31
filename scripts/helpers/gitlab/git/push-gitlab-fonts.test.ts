@@ -18,8 +18,8 @@ describe('pushGitlabFonts', () => {
   let sourceDir: string;
 
   const buildOptions = (workDirectory: string) => ({
-    repositoryUrl: 'https://gitlab.infomaniak.ch/infomaniak/fonts-delivery.git',
-    repositoryToken: 'glpat-token',
+    repositoryUrl: 'https://gitlab.example.com/infomaniak/fonts-delivery.git',
+    repositoryToken: 'test-token',
     sourceDirectory: sourceDir,
     fileNames: ['inter.woff2', 'inter.min.css'] as const,
     targetDirectoryName: 'latest',
@@ -52,7 +52,7 @@ describe('pushGitlabFonts', () => {
     await pushGitlabFonts(buildOptions(workDir));
 
     const repositoryUrlWithAuth =
-      'https://oauth2:glpat-token@gitlab.infomaniak.ch/infomaniak/fonts-delivery.git';
+      'https://oauth2:test-token@gitlab.example.com/infomaniak/fonts-delivery.git';
 
     expect(execFileMock).toHaveBeenCalledTimes(4);
     expect(execFileMock.mock.calls.map((call) => [call[0], call[1]])).toEqual([
@@ -103,7 +103,7 @@ describe('pushGitlabFonts', () => {
       const callback = args.at(-1) as (error: Error | null) => void;
       callback(
         new Error(
-          'Command failed: git clone https://oauth2:glpat-token@gitlab.infomaniak.ch/infomaniak/fonts-delivery.git',
+          'Command failed: git clone https://oauth2:test-token@gitlab.example.com/infomaniak/fonts-delivery.git',
         ),
       );
     });
@@ -114,7 +114,7 @@ describe('pushGitlabFonts', () => {
 
     expect(rejection).toBeInstanceOf(Error);
     expect((rejection as Error).message).toContain('https://oauth2:***@');
-    expect((rejection as Error).message).not.toContain('glpat-token');
+    expect((rejection as Error).message).not.toContain('test-token');
   });
 
   it('does not alter the error message when the token is empty', async () => {
