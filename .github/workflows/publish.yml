@@ -116,7 +116,7 @@ jobs:
           github.event.pull_request.head.ref == 'develop' &&
           github.event.action == 'ready_for_review'
         run: |
-          git push
+          git push origin HEAD:develop
 
       - name: Publish missing package versions
         if: >-
