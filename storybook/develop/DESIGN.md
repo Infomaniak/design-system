@@ -425,7 +425,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | body.sm.font | 400 0.875rem/20px Suisse Int'l | 400 0.875rem/20px Suisse Int'l | var(--esds-body-sm-font) | Small body text style. |
 | body.md.font | 400 1rem/24px Suisse Int'l | 400 1rem/24px Suisse Int'l | var(--esds-body-md-font) | Medium (default) body text style. |
 | body.lg.font | 400 1.125rem/26px Suisse Int'l | 400 1.125rem/26px Suisse Int'l | var(--esds-body-lg-font) | Large body text style. |
-| focus.border.color | #0077cf | #0077cf | var(--esds-focus-border-color) | N/A |
+| focus.border.color | #0077cf | #36adfa | var(--esds-focus-border-color) | N/A |
 | focus.border.radius | 2px | 2px | var(--esds-focus-border-radius) | N/A |
 | focus.border.width | 2px | 2px | var(--esds-focus-border-width) | N/A |
 | heading.xs.font | 500 1.25rem/28px Suisse Int'l | 500 1.25rem/28px Suisse Int'l | var(--esds-heading-xs-font) | Extra-small heading style. |
