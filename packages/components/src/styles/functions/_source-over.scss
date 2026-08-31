@@ -4,10 +4,10 @@
   Resulting opacity: `α_source + α_destination * (1 - α_source)`.
 
   @param {string} $destination - Unquoted name of the custom property holding
-    the base color. A companion `#{$destination}-a` custom property must
+    the base color. A companion `$destination-a` custom property must
     define its alpha (0–1).
   @param {string} $source - Unquoted name of the custom property holding the
-    overlay color. A companion `#{$source}-a` custom property must define its
+    overlay color. A companion `$source-a` custom property must define its
     alpha (0–1).
 
   @return {color} The composited color, emitted as a `color-mix()` expression.
@@ -23,8 +23,8 @@
 @function source-over($destination, $source) {
   @return color-mix(
     in srgb,
-    rgb(from var(#{$source}) r g b / 100%) calc(var(#{$source}-a) * 100%),
+    rgb(from var(#{$source}) r g b / 100%) calc(var(#{$source + '-a'}) * 100%),
     rgb(from var(#{$destination}) r g b / 100%)
-      calc(var(#{$destination}-a) * (1 - var(#{$source}-a)) * 100%)
+      calc(var(#{$destination + '-a'}) * (1 - var(#{$source + '-a'})) * 100%)
   );
 }
