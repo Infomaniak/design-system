@@ -13,7 +13,7 @@ directories (pushed by the design-system) to Infomaniak's S3-compatible storage.
 `dev/` or `latest/` and pushes to this repository. The push itself is the pipeline trigger: two
 jobs (`upload-dev-fonts`, `upload-latest-fonts`) each watch their directory via `changes:` rules,
 refuse to sync an empty directory (anti-wipe guard) and mirror it to
-`s3://{S3_BUCKET}/{dev|latest}/` through the custom S3 endpoint.
+`s3://{S3_BUCKET}/{S3_PATH_PREFIX}/{dev|latest}/` through the custom S3 endpoint.
 
 **Tech Stack:** GitLab CI (push-triggered pipelines, `changes:` rules), amazon/aws-cli container
 image, S3-compatible storage via `--endpoint-url`, `glab` CLI (already authenticated on
@@ -26,8 +26,10 @@ image, S3-compatible storage via `--endpoint-url`, `glab` CLI (already authentic
   id 6565, visibility internal, default branch `master`)
 - **Pipeline source:** `push` only (`workflow.rules`) — no trigger token, no scheduled/web/trigger
   pipelines
-- **Image:** `amazon/aws-cli:latest` with `entrypoint: [""]` (the image defaults to the `aws`
-  entrypoint, which would swallow the script lines)
+- **Image:** `docker.io/amazon/aws-cli:latest` with `entrypoint: [""]` (fully-qualified name per
+  runner policy; the image defaults to the `aws` entrypoint, which would swallow the script lines)
+- **S3 location:** fonts are NOT synced at the bucket root — a `S3_PATH_PREFIX` CI/CD variable
+  scopes them to a subfolder (`s3://{S3_BUCKET}/{S3_PATH_PREFIX}/{dev|latest}/`)
 - **Runner tags:** none — the instance runners are untagged (Kubernetes executor); the jobs
   intentionally define no `tags:` entry (a tagged job would never be picked up)
 - **S3 sync semantics:** mirror with `--delete`, scoped to `*.woff2` and `*.min.css` — a font
@@ -54,14 +56,20 @@ This plan was revised once:
 - **Task 1 (bootstrap) — DONE.** The repository was pre-created (project id 6565, internal,
   default branch `master`, empty). Bootstrap pushed: `README.md`, `dev/.gitkeep`,
   `latest/.gitkeep` (commit `d1ee2ba`).
-- **Task 2 (pipeline) — DONE, with one deviation.** `.gitlab-ci.yml` pushed (commit `d06c76b`),
-  validated with `glab ci lint`. The bootstrap push carried the `.gitkeep` files (under `dev/` and
-  `latest/`), so ONE pipeline started and both jobs failed on the anti-wipe guard
-  ("Refusing to sync dev/: no .woff2 file (S3 would be wiped).") — expected behaviour, live
-  demonstration of the guard before any S3 credentials exist. The plan's original expectation
-  (a root-files-only push starting no pipeline) still holds for future README/CI-only pushes.
+- **Task 2 (pipeline) — DONE, with two follow-up commits.** `.gitlab-ci.yml` pushed (commit
+  `d06c76b`, then `55f4163` + `5e7fe56`: fully-qualified `docker.io/amazon/aws-cli:latest` image
+  and the `S3_PATH_PREFIX` subfolder), validated with `glab ci lint`. The bootstrap push carried
+  the `.gitkeep` files (under `dev/` and `latest/`), so ONE pipeline started and both jobs failed
+  on the anti-wipe guard ("Refusing to sync dev/: no .woff2 file (S3 would be wiped).") —
+  expected behaviour, live demonstration of the guard before any S3 credentials exist. The
+  follow-up push (README + CI file only) started NO pipeline — the `changes:` rules verified live.
 - **Tasks 3–5 — REMAINING.** Blocked on: S3 credentials collection (endpoint, bucket, keys),
   project access token creation, protected branch, GitHub secrets — then the E2E.
+- **PENDING (design-system side):** once the real `S3_PATH_PREFIX` value is known, update
+  `SERVER_URL` in `packages/assets/fonts/scripts/scripts/build-fonts/build-fonts.script.ts` to
+  `https://fonts.storage.infomaniak.com/<S3_PATH_PREFIX>` so the generated CSS resolves against
+  the final public URL (the domain maps the bucket root, so the public URL gains the prefix
+  segment).
 
 ## Architecture Overview
 
@@ -83,7 +91,7 @@ GitLab (infomaniak/design-system/fonts-delivery) — the push STARTS the pipelin
   │       (scoped to *.woff2 + *.min.css — .gitkeep never reaches S3)
   │
   ▼
-S3-compatible storage → https://fonts.storage.infomaniak.com/{dev|latest}/
+S3-compatible storage → https://fonts.storage.infomaniak.com/{S3_PATH_PREFIX}/{dev|latest}/
 ```
 
 **Key design decisions:**
@@ -100,8 +108,8 @@ S3-compatible storage → https://fonts.storage.infomaniak.com/{dev|latest}/
 "*.min.css"` also keeps `.gitkeep` out of S3; `--delete` only ever removes objects of these two
   types.
 - **Custom S3 endpoint** — Infomaniak S3-compatible storage, so `aws` runs with
-  `--endpoint-url "$S3_ENDPOINT_URL"`; endpoint, bucket and region are CI/CD variables, not
-  hardcoded.
+  `--endpoint-url "$S3_ENDPOINT_URL"`; endpoint, bucket, path prefix and region are CI/CD
+  variables, not hardcoded.
 - **Retry semantics** — a failed upload is retried by re-running the job in the GitLab UI (the
   files are already committed). An identical-content re-publish produces an `--allow-empty`
   commit with an empty diff, which starts **no** pipeline — correct, because either the content
@@ -179,10 +187,10 @@ The [design-system](https://github.com/Infomaniak/design-system) CI builds the w
 (WOFF2 + min.css), commits them directly under `dev/` or `latest/` and pushes to this
 repository. **The push itself is the pipeline trigger:**
 
-| Directory | Fed by build mode | Mirrored to                |
-| --------- | ----------------- | -------------------------- |
-| `dev/`    | `dev` or `rc`     | `s3://{S3_BUCKET}/dev/`    |
-| `latest/` | `prod`            | `s3://{S3_BUCKET}/latest/` |
+| Directory | Fed by build mode | Mirrored to                                 |
+| --------- | ----------------- | ------------------------------------------- |
+| `dev/`    | `dev` or `rc`     | `s3://{S3_BUCKET}/{S3_PATH_PREFIX}/dev/`    |
+| `latest/` | `prod`            | `s3://{S3_BUCKET}/{S3_PATH_PREFIX}/latest/` |
 
 Jobs (see `.gitlab-ci.yml`):
 
@@ -193,14 +201,16 @@ Each job refuses to sync a directory without any `.woff2` file (anti-wipe guard)
 directory to the S3-compatible storage (endpoint and bucket are CI/CD variables) with `--delete`,
 scoped to `*.woff2` + `*.min.css` — `.gitkeep` never reaches S3.
 
-Public URL: `https://fonts.storage.infomaniak.com/{dev|latest}/`
+Public URL: `https://fonts.storage.infomaniak.com/{S3_PATH_PREFIX}/{dev|latest}/`
 
 ## One-time setup
 
 1. Project access token, role Maintainer, scope `write_repository` — used by design-system as
    `GITLAB_FONTS_REPOSITORY_TOKEN`
-2. CI/CD variables (masked): `S3_ENDPOINT_URL`, `S3_BUCKET`, `AWS_ACCESS_KEY_ID`,
-   `AWS_SECRET_ACCESS_KEY`, and `AWS_DEFAULT_REGION` if the storage requires a SigV4 region
+2. CI/CD variables (masked): `S3_PATH_PREFIX` (subfolder in the bucket, e.g.
+   `design-system/fonts` — the fonts are NOT synced at the bucket root), `S3_ENDPOINT_URL`,
+   `S3_BUCKET`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_DEFAULT_REGION` if the
+   storage requires a SigV4 region
 3. Protected branch `master` configured to allow the access token to push
 
 ## Retry semantics
@@ -234,9 +244,11 @@ Expected: `master` is the default branch and the README + both `.gitkeep` files 
 **Interfaces:**
 
 - Consumes: the checkout content of the pushed commit (directories `dev/` / `latest/`), CI/CD
-  variables `S3_ENDPOINT_URL`, `S3_BUCKET`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` (and
-  optional `AWS_DEFAULT_REGION`) — `aws` reads the last three from the environment
-- Produces: mirrored `*.woff2` + `*.min.css` objects under `s3://{S3_BUCKET}/{dev|latest}/`;
+  variables `S3_ENDPOINT_URL`, `S3_BUCKET`, `S3_PATH_PREFIX`, `AWS_ACCESS_KEY_ID`,
+  `AWS_SECRET_ACCESS_KEY` (and optional `AWS_DEFAULT_REGION`) — `aws` reads the last three from
+  the environment
+- Produces: mirrored `*.woff2` + `*.min.css` objects under
+  `s3://{S3_BUCKET}/{S3_PATH_PREFIX}/{dev|latest}/`;
   per-directory jobs selected by `changes:` rules
 
 - [ ] **Step 1: Write `.gitlab-ci.yml`**
@@ -252,12 +264,13 @@ stages:
 .upload-fonts:
   stage: upload
   image:
-    name: amazon/aws-cli:latest
+    name: docker.io/amazon/aws-cli:latest
     entrypoint: ['']
   script:
-    - ls "${FONT_DIR}"/*.woff2 > /dev/null || (echo "Refusing to sync ${FONT_DIR}/: no .woff2 file (S3 would be wiped)." && exit 1)
-    - aws --endpoint-url "${S3_ENDPOINT_URL}" s3 sync "${FONT_DIR}/" "s3://${S3_BUCKET}/${FONT_DIR}/" --delete --exclude "*" --include "*.woff2" --include "*.min.css" --no-progress
-    - echo "Fonts available at https://fonts.storage.infomaniak.com/${FONT_DIR}/"
+    - test -n "${S3_PATH_PREFIX}" || (echo "S3_PATH_PREFIX variable is required" && exit 1)
+    - 'ls "${FONT_DIR}"/*.woff2 > /dev/null || (echo "Refusing to sync ${FONT_DIR}/: no .woff2 file (S3 would be wiped)." && exit 1)'
+    - aws --endpoint-url "${S3_ENDPOINT_URL}" s3 sync "${FONT_DIR}/" "s3://${S3_BUCKET}/${S3_PATH_PREFIX}/${FONT_DIR}/" --delete --exclude "*" --include "*.woff2" --include "*.min.css" --no-progress
+    - echo "Fonts available at https://fonts.storage.infomaniak.com/${S3_PATH_PREFIX}/${FONT_DIR}/"
 
 upload-dev-fonts:
   extends: .upload-fonts
@@ -335,13 +348,14 @@ Settings → Access tokens → role **Maintainer**, scope **`write_repository`**
 
 Settings → CI/CD → Variables (flag **Masked** for the secrets):
 
-| Variable                | Value                                         |
-| ----------------------- | --------------------------------------------- |
-| `S3_ENDPOINT_URL`       | Infomaniak S3-compatible endpoint             |
-| `S3_BUCKET`             | Bucket serving `fonts.storage.infomaniak.com` |
-| `AWS_ACCESS_KEY_ID`     | S3 access key                                 |
-| `AWS_SECRET_ACCESS_KEY` | S3 secret key                                 |
-| `AWS_DEFAULT_REGION`    | Only if the storage requires a SigV4 region   |
+| Variable                | Value                                                |
+| ----------------------- | ---------------------------------------------------- |
+| `S3_PATH_PREFIX`        | Subfolder in the bucket (e.g. `design-system/fonts`) |
+| `S3_ENDPOINT_URL`       | Infomaniak S3-compatible endpoint                    |
+| `S3_BUCKET`             | Bucket serving `fonts.storage.infomaniak.com`        |
+| `AWS_ACCESS_KEY_ID`     | S3 access key                                        |
+| `AWS_SECRET_ACCESS_KEY` | S3 secret key                                        |
+| `AWS_DEFAULT_REGION`    | Only if the storage requires a SigV4 region          |
 
 - [ ] **Step 4: Protect the branch**
 
@@ -367,10 +381,10 @@ protected-branch error.
 
 On the `Infomaniak/design-system` GitHub repository → Settings → Secrets and variables → Actions:
 
-| Secret                          | Value                                                        |
-| ------------------------------- | ------------------------------------------------------------ |
+| Secret                          | Value                                                                      |
+| ------------------------------- | -------------------------------------------------------------------------- |
 | `GITLAB_FONTS_REPOSITORY_URL`   | `https://gitlab.infomaniak.ch/infomaniak/design-system/fonts-delivery.git` |
-| `GITLAB_FONTS_REPOSITORY_TOKEN` | Project access token (Task 3 Step 2)                         |
+| `GITLAB_FONTS_REPOSITORY_TOKEN` | Project access token (Task 3 Step 2)                                       |
 
 These are the only two secrets — there is no trigger URL or trigger token anymore.
 
@@ -411,7 +425,7 @@ Expected: job `upload-dev-fonts` succeeds; its log shows the `aws s3 sync` outpu
 - [ ] **Step 3: Verify the S3 result**
 
 Run (with the S3 credentials available locally):
-`aws --endpoint-url <S3_ENDPOINT_URL> s3 ls "s3://<S3_BUCKET>/dev/" | grep inter`
+`aws --endpoint-url <S3_ENDPOINT_URL> s3 ls "s3://<S3_BUCKET>/<S3_PATH_PREFIX>/dev/" | grep inter`
 Expected: `inter.woff2` and `inter.min.css`. If local credentials are unavailable, the job log
 from Step 2 is the evidence (it lists the uploaded objects).
 
@@ -429,8 +443,8 @@ pipeline is the expected evidence.
 - [ ] **Step 5: Cleanup**
 
 ```bash
-aws --endpoint-url <S3_ENDPOINT_URL> s3 rm "s3://<S3_BUCKET>/dev/inter.woff2"
-aws --endpoint-url <S3_ENDPOINT_URL> s3 rm "s3://<S3_BUCKET>/dev/inter.min.css"
+aws --endpoint-url <S3_ENDPOINT_URL> s3 rm "s3://<S3_BUCKET>/<S3_PATH_PREFIX>/dev/inter.woff2"
+aws --endpoint-url <S3_ENDPOINT_URL> s3 rm "s3://<S3_BUCKET>/<S3_PATH_PREFIX>/dev/inter.min.css"
 git -C /tmp/fonts-delivery push origin --delete pipeline-test
 ```
 

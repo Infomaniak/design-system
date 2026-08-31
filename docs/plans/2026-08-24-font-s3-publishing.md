@@ -70,11 +70,12 @@ GitLab CI (dedicated repository infomaniak/design-system/fonts-delivery)
   │ Push to the repo STARTS the pipeline (rules: push + changes on dev/**|latest/**)
   │ upload-dev-fonts / upload-latest-fonts jobs:
   │   - Guard: refuse to sync a directory without any .woff2 (S3 would be wiped)
-  │   - aws --endpoint-url $S3_ENDPOINT_URL s3 sync <dir>/ → s3://$S3_BUCKET/<dir>/
+  │   - aws --endpoint-url $S3_ENDPOINT_URL s3 sync <dir>/
+  │     → s3://$S3_BUCKET/$S3_PATH_PREFIX/<dir>/
   │     --delete (mirror: a font removed from the design-system leaves S3 too)
   │
   ▼
-S3: fonts.storage.infomaniak.com/{dev|latest}/
+S3: fonts.storage.infomaniak.com/{S3_PATH_PREFIX}/{dev|latest}/
 ```
 
 **Key design decisions:**
@@ -764,5 +765,8 @@ git commit -m "chore(fonts): fix coverage and formatting"
 
 See the companion plan `docs/plans/2026-08-28-gitlab-fonts-delivery.md` — the GitLab pipeline is
 push-triggered (`changes: dev/** | latest/**`), maps directories 1:1 to S3
-(`dev/` → `s3://{S3_BUCKET}/dev/`, `latest/` → `s3://{S3_BUCKET}/latest/`), mirrors with
+(`dev/` → `s3://{S3_BUCKET}/{S3_PATH_PREFIX}/dev/`, `latest/` →
+`s3://{S3_BUCKET}/{S3_PATH_PREFIX}/latest/`), mirrors with
 `--delete`, and refuses to sync a directory without `.woff2` files (anti-wipe guard).
+PENDING: once the real `S3_PATH_PREFIX` value is known, update `SERVER_URL` in
+`build-fonts.script.ts` to include it (the public URL gains the prefix segment).
