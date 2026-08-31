@@ -65,7 +65,7 @@ GitHub (design-system) = source of truth
   │         contents with the files, commits, pushes (HTTPS + GitLab token)
   │
   ▼
-GitLab CI (dedicated repository, e.g. infomaniak/fonts-delivery)
+GitLab CI (dedicated repository infomaniak/design-system/fonts-delivery)
   │
   │ Push to the repo STARTS the pipeline (rules: push + changes on dev/**|latest/**)
   │ upload-dev-fonts / upload-latest-fonts jobs:
@@ -683,7 +683,7 @@ Replace the GITLAB FONTS section (keep only the repository transport — no trig
 ```
 # GITLAB FONTS
 # Dedicated GitLab repository receiving the published font files (transport to S3).
-GITLAB_FONTS_REPOSITORY_URL="https://gitlab.infomaniak.ch/infomaniak/fonts-delivery.git"
+GITLAB_FONTS_REPOSITORY_URL="https://gitlab.infomaniak.ch/infomaniak/design-system/fonts-delivery.git"
 # GitLab token with write_repository scope on the dedicated repository.
 GITLAB_FONTS_REPOSITORY_TOKEN="glpat-xxxxxxxxxxxxxxxxxxxx"
 ```

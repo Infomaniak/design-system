@@ -4,7 +4,7 @@
 > (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox
 > (`- [ ]`) syntax for tracking.
 
-**Goal:** Create the dedicated GitLab repository `infomaniak/fonts-delivery` on
+**Goal:** Create the dedicated GitLab repository `infomaniak/design-system/fonts-delivery` on
 `gitlab.infomaniak.ch` with a push-triggered pipeline that mirrors the `dev/` and `latest/` font
 directories (pushed by the design-system) to Infomaniak's S3-compatible storage.
 
@@ -22,13 +22,14 @@ image, S3-compatible storage via `--endpoint-url`, `glab` CLI (already authentic
 ## Global Constraints
 
 - **GitLab instance:** `gitlab.infomaniak.ch`
-- **Project path:** `infomaniak/fonts-delivery` (adjust the group path at execution if the group
-  differs — all glab commands and URLs use this path)
+- **Project path:** `infomaniak/design-system/fonts-delivery` (confirmed at execution — project
+  id 6565, visibility internal, default branch `master`)
 - **Pipeline source:** `push` only (`workflow.rules`) — no trigger token, no scheduled/web/trigger
   pipelines
 - **Image:** `amazon/aws-cli:latest` with `entrypoint: [""]` (the image defaults to the `aws`
   entrypoint, which would swallow the script lines)
-- **Runner tags:** `docker` (adjust to the actual runner tags at execution — see Task 3)
+- **Runner tags:** none — the instance runners are untagged (Kubernetes executor); the jobs
+  intentionally define no `tags:` entry (a tagged job would never be picked up)
 - **S3 sync semantics:** mirror with `--delete`, scoped to `*.woff2` and `*.min.css` — a font
   removed from the design-system disappears from S3 too (accepted behaviour)
 - **Anti-wipe guard:** a directory without any `.woff2` file is never synced
@@ -48,6 +49,20 @@ This plan was revised once:
   files directly under `dev/` / `latest/`, and the push itself starts the pipeline via `changes:`
   rules. No trigger token, no `ARCHIVE_NAME`/`FONT_MODE` variables, no curl in the E2E test.
 
+## Execution status (2026-08-31)
+
+- **Task 1 (bootstrap) — DONE.** The repository was pre-created (project id 6565, internal,
+  default branch `master`, empty). Bootstrap pushed: `README.md`, `dev/.gitkeep`,
+  `latest/.gitkeep` (commit `d1ee2ba`).
+- **Task 2 (pipeline) — DONE, with one deviation.** `.gitlab-ci.yml` pushed (commit `d06c76b`),
+  validated with `glab ci lint`. The bootstrap push carried the `.gitkeep` files (under `dev/` and
+  `latest/`), so ONE pipeline started and both jobs failed on the anti-wipe guard
+  ("Refusing to sync dev/: no .woff2 file (S3 would be wiped).") — expected behaviour, live
+  demonstration of the guard before any S3 credentials exist. The plan's original expectation
+  (a root-files-only push starting no pipeline) still holds for future README/CI-only pushes.
+- **Tasks 3–5 — REMAINING.** Blocked on: S3 credentials collection (endpoint, bucket, keys),
+  project access token creation, protected branch, GitHub secrets — then the E2E.
+
 ## Architecture Overview
 
 ```
@@ -57,7 +72,7 @@ GitHub design-system (publish-fonts.script.ts, branch feat/fonts-s3-publishing /
   │    (commit message: "chore: publish fonts {mode} {shortSha}")
   │
   ▼
-GitLab (infomaniak/fonts-delivery) — the push STARTS the pipeline
+GitLab (infomaniak/design-system/fonts-delivery) — the push STARTS the pipeline
   │  workflow: push source only
   │  upload-dev-fonts      (runs when dev/**/* changed)
   │  upload-latest-fonts   (runs when latest/**/* changed)
@@ -98,7 +113,7 @@ S3-compatible storage → https://fonts.storage.infomaniak.com/{dev|latest}/
 
 ## File Structure
 
-### Files to Create (GitLab repository infomaniak/fonts-delivery)
+### Files to Create (GitLab repository infomaniak/design-system/fonts-delivery)
 
 | File              | Responsibility                                                  |
 | ----------------- | --------------------------------------------------------------- |
@@ -120,15 +135,15 @@ counterpart and the manual configuration binding both sides.
 
 **Files:**
 
-- Create (in `infomaniak/fonts-delivery`): `README.md`
-- Create (in `infomaniak/fonts-delivery`): `dev/.gitkeep`
-- Create (in `infomaniak/fonts-delivery`): `latest/.gitkeep`
+- Create (in `infomaniak/design-system/fonts-delivery`): `README.md`
+- Create (in `infomaniak/design-system/fonts-delivery`): `dev/.gitkeep`
+- Create (in `infomaniak/design-system/fonts-delivery`): `latest/.gitkeep`
 
 **Interfaces:**
 
 - Consumes: `glab` CLI (authenticated on `gitlab.infomaniak.ch`), `git` push via the glab HTTPS
   credential helper
-- Produces: an empty delivery repository with a default `main` branch and the `dev/` + `latest/`
+- Produces: an empty delivery repository with a default `master` branch and the `dev/` + `latest/`
   directories the design-system push helper expects (it replaces their contents while preserving
   `.gitkeep`)
 
@@ -137,7 +152,7 @@ counterpart and the manual configuration binding both sides.
 Run:
 
 ```bash
-glab repo create infomaniak/fonts-delivery --internal \
+glab repo create infomaniak/design-system/fonts-delivery --internal \
   --description "Font assets delivery repository (design-system to S3)"
 ```
 
@@ -147,7 +162,7 @@ group and record it (it feeds `GITLAB_FONTS_REPOSITORY_URL` in Task 4).
 - [ ] **Step 2: Clone and add the bootstrap files**
 
 ```bash
-glab repo clone infomaniak/fonts-delivery /tmp/fonts-delivery
+glab repo clone infomaniak/design-system/fonts-delivery /tmp/fonts-delivery
 cd /tmp/fonts-delivery
 mkdir -p dev latest
 touch dev/.gitkeep latest/.gitkeep
@@ -186,8 +201,7 @@ Public URL: `https://fonts.storage.infomaniak.com/{dev|latest}/`
    `GITLAB_FONTS_REPOSITORY_TOKEN`
 2. CI/CD variables (masked): `S3_ENDPOINT_URL`, `S3_BUCKET`, `AWS_ACCESS_KEY_ID`,
    `AWS_SECRET_ACCESS_KEY`, and `AWS_DEFAULT_REGION` if the storage requires a SigV4 region
-3. Runner tags in `.gitlab-ci.yml` (default `docker`) adjusted to the actual runners
-4. Protected branch `main` configured to allow the access token to push
+3. Protected branch `master` configured to allow the access token to push
 
 ## Retry semantics
 
@@ -201,13 +215,13 @@ pipeline — nothing to re-run, the content is already on S3.
 ```bash
 git add README.md dev/.gitkeep latest/.gitkeep
 git commit -m "chore: bootstrap fonts delivery repository"
-git push origin main
+git push origin master
 ```
 
 - [ ] **Step 4: Verify**
 
-Run: `glab repo view infomaniak/fonts-delivery`
-Expected: `main` is the default branch and the README + both `.gitkeep` files are present.
+Run: `glab repo view infomaniak/design-system/fonts-delivery`
+Expected: `master` is the default branch and the README + both `.gitkeep` files are present.
 
 ---
 
@@ -215,7 +229,7 @@ Expected: `main` is the default branch and the README + both `.gitkeep` files ar
 
 **Files:**
 
-- Create (in `infomaniak/fonts-delivery`): `.gitlab-ci.yml`
+- Create (in `infomaniak/design-system/fonts-delivery`): `.gitlab-ci.yml`
 
 **Interfaces:**
 
@@ -240,8 +254,6 @@ stages:
   image:
     name: amazon/aws-cli:latest
     entrypoint: ['']
-  tags:
-    - docker
   script:
     - ls "${FONT_DIR}"/*.woff2 > /dev/null || (echo "Refusing to sync ${FONT_DIR}/: no .woff2 file (S3 would be wiped)." && exit 1)
     - aws --endpoint-url "${S3_ENDPOINT_URL}" s3 sync "${FONT_DIR}/" "s3://${S3_BUCKET}/${FONT_DIR}/" --delete --exclude "*" --include "*.woff2" --include "*.min.css" --no-progress
@@ -277,7 +289,7 @@ Notes:
 
 - [ ] **Step 2: Lint the CI file**
 
-Run: `glab ci lint infomaniak/fonts-delivery --file .gitlab-ci.yml`
+Run: `glab ci lint infomaniak/design-system/fonts-delivery --file .gitlab-ci.yml`
 Expected: valid (or fallback: `glab ci lint < .gitlab-ci.yml` depending on the glab version).
 
 - [ ] **Step 3: Commit and push — and check that no job runs**
@@ -285,7 +297,7 @@ Expected: valid (or fallback: `glab ci lint < .gitlab-ci.yml` depending on the g
 ```bash
 git add .gitlab-ci.yml
 git commit -m "feat: add push-triggered fonts upload pipeline to S3"
-git push origin main
+git push origin master
 ```
 
 This push touches neither `dev/` nor `latest/`, so it must start no job — that is the first
@@ -293,7 +305,7 @@ verification of the `changes:` rules.
 
 - [ ] **Step 4: Verify**
 
-Run: `glab ci list --repo infomaniak/fonts-delivery`
+Run: `glab ci list --repo infomaniak/design-system/fonts-delivery`
 Expected: no pipeline for the push of this commit (or an empty pipeline with zero jobs).
 
 ---
@@ -309,10 +321,10 @@ Expected: no pipeline for the push of this commit (or an empty pipeline with zer
 - Produces: the access token consumed by Task 4 (design-system secret) and the CI/CD variables
   consumed by the pipeline at runtime
 
-- [ ] **Step 1: Adjust runner tags**
+- [ ] **Step 1: Adjust runner tags** (resolved at execution — no action needed)
 
-If the actual runners are not tagged `docker`, update `tags:` in `.gitlab-ci.yml` to the real
-tag(s) and push the change (`git commit -m "chore: set runner tags"`).
+The instance runners are untagged (Kubernetes executor), so `.gitlab-ci.yml` intentionally defines
+no `tags:` entry — committed that way during the bootstrap.
 
 - [ ] **Step 2: Create the project access token**
 
@@ -333,7 +345,7 @@ Settings → CI/CD → Variables (flag **Masked** for the secrets):
 
 - [ ] **Step 4: Protect the branch**
 
-Settings → Repository → Protected branches: protect `main`, with **push allowed** for the role
+Settings → Repository → Protected branches: protect `master`, with **push allowed** for the role
 of the project access token (Maintainer) — otherwise the design-system push fails with a
 protected-branch error.
 
@@ -357,7 +369,7 @@ On the `Infomaniak/design-system` GitHub repository → Settings → Secrets and
 
 | Secret                          | Value                                                        |
 | ------------------------------- | ------------------------------------------------------------ |
-| `GITLAB_FONTS_REPOSITORY_URL`   | `https://gitlab.infomaniak.ch/infomaniak/fonts-delivery.git` |
+| `GITLAB_FONTS_REPOSITORY_URL`   | `https://gitlab.infomaniak.ch/infomaniak/design-system/fonts-delivery.git` |
 | `GITLAB_FONTS_REPOSITORY_TOKEN` | Project access token (Task 3 Step 2)                         |
 
 These are the only two secrets — there is no trigger URL or trigger token anymore.
@@ -372,7 +384,7 @@ These are the only two secrets — there is no trigger URL or trigger token anym
 
 **Interfaces:**
 
-- Consumes: push access to `infomaniak/fonts-delivery`
+- Consumes: push access to `infomaniak/design-system/fonts-delivery`
 - Produces: evidence that push → `changes:` rules → anti-wipe guard → S3 sync works; test objects
   removed afterwards
 
@@ -392,7 +404,7 @@ Expected: the push **starts a pipeline by itself** (no trigger call) with exactl
 
 - [ ] **Step 2: Watch the pipeline**
 
-Run: `glab ci status --repo infomaniak/fonts-delivery --branch pipeline-test`
+Run: `glab ci status --repo infomaniak/design-system/fonts-delivery --branch pipeline-test`
 Expected: job `upload-dev-fonts` succeeds; its log shows the `aws s3 sync` output and the final
 "Fonts available at …" line.
 
@@ -432,7 +444,7 @@ After PR #319 (`feat/fonts-s3-publishing`) is merged and the secrets from Task 4
 `ci:publish` run on `develop` publishes fonts end-to-end:
 
 1. `publish-fonts.script.ts` commits the WOFF2 + min.css files under `dev/` or `latest/` and
-   pushes to `main`
+   pushes to the default branch (`master`)
 2. The push starts the pipeline; the matching job mirrors the directory to the same-named S3
    directory
 3. Verify at `https://fonts.storage.infomaniak.com/{dev|latest}/`
