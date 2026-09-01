@@ -8,7 +8,6 @@ import { getEnvGitlabFontsRepositoryUrl } from '../../../../../../scripts/helper
 import { pushGitlabFonts } from '../../../../../../scripts/helpers/gitlab/git/push-gitlab-fonts.ts';
 import type { Logger } from '../../../../../../scripts/helpers/log/logger.ts';
 import { runScript } from '../../../../../../scripts/helpers/misc/run-script/run-script.ts';
-import { getEnvCiPublishDryRun } from '../../../../../../scripts/helpers/publish/env/get-env-ci-publish-dry-run.ts';
 import { getEnvPublishConfig } from '../../../../../../scripts/helpers/publish/publish-config/env/get-env-publish-config.ts';
 import { publishModeToFontPublishDirectory } from '../../../../../../scripts/helpers/publish/publish-mode/publish-mode-to-font-publish-directory.ts';
 
@@ -17,13 +16,7 @@ const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..
 const DIST_WEB_DIR: string = join(ROOT_DIR, 'dist', 'web');
 
 await runScript('publish-fonts', async (logger: Logger): Promise<void> => {
-  if (getEnvCiPublishDryRun()) {
-    logger.info('Dry run: skipping fonts publication.');
-    return;
-  }
-
   const { mode } = getEnvPublishConfig();
-
   const { sha } = getEnvGithubCiConfig();
   const shortSha: string = sha.slice(0, 7);
 
