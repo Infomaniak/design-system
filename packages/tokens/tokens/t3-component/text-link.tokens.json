@@ -1,48 +1,18 @@
 {
   "text-link": {
     "$description": "Component tokens for text links across interaction and visited states.",
-    "color": {
-      "$description": "Text link colors for default, hover, pressed, and visited states.",
-      "default": {
-        "$value": "{color.content.brand.default}",
-        "$description": "Default text link color.",
-        "$extensions": {
-          "scopes": ["ALL_FILLS"]
-        }
-      },
-      "hover": {
-        "$value": "{color.content.brand.hover}",
-        "$description": "Text link color on hover.",
-        "$extensions": {
-          "scopes": ["ALL_FILLS"]
-        }
-      },
-      "pressed": {
-        "$value": "{color.content.brand.pressed}",
-        "$description": "Text link color on press.",
-        "$extensions": {
-          "scopes": ["ALL_FILLS"]
-        }
-      },
-      "visited": {
-        "$description": "Visited text link colors with interaction states.",
+    "content": {
+      "color": {
         "default": {
-          "$value": "{color.content.visited.default}",
+          "$value": "{color.content.brand}",
+          "$description": "Default text link color.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "visited": {
+          "$value": "{color.content.visited}",
           "$description": "Default visited text link color.",
-          "$extensions": {
-            "scopes": ["ALL_FILLS"]
-          }
-        },
-        "hover": {
-          "$value": "{color.content.visited.hover}",
-          "$description": "Visited text link color on hover.",
-          "$extensions": {
-            "scopes": ["ALL_FILLS"]
-          }
-        },
-        "pressed": {
-          "$value": "{color.content.visited.pressed}",
-          "$description": "Visited text link color on press.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }

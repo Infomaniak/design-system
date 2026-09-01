@@ -22,8 +22,8 @@
     "lint:fix": "yarn lint:fix:eslint && yarn lint:fix:stylelint",
     "lint:check:eslint": "yarn eslint",
     "lint:fix:eslint": "yarn eslint --fix",
-    "lint:check:stylelint": "stylelint \"**/*.css\"",
-    "lint:fix:stylelint": "stylelint \"**/*.css\" --fix",
+    "lint:check:stylelint": "stylelint \"**/*.{css,scss}\"",
+    "lint:fix:stylelint": "stylelint \"**/*.{css,scss}\" --fix",
     "check": "yarn check:types && yarn format:check && yarn lint:check",
     "check:types": "tsc -p tsconfig.json --noEmit",
     "=== TEST ===": "",
@@ -75,8 +75,8 @@
     "./**/*.{js,jsx,ts,tsx}": [
       "eslint --fix"
     ],
-    "./**/*.{css}": [
-      "stylelint \"**/*.css\" --fix"
+    "./**/*.{css,scss}": [
+      "stylelint \"**/*.{css,scss}\" --fix"
     ]
   },
   "devDependencies": {
@@ -113,10 +113,12 @@
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "rolldown": "^1.2.4",
+    "sass-embedded": "^1.103.1",
     "semver": "^7.8.5",
     "storybook": "^10.5.9",
     "stylelint": "^17.14.1",
     "stylelint-config-standard": "^40.0.0",
+    "stylelint-config-standard-scss": "^17.0.0",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "typescript-eslint": "^8.67.0",
     "vitest": "^4.1.10"

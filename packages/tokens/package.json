@@ -11,7 +11,7 @@
     "copy:markdown": "cp -r dist/markdown/*.md ../../apps/docs/src/stories/assets/",
     "copy:design-md": "mkdir -p ../../apps/docs/public && cp dist/design-md/DESIGN.md ../../apps/docs/public/DESIGN.md",
     "copy:changelog": "cp CHANGELOG.md ../../apps/docs/src/stories/assets/tokens-changelog.md",
-    "convert-figma-tokens": "node --no-warnings=ExperimentalWarning scripts/scripts/convert-figma-tokens/convert-figma-tokens.script.ts",
+    "convert-figma-tokens": "node --no-warnings=ExperimentalWarning scripts/scripts/convert-figma-tokens/convert-figma-tokens.script.ts && yarn build:tokens",
     "=== PUBLISH ===": "",
     "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-tokens/publish-tokens.script.ts"
   },

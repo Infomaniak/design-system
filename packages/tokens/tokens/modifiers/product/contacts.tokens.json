@@ -2,48 +2,22 @@
   "color": {
     "background": {
       "brand": {
-        "default": {
-          "$value": "{color.background.brand.contacts.default}"
-        },
-        "hover": {
-          "$value": "{color.background.brand.contacts.hover}"
-        },
-        "pressed": {
-          "$value": "{color.background.brand.contacts.pressed}"
-        }
+        "$value": "{color.background.brand.contacts}"
       }
     },
     "border": {
       "brand": {
-        "default": {
-          "$value": "{color.border.brand.contacts.default}"
-        },
-        "hover": {
-          "$value": "{color.border.brand.contacts.hover}"
-        },
-        "pressed": {
-          "$value": "{color.border.brand.contacts.pressed}"
-        }
+        "$value": "{color.border.brand.contacts}"
       }
     },
     "content": {
       "on": {
         "brand": {
-          "default": {
-            "$value": "{color.content.on.brand.contacts.default}"
-          }
+          "$value": "{color.content.on.brand.contacts}"
         }
       },
       "brand": {
-        "default": {
-          "$value": "{color.content.brand.contacts.default}"
-        },
-        "hover": {
-          "$value": "{color.content.brand.contacts.hover}"
-        },
-        "pressed": {
-          "$value": "{color.content.brand.contacts.pressed}"
-        }
+        "$value": "{color.content.brand.contacts}"
       }
     }
   }

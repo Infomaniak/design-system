@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write  # for OIDC
-      contents: read
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -44,6 +44,12 @@ jobs:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
           cache: 'yarn'
+
+      # Mise is required by the iOS workflow
+      - name: Setup mise
+        uses: jdx/mise-action@6d1e696aa24c1aa1bcc1adea0212707c71ab78a8
+        with:
+          install: false
 
       - name: Setup SSH
         run: |
@@ -78,6 +84,8 @@ jobs:
       # Context: https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#signing-commits-in-a-workflow
       # Link: https://github.com/crazy-max/ghaction-import-gpg/releases
       - name: Import bot's GPG key for signing commits
+        if: >-
+           github.event.pull_request.head.repo.full_name == github.repository
         id: import-gpg
         uses: crazy-max/ghaction-import-gpg@e89d40939c28e39f97cf32126055eeae86ba74ec # v6.3.0
         with:
@@ -110,7 +118,7 @@ jobs:
           github.event.pull_request.head.ref == 'develop' &&
           github.event.action == 'ready_for_review'
         run: |
-          git push
+          git push origin HEAD:develop
 
       - name: Publish missing package versions
         if: >-
