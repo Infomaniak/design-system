@@ -34,7 +34,6 @@ jobs:
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
-          persist-credentials: false
 
       - name: Enable Corepack
         run: corepack enable
@@ -118,11 +117,11 @@ jobs:
           github.event.pull_request.head.repo.full_name == github.repository &&
           github.event.pull_request.head.ref == 'develop' &&
           github.event.action == 'ready_for_review'
-        env:
-          INFOMANIAK_BOT_PAT: ${{ secrets.INFOMANIAK_BOT_PAT }}
         run: |
           git remote set-url origin "https://x-access-token:${INFOMANIAK_BOT_PAT}@github.com/${{ github.repository }}.git"
           git push origin HEAD:develop
+        env:
+          INFOMANIAK_BOT_PAT: ${{ secrets.INFOMANIAK_BOT_PAT }}
 
       - name: Publish missing package versions
         if: >-
