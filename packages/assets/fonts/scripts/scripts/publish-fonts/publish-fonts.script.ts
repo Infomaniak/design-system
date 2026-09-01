@@ -31,11 +31,7 @@ await runScript('publish-fonts', async (logger: Logger): Promise<void> => {
 
   const fileNames: string[] = [];
 
-  for await (const filePath of glob(`${DIST_WEB_DIR}/*.woff2`)) {
-    fileNames.push(basename(filePath));
-  }
-
-  for await (const filePath of glob(`${DIST_WEB_DIR}/*.min.css`)) {
+  for await (const filePath of glob([`${DIST_WEB_DIR}/*.woff2`, `${DIST_WEB_DIR}/*.min.css`])) {
     fileNames.push(basename(filePath));
   }
 
