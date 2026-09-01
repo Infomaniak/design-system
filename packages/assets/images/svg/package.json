@@ -8,7 +8,7 @@
     "build:legacy-svgs": "node --no-warnings=ExperimentalWarning scripts/scripts/build-legacy-svgs/build-legacy-svgs.script.ts"
   },
   "dependencies": {
-    "@iconify/tools": "^5.0.12",
+    "@iconify/tools": "^5.0.14",
     "@iconify/utils": "^3.1.4"
   },
   "private": true
