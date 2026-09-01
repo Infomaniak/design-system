@@ -131,6 +131,13 @@
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
+          },
+          "dim3": {
+            "$value": "{color.lime.50}",
+            "$description": "Subtle success background (dim3).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
           }
         },
         "warning": {
@@ -148,6 +155,13 @@
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
+          },
+          "dim3": {
+            "$value": "{color.orange.50}",
+            "$description": "Subtle warning background (dim3).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
           }
         },
         "error": {
@@ -162,6 +176,37 @@
           "dim2": {
             "$value": "{color.red.200}",
             "$description": "Soft error background (dim2).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.red.50}",
+            "$description": "Subtle success background (dim3).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          }
+        },
+        "information": {
+          "$description": "Information feedback background colors.",
+          "dim1": {
+            "$value": "{color.blue.400}",
+            "$description": "Strong information background (dim1).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.blue.200}",
+            "$description": "Soft information background (dim2).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.blue.50}",
+            "$description": "Subtle information background (dim3).",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
@@ -599,6 +644,13 @@
             "$extensions": {
               "scopes": ["ALL_FILLS"]
             }
+          },
+          "information": {
+            "$value": "{color.blue.900}",
+            "$description": "Foreground on strong information backgrounds (dim1).",
+            "$extensions": {
+              "scopes": ["ALL_FILLS"]
+            }
           }
         }
       },
@@ -736,6 +788,13 @@
         "warning": {
           "$value": "{color.orange.700}",
           "$description": "Warning foreground color with interaction states.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "information": {
+          "$value": "{color.blue.700}",
+          "$description": "Information foreground color with interaction states.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
@@ -1041,6 +1100,23 @@
           "dim2": {
             "$value": "{color.orange.200}",
             "$description": "Soft warning border (dim2).",
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"]
+            }
+          }
+        },
+        "information": {
+          "$description": "Information feedback border colors.",
+          "dim1": {
+            "$value": "{color.blue.600}",
+            "$description": "Strong information border (dim1).",
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.blue.200}",
+            "$description": "Soft information border (dim2).",
             "$extensions": {
               "scopes": ["STROKE_COLOR"]
             }

@@ -120,6 +120,9 @@
           },
           "dim2": {
             "$value": "{color.lime.900}"
+          },
+          "dim3": {
+            "$value": "{color.lime.950}"
           }
         },
         "warning": {
@@ -128,6 +131,9 @@
           },
           "dim2": {
             "$value": "{color.orange.900}"
+          },
+          "dim3": {
+            "$value": "{color.red.950}"
           }
         },
         "error": {
@@ -136,6 +142,20 @@
           },
           "dim2": {
             "$value": "{color.red.900}"
+          },
+          "dim3": {
+            "$value": "{color.red.950}"
+          }
+        },
+        "information": {
+          "dim1": {
+            "$value": "{color.blue.300}"
+          },
+          "dim2": {
+            "$value": "{color.blue.900}"
+          },
+          "dim3": {
+            "$value": "{color.blue.950}"
           }
         }
       },
@@ -255,6 +275,9 @@
           },
           "error": {
             "$value": "{color.red.100}"
+          },
+          "information": {
+            "$value": "{color.blue.100}"
           }
         }
       },
@@ -299,6 +322,9 @@
         },
         "error": {
           "$value": "{color.red.300}"
+        },
+        "information": {
+          "$value": "{color.blue.300}"
         }
       },
       "primary": {
@@ -445,6 +471,14 @@
           },
           "dim2": {
             "$value": "{color.red.700}"
+          }
+        },
+        "information": {
+          "dim1": {
+            "$value": "{color.blue.400}"
+          },
+          "dim2": {
+            "$value": "{color.blue.700}"
           }
         }
       },
