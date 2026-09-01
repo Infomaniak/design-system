@@ -86,6 +86,14 @@ The [esds-heading](/docs/components-heading--docs) attribute **must** be used to
 <h1 esds-heading="xl">Large text</h1>
 ```
 
+#### Tailwind
+
+On projects using Tailwind-based UI elements, we provide the custom class `esds-heading-*` to apply `heading` text styles to elements:
+
+```html
+<h1 class="esds-heading-xl">Large text</h1>
+```
+
 #### Tokens
 
 [Heading tokens](/docs/design-tokens-t3-heading--docs) are defined by the `heading.{xs..xl}.{font}` design tokens, and are used by the `esds-heading` custom attribute.
@@ -111,8 +119,15 @@ The [esds-body](/docs/components-body--docs) attribute **must** be used to apply
 </p>
 ```
 
+#### Tailwind
+
+On projects using Tailwind-based UI elements, we provide the custom class `esds-body-*` to apply `body` text styles to elements:
+
 ```html
-<label esds-body="sm">Input label</label>
+<p class="esds-body-sm">
+  This is a sample paragraph showing how text will appear in your application. It demonstrates the
+  font style, size, and spacing that will be used throughout your content.
+</p>
 ```
 
 #### Tokens
@@ -126,8 +141,4 @@ Here's an example of how to apply raw styles:
   This is a sample paragraph showing how text will appear in your application. It demonstrates the
   font style, size, and spacing that will be used throughout your content.
 </p>
-```
-
-```html
-<label style="font: var(--esds-body-sm-font)">Input label</label>
 ```

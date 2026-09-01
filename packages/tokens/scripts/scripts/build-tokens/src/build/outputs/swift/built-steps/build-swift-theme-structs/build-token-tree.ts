@@ -11,24 +11,36 @@ export function buildSwiftTokenTree(
   const tree: SwiftNestedMap = {};
 
   for (const name of names) {
-    let node = tree;
-    for (let i = 0; i < name.length; i++) {
-      const key = name[i];
-      if (i === name.length - 1) {
-        if (name[0] === 'radius') {
-          node[key] = 'RoundedRectangle';
-        } else {
-          const resolvedType = collection.resolve(collection.get(name)).type;
-          const swiftType = platformTypeRecord[resolvedType];
-          if (swiftType === undefined) {
-            throw new Error(`No Swift type mapping for token ${name.join('.')} (${resolvedType})`);
-          }
-          node[key] = swiftType;
-        }
-        break;
+    console.assert(name.length !== 0);
+
+    let node: SwiftNestedMap = tree;
+    const last: number = name.length - 1;
+
+    for (let i: number = 0; i < last; i++) {
+      const key: string = name[i];
+      if (!Reflect.has(node, key)) {
+        node[key] = {};
+      } else if (typeof node[key] !== 'object') {
+        node[key] = {
+          $root: node[key],
+        };
       }
-      if (!node[key]) node[key] = {};
       node = node[key] as SwiftNestedMap;
+    }
+
+    const key: string = name[last];
+
+    if (name[0] === 'radius') {
+      node[key] = 'RoundedRectangle';
+    } else {
+      const resolvedType: string = collection.resolve(collection.get(name)).type;
+      const swiftType: string = platformTypeRecord[resolvedType];
+
+      if (swiftType === undefined) {
+        throw new Error(`No Swift type mapping for token ${name.join('.')} (${resolvedType})`);
+      }
+
+      node[key] = swiftType;
     }
   }
 

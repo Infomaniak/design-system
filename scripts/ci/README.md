@@ -1,6 +1,6 @@
 # Release Workflow Handover
 
-> Technical handover for the npm release workflow (monorepo) and integration guide for future publishable libraries.
+> Technical handover for the release workflow (monorepo) and integration guide for future publishable libraries.
 
 ## Purpose
 
@@ -39,6 +39,8 @@ This document describes:
 ```mermaid
 flowchart LR
   EVENT("EVENT")
+  BUMP_VERSIONS["bump packages versions (changeset)"]
+  COMMIT_CHANGELOG["commit CHANGELOG.md"]
   HAS_DEV_TAG{"has 'dev' tag ?"}
   SKIP_BUILD(["skip build"])
   SEND_NOTIFICATION(["send success/error notification"])
@@ -50,15 +52,17 @@ flowchart LR
   PUBLISH_PROD_PACKAGES["publish 'prod' packages"]
   TARGET_BRANCH{"branch"}
 
-  EVENT -- "pull_request" --> HAS_DEV_TAG
+  EVENT --> BUMP_VERSIONS
+  BUMP_VERSIONS -- "pull_request" --> HAS_DEV_TAG
   HAS_DEV_TAG -- "no" --> SKIP_BUILD
   HAS_DEV_TAG -- "yes" --> BUILD_DEV_PACKAGES
   BUILD_DEV_PACKAGES --> PUBLISH_DEV_PACKAGES
   PUBLISH_DEV_PACKAGES --> SEND_NOTIFICATION
 
-  EVENT -- "push" --> TARGET_BRANCH
+  BUMP_VERSIONS -- "push" --> TARGET_BRANCH
 
-  TARGET_BRANCH -- "develop" --> BUILD_RC_PACKAGES
+  TARGET_BRANCH -- "develop" --> COMMIT_CHANGELOG
+  COMMIT_CHANGELOG --> BUILD_RC_PACKAGES
   BUILD_RC_PACKAGES --> PUBLISH_RC_PACKAGES
   PUBLISH_RC_PACKAGES --> SEND_NOTIFICATION
 
@@ -70,41 +74,33 @@ flowchart LR
 ## Important Rules
 
 - `package.json` files in the repo must keep stable versions (`x.y.z`)
+- versions are automatically bumped by **changesets**
 - `-dev` / `-rc` suffixes are generated in CI
 - A single timestamp is shared across the whole CI run
 - Internal dependents of an impacted package are republished on prerelease tags (`dev`/`rc`)
 
 ## Changesets (Versioning + Changelog)
 
-Changesets are used to collect structured change descriptions and automate version bumps + changelog generation. They do **not** replace the custom publish system — `ci:publish` remains the publish mechanism.
+Changesets are used to collect structured change descriptions and automate version bumps + changelog generation.
+They operate during the `publish.yml` workflow and are configured in `.changeset/config.json`.
 
 ### Flow
 
-1. Developers create changeset files (`yarn changeset`) on their feature branches and commit them alongside code changes
-2. Changesets accumulate on `develop` as PRs merge
-3. The `release-pr.yml` workflow automatically creates a **draft PR** from `develop` to `main` (if one doesn't already exist)
-4. When ready to release, a maintainer marks the draft PR as **Ready for review**
-5. This triggers the `version-bump` job which runs `yarn changeset:version` on `develop`:
-   - Consumes all pending `.changeset/*.md` files
-   - Bumps `package.json` versions (e.g. `0.2.4` -> `0.3.0`)
-   - Generates/updates `CHANGELOG.md` per package
-   - Deletes consumed changeset files
-   - Commits and pushes the result to `develop`
-6. The maintainer merges the PR to `main` — `ci:publish` publishes the bumped `x.y.z` as `latest`
+1. The `create-release-pr.yml` workflow automatically creates a **draft PR** from `develop` → `main` whenever new changes land on `develop` (if no such PR already exists).
+2. Developers create changeset files (`yarn changeset`) on their feature branches and commit them alongside code changes
+3. Changes accumulate on `develop` as PRs merge.
+4. When ready to release, a maintainer marks the draft PR as **Ready for review**.
+5. This triggers `publish.yml`:
+   - Automatically bumps the version via changesets:
+     - Consumes all pending `.changeset/*.md` files
+     - Bumps `package.json` versions (e.g. `0.2.4` → `0.3.0`)
+     - Generates/updates `CHANGELOG.md` per package
+     - Commits and pushes the result to `develop`
+   - Publishes an `rc` version
+6. The maintainer then merges the PR to `main`, which triggers `ci:publish` to publish the bumped versions as `latest` on the different platforms.
 
-The version bump can also be run manually with `yarn changeset:version` if needed.
-
-### What changesets do NOT affect
-
-- The `ci:publish` flow (dev/rc/prod modes, timestamped prereleases, dist generation, npm idempotency)
-- The `publish.yml` workflow
-- iOS/Android cross-repo publishing
-
-### Config
-
-- `.changeset/config.json` — `baseBranch: develop`, `access: public`, ignores non-publishable packages
-- Only `@infomaniak-design-system/tokens` and `@infomaniak-design-system/components` are versioned (packages with a `publish` script)
-- `.github/workflows/release-pr.yml` — automates the release PR creation and version bump
+The version bump can also be run manually with `yarn changeset:version`, if needed.
+It requires `GITHUB_TOKEN` so the changelog generator can link commits and PRs — run `export GITHUB_TOKEN=$(gh auth token)` first, or add it to your `.env` (see `.env.example`).
 
 ## Impacted Package Detection (prerelease)
 

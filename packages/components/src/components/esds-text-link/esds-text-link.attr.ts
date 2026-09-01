@@ -6,7 +6,7 @@ import {
   type CustomAttributeDefinition,
 } from '../../helpers/custom-attribute/custom-attribute.ts';
 
-import style from './esds-text-link.attr.css?inline';
+import style from './esds-text-link.attr.scss?inline';
 
 const styleSheet = InjectableStyleSheet.parse(style);
 

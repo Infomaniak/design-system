@@ -68,6 +68,7 @@
       }
     },
     "family": {
+      "$description": "Semantic font family tokens for typography.",
       "base": {
         "$value": "{font.family.Suisse Int'l}",
         "$description": "Base font family used across the design system.",
@@ -143,6 +144,7 @@
       }
     },
     "letter-spacing": {
+      "$description": "Semantic letter-spacing scale for typographic tracking.",
       "md": {
         "$value": "{font.letter-spacing.0}",
         "$description": "Default letter spacing for body and UI text.",

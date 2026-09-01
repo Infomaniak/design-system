@@ -1,10 +1,10 @@
 import type { Config } from 'stylelint';
 
 export default {
-  extends: ['stylelint-config-standard'],
+  extends: ['stylelint-config-standard-scss'],
   // https://stylelint.io/user-guide/rules
+  // https://github.com/stylelint-scss/stylelint-scss/tree/master/src/rules
   rules: {
-    'at-rule-no-unknown': [true, { ignoreAtRules: ['reference'] }], // for tailwind support
     'comment-empty-line-before': null, // allow flexibility in comments
     'comment-whitespace-inside': null, // allow flexibility in comments
     'declaration-no-important': [true, { severity: 'warning' }], // allow !important, but warn to avoid accidental or over-use
@@ -16,6 +16,9 @@ export default {
     'selector-class-pattern': '^[a-z]+((__|-|--)[a-z]+)*$', // allow dash-case and BEM notation
     'selector-no-deprecated': true, // prevent deprecated selectors
     'selector-no-invalid': true, // prevent invalid selectors
+    // scss
+    'scss/at-rule-no-unknown': [true, { ignoreAtRules: ['reference'] }], // for tailwind support
+    'scss/operator-no-newline-after': null, // for prettier compatibility
   },
   ignoreFiles: [
     '**/dist/**',

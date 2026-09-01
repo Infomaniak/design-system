@@ -15,7 +15,7 @@ export function publishWebTokens({
   // shared publish options
   mode,
 }: PublishWebTokensOptions): Promise<void> {
-  return logger.asyncTask('npm', async (): Promise<void> => {
+  return logger.asyncTask('npm', async (logger: Logger): Promise<void> => {
     await publishNpmPackageDirectory({
       packageDirectory: join(outputDirectory, 'web'),
       tag: publishModeToNpmTag(mode),
