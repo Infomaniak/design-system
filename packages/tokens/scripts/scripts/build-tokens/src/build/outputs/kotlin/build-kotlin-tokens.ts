@@ -46,7 +46,7 @@ export function buildKotlinTokens({
   outputDirectory,
   logger,
 }: BuildKotlinTokensOptions): Promise<void> {
-  return logger.asyncTask('kotlin', async (): Promise<void> => {
+  return logger.asyncTask('kotlin', async (logger: Logger): Promise<void> => {
     outputDirectory = removeTrailingSlash(outputDirectory);
     const kotlinOutputDirectory: string = `${outputDirectory}/kotlin`;
 
