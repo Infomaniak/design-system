@@ -488,6 +488,7 @@ export class DesignTokensCollection {
     {
       extensions: renameExtensions = designTokensCollectionRenameExtensionsAutomatically,
       onExistingTokenBehaviour = 'throw',
+      filter = () => true,
     }: DesignTokensCollectionRenameOptions = {},
   ): void {
     from = DesignTokensCollection.designTokenNameLikeToArrayDesignTokenName(from);
@@ -512,7 +513,7 @@ export class DesignTokensCollection {
     const toAsCurlyReference: CurlyReference =
       DesignTokensCollection.arrayDesignTokenNameToCurlyReference(to);
 
-    for (const token of Array.from(this.#tokens.values())) {
+    for (const token of Array.from(this.#tokens.values().filter(filter))) {
       let name: ArrayDesignTokenName = token.name;
       let value: unknown | CurlyReference = token.value;
       let extensions: DesignTokensCollectionTokenExtensions | undefined = token.extensions;

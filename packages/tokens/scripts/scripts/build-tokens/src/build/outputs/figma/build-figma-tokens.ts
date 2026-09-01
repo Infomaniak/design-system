@@ -114,8 +114,12 @@ export function buildFigmaTokens({
           }
 
           // references to this token must point now on the modifier
+          // we update only the references present into other modifiers
           figmaBaseCollection.rename(token.name, [modifier, ...token.name], {
             onExistingTokenBehaviour: 'only-references',
+            filter: (subToken: GenericDesignTokensCollectionToken): boolean => {
+              return modifiers.has(subToken.name[0]);
+            },
           });
         }
 
