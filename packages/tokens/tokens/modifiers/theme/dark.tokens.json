@@ -157,6 +157,17 @@
           "dim3": {
             "$value": "{color.blue.950}"
           }
+        },
+        "neutral": {
+          "dim1": {
+            "$value": "{color.gray.300}"
+          },
+          "dim2": {
+            "$value": "{color.gray.900}"
+          },
+          "dim3": {
+            "$value": "{color.gray.950}"
+          }
         }
       },
       "disabled": {
@@ -274,10 +285,13 @@
             "$value": "{color.orange.50}"
           },
           "error": {
-            "$value": "{color.red.100}"
+            "$value": "{color.red.50}"
           },
           "information": {
-            "$value": "{color.blue.100}"
+            "$value": "{color.blue.50}"
+          },
+          "neutral": {
+            "$value": "{color.gray.50}"
           }
         }
       },
@@ -325,6 +339,9 @@
         },
         "information": {
           "$value": "{color.blue.300}"
+        },
+        "neutral": {
+          "$value": "{color.gray.300}"
         }
       },
       "primary": {
@@ -479,6 +496,14 @@
           },
           "dim2": {
             "$value": "{color.blue.700}"
+          }
+        },
+        "neutral": {
+          "dim1": {
+            "$value": "{color.gray.400}"
+          },
+          "dim2": {
+            "$value": "{color.gray.700}"
           }
         }
       },

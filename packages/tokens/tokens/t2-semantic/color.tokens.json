@@ -211,6 +211,30 @@
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           }
+        },
+        "neutral": {
+          "$description": "Neutral feedback background colors.",
+          "dim1": {
+            "$value": "{color.gray.400}",
+            "$description": "Strong neutral background (dim1).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.gray.200}",
+            "$description": "Soft neutral background (dim2).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.gray.50}",
+            "$description": "Subtle neutral background (dim3).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          }
         }
       },
       "disabled": {
@@ -651,6 +675,13 @@
             "$extensions": {
               "scopes": ["ALL_FILLS"]
             }
+          },
+          "neutral": {
+            "$value": "{color.gray.900}",
+            "$description": "Foreground on strong neutral backgrounds (dim1).",
+            "$extensions": {
+              "scopes": ["ALL_FILLS"]
+            }
           }
         }
       },
@@ -795,6 +826,13 @@
         "information": {
           "$value": "{color.blue.700}",
           "$description": "Information foreground color with interaction states.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "neutral": {
+          "$value": "{color.gray.700}",
+          "$description": "Neutral foreground color with interaction states.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
@@ -1117,6 +1155,23 @@
           "dim2": {
             "$value": "{color.blue.200}",
             "$description": "Soft information border (dim2).",
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"]
+            }
+          }
+        },
+        "neutral": {
+          "$description": "Neutral feedback border colors.",
+          "dim1": {
+            "$value": "{color.gray.600}",
+            "$description": "Strong neutral border (dim1).",
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.gray.200}",
+            "$description": "Soft neutral border (dim2).",
             "$extensions": {
               "scopes": ["STROKE_COLOR"]
             }

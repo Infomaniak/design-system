@@ -157,6 +157,17 @@
           "dim3": {
             "$value": "{color.blue.50}"
           }
+        },
+        "neutral": {
+          "dim1": {
+            "$value": "{color.gray.400}"
+          },
+          "dim2": {
+            "$value": "{color.gray.200}"
+          },
+          "dim3": {
+            "$value": "{color.gray.50}"
+          }
         }
       },
       "disabled": {
@@ -278,6 +289,9 @@
           },
           "information": {
             "$value": "{color.blue.900}"
+          },
+          "neutral": {
+            "$value": "{color.gray.900}"
           }
         }
       },
@@ -325,6 +339,9 @@
         },
         "information": {
           "$value": "{color.blue.700}"
+        },
+        "neutral": {
+          "$value": "{color.gray.700}"
         }
       },
       "primary": {
@@ -479,6 +496,14 @@
           },
           "dim2": {
             "$value": "{color.blue.200}"
+          }
+        },
+        "neutral": {
+          "dim1": {
+            "$value": "{color.gray.600}"
+          },
+          "dim2": {
+            "$value": "{color.gray.200}"
           }
         }
       },
