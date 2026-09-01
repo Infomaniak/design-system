@@ -2,48 +2,22 @@
   "color": {
     "background": {
       "brand": {
-        "default": {
-          "$value": "{color.background.brand.swisstransfer.default}"
-        },
-        "hover": {
-          "$value": "{color.background.brand.swisstransfer.hover}"
-        },
-        "pressed": {
-          "$value": "{color.background.brand.swisstransfer.pressed}"
-        }
+        "$value": "{color.background.brand.swisstransfer}"
       }
     },
     "border": {
       "brand": {
-        "default": {
-          "$value": "{color.border.brand.swisstransfer.default}"
-        },
-        "hover": {
-          "$value": "{color.border.brand.swisstransfer.hover}"
-        },
-        "pressed": {
-          "$value": "{color.border.brand.swisstransfer.pressed}"
-        }
+        "$value": "{color.border.brand.swisstransfer}"
       }
     },
     "content": {
       "on": {
         "brand": {
-          "default": {
-            "$value": "{color.content.on.brand.swisstransfer.default}"
-          }
+          "$value": "{color.content.on.brand.swisstransfer}"
         }
       },
       "brand": {
-        "default": {
-          "$value": "{color.content.brand.swisstransfer.default}"
-        },
-        "hover": {
-          "$value": "{color.content.brand.swisstransfer.hover}"
-        },
-        "pressed": {
-          "$value": "{color.content.brand.swisstransfer.pressed}"
-        }
+        "$value": "{color.content.brand.swisstransfer}"
       }
     }
   }

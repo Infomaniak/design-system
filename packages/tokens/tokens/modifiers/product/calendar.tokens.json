@@ -2,48 +2,22 @@
   "color": {
     "background": {
       "brand": {
-        "default": {
-          "$value": "{color.background.brand.calendar.default}"
-        },
-        "hover": {
-          "$value": "{color.background.brand.calendar.hover}"
-        },
-        "pressed": {
-          "$value": "{color.background.brand.calendar.pressed}"
-        }
+        "$value": "{color.background.brand.calendar}"
       }
     },
     "border": {
       "brand": {
-        "default": {
-          "$value": "{color.border.brand.calendar.default}"
-        },
-        "hover": {
-          "$value": "{color.border.brand.calendar.hover}"
-        },
-        "pressed": {
-          "$value": "{color.border.brand.calendar.pressed}"
-        }
+        "$value": "{color.border.brand.calendar}"
       }
     },
     "content": {
       "on": {
         "brand": {
-          "default": {
-            "$value": "{color.content.on.brand.calendar.default}"
-          }
+          "$value": "{color.content.on.brand.calendar}"
         }
       },
       "brand": {
-        "default": {
-          "$value": "{color.content.brand.calendar.default}"
-        },
-        "hover": {
-          "$value": "{color.content.brand.calendar.hover}"
-        },
-        "pressed": {
-          "$value": "{color.content.brand.calendar.pressed}"
-        }
+        "$value": "{color.content.brand.calendar}"
       }
     }
   }
