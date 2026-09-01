@@ -159,10 +159,19 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.brand.swisstransfer | #15864e | #7bdaa2 | var(--esds-color-background-brand-swisstransfer) | SwissTransfer product brand background colors. |
 | color.background.feedback.success.dim1 | #1ec95e | #41e17c | var(--esds-color-background-feedback-success-dim1) | Strong success background (dim1). |
 | color.background.feedback.success.dim2 | #b9f9d0 | #12552d | var(--esds-color-background-feedback-success-dim2) | Soft success background (dim2). |
+| color.background.feedback.success.dim3 | #f0fdf4 | #042f16 | var(--esds-color-background-feedback-success-dim3) | Subtle success background (dim3). |
 | color.background.feedback.warning.dim1 | #ffa032 | #ffb34a | var(--esds-color-background-feedback-warning-dim1) | Strong warning background (dim1). |
 | color.background.feedback.warning.dim2 | #ffd188 | #7a200d | var(--esds-color-background-feedback-warning-dim2) | Soft warning background (dim2). |
+| color.background.feedback.warning.dim3 | #fff7eb | #500000 | var(--esds-color-background-feedback-warning-dim3) | Subtle warning background (dim3). |
 | color.background.feedback.error.dim1 | #ff5757 | #ff9494 | var(--esds-color-background-feedback-error-dim1) | Strong error background (dim1). |
 | color.background.feedback.error.dim2 | #ffc0c0 | #920a0a | var(--esds-color-background-feedback-error-dim2) | Soft error background (dim2). |
+| color.background.feedback.error.dim3 | #fff0f0 | #500000 | var(--esds-color-background-feedback-error-dim3) | Subtle success background (dim3). |
+| color.background.feedback.information.dim1 | #36adfa | #7cc8fd | var(--esds-color-background-feedback-information-dim1) | Strong information background (dim1). |
+| color.background.feedback.information.dim2 | #b9e0fe | #0b426f | var(--esds-color-background-feedback-information-dim2) | Soft information background (dim2). |
+| color.background.feedback.information.dim3 | #f0f8ff | #072a4a | var(--esds-color-background-feedback-information-dim3) | Subtle information background (dim3). |
+| color.background.feedback.neutral.dim1 | #90a1b9 | #cad5e2 | var(--esds-color-background-feedback-neutral-dim1) | Strong neutral background (dim1). |
+| color.background.feedback.neutral.dim2 | #e2e8f0 | #0f172b | var(--esds-color-background-feedback-neutral-dim2) | Soft neutral background (dim2). |
+| color.background.feedback.neutral.dim3 | #f8fafc | #020618 | var(--esds-color-background-feedback-neutral-dim3) | Subtle neutral background (dim3). |
 | color.background.disabled | #e2e8f0 | #192334 | var(--esds-color-background-disabled) | Background for disabled, non-interactive elements. |
 | color.background.dataviz.orange.dim1 | #dd4f02 | #ffa032 | var(--esds-color-background-dataviz-orange-dim1) | Strong orange data-viz background (dim1). |
 | color.background.dataviz.orange.dim2 | #ffd188 | #94260c | var(--esds-color-background-dataviz-orange-dim2) | Soft orange data-viz background (dim2). |
@@ -214,7 +223,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.on.dataviz.dim2 | #f0f8ff | #f0f8ff | var(--esds-color-content-on-dataviz-dim2) | Default foreground on data-viz dim2 backgrounds. |
 | color.content.on.feedback.success | #042f16 | #f0fdf4 | var(--esds-color-content-on-feedback-success) | Foreground on strong success backgrounds (dim1). |
 | color.content.on.feedback.warning | #7a200d | #fff7eb | var(--esds-color-content-on-feedback-warning) | Foreground on strong warning backgrounds (dim1). |
-| color.content.on.feedback.error | #920a0a | #fdd | var(--esds-color-content-on-feedback-error) | Foreground on strong error backgrounds (dim1). |
+| color.content.on.feedback.error | #920a0a | #fff0f0 | var(--esds-color-content-on-feedback-error) | Foreground on strong error backgrounds (dim1). |
+| color.content.on.feedback.information | #0b426f | #f0f8ff | var(--esds-color-content-on-feedback-information) | Foreground on strong information backgrounds (dim1). |
+| color.content.on.feedback.neutral | #0f172b | #f8fafc | var(--esds-color-content-on-feedback-neutral) | Foreground on strong neutral backgrounds (dim1). |
 | color.content.brand | #0077cf | #0077cf | var(--esds-color-content-brand) | Default brand foreground color. |
 | color.content.brand.infomaniak | #0077cf | #36adfa | var(--esds-color-content-brand-infomaniak) | Infomaniak brand foreground colors. |
 | color.content.brand.mail | #d7004b | #ff5d86 | var(--esds-color-content-brand-mail) | Mail product brand foreground colors. |
@@ -234,6 +245,8 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.feedback.error | #d70000 | #ff9494 | var(--esds-color-content-feedback-error) | Error foreground color with interaction states. |
 | color.content.feedback.success | #12833d | #83f2ac | var(--esds-color-content-feedback-success) | Success foreground color with interaction states. |
 | color.content.feedback.warning | #b73206 | #ffb34a | var(--esds-color-content-feedback-warning) | Warning foreground color with interaction states. |
+| color.content.feedback.information | #015ca3 | #7cc8fd | var(--esds-color-content-feedback-information) | Information foreground color with interaction states. |
+| color.content.feedback.neutral | #314158 | #cad5e2 | var(--esds-color-content-feedback-neutral) | Neutral foreground color with interaction states. |
 | color.content.visited | #8f30f7 | #cab1ff | var(--esds-color-content-visited) | Visited-link content colors with interaction states. |
 | color.content.muted | #62748e | #90a1b9 | var(--esds-color-content-muted) | Muted content color for de-emphasized, secondary text. |
 | color.border.brand | #0077cf | #0077cf | var(--esds-color-border-brand) | Default brand border color. |
@@ -271,6 +284,10 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.feedback.success.dim2 | #b9f9d0 | #12833d | var(--esds-color-border-feedback-success-dim2) | Soft success border (dim2). |
 | color.border.feedback.warning.dim1 | #dd4f02 | #ffa032 | var(--esds-color-border-feedback-warning-dim1) | Strong warning border (dim1). |
 | color.border.feedback.warning.dim2 | #ffd188 | #b73206 | var(--esds-color-border-feedback-warning-dim2) | Soft warning border (dim2). |
+| color.border.feedback.information.dim1 | #0077cf | #36adfa | var(--esds-color-border-feedback-information-dim1) | Strong information border (dim1). |
+| color.border.feedback.information.dim2 | #b9e0fe | #015ca3 | var(--esds-color-border-feedback-information-dim2) | Soft information border (dim2). |
+| color.border.feedback.neutral.dim1 | #45556c | #90a1b9 | var(--esds-color-border-feedback-neutral-dim1) | Strong neutral border (dim1). |
+| color.border.feedback.neutral.dim2 | #e2e8f0 | #314158 | var(--esds-color-border-feedback-neutral-dim2) | Soft neutral border (dim2). |
 | color.border.dim1 | #90a1b9 | #62748e | var(--esds-color-border-dim1) | Strongest neutral border color with interaction states. |
 | color.border.dim2 | #cad5e2 | #45556c | var(--esds-color-border-dim2) | Strong neutral border color with interaction states. |
 | color.border.dim3 | #e2e8f0 | #314158 | var(--esds-color-border-dim3) | Subtle neutral border color with interaction states. |
