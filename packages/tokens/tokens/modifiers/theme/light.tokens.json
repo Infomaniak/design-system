@@ -120,6 +120,9 @@
           },
           "dim2": {
             "$value": "{color.lime.200}"
+          },
+          "dim3": {
+            "$value": "{color.lime.50}"
           }
         },
         "warning": {
@@ -128,6 +131,9 @@
           },
           "dim2": {
             "$value": "{color.orange.200}"
+          },
+          "dim3": {
+            "$value": "{color.orange.50}"
           }
         },
         "error": {
@@ -136,6 +142,31 @@
           },
           "dim2": {
             "$value": "{color.red.200}"
+          },
+          "dim3": {
+            "$value": "{color.red.50}"
+          }
+        },
+        "information": {
+          "dim1": {
+            "$value": "{color.blue.400}"
+          },
+          "dim2": {
+            "$value": "{color.blue.200}"
+          },
+          "dim3": {
+            "$value": "{color.blue.50}"
+          }
+        },
+        "neutral": {
+          "dim1": {
+            "$value": "{color.gray.400}"
+          },
+          "dim2": {
+            "$value": "{color.gray.200}"
+          },
+          "dim3": {
+            "$value": "{color.gray.50}"
           }
         }
       },
@@ -255,6 +286,12 @@
           },
           "error": {
             "$value": "{color.red.900}"
+          },
+          "information": {
+            "$value": "{color.blue.900}"
+          },
+          "neutral": {
+            "$value": "{color.gray.900}"
           }
         }
       },
@@ -299,6 +336,12 @@
         },
         "error": {
           "$value": "{color.red.700}"
+        },
+        "information": {
+          "$value": "{color.blue.700}"
+        },
+        "neutral": {
+          "$value": "{color.gray.700}"
         }
       },
       "primary": {
@@ -445,6 +488,22 @@
           },
           "dim2": {
             "$value": "{color.red.200}"
+          }
+        },
+        "information": {
+          "dim1": {
+            "$value": "{color.blue.600}"
+          },
+          "dim2": {
+            "$value": "{color.blue.200}"
+          }
+        },
+        "neutral": {
+          "dim1": {
+            "$value": "{color.gray.600}"
+          },
+          "dim2": {
+            "$value": "{color.gray.200}"
           }
         }
       },

@@ -38,7 +38,7 @@
     "generate": "yarn workspace @infomaniak-design-system/components run generate",
     "create:figma:webhook": "node --no-warnings=ExperimentalWarning scripts/scripts/create-figma-webhook/create-figma-webhook.script.ts",
     "changeset": "changeset",
-    "changeset:version": "changeset version",
+    "changeset:version": "node --no-warnings=ExperimentalWarning scripts/scripts/changeset-version/changeset-version.script.ts",
     "=== CI ===": "",
     "ci:publish": "node --no-warnings=ExperimentalWarning scripts/ci/publish/ci-publish.script.ts",
     "ci:pr-ready-for-review": "node --no-warnings=ExperimentalWarning scripts/ci/pr-ready-for-review/pr-ready-for-review.script.ts",

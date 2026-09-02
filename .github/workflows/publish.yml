@@ -27,13 +27,14 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write  # for OIDC
-      contents: write
+      contents: read
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Enable Corepack
         run: corepack enable
@@ -85,7 +86,7 @@ jobs:
       # Link: https://github.com/crazy-max/ghaction-import-gpg/releases
       - name: Import bot's GPG key for signing commits
         if: >-
-           github.event.pull_request.head.repo.full_name == github.repository
+          github.event.pull_request.head.repo.full_name == github.repository
         id: import-gpg
         uses: crazy-max/ghaction-import-gpg@e89d40939c28e39f97cf32126055eeae86ba74ec # v6.3.0
         with:
@@ -118,7 +119,10 @@ jobs:
           github.event.pull_request.head.ref == 'develop' &&
           github.event.action == 'ready_for_review'
         run: |
+          git remote set-url origin "https://x-access-token:${INFOMANIAK_BOT_PAT}@github.com/${{ github.repository }}.git"
           git push origin HEAD:develop
+        env:
+          INFOMANIAK_BOT_PAT: ${{ secrets.INFOMANIAK_BOT_PAT }}
 
       - name: Publish missing package versions
         if: >-
