@@ -1,0 +1,72 @@
+name: Publish SF Symbols
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'packages/assets/images/svg/**'
+  workflow_dispatch:
+
+concurrency:
+  group: publish-sf-symbols-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  publish-sf-symbols:
+    name: Publish SF Symbols
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'yarn'
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "$SSH_DEPLOY_KEY_IOS" > ~/.ssh/id_ed25519_ios
+          chmod 600 ~/.ssh/id_ed25519_ios
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+          cat > ~/.ssh/config << EOF
+          # Host name should always match the github repository one
+          Host ios-design-system
+            HostName github.com
+            User git
+            IdentityFile ~/.ssh/id_ed25519_ios
+            IdentitiesOnly yes
+          EOF
+          chmod 600 ~/.ssh/config
+        env:
+          SSH_DEPLOY_KEY_IOS: ${{ secrets.SSH_DEPLOY_KEY_IOS }}
+
+      - name: Compute publish config
+        run: |
+          if [ "$GITHUB_REF_NAME" = "main" ]; then
+            echo 'PUBLISH_CONFIG={"mode":"prod"}' >> "$GITHUB_ENV"
+          else
+            echo "PUBLISH_CONFIG={\"mode\":\"rc\",\"prerelease\":\"$GITHUB_RUN_ID\"}" >> "$GITHUB_ENV"
+          fi
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Publish SF Symbols to ios-design-system
+        run: yarn workspace @infomaniak-design-system/svg-assets publish:sf-symbols
+        env:
+          CI_PULL_REQUEST_AUTH_TOKEN_MOBILE: ${{ secrets.CI_PULL_REQUEST_AUTH_TOKEN_MOBILE }}
+          KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}

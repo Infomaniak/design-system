@@ -76,7 +76,7 @@ When the Pull Request is merged, the assets are uploaded to the Infomaniak's Des
 
 ### Generate the SF Symbols
 
-When the Pull Request is merged, `ci:publish` also regenerates the [SF Symbols](https://developer.apple.com/sf-symbols/) asset catalog for iOS and delivers it to the [ios-design-system](https://github.com/Infomaniak/ios-design-system) repository, the same way the design tokens are published.
+When the Pull Request is merged, a dedicated workflow (`publish-sf-symbols`) regenerates the [SF Symbols](https://developer.apple.com/sf-symbols/) asset catalog for iOS and delivers it to the [ios-design-system](https://github.com/Infomaniak/ios-design-system) repository, mirroring how the design tokens are delivered to the same repository. Deliveries triggered by `develop` ship a prerelease version (`-rc.<run>`), deliveries triggered by `main` ship the proper version.
 
 ```shell
 yarn generate:sf-symbols
@@ -117,7 +117,7 @@ flowchart TD
   CREATE_PR --> MERGE_PR
   MERGE_PR -- "main" --> UPLOAD_PROD
   MERGE_PR -- "develop" --> UPLOAD_DEVELOP
-  MERGE_PR -- "ci:publish" --> GENERATE_SF_SYMBOLS("GENERATE SF SYMBOLS (iOS)")
+  MERGE_PR -- "develop / main" --> GENERATE_SF_SYMBOLS("GENERATE SF SYMBOLS (iOS)")
   GENERATE_SF_SYMBOLS --> PR_IOS("PULL REQUEST to ios-design-system")
   UPLOAD_PROD -- "manual update" --> FIGMA_ICONOGRAPHY_GUIDELINE
 

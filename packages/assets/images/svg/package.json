@@ -7,7 +7,7 @@
     "import": "node --no-warnings=ExperimentalWarning scripts/scripts/import-svgs/import-svgs.script.ts",
     "build:legacy-svgs": "node --no-warnings=ExperimentalWarning scripts/scripts/build-legacy-svgs/build-legacy-svgs.script.ts",
     "build:sf-symbols": "node --no-warnings=ExperimentalWarning scripts/scripts/generate-sf-symbols/generate-sf-symbols.script.ts",
-    "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-sf-symbols/publish-sf-symbols.script.ts"
+    "publish:sf-symbols": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-sf-symbols/publish-sf-symbols.script.ts"
   },
   "dependencies": {
     "@iconify/tools": "^5.0.12",
