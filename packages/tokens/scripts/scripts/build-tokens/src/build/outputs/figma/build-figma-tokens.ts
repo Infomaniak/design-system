@@ -114,14 +114,46 @@ export function buildFigmaTokens({
           }
 
           // references to this token must point now on the modifier
+          // we update only the references present into other modifiers
           figmaBaseCollection.rename(token.name, [modifier, ...token.name], {
             onExistingTokenBehaviour: 'only-references',
+            filter: (subToken: GenericDesignTokensCollectionToken): boolean => {
+              return modifiers.has(subToken.name[0]);
+            },
           });
         }
 
         // we've made all tokens of this modifier present into `figmaBaseCollection` point to this corresponding modifier
         // as tokens present into the different context collections have the same names, we don't have to iterate further
         break;
+      }
+    }
+
+    // handle "$root" tokens
+    {
+      const rootTokens: Set<GenericDesignTokensCollectionToken> = new Set();
+
+      for (const tokenA of figmaBaseCollection.tokens()) {
+        for (const tokenB of figmaBaseCollection.tokens()) {
+          if (
+            tokenB.name.length > tokenA.name.length &&
+            tokenA.name.every((segment: string, index: number): boolean => {
+              return tokenB.name[index] === segment;
+            })
+          ) {
+            // tokenA is a $root token of tokenB
+            rootTokens.add(tokenA);
+            break;
+          }
+        }
+      }
+
+      for (const token of rootTokens) {
+        figmaBaseCollection.rename(token.name, [...token.name, '@root']);
+
+        for (const [modifier] of modifiers.entries()) {
+          figmaBaseCollection.rename([modifier, ...token.name], [modifier, ...token.name, '@root']);
+        }
       }
     }
 

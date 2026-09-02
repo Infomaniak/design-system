@@ -6,348 +6,111 @@
       "elevation": {
         "$description": "Background colors for the elevation hierarchy: sunken, surface, raised, and overlay.",
         "sunken": {
+          "$value": "{color.gray.100}",
           "$description": "Background for sunken, recessed surfaces below the base level.",
-          "default": {
-            "$value": "{color.gray.100}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "hover": {
-            "$value": "{color.gray.200}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "pressed": {
-            "$value": "{color.gray.300}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "selected": {
-            "$value": "{color.gray.300}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
           }
         },
         "surface": {
+          "$value": "{color.white}",
           "$description": "Background for the default surface level, the base UI layer.",
-          "default": {
-            "$value": "{color.white}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "hover": {
-            "$value": "{color.gray.50}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "pressed": {
-            "$value": "{color.gray.100}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "selected": {
-            "$value": "{color.gray.100}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
           }
         },
         "raised": {
+          "$value": "{color.white}",
           "$description": "Background for raised, elevated surfaces such as cards.",
-          "default": {
-            "$value": "{color.white}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "hover": {
-            "$value": "{color.gray.50}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "pressed": {
-            "$value": "{color.gray.100}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "selected": {
-            "$value": "{color.gray.100}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
           }
         },
         "overlay": {
+          "$value": "{color.gray.100}",
           "$description": "Background for overlay and modal surfaces above the base UI.",
-          "default": {
-            "$value": "{color.gray.100}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "hover": {
-            "$value": "{color.gray.200}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "pressed": {
-            "$value": "{color.gray.300}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "selected": {
-            "$value": "{color.gray.300}",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
           }
         }
       },
       "brand": {
-        "$description": "Brand-specific background colors with default, hover, and pressed states.",
-        "infomaniak": {
-          "$description": "Infomaniak brand background colors.",
-          "default": {
-            "$value": "{color.blue.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.blue.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.blue.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "mail": {
-          "$description": "Mail product brand background colors.",
-          "default": {
-            "$value": "{color.pink.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.pink.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.pink.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "kdrive": {
-          "$description": "kDrive product brand background colors.",
-          "default": {
-            "$value": "{color.indigo.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.indigo.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.indigo.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "euria": {
-          "$description": "Euria product brand background colors.",
-          "default": {
-            "$value": "{color.ocean.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.ocean.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.ocean.900}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "kchat": {
-          "$description": "kChat product brand background colors.",
-          "default": {
-            "$value": "{color.cyan.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.cyan.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.cyan.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "security": {
-          "$description": "Security product brand background colors.",
-          "default": {
-            "$value": "{color.purple.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.purple.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.purple.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "calendar": {
-          "$description": "Calendar product brand background colors.",
-          "default": {
-            "$value": "{color.aqua.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.aqua.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.aqua.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "contacts": {
-          "$description": "Contacts product brand background colors.",
-          "default": {
-            "$value": "{color.violet.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.violet.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.violet.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "knote": {
-          "$description": "kNote product brand background colors.",
-          "default": {
-            "$value": "{color.coral.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.coral.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.coral.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "swisstransfer": {
-          "$description": "SwissTransfer product brand background colors.",
-          "default": {
-            "$value": "{color.emerald.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.emerald.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.emerald.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "default": {
+        "$description": "Brand-specific background colors.",
+        "$root": {
           "$value": "{color.blue.600}",
           "$description": "Default brand background (Infomaniak).",
           "$extensions": {
-            "scopes": ["ALL_FILLS"],
-            "figmaName": ["color", "background", "brand", "@root", "default"]
+            "scopes": ["ALL_FILLS"]
           }
         },
-        "pressed": {
-          "$value": "{color.blue.800}",
-          "$description": "Pressed state of the default brand background.",
+        "infomaniak": {
+          "$value": "{color.blue.600}",
+          "$description": "Infomaniak brand background colors.",
           "$extensions": {
-            "scopes": ["ALL_FILLS"],
-            "figmaName": ["color", "background", "brand", "@root", "pressed"]
+            "scopes": []
           }
         },
-        "hover": {
-          "$value": "{color.blue.700}",
-          "$description": "Hover state of the default brand background.",
+        "mail": {
+          "$value": "{color.pink.600}",
+          "$description": "Mail product brand background colors.",
           "$extensions": {
-            "scopes": ["ALL_FILLS"],
-            "figmaName": ["color", "background", "brand", "@root", "hover"]
+            "scopes": []
+          }
+        },
+        "kdrive": {
+          "$value": "{color.indigo.500}",
+          "$description": "kDrive product brand background colors.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "euria": {
+          "$value": "{color.ocean.700}",
+          "$description": "Euria product brand background colors.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "kchat": {
+          "$value": "{color.cyan.600}",
+          "$description": "kChat product brand background colors.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "security": {
+          "$value": "{color.purple.600}",
+          "$description": "Security product brand background colors.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "calendar": {
+          "$value": "{color.aqua.500}",
+          "$description": "Calendar product brand background colors.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "contacts": {
+          "$value": "{color.violet.500}",
+          "$description": "Contacts product brand background colors.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "knote": {
+          "$value": "{color.coral.600}",
+          "$description": "kNote product brand background colors.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "swisstransfer": {
+          "$value": "{color.emerald.600}",
+          "$description": "SwissTransfer product brand background colors.",
+          "$extensions": {
+            "scopes": []
           }
         }
       },
@@ -356,135 +119,120 @@
         "success": {
           "$description": "Success feedback background colors.",
           "dim1": {
+            "$value": "{color.lime.500}",
             "$description": "Strong success background (dim1).",
-            "default": {
-              "$value": "{color.lime.500}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            },
-            "hover": {
-              "$value": "{color.lime.600}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            },
-            "pressed": {
-              "$value": "{color.lime.700}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           },
           "dim2": {
+            "$value": "{color.lime.200}",
             "$description": "Soft success background (dim2).",
-            "default": {
-              "$value": "{color.lime.200}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            },
-            "hover": {
-              "$value": "{color.lime.300}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            },
-            "pressed": {
-              "$value": "{color.lime.400}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.lime.50}",
+            "$description": "Subtle success background (dim3).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           }
         },
         "warning": {
           "$description": "Warning feedback background colors.",
           "dim1": {
+            "$value": "{color.orange.400}",
             "$description": "Strong warning background (dim1).",
-            "default": {
-              "$value": "{color.orange.400}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            },
-            "hover": {
-              "$value": "{color.orange.500}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            },
-            "pressed": {
-              "$value": "{color.orange.600}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           },
           "dim2": {
+            "$value": "{color.orange.200}",
             "$description": "Soft warning background (dim2).",
-            "default": {
-              "$value": "{color.orange.200}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            },
-            "hover": {
-              "$value": "{color.orange.300}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            },
-            "pressed": {
-              "$value": "{color.orange.400}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.orange.50}",
+            "$description": "Subtle warning background (dim3).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           }
         },
         "error": {
           "$description": "Error feedback background colors.",
           "dim1": {
+            "$value": "{color.red.400}",
             "$description": "Strong error background (dim1).",
-            "default": {
-              "$value": "{color.red.400}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            },
-            "hover": {
-              "$value": "{color.red.500}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            },
-            "pressed": {
-              "$value": "{color.red.600}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           },
           "dim2": {
+            "$value": "{color.red.200}",
             "$description": "Soft error background (dim2).",
-            "default": {
-              "$value": "{color.red.200}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            },
-            "hover": {
-              "$value": "{color.red.300}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
-            },
-            "pressed": {
-              "$value": "{color.red.400}",
-              "$extensions": {
-                "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-              }
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.red.50}",
+            "$description": "Subtle success background (dim3).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          }
+        },
+        "information": {
+          "$description": "Information feedback background colors.",
+          "dim1": {
+            "$value": "{color.blue.400}",
+            "$description": "Strong information background (dim1).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.blue.200}",
+            "$description": "Soft information background (dim2).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.blue.50}",
+            "$description": "Subtle information background (dim3).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          }
+        },
+        "neutral": {
+          "$description": "Neutral feedback background colors.",
+          "dim1": {
+            "$value": "{color.gray.400}",
+            "$description": "Strong neutral background (dim1).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.gray.200}",
+            "$description": "Soft neutral background (dim2).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.gray.50}",
+            "$description": "Subtle neutral background (dim3).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
           }
         }
@@ -501,415 +249,153 @@
         "orange": {
           "$description": "Orange data-viz background colors.",
           "dim1": {
+            "$value": "{color.orange.600}",
             "$description": "Strong orange data-viz background (dim1).",
-            "default": {
-              "$value": "{color.orange.600}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.orange.700}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.orange.800}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           },
           "dim2": {
+            "$value": "{color.orange.200}",
             "$description": "Soft orange data-viz background (dim2).",
-            "default": {
-              "$value": "{color.orange.200}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.orange.300}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.orange.400}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           }
         },
         "emerald": {
           "$description": "Emerald data-viz background colors.",
           "dim1": {
+            "$value": "{color.emerald.600}",
             "$description": "Strong emerald data-viz background (dim1).",
-            "default": {
-              "$value": "{color.emerald.600}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.emerald.700}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.emerald.800}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           },
           "dim2": {
+            "$value": "{color.emerald.200}",
             "$description": "Soft emerald data-viz background (dim2).",
-            "default": {
-              "$value": "{color.emerald.200}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.emerald.300}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.emerald.400}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           }
         },
         "blue": {
           "$description": "Blue data-viz background colors.",
           "dim1": {
+            "$value": "{color.blue.600}",
             "$description": "Strong blue data-viz background (dim1).",
-            "default": {
-              "$value": "{color.blue.600}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.blue.700}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.blue.800}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           },
           "dim2": {
+            "$value": "{color.blue.200}",
             "$description": "Soft blue data-viz background (dim2).",
-            "default": {
-              "$value": "{color.blue.200}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.blue.300}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.blue.400}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           }
         },
         "violet": {
           "$description": "Violet data-viz background colors.",
           "dim1": {
+            "$value": "{color.violet.600}",
             "$description": "Strong violet data-viz background (dim1).",
-            "default": {
-              "$value": "{color.violet.600}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.violet.700}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.violet.800}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           },
           "dim2": {
+            "$value": "{color.violet.200}",
             "$description": "Soft violet data-viz background (dim2).",
-            "default": {
-              "$value": "{color.violet.200}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.violet.300}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.violet.400}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           }
         },
         "purple": {
           "$description": "Purple data-viz background colors.",
           "dim1": {
+            "$value": "{color.purple.600}",
             "$description": "Strong purple data-viz background (dim1).",
-            "default": {
-              "$value": "{color.purple.600}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.purple.700}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.purple.800}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           },
           "dim2": {
+            "$value": "{color.purple.200}",
             "$description": "Soft purple data-viz background (dim2).",
-            "default": {
-              "$value": "{color.purple.200}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.purple.300}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.purple.400}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           }
         },
         "pink": {
           "$description": "Pink data-viz background colors.",
           "dim1": {
+            "$value": "{color.pink.600}",
             "$description": "Strong pink data-viz background (dim1).",
-            "default": {
-              "$value": "{color.pink.600}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.pink.700}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.pink.800}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           },
           "dim2": {
+            "$value": "{color.pink.200}",
             "$description": "Soft pink data-viz background (dim2).",
-            "default": {
-              "$value": "{color.pink.200}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.pink.300}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.pink.400}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           }
         },
         "yellow": {
           "$description": "Yellow data-viz background colors.",
           "dim1": {
+            "$value": "{color.yellow.500}",
             "$description": "Strong yellow data-viz background (dim1).",
-            "default": {
-              "$value": "{color.yellow.500}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.yellow.600}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.yellow.700}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           },
           "dim2": {
+            "$value": "{color.yellow.200}",
             "$description": "Soft yellow data-viz background (dim2).",
-            "default": {
-              "$value": "{color.yellow.200}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.yellow.300}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.yellow.400}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           }
         },
         "gray": {
           "$description": "Gray data-viz background colors.",
           "dim1": {
+            "$value": "{color.gray.500}",
             "$description": "Strong gray data-viz background (dim1).",
-            "default": {
-              "$value": "{color.gray.500}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.gray.600}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.gray.700}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           },
           "dim2": {
+            "$value": "{color.gray.200}",
             "$description": "Soft gray data-viz background (dim2).",
-            "default": {
-              "$value": "{color.gray.200}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.gray.300}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.gray.400}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           }
         },
         "dim1": {
-          "$description": "Default data-viz background (dim1, blue).",
-          "default": {
-            "$value": "{color.blue.600}",
-            "$description": "Default dim1 data-viz background.",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"],
-              "figmaName": ["color", "background", "dataviz", "@root", "dim1", "default"]
-            }
-          },
-          "hover": {
-            "$value": "{color.blue.700}",
-            "$description": "Dim1 data-viz background on hover.",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"],
-              "figmaName": ["color", "background", "dataviz", "@root", "dim1", "hover"]
-            }
-          },
-          "pressed": {
-            "$value": "{color.blue.800}",
-            "$description": "Dim1 data-viz background on press.",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"],
-              "figmaName": ["color", "background", "dataviz", "@root", "dim1", "pressed"]
-            }
+          "$value": "{color.blue.600}",
+          "$description": "Default dim1 data-viz background.",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+            "figmaName": ["color", "background", "dataviz", "@root", "dim1"]
           }
         },
         "dim2": {
-          "$description": "Default data-viz background (dim2, blue).",
-          "default": {
-            "$value": "{color.blue.200}",
-            "$description": "Default dim2 data-viz background.",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"],
-              "figmaName": ["color", "background", "dataviz", "@root", "dim2", "default"]
-            }
-          },
-          "hover": {
-            "$value": "{color.blue.300}",
-            "$description": "Dim2 data-viz background on hover.",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"],
-              "figmaName": ["color", "background", "dataviz", "@root", "dim2", "hover"]
-            }
-          },
-          "pressed": {
-            "$value": "{color.blue.400}",
-            "$description": "Dim2 data-viz background on press.",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"],
-              "figmaName": ["color", "background", "dataviz", "@root", "dim2", "pressed"]
-            }
+          "$value": "{color.blue.200}",
+          "$description": "Default dim2 data-viz background.",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+            "figmaName": ["color", "background", "dataviz", "@root", "dim2"]
           }
         }
       }
@@ -927,168 +413,81 @@
         },
         "brand": {
           "$description": "Foreground colors placed on brand backgrounds.",
-          "infomaniak": {
-            "$description": "Foreground on Infomaniak brand backgrounds.",
-            "default": {
-              "$value": "{color.white}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "calendar": {
-            "$description": "Foreground on Calendar brand backgrounds.",
-            "default": {
-              "$value": "{color.white}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "contacts": {
-            "$description": "Foreground on Contacts brand backgrounds.",
-            "default": {
-              "$value": "{color.white}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "euria": {
-            "$description": "Foreground on Euria brand backgrounds.",
-            "default": {
-              "$value": "{color.white}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "kchat": {
-            "$description": "Foreground on kChat brand backgrounds.",
-            "default": {
-              "$value": "{color.white}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "kdrive": {
-            "$description": "Foreground on kDrive brand backgrounds.",
-            "default": {
-              "$value": "{color.white}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "knote": {
-            "$description": "Foreground on kNote brand backgrounds.",
-            "default": {
-              "$value": "{color.white}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "mail": {
-            "$description": "Foreground on Mail brand backgrounds.",
-            "default": {
-              "$value": "{color.white}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "security": {
-            "$description": "Foreground on Security brand backgrounds.",
-            "default": {
-              "$value": "{color.white}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "swisstransfer": {
-            "$description": "Foreground on SwissTransfer brand backgrounds.",
-            "default": {
-              "$value": "{color.white}",
-              "$extensions": {
-                "scopes": []
-              }
-            }
-          },
-          "default": {
+          "$root": {
             "$value": "{color.white}",
             "$description": "Default foreground on brand backgrounds.",
             "$extensions": {
-              "scopes": ["ALL_FILLS"],
-              "figmaName": ["color", "content", "on", "brand", "@root", "default"]
-            }
-          }
-        },
-        "feedback": {
-          "$description": "Foreground colors placed on feedback backgrounds.",
-          "success": {
-            "$description": "Foreground on success backgrounds.",
-            "dim1": {
-              "$description": "Foreground on strong success backgrounds (dim1).",
-              "default": {
-                "$value": "{color.lime.950}",
-                "$extensions": {
-                  "scopes": ["ALL_FILLS"]
-                }
-              }
-            },
-            "dim2": {
-              "$description": "Foreground on soft success backgrounds (dim2).",
-              "default": {
-                "$value": "{color.lime.950}",
-                "$extensions": {
-                  "scopes": ["ALL_FILLS"]
-                }
-              }
+              "scopes": ["ALL_FILLS"]
             }
           },
-          "warning": {
-            "$description": "Foreground on warning backgrounds.",
-            "dim1": {
-              "$description": "Foreground on strong warning backgrounds (dim1).",
-              "default": {
-                "$value": "{color.orange.900}",
-                "$extensions": {
-                  "scopes": ["ALL_FILLS"]
-                }
-              }
-            },
-            "dim2": {
-              "$description": "Foreground on soft warning backgrounds (dim2).",
-              "default": {
-                "$value": "{color.orange.950}",
-                "$extensions": {
-                  "scopes": ["ALL_FILLS"]
-                }
-              }
+          "infomaniak": {
+            "$value": "{color.white}",
+            "$description": "Foreground on Infomaniak brand backgrounds.",
+            "$extensions": {
+              "scopes": []
             }
           },
-          "error": {
-            "$description": "Foreground on error backgrounds.",
-            "dim1": {
-              "$description": "Foreground on strong error backgrounds (dim1).",
-              "default": {
-                "$value": "{color.red.900}",
-                "$extensions": {
-                  "scopes": ["ALL_FILLS"]
-                }
-              }
-            },
-            "dim2": {
-              "$description": "Foreground on soft error backgrounds (dim2).",
-              "default": {
-                "$value": "{color.red.950}",
-                "$extensions": {
-                  "scopes": ["ALL_FILLS"]
-                }
-              }
+          "calendar": {
+            "$value": "{color.white}",
+            "$description": "Foreground on Calendar brand backgrounds.",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "contacts": {
+            "$value": "{color.white}",
+            "$description": "Foreground on Contacts brand backgrounds.",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "euria": {
+            "$value": "{color.white}",
+            "$description": "Foreground on Euria brand backgrounds.",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "kchat": {
+            "$value": "{color.white}",
+            "$description": "Foreground on kChat brand backgrounds.",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "kdrive": {
+            "$value": "{color.white}",
+            "$description": "Foreground on kDrive brand backgrounds.",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "knote": {
+            "$value": "{color.white}",
+            "$description": "Foreground on kNote brand backgrounds.",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "mail": {
+            "$value": "{color.white}",
+            "$description": "Foreground on Mail brand backgrounds.",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "security": {
+            "$value": "{color.white}",
+            "$description": "Foreground on Security brand backgrounds.",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "swisstransfer": {
+            "$value": "{color.white}",
+            "$description": "Foreground on SwissTransfer brand backgrounds.",
+            "$extensions": {
+              "scopes": []
             }
           }
         },
@@ -1097,427 +496,272 @@
           "blue": {
             "$description": "Foreground on blue data-viz backgrounds.",
             "dim1": {
+              "$value": "{color.blue.900}",
               "$description": "Foreground on strong blue data-viz backgrounds (dim1).",
-              "default": {
-                "$value": "{color.blue.900}",
-                "$extensions": {
-                  "scopes": []
-                }
+              "$extensions": {
+                "scopes": []
               }
             },
             "dim2": {
+              "$value": "{color.blue.50}",
               "$description": "Foreground on soft blue data-viz backgrounds (dim2).",
-              "default": {
-                "$value": "{color.blue.50}",
-                "$extensions": {
-                  "scopes": []
-                }
+              "$extensions": {
+                "scopes": []
               }
             }
           },
           "emerald": {
             "$description": "Foreground on emerald data-viz backgrounds.",
             "dim1": {
+              "$value": "{color.emerald.900}",
               "$description": "Foreground on strong emerald data-viz backgrounds (dim1).",
-              "default": {
-                "$value": "{color.emerald.900}",
-                "$extensions": {
-                  "scopes": []
-                }
+              "$extensions": {
+                "scopes": []
               }
             },
             "dim2": {
+              "$value": "{color.emerald.50}",
               "$description": "Foreground on soft emerald data-viz backgrounds (dim2).",
-              "default": {
-                "$value": "{color.emerald.50}",
-                "$extensions": {
-                  "scopes": []
-                }
+              "$extensions": {
+                "scopes": []
               }
             }
           },
           "orange": {
             "$description": "Foreground on orange data-viz backgrounds.",
             "dim1": {
+              "$value": "{color.orange.900}",
               "$description": "Foreground on strong orange data-viz backgrounds (dim1).",
-              "default": {
-                "$value": "{color.orange.900}",
-                "$extensions": {
-                  "scopes": []
-                }
+              "$extensions": {
+                "scopes": []
               }
             },
             "dim2": {
+              "$value": "{color.orange.100}",
               "$description": "Foreground on soft orange data-viz backgrounds (dim2).",
-              "default": {
-                "$value": "{color.orange.100}",
-                "$extensions": {
-                  "scopes": []
-                }
+              "$extensions": {
+                "scopes": []
               }
             }
           },
           "pink": {
             "$description": "Foreground on pink data-viz backgrounds.",
             "dim1": {
+              "$value": "{color.pink.900}",
               "$description": "Foreground on strong pink data-viz backgrounds (dim1).",
-              "default": {
-                "$value": "{color.pink.900}",
-                "$extensions": {
-                  "scopes": []
-                }
+              "$extensions": {
+                "scopes": []
               }
             },
             "dim2": {
+              "$value": "{color.pink.50}",
               "$description": "Foreground on soft pink data-viz backgrounds (dim2).",
-              "default": {
-                "$value": "{color.pink.50}",
-                "$extensions": {
-                  "scopes": []
-                }
+              "$extensions": {
+                "scopes": []
               }
             }
           },
           "purple": {
             "$description": "Foreground on purple data-viz backgrounds.",
             "dim1": {
+              "$value": "{color.purple.900}",
               "$description": "Foreground on strong purple data-viz backgrounds (dim1).",
-              "default": {
-                "$value": "{color.purple.900}",
-                "$extensions": {
-                  "scopes": []
-                }
+              "$extensions": {
+                "scopes": []
               }
             },
             "dim2": {
+              "$value": "{color.purple.50}",
               "$description": "Foreground on soft purple data-viz backgrounds (dim2).",
-              "default": {
-                "$value": "{color.purple.50}",
-                "$extensions": {
-                  "scopes": []
-                }
+              "$extensions": {
+                "scopes": []
               }
             }
           },
           "violet": {
             "$description": "Foreground on violet data-viz backgrounds.",
             "dim1": {
+              "$value": "{color.violet.900}",
               "$description": "Foreground on strong violet data-viz backgrounds (dim1).",
-              "default": {
-                "$value": "{color.violet.900}",
-                "$extensions": {
-                  "scopes": []
-                }
+              "$extensions": {
+                "scopes": []
               }
             },
             "dim2": {
+              "$value": "{color.violet.50}",
               "$description": "Foreground on soft violet data-viz backgrounds (dim2).",
-              "default": {
-                "$value": "{color.violet.50}",
-                "$extensions": {
-                  "scopes": []
-                }
+              "$extensions": {
+                "scopes": []
               }
             }
           },
           "yellow": {
             "$description": "Foreground on yellow data-viz backgrounds.",
             "dim1": {
+              "$value": "{color.yellow.900}",
               "$description": "Foreground on strong yellow data-viz backgrounds (dim1).",
-              "default": {
-                "$value": "{color.yellow.900}",
-                "$extensions": {
-                  "scopes": []
-                }
+              "$extensions": {
+                "scopes": []
               }
             },
             "dim2": {
+              "$value": "{color.yellow.50}",
               "$description": "Foreground on soft yellow data-viz backgrounds (dim2).",
-              "default": {
-                "$value": "{color.yellow.50}",
-                "$extensions": {
-                  "scopes": []
-                }
+              "$extensions": {
+                "scopes": []
               }
             }
           },
           "gray": {
             "$description": "Foreground on gray data-viz backgrounds.",
             "dim1": {
+              "$value": "{color.gray.900}",
               "$description": "Foreground on strong gray data-viz backgrounds (dim1).",
-              "default": {
-                "$value": "{color.gray.900}",
-                "$extensions": {
-                  "scopes": []
-                }
+              "$extensions": {
+                "scopes": []
               }
             },
             "dim2": {
+              "$value": "{color.gray.50}",
               "$description": "Foreground on soft gray data-viz backgrounds (dim2).",
-              "default": {
-                "$value": "{color.gray.50}",
-                "$extensions": {
-                  "scopes": []
-                }
+              "$extensions": {
+                "scopes": []
               }
             }
           },
           "dim1": {
+            "$value": "{color.blue.900}",
             "$description": "Default foreground on data-viz dim1 backgrounds.",
-            "default": {
-              "$value": "{color.blue.900}",
-              "$extensions": {
-                "scopes": ["ALL_FILLS"],
-                "figmaName": ["color", "content", "on", "dataviz", "@root", "dim1", "default"]
-              }
+            "$extensions": {
+              "scopes": ["ALL_FILLS"],
+              "figmaName": ["color", "content", "on", "dataviz", "@root", "dim1"]
             }
           },
           "dim2": {
+            "$value": "{color.blue.50}",
             "$description": "Default foreground on data-viz dim2 backgrounds.",
-            "default": {
-              "$value": "{color.blue.50}",
-              "$extensions": {
-                "scopes": ["ALL_FILLS"],
-                "figmaName": ["color", "content", "on", "dataviz", "@root", "dim2", "default"]
-              }
+            "$extensions": {
+              "scopes": ["ALL_FILLS"],
+              "figmaName": ["color", "content", "on", "dataviz", "@root", "dim2"]
+            }
+          }
+        },
+        "feedback": {
+          "$description": "Foreground colors placed on feedback backgrounds.",
+          "success": {
+            "$value": "{color.lime.950}",
+            "$description": "Foreground on strong success backgrounds (dim1).",
+            "$extensions": {
+              "scopes": ["ALL_FILLS"]
+            }
+          },
+          "warning": {
+            "$value": "{color.orange.900}",
+            "$description": "Foreground on strong warning backgrounds (dim1).",
+            "$extensions": {
+              "scopes": ["ALL_FILLS"]
+            }
+          },
+          "error": {
+            "$value": "{color.red.900}",
+            "$description": "Foreground on strong error backgrounds (dim1).",
+            "$extensions": {
+              "scopes": ["ALL_FILLS"]
+            }
+          },
+          "information": {
+            "$value": "{color.blue.900}",
+            "$description": "Foreground on strong information backgrounds (dim1).",
+            "$extensions": {
+              "scopes": ["ALL_FILLS"]
+            }
+          },
+          "neutral": {
+            "$value": "{color.gray.900}",
+            "$description": "Foreground on strong neutral backgrounds (dim1).",
+            "$extensions": {
+              "scopes": ["ALL_FILLS"]
             }
           }
         }
       },
       "brand": {
         "$description": "Brand foreground colors for text and icons, with interaction states.",
-        "infomaniak": {
-          "$description": "Infomaniak brand foreground colors.",
-          "default": {
-            "$value": "{color.blue.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.blue.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.blue.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "mail": {
-          "$description": "Mail product brand foreground colors.",
-          "default": {
-            "$value": "{color.pink.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.pink.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.pink.900}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "kdrive": {
-          "$description": "kDrive product brand foreground colors.",
-          "default": {
-            "$value": "{color.indigo.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.indigo.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.indigo.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "euria": {
-          "$description": "Euria product brand foreground colors.",
-          "default": {
-            "$value": "{color.ocean.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.ocean.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.ocean.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "kchat": {
-          "$description": "kChat product brand foreground colors.",
-          "default": {
-            "$value": "{color.cyan.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.cyan.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.cyan.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "security": {
-          "$description": "Security product brand foreground colors.",
-          "default": {
-            "$value": "{color.purple.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.purple.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.purple.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "calendar": {
-          "$description": "Calendar product brand foreground colors.",
-          "default": {
-            "$value": "{color.aqua.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.aqua.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.aqua.900}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "contacts": {
-          "$description": "Contacts product brand foreground colors.",
-          "default": {
-            "$value": "{color.violet.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.violet.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.violet.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "knote": {
-          "$description": "kNote product brand foreground colors.",
-          "default": {
-            "$value": "{color.coral.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.coral.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.coral.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "swisstransfer": {
-          "$description": "SwissTransfer product brand foreground colors.",
-          "default": {
-            "$value": "{color.emerald.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.emerald.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.emerald.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "default": {
+        "$root": {
           "$value": "{color.blue.600}",
           "$description": "Default brand foreground color.",
           "$extensions": {
-            "scopes": ["ALL_FILLS"],
-            "figmaName": ["color", "content", "brand", "@root", "default"]
+            "scopes": ["ALL_FILLS"]
           }
         },
-        "hover": {
-          "$value": "{color.blue.700}",
-          "$description": "Hover state of the default brand foreground.",
+        "infomaniak": {
+          "$value": "{color.blue.600}",
+          "$description": "Infomaniak brand foreground colors.",
           "$extensions": {
-            "scopes": ["ALL_FILLS"],
-            "figmaName": ["color", "content", "brand", "@root", "hover"]
+            "scopes": []
           }
         },
-        "pressed": {
-          "$value": "{color.blue.800}",
-          "$description": "Pressed state of the default brand foreground.",
+        "mail": {
+          "$value": "{color.pink.700}",
+          "$description": "Mail product brand foreground colors.",
           "$extensions": {
-            "scopes": ["ALL_FILLS"],
-            "figmaName": ["color", "content", "brand", "@root", "pressed"]
+            "scopes": []
+          }
+        },
+        "kdrive": {
+          "$value": "{color.indigo.500}",
+          "$description": "kDrive product brand foreground colors.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "euria": {
+          "$value": "{color.ocean.600}",
+          "$description": "Euria product brand foreground colors.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "kchat": {
+          "$value": "{color.cyan.600}",
+          "$description": "kChat product brand foreground colors.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "security": {
+          "$value": "{color.purple.600}",
+          "$description": "Security product brand foreground colors.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "calendar": {
+          "$value": "{color.aqua.700}",
+          "$description": "Calendar product brand foreground colors.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "contacts": {
+          "$value": "{color.violet.500}",
+          "$description": "Contacts product brand foreground colors.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "knote": {
+          "$value": "{color.coral.600}",
+          "$description": "kNote product brand foreground colors.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "swisstransfer": {
+          "$value": "{color.emerald.600}",
+          "$description": "SwissTransfer product brand foreground colors.",
+          "$extensions": {
+            "scopes": []
           }
         }
       },
@@ -1529,14 +773,14 @@
         }
       },
       "secondary": {
-        "$value": "{color.gray.600}",
+        "$value": "{color.gray.700}",
         "$description": "Secondary content color for supporting text.",
         "$extensions": {
           "scopes": ["ALL_FILLS"]
         }
       },
       "tertiary": {
-        "$value": "{color.gray.500}",
+        "$value": "{color.gray.600}",
         "$description": "Tertiary content color for subtle, low-emphasis text.",
         "$extensions": {
           "scopes": ["ALL_FILLS"]
@@ -1559,88 +803,53 @@
       "feedback": {
         "$description": "Feedback foreground colors (error, success, warning) with interaction states.",
         "error": {
+          "$value": "{color.red.700}",
           "$description": "Error foreground color with interaction states.",
-          "default": {
-            "$value": "{color.red.700}",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
-            }
-          },
-          "hover": {
-            "$value": "{color.red.800}",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
-            }
-          },
-          "pressed": {
-            "$value": "{color.red.900}",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
-            }
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
           }
         },
         "success": {
+          "$value": "{color.lime.700}",
           "$description": "Success foreground color with interaction states.",
-          "default": {
-            "$value": "{color.lime.700}",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
-            }
-          },
-          "hover": {
-            "$value": "{color.lime.800}",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
-            }
-          },
-          "pressed": {
-            "$value": "{color.lime.900}",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
-            }
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
           }
         },
         "warning": {
+          "$value": "{color.orange.700}",
           "$description": "Warning foreground color with interaction states.",
-          "default": {
-            "$value": "{color.orange.700}",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
-            }
-          },
-          "hover": {
-            "$value": "{color.orange.800}",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
-            }
-          },
-          "pressed": {
-            "$value": "{color.orange.900}",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
-            }
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "information": {
+          "$value": "{color.blue.700}",
+          "$description": "Information foreground color with interaction states.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "neutral": {
+          "$value": "{color.gray.700}",
+          "$description": "Neutral foreground color with interaction states.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
           }
         }
       },
       "visited": {
+        "$value": "{color.violet.600}",
         "$description": "Visited-link content colors with interaction states.",
-        "default": {
-          "$value": "{color.violet.600}",
-          "$extensions": {
-            "scopes": ["ALL_FILLS"]
-          }
-        },
-        "hover": {
-          "$value": "{color.violet.700}",
-          "$extensions": {
-            "scopes": ["ALL_FILLS"]
-          }
-        },
-        "pressed": {
-          "$value": "{color.violet.800}",
-          "$extensions": {
-            "scopes": ["ALL_FILLS"]
-          }
+        "$extensions": {
+          "scopes": ["ALL_FILLS"]
+        }
+      },
+      "muted": {
+        "$value": "{color.gray.500}",
+        "$description": "Muted content color for de-emphasized, secondary text.",
+        "$extensions": {
+          "scopes": ["ALL_FILLS"]
         }
       }
     },
@@ -1648,238 +857,81 @@
       "$description": "Semantic border colors across brands, data-viz, feedback, and neutral dimensions.",
       "brand": {
         "$description": "Brand-specific border colors with interaction states.",
+        "$root": {
+          "$value": "{color.blue.600}",
+          "$description": "Default brand border color.",
+          "$extensions": {
+            "scopes": ["STROKE_COLOR"]
+          }
+        },
         "infomaniak": {
+          "$value": "{color.blue.600}",
           "$description": "Infomaniak brand border colors.",
-          "default": {
-            "$value": "{color.blue.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.blue.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.blue.700}",
-            "$extensions": {
-              "scopes": []
-            }
+          "$extensions": {
+            "scopes": []
           }
         },
         "mail": {
+          "$value": "{color.pink.600}",
           "$description": "Mail product brand border colors.",
-          "default": {
-            "$value": "{color.pink.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.pink.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.pink.700}",
-            "$extensions": {
-              "scopes": []
-            }
+          "$extensions": {
+            "scopes": []
           }
         },
         "kdrive": {
+          "$value": "{color.indigo.500}",
           "$description": "kDrive product brand border colors.",
-          "default": {
-            "$value": "{color.indigo.400}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.indigo.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.indigo.600}",
-            "$extensions": {
-              "scopes": []
-            }
+          "$extensions": {
+            "scopes": []
           }
         },
         "euria": {
+          "$value": "{color.ocean.700}",
           "$description": "Euria product brand border colors.",
-          "default": {
-            "$value": "{color.ocean.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.ocean.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.ocean.800}",
-            "$extensions": {
-              "scopes": []
-            }
+          "$extensions": {
+            "scopes": []
           }
         },
         "kchat": {
+          "$value": "{color.cyan.600}",
           "$description": "kChat product brand border colors.",
-          "default": {
-            "$value": "{color.cyan.400}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.cyan.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.cyan.600}",
-            "$extensions": {
-              "scopes": []
-            }
+          "$extensions": {
+            "scopes": []
           }
         },
         "security": {
+          "$value": "{color.purple.600}",
           "$description": "Security product brand border colors.",
-          "default": {
-            "$value": "{color.purple.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.purple.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.purple.800}",
-            "$extensions": {
-              "scopes": []
-            }
+          "$extensions": {
+            "scopes": []
           }
         },
         "calendar": {
+          "$value": "{color.aqua.500}",
           "$description": "Calendar product brand border colors.",
-          "default": {
-            "$value": "{color.aqua.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.aqua.800}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.aqua.900}",
-            "$extensions": {
-              "scopes": []
-            }
+          "$extensions": {
+            "scopes": []
           }
         },
         "contacts": {
+          "$value": "{color.violet.500}",
           "$description": "Contacts product brand border colors.",
-          "default": {
-            "$value": "{color.violet.300}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.violet.400}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.violet.500}",
-            "$extensions": {
-              "scopes": []
-            }
+          "$extensions": {
+            "scopes": []
           }
         },
         "knote": {
+          "$value": "{color.coral.600}",
           "$description": "kNote product brand border colors.",
-          "default": {
-            "$value": "{color.coral.400}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.coral.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.coral.600}",
-            "$extensions": {
-              "scopes": []
-            }
+          "$extensions": {
+            "scopes": []
           }
         },
         "swisstransfer": {
+          "$value": "{color.emerald.600}",
           "$description": "SwissTransfer product brand border colors.",
-          "default": {
-            "$value": "{color.emerald.500}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "hover": {
-            "$value": "{color.emerald.600}",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "pressed": {
-            "$value": "{color.emerald.700}",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "default": {
-          "$value": "{color.blue.500}",
-          "$description": "Default brand border color.",
           "$extensions": {
-            "scopes": ["STROKE_COLOR"],
-            "figmaName": ["color", "border", "brand", "@root", "default"]
-          }
-        },
-        "hover": {
-          "$value": "{color.blue.600}",
-          "$description": "Hover state of the default brand border.",
-          "$extensions": {
-            "scopes": [],
-            "figmaName": ["color", "border", "brand", "@root", "hover"]
-          }
-        },
-        "pressed": {
-          "$value": "{color.blue.700}",
-          "$description": "Pressed state of the default brand border.",
-          "$extensions": {
-            "scopes": [],
-            "figmaName": ["color", "border", "brand", "@root", "pressed"]
+            "scopes": []
           }
         }
       },
@@ -1888,415 +940,153 @@
         "blue": {
           "$description": "Blue data-viz border colors.",
           "dim1": {
+            "$value": "{color.blue.600}",
             "$description": "Strong blue data-viz border (dim1).",
-            "default": {
-              "$value": "{color.blue.600}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.blue.700}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.blue.800}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           },
           "dim2": {
+            "$value": "{color.blue.200}",
             "$description": "Soft blue data-viz border (dim2).",
-            "default": {
-              "$value": "{color.blue.200}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.blue.300}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.blue.400}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           }
         },
         "emerald": {
           "$description": "Emerald data-viz border colors.",
           "dim1": {
+            "$value": "{color.emerald.600}",
             "$description": "Strong emerald data-viz border (dim1).",
-            "default": {
-              "$value": "{color.emerald.600}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.emerald.700}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.emerald.800}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           },
           "dim2": {
+            "$value": "{color.emerald.200}",
             "$description": "Soft emerald data-viz border (dim2).",
-            "default": {
-              "$value": "{color.emerald.200}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.emerald.300}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.emerald.400}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           }
         },
         "orange": {
           "$description": "Orange data-viz border colors.",
           "dim1": {
+            "$value": "{color.orange.600}",
             "$description": "Strong orange data-viz border (dim1).",
-            "default": {
-              "$value": "{color.orange.600}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.orange.700}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.orange.800}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           },
           "dim2": {
+            "$value": "{color.orange.200}",
             "$description": "Soft orange data-viz border (dim2).",
-            "default": {
-              "$value": "{color.orange.200}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.orange.300}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.orange.400}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           }
         },
         "pink": {
           "$description": "Pink data-viz border colors.",
           "dim1": {
+            "$value": "{color.pink.600}",
             "$description": "Strong pink data-viz border (dim1).",
-            "default": {
-              "$value": "{color.pink.600}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.pink.700}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.pink.800}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           },
           "dim2": {
+            "$value": "{color.pink.200}",
             "$description": "Soft pink data-viz border (dim2).",
-            "default": {
-              "$value": "{color.pink.200}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.pink.300}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.pink.400}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           }
         },
         "purple": {
           "$description": "Purple data-viz border colors.",
           "dim1": {
+            "$value": "{color.purple.600}",
             "$description": "Strong purple data-viz border (dim1).",
-            "default": {
-              "$value": "{color.purple.600}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.purple.700}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.purple.800}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           },
           "dim2": {
+            "$value": "{color.purple.200}",
             "$description": "Soft purple data-viz border (dim2).",
-            "default": {
-              "$value": "{color.purple.200}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.purple.300}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.purple.400}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           }
         },
         "violet": {
           "$description": "Violet data-viz border colors.",
           "dim1": {
+            "$value": "{color.violet.600}",
             "$description": "Strong violet data-viz border (dim1).",
-            "default": {
-              "$value": "{color.violet.600}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.violet.700}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.violet.800}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           },
           "dim2": {
+            "$value": "{color.violet.200}",
             "$description": "Soft violet data-viz border (dim2).",
-            "default": {
-              "$value": "{color.violet.200}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.violet.300}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.violet.400}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           }
         },
         "yellow": {
           "$description": "Yellow data-viz border colors.",
           "dim1": {
+            "$value": "{color.yellow.600}",
             "$description": "Strong yellow data-viz border (dim1).",
-            "default": {
-              "$value": "{color.yellow.600}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.yellow.700}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.yellow.800}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           },
           "dim2": {
+            "$value": "{color.yellow.200}",
             "$description": "Soft yellow data-viz border (dim2).",
-            "default": {
-              "$value": "{color.yellow.200}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.yellow.300}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.yellow.400}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           }
         },
         "gray": {
           "$description": "Gray data-viz border colors.",
           "dim1": {
+            "$value": "{color.gray.600}",
             "$description": "Strong gray data-viz border (dim1).",
-            "default": {
-              "$value": "{color.gray.600}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.gray.700}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.gray.800}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           },
           "dim2": {
+            "$value": "{color.gray.200}",
             "$description": "Soft gray data-viz border (dim2).",
-            "default": {
-              "$value": "{color.gray.200}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "hover": {
-              "$value": "{color.gray.300}",
-              "$extensions": {
-                "scopes": []
-              }
-            },
-            "pressed": {
-              "$value": "{color.gray.400}",
-              "$extensions": {
-                "scopes": []
-              }
+            "$extensions": {
+              "scopes": []
             }
           }
         },
         "dim1": {
-          "$description": "Default data-viz border (dim1, blue).",
-          "default": {
-            "$value": "{color.blue.600}",
-            "$description": "Default dim1 data-viz border.",
-            "$extensions": {
-              "scopes": ["STROKE_COLOR"],
-              "figmaName": ["color", "border", "dataviz", "@root", "dim1", "default"]
-            }
-          },
-          "hover": {
-            "$value": "{color.blue.700}",
-            "$description": "Dim1 data-viz border on hover.",
-            "$extensions": {
-              "scopes": [],
-              "figmaName": ["color", "border", "dataviz", "@root", "dim1", "hover"]
-            }
-          },
-          "pressed": {
-            "$value": "{color.blue.800}",
-            "$description": "Dim1 data-viz border on press.",
-            "$extensions": {
-              "scopes": [],
-              "figmaName": ["color", "border", "dataviz", "@root", "dim1", "pressed"]
-            }
+          "$value": "{color.blue.600}",
+          "$description": "Default dim1 data-viz border.",
+          "$extensions": {
+            "scopes": ["STROKE_COLOR"],
+            "figmaName": ["color", "border", "dataviz", "@root", "dim1"]
           }
         },
         "dim2": {
-          "$description": "Default data-viz border (dim2, blue).",
-          "default": {
-            "$value": "{color.blue.200}",
-            "$description": "Default dim2 data-viz border.",
-            "$extensions": {
-              "scopes": ["STROKE_COLOR"],
-              "figmaName": ["color", "border", "dataviz", "@root", "dim2", "default"]
-            }
-          },
-          "hover": {
-            "$value": "{color.blue.300}",
-            "$description": "Dim2 data-viz border on hover.",
-            "$extensions": {
-              "scopes": [],
-              "figmaName": ["color", "border", "dataviz", "@root", "dim2", "hover"]
-            }
-          },
-          "pressed": {
-            "$value": "{color.blue.400}",
-            "$description": "Dim2 data-viz border on press.",
-            "$extensions": {
-              "scopes": [],
-              "figmaName": ["color", "border", "dataviz", "@root", "dim2", "pressed"]
-            }
+          "$value": "{color.blue.200}",
+          "$description": "Default dim2 data-viz border.",
+          "$extensions": {
+            "scopes": ["STROKE_COLOR"],
+            "figmaName": ["color", "border", "dataviz", "@root", "dim2"]
           }
         }
       },
@@ -2305,228 +1095,122 @@
         "error": {
           "$description": "Error feedback border colors.",
           "dim1": {
+            "$value": "{color.red.600}",
             "$description": "Strong error border (dim1).",
-            "default": {
-              "$value": "{color.red.600}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
-            },
-            "hover": {
-              "$value": "{color.red.700}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
-            },
-            "pressed": {
-              "$value": "{color.red.800}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"]
             }
           },
           "dim2": {
+            "$value": "{color.red.200}",
             "$description": "Soft error border (dim2).",
-            "default": {
-              "$value": "{color.red.200}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
-            },
-            "hover": {
-              "$value": "{color.red.300}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
-            },
-            "pressed": {
-              "$value": "{color.red.400}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"]
             }
           }
         },
         "success": {
           "$description": "Success feedback border colors.",
           "dim1": {
+            "$value": "{color.lime.600}",
             "$description": "Strong success border (dim1).",
-            "default": {
-              "$value": "{color.lime.600}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
-            },
-            "hover": {
-              "$value": "{color.lime.700}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
-            },
-            "pressed": {
-              "$value": "{color.lime.800}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"]
             }
           },
           "dim2": {
+            "$value": "{color.lime.200}",
             "$description": "Soft success border (dim2).",
-            "default": {
-              "$value": "{color.lime.200}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
-            },
-            "hover": {
-              "$value": "{color.lime.300}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
-            },
-            "pressed": {
-              "$value": "{color.lime.400}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"]
             }
           }
         },
         "warning": {
           "$description": "Warning feedback border colors.",
           "dim1": {
+            "$value": "{color.orange.600}",
             "$description": "Strong warning border (dim1).",
-            "default": {
-              "$value": "{color.orange.600}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
-            },
-            "hover": {
-              "$value": "{color.orange.700}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
-            },
-            "pressed": {
-              "$value": "{color.orange.800}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"]
             }
           },
           "dim2": {
+            "$value": "{color.orange.200}",
             "$description": "Soft warning border (dim2).",
-            "default": {
-              "$value": "{color.orange.200}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
-            },
-            "hover": {
-              "$value": "{color.orange.300}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
-            },
-            "pressed": {
-              "$value": "{color.orange.400}",
-              "$extensions": {
-                "scopes": ["STROKE_COLOR"]
-              }
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"]
+            }
+          }
+        },
+        "information": {
+          "$description": "Information feedback border colors.",
+          "dim1": {
+            "$value": "{color.blue.600}",
+            "$description": "Strong information border (dim1).",
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.blue.200}",
+            "$description": "Soft information border (dim2).",
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"]
+            }
+          }
+        },
+        "neutral": {
+          "$description": "Neutral feedback border colors.",
+          "dim1": {
+            "$value": "{color.gray.600}",
+            "$description": "Strong neutral border (dim1).",
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.gray.200}",
+            "$description": "Soft neutral border (dim2).",
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"]
             }
           }
         }
       },
       "dim1": {
+        "$value": "{color.gray.400}",
         "$description": "Strongest neutral border color with interaction states.",
-        "default": {
-          "$value": "{color.gray.400}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
-        },
-        "hover": {
-          "$value": "{color.gray.500}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
-        },
-        "pressed": {
-          "$value": "{color.gray.600}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
+        "$extensions": {
+          "scopes": ["STROKE_COLOR"]
         }
       },
       "dim2": {
+        "$value": "{color.gray.300}",
         "$description": "Strong neutral border color with interaction states.",
-        "default": {
-          "$value": "{color.gray.300}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
-        },
-        "hover": {
-          "$value": "{color.gray.400}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
-        },
-        "pressed": {
-          "$value": "{color.gray.500}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
+        "$extensions": {
+          "scopes": ["STROKE_COLOR"]
         }
       },
       "dim3": {
+        "$value": "{color.gray.200}",
         "$description": "Subtle neutral border color with interaction states.",
-        "default": {
-          "$value": "{color.gray.200}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
-        },
-        "hover": {
-          "$value": "{color.gray.300}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
-        },
-        "pressed": {
-          "$value": "{color.gray.400}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
+        "$extensions": {
+          "scopes": ["STROKE_COLOR"]
         }
       },
       "dim4": {
+        "$value": "{color.gray.100}",
         "$description": "Faintest neutral border color with interaction states.",
-        "default": {
-          "$value": "{color.gray.100}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
-        },
-        "hover": {
-          "$value": "{color.gray.200}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
-        },
-        "pressed": {
-          "$value": "{color.gray.300}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
+        "$extensions": {
+          "scopes": ["STROKE_COLOR"]
         }
       }
     },
     "shadow": {
       "$description": "Semantic shadow colors for elevation and depth effects.",
       "xs": {
-        "$value": "{color.transparent}",
+        "$value": "{color.gray.400-6}",
         "$description": "Shadow color for the xs elevation.",
         "$extensions": {
           "scopes": ["EFFECT_COLOR"]
@@ -2565,6 +1249,67 @@
         "$description": "Shadow color for the 2xl elevation.",
         "$extensions": {
           "scopes": ["EFFECT_COLOR"]
+        }
+      }
+    },
+    "state": {
+      "$description": "Interaction state colors for focus, hover, pressed, and selected states.",
+      "focus": {
+        "$value": "{color.blue.600}",
+        "$description": "Focus ring color for focused interactive elements.",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "hover": {
+        "$description": "Hover state overlay colors in medium and strong intensities.",
+        "medium": {
+          "$value": "{color.blue.900-12}",
+          "$description": "Medium hover overlay for subtle interactive feedback.",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+          }
+        },
+        "strong": {
+          "$value": "{color.blue.900-60}",
+          "$description": "Strong hover overlay for prominent interactive feedback.",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+          }
+        }
+      },
+      "pressed": {
+        "$description": "Pressed state overlay colors in medium and strong intensities.",
+        "medium": {
+          "$value": "{color.blue.900-16}",
+          "$description": "Medium pressed overlay for subtle active feedback.",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+          }
+        },
+        "strong": {
+          "$value": "{color.blue.900-80}",
+          "$description": "Strong pressed overlay for prominent active feedback.",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+          }
+        }
+      },
+      "selected": {
+        "$description": "Selected state overlay colors in medium and strong intensities.",
+        "medium": {
+          "$value": "{color.blue.900-12}",
+          "$description": "Medium selected overlay for subtle selection feedback.",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+          }
+        },
+        "strong": {
+          "$value": "{color.blue.900-80}",
+          "$description": "Strong selected overlay for prominent selection feedback.",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+          }
         }
       }
     }

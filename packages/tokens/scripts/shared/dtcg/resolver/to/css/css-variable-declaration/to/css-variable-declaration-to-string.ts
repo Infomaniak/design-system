@@ -22,5 +22,11 @@ export function cssVariableDeclarationToString(declaration: CssVariableDeclarati
 
   output += `${declaration.name}: ${declaration.value};`;
 
+  if (declaration.derived !== undefined) {
+    for (const derived of declaration.derived) {
+      output += `\n${cssVariableDeclarationToString(derived)}`;
+    }
+  }
+
   return output;
 }

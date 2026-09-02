@@ -184,7 +184,7 @@ const meta = {
 
 - **Purpose:** Collect structured change descriptions, automate version bumps, and generate `CHANGELOG.md` files. Changesets do **not** handle publishing — `ci:publish` remains the publish mechanism.
 - **Config:** `.changeset/config.json` with `baseBranch: "develop"`, `access: "public"`, ignores non-publishable packages.
-- **Versioning:** Automated via `.github/workflows/release-pr.yml`. A draft `develop → main` PR is created automatically when changes land on `develop`. Marking it as **Ready for review** triggers `yarn changeset:version` (bumps `package.json` versions, generates `CHANGELOG.md`, pushes to `develop`). The maintainer then merges the PR to `main` for production publish. Can also be run manually with `yarn changeset:version`.
+- **Versioning:** Automated via `.github/workflows/publish.yml`.
 - **Only publishable packages are versioned:** `@infomaniak-design-system/tokens` and `@infomaniak-design-system/components` (those with a `publish` script). PRs touching only docs/apps/scripts don't need a changeset.
 - **Creating a changeset:** Use the `generate-changeset` skill (`.agents/skills/generate-changeset/SKILL.md`) — it runs `git diff develop...HEAD`, determines the semver bump, identifies affected packages, and writes a formatted `.changeset/*.md` file. Prefer this over the manual `yarn changeset` flow.
 

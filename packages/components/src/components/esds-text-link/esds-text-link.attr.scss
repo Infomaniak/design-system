@@ -1,0 +1,64 @@
+@use '../../styles' as styles;
+
+[esds-text-link] {
+  display: inline;
+  text-decoration: none;
+  color: var(--esds-text-link-content-color-default);
+
+  &:focus-visible {
+    outline: var(--esds-focus-border-width) solid var(--esds-focus-border-color);
+    border-radius: var(--esds-focus-border-radius);
+  }
+
+  &:hover,
+  &:active {
+    text-decoration: underline;
+  }
+
+  &:hover {
+    color: styles.source-over(
+      --esds-text-link-content-color-default,
+      --esds-color-state-hover-strong
+    );
+  }
+
+  &:active {
+    color: styles.source-over(
+      --esds-text-link-content-color-default,
+      --esds-color-state-pressed-strong
+    );
+  }
+
+  &:visited {
+    color: var(--esds-text-link-content-color-visited);
+
+    &:hover {
+      color: styles.source-over(
+        --esds-text-link-content-color-visited,
+        --esds-color-state-hover-medium
+      );
+    }
+
+    &:active {
+      color: styles.source-over(
+        --esds-text-link-content-color-visited,
+        --esds-color-state-pressed-medium
+      );
+    }
+  }
+
+  &[underline] {
+    /*
+      NOTE: potential options: https://mui.com/material-ui/react-link/#underline
+       - underline="none"
+       - underline="hover"
+       - underline="always"
+     */
+    text-decoration: underline;
+
+    &:hover,
+    &:active {
+      text-decoration: initial;
+    }
+  }
+}

@@ -34,7 +34,20 @@ export function createAndroidPublishGithubBranch({
     }: UpdateGitRepositoryOnNewBranchUpdateFunctionContext): Promise<string> => {
       await Promise.all([cp(packageDirectory, cwd, { recursive: true, force: true })]);
 
-      await execCommandInherit(logger, './gradlew', ['ktlintFormat'], {
+      await execCommandInherit(
+        logger,
+        'curl',
+        ['-sSLO', 'https://github.com/ktlint/ktlint/releases/latest/download/ktlint'],
+        {
+          cwd,
+        },
+      );
+
+      await execCommandInherit(logger, 'chmod', ['a+x', 'ktlint'], {
+        cwd,
+      });
+
+      await execCommandInherit(logger, './ktlint', ['-F', '**/*.kt'], {
         shell: true,
         cwd,
       });
