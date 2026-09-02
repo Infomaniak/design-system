@@ -40,6 +40,11 @@ design-system/
 │   │   ├── scripts/             # Token build/validation scripts
 │   │   ├── demo/                # Live demo app for tokens
 │   │   └── dist/                # Output: CSS, JSON, Markdown
+│   ├── assets/images/svg/       # SVG assets (icons, illustrations) — private package
+│   │   ├── assets/svg/          # Committed SVGs + figma/outlines/ (feed SF Symbols)
+│   │   └── scripts/
+│   │       ├── scripts/         # import-svgs, generate-sf-symbols, publish-sf-symbols, build-legacy-svgs
+│   │       └── shared/          # sf-symbols/ (template engine, xcassets builder), svg/ helpers
 │   └── components/              # Web components library
 │       ├── src/                 # Component source + stories
 │       └── tests/visual-regression/      # Playwright visual regression suite
@@ -75,6 +80,7 @@ design-system/
 | Build all packages           | `yarn build`                                 |
 | Build tokens only            | `yarn build:tokens`                          |
 | Validate tokens              | `cd packages/tokens && yarn validate:tokens` |
+| Generate SF Symbols (iOS)    | `yarn generate:sf-symbols`                   |
 | Run tests                    | `yarn test`                                  |
 | Test coverage                | `yarn test:coverage`                         |
 | Visual regression tests      | `yarn test:vrt`                              |
