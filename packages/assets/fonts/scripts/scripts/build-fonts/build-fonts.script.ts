@@ -14,8 +14,6 @@ const SOURCE_DIR: string = join(ROOT_DIR, 'fonts');
 // const SERVER_URL: string = 'https://fonts.infomaniak.com';
 const SERVER_URL: string = 'https://fonts.storage.infomaniak.com';
 
-const WORKSPACE_ROOT_DIR: string = join(ROOT_DIR, '../../..');
-
 const OUTPUT_DIR: string = join(ROOT_DIR, 'dist');
 
 await runScript('build-fonts', async (logger: Logger): Promise<void> => {
