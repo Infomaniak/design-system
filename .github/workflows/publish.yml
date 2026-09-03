@@ -135,6 +135,8 @@ jobs:
           GITHUB_CI_CONFIG: ${{ toJson(github) }}
           KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
           CI_PULL_REQUEST_AUTH_TOKEN_MOBILE: ${{ secrets.CI_PULL_REQUEST_AUTH_TOKEN_MOBILE }}
+          GITLAB_FONTS_REPOSITORY_URL: ${{ secrets.GITLAB_FONTS_REPOSITORY_URL }}
+          GITLAB_FONTS_REPOSITORY_TOKEN: ${{ secrets.GITLAB_FONTS_REPOSITORY_TOKEN }}
 
       - name: Publish missing package versions (dry-run for fork PR)
         if: >-
