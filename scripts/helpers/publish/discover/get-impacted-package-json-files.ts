@@ -15,6 +15,12 @@ import {
 export interface GetImpactedPackageJsonFilesOptions
   extends DiscoverPackageJsonFilesOptions, Omit<ListGitChangedFilesOptions, keyof SpawnOptions> {}
 
+/**
+ * Identifies and returns a list of impacted `package.json` files based on changes in the repository and dependencies inside a monorepo context.
+ *
+ * @param {GetImpactedPackageJsonFilesOptions} options - Configuration options for discovering package.json files and listing changed files.
+ * @return {Promise<readonly PackageJsonWithPath[]>} A promise resolving to a list of objects representing impacted `package.json` files, each including the file path and its content.
+ */
 export async function getImpactedPackageJsonFiles(
   options: GetImpactedPackageJsonFilesOptions,
 ): Promise<readonly PackageJsonWithPath[]> {
