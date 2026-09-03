@@ -11,7 +11,7 @@ const FIGMA_ICONS_DIRECTORY: string = join(PACKAGE_ROOT_DIR, 'assets/svg/monoton
 const FIGMA_ICONS_OUTLINES_DIRECTORY: string = join(FIGMA_ICONS_DIRECTORY, 'outlines');
 const OUTPUT_DIR: string = join(PACKAGE_ROOT_DIR, 'dist/sf-symbols');
 
-await runScript('generate-sf-symbols', async (logger: Logger): Promise<void> => {
+await runScript('build-sf-symbols', async (logger: Logger): Promise<void> => {
   const icons = await generateSfSymbols({
     outputDirectory: OUTPUT_DIR,
     outlinesDirectory: FIGMA_ICONS_OUTLINES_DIRECTORY,
