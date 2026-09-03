@@ -11,11 +11,15 @@ import { SYMBOL_NAME_PREFIX, SYMBOLS_XCASSETS_DIRECTORY_NAME } from './sf-symbol
 
 const logger = Logger.never();
 const FIXTURES_DIRECTORY: string = join(dirname(fileURLToPath(import.meta.url)), 'fixtures');
-const FIXTURE_ICON_NAMES: readonly string[] = ['circle-check-filled', 'magnifying-glass', 'pencil'];
+/*
+ * Golden outlines extracted from the real Figma icons (`esds/icon/<name>`, geometry=paths).
+ * Snapshots: they do not follow future Figma redesigns (that is their role: stability).
+ */
+const FIXTURE_ICON_NAMES: readonly string[] = ['circle-check-filled', 'magnifying-glass', 'check'];
 const FIXTURE_PATH_COUNTS: Readonly<Record<string, number>> = {
   'circle-check-filled': 1,
-  'magnifying-glass': 2,
-  pencil: 2,
+  'magnifying-glass': 1,
+  check: 1,
 };
 const WIREFRAME_PATH_PATTERN = /<path class="SFSymbolsPreviewWireframe" d="([^"]+)"/g;
 
@@ -101,25 +105,31 @@ describe('sf-symbols fixtures', () => {
         expect(fittedPaths).toHaveLength(FIXTURE_PATH_COUNTS[iconName]!);
 
         const boundingBox = computePathDataBoundingBox(fittedPaths.join(' '));
-        expect(boundingBox.maxY - boundingBox.minY).toBeCloseTo(cellHeight, 2);
-        expect(boundingBox.maxY).toBeCloseTo(0, 2);
-        expect(boundingBox.minY).toBeCloseTo(-cellHeight, 2);
+        const width: number = boundingBox.maxX - boundingBox.minX;
+        const height: number = boundingBox.maxY - boundingBox.minY;
+
+        // the artwork is maximally scaled: it fills the cell in at least one dimension
+        // (width-limited for wide icons, height-limited otherwise)
+        expect(Math.max(width / variant.cellWidth, height / cellHeight)).toBeCloseTo(1, 2);
+        // centered horizontally in the cell, vertically between capline and baseline
         expect((boundingBox.minX + boundingBox.maxX) / 2).toBeCloseTo(variant.cellWidth / 2, 2);
+        expect((boundingBox.minY + boundingBox.maxY) / 2).toBeCloseTo(-cellHeight / 2, 2);
+        // fully inside the cell
+        expect(boundingBox.minY).toBeGreaterThanOrEqual(-cellHeight - 0.01);
+        expect(boundingBox.maxY).toBeLessThanOrEqual(0.01);
+        expect(boundingBox.minX).toBeGreaterThanOrEqual(-0.01);
+        expect(boundingBox.maxX).toBeLessThanOrEqual(variant.cellWidth + 0.01);
       }
     }
   });
 
-  test('preserves the winding rule of each fixture', async () => {
-    const filledContent: string = await readSymbolSvg('circle-check-filled');
-    expect(filledContent).toContain('fill-rule="evenodd"');
-    expect(filledContent.match(WIREFRAME_PATH_PATTERN)).toHaveLength(
-      FIXTURE_PATH_COUNTS['circle-check-filled']! * template.variants.length,
-    );
-
-    const strokeContent: string = await readSymbolSvg('pencil');
-    expect(strokeContent).not.toContain('fill-rule');
-    expect(strokeContent.match(WIREFRAME_PATH_PATTERN)).toHaveLength(
-      FIXTURE_PATH_COUNTS['pencil']! * template.variants.length,
-    );
+  test('preserves the (non-zero) winding rule of each fixture', async () => {
+    for (const iconName of FIXTURE_ICON_NAMES) {
+      const content: string = await readSymbolSvg(iconName);
+      expect(content).not.toContain('fill-rule');
+      expect(content.match(WIREFRAME_PATH_PATTERN)).toHaveLength(
+        FIXTURE_PATH_COUNTS[iconName]! * template.variants.length,
+      );
+    }
   });
 });
