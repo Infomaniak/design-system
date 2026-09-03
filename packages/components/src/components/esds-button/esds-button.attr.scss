@@ -1,0 +1,58 @@
+@use '../../styles' as styles;
+
+:root {
+  --esds-button-background-color: red;
+  --esds-button-content-color: blue;
+  --esds-button-border-radius: var(--esds-radius-md);
+  --esds-button-padding-inline: var(--esds-spacing-md);
+  --esds-button-padding-block: var(--esds-spacing-md);
+}
+
+button[esds-button] {
+  /* reset button style */
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+}
+
+a[esds-button] {
+  /* reset anchor style */
+  text-decoration: none;
+}
+
+[esds-button] {
+  background-color: var(--esds-button-background-color);
+  color: var(--esds-button-content-color);
+  border-radius: var(--esds-button-border-radius);
+  padding-inline: var(--esds-button-padding-inline);
+  padding-block: var(--esds-button-padding-block);
+
+  &:focus-visible {
+    outline: var(--esds-focus-border-width) solid var(--esds-focus-border-color);
+    border-radius: var(--esds-focus-border-radius);
+  }
+
+  &:hover {
+    background-color: styles.source-over(
+      --esds-button-background-color,
+      --esds-color-state-hover-strong
+    );
+    color: styles.source-over(--esds-button-content-color, --esds-color-state-hover-strong);
+  }
+
+  &:active {
+    background-color: styles.source-over(
+      --esds-button-background-color,
+      --esds-color-state-pressed-strong
+    );
+    color: styles.source-over(--esds-button-content-color, --esds-color-state-pressed-strong);
+  }
+}
