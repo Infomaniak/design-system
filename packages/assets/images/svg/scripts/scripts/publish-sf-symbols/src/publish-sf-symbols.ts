@@ -10,7 +10,6 @@ import { getEnvCiPullRequestAuthTokenMobile } from '../../../../../../../../scri
 import type { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
 import { generatePackageJsonBuildVersion } from '../../../../../../../../scripts/helpers/npm/generate-package-json-build-version/generate-package-json-build-version.ts';
 import type { PublishConfig } from '../../../../../../../../scripts/helpers/publish/publish-config/publish-config.ts';
-import { generateSfSymbols } from '../../../shared/sf-symbols/generate-sf-symbols.ts';
 import { OUTLINE_FILE_SUFFIX } from '../../../shared/sf-symbols/read-symbol-icons.ts';
 import { SYMBOLS_XCASSETS_DIRECTORY_NAME } from '../../../shared/sf-symbols/sf-symbols-config.ts';
 import { createIosSymbolsPublishGithubBranch } from './create-ios-symbols-publish-github-branch.ts';
@@ -22,7 +21,6 @@ export interface PublishSfSymbolsOptions extends PublishConfig {
   /** Directory wiped and filled with the generated `ESDSSymbols.xcassets`. */
   readonly outputDirectory: string;
   readonly outlinesDirectory: string;
-  readonly webIconsDirectory: string;
 }
 
 /**
@@ -34,7 +32,6 @@ export async function publishSfSymbols({
   packageRootDirectory,
   outputDirectory,
   outlinesDirectory,
-  webIconsDirectory,
   // shared publish options
   mode,
   prerelease,
@@ -46,8 +43,6 @@ export async function publishSfSymbols({
       );
       return;
     }
-
-    await generateSfSymbols({ outputDirectory, outlinesDirectory, webIconsDirectory, logger });
 
     const { version }: PackageJson = await readPackageJsonFile(
       join(packageRootDirectory, 'package.json'),
