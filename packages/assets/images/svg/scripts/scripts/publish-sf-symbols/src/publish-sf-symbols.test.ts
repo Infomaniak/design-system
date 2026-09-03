@@ -46,7 +46,6 @@ describe('publishSfSymbols', () => {
 
   const createPublishOptions = (mode: 'dev' | 'prod'): PublishSfSymbolsOptions => {
     const outlinesDirectory: string = join(tempDir, 'outlines');
-    const webIconsDirectory: string = join(tempDir, 'icons');
     const outputDirectory: string = join(tempDir, 'dist', 'sf-symbols');
 
     return {
@@ -54,7 +53,6 @@ describe('publishSfSymbols', () => {
       packageRootDirectory: tempDir,
       outputDirectory,
       outlinesDirectory,
-      webIconsDirectory,
       logger,
     };
   };
