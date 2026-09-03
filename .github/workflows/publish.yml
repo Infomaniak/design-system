@@ -26,7 +26,7 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     permissions:
-      id-token: write  # for OIDC
+      id-token: write # for OIDC
       contents: read
 
     steps:
