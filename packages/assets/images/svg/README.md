@@ -84,6 +84,9 @@ yarn generate:sf-symbols
 
 The command fits each committed outline (see [Icons](#icons)) into the official Apple SF Symbols template and emits the `ESDSSymbols.xcassets` catalog, with one custom symbol per icon named `esds-<name>` (e.g. `esds-magnifying-glass`). The publish step clones `ios-design-system`, replaces `Sources/ESDSSymbols/Symbols.xcassets`, pushes a branch `esds-symbols/<version>` and opens a pull request to `main`. When no outline has been imported yet, the publish step is skipped (non-blocking).
 
+> [!NOTE]
+> By design, only one weight is generated per symbol: all icons render at the stroke weight designed in Figma, regardless of font weight.
+
 ### Update the guidelines
 
 #### [Iconography Guideline](https://www.figma.com/design/nbEPxwoIzXfZVquwR4NfYg/Edelweiss---Iconography?node-id=0-1&p=f&t=50O2v4pgV2smKfy8-0)
