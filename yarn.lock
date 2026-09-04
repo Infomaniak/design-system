@@ -1287,6 +1287,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@infomaniak-design-system/figma-lint-plugin@workspace:packages/figma-lint-plugin":
+  version: 0.0.0-use.local
+  resolution: "@infomaniak-design-system/figma-lint-plugin@workspace:packages/figma-lint-plugin"
+  languageName: unknown
+  linkType: soft
+
 "@infomaniak-design-system/svg-assets@workspace:packages/assets/images/svg":
   version: 0.0.0-use.local
   resolution: "@infomaniak-design-system/svg-assets@workspace:packages/assets/images/svg"

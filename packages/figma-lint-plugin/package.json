@@ -1,0 +1,17 @@
+{
+  "name": "@infomaniak-design-system/figma-lint-plugin",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "node --no-warnings=ExperimentalWarning scripts/scripts/build-figma-lint-plugin/build-figma-lint-plugin.script.ts"
+  },
+  "description": "Infomaniak Design Linter — Figma plugin that lints selections for design-token compliance",
+  "keywords": [
+    "Infomaniak",
+    "Figma",
+    "Lint",
+    "Design tokens"
+  ],
+  "license": "GPL-3.0-only"
+}
