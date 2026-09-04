@@ -51,6 +51,8 @@ The Figma design file is traversed by a script to extract the icons.
 Each icon is converted to an SVG, is optimized by SVGO, we replace the colors by `currentColor` (to make them _monotone_) and,
 for each of them, we store the SVG into the `assets/svg/monotone/figma` directory as well as the metadata.
 
+An **outlined** version of each icon (`<name>.outline.svg`) is also generated into the `assets/svg/monotone/figma/outlines` directory, using the Figma vector geometry (`fillGeometry`/`strokeGeometry`) so every stroke becomes a filled path. Outlines are excluded from the iconify set and are committed to this repository: they feed the [SF Symbols generation](#generate-the-sf-symbols-ios) for iOS.
+
 Then a single [iconify JSON](https://iconify.design/docs/libraries/tools/export/json.html) file (`assets/server/esds.json`) is generated containing all the icons.
 
 #### Illustrations
@@ -71,6 +73,20 @@ A Pull Request is created to merge the assets into the `main` branch.
 ### Upload the assets
 
 When the Pull Request is merged, the assets are uploaded to the Infomaniak's Design System iconify server.
+
+### Generate the SF Symbols
+
+When the Pull Request is merged, the [publish workflow](/.github/workflows/publish.yml) regenerates the [SF Symbols](https://developer.apple.com/sf-symbols/) asset catalog for iOS and delivers it to the [ios-design-system](https://github.com/Infomaniak/ios-design-system) repository, mirroring how the design tokens are delivered to the same repository.
+Deliveries triggered by `develop` ship a prerelease version (`-rc.<run>`), deliveries triggered by `main` ship the proper version.
+
+```shell
+yarn build:sf-symbols
+```
+
+The command fits each committed outline (see [Icons](#icons)) into the official Apple SF Symbols template and emits the `ESDSSymbols.xcassets` catalog, with one custom symbol per icon named `esds-<name>` (e.g. `esds-magnifying-glass`). The publish step clones `ios-design-system`, replaces `Sources/ESDSSymbols/Symbols.xcassets`, pushes a branch `esds-symbols/<version>` and opens a pull request to `main`. When no outline has been imported yet, the publish step is skipped (non-blocking).
+
+> [!NOTE]
+> By design, only one weight is generated per symbol: all icons render at the stroke weight designed in Figma, regardless of font weight.
 
 ### Update the guidelines
 
@@ -105,6 +121,8 @@ flowchart TD
   CREATE_PR --> MERGE_PR
   MERGE_PR -- "main" --> UPLOAD_PROD
   MERGE_PR -- "develop" --> UPLOAD_DEVELOP
+  MERGE_PR -- "develop / main" --> GENERATE_SF_SYMBOLS("GENERATE SF SYMBOLS (iOS)")
+  GENERATE_SF_SYMBOLS --> PR_IOS("PULL REQUEST to ios-design-system")
   UPLOAD_PROD -- "manual update" --> FIGMA_ICONOGRAPHY_GUIDELINE
 
   %% FIX_FIGMA_WEBHOOK

@@ -139,6 +139,11 @@ interface GetPackagesToBuildReturn extends BuildConfig {
   readonly packagesToBuild: PackageJsonWithPath[];
 }
 
+/**
+ * Determines the list of packages that need to be built.
+ *
+ * - checks if the package exists on npm or not
+ */
 async function getPackagesToBuild({
   mode,
   publishablePackages,

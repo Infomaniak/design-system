@@ -10,6 +10,7 @@
     "build": "yarn workspaces foreach -Apt run build",
     "build:tokens": "yarn workspace @infomaniak-design-system/tokens build",
     "build:components": "yarn workspace @infomaniak-design-system/components build",
+    "build:sf-symbols": "yarn workspace @infomaniak-design-system/svg-assets build:sf-symbols",
     "build:docs": "yarn workspace @infomaniak-design-system/docs build",
     "=== CODE QUALITY ===": "",
     "format": "yarn format:fix",

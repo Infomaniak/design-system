@@ -8,6 +8,7 @@ import {
   SVG,
 } from '@iconify/tools';
 import type { ColorAttributes } from '@iconify/tools/lib/colors/attribs';
+import type { ImportDirectoryFileEntry } from '@iconify/tools/lib/import/directory';
 import type { IconifyJSON } from '@iconify/types';
 import type { Color } from '@iconify/utils/lib/colors/types';
 import { glob, readFile } from 'node:fs/promises';
@@ -17,6 +18,21 @@ import { writeJsonFileSafe } from '../../../../../../../../../scripts/helpers/fi
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
 import type { FigmaSvgMetadata } from '../../figma/figma-svg-metadata.ts';
 import { applyOpticalSizes } from './apply-optical-sizes.ts';
+
+function isSubDirectoryExcluded(
+  subdir: string,
+  excludedSubDirectories: readonly string[],
+): boolean {
+  const normalizedSubdir: string = subdir.replace(/\/+$/, '');
+  if (normalizedSubdir === '') {
+    return false;
+  }
+  return excludedSubDirectories.some(
+    (excludedSubDirectory: string): boolean =>
+      normalizedSubdir === excludedSubDirectory ||
+      normalizedSubdir.startsWith(`${excludedSubDirectory}/`),
+  );
+}
 
 export type SVGOOptions = Parameters<typeof runSVGO>[1];
 
@@ -31,6 +47,7 @@ export interface BuildSvgSetFromSvgDirectoryOptions {
   readonly optimize?: boolean | SVGOOptions; // (default: true)
   readonly withOpticalSizes?: boolean; // (default: true)
   readonly compareWithExistingVersion?: boolean; // (default: true)
+  readonly excludeSubDirectories?: readonly string[]; // (default: [])
 }
 
 /**
@@ -48,10 +65,20 @@ export async function buildSvgSetFromSvgDirectory({
   optimize = true,
   withOpticalSizes = true,
   compareWithExistingVersion = true,
+  excludeSubDirectories = [],
 }: BuildSvgSetFromSvgDirectoryOptions): Promise<boolean> {
   return logger.asyncTask(`build-svgs-set:${prefix}`, async (logger: Logger): Promise<boolean> => {
     const iconSet: IconSet = await importDirectory(sourceDirectory, {
       prefix,
+      ...(excludeSubDirectories.length > 0
+        ? {
+            keyword: (file: ImportDirectoryFileEntry, keyword: string): string | undefined => {
+              return isSubDirectoryExcluded(file.subdir, excludeSubDirectories)
+                ? undefined
+                : keyword;
+            },
+          }
+        : {}),
     });
 
     type IconSetForEachType = 'icon' | 'alias' | 'variation';

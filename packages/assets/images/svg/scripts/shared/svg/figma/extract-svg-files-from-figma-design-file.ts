@@ -21,13 +21,22 @@ import { block } from '../../../../../../../../scripts/helpers/misc/block.ts';
 import type { TreeExplorerPickReturn } from '../../../../../../../../scripts/helpers/misc/tree-explorer/tree-explorer.ts';
 import { removeTrailingSlash } from '../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 
+import { ICON_NAME_PATTERN_SOURCE } from '../../icons/icon-name.ts';
+import { buildOutlinedSvgsFromFigmaComponents } from './build-outlined-svg-from-figma-component.ts';
 import { type FigmaSvgMetadata } from './figma-svg-metadata.ts';
+
+export const FIGMA_SVG_OUTLINES_SUB_DIRECTORY_NAME = 'outlines';
 
 export interface ExtractSvgFilesFromFigmaDesignFileOptions {
   readonly outputDirectory: string;
   readonly figmaAPIToken: string;
   readonly figmaSourceFileKey: string;
   readonly generateMasks: boolean;
+  /**
+   * Generates a `<name>.outline.svg` file per icon component (stroke → outline geometry) in the
+   * "outlines" sub-directory of the output directory.
+   */
+  readonly generateOutlinedSvgs: boolean;
   readonly logger: Logger;
 }
 
@@ -40,6 +49,7 @@ export function extractSvgFilesFromFigmaDesignFile({
   figmaAPIToken,
   figmaSourceFileKey,
   generateMasks,
+  generateOutlinedSvgs,
   logger,
 }: ExtractSvgFilesFromFigmaDesignFileOptions): Promise<void> {
   return logger.asyncTask('extract-figma-svgs', async (logger: Logger): Promise<void> => {
@@ -51,7 +61,12 @@ export function extractSvgFilesFromFigmaDesignFile({
         return getFigmaFile({
           token: figmaAPIToken,
           file_key: figmaSourceFileKey,
-          geometry: generateMasks ? 'paths' : undefined,
+          /*
+        NOTE:
+          "fillGeometry" and "strokeGeometry" (required for outline generation) are only present
+          in the Figma API response when the file is fetched with "geometry=paths".
+       */
+          geometry: generateMasks || generateOutlinedSvgs ? 'paths' : undefined,
         });
       },
     );
@@ -141,6 +156,42 @@ export function extractSvgFilesFromFigmaDesignFile({
       });
     });
 
+    if (generateOutlinedSvgs) {
+      await logger.asyncTask('extract-outlined-svgs', async (): Promise<void> => {
+        const componentNodesByName: Map<string, FigmaComponentNode> = new Map(
+          FigmaNodesExplorer.explore<FigmaComponentNode>(
+            figmaFile.document,
+            (node: GenericFigmaNodeBase): TreeExplorerPickReturn | void => {
+              if (isFigmaComponentNode(node) && isIconFigmaComponent(node.name)) {
+                return {
+                  pickSelf: true,
+                  pickChildren: false,
+                };
+              } else {
+                return {
+                  pickSelf: false,
+                  pickChildren: true,
+                };
+              }
+            },
+          ).map((node: FigmaComponentNode): [string, FigmaComponentNode] => {
+            return [extractIconName(node.name), node];
+          }),
+        );
+
+        await buildOutlinedSvgsFromFigmaComponents({
+          components: [...componentNodesByName.entries()],
+          writeSvg: async ({ name, svg }): Promise<void> => {
+            await writeTextFileSafe(
+              join(outputDirectory, FIGMA_SVG_OUTLINES_SUB_DIRECTORY_NAME, `${name}.outline.svg`),
+              svg,
+            );
+          },
+          logger,
+        });
+      });
+    }
+
     if (generateMasks) {
       /*
       NOTE:
@@ -199,7 +250,10 @@ function isIconFigmaComponent(name: string): boolean {
 }
 
 function extractIconName(name: string): string {
-  const match: RegExpMatchArray | null = /^esds\/icon\/([a-z0-9-]+)$/g.exec(name);
+  const match: RegExpMatchArray | null = new RegExp(
+    `^esds/icon/(${ICON_NAME_PATTERN_SOURCE})$`,
+    'g',
+  ).exec(name);
 
   if (match === null) {
     throw new Error(`Invalid name: ${JSON.stringify(name)}`);
