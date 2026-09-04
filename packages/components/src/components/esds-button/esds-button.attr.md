@@ -19,7 +19,7 @@ EsdsButtonAttr.define();
   esds-button
   href="#"
 >
-  Link Button
+  Button link
 </a>
 ```
 

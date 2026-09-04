@@ -1,34 +1,28 @@
 @use '../../styles' as styles;
 
 :root {
-  --esds-button-background-color: red;
-  --esds-button-content-color: blue;
+  --esds-button-font: var(--esds-body-md-font);
+  --esds-button-background-color: var(--esds-color-background-brand);
+  --esds-button-background-color-a: var(--esds-color-background-brand-a);
+  --esds-button-content-color: var(--esds-color-content-on-brand);
+  --esds-button-content-color-a: var(--esds-color-content-on-brand-a);
   --esds-button-border-radius: var(--esds-radius-md);
   --esds-button-padding-inline: var(--esds-spacing-md);
   --esds-button-padding-block: var(--esds-spacing-md);
 }
 
-button[esds-button] {
+[esds-button] {
+  /* reset anchor style */
+  text-decoration: none;
+
   /* reset button style */
   border: none;
   margin: 0;
-  padding: 0;
   width: auto;
-  overflow: visible;
-  background: transparent;
-  /* inherit font & color from ancestor */
-  color: inherit;
-  font: inherit;
-  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
-  line-height: normal;
-}
 
-a[esds-button] {
-  /* reset anchor style */
-  text-decoration: none;
-}
-
-[esds-button] {
+  /* custom style */
+  display: inline-flex;
+  font: var(--esds-button-font);
   background-color: var(--esds-button-background-color);
   color: var(--esds-button-content-color);
   border-radius: var(--esds-button-border-radius);
@@ -45,7 +39,7 @@ a[esds-button] {
       --esds-button-background-color,
       --esds-color-state-hover-strong
     );
-    color: styles.source-over(--esds-button-content-color, --esds-color-state-hover-strong);
+    color: styles.source-over(--esds-button-content-color, --esds-color-state-hover-medium);
   }
 
   &:active {
@@ -53,6 +47,6 @@ a[esds-button] {
       --esds-button-background-color,
       --esds-color-state-pressed-strong
     );
-    color: styles.source-over(--esds-button-content-color, --esds-color-state-pressed-strong);
+    color: styles.source-over(--esds-button-content-color, --esds-color-state-pressed-medium);
   }
 }

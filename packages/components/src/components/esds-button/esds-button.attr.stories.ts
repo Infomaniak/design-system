@@ -55,7 +55,7 @@ export const Default: StoryObj<
     </button>`,
 };
 
-export const Link: StoryObj<EsdsButtonAttr & HTMLAnchorElement> = {
+export const ButtonLink: StoryObj<EsdsButtonAttr & HTMLAnchorElement> = {
   ...storybookInteractiveControls({
     href: 'https://infomaniak.com',
   }),
