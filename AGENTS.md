@@ -33,6 +33,11 @@ design-system/
 │       │   │   └── tokens/      # Markdown token documentation
 │       │   └── assets/          # Static assets
 │       ├── .storybook/          # Storybook configuration
+│       │   ├── main.ts          # Storybook main config
+│       │   ├── manager.ts       # Manager UI theme config (sidebar branding)
+│       │   ├── manager-head.html# Custom HTML injected into manager (sidebar link)
+│       │   ├── preview.tsx      # Preview config (docs container, toolbars)
+│       │   └── main.css         # Global manager styles
 │       └── dist/                # Built docs output
 ├── packages/
 │   ├── tokens/                  # Design tokens library (DTCG format)

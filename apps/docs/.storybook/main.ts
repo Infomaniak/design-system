@@ -27,6 +27,7 @@ const config: StorybookConfig = {
     getAbsolutePath('@storybook/addon-onboarding'),
   ],
   framework: getAbsolutePath('@storybook/web-components-vite'),
+  staticDirs: ['../public'],
   viteFinal: (config: InlineConfig): InlineConfig => {
     return mergeConfig(config, {
       envDir: '../..', // use .env in the repo root,
