@@ -27,13 +27,12 @@ export async function gitChanges({
   const result: string = await execCommand(
     logger,
     'git',
-    ['diff', 'HEAD~1', 'HEAD', '--name-status'],
+    ['diff', 'HEAD~1', 'HEAD', '--name-status', '--no-renames'],
     spawnOptions,
   );
 
   const lines: readonly string[] = result
     .split('\n')
-    .slice(2)
     .map((line: string): string => line.trim())
     .filter((line: string): boolean => line !== '');
 
