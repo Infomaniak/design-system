@@ -76,10 +76,11 @@ When the Pull Request is merged, the assets are uploaded to the Infomaniak's Des
 
 ### Generate the SF Symbols
 
-When the Pull Request is merged, the [publish workflow](/.github/workflows/publish.yml) regenerates the [SF Symbols](https://developer.apple.com/sf-symbols/) asset catalog for iOS and delivers it to the [ios-design-system](https://github.com/Infomaniak/ios-design-system) repository, mirroring how the design tokens are delivered to the same repository. Deliveries triggered by `develop` ship a prerelease version (`-rc.<run>`), deliveries triggered by `main` ship the proper version.
+When the Pull Request is merged, the [publish workflow](/.github/workflows/publish.yml) regenerates the [SF Symbols](https://developer.apple.com/sf-symbols/) asset catalog for iOS and delivers it to the [ios-design-system](https://github.com/Infomaniak/ios-design-system) repository, mirroring how the design tokens are delivered to the same repository.
+Deliveries triggered by `develop` ship a prerelease version (`-rc.<run>`), deliveries triggered by `main` ship the proper version.
 
 ```shell
-yarn generate:sf-symbols
+yarn build:sf-symbols
 ```
 
 The command fits each committed outline (see [Icons](#icons)) into the official Apple SF Symbols template and emits the `ESDSSymbols.xcassets` catalog, with one custom symbol per icon named `esds-<name>` (e.g. `esds-magnifying-glass`). The publish step clones `ios-design-system`, replaces `Sources/ESDSSymbols/Symbols.xcassets`, pushes a branch `esds-symbols/<version>` and opens a pull request to `main`. When no outline has been imported yet, the publish step is skipped (non-blocking).
