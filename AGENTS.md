@@ -80,7 +80,7 @@ design-system/
 | Build all packages           | `yarn build`                                 |
 | Build tokens only            | `yarn build:tokens`                          |
 | Validate tokens              | `cd packages/tokens && yarn validate:tokens` |
-| Generate SF Symbols (iOS)    | `yarn generate:sf-symbols`                   |
+| Build SF Symbols (iOS)       | `yarn build:sf-symbols`                      |
 | Run tests                    | `yarn test`                                  |
 | Test coverage                | `yarn test:coverage`                         |
 | Visual regression tests      | `yarn test:vrt`                              |
