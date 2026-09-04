@@ -29,10 +29,8 @@ export async function readSymbolIcons({
         directoryFileNames = await readdir(outlinesDirectory);
       } catch (error: unknown) {
         if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
-          throw new Error(
-            `Outlines directory ${JSON.stringify(outlinesDirectory)} does not exist. Run the Figma icons import first: the import pull request commits the outline files.`,
-            { cause: error },
-          );
+          // "outlines" directory does not exist: assumes no icon
+          return [];
         }
         throw error;
       }

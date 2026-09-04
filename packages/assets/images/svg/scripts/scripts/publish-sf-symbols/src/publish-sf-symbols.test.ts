@@ -8,14 +8,11 @@ import type { GitChanges } from '../../../../../../../../scripts/helpers/git/git
 import type { GithubCiPullRequest } from '../../../../../../../../scripts/helpers/github/github-ci-config/github-ci-config.ts';
 import { createGithubPullRequest } from '../../../../../../../../scripts/helpers/github/pull-request/create-github-pull-request.ts';
 import { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
-import type { SymbolIcon } from '../../../shared/sf-symbols/build-symbols-xcassets.ts';
-import { generateSfSymbols } from '../../../shared/sf-symbols/generate-sf-symbols.ts';
 import { SYMBOLS_XCASSETS_DIRECTORY_NAME } from '../../../shared/sf-symbols/sf-symbols-config.ts';
 import { createIosSymbolsPublishGithubBranch } from './create-ios-symbols-publish-github-branch.ts';
 import { publishSfSymbols, type PublishSfSymbolsOptions } from './publish-sf-symbols.ts';
 
 vi.mock('./create-ios-symbols-publish-github-branch.ts');
-vi.mock('../../../shared/sf-symbols/generate-sf-symbols.ts');
 vi.mock(
   '../../../../../../../../scripts/helpers/github/pull-request/create-github-pull-request.ts',
 );
@@ -24,7 +21,6 @@ vi.mock('../../../../../../../../scripts/helpers/file/package-json/read-package-
 const logger = Logger.never();
 
 const createIosSymbolsPublishGithubBranchMock = vi.mocked(createIosSymbolsPublishGithubBranch);
-const generateSfSymbolsMock = vi.mocked(generateSfSymbols);
 const createGithubPullRequestMock = vi.mocked(createGithubPullRequest);
 const readPackageJsonFileMock = vi.mocked(readPackageJsonFile);
 
@@ -35,11 +31,9 @@ describe('publishSfSymbols', () => {
     tempDir = await mkdtemp(join(tmpdir(), 'publish-sf-symbols-'));
 
     createIosSymbolsPublishGithubBranchMock.mockReset();
-    generateSfSymbolsMock.mockReset();
     createGithubPullRequestMock.mockReset();
     readPackageJsonFileMock.mockReset();
 
-    generateSfSymbolsMock.mockResolvedValue([] satisfies readonly SymbolIcon[]);
     readPackageJsonFileMock.mockResolvedValue({ name: 'x', version: '1.2.3' } as PackageJson);
     createGithubPullRequestMock.mockResolvedValue({} as GithubCiPullRequest);
     vi.stubEnv('CI_PULL_REQUEST_AUTH_TOKEN_MOBILE', 'test-token');
@@ -52,7 +46,6 @@ describe('publishSfSymbols', () => {
 
   const createPublishOptions = (mode: 'dev' | 'prod'): PublishSfSymbolsOptions => {
     const outlinesDirectory: string = join(tempDir, 'outlines');
-    const webIconsDirectory: string = join(tempDir, 'icons');
     const outputDirectory: string = join(tempDir, 'dist', 'sf-symbols');
 
     return {
@@ -60,7 +53,6 @@ describe('publishSfSymbols', () => {
       packageRootDirectory: tempDir,
       outputDirectory,
       outlinesDirectory,
-      webIconsDirectory,
       logger,
     };
   };
@@ -77,7 +69,6 @@ describe('publishSfSymbols', () => {
 
     await publishSfSymbols(options);
 
-    expect(generateSfSymbolsMock).not.toHaveBeenCalled();
     expect(createIosSymbolsPublishGithubBranchMock).not.toHaveBeenCalled();
     expect(createGithubPullRequestMock).not.toHaveBeenCalled();
   });
@@ -91,7 +82,6 @@ describe('publishSfSymbols', () => {
 
     await publishSfSymbols(options);
 
-    expect(generateSfSymbolsMock).not.toHaveBeenCalled();
     expect(createIosSymbolsPublishGithubBranchMock).not.toHaveBeenCalled();
     expect(createGithubPullRequestMock).not.toHaveBeenCalled();
   });
@@ -103,7 +93,6 @@ describe('publishSfSymbols', () => {
     (options as { outlinesDirectory: string }).outlinesDirectory = filePath;
 
     await expect(publishSfSymbols(options)).rejects.toThrow();
-    expect(generateSfSymbolsMock).not.toHaveBeenCalled();
   });
 
   it('generates, pushes the branch and opens a pull request (dev mode)', async () => {
@@ -115,12 +104,6 @@ describe('publishSfSymbols', () => {
 
     await publishSfSymbols(options);
 
-    expect(generateSfSymbolsMock).toHaveBeenCalledWith({
-      outputDirectory: options.outputDirectory,
-      outlinesDirectory: options.outlinesDirectory,
-      webIconsDirectory: options.webIconsDirectory,
-      logger,
-    });
     expect(createIosSymbolsPublishGithubBranchMock).toHaveBeenCalledWith({
       logger,
       xcassetsDirectory: join(options.outputDirectory, SYMBOLS_XCASSETS_DIRECTORY_NAME),

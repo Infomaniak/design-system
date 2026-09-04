@@ -5,7 +5,6 @@ on:
     branches:
       - main
       - develop
-  workflow_dispatch:
   pull_request:
     branches:
       - main
@@ -23,42 +22,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  sf-symbols-changes:
-    name: Detect SF Symbols changes
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    if: github.event_name != 'pull_request'
-
-    outputs:
-      sf_symbols: ${{ steps.filter.outputs.sf_symbols || steps.dispatch.outputs.sf_symbols }}
-
-    steps:
-      - name: Checkout repository
-        if: github.event_name == 'push'
-        uses: actions/checkout@v7
-        with:
-          fetch-depth: 0 # dorny/paths-filter requires full history on push events
-          persist-credentials: false
-
-      - name: Detect changed paths
-        if: github.event_name == 'push'
-        id: filter
-        uses: dorny/paths-filter@0e4a8c6effa4802afeda77dc8d303f8176d7dfad # v3.0.4
-        with:
-          filters: |
-            sf_symbols:
-              - 'packages/assets/images/svg/**'
-
-      - name: Force publish on manual dispatch
-        if: github.event_name == 'workflow_dispatch'
-        id: dispatch
-        run: echo 'sf_symbols=true' >> "$GITHUB_OUTPUT"
-
   publish:
     name: Publish
-    # yarn ci:publish only supports "push" and "pull_request" events
-    if: github.event_name != 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
       id-token: write # for OIDC
@@ -181,67 +146,3 @@ jobs:
           GITHUB_CI_CONFIG: ${{ toJson(github) }}
           CI_PUBLISH_DRY_RUN: 'true'
           SHOULD_NOTIFY: 'false'
-
-  publish-sf-symbols:
-    name: Publish SF Symbols
-    needs: sf-symbols-changes
-    if: needs.sf-symbols-changes.outputs.sf_symbols == 'true'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    concurrency:
-      group: publish-sf-symbols-${{ github.ref_name }}
-      cancel-in-progress: false
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-        with:
-          persist-credentials: false
-
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version: '24'
-          registry-url: 'https://registry.npmjs.org'
-          cache: 'yarn'
-
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          echo "$SSH_DEPLOY_KEY_IOS" > ~/.ssh/id_ed25519_ios
-          chmod 600 ~/.ssh/id_ed25519_ios
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-          cat > ~/.ssh/config << EOF
-          # Host name should always match the github repository one
-          Host ios-design-system
-            HostName github.com
-            User git
-            IdentityFile ~/.ssh/id_ed25519_ios
-            IdentitiesOnly yes
-          EOF
-          chmod 600 ~/.ssh/config
-        env:
-          SSH_DEPLOY_KEY_IOS: ${{ secrets.SSH_DEPLOY_KEY_IOS }}
-
-      - name: Compute publish config
-        run: |
-          if [ "$GITHUB_REF_NAME" = "main" ]; then
-            echo 'PUBLISH_CONFIG={"mode":"prod"}' >> "$GITHUB_ENV"
-          else
-            echo "PUBLISH_CONFIG={\"mode\":\"rc\",\"prerelease\":\"$GITHUB_RUN_ID\"}" >> "$GITHUB_ENV"
-          fi
-
-      - name: Install dependencies
-        run: yarn install --immutable
-
-      - name: Publish SF Symbols to ios-design-system
-        run: yarn workspace @infomaniak-design-system/svg-assets publish:sf-symbols
-        env:
-          CI_PULL_REQUEST_AUTH_TOKEN_MOBILE: ${{ secrets.CI_PULL_REQUEST_AUTH_TOKEN_MOBILE }}
-          KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}

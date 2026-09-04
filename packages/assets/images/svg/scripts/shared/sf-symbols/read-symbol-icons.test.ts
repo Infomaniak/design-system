@@ -68,11 +68,11 @@ describe('readSymbolIcons', () => {
     );
   });
 
-  test('throws a clear error when the outlines directory does not exist', async () => {
+  test('returns no icon when the outlines directory does not exist', async () => {
     const missingDirectory: string = join(tempDir, 'does-not-exist');
 
-    await expect(readSymbolIcons({ outlinesDirectory: missingDirectory, logger })).rejects.toThrow(
-      `Outlines directory ${JSON.stringify(missingDirectory)} does not exist. Run the Figma icons import first: the import pull request commits the outline files.`,
+    await expect(readSymbolIcons({ outlinesDirectory: missingDirectory, logger })).resolves.toEqual(
+      [],
     );
   });
 

@@ -19,7 +19,6 @@ await runScript('publish-sf-symbols', async (logger: Logger): Promise<void> => {
     packageRootDirectory: PACKAGE_ROOT_DIR,
     outputDirectory: OUTPUT_DIR,
     outlinesDirectory: join(FIGMA_ICONS_DIRECTORY, 'outlines'),
-    webIconsDirectory: FIGMA_ICONS_DIRECTORY,
     logger,
   });
 });
