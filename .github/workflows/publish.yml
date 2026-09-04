@@ -26,7 +26,7 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     permissions:
-      id-token: write  # for OIDC
+      id-token: write # for OIDC
       contents: read
 
     steps:
@@ -48,7 +48,7 @@ jobs:
 
       # Mise is required by the iOS workflow
       - name: Setup mise
-        uses: jdx/mise-action@6d1e696aa24c1aa1bcc1adea0212707c71ab78a8
+        uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
         with:
           install: false
 

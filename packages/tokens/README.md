@@ -283,3 +283,11 @@ yarn build
 ```
 
 Open the file `packages/tokens/dist/figma.tokens.json`, copy its content, and follow [the instructions](../../docs/figma/tokens-bruecke/figma-tokens-bruecke.md) to import the tokens into figma.
+
+## Semantic versioning
+
+The **code** is the source of truth for the semantic versioning.
+
+The version is generated automatically when the `develop -> main` PR is undrafted.
+When the merge occurs, the packages are published automatically with their final version.
+Then we create **manually** a version with the same number in the Figma `Token core` file, to keep both worlds in sync.
