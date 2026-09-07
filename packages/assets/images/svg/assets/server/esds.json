@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.26",
+    "version": "0.0.27",
     "author": {
       "name": "Infomaniak"
     },
@@ -10,9 +10,9 @@
       "title": "GPL-3.0-only",
       "spdx": "GPL-3.0-only"
     },
-    "total": 246
+    "total": 247
   },
-  "lastModified": 1787212406,
+  "lastModified": 1788767793,
   "icons": {
     "a-large-small": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 16 2.536-7.328a1.02 1.02 0 011.928 0L22 16m-6.303-2h5.606M2 16l4.039-9.69a.5.5 0 01.923 0L11 16m-7.696-3h6.392\" vector-effect=\"non-scaling-stroke\"/>"
@@ -97,6 +97,9 @@
     },
     "bubble-top-right-circle": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12.7 3H4a2 2 0 00-2 2v16.286a.71.71 0 001.212.502l2.202-2.202A2 2 0 016.828 19H20a2 2 0 002-2v-4.7M22 6a3 3 0 11-6 0 3 3 0 016 0\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "bucket-drop": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M11 7 6 2m12.992 10H2.04M8.5 4.5l2.148-2.148a1.205 1.205 0 011.704 0l7.296 7.296a1.205 1.205 0 010 1.704l-7.592 7.592a3.615 3.615 0 01-5.112 0l-3.888-3.888a3.615 3.615 0 010-5.112L5.67 7.33m15.475 11.05A3.34 3.34 0 0120 16.5a3.3 3.3 0 01-1.145 1.88c-.575.46-.855 1.02-.855 1.595a2 2 0 104 0c0-.58-.285-1.13-.855-1.595\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "bug": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 20v-9m0 9a6 6 0 006-6v-3a4 4 0 00-4-4h-4a4 4 0 00-4 4v3a6 6 0 006 6m2.12-16.12L16 2m5 19a4 4 0 00-3.81-4M21 5a4 4 0 01-3.55 3.97M22 13h-4M3 21a4 4 0 013.81-4M3 5a4 4 0 003.55 3.97M6 13H2M8 2l1.88 1.88M9 7.13V6a3 3 0 116 0v1.13\" vector-effect=\"non-scaling-stroke\"/>"
@@ -783,6 +786,7 @@
       "broom",
       "bubble-left-text",
       "bubble-top-right-circle",
+      "bucket-drop",
       "bug",
       "building",
       "cake-candles",
@@ -1171,6 +1175,9 @@
     "#app": [
       "smartphone"
     ],
+    "#appearance": [
+      "bucket-drop"
+    ],
     "#append": [
       "plus",
       "squares-stacked-plus"
@@ -1331,6 +1338,9 @@
       "chevron-left",
       "circle-arrow-anticlockwise",
       "circle-arrow-left"
+    ],
+    "#background": [
+      "bucket-drop"
     ],
     "#backspace": [
       "label-cross"
@@ -1767,6 +1777,9 @@
       "sidebar-left-chevron-left",
       "sidebar-left-chevron-right"
     ],
+    "#color": [
+      "bucket-drop"
+    ],
     "#columns": [
       "columns-four",
       "columns-three",
@@ -1994,6 +2007,9 @@
     "#customer-service": [
       "headset"
     ],
+    "#customization": [
+      "bucket-drop"
+    ],
     "#cut": [
       "link-broken",
       "scissors",
@@ -2115,6 +2131,9 @@
     ],
     "#descend": [
       "arrow-down"
+    ],
+    "#design": [
+      "bucket-drop"
     ],
     "#desktop": [
       "monitor"
@@ -2327,6 +2346,9 @@
       "sidebar-left-chevron-left",
       "sidebar-left-chevron-right"
     ],
+    "#drawing": [
+      "bucket-drop"
+    ],
     "#drive": [
       "hard-drive",
       "hard-drive-filled"
@@ -2364,6 +2386,9 @@
       "pen",
       "pencil-sparkles",
       "scissors"
+    ],
+    "#editing": [
+      "bucket-drop"
     ],
     "#editor": [
       "bold",
@@ -2618,6 +2643,9 @@
       "folder-open",
       "folder-plus",
       "squares-stacked"
+    ],
+    "#fill": [
+      "bucket-drop"
     ],
     "#filled": [
       "circle-check-filled",
@@ -3896,6 +3924,12 @@
     "#pages": [
       "book"
     ],
+    "#paint": [
+      "bucket-drop"
+    ],
+    "#palette": [
+      "bucket-drop"
+    ],
     "#palm": [
       "tree-palm"
     ],
@@ -4236,6 +4270,9 @@
     ],
     "#recognition": [
       "square-corners-face"
+    ],
+    "#recolor": [
+      "bucket-drop"
     ],
     "#record": [
       "file",
@@ -5103,6 +5140,7 @@
       "underline"
     ],
     "#theme": [
+      "bucket-drop",
       "moon",
       "sun"
     ],
