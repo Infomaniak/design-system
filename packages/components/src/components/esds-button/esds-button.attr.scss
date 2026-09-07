@@ -16,37 +16,61 @@
   text-decoration: none;
 
   /* reset button style */
+  appearance: none;
   border: none;
   margin: 0;
   width: auto;
 
   /* custom style */
   display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
   font: var(--esds-button-font);
   background-color: var(--esds-button-background-color);
   color: var(--esds-button-content-color);
   border-radius: var(--esds-button-border-radius);
   padding-inline: var(--esds-button-padding-inline);
   padding-block: var(--esds-button-padding-block);
+  transition:
+    background-color 150ms,
+    border-color 150ms;
+
+  /* auto wrap text */
+  hyphens: auto;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  white-space: normal;
 
   &:focus-visible {
     outline: var(--esds-focus-border-width) solid var(--esds-focus-border-color);
     border-radius: var(--esds-focus-border-radius);
   }
 
-  &:hover {
+  &:not(:disabled, [disabled]) {
+    &:hover {
+      background-color: styles.source-over(
+        --esds-button-background-color,
+        --esds-color-state-hover-strong
+      );
+      color: styles.source-over(--esds-button-content-color, --esds-color-state-hover-medium);
+    }
+
+    &:active {
+      background-color: styles.source-over(
+        --esds-button-background-color,
+        --esds-color-state-pressed-strong
+      );
+      color: styles.source-over(--esds-button-content-color, --esds-color-state-pressed-medium);
+    }
+  }
+
+  &:is(:disabled, [disabled]) {
+    // TODO
     background-color: styles.source-over(
       --esds-button-background-color,
       --esds-color-state-hover-strong
     );
     color: styles.source-over(--esds-button-content-color, --esds-color-state-hover-medium);
-  }
-
-  &:active {
-    background-color: styles.source-over(
-      --esds-button-background-color,
-      --esds-color-state-pressed-strong
-    );
-    color: styles.source-over(--esds-button-content-color, --esds-color-state-pressed-medium);
   }
 }
