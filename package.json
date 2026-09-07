@@ -114,7 +114,7 @@
     "rolldown": "^1.2.6",
     "sass-embedded": "^1.103.1",
     "semver": "^7.8.5",
-    "storybook": "^10.5.9",
+    "storybook": "^10.5.10",
     "stylelint": "^17.14.1",
     "stylelint-config-standard": "^40.0.0",
     "stylelint-config-standard-scss": "^17.0.0",
