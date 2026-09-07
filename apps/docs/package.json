@@ -26,14 +26,14 @@
     "@storybook/react-vite": "^10.5.9",
     "@storybook/web-components-vite": "^10.5.9",
     "@types/babel__core": "^7.20.5",
-    "@types/node": "^26.2.0",
+    "@types/node": "^26.4.0",
     "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4",
-    "@wc-toolkit/storybook-helpers": "^10.7.6",
+    "@types/react-dom": "^19.2.5",
+    "@wc-toolkit/storybook-helpers": "^10.7.7",
     "lit": "^3.3.3",
-    "rolldown": "^1.2.4",
+    "rolldown": "^1.2.6",
     "storybook": "^10.5.9",
     "typescript": "~7.0.2",
-    "vite": "^8.2.1"
+    "vite": "^8.2.2"
   }
 }

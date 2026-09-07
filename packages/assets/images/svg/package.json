@@ -14,7 +14,7 @@
     "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-sf-symbols/publish-sf-symbols.script.ts"
   },
   "devDependencies": {
-    "@iconify/tools": "^5.0.12",
+    "@iconify/tools": "^5.0.14",
     "@iconify/utils": "^3.1.4"
   },
   "private": true
