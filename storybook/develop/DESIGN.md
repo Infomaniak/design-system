@@ -162,7 +162,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.feedback.success.dim3 | #f0fdf4 | #042f16 | var(--esds-color-background-feedback-success-dim3) | Subtle success background (dim3). |
 | color.background.feedback.warning.dim1 | #ffa032 | #ffb34a | var(--esds-color-background-feedback-warning-dim1) | Strong warning background (dim1). |
 | color.background.feedback.warning.dim2 | #ffd188 | #7a200d | var(--esds-color-background-feedback-warning-dim2) | Soft warning background (dim2). |
-| color.background.feedback.warning.dim3 | #fff7eb | #500000 | var(--esds-color-background-feedback-warning-dim3) | Subtle warning background (dim3). |
+| color.background.feedback.warning.dim3 | #fff7eb | #460d02 | var(--esds-color-background-feedback-warning-dim3) | Subtle warning background (dim3). |
 | color.background.feedback.error.dim1 | #ff5757 | #ff9494 | var(--esds-color-background-feedback-error-dim1) | Strong error background (dim1). |
 | color.background.feedback.error.dim2 | #ffc0c0 | #920a0a | var(--esds-color-background-feedback-error-dim2) | Soft error background (dim2). |
 | color.background.feedback.error.dim3 | #fff0f0 | #500000 | var(--esds-color-background-feedback-error-dim3) | Subtle success background (dim3). |
