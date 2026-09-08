@@ -26,7 +26,7 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     permissions:
-      id-token: write  # for OIDC
+      id-token: write # for OIDC
       contents: read
 
     steps:
@@ -48,7 +48,7 @@ jobs:
 
       # Mise is required by the iOS workflow
       - name: Setup mise
-        uses: jdx/mise-action@6d1e696aa24c1aa1bcc1adea0212707c71ab78a8
+        uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
         with:
           install: false
 
@@ -86,9 +86,10 @@ jobs:
       # Link: https://github.com/crazy-max/ghaction-import-gpg/releases
       - name: Import bot's GPG key for signing commits
         if: >-
-          github.event.pull_request.head.repo.full_name == github.repository
+          github.event.pull_request.head.repo.full_name == github.repository &&
+          github.actor != 'dependabot[bot]'
         id: import-gpg
-        uses: crazy-max/ghaction-import-gpg@e89d40939c28e39f97cf32126055eeae86ba74ec # v6.3.0
+        uses: crazy-max/ghaction-import-gpg@2dc316deee8e90f13e1a351ab510b4d5bc0c82cd # v7.0.0
         with:
           gpg_private_key: ${{ secrets.INFOMANIAK_BOT_GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.INFOMANIAK_BOT_GPG_PASSPHRASE }}

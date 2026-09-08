@@ -1,4 +1,4 @@
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
@@ -76,5 +76,78 @@ describe('buildSvgSetFromSvgDirectory', () => {
 
     expect(outputJson.categories).toBeDefined();
     expect(outputJson.categories['@all']).toContain('test-icon');
+  });
+
+  it('imports nested svg files as icons when no sub directory is excluded', async () => {
+    const logger = Logger.root();
+
+    await writeFile(
+      join(tempDir, 'test-icon.svg'),
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>`,
+    );
+    await mkdir(join(tempDir, 'outlines'), { recursive: true });
+    await writeFile(
+      join(tempDir, 'outlines', 'test-icon.outline.svg'),
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24"/></svg>`,
+    );
+
+    await buildSvgSetFromSvgDirectory({
+      sourceDirectory: tempDir,
+      outputDirectory: outputDir,
+      prefix: 'test',
+      version: '0.0.0-test',
+      logger,
+      compareWithExistingVersion: false,
+    });
+
+    const outputJson = JSON.parse(
+      await readFile(join(outputDir, 'test.json'), { encoding: 'utf8' }),
+    );
+
+    expect(Object.keys(outputJson.icons)).toContain('test-icon');
+    expect(Object.keys(outputJson.icons)).toContain('test-icon-outline');
+  });
+
+  it('excludes nested svg files from excluded sub directories', async () => {
+    const logger = Logger.root();
+
+    await writeFile(
+      join(tempDir, 'test-icon.svg'),
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>`,
+    );
+    await mkdir(join(tempDir, 'outlines'), { recursive: true });
+    await writeFile(
+      join(tempDir, 'outlines', 'test-icon.outline.svg'),
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24"/></svg>`,
+    );
+    await mkdir(join(tempDir, 'outlines', 'nested'), { recursive: true });
+    await writeFile(
+      join(tempDir, 'outlines', 'nested', 'nested-icon.outline.svg'),
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24"/></svg>`,
+    );
+    await mkdir(join(tempDir, 'kept'), { recursive: true });
+    await writeFile(
+      join(tempDir, 'kept', 'kept-icon.svg'),
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24"/></svg>`,
+    );
+
+    await buildSvgSetFromSvgDirectory({
+      sourceDirectory: tempDir,
+      outputDirectory: outputDir,
+      prefix: 'test',
+      version: '0.0.0-test',
+      logger,
+      compareWithExistingVersion: false,
+      excludeSubDirectories: ['outlines'],
+    });
+
+    const outputJson = JSON.parse(
+      await readFile(join(outputDir, 'test.json'), { encoding: 'utf8' }),
+    );
+
+    expect(Object.keys(outputJson.icons)).toContain('test-icon');
+    expect(Object.keys(outputJson.icons)).toContain('kept-icon');
+    expect(Object.keys(outputJson.icons)).not.toContain('test-icon-outline');
+    expect(Object.keys(outputJson.icons)).not.toContain('nested-icon-outline');
   });
 });

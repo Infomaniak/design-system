@@ -130,7 +130,7 @@ function generateSvgPullRequestDescription({
   changes,
   version,
 }: GenerateSvgPullRequestDescriptionOptions): string {
-  type IconChangeType = 'svg' | 'metadata';
+  type IconChangeType = 'svg' | 'metadata' | 'outline';
   const iconsThatChanged: Map<
     string /* icon name */,
     Map<IconChangeType, GitChangeMode>
@@ -140,7 +140,10 @@ function generateSvgPullRequestDescription({
     let type: IconChangeType;
     let name: string;
 
-    if (file.endsWith('.svg')) {
+    if (file.endsWith('.outline.svg')) {
+      type = 'outline';
+      name = basename(file, '.outline.svg');
+    } else if (file.endsWith('.svg')) {
       type = 'svg';
       name = basename(file, '.svg');
     } else if (file.endsWith('.metadata.json')) {
