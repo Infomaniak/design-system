@@ -30,10 +30,10 @@ describe('createIosSymbolsPublishGithubBranch', () => {
   beforeEach(async () => {
     tempDir = await mkdtemp(join(tmpdir(), 'ios-symbols-publish-'));
     xcassetsDirectory = join(tempDir, 'ESDSSymbols.xcassets');
-    await mkdir(join(xcassetsDirectory, 'esds-a-square.symbolset'), { recursive: true });
+    await mkdir(join(xcassetsDirectory, 'a-square.symbolset'), { recursive: true });
     await writeFile(join(xcassetsDirectory, 'Contents.json'), '{}', { encoding: 'utf8' });
     await writeFile(
-      join(xcassetsDirectory, 'esds-a-square.symbolset', 'esds-a-square.symbol.svg'),
+      join(xcassetsDirectory, 'a-square.symbolset', 'a-square.symbol.svg'),
       '<svg/>',
       { encoding: 'utf8' },
     );
@@ -85,7 +85,7 @@ describe('createIosSymbolsPublishGithubBranch', () => {
   it('replaces the destination asset catalog and returns the commit message', async () => {
     const repositoryDirectory: string = join(tempDir, 'repository');
     const destinationDirectory: string = join(repositoryDirectory, IOS_SYMBOLS_DESTINATION_PATH);
-    await mkdir(join(destinationDirectory, 'stale-esds-icon.symbolset'), { recursive: true });
+    await mkdir(join(destinationDirectory, 'stale-icon.symbolset'), { recursive: true });
     await writeFile(join(destinationDirectory, 'stale.txt'), 'stale', { encoding: 'utf8' });
 
     const { commitMessage } = await runUpdateInRepository(repositoryDirectory);
@@ -93,7 +93,7 @@ describe('createIosSymbolsPublishGithubBranch', () => {
     expect(commitMessage).toBe('chore: Update symbols to 1.2.3');
     expect(
       await readFile(
-        join(destinationDirectory, 'esds-a-square.symbolset', 'esds-a-square.symbol.svg'),
+        join(destinationDirectory, 'a-square.symbolset', 'a-square.symbol.svg'),
         'utf8',
       ),
     ).toBe('<svg/>');
