@@ -1,3 +1,5 @@
+import { cleanupSVG, runSVGO } from '@iconify/tools';
+import { SVG } from '@iconify/tools/lib/svg';
 import { join } from 'node:path';
 import { getFigmaFile } from '../../../../../../../../scripts/helpers/figma/api/files/get-figma-file.ts';
 import type { GenericFigmaNodeBase } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/base/figma-node-base.ts';
@@ -22,7 +24,10 @@ import type { TreeExplorerPickReturn } from '../../../../../../../../scripts/hel
 import { removeTrailingSlash } from '../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 
 import { ICON_NAME_PATTERN_SOURCE } from '../../icons/icon-name.ts';
-import { buildOutlinedSvgsFromFigmaComponents } from './build-outlined-svg-from-figma-component.ts';
+import {
+  buildOutlinedSvgsFromFigmaComponents,
+  type OutlinedSvgWrite,
+} from './build-outlined-svg-from-figma-component.ts';
 import { type FigmaSvgMetadata } from './figma-svg-metadata.ts';
 
 export const FIGMA_SVG_OUTLINES_SUB_DIRECTORY_NAME = 'outlines';
@@ -157,7 +162,7 @@ export function extractSvgFilesFromFigmaDesignFile({
     });
 
     if (generateOutlinedSvgs) {
-      await logger.asyncTask('extract-outlined-svgs', async (): Promise<void> => {
+      await logger.asyncTask('extract-outlined-svgs', async (logger: Logger): Promise<void> => {
         const componentNodesByName: Map<string, FigmaComponentNode> = new Map(
           FigmaNodesExplorer.explore<FigmaComponentNode>(
             figmaFile.document,
@@ -181,10 +186,15 @@ export function extractSvgFilesFromFigmaDesignFile({
 
         await buildOutlinedSvgsFromFigmaComponents({
           components: [...componentNodesByName.entries()],
-          writeSvg: async ({ name, svg }): Promise<void> => {
+          writeSvg: async ({ name, content }: OutlinedSvgWrite): Promise<void> => {
+            const svg: SVG = new SVG(content);
+
+            cleanupSVG(svg);
+            runSVGO(svg);
+
             await writeTextFileSafe(
               join(outputDirectory, FIGMA_SVG_OUTLINES_SUB_DIRECTORY_NAME, `${name}.outline.svg`),
-              svg,
+              svg.toString(),
             );
           },
           logger,
