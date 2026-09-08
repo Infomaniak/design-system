@@ -9,5 +9,8 @@ on:
 jobs:
   auto-assign-author-and-reviewers:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
       - uses: kentaro-m/auto-assign-action@v2.0.2

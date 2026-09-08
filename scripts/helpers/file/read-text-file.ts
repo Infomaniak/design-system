@@ -1,11 +1,12 @@
-import { readFile } from 'node:fs/promises';
+import type { PathLike, ReadFileOptionsWithStringEncoding } from 'node:fs';
+import { type FileHandle, readFile } from 'node:fs/promises';
 
-export type ReadTextFileArguments =
-  Parameters<typeof readFile> extends [infer GPath, ...infer GRest] ? [GPath, ...GRest] : never;
-
-export function readTextFile(...args: ReadTextFileArguments): Promise<string> {
-  return readFile(args[0], {
-    ...(typeof args[1] === 'object' ? args[1] : {}),
+export function readTextFile(
+  path: PathLike | FileHandle,
+  options?: ReadFileOptionsWithStringEncoding,
+): Promise<string> {
+  return readFile(path, {
+    ...(typeof options === 'object' ? options : {}),
     encoding: 'utf-8',
   });
 }
