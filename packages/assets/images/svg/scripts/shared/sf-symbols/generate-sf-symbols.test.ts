@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, test } from 'vitest';
 import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { generateSfSymbols } from './generate-sf-symbols.ts';
-import { SYMBOL_NAME_PREFIX, SYMBOLS_XCASSETS_DIRECTORY_NAME } from './sf-symbols-config.ts';
+import { SYMBOLS_XCASSETS_DIRECTORY_NAME } from './sf-symbols-config.ts';
 
 const logger = Logger.never();
 
@@ -57,10 +57,7 @@ describe('generateSfSymbols', () => {
     expect(icons.map(({ name }) => name)).toEqual(['a-square', 'b-circle']);
 
     const xcassetsDirectory: string = join(outputDirectory, SYMBOLS_XCASSETS_DIRECTORY_NAME);
-    const symbolsetDirectory: string = join(
-      xcassetsDirectory,
-      `${SYMBOL_NAME_PREFIX}a-square.symbolset`,
-    );
+    const symbolsetDirectory: string = join(xcassetsDirectory, 'a-square.symbolset');
 
     expect(JSON.parse(await readFile(join(xcassetsDirectory, 'Contents.json'), 'utf8'))).toEqual({
       info: { author: 'xcode', version: 1 },
@@ -69,15 +66,12 @@ describe('generateSfSymbols', () => {
       info: { author: 'xcode', version: 1 },
       symbols: [
         {
-          filename: `${SYMBOL_NAME_PREFIX}a-square.symbol.svg`,
+          filename: 'a-square.symbol.svg',
           idiom: 'universal',
         },
       ],
     });
-    expect(await readdir(symbolsetDirectory)).toEqual([
-      'Contents.json',
-      `${SYMBOL_NAME_PREFIX}a-square.symbol.svg`,
-    ]);
+    expect(await readdir(symbolsetDirectory)).toEqual(['Contents.json', 'a-square.symbol.svg']);
     await expect(readFile(join(outputDirectory, 'stale.txt'), 'utf8')).rejects.toThrow();
   });
 

@@ -7,7 +7,7 @@ import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { computePathDataBoundingBox } from '../icons/bake-transform-into-path.ts';
 import { generateSfSymbols } from './generate-sf-symbols.ts';
 import { readSymbolTemplate, type SymbolTemplate } from './parse-symbol-template.ts';
-import { SYMBOL_NAME_PREFIX, SYMBOLS_XCASSETS_DIRECTORY_NAME } from './sf-symbols-config.ts';
+import { SYMBOLS_XCASSETS_DIRECTORY_NAME } from './sf-symbols-config.ts';
 
 const logger = Logger.never();
 const FIXTURES_DIRECTORY: string = join(dirname(fileURLToPath(import.meta.url)), 'fixtures');
@@ -38,13 +38,12 @@ describe('sf-symbols fixtures', () => {
   });
 
   const readSymbolSvg = async (iconName: string): Promise<string> => {
-    const symbolName: string = `${SYMBOL_NAME_PREFIX}${iconName}`;
     return readFile(
       join(
         outputDirectory,
         SYMBOLS_XCASSETS_DIRECTORY_NAME,
-        `${symbolName}.symbolset`,
-        `${symbolName}.symbol.svg`,
+        `${iconName}.symbolset`,
+        `${iconName}.symbol.svg`,
       ),
       'utf8',
     );
@@ -56,9 +55,7 @@ describe('sf-symbols fixtures', () => {
     expect((await readdir(xcassetsDirectory)).sort()).toEqual(
       [
         'Contents.json',
-        ...FIXTURE_ICON_NAMES.map(
-          (name: string): string => `${SYMBOL_NAME_PREFIX}${name}.symbolset`,
-        ),
+        ...FIXTURE_ICON_NAMES.map((name: string): string => `${name}.symbolset`),
       ].sort(),
     );
     expect(JSON.parse(await readFile(join(xcassetsDirectory, 'Contents.json'), 'utf8'))).toEqual({
@@ -66,17 +63,16 @@ describe('sf-symbols fixtures', () => {
     });
 
     for (const iconName of FIXTURE_ICON_NAMES) {
-      const symbolName: string = `${SYMBOL_NAME_PREFIX}${iconName}`;
-      const symbolsetDirectory: string = join(xcassetsDirectory, `${symbolName}.symbolset`);
+      const symbolsetDirectory: string = join(xcassetsDirectory, `${iconName}.symbolset`);
 
       expect(await readdir(symbolsetDirectory)).toEqual([
         'Contents.json',
-        `${symbolName}.symbol.svg`,
+        `${iconName}.symbol.svg`,
       ]);
       expect(JSON.parse(await readFile(join(symbolsetDirectory, 'Contents.json'), 'utf8'))).toEqual(
         {
           info: { author: 'xcode', version: 1 },
-          symbols: [{ filename: `${symbolName}.symbol.svg`, idiom: 'universal' }],
+          symbols: [{ filename: `${iconName}.symbol.svg`, idiom: 'universal' }],
         },
       );
     }
@@ -87,7 +83,7 @@ describe('sf-symbols fixtures', () => {
 
     for (const iconName of FIXTURE_ICON_NAMES) {
       const content: string = await readSymbolSvg(iconName);
-      expect(content).toContain(`Generated from ${SYMBOL_NAME_PREFIX}${iconName}</text>`);
+      expect(content).toContain(`Generated from ${iconName}</text>`);
 
       for (const variant of template.variants) {
         const groupOpenTag: string =
