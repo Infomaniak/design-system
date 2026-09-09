@@ -10,17 +10,17 @@ Component (or ComponentSet), the plugin generates scaled variants (16, 20, 24,
 
 ## Install (designers)
 
-1. Get the repository (clone or download).
-2. Install dependencies and build the plugin:
-   ```sh
-   nvm use
-   yarn install
-   yarn build:figma-plugin-icons
-   ```
+1. Download `esds-icons.zip` from the
+   [GitHub Releases page](https://github.com/Infomaniak/design-system/releases)
+   (pick the latest release; `-dev.*` prereleases are published from `develop`).
+2. Unzip it.
 3. In Figma Desktop: **Plugins → Development → Import plugin from manifest…**
-4. Select `packages/figma-plugin-icons/manifest.json`.
+4. Select the unzipped `esds-icons/manifest.json`.
 
 The plugin then appears under **Plugins → Development → ESDS icons**.
+
+To update, download the latest zip, unzip over the previous folder and reload
+the plugin in Figma (**Plugins → Development → ESDS icons → Reload**).
 
 ## Develop (engineers)
 
@@ -32,6 +32,19 @@ The plugin then appears under **Plugins → Development → ESDS icons**.
 - `packages/figma-plugin-icons/manifest.json` contains a placeholder `id`;
   Figma assigns a real one on first import. Do not publish the plugin to the
   Figma Community.
+
+### Publishing
+
+The plugin is published automatically as a GitHub Release by the CI publish
+job (`yarn ci:publish`) when it lands on `develop` (prereleases tagged
+`@infomaniak-design-system/figma-plugin-icons@<version>-dev.<timestamp>`) or
+`main` (stable releases tagged
+`@infomaniak-design-system/figma-plugin-icons@<version>`).
+
+The release asset is a zip (`esds-icons.zip`) containing `manifest.json` and
+the built plugin, ready to be imported in Figma. Version bumps come from
+changesets: add a changeset when changing the plugin so the release tag stays
+unique.
 
 ### Structure
 
@@ -50,6 +63,10 @@ packages/figma-plugin-icons/
 ├── ui/              # Plugin iframe (bundled + inlined into dist/ui.html)
 │   ├── ui.html
 │   └── ui.ts
+├── scripts/         # Build + publish scripts
+│   └── scripts/
+│       ├── build-figma-plugin/   # esbuild bundling to dist/
+│       └── publish-figma-plugin-icons/  # GitHub Release publishing (CI)
 └── dist/            # Build output (gitignored)
 ```
 
