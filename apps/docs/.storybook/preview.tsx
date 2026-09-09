@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { GLOBALS_UPDATED } from 'storybook/internal/core-events';
 import { Globals, GlobalsUpdatedPayload } from 'storybook/internal/types';
 import customElements from '../../../packages/components/custom-elements.json' with { type: 'json' };
+import Collapsible from '../src/components/Collapsible.tsx';
 import FontPreview from '../src/components/FontPreview.tsx';
 import MaterialThemeBuilderLink from '../src/components/MaterialThemeBuilderLink.tsx';
 import Table from '../src/components/Table.tsx';
@@ -277,6 +278,7 @@ const preview: Preview = {
     docs: {
       container: CustomDocsContainer,
       components: {
+        Collapsible,
         Table,
         FontPreview,
         MaterialThemeBuilderLink,
@@ -292,6 +294,16 @@ const preview: Preview = {
       storySort: {
         order: [
           'Welcome',
+          'Designers Guide',
+          [
+            'Getting Started',
+            'iOS - iPadOS Kit',
+            'iOS - Technical Limitations',
+            'Material Kit',
+            'Android - Technical Limitations',
+            'Shadcn Kit',
+            'System Icons Contribution',
+          ],
           'Design Tokens',
           ['Getting Started', '*', 'Material', 'CHANGELOG'],
           'Icons',
