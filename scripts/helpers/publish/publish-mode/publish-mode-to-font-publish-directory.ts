@@ -2,6 +2,9 @@ import type { PublishMode } from './publish-mode.ts';
 
 export type FontPublishDirectory = 'dev' | 'latest';
 
+/**
+ * @deprecated TODO
+ */
 export function publishModeToFontPublishDirectory(mode: PublishMode): FontPublishDirectory {
   switch (mode) {
     case 'dev':
