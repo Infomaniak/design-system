@@ -34,6 +34,7 @@ await runScript('publish-fonts', async (logger: Logger): Promise<void> => {
       assetsDirectory: OUTPUT_WEB_DIR,
       logger,
       prerelease: publishConfig.mode !== 'prod',
+      zip: true,
     });
   });
 });
