@@ -44,6 +44,11 @@ design-system/
 │   │   └── scripts/
 │   │       ├── scripts/         # import-svgs, generate-sf-symbols, publish-sf-symbols, build-legacy-svgs
 │   │       └── shared/          # sf-symbols/ (template engine, xcassets builder), svg/ helpers
+│   ├── figma-plugin-icons/      # "ESDS icons" Figma plugin (multi-size icon generator) — private package
+│   │   ├── src/                 # Sandbox code (TS, bundled to dist/code.js)
+│   │   ├── ui/                  # Plugin iframe (TS + HTML template, inlined into dist/ui.html)
+│   │   ├── manifest.json        # Points to dist/ (built locally, imported as dev plugin)
+│   │   └── dist/                # Build output (gitignored)
 │   └── components/              # Web components library
 │       ├── src/                 # Component source + stories
 │       └── tests/visual-regression/      # Playwright visual regression suite
@@ -71,23 +76,26 @@ design-system/
 
 ### Command Patterns
 
-| Task                         | Command                                    |
-| ---------------------------- | ------------------------------------------ |
-| Install deps                 | `yarn install`                             |
-| Dev server (docs)            | `cd apps/docs && yarn dev`                 |
-| Dev server (Storybook)       | `cd apps/docs && yarn storybook`           |
-| Build all packages           | `yarn build`                               |
-| Build tokens only            | `yarn build:tokens`                        |
-| Build SF Symbols (iOS)       | `yarn build:sf-symbols`                    |
-| Run tests                    | `yarn test`                                |
-| Test coverage                | `yarn test:coverage`                       |
-| Visual regression tests      | `yarn test:vrt`                            |
-| Format code                  | `yarn format`                              |
-| PR validation                | `yarn ci:on-pull-request`                  |
-| CI publish (manual)          | `GITHUB_REF_NAME=develop yarn ci:publish`  |
-| CI visual regression comment | `yarn ci:visual-regression --mode=comment` |
-| Create changeset             | `yarn changeset`                           |
-| Version + changelog (manual) | `yarn changeset:version`                   |
+| Task                         | Command                                      |
+| ---------------------------- | -------------------------------------------- |
+| Install deps                 | `yarn install`                               |
+| Dev server (docs)            | `cd apps/docs && yarn dev`                   |
+| Dev server (Storybook)       | `cd apps/docs && yarn storybook`             |
+| Build all packages           | `yarn build`                                 |
+| Build tokens only            | `yarn build:tokens`                          |
+| Validate tokens              | `cd packages/tokens && yarn validate:tokens` |
+| Build SF Symbols (iOS)       | `yarn build:sf-symbols`                      |
+| Build Figma plugin (icons)   | `yarn build:figma-plugin-icons`              |
+| Dev Figma plugin (watch)     | `yarn dev:figma-plugin-icons`                |
+| Run tests                    | `yarn test`                                  |
+| Test coverage                | `yarn test:coverage`                         |
+| Visual regression tests      | `yarn test:vrt`                              |
+| Format code                  | `yarn format`                                |
+| PR validation                | `yarn ci:on-pull-request`                    |
+| CI publish (manual)          | `GITHUB_REF_NAME=develop yarn ci:publish`    |
+| CI visual regression comment | `yarn ci:visual-regression --mode=comment`   |
+| Create changeset             | `yarn changeset`                             |
+| Version + changelog (manual) | `yarn changeset:version`                     |
 
 ### Code Style
 
@@ -115,10 +123,11 @@ design-system/
 
 ### Workspace Structure
 
-- Monorepo with 3 workspaces:
+- Monorepo with 4 workspaces:
   1. `@infomaniak-design-system/tokens`
   2. `@infomaniak-design-system/tokens/demo`
-  3. `@infomaniak-design-system/docs`
+  3. `@infomaniak-design-system/figma-plugin-icons`
+  4. `@infomaniak-design-system/docs`
 
 ### DTCG Token Structure
 

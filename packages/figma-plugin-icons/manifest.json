@@ -3,8 +3,8 @@
   "id": "TODO_ID",
   "api": "1.0.0",
   "editorType": ["figma"],
-  "main": "code.js",
-  "ui": "ui.html",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html",
   "documentAccess": "dynamic-page",
   "networkAccess": {
     "allowedDomains": ["none"]

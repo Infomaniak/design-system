@@ -1,0 +1,649 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 14px;
+        color: #333;
+        background: #fff;
+        padding: 20px;
+      }
+
+      h2 {
+        font-size: 18px;
+        margin-bottom: 16px;
+        color: #000;
+      }
+
+      .state {
+        display: none;
+      }
+
+      .state.active {
+        display: block;
+      }
+
+      /* Initial State */
+      .initial-state {
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .initial-icon {
+        font-size: 48px;
+        margin-bottom: 16px;
+      }
+
+      .initial-text {
+        color: #666;
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
+
+      /* Validation State */
+      .validation-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+        padding: 12px;
+        background: #f5f5f5;
+        border-radius: 8px;
+      }
+
+      .validation-item.success {
+        background: #e8f5e9;
+        border: 1px solid #4caf50;
+      }
+
+      .validation-item.error {
+        background: #ffebee;
+        border: 1px solid #f44336;
+      }
+
+      .icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+      }
+
+      .validation-content {
+        flex: 1;
+      }
+
+      .validation-label {
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+
+      .validation-desc {
+        font-size: 12px;
+        color: #666;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 16px;
+        transition: opacity 0.2s;
+      }
+
+      .btn:hover {
+        opacity: 0.8;
+      }
+
+      .btn-primary {
+        background: #000;
+        color: #fff;
+      }
+
+      .btn-primary:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+
+      .btn-secondary {
+        background: #f5f5f5;
+        color: #333;
+        border: 1px solid #ddd;
+      }
+
+      /* Loading State */
+      .loading-state {
+        text-align: center;
+        padding: 40px 0;
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #000;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 16px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loading-text {
+        color: #666;
+      }
+
+      /* Progress State */
+      .progress-container {
+        margin-bottom: 20px;
+      }
+
+      .progress-bar-bg {
+        width: 100%;
+        height: 8px;
+        background: #e0e0e0;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 12px;
+      }
+
+      .progress-bar-fill {
+        height: 100%;
+        background: #000;
+        border-radius: 4px;
+        transition: width 0.3s ease;
+      }
+
+      .progress-text {
+        text-align: center;
+        font-size: 14px;
+        color: #666;
+      }
+
+      .progress-status {
+        text-align: center;
+        font-size: 12px;
+        color: #999;
+        margin-top: 8px;
+      }
+
+      /* Complete State */
+      .report {
+        background: #f5f5f5;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 20px;
+      }
+
+      .report-title {
+        font-weight: 600;
+        margin-bottom: 12px;
+        font-size: 16px;
+      }
+
+      .report-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        font-size: 13px;
+      }
+
+      .report-icon {
+        margin-right: 8px;
+      }
+
+      /* Multi-select validation */
+      .multi-validation-header {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .multi-validation-list {
+        max-height: 280px;
+        overflow-y: auto;
+        margin-bottom: 16px;
+      }
+
+      .multi-validation-item {
+        display: flex;
+        align-items: flex-start;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+        border-radius: 6px;
+        font-size: 13px;
+      }
+
+      .multi-validation-item.success {
+        background: #e8f5e9;
+        border: 1px solid #4caf50;
+      }
+
+      .multi-validation-item.error {
+        background: #ffebee;
+        border: 1px solid #f44336;
+      }
+
+      .multi-validation-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .multi-validation-content {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .multi-validation-name {
+        font-weight: 600;
+        margin-bottom: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .multi-validation-error {
+        font-size: 11px;
+        color: #d32f2f;
+        margin-top: 2px;
+      }
+
+      .multi-validation-type {
+        font-size: 11px;
+        color: #666;
+      }
+
+      /* Debug console */
+      .debug-console {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        max-height: 100px;
+        background: #000;
+        color: #0f0;
+        font-family: monospace;
+        font-size: 10px;
+        padding: 8px;
+        border-radius: 4px;
+        overflow-y: auto;
+        display: none;
+      }
+
+      .debug-console.visible {
+        display: block;
+      }
+
+      /* Settings styles */
+      .settings-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+
+      .settings-back {
+        font-size: 14px;
+        color: #666;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 4px 8px;
+      }
+
+      .settings-back:hover {
+        color: #000;
+      }
+
+      .stroke-config-list {
+        margin-bottom: 24px;
+      }
+
+      .stroke-config-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .stroke-config-item:last-child {
+        border-bottom: none;
+      }
+
+      .stroke-config-label {
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .stroke-config-input {
+        width: 80px;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .stroke-config-unit {
+        font-size: 12px;
+        color: #666;
+        margin-left: 8px;
+      }
+
+      .settings-actions {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      .btn-small {
+        padding: 8px 16px;
+        font-size: 12px;
+      }
+
+      .variables-status {
+        background: #e3f2fd;
+        border: 1px solid #2196f3;
+        border-radius: 6px;
+        padding: 12px;
+        margin-bottom: 16px;
+        font-size: 12px;
+      }
+
+      .variables-status.success {
+        background: #e8f5e9;
+        border-color: #4caf50;
+      }
+
+      .variables-status.error {
+        background: #ffebee;
+        border-color: #f44336;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- State 0: Initial -->
+    <div
+      id="state-initial"
+      class="state active"
+    >
+      <h2>Générateur d'icônes multi-tailles</h2>
+
+      <div class="initial-state">
+        <div class="initial-text">
+          Sélectionnez un Component ou ComponentSet<br />
+          d'icône de 24×24px avec des strokes
+        </div>
+        <button
+          id="btn-analyze"
+          class="btn btn-primary"
+        >
+          Analyser la sélection
+        </button>
+        <button
+          id="btn-settings"
+          class="btn btn-secondary"
+          style="margin-top: 12px"
+        >
+          Paramètres
+        </button>
+      </div>
+    </div>
+
+    <!-- State: Settings -->
+    <div
+      id="state-settings"
+      class="state"
+    >
+      <div class="settings-header">
+        <h2>Paramètres</h2>
+        <button
+          id="btn-settings-back"
+          class="settings-back"
+        >
+          ← Retour
+        </button>
+      </div>
+
+      <div
+        id="variables-status"
+        class="variables-status"
+        style="display: none"
+      ></div>
+
+      <div class="stroke-config-list">
+        <div class="stroke-config-item">
+          <span class="stroke-config-label">Size 16:</span>
+          <div>
+            <input
+              type="number"
+              step="0.01"
+              class="stroke-config-input"
+              id="stroke-16"
+              value="1.25"
+            />
+            <span class="stroke-config-unit">px</span>
+          </div>
+        </div>
+        <div class="stroke-config-item">
+          <span class="stroke-config-label">Size 20:</span>
+          <div>
+            <input
+              type="number"
+              step="0.01"
+              class="stroke-config-input"
+              id="stroke-20"
+              value="1.5"
+            />
+            <span class="stroke-config-unit">px</span>
+          </div>
+        </div>
+        <div class="stroke-config-item">
+          <span class="stroke-config-label">Size 24:</span>
+          <div>
+            <input
+              type="number"
+              step="0.01"
+              class="stroke-config-input"
+              id="stroke-24"
+              value="1.75"
+            />
+            <span class="stroke-config-unit">px</span>
+          </div>
+        </div>
+        <div class="stroke-config-item">
+          <span class="stroke-config-label">Size 32:</span>
+          <div>
+            <input
+              type="number"
+              step="0.01"
+              class="stroke-config-input"
+              id="stroke-32"
+              value="2.0"
+            />
+            <span class="stroke-config-unit">px</span>
+          </div>
+        </div>
+        <div class="stroke-config-item">
+          <span class="stroke-config-label">Size 40:</span>
+          <div>
+            <input
+              type="number"
+              step="0.01"
+              class="stroke-config-input"
+              id="stroke-40"
+              value="2.25"
+            />
+            <span class="stroke-config-unit">px</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-actions">
+        <button
+          id="btn-detect-variables"
+          class="btn btn-secondary btn-small"
+        >
+          Utiliser les variables
+        </button>
+        <button
+          id="btn-reset-config"
+          class="btn btn-secondary btn-small"
+        >
+          Réinitialiser
+        </button>
+      </div>
+
+      <button
+        id="btn-save-config"
+        class="btn btn-primary"
+      >
+        Sauvegarder
+      </button>
+    </div>
+
+    <!-- State 1: Loading -->
+    <div
+      id="state-loading"
+      class="state"
+    >
+      <h2>Analyse en cours</h2>
+
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <div class="loading-text">Analyse de votre sélection...</div>
+      </div>
+    </div>
+
+    <!-- State 2: Validation Results -->
+    <div
+      id="state-validation"
+      class="state"
+    >
+      <h2>Résultat de l'analyse</h2>
+
+      <div id="validation-list">
+        <!-- Filled dynamically -->
+      </div>
+
+      <button
+        id="btn-regenerate"
+        class="btn btn-secondary"
+        style="margin-top: 8px"
+      >
+        Réanalyser
+      </button>
+      <button
+        id="btn-generate"
+        class="btn btn-primary"
+        disabled
+      >
+        Générer les icônes
+      </button>
+    </div>
+
+    <!-- State 3: Progress -->
+    <div
+      id="state-progress"
+      class="state"
+    >
+      <h2>Génération en cours</h2>
+
+      <div class="progress-container">
+        <div class="progress-bar-bg">
+          <div
+            id="progress-fill"
+            class="progress-bar-fill"
+            style="width: 0%"
+          ></div>
+        </div>
+        <div
+          id="progress-text"
+          class="progress-text"
+        >
+          0%
+        </div>
+        <div
+          id="progress-status"
+          class="progress-status"
+        >
+          Initialisation...
+        </div>
+      </div>
+
+      <button
+        id="btn-cancel"
+        class="btn btn-secondary"
+      >
+        Annuler
+      </button>
+    </div>
+
+    <!-- State 4: Complete -->
+    <div
+      id="state-complete"
+      class="state"
+    >
+      <h2>Génération terminée</h2>
+
+      <div class="report">
+        <div class="report-title">Résumé</div>
+        <div id="report-content">
+          <!-- Filled dynamically -->
+        </div>
+      </div>
+
+      <button
+        id="btn-close"
+        class="btn btn-primary"
+      >
+        Fermer le plugin
+      </button>
+      <button
+        id="btn-restart"
+        class="btn btn-secondary"
+        style="margin-top: 8px"
+      >
+        Générer une autre icône
+      </button>
+    </div>
+
+    <!-- Debug console (visible in debug builds only) -->
+    <div
+      id="debug-console"
+      class="debug-console"
+    ></div>
+
+    <script>
+      /* __UI_BUNDLE__ */
+    </script>
+  </body>
+</html>

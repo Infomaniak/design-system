@@ -6,12 +6,14 @@
   "scripts": {
     "=== DEV ===": "",
     "dev:docs": "yarn workspace @infomaniak-design-system/docs dev",
+    "dev:figma-plugin-icons": "yarn workspace @infomaniak-design-system/figma-plugin-icons dev",
     "=== BUILD ===": "",
     "build": "yarn workspaces foreach -Apt run build",
     "build:tokens": "yarn workspace @infomaniak-design-system/tokens build",
     "build:components": "yarn workspace @infomaniak-design-system/components build",
     "build:sf-symbols": "yarn workspace @infomaniak-design-system/svg-assets build:sf-symbols",
     "build:fonts": "yarn workspace @infomaniak-design-system/fonts build",
+    "build:figma-plugin-icons": "yarn workspace @infomaniak-design-system/figma-plugin-icons build",
     "build:docs": "yarn workspace @infomaniak-design-system/docs build",
     "=== CODE QUALITY ===": "",
     "format": "yarn format:fix",
@@ -66,6 +68,7 @@
       "packages/components",
       "packages/assets/images/svg",
       "packages/assets/fonts",
+      "packages/figma-plugin-icons",
       "apps/docs"
     ]
   },
