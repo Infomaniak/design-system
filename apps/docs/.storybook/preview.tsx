@@ -297,15 +297,7 @@ const preview: Preview = {
         order: [
           'Welcome',
           'Designers Guide',
-          [
-            'Getting Started',
-            'iOS - iPadOS Kit',
-            'iOS - Technical Limitations',
-            'Material Kit',
-            'Android - Technical Limitations',
-            'Shadcn Kit',
-            'System Icons Contribution',
-          ],
+          ['Getting Started'],
           'Design Tokens',
           ['Getting Started', '*', 'Material', 'CHANGELOG'],
           'Icons',
