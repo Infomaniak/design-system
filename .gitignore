@@ -170,6 +170,9 @@ playwright-vr-results-metadata.json
 packages/components/tests/visual-regression/__screenshots__/
 test-results/
 
+# Local git worktrees
+.worktrees
+
 # Generated files
 apps/docs/public/DESIGN.md
 apps/docs/src/stories/assets/*.md
