@@ -43,6 +43,8 @@ export async function getImpactedPackageJsonFiles(
     },
   );
 
+  console.log(changedFiles);
+
   const isPackageImpactedMap: Map<string, boolean> = new Map<string, boolean>();
 
   // TODO: as we use "recursive" on the yarn workspace command, we PROBABLY may only check if the package.json files change => to be tested when we'll have more packages.

@@ -18,7 +18,7 @@ const ROOT_DIR: string = join(dirname(fileURLToPath(import.meta.url)), '../../..
 await runScript('ci-publish', async (logger: Logger): Promise<RunScriptNotification | void> => {
   const githubCiConfig: GithubCiConfig = getEnvGithubCiConfig();
   const ciPublishContext: CiPublishContext = inferCiPublishContext(githubCiConfig);
-  const dryRun: boolean = getEnvCiPublishDryRun();
+  const dryRun: boolean = getEnvCiPublishDryRun() || true; // TODO
   const jobUrl: string = `${githubCiConfig.server_url}/${githubCiConfig.repository}/actions/runs/${githubCiConfig.run_id}`;
 
   if (!ciPublishContext.shouldPublish) {
