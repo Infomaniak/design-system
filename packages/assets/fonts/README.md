@@ -2,20 +2,37 @@
 
 Contains the list of Infomaniak's Design System fonts.
 
+- [Documentation ↗](https://infomaniak.github.io/design-system/storybook/main/?path=/docs/typography--docs)
+- [Handbook ↗](https://handbook.design-ik.ch/procedure-inter-infomaniaksans/)
+- [CONTRIBUTING](./CONTRIBUTING.md)
+
 ## Platforms
 
 ### Web
 
-[//]: # 'TODO: to be defined => maybe we will use an s3 ?'
+The fonts are distributed by our S3 server: `https://fonts.storage.infomaniak.com/design-system/latest/infomaniak-sans.min.css`.
 
-The tokens are published as a npm package: `@infomaniak-design-system/fonts`.
+#### HTML
 
-```bash
-npm install @infomaniak-design-system/fonts
+```html
+<link
+  rel="stylesheet"
+  href="https://fonts.storage.infomaniak.com/design-system/latest/infomaniak-sans.min.css"
+/>
 ```
 
 #### CSS
 
 ```css
-@import '@infomaniak-design-system/fonts/inter.css';
+@import 'https://fonts.storage.infomaniak.com/design-system/latest/infomaniak-sans.min.css';
+```
+
+#### Direct download
+
+- [infomaniak-sans](./fonts/infomaniak-sans)
+
+#### Consumption
+
+```css
+font-family: var(--esds-font-family-base), sans-serif;
 ```
