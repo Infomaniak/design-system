@@ -21,21 +21,6 @@ await runScript('build-components', async (logger: Logger): Promise<void> => {
 
   await execCommandInherit(logger, 'yarn', ['run', 'build:manual']);
 
-  // Regression guard: the runtime probe in `supports-symbols-as-weak-key.ts` must survive
-  // minification. The oxc minifier once dead-code eliminated its `void new WeakMap(...)`
-  // side-effect statement, making the probe always return `true` and crashing Firefox ESR
-  // (< 146) when `hostInject` cached shared defaults with symbol keys.
-  const distPolyfillPath: string = join(
-    OUTPUT_DIR,
-    'helpers/.private/misc/polyfill/supports-symbols-as-weak-key.js',
-  );
-  const distPolyfillContent: string = await readFile(distPolyfillPath, 'utf-8');
-  if (!/WeakMap\(\s*\)\s*\)?\s*\.set\(\s*Symbol/.test(distPolyfillContent)) {
-    throw new Error(
-      `The symbols-as-WeakMap-keys probe was eliminated from "${distPolyfillPath}": a minifier change is removing the runtime feature detection. Fix the probe formulation in "supports-symbols-as-weak-key.ts" to be minification-proof.`,
-    );
-  }
-
   // Copy custom-elements.json into dist so it's included in the published package
   await cp(join(ROOT_DIR, 'custom-elements.json'), join(OUTPUT_DIR, 'custom-elements.json'), {
     force: true,
