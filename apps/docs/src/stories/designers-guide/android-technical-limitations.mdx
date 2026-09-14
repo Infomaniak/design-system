@@ -1,0 +1,192 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Designers Guide/Android/Android - Technical Limitations" />
+
+# Technical Limitations — Figma Kit Android
+
+**Goal:** determine how the components can be used and any related constraints.
+
+---
+
+## Overall backward compatibility
+
+- **Jetpack Compose** keeps components compatible regardless of the OS, unlike Apple.
+
+## App Bars
+
+- **XR (Mixed Reality)**, intended for virtual reality headsets → to be removed from the entire
+  kit.
+- The **left-aligned label** version can use a **hamburger menu** instead of the arrow.
+- 3 parameters: **nav**, **title**, **action**.
+  - **Nav** → free.
+  - **Action** → free, but **max 3 icons** recommended (more is possible but discouraged).
+
+## Avatars
+
+- **Infomaniak-specific** component, created by the devs.
+- **Colors** freely configurable.
+
+## Badges
+
+- No issues Figma/Dev. Refer to the Material documentation if needed.
+
+## Buttons
+
+- Provide the **raw icons** for the different sizes depending on the stroke — **variable strokes**
+  are reserved for web.
+- **Button group** = buttons combined together.
+  - Design side: prefer it as soon as several buttons are used (recommended, not mandatory).
+  - Dev side: handles **toggle buttons** automatically (animation, etc.).
+- **FAB** = reserved for a primary action at the bottom right; otherwise, they are simple
+  **icon buttons**.
+- Refer to the Material documentation if needed for the rest.
+
+## Cards
+
+- The component **does not exist as-is on the Android side** — to be built by the devs.
+- Easily replicable structure, but **not callable by default** in this form.
+- The devs only have the **slot version**.
+
+## Carousel
+
+- No issues Figma/Dev. Refer to the Material documentation if needed.
+
+## Checkbox
+
+- **Extended colors** can be used beyond the default ones.
+
+## Chips
+
+- Like the buttons: prefer the **chip group** as soon as several chips are used, for better dev
+  integration.
+- Refer to the Material documentation if needed for the rest.
+
+## Date & Time Picker
+
+- Either **reused as-is**, or **rebuilt from scratch** — the existing Calendar cells cannot be used
+  directly, the devs will have to recode them.
+- Icons **cannot be replaced** with ours.
+- The **input** is a component separate from the date/time picker, to keep our calendar icon and
+  avoid visual differences in a form.
+
+## Dialogs
+
+- **Dialog**: max 2 actions — adding more is discouraged (otherwise manual development).
+- **List dialog**: fully custom — can contain something other than a list (image, etc.).
+- One of the actions can be **destructive**, even though this is not natively available in the
+  component.
+
+## Dividers
+
+- **Divider + Subheader** does not exist in code — to be rebuilt manually.
+- Refer to the Material documentation if needed for the rest.
+- ⚠️ Action item: improve the Material component to create a dedicated set.
+
+## Lists
+
+- **Icons** can be replaced with our own (icon or chevron).
+- **Swipe actions** can be modified, **max 3**.
+- No background by default, but one can be added.
+
+## Loading & Progress
+
+- No issues Figma/Dev. Refer to the Material documentation if needed.
+
+## Menu
+
+- **Icons** can be replaced with our own (icon or chevron).
+- Refer to the Material documentation if needed.
+
+## Navigation
+
+- **Navigation rail**: tablet/desktop only. 📱💻
+- **Navigation bar**: mobile or very small screens.
+- **Drawer**: still used for some cases, despite being deprecated by Material.
+- ⚠️ No long text: beyond that, the text is truncated with "…", which Material discourages.
+
+## Radio Button
+
+- No issues Figma/Dev. Refer to the Material documentation if needed.
+
+## Search
+
+- Reuses the **list items** → fully customizable.
+- Refer to the Material documentation if needed.
+
+## Shape
+
+- Refer to the Material documentation if needed.
+
+## Sheets
+
+- **Side sheets** not available on Jetpack Compose for now (as of June 2026).
+- ⚠️ Avoid overly experimental gradients: the content can be scrolled and the gradient risks being
+  blocked by the handle.
+
+## Sliders
+
+- Refer to the Material documentation if needed.
+
+## Snackbar
+
+- Additional **colors** can be considered.
+- No **illustrative icon**.
+
+## Switch
+
+- Refer to the Material documentation if needed.
+- ❌ Size cannot be reduced — otherwise non-compliant with Material recommendations.
+
+## Tabs
+
+- ⚠️ Make sure to use the **primary** when there is no secondary.
+- Refer to the Material documentation if needed.
+
+## Text Fields
+
+- **Filled version**: bottom edges not rounded (otherwise it masks part of the bottom border) →
+  prefer the **outline version** for fully rounded edges.
+- The chosen style must be **consistent across the entire app**.
+- **Corner radius** can be modified if needed (e.g.: 4 → 8).
+- **Icons** customizable (e.g.: search).
+- Refer to the Material documentation if needed.
+
+## Toolbars
+
+- Reserved for **actions**; possible for secondary navigation, otherwise use a **nav bar**.
+- No mix of tab + standalone icon — for tab + icon, apply the toolbar and the FAB separately on the
+  right.
+- Refer to the Material documentation if needed.
+
+## Tooltips
+
+- Refer to the Material documentation if needed.
+
+## Utilities
+
+- ❌ Cannot be edited.
+
+---
+
+## Quick summary
+
+<Table
+  headers={['Category', 'Components']}
+  rows={[
+    ['🟢 Fully customizable', 'Avatars'],
+    [
+      '🟡 Partially customizable (icons, colors, groups recommended)',
+      'App Bars, Buttons, Checkbox, Chips, Lists, Menu, Snackbar, Search, Text Fields',
+    ],
+    [
+      '🟠 As-is or to rebuild (full custom)',
+      'Cards, Date & Time Picker, Dialogs (list dialog), Dividers, Navigation',
+    ],
+    ['🔴 Cannot be edited / constrained', 'Utilities, Switch (size), Date & Time Picker (icons)'],
+    [
+      '⚪ No issues / refer to Material',
+      'Badges, Carousel, Loading & Progress, Radio Button, Shape, Sliders, Tabs, Toolbars, Tooltips',
+    ],
+    ['📱💻 Tablet/Desktop only', 'Navigation rail'],
+  ]}
+/>
