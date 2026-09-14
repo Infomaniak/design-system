@@ -28,11 +28,10 @@ design-system/
 ├── apps/
 │   └── docs/                    # Storybook documentation app
 │       ├── src/
-│       │   ├── main.tsx         # App entry point
-│       │   ├── stories/         # Storybook stories + token docs
-│       │   │   └── tokens/      # Markdown token documentation
-│       │   └── assets/          # Static assets
-│       ├── .storybook/          # Storybook configuration
+│       │   ├── components/      # React docs components (DocsLink, DocsMarkdown, …)
+│       │   ├── stories/         # Storybook stories + token docs (MDX, raw .md assets)
+│       │   └── styles/          # Docs stylesheets
+│       ├── .storybook/          # Storybook configuration (preview.tsx = entry)
 │       └── dist/                # Built docs output
 ├── packages/
 │   ├── tokens/                  # Design tokens library (DTCG format)

@@ -133,7 +133,7 @@
             "$value": "{color.orange.900}"
           },
           "dim3": {
-            "$value": "{color.red.950}"
+            "$value": "{color.orange.950}"
           }
         },
         "error": {

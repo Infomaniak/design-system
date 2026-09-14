@@ -385,7 +385,7 @@ describe('buildOutlinedSvgFromFigmaComponent', () => {
 
 describe('buildOutlinedSvgsFromFigmaComponents', () => {
   test('builds and writes an outlined svg per component', async () => {
-    const written: { name: string; svg: string }[] = [];
+    const written: { name: string; content: string }[] = [];
 
     await buildOutlinedSvgsFromFigmaComponents({
       components: [
@@ -399,7 +399,7 @@ describe('buildOutlinedSvgsFromFigmaComponents', () => {
     });
 
     expect(written.map(({ name }): string => name)).toEqual(['a', 'b']);
-    expect(written.every(({ svg }): boolean => svg.startsWith('<svg'))).toBe(true);
+    expect(written.every(({ content }): boolean => content.startsWith('<svg'))).toBe(true);
   });
 
   test('isolates failing components, writes the rest, and aggregates all failures into a single error', async () => {

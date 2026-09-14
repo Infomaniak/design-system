@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 
-<Meta title="Components/Technical Limitations" />
+<Meta title="Designers Guide/iOS/iOS - Technical Limitations" />
 
 # Technical Limitations — Figma Kit iOS/iPadOS vs Dev
 
@@ -13,7 +13,8 @@ import { Meta } from '@storybook/addon-docs/blocks';
 Hold actions:
 
 - **Title** + **Description**: max 2 lines in standard use (avoid if possible), otherwise 1 line max.
-- **Widgets** cannot be customized (display latency can go up to **15 min**)
+- **Widgets** can be fully customized except for sizes (3 default sizes: see the kit)
+- Display latency can go up to **15 min**
 
 ## Action Sheets
 
@@ -102,14 +103,15 @@ Hold actions:
 
 ## Segmented Controls
 
-- ❌ Cannot be edited
+- Fully customizable (size, color…)
 
 ## Sheets
 
-- **Grabber** required if the sheet can be dismissed via swipe.
-- 3 heights enforced by Apple: **small**, **medium**, **large**.
+- **Grabber** present or not depending on needs, if the sheet can be dismissed via swipe.
+- 3 heights enforced by Apple: **small**, **medium**, **large**, or adapt the sheet size to its content.
 - **Inspector**: always slightly transparent (see the Maps app).
 - **Full screen cover** = takes the entire screen, **no grabber**.
+- **Close button strongly recommended** for accessibility; Apple provides a "cancellation zone" that adapts to the region (e.g. Arabic-speaking countries → left).
 
 ## Sidebar
 
@@ -138,13 +140,14 @@ Hold actions:
 
 ## Text Fields
 
-- The **accent color bar** (input) is **unique across the entire app**.
+- The **accent color bar** (input) is **unique across the entire app**, but specific zones can adapt it (e.g. **Euria** → blue).
 - **List background colors**: easily modifiable.
 - **Placeholders** use transparency → do not touch the colors.
 
 ## Toggle
 
-- ❌ Cannot be edited
+- Either keep the component as-is, changing the green for a **brand color**.
+- Or build a **fully custom** component (SwiftUI provides all the accessibility parameters for this).
 
 ## Toolbars
 

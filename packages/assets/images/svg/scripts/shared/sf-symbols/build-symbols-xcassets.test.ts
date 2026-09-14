@@ -40,28 +40,28 @@ describe('buildSymbolsXcassets', () => {
       );
 
       const symbolsetContents: string = await readFile(
-        join(xcassetsDirectory, 'esds-square.symbolset', 'Contents.json'),
+        join(xcassetsDirectory, 'square.symbolset', 'Contents.json'),
         { encoding: 'utf8' },
       );
       expect(JSON.parse(symbolsetContents)).toEqual({
         info: { author: 'xcode', version: 1 },
-        symbols: [{ filename: 'esds-square.symbol.svg', idiom: 'universal' }],
+        symbols: [{ filename: 'square.symbol.svg', idiom: 'universal' }],
       });
 
       const symbolSvg: string = await readFile(
-        join(xcassetsDirectory, 'esds-square.symbolset', 'esds-square.symbol.svg'),
+        join(xcassetsDirectory, 'square.symbolset', 'square.symbol.svg'),
         { encoding: 'utf8' },
       );
-      expect(symbolSvg).toContain('Generated from esds-square');
+      expect(symbolSvg).toContain('Generated from square');
       expect(symbolSvg).toContain('<g id="Regular-S"');
       expect(symbolSvg).toContain('<g id="Ultralight-S"');
       expect(symbolSvg).toContain('<g id="Black-S"');
 
       await expect(
-        readFile(join(xcassetsDirectory, 'esds-evenodd.symbolset', 'Contents.json'), {
+        readFile(join(xcassetsDirectory, 'evenodd.symbolset', 'Contents.json'), {
           encoding: 'utf8',
         }),
-      ).resolves.toContain('esds-evenodd.symbol.svg');
+      ).resolves.toContain('evenodd.symbol.svg');
     } finally {
       await rm(outputDirectory, { force: true, recursive: true });
     }
