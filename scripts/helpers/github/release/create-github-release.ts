@@ -43,6 +43,11 @@ export interface CreateGithubReleaseOptions {
  * Creates a GitHub release using the GitHub REST API and uploads every file
  * found in `assetsDirectory` (recursively) as release assets, or a single zip
  * archive of that content when `zip` is enabled.
+ *
+ * The release is always created as a draft first and published only once its
+ * assets are uploaded: drafts fire no `release` webhook events and asset
+ * uploads would, so this sends exactly one `release` event per release. If an
+ * upload fails, the release remains an unpublished draft.
  */
 export async function createGithubRelease({
   owner,
@@ -76,7 +81,10 @@ export async function createGithubRelease({
         name,
         body,
         target_commitish: targetCommitish,
-        draft,
+        // Always create as a draft: drafts fire no `release` webhook events
+        // (asset uploads on a draft neither), so the release is published
+        // below, after its assets are uploaded, sending exactly one event.
+        draft: true,
         prerelease,
         generate_release_notes: generateReleaseNotes,
       },
@@ -104,7 +112,16 @@ export async function createGithubRelease({
       });
     }
 
-    return release;
+    if (draft) {
+      return release;
+    }
+
+    return await githubRequest<GithubRelease>({
+      method: 'PATCH',
+      path: `/repos/${owner}/${repository}/releases/${release.id}`,
+      token: authToken,
+      body: { draft: false },
+    });
   } finally {
     if (assetsZipPath !== undefined) {
       await rm(dirname(assetsZipPath), { recursive: true, force: true });
