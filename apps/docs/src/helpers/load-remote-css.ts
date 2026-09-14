@@ -6,8 +6,7 @@ const PENDING_LOADS = new Map<string, Promise<void>>();
  *
  * - Deduplicates concurrent and repeated loads for the same URL.
  * - Resolves once the stylesheet is loaded.
- * - Never rejects: on failure it logs to console.error and resolves anyway,
- *   so rendering is never blocked (the page just misses the remote styles).
+ * - Rejects when the stylesheet fails to load so callers can log or recover.
  */
 export function loadRemoteCss(url: string): Promise<void> {
   let promise: Promise<void> | undefined = PENDING_LOADS.get(url);
