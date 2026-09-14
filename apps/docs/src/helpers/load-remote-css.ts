@@ -40,6 +40,8 @@ export function loadRemoteCss(url: string): Promise<void> {
         'error',
         (): void => {
           controller.abort();
+          PENDING_LOADS.delete(url);
+          link.remove();
           reject(new Error(`Failed to load remote CSS: ${url}`));
         },
         { signal: controller.signal },

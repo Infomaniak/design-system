@@ -16,6 +16,7 @@
   "private": true,
   "devDependencies": {
     "@0x6b/ttf2woff2-wasm": "^0.13.2",
-    "lightningcss": "^1.33.0"
+    "lightningcss": "^1.33.0",
+    "zod": "^4.5.4"
   }
 }
