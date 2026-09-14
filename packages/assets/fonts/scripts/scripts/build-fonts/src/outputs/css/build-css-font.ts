@@ -1,10 +1,12 @@
 import { transform } from 'lightningcss';
 import crypto from 'node:crypto';
+import { cp } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { readJsonFile } from '../../../../../../../../../scripts/helpers/file/read-json-file.ts';
 import { writeFileSafe } from '../../../../../../../../../scripts/helpers/file/write-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
 import { toDashCase } from '../../../../../../../../../scripts/helpers/misc/case/to-dash-case/to-dash-case.ts';
+import { dedent } from '../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { fontDescriptionSchema } from '../../../../../shared/font-description/font-description.schema.ts';
 import type { FontDescription } from '../../../../../shared/font-description/font-description.ts';
 import { fontVariantToCss } from '../../../../../shared/font-description/font-variant/to/css/font-variant-to-css.ts';
@@ -33,7 +35,17 @@ export async function buildCssFont({
 
     const baseName: string = toDashCase(family);
 
-    let css: string = '';
+    const licenceFileName: string = `${baseName}.license.txt`;
+    const licenceUrl: URL = new URL(`./${licenceFileName}`, serverURL);
+
+    let css: string =
+      fontDescription.license === undefined
+        ? ''
+        : dedent`
+          /*
+            LICENSE: ${fontDescription.license} (${licenceUrl.toString()})
+          */
+        ` + '\n\n';
 
     for (const fontVariant of variants) {
       const variantName: string = fontVariantToFileName(fontVariant);
@@ -51,7 +63,7 @@ export async function buildCssFont({
 
         await writeFileSafe(join(outputDirectory, woff2FileName), woff2);
 
-        const src = new URL(`./${woff2FileName}`, serverURL);
+        const src: URL = new URL(`./${woff2FileName}`, serverURL);
 
         css +=
           fontVariantToCss(fontVariant, {
@@ -74,5 +86,15 @@ export async function buildCssFont({
       writeFileSafe(join(outputDirectory, `${baseName}.min.css`), code),
       writeFileSafe(join(outputDirectory, `${baseName}.min.css.map`), map!),
     ]);
+
+    // optionally copy the licenses
+    for (const fileName of ['OFL.txt']) {
+      try {
+        await cp(join(dirname(sourceFile), fileName), join(outputDirectory, licenceFileName));
+        break;
+      } catch {
+        // fail silently
+      }
+    }
   });
 }

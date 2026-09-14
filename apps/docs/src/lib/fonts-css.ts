@@ -1,4 +1,4 @@
-import { loadRemoteCss } from '../helpers/load-remote-css.ts';
+import { loadRemoteCss } from './load-remote-css.ts';
 
 /**
  * Pre-configured loader for the design system fonts CSS.
