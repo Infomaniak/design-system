@@ -36,6 +36,9 @@ import '../src/styles/token-tables.css';
 // Import base CSS tokens
 import '@infomaniak-design-system/tokens/dist/web/css/material/tokens.root.css';
 
+// Import fonts
+import '@infomaniak-design-system/fonts/dist/web/infomaniak-sans.css';
+
 // Import all product modifiers (for dynamic switching via data-esds-product attribute)
 import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/calendar.attr.css';
 import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/contacts.attr.css';
