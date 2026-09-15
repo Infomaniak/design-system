@@ -1,7 +1,16 @@
+import { cleanupSVG, runSVGO } from '@iconify/tools';
+import { SVG } from '@iconify/tools/lib/svg';
+import { mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 import type { GenericFigmaNodeBase } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/base/figma-node-base.ts';
 import type { FigmaComponentNode } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/built-in/component/figma-component-node.ts';
 import { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
+import type { PathBoundingBox } from '../../icons/bake-transform-into-path.ts';
+import type { SvgOutlinePath } from '../../icons/outline-path.ts';
+import { computeOutlinedPathsBoundingBox } from '../../sf-symbols/build-symbol-svg.ts';
+import { readSymbolIcons } from '../../sf-symbols/read-symbol-icons.ts';
 import {
   buildOutlinedSvgFromFigmaComponent,
   buildOutlinedSvgsFromFigmaComponents,
@@ -380,6 +389,50 @@ describe('buildOutlinedSvgFromFigmaComponent', () => {
         logger,
       }),
     ).toThrow('No outline geometry extracted for component "esds/icon/test-icon".');
+  });
+
+  test('writes svgs that survive SVGO and the SF Symbols generation', async () => {
+    const componentNode: FigmaComponentNode = buildComponentNode([
+      buildVectorNode({ strokeGeometry: STROKE_GEOMETRY }),
+      buildVectorNode({
+        name: 'cutout',
+        fillGeometry: [{ path: 'M 1 1 L 2 2 Z', windingRule: 'EVENODD' }],
+      }),
+    ]);
+    const expectedPaths: readonly SvgOutlinePath[] = extractSymbolOutlinePathsFromFigmaComponent({
+      node: componentNode,
+      logger,
+    });
+
+    const tempDir: string = await mkdtemp(join(tmpdir(), 'outlined-svg-round-trip-'));
+    try {
+      // NOTE: mirrors the production write pipeline (extract-svg-files-from-figma-design-file).
+      const svg: SVG = new SVG(buildOutlinedSvgFromFigmaComponent({ node: componentNode, logger }));
+      cleanupSVG(svg);
+      runSVGO(svg);
+      await writeFile(join(tempDir, 'test-icon.outline.svg'), svg.toString(), {
+        encoding: 'utf8',
+      });
+
+      const icons = await readSymbolIcons({ outlinesDirectory: tempDir, logger });
+
+      expect(icons.map(({ name }): string => name)).toEqual(['test-icon']);
+      expect(icons[0]!.outlinedPaths).toHaveLength(expectedPaths.length);
+      expect(icons[0]!.outlinedPaths.map(({ windingRule }): string => windingRule)).toEqual(
+        expectedPaths.map(({ windingRule }): string => windingRule),
+      );
+
+      // NOTE: SVGO rewrites path data (relative commands, arcs), so only geometry is compared.
+      const expectedBoundingBox: PathBoundingBox = computeOutlinedPathsBoundingBox(expectedPaths);
+      const parsedBoundingBox: PathBoundingBox = computeOutlinedPathsBoundingBox(
+        icons[0]!.outlinedPaths,
+      );
+      for (const key of ['minX', 'minY', 'maxX', 'maxY'] as const) {
+        expect(parsedBoundingBox[key]).toBeCloseTo(expectedBoundingBox[key], 2);
+      }
+    } finally {
+      await rm(tempDir, { force: true, recursive: true });
+    }
   });
 });
 

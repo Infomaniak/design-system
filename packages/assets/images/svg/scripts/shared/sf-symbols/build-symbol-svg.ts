@@ -60,9 +60,7 @@ export function buildSymbolSvg({
     throw new Error(`Symbol ${JSON.stringify(symbolName)} has no outline paths.`);
   }
 
-  const boundingBox: PathBoundingBox = computePathDataBoundingBox(
-    outlinedPaths.map(({ d }: SvgOutlinePath): string => d).join(' '),
-  );
+  const boundingBox: PathBoundingBox = computeOutlinedPathsBoundingBox(outlinedPaths);
 
   let content: string = template.content;
 
@@ -87,6 +85,30 @@ export function buildSymbolSvg({
   );
 
   return content;
+}
+
+/*
+ * Computes the union of the per-path bounding boxes. Paths are parsed independently: optimized
+ * path data may start with a relative "m" command, which must not resolve against the previous
+ * path's end point.
+ */
+export function computeOutlinedPathsBoundingBox(
+  outlinedPaths: readonly SvgOutlinePath[],
+): PathBoundingBox {
+  if (outlinedPaths.length === 0) {
+    throw new Error('No outline paths.');
+  }
+
+  const boundingBoxes: readonly PathBoundingBox[] = outlinedPaths.map(
+    ({ d }: SvgOutlinePath): PathBoundingBox => computePathDataBoundingBox(d),
+  );
+
+  return {
+    minX: Math.min(...boundingBoxes.map(({ minX }): number => minX)),
+    minY: Math.min(...boundingBoxes.map(({ minY }): number => minY)),
+    maxX: Math.max(...boundingBoxes.map(({ maxX }): number => maxX)),
+    maxY: Math.max(...boundingBoxes.map(({ maxY }): number => maxY)),
+  };
 }
 
 function fittedPathsToSvg(fittedPaths: readonly FittedSymbolPath[]): string {

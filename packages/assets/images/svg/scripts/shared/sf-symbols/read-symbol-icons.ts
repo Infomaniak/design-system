@@ -2,7 +2,7 @@ import { readdir, readFile } from 'node:fs/promises';
 import { basename, join } from 'node:path';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { ICON_NAME_PATTERN } from '../icons/icon-name.ts';
-import type { SvgOutlinePath } from '../icons/outline-path.ts';
+import type { SvgOutlinePath, WindingRule } from '../icons/outline-path.ts';
 import type { SymbolIcon } from './build-symbols-xcassets.ts';
 
 export interface ReadSymbolIconsOptions {
@@ -75,10 +75,16 @@ export const OUTLINE_FILE_SUFFIX = '.outline.svg';
 const WEB_ICON_FILE_SUFFIX = '.svg';
 const EXCLUDED_WEB_ICON_FILE_SUFFIXES: readonly string[] = [OUTLINE_FILE_SUFFIX, '.mask.svg'];
 const OUTLINED_SVG_VIEW_BOX = 'viewBox="0 0 24 24"';
-const OUTLINED_SVG_PATH_PATTERN: RegExp =
-  /<path d="([^"]+)" fill="black"( fill-rule="evenodd")?\/>/g;
-const OUTLINED_SVG_PATH_ELEMENT_PATTERN: RegExp = /<path/g;
+const OUTLINED_SVG_PATH_ELEMENT_PATTERN: RegExp = /<path\b[^>]*>/g;
+const SVG_ATTRIBUTE_PATTERN: RegExp = /([^\s=/]+)="([^"]*)"/g;
 
+/*
+ * Parses an outline SVG into its paths. Outline files are monochrome silhouettes whose paths are
+ * self-contained (`<path d="..."/>`), so a light regex-based parsing is enough. The files are
+ * optimized with SVGO: attributes may appear in any order and `fill="black"` is stripped (it is
+ * the SVG default anyway). Only the geometry (`d`) and the winding rule (`fill-rule`) are read.
+ * Inputs that would be silently mis-rendered as filled silhouettes are rejected.
+ */
 function parseOutlinedSvg(content: string, fileName: string): readonly SvgOutlinePath[] {
   if (!content.includes(OUTLINED_SVG_VIEW_BOX)) {
     throw new Error(
@@ -86,16 +92,23 @@ function parseOutlinedSvg(content: string, fileName: string): readonly SvgOutlin
     );
   }
 
-  const outlinedPaths: readonly SvgOutlinePath[] = [
-    ...content.matchAll(OUTLINED_SVG_PATH_PATTERN),
-  ].map((match: RegExpMatchArray): SvgOutlinePath => {
-    return {
-      d: match[1]!,
-      windingRule: match[2] !== undefined ? 'EVENODD' : 'NONZERO',
-    };
-  });
+  /*
+   * A `fill-rule` outside a `<path>` element (e.g. hoisted to a `<g>` by an SVGO group
+   * optimization) would be silently ignored and flip winding rules to nonzero.
+   */
+  const contentWithoutPathElements: string = content.replace(OUTLINED_SVG_PATH_ELEMENT_PATTERN, '');
+  if (contentWithoutPathElements.includes('fill-rule=')) {
+    throw new Error(
+      `Unexpected fill rule outside a path element in outline file ${JSON.stringify(fileName)}: only per-path fill rules are supported.`,
+    );
+  }
 
-  const pathElementCount: number = content.match(OUTLINED_SVG_PATH_ELEMENT_PATTERN)?.length ?? 0;
+  const pathElements: readonly string[] = content.match(OUTLINED_SVG_PATH_ELEMENT_PATTERN) ?? [];
+  const outlinedPaths: readonly SvgOutlinePath[] = pathElements
+    .map((pathElement: string): SvgOutlinePath | null => parsePathElement(pathElement, fileName))
+    .filter((path: SvgOutlinePath | null): path is SvgOutlinePath => path !== null);
+
+  const pathElementCount: number = pathElements.length;
   if (outlinedPaths.length === 0 || pathElementCount !== outlinedPaths.length) {
     throw new Error(
       `Unexpected path elements in outline file ${JSON.stringify(fileName)}: parsed ${String(outlinedPaths.length)} of ${String(pathElementCount)}.`,
@@ -103,6 +116,42 @@ function parseOutlinedSvg(content: string, fileName: string): readonly SvgOutlin
   }
 
   return outlinedPaths;
+}
+
+/*
+ * Parses a `<path>` element into an outline path, or returns null when it has no usable `d`
+ * attribute (reported by the caller as an unparsed path element). An absent `fill-rule`
+ * attribute defaults to "nonzero". Stroked or unfilled paths are rejected: their geometry
+ * (centerlines, holes) would be silently rendered as filled silhouettes.
+ */
+function parsePathElement(pathElement: string, fileName: string): SvgOutlinePath | null {
+  const attributes: ReadonlyMap<string, string> = new Map(
+    [...pathElement.matchAll(SVG_ATTRIBUTE_PATTERN)].map(
+      (match: RegExpMatchArray): [string, string] => [match[1]!, match[2]!],
+    ),
+  );
+
+  const d: string | undefined = attributes.get('d');
+  if (d === undefined || d === '') {
+    return null;
+  }
+
+  if (attributes.get('fill') === 'none') {
+    throw new Error(
+      `Unexpected fill "none" in outline file ${JSON.stringify(fileName)}: outline paths must be filled silhouettes.`,
+    );
+  }
+
+  if (attributes.has('stroke')) {
+    throw new Error(
+      `Unexpected stroke in outline file ${JSON.stringify(fileName)}: outline paths must be filled silhouettes.`,
+    );
+  }
+
+  const fillRule: string | undefined = attributes.get('fill-rule');
+  const windingRule: WindingRule = fillRule?.toLowerCase() === 'evenodd' ? 'EVENODD' : 'NONZERO';
+
+  return { d, windingRule };
 }
 
 async function warnOnIconOutlineMismatches({

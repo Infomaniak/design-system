@@ -62,6 +62,20 @@ describe('readSymbolIcons', () => {
     ]);
   });
 
+  test('parses SVGO-optimized outline files with reordered attributes and no fill', async () => {
+    await writeOutline(
+      'svgo.outline.svg',
+      `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill-rule="evenodd" d="m1 1 1 1Z"/><path d="M14 15h2"/></svg>`,
+    );
+
+    const icons = await readSymbolIcons({ outlinesDirectory: tempDir, logger });
+
+    expect(icons[0]!.outlinedPaths).toEqual([
+      { d: 'm1 1 1 1Z', windingRule: 'EVENODD' },
+      { d: 'M14 15h2', windingRule: 'NONZERO' },
+    ]);
+  });
+
   test('throws when the outlines directory is empty', async () => {
     await expect(readSymbolIcons({ outlinesDirectory: tempDir, logger })).rejects.toThrow(
       `No outline files found in ${JSON.stringify(tempDir)}.`,
@@ -118,18 +132,76 @@ describe('readSymbolIcons', () => {
     );
   });
 
-  test('throws on unconsumed path elements', async () => {
+  test('throws when a path element has no d attribute', async () => {
     await writeOutline(
       'test.outline.svg',
       `<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 1 1 L 2 2 Z" fill="black"/>
-  <path d="M 3 3 L 4 4 Z" fill="red"/>
+  <path fill="black"/>
+  <path d="" fill="black"/>
 </svg>
 `,
     );
 
     await expect(readSymbolIcons({ outlinesDirectory: tempDir, logger })).rejects.toThrow(
-      'Unexpected path elements in outline file "test.outline.svg": parsed 1 of 2.',
+      'Unexpected path elements in outline file "test.outline.svg": parsed 0 of 2.',
+    );
+  });
+
+  test('defaults unexpected fill rule values to nonzero', async () => {
+    await writeOutline(
+      'test.outline.svg',
+      `<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M 1 1 L 2 2 Z" fill-rule="weird"/>
+</svg>
+`,
+    );
+
+    const icons = await readSymbolIcons({ outlinesDirectory: tempDir, logger });
+
+    expect(icons[0]!.outlinedPaths).toEqual([{ d: 'M 1 1 L 2 2 Z', windingRule: 'NONZERO' }]);
+  });
+
+  test('throws on a fill-none path', async () => {
+    await writeOutline(
+      'test.outline.svg',
+      `<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M 1 1 L 2 2 Z" fill="none" stroke="black"/>
+</svg>
+`,
+    );
+
+    await expect(readSymbolIcons({ outlinesDirectory: tempDir, logger })).rejects.toThrow(
+      'Unexpected fill "none" in outline file "test.outline.svg": outline paths must be filled silhouettes.',
+    );
+  });
+
+  test('throws on a stroked path', async () => {
+    await writeOutline(
+      'test.outline.svg',
+      `<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M 1 1 L 2 2 Z" stroke="black"/>
+</svg>
+`,
+    );
+
+    await expect(readSymbolIcons({ outlinesDirectory: tempDir, logger })).rejects.toThrow(
+      'Unexpected stroke in outline file "test.outline.svg": outline paths must be filled silhouettes.',
+    );
+  });
+
+  test('throws when a fill rule is hoisted outside path elements', async () => {
+    await writeOutline(
+      'test.outline.svg',
+      `<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <g fill-rule="evenodd">
+    <path d="M 1 1 L 2 2 Z"/>
+  </g>
+</svg>
+`,
+    );
+
+    await expect(readSymbolIcons({ outlinesDirectory: tempDir, logger })).rejects.toThrow(
+      'Unexpected fill rule outside a path element in outline file "test.outline.svg": only per-path fill rules are supported.',
     );
   });
 
@@ -226,5 +298,15 @@ describe('readSymbolIcons', () => {
     await expect(
       readSymbolIcons({ outlinesDirectory: tempDir, webIconsDirectory: missingDirectory, logger }),
     ).rejects.toThrow(`Web icons directory ${JSON.stringify(missingDirectory)} does not exist.`);
+  });
+
+  test('rethrows unexpected web icons directory read errors', async () => {
+    await writeOutline('a.outline.svg', validOutline('M 1 1 L 2 2 Z'));
+    const filePath: string = join(tempDir, 'file.txt');
+    await writeFile(filePath, 'not a directory');
+
+    await expect(
+      readSymbolIcons({ outlinesDirectory: tempDir, webIconsDirectory: filePath, logger }),
+    ).rejects.toThrow(/ENOTDIR/);
   });
 });

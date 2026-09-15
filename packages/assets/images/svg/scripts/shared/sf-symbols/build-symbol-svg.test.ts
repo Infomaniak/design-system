@@ -1,7 +1,11 @@
 import { describe, expect, test } from 'vitest';
 import { computePathDataBoundingBox } from '../icons/bake-transform-into-path.ts';
 import type { SvgOutlinePath } from '../icons/outline-path.ts';
-import { buildSymbolSvg, fitSymbolOutlinePathsToVariant } from './build-symbol-svg.ts';
+import {
+  buildSymbolSvg,
+  computeOutlinedPathsBoundingBox,
+  fitSymbolOutlinePathsToVariant,
+} from './build-symbol-svg.ts';
 import type { SymbolTemplate } from './parse-symbol-template.ts';
 import { parseSymbolTemplate, readSymbolTemplate } from './parse-symbol-template.ts';
 
@@ -111,6 +115,10 @@ describe('buildSymbolSvg', () => {
     expect(() => buildSymbolSvg({ symbolName: 'empty', outlinedPaths: [], template })).toThrow(
       'Symbol "empty" has no outline paths.',
     );
+  });
+
+  test('computeOutlinedPathsBoundingBox throws on an empty path list', () => {
+    expect(() => computeOutlinedPathsBoundingBox([])).toThrow('No outline paths.');
   });
 });
 
