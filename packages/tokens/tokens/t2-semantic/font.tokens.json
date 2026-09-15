@@ -70,7 +70,7 @@
     "family": {
       "$description": "Semantic font family tokens for typography.",
       "base": {
-        "$value": "{font.family.Suisse Int'l}",
+        "$value": "{font.family.infomaniak-sans}",
         "$description": "Base font family used across the design system.",
         "$extensions": {
           "scopes": []

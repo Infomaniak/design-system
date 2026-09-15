@@ -11,9 +11,12 @@ import { useEffect, useState } from 'react';
 import { GLOBALS_UPDATED } from 'storybook/internal/core-events';
 import { Globals, GlobalsUpdatedPayload } from 'storybook/internal/types';
 import customElements from '../../../packages/components/custom-elements.json' with { type: 'json' };
+import Collapsible from '../src/components/Collapsible.tsx';
+import DocsLink from '../src/components/docs-link.tsx';
 import FontPreview from '../src/components/FontPreview.tsx';
 import MaterialThemeBuilderLink from '../src/components/MaterialThemeBuilderLink.tsx';
 import Table from '../src/components/Table.tsx';
+import { loadFontsCss } from '../src/lib/fonts-css.ts';
 import { iconifyApi } from '../src/lib/iconify-api.ts';
 
 setCustomElementsManifest(customElements);
@@ -35,6 +38,11 @@ import '../src/styles/token-tables.css';
 
 // Import base CSS tokens
 import '@infomaniak-design-system/tokens/dist/web/css/material/tokens.root.css';
+
+// Import fonts dynamically from remote storage (URL configurable via VITE_FONTS_CSS_URL)
+loadFontsCss().catch((error: unknown): void => {
+  console.error(error);
+});
 
 // Import all product modifiers (for dynamic switching via data-esds-product attribute)
 import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/calendar.attr.css';
@@ -277,9 +285,11 @@ const preview: Preview = {
     docs: {
       container: CustomDocsContainer,
       components: {
+        Collapsible,
         Table,
         FontPreview,
         MaterialThemeBuilderLink,
+        a: DocsLink,
       },
     },
     a11y: {
@@ -292,6 +302,8 @@ const preview: Preview = {
       storySort: {
         order: [
           'Welcome',
+          'Designers Guide',
+          ['Getting Started'],
           'Design Tokens',
           ['Getting Started', '*', 'Material', 'CHANGELOG'],
           'Icons',

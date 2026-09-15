@@ -279,19 +279,44 @@
         },
         "feedback": {
           "success": {
-            "$value": "{color.lime.950}"
+            "dim1": {
+              "$value": "{color.lime.950}"
+            },
+            "dim2": {
+              "$value": "{color.white}"
+            }
           },
           "warning": {
-            "$value": "{color.orange.900}"
+            "dim1": {
+              "$value": "{color.orange.900}"
+            },
+            "dim2": {
+              "$value": "{color.white}"
+            }
           },
           "error": {
-            "$value": "{color.red.900}"
+            "dim1": {
+              "$value": "{color.red.900}"
+            },
+            "dim2": {
+              "$value": "{color.white}"
+            }
           },
           "information": {
-            "$value": "{color.blue.900}"
+            "dim1": {
+              "$value": "{color.blue.900}"
+            },
+            "dim2": {
+              "$value": "{color.white}"
+            }
           },
           "neutral": {
-            "$value": "{color.gray.900}"
+            "dim1": {
+              "$value": "{color.gray.900}"
+            },
+            "dim2": {
+              "$value": "{color.white}"
+            }
           }
         }
       },
@@ -521,6 +546,9 @@
       }
     },
     "shadow": {
+      "xs": {
+        "$value": "{color.gray.400-6}"
+      },
       "sm": {
         "$value": "{color.gray.400-6}"
       },
@@ -535,9 +563,6 @@
       },
       "2xl": {
         "$value": "{color.gray.400-14}"
-      },
-      "xs": {
-        "$value": "{color.gray.400-6}"
       }
     },
     "state": {
@@ -559,7 +584,7 @@
       },
       "selected": {
         "medium": {
-          "$value": "{color.blue.900-12}"
+          "$value": "{color.blue.900-40}"
         },
         "strong": {
           "$value": "{color.blue.900-80}"

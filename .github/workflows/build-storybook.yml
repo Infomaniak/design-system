@@ -48,6 +48,7 @@ jobs:
         run: yarn build
         env:
           VITE_ICONIFY_API_URL: ${{ (github.ref == 'refs/heads/main' || github.ref_type == 'tag') && 'https://iconify.infomaniak.com/' || 'https://iconify.preprod.dev.infomaniak.ch/' }}
+          VITE_FONTS_CSS_URL: ${{ (github.ref == 'refs/heads/main' || github.ref_type == 'tag') && 'https://fonts.storage.infomaniak.com/design-system/latest/infomaniak-sans.min.css' || 'https://fonts.storage.infomaniak.com/design-system/dev/infomaniak-sans.min.css' }}
 
       - name: Normalize Storybook build for subpath hosting
         if: steps.build.outcome == 'success'
