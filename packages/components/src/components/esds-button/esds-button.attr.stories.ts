@@ -71,6 +71,7 @@ export const Button: StoryObj<
       esds-button
       ?disabled=${args.disabled}
       ?loading=${args.loading}
+      @click="${() => console.log('clicked')}"
     >
       ${args.content}
     </button>`,
@@ -99,14 +100,16 @@ export const Link: StoryObj<
     >`,
 };
 
-export const WithIcon: StoryObj<EsdsButtonAttr & HTMLButtonElement & ExtraControls> = {
+export const WithIcon: StoryObj<
+  EsdsButtonAttr &
+    HTMLButtonElement &
+    ExtraControls & {
+      content: string;
+    }
+> = {
   ...storybookInteractiveControls({
     ...extraControls,
     content: 'Add',
-    disabled: {
-      value: false,
-      type: 'boolean',
-    },
   }),
   render: (args) =>
     html`<button
@@ -171,7 +174,6 @@ export const Sizes: StoryObj<EsdsButtonAttr & HTMLButtonElement & ExtraControls>
             data-esds-button-size=${variant}
             ?disabled=${args.disabled}
             ?loading=${args.loading}
-            @click="${() => console.log('ok')}"
           >
             <esds-icon name="esds:plus"></esds-icon>
             ${variant}
