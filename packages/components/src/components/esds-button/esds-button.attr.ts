@@ -32,6 +32,26 @@ export class EsdsButtonAttr extends CustomAttribute implements CustomAttributeDe
       throw new Error('esds-button attribute can only be used on <button> or <a> elements');
     }
     super(attr);
+
+    const element: HTMLElement = this.ownerElement! as HTMLElement;
+
+    element.addEventListener('pointerdown', (event: PointerEvent): void => {
+      if (element.hasAttribute('loading')) {
+        event.preventDefault();
+        event.stopPropagation();
+        element.setAttribute('inert', '');
+
+        window.addEventListener(
+          'pointerup',
+          (): void => {
+            element.removeAttribute('inert');
+          },
+          {
+            once: true,
+          },
+        );
+      }
+    });
   }
 
   connectedCallback(): void {

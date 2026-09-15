@@ -44,7 +44,7 @@
     border-radius: var(--esds-focus-border-radius);
   }
 
-  &:not(:disabled, [disabled]) {
+  &:not(:disabled, [disabled], [loading]) {
     &:hover {
       border-color: styles.source-over(--esds-button-border-color, --esds-color-state-hover-strong);
       background-color: styles.source-over(
@@ -79,5 +79,7 @@
 
   &[loading] {
     cursor: progress;
+
+    // interactivity: inert;
   }
 }
