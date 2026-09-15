@@ -1,0 +1,24 @@
+{
+  "button": {
+    "background": {
+      "color": {
+        "$root": {
+          "$value": "{color.background.brand}"
+        },
+        "disabled": {
+          "$value": "{color.background.disabled}"
+        }
+      }
+    },
+    "content": {
+      "color": {
+        "$root": {
+          "$value": "{color.content.on.brand}"
+        },
+        "disabled": {
+          "$value": "{color.content.on.disabled}"
+        }
+      }
+    }
+  }
+}

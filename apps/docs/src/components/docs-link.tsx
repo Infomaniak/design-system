@@ -34,7 +34,7 @@ const DocsLink: React.FC<DocsLinkProps> = ({ children, href, rel, ...rest }) => 
     return (
       <a
         href={href}
-        rel={rel}
+        rel={buildRel(rel)}
         {...rest}
       >
         {children}

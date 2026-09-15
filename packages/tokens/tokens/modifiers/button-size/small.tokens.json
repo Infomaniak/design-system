@@ -1,0 +1,35 @@
+{
+  "button": {
+    "padding": {
+      "inline": {
+        "$value": "{spacing.md}"
+      },
+      "block": {
+        "$value": "{spacing.sm}"
+      }
+    },
+    "gap": {
+      "row": {
+        "$value": "{spacing.sm}"
+      },
+      "column": {
+        "$value": "{spacing.sm}"
+      }
+    },
+    "border": {
+      "radius": {
+        "$value": "{radius.lg}"
+      }
+    },
+    "content": {
+      "font": {
+        "$value": "{body.sm.font}"
+      }
+    },
+    "icon": {
+      "size": {
+        "$value": "{icon.size.sm}"
+      }
+    }
+  }
+}

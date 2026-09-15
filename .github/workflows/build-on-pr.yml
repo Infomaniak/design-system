@@ -56,6 +56,7 @@ jobs:
         run: yarn build
         env:
           VITE_ICONIFY_API_URL: 'https://iconify.preprod.dev.infomaniak.ch/'
+          KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
 
       - name: Normalize Storybook build for subpath hosting
         if: steps.build.outcome == 'success'
