@@ -221,11 +221,16 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.on.dataviz.gray.dim2 | #f8fafc | #020618 | var(--esds-color-content-on-dataviz-gray-dim2) | Foreground on soft gray data-viz backgrounds (dim2). |
 | color.content.on.dataviz.dim1 | #0b426f | #0b426f | var(--esds-color-content-on-dataviz-dim1) | Default foreground on data-viz dim1 backgrounds. |
 | color.content.on.dataviz.dim2 | #f0f8ff | #f0f8ff | var(--esds-color-content-on-dataviz-dim2) | Default foreground on data-viz dim2 backgrounds. |
-| color.content.on.feedback.success | #042f16 | #f0fdf4 | var(--esds-color-content-on-feedback-success) | Foreground on strong success backgrounds (dim1). |
-| color.content.on.feedback.warning | #7a200d | #fff7eb | var(--esds-color-content-on-feedback-warning) | Foreground on strong warning backgrounds (dim1). |
-| color.content.on.feedback.error | #920a0a | #fff0f0 | var(--esds-color-content-on-feedback-error) | Foreground on strong error backgrounds (dim1). |
-| color.content.on.feedback.information | #0b426f | #f0f8ff | var(--esds-color-content-on-feedback-information) | Foreground on strong information backgrounds (dim1). |
-| color.content.on.feedback.neutral | #0f172b | #f8fafc | var(--esds-color-content-on-feedback-neutral) | Foreground on strong neutral backgrounds (dim1). |
+| color.content.on.feedback.success.dim1 | #042f16 | #f0fdf4 | var(--esds-color-content-on-feedback-success-dim1) | Foreground on strong success backgrounds (dim1). |
+| color.content.on.feedback.success.dim2 | #fff | #042f16 | var(--esds-color-content-on-feedback-success-dim2) | Foreground on strong success backgrounds (dim1). |
+| color.content.on.feedback.warning.dim1 | #7a200d | #fff7eb | var(--esds-color-content-on-feedback-warning-dim1) | Foreground on strong warning backgrounds (dim1). |
+| color.content.on.feedback.warning.dim2 | #fff | #460d02 | var(--esds-color-content-on-feedback-warning-dim2) | Foreground on strong warning backgrounds (dim1). |
+| color.content.on.feedback.error.dim1 | #920a0a | #fff0f0 | var(--esds-color-content-on-feedback-error-dim1) | Foreground on strong error backgrounds (dim1). |
+| color.content.on.feedback.error.dim2 | #fff | #500000 | var(--esds-color-content-on-feedback-error-dim2) | Foreground on strong error backgrounds (dim1). |
+| color.content.on.feedback.information.dim1 | #0b426f | #f0f8ff | var(--esds-color-content-on-feedback-information-dim1) | Foreground on strong information backgrounds (dim1). |
+| color.content.on.feedback.information.dim2 | #fff | #072a4a | var(--esds-color-content-on-feedback-information-dim2) | Foreground on strong information backgrounds (dim1). |
+| color.content.on.feedback.neutral.dim1 | #0f172b | #f8fafc | var(--esds-color-content-on-feedback-neutral-dim1) | Foreground on strong neutral backgrounds (dim1). |
+| color.content.on.feedback.neutral.dim2 | #fff | #020618 | var(--esds-color-content-on-feedback-neutral-dim2) | Foreground on strong neutral backgrounds (dim1). |
 | color.content.brand | #0077cf | #0077cf | var(--esds-color-content-brand) | Default brand foreground color. |
 | color.content.brand.infomaniak | #0077cf | #36adfa | var(--esds-color-content-brand-infomaniak) | Infomaniak brand foreground colors. |
 | color.content.brand.mail | #d7004b | #ff5d86 | var(--esds-color-content-brand-mail) | Mail product brand foreground colors. |
@@ -303,7 +308,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.state.hover.strong | #0b426f99 | #f8fafc33 | var(--esds-color-state-hover-strong) | Strong hover overlay for prominent interactive feedback. |
 | color.state.pressed.medium | #0b426f29 | #f8fafc29 | var(--esds-color-state-pressed-medium) | Medium pressed overlay for subtle active feedback. |
 | color.state.pressed.strong | #0b426fcc | #f8fafc66 | var(--esds-color-state-pressed-strong) | Strong pressed overlay for prominent active feedback. |
-| color.state.selected.medium | #0b426f1f | #f8fafc1f | var(--esds-color-state-selected-medium) | Medium selected overlay for subtle selection feedback. |
+| color.state.selected.medium | #0b426f66 | #f8fafc66 | var(--esds-color-state-selected-medium) | Medium selected overlay for subtle selection feedback. |
 | color.state.selected.strong | #0b426fcc | #f8fafc66 | var(--esds-color-state-selected-strong) | Strong selected overlay for prominent selection feedback. |
 | font.size.xs | 0.75rem | 0.75rem | var(--esds-font-size-xs) | Extra-small font size for captions and metadata. |
 | font.size.sm | 0.875rem | 0.875rem | var(--esds-font-size-sm) | Small font size for helper text and compact UI. |
@@ -442,9 +447,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | body.sm.font | 400 0.875rem/20px Infomaniak Sans | 400 0.875rem/20px Infomaniak Sans | var(--esds-body-sm-font) | Small body text style. |
 | body.md.font | 400 1rem/24px Infomaniak Sans | 400 1rem/24px Infomaniak Sans | var(--esds-body-md-font) | Medium (default) body text style. |
 | body.lg.font | 400 1.125rem/26px Infomaniak Sans | 400 1.125rem/26px Infomaniak Sans | var(--esds-body-lg-font) | Large body text style. |
-| focus.border.color | #0077cf | #36adfa | var(--esds-focus-border-color) | N/A |
-| focus.border.radius | 2px | 2px | var(--esds-focus-border-radius) | N/A |
-| focus.border.width | 2px | 2px | var(--esds-focus-border-width) | N/A |
+| focus.border.color | #0077cf | #36adfa | var(--esds-focus-border-color) | Focus-effect border color. |
+| focus.border.radius | 2px | 2px | var(--esds-focus-border-radius) | Focus-effect border radius. |
+| focus.border.width | 2px | 2px | var(--esds-focus-border-width) | Focus-effect border width. |
 | heading.xs.font | 500 1.25rem/28px Infomaniak Sans | 500 1.25rem/28px Infomaniak Sans | var(--esds-heading-xs-font) | Extra-small heading style. |
 | heading.sm.font | 500 1.5rem/32px Infomaniak Sans | 500 1.5rem/32px Infomaniak Sans | var(--esds-heading-sm-font) | Small heading style. |
 | heading.md.font | 500 2rem/40px Infomaniak Sans | 500 2rem/40px Infomaniak Sans | var(--esds-heading-md-font) | Medium heading style. |
