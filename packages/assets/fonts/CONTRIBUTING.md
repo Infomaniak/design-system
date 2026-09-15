@@ -91,3 +91,36 @@ yarn build
 ```
 
 You may verify the output into the `dist` directory.
+
+## Workflow
+
+This package follows our standard `build`/`publish` [workflow](../../../scripts/ci/README.md).
+
+When the `publish` workflow triggers, the fonts are automatically built and published as a GitHub release.
+
+Then, a Gitlab hook on [an internal repository](https://gitlab.infomaniak.ch/infomaniak/design-system/fonts-delivery) is triggered to fetch the release and upload it on our font delivery server.
+
+Files are accessible following this url: `https://fonts.storage.infomaniak.com/design-system/{version}/{name}.min.css`.
+
+Where:
+
+- `version`:
+  - `dev` for preprod (`dev` or `rc` publish)
+  - `latest` for production (`prod` publish)
+- `name`: the name of the font (ex:`infomaniak-sans`)
+
+### Graph
+
+```mermaid
+flowchart LR
+  BUILD("BUILD")
+  BUILD_FONTS(["build the fonts"])
+  PUBLISH("PUBLISH")
+  GH_RELEASE(["create a GitHub release"])
+  UPLOAD_DELIVERY_SERVER(["upload the release on the font delivery server"])
+
+  BUILD --> BUILD_FONTS
+  BUILD_FONTS --> PUBLISH
+  PUBLISH --> GH_RELEASE
+  GH_RELEASE -- "triggers a Gitlab hook" --> UPLOAD_DELIVERY_SERVER
+```
