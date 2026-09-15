@@ -443,18 +443,27 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 
 | Token Name | Light Value | Dark Value | CSS Variable | Description |
 |---|---|---|---|---|
-| body.xs.font | 400 0.75rem/16px Infomaniak Sans | 400 0.75rem/16px Infomaniak Sans | var(--esds-body-xs-font) | Extra-small body text style. |
-| body.sm.font | 400 0.875rem/20px Infomaniak Sans | 400 0.875rem/20px Infomaniak Sans | var(--esds-body-sm-font) | Small body text style. |
-| body.md.font | 400 1rem/24px Infomaniak Sans | 400 1rem/24px Infomaniak Sans | var(--esds-body-md-font) | Medium (default) body text style. |
-| body.lg.font | 400 1.125rem/26px Infomaniak Sans | 400 1.125rem/26px Infomaniak Sans | var(--esds-body-lg-font) | Large body text style. |
+| body.xs.font.base | 400 0.75rem/16px Infomaniak Sans | 400 0.75rem/16px Infomaniak Sans | var(--esds-body-xs-font-base) | Extra-small body text style. |
+| body.xs.font.emphasized | 500 0.75rem/16px Infomaniak Sans | 500 0.75rem/16px Infomaniak Sans | var(--esds-body-xs-font-emphasized) | Extra-small body text style. |
+| body.sm.font.base | 400 0.875rem/20px Infomaniak Sans | 400 0.875rem/20px Infomaniak Sans | var(--esds-body-sm-font-base) | Small body text style. |
+| body.sm.font.emphasized | 500 0.875rem/20px Infomaniak Sans | 500 0.875rem/20px Infomaniak Sans | var(--esds-body-sm-font-emphasized) | Small body text style. |
+| body.md.font.base | 400 1rem/24px Infomaniak Sans | 400 1rem/24px Infomaniak Sans | var(--esds-body-md-font-base) | Medium (default) body text style. |
+| body.md.font.emphasized | 500 1rem/24px Infomaniak Sans | 500 1rem/24px Infomaniak Sans | var(--esds-body-md-font-emphasized) | Medium (default) body text style. |
+| body.lg.font.base | 400 1.125rem/26px Infomaniak Sans | 400 1.125rem/26px Infomaniak Sans | var(--esds-body-lg-font-base) | Large body text style. |
+| body.lg.font.emphasized | 500 1.125rem/26px Infomaniak Sans | 500 1.125rem/26px Infomaniak Sans | var(--esds-body-lg-font-emphasized) | Large body text style. |
 | focus.border.color | #0077cf | #36adfa | var(--esds-focus-border-color) | Focus-effect border color. |
 | focus.border.radius | 2px | 2px | var(--esds-focus-border-radius) | Focus-effect border radius. |
 | focus.border.width | 2px | 2px | var(--esds-focus-border-width) | Focus-effect border width. |
-| heading.xs.font | 500 1.25rem/28px Infomaniak Sans | 500 1.25rem/28px Infomaniak Sans | var(--esds-heading-xs-font) | Extra-small heading style. |
-| heading.sm.font | 500 1.5rem/32px Infomaniak Sans | 500 1.5rem/32px Infomaniak Sans | var(--esds-heading-sm-font) | Small heading style. |
-| heading.md.font | 500 2rem/40px Infomaniak Sans | 500 2rem/40px Infomaniak Sans | var(--esds-heading-md-font) | Medium heading style. |
-| heading.lg.font | 500 2.5rem/48px Infomaniak Sans | 500 2.5rem/48px Infomaniak Sans | var(--esds-heading-lg-font) | Large heading style. |
-| heading.xl.font | 500 3rem/56px Infomaniak Sans | 500 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font) | Extra-large heading style. |
+| heading.xs.font.base | 400 1.25rem/28px Infomaniak Sans | 400 1.25rem/28px Infomaniak Sans | var(--esds-heading-xs-font-base) | Extra-small heading style. |
+| heading.xs.font.emphasized | 500 1.25rem/28px Infomaniak Sans | 500 1.25rem/28px Infomaniak Sans | var(--esds-heading-xs-font-emphasized) | Extra-small heading style. |
+| heading.sm.font.base | 400 1.5rem/32px Infomaniak Sans | 400 1.5rem/32px Infomaniak Sans | var(--esds-heading-sm-font-base) | Small heading style. |
+| heading.sm.font.emphasized | 500 1.5rem/32px Infomaniak Sans | 500 1.5rem/32px Infomaniak Sans | var(--esds-heading-sm-font-emphasized) | Small heading style. |
+| heading.md.font.base | 400 2rem/40px Infomaniak Sans | 400 2rem/40px Infomaniak Sans | var(--esds-heading-md-font-base) | Medium heading style. |
+| heading.md.font.emphasized | 500 2rem/40px Infomaniak Sans | 500 2rem/40px Infomaniak Sans | var(--esds-heading-md-font-emphasized) | Medium heading style. |
+| heading.lg.font.base | 400 2.5rem/48px Infomaniak Sans | 400 2.5rem/48px Infomaniak Sans | var(--esds-heading-lg-font-base) | Large heading style. |
+| heading.lg.font.emphasized | 500 2.5rem/48px Infomaniak Sans | 500 2.5rem/48px Infomaniak Sans | var(--esds-heading-lg-font-emphasized) | Large heading style. |
+| heading.xl.font.base | 400 3rem/56px Infomaniak Sans | 400 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font-base) | Extra-large heading style. |
+| heading.xl.font.emphasized | 500 3rem/56px Infomaniak Sans | 500 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font-emphasized) | Extra-large heading style. |
 | text-link.content.color.default | #0077cf | #0077cf | var(--esds-text-link-content-color-default) | Default text link color. |
 | text-link.content.color.visited | #8f30f7 | #cab1ff | var(--esds-text-link-content-color-visited) | Default visited text link color. |
 
