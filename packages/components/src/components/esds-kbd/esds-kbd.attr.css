@@ -1,0 +1,9 @@
+kbd[esds-kbd] {
+  box-sizing: border-box;
+  padding: var(--esds-kbd-padding-block) var(--esds-kbd-padding-inline);
+  background-color: var(--esds-kbd-background-color);
+  border: var(--esds-kbd-border-width) solid var(--esds-kbd-border-color);
+  border-radius: var(--esds-kbd-border-radius);
+  color: var(--esds-kbd-content-color);
+  font: var(--esds-kbd-font);
+}
