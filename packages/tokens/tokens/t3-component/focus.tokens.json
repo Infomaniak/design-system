@@ -3,18 +3,21 @@
     "border": {
       "color": {
         "$value": "{color.state.focus}",
+        "$description": "Focus-effect border color.",
         "$extensions": {
           "scopes": ["STROKE_COLOR"]
         }
       },
       "radius": {
         "$value": "{radius.xs}",
+        "$description": "Focus-effect border radius.",
         "$extensions": {
           "scopes": []
         }
       },
       "width": {
         "$value": "{border.sm.width}",
+        "$description": "Focus-effect border width.",
         "$extensions": {
           "scopes": []
         }

@@ -649,38 +649,83 @@
         "feedback": {
           "$description": "Foreground colors placed on feedback backgrounds.",
           "success": {
-            "$value": "{color.lime.950}",
-            "$description": "Foreground on strong success backgrounds (dim1).",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
+            "dim1": {
+              "$value": "{color.lime.950}",
+              "$description": "Foreground on strong success backgrounds (dim1).",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"]
+              }
+            },
+            "dim2": {
+              "$value": "{color.white}",
+              "$description": "Foreground on strong success backgrounds (dim1).",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"]
+              }
             }
           },
           "warning": {
-            "$value": "{color.orange.900}",
-            "$description": "Foreground on strong warning backgrounds (dim1).",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
+            "dim1": {
+              "$value": "{color.orange.900}",
+              "$description": "Foreground on strong warning backgrounds (dim1).",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"]
+              }
+            },
+            "dim2": {
+              "$value": "{color.white}",
+              "$description": "Foreground on strong warning backgrounds (dim1).",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"]
+              }
             }
           },
           "error": {
-            "$value": "{color.red.900}",
-            "$description": "Foreground on strong error backgrounds (dim1).",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
+            "dim1": {
+              "$value": "{color.red.900}",
+              "$description": "Foreground on strong error backgrounds (dim1).",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"]
+              }
+            },
+            "dim2": {
+              "$value": "{color.white}",
+              "$description": "Foreground on strong error backgrounds (dim1).",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"]
+              }
             }
           },
           "information": {
-            "$value": "{color.blue.900}",
-            "$description": "Foreground on strong information backgrounds (dim1).",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
+            "dim1": {
+              "$value": "{color.blue.900}",
+              "$description": "Foreground on strong information backgrounds (dim1).",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"]
+              }
+            },
+            "dim2": {
+              "$value": "{color.white}",
+              "$description": "Foreground on strong information backgrounds (dim1).",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"]
+              }
             }
           },
           "neutral": {
-            "$value": "{color.gray.900}",
-            "$description": "Foreground on strong neutral backgrounds (dim1).",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
+            "dim1": {
+              "$value": "{color.gray.900}",
+              "$description": "Foreground on strong neutral backgrounds (dim1).",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"]
+              }
+            },
+            "dim2": {
+              "$value": "{color.white}",
+              "$description": "Foreground on strong neutral backgrounds (dim1).",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"]
+              }
             }
           }
         }
@@ -1267,14 +1312,14 @@
           "$value": "{color.blue.900-12}",
           "$description": "Medium hover overlay for subtle interactive feedback.",
           "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            "scopes": ["ALL_FILLS"]
           }
         },
         "strong": {
           "$value": "{color.blue.900-60}",
           "$description": "Strong hover overlay for prominent interactive feedback.",
           "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            "scopes": ["ALL_FILLS"]
           }
         }
       },
@@ -1284,31 +1329,31 @@
           "$value": "{color.blue.900-16}",
           "$description": "Medium pressed overlay for subtle active feedback.",
           "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            "scopes": ["ALL_FILLS"]
           }
         },
         "strong": {
           "$value": "{color.blue.900-80}",
           "$description": "Strong pressed overlay for prominent active feedback.",
           "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            "scopes": ["ALL_FILLS"]
           }
         }
       },
       "selected": {
         "$description": "Selected state overlay colors in medium and strong intensities.",
         "medium": {
-          "$value": "{color.blue.900-12}",
+          "$value": "{color.blue.900-40}",
           "$description": "Medium selected overlay for subtle selection feedback.",
           "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            "scopes": ["ALL_FILLS"]
           }
         },
         "strong": {
           "$value": "{color.blue.900-80}",
           "$description": "Strong selected overlay for prominent selection feedback.",
           "$extensions": {
-            "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            "scopes": ["ALL_FILLS"]
           }
         }
       }
