@@ -82,3 +82,88 @@ export const Shortcut: Story = {
     </p>
   `,
 };
+
+export const SpecialKeys: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Modifier and special keys are plain Unicode characters typed literally in the markup — the attribute applies no mapping. Copy the glyph you need from the canvas, or the ready-to-use markup from the source below.',
+      },
+    },
+  },
+  render: () => html`
+    <div style="display: flex; flex-wrap: wrap; gap: var(--esds-spacing-sm);">
+      <kbd
+        ${defineEsdsKbdAttr}
+        esds-kbd
+        >⇧</kbd
+      >
+      <kbd
+        ${defineEsdsKbdAttr}
+        esds-kbd
+        >⌥</kbd
+      >
+      <kbd
+        ${defineEsdsKbdAttr}
+        esds-kbd
+        >⌘</kbd
+      >
+      <kbd
+        ${defineEsdsKbdAttr}
+        esds-kbd
+        >⌃</kbd
+      >
+      <kbd
+        ${defineEsdsKbdAttr}
+        esds-kbd
+        >⏎</kbd
+      >
+      <kbd
+        ${defineEsdsKbdAttr}
+        esds-kbd
+        >⌫</kbd
+      >
+      <kbd
+        ${defineEsdsKbdAttr}
+        esds-kbd
+        >⇥</kbd
+      >
+      <kbd
+        ${defineEsdsKbdAttr}
+        esds-kbd
+        >⎋</kbd
+      >
+      <kbd
+        ${defineEsdsKbdAttr}
+        esds-kbd
+        >⇪</kbd
+      >
+      <kbd
+        ${defineEsdsKbdAttr}
+        esds-kbd
+        >⏏</kbd
+      >
+      <kbd
+        ${defineEsdsKbdAttr}
+        esds-kbd
+        >←</kbd
+      >
+      <kbd
+        ${defineEsdsKbdAttr}
+        esds-kbd
+        >↑</kbd
+      >
+      <kbd
+        ${defineEsdsKbdAttr}
+        esds-kbd
+        >→</kbd
+      >
+      <kbd
+        ${defineEsdsKbdAttr}
+        esds-kbd
+        >↓</kbd
+      >
+    </div>
+  `,
+};
