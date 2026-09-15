@@ -105,6 +105,7 @@ design-system/
   - No unused locals/parameters
   - `NodeNext` module resolution
   - Import with `.ts` extensions
+  - Prefer `function` declarations over `const` + arrow functions for named functions (arrow lambdas stay fine for callbacks)
 
 ### Testing
 

@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.5.0
+
+### Minor Changes
+
+- [#250](https://github.com/Infomaniak/design-system/pull/250) [`c4a1614`](https://github.com/Infomaniak/design-system/commit/c4a1614e0a9eeacb870becb5139c0a8b295aa918): Introducing `@infomaniak-design-system/fonts`, a new package distributing the Infomaniak Sans typeface (variable TTFs, woff2 files, and ready-to-use CSS), along with the tooling to build and publish font updates.
+
+  The design system's base typography now uses Infomaniak Sans: the semantic `font.family.base` token points to the new `font.family.infomaniak-sans` primitive instead of Suisse Int'l.
+  Load the fonts via own hosting to render text with the intended typeface.
+
+- [#349](https://github.com/Infomaniak/design-system/pull/349) [`763bdfc`](https://github.com/Infomaniak/design-system/commit/763bdfc794816ac86c8f9b7f9fbf608d69f8357e): Feedback `foreground` tokens (success, warning, error, information) are now split into `dim1` and `dim2` variants instead of a single value. Consumers referencing the previous flat token path must update to one of the new variants.
+
+  Selected state overlay (`medium`) opacity increased from 12% to 40% for stronger selection feedback. New primitive blue shades (`900-20`, `900-40`) and an `xs` border-radius size are now available.
+
+### Patch Changes
+
+- [#337](https://github.com/Infomaniak/design-system/pull/337) [`755ea1f`](https://github.com/Infomaniak/design-system/commit/755ea1f763e269e3de03895b879b9d0ab233a623): Fixed the dark mode `color-bg-feedback-warning` dim2 token, which referenced the wrong color family (red instead of orange). The warning background now renders with the intended orange shade in dark mode.
+
 ## 0.4.0
 
 ### Minor Changes
