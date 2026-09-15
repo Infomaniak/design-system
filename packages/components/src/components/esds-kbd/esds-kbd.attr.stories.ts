@@ -60,7 +60,7 @@ export const Shortcut: Story = {
     docs: {
       description: {
         story:
-          'Multi-key shortcuts are plain markup: several `<kbd esds-kbd>` elements with a `+` separator, spaced by natural inline text flow.',
+          'Multi-key shortcuts are a single `<kbd esds-kbd>` element containing the full combination, e.g. `⌘+K`.',
       },
     },
   },
@@ -70,13 +70,7 @@ export const Shortcut: Story = {
       <kbd
         ${defineEsdsKbdAttr}
         esds-kbd
-        >⌘</kbd
-      >
-      +
-      <kbd
-        ${defineEsdsKbdAttr}
-        esds-kbd
-        >K</kbd
+        >⌘+K</kbd
       >
       to open the command menu.
     </p>

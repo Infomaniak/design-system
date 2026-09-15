@@ -28,20 +28,15 @@ A keyboard key reads naturally inline within a sentence:
 
 ### Multi-key shortcuts
 
-No special markup is needed to group keys: use several `<kbd esds-kbd>` elements separated by a `+` character, spaced by the natural inline text flow:
+Write the full combination as a single `<kbd esds-kbd>` element containing the key symbols and the `+` separator:
 
 ```html
 <p>
   Press
-  <kbd esds-kbd>⌘</kbd>
-  +
-  <kbd esds-kbd>K</kbd>
+  <kbd esds-kbd>⌘+K</kbd>
   to open the command menu.
 </p>
 ```
-
-> [!NOTE]
-> In compact contexts (buttons, inputs, tooltips), wrap the keys in a flex container with a small gap if natural whitespace spacing is not sufficient.
 
 ## Description
 
