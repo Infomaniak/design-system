@@ -14,7 +14,6 @@
 
 .separator {
   display: flex;
-  align-items: center;
 }
 
 :host([orientation='vertical']) .separator {
@@ -33,19 +32,4 @@
 
 :host([orientation='vertical']) .line {
   width: var(--esds-separator-thickness);
-}
-
-/* Spacing is applied as margins on the visible content only: a flex `gap`
-   would still create one gap between the two lines when the content is
-   `display: none`. */
-:host(:not([orientation='vertical'])) .content:not([hidden]) {
-  margin-inline: var(--esds-separator-spacing);
-}
-
-:host([orientation='vertical']) .content:not([hidden]) {
-  margin-block: var(--esds-separator-spacing);
-}
-
-.content[hidden] {
-  display: none;
 }

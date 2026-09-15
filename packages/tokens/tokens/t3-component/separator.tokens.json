@@ -14,13 +14,6 @@
       "$extensions": {
         "scopes": ["STROKE_FLOAT"]
       }
-    },
-    "spacing": {
-      "$value": "{spacing.sm}",
-      "$description": "Gap between the separator lines and slotted content.",
-      "$extensions": {
-        "scopes": ["GAP"]
-      }
     }
   }
 }

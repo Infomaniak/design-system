@@ -34,14 +34,6 @@ In a flex or grid container, the vertical separator stretches to fill the availa
 
 > **Note:** outside a flex/grid container, set an explicit height on the element (e.g. `style="height: 3rem"`), otherwise it collapses.
 
-### With content
-
-Use the default slot to display a label (or any content) between the two lines:
-
-```html
-<esds-separator>OR</esds-separator>
-```
-
 ### Decorative
 
 Removes the separator from the accessibility tree:
@@ -52,13 +44,13 @@ Removes the separator from the accessibility tree:
 
 ## Description
 
-The separator divides content horizontally or vertically. Unlike the native `<hr>` element, it supports vertical orientation and can display content between its two lines.
+The separator divides content horizontally or vertically. Unlike the native `<hr>` element, it supports vertical orientation.
 
 ### Semantics
 
 - The component has `role="separator"` and exposes `aria-orientation` matching the `orientation` attribute.
-- Slotted content is visual-only: `role="separator"` hides its children from assistive technology. Set `aria-label` explicitly on the element if a name is needed.
 - With the `decorative` attribute, it switches to `role="presentation"` and is removed from the accessibility tree.
+- The component does not support slotted content: any children are ignored. For a labeled divider, compose the separator with text in your layout instead.
 - For thematic breaks in prose content, prefer the native `<hr>` element; this component is intended for interface layouts (menus, toolbars, forms, card sections...).
 
 Its appearance is driven by the design tokens; changes to the look belong to the token layer, not to component consumers.
