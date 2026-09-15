@@ -1,6 +1,7 @@
 export * from './components/esds-body/esds-body.attr.ts';
 export * from './components/esds-heading/esds-heading.attr.ts';
 export * from './components/esds-icon/esds-icon.component.ts';
+export * from './components/esds-separator/esds-separator.component.ts';
 export * from './components/esds-text-link/esds-text-link.attr.ts';
 export * from './helpers/custom-attribute/custom-attribute.ts';
 export * from './helpers/injection-context/injection-context.ts';

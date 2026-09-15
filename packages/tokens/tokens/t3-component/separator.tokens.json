@@ -1,0 +1,26 @@
+{
+  "separator": {
+    "$description": "Component tokens for separators.",
+    "color": {
+      "$value": "{color.border.dim3}",
+      "$description": "Default separator line color (subtle neutral border).",
+      "$extensions": {
+        "scopes": ["STROKE_COLOR"]
+      }
+    },
+    "thickness": {
+      "$value": "{border.xs.width}",
+      "$description": "Default separator line thickness.",
+      "$extensions": {
+        "scopes": ["STROKE_FLOAT"]
+      }
+    },
+    "spacing": {
+      "$value": "{spacing.sm}",
+      "$description": "Gap between the separator lines and slotted content.",
+      "$extensions": {
+        "scopes": ["GAP"]
+      }
+    }
+  }
+}
