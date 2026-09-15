@@ -47,10 +47,13 @@ jobs:
           cache: 'yarn'
 
       # Mise is required by the iOS workflow
+      # Version pinned: https://mise.jdx.dev/VERSION can advertise a release
+      # before/after its GitHub assets exist, breaking the default resolution
       - name: Setup mise
         uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
         with:
           install: false
+          version: '2026.9.2'
 
       - name: Setup SSH
         run: |
@@ -135,6 +138,7 @@ jobs:
         env:
           GITHUB_CI_CONFIG: ${{ toJson(github) }}
           KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
+          CI_DS_UPDATE_AND_PR_AUTH_TOKEN: ${{ secrets.CI_DS_UPDATE_AND_PR_AUTH_TOKEN }}
           CI_PULL_REQUEST_AUTH_TOKEN_MOBILE: ${{ secrets.CI_PULL_REQUEST_AUTH_TOKEN_MOBILE }}
 
       - name: Publish missing package versions (dry-run for fork PR)

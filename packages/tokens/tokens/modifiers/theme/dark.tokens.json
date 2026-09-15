@@ -133,7 +133,7 @@
             "$value": "{color.orange.900}"
           },
           "dim3": {
-            "$value": "{color.red.950}"
+            "$value": "{color.orange.950}"
           }
         },
         "error": {
@@ -279,19 +279,44 @@
         },
         "feedback": {
           "success": {
-            "$value": "{color.lime.50}"
+            "dim1": {
+              "$value": "{color.lime.50}"
+            },
+            "dim2": {
+              "$value": "{color.lime.950}"
+            }
           },
           "warning": {
-            "$value": "{color.orange.50}"
+            "dim1": {
+              "$value": "{color.orange.50}"
+            },
+            "dim2": {
+              "$value": "{color.orange.950}"
+            }
           },
           "error": {
-            "$value": "{color.red.50}"
+            "dim1": {
+              "$value": "{color.red.50}"
+            },
+            "dim2": {
+              "$value": "{color.red.950}"
+            }
           },
           "information": {
-            "$value": "{color.blue.50}"
+            "dim1": {
+              "$value": "{color.blue.50}"
+            },
+            "dim2": {
+              "$value": "{color.blue.950}"
+            }
           },
           "neutral": {
-            "$value": "{color.gray.50}"
+            "dim1": {
+              "$value": "{color.gray.50}"
+            },
+            "dim2": {
+              "$value": "{color.gray.950}"
+            }
           }
         }
       },
@@ -521,6 +546,9 @@
       }
     },
     "shadow": {
+      "xs": {
+        "$value": "{color.gray.950-6}"
+      },
       "sm": {
         "$value": "{color.gray.950-6}"
       },
@@ -535,9 +563,6 @@
       },
       "2xl": {
         "$value": "{color.gray.950-14}"
-      },
-      "xs": {
-        "$value": "{color.gray.950-6}"
       }
     },
     "state": {
@@ -559,7 +584,7 @@
       },
       "selected": {
         "medium": {
-          "$value": "{color.gray.50-12}"
+          "$value": "{color.gray.50-40}"
         },
         "strong": {
           "$value": "{color.gray.50-40}"

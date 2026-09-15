@@ -31,7 +31,7 @@ export interface OutlinedSvgBuildFailure {
 
 export interface OutlinedSvgWrite {
   readonly name: string;
-  readonly svg: string;
+  readonly content: string;
 }
 
 export interface BuildOutlinedSvgsFromFigmaComponentsOptions {
@@ -54,9 +54,9 @@ export async function buildOutlinedSvgsFromFigmaComponents({
 
   await Promise.all(
     components.map(async ([name, node]): Promise<void> => {
-      let svg: string;
+      let content: string;
       try {
-        svg = buildOutlinedSvgFromFigmaComponent({ node, logger });
+        content = buildOutlinedSvgFromFigmaComponent({ node, logger });
       } catch (error: unknown) {
         failures.push({
           name,
@@ -65,7 +65,7 @@ export async function buildOutlinedSvgsFromFigmaComponents({
         return;
       }
 
-      await writeSvg({ name, svg });
+      await writeSvg({ name, content });
     }),
   );
 

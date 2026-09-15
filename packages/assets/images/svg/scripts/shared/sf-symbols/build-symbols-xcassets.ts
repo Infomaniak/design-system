@@ -7,7 +7,7 @@ import { ICON_NAME_PATTERN } from '../icons/icon-name.ts';
 import type { SvgOutlinePath } from '../icons/outline-path.ts';
 import { buildSymbolSvg } from './build-symbol-svg.ts';
 import type { SymbolTemplate } from './parse-symbol-template.ts';
-import { SYMBOL_NAME_PREFIX, SYMBOLS_XCASSETS_DIRECTORY_NAME } from './sf-symbols-config.ts';
+import { SYMBOLS_XCASSETS_DIRECTORY_NAME } from './sf-symbols-config.ts';
 
 export interface SymbolIcon {
   readonly name: string;
@@ -37,7 +37,7 @@ export async function buildSymbolsXcassets({
     });
 
     for (const icon of icons) {
-      const symbolName: string = `${SYMBOL_NAME_PREFIX}${icon.name}`;
+      const symbolName: string = icon.name;
       const symbolsetDirectory: string = join(xcassetsDirectory, `${symbolName}.symbolset`);
       await mkdir(symbolsetDirectory, { recursive: true });
       await writeJsonFileSafe(

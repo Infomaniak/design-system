@@ -33,7 +33,7 @@ describe('buildSymbolSvg', () => {
   test('bakes identical geometry into the three weight variants', async () => {
     const template = await readSymbolTemplate();
     const svg = buildSymbolSvg({
-      symbolName: 'esds-square',
+      symbolName: 'square',
       outlinedPaths: SQUARE_OUTLINED_PATH,
       template,
     });
@@ -64,14 +64,14 @@ describe('buildSymbolSvg', () => {
     expect(fittedBoundingBoxes[0]!.maxY).toBeCloseTo(0, 3);
     expect(fittedBoundingBoxes[0]!.minX).toBeCloseTo(3.761, 3);
 
-    expect(svg).toContain('Generated from esds-square');
+    expect(svg).toContain('Generated from square');
     expect(svg).not.toContain('Generated from symbol');
   });
 
   test('adds a fill-rule attribute for EVENODD winding', async () => {
     const template = await readSymbolTemplate();
     const svg = buildSymbolSvg({
-      symbolName: 'esds-evenodd',
+      symbolName: 'evenodd',
       outlinedPaths: [{ d: SQUARE_OUTLINED_PATH[0]!.d, windingRule: 'EVENODD' }],
       template,
     });
@@ -82,7 +82,7 @@ describe('buildSymbolSvg', () => {
   test('does not add a fill-rule attribute for NONZERO winding', async () => {
     const template = await readSymbolTemplate();
     const svg = buildSymbolSvg({
-      symbolName: 'esds-nonzero',
+      symbolName: 'nonzero',
       outlinedPaths: SQUARE_OUTLINED_PATH,
       template,
     });
@@ -99,7 +99,7 @@ describe('buildSymbolSvg', () => {
 
     expect(() =>
       buildSymbolSvg({
-        symbolName: 'esds-square',
+        symbolName: 'square',
         outlinedPaths: SQUARE_OUTLINED_PATH,
         template: brokenTemplate,
       }),
@@ -108,8 +108,8 @@ describe('buildSymbolSvg', () => {
 
   test('throws when there are no outline paths', async () => {
     const template = await readSymbolTemplate();
-    expect(() => buildSymbolSvg({ symbolName: 'esds-empty', outlinedPaths: [], template })).toThrow(
-      'Symbol "esds-empty" has no outline paths.',
+    expect(() => buildSymbolSvg({ symbolName: 'empty', outlinedPaths: [], template })).toThrow(
+      'Symbol "empty" has no outline paths.',
     );
   });
 });
