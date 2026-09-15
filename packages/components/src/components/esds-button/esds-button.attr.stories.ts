@@ -35,8 +35,6 @@ const meta = {
 
 export default meta;
 
-// type Story = StoryObj<EsdsButtonAttr & HTMLButtonElement>;
-
 export const Button: StoryObj<
   EsdsButtonAttr &
     HTMLButtonElement & {
@@ -142,6 +140,7 @@ export const Types: StoryObj<
             esds-button
             data-esds-button-type=${variant}
             ?disabled=${args.disabled}
+            loading
           >
             ${variant}
           </button>
@@ -163,7 +162,6 @@ export const Sizes: StoryObj<
       type: 'boolean',
     },
   }),
-
   render: (args) => html`
     <style>
       .buttons-container {
@@ -174,17 +172,20 @@ export const Sizes: StoryObj<
         gap: 12px;
       }
     </style>
-    ${['small', 'medium', 'large'].map(
-      (variant) => html`
-        <button
-          ${defineEsdsButtonAttr}
-          esds-button
-          data-esds-button-size=${variant}
-          ?disabled=${args.disabled}
-        >
-          ${variant}
-        </button>
-      `,
-    )}
+    <div class="buttons-container">
+      ${['small', 'medium', 'large'].map(
+        (variant) => html`
+          <button
+            ${defineEsdsButtonAttr}
+            esds-button
+            data-esds-button-size=${variant}
+            ?disabled=${args.disabled}
+          >
+            <esds-icon name="esds:plus"></esds-icon>
+            ${variant}
+          </button>
+        `,
+      )}
+    </div>
   `,
 };
