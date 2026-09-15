@@ -1,0 +1,1 @@
+import{t as e}from"./iframe-XndwF800.js";e();
