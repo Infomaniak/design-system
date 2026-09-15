@@ -14,6 +14,7 @@
   --esds-button-content-color-a: var(--esds-color-content-on-brand-a);
   --esds-button-background-color-disabled: var(--esds-color-background-disabled);
   --esds-button-content-color-disabled: var(--esds-color-content-on-disabled);
+  --esds-button-transition: 150ms linear 0s;
 }
 
 [esds-button] {
@@ -40,9 +41,9 @@
   background-color: var(--esds-button-background-color);
   color: var(--esds-button-content-color);
   transition:
-    background-color 150ms,
-    color 150ms,
-    border-color 150ms;
+    background-color var(--esds-button-transition),
+    color var(--esds-button-transition),
+    border-color var(--esds-button-transition);
 
   /* auto wrap text */
   hyphens: auto;
