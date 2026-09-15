@@ -88,6 +88,9 @@ The command fits each committed outline (see [Icons](#icons)) into a minimal App
 > [!NOTE]
 > By design, only one weight is generated per symbol: all icons render at the stroke weight designed in Figma, regardless of font weight.
 
+> [!IMPORTANT]
+> iOS symbol names are the raw, unprefixed icon names (e.g. `magnifying-glass`, used as `Image("magnifying-glass")`): they intentionally do **not** carry the `esds-` prefix used by the web iconify JSON.
+
 ### Update the guidelines
 
 #### [Iconography Guideline](https://www.figma.com/design/nbEPxwoIzXfZVquwR4NfYg/Edelweiss---Iconography?node-id=0-1&p=f&t=50O2v4pgV2smKfy8-0)
