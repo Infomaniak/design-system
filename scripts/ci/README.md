@@ -102,11 +102,21 @@ They operate during the `publish.yml` workflow and are configured in `.changeset
 The version bump can also be run manually with `yarn changeset:version`, if needed.
 It requires `GITHUB_TOKEN` so the changelog generator can link commits and PRs — run `export GITHUB_TOKEN=$(gh auth token)` first, or add it to your `.env` (see `.env.example`).
 
-## Impacted Package Detection (prerelease)
+## How does it work ?
 
-For `dev` / `rc` prerelease tags, `scripts/ci/publish/src/ci-publish.ts`:
+This repo is a monorepo based on `yarn workspaces`.
+
+When the `publish.yml` workflow triggers, the `yarn ci:publish` script is run.
+
+This script:
 
 1. detects changed files via `git diff --name-only <base> <head>`
 2. maps files to publishable packages (`packages/*`)
 3. propagates impact to internal dependents (dependency graph)
-4. publishes in topological order
+4. compare the versions of the impacted packages with the latest published versions on npm
+5. runs every `build` scripts present into the impacted packages:
+   - command: `yarn workspaces foreach --topological-dev --recursive run build`
+   - used to build the artifacts associated with each package.
+6. runs every `publish` scripts present into the impacted packages:
+   - command: `yarn workspaces foreach --topological-dev --recursive run publish`
+   - used to publish the previously built artifacts associated with each package.

@@ -28,11 +28,10 @@ design-system/
 ├── apps/
 │   └── docs/                    # Storybook documentation app
 │       ├── src/
-│       │   ├── main.tsx         # App entry point
-│       │   ├── stories/         # Storybook stories + token docs
-│       │   │   └── tokens/      # Markdown token documentation
-│       │   └── assets/          # Static assets
-│       ├── .storybook/          # Storybook configuration
+│       │   ├── components/      # React docs components (DocsLink, DocsMarkdown, …)
+│       │   ├── stories/         # Storybook stories + token docs (MDX, raw .md assets)
+│       │   └── styles/          # Docs stylesheets
+│       ├── .storybook/          # Storybook configuration (preview.tsx = entry)
 │       └── dist/                # Built docs output
 ├── packages/
 │   ├── tokens/                  # Design tokens library (DTCG format)
@@ -40,6 +39,11 @@ design-system/
 │   │   ├── scripts/             # Token build/validation scripts
 │   │   ├── demo/                # Live demo app for tokens
 │   │   └── dist/                # Output: CSS, JSON, Markdown
+│   ├── assets/images/svg/       # SVG assets (icons, illustrations) — private package
+│   │   ├── assets/svg/          # Committed SVGs + figma/outlines/ (feed SF Symbols)
+│   │   └── scripts/
+│   │       ├── scripts/         # import-svgs, generate-sf-symbols, publish-sf-symbols, build-legacy-svgs
+│   │       └── shared/          # sf-symbols/ (template engine, xcassets builder), svg/ helpers
 │   └── components/              # Web components library
 │       ├── src/                 # Component source + stories
 │       └── tests/visual-regression/      # Playwright visual regression suite
@@ -75,6 +79,7 @@ design-system/
 | Build all packages           | `yarn build`                                 |
 | Build tokens only            | `yarn build:tokens`                          |
 | Validate tokens              | `cd packages/tokens && yarn validate:tokens` |
+| Build SF Symbols (iOS)       | `yarn build:sf-symbols`                      |
 | Run tests                    | `yarn test`                                  |
 | Test coverage                | `yarn test:coverage`                         |
 | Visual regression tests      | `yarn test:vrt`                              |
@@ -100,6 +105,7 @@ design-system/
   - No unused locals/parameters
   - `NodeNext` module resolution
   - Import with `.ts` extensions
+  - Prefer `function` declarations over `const` + arrow functions for named functions (arrow lambdas stay fine for callbacks)
 
 ### Testing
 

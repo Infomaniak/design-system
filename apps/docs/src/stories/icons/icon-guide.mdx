@@ -137,4 +137,8 @@ This gives the following approximate stroke-widths:
 
 See the [implementation](https://github.com/Infomaniak/design-system/blob/develop/packages/assets/images/svg/scripts/shared/svg/iconify/build-svg-set-from-svg-directory/apply-optical-sizes.ts) for more details.
 
-> ⚠️ **Note:** Mobile platforms (iOS, Android) handle icon sizing differently. This approach is specific to the **web** implementation.
+## iOS (SF Symbols)
+
+Icons are also delivered to iOS as [custom SF Symbols](https://developer.apple.com/sf-symbols/). During the Figma import, an **outlined** version of each icon (filled paths, no strokes — a requirement of SF Symbols) is committed alongside the web SVG and feeds the generation of the `ESDSSymbols.xcassets` catalog published to the `ios-design-system` repository.
+
+Symbols follow the same naming convention with the `esds-` prefix (e.g. `Image("esds-home")` in SwiftUI).

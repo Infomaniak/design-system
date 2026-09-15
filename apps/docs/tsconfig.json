@@ -8,5 +8,5 @@
     "jsx": "react-jsx",
     "types": ["vite/client"]
   },
-  "include": ["src", ".storybook", "src/types/*.d.ts"]
+  "include": ["src", ".storybook", "../../packages/components/dist/generated-jsx-types.d.ts"]
 }
