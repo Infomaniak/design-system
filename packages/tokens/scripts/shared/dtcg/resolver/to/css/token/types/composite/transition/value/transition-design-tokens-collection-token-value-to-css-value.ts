@@ -16,5 +16,5 @@ export function transitionDesignTokensCollectionTokenValueToCssValue(
   value: TransitionDesignTokensCollectionTokenValue,
   options?: TransitionDesignTokensCollectionTokenValueToCssValueOptions,
 ): string {
-  return `${valueOrCurlyReferenceToCssVariableReference(value.duration, durationDesignTokensCollectionTokenValueToCssValue, options)} ${valueOrCurlyReferenceToCssVariableReference(value.timingFunction, cubicBezierDesignTokensCollectionTokenValueToCssValue, options)} ${valueOrCurlyReferenceToCssVariableReference(value.duration, durationDesignTokensCollectionTokenValueToCssValue, options)}`;
+  return `${valueOrCurlyReferenceToCssVariableReference(value.duration, durationDesignTokensCollectionTokenValueToCssValue, options)} ${valueOrCurlyReferenceToCssVariableReference(value.timingFunction, cubicBezierDesignTokensCollectionTokenValueToCssValue, options)} ${valueOrCurlyReferenceToCssVariableReference(value.delay, durationDesignTokensCollectionTokenValueToCssValue, options)}`;
 }
