@@ -3,19 +3,40 @@
 }
 
 [esds-body='xs'] {
-  --esds-body-font: var(--esds-body-xs-font);
+  --esds-body-font: var(--esds-body-xs-font-base);
+
+  &[emphasized],
+  & strong {
+    --esds-body-font: var(--esds-body-xs-font-emphasized);
+  }
 }
 
 [esds-body='sm'] {
-  --esds-body-font: var(--esds-body-sm-font);
+  --esds-body-font: var(--esds-body-sm-font-base);
+
+  &[emphasized],
+  & strong {
+    --esds-body-font: var(--esds-body-sm-font-emphasized);
+  }
 }
 
-[esds-body='md'] {
-  --esds-body-font: var(--esds-body-md-font);
+[esds-body='md'],
+strong {
+  --esds-body-font: var(--esds-body-md-font-base);
+
+  &[emphasized],
+  & strong {
+    --esds-body-font: var(--esds-body-md-font-emphasized);
+  }
 }
 
 [esds-body='lg'] {
-  --esds-body-font: var(--esds-body-lg-font);
+  --esds-body-font: var(--esds-body-lg-font-base);
+
+  &[emphasized],
+  & strong {
+    --esds-body-font: var(--esds-body-lg-font-emphasized);
+  }
 }
 
 p {
