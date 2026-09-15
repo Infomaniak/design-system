@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.28",
+    "version": "0.0.30",
     "author": {
       "name": "Infomaniak"
     },
@@ -10,9 +10,9 @@
       "title": "GPL-3.0-only",
       "spdx": "GPL-3.0-only"
     },
-    "total": 261
+    "total": 262
   },
-  "lastModified": 1788869478,
+  "lastModified": 1789465005,
   "icons": {
     "a-large-small": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 16 2.536-7.328a1.02 1.02 0 011.928 0L22 16m-6.303-2h5.606M2 16l4.039-9.69a.5.5 0 01.923 0L11 16m-7.696-3h6.392\" vector-effect=\"non-scaling-stroke\"/>"
@@ -135,7 +135,7 @@
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M16 2v2m1.915 18a6 6 0 10-12 0M8 2v2m8 8a4 4 0 11-8 0 4 4 0 018 0M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "check": {
-      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M20 6 9 17l-5-5\" vector-effect=\"non-scaling-stroke\"/>"
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M20 7 9 18l-5-5\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "checkmark-list": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M13 5h8m-8 7h8m-8 7h8M3 17l2 2 4-4M3 7l2 2 4-4\" vector-effect=\"non-scaling-stroke\"/>"
@@ -197,6 +197,9 @@
     "circle-fading-arrow-up": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 2a10 10 0 017.38 16.75M8 12l4-4 4 4m-4-4v8M2.5 8.875a10 10 0 00-.5 3M2.83 16a10 10 0 002.43 3.4M4.636 5.235a10 10 0 01.891-.857M8.644 21.42a10 10 0 007.631-.38\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "circle-filled": {
+      "body": "<path fill=\"currentColor\" d=\"M12 1.125c6.006 0 10.875 4.869 10.875 10.875S18.006 22.875 12 22.875 1.125 18.006 1.125 12 5.994 1.125 12 1.125\"/>"
+    },
     "circle-info": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 16v-4m0-4h.01M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10\" vector-effect=\"non-scaling-stroke\"/>"
     },
@@ -234,7 +237,7 @@
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M17.5 19H9a7 7 0 116.71-9h1.79a4.5 4.5 0 110 9\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "cloud-arrow-anticlockwise": {
-      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M21 15.25A4.5 4.5 0 0017.5 8h-1.79a7.001 7.001 0 00-13.377-.111A7 7 0 003 13.607M11 15H7v-4m0 4 2.09-2.09a4.82 4.82 0 013.41-1.41A4.5 4.5 0 0117 16a5 5 0 01-9 3\" vector-effect=\"non-scaling-stroke\"/>"
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M21 15.25A4.499 4.499 0 0017.5 8h-1.79a6.999 6.999 0 00-13.377-.111A7 7 0 003 13.607M11 15H7v-4m0 4 2.09-2.09a4.82 4.82 0 013.41-1.41A4.5 4.5 0 0117 16a5 5 0 01-9 3\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "cloud-arrow-down": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 13v8m4-4-4 4-4-4m-3.607-1.73A7 7 0 1115.71 8h1.79a4.5 4.5 0 012.436 8.284\" vector-effect=\"non-scaling-stroke\"/>"
@@ -455,7 +458,7 @@
     "list-left": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M15 12H3m0-7h18M9 19H3\" vector-effect=\"non-scaling-stroke\"/>"
     },
-    "list-magnifying-class": {
+    "list-magnifying-glass": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M21 5H3m7 7H3m7 7H3m18 0-1.9-1.9M20 15a3 3 0 11-6 0 3 3 0 016 0\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "lock": {
@@ -696,7 +699,7 @@
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M11.525 2.295a.53.53 0 01.95 0l2.31 4.679a2.12 2.12 0 001.595 1.16l5.166.756a.53.53 0 01.294.904l-3.736 3.638a2.12 2.12 0 00-.611 1.878l.882 5.14a.53.53 0 01-.771.56l-4.618-2.428a2.12 2.12 0 00-1.973 0L6.396 21.01a.53.53 0 01-.77-.56l.881-5.14a2.12 2.12 0 00-.611-1.878L2.16 9.795a.53.53 0 01.294-.906l5.165-.755a2.12 2.12 0 001.597-1.16z\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "store": {
-      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M15 21v-5a1 1 0 00-1-1h-4a1 1 0 00-1 1v5m8.774-10.69a1.12 1.12 0 00-1.549 0 2.5 2.5 0 01-3.451 0 1.12 1.12 0 00-1.548 0 2.5 2.5 0 01-3.452 0 1.12 1.12 0 00-1.55 0 2.5 2.5 0 01-3.769-3.248l2.889-4.184A2 2 0 017 2h10a2 2 0 011.653.873l2.895 4.192a2.5 2.5 0 01-3.774 3.244M4 10.95V19a2 2 0 002 2h12a2 2 0 002-2v-8.05\" vector-effect=\"non-scaling-stroke\"/>"
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M15 21v-5a1 1 0 00-1-1h-4a1 1 0 00-1 1v5m8.774-10.69a1.12 1.12 0 00-1.549 0 2.5 2.5 0 01-3.451 0 1.12 1.12 0 00-1.548 0 2.5 2.5 0 01-3.452 0 1.12 1.12 0 00-1.549 0 2.5 2.5 0 01-3.77-3.248l2.889-4.184A2 2 0 017 2h10a2 2 0 011.653.873l2.895 4.192a2.5 2.5 0 01-3.774 3.244M4 10.95V19a2 2 0 002 2h12a2 2 0 002-2v-8.05\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "strikethrough": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M16 4H9a3 3 0 00-2.83 4M14 12a4 4 0 110 8H6m-2-8h16\" vector-effect=\"non-scaling-stroke\"/>"
@@ -861,6 +864,7 @@
       "circle-cross-filled",
       "circle-ellipsis",
       "circle-fading-arrow-up",
+      "circle-filled",
       "circle-info",
       "circle-info-filled",
       "circle-line-circle",
@@ -947,7 +951,7 @@
       "list",
       "list-filter",
       "list-left",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "lock",
       "lock-open",
       "looped-square",
@@ -1065,6 +1069,7 @@
     "@filled": [
       "circle-check-filled",
       "circle-cross-filled",
+      "circle-filled",
       "circle-info-filled",
       "envelope-filled",
       "hard-drive-filled"
@@ -1450,6 +1455,7 @@
     ],
     "#basic": [
       "circle",
+      "circle-filled",
       "square"
     ],
     "#basket": [
@@ -1582,7 +1588,7 @@
     ],
     "#browse": [
       "folder-open",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "magnifying-glass"
     ],
     "#brush": [
@@ -1775,6 +1781,7 @@
       "circle-arrow-right",
       "circle-ellipsis",
       "circle-fading-arrow-up",
+      "circle-filled",
       "circle-info",
       "circle-info-filled",
       "circle-open-top-right",
@@ -2435,7 +2442,8 @@
       "door-open"
     ],
     "#dot": [
-      "circle"
+      "circle",
+      "circle-filled"
     ],
     "#dots": [
       "calendar-dots",
@@ -2801,13 +2809,13 @@
     "#filter": [
       "funnel",
       "list-filter",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "sliders-horizontal",
       "sliders-vertical"
     ],
     "#find": [
       "envelope-magnifying-glass",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "magnifying-glass",
       "magnifying-glass-minus",
       "magnifying-glass-plus",
@@ -2853,6 +2861,7 @@
     ],
     "#form": [
       "circle",
+      "circle-filled",
       "square"
     ],
     "#format": [
@@ -2941,6 +2950,7 @@
     ],
     "#geometry": [
       "circle",
+      "circle-filled",
       "square"
     ],
     "#get": [
@@ -3266,7 +3276,7 @@
       "list-left"
     ],
     "#index": [
-      "list-magnifying-class"
+      "list-magnifying-glass"
     ],
     "#individual": [
       "user"
@@ -3532,7 +3542,7 @@
       "list",
       "list-filter",
       "list-left",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "number-list",
       "rows-three",
       "rows-two"
@@ -3591,7 +3601,7 @@
     ],
     "#lookup": [
       "envelope-magnifying-glass",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "magnifying-glass",
       "magnifying-glass-minus",
       "magnifying-glass-plus",
@@ -3632,7 +3642,7 @@
       "magnifying-glass"
     ],
     "#magnify": [
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "magnifying-glass-minus",
       "magnifying-glass-plus"
     ],
@@ -4122,6 +4132,7 @@
     ],
     "#outline": [
       "circle",
+      "circle-filled",
       "square"
     ],
     "#output": [
@@ -4461,7 +4472,7 @@
       "circle-question-filled",
       "envelope-magnifying-glass",
       "envelope-question-mark",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "magnifying-glass",
       "shield-question-mark"
     ],
@@ -4487,7 +4498,8 @@
       "concentric-circles"
     ],
     "#radio": [
-      "circle"
+      "circle",
+      "circle-filled"
     ],
     "#rating": [
       "heart",
@@ -4779,7 +4791,8 @@
     ],
     "#ring": [
       "bell",
-      "circle"
+      "circle",
+      "circle-filled"
     ],
     "#rings": [
       "concentric-circles"
@@ -4809,7 +4822,8 @@
       "square-arrow-clockwise"
     ],
     "#round": [
-      "circle"
+      "circle",
+      "circle-filled"
     ],
     "#route": [
       "arrow-turn-up-right"
@@ -4895,7 +4909,7 @@
     "#search": [
       "envelope-magnifying-glass",
       "list-filter",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "magnifying-glass",
       "magnifying-glass-minus",
       "magnifying-glass-plus",
@@ -4986,6 +5000,7 @@
     ],
     "#shape": [
       "circle",
+      "circle-filled",
       "overline-rectangle-underline",
       "square"
     ],
@@ -5427,7 +5442,7 @@
       "italic",
       "languages",
       "list-left",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "rectangle-underline-dashed",
       "text",
       "toggle-case",
