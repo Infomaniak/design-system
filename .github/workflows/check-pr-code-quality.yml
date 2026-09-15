@@ -42,6 +42,8 @@ jobs:
           "
       - name: Build packages
         run: yarn build
+        env:
+          KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
 
       - name: Run "check" script
         run: yarn run check
