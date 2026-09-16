@@ -24,6 +24,7 @@ export interface CreateIosSymbolsPublishGithubBranchOptions {
   readonly version: string;
   readonly sourceCommit: string;
   readonly branchName: string;
+  readonly pushBranchWhenEmpty?: boolean;
 }
 
 /**
@@ -37,6 +38,7 @@ export async function createIosSymbolsPublishGithubBranch({
   version,
   sourceCommit,
   branchName,
+  pushBranchWhenEmpty = false,
 }: CreateIosSymbolsPublishGithubBranchOptions): Promise<GitChanges> {
   return updateGitRepositoryOnNewBranch({
     repository: `git@${IOS_DESIGN_SYSTEM_REPOSITORY_NAME}:${INFOMANIAK_GITHUB_ORGANIZATION}/${IOS_DESIGN_SYSTEM_REPOSITORY_NAME}.git`,
@@ -65,6 +67,6 @@ export async function createIosSymbolsPublishGithubBranch({
       return `chore: Update symbols to ${version}`;
     },
     logger,
-    allowEmpty: 'yes-skip-push',
+    allowEmpty: pushBranchWhenEmpty ? 'yes' : 'yes-skip-push',
   });
 }

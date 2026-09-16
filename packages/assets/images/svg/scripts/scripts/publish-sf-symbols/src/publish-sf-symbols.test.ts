@@ -116,6 +116,7 @@ describe('publishSfSymbols', () => {
       version: '1.2.3-dev.42',
       sourceCommit: SOURCE_COMMIT,
       branchName: 'esds-symbols/1.2.3-dev.42',
+      pushBranchWhenEmpty: false,
     });
     expect(createGithubPullRequestMock).toHaveBeenCalledWith({
       owner: 'Infomaniak',
@@ -159,6 +160,24 @@ describe('publishSfSymbols', () => {
     await publishSfSymbols(options);
 
     expect(createIosSymbolsPublishGithubBranchMock).toHaveBeenCalledOnce();
+    expect(createGithubPullRequestMock).not.toHaveBeenCalled();
+  });
+
+  it('pushes an empty symbols branch when the token publish depends on it', async () => {
+    const options = createPublishOptions('dev');
+    (options as { iosDesignSystemBaseBranch: string }).iosDesignSystemBaseBranch =
+      'esds-symbols/1.2.3-dev.42';
+    await writeOutlineFile(options.outlinesDirectory);
+    createIosSymbolsPublishGithubBranchMock.mockResolvedValue([] satisfies GitChanges);
+
+    await publishSfSymbols(options);
+
+    expect(createIosSymbolsPublishGithubBranchMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        branchName: 'esds-symbols/1.2.3-dev.42',
+        pushBranchWhenEmpty: true,
+      }),
+    );
     expect(createGithubPullRequestMock).not.toHaveBeenCalled();
   });
 });

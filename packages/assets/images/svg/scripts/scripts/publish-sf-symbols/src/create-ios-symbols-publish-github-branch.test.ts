@@ -61,7 +61,10 @@ describe('createIosSymbolsPublishGithubBranch', () => {
     await rm(tempDir, { force: true, recursive: true });
   });
 
-  const runUpdateInRepository = async (repositoryDirectory: string): Promise<RunUpdateResult> => {
+  const runUpdateInRepository = async (
+    repositoryDirectory: string,
+    pushBranchWhenEmpty = false,
+  ): Promise<RunUpdateResult> => {
     let result: RunUpdateResult | undefined;
 
     updateGitRepositoryOnNewBranchMock.mockImplementation(
@@ -87,6 +90,7 @@ describe('createIosSymbolsPublishGithubBranch', () => {
       version: '1.2.3',
       sourceCommit: SYMBOL_SOURCE_COMMIT,
       branchName: 'esds-symbols/1.2.3',
+      pushBranchWhenEmpty,
     });
 
     expect(changes).toEqual([{ mode: 'create', file: 'Sources/ESDSSymbols/Symbols.xcassets' }]);
@@ -96,7 +100,7 @@ describe('createIosSymbolsPublishGithubBranch', () => {
       updateGitRepositoryOnNewBranchMock.mock.calls[0]![0]!;
     expect(options.repository).toBe('git@ios-design-system:Infomaniak/ios-design-system.git');
     expect(options.branchName).toBe('esds-symbols/1.2.3');
-    expect(options.allowEmpty).toBe('yes-skip-push');
+    expect(options.allowEmpty).toBe(pushBranchWhenEmpty ? 'yes' : 'yes-skip-push');
 
     return result!;
   };
@@ -172,5 +176,12 @@ describe('createIosSymbolsPublishGithubBranch', () => {
         },
       }),
     );
+  });
+
+  it('pushes an empty branch when requested', async () => {
+    const repositoryDirectory: string = join(tempDir, 'repository');
+    await mkdir(repositoryDirectory, { recursive: true });
+
+    await runUpdateInRepository(repositoryDirectory, true);
   });
 });

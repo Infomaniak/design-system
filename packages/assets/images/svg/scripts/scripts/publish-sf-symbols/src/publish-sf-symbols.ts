@@ -40,6 +40,7 @@ export async function publishSfSymbols({
   // shared publish options
   mode,
   prerelease,
+  iosDesignSystemBaseBranch,
 }: PublishSfSymbolsOptions): Promise<void> {
   return logger.asyncTask('sf-symbols', async (logger: Logger): Promise<void> => {
     if (!(await hasSymbolOutlineFiles(outlinesDirectory))) {
@@ -69,6 +70,7 @@ export async function publishSfSymbols({
       version: publishVersion,
       sourceCommit,
       branchName: publishBranchName,
+      pushBranchWhenEmpty: iosDesignSystemBaseBranch === publishBranchName,
     });
 
     if (branchChanges.length > 0) {
