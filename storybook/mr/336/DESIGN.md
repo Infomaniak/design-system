@@ -2,117 +2,117 @@
 typography:
   xs:
     base:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "0.75rem"
       fontWeight: "400"
       lineHeight: "16px"
       letterSpacing: "0px"
     emphasized:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "0.75rem"
       fontWeight: "500"
       lineHeight: "16px"
       letterSpacing: "0px"
   sm:
     base:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "0.875rem"
       fontWeight: "400"
       lineHeight: "20px"
       letterSpacing: "0px"
     emphasized:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "0.875rem"
       fontWeight: "500"
       lineHeight: "20px"
       letterSpacing: "0px"
   md:
     base:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "1rem"
       fontWeight: "400"
       lineHeight: "24px"
       letterSpacing: "0px"
     emphasized:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "1rem"
       fontWeight: "500"
       lineHeight: "24px"
       letterSpacing: "0px"
   lg:
     base:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "1.125rem"
       fontWeight: "400"
       lineHeight: "26px"
       letterSpacing: "0px"
     emphasized:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "1.125rem"
       fontWeight: "500"
       lineHeight: "26px"
       letterSpacing: "0px"
   xl:
     base:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "1.25rem"
       fontWeight: "400"
       lineHeight: "28px"
       letterSpacing: "0px"
     emphasized:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "1.25rem"
       fontWeight: "500"
       lineHeight: "28px"
       letterSpacing: "0px"
   2xl:
     base:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "1.5rem"
       fontWeight: "400"
       lineHeight: "32px"
       letterSpacing: "0px"
     emphasized:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "1.5rem"
       fontWeight: "500"
       lineHeight: "32px"
       letterSpacing: "0px"
   3xl:
     base:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "2rem"
       fontWeight: "400"
       lineHeight: "40px"
       letterSpacing: "0px"
     emphasized:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "2rem"
       fontWeight: "500"
       lineHeight: "40px"
       letterSpacing: "0px"
   4xl:
     base:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "2.5rem"
       fontWeight: "400"
       lineHeight: "48px"
       letterSpacing: "0px"
     emphasized:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "2.5rem"
       fontWeight: "500"
       lineHeight: "48px"
       letterSpacing: "0px"
   5xl:
     base:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "3rem"
       fontWeight: "400"
       lineHeight: "56px"
       letterSpacing: "0px"
     emphasized:
-      fontFamily: "Suisse Int'l"
+      fontFamily: "Infomaniak Sans"
       fontSize: "3rem"
       fontWeight: "500"
       lineHeight: "56px"
@@ -221,11 +221,16 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.on.dataviz.gray.dim2 | #f8fafc | #020618 | var(--esds-color-content-on-dataviz-gray-dim2) | Foreground on soft gray data-viz backgrounds (dim2). |
 | color.content.on.dataviz.dim1 | #0b426f | #0b426f | var(--esds-color-content-on-dataviz-dim1) | Default foreground on data-viz dim1 backgrounds. |
 | color.content.on.dataviz.dim2 | #f0f8ff | #f0f8ff | var(--esds-color-content-on-dataviz-dim2) | Default foreground on data-viz dim2 backgrounds. |
-| color.content.on.feedback.success | #042f16 | #f0fdf4 | var(--esds-color-content-on-feedback-success) | Foreground on strong success backgrounds (dim1). |
-| color.content.on.feedback.warning | #7a200d | #fff7eb | var(--esds-color-content-on-feedback-warning) | Foreground on strong warning backgrounds (dim1). |
-| color.content.on.feedback.error | #920a0a | #fff0f0 | var(--esds-color-content-on-feedback-error) | Foreground on strong error backgrounds (dim1). |
-| color.content.on.feedback.information | #0b426f | #f0f8ff | var(--esds-color-content-on-feedback-information) | Foreground on strong information backgrounds (dim1). |
-| color.content.on.feedback.neutral | #0f172b | #f8fafc | var(--esds-color-content-on-feedback-neutral) | Foreground on strong neutral backgrounds (dim1). |
+| color.content.on.feedback.success.dim1 | #042f16 | #f0fdf4 | var(--esds-color-content-on-feedback-success-dim1) | Foreground on strong success backgrounds (dim1). |
+| color.content.on.feedback.success.dim2 | #fff | #042f16 | var(--esds-color-content-on-feedback-success-dim2) | Foreground on strong success backgrounds (dim1). |
+| color.content.on.feedback.warning.dim1 | #7a200d | #fff7eb | var(--esds-color-content-on-feedback-warning-dim1) | Foreground on strong warning backgrounds (dim1). |
+| color.content.on.feedback.warning.dim2 | #fff | #460d02 | var(--esds-color-content-on-feedback-warning-dim2) | Foreground on strong warning backgrounds (dim1). |
+| color.content.on.feedback.error.dim1 | #920a0a | #fff0f0 | var(--esds-color-content-on-feedback-error-dim1) | Foreground on strong error backgrounds (dim1). |
+| color.content.on.feedback.error.dim2 | #fff | #500000 | var(--esds-color-content-on-feedback-error-dim2) | Foreground on strong error backgrounds (dim1). |
+| color.content.on.feedback.information.dim1 | #0b426f | #f0f8ff | var(--esds-color-content-on-feedback-information-dim1) | Foreground on strong information backgrounds (dim1). |
+| color.content.on.feedback.information.dim2 | #fff | #072a4a | var(--esds-color-content-on-feedback-information-dim2) | Foreground on strong information backgrounds (dim1). |
+| color.content.on.feedback.neutral.dim1 | #0f172b | #f8fafc | var(--esds-color-content-on-feedback-neutral-dim1) | Foreground on strong neutral backgrounds (dim1). |
+| color.content.on.feedback.neutral.dim2 | #fff | #020618 | var(--esds-color-content-on-feedback-neutral-dim2) | Foreground on strong neutral backgrounds (dim1). |
 | color.content.brand | #0077cf | #0077cf | var(--esds-color-content-brand) | Default brand foreground color. |
 | color.content.brand.infomaniak | #0077cf | #36adfa | var(--esds-color-content-brand-infomaniak) | Infomaniak brand foreground colors. |
 | color.content.brand.mail | #d7004b | #ff5d86 | var(--esds-color-content-brand-mail) | Mail product brand foreground colors. |
@@ -303,7 +308,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.state.hover.strong | #0b426f99 | #f8fafc33 | var(--esds-color-state-hover-strong) | Strong hover overlay for prominent interactive feedback. |
 | color.state.pressed.medium | #0b426f29 | #f8fafc29 | var(--esds-color-state-pressed-medium) | Medium pressed overlay for subtle active feedback. |
 | color.state.pressed.strong | #0b426fcc | #f8fafc66 | var(--esds-color-state-pressed-strong) | Strong pressed overlay for prominent active feedback. |
-| color.state.selected.medium | #0b426f1f | #f8fafc1f | var(--esds-color-state-selected-medium) | Medium selected overlay for subtle selection feedback. |
+| color.state.selected.medium | #0b426f66 | #f8fafc66 | var(--esds-color-state-selected-medium) | Medium selected overlay for subtle selection feedback. |
 | color.state.selected.strong | #0b426fcc | #f8fafc66 | var(--esds-color-state-selected-strong) | Strong selected overlay for prominent selection feedback. |
 | font.size.xs | 0.75rem | 0.75rem | var(--esds-font-size-xs) | Extra-small font size for captions and metadata. |
 | font.size.sm | 0.875rem | 0.875rem | var(--esds-font-size-sm) | Small font size for helper text and compact UI. |
@@ -314,7 +319,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | font.size.3xl | 2rem | 2rem | var(--esds-font-size-3xl) | 3x-large font size for prominent headings. |
 | font.size.4xl | 2.5rem | 2.5rem | var(--esds-font-size-4xl) | 4x-large font size for display headings. |
 | font.size.5xl | 3rem | 3rem | var(--esds-font-size-5xl) | 5x-large font size for hero display text. |
-| font.family.base | "Suisse Int'l" | "Suisse Int'l" | var(--esds-font-family-base) | Base font family used across the design system. |
+| font.family.base | "Infomaniak Sans" | "Infomaniak Sans" | var(--esds-font-family-base) | Base font family used across the design system. |
 | font.line-height.xs | 16px | 16px | var(--esds-font-line-height-xs) | Extra-small line-height for the tightest text. |
 | font.line-height.sm | 20px | 20px | var(--esds-font-line-height-sm) | Small line-height for compact text blocks. |
 | font.line-height.md | 24px | 24px | var(--esds-font-line-height-md) | Medium line-height for default body text. |
@@ -415,44 +420,51 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | text.5xl.size | 3rem | 3rem | var(--esds-text-5xl-size) | Font size for 5x-large text. |
 | text.5xl.line-height | 56px | 56px | var(--esds-text-5xl-line-height) | Line-height for 5x-large text. |
 | text.5xl.letter-spacing | 0px | 0px | var(--esds-text-5xl-letter-spacing) | Letter spacing for 5x-large text. |
-| typography.xs.base | 400 0.75rem/16px Suisse Int'l | 400 0.75rem/16px Suisse Int'l | var(--esds-typography-xs-base) | Extra-small base typography (regular weight). |
-| typography.xs.emphasized | 500 0.75rem/16px Suisse Int'l | 500 0.75rem/16px Suisse Int'l | var(--esds-typography-xs-emphasized) | Extra-small emphasized typography (medium weight). |
-| typography.sm.base | 400 0.875rem/20px Suisse Int'l | 400 0.875rem/20px Suisse Int'l | var(--esds-typography-sm-base) | Small base typography (regular weight). |
-| typography.sm.emphasized | 500 0.875rem/20px Suisse Int'l | 500 0.875rem/20px Suisse Int'l | var(--esds-typography-sm-emphasized) | Small emphasized typography (medium weight). |
-| typography.md.base | 400 1rem/24px Suisse Int'l | 400 1rem/24px Suisse Int'l | var(--esds-typography-md-base) | Medium base typography (regular weight). |
-| typography.md.emphasized | 500 1rem/24px Suisse Int'l | 500 1rem/24px Suisse Int'l | var(--esds-typography-md-emphasized) | Medium emphasized typography (medium weight). |
-| typography.lg.base | 400 1.125rem/26px Suisse Int'l | 400 1.125rem/26px Suisse Int'l | var(--esds-typography-lg-base) | Large base typography (regular weight). |
-| typography.lg.emphasized | 500 1.125rem/26px Suisse Int'l | 500 1.125rem/26px Suisse Int'l | var(--esds-typography-lg-emphasized) | Large emphasized typography (medium weight). |
-| typography.xl.base | 400 1.25rem/28px Suisse Int'l | 400 1.25rem/28px Suisse Int'l | var(--esds-typography-xl-base) | Extra-large base typography (regular weight). |
-| typography.xl.emphasized | 500 1.25rem/28px Suisse Int'l | 500 1.25rem/28px Suisse Int'l | var(--esds-typography-xl-emphasized) | Extra-large emphasized typography (medium weight). |
-| typography.2xl.base | 400 1.5rem/32px Suisse Int'l | 400 1.5rem/32px Suisse Int'l | var(--esds-typography-2xl-base) | 2x-large base typography (regular weight). |
-| typography.2xl.emphasized | 500 1.5rem/32px Suisse Int'l | 500 1.5rem/32px Suisse Int'l | var(--esds-typography-2xl-emphasized) | 2x-large emphasized typography (medium weight). |
-| typography.3xl.base | 400 2rem/40px Suisse Int'l | 400 2rem/40px Suisse Int'l | var(--esds-typography-3xl-base) | 3x-large base typography (regular weight). |
-| typography.3xl.emphasized | 500 2rem/40px Suisse Int'l | 500 2rem/40px Suisse Int'l | var(--esds-typography-3xl-emphasized) | 3x-large emphasized typography (medium weight). |
-| typography.4xl.base | 400 2.5rem/48px Suisse Int'l | 400 2.5rem/48px Suisse Int'l | var(--esds-typography-4xl-base) | 4x-large base typography (regular weight). |
-| typography.4xl.emphasized | 500 2.5rem/48px Suisse Int'l | 500 2.5rem/48px Suisse Int'l | var(--esds-typography-4xl-emphasized) | 4x-large emphasized typography (medium weight). |
-| typography.5xl.base | 400 3rem/56px Suisse Int'l | 400 3rem/56px Suisse Int'l | var(--esds-typography-5xl-base) | 5x-large base typography (regular weight). |
-| typography.5xl.emphasized | 500 3rem/56px Suisse Int'l | 500 3rem/56px Suisse Int'l | var(--esds-typography-5xl-emphasized) | 5x-large emphasized typography (medium weight). |
+| typography.xs.base | 400 0.75rem/16px Infomaniak Sans | 400 0.75rem/16px Infomaniak Sans | var(--esds-typography-xs-base) | Extra-small base typography (regular weight). |
+| typography.xs.emphasized | 500 0.75rem/16px Infomaniak Sans | 500 0.75rem/16px Infomaniak Sans | var(--esds-typography-xs-emphasized) | Extra-small emphasized typography (medium weight). |
+| typography.sm.base | 400 0.875rem/20px Infomaniak Sans | 400 0.875rem/20px Infomaniak Sans | var(--esds-typography-sm-base) | Small base typography (regular weight). |
+| typography.sm.emphasized | 500 0.875rem/20px Infomaniak Sans | 500 0.875rem/20px Infomaniak Sans | var(--esds-typography-sm-emphasized) | Small emphasized typography (medium weight). |
+| typography.md.base | 400 1rem/24px Infomaniak Sans | 400 1rem/24px Infomaniak Sans | var(--esds-typography-md-base) | Medium base typography (regular weight). |
+| typography.md.emphasized | 500 1rem/24px Infomaniak Sans | 500 1rem/24px Infomaniak Sans | var(--esds-typography-md-emphasized) | Medium emphasized typography (medium weight). |
+| typography.lg.base | 400 1.125rem/26px Infomaniak Sans | 400 1.125rem/26px Infomaniak Sans | var(--esds-typography-lg-base) | Large base typography (regular weight). |
+| typography.lg.emphasized | 500 1.125rem/26px Infomaniak Sans | 500 1.125rem/26px Infomaniak Sans | var(--esds-typography-lg-emphasized) | Large emphasized typography (medium weight). |
+| typography.xl.base | 400 1.25rem/28px Infomaniak Sans | 400 1.25rem/28px Infomaniak Sans | var(--esds-typography-xl-base) | Extra-large base typography (regular weight). |
+| typography.xl.emphasized | 500 1.25rem/28px Infomaniak Sans | 500 1.25rem/28px Infomaniak Sans | var(--esds-typography-xl-emphasized) | Extra-large emphasized typography (medium weight). |
+| typography.2xl.base | 400 1.5rem/32px Infomaniak Sans | 400 1.5rem/32px Infomaniak Sans | var(--esds-typography-2xl-base) | 2x-large base typography (regular weight). |
+| typography.2xl.emphasized | 500 1.5rem/32px Infomaniak Sans | 500 1.5rem/32px Infomaniak Sans | var(--esds-typography-2xl-emphasized) | 2x-large emphasized typography (medium weight). |
+| typography.3xl.base | 400 2rem/40px Infomaniak Sans | 400 2rem/40px Infomaniak Sans | var(--esds-typography-3xl-base) | 3x-large base typography (regular weight). |
+| typography.3xl.emphasized | 500 2rem/40px Infomaniak Sans | 500 2rem/40px Infomaniak Sans | var(--esds-typography-3xl-emphasized) | 3x-large emphasized typography (medium weight). |
+| typography.4xl.base | 400 2.5rem/48px Infomaniak Sans | 400 2.5rem/48px Infomaniak Sans | var(--esds-typography-4xl-base) | 4x-large base typography (regular weight). |
+| typography.4xl.emphasized | 500 2.5rem/48px Infomaniak Sans | 500 2.5rem/48px Infomaniak Sans | var(--esds-typography-4xl-emphasized) | 4x-large emphasized typography (medium weight). |
+| typography.5xl.base | 400 3rem/56px Infomaniak Sans | 400 3rem/56px Infomaniak Sans | var(--esds-typography-5xl-base) | 5x-large base typography (regular weight). |
+| typography.5xl.emphasized | 500 3rem/56px Infomaniak Sans | 500 3rem/56px Infomaniak Sans | var(--esds-typography-5xl-emphasized) | 5x-large emphasized typography (medium weight). |
 
 ## 3. Component Tokens
 
 | Token Name | Light Value | Dark Value | CSS Variable | Description |
 |---|---|---|---|---|
-| body.xs.font | 400 0.75rem/16px Suisse Int'l | 400 0.75rem/16px Suisse Int'l | var(--esds-body-xs-font) | Extra-small body text style. |
-| body.sm.font | 400 0.875rem/20px Suisse Int'l | 400 0.875rem/20px Suisse Int'l | var(--esds-body-sm-font) | Small body text style. |
-| body.md.font | 400 1rem/24px Suisse Int'l | 400 1rem/24px Suisse Int'l | var(--esds-body-md-font) | Medium (default) body text style. |
-| body.lg.font | 400 1.125rem/26px Suisse Int'l | 400 1.125rem/26px Suisse Int'l | var(--esds-body-lg-font) | Large body text style. |
-| focus.border.color | #0077cf | #36adfa | var(--esds-focus-border-color) | N/A |
-| focus.border.radius | 2px | 2px | var(--esds-focus-border-radius) | N/A |
-| focus.border.width | 2px | 2px | var(--esds-focus-border-width) | N/A |
-| heading.xs.font | 500 1.25rem/28px Suisse Int'l | 500 1.25rem/28px Suisse Int'l | var(--esds-heading-xs-font) | Extra-small heading style. |
-| heading.sm.font | 500 1.5rem/32px Suisse Int'l | 500 1.5rem/32px Suisse Int'l | var(--esds-heading-sm-font) | Small heading style. |
-| heading.md.font | 500 2rem/40px Suisse Int'l | 500 2rem/40px Suisse Int'l | var(--esds-heading-md-font) | Medium heading style. |
-| heading.lg.font | 500 2.5rem/48px Suisse Int'l | 500 2.5rem/48px Suisse Int'l | var(--esds-heading-lg-font) | Large heading style. |
-| heading.xl.font | 500 3rem/56px Suisse Int'l | 500 3rem/56px Suisse Int'l | var(--esds-heading-xl-font) | Extra-large heading style. |
+| body.xs.font | 400 0.75rem/16px Infomaniak Sans | 400 0.75rem/16px Infomaniak Sans | var(--esds-body-xs-font) | Extra-small body text style. |
+| body.sm.font | 400 0.875rem/20px Infomaniak Sans | 400 0.875rem/20px Infomaniak Sans | var(--esds-body-sm-font) | Small body text style. |
+| body.md.font | 400 1rem/24px Infomaniak Sans | 400 1rem/24px Infomaniak Sans | var(--esds-body-md-font) | Medium (default) body text style. |
+| body.lg.font | 400 1.125rem/26px Infomaniak Sans | 400 1.125rem/26px Infomaniak Sans | var(--esds-body-lg-font) | Large body text style. |
+| focus.border.color | #0077cf | #36adfa | var(--esds-focus-border-color) | Focus-effect border color. |
+| focus.border.radius | 2px | 2px | var(--esds-focus-border-radius) | Focus-effect border radius. |
+| focus.border.width | 2px | 2px | var(--esds-focus-border-width) | Focus-effect border width. |
+| heading.xs.font | 500 1.25rem/28px Infomaniak Sans | 500 1.25rem/28px Infomaniak Sans | var(--esds-heading-xs-font) | Extra-small heading style. |
+| heading.sm.font | 500 1.5rem/32px Infomaniak Sans | 500 1.5rem/32px Infomaniak Sans | var(--esds-heading-sm-font) | Small heading style. |
+| heading.md.font | 500 2rem/40px Infomaniak Sans | 500 2rem/40px Infomaniak Sans | var(--esds-heading-md-font) | Medium heading style. |
+| heading.lg.font | 500 2.5rem/48px Infomaniak Sans | 500 2.5rem/48px Infomaniak Sans | var(--esds-heading-lg-font) | Large heading style. |
+| heading.xl.font | 500 3rem/56px Infomaniak Sans | 500 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font) | Extra-large heading style. |
+| kbd.background-color | #f1f5f9 | #020618 | var(--esds-kbd-background-color) | Default keyboard key background color. |
+| kbd.border.color | #cad5e2 | #45556c | var(--esds-kbd-border-color) | Default keyboard key border color. |
+| kbd.border.width | 1px | 1px | var(--esds-kbd-border-width) | Default keyboard key border width. |
+| kbd.border.radius | 4px | 4px | var(--esds-kbd-border-radius) | Default keyboard key corner radius. |
+| kbd.content.color | #314158 | #e2e8f0 | var(--esds-kbd-content-color) | Default keyboard key label color. |
+| kbd.font | 500 0.875rem/20px Infomaniak Sans | 500 0.875rem/20px Infomaniak Sans | var(--esds-kbd-font) | Default keyboard key typography (medium weight, slightly smaller than body text). |
+| kbd.padding.block | 2px | 2px | var(--esds-kbd-padding-block) | Default keyboard key block padding. |
+| kbd.padding.inline | 4px | 4px | var(--esds-kbd-padding-inline) | Default keyboard key inline padding. |
 | separator.color | #e2e8f0 | #314158 | var(--esds-separator-color) | Default separator line color (subtle neutral border). |
 | separator.thickness | 1px | 1px | var(--esds-separator-thickness) | Default separator line thickness. |
-| separator.spacing | 6px | 6px | var(--esds-separator-spacing) | Gap between the separator lines and slotted content. |
 | text-link.content.color.default | #0077cf | #0077cf | var(--esds-text-link-content-color-default) | Default text link color. |
 | text-link.content.color.visited | #8f30f7 | #cab1ff | var(--esds-text-link-content-color-visited) | Default visited text link color. |
 
