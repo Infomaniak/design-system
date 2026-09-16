@@ -27,7 +27,7 @@ describe('buildSymbolsSwiftFile', () => {
   test('generates public SwiftUI and UIKit image accessors', async () => {
     await buildSymbolsSwiftFile({
       outputDirectory,
-      icons: [createIcon('a-square'), createIcon('switch')],
+      icons: [createIcon('a-square'), createIcon('class')],
       logger,
     });
 
@@ -44,7 +44,7 @@ describe('buildSymbolsSwiftFile', () => {
       'public var uiImage: UIKit.UIImage {\n            guard let image = UIKit.UIImage(named: name, in: .module, compatibleWith: nil)',
     );
     expect(content).toContain('public static let aSquare = Symbol(name: "a-square")');
-    expect(content).toContain('public static let `switch` = Symbol(name: "switch")');
+    expect(content).toContain('public static let `class` = Symbol(name: "class")');
   });
 
   test('rejects icon names that generate the same Swift identifier', async () => {
