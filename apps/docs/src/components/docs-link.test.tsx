@@ -50,7 +50,7 @@ describe('DocsLink', () => {
     const link = screen.getByText('Guide').closest('a')!;
     expect(link).toHaveAttribute('href', href);
     expect(link).not.toHaveAttribute('target');
-    expect(link).not.toHaveAttribute('rel');
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
     expect(link.querySelector('esds-icon')).toBeNull();
   });
 
@@ -107,7 +107,7 @@ describe('DocsLink', () => {
     );
   });
 
-  it('preserves a caller-provided rel on internal links', () => {
+  it('merges caller-provided rel tokens with the security tokens on internal links', () => {
     render(
       <DocsLink
         href="/?path=/docs/x--docs"
@@ -118,7 +118,7 @@ describe('DocsLink', () => {
     );
 
     const link = screen.getByText('Guide').closest('a')!;
-    expect(link).toHaveAttribute('rel', 'nofollow');
+    expect(link).toHaveAttribute('rel', 'nofollow noopener noreferrer');
     expect(link).not.toHaveAttribute('target');
   });
 });

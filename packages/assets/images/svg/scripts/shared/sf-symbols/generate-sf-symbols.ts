@@ -1,11 +1,12 @@
 import { rm } from 'node:fs/promises';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
+import { buildSymbolsSwiftFile } from './build-symbols-swift-file.ts';
 import { buildSymbolsXcassets, type SymbolIcon } from './build-symbols-xcassets.ts';
 import { readSymbolTemplate } from './parse-symbol-template.ts';
 import { readSymbolIcons } from './read-symbol-icons.ts';
 
 export interface GenerateSfSymbolsOptions {
-  /** Directory wiped and filled with the generated `ESDSSymbols.xcassets`. */
+  /** Directory wiped and filled with the generated asset catalog and Swift accessors. */
   readonly outputDirectory: string;
   readonly outlinesDirectory: string;
   readonly webIconsDirectory?: string;
@@ -13,8 +14,8 @@ export interface GenerateSfSymbolsOptions {
 }
 
 /**
- * Wipes the output directory then generates the SF Symbols `.xcassets` from the committed outline
- * files and the Apple SF Symbols template.
+ * Wipes the output directory then generates the SF Symbols asset catalog and Swift accessors from
+ * the committed outline files and the Apple SF Symbols template.
  */
 export async function generateSfSymbols({
   outputDirectory,
@@ -27,6 +28,7 @@ export async function generateSfSymbols({
   const template = await readSymbolTemplate();
   const icons = await readSymbolIcons({ outlinesDirectory, webIconsDirectory, logger });
   await buildSymbolsXcassets({ outputDirectory, template, icons, logger });
+  await buildSymbolsSwiftFile({ outputDirectory, icons, logger });
 
   return icons;
 }

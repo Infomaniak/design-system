@@ -7,6 +7,7 @@
 
   &:focus-visible {
     outline: var(--esds-focus-border-width) solid var(--esds-focus-border-color);
+    outline-offset: var(--esds-focus-border-offset);
     border-radius: var(--esds-focus-border-radius);
   }
 
