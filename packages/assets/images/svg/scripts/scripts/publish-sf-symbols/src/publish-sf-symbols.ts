@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import type { PackageJson } from '../../../../../../../../scripts/helpers/file/package-json/package-json.ts';
 import { readPackageJsonFile } from '../../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
 import type { GitChanges } from '../../../../../../../../scripts/helpers/git/git-changes.ts';
+import { updateGitRepositoryOnNewBranch } from '../../../../../../../../scripts/helpers/git/update-git-repository-on-new-branch.ts';
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import { IOS_DESIGN_SYSTEM_REPOSITORY_NAME } from '../../../../../../../../scripts/helpers/github/constants/ios-design-system-repository-name.constant.ts';
 import { createGithubPullRequest } from '../../../../../../../../scripts/helpers/github/pull-request/create-github-pull-request.ts';
@@ -44,6 +45,16 @@ export async function publishSfSymbols({
 }: PublishSfSymbolsOptions): Promise<void> {
   return logger.asyncTask('sf-symbols', async (logger: Logger): Promise<void> => {
     if (!(await hasSymbolOutlineFiles(outlinesDirectory))) {
+      if (iosDesignSystemBaseBranch !== undefined) {
+        await updateGitRepositoryOnNewBranch({
+          repository: `git@${IOS_DESIGN_SYSTEM_REPOSITORY_NAME}:${INFOMANIAK_GITHUB_ORGANIZATION}/${IOS_DESIGN_SYSTEM_REPOSITORY_NAME}.git`,
+          branchName: iosDesignSystemBaseBranch,
+          update: (): string => 'chore: Bootstrap symbols dependency branch',
+          logger,
+          allowEmpty: 'yes',
+        });
+      }
+
       logger.info(
         'SKIP (non-blocking): No SF Symbol outlines yet. Run the Figma icons import first: the import pull request commits the outline files.',
       );

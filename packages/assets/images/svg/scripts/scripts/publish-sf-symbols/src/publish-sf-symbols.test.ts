@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { PackageJson } from '../../../../../../../../scripts/helpers/file/package-json/package-json.ts';
 import { readPackageJsonFile } from '../../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
 import type { GitChanges } from '../../../../../../../../scripts/helpers/git/git-changes.ts';
+import { updateGitRepositoryOnNewBranch } from '../../../../../../../../scripts/helpers/git/update-git-repository-on-new-branch.ts';
 import type { GithubCiPullRequest } from '../../../../../../../../scripts/helpers/github/github-ci-config/github-ci-config.ts';
 import { createGithubPullRequest } from '../../../../../../../../scripts/helpers/github/pull-request/create-github-pull-request.ts';
 import { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
@@ -20,12 +21,14 @@ vi.mock(
   '../../../../../../../../scripts/helpers/github/pull-request/create-github-pull-request.ts',
 );
 vi.mock('../../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts');
+vi.mock('../../../../../../../../scripts/helpers/git/update-git-repository-on-new-branch.ts');
 
 const logger = Logger.never();
 
 const createIosSymbolsPublishGithubBranchMock = vi.mocked(createIosSymbolsPublishGithubBranch);
 const createGithubPullRequestMock = vi.mocked(createGithubPullRequest);
 const readPackageJsonFileMock = vi.mocked(readPackageJsonFile);
+const updateGitRepositoryOnNewBranchMock = vi.mocked(updateGitRepositoryOnNewBranch);
 const SOURCE_COMMIT = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb';
 
 describe('publishSfSymbols', () => {
@@ -37,6 +40,7 @@ describe('publishSfSymbols', () => {
     createIosSymbolsPublishGithubBranchMock.mockReset();
     createGithubPullRequestMock.mockReset();
     readPackageJsonFileMock.mockReset();
+    updateGitRepositoryOnNewBranchMock.mockReset();
 
     readPackageJsonFileMock.mockResolvedValue({ name: 'x', version: '1.2.3' } as PackageJson);
     createGithubPullRequestMock.mockResolvedValue({} as GithubCiPullRequest);
@@ -74,6 +78,34 @@ describe('publishSfSymbols', () => {
 
     await publishSfSymbols(options);
 
+    expect(createIosSymbolsPublishGithubBranchMock).not.toHaveBeenCalled();
+    expect(createGithubPullRequestMock).not.toHaveBeenCalled();
+  });
+
+  it('bootstraps the symbols dependency branch when no outlines exist', async () => {
+    const options = createPublishOptions('dev');
+    (options as { iosDesignSystemBaseBranch: string }).iosDesignSystemBaseBranch =
+      'esds-symbols/1.2.3-dev.42';
+    updateGitRepositoryOnNewBranchMock.mockResolvedValue([] satisfies GitChanges);
+
+    await publishSfSymbols(options);
+
+    expect(updateGitRepositoryOnNewBranchMock).toHaveBeenCalledWith({
+      repository: 'git@ios-design-system:Infomaniak/ios-design-system.git',
+      branchName: 'esds-symbols/1.2.3-dev.42',
+      update: expect.any(Function),
+      logger,
+      allowEmpty: 'yes',
+    });
+    const update = updateGitRepositoryOnNewBranchMock.mock.calls[0]![0].update;
+    expect(
+      update({
+        repository: 'git@ios-design-system:Infomaniak/ios-design-system.git',
+        branchName: 'esds-symbols/1.2.3-dev.42',
+        cwd: '.tmp',
+        logger,
+      }),
+    ).toBe('chore: Bootstrap symbols dependency branch');
     expect(createIosSymbolsPublishGithubBranchMock).not.toHaveBeenCalled();
     expect(createGithubPullRequestMock).not.toHaveBeenCalled();
   });
