@@ -80,6 +80,7 @@ export async function ciPublish({
     const runYarnWorkspacesCommand = (
       command: string,
       env?: Record<string, string>,
+      packages: readonly PackageJsonWithPath[] = packagesToBuild,
     ): Promise<void> => {
       return logger.asyncTask(command, async (logger: Logger): Promise<void> => {
         const args: string[] = ['workspaces', 'foreach', '--topological-dev', '--recursive'];
@@ -89,7 +90,7 @@ export async function ciPublish({
           logger.debug('DRY-RUN');
         }
 
-        for (const [, { name }] of packagesToBuild) {
+        for (const [, { name }] of packages) {
           args.push('--from', name);
         }
 
@@ -110,13 +111,30 @@ export async function ciPublish({
       [ENV_BUILD_CONFIG]: JSON.stringify(buildConfig),
     });
 
-    await runYarnWorkspacesCommand('publish', {
-      [ENV_PUBLISH_CONFIG]: JSON.stringify({
-        mode: buildConfig.mode,
-        prerelease: buildConfig.prerelease,
-        iosDesignSystemBaseBranch: getIosDesignSystemBaseBranch(packagesToBuild, buildConfig),
-      } satisfies PublishConfig),
-    });
+    const publishConfig: PublishConfig = {
+      mode: buildConfig.mode,
+      prerelease: buildConfig.prerelease,
+      iosDesignSystemBaseBranch: getIosDesignSystemBaseBranch(packagesToBuild, buildConfig),
+    };
+    const publishEnv: Record<string, string> = {
+      [ENV_PUBLISH_CONFIG]: JSON.stringify(publishConfig),
+    };
+
+    if (publishConfig.iosDesignSystemBaseBranch !== undefined) {
+      const symbolsPackages: readonly PackageJsonWithPath[] = packagesToBuild.filter(
+        ([, { name }]: PackageJsonWithPath): boolean =>
+          name === '@infomaniak-design-system/svg-assets',
+      );
+      const remainingPackages: readonly PackageJsonWithPath[] = packagesToBuild.filter(
+        ([, { name }]: PackageJsonWithPath): boolean =>
+          name !== '@infomaniak-design-system/svg-assets',
+      );
+
+      await runYarnWorkspacesCommand('publish', publishEnv, symbolsPackages);
+      await runYarnWorkspacesCommand('publish', publishEnv, remainingPackages);
+    } else {
+      await runYarnWorkspacesCommand('publish', publishEnv);
+    }
 
     // TODO update PR comment with dev version
 
