@@ -3,7 +3,6 @@ import { writeTextFileSafe } from '../../../../../../../scripts/helpers/file/wri
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { dedent } from '../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { SWIFT_FILE_HEADER } from '../../../../../../tokens/scripts/scripts/build-tokens/src/build/outputs/swift/helpers/build-swift-file-header.ts';
-import { indentSwiftLines } from '../../../../../../tokens/scripts/scripts/build-tokens/src/build/outputs/swift/helpers/build-swift-file.ts';
 import { toSwiftVariableName } from '../../../../../../tokens/scripts/shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
 import type { SymbolIcon } from './build-symbols-xcassets.ts';
 import { SYMBOLS_SWIFT_FILE_NAME } from './sf-symbols-config.ts';
@@ -35,19 +34,21 @@ export async function buildSymbolsSwiftFile({
       declarations.push(`public static let ${identifier} = Symbol(name: ${JSON.stringify(name)})`);
     }
 
-    const content: string = `${SWIFT_FILE_HEADER}
+    const content: string = dedent`
+      ${SWIFT_FILE_HEADER}
 
-import SwiftUI
+      import SwiftUI
 
-#if canImport(UIKit)
-import UIKit
-#endif
+      #if canImport(UIKit)
+      import UIKit
+      #endif
 
-public enum ESDSSymbols: Sendable {
-${indentSwiftLines(buildSymbolType())}
+      public enum ESDSSymbols: Sendable {
+          ${buildSymbolType()}
 
-${indentSwiftLines(declarations.join('\n'))}
-}`;
+          ${declarations.join('\n')}
+      }
+    `;
 
     await writeTextFileSafe(join(outputDirectory, SYMBOLS_SWIFT_FILE_NAME), content);
     logger.info(`Built ${JSON.stringify(SYMBOLS_SWIFT_FILE_NAME)}.`);
