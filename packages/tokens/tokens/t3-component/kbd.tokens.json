@@ -1,0 +1,64 @@
+{
+  "kbd": {
+    "$description": "Component tokens for keyboard keys.",
+    "background-color": {
+      "$value": "{color.background.elevation.sunken}",
+      "$description": "Default keyboard key background color.",
+      "$extensions": {
+        "scopes": ["ALL_FILLS"]
+      }
+    },
+    "border": {
+      "color": {
+        "$value": "{color.border.dim2}",
+        "$description": "Default keyboard key border color.",
+        "$extensions": {
+          "scopes": ["STROKE_COLOR"]
+        }
+      },
+      "width": {
+        "$value": "{border.xs.width}",
+        "$description": "Default keyboard key border width.",
+        "$extensions": {
+          "scopes": ["STROKE_FLOAT"]
+        }
+      },
+      "radius": {
+        "$value": "{radius.sm}",
+        "$description": "Default keyboard key corner radius.",
+        "$extensions": {
+          "scopes": ["CORNER_RADIUS"]
+        }
+      }
+    },
+    "content": {
+      "color": {
+        "$value": "{color.content.secondary}",
+        "$description": "Default keyboard key label color.",
+        "$extensions": {
+          "scopes": ["ALL_FILLS"]
+        }
+      }
+    },
+    "font": {
+      "$value": "{typography.sm.emphasized}",
+      "$description": "Default keyboard key typography (medium weight, slightly smaller than body text)."
+    },
+    "padding": {
+      "block": {
+        "$value": "{spacing.2xs}",
+        "$description": "Default keyboard key block padding.",
+        "$extensions": {
+          "scopes": ["GAP"]
+        }
+      },
+      "inline": {
+        "$value": "{spacing.xs}",
+        "$description": "Default keyboard key inline padding.",
+        "$extensions": {
+          "scopes": ["GAP"]
+        }
+      }
+    }
+  }
+}
