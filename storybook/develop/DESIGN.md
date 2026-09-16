@@ -454,6 +454,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | focus.border.color | #0077cf | #36adfa | var(--esds-focus-border-color) | Focus-effect border color. |
 | focus.border.radius | 2px | 2px | var(--esds-focus-border-radius) | Focus-effect border radius. |
 | focus.border.width | 2px | 2px | var(--esds-focus-border-width) | Focus-effect border width. |
+| focus.border.offset | 2px | 2px | var(--esds-focus-border-offset) | Focus-effect border offset. |
 | heading.xs.font.base | 400 1.25rem/28px Infomaniak Sans | 400 1.25rem/28px Infomaniak Sans | var(--esds-heading-xs-font-base) | Extra-small heading style. |
 | heading.xs.font.emphasized | 500 1.25rem/28px Infomaniak Sans | 500 1.25rem/28px Infomaniak Sans | var(--esds-heading-xs-font-emphasized) | Extra-small heading style. |
 | heading.sm.font.base | 400 1.5rem/32px Infomaniak Sans | 400 1.5rem/32px Infomaniak Sans | var(--esds-heading-sm-font-base) | Small heading style. |
