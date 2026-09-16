@@ -22,7 +22,7 @@ From `packages/tokens`, run:
 yarn convert-figma-tokens
 ```
 
-It converts the Figma export into DTCG files in `packages/tokens/tokens/**`, formats them (prettier), then runs `yarn build:tokens`. If the build fails, the export is invalid or incoherent: STOP, report the errors, propose the rollback from step 7.
+It converts the Figma export into DTCG files in `packages/tokens/tokens/**`, formats them (prettier), then runs `yarn build:tokens`. If the build fails, the export is invalid or incoherent: STOP, report the errors, propose the rollback from step 8.
 
 ## 3. Review coherence
 
@@ -40,16 +40,23 @@ Give the user a concise report: counts of added / modified / removed token files
 ## 5. Ask for validation
 
 Ask the user a strict yes/no question: "Do you validate these token changes?" Do not commit, push, or open a PR on an ambiguous answer.
+generate-changeset
 
-## 6. If YES — commit, push, PR
+## 6. If YES — generate the changeset
+
+Run the `generate-changeset` skill (`.agents/skills/generate-changeset/SKILL.md`). The token changes are still uncommitted in the worktree at this point, so adapt its diff step: compare against `develop` with `git diff develop -- packages/tokens/tokens` instead of `git diff develop...HEAD`.
+
+Show the generated changeset to the user and iterate on it — semver bump, affected packages, wording — until they explicitly confirm they are satisfied. Do not move on with an unapproved changeset.
+
+## 7. If YES — commit, push, PR
 
 - Create a branch following repo naming (`feat/`, `fix/`, `docs/` prefixes): `feat/sync-figma-tokens-<YYYY-MM-DD>` when tokens are added, `fix/sync-figma-tokens-<YYYY-MM-DD>` when values are corrected.
-- Stage ONLY `packages/tokens/tokens` (the input `tokens.json` is gitignored).
+- Stage ONLY `packages/tokens/tokens` and the approved `.changeset/*.md` file (the input `tokens.json` is gitignored).
 - Commit with Conventional Commits, e.g. `feat(tokens): sync DTCG tokens from Figma export`.
 - Push with `git push -u origin <branch>`.
 - Open the PR against `develop` with `gh pr create --base develop`, title = commit message, body = the summary from step 4. Do NOT squash or amend history.
 
-## 7. If NO — rollback
+## 8. If NO — rollback
 
 Restore the regenerated tokens and discard leftovers, scoped strictly to the tokens directory (never a global `git clean`):
 
