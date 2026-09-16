@@ -17,6 +17,9 @@ import { ENV_PUBLISH_CONFIG } from '../../../helpers/publish/publish-config/env/
 import type { PublishConfig } from '../../../helpers/publish/publish-config/publish-config.ts';
 import type { CiPublishContext } from './context/infer-ci-publish-context.ts';
 
+const TOKENS_PACKAGE_NAME = '@infomaniak-design-system/tokens';
+const SYMBOLS_PACKAGE_NAME = '@infomaniak-design-system/svg-assets';
+
 export interface CiPublishOptions extends Omit<CiPublishContext, 'shouldPublish'> {
   readonly rootDirectory: string;
   readonly dryRun?: boolean;
@@ -114,26 +117,26 @@ export async function ciPublish({
     const publishConfig: PublishConfig = {
       mode: buildConfig.mode,
       prerelease: buildConfig.prerelease,
-      iosDesignSystemBaseBranch: getIosDesignSystemBaseBranch(packagesToBuild, buildConfig),
+      baseBranch: getBaseBranch(packagesToBuild, buildConfig),
     };
     const publishEnv: Record<string, string> = {
       [ENV_PUBLISH_CONFIG]: JSON.stringify(publishConfig),
     };
 
-    if (publishConfig.iosDesignSystemBaseBranch !== undefined) {
-      const symbolsPackages: readonly PackageJsonWithPath[] = packagesToBuild.filter(
-        ([, { name }]: PackageJsonWithPath): boolean =>
-          name === '@infomaniak-design-system/svg-assets',
-      );
-      const remainingPackages: readonly PackageJsonWithPath[] = packagesToBuild.filter(
-        ([, { name }]: PackageJsonWithPath): boolean =>
-          name !== '@infomaniak-design-system/svg-assets',
-      );
+    const publishGroups: readonly (readonly PackageJsonWithPath[])[] =
+      publishConfig.baseBranch === undefined
+        ? [packagesToBuild]
+        : [
+            packagesToBuild.filter(
+              ([, { name }]: PackageJsonWithPath): boolean => name === SYMBOLS_PACKAGE_NAME,
+            ),
+            packagesToBuild.filter(
+              ([, { name }]: PackageJsonWithPath): boolean => name !== SYMBOLS_PACKAGE_NAME,
+            ),
+          ];
 
-      await runYarnWorkspacesCommand('publish', publishEnv, symbolsPackages);
-      await runYarnWorkspacesCommand('publish', publishEnv, remainingPackages);
-    } else {
-      await runYarnWorkspacesCommand('publish', publishEnv);
+    for (const packages of publishGroups) {
+      await runYarnWorkspacesCommand('publish', publishEnv, packages);
     }
 
     // TODO update PR comment with dev version
@@ -149,15 +152,15 @@ export async function ciPublish({
 
 /*---*/
 
-function getIosDesignSystemBaseBranch(
+function getBaseBranch(
   packagesToBuild: readonly PackageJsonWithPath[],
   buildConfig: BuildConfig,
 ): string | undefined {
   const publishesTokens: boolean = packagesToBuild.some(
-    ([, { name }]: PackageJsonWithPath): boolean => name === '@infomaniak-design-system/tokens',
+    ([, { name }]: PackageJsonWithPath): boolean => name === TOKENS_PACKAGE_NAME,
   );
   const symbolsPackage: PackageJsonWithPath | undefined = packagesToBuild.find(
-    ([, { name }]: PackageJsonWithPath): boolean => name === '@infomaniak-design-system/svg-assets',
+    ([, { name }]: PackageJsonWithPath): boolean => name === SYMBOLS_PACKAGE_NAME,
   );
 
   if (!publishesTokens || symbolsPackage === undefined) {

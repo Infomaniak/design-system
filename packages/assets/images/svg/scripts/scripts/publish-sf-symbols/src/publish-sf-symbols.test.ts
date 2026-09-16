@@ -84,11 +84,12 @@ describe('publishSfSymbols', () => {
 
   it('bootstraps the symbols dependency branch when no outlines exist', async () => {
     const options = createPublishOptions('dev');
-    (options as { iosDesignSystemBaseBranch: string }).iosDesignSystemBaseBranch =
-      'esds-symbols/1.2.3-dev.42';
     updateGitRepositoryOnNewBranchMock.mockResolvedValue([] satisfies GitChanges);
 
-    await publishSfSymbols(options);
+    await publishSfSymbols({
+      ...options,
+      baseBranch: 'esds-symbols/1.2.3-dev.42',
+    });
 
     expect(updateGitRepositoryOnNewBranchMock).toHaveBeenCalledWith({
       repository: 'git@ios-design-system:Infomaniak/ios-design-system.git',
@@ -197,12 +198,13 @@ describe('publishSfSymbols', () => {
 
   it('pushes an empty symbols branch when the token publish depends on it', async () => {
     const options = createPublishOptions('dev');
-    (options as { iosDesignSystemBaseBranch: string }).iosDesignSystemBaseBranch =
-      'esds-symbols/1.2.3-dev.42';
     await writeOutlineFile(options.outlinesDirectory);
     createIosSymbolsPublishGithubBranchMock.mockResolvedValue([] satisfies GitChanges);
 
-    await publishSfSymbols(options);
+    await publishSfSymbols({
+      ...options,
+      baseBranch: 'esds-symbols/1.2.3-dev.42',
+    });
 
     expect(createIosSymbolsPublishGithubBranchMock).toHaveBeenCalledWith(
       expect.objectContaining({

@@ -41,14 +41,14 @@ export async function publishSfSymbols({
   // shared publish options
   mode,
   prerelease,
-  iosDesignSystemBaseBranch,
+  baseBranch,
 }: PublishSfSymbolsOptions): Promise<void> {
   return logger.asyncTask('sf-symbols', async (logger: Logger): Promise<void> => {
     if (!(await hasSymbolOutlineFiles(outlinesDirectory))) {
-      if (iosDesignSystemBaseBranch !== undefined) {
+      if (baseBranch !== undefined) {
         await updateGitRepositoryOnNewBranch({
           repository: `git@${IOS_DESIGN_SYSTEM_REPOSITORY_NAME}:${INFOMANIAK_GITHUB_ORGANIZATION}/${IOS_DESIGN_SYSTEM_REPOSITORY_NAME}.git`,
-          branchName: iosDesignSystemBaseBranch,
+          branchName: baseBranch,
           update: (): string => 'chore: Bootstrap symbols dependency branch',
           logger,
           allowEmpty: 'yes',
@@ -81,7 +81,7 @@ export async function publishSfSymbols({
       version: publishVersion,
       sourceCommit,
       branchName: publishBranchName,
-      pushBranchWhenEmpty: iosDesignSystemBaseBranch === publishBranchName,
+      pushBranchWhenEmpty: baseBranch === publishBranchName,
     });
 
     if (branchChanges.length > 0) {

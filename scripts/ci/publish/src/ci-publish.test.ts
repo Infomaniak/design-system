@@ -76,7 +76,7 @@ describe('ciPublish', () => {
     expect(publishConfig).toEqual({
       mode: 'dev',
       prerelease: '123',
-      iosDesignSystemBaseBranch: 'esds-symbols/4.5.6-dev.123',
+      baseBranch: 'esds-symbols/4.5.6-dev.123',
     });
   });
 });

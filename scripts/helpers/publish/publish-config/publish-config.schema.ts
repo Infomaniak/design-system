@@ -4,5 +4,5 @@ import { publishModeSchema } from '../publish-mode/publish-mode.schema.ts';
 export const publishConfigSchema = z.object({
   mode: publishModeSchema,
   prerelease: z.string().optional(),
-  iosDesignSystemBaseBranch: z.string().optional(),
+  baseBranch: z.string().optional(),
 });

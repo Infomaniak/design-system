@@ -24,7 +24,7 @@ export async function publishIosTokens({
   // shared publish options
   mode,
   prerelease,
-  iosDesignSystemBaseBranch,
+  baseBranch,
   logger,
 }: PublishIosTokensOptions): Promise<void> {
   return logger.asyncTask('ios', async (logger: Logger): Promise<void> => {
@@ -47,7 +47,7 @@ export async function publishIosTokens({
           version: publishVersion,
           sourceCommit,
           branchName: publishBranchName,
-          mainBranchName: iosDesignSystemBaseBranch,
+          mainBranchName: baseBranch,
         })
       ).length > 0
     ) {
