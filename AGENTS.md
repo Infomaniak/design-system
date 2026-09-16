@@ -78,7 +78,6 @@ design-system/
 | Dev server (Storybook)       | `cd apps/docs && yarn storybook`             |
 | Build all packages           | `yarn build`                                 |
 | Build tokens only            | `yarn build:tokens`                          |
-| Validate tokens              | `cd packages/tokens && yarn validate:tokens` |
 | Build SF Symbols (iOS)       | `yarn build:sf-symbols`                      |
 | Run tests                    | `yarn test`                                  |
 | Test coverage                | `yarn test:coverage`                         |
