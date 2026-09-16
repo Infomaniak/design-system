@@ -1,6 +1,7 @@
 import { join } from 'node:path';
 import { writeTextFileSafe } from '../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
+import { dedent } from '../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { SWIFT_FILE_HEADER } from '../../../../../../tokens/scripts/scripts/build-tokens/src/build/outputs/swift/helpers/build-swift-file-header.ts';
 import { indentSwiftLines } from '../../../../../../tokens/scripts/scripts/build-tokens/src/build/outputs/swift/helpers/build-swift-file.ts';
 import { toSwiftVariableName } from '../../../../../../tokens/scripts/shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
@@ -54,24 +55,26 @@ ${indentSwiftLines(declarations.join('\n'))}
 }
 
 function buildSymbolType(): string {
-  return `public struct Symbol: Sendable {
-    private let name: String
+  return dedent`
+    public struct Symbol: Sendable {
+        private let name: String
 
-    public var image: SwiftUI.Image {
-        SwiftUI.Image(name, bundle: .module)
-    }
-
-    #if canImport(UIKit)
-    public var uiImage: UIKit.UIImage {
-        guard let image = UIKit.UIImage(named: name, in: .module, compatibleWith: nil) else {
-            preconditionFailure("Missing symbol asset \\"\\(name)\\".")
+        public var image: SwiftUI.Image {
+            SwiftUI.Image(name, bundle: .module)
         }
-        return image
-    }
-    #endif
 
-    fileprivate init(name: String) {
-        self.name = name
+        #if canImport(UIKit)
+        public var uiImage: UIKit.UIImage {
+            guard let image = UIKit.UIImage(named: name, in: .module, compatibleWith: nil) else {
+                preconditionFailure("Missing symbol asset \\"\\(name)\\".")
+            }
+            return image
+        }
+        #endif
+
+        fileprivate init(name: String) {
+            self.name = name
+        }
     }
-}`;
+  `;
 }
