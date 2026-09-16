@@ -107,7 +107,7 @@ describe('createIosSymbolsPublishGithubBranch', () => {
     await mkdir(join(destinationDirectory, 'stale-icon.symbolset'), { recursive: true });
     await writeFile(join(destinationDirectory, 'stale.txt'), 'stale', { encoding: 'utf8' });
     await writeFile(
-      join(repositoryDirectory, 'versions.json'),
+      join(repositoryDirectory, 'artifact-versions.json'),
       JSON.stringify({
         schemaVersion: 1,
         'tokens-core': {
@@ -121,7 +121,7 @@ describe('createIosSymbolsPublishGithubBranch', () => {
     const { commitMessage } = await runUpdateInRepository(repositoryDirectory);
 
     expect(commitMessage).toBe('chore: Update symbols to 1.2.3');
-    expect(await readFile(join(repositoryDirectory, 'versions.json'), 'utf8')).toBe(
+    expect(await readFile(join(repositoryDirectory, 'artifact-versions.json'), 'utf8')).toBe(
       formatJson({
         schemaVersion: 1,
         'tokens-core': {
@@ -163,7 +163,7 @@ describe('createIosSymbolsPublishGithubBranch', () => {
     await expect(
       stat(join(repositoryDirectory, IOS_SYMBOLS_SWIFT_DESTINATION_PATH)),
     ).resolves.toBeDefined();
-    expect(await readFile(join(repositoryDirectory, 'versions.json'), 'utf8')).toBe(
+    expect(await readFile(join(repositoryDirectory, 'artifact-versions.json'), 'utf8')).toBe(
       formatJson({
         schemaVersion: 1,
         symbols: {

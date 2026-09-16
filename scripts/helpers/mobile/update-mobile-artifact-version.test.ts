@@ -19,7 +19,7 @@ describe('updateMobileArtifactVersion', () => {
 
   beforeEach(async () => {
     repositoryDirectory = await mkdtemp(join(tmpdir(), 'mobile-artifact-version-'));
-    manifestPath = join(repositoryDirectory, 'versions.json');
+    manifestPath = join(repositoryDirectory, 'artifact-versions.json');
   });
 
   afterEach(async () => {
@@ -175,7 +175,9 @@ describe('updateMobileArtifactVersion', () => {
           version: '1.5.0',
           sourceCommit: TOKEN_SOURCE_COMMIT,
         }),
-      ).rejects.toThrow(`${manifestPath} does not match versions manifest schema version 1.`);
+      ).rejects.toThrow(
+        `${manifestPath} does not match artifact versions manifest schema version 1.`,
+      );
       await expect(readFile(manifestPath, 'utf8')).resolves.toBe(invalidManifest);
     },
   );

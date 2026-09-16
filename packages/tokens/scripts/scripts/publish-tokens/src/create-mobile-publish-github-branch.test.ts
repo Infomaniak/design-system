@@ -86,7 +86,7 @@ describe('mobile publish branches', () => {
       branchName: 'esds/1.5.0',
     });
 
-    expect(await readFile(join(iosRepositoryDirectory, 'versions.json'), 'utf8')).toBe(
+    expect(await readFile(join(iosRepositoryDirectory, 'artifact-versions.json'), 'utf8')).toBe(
       formatJson({
         schemaVersion: 1,
         'tokens-core': {
@@ -99,7 +99,7 @@ describe('mobile publish branches', () => {
 
   it('publishes only tokens-core on Android', async () => {
     await writeFile(
-      join(androidRepositoryDirectory, 'versions.json'),
+      join(androidRepositoryDirectory, 'artifact-versions.json'),
       '{ "schemaVersion": 1 }\n',
       'utf8',
     );
@@ -113,7 +113,7 @@ describe('mobile publish branches', () => {
       branchName: 'esds/1.5.0',
     });
 
-    expect(await readFile(join(androidRepositoryDirectory, 'versions.json'), 'utf8')).toBe(
+    expect(await readFile(join(androidRepositoryDirectory, 'artifact-versions.json'), 'utf8')).toBe(
       formatJson({
         schemaVersion: 1,
         'tokens-core': {
@@ -126,9 +126,13 @@ describe('mobile publish branches', () => {
 
   it('tracks iOS tokens, Android tokens, and iOS symbols across publish callbacks', async () => {
     await Promise.all([
-      writeFile(join(iosRepositoryDirectory, 'versions.json'), '{ "schemaVersion": 1 }\n', 'utf8'),
       writeFile(
-        join(androidRepositoryDirectory, 'versions.json'),
+        join(iosRepositoryDirectory, 'artifact-versions.json'),
+        '{ "schemaVersion": 1 }\n',
+        'utf8',
+      ),
+      writeFile(
+        join(androidRepositoryDirectory, 'artifact-versions.json'),
         '{ "schemaVersion": 1 }\n',
         'utf8',
       ),
@@ -159,7 +163,7 @@ describe('mobile publish branches', () => {
       branchName: 'esds-symbols/1.0.0',
     });
 
-    expect(await readFile(join(iosRepositoryDirectory, 'versions.json'), 'utf8')).toBe(
+    expect(await readFile(join(iosRepositoryDirectory, 'artifact-versions.json'), 'utf8')).toBe(
       formatJson({
         schemaVersion: 1,
         'tokens-core': {
@@ -172,7 +176,7 @@ describe('mobile publish branches', () => {
         },
       }),
     );
-    expect(await readFile(join(androidRepositoryDirectory, 'versions.json'), 'utf8')).toBe(
+    expect(await readFile(join(androidRepositoryDirectory, 'artifact-versions.json'), 'utf8')).toBe(
       formatJson({
         schemaVersion: 1,
         'tokens-core': {

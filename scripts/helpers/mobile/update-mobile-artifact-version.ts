@@ -3,8 +3,8 @@ import { readJsonFile } from '../file/read-json-file.ts';
 import { writeJsonFileSafe } from '../file/write-json-file-safe.ts';
 import { isFullGitCommitHash } from '../git/is-full-git-commit-hash.ts';
 
-const VERSIONS_MANIFEST_FILE_NAME = 'versions.json';
-const VERSIONS_MANIFEST_SCHEMA_VERSION = 1;
+const ARTIFACT_VERSIONS_MANIFEST_FILE_NAME = 'artifact-versions.json';
+const ARTIFACT_VERSIONS_MANIFEST_SCHEMA_VERSION = 1;
 
 export type MobileArtifactVersionCategory = 'tokens-core' | 'symbols';
 
@@ -20,9 +20,9 @@ interface ArtifactVersion {
   readonly sourceCommit: string;
 }
 
-interface VersionsManifest {
-  readonly schemaVersion: typeof VERSIONS_MANIFEST_SCHEMA_VERSION;
-  readonly [category: string]: typeof VERSIONS_MANIFEST_SCHEMA_VERSION | ArtifactVersion;
+interface ArtifactVersionsManifest {
+  readonly schemaVersion: typeof ARTIFACT_VERSIONS_MANIFEST_SCHEMA_VERSION;
+  readonly [category: string]: typeof ARTIFACT_VERSIONS_MANIFEST_SCHEMA_VERSION | ArtifactVersion;
 }
 
 function isMissingFileError(error: unknown): boolean {
@@ -43,13 +43,13 @@ function isArtifactVersion(value: unknown): value is ArtifactVersion {
   );
 }
 
-function isVersionsManifest(value: unknown): value is VersionsManifest {
+function isArtifactVersionsManifest(value: unknown): value is ArtifactVersionsManifest {
   return (
     typeof value === 'object' &&
     value !== null &&
     !Array.isArray(value) &&
     'schemaVersion' in value &&
-    value.schemaVersion === VERSIONS_MANIFEST_SCHEMA_VERSION &&
+    value.schemaVersion === ARTIFACT_VERSIONS_MANIFEST_SCHEMA_VERSION &&
     Object.entries(value).every(
       ([category, artifactVersion]: [string, unknown]): boolean =>
         category === 'schemaVersion' || isArtifactVersion(artifactVersion),
@@ -57,14 +57,16 @@ function isVersionsManifest(value: unknown): value is VersionsManifest {
   );
 }
 
-async function readVersionsManifest(manifestPath: string): Promise<VersionsManifest> {
+async function readArtifactVersionsManifest(
+  manifestPath: string,
+): Promise<ArtifactVersionsManifest> {
   let manifest: unknown;
 
   try {
     manifest = await readJsonFile<unknown>(manifestPath);
   } catch (error: unknown) {
     if (isMissingFileError(error)) {
-      return { schemaVersion: VERSIONS_MANIFEST_SCHEMA_VERSION };
+      return { schemaVersion: ARTIFACT_VERSIONS_MANIFEST_SCHEMA_VERSION };
     }
 
     if (error instanceof SyntaxError) {
@@ -74,8 +76,10 @@ async function readVersionsManifest(manifestPath: string): Promise<VersionsManif
     throw new Error(`Failed to read ${manifestPath}.`, { cause: error });
   }
 
-  if (!isVersionsManifest(manifest)) {
-    throw new TypeError(`${manifestPath} does not match versions manifest schema version 1.`);
+  if (!isArtifactVersionsManifest(manifest)) {
+    throw new TypeError(
+      `${manifestPath} does not match artifact versions manifest schema version 1.`,
+    );
   }
 
   return manifest;
@@ -87,8 +91,8 @@ export async function updateMobileArtifactVersion({
   version,
   sourceCommit,
 }: UpdateMobileArtifactVersionOptions): Promise<void> {
-  const manifestPath: string = join(repositoryDirectory, VERSIONS_MANIFEST_FILE_NAME);
-  const manifest: VersionsManifest = await readVersionsManifest(manifestPath);
+  const manifestPath: string = join(repositoryDirectory, ARTIFACT_VERSIONS_MANIFEST_FILE_NAME);
+  const manifest: ArtifactVersionsManifest = await readArtifactVersionsManifest(manifestPath);
   const artifactVersion: ArtifactVersion = { version, sourceCommit };
 
   if (!isArtifactVersion(artifactVersion)) {
