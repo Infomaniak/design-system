@@ -8,6 +8,7 @@ import {
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import { IOS_DESIGN_SYSTEM_REPOSITORY_NAME } from '../../../../../../../../scripts/helpers/github/constants/ios-design-system-repository-name.constant.ts';
 import type { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
+import { formatSwiftFiles } from '../../../../../../../../scripts/helpers/swift/format-swift-files.ts';
 import {
   IOS_SYMBOLS_DESTINATION_PATH,
   IOS_SYMBOLS_SWIFT_DESTINATION_PATH,
@@ -46,6 +47,11 @@ export async function createIosSymbolsPublishGithubBranch({
       await rm(destinationDirectory, { recursive: true, force: true });
       await cp(xcassetsDirectory, destinationDirectory, { recursive: true, force: true });
       await cp(swiftFile, join(cwd, IOS_SYMBOLS_SWIFT_DESTINATION_PATH), { force: true });
+      await formatSwiftFiles({
+        logger,
+        cwd,
+        paths: [IOS_SYMBOLS_SWIFT_DESTINATION_PATH],
+      });
 
       return `chore: Update symbols to ${version}`;
     },

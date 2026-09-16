@@ -9,6 +9,7 @@ import type {
 } from '../../../../../../../../scripts/helpers/git/update-git-repository-on-new-branch.ts';
 import { updateGitRepositoryOnNewBranch } from '../../../../../../../../scripts/helpers/git/update-git-repository-on-new-branch.ts';
 import { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
+import { formatSwiftFiles } from '../../../../../../../../scripts/helpers/swift/format-swift-files.ts';
 import {
   IOS_SYMBOLS_DESTINATION_PATH,
   IOS_SYMBOLS_SWIFT_DESTINATION_PATH,
@@ -17,10 +18,12 @@ import {
 import { createIosSymbolsPublishGithubBranch } from './create-ios-symbols-publish-github-branch.ts';
 
 vi.mock('../../../../../../../../scripts/helpers/git/update-git-repository-on-new-branch.ts');
+vi.mock('../../../../../../../../scripts/helpers/swift/format-swift-files.ts');
 
 const logger = Logger.never();
 
 const updateGitRepositoryOnNewBranchMock = vi.mocked(updateGitRepositoryOnNewBranch);
+const formatSwiftFilesMock = vi.mocked(formatSwiftFiles);
 
 interface RunUpdateResult {
   readonly context: UpdateGitRepositoryOnNewBranchUpdateFunctionContext;
@@ -48,6 +51,7 @@ describe('createIosSymbolsPublishGithubBranch', () => {
 
   afterEach(async () => {
     updateGitRepositoryOnNewBranchMock.mockReset();
+    formatSwiftFilesMock.mockReset();
     await rm(tempDir, { force: true, recursive: true });
   });
 
@@ -108,6 +112,11 @@ describe('createIosSymbolsPublishGithubBranch', () => {
     expect(
       await readFile(join(repositoryDirectory, IOS_SYMBOLS_SWIFT_DESTINATION_PATH), 'utf8'),
     ).toBe('public enum ESDSSymbols {}');
+    expect(formatSwiftFilesMock).toHaveBeenCalledExactlyOnceWith({
+      logger,
+      cwd: repositoryDirectory,
+      paths: [IOS_SYMBOLS_SWIFT_DESTINATION_PATH],
+    });
     await expect(stat(join(destinationDirectory, 'stale.txt'))).rejects.toThrow();
   });
 
