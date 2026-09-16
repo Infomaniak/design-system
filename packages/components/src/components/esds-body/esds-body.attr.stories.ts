@@ -37,10 +37,38 @@ export const Default: StoryObj<
     HTMLElement & {
       text: string;
       size: 'xs' | 'sm' | 'md' | 'lg';
+      emphasized: boolean;
     }
 > = {
   ...storybookInteractiveControls({
     text: 'This is a body example',
+    size: {
+      value: 'md',
+      type: 'select',
+      options: ['xs', 'sm', 'md', 'lg'],
+    },
+    emphasized: {
+      value: false,
+      type: 'boolean',
+    },
+  }),
+  render: (args) =>
+    html`<p
+      ${defineEsdsBodyAttr}
+      esds-body="${args.size}"
+      ?emphasized="${args.emphasized}"
+    >
+      ${args.text}
+    </p>`,
+};
+
+export const WithStrongContent: StoryObj<
+  EsdsBodyAttr &
+    HTMLElement & {
+      size: 'xs' | 'sm' | 'md' | 'lg';
+    }
+> = {
+  ...storybookInteractiveControls({
     size: {
       value: 'md',
       type: 'select',
@@ -52,7 +80,7 @@ export const Default: StoryObj<
       ${defineEsdsBodyAttr}
       esds-body="${args.size}"
     >
-      ${args.text}
+      This is a body example <strong>with strong content</strong>
     </p>`,
 };
 
@@ -60,35 +88,25 @@ export const AllSizes: StoryObj<
   EsdsBodyAttr &
     HTMLElement & {
       text: string;
+      emphasized: boolean;
     }
 > = {
   ...storybookInteractiveControls({
     text: 'This is a body example',
+    emphasized: {
+      value: false,
+      type: 'boolean',
+    },
   }),
   render: (args) => html`
-    <p
-      ${defineEsdsBodyAttr}
-      esds-body="lg"
-    >
-      ${args.text}
-    </p>
-    <p
-      ${defineEsdsBodyAttr}
-      esds-body="md"
-    >
-      ${args.text}
-    </p>
-    <p
-      ${defineEsdsBodyAttr}
-      esds-body="sm"
-    >
-      ${args.text}
-    </p>
-    <p
-      ${defineEsdsBodyAttr}
-      esds-body="xs"
-    >
-      ${args.text}
-    </p>
+    ${['xs', 'sm', 'md', 'lg'].map((size) => {
+      return html`<p
+        ${defineEsdsBodyAttr}
+        esds-body="${size}"
+        ?emphasized="${args.emphasized}"
+      >
+        ${args.text}
+      </p>`;
+    })}
   `,
 };
