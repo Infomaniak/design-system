@@ -1,35 +1,13 @@
 :host {
   display: block;
-}
-
-:host(:not([orientation='vertical'])) {
   width: 100%;
-}
-
-:host([orientation='vertical']) {
-  display: inline-flex;
-  flex-direction: column;
-  align-self: stretch;
-}
-
-.separator {
-  display: flex;
-}
-
-:host([orientation='vertical']) .separator {
-  flex-direction: column;
-  flex: 1;
-}
-
-.line {
-  flex: 1;
+  height: var(--esds-separator-thickness);
   background-color: var(--esds-separator-color);
 }
 
-:host(:not([orientation='vertical'])) .line {
-  height: var(--esds-separator-thickness);
-}
-
-:host([orientation='vertical']) .line {
+:host([orientation='vertical']) {
+  display: inline-block;
   width: var(--esds-separator-thickness);
+  height: auto;
+  align-self: stretch;
 }

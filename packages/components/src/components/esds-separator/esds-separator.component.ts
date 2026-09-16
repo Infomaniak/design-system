@@ -1,4 +1,4 @@
-import { html, LitElement, unsafeCSS, type TemplateResult } from 'lit';
+import { LitElement, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators.js';
 import { defineComponent } from '../../helpers/.private/component/define-component.ts';
 import style from './esds-separator.component.css?inline';
@@ -47,25 +47,28 @@ export class EsdsSeparatorComponent extends LitElement {
   @property({ type: Boolean, reflect: true })
   accessor decorative: boolean = false;
 
+  /* PRIVATE METHODS */
+
+  /**
+   * Sets the separator role once, unless the consumer already provided one.
+   */
+  public override connectedCallback(): void {
+    super.connectedCallback();
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'separator');
+    }
+  }
+
   protected override updated(): void {
+    this.toggleAttribute('aria-hidden', this.decorative);
     if (this.decorative) {
-      this.setAttribute('role', 'presentation');
       this.removeAttribute('aria-orientation');
     } else {
-      this.setAttribute('role', 'separator');
       this.setAttribute(
         'aria-orientation',
         this.orientation === 'vertical' ? 'vertical' : 'horizontal',
       );
     }
-  }
-
-  protected override render(): TemplateResult {
-    return html`
-      <div class="separator">
-        <span class="line"></span>
-      </div>
-    `;
   }
 }
 

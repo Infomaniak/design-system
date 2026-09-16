@@ -48,8 +48,8 @@ The separator divides content horizontally or vertically. Unlike the native `<hr
 
 ### Semantics
 
-- The component has `role="separator"` and exposes `aria-orientation` matching the `orientation` attribute.
-- With the `decorative` attribute, it switches to `role="presentation"` and is removed from the accessibility tree.
+- The component sets `role="separator"` unless a `role` is already present, and reflects the orientation with `aria-orientation` (any value other than `vertical` is treated as `horizontal`).
+- With the `decorative` attribute, `aria-hidden="true"` removes the separator from the accessibility tree, independently of the role.
 - The component does not support slotted content: any children are ignored. For a labeled divider, compose the separator with text in your layout instead.
 - For thematic breaks in prose content, prefer the native `<hr>` element; this component is intended for interface layouts (menus, toolbars, forms, card sections...).
 
