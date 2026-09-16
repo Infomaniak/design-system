@@ -114,6 +114,7 @@ export async function ciPublish({
       [ENV_PUBLISH_CONFIG]: JSON.stringify({
         mode: buildConfig.mode,
         prerelease: buildConfig.prerelease,
+        iosDesignSystemBaseBranch: getIosDesignSystemBaseBranch(packagesToBuild, buildConfig),
       } satisfies PublishConfig),
     });
 
@@ -129,6 +130,31 @@ export async function ciPublish({
 }
 
 /*---*/
+
+function getIosDesignSystemBaseBranch(
+  packagesToBuild: readonly PackageJsonWithPath[],
+  buildConfig: BuildConfig,
+): string | undefined {
+  const publishesTokens: boolean = packagesToBuild.some(
+    ([, { name }]: PackageJsonWithPath): boolean => name === '@infomaniak-design-system/tokens',
+  );
+  const symbolsPackage: PackageJsonWithPath | undefined = packagesToBuild.find(
+    ([, { name }]: PackageJsonWithPath): boolean => name === '@infomaniak-design-system/svg-assets',
+  );
+
+  if (!publishesTokens || symbolsPackage === undefined) {
+    return undefined;
+  }
+
+  const [, { version }] = symbolsPackage;
+  const symbolsVersion: string = generatePackageJsonBuildVersion({
+    version,
+    mode: buildConfig.mode,
+    prerelease: buildConfig.prerelease,
+  });
+
+  return `esds-symbols/${symbolsVersion}`;
+}
 
 interface GetPackagesToBuildOptions extends Pick<CiPublishContext, 'mode'> {
   readonly publishablePackages: readonly PackageJsonWithPath[];

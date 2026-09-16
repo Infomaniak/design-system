@@ -23,6 +23,7 @@ export interface CreateIosPublishGithubBranchOptions {
   readonly version: string;
   readonly sourceCommit: string;
   readonly branchName: string;
+  readonly mainBranchName?: string;
 }
 
 const PROTECTED_FOUNDATION_ENTRIES: readonly string[] = ['SwiftUI'];
@@ -62,10 +63,12 @@ export async function createIosPublishGithubBranch({
   version,
   sourceCommit,
   branchName,
+  mainBranchName,
 }: CreateIosPublishGithubBranchOptions): Promise<GitChanges> {
   return updateGitRepositoryOnNewBranch({
     repository: `git@${repositoryName}:${INFOMANIAK_GITHUB_ORGANIZATION}/${repositoryName}.git`,
     branchName,
+    mainBranchName,
     update: async ({
       cwd,
     }: UpdateGitRepositoryOnNewBranchUpdateFunctionContext): Promise<string> => {

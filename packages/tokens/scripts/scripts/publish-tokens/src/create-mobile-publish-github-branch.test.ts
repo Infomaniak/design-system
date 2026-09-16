@@ -97,6 +97,50 @@ describe('mobile publish branches', () => {
     );
   });
 
+  it('bases iOS tokens on the symbols publish branch when both artifacts are published', async () => {
+    await writeFile(
+      join(iosRepositoryDirectory, 'artifact-versions.json'),
+      formatJson({
+        schemaVersion: 1,
+        symbols: {
+          version: '1.0.0',
+          sourceCommit: SYMBOL_SOURCE_COMMIT,
+        },
+      }),
+      'utf8',
+    );
+
+    await createIosPublishGithubBranch({
+      logger,
+      repositoryName: 'ios-design-system',
+      packageDirectory,
+      version: '1.5.0',
+      sourceCommit: TOKEN_SOURCE_COMMIT,
+      branchName: 'esds/1.5.0',
+      mainBranchName: 'esds-symbols/1.0.0',
+    });
+
+    expect(updateGitRepositoryOnNewBranchMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        branchName: 'esds/1.5.0',
+        mainBranchName: 'esds-symbols/1.0.0',
+      }),
+    );
+    expect(await readFile(join(iosRepositoryDirectory, 'artifact-versions.json'), 'utf8')).toBe(
+      formatJson({
+        schemaVersion: 1,
+        symbols: {
+          version: '1.0.0',
+          sourceCommit: SYMBOL_SOURCE_COMMIT,
+        },
+        'tokens-core': {
+          version: '1.5.0',
+          sourceCommit: TOKEN_SOURCE_COMMIT,
+        },
+      }),
+    );
+  });
+
   it('publishes only tokens-core on Android', async () => {
     await writeFile(
       join(androidRepositoryDirectory, 'artifact-versions.json'),
