@@ -24,6 +24,12 @@ const logger = Logger.never();
 
 const updateGitRepositoryOnNewBranchMock = vi.mocked(updateGitRepositoryOnNewBranch);
 const formatSwiftFilesMock = vi.mocked(formatSwiftFiles);
+const TOKEN_SOURCE_COMMIT = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+const SYMBOL_SOURCE_COMMIT = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb';
+
+function formatJson(value: unknown): string {
+  return `${JSON.stringify(value, null, 2)}\n`;
+}
 
 interface RunUpdateResult {
   readonly context: UpdateGitRepositoryOnNewBranchUpdateFunctionContext;
@@ -79,6 +85,7 @@ describe('createIosSymbolsPublishGithubBranch', () => {
       xcassetsDirectory,
       swiftFile,
       version: '1.2.3',
+      sourceCommit: SYMBOL_SOURCE_COMMIT,
       branchName: 'esds-symbols/1.2.3',
     });
 
@@ -99,10 +106,34 @@ describe('createIosSymbolsPublishGithubBranch', () => {
     const destinationDirectory: string = join(repositoryDirectory, IOS_SYMBOLS_DESTINATION_PATH);
     await mkdir(join(destinationDirectory, 'stale-icon.symbolset'), { recursive: true });
     await writeFile(join(destinationDirectory, 'stale.txt'), 'stale', { encoding: 'utf8' });
+    await writeFile(
+      join(repositoryDirectory, 'versions.json'),
+      JSON.stringify({
+        schemaVersion: 1,
+        'tokens-core': {
+          version: '1.5.0',
+          sourceCommit: TOKEN_SOURCE_COMMIT,
+        },
+      }),
+      { encoding: 'utf8' },
+    );
 
     const { commitMessage } = await runUpdateInRepository(repositoryDirectory);
 
     expect(commitMessage).toBe('chore: Update symbols to 1.2.3');
+    expect(await readFile(join(repositoryDirectory, 'versions.json'), 'utf8')).toBe(
+      formatJson({
+        schemaVersion: 1,
+        'tokens-core': {
+          version: '1.5.0',
+          sourceCommit: TOKEN_SOURCE_COMMIT,
+        },
+        symbols: {
+          version: '1.2.3',
+          sourceCommit: SYMBOL_SOURCE_COMMIT,
+        },
+      }),
+    );
     expect(
       await readFile(
         join(destinationDirectory, 'a-square.symbolset', 'a-square.symbol.svg'),
@@ -132,5 +163,14 @@ describe('createIosSymbolsPublishGithubBranch', () => {
     await expect(
       stat(join(repositoryDirectory, IOS_SYMBOLS_SWIFT_DESTINATION_PATH)),
     ).resolves.toBeDefined();
+    expect(await readFile(join(repositoryDirectory, 'versions.json'), 'utf8')).toBe(
+      formatJson({
+        schemaVersion: 1,
+        symbols: {
+          version: '1.2.3',
+          sourceCommit: SYMBOL_SOURCE_COMMIT,
+        },
+      }),
+    );
   });
 });

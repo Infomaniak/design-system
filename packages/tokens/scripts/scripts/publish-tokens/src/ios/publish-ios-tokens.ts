@@ -13,12 +13,14 @@ import { createIosPublishGithubBranch } from './create-ios-publish-github-branch
 export interface PublishIosTokensOptions extends PublishConfig {
   readonly rootDirectory: string;
   readonly outputDirectory: string;
+  readonly sourceCommit: string;
   readonly logger: Logger;
 }
 
 export async function publishIosTokens({
   rootDirectory,
   outputDirectory,
+  sourceCommit,
   // shared publish options
   mode,
   prerelease,
@@ -42,6 +44,7 @@ export async function publishIosTokens({
           repositoryName: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
           packageDirectory: join(outputDirectory, 'ios/swift'),
           version: publishVersion,
+          sourceCommit,
           branchName: publishBranchName,
         })
       ).length > 0

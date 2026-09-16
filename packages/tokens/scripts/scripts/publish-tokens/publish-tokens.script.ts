@@ -1,6 +1,7 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { getSourceCommit } from '../../../../../scripts/helpers/git/get-source-commit.ts';
 import { Logger } from '../../../../../scripts/helpers/log/logger.ts';
 import { asyncOptionalCascade } from '../../../../../scripts/helpers/misc/async/async-optional-cascade.ts';
 import { runScript } from '../../../../../scripts/helpers/misc/run-script/run-script.ts';
@@ -16,6 +17,7 @@ const OUTPUT_DIR: string = join(ROOT_DIR, 'dist');
 
 await runScript('publish-tokens', async (logger: Logger): Promise<void> => {
   const publishConfig: PublishConfig = getEnvPublishConfig();
+  const sourceCommit: string = await getSourceCommit(logger, ROOT_DIR);
 
   await asyncOptionalCascade([
     (): Promise<void> =>
@@ -29,6 +31,7 @@ await runScript('publish-tokens', async (logger: Logger): Promise<void> => {
         ...publishConfig,
         rootDirectory: ROOT_DIR,
         outputDirectory: OUTPUT_DIR,
+        sourceCommit,
         logger,
       }),
     (): Promise<void> =>
@@ -36,6 +39,7 @@ await runScript('publish-tokens', async (logger: Logger): Promise<void> => {
         ...publishConfig,
         rootDirectory: ROOT_DIR,
         outputDirectory: OUTPUT_DIR,
+        sourceCommit,
         logger,
       }),
   ]);

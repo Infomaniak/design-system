@@ -24,6 +24,7 @@ export interface PublishSfSymbolsOptions extends PublishConfig {
   /** Directory containing the generated asset catalog and Swift accessors. */
   readonly outputDirectory: string;
   readonly outlinesDirectory: string;
+  readonly sourceCommit: string;
 }
 
 /**
@@ -35,6 +36,7 @@ export async function publishSfSymbols({
   packageRootDirectory,
   outputDirectory,
   outlinesDirectory,
+  sourceCommit,
   // shared publish options
   mode,
   prerelease,
@@ -65,6 +67,7 @@ export async function publishSfSymbols({
       xcassetsDirectory: join(outputDirectory, SYMBOLS_XCASSETS_DIRECTORY_NAME),
       swiftFile: join(outputDirectory, SYMBOLS_SWIFT_FILE_NAME),
       version: publishVersion,
+      sourceCommit,
       branchName: publishBranchName,
     });
 

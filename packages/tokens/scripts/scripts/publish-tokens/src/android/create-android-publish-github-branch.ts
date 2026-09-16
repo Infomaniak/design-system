@@ -7,12 +7,14 @@ import {
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { execCommandInherit } from '../../../../../../../scripts/helpers/misc/exec-command.ts';
+import { updateMobileArtifactVersion } from '../../../../../../../scripts/helpers/mobile/update-mobile-artifact-version.ts';
 
 export interface CreateAndroidPublishGithubBranchOptions {
   readonly logger: Logger;
   readonly repositoryName: string;
   readonly packageDirectory: string;
   readonly version: string;
+  readonly sourceCommit: string;
   readonly branchName: string;
 }
 
@@ -24,6 +26,7 @@ export function createAndroidPublishGithubBranch({
   repositoryName,
   packageDirectory,
   version,
+  sourceCommit,
   branchName,
 }: CreateAndroidPublishGithubBranchOptions): Promise<GitChanges> {
   return updateGitRepositoryOnNewBranch({
@@ -32,7 +35,13 @@ export function createAndroidPublishGithubBranch({
     update: async ({
       cwd,
     }: UpdateGitRepositoryOnNewBranchUpdateFunctionContext): Promise<string> => {
-      await Promise.all([cp(packageDirectory, cwd, { recursive: true, force: true })]);
+      await cp(packageDirectory, cwd, { recursive: true, force: true });
+      await updateMobileArtifactVersion({
+        repositoryDirectory: cwd,
+        category: 'tokens-core',
+        version,
+        sourceCommit,
+      });
 
       await execCommandInherit(
         logger,

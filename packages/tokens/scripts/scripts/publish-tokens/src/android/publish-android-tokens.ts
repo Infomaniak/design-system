@@ -13,12 +13,14 @@ import { createAndroidPublishGithubBranch } from './create-android-publish-githu
 export interface PublishAndroidTokensOptions extends PublishConfig {
   readonly rootDirectory: string;
   readonly outputDirectory: string;
+  readonly sourceCommit: string;
   readonly logger: Logger;
 }
 
 export async function publishAndroidTokens({
   rootDirectory,
   outputDirectory,
+  sourceCommit,
   // shared publish options
   mode,
   prerelease,
@@ -42,6 +44,7 @@ export async function publishAndroidTokens({
           repositoryName: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
           packageDirectory: join(outputDirectory, 'kotlin'),
           version: publishVersion,
+          sourceCommit,
           branchName: publishBranchName,
         })
       ).length > 0

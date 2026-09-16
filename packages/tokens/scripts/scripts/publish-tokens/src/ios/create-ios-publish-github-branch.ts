@@ -7,6 +7,7 @@ import {
 } from '../../../../../../../scripts/helpers/git/update-git-repository-on-new-branch.ts';
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
+import { updateMobileArtifactVersion } from '../../../../../../../scripts/helpers/mobile/update-mobile-artifact-version.ts';
 import { formatSwiftFiles } from '../../../../../../../scripts/helpers/swift/format-swift-files.ts';
 import {
   SWIFT_FOUNDATION_DIR,
@@ -20,6 +21,7 @@ export interface CreateIosPublishGithubBranchOptions {
   readonly repositoryName: string;
   readonly packageDirectory: string;
   readonly version: string;
+  readonly sourceCommit: string;
   readonly branchName: string;
 }
 
@@ -58,6 +60,7 @@ export async function createIosPublishGithubBranch({
   repositoryName,
   packageDirectory,
   version,
+  sourceCommit,
   branchName,
 }: CreateIosPublishGithubBranchOptions): Promise<GitChanges> {
   return updateGitRepositoryOnNewBranch({
@@ -84,6 +87,12 @@ export async function createIosPublishGithubBranch({
       ]);
 
       await cp(packageDirectory, cwd, { recursive: true, force: true });
+      await updateMobileArtifactVersion({
+        repositoryDirectory: cwd,
+        category: 'tokens-core',
+        version,
+        sourceCommit,
+      });
 
       await formatSwiftFiles({
         logger,

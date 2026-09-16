@@ -26,6 +26,7 @@ const logger = Logger.never();
 const createIosSymbolsPublishGithubBranchMock = vi.mocked(createIosSymbolsPublishGithubBranch);
 const createGithubPullRequestMock = vi.mocked(createGithubPullRequest);
 const readPackageJsonFileMock = vi.mocked(readPackageJsonFile);
+const SOURCE_COMMIT = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb';
 
 describe('publishSfSymbols', () => {
   let tempDir: string;
@@ -56,6 +57,7 @@ describe('publishSfSymbols', () => {
       packageRootDirectory: tempDir,
       outputDirectory,
       outlinesDirectory,
+      sourceCommit: SOURCE_COMMIT,
       logger,
     };
   };
@@ -112,6 +114,7 @@ describe('publishSfSymbols', () => {
       xcassetsDirectory: join(options.outputDirectory, SYMBOLS_XCASSETS_DIRECTORY_NAME),
       swiftFile: join(options.outputDirectory, SYMBOLS_SWIFT_FILE_NAME),
       version: '1.2.3-dev.42',
+      sourceCommit: SOURCE_COMMIT,
       branchName: 'esds-symbols/1.2.3-dev.42',
     });
     expect(createGithubPullRequestMock).toHaveBeenCalledWith({

@@ -8,6 +8,7 @@ import {
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import { IOS_DESIGN_SYSTEM_REPOSITORY_NAME } from '../../../../../../../../scripts/helpers/github/constants/ios-design-system-repository-name.constant.ts';
 import type { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
+import { updateMobileArtifactVersion } from '../../../../../../../../scripts/helpers/mobile/update-mobile-artifact-version.ts';
 import { formatSwiftFiles } from '../../../../../../../../scripts/helpers/swift/format-swift-files.ts';
 import {
   IOS_SYMBOLS_DESTINATION_PATH,
@@ -21,6 +22,7 @@ export interface CreateIosSymbolsPublishGithubBranchOptions {
   /** Generated Swift source exposing the symbols outside the package. */
   readonly swiftFile: string;
   readonly version: string;
+  readonly sourceCommit: string;
   readonly branchName: string;
 }
 
@@ -33,6 +35,7 @@ export async function createIosSymbolsPublishGithubBranch({
   xcassetsDirectory,
   swiftFile,
   version,
+  sourceCommit,
   branchName,
 }: CreateIosSymbolsPublishGithubBranchOptions): Promise<GitChanges> {
   return updateGitRepositoryOnNewBranch({
@@ -51,6 +54,12 @@ export async function createIosSymbolsPublishGithubBranch({
         logger,
         cwd,
         paths: [IOS_SYMBOLS_SWIFT_DESTINATION_PATH],
+      });
+      await updateMobileArtifactVersion({
+        repositoryDirectory: cwd,
+        category: 'symbols',
+        version,
+        sourceCommit,
       });
 
       return `chore: Update symbols to ${version}`;
