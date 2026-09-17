@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.29",
+    "version": "0.0.30",
     "author": {
       "name": "Infomaniak"
     },
@@ -12,7 +12,7 @@
     },
     "total": 262
   },
-  "lastModified": 1789459662,
+  "lastModified": 1789623486,
   "icons": {
     "a-large-small": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 16 2.536-7.328a1.02 1.02 0 011.928 0L22 16m-6.303-2h5.606M2 16l4.039-9.69a.5.5 0 01.923 0L11 16m-7.696-3h6.392\" vector-effect=\"non-scaling-stroke\"/>"
@@ -458,7 +458,7 @@
     "list-left": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M15 12H3m0-7h18M9 19H3\" vector-effect=\"non-scaling-stroke\"/>"
     },
-    "list-magnifying-class": {
+    "list-magnifying-glass": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M21 5H3m7 7H3m7 7H3m18 0-1.9-1.9M20 15a3 3 0 11-6 0 3 3 0 016 0\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "lock": {
@@ -951,7 +951,7 @@
       "list",
       "list-filter",
       "list-left",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "lock",
       "lock-open",
       "looped-square",
@@ -1588,7 +1588,7 @@
     ],
     "#browse": [
       "folder-open",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "magnifying-glass"
     ],
     "#brush": [
@@ -2809,13 +2809,13 @@
     "#filter": [
       "funnel",
       "list-filter",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "sliders-horizontal",
       "sliders-vertical"
     ],
     "#find": [
       "envelope-magnifying-glass",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "magnifying-glass",
       "magnifying-glass-minus",
       "magnifying-glass-plus",
@@ -3276,7 +3276,7 @@
       "list-left"
     ],
     "#index": [
-      "list-magnifying-class"
+      "list-magnifying-glass"
     ],
     "#individual": [
       "user"
@@ -3542,7 +3542,7 @@
       "list",
       "list-filter",
       "list-left",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "number-list",
       "rows-three",
       "rows-two"
@@ -3601,7 +3601,7 @@
     ],
     "#lookup": [
       "envelope-magnifying-glass",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "magnifying-glass",
       "magnifying-glass-minus",
       "magnifying-glass-plus",
@@ -3642,7 +3642,7 @@
       "magnifying-glass"
     ],
     "#magnify": [
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "magnifying-glass-minus",
       "magnifying-glass-plus"
     ],
@@ -4472,7 +4472,7 @@
       "circle-question-filled",
       "envelope-magnifying-glass",
       "envelope-question-mark",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "magnifying-glass",
       "shield-question-mark"
     ],
@@ -4909,7 +4909,7 @@
     "#search": [
       "envelope-magnifying-glass",
       "list-filter",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "magnifying-glass",
       "magnifying-glass-minus",
       "magnifying-glass-plus",
@@ -5442,7 +5442,7 @@
       "italic",
       "languages",
       "list-left",
-      "list-magnifying-class",
+      "list-magnifying-glass",
       "rectangle-underline-dashed",
       "text",
       "toggle-case",
