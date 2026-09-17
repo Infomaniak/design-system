@@ -8,7 +8,10 @@ import type { GitChanges } from '../../../../../../../../scripts/helpers/git/git
 import type { GithubCiPullRequest } from '../../../../../../../../scripts/helpers/github/github-ci-config/github-ci-config.ts';
 import { createGithubPullRequest } from '../../../../../../../../scripts/helpers/github/pull-request/create-github-pull-request.ts';
 import { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
-import { SYMBOLS_XCASSETS_DIRECTORY_NAME } from '../../../shared/sf-symbols/sf-symbols-config.ts';
+import {
+  SYMBOLS_SWIFT_FILE_NAME,
+  SYMBOLS_XCASSETS_DIRECTORY_NAME,
+} from '../../../shared/sf-symbols/sf-symbols-config.ts';
 import { createIosSymbolsPublishGithubBranch } from './create-ios-symbols-publish-github-branch.ts';
 import { publishSfSymbols, type PublishSfSymbolsOptions } from './publish-sf-symbols.ts';
 
@@ -107,6 +110,7 @@ describe('publishSfSymbols', () => {
     expect(createIosSymbolsPublishGithubBranchMock).toHaveBeenCalledWith({
       logger,
       xcassetsDirectory: join(options.outputDirectory, SYMBOLS_XCASSETS_DIRECTORY_NAME),
+      swiftFile: join(options.outputDirectory, SYMBOLS_SWIFT_FILE_NAME),
       version: '1.2.3-dev.42',
       branchName: 'esds-symbols/1.2.3-dev.42',
     });

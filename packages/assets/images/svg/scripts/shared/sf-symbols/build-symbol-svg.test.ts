@@ -4,6 +4,7 @@ import type { SvgOutlinePath } from '../icons/outline-path.ts';
 import { buildSymbolSvg, fitSymbolOutlinePathsToVariant } from './build-symbol-svg.ts';
 import type { SymbolTemplate } from './parse-symbol-template.ts';
 import { parseSymbolTemplate, readSymbolTemplate } from './parse-symbol-template.ts';
+import { SYMBOL_FILL_RATIO } from './sf-symbols-config.ts';
 
 const SQUARE_OUTLINED_PATH: readonly SvgOutlinePath[] = [
   { d: 'M 4 4 L 20 4 L 20 20 L 4 20 Z', windingRule: 'NONZERO' },
@@ -66,6 +67,33 @@ describe('buildSymbolSvg', () => {
 
     expect(svg).toContain('Generated from square');
     expect(svg).not.toContain('Generated from symbol');
+  });
+
+  test('computes the bounding box per path, supporting relative path starts', async () => {
+    const template = await readSymbolTemplate();
+    const svg = buildSymbolSvg({
+      symbolName: 'relative',
+      outlinedPaths: [
+        { d: 'M 2 0 L 4 0', windingRule: 'NONZERO' },
+        { d: 'm 1 1 L 3 3 Z', windingRule: 'NONZERO' },
+      ],
+      template,
+    });
+
+    const regularVariant = template.variants.find(({ id }): boolean => id === 'Regular-S')!;
+    const groupBody: string =
+      new RegExp(`<g id="Regular-S"[^>]*>([\\s\\S]*?)</g>`).exec(svg)?.[1] ?? '';
+    const fittedPathDataList: readonly string[] = [...groupBody.matchAll(/d="([^"]+)"/g)].map(
+      (match: RegExpMatchArray): string => match[1]!,
+    );
+    const fittedBoundingBox = computePathDataBoundingBox(fittedPathDataList.join(' '));
+
+    const cellHeight: number = template.baselineY - template.caplineY;
+    const scale: number =
+      Math.min(regularVariant.cellWidth / 3, cellHeight / 3) * SYMBOL_FILL_RATIO;
+
+    expect(fittedBoundingBox.minX).toBeCloseTo(regularVariant.cellWidth / 2 - 1.5 * scale, 3);
+    expect(fittedBoundingBox.maxX).toBeCloseTo(regularVariant.cellWidth / 2 + 1.5 * scale, 3);
   });
 
   test('adds a fill-rule attribute for EVENODD winding', async () => {
