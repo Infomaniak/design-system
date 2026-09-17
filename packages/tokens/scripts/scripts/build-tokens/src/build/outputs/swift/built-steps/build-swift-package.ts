@@ -11,6 +11,7 @@ import {
 
 const SWIFT_TOOLS_VERSION = '6.2';
 const SWIFT_PACKAGE_PLATFORMS = '[.iOS(.v16), .macOS(.v13), .visionOS(.v1)]';
+const SWIFT_SYMBOLS_TARGET_NAME = 'ESDSSymbols';
 
 export interface BuildSwiftPackageOptions {
   readonly outputDirectory: string;
@@ -40,7 +41,7 @@ export async function buildSwiftPackage({
   outputDirectory,
   productTargetNames,
 }: BuildSwiftPackageOptions): Promise<void> {
-  const libraryProducts = [SWIFT_FOUNDATION_DIR, ...productTargetNames]
+  const libraryProducts = [SWIFT_FOUNDATION_DIR, SWIFT_SYMBOLS_TARGET_NAME, ...productTargetNames]
     .map(buildLibraryProduct)
     .join('\n');
   const productTargets = productTargetNames.map(buildProductTarget).join('\n');
@@ -64,6 +65,10 @@ export async function buildSwiftPackage({
             .target(
                 name: "${SWIFT_FOUNDATION_DIR}",
                 dependencies: ["${SWIFT_PRIMITIVE_TARGET_NAME}"]
+            ),
+            .target(
+              name: "${SWIFT_SYMBOLS_TARGET_NAME}",
+              resources: [.process("Symbols.xcassets")]
             ),
             ${productTargets}
         ]
