@@ -40,30 +40,32 @@
 
   &:focus-visible {
     outline: var(--esds-focus-border-width) solid var(--esds-focus-border-color);
-    outline-offset: var(--esds-spacing-2xs); // TODO use focus token
+    outline-offset: var(--esds-focus-border-offset);
     border-radius: var(--esds-focus-border-radius);
   }
 
   &:not(:disabled, [disabled], [loading]) {
     &:hover {
-      border-color: styles.source-over(--esds-button-border-color, --esds-color-state-hover-strong);
+      border-color: styles.source-over(--esds-button-border-color, --esds-button-color-state-hover);
       background-color: styles.source-over(
         --esds-button-background-color,
-        --esds-color-state-hover-strong
+        --esds-button-color-state-hover
       );
-      color: styles.source-over(--esds-button-content-color, --esds-color-state-hover-medium);
+
+      // color: styles.source-over(--esds-button-content-color, --esds-button-color-state-hover);
     }
 
     &:active {
       border-color: styles.source-over(
         --esds-button-border-color,
-        --esds-color-state-pressed-strong
+        --esds-button-color-state-pressed
       );
       background-color: styles.source-over(
         --esds-button-background-color,
-        --esds-color-state-pressed-strong
+        --esds-button-color-state-pressed
       );
-      color: styles.source-over(--esds-button-content-color, --esds-color-state-pressed-medium);
+
+      // color: styles.source-over(--esds-button-content-color, --esds-button-color-state-pressed);
     }
   }
 

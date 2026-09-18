@@ -55,6 +55,16 @@
         "$value": "{body.md.font.emphasized}"
       }
     },
+    "color": {
+      "state": {
+        "hover": {
+          "$value": "{color.state.hover.medium}"
+        },
+        "pressed": {
+          "$value": "{color.state.pressed.medium}"
+        }
+      }
+    },
     "icon": {
       "size": {
         "$value": "{icon.size.md}"
