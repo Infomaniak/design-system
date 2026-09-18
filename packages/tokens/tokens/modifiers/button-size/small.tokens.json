@@ -23,7 +23,7 @@
     },
     "content": {
       "font": {
-        "$value": "{body.sm.font}"
+        "$value": "{body.sm.font.emphasized}"
       }
     },
     "icon": {

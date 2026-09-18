@@ -52,7 +52,7 @@
         }
       },
       "font": {
-        "$value": "{body.md.font}"
+        "$value": "{body.md.font.emphasized}"
       }
     },
     "icon": {
