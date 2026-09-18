@@ -173,24 +173,33 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.feedback.neutral.dim2 | #e2e8f0 | #0f172b | var(--esds-color-background-feedback-neutral-dim2) | Soft neutral background (dim2). |
 | color.background.feedback.neutral.dim3 | #f8fafc | #020618 | var(--esds-color-background-feedback-neutral-dim3) | Subtle neutral background (dim3). |
 | color.background.disabled | #e2e8f0 | #192334 | var(--esds-color-background-disabled) | Background for disabled, non-interactive elements. |
-| color.background.dataviz.orange.dim1 | #dd4f02 | #ffa032 | var(--esds-color-background-dataviz-orange-dim1) | Strong orange data-viz background (dim1). |
+| color.background.dataviz.orange.dim1 | #f97207 | #ffa032 | var(--esds-color-background-dataviz-orange-dim1) | Strong orange data-viz background (dim1). |
 | color.background.dataviz.orange.dim2 | #ffd188 | #94260c | var(--esds-color-background-dataviz-orange-dim2) | Soft orange data-viz background (dim2). |
-| color.background.dataviz.emerald.dim1 | #15864e | #3cb572 | var(--esds-color-background-dataviz-emerald-dim1) | Strong emerald data-viz background (dim1). |
+| color.background.dataviz.orange.dim3 | #fff7eb | #460d02 | var(--esds-color-background-dataviz-orange-dim3) | Subtle orange data-viz background (dim3). |
+| color.background.dataviz.emerald.dim1 | #23a662 | #3cb572 | var(--esds-color-background-dataviz-emerald-dim1) | Strong emerald data-viz background (dim1). |
 | color.background.dataviz.emerald.dim2 | #afebc4 | #105535 | var(--esds-color-background-dataviz-emerald-dim2) | Soft emerald data-viz background (dim2). |
-| color.background.dataviz.blue.dim1 | #0077cf | #36adfa | var(--esds-color-background-dataviz-blue-dim1) | Strong blue data-viz background (dim1). |
+| color.background.dataviz.emerald.dim3 | #eefbf2 | #072719 | var(--esds-color-background-dataviz-emerald-dim3) | Subtle emerald data-viz background (dim3). |
+| color.background.dataviz.blue.dim1 | #0c93eb | #36adfa | var(--esds-color-background-dataviz-blue-dim1) | Strong blue data-viz background (dim1). |
 | color.background.dataviz.blue.dim2 | #b9e0fe | #064e86 | var(--esds-color-background-dataviz-blue-dim2) | Soft blue data-viz background (dim2). |
-| color.background.dataviz.violet.dim1 | #8f30f7 | #b185ff | var(--esds-color-background-dataviz-violet-dim1) | Strong violet data-viz background (dim1). |
+| color.background.dataviz.blue.dim3 | #f0f8ff | #072a4a | var(--esds-color-background-dataviz-blue-dim3) | Subtle blue data-viz background (dim3). |
+| color.background.dataviz.violet.dim1 | #9346ff | #b185ff | var(--esds-color-background-dataviz-violet-dim1) | Strong violet data-viz background (dim1). |
 | color.background.dataviz.violet.dim2 | #e0d4ff | #6c18bf | var(--esds-color-background-dataviz-violet-dim2) | Soft violet data-viz background (dim2). |
-| color.background.dataviz.purple.dim1 | #4d62ea | #7ea1fb | var(--esds-color-background-dataviz-purple-dim1) | Strong purple data-viz background (dim1). |
+| color.background.dataviz.violet.dim3 | #f6f2ff | #370b6a | var(--esds-color-background-dataviz-violet-dim3) | Subtle violet data-viz background (dim3). |
+| color.background.dataviz.purple.dim1 | #607ff4 | #7ea1fb | var(--esds-color-background-dataviz-purple-dim1) | Strong purple data-viz background (dim1). |
 | color.background.dataviz.purple.dim2 | #c6dcff | #2d3da6 | var(--esds-color-background-dataviz-purple-dim2) | Soft purple data-viz background (dim2). |
-| color.background.dataviz.pink.dim1 | #e9004c | #ff5d86 | var(--esds-color-background-dataviz-pink-dim1) | Strong pink data-viz background (dim1). |
+| color.background.dataviz.purple.dim3 | #eef5ff | #1a204c | var(--esds-color-background-dataviz-purple-dim3) | Subtle purple data-viz background (dim3). |
+| color.background.dataviz.pink.dim1 | #ff2461 | #ff5d86 | var(--esds-color-background-dataviz-pink-dim1) | Strong pink data-viz background (dim1). |
 | color.background.dataviz.pink.dim2 | #ffc6d3 | #b40045 | var(--esds-color-background-dataviz-pink-dim2) | Soft pink data-viz background (dim2). |
+| color.background.dataviz.pink.dim3 | #ffeff2 | #570022 | var(--esds-color-background-dataviz-pink-dim3) | Subtle pink data-viz background (dim3). |
 | color.background.dataviz.yellow.dim1 | #ecb306 | #fccf20 | var(--esds-color-background-dataviz-yellow-dim1) | Strong yellow data-viz background (dim1). |
 | color.background.dataviz.yellow.dim2 | #fff089 | #864d0d | var(--esds-color-background-dataviz-yellow-dim2) | Soft yellow data-viz background (dim2). |
+| color.background.dataviz.yellow.dim3 | #fefce8 | #422006 | var(--esds-color-background-dataviz-yellow-dim3) | Subtle yellow data-viz background (dim3). |
 | color.background.dataviz.gray.dim1 | #62748e | #90a1b9 | var(--esds-color-background-dataviz-gray-dim1) | Strong gray data-viz background (dim1). |
 | color.background.dataviz.gray.dim2 | #e2e8f0 | #192334 | var(--esds-color-background-dataviz-gray-dim2) | Soft gray data-viz background (dim2). |
-| color.background.dataviz.dim1 | #0077cf | #0077cf | var(--esds-color-background-dataviz-dim1) | Default dim1 data-viz background. |
+| color.background.dataviz.gray.dim3 | #f8fafc | #020618 | var(--esds-color-background-dataviz-gray-dim3) | Subtle gray data-viz background (dim3). |
+| color.background.dataviz.dim1 | #0c93eb | #0c93eb | var(--esds-color-background-dataviz-dim1) | Default dim1 data-viz background. |
 | color.background.dataviz.dim2 | #b9e0fe | #b9e0fe | var(--esds-color-background-dataviz-dim2) | Default dim2 data-viz background. |
+| color.background.dataviz.dim3 | #f0f8ff | #f0f8ff | var(--esds-color-background-dataviz-dim3) | Default dim3 data-viz background. |
 | color.content.on.disabled | #90a1b9 | #62748e | var(--esds-color-content-on-disabled) | Content color for disabled states on backgrounds. |
 | color.content.on.brand | #fff | #fff | var(--esds-color-content-on-brand) | Default foreground on brand backgrounds. |
 | color.content.on.brand.infomaniak | #fff | #072a4a | var(--esds-color-content-on-brand-infomaniak) | Foreground on Infomaniak brand backgrounds. |
@@ -203,34 +212,48 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.on.brand.mail | #fff | #570022 | var(--esds-color-content-on-brand-mail) | Foreground on Mail brand backgrounds. |
 | color.content.on.brand.security | #fff | #1a204c | var(--esds-color-content-on-brand-security) | Foreground on Security brand backgrounds. |
 | color.content.on.brand.swisstransfer | #fff | #072719 | var(--esds-color-content-on-brand-swisstransfer) | Foreground on SwissTransfer brand backgrounds. |
-| color.content.on.dataviz.blue.dim1 | #0b426f | #e0effe | var(--esds-color-content-on-dataviz-blue-dim1) | Foreground on strong blue data-viz backgrounds (dim1). |
-| color.content.on.dataviz.blue.dim2 | #f0f8ff | #072a4a | var(--esds-color-content-on-dataviz-blue-dim2) | Foreground on soft blue data-viz backgrounds (dim2). |
-| color.content.on.dataviz.emerald.dim1 | #0e462d | #d6f5df | var(--esds-color-content-on-dataviz-emerald-dim1) | Foreground on strong emerald data-viz backgrounds (dim1). |
-| color.content.on.dataviz.emerald.dim2 | #eefbf2 | #072719 | var(--esds-color-content-on-dataviz-emerald-dim2) | Foreground on soft emerald data-viz backgrounds (dim2). |
-| color.content.on.dataviz.orange.dim1 | #7a200d | #ffe9c6 | var(--esds-color-content-on-dataviz-orange-dim1) | Foreground on strong orange data-viz backgrounds (dim1). |
-| color.content.on.dataviz.orange.dim2 | #ffe9c6 | #460d02 | var(--esds-color-content-on-dataviz-orange-dim2) | Foreground on soft orange data-viz backgrounds (dim2). |
-| color.content.on.dataviz.pink.dim1 | #990241 | #ffe0e6 | var(--esds-color-content-on-dataviz-pink-dim1) | Foreground on strong pink data-viz backgrounds (dim1). |
-| color.content.on.dataviz.pink.dim2 | #ffeff2 | #570022 | var(--esds-color-content-on-dataviz-pink-dim2) | Foreground on soft pink data-viz backgrounds (dim2). |
-| color.content.on.dataviz.purple.dim1 | #2c3983 | #dfecff | var(--esds-color-content-on-dataviz-purple-dim1) | Foreground on strong purple data-viz backgrounds (dim1). |
-| color.content.on.dataviz.purple.dim2 | #eef5ff | #1a204c | var(--esds-color-content-on-dataviz-purple-dim2) | Foreground on soft purple data-viz backgrounds (dim2). |
-| color.content.on.dataviz.violet.dim1 | #59169c | #efe8ff | var(--esds-color-content-on-dataviz-violet-dim1) | Foreground on strong violet data-viz backgrounds (dim1). |
-| color.content.on.dataviz.violet.dim2 | #f6f2ff | #370b6a | var(--esds-color-content-on-dataviz-violet-dim2) | Foreground on soft violet data-viz backgrounds (dim2). |
-| color.content.on.dataviz.yellow.dim1 | #723f11 | #fef9c3 | var(--esds-color-content-on-dataviz-yellow-dim1) | Foreground on strong yellow data-viz backgrounds (dim1). |
-| color.content.on.dataviz.yellow.dim2 | #fefce8 | #422006 | var(--esds-color-content-on-dataviz-yellow-dim2) | Foreground on soft yellow data-viz backgrounds (dim2). |
-| color.content.on.dataviz.gray.dim1 | #0f172b | #f1f5f9 | var(--esds-color-content-on-dataviz-gray-dim1) | Foreground on strong gray data-viz backgrounds (dim1). |
-| color.content.on.dataviz.gray.dim2 | #f8fafc | #020618 | var(--esds-color-content-on-dataviz-gray-dim2) | Foreground on soft gray data-viz backgrounds (dim2). |
-| color.content.on.dataviz.dim1 | #0b426f | #0b426f | var(--esds-color-content-on-dataviz-dim1) | Default foreground on data-viz dim1 backgrounds. |
-| color.content.on.dataviz.dim2 | #f0f8ff | #f0f8ff | var(--esds-color-content-on-dataviz-dim2) | Default foreground on data-viz dim2 backgrounds. |
-| color.content.on.feedback.success.dim1 | #042f16 | #f0fdf4 | var(--esds-color-content-on-feedback-success-dim1) | Foreground on strong success backgrounds (dim1). |
-| color.content.on.feedback.success.dim2 | #fff | #042f16 | var(--esds-color-content-on-feedback-success-dim2) | Foreground on strong success backgrounds (dim1). |
-| color.content.on.feedback.warning.dim1 | #7a200d | #fff7eb | var(--esds-color-content-on-feedback-warning-dim1) | Foreground on strong warning backgrounds (dim1). |
-| color.content.on.feedback.warning.dim2 | #fff | #460d02 | var(--esds-color-content-on-feedback-warning-dim2) | Foreground on strong warning backgrounds (dim1). |
-| color.content.on.feedback.error.dim1 | #920a0a | #fff0f0 | var(--esds-color-content-on-feedback-error-dim1) | Foreground on strong error backgrounds (dim1). |
-| color.content.on.feedback.error.dim2 | #fff | #500000 | var(--esds-color-content-on-feedback-error-dim2) | Foreground on strong error backgrounds (dim1). |
-| color.content.on.feedback.information.dim1 | #0b426f | #f0f8ff | var(--esds-color-content-on-feedback-information-dim1) | Foreground on strong information backgrounds (dim1). |
-| color.content.on.feedback.information.dim2 | #fff | #072a4a | var(--esds-color-content-on-feedback-information-dim2) | Foreground on strong information backgrounds (dim1). |
-| color.content.on.feedback.neutral.dim1 | #0f172b | #f8fafc | var(--esds-color-content-on-feedback-neutral-dim1) | Foreground on strong neutral backgrounds (dim1). |
-| color.content.on.feedback.neutral.dim2 | #fff | #020618 | var(--esds-color-content-on-feedback-neutral-dim2) | Foreground on strong neutral backgrounds (dim1). |
+| color.content.on.dataviz.blue.dim1 | #f0f8ff | #072a4a | var(--esds-color-content-on-dataviz-blue-dim1) | Foreground on strong blue data-viz backgrounds (dim1). |
+| color.content.on.dataviz.blue.dim2 | #0b426f | #e0effe | var(--esds-color-content-on-dataviz-blue-dim2) | Foreground on soft blue data-viz backgrounds (dim2). |
+| color.content.on.dataviz.blue.dim3 | #015ca3 | #7cc8fd | var(--esds-color-content-on-dataviz-blue-dim3) | Foreground on subtle blue data-viz backgrounds (dim3). |
+| color.content.on.dataviz.emerald.dim1 | #eefbf2 | #072719 | var(--esds-color-content-on-dataviz-emerald-dim1) | Foreground on strong emerald data-viz backgrounds (dim1). |
+| color.content.on.dataviz.emerald.dim2 | #0e462d | #d6f5df | var(--esds-color-content-on-dataviz-emerald-dim2) | Foreground on soft emerald data-viz backgrounds (dim2). |
+| color.content.on.dataviz.emerald.dim3 | #116b40 | #7bdaa2 | var(--esds-color-content-on-dataviz-emerald-dim3) | Foreground on subtle emerald data-viz backgrounds (dim3). |
+| color.content.on.dataviz.orange.dim1 | #fff7eb | #460d02 | var(--esds-color-content-on-dataviz-orange-dim1) | Foreground on strong orange data-viz backgrounds (dim1). |
+| color.content.on.dataviz.orange.dim2 | #7a200d | #ffe9c6 | var(--esds-color-content-on-dataviz-orange-dim2) | Foreground on soft orange data-viz backgrounds (dim2). |
+| color.content.on.dataviz.orange.dim3 | #b73206 | #ffb34a | var(--esds-color-content-on-dataviz-orange-dim3) | Foreground on subtle orange data-viz backgrounds (dim3). |
+| color.content.on.dataviz.pink.dim1 | #ffeff2 | #570022 | var(--esds-color-content-on-dataviz-pink-dim1) | Foreground on strong pink data-viz backgrounds (dim1). |
+| color.content.on.dataviz.pink.dim2 | #990241 | #ffe0e6 | var(--esds-color-content-on-dataviz-pink-dim2) | Foreground on soft pink data-viz backgrounds (dim2). |
+| color.content.on.dataviz.pink.dim3 | #d7004b | #ff97af | var(--esds-color-content-on-dataviz-pink-dim3) | Foreground on subtle pink data-viz backgrounds (dim3). |
+| color.content.on.dataviz.purple.dim1 | #eef5ff | #1a204c | var(--esds-color-content-on-dataviz-purple-dim1) | Foreground on strong purple data-viz backgrounds (dim1). |
+| color.content.on.dataviz.purple.dim2 | #2c3983 | #dfecff | var(--esds-color-content-on-dataviz-purple-dim2) | Foreground on soft purple data-viz backgrounds (dim2). |
+| color.content.on.dataviz.purple.dim3 | #3546cd | #a3c4fe | var(--esds-color-content-on-dataviz-purple-dim3) | Foreground on subtle purple data-viz backgrounds (dim3). |
+| color.content.on.dataviz.violet.dim1 | #f6f2ff | #370b6a | var(--esds-color-content-on-dataviz-violet-dim1) | Foreground on strong violet data-viz backgrounds (dim1). |
+| color.content.on.dataviz.violet.dim2 | #59169c | #efe8ff | var(--esds-color-content-on-dataviz-violet-dim2) | Foreground on soft violet data-viz backgrounds (dim2). |
+| color.content.on.dataviz.violet.dim3 | #811ee3 | #cab1ff | var(--esds-color-content-on-dataviz-violet-dim3) | Foreground on subtle violet data-viz backgrounds (dim3). |
+| color.content.on.dataviz.yellow.dim1 | #fefce8 | #422006 | var(--esds-color-content-on-dataviz-yellow-dim1) | Foreground on strong yellow data-viz backgrounds (dim1). |
+| color.content.on.dataviz.yellow.dim2 | #723f11 | #fef9c3 | var(--esds-color-content-on-dataviz-yellow-dim2) | Foreground on soft yellow data-viz backgrounds (dim2). |
+| color.content.on.dataviz.yellow.dim3 | #a26206 | #fee046 | var(--esds-color-content-on-dataviz-yellow-dim3) | Foreground on subtle yellow data-viz backgrounds (dim3). |
+| color.content.on.dataviz.gray.dim1 | #f8fafc | #020618 | var(--esds-color-content-on-dataviz-gray-dim1) | Foreground on strong gray data-viz backgrounds (dim1). |
+| color.content.on.dataviz.gray.dim2 | #0f172b | #f1f5f9 | var(--esds-color-content-on-dataviz-gray-dim2) | Foreground on soft gray data-viz backgrounds (dim2). |
+| color.content.on.dataviz.gray.dim3 | #314158 | #cad5e2 | var(--esds-color-content-on-dataviz-gray-dim3) | Foreground on subtle gray data-viz backgrounds (dim3). |
+| color.content.on.dataviz.dim1 | #f0f8ff | #f0f8ff | var(--esds-color-content-on-dataviz-dim1) | Default foreground on data-viz dim1 backgrounds. |
+| color.content.on.dataviz.dim2 | #0b426f | #0b426f | var(--esds-color-content-on-dataviz-dim2) | Default foreground on data-viz dim2 backgrounds. |
+| color.content.on.dataviz.dim3 | #015ca3 | #015ca3 | var(--esds-color-content-on-dataviz-dim3) | Default foreground on data-viz dim3 backgrounds. |
+| color.content.on.feedback.success.dim1 | #fff | #042f16 | var(--esds-color-content-on-feedback-success-dim1) | Foreground on strong success backgrounds (dim1). |
+| color.content.on.feedback.success.dim2 | #12552d | #f0fdf4 | var(--esds-color-content-on-feedback-success-dim2) | Foreground on soft success backgrounds (dim2). |
+| color.content.on.feedback.success.dim3 | #12833d | #83f2ac | var(--esds-color-content-on-feedback-success-dim3) | Foreground on subtle success backgrounds (dim3). |
+| color.content.on.feedback.warning.dim1 | #fff | #460d02 | var(--esds-color-content-on-feedback-warning-dim1) | Foreground on strong warning backgrounds (dim1). |
+| color.content.on.feedback.warning.dim2 | #7a200d | #fff7eb | var(--esds-color-content-on-feedback-warning-dim2) | Foreground on soft warning backgrounds (dim2). |
+| color.content.on.feedback.warning.dim3 | #b73206 | #ffb34a | var(--esds-color-content-on-feedback-warning-dim3) | Foreground on subtle warning backgrounds (dim3). |
+| color.content.on.feedback.error.dim1 | #fff | #500000 | var(--esds-color-content-on-feedback-error-dim1) | Foreground on strong error backgrounds (dim1). |
+| color.content.on.feedback.error.dim2 | #920a0a | #fff0f0 | var(--esds-color-content-on-feedback-error-dim2) | Foreground on soft error backgrounds (dim2). |
+| color.content.on.feedback.error.dim3 | #d70000 | #ff9494 | var(--esds-color-content-on-feedback-error-dim3) | Foreground on subtle error backgrounds (dim3). |
+| color.content.on.feedback.information.dim1 | #fff | #072a4a | var(--esds-color-content-on-feedback-information-dim1) | Foreground on strong information backgrounds (dim1). |
+| color.content.on.feedback.information.dim2 | #0b426f | #f0f8ff | var(--esds-color-content-on-feedback-information-dim2) | Foreground on soft information backgrounds (dim2). |
+| color.content.on.feedback.information.dim3 | #015ca3 | #7cc8fd | var(--esds-color-content-on-feedback-information-dim3) | Foreground on subtle information backgrounds (dim3). |
+| color.content.on.feedback.neutral.dim1 | #fff | #020618 | var(--esds-color-content-on-feedback-neutral-dim1) | Foreground on strong neutral backgrounds (dim1). |
+| color.content.on.feedback.neutral.dim2 | #0f172b | #f8fafc | var(--esds-color-content-on-feedback-neutral-dim2) | Foreground on soft neutral backgrounds (dim2). |
+| color.content.on.feedback.neutral.dim3 | #314158 | #cad5e2 | var(--esds-color-content-on-feedback-neutral-dim3) | Foreground on subtle neutral backgrounds (dim3). |
 | color.content.brand | #0077cf | #0077cf | var(--esds-color-content-brand) | Default brand foreground color. |
 | color.content.brand.infomaniak | #0077cf | #36adfa | var(--esds-color-content-brand-infomaniak) | Infomaniak brand foreground colors. |
 | color.content.brand.mail | #d7004b | #ff5d86 | var(--esds-color-content-brand-mail) | Mail product brand foreground colors. |
@@ -247,13 +270,22 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.tertiary | #45556c | #cad5e2 | var(--esds-color-content-tertiary) | Tertiary content color for subtle, low-emphasis text. |
 | color.content.disabled | #90a1b9 | #62748e | var(--esds-color-content-disabled) | Content color for disabled text and icons. |
 | color.content.inverse | #f1f5f9 | #192334 | var(--esds-color-content-inverse) | Inverse content color for use on dark backgrounds. |
-| color.content.feedback.error | #d70000 | #ff9494 | var(--esds-color-content-feedback-error) | Error foreground color with interaction states. |
-| color.content.feedback.success | #12833d | #83f2ac | var(--esds-color-content-feedback-success) | Success foreground color with interaction states. |
-| color.content.feedback.warning | #b73206 | #ffb34a | var(--esds-color-content-feedback-warning) | Warning foreground color with interaction states. |
-| color.content.feedback.information | #015ca3 | #7cc8fd | var(--esds-color-content-feedback-information) | Information foreground color with interaction states. |
-| color.content.feedback.neutral | #314158 | #cad5e2 | var(--esds-color-content-feedback-neutral) | Neutral foreground color with interaction states. |
+| color.content.feedback.error | #f00 | #ff5757 | var(--esds-color-content-feedback-error) | Error foreground color with interaction states. |
+| color.content.feedback.success | #12a74a | #41e17c | var(--esds-color-content-feedback-success) | Success foreground color with interaction states. |
+| color.content.feedback.warning | #f97207 | #ffa032 | var(--esds-color-content-feedback-warning) | Warning foreground color with interaction states. |
+| color.content.feedback.information | #0077cf | #36adfa | var(--esds-color-content-feedback-information) | Information foreground color with interaction states. |
+| color.content.feedback.neutral | #45556c | #90a1b9 | var(--esds-color-content-feedback-neutral) | Neutral foreground color with interaction states. |
 | color.content.visited | #8f30f7 | #cab1ff | var(--esds-color-content-visited) | Visited-link content colors with interaction states. |
 | color.content.muted | #62748e | #90a1b9 | var(--esds-color-content-muted) | Muted content color for de-emphasized, secondary text. |
+| color.content.dataviz | #0077cf | #0077cf | var(--esds-color-content-dataviz) | Default data-viz foreground color. |
+| color.content.dataviz.blue | #0077cf | #36adfa | var(--esds-color-content-dataviz-blue) | Blue data-viz foreground color. |
+| color.content.dataviz.emerald | #15864e | #3cb572 | var(--esds-color-content-dataviz-emerald) | Emerald data-viz foreground color. |
+| color.content.dataviz.orange | #f97207 | #ffa032 | var(--esds-color-content-dataviz-orange) | Orange data-viz foreground color. |
+| color.content.dataviz.pink | #e9004c | #ff5d86 | var(--esds-color-content-dataviz-pink) | Pink data-viz foreground color. |
+| color.content.dataviz.purple | #4d62ea | #7ea1fb | var(--esds-color-content-dataviz-purple) | Purple data-viz foreground color. |
+| color.content.dataviz.violet | #8f30f7 | #b185ff | var(--esds-color-content-dataviz-violet) | Violet data-viz foreground color. |
+| color.content.dataviz.yellow | #ecb306 | #fccf20 | var(--esds-color-content-dataviz-yellow) | Yellow data-viz foreground color. |
+| color.content.dataviz.gray | #45556c | #90a1b9 | var(--esds-color-content-dataviz-gray) | Gray data-viz foreground color. |
 | color.border.brand | #0077cf | #0077cf | var(--esds-color-border-brand) | Default brand border color. |
 | color.border.brand.infomaniak | #0077cf | #36adfa | var(--esds-color-border-brand-infomaniak) | Infomaniak brand border colors. |
 | color.border.brand.mail | #e9004c | #ff97af | var(--esds-color-border-brand-mail) | Mail product brand border colors. |
