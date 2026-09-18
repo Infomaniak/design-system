@@ -3,7 +3,7 @@
     "background": {
       "color": {
         "$root": {
-          "$value": "{color.background.brand}"
+          "$value": "{color.background.elevation.surface}"
         },
         "disabled": {
           "$value": "{color.background.disabled}"
@@ -13,7 +13,7 @@
     "content": {
       "color": {
         "$root": {
-          "$value": "{color.content.on.brand}"
+          "$value": "{color.content.primary}"
         },
         "disabled": {
           "$value": "{color.content.on.disabled}"
