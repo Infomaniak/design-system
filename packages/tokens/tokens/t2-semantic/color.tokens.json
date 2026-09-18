@@ -249,7 +249,7 @@
         "orange": {
           "$description": "Orange data-viz background colors.",
           "dim1": {
-            "$value": "{color.orange.600}",
+            "$value": "{color.orange.500}",
             "$description": "Strong orange data-viz background (dim1).",
             "$extensions": {
               "scopes": []
@@ -261,12 +261,19 @@
             "$extensions": {
               "scopes": []
             }
+          },
+          "dim3": {
+            "$value": "{color.orange.50}",
+            "$description": "Subtle orange data-viz background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
           }
         },
         "emerald": {
           "$description": "Emerald data-viz background colors.",
           "dim1": {
-            "$value": "{color.emerald.600}",
+            "$value": "{color.emerald.500}",
             "$description": "Strong emerald data-viz background (dim1).",
             "$extensions": {
               "scopes": []
@@ -278,12 +285,19 @@
             "$extensions": {
               "scopes": []
             }
+          },
+          "dim3": {
+            "$value": "{color.emerald.50}",
+            "$description": "Subtle emerald data-viz background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
           }
         },
         "blue": {
           "$description": "Blue data-viz background colors.",
           "dim1": {
-            "$value": "{color.blue.600}",
+            "$value": "{color.blue.500}",
             "$description": "Strong blue data-viz background (dim1).",
             "$extensions": {
               "scopes": []
@@ -295,12 +309,19 @@
             "$extensions": {
               "scopes": []
             }
+          },
+          "dim3": {
+            "$value": "{color.blue.50}",
+            "$description": "Subtle blue data-viz background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
           }
         },
         "violet": {
           "$description": "Violet data-viz background colors.",
           "dim1": {
-            "$value": "{color.violet.600}",
+            "$value": "{color.violet.500}",
             "$description": "Strong violet data-viz background (dim1).",
             "$extensions": {
               "scopes": []
@@ -312,12 +333,19 @@
             "$extensions": {
               "scopes": []
             }
+          },
+          "dim3": {
+            "$value": "{color.violet.50}",
+            "$description": "Subtle violet data-viz background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
           }
         },
         "purple": {
           "$description": "Purple data-viz background colors.",
           "dim1": {
-            "$value": "{color.purple.600}",
+            "$value": "{color.purple.500}",
             "$description": "Strong purple data-viz background (dim1).",
             "$extensions": {
               "scopes": []
@@ -329,12 +357,19 @@
             "$extensions": {
               "scopes": []
             }
+          },
+          "dim3": {
+            "$value": "{color.purple.50}",
+            "$description": "Subtle purple data-viz background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
           }
         },
         "pink": {
           "$description": "Pink data-viz background colors.",
           "dim1": {
-            "$value": "{color.pink.600}",
+            "$value": "{color.pink.500}",
             "$description": "Strong pink data-viz background (dim1).",
             "$extensions": {
               "scopes": []
@@ -343,6 +378,13 @@
           "dim2": {
             "$value": "{color.pink.200}",
             "$description": "Soft pink data-viz background (dim2).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim3": {
+            "$value": "{color.pink.50}",
+            "$description": "Subtle pink data-viz background (dim3).",
             "$extensions": {
               "scopes": []
             }
@@ -363,6 +405,13 @@
             "$extensions": {
               "scopes": []
             }
+          },
+          "dim3": {
+            "$value": "{color.yellow.50}",
+            "$description": "Subtle yellow data-viz background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
           }
         },
         "gray": {
@@ -380,10 +429,17 @@
             "$extensions": {
               "scopes": []
             }
+          },
+          "dim3": {
+            "$value": "{color.gray.50}",
+            "$description": "Subtle gray data-viz background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
           }
         },
         "dim1": {
-          "$value": "{color.blue.600}",
+          "$value": "{color.blue.500}",
           "$description": "Default dim1 data-viz background.",
           "$extensions": {
             "scopes": ["FRAME_FILL", "SHAPE_FILL"],
@@ -396,6 +452,14 @@
           "$extensions": {
             "scopes": ["FRAME_FILL", "SHAPE_FILL"],
             "figmaName": ["color", "background", "dataviz", "@root", "dim2"]
+          }
+        },
+        "dim3": {
+          "$value": "{color.blue.50}",
+          "$description": "Default dim3 data-viz background.",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+            "figmaName": ["color", "background", "dataviz", "@root", "dim3"]
           }
         }
       }
@@ -496,15 +560,22 @@
           "blue": {
             "$description": "Foreground on blue data-viz backgrounds.",
             "dim1": {
-              "$value": "{color.blue.900}",
+              "$value": "{color.blue.50}",
               "$description": "Foreground on strong blue data-viz backgrounds (dim1).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim2": {
-              "$value": "{color.blue.50}",
+              "$value": "{color.blue.900}",
               "$description": "Foreground on soft blue data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.blue.700}",
+              "$description": "Foreground on subtle blue data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -513,15 +584,22 @@
           "emerald": {
             "$description": "Foreground on emerald data-viz backgrounds.",
             "dim1": {
-              "$value": "{color.emerald.900}",
+              "$value": "{color.emerald.50}",
               "$description": "Foreground on strong emerald data-viz backgrounds (dim1).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim2": {
-              "$value": "{color.emerald.50}",
+              "$value": "{color.emerald.900}",
               "$description": "Foreground on soft emerald data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.emerald.700}",
+              "$description": "Foreground on subtle emerald data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -530,15 +608,22 @@
           "orange": {
             "$description": "Foreground on orange data-viz backgrounds.",
             "dim1": {
-              "$value": "{color.orange.900}",
+              "$value": "{color.orange.50}",
               "$description": "Foreground on strong orange data-viz backgrounds (dim1).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim2": {
-              "$value": "{color.orange.100}",
+              "$value": "{color.orange.900}",
               "$description": "Foreground on soft orange data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.orange.700}",
+              "$description": "Foreground on subtle orange data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -547,15 +632,22 @@
           "pink": {
             "$description": "Foreground on pink data-viz backgrounds.",
             "dim1": {
-              "$value": "{color.pink.900}",
+              "$value": "{color.pink.50}",
               "$description": "Foreground on strong pink data-viz backgrounds (dim1).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim2": {
-              "$value": "{color.pink.50}",
+              "$value": "{color.pink.900}",
               "$description": "Foreground on soft pink data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.pink.700}",
+              "$description": "Foreground on subtle pink data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -564,15 +656,22 @@
           "purple": {
             "$description": "Foreground on purple data-viz backgrounds.",
             "dim1": {
-              "$value": "{color.purple.900}",
+              "$value": "{color.purple.50}",
               "$description": "Foreground on strong purple data-viz backgrounds (dim1).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim2": {
-              "$value": "{color.purple.50}",
+              "$value": "{color.purple.900}",
               "$description": "Foreground on soft purple data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.purple.700}",
+              "$description": "Foreground on subtle purple data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -581,15 +680,22 @@
           "violet": {
             "$description": "Foreground on violet data-viz backgrounds.",
             "dim1": {
-              "$value": "{color.violet.900}",
+              "$value": "{color.violet.50}",
               "$description": "Foreground on strong violet data-viz backgrounds (dim1).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim2": {
-              "$value": "{color.violet.50}",
+              "$value": "{color.violet.900}",
               "$description": "Foreground on soft violet data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.violet.700}",
+              "$description": "Foreground on subtle violet data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -598,15 +704,22 @@
           "yellow": {
             "$description": "Foreground on yellow data-viz backgrounds.",
             "dim1": {
-              "$value": "{color.yellow.900}",
+              "$value": "{color.yellow.50}",
               "$description": "Foreground on strong yellow data-viz backgrounds (dim1).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim2": {
-              "$value": "{color.yellow.50}",
+              "$value": "{color.yellow.900}",
               "$description": "Foreground on soft yellow data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.yellow.700}",
+              "$description": "Foreground on subtle yellow data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -615,22 +728,29 @@
           "gray": {
             "$description": "Foreground on gray data-viz backgrounds.",
             "dim1": {
-              "$value": "{color.gray.900}",
+              "$value": "{color.gray.50}",
               "$description": "Foreground on strong gray data-viz backgrounds (dim1).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim2": {
-              "$value": "{color.gray.50}",
+              "$value": "{color.gray.900}",
               "$description": "Foreground on soft gray data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.gray.700}",
+              "$description": "Foreground on subtle gray data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
             }
           },
           "dim1": {
-            "$value": "{color.blue.900}",
+            "$value": "{color.blue.50}",
             "$description": "Default foreground on data-viz dim1 backgrounds.",
             "$extensions": {
               "scopes": ["ALL_FILLS"],
@@ -638,11 +758,19 @@
             }
           },
           "dim2": {
-            "$value": "{color.blue.50}",
+            "$value": "{color.blue.900}",
             "$description": "Default foreground on data-viz dim2 backgrounds.",
             "$extensions": {
               "scopes": ["ALL_FILLS"],
               "figmaName": ["color", "content", "on", "dataviz", "@root", "dim2"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.blue.700}",
+            "$description": "Default foreground on data-viz dim3 backgrounds.",
+            "$extensions": {
+              "scopes": ["ALL_FILLS"],
+              "figmaName": ["color", "content", "on", "dataviz", "@root", "dim3"]
             }
           }
         },
@@ -650,15 +778,22 @@
           "$description": "Foreground colors placed on feedback backgrounds.",
           "success": {
             "dim1": {
-              "$value": "{color.lime.950}",
+              "$value": "{color.white}",
               "$description": "Foreground on strong success backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["ALL_FILLS"]
               }
             },
             "dim2": {
-              "$value": "{color.white}",
-              "$description": "Foreground on strong success backgrounds (dim1).",
+              "$value": "{color.lime.900}",
+              "$description": "Foreground on soft success backgrounds (dim2).",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"]
+              }
+            },
+            "dim3": {
+              "$value": "{color.lime.700}",
+              "$description": "Foreground on subtle success backgrounds (dim3).",
               "$extensions": {
                 "scopes": ["ALL_FILLS"]
               }
@@ -666,15 +801,22 @@
           },
           "warning": {
             "dim1": {
-              "$value": "{color.orange.900}",
+              "$value": "{color.white}",
               "$description": "Foreground on strong warning backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["ALL_FILLS"]
               }
             },
             "dim2": {
-              "$value": "{color.white}",
-              "$description": "Foreground on strong warning backgrounds (dim1).",
+              "$value": "{color.orange.900}",
+              "$description": "Foreground on soft warning backgrounds (dim2).",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"]
+              }
+            },
+            "dim3": {
+              "$value": "{color.orange.700}",
+              "$description": "Foreground on subtle warning backgrounds (dim3).",
               "$extensions": {
                 "scopes": ["ALL_FILLS"]
               }
@@ -682,15 +824,22 @@
           },
           "error": {
             "dim1": {
-              "$value": "{color.red.900}",
+              "$value": "{color.white}",
               "$description": "Foreground on strong error backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["ALL_FILLS"]
               }
             },
             "dim2": {
-              "$value": "{color.white}",
-              "$description": "Foreground on strong error backgrounds (dim1).",
+              "$value": "{color.red.900}",
+              "$description": "Foreground on soft error backgrounds (dim2).",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"]
+              }
+            },
+            "dim3": {
+              "$value": "{color.red.700}",
+              "$description": "Foreground on subtle error backgrounds (dim3).",
               "$extensions": {
                 "scopes": ["ALL_FILLS"]
               }
@@ -698,15 +847,22 @@
           },
           "information": {
             "dim1": {
-              "$value": "{color.blue.900}",
+              "$value": "{color.white}",
               "$description": "Foreground on strong information backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["ALL_FILLS"]
               }
             },
             "dim2": {
-              "$value": "{color.white}",
-              "$description": "Foreground on strong information backgrounds (dim1).",
+              "$value": "{color.blue.900}",
+              "$description": "Foreground on soft information backgrounds (dim2).",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"]
+              }
+            },
+            "dim3": {
+              "$value": "{color.blue.700}",
+              "$description": "Foreground on subtle information backgrounds (dim3).",
               "$extensions": {
                 "scopes": ["ALL_FILLS"]
               }
@@ -714,15 +870,22 @@
           },
           "neutral": {
             "dim1": {
-              "$value": "{color.gray.900}",
+              "$value": "{color.white}",
               "$description": "Foreground on strong neutral backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["ALL_FILLS"]
               }
             },
             "dim2": {
-              "$value": "{color.white}",
-              "$description": "Foreground on strong neutral backgrounds (dim1).",
+              "$value": "{color.gray.900}",
+              "$description": "Foreground on soft neutral backgrounds (dim2).",
+              "$extensions": {
+                "scopes": ["ALL_FILLS"]
+              }
+            },
+            "dim3": {
+              "$value": "{color.gray.700}",
+              "$description": "Foreground on subtle neutral backgrounds (dim3).",
               "$extensions": {
                 "scopes": ["ALL_FILLS"]
               }
@@ -848,35 +1011,35 @@
       "feedback": {
         "$description": "Feedback foreground colors (error, success, warning) with interaction states.",
         "error": {
-          "$value": "{color.red.700}",
+          "$value": "{color.red.600}",
           "$description": "Error foreground color with interaction states.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "success": {
-          "$value": "{color.lime.700}",
+          "$value": "{color.lime.600}",
           "$description": "Success foreground color with interaction states.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "warning": {
-          "$value": "{color.orange.700}",
+          "$value": "{color.orange.500}",
           "$description": "Warning foreground color with interaction states.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "information": {
-          "$value": "{color.blue.700}",
+          "$value": "{color.blue.600}",
           "$description": "Information foreground color with interaction states.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "neutral": {
-          "$value": "{color.gray.700}",
+          "$value": "{color.gray.600}",
           "$description": "Neutral foreground color with interaction states.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
@@ -895,6 +1058,71 @@
         "$description": "Muted content color for de-emphasized, secondary text.",
         "$extensions": {
           "scopes": ["ALL_FILLS"]
+        }
+      },
+      "dataviz": {
+        "$root": {
+          "$value": "{color.blue.600}",
+          "$description": "Default data-viz foreground color.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "blue": {
+          "$value": "{color.blue.600}",
+          "$description": "Blue data-viz foreground color.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "emerald": {
+          "$value": "{color.emerald.600}",
+          "$description": "Emerald data-viz foreground color.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "orange": {
+          "$value": "{color.orange.500}",
+          "$description": "Orange data-viz foreground color.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "pink": {
+          "$value": "{color.pink.600}",
+          "$description": "Pink data-viz foreground color.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "purple": {
+          "$value": "{color.purple.600}",
+          "$description": "Purple data-viz foreground color.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "violet": {
+          "$value": "{color.violet.600}",
+          "$description": "Violet data-viz foreground color.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "yellow": {
+          "$value": "{color.yellow.500}",
+          "$description": "Yellow data-viz foreground color.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "gray": {
+          "$value": "{color.gray.600}",
+          "$description": "Gray data-viz foreground color.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
         }
       }
     },
