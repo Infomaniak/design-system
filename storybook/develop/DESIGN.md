@@ -304,10 +304,13 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.shadow.xl | #90a1b91a | #0206181a | var(--esds-color-shadow-xl) | Shadow color for the xl elevation. |
 | color.shadow.2xl | #90a1b924 | #02061824 | var(--esds-color-shadow-2xl) | Shadow color for the 2xl elevation. |
 | color.state.focus | #0077cf | #36adfa | var(--esds-color-state-focus) | Focus ring color for focused interactive elements. |
+| color.state.hover.soft | #0b426f0f | #f8fafc0f | var(--esds-color-state-hover-soft) | Medium hover overlay for subtle interactive feedback. |
 | color.state.hover.medium | #0b426f1f | #f8fafc1f | var(--esds-color-state-hover-medium) | Medium hover overlay for subtle interactive feedback. |
 | color.state.hover.strong | #0b426f99 | #f8fafc33 | var(--esds-color-state-hover-strong) | Strong hover overlay for prominent interactive feedback. |
+| color.state.pressed.soft | #0b426f1f | #f8fafc1f | var(--esds-color-state-pressed-soft) | Medium pressed overlay for subtle active feedback. |
 | color.state.pressed.medium | #0b426f29 | #f8fafc29 | var(--esds-color-state-pressed-medium) | Medium pressed overlay for subtle active feedback. |
 | color.state.pressed.strong | #0b426fcc | #f8fafc66 | var(--esds-color-state-pressed-strong) | Strong pressed overlay for prominent active feedback. |
+| color.state.selected.soft | #0b426f33 | #f8fafc33 | var(--esds-color-state-selected-soft) | Medium selected overlay for subtle selection feedback. |
 | color.state.selected.medium | #0b426f66 | #f8fafc66 | var(--esds-color-state-selected-medium) | Medium selected overlay for subtle selection feedback. |
 | color.state.selected.strong | #0b426fcc | #f8fafc66 | var(--esds-color-state-selected-strong) | Strong selected overlay for prominent selection feedback. |
 | font.size.xs | 0.75rem | 0.75rem | var(--esds-font-size-xs) | Extra-small font size for captions and metadata. |
