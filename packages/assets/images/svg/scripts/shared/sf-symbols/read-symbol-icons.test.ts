@@ -104,6 +104,40 @@ describe('readSymbolIcons', () => {
     );
   });
 
+  test('parses SVGO-optimized outline files without fill attribute or separators', async () => {
+    await writeOutline(
+      'svgo.outline.svg',
+      '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="m12.601 21.799.526.7.046-.038zm-1.202 0-.572.662q.022.02.046.037z"/></svg>',
+    );
+
+    const icons = await readSymbolIcons({ outlinesDirectory: tempDir, logger });
+
+    expect(icons[0]!.outlinedPaths).toEqual([
+      {
+        d: 'm12.601 21.799.526.7.046-.038zm-1.202 0-.572.662q.022.02.046.037z',
+        windingRule: 'NONZERO',
+      },
+    ]);
+  });
+
+  test('parses path elements regardless of attribute presence, order and fill value', async () => {
+    await writeOutline(
+      'test.outline.svg',
+      `<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path fill="red" d="M 3 3 L 4 4 Z" fill-rule="evenodd"/>
+  <path fill-rule="nonzero" d="M 1 1 L 2 2 Z" fill="black"/>
+</svg>
+`,
+    );
+
+    const icons = await readSymbolIcons({ outlinesDirectory: tempDir, logger });
+
+    expect(icons[0]!.outlinedPaths).toEqual([
+      { d: 'M 3 3 L 4 4 Z', windingRule: 'EVENODD' },
+      { d: 'M 1 1 L 2 2 Z', windingRule: 'NONZERO' },
+    ]);
+  });
+
   test('throws when no path element can be parsed', async () => {
     await writeOutline(
       'test.outline.svg',
@@ -114,22 +148,22 @@ describe('readSymbolIcons', () => {
     );
 
     await expect(readSymbolIcons({ outlinesDirectory: tempDir, logger })).rejects.toThrow(
-      'Unexpected path elements in outline file "test.outline.svg": parsed 0 of 0.',
+      'No path element found in outline file "test.outline.svg".',
     );
   });
 
-  test('throws on unconsumed path elements', async () => {
+  test('throws on a path element without path data', async () => {
     await writeOutline(
       'test.outline.svg',
       `<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <path d="M 1 1 L 2 2 Z" fill="black"/>
-  <path d="M 3 3 L 4 4 Z" fill="red"/>
+  <path fill="black"/>
 </svg>
 `,
     );
 
     await expect(readSymbolIcons({ outlinesDirectory: tempDir, logger })).rejects.toThrow(
-      'Unexpected path elements in outline file "test.outline.svg": parsed 1 of 2.',
+      'Path element without path data in outline file "test.outline.svg".',
     );
   });
 
@@ -226,5 +260,15 @@ describe('readSymbolIcons', () => {
     await expect(
       readSymbolIcons({ outlinesDirectory: tempDir, webIconsDirectory: missingDirectory, logger }),
     ).rejects.toThrow(`Web icons directory ${JSON.stringify(missingDirectory)} does not exist.`);
+  });
+
+  test('rethrows unexpected web icons directory read errors', async () => {
+    await writeOutline('a.outline.svg', validOutline('M 1 1 L 2 2 Z'));
+    const filePath: string = join(tempDir, 'file.txt');
+    await writeFile(filePath, 'not a directory');
+
+    await expect(
+      readSymbolIcons({ outlinesDirectory: tempDir, webIconsDirectory: filePath, logger }),
+    ).rejects.toThrow(/ENOTDIR/);
   });
 });

@@ -1,6 +1,6 @@
 import {
   applyPathTransformToPathData,
-  computePathDataBoundingBox,
+  computePathsBoundingBox,
   type PathBoundingBox,
   type PathTransform,
 } from '../icons/bake-transform-into-path.ts';
@@ -60,8 +60,10 @@ export function buildSymbolSvg({
     throw new Error(`Symbol ${JSON.stringify(symbolName)} has no outline paths.`);
   }
 
-  const boundingBox: PathBoundingBox = computePathDataBoundingBox(
-    outlinedPaths.map(({ d }: SvgOutlinePath): string => d).join(' '),
+  // per-path bounding box: joining path data strings would resolve a relative
+  // command against the previous path's endpoint
+  const boundingBox: PathBoundingBox = computePathsBoundingBox(
+    outlinedPaths.map(({ d }: SvgOutlinePath): string => d),
   );
 
   let content: string = template.content;

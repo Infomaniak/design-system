@@ -54,6 +54,9 @@
           },
           "dim2": {
             "$value": "{color.orange.800}"
+          },
+          "dim3": {
+            "$value": "{color.orange.950}"
           }
         },
         "emerald": {
@@ -62,6 +65,9 @@
           },
           "dim2": {
             "$value": "{color.emerald.800}"
+          },
+          "dim3": {
+            "$value": "{color.emerald.950}"
           }
         },
         "blue": {
@@ -70,6 +76,9 @@
           },
           "dim2": {
             "$value": "{color.blue.800}"
+          },
+          "dim3": {
+            "$value": "{color.blue.950}"
           }
         },
         "violet": {
@@ -78,6 +87,9 @@
           },
           "dim2": {
             "$value": "{color.violet.800}"
+          },
+          "dim3": {
+            "$value": "{color.violet.950}"
           }
         },
         "purple": {
@@ -86,6 +98,9 @@
           },
           "dim2": {
             "$value": "{color.purple.800}"
+          },
+          "dim3": {
+            "$value": "{color.purple.950}"
           }
         },
         "pink": {
@@ -94,6 +109,9 @@
           },
           "dim2": {
             "$value": "{color.pink.800}"
+          },
+          "dim3": {
+            "$value": "{color.pink.950}"
           }
         },
         "yellow": {
@@ -102,6 +120,9 @@
           },
           "dim2": {
             "$value": "{color.yellow.800}"
+          },
+          "dim3": {
+            "$value": "{color.yellow.950}"
           }
         },
         "gray": {
@@ -110,6 +131,9 @@
           },
           "dim2": {
             "$value": "{color.gray.800}"
+          },
+          "dim3": {
+            "$value": "{color.gray.950}"
           }
         }
       },
@@ -214,108 +238,147 @@
         "dataviz": {
           "orange": {
             "dim1": {
-              "$value": "{color.orange.100}"
+              "$value": "{color.orange.950}"
             },
             "dim2": {
-              "$value": "{color.orange.950}"
+              "$value": "{color.orange.100}"
+            },
+            "dim3": {
+              "$value": "{color.orange.300}"
             }
           },
           "emerald": {
             "dim1": {
-              "$value": "{color.emerald.100}"
+              "$value": "{color.emerald.950}"
             },
             "dim2": {
-              "$value": "{color.emerald.950}"
+              "$value": "{color.emerald.100}"
+            },
+            "dim3": {
+              "$value": "{color.emerald.300}"
             }
           },
           "blue": {
             "dim1": {
-              "$value": "{color.blue.100}"
+              "$value": "{color.blue.950}"
             },
             "dim2": {
-              "$value": "{color.blue.950}"
+              "$value": "{color.blue.100}"
+            },
+            "dim3": {
+              "$value": "{color.blue.300}"
             }
           },
           "violet": {
             "dim1": {
-              "$value": "{color.violet.100}"
+              "$value": "{color.violet.950}"
             },
             "dim2": {
-              "$value": "{color.violet.950}"
+              "$value": "{color.violet.100}"
+            },
+            "dim3": {
+              "$value": "{color.violet.300}"
             }
           },
           "purple": {
             "dim1": {
-              "$value": "{color.purple.100}"
+              "$value": "{color.purple.950}"
             },
             "dim2": {
-              "$value": "{color.purple.950}"
+              "$value": "{color.purple.100}"
+            },
+            "dim3": {
+              "$value": "{color.purple.300}"
             }
           },
           "pink": {
             "dim1": {
-              "$value": "{color.pink.100}"
+              "$value": "{color.pink.950}"
             },
             "dim2": {
-              "$value": "{color.pink.950}"
+              "$value": "{color.pink.100}"
+            },
+            "dim3": {
+              "$value": "{color.pink.300}"
             }
           },
           "yellow": {
             "dim1": {
-              "$value": "{color.yellow.100}"
+              "$value": "{color.yellow.950}"
             },
             "dim2": {
-              "$value": "{color.yellow.950}"
+              "$value": "{color.yellow.100}"
+            },
+            "dim3": {
+              "$value": "{color.yellow.300}"
             }
           },
           "gray": {
             "dim1": {
-              "$value": "{color.gray.100}"
+              "$value": "{color.gray.950}"
             },
             "dim2": {
-              "$value": "{color.gray.950}"
+              "$value": "{color.gray.100}"
+            },
+            "dim3": {
+              "$value": "{color.gray.300}"
             }
           }
         },
         "feedback": {
           "success": {
             "dim1": {
-              "$value": "{color.lime.50}"
+              "$value": "{color.lime.950}"
             },
             "dim2": {
-              "$value": "{color.lime.950}"
+              "$value": "{color.lime.50}"
+            },
+            "dim3": {
+              "$value": "{color.lime.300}"
             }
           },
           "warning": {
             "dim1": {
-              "$value": "{color.orange.50}"
+              "$value": "{color.orange.950}"
             },
             "dim2": {
-              "$value": "{color.orange.950}"
+              "$value": "{color.orange.50}"
+            },
+            "dim3": {
+              "$value": "{color.orange.300}"
             }
           },
           "error": {
             "dim1": {
-              "$value": "{color.red.50}"
+              "$value": "{color.red.950}"
             },
             "dim2": {
-              "$value": "{color.red.950}"
+              "$value": "{color.red.50}"
+            },
+            "dim3": {
+              "$value": "{color.red.300}"
             }
           },
           "information": {
             "dim1": {
-              "$value": "{color.blue.50}"
+              "$value": "{color.blue.950}"
             },
             "dim2": {
-              "$value": "{color.blue.950}"
+              "$value": "{color.blue.50}"
+            },
+            "dim3": {
+              "$value": "{color.blue.300}"
             }
           },
           "neutral": {
             "dim1": {
-              "$value": "{color.gray.50}"
+              "$value": "{color.gray.950}"
             },
             "dim2": {
-              "$value": "{color.gray.950}"
+              "$value": "{color.gray.50}"
+            },
+            "dim3": {
+              "$value": "{color.gray.300}"
             }
           }
         }
@@ -354,19 +417,19 @@
       },
       "feedback": {
         "success": {
-          "$value": "{color.lime.300}"
+          "$value": "{color.lime.400}"
         },
         "warning": {
-          "$value": "{color.orange.300}"
+          "$value": "{color.orange.400}"
         },
         "error": {
-          "$value": "{color.red.300}"
+          "$value": "{color.red.400}"
         },
         "information": {
-          "$value": "{color.blue.300}"
+          "$value": "{color.blue.400}"
         },
         "neutral": {
-          "$value": "{color.gray.300}"
+          "$value": "{color.gray.400}"
         }
       },
       "primary": {
@@ -389,6 +452,32 @@
       },
       "muted": {
         "$value": "{color.gray.400}"
+      },
+      "dataviz": {
+        "orange": {
+          "$value": "{color.orange.400}"
+        },
+        "emerald": {
+          "$value": "{color.emerald.400}"
+        },
+        "blue": {
+          "$value": "{color.blue.400}"
+        },
+        "violet": {
+          "$value": "{color.violet.400}"
+        },
+        "purple": {
+          "$value": "{color.purple.400}"
+        },
+        "pink": {
+          "$value": "{color.pink.400}"
+        },
+        "yellow": {
+          "$value": "{color.yellow.400}"
+        },
+        "gray": {
+          "$value": "{color.gray.400}"
+        }
       }
     },
     "border": {
@@ -567,6 +656,9 @@
     },
     "state": {
       "hover": {
+        "soft": {
+          "$value": "{color.gray.50-6}"
+        },
         "medium": {
           "$value": "{color.gray.50-12}"
         },
@@ -575,6 +667,9 @@
         }
       },
       "pressed": {
+        "soft": {
+          "$value": "{color.gray.50-12}"
+        },
         "medium": {
           "$value": "{color.gray.50-16}"
         },
@@ -583,6 +678,9 @@
         }
       },
       "selected": {
+        "soft": {
+          "$value": "{color.gray.50-20}"
+        },
         "medium": {
           "$value": "{color.gray.50-40}"
         },

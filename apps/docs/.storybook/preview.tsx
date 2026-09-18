@@ -60,6 +60,16 @@ import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product
 import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/dark.attr.css';
 import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/light.attr.css';
 
+// Import all button-size modifiers
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-size/large.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-size/medium.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-size/small.attr.css';
+
+// Import all button-type modifiers
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-type/destructive.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-type/primary.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-type/secondary.attr.css';
+
 // Initialize <esds-icon> and provide IconifyApi via root InjectionContext
 EsdsIconComponent.define();
 
