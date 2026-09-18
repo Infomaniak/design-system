@@ -7,6 +7,9 @@
         },
         "dim2": {
           "$value": "{color.background.dataviz.yellow.dim2}"
+        },
+        "dim3": {
+          "$value": "{color.background.dataviz.yellow.dim3}"
         }
       }
     },
@@ -28,8 +31,14 @@
           },
           "dim2": {
             "$value": "{color.content.on.dataviz.yellow.dim2}"
+          },
+          "dim3": {
+            "$value": "{color.content.on.dataviz.yellow.dim3}"
           }
         }
+      },
+      "dataviz": {
+        "$value": "{color.content.dataviz.yellow}"
       }
     }
   }
