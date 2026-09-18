@@ -567,6 +567,9 @@
     },
     "state": {
       "hover": {
+        "soft": {
+          "$value": "{color.blue.900-6}"
+        },
         "medium": {
           "$value": "{color.blue.900-12}"
         },
@@ -575,6 +578,9 @@
         }
       },
       "pressed": {
+        "soft": {
+          "$value": "{color.blue.900-12}"
+        },
         "medium": {
           "$value": "{color.blue.900-16}"
         },
@@ -583,6 +589,9 @@
         }
       },
       "selected": {
+        "soft": {
+          "$value": "{color.blue.900-20}"
+        },
         "medium": {
           "$value": "{color.blue.900-40}"
         },
