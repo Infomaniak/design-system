@@ -73,7 +73,24 @@ export class DesignTokensCollection {
   static tokenNamesEqual(a: ArrayDesignTokenName, b: ArrayDesignTokenName): boolean {
     return (
       a.length === b.length &&
-      a.every((token: string, index: number): boolean => token === b[index])
+      a.every((segment: string, index: number): boolean => segment === b[index])
+    );
+  }
+
+  /**
+   * Determines if the first token name (`a`) is a root token of the second token name (`b`).
+   * A root token means `a` matches all segments of `b` except for the last one.
+   *
+   * @param {ArrayDesignTokenName} a - The array representing the first token name.
+   * @param {ArrayDesignTokenName} b - The array representing the second token name to compare against.
+   * @returns {boolean} Returns true if `a` is a root token name of `b`, otherwise false.
+   */
+  static isRootTokenNameOf(a: ArrayDesignTokenName, b: ArrayDesignTokenName): boolean {
+    return (
+      b.length === a.length + 1 &&
+      a.every((segment: string, index: number): boolean => {
+        return b[index] === segment;
+      })
     );
   }
 
@@ -502,6 +519,7 @@ export class DesignTokensCollection {
 
     if (this.has(to)) {
       if (onExistingTokenBehaviour === 'throw') {
+        console.log(this.get(to));
         throw new Error(`Replacing an existing token: ${from.join('.')} -> ${to.join('.')}`);
       } else if (onExistingTokenBehaviour === 'skip') {
         return;
