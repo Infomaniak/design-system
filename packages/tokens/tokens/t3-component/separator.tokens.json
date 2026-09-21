@@ -2,10 +2,17 @@
   "separator": {
     "$description": "Component tokens for separators.",
     "color": {
-      "$value": "{color.border.dim3}",
-      "$description": "Default separator line color (subtle neutral border).",
+      "$value": "{color.border.dim2}",
+      "$description": "Default separator line color (strong neutral border).",
       "$extensions": {
         "scopes": ["STROKE_COLOR"]
+      }
+    },
+    "padding": {
+      "$value": "{spacing.2xs}",
+      "$description": "Default padding across the separator line.",
+      "$extensions": {
+        "scopes": []
       }
     },
     "thickness": {

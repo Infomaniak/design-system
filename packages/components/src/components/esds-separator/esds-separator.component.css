@@ -1,13 +1,18 @@
 :host {
   display: block;
+  box-sizing: content-box;
   width: 100%;
   height: var(--esds-separator-thickness);
+  padding-block: var(--esds-separator-padding);
   background-color: var(--esds-separator-color);
+  background-clip: content-box;
 }
 
 :host([orientation='vertical']) {
   display: inline-block;
   width: var(--esds-separator-thickness);
   height: auto;
+  padding-block: 0;
+  padding-inline: var(--esds-separator-padding);
   align-self: stretch;
 }

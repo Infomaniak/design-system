@@ -154,6 +154,17 @@ describe('EsdsSeparatorComponent', () => {
       expect(styles).toContain('height: var(--esds-separator-thickness)');
       expect(styles).toContain('width: var(--esds-separator-thickness)');
     });
+
+    it('should pad the line across its axis with the padding token', () => {
+      expect(styles).toContain('box-sizing: content-box');
+      expect(styles).toContain('padding-block: var(--esds-separator-padding)');
+      expect(styles).toContain('padding-inline: var(--esds-separator-padding)');
+      expect(styles).toContain('padding-block: 0');
+    });
+
+    it('should keep the padding transparent by clipping the background to the line', () => {
+      expect(styles).toContain('background-clip: content-box');
+    });
   });
 
   describe('shadow structure', () => {
