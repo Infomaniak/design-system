@@ -1623,6 +1623,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@infomaniak-design-system/figma-plugin-icons@workspace:packages/figma/figma-plugin-icons":
+  version: 0.0.0-use.local
+  resolution: "@infomaniak-design-system/figma-plugin-icons@workspace:packages/figma/figma-plugin-icons"
+  dependencies:
+    "@figma/plugin-typings": "npm:^1.120.0"
+    esbuild: "npm:^0.28.1"
+  languageName: unknown
+  linkType: soft
+
 "@infomaniak-design-system/fonts@workspace:packages/assets/fonts":
   version: 0.0.0-use.local
   resolution: "@infomaniak-design-system/fonts@workspace:packages/assets/fonts"
@@ -1630,15 +1639,6 @@ __metadata:
     "@0x6b/ttf2woff2-wasm": "npm:^0.13.2"
     lightningcss: "npm:^1.33.0"
     zod: "npm:^4.6.5"
-  languageName: unknown
-  linkType: soft
-
-"@infomaniak-design-system/figma-plugin-icons@workspace:packages/figma-plugin-icons":
-  version: 0.0.0-use.local
-  resolution: "@infomaniak-design-system/figma-plugin-icons@workspace:packages/figma-plugin-icons"
-  dependencies:
-    "@figma/plugin-typings": "npm:^1.120.0"
-    esbuild: "npm:^0.28.1"
   languageName: unknown
   linkType: soft
 

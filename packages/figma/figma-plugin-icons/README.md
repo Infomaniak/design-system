@@ -29,7 +29,7 @@ the plugin in Figma (**Plugins → Development → ESDS icons → Reload**).
 - `yarn build:figma-plugin-icons --debug` (or `yarn dev:figma-plugin-icons` +
   editing the script flags) enables verbose logging and the on-screen debug
   console. Debug logging is stripped from regular builds.
-- `packages/figma-plugin-icons/manifest.json` contains a placeholder `id`;
+- `packages/figma/figma-plugin-icons/manifest.json` contains a placeholder `id`;
   Figma assigns a real one on first import. Do not publish the plugin to the
   Figma Community.
 
@@ -42,14 +42,15 @@ job (`yarn ci:publish`) when it lands on `develop` (prereleases tagged
 `@infomaniak-design-system/figma-plugin-icons@<version>`).
 
 The release asset is a zip (`esds-icons.zip`) containing `manifest.json` and
-the built plugin, ready to be imported in Figma. Version bumps come from
-changesets: add a changeset when changing the plugin so the release tag stays
-unique.
+the built plugin, ready to be imported in Figma. The version comes from
+`package.json`: bump it when you want a new stable release (re-publishing an
+existing version fails, preventing accidental overwrites). Prereleases from
+`develop` are timestamped and always unique — no version bump needed.
 
 ### Structure
 
 ```
-packages/figma-plugin-icons/
+packages/figma/figma-plugin-icons/
 ├── manifest.json    # Figma plugin manifest (points to dist/)
 ├── src/             # Sandbox code (bundled to dist/code.js)
 │   ├── code.ts      # Entry point: message router

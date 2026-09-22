@@ -28,7 +28,7 @@
     "lint:check:stylelint": "stylelint \"**/*.{css,scss}\"",
     "lint:fix:stylelint": "stylelint \"**/*.{css,scss}\" --fix",
     "check": "yarn check:types && yarn format:check && yarn lint:check",
-    "check:types": "tsc -p tsconfig.json --noEmit && tsc -p packages/figma-plugin-icons/tsconfig.json --noEmit",
+    "check:types": "tsc -p tsconfig.json --noEmit && tsc -p packages/figma/figma-plugin-icons/tsconfig.json --noEmit",
     "=== TEST ===": "",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -68,7 +68,7 @@
       "packages/components",
       "packages/assets/images/svg",
       "packages/assets/fonts",
-      "packages/figma-plugin-icons",
+      "packages/figma/*",
       "apps/docs"
     ]
   },

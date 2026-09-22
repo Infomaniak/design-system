@@ -44,7 +44,8 @@ design-system/
 │   │   └── scripts/
 │   │       ├── scripts/         # import-svgs, generate-sf-symbols, publish-sf-symbols, build-legacy-svgs
 │   │       └── shared/          # sf-symbols/ (template engine, xcassets builder), svg/ helpers
-│   ├── figma-plugin-icons/      # "ESDS icons" Figma plugin (multi-size icon generator) — private package, released as GitHub Release asset
+│   ├── figma/                   # Figma plugins (packages/figma/<full-plugin-name>/, each with its own tsconfig)
+│   │   └── figma-plugin-icons/  # "ESDS icons" Figma plugin (multi-size icon generator) — private package, released as GitHub Release asset
 │   │   ├── src/                 # Sandbox code (TS, bundled to dist/code.js)
 │   │   ├── ui/                  # Plugin iframe (TS + HTML template, inlined into dist/ui.html)
 │   │   ├── manifest.json        # Points to dist/ (built locally, imported as dev plugin)
@@ -123,11 +124,14 @@ design-system/
 
 ### Workspace Structure
 
-- Monorepo with 4 workspaces:
+- Monorepo with 7 workspaces:
   1. `@infomaniak-design-system/tokens`
   2. `@infomaniak-design-system/tokens/demo`
-  3. `@infomaniak-design-system/figma-plugin-icons`
-  4. `@infomaniak-design-system/docs`
+  3. `@infomaniak-design-system/components`
+  4. `@infomaniak-design-system/svg-assets`
+  5. `@infomaniak-design-system/fonts`
+  6. `@infomaniak-design-system/figma-plugin-icons`
+  7. `@infomaniak-design-system/docs`
 
 ### DTCG Token Structure
 
@@ -199,7 +203,7 @@ const meta = {
 - **Purpose:** Collect structured change descriptions, automate version bumps, and generate `CHANGELOG.md` files. Changesets do **not** handle publishing — `ci:publish` remains the publish mechanism.
 - **Config:** `.changeset/config.json` with `baseBranch: "develop"`, `access: "public"`, ignores non-publishable packages.
 - **Versioning:** Automated via `.github/workflows/publish.yml`.
-- **Only packages with a `publish` script are versioned:** `@infomaniak-design-system/tokens` and `@infomaniak-design-system/components` (published to npm), plus `@infomaniak-design-system/fonts` and `@infomaniak-design-system/figma-plugin-icons` (published as GitHub Release assets — no npm). PRs touching only docs/apps/scripts don't need a changeset. A changeset is required when changing a package with a `publish` script so its release tag/version stays unique.
+- **Only packages with a `publish` script are versioned:** `@infomaniak-design-system/tokens` and `@infomaniak-design-system/components` (published to npm), plus `@infomaniak-design-system/fonts` and `@infomaniak-design-system/figma-plugin-icons` (published as GitHub Release assets — no npm). Changesets are required for the npm packages and fonts; the Figma plugin is exempt — bump its version manually in `package.json` when a new stable release is wanted. PRs touching only docs/apps/scripts don't need a changeset.
 - **Creating a changeset:** Use the `generate-changeset` skill (`.agents/skills/generate-changeset/SKILL.md`) — it runs `git diff develop...HEAD`, determines the semver bump, identifies affected packages, and writes a formatted `.changeset/*.md` file. Prefer this over the manual `yarn changeset` flow.
 
 ---
