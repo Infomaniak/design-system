@@ -150,9 +150,9 @@ describe('EsdsSeparatorComponent', () => {
       expect(styles).toContain('height: auto');
     });
 
-    it('should size the separator with the thickness token in both orientations', () => {
-      expect(styles).toContain('height: var(--esds-separator-thickness)');
-      expect(styles).toContain('width: var(--esds-separator-thickness)');
+    it('should size the separator with the width token in both orientations', () => {
+      expect(styles).toContain('height: var(--esds-separator-width)');
+      expect(styles).toContain('width: var(--esds-separator-width)');
     });
 
     it('should pad the line across its axis with the padding token', () => {

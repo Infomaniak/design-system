@@ -15,9 +15,9 @@
         "scopes": []
       }
     },
-    "thickness": {
+    "width": {
       "$value": "{border.xs.width}",
-      "$description": "Default separator line thickness.",
+      "$description": "Default separator line width.",
       "$extensions": {
         "scopes": ["STROKE_FLOAT"]
       }

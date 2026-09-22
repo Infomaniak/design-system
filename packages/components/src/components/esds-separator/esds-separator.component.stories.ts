@@ -23,9 +23,9 @@ const meta = {
   argTypes,
   render: (args) => html`
     <div
-      style="display: flex; flex-direction: ${
+      style="display: flex; align-items: center; min-height: 3rem; flex-direction: ${
         args.orientation === 'vertical' ? 'row' : 'column'
-      }; align-items: center; gap: 1rem; min-height: 3rem"
+      }"
     >
       <span>before</span>
       ${template(args)}
