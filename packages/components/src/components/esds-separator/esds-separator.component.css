@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  width: 100%;
+  height: var(--esds-separator-thickness);
+  background-color: var(--esds-separator-color);
+}
+
+:host([orientation='vertical']) {
+  display: inline-block;
+  width: var(--esds-separator-thickness);
+  height: auto;
+  align-self: stretch;
+}
