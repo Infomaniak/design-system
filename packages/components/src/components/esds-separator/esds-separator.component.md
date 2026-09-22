@@ -25,11 +25,7 @@ The separator is full-width (`width: 100%`); avoid `margin-inline` on it, as it 
 In a flex or grid container, the vertical separator stretches to fill the available space:
 
 ```html
-<div style="display: flex; align-items: center; gap: 1rem; height: 3rem">
-  <span>Left</span>
-  <esds-separator orientation="vertical"></esds-separator>
-  <span>Right</span>
-</div>
+<esds-separator orientation="vertical"></esds-separator>
 ```
 
 > **Note:** outside a flex/grid container, set an explicit height on the element (e.g. `style="height: 3rem"`), otherwise it collapses.

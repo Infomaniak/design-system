@@ -21,7 +21,17 @@ const meta = {
   },
   args,
   argTypes,
-  render: (args) => template(args),
+  render: (args) => html`
+    <div
+      style="display: flex; flex-direction: ${
+        args.orientation === 'vertical' ? 'row' : 'column'
+      }; align-items: center; gap: 1rem; min-height: 3rem"
+    >
+      <span>before</span>
+      ${template(args)}
+      <span>after</span>
+    </div>
+  `,
 } satisfies Meta<EsdsSeparatorComponent>;
 
 export default meta;
@@ -34,13 +44,6 @@ export const Vertical: Story = {
   args: {
     orientation: 'vertical',
   },
-  render: (args) => html`
-    <div style="display: flex; align-items: center; gap: 1rem; height: 3rem">
-      <span>Left</span>
-      ${template(args)}
-      <span>Right</span>
-    </div>
-  `,
 };
 
 export const Decorative: Story = {
