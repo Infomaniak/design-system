@@ -1,5 +1,3 @@
-import { cleanupSVG, runSVGO } from '@iconify/tools';
-import { SVG } from '@iconify/tools/lib/svg';
 import { join } from 'node:path';
 import { getFigmaFile } from '../../../../../../../../scripts/helpers/figma/api/files/get-figma-file.ts';
 import type { GenericFigmaNodeBase } from '../../../../../../../../scripts/helpers/figma/api/files/nodes/base/figma-node-base.ts';
@@ -187,14 +185,9 @@ export function extractSvgFilesFromFigmaDesignFile({
         await buildOutlinedSvgsFromFigmaComponents({
           components: [...componentNodesByName.entries()],
           writeSvg: async ({ name, content }: OutlinedSvgWrite): Promise<void> => {
-            const svg: SVG = new SVG(content);
-
-            cleanupSVG(svg);
-            runSVGO(svg);
-
             await writeTextFileSafe(
               join(outputDirectory, FIGMA_SVG_OUTLINES_SUB_DIRECTORY_NAME, `${name}.outline.svg`),
-              svg.toString(),
+              content,
             );
           },
           logger,
