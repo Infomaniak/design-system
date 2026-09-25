@@ -60,7 +60,7 @@ export const Shortcut: Story = {
     docs: {
       description: {
         story:
-          'Multi-key shortcuts are a single `<kbd esds-kbd>` element containing the full combination, e.g. `⌘+K`.',
+          'Multi-key shortcuts stay within a single `<kbd esds-kbd>` element. Wrap the `+` separator in a `<span>` so each key is its own flex item and the gap token applies between them, e.g. `<kbd esds-kbd>⌘<span>+</span>K</kbd>`.',
       },
     },
   },
@@ -70,7 +70,7 @@ export const Shortcut: Story = {
       <kbd
         ${defineEsdsKbdAttr}
         esds-kbd
-        >⌘+K</kbd
+        >⌘<span>+</span>K</kbd
       >
       to open the command menu.
     </p>
@@ -82,7 +82,7 @@ export const SpecialKeys: Story = {
     docs: {
       description: {
         story:
-          'Modifier and special keys are plain Unicode characters typed literally in the markup — the attribute applies no mapping. Copy the glyph you need from the canvas, or the ready-to-use markup from the source below.',
+          'Modifier and special keys are plain Unicode characters. Copy the glyph you need from the canvas, or the ready-to-use markup from the source below.',
       },
     },
   },

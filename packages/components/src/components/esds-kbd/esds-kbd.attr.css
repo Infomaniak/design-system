@@ -1,5 +1,8 @@
 kbd[esds-kbd] {
   box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esds-kbd-gap);
   padding: var(--esds-kbd-padding-block) var(--esds-kbd-padding-inline);
   background-color: var(--esds-kbd-background-color);
   border: var(--esds-kbd-border-width) solid var(--esds-kbd-border-color);
