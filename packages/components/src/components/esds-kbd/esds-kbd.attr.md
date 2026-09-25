@@ -28,12 +28,12 @@ A keyboard key reads naturally inline within a sentence:
 
 ### Multi-key shortcuts
 
-Write the full combination as a single `<kbd esds-kbd>` element containing the key symbols and the `+` separator:
+Keep the full combination inside a single `<kbd esds-kbd>` element, and wrap the `+` separator in a `<span>` so each key is its own flex item — the `gap` token then spaces the keys evenly:
 
 ```html
 <p>
   Press
-  <kbd esds-kbd>⌘+K</kbd>
+  <kbd esds-kbd>⌘<span>+</span>K</kbd>
   to open the command menu.
 </p>
 ```
