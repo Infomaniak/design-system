@@ -1,3 +1,5 @@
+import { parseSVG, SVG } from '@iconify/tools';
+import type { ParseSVGCallbackItem } from '@iconify/tools/lib/svg/parse';
 import { readdir, readFile } from 'node:fs/promises';
 import { basename, join } from 'node:path';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
@@ -75,9 +77,6 @@ export const OUTLINE_FILE_SUFFIX = '.outline.svg';
 const WEB_ICON_FILE_SUFFIX = '.svg';
 const EXCLUDED_WEB_ICON_FILE_SUFFIXES: readonly string[] = [OUTLINE_FILE_SUFFIX, '.mask.svg'];
 const OUTLINED_SVG_VIEW_BOX = 'viewBox="0 0 24 24"';
-const OUTLINED_SVG_PATH_PATTERN: RegExp =
-  /<path d="([^"]+)" fill="black"( fill-rule="evenodd")?\/>/g;
-const OUTLINED_SVG_PATH_ELEMENT_PATTERN: RegExp = /<path/g;
 
 function parseOutlinedSvg(content: string, fileName: string): readonly SvgOutlinePath[] {
   if (!content.includes(OUTLINED_SVG_VIEW_BOX)) {
@@ -86,20 +85,25 @@ function parseOutlinedSvg(content: string, fileName: string): readonly SvgOutlin
     );
   }
 
-  const outlinedPaths: readonly SvgOutlinePath[] = [
-    ...content.matchAll(OUTLINED_SVG_PATH_PATTERN),
-  ].map((match: RegExpMatchArray): SvgOutlinePath => {
-    return {
-      d: match[1]!,
-      windingRule: match[2] !== undefined ? 'EVENODD' : 'NONZERO',
-    };
+  const outlinedPaths: SvgOutlinePath[] = [];
+  parseSVG(new SVG(content), (item: ParseSVGCallbackItem): void => {
+    if (item.node.tag !== 'path') {
+      return;
+    }
+    const pathData: string | number | undefined = item.node.attribs['d'];
+    if (pathData === undefined || pathData === '') {
+      throw new Error(
+        `Path element without path data in outline file ${JSON.stringify(fileName)}.`,
+      );
+    }
+    outlinedPaths.push({
+      d: String(pathData),
+      windingRule: item.node.attribs['fill-rule'] === 'evenodd' ? 'EVENODD' : 'NONZERO',
+    });
   });
 
-  const pathElementCount: number = content.match(OUTLINED_SVG_PATH_ELEMENT_PATTERN)?.length ?? 0;
-  if (outlinedPaths.length === 0 || pathElementCount !== outlinedPaths.length) {
-    throw new Error(
-      `Unexpected path elements in outline file ${JSON.stringify(fileName)}: parsed ${String(outlinedPaths.length)} of ${String(pathElementCount)}.`,
-    );
+  if (outlinedPaths.length === 0) {
+    throw new Error(`No path element found in outline file ${JSON.stringify(fileName)}.`);
   }
 
   return outlinedPaths;

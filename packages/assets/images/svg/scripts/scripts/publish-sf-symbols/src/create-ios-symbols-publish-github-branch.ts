@@ -8,12 +8,18 @@ import {
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import { IOS_DESIGN_SYSTEM_REPOSITORY_NAME } from '../../../../../../../../scripts/helpers/github/constants/ios-design-system-repository-name.constant.ts';
 import type { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
-import { IOS_SYMBOLS_DESTINATION_PATH } from '../../../shared/sf-symbols/sf-symbols-config.ts';
+import { formatSwiftFiles } from '../../../../../../../../scripts/helpers/swift/format-swift-files.ts';
+import {
+  IOS_SYMBOLS_DESTINATION_PATH,
+  IOS_SYMBOLS_SWIFT_DESTINATION_PATH,
+} from '../../../shared/sf-symbols/sf-symbols-config.ts';
 
 export interface CreateIosSymbolsPublishGithubBranchOptions {
   readonly logger: Logger;
   /** Directory of the generated `ESDSSymbols.xcassets` to copy into the iOS repository. */
   readonly xcassetsDirectory: string;
+  /** Generated Swift source exposing the symbols outside the package. */
+  readonly swiftFile: string;
   readonly version: string;
   readonly branchName: string;
 }
@@ -25,6 +31,7 @@ export interface CreateIosSymbolsPublishGithubBranchOptions {
 export async function createIosSymbolsPublishGithubBranch({
   logger,
   xcassetsDirectory,
+  swiftFile,
   version,
   branchName,
 }: CreateIosSymbolsPublishGithubBranchOptions): Promise<GitChanges> {
@@ -39,6 +46,12 @@ export async function createIosSymbolsPublishGithubBranch({
       // Replace the whole asset catalog so removed icons are not kept stale on the iOS side.
       await rm(destinationDirectory, { recursive: true, force: true });
       await cp(xcassetsDirectory, destinationDirectory, { recursive: true, force: true });
+      await cp(swiftFile, join(cwd, IOS_SYMBOLS_SWIFT_DESTINATION_PATH), { force: true });
+      await formatSwiftFiles({
+        logger,
+        cwd,
+        paths: [IOS_SYMBOLS_SWIFT_DESTINATION_PATH],
+      });
 
       return `chore: Update symbols to ${version}`;
     },

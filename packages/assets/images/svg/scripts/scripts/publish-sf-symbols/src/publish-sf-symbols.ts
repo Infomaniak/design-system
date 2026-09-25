@@ -11,14 +11,17 @@ import type { Logger } from '../../../../../../../../scripts/helpers/log/logger.
 import { generatePackageJsonBuildVersion } from '../../../../../../../../scripts/helpers/npm/generate-package-json-build-version/generate-package-json-build-version.ts';
 import type { PublishConfig } from '../../../../../../../../scripts/helpers/publish/publish-config/publish-config.ts';
 import { OUTLINE_FILE_SUFFIX } from '../../../shared/sf-symbols/read-symbol-icons.ts';
-import { SYMBOLS_XCASSETS_DIRECTORY_NAME } from '../../../shared/sf-symbols/sf-symbols-config.ts';
+import {
+  SYMBOLS_SWIFT_FILE_NAME,
+  SYMBOLS_XCASSETS_DIRECTORY_NAME,
+} from '../../../shared/sf-symbols/sf-symbols-config.ts';
 import { createIosSymbolsPublishGithubBranch } from './create-ios-symbols-publish-github-branch.ts';
 
 export interface PublishSfSymbolsOptions extends PublishConfig {
   readonly logger: Logger;
   /** Root directory of the `@infomaniak-design-system/svg-assets` package. */
   readonly packageRootDirectory: string;
-  /** Directory wiped and filled with the generated `ESDSSymbols.xcassets`. */
+  /** Directory containing the generated asset catalog and Swift accessors. */
   readonly outputDirectory: string;
   readonly outlinesDirectory: string;
 }
@@ -60,6 +63,7 @@ export async function publishSfSymbols({
     const branchChanges: GitChanges = await createIosSymbolsPublishGithubBranch({
       logger,
       xcassetsDirectory: join(outputDirectory, SYMBOLS_XCASSETS_DIRECTORY_NAME),
+      swiftFile: join(outputDirectory, SYMBOLS_SWIFT_FILE_NAME),
       version: publishVersion,
       branchName: publishBranchName,
     });
