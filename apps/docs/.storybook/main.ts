@@ -3,6 +3,7 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { type InlineConfig, mergeConfig } from 'vite';
 import { viteTc39DecoratorsPlugin } from '../../../plugins/vite-tc39-decorators-plugin.ts';
+import { FONTS_CSS_URL_DEFAULT } from '../src/lib/font-css-url.ts';
 import { webComponentAutoReload } from './vite-web-component-autoreload.ts';
 
 /**
@@ -32,6 +33,17 @@ const config: StorybookConfig = {
       envDir: '../..', // use .env in the repo root,
       plugins: [webComponentAutoReload(), viteTc39DecoratorsPlugin()],
     });
+  },
+  /**
+   * Injects the remote Infomaniak Sans stylesheet into the manager head.
+   *
+   * Resolved here at build time because `manager-head.html` cannot see
+   * VITE_* env vars (they are only replaced in the Vite-built preview), which
+   * previously forced a hardcoded URL in the HTML.
+   */
+  managerHead: (head: string): string => {
+    const fontsCssUrl: string = process.env.VITE_FONTS_CSS_URL ?? FONTS_CSS_URL_DEFAULT;
+    return `${head}<link rel="stylesheet" href="${fontsCssUrl}">`;
   },
 };
 export default config;
