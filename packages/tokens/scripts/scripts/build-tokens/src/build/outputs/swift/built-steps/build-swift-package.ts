@@ -7,6 +7,8 @@ import {
   SWIFT_PRIMITIVE_TARGET_NAME,
   SWIFT_PRODUCTS_DIR,
   SWIFT_SOURCES_DIR,
+  SWIFT_SYMBOLS_TARGET_NAME,
+  SWIFT_SYMBOLS_XCASSETS_NAME,
 } from '../swift-constants.ts';
 
 const SWIFT_TOOLS_VERSION = '6.2';
@@ -40,7 +42,7 @@ export async function buildSwiftPackage({
   outputDirectory,
   productTargetNames,
 }: BuildSwiftPackageOptions): Promise<void> {
-  const libraryProducts = [SWIFT_FOUNDATION_DIR, ...productTargetNames]
+  const libraryProducts = [SWIFT_FOUNDATION_DIR, SWIFT_SYMBOLS_TARGET_NAME, ...productTargetNames]
     .map(buildLibraryProduct)
     .join('\n');
   const productTargets = productTargetNames.map(buildProductTarget).join('\n');
@@ -64,6 +66,10 @@ export async function buildSwiftPackage({
             .target(
                 name: "${SWIFT_FOUNDATION_DIR}",
                 dependencies: ["${SWIFT_PRIMITIVE_TARGET_NAME}"]
+            ),
+            .target(
+                name: "${SWIFT_SYMBOLS_TARGET_NAME}",
+                resources: [.process("${SWIFT_SYMBOLS_XCASSETS_NAME}")]
             ),
             ${productTargets}
         ]
