@@ -2,7 +2,7 @@
   "kbd": {
     "$description": "Component tokens for keyboard keys.",
     "background-color": {
-      "$value": "{color.background.elevation.sunken}",
+      "$value": "{color.background.elevation.surface}",
       "$description": "Default keyboard key background color.",
       "$extensions": {
         "scopes": ["ALL_FILLS"]
@@ -10,7 +10,7 @@
     },
     "border": {
       "color": {
-        "$value": "{color.border.dim2}",
+        "$value": "{color.border.dim3}",
         "$description": "Default keyboard key border color.",
         "$extensions": {
           "scopes": ["STROKE_COLOR"]
@@ -24,7 +24,7 @@
         }
       },
       "radius": {
-        "$value": "{radius.sm}",
+        "$value": "{radius.md}",
         "$description": "Default keyboard key corner radius.",
         "$extensions": {
           "scopes": ["CORNER_RADIUS"]
@@ -33,7 +33,7 @@
     },
     "content": {
       "color": {
-        "$value": "{color.content.secondary}",
+        "$value": "{color.content.muted}",
         "$description": "Default keyboard key label color.",
         "$extensions": {
           "scopes": ["ALL_FILLS"]
@@ -41,8 +41,15 @@
       }
     },
     "font": {
-      "$value": "{typography.sm.emphasized}",
-      "$description": "Default keyboard key typography (medium weight, slightly smaller than body text)."
+      "$value": "{body.xs.font.emphasized}",
+      "$description": "Default keyboard key typography (extra-small emphasized body text)."
+    },
+    "gap": {
+      "$value": "{spacing.xs}",
+      "$description": "Default gap between keys inside a multi-key keyboard shortcut.",
+      "$extensions": {
+        "scopes": ["GAP"]
+      }
     },
     "padding": {
       "block": {

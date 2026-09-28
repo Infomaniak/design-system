@@ -1,3 +1,5 @@
+- [Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2114-296&p=f&t=ujLMjTQvGkMfXRoU-0)
+
 ## Setup
 
 Import and register the separator component in your application's entry file (e.g., `main.ts` or `index.ts`):
