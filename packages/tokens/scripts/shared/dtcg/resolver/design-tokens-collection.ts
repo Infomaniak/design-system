@@ -519,7 +519,6 @@ export class DesignTokensCollection {
 
     if (this.has(to)) {
       if (onExistingTokenBehaviour === 'throw') {
-        console.log(this.get(to));
         throw new Error(`Replacing an existing token: ${from.join('.')} -> ${to.join('.')}`);
       } else if (onExistingTokenBehaviour === 'skip') {
         return;
