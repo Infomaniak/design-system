@@ -69,6 +69,27 @@ describe('buildSymbolSvg', () => {
     expect(svg).not.toContain('Generated from symbol');
   });
 
+  test('keeps the Apple guide lines required by Xcode for every scale row', async () => {
+    const template = await readSymbolTemplate();
+    const svg = buildSymbolSvg({
+      symbolName: 'square',
+      outlinedPaths: SQUARE_OUTLINED_PATH,
+      template,
+    });
+
+    const guideLineIds: readonly string[] = [
+      'Capline-S',
+      'Baseline-S',
+      'Capline-M',
+      'Baseline-M',
+      'Capline-L',
+      'Baseline-L',
+    ];
+    for (const guideLineId of guideLineIds) {
+      expect(svg).toContain(`<line id="${guideLineId}"`);
+    }
+  });
+
   test('computes the bounding box per path, supporting relative path starts', async () => {
     const template = await readSymbolTemplate();
     const svg = buildSymbolSvg({

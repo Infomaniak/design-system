@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.30",
+    "version": "0.0.31",
     "author": {
       "name": "Infomaniak"
     },
@@ -10,9 +10,9 @@
       "title": "GPL-3.0-only",
       "spdx": "GPL-3.0-only"
     },
-    "total": 262
+    "total": 265
   },
-  "lastModified": 1789623486,
+  "lastModified": 1790059227,
   "icons": {
     "a-large-small": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 16 2.536-7.328a1.02 1.02 0 011.928 0L22 16m-6.303-2h5.606M2 16l4.039-9.69a.5.5 0 01.923 0L11 16m-7.696-3h6.392\" vector-effect=\"non-scaling-stroke\"/>"
@@ -374,6 +374,9 @@
     "frame-sun-mountain": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m21 15-3.086-3.086a2 2 0 00-2.828 0L6 21M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2m6 6a2 2 0 11-4 0 2 2 0 014 0\" vector-effect=\"non-scaling-stroke\"/>"
     },
+    "frame-sun-mountain-plus": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M16 5h6m-3-3v6m2 3.5V19a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h7.5M21 15l-3.086-3.086a2 2 0 00-2.828 0L6 21m5-12a2 2 0 11-4 0 2 2 0 014 0\" vector-effect=\"non-scaling-stroke\"/>"
+    },
     "funnel": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M10 20a1 1 0 00.553.895l2 1A1 1 0 0014 21v-7a2 2 0 01.517-1.341L21.74 4.67A1 1 0 0021 3H3a1 1 0 00-.742 1.67l7.225 7.989A2 2 0 0110 14z\" vector-effect=\"non-scaling-stroke\"/>"
     },
@@ -509,9 +512,6 @@
     "number-list": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M11 5h10m-10 7h10m-10 7h10M4 4h1v5M4 9h2m.5 11H3.4c0-1 2.6-1.925 2.6-3.5a1.5 1.5 0 00-2.6-1.02\" vector-effect=\"non-scaling-stroke\"/>"
     },
-    "overline-rectangle-underline": {
-      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M3 2h18M3 22h18M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
-    },
     "paper-plane": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M10.914 13.085a2 2 0 00-.67-.44l-7.93-3.18a.5.5 0 01.024-.938l19-6.5a.496.496 0 01.635.635l-6.5 19a.5.5 0 01-.937.024l-3.18-7.932a2 2 0 00-.442-.669m0 0 10.94-10.938\" vector-effect=\"non-scaling-stroke\"/>"
     },
@@ -586,6 +586,12 @@
     },
     "rectangle-dots-three": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 12h.01M17 12h.01M7 12h.01M4 6h16a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "rectangle-double-overline": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M7 2h10M5 6h14M5 10h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "rectangle-overline-underline": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M3 2h18M3 22h18M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "rectangle-squares-two": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M20 3H4a1 1 0 00-1 1v5a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1M9 14H4a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1v-5a1 1 0 00-1-1m11 0h-5a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1v-5a1 1 0 00-1-1\" vector-effect=\"non-scaling-stroke\"/>"
@@ -751,6 +757,9 @@
     },
     "triangle-exclamation-mark": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 9v4m0 4h.01m9.72 1-8-14a2 2 0 00-3.48 0l-8 14A2 2 0 004 21h16a2 2 0 001.73-3\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "triangle-right": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M5 5a2 2 0 013.008-1.728l11.997 6.998a2 2 0 01.003 3.458l-12 7A2 2 0 015 19z\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "underline": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M6 4v6a6 6 0 1012 0V4M4 20h16\" vector-effect=\"non-scaling-stroke\"/>"
@@ -923,6 +932,7 @@
       "folder-open",
       "folder-plus",
       "frame-sun-mountain",
+      "frame-sun-mountain-plus",
       "funnel",
       "globe",
       "grid-three-two",
@@ -968,7 +978,6 @@
       "music-note",
       "network",
       "number-list",
-      "overline-rectangle-underline",
       "paper-plane",
       "paperclip",
       "pen",
@@ -994,6 +1003,8 @@
       "product-swisstransfer",
       "product-swisstransfer-filled",
       "rectangle-dots-three",
+      "rectangle-double-overline",
+      "rectangle-overline-underline",
       "rectangle-squares-two",
       "rectangle-two",
       "rectangle-underline-dashed",
@@ -1049,6 +1060,7 @@
       "tray-arrow-up",
       "tree-palm",
       "triangle-exclamation-mark",
+      "triangle-right",
       "underline",
       "user",
       "user-cog",
@@ -1124,6 +1136,12 @@
       "plus",
       "squares-stacked-plus"
     ],
+    "#add-image": [
+      "frame-sun-mountain-plus"
+    ],
+    "#add-media": [
+      "frame-sun-mountain-plus"
+    ],
     "#addition": [
       "plus"
     ],
@@ -1183,6 +1201,9 @@
       "alarm-clock",
       "bell"
     ],
+    "#albums": [
+      "rectangle-double-overline"
+    ],
     "#alert": [
       "alarm-clock",
       "bell",
@@ -1228,6 +1249,9 @@
     "#anchor": [
       "link",
       "link-horizontal"
+    ],
+    "#animation": [
+      "triangle-right"
     ],
     "#anniversary": [
       "cake-candles"
@@ -1377,6 +1401,9 @@
       "paperclip",
       "pin"
     ],
+    "#attach-image": [
+      "frame-sun-mountain-plus"
+    ],
     "#attachment": [
       "file",
       "paperclip"
@@ -1394,6 +1421,7 @@
       "mic",
       "music-note",
       "speaker-waves",
+      "triangle-right",
       "waveform"
     ],
     "#authentication": [
@@ -1540,7 +1568,7 @@
       "rocket"
     ],
     "#border": [
-      "overline-rectangle-underline",
+      "rectangle-overline-underline",
       "rectangle-underline-dashed"
     ],
     "#bottom": [
@@ -1549,7 +1577,7 @@
     "#box": [
       "box-lid",
       "iso-cube",
-      "overline-rectangle-underline",
+      "rectangle-overline-underline",
       "square"
     ],
     "#braces": [
@@ -1679,6 +1707,9 @@
     "#capture": [
       "video-camera"
     ],
+    "#cards": [
+      "rectangle-double-overline"
+    ],
     "#care": [
       "handshake-heart"
     ],
@@ -1689,12 +1720,18 @@
       "chevron-down",
       "chevron-up"
     ],
+    "#carousel": [
+      "rectangle-double-overline"
+    ],
     "#cart": [
       "shopping-cart"
     ],
     "#case": [
       "toggle-case",
       "tool-case"
+    ],
+    "#catalog": [
+      "rectangle-double-overline"
     ],
     "#categories": [
       "squares-four"
@@ -1892,6 +1929,9 @@
       "sidebar-left-chevron-left",
       "sidebar-left-chevron-right"
     ],
+    "#collection": [
+      "rectangle-double-overline"
+    ],
     "#color": [
       "bucket-drop"
     ],
@@ -2004,7 +2044,7 @@
     "#container": [
       "box-lid",
       "iso-cube",
-      "overline-rectangle-underline"
+      "rectangle-overline-underline"
     ],
     "#content": [
       "file-bullet-lines",
@@ -2072,6 +2112,9 @@
       "pen",
       "plus",
       "squares-stacked-plus"
+    ],
+    "#create-album": [
+      "frame-sun-mountain-plus"
     ],
     "#createaccount": [
       "user-plus"
@@ -2909,7 +2952,7 @@
     ],
     "#frame": [
       "corner-brackets",
-      "overline-rectangle-underline",
+      "rectangle-overline-underline",
       "square",
       "square-corners-face"
     ],
@@ -2935,7 +2978,9 @@
     "#gallery": [
       "file-sun-mountain",
       "frame-sun-mountain",
+      "frame-sun-mountain-plus",
       "grid-three-two",
+      "rectangle-double-overline",
       "squares-four"
     ],
     "#gear": [
@@ -3017,6 +3062,7 @@
     ],
     "#group": [
       "diamonds-stacked-vertical",
+      "rectangle-double-overline",
       "squares-stacked",
       "users-stacked"
     ],
@@ -3227,6 +3273,9 @@
       "file-sun-mountain",
       "frame-sun-mountain"
     ],
+    "#image-upload": [
+      "frame-sun-mountain-plus"
+    ],
     "#import": [
       "clipboard-arrow-left",
       "cloud-arrow-down",
@@ -3310,6 +3359,9 @@
       "folder-plus",
       "plus",
       "squares-stacked-plus"
+    ],
+    "#insert-image": [
+      "frame-sun-mountain-plus"
     ],
     "#insight": [
       "lightbulb"
@@ -3431,6 +3483,7 @@
     ],
     "#layers": [
       "diamonds-stacked-vertical",
+      "rectangle-double-overline",
       "squares-stacked"
     ],
     "#layers-three": [
@@ -3440,7 +3493,7 @@
       "columns-four",
       "columns-three",
       "grid-three-two",
-      "overline-rectangle-underline",
+      "rectangle-overline-underline",
       "rectangle-squares-two",
       "rectangle-two",
       "rows-four",
@@ -3489,7 +3542,8 @@
     "#library": [
       "book",
       "book-user",
-      "bookmark"
+      "bookmark",
+      "rectangle-double-overline"
     ],
     "#lid": [
       "box-lid"
@@ -3521,7 +3575,7 @@
       "list",
       "list-filter",
       "list-left",
-      "overline-rectangle-underline",
+      "rectangle-overline-underline",
       "rows-four",
       "rows-three",
       "rows-two"
@@ -3546,6 +3600,9 @@
       "number-list",
       "rows-three",
       "rows-two"
+    ],
+    "#listen": [
+      "triangle-right"
     ],
     "#listview": [
       "dots-list",
@@ -3711,6 +3768,12 @@
       "music-note",
       "speaker-waves",
       "video-camera"
+    ],
+    "#media-library": [
+      "frame-sun-mountain-plus"
+    ],
+    "#media-player": [
+      "triangle-right"
     ],
     "#meeting": [
       "calendar-user",
@@ -3939,6 +4002,9 @@
     "#new-file": [
       "file"
     ],
+    "#new-photo": [
+      "frame-sun-mountain-plus"
+    ],
     "#newsletter": [
       "envelope",
       "envelope-filled"
@@ -4149,6 +4215,7 @@
       "diamonds-stacked-vertical"
     ],
     "#overview": [
+      "rectangle-double-overline",
       "squares-four"
     ],
     "#package": [
@@ -4280,6 +4347,12 @@
       "file-sun-mountain",
       "frame-sun-mountain"
     ],
+    "#photo-editor": [
+      "frame-sun-mountain-plus"
+    ],
+    "#photo-upload": [
+      "frame-sun-mountain-plus"
+    ],
     "#photograph": [
       "frame-sun-mountain"
     ],
@@ -4320,11 +4393,13 @@
       "calendar-dots"
     ],
     "#play": [
-      "music-note"
+      "music-note",
+      "triangle-right"
     ],
     "#playback": [
       "circle-line-circle",
-      "speaker-waves"
+      "speaker-waves",
+      "triangle-right"
     ],
     "#plus": [
       "calendar-plus",
@@ -4350,7 +4425,8 @@
       "dots-list"
     ],
     "#portfolio": [
-      "briefcase"
+      "briefcase",
+      "rectangle-double-overline"
     ],
     "#position": [
       "map-pin"
@@ -4382,7 +4458,8 @@
     ],
     "#preview": [
       "eye",
-      "smartphone-tablet"
+      "smartphone-tablet",
+      "triangle-right"
     ],
     "#previous": [
       "arrow-left",
@@ -4548,7 +4625,7 @@
       "cloud-arrow-anticlockwise"
     ],
     "#rectangle": [
-      "overline-rectangle-underline",
+      "rectangle-overline-underline",
       "rectangle-squares-two",
       "rectangle-two",
       "square"
@@ -4725,6 +4802,9 @@
     "#restricted": [
       "lock",
       "user-lock"
+    ],
+    "#resume": [
+      "triangle-right"
     ],
     "#retail": [
       "shopping-cart",
@@ -5001,7 +5081,7 @@
     "#shape": [
       "circle",
       "circle-filled",
-      "overline-rectangle-underline",
+      "rectangle-overline-underline",
       "square"
     ],
     "#share": [
@@ -5108,6 +5188,9 @@
     "#sliders": [
       "sliders-horizontal",
       "sliders-vertical"
+    ],
+    "#slideshow": [
+      "triangle-right"
     ],
     "#smart": [
       "pencil-sparkles",
@@ -5225,6 +5308,7 @@
     ],
     "#stack": [
       "diamonds-stacked-vertical",
+      "rectangle-double-overline",
       "rows-three",
       "rows-two",
       "squares-stacked",
@@ -5241,7 +5325,8 @@
       "user-star"
     ],
     "#start": [
-      "power"
+      "power",
+      "triangle-right"
     ],
     "#startup": [
       "rocket"
@@ -5307,7 +5392,7 @@
       "columns-four",
       "columns-three",
       "network",
-      "overline-rectangle-underline",
+      "rectangle-overline-underline",
       "rows-four",
       "sidebar-left",
       "square-split-top"
@@ -5773,6 +5858,9 @@
       "file-sun-mountain",
       "tray-arrow-up"
     ],
+    "#upload-photo": [
+      "frame-sun-mountain-plus"
+    ],
     "#uploaded": [
       "cloud-check"
     ],
@@ -5848,6 +5936,7 @@
       "sliders-vertical"
     ],
     "#video": [
+      "triangle-right",
       "video-camera"
     ],
     "#view": [
@@ -5905,7 +5994,8 @@
     ],
     "#watch": [
       "clock",
-      "eye"
+      "eye",
+      "triangle-right"
     ],
     "#waves": [
       "speaker-waves",
@@ -5929,7 +6019,7 @@
       "wave-arcs-up"
     ],
     "#wireframe": [
-      "overline-rectangle-underline"
+      "rectangle-overline-underline"
     ],
     "#wireless": [
       "wave-arcs-up"
