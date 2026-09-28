@@ -355,6 +355,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | font.size.4xl | 2.5rem | 2.5rem | var(--esds-font-size-4xl) | 4x-large font size for display headings. |
 | font.size.5xl | 3rem | 3rem | var(--esds-font-size-5xl) | 5x-large font size for hero display text. |
 | font.family.base | "Infomaniak Sans" | "Infomaniak Sans" | var(--esds-font-family-base) | Base font family used across the design system. |
+| font.family.base.ex-alphabetic | "Infomaniak Sans ExAlphabetic" | "Infomaniak Sans ExAlphabetic" | var(--esds-font-family-base-ex-alphabetic) | Base font family used across the design system with ex-alphabetic centering. |
 | font.line-height.xs | 16px | 16px | var(--esds-font-line-height-xs) | Extra-small line-height for the tightest text. |
 | font.line-height.sm | 20px | 20px | var(--esds-font-line-height-sm) | Small line-height for compact text blocks. |
 | font.line-height.md | 24px | 24px | var(--esds-font-line-height-md) | Medium line-height for default body text. |
