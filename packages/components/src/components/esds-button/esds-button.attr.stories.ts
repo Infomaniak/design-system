@@ -2,6 +2,7 @@ import { EsdsIconComponent } from '@infomaniak-design-system/components';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import {
   storybookInteractiveControls,
   type StoryPropertyConfigLike,
@@ -54,13 +55,25 @@ const extraControls: Record<string, StoryPropertyConfigLike> = {
   },
 };
 
+const BUTTON_TYPES = [
+  'primary',
+  'primary-destructive',
+  'secondary',
+  'secondary-destructive',
+  'ghost-primary',
+  'ghost-secondary',
+  'ghost-destructive',
+] as const;
+
+const BUTTON_SIZES = ['small', 'medium', 'large'] as const;
+
 export const Button: StoryObj<
   EsdsButtonAttr &
     HTMLButtonElement &
     ExtraControls & {
       content: string;
-      buttonType: 'primary' | 'secondary' | 'destructive' | 'ghost' | 'ghost-destructive';
-      size: 'small' | 'medium' | 'large';
+      buttonType: (typeof BUTTON_TYPES)[number];
+      size: (typeof BUTTON_SIZES)[number];
     }
 > = {
   ...storybookInteractiveControls({
@@ -69,12 +82,12 @@ export const Button: StoryObj<
     buttonType: {
       value: 'primary',
       type: 'select',
-      options: ['primary', 'secondary', 'destructive', 'ghost', 'ghost-destructive'],
+      options: BUTTON_TYPES,
     },
     size: {
       value: 'medium',
       type: 'select',
-      options: ['small', 'medium', 'large'],
+      options: BUTTON_SIZES,
     },
   }),
   render: (args) =>
@@ -83,8 +96,8 @@ export const Button: StoryObj<
       esds-button
       ?disabled=${args.disabled}
       ?loading=${args.loading}
-      data-esds-button-type=${args.buttonType}
-      data-esds-button-size=${args.size}
+      data-esds-button-type=${ifDefined(args.buttonType)}
+      data-esds-button-size=${ifDefined(args.size)}
       @click="${() => console.log('clicked')}"
     >
       <esds-icon name="esds:plus"></esds-icon>
@@ -150,12 +163,12 @@ export const Types: StoryObj<EsdsButtonAttr & HTMLButtonElement & ExtraControls>
       }
     </style>
     <div class="buttons-container">
-      ${['primary', 'secondary', 'destructive', 'ghost', 'ghost-destructive'].map(
+      ${BUTTON_TYPES.map(
         (variant) => html`
           <button
             ${defineEsdsButtonAttr}
             esds-button
-            data-esds-button-type=${variant}
+            data-esds-button-type=${ifDefined(variant)}
             ?disabled=${args.disabled}
             ?loading=${args.loading}
           >
@@ -181,12 +194,12 @@ export const Sizes: StoryObj<EsdsButtonAttr & HTMLButtonElement & ExtraControls>
       }
     </style>
     <div class="buttons-container">
-      ${['small', 'medium', 'large'].map(
+      ${BUTTON_SIZES.map(
         (variant) => html`
           <button
             ${defineEsdsButtonAttr}
             esds-button
-            data-esds-button-size=${variant}
+            data-esds-button-size=${ifDefined(variant)}
             ?disabled=${args.disabled}
             ?loading=${args.loading}
           >

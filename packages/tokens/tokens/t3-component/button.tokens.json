@@ -29,7 +29,12 @@
         }
       },
       "width": {
-        "$value": "{border.none.width}"
+        "$root": {
+          "$value": "{border.none.width}"
+        },
+        "disabled": {
+          "$value": "{border.none.width}"
+        }
       }
     },
     "background": {

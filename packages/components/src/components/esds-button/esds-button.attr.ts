@@ -35,6 +35,7 @@ export class EsdsButtonAttr extends CustomAttribute implements CustomAttributeDe
 
     const element: HTMLElement = this.ownerElement! as HTMLElement;
 
+    // NOTE: make button _inert_ only when we **click** on it, NOT ALWAYS => this allows to have **hover** effects like tooltips.
     element.addEventListener('pointerdown', (event: PointerEvent): void => {
       if (element.hasAttribute('loading')) {
         event.preventDefault();

@@ -23,6 +23,12 @@ EsdsButtonAttr.define();
 </a>
 ```
 
+### Styles
+
+#### Types
+
+TODO
+
 ## Description
 
 Adding the custom attribute `esds-button` to a `<button>` or `<a>` element, applies the `esds-button` styles to this element.
