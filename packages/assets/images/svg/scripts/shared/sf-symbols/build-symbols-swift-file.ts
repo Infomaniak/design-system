@@ -5,7 +5,11 @@ import { dedent } from '../../../../../../../scripts/helpers/misc/string/dedent/
 import { SWIFT_FILE_HEADER } from '../../../../../../tokens/scripts/scripts/build-tokens/src/build/outputs/swift/helpers/build-swift-file-header.ts';
 import { toSwiftVariableName } from '../../../../../../tokens/scripts/shared/dtcg/resolver/to/swift/token/name/to-swift-variable-name.ts';
 import type { SymbolIcon } from './build-symbols-xcassets.ts';
-import { SYMBOLS_SWIFT_FILE_NAME } from './sf-symbols-config.ts';
+import {
+  SYMBOLS_ENUM_NAME,
+  SYMBOLS_SWIFT_FILE_NAME,
+  SYMBOL_TYPE_NAME,
+} from './sf-symbols-config.ts';
 
 export interface BuildSymbolsSwiftFileOptions {
   readonly outputDirectory: string;
@@ -31,7 +35,9 @@ export async function buildSymbolsSwiftFile({
       }
 
       identifiers.add(identifier);
-      declarations.push(`public static let ${identifier} = Symbol(name: ${JSON.stringify(name)})`);
+      declarations.push(
+        `public static let ${identifier} = ${SYMBOL_TYPE_NAME}(name: ${JSON.stringify(name)})`,
+      );
     }
 
     const content: string = dedent`
@@ -43,7 +49,7 @@ export async function buildSymbolsSwiftFile({
       import UIKit
       #endif
 
-      public enum ESDSSymbols: Sendable {
+      public enum ${SYMBOLS_ENUM_NAME}: Sendable {
           ${buildSymbolType()}
 
           ${declarations.join('\n')}
@@ -57,7 +63,7 @@ export async function buildSymbolsSwiftFile({
 
 function buildSymbolType(): string {
   return dedent`
-    public struct Symbol: Sendable {
+    public struct ${SYMBOL_TYPE_NAME}: Sendable {
         private let name: String
 
         public var image: SwiftUI.Image {
