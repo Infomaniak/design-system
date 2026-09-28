@@ -474,8 +474,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | kbd.gap | 4px | 4px | var(--esds-kbd-gap) | Default gap between keys inside a multi-key keyboard shortcut. |
 | kbd.padding.block | 2px | 2px | var(--esds-kbd-padding-block) | Default keyboard key block padding. |
 | kbd.padding.inline | 4px | 4px | var(--esds-kbd-padding-inline) | Default keyboard key inline padding. |
-| separator.color | #e2e8f0 | #314158 | var(--esds-separator-color) | Default separator line color (subtle neutral border). |
-| separator.thickness | 1px | 1px | var(--esds-separator-thickness) | Default separator line thickness. |
+| separator.color | #cad5e2 | #45556c | var(--esds-separator-color) | Default separator line color (strong neutral border). |
+| separator.padding | 2px | 2px | var(--esds-separator-padding) | Default padding across the separator line. |
+| separator.width | 1px | 1px | var(--esds-separator-width) | Default separator line width. |
 | text-link.content.color.default | #0077cf | #0077cf | var(--esds-text-link-content-color-default) | Default text link color. |
 | text-link.content.color.visited | #8f30f7 | #cab1ff | var(--esds-text-link-content-color-visited) | Default visited text link color. |
 
