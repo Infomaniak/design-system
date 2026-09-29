@@ -95,11 +95,14 @@ function isElementLoading(element: Element): boolean {
 
 function syncElementState(element: Element): void {
   if (isAnchorElement(element)) {
-    if (isElementDisabled(element)) {
+    if (isElementDisabledOrLoading(element)) {
       element.setAttribute('aria-disabled', 'true');
-      element.setAttribute('tabindex', '-1');
     } else {
       element.removeAttribute('aria-disabled');
+    }
+    if (isElementDisabled(element)) {
+      element.setAttribute('tabindex', '-1');
+    } else {
       element.removeAttribute('tabindex');
     }
   }
