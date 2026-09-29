@@ -4,6 +4,7 @@ import { dedent } from '../../../../../../scripts/helpers/misc/string/dedent/ded
 const TRUE_TYPE_SFNT_VERSION: number = 0x00010000;
 const USE_TYPO_METRICS_BIT: number = 1 << 7;
 const FONT_CHECKSUM_ADJUSTMENT_BASE: number = 0xb1b0afba;
+const MAX_INT16: number = 0x7fff;
 /** Over (top) edge of the centered band, mirroring the first `text-box-edge` value. */
 export type CenteredBandOverEdge = 'text' | 'cap' | 'ex';
 /** Under (bottom) edge of the centered band, mirroring the second `text-box-edge` value. */
@@ -25,17 +26,14 @@ const METRIC_MVAR_VALUE_TAGS: ReadonlySet<string> = new Set([
 const LATIN1_DECODER: TextDecoder = new TextDecoder('latin1');
 const UTF_16_BE_DECODER: TextDecoder = new TextDecoder('utf-16be');
 
-export interface ConvertTtfContentToCenteredBandOptions {
-  /** Content of the source .ttf file */
-  readonly input: Uint8Array;
+export interface ConvertTtfContentToCenteredBandOptions extends Omit<
+  OffsetTtfContentToCenteredBandOptions,
+  'offset' | 'bandLabel'
+> {
   /** Over (top) edge of the centered band */
   readonly start: CenteredBandOverEdge;
   /** Under (bottom) edge of the centered band */
   readonly end: CenteredBandUnderEdge;
-  /** Suffix appended to the source family name (default: derived from the edges, e.g. 'ExAlphabetic') */
-  readonly familySuffix?: string;
-  /** Logger for the conversion report and guards (default: silent) */
-  readonly logger?: Logger;
 }
 
 /**
@@ -44,17 +42,100 @@ export interface ConvertTtfContentToCenteredBandOptions {
  * `text-box-edge`) — e.g. the `ex alphabetic` band (x-height top → baseline) for optical
  * centering — with the line height strictly unchanged.
  *
- * The vertical metrics are rebalanced (their sum is preserved), the `name` table is
- * rebuilt so the derivative is a distinct family, and every other table stays
- * byte-identical. The input content is never mutated.
+ * The band edges are translated into the equivalent `offset` and the conversion is
+ * delegated to `offsetTtfContentToCenteredBand`.
  */
 export async function convertTtfContentToCenteredBand({
   input,
   start,
   end,
-  familySuffix = toBandFamilySuffix(start, end),
-  logger = Logger.never(),
+  family,
+  logger,
 }: ConvertTtfContentToCenteredBandOptions): Promise<Uint8Array> {
+  const tableRecords: readonly TableRecord[] = parseSfntTableDirectory(input);
+  const os2View: DataView = createDataView(
+    copyTable(input, requireTableRecord(tableRecords, 'OS/2')),
+  );
+  const os2Version: number = os2View.getUint16(0);
+
+  if (os2Version < 2) {
+    throw new Error(
+      `Unsupported "OS/2" table version: ${os2Version} (version 2+ is required to read "sxHeight" and "sCapHeight").`,
+    );
+  }
+
+  const sourceMetrics: CenteredBandSourceMetrics = {
+    ascender: os2View.getInt16(68),
+    descender: os2View.getInt16(70),
+    lineGap: os2View.getInt16(72),
+    xHeight: os2View.getInt16(86),
+    capHeight: os2View.getInt16(88),
+  };
+  const band: CenteredBand = resolveCenteredBand(sourceMetrics, { start, end });
+
+  // The band center sits (overEdge + underEdge) / 2 above the baseline: centering the
+  // band is equivalent to shifting the baseline point down by that amount, expressed as
+  // a fraction of the line box.
+  const offset: number = -(band.overEdge + band.underEdge) / computeLineBox(sourceMetrics);
+
+  // Default naming: the source family + the suffix derived from the band edges.
+  const nameTable: Uint8Array = copyTable(input, requireTableRecord(tableRecords, 'name'));
+  const derivativeFamily: string =
+    family ?? `${readNameTableFamily(nameTable)} ${toBandFamilySuffix(start, end)}`;
+
+  return offsetTtfContentToCenteredBand({
+    input,
+    offset,
+    family: derivativeFamily,
+    logger,
+    bandLabel: `text-box: trim-both ${start} ${end} (centered in the content area)`,
+  });
+}
+
+export interface OffsetTtfContentToCenteredBandOptions {
+  /** Content of the source .ttf file */
+  readonly input: Uint8Array;
+  /**
+   * Offset of the centered band: the baseline shifts by `offset` times half the
+   * line-height, i.e. it sits at `(1 - offset) / 2` of the line box — 0 centers it,
+   * 1 puts it on the top edge, -1 on the bottom edge. The shift is quantized to whole
+   * font units.
+   */
+  readonly offset: number;
+  /** New `font-family` replacing the whole name (default: the source family + the derived suffix) */
+  readonly family?: string;
+  /** Logger for the conversion report and guards (default: silent) */
+  readonly logger?: Logger;
+  /** Band placement description logged after "band: " (default: derived from the offset) */
+  readonly bandLabel?: string;
+}
+
+/**
+ * Derives a new font family from a metric-compatible source whose default vertical
+ * anchoring places the baseline point at `(1 - offset) / 2` of the content area
+ * (`offset` in [-1, 1]: 0 centers it, 1 puts it on the top edge, -1 on the bottom edge),
+ * with the line height strictly unchanged.
+ *
+ * The vertical metrics are rebalanced (their sum is preserved), the `name` table is
+ * rebuilt so the derivative is a distinct family — renamed to `family` when provided,
+ * otherwise the source family + the derived suffix — and every other table stays
+ * byte-identical. The input content is never mutated.
+ */
+export async function offsetTtfContentToCenteredBand({
+  input,
+  offset,
+  family,
+  logger = Logger.never(),
+  bandLabel = toOffsetBandLabel(offset),
+}: OffsetTtfContentToCenteredBandOptions): Promise<Uint8Array> {
+  if (!Number.isFinite(offset)) {
+    throw new Error(`Invalid offset: ${offset} (must be a finite fraction of line-height).`);
+  }
+
+  if (offset < -1 || offset > 1) {
+    throw new Error(`Invalid offset: ${offset} (must be within [-1, 1]).`);
+  }
+
   const tableRecords: readonly TableRecord[] = parseSfntTableDirectory(input);
 
   const headRecord: TableRecord = requireTableRecord(tableRecords, 'head');
@@ -64,13 +145,6 @@ export async function convertTtfContentToCenteredBand({
 
   const os2: Uint8Array = copyTable(input, os2Record);
   const os2View: DataView = createDataView(os2);
-  const os2Version: number = os2View.getUint16(0);
-
-  if (os2Version < 2) {
-    throw new Error(
-      `Unsupported "OS/2" table version: ${os2Version} (version 2+ is required to read "sxHeight" and "sCapHeight").`,
-    );
-  }
 
   if ((os2View.getUint16(62) & USE_TYPO_METRICS_BIT) === 0) {
     logger.warn(
@@ -78,19 +152,16 @@ export async function convertTtfContentToCenteredBand({
     );
   }
 
-  // Split the content area so the band between the two edges is vertically centered in
-  // it, while preserving the ascent + descent sum: the line box height stays identical,
-  // and geometric centering centers the band exactly like `text-box: trim-both <start>
-  // <end>` would on the source font.
-  const sourceMetrics: CenteredBandSourceMetrics = {
+  // Rebalance the metrics so the baseline point shifts by `offset` times half the line
+  // height from the center of the content area (positive toward the top), while
+  // preserving the ascent + descent sum: the line box height stays identical. The shift
+  // is quantized to whole font units so band-derived offsets round-trip exactly.
+  const sourceMetrics: VerticalMetrics = {
     ascender: os2View.getInt16(68),
     descender: os2View.getInt16(70),
     lineGap: os2View.getInt16(72),
-    xHeight: os2View.getInt16(86),
-    capHeight: os2View.getInt16(88),
   };
-  const band: CenteredBand = resolveCenteredBand(sourceMetrics, { start, end });
-  const metrics: CenteredBandMetrics = computeCenteredBandMetrics(sourceMetrics, band);
+  const metrics: CenteredBandMetrics = computeOffsetBandMetrics(sourceMetrics, offset);
 
   const mvarRecord: TableRecord | undefined = findTableRecord(tableRecords, 'MVAR');
 
@@ -110,10 +181,10 @@ export async function convertTtfContentToCenteredBand({
   os2View.setUint16(74, metrics.ascender);
   os2View.setUint16(76, metrics.descender);
 
-  const { table: nameTable, family }: CenteredBandNameTable = buildCenteredBandNameTable(
-    copyTable(input, nameRecord),
-    familySuffix,
-  );
+  const sourceNameTable: Uint8Array = copyTable(input, nameRecord);
+  const sourceFamily: string = readNameTableFamily(sourceNameTable);
+  const newFamily: string = family ?? `${sourceFamily} ${toOffsetFamilySuffix(offset)}`;
+  const nameTable: Uint8Array = buildCenteredBandNameTable(sourceNameTable, newFamily);
 
   const head: Uint8Array = copyTable(input, headRecord);
 
@@ -140,8 +211,8 @@ export async function convertTtfContentToCenteredBand({
 
   logger.info(
     dedent`
-      family: "${family}" -> "${family} ${familySuffix}"
-      band: text-box: trim-both ${start} ${end} (centered in the content area)
+      family: "${sourceFamily}" -> "${newFamily}"
+      band: ${bandLabel}
       normal (line height): ${String(metrics.normal)} (preserved)
       ascender: ${String(sourceMetrics.ascender)} -> ${String(metrics.ascender)}
       descender: ${String(sourceMetrics.descender)} -> ${String(-metrics.descender)}
@@ -159,11 +230,14 @@ interface TableRecord {
   readonly length: number;
 }
 
-interface CenteredBandSourceMetrics {
+interface VerticalMetrics {
   readonly ascender: number;
   /** Negative, as stored in the font */
   readonly descender: number;
   readonly lineGap: number;
+}
+
+interface CenteredBandSourceMetrics extends VerticalMetrics {
   readonly xHeight: number;
   readonly capHeight: number;
 }
@@ -181,11 +255,6 @@ interface CenteredBandMetrics {
   readonly ascender: number;
   /** Positive descender magnitude, stored as `-descender` */
   readonly descender: number;
-}
-
-interface CenteredBandNameTable {
-  readonly table: Uint8Array;
-  readonly family: string;
 }
 
 /** Parses and validates the sfnt table directory (tags, checksums, offsets, lengths). */
@@ -261,20 +330,33 @@ function requirePositiveMetric(value: number, os2Field: string, edge: string): n
   return value;
 }
 
+function computeLineBox({ ascender, descender, lineGap }: VerticalMetrics): number {
+  return ascender - descender + lineGap;
+}
+
 /**
  * Computes the rebalanced vertical metrics: the line box (`normal`, i.e. ascent − descent
- * + line gap) is preserved exactly, and the new ascender is placed so the band between the
- * two edges ends up vertically centered in the content area.
+ * + line gap) is preserved exactly, and the baseline point shifts by `offset` times half
+ * the line height from the center (positive toward the top). The shift is quantized to
+ * whole font units so band-derived offsets round-trip exactly through the float
+ * conversion.
  */
-function computeCenteredBandMetrics(
-  { ascender, descender, lineGap }: CenteredBandSourceMetrics,
-  { overEdge, underEdge }: CenteredBand,
+function computeOffsetBandMetrics(
+  sourceMetrics: VerticalMetrics,
+  offset: number,
 ): CenteredBandMetrics {
-  const normal: number = ascender - descender + lineGap;
-  const newAscender: number = Math.floor((normal + overEdge + underEdge) / 2);
-  const newDescender: number = normal - newAscender;
+  const normal: number = computeLineBox(sourceMetrics);
+  const shift: number = Math.round(offset * normal);
+  const ascender: number = Math.floor((normal - shift) / 2);
+  const descender: number = normal - ascender;
 
-  return { normal, ascender: newAscender, descender: newDescender };
+  if (ascender < 0 || ascender > MAX_INT16 || descender < 0 || descender > MAX_INT16) {
+    throw new Error(
+      `Invalid offset: ${offset} (the rebalanced metrics overflow the 16-bit fields: ascender ${ascender}, descender ${descender}).`,
+    );
+  }
+
+  return { normal, ascender, descender };
 }
 
 export function toBandFamilySuffix(
@@ -284,8 +366,39 @@ export function toBandFamilySuffix(
   return `${capitalize(start)}${capitalize(end)}`;
 }
 
+export function opticalCenteringBandToFileNameSuffix(
+  start: CenteredBandOverEdge,
+  end: CenteredBandUnderEdge,
+): string {
+  return opticalCenteringToFileNameSuffix(`${start}-${end}`);
+}
+
 function capitalize(value: string): string {
   return `${value[0]!.toUpperCase()}${value.slice(1)}`;
+}
+
+export function toOffsetFamilySuffix(offset: number): string {
+  const percent: number = Math.round(offset * 100);
+
+  if (percent === 0) {
+    return 'Centered';
+  }
+
+  return `${percent > 0 ? 'Up' : 'Down'}${Math.abs(percent)}`;
+}
+
+export function opticalCenteringOffsetToFileNameSuffix(offset: number): string {
+  return opticalCenteringToFileNameSuffix(
+    `${offset === 0 ? '' : offset > 0 ? '+' : '-'}${Math.round(Math.abs(offset) * 100)}`,
+  );
+}
+
+export function opticalCenteringToFileNameSuffix(value: string): string {
+  return `opvc[${value}]`;
+}
+
+function toOffsetBandLabel(offset: number): string {
+  return `baseline at ${(((1 - offset) / 2) * 100).toFixed(1)}% of the line box (offset ${offset})`;
 }
 
 /**
@@ -316,16 +429,36 @@ function calculateChecksum(data: Uint8Array): number {
   return checksum;
 }
 
+/** Reads the source family name (nameID 1), used by the default derivative naming. */
+function readNameTableFamily(nameTable: Uint8Array): string {
+  const view: DataView = createDataView(nameTable);
+  const recordCount: number = view.getUint16(2);
+  const stringOffset: number = view.getUint16(4);
+
+  for (let index: number = 0; index < recordCount; index++) {
+    const recordOffset: number = 6 + index * 12;
+
+    if (view.getUint16(recordOffset + 6) === 1) {
+      return decodeNameString(
+        readNameString(nameTable, stringOffset, {
+          length: view.getUint16(recordOffset + 8),
+          offset: view.getUint16(recordOffset + 10),
+        }),
+        view.getUint16(recordOffset),
+      );
+    }
+  }
+
+  throw new Error('Invalid "name" table: no record with nameID 1 (family name).');
+}
+
 /**
  * Rebuilds the `name` table so the derivative is a distinct family: nameIDs 1 (family),
  * 4 (full name) and 6 (PostScript name) — plus 16 (typographic family) only when present —
- * are renamed, and the string storage is rebuilt since the new names have a different
- * length. Every other record is kept byte-identical.
+ * are renamed to `newFamily`, and the string storage is rebuilt since the new names have
+ * a different length. Every other record is kept byte-identical.
  */
-function buildCenteredBandNameTable(
-  nameTable: Uint8Array,
-  familySuffix: string,
-): CenteredBandNameTable {
+function buildCenteredBandNameTable(nameTable: Uint8Array, newFamily: string): Uint8Array {
   const view: DataView = createDataView(nameTable);
   const format: number = view.getUint16(0);
   const recordCount: number = view.getUint16(2);
@@ -355,17 +488,6 @@ function buildCenteredBandNameTable(
     });
   }
 
-  const familyRecord: NameRecord | undefined = records.find(({ nameID }) => nameID === 1);
-
-  if (familyRecord === undefined) {
-    throw new Error('Invalid "name" table: no record with nameID 1 (family name).');
-  }
-
-  const family: string = decodeNameString(
-    readNameString(nameTable, stringOffset, familyRecord),
-    familyRecord.platformID,
-  );
-  const newFamily: string = `${family} ${familySuffix}`;
   const postScriptName: string = newFamily.replace(/[ .-]/g, '');
 
   const renamedNameIDs: ReadonlySet<number> = records.some(({ nameID }) => nameID === 16)
@@ -409,7 +531,7 @@ function buildCenteredBandNameTable(
     storageOffset += bytes.length;
   }
 
-  return { table, family };
+  return table;
 }
 
 /**

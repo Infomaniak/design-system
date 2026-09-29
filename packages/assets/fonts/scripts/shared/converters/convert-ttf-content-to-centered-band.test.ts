@@ -7,6 +7,8 @@ import { Logger } from '../../../../../../scripts/helpers/log/logger.ts';
 import {
   convertTtfContentToCenteredBand,
   type ConvertTtfContentToCenteredBandOptions,
+  offsetTtfContentToCenteredBand,
+  type OffsetTtfContentToCenteredBandOptions,
 } from './convert-ttf-content-to-centered-band.ts';
 
 const FIXTURE_PATH: string = join(
@@ -377,6 +379,22 @@ function convertBytes(
   });
 }
 
+async function offsetTestFont(
+  options: TestFontOptions,
+  offset: number,
+  offsetOptions?: Partial<OffsetTtfContentToCenteredBandOptions>,
+): Promise<Uint8Array> {
+  return offsetBytes(buildTestFont(options), offset, offsetOptions);
+}
+
+function offsetBytes(
+  bytes: Uint8Array,
+  offset: number,
+  offsetOptions?: Partial<OffsetTtfContentToCenteredBandOptions>,
+): Promise<Uint8Array> {
+  return offsetTtfContentToCenteredBand({ input: bytes, offset, ...offsetOptions });
+}
+
 describe('convertTtfContentToCenteredBand', () => {
   test('converts the fixture font preserving the line height, the outlines and the other tables', async () => {
     const source: Uint8Array = await readFile(FIXTURE_PATH);
@@ -544,11 +562,11 @@ describe('convertTtfContentToCenteredBand', () => {
     ).rejects.toThrow('Invalid "OS/2".sCapHeight: 0 (required by the "cap" band edge).');
   });
 
-  test('appends a custom family suffix', async () => {
-    const converted: Uint8Array = await convertTestFont({}, { familySuffix: 'Centered' });
+  test('replaces the whole family when "family" is provided', async () => {
+    const converted: Uint8Array = await convertTestFont({}, { family: 'Custom Family' });
 
-    expect(readTestNameString(converted, 1)).toBe('Infomaniak Variable Centered');
-    expect(readTestNameString(converted, 6)).toBe('InfomaniakVariableCentered');
+    expect(readTestNameString(converted, 1)).toBe('Custom Family');
+    expect(readTestNameString(converted, 6)).toBe('CustomFamily');
   });
 
   test('renames nameID 16 when it is present', async () => {
@@ -685,6 +703,134 @@ describe('convertTtfContentToCenteredBand', () => {
 
     await expect(convertBytes(font)).rejects.toThrow(
       'Invalid "head" table: bytes 0..100 exceed the 28-byte file.',
+    );
+  });
+});
+
+describe('offsetTtfContentToCenteredBand', () => {
+  test('centers the baseline when the offset is 0', async () => {
+    const converted: Uint8Array = await offsetTestFont({}, 0);
+
+    expect(readTestTableInt16(converted, 'OS/2', 68)).toBe(1239);
+    expect(readTestTableInt16(converted, 'OS/2', 70)).toBe(-1239);
+    expect(readTestTableUint16(converted, 'OS/2', 74)).toBe(1239);
+    expect(readTestTableUint16(converted, 'OS/2', 76)).toBe(1239);
+    expect(readTestTableInt16(converted, 'hhea', 4)).toBe(1239);
+    expect(readTestTableInt16(converted, 'hhea', 6)).toBe(-1239);
+  });
+
+  test('moves the band toward the top for a positive offset', async () => {
+    const converted: Uint8Array = await offsetTestFont({}, 0.5);
+
+    expect(readTestTableInt16(converted, 'OS/2', 68)).toBe(619);
+    expect(readTestTableInt16(converted, 'OS/2', 70)).toBe(-1859);
+  });
+
+  test('moves the band toward the bottom for a negative offset', async () => {
+    const converted: Uint8Array = await offsetTestFont({}, -0.5);
+
+    expect(readTestTableInt16(converted, 'OS/2', 68)).toBe(1858);
+    expect(readTestTableInt16(converted, 'OS/2', 70)).toBe(-620);
+  });
+
+  test('puts the baseline on the content area edges for the offsets -1 and 1', async () => {
+    const top: Uint8Array = await offsetTestFont({}, 1);
+
+    expect(readTestTableInt16(top, 'OS/2', 68)).toBe(0);
+    expect(readTestTableInt16(top, 'OS/2', 70)).toBe(-2478);
+
+    const bottom: Uint8Array = await offsetTestFont({}, -1);
+
+    expect(readTestTableInt16(bottom, 'OS/2', 68)).toBe(2478);
+    expect(readTestTableInt16(bottom, 'OS/2', 70)).toBe(0);
+  });
+
+  test('quantizes the shift to whole font units', async () => {
+    // 0.00097 * 2478 ≈ 2.4, quantized to a shift of 2 (a 1-unit baseline move).
+    const converted: Uint8Array = await offsetTestFont({}, 0.00097);
+
+    expect(readTestTableInt16(converted, 'OS/2', 68)).toBe(1238);
+    expect(readTestTableInt16(converted, 'OS/2', 70)).toBe(-1240);
+  });
+
+  test('matches the edge-based conversion for the equivalent offset', async () => {
+    const font: Uint8Array = buildTestFont();
+    const edgeBased: Uint8Array = await convertBytes(font);
+    const offsetEquivalent: Uint8Array = await offsetBytes(font, -1118 / 2478, {
+      family: 'Infomaniak Variable ExAlphabetic',
+    });
+
+    expect([...offsetEquivalent]).toEqual([...edgeBased]);
+  });
+
+  test('derives the family suffix from the offset', async () => {
+    const centered: Uint8Array = await offsetTestFont({}, 0);
+
+    expect(readTestNameString(centered, 1)).toBe('Infomaniak Variable Centered');
+    expect(readTestNameString(centered, 6)).toBe('InfomaniakVariableCentered');
+
+    const up: Uint8Array = await offsetTestFont({}, 0.21);
+
+    expect(readTestNameString(up, 1)).toBe('Infomaniak Variable Up21');
+
+    const down: Uint8Array = await offsetTestFont({}, -0.451);
+
+    expect(readTestNameString(down, 1)).toBe('Infomaniak Variable Down45');
+  });
+
+  test('replaces the whole family when "family" is provided', async () => {
+    const converted: Uint8Array = await offsetTestFont({}, 0, { family: 'Custom Family' });
+
+    expect(readTestNameString(converted, 1)).toBe('Custom Family');
+    expect(readTestNameString(converted, 6)).toBe('CustomFamily');
+  });
+
+  test('logs the derived band label and family suffix by default', async () => {
+    const { logger, info }: LoggerSpy = createLoggerSpy();
+    const converted: Uint8Array = await offsetTestFont({}, 0.5, { logger });
+
+    expect(readTestTableInt16(converted, 'OS/2', 68)).toBe(619);
+    expect(info).toHaveBeenCalledTimes(1);
+    expect(info.mock.calls[0]?.[0]).toContain(
+      'family: "Infomaniak Variable" -> "Infomaniak Variable Up50"',
+    );
+    expect(info.mock.calls[0]?.[0]).toContain(
+      'band: baseline at 25.0% of the line box (offset 0.5)',
+    );
+  });
+
+  test('throws on a non-finite offset', async () => {
+    await expect(offsetBytes(buildTestFont(), Number.NaN)).rejects.toThrow(
+      'Invalid offset: NaN (must be a finite fraction of line-height).',
+    );
+    await expect(offsetBytes(buildTestFont(), Number.POSITIVE_INFINITY)).rejects.toThrow(
+      'Invalid offset: Infinity (must be a finite fraction of line-height).',
+    );
+  });
+
+  test('throws when the offset is outside [-1, 1]', async () => {
+    await expect(offsetBytes(buildTestFont(), 1.01)).rejects.toThrow(
+      'Invalid offset: 1.01 (must be within [-1, 1]).',
+    );
+    await expect(offsetBytes(buildTestFont(), -1.01)).rejects.toThrow(
+      'Invalid offset: -1.01 (must be within [-1, 1]).',
+    );
+  });
+
+  test('throws when the rebalanced metrics overflow the 16-bit fields', async () => {
+    const extremeMetrics: TestFontMetrics = {
+      ascender: 32767,
+      descender: -32768,
+      lineGap: 32767,
+      xHeight: 1118,
+      capHeight: 1490,
+    };
+
+    await expect(offsetTestFont({ metrics: extremeMetrics }, 0)).rejects.toThrow(
+      'Invalid offset: 0 (the rebalanced metrics overflow the 16-bit fields: ascender 49151, descender 49151).',
+    );
+    await expect(offsetTestFont({ metrics: extremeMetrics }, -1)).rejects.toThrow(
+      'Invalid offset: -1 (the rebalanced metrics overflow the 16-bit fields: ascender 98302, descender 0).',
     );
   });
 });

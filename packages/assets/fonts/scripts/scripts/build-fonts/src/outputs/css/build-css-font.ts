@@ -13,7 +13,11 @@ import {
   type CenteredBandOverEdge,
   type CenteredBandUnderEdge,
   convertTtfContentToCenteredBand,
+  offsetTtfContentToCenteredBand,
+  opticalCenteringBandToFileNameSuffix,
+  opticalCenteringOffsetToFileNameSuffix,
   toBandFamilySuffix,
+  toOffsetFamilySuffix,
 } from '../../../../../shared/converters/convert-ttf-content-to-centered-band.ts';
 import { fontDescriptionSchema } from '../../../../../shared/font-description/font-description.schema.ts';
 import type { FontDescription } from '../../../../../shared/font-description/font-description.ts';
@@ -73,18 +77,44 @@ export async function buildCssFont({
             })) + '\n\n';
         });
 
+        {
+          // TODO: explore `ascent-override` when available on safari
+          const offset: number = -0.5;
+          const src: string = join(tmpdir(), `${randomUUID()}.ttf`);
+          const newFamily: string = `${family} ${toOffsetFamilySuffix(offset)}`;
+
+          const content: Uint8Array = await offsetTtfContentToCenteredBand({
+            input: await readFile(toAbsolutePath(fontVariant.src, dirname(sourceFile))),
+            offset,
+            family: newFamily,
+            logger,
+          });
+
+          await writeFile(src, content);
+
+          css +=
+            (await fontVariantToWoff2AndCss({
+              fontVariant: { ...fontVariant, src },
+              cwd: dirname(src),
+              outputDirectory,
+              family: newFamily,
+              baseName: `${baseName}.${opticalCenteringOffsetToFileNameSuffix(offset)}`,
+              variantName,
+              serverURL,
+            })) + '\n\n';
+        }
+
         for (const start of ['ex'] satisfies readonly CenteredBandOverEdge[]) {
           for (const end of ['alphabetic'] satisfies readonly CenteredBandUnderEdge[]) {
             await logger.asyncTask(`${start}-${end}`, async (logger: Logger): Promise<void> => {
               const src: string = join(tmpdir(), `${randomUUID()}.ttf`);
-
-              const familySuffix: string = toBandFamilySuffix(start, end);
+              const newFamily: string = `${family} ${toBandFamilySuffix(start, end)}`;
 
               const content: Uint8Array = await convertTtfContentToCenteredBand({
                 input: await readFile(toAbsolutePath(fontVariant.src, dirname(sourceFile))),
                 start,
                 end,
-                familySuffix,
+                family: newFamily,
                 logger,
               });
 
@@ -95,8 +125,8 @@ export async function buildCssFont({
                   fontVariant: { ...fontVariant, src },
                   cwd: dirname(src),
                   outputDirectory,
-                  family: `${family} ${familySuffix}`,
-                  baseName: `${baseName}.opvc[${start}-${end}]`,
+                  family: newFamily,
+                  baseName: `${baseName}.${opticalCenteringBandToFileNameSuffix(start, end)}`,
                   variantName,
                   serverURL,
                 })) + '\n\n';
