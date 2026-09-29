@@ -9,10 +9,10 @@
           "$value": "{color.white}"
         },
         "raised": {
-          "$value": "{color.white}"
+          "$value": "{color.gray.50}"
         },
         "overlay": {
-          "$value": "{color.gray.100}"
+          "$value": "{color.white}"
         }
       },
       "brand": {
@@ -140,7 +140,7 @@
       "feedback": {
         "success": {
           "dim1": {
-            "$value": "{color.lime.500}"
+            "$value": "{color.lime.600}"
           },
           "dim2": {
             "$value": "{color.lime.200}"
@@ -151,7 +151,7 @@
         },
         "warning": {
           "dim1": {
-            "$value": "{color.orange.400}"
+            "$value": "{color.orange.600}"
           },
           "dim2": {
             "$value": "{color.orange.200}"
@@ -162,7 +162,7 @@
         },
         "error": {
           "dim1": {
-            "$value": "{color.red.400}"
+            "$value": "{color.red.600}"
           },
           "dim2": {
             "$value": "{color.red.200}"
@@ -173,7 +173,7 @@
         },
         "information": {
           "dim1": {
-            "$value": "{color.blue.400}"
+            "$value": "{color.blue.600}"
           },
           "dim2": {
             "$value": "{color.blue.200}"
@@ -184,7 +184,7 @@
         },
         "neutral": {
           "dim1": {
-            "$value": "{color.gray.400}"
+            "$value": "{color.gray.500}"
           },
           "dim2": {
             "$value": "{color.gray.200}"
@@ -621,9 +621,6 @@
           }
         }
       },
-      "dim1": {
-        "$value": "{color.gray.400}"
-      },
       "dim2": {
         "$value": "{color.gray.300}"
       },
@@ -679,13 +676,13 @@
       },
       "selected": {
         "soft": {
-          "$value": "{color.blue.900-20}"
+          "$value": "{color.blue.900-6}"
         },
         "medium": {
-          "$value": "{color.blue.900-40}"
+          "$value": "{color.blue.900-12}"
         },
         "strong": {
-          "$value": "{color.blue.900-80}"
+          "$value": "{color.blue.900-60}"
         }
       },
       "focus": {

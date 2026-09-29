@@ -20,14 +20,14 @@
           }
         },
         "raised": {
-          "$value": "{color.white}",
+          "$value": "{color.gray.50}",
           "$description": "Background for raised, elevated surfaces such as cards.",
           "$extensions": {
             "scopes": ["FRAME_FILL", "SHAPE_FILL"]
           }
         },
         "overlay": {
-          "$value": "{color.gray.100}",
+          "$value": "{color.white}",
           "$description": "Background for overlay and modal surfaces above the base UI.",
           "$extensions": {
             "scopes": ["FRAME_FILL", "SHAPE_FILL"]
@@ -112,136 +112,6 @@
           "$extensions": {
             "scopes": []
           }
-        }
-      },
-      "feedback": {
-        "$description": "Feedback background colors (success, warning, error) in two dimensions.",
-        "success": {
-          "$description": "Success feedback background colors.",
-          "dim1": {
-            "$value": "{color.lime.500}",
-            "$description": "Strong success background (dim1).",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "dim2": {
-            "$value": "{color.lime.200}",
-            "$description": "Soft success background (dim2).",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "dim3": {
-            "$value": "{color.lime.50}",
-            "$description": "Subtle success background (dim3).",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          }
-        },
-        "warning": {
-          "$description": "Warning feedback background colors.",
-          "dim1": {
-            "$value": "{color.orange.400}",
-            "$description": "Strong warning background (dim1).",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "dim2": {
-            "$value": "{color.orange.200}",
-            "$description": "Soft warning background (dim2).",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "dim3": {
-            "$value": "{color.orange.50}",
-            "$description": "Subtle warning background (dim3).",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          }
-        },
-        "error": {
-          "$description": "Error feedback background colors.",
-          "dim1": {
-            "$value": "{color.red.400}",
-            "$description": "Strong error background (dim1).",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "dim2": {
-            "$value": "{color.red.200}",
-            "$description": "Soft error background (dim2).",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "dim3": {
-            "$value": "{color.red.50}",
-            "$description": "Subtle success background (dim3).",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          }
-        },
-        "information": {
-          "$description": "Information feedback background colors.",
-          "dim1": {
-            "$value": "{color.blue.400}",
-            "$description": "Strong information background (dim1).",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "dim2": {
-            "$value": "{color.blue.200}",
-            "$description": "Soft information background (dim2).",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "dim3": {
-            "$value": "{color.blue.50}",
-            "$description": "Subtle information background (dim3).",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          }
-        },
-        "neutral": {
-          "$description": "Neutral feedback background colors.",
-          "dim1": {
-            "$value": "{color.gray.400}",
-            "$description": "Strong neutral background (dim1).",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "dim2": {
-            "$value": "{color.gray.200}",
-            "$description": "Soft neutral background (dim2).",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          },
-          "dim3": {
-            "$value": "{color.gray.50}",
-            "$description": "Subtle neutral background (dim3).",
-            "$extensions": {
-              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
-            }
-          }
-        }
-      },
-      "disabled": {
-        "$value": "{color.gray.200}",
-        "$description": "Background for disabled, non-interactive elements.",
-        "$extensions": {
-          "scopes": ["FRAME_FILL"]
         }
       },
       "dataviz": {
@@ -461,6 +331,136 @@
             "scopes": ["FRAME_FILL", "SHAPE_FILL"],
             "figmaName": ["color", "background", "dataviz", "@root", "dim3"]
           }
+        }
+      },
+      "feedback": {
+        "$description": "Feedback background colors (success, warning, error) in two dimensions.",
+        "success": {
+          "$description": "Success feedback background colors.",
+          "dim1": {
+            "$value": "{color.lime.600}",
+            "$description": "Strong success background (dim1).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.lime.200}",
+            "$description": "Soft success background (dim2).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.lime.50}",
+            "$description": "Subtle success background (dim3).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          }
+        },
+        "warning": {
+          "$description": "Warning feedback background colors.",
+          "dim1": {
+            "$value": "{color.orange.600}",
+            "$description": "Strong warning background (dim1).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.orange.200}",
+            "$description": "Soft warning background (dim2).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.orange.50}",
+            "$description": "Subtle warning background (dim3).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          }
+        },
+        "error": {
+          "$description": "Error feedback background colors.",
+          "dim1": {
+            "$value": "{color.red.600}",
+            "$description": "Strong error background (dim1).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.red.200}",
+            "$description": "Soft error background (dim2).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.red.50}",
+            "$description": "Subtle success background (dim3).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          }
+        },
+        "information": {
+          "$description": "Information feedback background colors.",
+          "dim1": {
+            "$value": "{color.blue.600}",
+            "$description": "Strong information background (dim1).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.blue.200}",
+            "$description": "Soft information background (dim2).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.blue.50}",
+            "$description": "Subtle information background (dim3).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          }
+        },
+        "neutral": {
+          "$description": "Neutral feedback background colors.",
+          "dim1": {
+            "$value": "{color.gray.500}",
+            "$description": "Strong neutral background (dim1).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.gray.200}",
+            "$description": "Soft neutral background (dim2).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.gray.50}",
+            "$description": "Subtle neutral background (dim3).",
+            "$extensions": {
+              "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+            }
+          }
+        }
+      },
+      "disabled": {
+        "$value": "{color.gray.200}",
+        "$description": "Background for disabled, non-interactive elements.",
+        "$extensions": {
+          "scopes": ["FRAME_FILL"]
         }
       }
     },
@@ -1585,21 +1585,21 @@
       "selected": {
         "$description": "Selected state overlay colors in medium and strong intensities.",
         "soft": {
-          "$value": "{color.blue.900-20}",
+          "$value": "{color.blue.900-6}",
           "$description": "Medium selected overlay for subtle selection feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "medium": {
-          "$value": "{color.blue.900-40}",
+          "$value": "{color.blue.900-12}",
           "$description": "Medium selected overlay for subtle selection feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "strong": {
-          "$value": "{color.blue.900-80}",
+          "$value": "{color.blue.900-60}",
           "$description": "Strong selected overlay for prominent selection feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
