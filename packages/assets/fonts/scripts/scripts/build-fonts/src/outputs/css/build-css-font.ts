@@ -83,7 +83,7 @@ export async function buildCssFont({
           const src: string = join(tmpdir(), `${randomUUID()}.ttf`);
           const newFamily: string = `${family} ${toOffsetFamilySuffix(offset)}`;
 
-          const content: Uint8Array = await offsetTtfContentToCenteredBand({
+          const content: Uint8Array = offsetTtfContentToCenteredBand({
             input: await readFile(toAbsolutePath(fontVariant.src, dirname(sourceFile))),
             offset,
             family: newFamily,
@@ -110,7 +110,7 @@ export async function buildCssFont({
               const src: string = join(tmpdir(), `${randomUUID()}.ttf`);
               const newFamily: string = `${family} ${toBandFamilySuffix(start, end)}`;
 
-              const content: Uint8Array = await convertTtfContentToCenteredBand({
+              const content: Uint8Array = convertTtfContentToCenteredBand({
                 input: await readFile(toAbsolutePath(fontVariant.src, dirname(sourceFile))),
                 start,
                 end,

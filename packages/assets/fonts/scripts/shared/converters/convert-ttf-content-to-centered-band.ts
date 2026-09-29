@@ -45,13 +45,13 @@ export interface ConvertTtfContentToCenteredBandOptions extends Omit<
  * The band edges are translated into the equivalent `offset` and the conversion is
  * delegated to `offsetTtfContentToCenteredBand`.
  */
-export async function convertTtfContentToCenteredBand({
+export function convertTtfContentToCenteredBand({
   input,
   start,
   end,
   family,
   logger,
-}: ConvertTtfContentToCenteredBandOptions): Promise<Uint8Array> {
+}: ConvertTtfContentToCenteredBandOptions): Uint8Array {
   const tableRecords: readonly TableRecord[] = parseSfntTableDirectory(input);
   const os2View: DataView = createDataView(
     copyTable(input, requireTableRecord(tableRecords, 'OS/2')),
@@ -121,13 +121,13 @@ export interface OffsetTtfContentToCenteredBandOptions {
  * otherwise the source family + the derived suffix — and every other table stays
  * byte-identical. The input content is never mutated.
  */
-export async function offsetTtfContentToCenteredBand({
+export function offsetTtfContentToCenteredBand({
   input,
   offset,
   family,
   logger = Logger.never(),
   bandLabel = toOffsetBandLabel(offset),
-}: OffsetTtfContentToCenteredBandOptions): Promise<Uint8Array> {
+}: OffsetTtfContentToCenteredBandOptions): Uint8Array {
   if (!Number.isFinite(offset)) {
     throw new Error(`Invalid offset: ${offset} (must be a finite fraction of line-height).`);
   }
