@@ -1,4 +1,4 @@
-import { EsdsIconComponent } from '@infomaniak-design-system/components';
+import { EsdsIconComponent, EsdsKbdAttr } from '@infomaniak-design-system/components';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
@@ -16,6 +16,9 @@ EsdsIconComponent.define();
 
 const defineEsdsButtonAttr = htmlElementRef((element: Element) => {
   EsdsButtonAttr.define({
+    registry: AttributeRegistry.of(element.ownerDocument!),
+  });
+  EsdsKbdAttr.define({
     registry: AttributeRegistry.of(element.ownerDocument!),
   });
 });
