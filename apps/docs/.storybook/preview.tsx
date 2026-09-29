@@ -61,18 +61,10 @@ import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/d
 import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/light.attr.css';
 
 // Import all button-size modifiers
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-size/large.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-size/medium.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-size/small.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-size/all.attr.css';
 
 // Import all button-type modifiers
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-type/ghost-destructive.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-type/ghost-primary.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-type/ghost-secondary.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-type/primary-destructive.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-type/primary.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-type/secondary-destructive.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-type/secondary.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-type/all.attr.css';
 
 // Initialize <esds-icon> and provide IconifyApi via root InjectionContext
 EsdsIconComponent.define();

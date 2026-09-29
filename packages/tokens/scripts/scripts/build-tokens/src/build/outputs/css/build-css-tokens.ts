@@ -87,6 +87,8 @@ export function buildCssTokens({
     await logger.asyncTask('modifier', async (logger: Logger): Promise<void> => {
       for (const [modifier, contexts] of modifiers.entries()) {
         await logger.asyncTask(modifier, async (logger: Logger): Promise<void> => {
+          const modifierOutputDirectory: string = `${cssOutputDirectory}/modifiers/${modifier}`;
+
           await logger.asyncTask('context', async (logger: Logger): Promise<void> => {
             for (const [context, collection] of contexts.entries()) {
               await logger.asyncTask(context, async (): Promise<void> => {
@@ -143,8 +145,6 @@ export function buildCssTokens({
                   `;
                 }
 
-                const modifierOutputDirectory: string = `${cssOutputDirectory}/modifiers/${modifier}`;
-
                 await Promise.all([
                   writeTextFileSafe(
                     `${modifierOutputDirectory}/${context}.root.css`,
@@ -166,6 +166,18 @@ export function buildCssTokens({
               });
             }
           });
+
+          await writeTextFileSafe(
+            `${modifierOutputDirectory}/all.attr.css`,
+            dedent`
+              ${CSS_AUTO_GENERATED_FILE_HEADER}
+              ${Array.from(
+                contexts.keys().map((context: string): string => {
+                  return `@import "./${context}.attr.css";`;
+                }),
+              ).join('\n')}
+            `,
+          );
         });
       }
     });
