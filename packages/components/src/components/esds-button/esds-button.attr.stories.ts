@@ -102,6 +102,7 @@ export const Button: StoryObj<
     >
       <esds-icon name="esds:plus"></esds-icon>
       ${args.content}
+      <kbd esds-kbd="">⌘</kbd>
     </button>`,
 };
 
@@ -131,7 +132,7 @@ export const Link: StoryObj<
     </a>`,
 };
 
-export const WithoutIcon: StoryObj<
+export const TextOnly: StoryObj<
   EsdsButtonAttr &
     HTMLButtonElement &
     ExtraControls & {
