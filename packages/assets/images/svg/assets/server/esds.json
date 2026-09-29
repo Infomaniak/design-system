@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.31",
+    "version": "0.0.33",
     "author": {
       "name": "Infomaniak"
     },
@@ -10,9 +10,9 @@
       "title": "GPL-3.0-only",
       "spdx": "GPL-3.0-only"
     },
-    "total": 265
+    "total": 268
   },
-  "lastModified": 1790059227,
+  "lastModified": 1790586978,
   "icons": {
     "a-large-small": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 16 2.536-7.328a1.02 1.02 0 011.928 0L22 16m-6.303-2h5.606M2 16l4.039-9.69a.5.5 0 01.923 0L11 16m-7.696-3h6.392\" vector-effect=\"non-scaling-stroke\"/>"
@@ -287,7 +287,10 @@
     "dots-nine": {
       "body": "<path fill=\"currentColor\" d=\"M5 17.125a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m-14-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m-14-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75\"/>"
     },
-    "dots-six": {
+    "dots-six-horizontal": {
+      "body": "<path fill=\"currentColor\" d=\"M5 13.125a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m-14-6a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m7 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75\"/>"
+    },
+    "dots-six-vertical": {
       "body": "<path fill=\"currentColor\" d=\"M9 17.125a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m6 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m-6-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m6 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m-6-7a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75m6 0a1.875 1.875 0 110 3.75 1.875 1.875 0 010-3.75\"/>"
     },
     "dots-three-horizontal": {
@@ -484,6 +487,9 @@
     },
     "map-pin": {
       "body": "<g fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\"><path d=\"M12.601 21.799C14.461 20.193 20 14.993 20 10a8 8 0 00-16 0c0 4.993 5.539 10.193 7.399 11.799a1 1 0 001.202 0\" vector-effect=\"non-scaling-stroke\"/><path d=\"M12 13a3 3 0 100-6 3 3 0 000 6\" vector-effect=\"non-scaling-stroke\"/></g>"
+    },
+    "megaphone": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M6 14a12 12 0 002.4 7.2 2 2 0 003.2-2.4A8 8 0 0110 14M8 6v8m3-8a13 13 0 008.4-2.8A1 1 0 0121 4v12a1 1 0 01-1.6.8A13 13 0 0011 14H5a2 2 0 01-2-2V8a2 2 0 012-2z\" vector-effect=\"non-scaling-stroke\"/>"
     },
     "mic": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M12 19v3m0-3a7 7 0 007-7v-2m-7 9a7 7 0 01-7-7v-2m7-8a3 3 0 013 3v7a3 3 0 11-6 0V5a3 3 0 013-3\" vector-effect=\"non-scaling-stroke\"/>"
@@ -808,6 +814,9 @@
     },
     "wrench": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.106-3.105c.32-.322.863-.22.983.218a6.001 6.001 0 01-8.259 7.057l-7.91 7.91a2.121 2.121 0 11-2.999-3l7.91-7.91a6 6 0 017.057-8.259c.438.12.54.662.219.984z\" vector-effect=\"non-scaling-stroke\"/>"
+    },
+    "zigzag-arrow-up-right": {
+      "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m20.996 12.6-8.375 8.396m8.375-3.598V12.6h-4.798m1.2-9.596v3.598H12.6V11.4H7.802v4.798H3.004v4.798\" vector-effect=\"non-scaling-stroke\"/>"
     }
   },
   "categories": {
@@ -903,7 +912,8 @@
       "door-open",
       "dots-list",
       "dots-nine",
-      "dots-six",
+      "dots-six-horizontal",
+      "dots-six-vertical",
       "dots-three-horizontal",
       "dots-three-vertical",
       "double-quotes-closing",
@@ -969,6 +979,7 @@
       "magnifying-glass-minus",
       "magnifying-glass-plus",
       "map-pin",
+      "megaphone",
       "mic",
       "minus",
       "monitor",
@@ -1076,7 +1087,8 @@
       "video-camera",
       "wave-arcs-up",
       "waveform",
-      "wrench"
+      "wrench",
+      "zigzag-arrow-up-right"
     ],
     "@filled": [
       "circle-check-filled",
@@ -1173,6 +1185,9 @@
     "#advance": [
       "arrow-right"
     ],
+    "#advertising": [
+      "megaphone"
+    ],
     "#agency": [
       "briefcase"
     ],
@@ -1263,8 +1278,12 @@
     "#annotation": [
       "highlighter"
     ],
+    "#announce": [
+      "megaphone"
+    ],
     "#announcement": [
-      "bell"
+      "bell",
+      "megaphone"
     ],
     "#antenna": [
       "wave-arcs-up"
@@ -1605,6 +1624,7 @@
       "sun"
     ],
     "#broadcast": [
+      "megaphone",
       "mic",
       "wave-arcs-up"
     ],
@@ -1633,7 +1653,8 @@
     ],
     "#building": [
       "building",
-      "store"
+      "store",
+      "zigzag-arrow-up-right"
     ],
     "#bullet": [
       "dots-list",
@@ -1644,6 +1665,9 @@
     ],
     "#bulletpoints": [
       "list"
+    ],
+    "#bullhorn": [
+      "megaphone"
     ],
     "#bullseye": [
       "concentric-circles"
@@ -1684,6 +1708,9 @@
     "#camera": [
       "corner-brackets",
       "video-camera"
+    ],
+    "#campaign": [
+      "megaphone"
     ],
     "#cancel": [
       "bookmark-slash",
@@ -2482,7 +2509,8 @@
       "moon"
     ],
     "#door": [
-      "door-open"
+      "door-open",
+      "zigzag-arrow-up-right"
     ],
     "#dot": [
       "circle",
@@ -2493,7 +2521,8 @@
       "circle-ellipsis",
       "dots-list",
       "dots-nine",
-      "dots-six",
+      "dots-six-horizontal",
+      "dots-six-vertical",
       "rectangle-dots-three"
     ],
     "#double-quotes": [
@@ -2513,10 +2542,15 @@
     ],
     "#drag": [
       "arrows-cross-out",
-      "dots-six"
+      "dots-six-horizontal",
+      "dots-six-vertical"
+    ],
+    "#dragdrop": [
+      "dots-six-horizontal"
     ],
     "#draghandle": [
-      "dots-six"
+      "dots-six-horizontal",
+      "dots-six-vertical"
     ],
     "#drawer": [
       "sidebar-left",
@@ -2627,6 +2661,9 @@
     "#embed": [
       "chevron-left-slash-chevron-right"
     ],
+    "#emergencyexit": [
+      "zigzag-arrow-up-right"
+    ],
     "#emoji": [
       "smile"
     ],
@@ -2656,7 +2693,8 @@
       "building"
     ],
     "#entrance": [
-      "door-open"
+      "door-open",
+      "zigzag-arrow-up-right"
     ],
     "#entries": [
       "list"
@@ -2723,7 +2761,8 @@
     ],
     "#exit": [
       "cross",
-      "door-open"
+      "door-open",
+      "zigzag-arrow-up-right"
     ],
     "#expand": [
       "arrow-up",
@@ -2881,6 +2920,9 @@
       "bookmark",
       "flag"
     ],
+    "#floor": [
+      "zigzag-arrow-up-right"
+    ],
     "#fly": [
       "paper-plane"
     ],
@@ -3033,8 +3075,11 @@
     "#gps": [
       "map-pin"
     ],
+    "#grab": [
+      "dots-six-horizontal"
+    ],
     "#grabber": [
-      "dots-six"
+      "dots-six-vertical"
     ],
     "#graph": [
       "file-chart",
@@ -3058,7 +3103,11 @@
       "squares-four"
     ],
     "#grip": [
-      "dots-six"
+      "dots-six-horizontal",
+      "dots-six-vertical"
+    ],
+    "#gripper": [
+      "dots-six-horizontal"
     ],
     "#group": [
       "diamonds-stacked-vertical",
@@ -3089,7 +3138,8 @@
     ],
     "#handle": [
       "at-sign",
-      "dots-six"
+      "dots-six-horizontal",
+      "dots-six-vertical"
     ],
     "#handset": [
       "smartphone"
@@ -3435,7 +3485,7 @@
     ],
     "#kebab": [
       "circle-ellipsis",
-      "dots-six",
+      "dots-six-vertical",
       "dots-three-horizontal",
       "dots-three-vertical",
       "rectangle-dots-three"
@@ -3535,6 +3585,9 @@
     "#letters": [
       "a-large-small",
       "toggle-case"
+    ],
+    "#level": [
+      "zigzag-arrow-up-right"
     ],
     "#levels": [
       "diamonds-stacked-vertical"
@@ -3672,6 +3725,7 @@
       "speaker-waves"
     ],
     "#loudspeaker": [
+      "megaphone",
       "speaker-waves"
     ],
     "#love": [
@@ -3751,6 +3805,9 @@
     "#market": [
       "store"
     ],
+    "#marketing": [
+      "megaphone"
+    ],
     "#markup": [
       "chevron-left-slash-chevron-right",
       "highlighter"
@@ -3779,6 +3836,9 @@
       "calendar-user",
       "handshake"
     ],
+    "#megaphone": [
+      "megaphone"
+    ],
     "#melody": [
       "music-note"
     ],
@@ -3802,7 +3862,7 @@
       "circle-ellipsis",
       "dots-list",
       "dots-nine",
-      "dots-six",
+      "dots-six-vertical",
       "dots-three-horizontal",
       "dots-three-vertical",
       "list",
@@ -3927,7 +3987,8 @@
       "arrows-up-down",
       "circle-arrow-right",
       "clipboard-arrow-left",
-      "dots-six",
+      "dots-six-horizontal",
+      "dots-six-vertical",
       "square-arrow-down-left"
     ],
     "#movie": [
@@ -4004,6 +4065,9 @@
     ],
     "#new-photo": [
       "frame-sun-mountain-plus"
+    ],
+    "#news": [
+      "megaphone"
     ],
     "#newsletter": [
       "envelope",
@@ -4517,6 +4581,9 @@
       "circle-fading-arrow-up",
       "circle-open-top-right"
     ],
+    "#promotion": [
+      "megaphone"
+    ],
     "#protect": [
       "lock"
     ],
@@ -4593,7 +4660,8 @@
       "envelope-open"
     ],
     "#rearrange": [
-      "dots-six"
+      "dots-six-horizontal",
+      "dots-six-vertical"
     ],
     "#receive": [
       "cloud-arrow-down",
@@ -4727,7 +4795,8 @@
     "#reorder": [
       "arrows-up-down",
       "chevrons-up-down",
-      "dots-six"
+      "dots-six-horizontal",
+      "dots-six-vertical"
     ],
     "#repair": [
       "tool-case",
@@ -5129,6 +5198,9 @@
       "key-option-apple",
       "looped-square"
     ],
+    "#shout": [
+      "megaphone"
+    ],
     "#show": [
       "chevron-down",
       "eye",
@@ -5226,12 +5298,13 @@
     "#sort": [
       "arrows-up-down",
       "chevrons-up-down",
+      "dots-six-horizontal",
       "funnel",
       "list-filter",
       "list-left"
     ],
     "#sortable": [
-      "dots-six"
+      "dots-six-vertical"
     ],
     "#sound": [
       "bell",
@@ -5318,6 +5391,15 @@
     "#stacked": [
       "users-stacked"
     ],
+    "#staircase": [
+      "zigzag-arrow-up-right"
+    ],
+    "#stairs": [
+      "zigzag-arrow-up-right"
+    ],
+    "#stairway": [
+      "zigzag-arrow-up-right"
+    ],
     "#standby": [
       "power"
     ],
@@ -5336,7 +5418,8 @@
       "pie-slice"
     ],
     "#steps": [
-      "number-list"
+      "number-list",
+      "zigzag-arrow-up-right"
     ],
     "#sticker": [
       "tag"
@@ -5866,6 +5949,9 @@
     ],
     "#uppercase": [
       "toggle-case"
+    ],
+    "#upstairs": [
+      "zigzag-arrow-up-right"
     ],
     "#urgent": [
       "envelope-exclamation-mark",
