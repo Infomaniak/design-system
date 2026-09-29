@@ -122,10 +122,13 @@ export const Link: StoryObj<
       ${defineEsdsButtonAttr}
       esds-button
       href="${args.href}"
+      target="_blank"
       ?disabled=${args.disabled}
       ?loading=${args.loading}
-      >${args.content}</a
-    >`,
+    >
+      <esds-icon name="esds:plus"></esds-icon>
+      ${args.content}
+    </a>`,
 };
 
 export const WithoutIcon: StoryObj<

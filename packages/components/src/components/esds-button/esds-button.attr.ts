@@ -19,6 +19,8 @@ export interface EsdsButtonAttrDefineOptions {
  *
  * @summary Button attribute
  * @element esds-button
+ * @attr disabled - Disables the button
+ * @attr loading - Displays a loading state on the button
  */
 export class EsdsButtonAttr extends CustomAttribute implements CustomAttributeDefinition {
   static define({ registry = AttributeRegistry.root }: EsdsButtonAttrDefineOptions = {}): void {
@@ -26,6 +28,10 @@ export class EsdsButtonAttr extends CustomAttribute implements CustomAttributeDe
   }
 
   #cleanup: CleanUpFunction | undefined;
+
+  readonly #observer: MutationObserver = new MutationObserver((): void => {
+    syncElementState(this.ownerElement!);
+  });
 
   constructor(attr: Attr) {
     if (attr.ownerElement?.tagName !== 'BUTTON' && attr.ownerElement?.tagName !== 'A') {
@@ -35,32 +41,95 @@ export class EsdsButtonAttr extends CustomAttribute implements CustomAttributeDe
 
     const element: HTMLElement = this.ownerElement! as HTMLElement;
 
-    // NOTE: make button _inert_ only when we **click** on it, NOT ALWAYS => this allows to have **hover** effects like tooltips.
-    element.addEventListener('pointerdown', (event: PointerEvent): void => {
-      if (element.hasAttribute('loading')) {
-        event.preventDefault();
-        event.stopPropagation();
-        element.setAttribute('inert', '');
+    if (isAnchorElement(element)) {
+      element.role = 'button';
+    }
 
-        window.addEventListener(
-          'pointerup',
-          (): void => {
-            element.removeAttribute('inert');
-          },
-          {
-            once: true,
-          },
-        );
-      }
-    });
+    makeElementInertOnDownUpEvent(element, 'pointer');
+    makeElementInertOnDownUpEvent(element, 'key');
   }
 
   connectedCallback(): void {
-    this.#cleanup = styleSheet.injectFrom(this.ownerElement!);
+    const element: Element = this.ownerElement!;
+
+    this.#cleanup = styleSheet.injectFrom(element);
+
+    if (isAnchorElement(element)) {
+      this.#observer.observe(element, {
+        attributes: true,
+        attributeFilter: ['disabled', 'loading'],
+      });
+
+      syncElementState(element);
+    }
   }
 
   disconnectedCallback(): void {
     this.#cleanup?.();
     this.#cleanup = undefined;
+
+    this.#observer.disconnect();
   }
+}
+
+/* INTERNAL */
+
+function isAnchorElement(element: Element): element is HTMLAnchorElement {
+  return element.tagName === 'A';
+}
+
+function isElementDisabledOrLoading(element: Element): boolean {
+  return isElementDisabled(element) || isElementLoading(element);
+}
+
+function isElementDisabled(element: Element): boolean {
+  return (
+    element.hasAttribute('disabled') ||
+    (Reflect.has(element, 'disabled') && Reflect.get(element, 'disabled'))
+  );
+}
+
+function isElementLoading(element: Element): boolean {
+  return element.hasAttribute('loading');
+}
+
+function syncElementState(element: Element): void {
+  if (isAnchorElement(element)) {
+    if (isElementDisabled(element)) {
+      element.setAttribute('aria-disabled', 'true');
+      element.setAttribute('tabindex', '-1');
+    } else {
+      element.removeAttribute('aria-disabled');
+      element.removeAttribute('tabindex');
+    }
+  }
+}
+
+function makeElementInertOnDownUpEvent(element: Element, eventName: string): void {
+  // NOTE: make element _inert_ only when we **click** on it; NOT ALWAYS => this allows to have **hover** effects like tooltips.
+  element.addEventListener(`${eventName}down`, (event: Event): void => {
+    if (isElementDisabledOrLoading(element)) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      element.setAttribute('inert', '');
+
+      window.addEventListener(
+        `${eventName}up`,
+        (): void => {
+          element.removeAttribute('inert');
+          if (
+            element instanceof HTMLElement &&
+            isElementLoading(element) &&
+            !isElementDisabled(element)
+          ) {
+            element.focus();
+          }
+        },
+        {
+          once: true,
+        },
+      );
+    }
+  });
 }

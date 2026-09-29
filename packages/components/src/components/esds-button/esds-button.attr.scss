@@ -1,6 +1,7 @@
 @use '../../styles' as styles;
 
 :root {
+  /* TODO: migrate into tokens when transitions will be managed */
   --esds-button-transition: 150ms linear 0s;
 }
 
@@ -19,6 +20,7 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  cursor: default;
   border-radius: var(--esds-button-border-radius);
   padding-inline: calc(var(--esds-button-padding-inline) - var(--esds-button-border-width));
   padding-block: calc(var(--esds-button-padding-block) - var(--esds-button-border-width));
@@ -38,6 +40,11 @@
   word-break: normal;
   white-space: normal;
 
+  & > esds-icon {
+    font-size: var(--esds-button-icon-size);
+  }
+
+  /* focus effect */
   &:focus-visible {
     outline: var(--esds-focus-border-width) solid var(--esds-focus-border-color);
     outline-offset: var(--esds-focus-border-offset);
@@ -60,7 +67,9 @@
     }
   }
 
+  /* disabled */
   &:is(:disabled, [disabled]) {
+    cursor: not-allowed;
     padding-inline: calc(
       var(--esds-button-padding-inline) - var(--esds-button-border-width-disabled)
     );
@@ -81,10 +90,7 @@
     }
   }
 
-  & > esds-icon {
-    font-size: var(--esds-button-icon-size);
-  }
-
+  /* loading */
   &[loading] {
     position: relative;
     cursor: progress;
