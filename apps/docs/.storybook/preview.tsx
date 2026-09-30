@@ -323,7 +323,7 @@ const preview: Preview = {
         order: [
           'Welcome',
           'Designers Guide',
-          ['Getting Started'],
+          ['Getting Started', 'Install the Font'],
           'Design Tokens',
           ['Getting Started', '*', 'Material', 'CHANGELOG'],
           'Icons',
