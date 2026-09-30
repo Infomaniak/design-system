@@ -72,12 +72,12 @@
 
 .token-value:focus {
   outline: none;
-  box-shadow: 0 0 0 2px var(--esds-color-info-400, #60a5fa);
+  box-shadow: 0 0 0 2px var(--esds-color-blue-400, #60a5fa);
 }
 
 .token-value:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--esds-color-info-400, #60a5fa);
+  box-shadow: 0 0 0 2px var(--esds-color-blue-400, #60a5fa);
 }
 
 /* Description row styling */
@@ -118,7 +118,7 @@
   opacity: 0;
   transition: opacity 0.15s ease;
   transform: translateX(-50%);
-  font-family: var(--esds-font-family-sans, system-ui, sans-serif);
+  font-family: var(--esds-font-family-base, system-ui, sans-serif);
 
   /* Position using CSS custom properties set via JS */
   left: var(--tooltip-x, 0);
