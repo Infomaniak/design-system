@@ -5,4 +5,4 @@
  * Kept in a dedicated module with no `import.meta.env` access so it can safely
  * be imported by both the Vite-built preview and the esbuild-built manager.
  */
-export const fontBase: string = "'Infomaniak Sans', sans-serif";
+export const FONT_BASE: string = "'Infomaniak Sans', sans-serif";
