@@ -7,15 +7,17 @@ import { DocsContainer, type DocsContainerProps } from '@storybook/addon-docs/bl
 import { setCustomElementsManifest } from '@storybook/web-components';
 import type { Preview } from '@storybook/web-components-vite';
 import { setStorybookHelpersConfig } from '@wc-toolkit/storybook-helpers';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { GLOBALS_UPDATED } from 'storybook/internal/core-events';
 import { Globals, GlobalsUpdatedPayload } from 'storybook/internal/types';
+import { create } from 'storybook/theming';
 import customElements from '../../../packages/components/custom-elements.json' with { type: 'json' };
 import Collapsible from '../src/components/Collapsible.tsx';
 import DocsLink from '../src/components/docs-link.tsx';
 import FontPreview from '../src/components/FontPreview.tsx';
 import MaterialThemeBuilderLink from '../src/components/MaterialThemeBuilderLink.tsx';
 import Table from '../src/components/Table.tsx';
+import { FONT_BASE } from '../src/lib/font-stack.ts';
 import { loadFontsCss } from '../src/lib/fonts-css.ts';
 import { iconifyApi } from '../src/lib/iconify-api.ts';
 
@@ -35,6 +37,9 @@ setStorybookHelpersConfig({
 import '../src/styles/data-preview-value.css';
 import '../src/styles/main.css';
 import '../src/styles/token-tables.css';
+
+// Apply Infomaniak Sans as the default font of the preview iframe (canvas + docs)
+import '../src/styles/fonts.css';
 
 // Import base CSS tokens
 import '@infomaniak-design-system/tokens/dist/web/css/material/tokens.root.css';
@@ -122,6 +127,14 @@ const tooltipManager = (() => {
 })();
 
 /**
+ * Docs theme following the toolbar `theme` global (not the OS): the docs
+ * iframe hosts design-system content driven by the product/theme selectors,
+ * so the Storybook docs chrome must match the selected theme.
+ */
+const getDocsTheme = (theme: string) =>
+  create({ base: theme === 'dark' ? 'dark' : 'light', fontBase: FONT_BASE });
+
+/**
  * Custom wrapper for MDX files
  */
 const CustomDocsContainer = (props: DocsContainerProps) => {
@@ -151,6 +164,8 @@ const CustomDocsContainer = (props: DocsContainerProps) => {
 
   const product = globals.product || 'infomaniak';
   const theme = globals.theme || 'light';
+
+  const docsTheme = useMemo(() => getDocsTheme(theme), [theme]);
 
   useEffect(() => {
     setBodyAttributes(product, theme);
@@ -271,7 +286,12 @@ const CustomDocsContainer = (props: DocsContainerProps) => {
     }
   });
 
-  return <DocsContainer {...props} />;
+  return (
+    <DocsContainer
+      {...props}
+      theme={docsTheme}
+    />
+  );
 };
 
 const preview: Preview = {

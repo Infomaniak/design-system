@@ -1,3 +1,11 @@
+/*
+ * The story canvas background follows the toolbar `theme` global: the
+ * decorator sets `data-esds-theme` on body and the token flips with it.
+ */
+body {
+  background-color: var(--esds-color-background-elevation-surface);
+}
+
 .docs-external-link-icon {
   margin-left: 0.25em;
 }
