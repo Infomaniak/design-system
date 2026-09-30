@@ -500,6 +500,18 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | heading.lg.font.emphasized | 500 2.5rem/48px Infomaniak Sans | 500 2.5rem/48px Infomaniak Sans | var(--esds-heading-lg-font-emphasized) | Large heading style. |
 | heading.xl.font.base | 400 3rem/56px Infomaniak Sans | 400 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font-base) | Extra-large heading style. |
 | heading.xl.font.emphasized | 500 3rem/56px Infomaniak Sans | 500 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font-emphasized) | Extra-large heading style. |
+| kbd.background-color | #fff | #192334 | var(--esds-kbd-background-color) | Default keyboard key background color. |
+| kbd.border.color | #e2e8f0 | #45556c | var(--esds-kbd-border-color) | Default keyboard key border color. |
+| kbd.border.width | 1px | 1px | var(--esds-kbd-border-width) | Default keyboard key border width. |
+| kbd.border.radius | 6px | 6px | var(--esds-kbd-border-radius) | Default keyboard key corner radius. |
+| kbd.content.color | #62748e | #90a1b9 | var(--esds-kbd-content-color) | Default keyboard key label color. |
+| kbd.font | 500 0.75rem/16px Infomaniak Sans | 500 0.75rem/16px Infomaniak Sans | var(--esds-kbd-font) | Default keyboard key typography (extra-small emphasized body text). |
+| kbd.gap | 4px | 4px | var(--esds-kbd-gap) | Default gap between keys inside a multi-key keyboard shortcut. |
+| kbd.padding.block | 2px | 2px | var(--esds-kbd-padding-block) | Default keyboard key block padding. |
+| kbd.padding.inline | 4px | 4px | var(--esds-kbd-padding-inline) | Default keyboard key inline padding. |
+| separator.color | #cad5e2 | #62748e | var(--esds-separator-color) | Default separator line color (strong neutral border). |
+| separator.padding | 2px | 2px | var(--esds-separator-padding) | Default padding across the separator line. |
+| separator.width | 1px | 1px | var(--esds-separator-width) | Default separator line width. |
 | text-link.content.color.default | #0077cf | #0077cf | var(--esds-text-link-content-color-default) | Default text link color. |
 | text-link.content.color.visited | #8f30f7 | #cab1ff | var(--esds-text-link-content-color-visited) | Default visited text link color. |
 
