@@ -1,0 +1,42 @@
+{
+  "button": {
+    "border": {
+      "color": {
+        "$root": {
+          "$value": "{color.border.dim2}"
+        },
+        "disabled": {
+          "$value": "{color.background.disabled}"
+        }
+      },
+      "width": {
+        "$root": {
+          "$value": "{border.xs.width}"
+        },
+        "disabled": {
+          "$value": "{border.none.width}"
+        }
+      }
+    },
+    "background": {
+      "color": {
+        "$root": {
+          "$value": "{color.background.elevation.surface}"
+        },
+        "disabled": {
+          "$value": "{color.background.disabled}"
+        }
+      }
+    },
+    "content": {
+      "color": {
+        "$root": {
+          "$value": "{color.content.primary}"
+        },
+        "disabled": {
+          "$value": "{color.content.on.disabled}"
+        }
+      }
+    }
+  }
+}

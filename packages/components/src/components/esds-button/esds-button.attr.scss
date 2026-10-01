@@ -1,0 +1,152 @@
+@use '../../styles' as styles;
+
+:root {
+  /* TODO: migrate into tokens when transitions will be managed */
+  --esds-button-transition: 150ms linear 0s;
+  /* TODO: await `scale.50` token */
+  --esds-button-size: 50px;
+}
+
+[esds-button] {
+  --computed-esds-button-padding-inline: calc(
+    var(--esds-button-padding-inline) - var(--esds-button-border-width)
+  );
+  --computed-esds-button-padding-block: calc(
+    var(--esds-button-padding-block) - var(--esds-button-border-width)
+  );
+
+  /* reset anchor style */
+  text-decoration: none;
+
+  /* reset button style */
+  appearance: none;
+  margin: 0;
+  width: auto;
+
+  /* custom style */
+  display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  cursor: default;
+  border-radius: var(--esds-button-border-radius);
+  padding-inline: var(--computed-esds-button-padding-inline);
+  padding-block: var(--computed-esds-button-padding-block);
+  gap: var(--esds-button-gap-row) var(--esds-button-gap-column);
+  font: var(--esds-button-content-font);
+  border: var(--esds-button-border-width) solid var(--esds-button-border-color);
+  background-color: var(--esds-button-background-color);
+  color: var(--esds-button-content-color);
+  transition:
+    border-color var(--esds-button-transition),
+    background-color var(--esds-button-transition),
+    color var(--esds-button-transition);
+
+  /* auto wrap text */
+  hyphens: auto;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  white-space: normal;
+
+  & > esds-icon {
+    font-size: var(--esds-button-icon-size);
+    flex-shrink: 0;
+  }
+
+  &[square] {
+    --computed-esds-button-padding-inline: 0;
+    --computed-esds-button-padding-block: 0;
+
+    width: var(--esds-button-size);
+    height: var(--esds-button-size);
+  }
+
+  /* focus effect */
+  &:focus-visible {
+    outline: var(--esds-focus-border-width) solid var(--esds-focus-border-color);
+    outline-offset: var(--esds-focus-border-offset);
+    border-radius: var(--esds-focus-border-radius);
+  }
+
+  &:not(:disabled, [disabled], [loading]) {
+    &:hover {
+      background-color: styles.source-over(
+        --esds-button-background-color,
+        --esds-button-color-state-hover
+      );
+    }
+
+    &:active {
+      background-color: styles.source-over(
+        --esds-button-background-color,
+        --esds-button-color-state-pressed
+      );
+    }
+  }
+
+  /* disabled */
+  &:is(:disabled, [disabled]) {
+    cursor: not-allowed;
+    border-color: var(--esds-button-border-color-disabled);
+    border-width: var(--esds-button-border-width-disabled);
+    background-color: var(--esds-button-background-color-disabled);
+    color: var(--esds-button-content-color-disabled);
+
+    &:not([square]) {
+      --computed-esds-button-padding-inline: calc(
+        var(--esds-button-padding-inline) - var(--esds-button-border-width-disabled)
+      );
+      --computed-esds-button-padding-block: calc(
+        var(--esds-button-padding-block) - var(--esds-button-border-width-disabled)
+      );
+    }
+
+    &[loading] {
+      &::after {
+        border-top-color: var(--esds-button-content-color-disabled);
+        border-left-color: var(--esds-button-content-color-disabled);
+        border-bottom-color: var(--esds-button-content-color-disabled);
+      }
+    }
+  }
+
+  /* loading */
+  &[loading] {
+    position: relative;
+    cursor: progress;
+    color: transparent;
+    transition-duration: 0ms;
+
+    & > * {
+      visibility: hidden;
+    }
+
+    &::after {
+      --esds-button-loader-size: calc(var(--esds-button-icon-size) * 0.8125);
+
+      display: block;
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      top: calc(50% - var(--esds-button-loader-size) / 2);
+      left: calc(50% - var(--esds-button-loader-size) / 2);
+      width: var(--esds-button-loader-size);
+      height: var(--esds-button-loader-size);
+      border-radius: 50%;
+      border: 2px solid var(--esds-button-content-color);
+      border-right-color: transparent;
+      animation: esds-button-loader-animation 1s infinite linear;
+    }
+  }
+}
+
+@keyframes esds-button-loader-animation {
+  from {
+    rotate: 0deg;
+  }
+
+  to {
+    rotate: 360deg;
+  }
+}
