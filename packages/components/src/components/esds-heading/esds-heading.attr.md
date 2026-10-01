@@ -16,4 +16,6 @@ EsdsHeadingAttr.define();
 
 A custom attribute for styling headings (h1..h6) while preserving native semantics.
 
+Use the `<strong>` element to emphasize text within a heading text element, or use the `emphasized` attribute on the `esds-heading` attribute to apply emphasized styles to the text.
+
 ## Demo

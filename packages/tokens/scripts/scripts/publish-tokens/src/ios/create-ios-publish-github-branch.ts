@@ -7,7 +7,7 @@ import {
 } from '../../../../../../../scripts/helpers/git/update-git-repository-on-new-branch.ts';
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
-import { execCommandInherit } from '../../../../../../../scripts/helpers/misc/exec-command.ts';
+import { formatSwiftFiles } from '../../../../../../../scripts/helpers/swift/format-swift-files.ts';
 import {
   SWIFT_FOUNDATION_DIR,
   SWIFT_PRIMITIVE_TARGET_DIR,
@@ -85,14 +85,10 @@ export async function createIosPublishGithubBranch({
 
       await cp(packageDirectory, cwd, { recursive: true, force: true });
 
-      // Run `swiftformat` to lint generated code
-      await execCommandInherit(logger, 'mise', ['install'], {
-        shell: true,
+      await formatSwiftFiles({
+        logger,
         cwd,
-      });
-      await execCommandInherit(logger, 'mise', ['exec', '--', 'swiftformat', '.'], {
-        shell: true,
-        cwd,
+        paths: ['.'],
       });
 
       return `chore: Update to ${version}`;

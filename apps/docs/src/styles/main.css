@@ -1,3 +1,11 @@
+/*
+ * The story canvas background follows the toolbar `theme` global: the
+ * decorator sets `data-esds-theme` on body and the token flips with it.
+ */
+body {
+  background-color: var(--esds-color-background-elevation-surface);
+}
+
 .docs-external-link-icon {
   margin-left: 0.25em;
 }
@@ -18,14 +26,14 @@
   font-size: 48px;
   font-weight: 700;
   margin: 0 0 16px;
-  color: var(--esds-color-text-primary);
+  color: var(--esds-color-content-primary);
   line-height: 1.1;
 }
 
 .welcome-subtitle {
   font-size: 20px;
   line-height: 1.6;
-  color: var(--esds-color-text-secondary);
+  color: var(--esds-color-content-secondary);
   margin: 0;
 }
 
@@ -37,7 +45,7 @@
   font-size: 28px;
   font-weight: 600;
   margin: 0 0 32px;
-  color: var(--esds-color-text-primary);
+  color: var(--esds-color-content-primary);
 }
 
 .card-grid {
@@ -47,8 +55,8 @@
 }
 
 .card {
-  background: var(--esds-color-background-elevation-surface-default);
-  border: 1px solid var(--esds-color-border-subtle-default);
+  background: var(--esds-color-background-elevation-surface);
+  border: 1px solid var(--esds-color-border-dim3);
   border-radius: 12px;
   text-decoration: none;
   color: inherit;
@@ -62,7 +70,7 @@ a.card {
 .card:where(:hover, :focus-visible):not(.card--disabled) {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
-  border-color: var(--esds-color-border-subtle-default);
+  border-color: var(--esds-color-border-dim3);
 }
 
 .card--disabled {
@@ -86,7 +94,7 @@ a.card {
   font-size: 20px;
   font-weight: 600;
   margin: 0 0 12px;
-  color: var(--esds-color-text-primary);
+  color: var(--esds-color-content-primary);
 }
 
 .card--horizontal .card__title {
@@ -97,7 +105,7 @@ a.card {
 .card__description {
   font-size: 15px;
   line-height: 1.5;
-  color: var(--esds-color-text-secondary);
+  color: var(--esds-color-content-secondary);
   margin: 0 0 20px;
   flex: 1;
 }
@@ -111,22 +119,22 @@ a.card {
   align-items: center;
   font-size: 15px;
   font-weight: 500;
-  color: var(--esds-color-text-brand-default);
+  color: var(--esds-color-content-brand);
 }
 
 .card__link--disabled {
-  color: var(--esds-color-text-tertiary);
+  color: var(--esds-color-content-tertiary);
 }
 
 .welcome-getting-started {
-  background: var(--esds-color-background-elevation-raised-default);
+  background: var(--esds-color-background-elevation-raised);
   border-radius: 12px;
   padding: 32px;
 }
 
 .welcome-getting-started p {
   margin: 0 0 16px;
-  color: var(--esds-color-text-secondary);
+  color: var(--esds-color-content-secondary);
 }
 
 .welcome-getting-started ul {
@@ -136,13 +144,13 @@ a.card {
 
 .welcome-getting-started li {
   margin-bottom: 8px;
-  color: var(--esds-color-text-secondary);
+  color: var(--esds-color-content-secondary);
 }
 
 .welcome-getting-started a {
   display: inline-flex;
   align-items: center;
-  color: var(--esds-color-text-brand-default);
+  color: var(--esds-color-content-brand);
   font-weight: 500;
   text-decoration: none;
 }
@@ -157,10 +165,10 @@ a.card {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--esds-color-background-elevation-raised-default);
+  background: var(--esds-color-background-elevation-raised);
   border-radius: 12px;
   flex-shrink: 0;
-  color: var(--esds-color-text-secondary);
+  color: var(--esds-color-content-secondary);
 }
 
 .card__body {

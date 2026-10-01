@@ -19,7 +19,7 @@ const defineEsdsLinkAttr = htmlElementRef((element: Element) => {
 const { args, argTypes } = getStorybookHelpers<EsdsTextLinkAttr>('esds-text-link');
 
 const meta = {
-  title: 'Components/Link',
+  title: 'Components/Text Link',
   component: 'esds-text-link',
   tags: ['autodocs', 'vr-test'],
   parameters: {

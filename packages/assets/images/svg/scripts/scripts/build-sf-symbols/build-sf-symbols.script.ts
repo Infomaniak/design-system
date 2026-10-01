@@ -3,7 +3,6 @@ import { fileURLToPath } from 'node:url';
 import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { runScript } from '../../../../../../../scripts/helpers/misc/run-script/run-script.ts';
 import { generateSfSymbols } from '../../shared/sf-symbols/generate-sf-symbols.ts';
-import { SYMBOLS_XCASSETS_DIRECTORY_NAME } from '../../shared/sf-symbols/sf-symbols-config.ts';
 
 const SCRIPT_DIR: string = dirname(fileURLToPath(import.meta.url));
 const PACKAGE_ROOT_DIR: string = join(SCRIPT_DIR, '../../..');
@@ -19,7 +18,5 @@ await runScript('build-sf-symbols', async (logger: Logger): Promise<void> => {
     logger,
   });
 
-  logger.info(
-    `Generated ${String(icons.length)} SF Symbols in ${JSON.stringify(join(OUTPUT_DIR, SYMBOLS_XCASSETS_DIRECTORY_NAME))}.`,
-  );
+  logger.info(`Generated ${String(icons.length)} SF Symbols in ${JSON.stringify(OUTPUT_DIR)}.`);
 });

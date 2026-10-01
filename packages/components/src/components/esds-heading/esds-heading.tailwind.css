@@ -1,21 +1,41 @@
 @layer components {
   .esds-heading-xs {
-    font: var(--esds-heading-xs-font);
+    font: var(--esds-heading-xs-font-base);
+  }
+
+  .esds-heading-xs-emphasized {
+    font: var(--esds-heading-xs-font-emphasized);
   }
 
   .esds-heading-sm {
-    font: var(--esds-heading-sm-font);
+    font: var(--esds-heading-sm-font-base);
+  }
+
+  .esds-heading-sm-emphasized {
+    font: var(--esds-heading-sm-font-emphasized);
   }
 
   .esds-heading-md {
-    font: var(--esds-heading-md-font);
+    font: var(--esds-heading-md-font-base);
+  }
+
+  .esds-heading-md-emphasized {
+    font: var(--esds-heading-md-font-emphasized);
   }
 
   .esds-heading-lg {
-    font: var(--esds-heading-lg-font);
+    font: var(--esds-heading-lg-font-base);
+  }
+
+  .esds-heading-lg-emphasized {
+    font: var(--esds-heading-lg-font-emphasized);
   }
 
   .esds-heading-xl {
-    font: var(--esds-heading-xl-font);
+    font: var(--esds-heading-xl-font-base);
+  }
+
+  .esds-heading-xl-emphasized {
+    font: var(--esds-heading-xl-font-emphasized);
   }
 }

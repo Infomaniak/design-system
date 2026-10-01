@@ -3,23 +3,48 @@
 }
 
 [esds-heading='xs'] {
-  --esds-heading-font: var(--esds-heading-xs-font);
+  --esds-heading-font: var(--esds-heading-xs-font-base);
+
+  &[emphasized],
+  & strong {
+    --esds-heading-font: var(--esds-heading-xs-font-emphasized);
+  }
 }
 
 [esds-heading='sm'] {
-  --esds-heading-font: var(--esds-heading-sm-font);
+  --esds-heading-font: var(--esds-heading-sm-font-base);
+
+  &[emphasized],
+  & strong {
+    --esds-heading-font: var(--esds-heading-sm-font-emphasized);
+  }
 }
 
 [esds-heading='md'] {
-  --esds-heading-font: var(--esds-heading-md-font);
+  --esds-heading-font: var(--esds-heading-md-font-base);
+
+  &[emphasized],
+  & strong {
+    --esds-heading-font: var(--esds-heading-md-font-emphasized);
+  }
 }
 
 [esds-heading='lg'] {
-  --esds-heading-font: var(--esds-heading-lg-font);
+  --esds-heading-font: var(--esds-heading-lg-font-base);
+
+  &[emphasized],
+  & strong {
+    --esds-heading-font: var(--esds-heading-lg-font-emphasized);
+  }
 }
 
 [esds-heading='xl'] {
-  --esds-heading-font: var(--esds-heading-xl-font);
+  --esds-heading-font: var(--esds-heading-xl-font-base);
+
+  &[emphasized],
+  & strong {
+    --esds-heading-font: var(--esds-heading-xl-font-emphasized);
+  }
 }
 
 h1,
