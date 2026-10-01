@@ -30,7 +30,7 @@ export class EsdsButtonAttr extends CustomAttribute implements CustomAttributeDe
   #cleanup: CleanUpFunction | undefined;
 
   readonly #observer: MutationObserver = new MutationObserver((): void => {
-    syncElementState(this.ownerElement!);
+    this.#updateElementState();
   });
 
   constructor(attr: Attr) {
@@ -49,6 +49,32 @@ export class EsdsButtonAttr extends CustomAttribute implements CustomAttributeDe
     makeElementInertOnDownUpEvent(element, 'key');
   }
 
+  #updateElementState(): void {
+    const element: HTMLElement = this.ownerElement! as HTMLElement;
+
+    if (isAnchorElement(element)) {
+      if (isElementDisabledOrLoading(element)) {
+        element.setAttribute('aria-disabled', 'true');
+      } else {
+        element.removeAttribute('aria-disabled');
+      }
+
+      if (isElementLoading(element)) {
+        element.setAttribute('aria-busy', 'true');
+        element.setAttribute('aria-label', element.textContent);
+      } else {
+        element.removeAttribute('aria-busy');
+        element.removeAttribute('aria-label');
+      }
+
+      if (isElementDisabled(element)) {
+        element.setAttribute('tabindex', '-1');
+      } else {
+        element.removeAttribute('tabindex');
+      }
+    }
+  }
+
   connectedCallback(): void {
     const element: Element = this.ownerElement!;
 
@@ -60,7 +86,7 @@ export class EsdsButtonAttr extends CustomAttribute implements CustomAttributeDe
         attributeFilter: ['disabled', 'loading'],
       });
 
-      syncElementState(element);
+      this.#updateElementState();
     }
   }
 
@@ -91,21 +117,6 @@ function isElementDisabled(element: Element): boolean {
 
 function isElementLoading(element: Element): boolean {
   return element.hasAttribute('loading');
-}
-
-function syncElementState(element: Element): void {
-  if (isAnchorElement(element)) {
-    if (isElementDisabledOrLoading(element)) {
-      element.setAttribute('aria-disabled', 'true');
-    } else {
-      element.removeAttribute('aria-disabled');
-    }
-    if (isElementDisabled(element)) {
-      element.setAttribute('tabindex', '-1');
-    } else {
-      element.removeAttribute('tabindex');
-    }
-  }
 }
 
 function makeElementInertOnDownUpEvent(element: Element, eventName: string): void {
