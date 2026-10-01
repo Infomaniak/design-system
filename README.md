@@ -40,6 +40,8 @@
     - android: [android-design-system ↗](https://github.com/Infomaniak/android-design-system)
   - [components/](packages/components): contains the web components library
     - [@infomaniak-design-system/components ↗](https://www.npmjs.com/package/@infomaniak-design-system/components)
+  - [figma/](packages/figma): contains the Figma plugins
+    - [ESDS icons](packages/figma/figma-plugin-icons): multi-size icon generator, distributed as a GitHub Release asset
   - [assets/images/svg/](packages/assets/images/svg): contains the SVG icons and illustrations
     - [explore ↗](https://infomaniak.github.io/design-system/storybook/main/?path=/docs/icons-icon-gallery--docs&collection=esds)
 - `apps/`: contains the deployable apps

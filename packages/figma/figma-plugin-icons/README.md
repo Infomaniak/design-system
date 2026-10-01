@@ -11,10 +11,10 @@ Component (or ComponentSet), the plugin generates scaled variants (16, 20, 24,
 ## Install (designers)
 
 1. Open the
-   [GitHub Releases page](https://github.com/Infomaniak/design-system/releases):
+   [GitHub Releases page](https://github.com/Infomaniak/design-system/releases?q=figma-plugin-icons):
    every merge to `develop` automatically publishes a new build of the plugin,
    so the newest release is always up to date.
-2. Download the `esds-icons.zip` asset from the latest release (builds from
+2. Download the `esds-icons.zip` asset from the newest release (builds from
    `develop` are marked **Pre-release**; stable releases are published from
    `main`).
 3. Unzip it.
@@ -25,6 +25,12 @@ The plugin then appears under **Plugins → Development → ESDS icons**.
 
 To update, download the latest zip, unzip over the previous folder and reload
 the plugin in Figma (**Plugins → Development → ESDS icons → Reload**).
+
+> Pre-releases with a `-dev.` suffix can also appear while a pull request is
+> open — they are published on demand (label `dev`) for testing before merge.
+
+A step-by-step guide is available in the
+[Storybook documentation](https://infomaniak.github.io/design-system/storybook/main/?path=/docs/designers-guide-esds-icons-plugin--docs).
 
 ## Develop (engineers)
 
