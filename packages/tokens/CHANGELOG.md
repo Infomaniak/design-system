@@ -1,5 +1,44 @@
 # Changelog
 
+## 0.6.0
+
+### Minor Changes
+
+- [#355](https://github.com/Infomaniak/design-system/pull/355) [`46ce53f`](https://github.com/Infomaniak/design-system/commit/46ce53f6a87f66cc1ae58551d3c25ef8fe53db8a): Added emphasized typography styles for headings and body text. Text emphasis is now opt-in via a new `emphasized` attribute on the `esds-heading` and `esds-body` custom attributes, new `esds-heading-{xs..xl}-emphasized` and `esds-body-{xs..lg}-emphasized` utility classes, or automatically through `<strong>` content inside a styled element.
+
+  The `heading.{xs..xl}.font` and `body.{xs..lg}.font` tokens now expose `base` and `emphasized` variants instead of a single value; the previous flat token path was removed, so consumers referencing it must update to one of the new variants (e.g. `body.md.font.base`). The corresponding CSS custom properties were renamed accordingly (`--esds-body-md-font` becomes `--esds-body-md-font-base` / `--esds-body-md-font-emphasized`). Headings no longer default to the emphasized typography style: they now render with the base style unless emphasis is applied.
+
+- [#328](https://github.com/Infomaniak/design-system/pull/328) [`74ba77c`](https://github.com/Infomaniak/design-system/commit/74ba77c0b11487f885660274d58a4bbab39b3179): Added the `esds-button` custom attribute, which applies the design system button styles to native `<button>` and `<a>` elements while preserving native behavior — links keep their navigation semantics and are exposed to assistive technologies as buttons with proper `aria-disabled` handling. It supports `disabled` and `loading` states, with variants selected through `data-esds-button-type` (`primary`, `secondary`, `ghost`, and their destructive variants) and `data-esds-button-size` (`small`, `medium`, `large`) attributes. The matching design tokens ship as new `button-size` and `button-type` modifiers plus button component tokens, importable per variant or all at once (e.g. `@infomaniak-design-system/tokens/css/modifiers/button-size/all.attr.css`).
+
+- [#353](https://github.com/Infomaniak/design-system/pull/353) [`cc0b29f`](https://github.com/Infomaniak/design-system/commit/cc0b29fe89f9da9975f8426d43b5380aea632c8e): Added the `esds-kbd` custom attribute, which styles native `<kbd>` elements as keyboard keys — extra-small emphasized body typography with muted content color on a surface background, rounded with a `md` radius and a subtle `dim3` border, all driven by design tokens. The attribute can only be used on `<kbd>` elements, preserving native semantics. The element lays its content out with a flex `gap` token: multi-key shortcuts stay within a single `<kbd esds-kbd>` element, wrapping the `+` separator in a `<span>` so the keys are evenly spaced (e.g. `<kbd esds-kbd>⌘<span>+</span>K</kbd>`).
+
+- [#353](https://github.com/Infomaniak/design-system/pull/353) [`cc0b29f`](https://github.com/Infomaniak/design-system/commit/cc0b29fe89f9da9975f8426d43b5380aea632c8e): Added the `esds-separator` component, which divides content horizontally or vertically. It exposes `role="separator"` semantics with `aria-orientation`, and can be removed from the accessibility tree with the `decorative` attribute. Its appearance is driven by the design tokens.
+
+- [#356](https://github.com/Infomaniak/design-system/pull/356) [`92e9970`](https://github.com/Infomaniak/design-system/commit/92e9970095127ae916eebdaa2f7795f1e094a327): Added a new `focus.border.offset` token (defaults to `spacing.2xs`), exposed as the `--esds-focus-border-offset` CSS custom property. The focus effect on `esds-text-link` now offsets its outline with this token, so the focus ring no longer overlaps the link text and can be tuned via the custom property.
+
+- [#375](https://github.com/Infomaniak/design-system/pull/375) [`ae6dd7d`](https://github.com/Infomaniak/design-system/commit/ae6dd7d2ed43a1d4921c42f628b202a06a9b78ea): Added a new `all.attr.css` output for each modifier, which imports the attribute CSS of all its contexts into a single file. Consumers can now import one file per modifier (e.g. `modifiers/button-size/all.attr.css`) instead of listing every context variant individually.
+
+- [#365](https://github.com/Infomaniak/design-system/pull/365) [`a81efb7`](https://github.com/Infomaniak/design-system/commit/a81efb7e54df053baaa2384cd3afb60b650f6ed4): Synced DTCG tokens from the latest Figma export.
+
+  - Added subtle `dim3` data-viz variants: new `color.background.dataviz.*.dim3` backgrounds and matching `color.content.on.dataviz.*.dim3` foregrounds, plus per-hue `color.content.dataviz.*` foreground tokens, available in both themes and the dataviz overrides.
+  - Softened the strong `dim1` data-viz backgrounds (`600` → `500` shades) and re-paired the `dim1`/`dim2` foregrounds placed on them for proper contrast in light and dark themes.
+  - Feedback foregrounds on strong backgrounds are now white; the tinted shades moved to the `dim2` variants and new `dim3` foregrounds were added.
+  - Lightened the `error`, `success`, `warning`, `information` and `neutral` interaction-state content colors (`700` → `600` shades; `warning` now `orange.500`).
+
+- [#362](https://github.com/Infomaniak/design-system/pull/362) [`f1cbc10`](https://github.com/Infomaniak/design-system/commit/f1cbc102707535eb8b0869351eff9ce26e391812): Synced DTCG tokens from the latest Figma export.
+
+  - Added `soft` overlay tokens for hover, pressed and selected states (`color.state.hover.soft`, `color.state.pressed.soft`, `color.state.selected.soft`), with light and dark theme values, backed by new 6% alpha primitives `blue.900-6` and `gray.50-6`.
+
+### Patch Changes
+
+- [#380](https://github.com/Infomaniak/design-system/pull/380) [`7bcc0ea`](https://github.com/Infomaniak/design-system/commit/7bcc0eabc111ea6403e95a05a34221e5652149e9): Synced DTCG tokens from the latest Figma export.
+
+  - Refreshed the `red` color ramp (all 10 shades updated to the new reds).
+  - Darkened the strong (`dim1`) feedback backgrounds (`color.background.feedback.*.dim1`): `success`/`warning`/`error`/`information` moved one shade darker, `neutral` now `gray.500`.
+  - Lightened the selected-state and focus overlays (`color.selected.*`): `20%/40%/80%` opacities replaced by `6%/12%/60%`, with matching theme shadow adjustments.
+  - Swapped the light-theme elevated surfaces: `background.elevation.raised` is now `gray.50` and `background.elevation.overlay` is white.
+  - Unified `color.border.dim1` to `gray.400` in both themes (previously `gray.500` in dark mode).
+
 ## 0.5.0
 
 ### Minor Changes
