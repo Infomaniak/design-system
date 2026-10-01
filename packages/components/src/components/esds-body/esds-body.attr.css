@@ -1,41 +1,40 @@
 [esds-body] {
-  font: var(--esds-body-font);
+  font: var(--esds-body-md-font-base);
 }
 
 [esds-body='xs'] {
-  --esds-body-font: var(--esds-body-xs-font-base);
+  font: var(--esds-body-xs-font-base);
 
   &[emphasized],
   & strong {
-    --esds-body-font: var(--esds-body-xs-font-emphasized);
+    font: var(--esds-body-xs-font-emphasized);
   }
 }
 
 [esds-body='sm'] {
-  --esds-body-font: var(--esds-body-sm-font-base);
+  font: var(--esds-body-sm-font-base);
 
   &[emphasized],
   & strong {
-    --esds-body-font: var(--esds-body-sm-font-emphasized);
+    font: var(--esds-body-sm-font-emphasized);
   }
 }
 
-[esds-body='md'],
-strong {
-  --esds-body-font: var(--esds-body-md-font-base);
+[esds-body='md'] {
+  font: var(--esds-body-md-font-base);
 
   &[emphasized],
   & strong {
-    --esds-body-font: var(--esds-body-md-font-emphasized);
+    font: var(--esds-body-md-font-emphasized);
   }
 }
 
 [esds-body='lg'] {
-  --esds-body-font: var(--esds-body-lg-font-base);
+  font: var(--esds-body-lg-font-base);
 
   &[emphasized],
   & strong {
-    --esds-body-font: var(--esds-body-lg-font-emphasized);
+    font: var(--esds-body-lg-font-emphasized);
   }
 }
 
