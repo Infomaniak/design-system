@@ -115,7 +115,7 @@ export function buildTailwindTokens({
                 (file: string): boolean => !file.includes(T1_DIRECTORY_NAME),
               );
 
-              if (isNotT1Token) {
+              if (isNotT1Token || tokenName.startsWith('color.transparent')) {
                 if (tokenName.startsWith('color')) {
                   // --color-*
                   const tailwindVariableName: SegmentsReference = block((): SegmentsReference => {
@@ -135,7 +135,10 @@ export function buildTailwindTokens({
                   let extra: readonly CssVariableDeclaration[] = [];
 
                   // generate state tokens
-                  if (tokenName.startsWith('color.background')) {
+                  if (
+                    tokenName.startsWith('color.background') ||
+                    tokenName.startsWith('color.transparent')
+                  ) {
                     extra = stateTokens.map(
                       (stateToken: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
                         const sourceCssVariable: string = segmentsReferenceToCssVariableReference(
