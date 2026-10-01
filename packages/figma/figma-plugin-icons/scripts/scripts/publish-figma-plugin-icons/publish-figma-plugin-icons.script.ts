@@ -46,6 +46,7 @@ await runScript('publish-figma-plugin-icons', async (logger: Logger): Promise<vo
           zip: true,
           zipFileName: 'esds-icons.zip',
           prerelease: publishConfig.mode !== 'prod',
+          skipIfExists: true,
           logger,
         });
       } finally {

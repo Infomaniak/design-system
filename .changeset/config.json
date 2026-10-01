@@ -11,5 +11,10 @@
   "baseBranch": "main",
   "privatePackages": { "version": true, "tag": false },
   "updateInternalDependencies": "patch",
-  "ignore": ["demo", "@infomaniak-design-system/docs", "@infomaniak-design-system/svg-assets"]
+  "ignore": [
+    "demo",
+    "@infomaniak-design-system/docs",
+    "@infomaniak-design-system/svg-assets",
+    "@infomaniak-design-system/figma-plugin-icons"
+  ]
 }

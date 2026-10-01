@@ -48,8 +48,8 @@ job (`yarn ci:publish`) when it lands on `develop` (prereleases tagged
 The release asset is a zip (`esds-icons.zip`) containing `manifest.json` and
 the built plugin, ready to be imported in Figma. The version comes from
 `package.json`: bump it when you want a new stable release (re-publishing an
-existing version fails, preventing accidental overwrites). Prereleases from
-`develop` are timestamped and always unique — no version bump needed.
+existing version is skipped, preventing accidental overwrites). Prereleases
+from `develop` are timestamped and always unique — no version bump needed.
 
 ### Structure
 
