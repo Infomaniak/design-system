@@ -61,7 +61,7 @@ export class EsdsSeparatorComponent extends LitElement {
 
   protected override updated(): void {
     this.toggleAttribute('aria-hidden', this.decorative);
-    if (this.decorative) {
+    if (this.decorative || this.getAttribute('role') !== 'separator') {
       this.removeAttribute('aria-orientation');
     } else {
       this.setAttribute(
