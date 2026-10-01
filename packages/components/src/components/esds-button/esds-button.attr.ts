@@ -72,10 +72,8 @@ export class EsdsButtonAttr extends CustomAttribute implements CustomAttributeDe
 
       if (isElementLoading(element)) {
         element.setAttribute('aria-busy', 'true');
-        element.setAttribute('aria-label', element.textContent);
       } else {
         element.removeAttribute('aria-busy');
-        element.removeAttribute('aria-label');
       }
 
       if (isElementDisabled(element)) {
@@ -93,6 +91,12 @@ export class EsdsButtonAttr extends CustomAttribute implements CustomAttributeDe
           this.#userDefinedTabIndexValue = undefined;
         }
       }
+    }
+
+    if (isElementLoading(element)) {
+      element.setAttribute('aria-label', element.textContent.trim());
+    } else {
+      element.removeAttribute('aria-label');
     }
   }
 
