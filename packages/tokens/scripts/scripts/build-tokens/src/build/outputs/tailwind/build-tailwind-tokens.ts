@@ -139,10 +139,10 @@ export function buildTailwindTokens({
                     extra = stateTokens.map(
                       (stateToken: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
                         const source: string = DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(
-                          token.name,
+                          stateToken.name,
                         );
                         const destination: string = DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(
-                          stateToken.name,
+                          token.name,
                         );
 
                         return {
