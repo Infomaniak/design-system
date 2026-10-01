@@ -32,11 +32,13 @@ const meta = {
 
 export default meta;
 
+const HEADER_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+
 export const Default: StoryObj<
   EsdsHeadingAttr &
     HTMLElement & {
       text: string;
-      size: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+      size: (typeof HEADER_SIZES)[number];
       emphasized: boolean;
     }
 > = {
@@ -45,7 +47,7 @@ export const Default: StoryObj<
     size: {
       value: 'md',
       type: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      options: HEADER_SIZES,
     },
     emphasized: {
       value: false,
@@ -65,14 +67,14 @@ export const Default: StoryObj<
 export const WithStrongContent: StoryObj<
   EsdsHeadingAttr &
     HTMLElement & {
-      size: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+      size: (typeof HEADER_SIZES)[number];
     }
 > = {
   ...storybookInteractiveControls({
     size: {
       value: 'md',
       type: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      options: HEADER_SIZES,
     },
   }),
   render: (args) =>
@@ -99,6 +101,13 @@ export const AllSizes: StoryObj<
     },
   }),
   render: (args) => html`
+    <h1
+      ${defineEsdsHeadingAttr}
+      esds-heading="xl"
+      ?emphasized="${args.emphasized}"
+    >
+      ${args.text}
+    </h1>
     <h2
       ${defineEsdsHeadingAttr}
       esds-heading="lg"

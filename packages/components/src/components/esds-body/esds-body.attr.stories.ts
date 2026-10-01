@@ -32,11 +32,13 @@ const meta = {
 
 export default meta;
 
+const BODY_SIZES = ['xs', 'sm', 'md', 'lg'] as const;
+
 export const Default: StoryObj<
   EsdsBodyAttr &
     HTMLElement & {
       text: string;
-      size: 'xs' | 'sm' | 'md' | 'lg';
+      size: (typeof BODY_SIZES)[number];
       emphasized: boolean;
     }
 > = {
@@ -45,7 +47,7 @@ export const Default: StoryObj<
     size: {
       value: 'md',
       type: 'select',
-      options: ['xs', 'sm', 'md', 'lg'],
+      options: BODY_SIZES,
     },
     emphasized: {
       value: false,
@@ -65,14 +67,14 @@ export const Default: StoryObj<
 export const WithStrongContent: StoryObj<
   EsdsBodyAttr &
     HTMLElement & {
-      size: 'xs' | 'sm' | 'md' | 'lg';
+      size: (typeof BODY_SIZES)[number];
     }
 > = {
   ...storybookInteractiveControls({
     size: {
       value: 'md',
       type: 'select',
-      options: ['xs', 'sm', 'md', 'lg'],
+      options: BODY_SIZES,
     },
   }),
   render: (args) =>
@@ -99,7 +101,7 @@ export const AllSizes: StoryObj<
     },
   }),
   render: (args) => html`
-    ${['xs', 'sm', 'md', 'lg'].map((size) => {
+    ${BODY_SIZES.map((size) => {
       return html`<p
         ${defineEsdsBodyAttr}
         esds-body="${size}"
