@@ -4,31 +4,56 @@
     "xs": {
       "$description": "Extra-small heading style.",
       "font": {
-        "$value": "{typography.xl.emphasized}"
+        "base": {
+          "$value": "{typography.xl.base}"
+        },
+        "emphasized": {
+          "$value": "{typography.xl.emphasized}"
+        }
       }
     },
     "sm": {
       "$description": "Small heading style.",
       "font": {
-        "$value": "{typography.2xl.emphasized}"
+        "base": {
+          "$value": "{typography.2xl.base}"
+        },
+        "emphasized": {
+          "$value": "{typography.2xl.emphasized}"
+        }
       }
     },
     "md": {
       "$description": "Medium heading style.",
       "font": {
-        "$value": "{typography.3xl.emphasized}"
+        "base": {
+          "$value": "{typography.3xl.base}"
+        },
+        "emphasized": {
+          "$value": "{typography.3xl.emphasized}"
+        }
       }
     },
     "lg": {
       "$description": "Large heading style.",
       "font": {
-        "$value": "{typography.4xl.emphasized}"
+        "base": {
+          "$value": "{typography.4xl.base}"
+        },
+        "emphasized": {
+          "$value": "{typography.4xl.emphasized}"
+        }
       }
     },
     "xl": {
       "$description": "Extra-large heading style.",
       "font": {
-        "$value": "{typography.5xl.emphasized}"
+        "base": {
+          "$value": "{typography.5xl.base}"
+        },
+        "emphasized": {
+          "$value": "{typography.5xl.emphasized}"
+        }
       }
     }
   }

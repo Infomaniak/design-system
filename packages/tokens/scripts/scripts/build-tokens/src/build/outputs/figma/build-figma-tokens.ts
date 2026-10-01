@@ -135,12 +135,7 @@ export function buildFigmaTokens({
 
       for (const tokenA of figmaBaseCollection.tokens()) {
         for (const tokenB of figmaBaseCollection.tokens()) {
-          if (
-            tokenB.name.length > tokenA.name.length &&
-            tokenA.name.every((segment: string, index: number): boolean => {
-              return tokenB.name[index] === segment;
-            })
-          ) {
+          if (DesignTokensCollection.isRootTokenNameOf(tokenA.name, tokenB.name)) {
             // tokenA is a $root token of tokenB
             rootTokens.add(tokenA);
             break;
@@ -150,10 +145,6 @@ export function buildFigmaTokens({
 
       for (const token of rootTokens) {
         figmaBaseCollection.rename(token.name, [...token.name, '@root']);
-
-        for (const [modifier] of modifiers.entries()) {
-          figmaBaseCollection.rename([modifier, ...token.name], [modifier, ...token.name, '@root']);
-        }
       }
     }
 

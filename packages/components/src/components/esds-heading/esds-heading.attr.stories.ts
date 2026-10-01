@@ -32,11 +32,14 @@ const meta = {
 
 export default meta;
 
+const HEADER_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+
 export const Default: StoryObj<
   EsdsHeadingAttr &
     HTMLElement & {
       text: string;
-      size: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+      size: (typeof HEADER_SIZES)[number];
+      emphasized: boolean;
     }
 > = {
   ...storybookInteractiveControls({
@@ -44,7 +47,34 @@ export const Default: StoryObj<
     size: {
       value: 'md',
       type: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      options: HEADER_SIZES,
+    },
+    emphasized: {
+      value: false,
+      type: 'boolean',
+    },
+  }),
+  render: (args) =>
+    html`<h1
+      ${defineEsdsHeadingAttr}
+      esds-heading="${args.size}"
+      ?emphasized="${args.emphasized}"
+    >
+      ${args.text}
+    </h1>`,
+};
+
+export const WithStrongContent: StoryObj<
+  EsdsHeadingAttr &
+    HTMLElement & {
+      size: (typeof HEADER_SIZES)[number];
+    }
+> = {
+  ...storybookInteractiveControls({
+    size: {
+      value: 'md',
+      type: 'select',
+      options: HEADER_SIZES,
     },
   }),
   render: (args) =>
@@ -52,7 +82,7 @@ export const Default: StoryObj<
       ${defineEsdsHeadingAttr}
       esds-heading="${args.size}"
     >
-      ${args.text}
+      This is a heading example <strong>with strong content</strong>
     </h1>`,
 };
 
@@ -60,39 +90,49 @@ export const AllSizes: StoryObj<
   EsdsHeadingAttr &
     HTMLElement & {
       text: string;
+      emphasized: boolean;
     }
 > = {
   ...storybookInteractiveControls({
     text: 'This is a heading example',
+    emphasized: {
+      value: false,
+      type: 'boolean',
+    },
   }),
   render: (args) => html`
     <h1
       ${defineEsdsHeadingAttr}
       esds-heading="xl"
+      ?emphasized="${args.emphasized}"
     >
       ${args.text}
     </h1>
     <h2
       ${defineEsdsHeadingAttr}
       esds-heading="lg"
+      ?emphasized="${args.emphasized}"
     >
       ${args.text}
     </h2>
     <h3
       ${defineEsdsHeadingAttr}
       esds-heading="md"
+      ?emphasized="${args.emphasized}"
     >
       ${args.text}
     </h3>
     <h4
       ${defineEsdsHeadingAttr}
       esds-heading="sm"
+      ?emphasized="${args.emphasized}"
     >
       ${args.text}
     </h4>
     <h5
       ${defineEsdsHeadingAttr}
       esds-heading="xs"
+      ?emphasized="${args.emphasized}"
     >
       ${args.text}
     </h5>

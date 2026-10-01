@@ -4,25 +4,45 @@
     "xs": {
       "$description": "Extra-small body text style.",
       "font": {
-        "$value": "{typography.xs.base}"
+        "base": {
+          "$value": "{typography.xs.base}"
+        },
+        "emphasized": {
+          "$value": "{typography.xs.emphasized}"
+        }
       }
     },
     "sm": {
       "$description": "Small body text style.",
       "font": {
-        "$value": "{typography.sm.base}"
+        "base": {
+          "$value": "{typography.sm.base}"
+        },
+        "emphasized": {
+          "$value": "{typography.sm.emphasized}"
+        }
       }
     },
     "md": {
       "$description": "Medium (default) body text style.",
       "font": {
-        "$value": "{typography.md.base}"
+        "base": {
+          "$value": "{typography.md.base}"
+        },
+        "emphasized": {
+          "$value": "{typography.md.emphasized}"
+        }
       }
     },
     "lg": {
       "$description": "Large body text style.",
       "font": {
-        "$value": "{typography.lg.base}"
+        "base": {
+          "$value": "{typography.lg.base}"
+        },
+        "emphasized": {
+          "$value": "{typography.lg.emphasized}"
+        }
       }
     }
   }

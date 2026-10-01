@@ -1,25 +1,50 @@
 [esds-heading] {
-  font: var(--esds-heading-font);
+  font: var(--esds-heading-md-font-base);
 }
 
 [esds-heading='xs'] {
-  --esds-heading-font: var(--esds-heading-xs-font);
+  font: var(--esds-heading-xs-font-base);
+
+  &[emphasized],
+  & strong {
+    font: var(--esds-heading-xs-font-emphasized);
+  }
 }
 
 [esds-heading='sm'] {
-  --esds-heading-font: var(--esds-heading-sm-font);
+  font: var(--esds-heading-sm-font-base);
+
+  &[emphasized],
+  & strong {
+    font: var(--esds-heading-sm-font-emphasized);
+  }
 }
 
 [esds-heading='md'] {
-  --esds-heading-font: var(--esds-heading-md-font);
+  font: var(--esds-heading-md-font-base);
+
+  &[emphasized],
+  & strong {
+    font: var(--esds-heading-md-font-emphasized);
+  }
 }
 
 [esds-heading='lg'] {
-  --esds-heading-font: var(--esds-heading-lg-font);
+  font: var(--esds-heading-lg-font-base);
+
+  &[emphasized],
+  & strong {
+    font: var(--esds-heading-lg-font-emphasized);
+  }
 }
 
 [esds-heading='xl'] {
-  --esds-heading-font: var(--esds-heading-xl-font);
+  font: var(--esds-heading-xl-font-base);
+
+  &[emphasized],
+  & strong {
+    font: var(--esds-heading-xl-font-emphasized);
+  }
 }
 
 h1,

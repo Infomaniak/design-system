@@ -1,21 +1,41 @@
 [esds-body] {
-  font: var(--esds-body-font);
+  font: var(--esds-body-md-font-base);
 }
 
 [esds-body='xs'] {
-  --esds-body-font: var(--esds-body-xs-font);
+  font: var(--esds-body-xs-font-base);
+
+  &[emphasized],
+  & strong {
+    font: var(--esds-body-xs-font-emphasized);
+  }
 }
 
 [esds-body='sm'] {
-  --esds-body-font: var(--esds-body-sm-font);
+  font: var(--esds-body-sm-font-base);
+
+  &[emphasized],
+  & strong {
+    font: var(--esds-body-sm-font-emphasized);
+  }
 }
 
 [esds-body='md'] {
-  --esds-body-font: var(--esds-body-md-font);
+  font: var(--esds-body-md-font-base);
+
+  &[emphasized],
+  & strong {
+    font: var(--esds-body-md-font-emphasized);
+  }
 }
 
 [esds-body='lg'] {
-  --esds-body-font: var(--esds-body-lg-font);
+  font: var(--esds-body-lg-font-base);
+
+  &[emphasized],
+  & strong {
+    font: var(--esds-body-lg-font-emphasized);
+  }
 }
 
 p {

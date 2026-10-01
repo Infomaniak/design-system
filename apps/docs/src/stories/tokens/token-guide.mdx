@@ -18,6 +18,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
     - [CSS Files](#css-files)
     - [Loading Themes (.root files)](#loading-themes-root-files)
     - [Using Modifiers (.attr files)](#using-modifiers-attr-files)
+      - [Import all contexts (all.attr files)](#import-all-contexts-allattrcss-files)
     - [Tailwind CSS](#tailwind-css)
   - [LLM/AI](#llmai)
   - [iOS](#ios)
@@ -134,6 +135,14 @@ Modifiers can also be set on container elements:
 >
   <!-- Dark theme and product mail applies to children -->
 </body>
+```
+
+##### Import all contexts (`all.attr.css` files)
+
+Each modifier also generates an `all.attr.css` file which imports the attribute CSS of all its contexts at once, for example:
+
+```css
+@import '@infomaniak-design-system/tokens/css/modifiers/theme/all.attr.css';
 ```
 
 #### Tailwind CSS

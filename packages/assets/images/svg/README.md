@@ -83,7 +83,7 @@ Deliveries triggered by `develop` ship a prerelease version (`-rc.<run>`), deliv
 yarn build:sf-symbols
 ```
 
-The command fits each committed outline (see [Icons](#icons)) into a minimal Apple SF Symbols template and emits the `ESDSSymbols.xcassets` catalog, with one custom symbol per icon named after the icon (e.g. `magnifying-glass`). The publish step clones `ios-design-system`, replaces `Sources/ESDSSymbols/Symbols.xcassets`, pushes a branch `esds-symbols/<version>` and opens a pull request to `main`. When no outline has been imported yet, the publish step is skipped (non-blocking).
+The command fits each committed outline (see [Icons](#icons)) into the official Apple SF Symbols template and emits the `ESDSSymbols.xcassets` catalog, with one custom symbol per icon named after the icon (e.g. `magnifying-glass`). It also generates `ESDSSymbols.swift`, which exposes each symbol as a public value with SwiftUI and UIKit images (e.g. `ESDSSymbols.magnifyingGlass.image` and `ESDSSymbols.magnifyingGlass.uiImage`). The publish step clones `ios-design-system`, replaces `Sources/ESDSSymbols/Symbols.xcassets` and `Sources/ESDSSymbols/ESDSSymbols.swift`, pushes a branch `esds-symbols/<version>` and opens a pull request to `main`. When no outline has been imported yet, the publish step is skipped (non-blocking).
 
 > [!NOTE]
 > By design, only one weight is generated per symbol: all icons render at the stroke weight designed in Figma, regardless of font weight.

@@ -272,6 +272,9 @@ Go to `packages/tokens`, and run the following command:
 yarn convert-figma-tokens
 ```
 
+> [!TIP]
+> Instead of manually running this command, you may use the [`convert-figma-tokens` skill](../../.agents/skills/convert-figma-tokens/SKILL.md).
+
 It will export the tokens into `packages/tokens/tokens/**`, with a valid DTCG format.
 
 ### Import the tokens into figma

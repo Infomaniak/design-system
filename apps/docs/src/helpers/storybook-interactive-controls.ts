@@ -1,7 +1,7 @@
 import type { StoryHelpers } from '@wc-toolkit/storybook-helpers';
 
 export interface StoryPropertyConfig {
-  readonly value: string;
+  readonly value: string | number | boolean;
   readonly type?:
     | 'object'
     | 'boolean'

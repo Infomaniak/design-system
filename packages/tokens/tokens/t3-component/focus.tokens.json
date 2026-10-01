@@ -21,6 +21,13 @@
         "$extensions": {
           "scopes": []
         }
+      },
+      "offset": {
+        "$value": "{spacing.2xs}",
+        "$description": "Focus-effect border offset.",
+        "$extensions": {
+          "scopes": []
+        }
       }
     }
   }

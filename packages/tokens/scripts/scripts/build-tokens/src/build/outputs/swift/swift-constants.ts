@@ -8,6 +8,8 @@ export const SWIFT_PRIMITIVE_TARGET_NAME = 'ESDSPrimitives';
 export const SWIFT_PRIMITIVE_TARGET_DIR = `${SWIFT_SOURCES_DIR}/${SWIFT_PRIMITIVE_TARGET_NAME}`;
 export const SWIFT_FOUNDATION_DIR = 'ESDSFoundation';
 export const SWIFT_PRODUCTS_DIR = 'Products';
+export const SWIFT_SYMBOLS_TARGET_NAME = 'ESDSSymbols';
+export const SWIFT_SYMBOLS_XCASSETS_NAME = 'Symbols.xcassets';
 
 export const EXCLUDED_SWIFT_TOKEN_ROOTS = [
   'font',

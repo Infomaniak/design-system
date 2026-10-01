@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, test } from 'vitest';
 import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { generateSfSymbols } from './generate-sf-symbols.ts';
-import { SYMBOLS_XCASSETS_DIRECTORY_NAME } from './sf-symbols-config.ts';
+import { SYMBOLS_SWIFT_FILE_NAME, SYMBOLS_XCASSETS_DIRECTORY_NAME } from './sf-symbols-config.ts';
 
 const logger = Logger.never();
 
@@ -41,7 +41,7 @@ describe('generateSfSymbols', () => {
     await writeFile(join(webIconsDirectory, `${name}.svg`), '<svg/>', { encoding: 'utf8' });
   };
 
-  test('wipes the output directory and generates the xcassets from the outlines', async () => {
+  test('wipes the output directory and generates the xcassets and Swift accessors', async () => {
     await mkdir(outputDirectory, { recursive: true });
     await writeFile(join(outputDirectory, 'stale.txt'), 'stale', { encoding: 'utf8' });
     await writeIcon('b-circle', 'M 4 4 L 20 4 L 20 20 Z');
@@ -72,6 +72,12 @@ describe('generateSfSymbols', () => {
       ],
     });
     expect(await readdir(symbolsetDirectory)).toEqual(['Contents.json', 'a-square.symbol.svg']);
+    expect(await readFile(join(outputDirectory, SYMBOLS_SWIFT_FILE_NAME), 'utf8')).toContain(
+      'public static let aSquare = Symbol(name: "a-square")',
+    );
+    expect(await readFile(join(outputDirectory, SYMBOLS_SWIFT_FILE_NAME), 'utf8')).toContain(
+      'public static let bCircle = Symbol(name: "b-circle")',
+    );
     await expect(readFile(join(outputDirectory, 'stale.txt'), 'utf8')).rejects.toThrow();
   });
 

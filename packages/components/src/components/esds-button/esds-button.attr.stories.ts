@@ -1,0 +1,262 @@
+import { EsdsIconComponent, EsdsKbdAttr } from '@infomaniak-design-system/components';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import {
+  storybookInteractiveControls,
+  type StoryPropertyConfigLike,
+} from '../../../../../apps/docs/src/helpers/storybook-interactive-controls.ts';
+import { htmlElementRef } from '../../helpers/.private/component/html-element-ref.ts';
+import { AttributeRegistry } from '../../helpers/custom-attribute/custom-attribute.ts';
+import documentation from './esds-button.attr.md?raw';
+import { EsdsButtonAttr } from './esds-button.attr.ts';
+
+EsdsIconComponent.define();
+
+const defineEsdsButtonAttr = htmlElementRef((element: Element) => {
+  EsdsButtonAttr.define({
+    registry: AttributeRegistry.of(element.ownerDocument!),
+  });
+  EsdsKbdAttr.define({
+    registry: AttributeRegistry.of(element.ownerDocument!),
+  });
+});
+
+const { args, argTypes } = getStorybookHelpers<EsdsButtonAttr>('esds-button');
+
+const meta = {
+  title: 'Components/Button',
+  component: 'esds-button',
+  tags: ['autodocs', 'vr-test'],
+  parameters: {
+    docs: {
+      description: {
+        component: documentation,
+      },
+    },
+  },
+  args,
+  argTypes,
+} satisfies Meta<EsdsButtonAttr>;
+
+export default meta;
+
+interface ExtraControls {
+  disabled: boolean;
+  loading: boolean;
+}
+
+const extraControls: Record<string, StoryPropertyConfigLike> = {
+  disabled: {
+    value: false,
+    type: 'boolean',
+  },
+  loading: {
+    value: false,
+    type: 'boolean',
+  },
+};
+
+const BUTTON_TYPES = [
+  'primary',
+  'primary-destructive',
+  'secondary',
+  'secondary-destructive',
+  'ghost-primary',
+  'ghost-secondary',
+  'ghost-destructive',
+] as const;
+
+const BUTTON_SIZES = ['small', 'medium', 'large'] as const;
+
+export const Button: StoryObj<
+  EsdsButtonAttr &
+    HTMLButtonElement &
+    ExtraControls & {
+      content: string;
+      buttonType: (typeof BUTTON_TYPES)[number];
+      size: (typeof BUTTON_SIZES)[number];
+    }
+> = {
+  ...storybookInteractiveControls({
+    ...extraControls,
+    content: 'Text content',
+    buttonType: {
+      value: 'primary',
+      type: 'select',
+      options: BUTTON_TYPES,
+    },
+    size: {
+      value: 'medium',
+      type: 'select',
+      options: BUTTON_SIZES,
+    },
+  }),
+  render: (args) =>
+    html`<button
+      ${defineEsdsButtonAttr}
+      esds-button
+      ?disabled=${args.disabled}
+      ?loading=${args.loading}
+      data-esds-button-type=${ifDefined(args.buttonType)}
+      data-esds-button-size=${ifDefined(args.size)}
+      @click="${() => console.log('clicked')}"
+    >
+      <esds-icon name="esds:plus"></esds-icon>
+      ${args.content}
+      <kbd esds-kbd="">⌘</kbd>
+    </button>`,
+};
+
+export const Link: StoryObj<
+  EsdsButtonAttr &
+    HTMLAnchorElement &
+    ExtraControls & {
+      content: string;
+    }
+> = {
+  ...storybookInteractiveControls({
+    ...extraControls,
+    content: 'Link content',
+    href: 'https://infomaniak.com',
+  }),
+  render: (args) =>
+    html`<a
+      ${defineEsdsButtonAttr}
+      esds-button
+      href="${args.href}"
+      target="_blank"
+      ?disabled=${args.disabled}
+      ?loading=${args.loading}
+    >
+      <esds-icon name="esds:plus"></esds-icon>
+      ${args.content}
+    </a>`,
+};
+
+export const TextOnly: StoryObj<
+  EsdsButtonAttr &
+    HTMLButtonElement &
+    ExtraControls & {
+      content: string;
+    }
+> = {
+  ...storybookInteractiveControls({
+    ...extraControls,
+    content: 'Text content',
+  }),
+  render: (args) =>
+    html`<button
+      ${defineEsdsButtonAttr}
+      esds-button
+      ?disabled=${args.disabled}
+      ?loading=${args.loading}
+    >
+      ${args.content}
+    </button>`,
+};
+
+export const Types: StoryObj<EsdsButtonAttr & HTMLButtonElement & ExtraControls> = {
+  ...storybookInteractiveControls(extraControls),
+  render: (args) => html`
+    <style>
+      .buttons-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 16px;
+
+        & > div {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+      }
+    </style>
+    <div class="buttons-container">
+      ${BUTTON_TYPES.map(
+        (variant) => html`
+          <div>
+            <button
+              ${defineEsdsButtonAttr}
+              esds-button
+              data-esds-button-type=${ifDefined(variant)}
+              ?disabled=${args.disabled}
+              ?loading=${args.loading}
+            >
+              <esds-icon name="esds:plus"></esds-icon>
+              ${variant}
+            </button>
+            <!--
+            TODO
+            <button
+              ${defineEsdsButtonAttr}
+              esds-button
+              data-esds-button-type=${ifDefined(variant)}
+              square
+              ?disabled=${args.disabled}
+              ?loading=${args.loading}
+            >
+              <esds-icon name="esds:plus"></esds-icon>
+            </button>
+            -->
+          </div>
+        `,
+      )}
+    </div>
+  `,
+};
+
+export const Sizes: StoryObj<EsdsButtonAttr & HTMLButtonElement & ExtraControls> = {
+  ...storybookInteractiveControls(extraControls),
+  render: (args) => html`
+    <style>
+      .buttons-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 16px;
+
+        & > div {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+      }
+    </style>
+    <div class="buttons-container">
+      ${BUTTON_SIZES.map(
+        (variant) => html`
+          <div>
+            <button
+              ${defineEsdsButtonAttr}
+              esds-button
+              data-esds-button-size=${ifDefined(variant)}
+              ?disabled=${args.disabled}
+              ?loading=${args.loading}
+            >
+              <esds-icon name="esds:plus"></esds-icon>
+              ${variant}
+            </button>
+            <!--
+            TODO
+            <button
+              ${defineEsdsButtonAttr}
+              esds-button
+              data-esds-button-size=${ifDefined(variant)}
+              square
+              ?disabled=${args.disabled}
+              ?loading=${args.loading}
+            >
+              <esds-icon name="esds:plus"></esds-icon>
+            </button>
+            -->
+          </div>
+        `,
+      )}
+    </div>
+  `,
+};

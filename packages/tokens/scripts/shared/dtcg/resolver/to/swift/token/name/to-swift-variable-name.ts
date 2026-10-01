@@ -1,11 +1,67 @@
 import { toCamelCase } from '../../../../../../../../../../scripts/helpers/misc/case/to-camel-case/to-camel-case.ts';
 
-const SWIFT_RESERVED = new Set(['default', 'in', 'for', 'while', 'return', 'case', 'switch']);
+const SWIFT_RESERVED_IDENTIFIERS: ReadonlySet<string> = new Set([
+  'Any',
+  'Protocol',
+  'Self',
+  'Type',
+  'associatedtype',
+  'as',
+  'break',
+  'case',
+  'catch',
+  'class',
+  'continue',
+  'default',
+  'defer',
+  'deinit',
+  'do',
+  'else',
+  'enum',
+  'extension',
+  'fallthrough',
+  'false',
+  'fileprivate',
+  'for',
+  'func',
+  'guard',
+  'if',
+  'import',
+  'in',
+  'init',
+  'inout',
+  'internal',
+  'is',
+  'let',
+  'nil',
+  'open',
+  'operator',
+  'private',
+  'protocol',
+  'public',
+  'repeat',
+  'rethrows',
+  'return',
+  'self',
+  'static',
+  'struct',
+  'subscript',
+  'super',
+  'switch',
+  'throw',
+  'throws',
+  'true',
+  'try',
+  'typealias',
+  'var',
+  'where',
+  'while',
+]);
 
 export function toSwiftVariableName(parts: string[]): string {
   const name = toCamelCase(
     parts.filter((segment: string): boolean => segment !== '$root').join('-'),
   );
-  if (SWIFT_RESERVED.has(name)) return `\`${name}\``;
+  if (SWIFT_RESERVED_IDENTIFIERS.has(name)) return `\`${name}\``;
   return name;
 }
