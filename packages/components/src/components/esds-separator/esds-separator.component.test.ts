@@ -123,7 +123,22 @@ describe('EsdsSeparatorComponent', () => {
       await el.updateComplete;
 
       expect(el.getAttribute('role')).toBe('menuitem');
+      expect(el.hasAttribute('aria-orientation')).toBe(false);
+    });
+
+    it('should expose aria-orientation for a consumer-provided separator role', async () => {
+      const el = document.createElement('esds-separator');
+      el.setAttribute('role', 'separator');
+      container.append(el);
+      await el.updateComplete;
+
+      expect(el.getAttribute('role')).toBe('separator');
       expect(el.getAttribute('aria-orientation')).toBe('horizontal');
+
+      el.orientation = 'vertical';
+      await el.updateComplete;
+
+      expect(el.getAttribute('aria-orientation')).toBe('vertical');
     });
 
     it('should not overwrite a consumer role set after first render', async () => {
@@ -137,6 +152,7 @@ describe('EsdsSeparatorComponent', () => {
 
       expect(el.getAttribute('role')).toBe('menuitem');
       expect(el.hasAttribute('aria-hidden')).toBe(true);
+      expect(el.hasAttribute('aria-orientation')).toBe(false);
     });
   });
 
