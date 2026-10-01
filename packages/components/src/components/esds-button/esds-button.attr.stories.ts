@@ -127,6 +127,7 @@ export const Link: StoryObj<
       esds-button
       href="${args.href}"
       target="_blank"
+      tabindex="3"
       ?disabled=${args.disabled}
       ?loading=${args.loading}
     >

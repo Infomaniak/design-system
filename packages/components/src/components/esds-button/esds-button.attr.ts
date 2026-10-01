@@ -33,6 +33,8 @@ export class EsdsButtonAttr extends CustomAttribute implements CustomAttributeDe
     this.#updateElementState();
   });
 
+  #userDefinedTabIndexValue: string | null | undefined = undefined;
+
   constructor(attr: Attr) {
     if (attr.ownerElement?.tagName !== 'BUTTON' && attr.ownerElement?.tagName !== 'A') {
       throw new Error('esds-button attribute can only be used on <button> or <a> elements');
@@ -68,9 +70,19 @@ export class EsdsButtonAttr extends CustomAttribute implements CustomAttributeDe
       }
 
       if (isElementDisabled(element)) {
+        if (this.#userDefinedTabIndexValue === undefined) {
+          this.#userDefinedTabIndexValue = element.getAttribute('tabindex');
+        }
         element.setAttribute('tabindex', '-1');
       } else {
-        element.removeAttribute('tabindex');
+        if (this.#userDefinedTabIndexValue !== undefined) {
+          if (this.#userDefinedTabIndexValue === null) {
+            element.removeAttribute('tabindex');
+          } else {
+            element.setAttribute('tabindex', this.#userDefinedTabIndexValue);
+          }
+          this.#userDefinedTabIndexValue = undefined;
+        }
       }
     }
   }
