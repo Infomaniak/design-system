@@ -138,12 +138,22 @@ export function buildTailwindTokens({
                   if (tokenName.startsWith('color.background')) {
                     extra = stateTokens.map(
                       (stateToken: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
-                        const source: string = DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(
+                        const sourceCssVariable: string = segmentsReferenceToCssVariableReference(
                           stateToken.name,
+                          cssOptions,
                         );
-                        const destination: string = DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(
-                          token.name,
-                        );
+
+                        const sourceAlphaCssVariable: string =
+                          segmentsReferenceToCssVariableReference(
+                            [...stateToken.name, 'a'],
+                            cssOptions,
+                          );
+
+                        const destinationCssVariable: string =
+                          segmentsReferenceToCssVariableReference(token.name, cssOptions);
+
+                        const destinationAlphaCssVariable: string =
+                          segmentsReferenceToCssVariableReference([...token.name, 'a'], cssOptions);
 
                         return {
                           name: DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
@@ -154,12 +164,12 @@ export function buildTailwindTokens({
                           value: dedent`
                             color-mix(
                               in srgb,
-                              rgb(from var(${source}) r g b / 100%) calc(var(${source + '-a'}) * 100%),
-                              rgb(from var(${destination}) r g b / 100%)
-                                calc(var(${destination + '-a'}) * (1 - var(${source + '-a'})) * 100%)
+                              rgb(from ${sourceCssVariable} r g b / 100%) calc(${sourceAlphaCssVariable} * 100%),
+                              rgb(from ${destinationCssVariable} r g b / 100%)
+                                calc(${destinationAlphaCssVariable} * (1 - ${sourceAlphaCssVariable}) * 100%)
                             )
                           `,
-                          description: `State effect ${JSON.stringify(destination)} applied to ${JSON.stringify(source)}${stateToken.description === undefined ? '' : `: ${stateToken.description}`}`,
+                          description: `State effect ${JSON.stringify(sourceCssVariable)} applied to ${JSON.stringify(destinationCssVariable)}${stateToken.description === undefined ? '' : `: ${stateToken.description}`}`,
                           deprecated: token.deprecated || stateToken.deprecated,
                         };
                       },
