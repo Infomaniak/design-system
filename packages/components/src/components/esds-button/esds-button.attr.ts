@@ -45,6 +45,15 @@ export class EsdsButtonAttr extends CustomAttribute implements CustomAttributeDe
 
     if (isAnchorElement(element)) {
       element.role = 'button';
+
+      element.addEventListener('keypress', (event: KeyboardEvent): void => {
+        if (event.code === 'Space') {
+          if (isElementDisabledOrLoading(element)) {
+            return;
+          }
+          element.click();
+        }
+      });
     }
 
     makeElementInertOnDownUpEvent(element, 'pointer');
