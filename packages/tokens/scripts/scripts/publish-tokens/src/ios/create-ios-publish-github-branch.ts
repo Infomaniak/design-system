@@ -7,6 +7,7 @@ import {
 } from '../../../../../../../scripts/helpers/git/update-git-repository-on-new-branch.ts';
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
+import { UPDATE_PACKAGE_VERSIONS_FILE_CHANGES_HOOK } from '../../../../../../../scripts/helpers/publish/update-package-versions-file/update-package-versions-file-changes-hook.ts';
 import { updatePackageVersionsFile } from '../../../../../../../scripts/helpers/publish/update-package-versions-file/update-package-versions-file.ts';
 import { formatSwiftFiles } from '../../../../../../../scripts/helpers/swift/format-swift-files.ts';
 import {
@@ -76,6 +77,7 @@ export async function createIosPublishGithubBranch({
 
       return `chore: ${packageName}@${version}`;
     },
+    changesHook: UPDATE_PACKAGE_VERSIONS_FILE_CHANGES_HOOK,
     logger,
     allowEmpty: 'yes-skip-push',
   });

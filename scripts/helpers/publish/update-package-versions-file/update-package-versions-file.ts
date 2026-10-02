@@ -2,7 +2,7 @@ import { join } from 'node:path';
 import { readJsonFile } from '../../file/read-json-file.ts';
 import { writeJsonFileSafe } from '../../file/write-json-file-safe.ts';
 
-const PACKAGE_VERSIONS_FILE: string = 'package-versions.json';
+export const PACKAGE_VERSIONS_FILE: string = 'package-versions.json';
 
 export interface UpdatePackageVersionsFileOptions {
   readonly packageName: string;
