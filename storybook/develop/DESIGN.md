@@ -486,6 +486,23 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | body.md.font.emphasized | 500 1rem/24px Infomaniak Sans | 500 1rem/24px Infomaniak Sans | var(--esds-body-md-font-emphasized) | Medium (default) body text style. |
 | body.lg.font.base | 400 1.125rem/26px Infomaniak Sans | 400 1.125rem/26px Infomaniak Sans | var(--esds-body-lg-font-base) | Large body text style. |
 | body.lg.font.emphasized | 500 1.125rem/26px Infomaniak Sans | 500 1.125rem/26px Infomaniak Sans | var(--esds-body-lg-font-emphasized) | Large body text style. |
+| button.padding.inline | 12px | 12px | var(--esds-button-padding-inline) | N/A |
+| button.padding.block | 8px | 8px | var(--esds-button-padding-block) | N/A |
+| button.gap.row | 6px | 6px | var(--esds-button-gap-row) | N/A |
+| button.gap.column | 6px | 6px | var(--esds-button-gap-column) | N/A |
+| button.border.radius | 8px | 8px | var(--esds-button-border-radius) | N/A |
+| button.border.color | #0077cf | #0077cf | var(--esds-button-border-color) | N/A |
+| button.border.color.disabled | #e2e8f0 | #0f172b | var(--esds-button-border-color-disabled) | N/A |
+| button.border.width | 0px | 0px | var(--esds-button-border-width) | N/A |
+| button.border.width.disabled | 0px | 0px | var(--esds-button-border-width-disabled) | N/A |
+| button.background.color | #0077cf | #0077cf | var(--esds-button-background-color) | N/A |
+| button.background.color.disabled | #e2e8f0 | #0f172b | var(--esds-button-background-color-disabled) | N/A |
+| button.content.color | #fff | #fff | var(--esds-button-content-color) | N/A |
+| button.content.color.disabled | #90a1b9 | #62748e | var(--esds-button-content-color-disabled) | N/A |
+| button.content.font | 500 1rem/24px Infomaniak Sans | 500 1rem/24px Infomaniak Sans | var(--esds-button-content-font) | N/A |
+| button.color.state.hover | #0b426f1f | #f8fafc1f | var(--esds-button-color-state-hover) | N/A |
+| button.color.state.pressed | #0b426f29 | #f8fafc29 | var(--esds-button-color-state-pressed) | N/A |
+| button.icon.size | 24px | 24px | var(--esds-button-icon-size) | N/A |
 | focus.border.color | #0077cf | #36adfa | var(--esds-focus-border-color) | Focus-effect border color. |
 | focus.border.radius | 2px | 2px | var(--esds-focus-border-radius) | Focus-effect border radius. |
 | focus.border.width | 2px | 2px | var(--esds-focus-border-width) | Focus-effect border width. |
