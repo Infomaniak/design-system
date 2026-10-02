@@ -8,6 +8,7 @@ import {
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import { IOS_DESIGN_SYSTEM_REPOSITORY_NAME } from '../../../../../../../../scripts/helpers/github/constants/ios-design-system-repository-name.constant.ts';
 import type { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
+import { UPDATE_PACKAGE_VERSIONS_FILE_CHANGES_HOOK } from '../../../../../../../../scripts/helpers/publish/update-package-versions-file/update-package-versions-file-changes-hook.ts';
 import { updatePackageVersionsFile } from '../../../../../../../../scripts/helpers/publish/update-package-versions-file/update-package-versions-file.ts';
 import { formatSwiftFiles } from '../../../../../../../../scripts/helpers/swift/format-swift-files.ts';
 import {
@@ -67,6 +68,7 @@ export async function createIosSymbolsPublishGithubBranch({
 
       return `chore: ${packageName}@${version}`;
     },
+    changesHook: UPDATE_PACKAGE_VERSIONS_FILE_CHANGES_HOOK,
     logger,
     allowEmpty: 'yes-skip-push',
   });
