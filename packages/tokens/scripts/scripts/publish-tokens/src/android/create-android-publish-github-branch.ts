@@ -7,6 +7,7 @@ import {
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import { formatKotlinFiles } from '../../../../../../../scripts/helpers/kotlin/format-kotlin-files.ts';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
+import { UPDATE_PACKAGE_VERSIONS_FILE_CHANGES_HOOK } from '../../../../../../../scripts/helpers/publish/update-package-versions-file/update-package-versions-file-changes-hook.ts';
 import { updatePackageVersionsFile } from '../../../../../../../scripts/helpers/publish/update-package-versions-file/update-package-versions-file.ts';
 
 export interface CreateAndroidPublishGithubBranchOptions {
@@ -48,6 +49,7 @@ export function createAndroidPublishGithubBranch({
 
       return `chore: ${packageName}@${version}`;
     },
+    changesHook: UPDATE_PACKAGE_VERSIONS_FILE_CHANGES_HOOK,
     logger,
     allowEmpty: 'yes-skip-push',
   });

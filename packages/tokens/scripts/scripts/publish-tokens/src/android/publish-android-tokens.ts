@@ -47,7 +47,7 @@ export async function publishAndroidTokens({
       branchName: publishBranchName,
     });
 
-    if (changes.length > 1 /* NOTE: the package-versions.json file always changes */) {
+    if (changes.length > 0) {
       await createGithubPullRequest({
         owner: INFOMANIAK_GITHUB_ORGANIZATION,
         repository: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
