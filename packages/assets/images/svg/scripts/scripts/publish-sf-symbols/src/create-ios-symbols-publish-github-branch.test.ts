@@ -58,6 +58,12 @@ describe('createIosSymbolsPublishGithubBranch', () => {
   const runUpdateInRepository = async (repositoryDirectory: string): Promise<RunUpdateResult> => {
     let result: RunUpdateResult | undefined;
 
+    await writeFile(
+      join(repositoryDirectory, 'package-versions.json'),
+      JSON.stringify({ 'other-package': '9.9.9' }),
+      { encoding: 'utf8' },
+    );
+
     updateGitRepositoryOnNewBranchMock.mockImplementation(
       async (options: UpdateGitRepositoryOnNewBranchOptions): Promise<GitChanges> => {
         const context: UpdateGitRepositoryOnNewBranchUpdateFunctionContext = {
@@ -78,6 +84,7 @@ describe('createIosSymbolsPublishGithubBranch', () => {
       logger,
       xcassetsDirectory,
       swiftFile,
+      packageName: '@infomaniak-design-system/svg-assets',
       version: '1.2.3',
       branchName: 'esds-symbols/1.2.3',
     });
@@ -102,7 +109,7 @@ describe('createIosSymbolsPublishGithubBranch', () => {
 
     const { commitMessage } = await runUpdateInRepository(repositoryDirectory);
 
-    expect(commitMessage).toBe('chore: Update symbols to 1.2.3');
+    expect(commitMessage).toBe('chore: @infomaniak-design-system/svg-assets@1.2.3');
     expect(
       await readFile(
         join(destinationDirectory, 'a-square.symbolset', 'a-square.symbol.svg'),
@@ -132,5 +139,16 @@ describe('createIosSymbolsPublishGithubBranch', () => {
     await expect(
       stat(join(repositoryDirectory, IOS_SYMBOLS_SWIFT_DESTINATION_PATH)),
     ).resolves.toBeDefined();
+  });
+
+  it('records the published package version in package-versions.json', async () => {
+    const repositoryDirectory: string = join(tempDir, 'versions-repository');
+    await mkdir(repositoryDirectory, { recursive: true });
+
+    await runUpdateInRepository(repositoryDirectory);
+
+    expect(
+      JSON.parse(await readFile(join(repositoryDirectory, 'package-versions.json'), 'utf8')),
+    ).toEqual({ 'other-package': '9.9.9', '@infomaniak-design-system/svg-assets': '1.2.3' });
   });
 });

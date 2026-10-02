@@ -1,6 +1,7 @@
 import { join } from 'node:path';
 import type { PackageJson } from '../../../../../../../scripts/helpers/file/package-json/package-json.ts';
 import { readPackageJsonFile } from '../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
+import type { GitChanges } from '../../../../../../../scripts/helpers/git/git-changes.ts';
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import { IOS_DESIGN_SYSTEM_REPOSITORY_NAME } from '../../../../../../../scripts/helpers/github/constants/ios-design-system-repository-name.constant.ts';
 import { createGithubPullRequest } from '../../../../../../../scripts/helpers/github/pull-request/create-github-pull-request.ts';
@@ -25,7 +26,9 @@ export async function publishIosTokens({
   logger,
 }: PublishIosTokensOptions): Promise<void> {
   return logger.asyncTask('ios', async (logger: Logger): Promise<void> => {
-    const { version }: PackageJson = await readPackageJsonFile(join(rootDirectory, 'package.json'));
+    const { name, version }: PackageJson = await readPackageJsonFile(
+      join(rootDirectory, 'package.json'),
+    );
 
     const publishVersion: string = generatePackageJsonBuildVersion({
       version,
@@ -33,25 +36,24 @@ export async function publishIosTokens({
       prerelease,
     });
 
-    const publishBranchName: string = `esds/${publishVersion}`;
+    const publishBranchName: string = `esds/tokens/${publishVersion}`;
 
-    if (
-      (
-        await createIosPublishGithubBranch({
-          logger,
-          repositoryName: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
-          packageDirectory: join(outputDirectory, 'ios/swift'),
-          version: publishVersion,
-          branchName: publishBranchName,
-        })
-      ).length > 0
-    ) {
+    const changes: GitChanges = await createIosPublishGithubBranch({
+      logger,
+      repositoryName: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
+      packageDirectory: join(outputDirectory, 'ios/swift'),
+      packageName: name,
+      version: publishVersion,
+      branchName: publishBranchName,
+    });
+
+    if (changes.length > 0) {
       await createGithubPullRequest({
         owner: INFOMANIAK_GITHUB_ORGANIZATION,
         repository: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
         authToken: getEnvCiPullRequestAuthTokenMobile(),
-        title: `chore: Update to ${publishVersion}`,
-        body: `Update to ${publishVersion}`,
+        title: `chore: ${name}@${publishVersion}`,
+        body: `${name}@${publishVersion}`,
         head: publishBranchName,
         base: 'main',
       });

@@ -8,6 +8,8 @@ import {
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import { IOS_DESIGN_SYSTEM_REPOSITORY_NAME } from '../../../../../../../../scripts/helpers/github/constants/ios-design-system-repository-name.constant.ts';
 import type { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
+import { UPDATE_PACKAGE_VERSIONS_FILE_CHANGES_HOOK } from '../../../../../../../../scripts/helpers/publish/update-package-versions-file/update-package-versions-file-changes-hook.ts';
+import { updatePackageVersionsFile } from '../../../../../../../../scripts/helpers/publish/update-package-versions-file/update-package-versions-file.ts';
 import { formatSwiftFiles } from '../../../../../../../../scripts/helpers/swift/format-swift-files.ts';
 import {
   IOS_SYMBOLS_DESTINATION_PATH,
@@ -20,6 +22,7 @@ export interface CreateIosSymbolsPublishGithubBranchOptions {
   readonly xcassetsDirectory: string;
   /** Generated Swift source exposing the symbols outside the package. */
   readonly swiftFile: string;
+  readonly packageName: string;
   readonly version: string;
   readonly branchName: string;
 }
@@ -32,6 +35,7 @@ export async function createIosSymbolsPublishGithubBranch({
   logger,
   xcassetsDirectory,
   swiftFile,
+  packageName,
   version,
   branchName,
 }: CreateIosSymbolsPublishGithubBranchOptions): Promise<GitChanges> {
@@ -45,16 +49,26 @@ export async function createIosSymbolsPublishGithubBranch({
 
       // Replace the whole asset catalog so removed icons are not kept stale on the iOS side.
       await rm(destinationDirectory, { recursive: true, force: true });
-      await cp(xcassetsDirectory, destinationDirectory, { recursive: true, force: true });
-      await cp(swiftFile, join(cwd, IOS_SYMBOLS_SWIFT_DESTINATION_PATH), { force: true });
+
+      await Promise.all([
+        cp(xcassetsDirectory, destinationDirectory, { recursive: true, force: true }),
+        cp(swiftFile, join(cwd, IOS_SYMBOLS_SWIFT_DESTINATION_PATH), { force: true }),
+        updatePackageVersionsFile({
+          packageName,
+          version,
+          cwd,
+        }),
+      ]);
+
       await formatSwiftFiles({
         logger,
         cwd,
         paths: [IOS_SYMBOLS_SWIFT_DESTINATION_PATH],
       });
 
-      return `chore: Update symbols to ${version}`;
+      return `chore: ${packageName}@${version}`;
     },
+    changesHook: UPDATE_PACKAGE_VERSIONS_FILE_CHANGES_HOOK,
     logger,
     allowEmpty: 'yes-skip-push',
   });

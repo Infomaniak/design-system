@@ -7,6 +7,8 @@ import {
 } from '../../../../../../../scripts/helpers/git/update-git-repository-on-new-branch.ts';
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
+import { UPDATE_PACKAGE_VERSIONS_FILE_CHANGES_HOOK } from '../../../../../../../scripts/helpers/publish/update-package-versions-file/update-package-versions-file-changes-hook.ts';
+import { updatePackageVersionsFile } from '../../../../../../../scripts/helpers/publish/update-package-versions-file/update-package-versions-file.ts';
 import { formatSwiftFiles } from '../../../../../../../scripts/helpers/swift/format-swift-files.ts';
 import {
   SWIFT_FOUNDATION_DIR,
@@ -19,35 +21,9 @@ export interface CreateIosPublishGithubBranchOptions {
   readonly logger: Logger;
   readonly repositoryName: string;
   readonly packageDirectory: string;
+  readonly packageName: string;
   readonly version: string;
   readonly branchName: string;
-}
-
-const PROTECTED_FOUNDATION_ENTRIES: readonly string[] = ['SwiftUI'];
-
-async function removeDirectoryContentsExcept(
-  directory: string,
-  keptEntries: readonly string[],
-): Promise<void> {
-  let entries: readonly string[];
-
-  try {
-    entries = await readdir(directory);
-  } catch (error: unknown) {
-    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
-      return;
-    }
-
-    throw error;
-  }
-
-  await Promise.all(
-    entries
-      .filter((entry: string): boolean => !keptEntries.includes(entry))
-      .map((entry: string): Promise<void> => {
-        return rm(join(directory, entry), { recursive: true, force: true });
-      }),
-  );
 }
 
 /**
@@ -57,6 +33,7 @@ export async function createIosPublishGithubBranch({
   logger,
   repositoryName,
   packageDirectory,
+  packageName,
   version,
   branchName,
 }: CreateIosPublishGithubBranchOptions): Promise<GitChanges> {
@@ -83,7 +60,14 @@ export async function createIosPublishGithubBranch({
         }),
       ]);
 
-      await cp(packageDirectory, cwd, { recursive: true, force: true });
+      await Promise.all([
+        cp(packageDirectory, cwd, { recursive: true, force: true }),
+        updatePackageVersionsFile({
+          packageName,
+          version,
+          cwd,
+        }),
+      ]);
 
       await formatSwiftFiles({
         logger,
@@ -91,9 +75,39 @@ export async function createIosPublishGithubBranch({
         paths: ['.'],
       });
 
-      return `chore: Update to ${version}`;
+      return `chore: ${packageName}@${version}`;
     },
+    changesHook: UPDATE_PACKAGE_VERSIONS_FILE_CHANGES_HOOK,
     logger,
     allowEmpty: 'yes-skip-push',
   });
+}
+
+/* INTERNAL */
+
+const PROTECTED_FOUNDATION_ENTRIES: readonly string[] = ['SwiftUI'];
+
+async function removeDirectoryContentsExcept(
+  directory: string,
+  keptEntries: readonly string[],
+): Promise<void> {
+  let entries: readonly string[];
+
+  try {
+    entries = await readdir(directory);
+  } catch (error: unknown) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      return;
+    }
+
+    throw error;
+  }
+
+  await Promise.all(
+    entries
+      .filter((entry: string): boolean => !keptEntries.includes(entry))
+      .map((entry: string): Promise<void> => {
+        return rm(join(directory, entry), { recursive: true, force: true });
+      }),
+  );
 }
