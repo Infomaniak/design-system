@@ -47,7 +47,7 @@ export async function publishIosTokens({
           version: publishVersion,
           branchName: publishBranchName,
         })
-      ).length > 0
+      ).length > 1 /* NOTE: the package-versions.json file always changes */
     ) {
       await createGithubPullRequest({
         owner: INFOMANIAK_GITHUB_ORGANIZATION,
