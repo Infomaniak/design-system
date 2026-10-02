@@ -203,7 +203,7 @@ const meta = {
 - **Purpose:** Collect structured change descriptions, automate version bumps, and generate `CHANGELOG.md` files. Changesets do **not** handle publishing — `ci:publish` remains the publish mechanism.
 - **Config:** `.changeset/config.json` with `baseBranch: "develop"`, `access: "public"`, ignores non-publishable packages.
 - **Versioning:** Automated via `.github/workflows/publish.yml`.
-- **Only packages with a `publish` script are versioned:** `@infomaniak-design-system/tokens` and `@infomaniak-design-system/components` (published to npm), plus `@infomaniak-design-system/fonts` and `@infomaniak-design-system/figma-plugin-icons` (published as GitHub Release assets — no npm). Changesets are required for the npm packages and fonts; the Figma plugin is exempt — bump its version manually in `package.json` when a new stable release is wanted. PRs touching only docs/apps/scripts don't need a changeset.
+- **Only packages with a `publish` script are versioned:** `@infomaniak-design-system/tokens` and `@infomaniak-design-system/components` (published to npm), plus `@infomaniak-design-system/fonts` and `@infomaniak-design-system/figma-plugin-icons` (published as GitHub Release assets — no npm). Changesets are required for all of these packages. PRs touching only docs/apps/scripts don't need a changeset.
 - **Creating a changeset:** Use the `generate-changeset` skill (`.agents/skills/generate-changeset/SKILL.md`) — it runs `git diff develop...HEAD`, determines the semver bump, identifies affected packages, and writes a formatted `.changeset/*.md` file. Prefer this over the manual `yarn changeset` flow.
 
 ---
