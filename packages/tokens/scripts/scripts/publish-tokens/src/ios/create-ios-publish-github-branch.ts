@@ -1,5 +1,7 @@
 import { cp, readdir, rm } from 'node:fs/promises';
 import { join } from 'node:path';
+import { readJsonFile } from '../../../../../../../scripts/helpers/file/read-json-file.ts';
+import { writeJsonFileSafe } from '../../../../../../../scripts/helpers/file/write-json-file-safe.ts';
 import type { GitChanges } from '../../../../../../../scripts/helpers/git/git-changes.ts';
 import {
   updateGitRepositoryOnNewBranch,
@@ -19,35 +21,9 @@ export interface CreateIosPublishGithubBranchOptions {
   readonly logger: Logger;
   readonly repositoryName: string;
   readonly packageDirectory: string;
+  readonly packageName: string;
   readonly version: string;
   readonly branchName: string;
-}
-
-const PROTECTED_FOUNDATION_ENTRIES: readonly string[] = ['SwiftUI'];
-
-async function removeDirectoryContentsExcept(
-  directory: string,
-  keptEntries: readonly string[],
-): Promise<void> {
-  let entries: readonly string[];
-
-  try {
-    entries = await readdir(directory);
-  } catch (error: unknown) {
-    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
-      return;
-    }
-
-    throw error;
-  }
-
-  await Promise.all(
-    entries
-      .filter((entry: string): boolean => !keptEntries.includes(entry))
-      .map((entry: string): Promise<void> => {
-        return rm(join(directory, entry), { recursive: true, force: true });
-      }),
-  );
 }
 
 /**
@@ -57,6 +33,7 @@ export async function createIosPublishGithubBranch({
   logger,
   repositoryName,
   packageDirectory,
+  packageName,
   version,
   branchName,
 }: CreateIosPublishGithubBranchOptions): Promise<GitChanges> {
@@ -85,15 +62,51 @@ export async function createIosPublishGithubBranch({
 
       await cp(packageDirectory, cwd, { recursive: true, force: true });
 
+      // update package versions
+      await writeJsonFileSafe(join(cwd, PACKAGE_VERSIONS_FILE), {
+        ...(await readJsonFile(join(cwd, PACKAGE_VERSIONS_FILE))),
+        [packageName]: version,
+      });
+
       await formatSwiftFiles({
         logger,
         cwd,
         paths: ['.'],
       });
 
-      return `chore: Update to ${version}`;
+      return `chore: ${packageName}@${version}`;
     },
     logger,
     allowEmpty: 'yes-skip-push',
   });
+}
+
+/* INTERNAL */
+
+const PROTECTED_FOUNDATION_ENTRIES: readonly string[] = ['SwiftUI'];
+const PACKAGE_VERSIONS_FILE: string = 'package-versions.json';
+
+async function removeDirectoryContentsExcept(
+  directory: string,
+  keptEntries: readonly string[],
+): Promise<void> {
+  let entries: readonly string[];
+
+  try {
+    entries = await readdir(directory);
+  } catch (error: unknown) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      return;
+    }
+
+    throw error;
+  }
+
+  await Promise.all(
+    entries
+      .filter((entry: string): boolean => !keptEntries.includes(entry))
+      .map((entry: string): Promise<void> => {
+        return rm(join(directory, entry), { recursive: true, force: true });
+      }),
+  );
 }

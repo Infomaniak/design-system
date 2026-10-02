@@ -25,7 +25,9 @@ export async function publishIosTokens({
   logger,
 }: PublishIosTokensOptions): Promise<void> {
   return logger.asyncTask('ios', async (logger: Logger): Promise<void> => {
-    const { version }: PackageJson = await readPackageJsonFile(join(rootDirectory, 'package.json'));
+    const { name, version }: PackageJson = await readPackageJsonFile(
+      join(rootDirectory, 'package.json'),
+    );
 
     const publishVersion: string = generatePackageJsonBuildVersion({
       version,
@@ -41,6 +43,7 @@ export async function publishIosTokens({
           logger,
           repositoryName: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
           packageDirectory: join(outputDirectory, 'ios/swift'),
+          packageName: name,
           version: publishVersion,
           branchName: publishBranchName,
         })
