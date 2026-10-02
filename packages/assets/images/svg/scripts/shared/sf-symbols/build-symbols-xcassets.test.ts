@@ -16,6 +16,11 @@ const EVENODD_ICON: SymbolIcon = {
   outlinedPaths: [{ d: 'M 4 4 L 20 4 L 20 20 Z', windingRule: 'EVENODD' }],
 };
 
+const OVERFLOWING_ICON: SymbolIcon = {
+  name: 'overflowing',
+  outlinedPaths: [{ d: 'M 0 0 L 24.437 24.437', windingRule: 'NONZERO' }],
+};
+
 describe('buildSymbolsXcassets', () => {
   test('writes one symbolset per icon', async () => {
     const outputDirectory: string = await mkdtemp(join(tmpdir(), 'sf-symbols-xcassets-'));
@@ -62,6 +67,36 @@ describe('buildSymbolsXcassets', () => {
           encoding: 'utf8',
         }),
       ).resolves.toContain('evenodd.symbol.svg');
+    } finally {
+      await rm(outputDirectory, { force: true, recursive: true });
+    }
+  });
+
+  test('warns when an icon artwork overflows the design canvas', async () => {
+    const outputDirectory: string = await mkdtemp(join(tmpdir(), 'sf-symbols-xcassets-'));
+    try {
+      const template = await readSymbolTemplate();
+      const warnings: unknown[][] = [];
+      const warnLogger: Logger = new Logger('$TEST', {
+        logLevel: {
+          warn: (_name: string, args: unknown[]): void => {
+            warnings.push(args);
+          },
+        },
+      });
+
+      await buildSymbolsXcassets({
+        outputDirectory,
+        template,
+        icons: [OVERFLOWING_ICON],
+        logger: warnLogger,
+      });
+
+      expect(warnings).toEqual([
+        [
+          'Symbol "overflowing" artwork overflows the 24×24 design canvas (right 0.437: renders within the symbol cell margins, bottom 0.437: renders outside the symbol cell); it is kept proportional.',
+        ],
+      ]);
     } finally {
       await rm(outputDirectory, { force: true, recursive: true });
     }
