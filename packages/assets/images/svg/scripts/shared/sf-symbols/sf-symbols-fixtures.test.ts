@@ -4,10 +4,16 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterEach, beforeEach, describe, expect, test } from 'vitest';
 import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
-import { computePathDataBoundingBox } from '../icons/bake-transform-into-path.ts';
+import {
+  computePathDataBoundingBox,
+  computePathsBoundingBox,
+  type PathBoundingBox,
+} from '../icons/bake-transform-into-path.ts';
+import { getSymbolCanvasScale } from './build-symbol-svg.ts';
 import { generateSfSymbols } from './generate-sf-symbols.ts';
 import { readSymbolTemplate, type SymbolTemplate } from './parse-symbol-template.ts';
-import { SYMBOLS_XCASSETS_DIRECTORY_NAME } from './sf-symbols-config.ts';
+import { OUTLINE_FILE_SUFFIX } from './read-symbol-icons.ts';
+import { SYMBOL_CANVAS_SIZE, SYMBOLS_XCASSETS_DIRECTORY_NAME } from './sf-symbols-config.ts';
 
 const logger = Logger.never();
 const FIXTURES_DIRECTORY: string = join(dirname(fileURLToPath(import.meta.url)), 'fixtures');
@@ -49,6 +55,17 @@ describe('sf-symbols fixtures', () => {
     );
   };
 
+  const readFixtureOutlineBoundingBox = async (iconName: string): Promise<PathBoundingBox> => {
+    const content: string = await readFile(
+      join(FIXTURES_DIRECTORY, `${iconName}${OUTLINE_FILE_SUFFIX}`),
+      'utf8',
+    );
+    const pathDataList: readonly string[] = [...content.matchAll(/ d="([^"]+)"/g)].map(
+      (match: RegExpMatchArray): string => match[1]!,
+    );
+    return computePathsBoundingBox(pathDataList);
+  };
+
   test('builds every fixture icon into a complete symbolset', async () => {
     const xcassetsDirectory: string = join(outputDirectory, SYMBOLS_XCASSETS_DIRECTORY_NAME);
 
@@ -85,7 +102,10 @@ describe('sf-symbols fixtures', () => {
       const content: string = await readSymbolSvg(iconName);
       expect(content).toContain(`Generated from ${iconName}</text>`);
 
+      const sourceBoundingBox: PathBoundingBox = await readFixtureOutlineBoundingBox(iconName);
+
       for (const variant of template.variants) {
+        const canvasScale: number = getSymbolCanvasScale({ variant, template });
         const groupOpenTag: string =
           new RegExp(`<g id="${variant.id}"[^>]*>`).exec(content)?.[0] ?? '';
         const templateGroupOpenTag: string =
@@ -101,15 +121,25 @@ describe('sf-symbols fixtures', () => {
         expect(fittedPaths).toHaveLength(FIXTURE_PATH_COUNTS[iconName]!);
 
         const boundingBox = computePathDataBoundingBox(fittedPaths.join(' '));
-        const width: number = boundingBox.maxX - boundingBox.minX;
-        const height: number = boundingBox.maxY - boundingBox.minY;
 
-        // the artwork is maximally scaled: it fills the cell in at least one dimension
-        // (width-limited for wide icons, height-limited otherwise)
-        expect(Math.max(width / variant.cellWidth, height / cellHeight)).toBeCloseTo(1, 2);
-        // centered horizontally in the cell, vertically between capline and baseline
-        expect((boundingBox.minX + boundingBox.maxX) / 2).toBeCloseTo(variant.cellWidth / 2, 2);
-        expect((boundingBox.minY + boundingBox.maxY) / 2).toBeCloseTo(-cellHeight / 2, 2);
+        // the 24×24 design canvas is mapped onto the cell: designed insets and proportions
+        // between icons are preserved
+        expect(boundingBox.minX).toBeCloseTo(
+          variant.cellWidth / 2 - canvasScale * (SYMBOL_CANVAS_SIZE / 2 - sourceBoundingBox.minX),
+          2,
+        );
+        expect(boundingBox.maxX).toBeCloseTo(
+          variant.cellWidth / 2 + canvasScale * (sourceBoundingBox.maxX - SYMBOL_CANVAS_SIZE / 2),
+          2,
+        );
+        expect(boundingBox.minY).toBeCloseTo(
+          -cellHeight / 2 - canvasScale * (SYMBOL_CANVAS_SIZE / 2 - sourceBoundingBox.minY),
+          2,
+        );
+        expect(boundingBox.maxY).toBeCloseTo(
+          -cellHeight / 2 + canvasScale * (sourceBoundingBox.maxY - SYMBOL_CANVAS_SIZE / 2),
+          2,
+        );
         // fully inside the cell
         expect(boundingBox.minY).toBeGreaterThanOrEqual(-cellHeight - 0.01);
         expect(boundingBox.maxY).toBeLessThanOrEqual(0.01);

@@ -5,7 +5,7 @@ import { writeTextFileSafe } from '../../../../../../../scripts/helpers/file/wri
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { ICON_NAME_PATTERN } from '../icons/icon-name.ts';
 import type { SvgOutlinePath } from '../icons/outline-path.ts';
-import { buildSymbolSvg } from './build-symbol-svg.ts';
+import { buildSymbolSvg, getSymbolCanvasOverflowWarnings } from './build-symbol-svg.ts';
 import type { SymbolTemplate } from './parse-symbol-template.ts';
 import { SYMBOLS_XCASSETS_DIRECTORY_NAME } from './sf-symbols-config.ts';
 
@@ -48,6 +48,13 @@ export async function buildSymbolsXcassets({
         join(symbolsetDirectory, `${symbolName}.symbol.svg`),
         buildSymbolSvg({ symbolName, outlinedPaths: icon.outlinedPaths, template }),
       );
+      for (const warning of getSymbolCanvasOverflowWarnings({
+        symbolName,
+        outlinedPaths: icon.outlinedPaths,
+        template,
+      })) {
+        logger.warn(warning);
+      }
       logger.info(`Built ${JSON.stringify(`${symbolName}.symbolset`)}.`);
     }
   });

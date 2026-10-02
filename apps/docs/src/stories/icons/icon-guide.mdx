@@ -142,3 +142,7 @@ See the [implementation](https://github.com/Infomaniak/design-system/blob/develo
 Icons are also delivered to iOS as [custom SF Symbols](https://developer.apple.com/sf-symbols/). During the Figma import, an **outlined** version of each icon (filled paths, no strokes — a requirement of SF Symbols) is committed alongside the web SVG and feeds the generation of the `ESDSSymbols.xcassets` catalog published to the `ios-design-system` repository.
 
 Symbols follow the same naming convention with the `esds-` prefix (e.g. `Image("esds-home")` in SwiftUI).
+
+Symbols preserve the web design: the 24×24 icon canvas is mapped onto the SF Symbols cap height, so the designed padding and the relative sizes between icons are kept (e.g. a `check` renders smaller than a `circle-check-filled`, exactly as on web).
+
+Sizing follows the SF Pro font metrics: at a font size of _F_, the symbol renders like the web icon at `0.7046 × F` px. To reproduce a web icon of _S_ px, use a font size of about `1.42 × S` (i.e. `2048 / 1443`), e.g. a 20px web icon → 28.4pt font.
