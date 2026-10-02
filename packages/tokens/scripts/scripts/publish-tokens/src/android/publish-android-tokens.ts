@@ -1,6 +1,7 @@
 import { join } from 'node:path';
 import type { PackageJson } from '../../../../../../../scripts/helpers/file/package-json/package-json.ts';
 import { readPackageJsonFile } from '../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
+import type { GitChanges } from '../../../../../../../scripts/helpers/git/git-changes.ts';
 import { ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME } from '../../../../../../../scripts/helpers/github/constants/android-design-system-repository-name.constant.ts';
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import { createGithubPullRequest } from '../../../../../../../scripts/helpers/github/pull-request/create-github-pull-request.ts';
@@ -25,7 +26,9 @@ export async function publishAndroidTokens({
   logger,
 }: PublishAndroidTokensOptions): Promise<void> {
   return logger.asyncTask('android', async (logger: Logger): Promise<void> => {
-    const { version }: PackageJson = await readPackageJsonFile(join(rootDirectory, 'package.json'));
+    const { name, version }: PackageJson = await readPackageJsonFile(
+      join(rootDirectory, 'package.json'),
+    );
 
     const publishVersion: string = generatePackageJsonBuildVersion({
       version,
@@ -33,25 +36,24 @@ export async function publishAndroidTokens({
       prerelease,
     });
 
-    const publishBranchName: string = `esds/${publishVersion}`;
+    const publishBranchName: string = `esds/tokens/${publishVersion}`;
 
-    if (
-      (
-        await createAndroidPublishGithubBranch({
-          logger,
-          repositoryName: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
-          packageDirectory: join(outputDirectory, 'kotlin'),
-          version: publishVersion,
-          branchName: publishBranchName,
-        })
-      ).length > 0
-    ) {
+    const changes: GitChanges = await createAndroidPublishGithubBranch({
+      logger,
+      repositoryName: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
+      packageDirectory: join(outputDirectory, 'kotlin'),
+      packageName: name,
+      version: publishVersion,
+      branchName: publishBranchName,
+    });
+
+    if (changes.length > 1 /* NOTE: the package-versions.json file always changes */) {
       await createGithubPullRequest({
         owner: INFOMANIAK_GITHUB_ORGANIZATION,
         repository: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
         authToken: getEnvCiPullRequestAuthTokenMobile(),
-        title: `chore: Update to ${publishVersion}`,
-        body: `Update to ${publishVersion}`,
+        title: `chore: ${name}@${publishVersion}`,
+        body: `${name}@${publishVersion}`,
         head: publishBranchName,
         base: 'main',
       });
