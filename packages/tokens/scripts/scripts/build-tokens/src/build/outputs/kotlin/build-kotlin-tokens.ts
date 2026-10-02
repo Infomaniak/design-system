@@ -1,9 +1,12 @@
+import { join } from 'node:path';
+import { writeJsonFileSafe } from '../../../../../../../../../scripts/helpers/file/write-json-file-safe.ts';
 import { writeTextFileSafe } from '../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
 import { toCamelCase } from '../../../../../../../../../scripts/helpers/misc/case/to-camel-case/to-camel-case.ts';
 import { toPascalCase } from '../../../../../../../../../scripts/helpers/misc/case/to-pascal-case/to-pascal-case.ts';
 import { dedent } from '../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { removeTrailingSlash } from '../../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
+import { generateWorkspaceState } from '../../../../../../../../../scripts/helpers/workspace/state/generate-workspace-state.ts';
 import type { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type {
   DesignTokenContexts,
@@ -49,6 +52,11 @@ export function buildKotlinTokens({
   return logger.asyncTask('kotlin', async (logger: Logger): Promise<void> => {
     outputDirectory = removeTrailingSlash(outputDirectory);
     const kotlinOutputDirectory: string = `${outputDirectory}/kotlin`;
+
+    await writeJsonFileSafe(
+      join(kotlinOutputDirectory, 'workspace-state.json'),
+      await generateWorkspaceState(),
+    );
 
     const kotlinTokensCollectionOptions: DesignTokensCollectionTokenToKotlinVariableDeclarationOptions =
       {

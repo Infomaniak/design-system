@@ -1,7 +1,9 @@
 import { join } from 'node:path';
+import { writeJsonFileSafe } from '../../../../../../../../../scripts/helpers/file/write-json-file-safe.ts';
 import { writeTextFileSafe } from '../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
 import { removeTrailingSlash } from '../../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
+import { generateWorkspaceState } from '../../../../../../../../../scripts/helpers/workspace/state/generate-workspace-state.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { DesignTokenModifiers } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import { type SwiftEnumDeclaration } from '../../../../../../shared/dtcg/resolver/to/swift/swift-enum-declaration/swift-enum-declaration.ts';
@@ -74,6 +76,11 @@ export async function buildSwiftTokens({
     const primitivesTargetDirectory: string = join(
       iosSwiftOutputDirectory,
       SWIFT_PRIMITIVE_TARGET_DIR,
+    );
+
+    await writeJsonFileSafe(
+      join(iosSwiftOutputDirectory, 'workspace-state.json'),
+      await generateWorkspaceState(),
     );
 
     const declarations: Map<string, SwiftEnumDeclaration[]> = new Map();
