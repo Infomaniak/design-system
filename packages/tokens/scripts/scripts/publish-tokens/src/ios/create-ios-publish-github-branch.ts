@@ -1,7 +1,5 @@
 import { cp, readdir, rm } from 'node:fs/promises';
 import { join } from 'node:path';
-import { readJsonFile } from '../../../../../../../scripts/helpers/file/read-json-file.ts';
-import { writeJsonFileSafe } from '../../../../../../../scripts/helpers/file/write-json-file-safe.ts';
 import type { GitChanges } from '../../../../../../../scripts/helpers/git/git-changes.ts';
 import {
   updateGitRepositoryOnNewBranch,
@@ -9,6 +7,7 @@ import {
 } from '../../../../../../../scripts/helpers/git/update-git-repository-on-new-branch.ts';
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
+import { updatePackageVersionsFile } from '../../../../../../../scripts/helpers/publish/update-package-versions-file/update-package-versions-file.ts';
 import { formatSwiftFiles } from '../../../../../../../scripts/helpers/swift/format-swift-files.ts';
 import {
   SWIFT_FOUNDATION_DIR,
@@ -60,13 +59,14 @@ export async function createIosPublishGithubBranch({
         }),
       ]);
 
-      await cp(packageDirectory, cwd, { recursive: true, force: true });
-
-      // update package versions
-      await writeJsonFileSafe(join(cwd, PACKAGE_VERSIONS_FILE), {
-        ...(await readJsonFile(join(cwd, PACKAGE_VERSIONS_FILE))),
-        [packageName]: version,
-      });
+      await Promise.all([
+        cp(packageDirectory, cwd, { recursive: true, force: true }),
+        updatePackageVersionsFile({
+          packageName,
+          version,
+          cwd,
+        }),
+      ]);
 
       await formatSwiftFiles({
         logger,
@@ -84,7 +84,6 @@ export async function createIosPublishGithubBranch({
 /* INTERNAL */
 
 const PROTECTED_FOUNDATION_ENTRIES: readonly string[] = ['SwiftUI'];
-const PACKAGE_VERSIONS_FILE: string = 'package-versions.json';
 
 async function removeDirectoryContentsExcept(
   directory: string,

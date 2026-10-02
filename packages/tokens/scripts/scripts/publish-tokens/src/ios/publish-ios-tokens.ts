@@ -1,6 +1,7 @@
 import { join } from 'node:path';
 import type { PackageJson } from '../../../../../../../scripts/helpers/file/package-json/package-json.ts';
 import { readPackageJsonFile } from '../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
+import type { GitChanges } from '../../../../../../../scripts/helpers/git/git-changes.ts';
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import { IOS_DESIGN_SYSTEM_REPOSITORY_NAME } from '../../../../../../../scripts/helpers/github/constants/ios-design-system-repository-name.constant.ts';
 import { createGithubPullRequest } from '../../../../../../../scripts/helpers/github/pull-request/create-github-pull-request.ts';
@@ -35,20 +36,18 @@ export async function publishIosTokens({
       prerelease,
     });
 
-    const publishBranchName: string = `esds/${publishVersion}`;
+    const publishBranchName: string = `esds/tokens/${publishVersion}`;
 
-    if (
-      (
-        await createIosPublishGithubBranch({
-          logger,
-          repositoryName: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
-          packageDirectory: join(outputDirectory, 'ios/swift'),
-          packageName: name,
-          version: publishVersion,
-          branchName: publishBranchName,
-        })
-      ).length > 1 /* NOTE: the package-versions.json file always changes */
-    ) {
+    const changes: GitChanges = await createIosPublishGithubBranch({
+      logger,
+      repositoryName: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
+      packageDirectory: join(outputDirectory, 'ios/swift'),
+      packageName: name,
+      version: publishVersion,
+      branchName: publishBranchName,
+    });
+
+    if (changes.length > 1 /* NOTE: the package-versions.json file always changes */) {
       await createGithubPullRequest({
         owner: INFOMANIAK_GITHUB_ORGANIZATION,
         repository: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
