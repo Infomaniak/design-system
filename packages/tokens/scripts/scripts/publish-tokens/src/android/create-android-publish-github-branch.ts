@@ -54,5 +54,3 @@ export function createAndroidPublishGithubBranch({
     allowEmpty: 'yes-skip-push',
   });
 }
-
-/* INTERNAL */
