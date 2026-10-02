@@ -52,10 +52,15 @@ job (`yarn ci:publish`) when it lands on `develop` (prereleases tagged
 `@infomaniak-design-system/figma-plugin-icons@<version>`).
 
 The release asset is a zip (`esds-icons.zip`) containing `manifest.json` and
-the built plugin, ready to be imported in Figma. The version comes from
-`package.json`: bump it when you want a new stable release (re-publishing an
-existing version is skipped, preventing accidental overwrites). Prereleases
-from `develop` are timestamped and always unique — no version bump needed.
+the built plugin, ready to be imported in Figma.
+
+Stable versions are managed with changesets, like every publishable package:
+add a changeset to your pull request (`yarn changeset`, bumping
+`@infomaniak-design-system/figma-plugin-icons`). The release PR (`develop` →
+`main`) then runs `yarn changeset:version`, which bumps `package.json` and
+generates the `CHANGELOG.md` entry. Re-publishing an existing version is
+skipped (`skipIfExists`), preventing accidental overwrites. Prereleases from
+`develop` are timestamped and always unique — no changeset needed for them.
 
 ### Structure
 
