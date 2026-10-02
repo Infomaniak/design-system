@@ -6,6 +6,7 @@ import type { Logger } from '../../../../../../../scripts/helpers/log/logger.ts'
 import { ICON_NAME_PATTERN } from '../icons/icon-name.ts';
 import type { SvgOutlinePath } from '../icons/outline-path.ts';
 import type { SymbolIcon } from './build-symbols-xcassets.ts';
+import { SYMBOL_OUTLINE_VIEW_BOX_SIZE } from './sf-symbols-config.ts';
 
 export interface ReadSymbolIconsOptions {
   readonly outlinesDirectory: string;
@@ -76,7 +77,7 @@ export async function readSymbolIcons({
 export const OUTLINE_FILE_SUFFIX = '.outline.svg';
 const WEB_ICON_FILE_SUFFIX = '.svg';
 const EXCLUDED_WEB_ICON_FILE_SUFFIXES: readonly string[] = [OUTLINE_FILE_SUFFIX, '.mask.svg'];
-const OUTLINED_SVG_VIEW_BOX = 'viewBox="0 0 24 24"';
+const OUTLINED_SVG_VIEW_BOX = `viewBox="0 0 ${String(SYMBOL_OUTLINE_VIEW_BOX_SIZE)} ${String(SYMBOL_OUTLINE_VIEW_BOX_SIZE)}"`;
 
 function parseOutlinedSvg(content: string, fileName: string): readonly SvgOutlinePath[] {
   if (!content.includes(OUTLINED_SVG_VIEW_BOX)) {
