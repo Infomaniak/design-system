@@ -120,7 +120,14 @@ describe('resetStrokeConfig', () => {
     await saveStrokeConfig(store, VALID_CONFIG);
 
     const reset = await resetStrokeConfig(store);
-    expect(reset).toEqual(DEFAULT_STROKE_WEIGHTS);
+    expect(reset.config).toEqual(DEFAULT_STROKE_WEIGHTS);
+    expect(reset.saved).toBe(true);
     expect(store.peek('strokeConfig')).toEqual(DEFAULT_STROKE_WEIGHTS);
+  });
+
+  it('reports the defaults even when persisting fails', async () => {
+    const reset = await resetStrokeConfig(new FailingStore());
+    expect(reset.config).toEqual(DEFAULT_STROKE_WEIGHTS);
+    expect(reset.saved).toBe(false);
   });
 });

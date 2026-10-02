@@ -123,19 +123,25 @@ async function createScaledVariant(
 
   try {
     for (const child of sourceComponent.children) {
-      const processedChild: SceneNode =
-        child.type === 'INSTANCE' ? child.detachInstance() : child.clone();
+      const clone: SceneNode = child.clone();
+      tempFrame.appendChild(clone);
+
+      // Detaching the source's own instance children would mutate the source
+      // component, so clones are detached instead (inside the temp frame).
+      const processedChild: SceneNode = clone.type === 'INSTANCE' ? clone.detachInstance() : clone;
 
       if ('resize' in processedChild) {
         processedChild.resize(processedChild.width * scale, processedChild.height * scale);
+      }
+      if ('x' in processedChild) {
+        processedChild.x *= scale;
+        processedChild.y *= scale;
       }
 
       applyStrokeWeight(processedChild, strokeWeight);
       if (styleName === 'Filled') {
         applyIconFills(processedChild);
       }
-
-      tempFrame.appendChild(processedChild);
     }
 
     if (styleName === 'Outlined' && tempFrame.children.length > 0) {

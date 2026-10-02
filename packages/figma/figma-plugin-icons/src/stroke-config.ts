@@ -55,9 +55,15 @@ export async function saveStrokeConfig(
   }
 }
 
+export interface ResetStrokeConfigResult {
+  readonly config: StrokeConfig;
+  /** Whether the reset could be persisted. */
+  readonly saved: boolean;
+}
+
 /** Reset the stroke config to the design-token defaults and persist it. */
-export async function resetStrokeConfig(store: KeyValueStore): Promise<StrokeConfig> {
+export async function resetStrokeConfig(store: KeyValueStore): Promise<ResetStrokeConfigResult> {
   const config: StrokeConfig = { ...DEFAULT_STROKE_WEIGHTS };
-  await saveStrokeConfig(store, config);
-  return config;
+  const saved = await saveStrokeConfig(store, config);
+  return { config, saved };
 }

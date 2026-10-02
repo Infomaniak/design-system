@@ -1,7 +1,4 @@
-import { CANVAS_SIZE } from './tokens.ts';
-
-/** Sizing tolerance (in px) used when matching variant widths to the canvas size. */
-const SIZE_TOLERANCE = 0.1;
+import { isCanvasSize } from './tokens.ts';
 
 export interface IconVariants {
   readonly outlined: ComponentNode | null;
@@ -32,7 +29,8 @@ function isOutlinedVariantName(name: string): boolean {
  *
  * - A plain Component is used directly as the Outlined source.
  * - A ComponentSet's variants are detected by name (`Filled=true`, `filled=yes`,
- *   `Outlined`, `Outline`, ...). Filled takes priority when a name matches both.
+ *   `Outlined`, `Outline`, ...). Candidates must match the full canvas size
+ *   (24×24px). Filled takes priority when a name matches both.
  * - When no Outlined variant is found, the first canvas-size component is used
  *   as fallback (matches legacy behavior).
  */
@@ -45,7 +43,7 @@ export function detectVariants(source: ComponentNode | ComponentSetNode): IconVa
   let filled: ComponentNode | null = null;
 
   for (const child of source.children) {
-    if (child.type !== 'COMPONENT' || Math.abs(child.width - CANVAS_SIZE) > SIZE_TOLERANCE) {
+    if (child.type !== 'COMPONENT' || !isCanvasSize(child)) {
       continue;
     }
     if (isFilledVariantName(child.name) && filled === null) {
@@ -57,7 +55,7 @@ export function detectVariants(source: ComponentNode | ComponentSetNode): IconVa
 
   if (outlined === null) {
     for (const child of source.children) {
-      if (child.type === 'COMPONENT' && Math.abs(child.width - CANVAS_SIZE) < SIZE_TOLERANCE) {
+      if (child.type === 'COMPONENT' && isCanvasSize(child)) {
         outlined = child;
         break;
       }

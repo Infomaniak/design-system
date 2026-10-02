@@ -69,6 +69,20 @@ describe('detectVariants', () => {
     expect(result).toEqual({ outlined: null, filled: null });
   });
 
+  it('ignores components whose height differs from the canvas size', () => {
+    const flat = fakeComponent({ name: 'filled=false', height: 16 });
+    const result = detectVariants(fakeSet([flat]));
+    expect(result).toEqual({ outlined: null, filled: null });
+  });
+
+  it('skips named variants with a wrong height during the fallback scan', () => {
+    const flat = fakeComponent({ name: 'filled=false', height: 16 });
+    const generic = fakeComponent({ name: 'size=24' });
+    const result = detectVariants(fakeSet([flat, generic]));
+    expect(result.outlined).toBe(generic);
+    expect(result.filled).toBeNull();
+  });
+
   it('falls back to the first canvas-width component when no variant name matches', () => {
     const generic = fakeComponent({ name: 'size=24' });
     const result = detectVariants(fakeSet([generic]));

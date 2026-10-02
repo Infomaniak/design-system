@@ -48,7 +48,7 @@ function stubFigma(
         Promise.resolve(variablesByCollection[collectionKey] ?? []),
     },
     variables: {
-      getVariableByIdAsync: (key: string) => Promise.resolve(variablesByKey[key] ?? null),
+      importVariableByKeyAsync: (key: string) => Promise.resolve(variablesByKey[key] ?? null),
     },
   });
 }
@@ -127,7 +127,7 @@ describe('applyStrokeVariables', () => {
   it('skips variables throwing during resolution', async () => {
     vi.stubGlobal('figma', {
       variables: {
-        getVariableByIdAsync: () => Promise.reject(new Error('boom')),
+        importVariableByKeyAsync: () => Promise.reject(new Error('boom')),
       },
     });
 

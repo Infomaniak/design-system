@@ -5,6 +5,7 @@ import {
   DEFAULT_STROKE_WEIGHTS,
   ICON_COLORS,
   ICON_SIZES,
+  isCanvasSize,
   isIconSize,
 } from './tokens.ts';
 
@@ -38,5 +39,23 @@ describe('isIconSize', () => {
     expect(isIconSize(18)).toBe(false);
     expect(isIconSize('16')).toBe(false);
     expect(isIconSize(null)).toBe(false);
+  });
+});
+
+describe('isCanvasSize', () => {
+  it('accepts exact 24x24 nodes', () => {
+    expect(isCanvasSize({ width: 24, height: 24 })).toBe(true);
+  });
+
+  it('accepts nodes within the tolerance', () => {
+    expect(isCanvasSize({ width: 23.95, height: 24.05 })).toBe(true);
+  });
+
+  it('rejects undersized nodes', () => {
+    expect(isCanvasSize({ width: 16, height: 16 })).toBe(false);
+  });
+
+  it('rejects nodes with only one matching dimension', () => {
+    expect(isCanvasSize({ width: 24, height: 32 })).toBe(false);
   });
 });

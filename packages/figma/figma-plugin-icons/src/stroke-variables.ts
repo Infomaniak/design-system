@@ -48,6 +48,9 @@ export async function detectStrokeVariables(): Promise<DetectedStrokeVariable[]>
 /**
  * Resolve the value of each detected stroke variable and merge it into the
  * given config. Unresolvable variables are skipped. Figma-coupled.
+ *
+ * Library variables are not part of the current file: they must be imported
+ * by key (`importVariableByKeyAsync`) before their values can be read.
  */
 export async function applyStrokeVariables(
   variables: readonly DetectedStrokeVariable[],
@@ -57,7 +60,7 @@ export async function applyStrokeVariables(
 
   for (const variable of variables) {
     try {
-      const resolved = await figma.variables.getVariableByIdAsync(variable.key);
+      const resolved = await figma.variables.importVariableByKeyAsync(variable.key);
       if (!resolved) {
         continue;
       }

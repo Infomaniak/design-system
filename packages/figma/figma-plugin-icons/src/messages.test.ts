@@ -101,6 +101,14 @@ describe('parseUiMessage', () => {
     });
   });
 
+  it('accepts the empty invalid reason', () => {
+    const result = { name: 'eye', type: 'COMPONENT', valid: false, reason: 'empty' };
+    expect(parseUiMessage({ type: 'validation-result', result })).toEqual({
+      type: 'validation-result',
+      result,
+    });
+  });
+
   it('rejects malformed validation-result messages', () => {
     expect(
       parseUiMessage({ type: 'validation-result', result: { valid: true, reason: null } }),
@@ -204,6 +212,24 @@ describe('parseUiMessage', () => {
 
   it('rejects stroke-config-saved messages without a boolean', () => {
     expect(parseUiMessage({ type: 'stroke-config-saved', success: 'yes' })).toBeNull();
+  });
+
+  it('accepts stroke-config-reset messages', () => {
+    const config: StrokeConfig = { ...DEFAULT_STROKE_WEIGHTS };
+    expect(parseUiMessage({ type: 'stroke-config-reset', success: false, config })).toEqual({
+      type: 'stroke-config-reset',
+      success: false,
+      config,
+    });
+    expect(parseUiMessage({ type: 'stroke-config-reset', success: true })).toBeNull();
+  });
+
+  it('accepts stroke-variables-error messages', () => {
+    expect(parseUiMessage({ type: 'stroke-variables-error', message: 'échec' })).toEqual({
+      type: 'stroke-variables-error',
+      message: 'échec',
+    });
+    expect(parseUiMessage({ type: 'stroke-variables-error' })).toBeNull();
   });
 
   it('accepts stroke-variables-detected messages', () => {

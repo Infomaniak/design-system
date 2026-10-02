@@ -11,7 +11,12 @@ export const GENERATED_SUFFIX = '[generated]';
  * '24×24px' vs '24x24px' mismatch between sandbox and UI).
  */
 export type InvalidReason =
-  'not-a-component' | 'already-generated' | 'no-24x24-variant' | 'not-24x24' | 'no-strokes';
+  | 'not-a-component'
+  | 'already-generated'
+  | 'no-24x24-variant'
+  | 'not-24x24'
+  | 'no-strokes'
+  | 'empty';
 
 export interface IconValidation {
   readonly name: string;
@@ -57,8 +62,10 @@ export type UiMessage =
   | { type: 'error'; message: string }
   | { type: 'stroke-config'; config: StrokeConfig }
   | { type: 'stroke-config-saved'; success: boolean }
+  | { type: 'stroke-config-reset'; success: boolean; config: StrokeConfig }
   | { type: 'stroke-variables-detected'; variables: readonly DetectedStrokeVariable[] }
-  | { type: 'stroke-variables-applied'; success: boolean; config: StrokeConfig };
+  | { type: 'stroke-variables-applied'; success: boolean; config: StrokeConfig }
+  | { type: 'stroke-variables-error'; message: string };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
@@ -184,6 +191,12 @@ export function parseUiMessage(input: unknown): UiMessage | null {
         ? { type: 'stroke-config-saved', success: input['success'] }
         : null;
     }
+    case 'stroke-config-reset': {
+      const config = parseStrokeConfig(input['config']);
+      return typeof input['success'] === 'boolean' && config
+        ? { type: 'stroke-config-reset', success: input['success'], config }
+        : null;
+    }
     case 'stroke-variables-detected': {
       return isDetectedStrokeVariableList(input['variables'])
         ? { type: 'stroke-variables-detected', variables: input['variables'] }
@@ -193,6 +206,11 @@ export function parseUiMessage(input: unknown): UiMessage | null {
       const config = parseStrokeConfig(input['config']);
       return typeof input['success'] === 'boolean' && config
         ? { type: 'stroke-variables-applied', success: input['success'], config }
+        : null;
+    }
+    case 'stroke-variables-error': {
+      return typeof input['message'] === 'string'
+        ? { type: 'stroke-variables-error', message: input['message'] }
         : null;
     }
     default:
@@ -211,6 +229,7 @@ function isInvalidReason(value: unknown): value is InvalidReason {
     value === 'no-24x24-variant' ||
     value === 'not-24x24' ||
     value === 'no-strokes' ||
+    value === 'empty' ||
     value === null
   );
 }

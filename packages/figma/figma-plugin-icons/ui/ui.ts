@@ -13,6 +13,7 @@ const REASON_LABELS: Record<InvalidReason, string> = {
   'no-24x24-variant': 'Le ComponentSet doit contenir un variant de 24×24px',
   'not-24x24': 'Le composant doit faire exactement 24×24px',
   'no-strokes': 'Le composant ne contient pas de strokes (lines/paths)',
+  empty: 'Le composant est vide (aucun enfant à générer)',
 };
 
 function requireElement<T extends HTMLElement>(id: string): T {
@@ -21,6 +22,19 @@ function requireElement<T extends HTMLElement>(id: string): T {
     throw new Error(`Missing element #${id}`);
   }
   return element as T;
+}
+
+function createElement<K extends keyof HTMLElementTagNameMap>(
+  tag: K,
+  className: string,
+  text?: string,
+): HTMLElementTagNameMap[K] {
+  const element = document.createElement(tag);
+  element.className = className;
+  if (text !== undefined) {
+    element.textContent = text;
+  }
+  return element;
 }
 
 function sendToPlugin(message: PluginMessage): void {
@@ -91,17 +105,35 @@ window.onmessage = (event: MessageEvent) => {
         showVariablesStatus('error', 'Échec de la sauvegarde de la configuration');
       }
       break;
+    case 'stroke-config-reset':
+      fillStrokeInputs(message.config);
+      showVariablesStatus(
+        message.success ? 'success' : 'error',
+        message.success
+          ? 'Configuration réinitialisée'
+          : 'Échec de la réinitialisation de la configuration',
+      );
+      break;
     case 'stroke-variables-detected':
       handleVariablesDetected(message.variables);
       break;
     case 'stroke-variables-applied':
       if (message.success) {
         fillStrokeInputs(message.config);
+        const strong = document.createElement('strong');
+        strong.textContent = '✓ Variables appliquées avec succès';
+        const fragment = document.createDocumentFragment();
+        fragment.append(strong, document.createElement('br'), 'Les valeurs ont été mises à jour');
+        showVariablesStatus('success', fragment);
+      } else {
         showVariablesStatus(
-          'success',
-          '<strong>✓ Variables appliquées avec succès</strong><br>Les valeurs ont été mises à jour',
+          'error',
+          'Échec de l’application des variables — la configuration n’a pas été sauvegardée',
         );
       }
+      break;
+    case 'stroke-variables-error':
+      showVariablesStatus('error', message.message);
       break;
   }
 };
@@ -121,32 +153,36 @@ function showValidationResult(result: {
   const generateButton = requireElement<HTMLButtonElement>('btn-generate');
   showState('state-validation');
 
+  const item = createElement('div', `validation-item ${result.valid ? 'success' : 'error'}`);
+  item.appendChild(createElement('div', 'icon', result.valid ? '✓' : '✕'));
+  const content = createElement('div', 'validation-content');
   if (result.valid) {
-    list.innerHTML =
-      '<div class="validation-item success">' +
-      '<div class="icon">✓</div>' +
-      '<div class="validation-content">' +
-      `<div class="validation-label">${escapeHtml(result.name) || 'Composant'}</div>` +
-      `<div class="validation-desc">${escapeHtml(result.type) || 'Component'} • 24×24px • Contient des strokes</div>` +
-      '</div>' +
-      '</div>';
+    content.appendChild(createElement('div', 'validation-label', result.name || 'Composant'));
+    content.appendChild(
+      createElement(
+        'div',
+        'validation-desc',
+        `${result.type || 'Component'} • 24×24px • Contient des strokes`,
+      ),
+    );
+  } else {
+    content.appendChild(createElement('div', 'validation-label', 'Erreur de validation'));
+    const reason = result.reason ?? 'not-a-component';
+    const details = result.currentSize ? ` (actuel: ${result.currentSize})` : '';
+    content.appendChild(
+      createElement('div', 'validation-desc', `${REASON_LABELS[reason]}${details}`),
+    );
+  }
+  item.appendChild(content);
+  list.replaceChildren(item);
+
+  if (result.valid) {
     generateButton.disabled = false;
     generateButton.textContent = 'Générer les icônes';
-    return;
+  } else {
+    generateButton.disabled = true;
+    generateButton.textContent = 'Corrigez la sélection';
   }
-
-  const reason = result.reason ?? 'not-a-component';
-  const details = result.currentSize ? ` (actuel: ${result.currentSize})` : '';
-  list.innerHTML =
-    '<div class="validation-item error">' +
-    '<div class="icon">✕</div>' +
-    '<div class="validation-content">' +
-    '<div class="validation-label">Erreur de validation</div>' +
-    `<div class="validation-desc">${REASON_LABELS[reason]}${details}</div>` +
-    '</div>' +
-    '</div>';
-  generateButton.disabled = true;
-  generateButton.textContent = 'Corrigez la sélection';
 }
 
 function showValidationResults(summary: {
@@ -159,28 +195,37 @@ function showValidationResults(summary: {
   const generateButton = requireElement<HTMLButtonElement>('btn-generate');
   showState('state-validation');
 
-  let iconsHtml = '';
-  for (const [index, icon] of summary.icons.entries()) {
-    const stateClass = icon.valid ? 'success' : 'error';
-    const symbol = icon.valid ? '✓' : '✕';
-    const label = icon.valid
-      ? `<span class="multi-validation-type">${escapeHtml(icon.type) || 'Component'} • 24×24px</span>`
-      : `<span class="multi-validation-error">${escapeHtml(reasonLabel(icon.reason))}</span>`;
+  const header = createElement('div', 'multi-validation-header');
+  const validLabel = document.createElement('strong');
+  validLabel.textContent = `${summary.validCount} valides`;
+  header.append(
+    `${summary.total} icônes sélectionnées • `,
+    validLabel,
+    ` • ${summary.invalidCount} invalides`,
+  );
 
-    iconsHtml +=
-      `<div class="multi-validation-item ${stateClass}">` +
-      `<div class="multi-validation-icon">${symbol}</div>` +
-      '<div class="multi-validation-content">' +
-      `<div class="multi-validation-name">${escapeHtml(icon.name) || `Icône ${index + 1}`}</div>` +
-      label +
-      '</div>' +
-      '</div>';
+  const rows = createElement('div', 'multi-validation-list');
+  for (const [index, icon] of summary.icons.entries()) {
+    const item = createElement('div', `multi-validation-item ${icon.valid ? 'success' : 'error'}`);
+    item.appendChild(createElement('div', 'multi-validation-icon', icon.valid ? '✓' : '✕'));
+    const content = createElement('div', 'multi-validation-content');
+    content.appendChild(
+      createElement('div', 'multi-validation-name', icon.name || `Icône ${index + 1}`),
+    );
+    if (icon.valid) {
+      content.appendChild(
+        createElement('span', 'multi-validation-type', `${icon.type || 'Component'} • 24×24px`),
+      );
+    } else {
+      content.appendChild(
+        createElement('span', 'multi-validation-error', reasonLabel(icon.reason)),
+      );
+    }
+    item.appendChild(content);
+    rows.appendChild(item);
   }
 
-  list.innerHTML =
-    `<div class="multi-validation-header">${summary.total} icônes sélectionnées • ` +
-    `<strong>${summary.validCount} valides</strong> • ${summary.invalidCount} invalides</div>` +
-    `<div class="multi-validation-list">${iconsHtml}</div>`;
+  list.replaceChildren(header, rows);
 
   if (summary.validCount > 0) {
     generateButton.disabled = false;
@@ -197,14 +242,13 @@ function reasonLabel(reason: InvalidReason | null): string {
 }
 
 function showError(message: string): void {
-  requireElement('validation-list').innerHTML =
-    '<div class="validation-item error">' +
-    '<div class="icon">✕</div>' +
-    '<div class="validation-content">' +
-    '<div class="validation-label">Erreur</div>' +
-    `<div class="validation-desc">${escapeHtml(message)}</div>` +
-    '</div>' +
-    '</div>';
+  const item = createElement('div', 'validation-item error');
+  item.appendChild(createElement('div', 'icon', '✕'));
+  const content = createElement('div', 'validation-content');
+  content.appendChild(createElement('div', 'validation-label', 'Erreur'));
+  content.appendChild(createElement('div', 'validation-desc', message));
+  item.appendChild(content);
+  requireElement('validation-list').replaceChildren(item);
   showState('state-validation');
 }
 
@@ -222,8 +266,9 @@ function showProgress(message: { step: number; total: number; message: string })
 
 function showComplete(message: string): void {
   showState('state-complete');
-  requireElement('report-content').innerHTML =
-    `<div class="report-item"><span class="report-icon">✓</span> ${escapeHtml(message)}</div>`;
+  const item = createElement('div', 'report-item');
+  item.append(createElement('span', 'report-icon', '✓'), ` ${message}`);
+  requireElement('report-content').replaceChildren(item);
 }
 
 // ---------------------------------------------------------------------------
@@ -247,11 +292,11 @@ function readStrokeInputs(): StrokeConfig {
   return config;
 }
 
-function showVariablesStatus(state: '' | 'success' | 'error', html: string): void {
+function showVariablesStatus(state: '' | 'success' | 'error', content: string | Node): void {
   const status = requireElement('variables-status');
   status.style.display = 'block';
   status.className = `variables-status${state ? ` ${state}` : ''}`;
-  status.innerHTML = html;
+  status.replaceChildren(content);
 }
 
 function handleVariablesDetected(variables: readonly DetectedStrokeVariable[]): void {
@@ -260,11 +305,13 @@ function handleVariablesDetected(variables: readonly DetectedStrokeVariable[]): 
 
   if (variables.length > 0) {
     status.className = 'variables-status';
-    status.innerHTML =
-      `<strong>${variables.length} variable(s) détectée(s)</strong><br>` +
-      variables
-        .map((variable) => `${escapeHtml(variable.name)} → Taille ${variable.size}`)
-        .join('<br>');
+    const label = document.createElement('strong');
+    label.textContent = `${variables.length} variable(s) détectée(s)`;
+    status.replaceChildren(label);
+    for (const variable of variables) {
+      status.appendChild(document.createElement('br'));
+      status.append(`${variable.name} → Taille ${variable.size}`);
+    }
     // Auto-apply the detected variables.
     sendToPlugin({ type: 'apply-stroke-variables', variables });
   } else {
@@ -328,13 +375,5 @@ requireElement<HTMLButtonElement>('btn-detect-variables').onclick = () => {
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
 
 log('UI fully loaded and ready');

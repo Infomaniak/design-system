@@ -1,9 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  findCanvasVariant,
   hasStrokesDeeply,
-  isCanvasSize,
   isComponentOrSet,
   isGenerated,
   validateSelection,
@@ -19,6 +17,7 @@ function fakeNode(overrides: NodeOverrides = {}): SceneNode {
     width: 24,
     height: 24,
     strokes: [],
+    children: [],
     ...overrides,
   } as unknown as SceneNode;
 }
@@ -45,24 +44,6 @@ describe('isComponentOrSet', () => {
   });
 });
 
-describe('isCanvasSize', () => {
-  it('accepts exact 24x24 nodes', () => {
-    expect(isCanvasSize({ width: 24, height: 24 })).toBe(true);
-  });
-
-  it('accepts nodes within the tolerance', () => {
-    expect(isCanvasSize({ width: 23.95, height: 24.05 })).toBe(true);
-  });
-
-  it('rejects undersized nodes', () => {
-    expect(isCanvasSize({ width: 16, height: 16 })).toBe(false);
-  });
-
-  it('rejects nodes with only one matching dimension', () => {
-    expect(isCanvasSize({ width: 24, height: 32 })).toBe(false);
-  });
-});
-
 describe('isGenerated', () => {
   it('detects generated names', () => {
     expect(isGenerated('eye [generated]')).toBe(true);
@@ -70,24 +51,6 @@ describe('isGenerated', () => {
 
   it('accepts regular names', () => {
     expect(isGenerated('eye')).toBe(false);
-  });
-});
-
-describe('findCanvasVariant', () => {
-  it('returns the first 24x24 component child', () => {
-    const variant = fakeComponent({ name: 'size=24', width: 24, height: 24 });
-    const other = fakeComponent({ name: 'size=16', width: 16, height: 16 });
-    expect(findCanvasVariant(fakeSet([other, variant]))).toBe(variant);
-  });
-
-  it('ignores non-component children', () => {
-    const frame = fakeNode({ type: 'FRAME', width: 24, height: 24 });
-    expect(findCanvasVariant(fakeSet([frame]))).toBeNull();
-  });
-
-  it('returns null when no variant matches the canvas size', () => {
-    const small = fakeComponent({ name: 'size=16', width: 16, height: 16 });
-    expect(findCanvasVariant(fakeSet([small]))).toBeNull();
   });
 });
 
@@ -112,7 +75,10 @@ describe('hasStrokesDeeply', () => {
 
 describe('validateSingleIcon', () => {
   it('accepts a valid component', () => {
-    const component = fakeComponent({ name: 'eye', strokes: [{ type: 'SOLID' }] });
+    const component = fakeComponent({
+      name: 'eye',
+      children: [fakeNode({ strokes: [{ type: 'SOLID' }] })],
+    });
     expect(validateSingleIcon(component)).toEqual({
       name: 'eye',
       type: 'COMPONENT',
@@ -133,6 +99,11 @@ describe('validateSingleIcon', () => {
     expect(validateSingleIcon(component).currentSize).toBe('16×16');
   });
 
+  it('rejects childless components even when they carry their own strokes', () => {
+    const component = fakeComponent({ name: 'eye', strokes: [{ type: 'SOLID' }] });
+    expect(validateSingleIcon(component).reason).toBe('empty');
+  });
+
   it('rejects component sets without a 24x24 variant', () => {
     const small = fakeComponent({
       name: 'size=16',
@@ -144,17 +115,41 @@ describe('validateSingleIcon', () => {
   });
 
   it('rejects component sets whose 24x24 variant has no strokes', () => {
-    const variant = fakeComponent({ name: 'size=24', width: 24, height: 24, strokes: [] });
+    const variant = fakeComponent({ name: 'size=24', children: [fakeNode({ name: 'child' })] });
     expect(validateSingleIcon(fakeSet([variant])).reason).toBe('no-strokes');
+  });
+
+  it('rejects sets whose named Filled variant would generate an empty icon', () => {
+    const outlined = fakeComponent({
+      name: 'filled=false',
+      children: [fakeNode({ strokes: [{ type: 'SOLID' }] })],
+    });
+    const filled = fakeComponent({
+      name: 'filled=true',
+      children: [fakeNode({ name: 'child' })],
+    });
+    expect(validateSingleIcon(fakeSet([outlined, filled])).reason).toBe('no-strokes');
+  });
+
+  it('ignores named variants whose height differs from the canvas size', () => {
+    const wrongHeight = fakeComponent({
+      name: 'filled=false',
+      width: 24,
+      height: 16,
+      strokes: [{ type: 'SOLID' }],
+    });
+    const fallback = fakeComponent({
+      name: 'size=24',
+      children: [fakeNode({ strokes: [{ type: 'SOLID' }] })],
+    });
+    expect(validateSingleIcon(fakeSet([wrongHeight, fallback])).valid).toBe(true);
   });
 
   it('accepts component sets through their 24x24 variant', () => {
     const small = fakeComponent({ name: 'size=16', width: 16, height: 16, strokes: [] });
     const variant = fakeComponent({
       name: 'size=24',
-      width: 24,
-      height: 24,
-      strokes: [{ type: 'SOLID' }],
+      children: [fakeNode({ strokes: [{ type: 'SOLID' }] })],
     });
     expect(validateSingleIcon(fakeSet([small, variant])).valid).toBe(true);
   });
@@ -167,7 +162,10 @@ describe('validateSingleIcon', () => {
 
 describe('validateSelection', () => {
   it('summarizes a mixed selection', () => {
-    const valid = fakeComponent({ name: 'eye', strokes: [{ type: 'SOLID' }] });
+    const valid = fakeComponent({
+      name: 'eye',
+      children: [fakeNode({ strokes: [{ type: 'SOLID' }] })],
+    });
     const wrongSize = fakeComponent({ name: 'bolt', width: 16, height: 16 });
     const frame = fakeNode({ type: 'FRAME', name: 'frame' });
 

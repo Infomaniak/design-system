@@ -120,15 +120,22 @@ figma.ui.onmessage = (event: unknown) => {
       });
       break;
     case 'reset-stroke-config':
-      void resetStrokeConfig(clientStorage).then((config) => {
+      void resetStrokeConfig(clientStorage).then(({ config, saved }) => {
         strokeConfig = config;
-        figma.ui.postMessage({ type: 'stroke-config', config });
+        figma.ui.postMessage({ type: 'stroke-config-reset', success: saved, config });
       });
       break;
     case 'detect-stroke-variables':
-      void detectStrokeVariables().then((variables) => {
-        figma.ui.postMessage({ type: 'stroke-variables-detected', variables });
-      });
+      void detectStrokeVariables()
+        .then((variables) => {
+          figma.ui.postMessage({ type: 'stroke-variables-detected', variables });
+        })
+        .catch((error) => {
+          figma.ui.postMessage({
+            type: 'stroke-variables-error',
+            message: `Erreur lors de la recherche des variables: ${describeError(error)}`,
+          });
+        });
       break;
     case 'apply-stroke-variables':
       void applyStrokeVariables(message.variables, strokeConfig)
