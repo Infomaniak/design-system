@@ -2,7 +2,7 @@
   "prefix": "esds",
   "info": {
     "name": "Infomaniak \"esds\" icons",
-    "version": "0.0.33",
+    "version": "0.0.34",
     "author": {
       "name": "Infomaniak"
     },
@@ -12,7 +12,7 @@
     },
     "total": 268
   },
-  "lastModified": 1790586978,
+  "lastModified": 1791190589,
   "icons": {
     "a-large-small": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m15 16 2.536-7.328a1.02 1.02 0 011.928 0L22 16m-6.303-2h5.606M2 16l4.039-9.69a.5.5 0 01.923 0L11 16m-7.696-3h6.392\" vector-effect=\"non-scaling-stroke\"/>"
@@ -817,6 +817,11 @@
     },
     "zigzag-arrow-up-right": {
       "body": "<path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"calc((1em / 32) + 1px)\" d=\"m20.996 12.6-8.375 8.396m8.375-3.598V12.6h-4.798m1.2-9.596v3.598H12.6V11.4H7.802v4.798H3.004v4.798\" vector-effect=\"non-scaling-stroke\"/>"
+    }
+  },
+  "aliases": {
+    "dots-six": {
+      "parent": "dots-six-vertical"
     }
   },
   "categories": {
