@@ -1,6 +1,6 @@
 {
   "name": "@infomaniak-design-system/figma-plugin-icons",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
   "description": "Infomaniak's Design System - Figma plugin generating multi-size icon variants",
   "keywords": [

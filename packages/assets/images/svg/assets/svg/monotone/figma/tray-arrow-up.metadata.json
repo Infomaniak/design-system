@@ -11,5 +11,6 @@
     "outbox",
     "transfer"
   ],
-  "categories": []
+  "categories": [],
+  "aliases": []
 }

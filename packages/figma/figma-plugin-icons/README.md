@@ -30,7 +30,7 @@ the plugin in Figma (**Plugins → Development → ESDS icons → Reload**).
 > open — they are published on demand (label `dev`) for testing before merge.
 
 A step-by-step guide is available in the
-[Storybook documentation](https://infomaniak.github.io/design-system/storybook/main/?path=/docs/designers-guide-esds-icons-plugin--docs).
+[Storybook documentation](https://infomaniak.github.io/design-system/storybook/main/?path=/docs/designers-guide-figma-plugins--docs).
 
 ## Develop (engineers)
 

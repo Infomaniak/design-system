@@ -11,5 +11,6 @@
     "date",
     "booking"
   ],
-  "categories": []
+  "categories": [],
+  "aliases": []
 }
