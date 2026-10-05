@@ -1,32 +1,37 @@
 import type { IconMetadataDisplayProps } from '../types/icon-metadata.ts';
 
-const IconMetadataDisplay = ({ metadata }: IconMetadataDisplayProps) => {
-  const tags = metadata.tags.map((tag) => (
+function toPill(label: string) {
+  return (
     <span
-      key={tag}
+      key={label}
       className="metadata-pill"
     >
-      {tag}
+      {label}
     </span>
-  ));
+  );
+}
 
+const IconMetadataDisplay = ({
+  metadata: { collection, license, tags, categories, aliases },
+}: IconMetadataDisplayProps) => {
   return (
     <>
       <style>{`
         .metadata-section {
-          margin-bottom: 16px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: var(--esds-spacing-2xl);
         }
         .metadata-label {
           font-size: 14px;
           color: #6b7280;
-          margin-bottom: 4px;
         }
         .metadata-value {
           font-size: 14px;
           color: #111827;
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
         }
         .metadata-pill {
           font-family: monospace;
@@ -39,17 +44,31 @@ const IconMetadataDisplay = ({ metadata }: IconMetadataDisplayProps) => {
           width: max-content;
         }
       `}</style>
-      <div className="metadata-section">
-        <div className="metadata-label">Tags:</div>
-        <div className="metadata-value">{tags.length > 0 ? tags : 'No tags'}</div>
-      </div>
+      {tags.length > 0 && (
+        <div className="metadata-section">
+          <div className="metadata-label">Tags:</div>
+          {tags.map(toPill)}
+        </div>
+      )}
+      {categories.length > 0 && (
+        <div className="metadata-section">
+          <div className="metadata-label">Categories:</div>
+          {categories.map(toPill)}
+        </div>
+      )}
+      {aliases.length > 0 && (
+        <div className="metadata-section">
+          <div className="metadata-label">Aliases (deprecated):</div>
+          {aliases.map(toPill)}
+        </div>
+      )}
       <div className="metadata-section">
         <div className="metadata-label">Collection:</div>
-        <div className="metadata-value">{metadata.collection}</div>
+        <div className="metadata-value">{collection}</div>
       </div>
       <div className="metadata-section">
         <div className="metadata-label">License:</div>
-        <div className="metadata-value">{metadata.license}</div>
+        <div className="metadata-value">{license}</div>
       </div>
     </>
   );
