@@ -67,10 +67,10 @@ export function extractSvgFilesFromFigmaDesignFile({
           token: figmaAPIToken,
           file_key: figmaSourceFileKey,
           /*
-        NOTE:
-          "fillGeometry" and "strokeGeometry" (required for outline generation) are only present
-          in the Figma API response when the file is fetched with "geometry=paths".
-       */
+            NOTE:
+              "fillGeometry" and "strokeGeometry" (required for outline generation) are only present
+              in the Figma API response when the file is fetched with "geometry=paths".
+          */
           geometry: generateMasks || generateOutlinedSvgs ? 'paths' : undefined,
         });
       },
@@ -105,20 +105,9 @@ export function extractSvgFilesFromFigmaDesignFile({
             id,
             name: extractIconName(component.name),
             metadata: {
-              tags: parts
-                .filter((input: string): boolean => {
-                  return input.startsWith('#');
-                })
-                .map((input: string): string => {
-                  return input.slice(1);
-                }),
-              categories: parts
-                .filter((input: string): boolean => {
-                  return input.startsWith('@');
-                })
-                .map((input: string): string => {
-                  return input.slice(1);
-                }),
+              tags: extractSpecialParts(parts, '#'),
+              categories: extractSpecialParts(parts, '@'),
+              aliases: extractSpecialParts(parts, '!'),
             },
           });
         }
@@ -270,6 +259,16 @@ function extractIconName(name: string): string {
   }
 
   return match[1];
+}
+
+function extractSpecialParts(parts: readonly string[], prefix: string): string[] {
+  return parts
+    .filter((input: string): boolean => {
+      return input.startsWith(prefix);
+    })
+    .map((input: string): string => {
+      return input.slice(prefix.length);
+    });
 }
 
 async function fetchFigmaSvgAsset(url: string): Promise<string> {
