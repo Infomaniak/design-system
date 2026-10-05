@@ -31,6 +31,7 @@ describe('buildSvgSetFromSvgDirectory', () => {
       JSON.stringify({
         tags: ['circle', 'round'],
         categories: ['filled', 'kdrive'],
+        aliases: ['test-icon-alias'],
       }),
     );
 
@@ -52,6 +53,8 @@ describe('buildSvgSetFromSvgDirectory', () => {
     expect(outputJson.categories['@kdrive']).toContain('test-icon');
     expect(outputJson.categories['#circle']).toContain('test-icon');
     expect(outputJson.categories['#round']).toContain('test-icon');
+    expect(Object.keys(outputJson.aliases)).toContain('test-icon-alias');
+    expect(outputJson.aliases['test-icon-alias'].parent).toBe('test-icon');
   });
 
   it('handles missing metadata file gracefully - still adds @all category', async () => {
