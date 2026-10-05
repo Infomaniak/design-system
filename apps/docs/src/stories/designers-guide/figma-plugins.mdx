@@ -1,27 +1,37 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 
-<Meta title="Designers Guide/ESDS Icons Plugin" />
+<Meta title="Designers Guide/Figma Plugins" />
 
-# ESDS icons plugin
+# Figma plugins
 
-The **ESDS icons** Figma plugin generates multi-size variants of a 24×24px system icon (16, 20,
-24, 32, 40 px). It is distributed as a zip file built automatically by CI on every merge to
-`develop` — install it locally in Figma Desktop as a development plugin.
+Infomaniak's design system Figma plugins are distributed as zip files built automatically by CI on
+every merge to `develop`. They are installed locally in Figma Desktop as development plugins and
+are not published to the Figma Community.
 
-## 1. Download the plugin
+- **ESDS icons** — generates multi-size variants (16, 20, 24, 32, 40 px) of a 24×24px system icon.
+
+---
+
+## ESDS icons
+
+The **ESDS icons** plugin generates multi-size variants of a 24×24px system icon (16, 20, 24, 32,
+40 px). It is distributed as a zip file built automatically by CI on every merge to `develop` —
+install it locally in Figma Desktop as a development plugin.
+
+### 1. Download the plugin
 
 Open the
 [plugin releases page](https://github.com/Infomaniak/design-system/releases?q=figma-plugin-icons)
 and download the `esds-icons.zip` asset of the newest release.
 
-## 2. Install it in Figma
+### 2. Install it in Figma
 
 Unzip the archive, then in Figma Desktop: **Plugins → Development → Import plugin from
 manifest…** and select the unzipped `esds-icons/manifest.json`.
 
 The plugin appears under **Plugins → Development → ESDS icons**.
 
-## 3. Generate the icon variants
+### 3. Generate the icon variants
 
 1. Select a Component or ComponentSet of a 24×24px icon containing strokes.
 2. Click **Analyser la sélection** to validate the selection (multi-select supported).
@@ -31,7 +41,7 @@ The plugin appears under **Plugins → Development → ESDS icons**.
 Stroke weights per size are configurable in **Paramètres** and persisted per user.
 **Utiliser les variables** adopts the stroke variables from the enabled team libraries.
 
-## Update the plugin
+### Update the plugin
 
 Download the latest zip, unzip it over the previous folder and reload the plugin in Figma
 (**Plugins → Development → ESDS icons → Reload**).
