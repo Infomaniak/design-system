@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.1
+
+### Patch Changes
+
+- [#393](https://github.com/Infomaniak/design-system/pull/393) [`1ce27c3`](https://github.com/Infomaniak/design-system/commit/1ce27c3515cbd5bad61ada5ecf629e770d61c1f3): Android token publish branches now record the published package version in `package-versions.json`, and their commit messages and pull requests use a `package@version` format instead of "Update to version".
+
+- [#392](https://github.com/Infomaniak/design-system/pull/392) [`79575a9`](https://github.com/Infomaniak/design-system/commit/79575a980723d625277bd33fbbc2ce9fa7dac72c): iOS token publish branches now record the published package version in `package-versions.json`, and their commit messages and GitHub releases use a `package@version` format instead of "Update to version".
+
 ## 0.6.0
 
 ### Minor Changes

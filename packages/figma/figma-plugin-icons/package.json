@@ -1,0 +1,23 @@
+{
+  "name": "@infomaniak-design-system/figma-plugin-icons",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "Infomaniak's Design System - Figma plugin generating multi-size icon variants",
+  "keywords": [
+    "Infomaniak",
+    "Figma",
+    "Icons"
+  ],
+  "private": true,
+  "scripts": {
+    "=== BUILD ===": "",
+    "build": "node --no-warnings=ExperimentalWarning scripts/scripts/build-figma-plugin/build-figma-plugin.script.ts",
+    "dev": "node --no-warnings=ExperimentalWarning scripts/scripts/build-figma-plugin/build-figma-plugin.script.ts --watch",
+    "=== PUBLISH ===": "",
+    "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-figma-plugin-icons/publish-figma-plugin-icons.script.ts"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.120.0",
+    "esbuild": "^0.28.1"
+  }
+}

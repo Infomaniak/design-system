@@ -67,6 +67,13 @@ describe('publishSfSymbols', () => {
     });
   };
 
+  const mockBranchChanges = (): void => {
+    createIosSymbolsPublishGithubBranchMock.mockResolvedValue([
+      { mode: 'create', file: 'Sources/ESDSSymbols/Symbols.xcassets' },
+      { mode: 'update', file: 'package-versions.json' },
+    ] satisfies GitChanges);
+  };
+
   it('skips when the outlines directory does not exist', async () => {
     const options = createPublishOptions('dev');
 
@@ -101,9 +108,7 @@ describe('publishSfSymbols', () => {
   it('generates, pushes the branch and opens a pull request (dev mode)', async () => {
     const options = createPublishOptions('dev');
     await writeOutlineFile(options.outlinesDirectory);
-    createIosSymbolsPublishGithubBranchMock.mockResolvedValue([
-      { mode: 'create', file: 'Sources/ESDSSymbols/Symbols.xcassets' },
-    ] satisfies GitChanges);
+    mockBranchChanges();
 
     await publishSfSymbols(options);
 
@@ -111,16 +116,17 @@ describe('publishSfSymbols', () => {
       logger,
       xcassetsDirectory: join(options.outputDirectory, SYMBOLS_XCASSETS_DIRECTORY_NAME),
       swiftFile: join(options.outputDirectory, SYMBOLS_SWIFT_FILE_NAME),
+      packageName: 'x',
       version: '1.2.3-dev.42',
-      branchName: 'esds-symbols/1.2.3-dev.42',
+      branchName: 'esds/symbols/1.2.3-dev.42',
     });
     expect(createGithubPullRequestMock).toHaveBeenCalledWith({
       owner: 'Infomaniak',
       repository: 'ios-design-system',
       authToken: 'test-token',
-      title: 'chore: Update symbols to 1.2.3-dev.42',
-      body: 'chore: Update symbols to 1.2.3-dev.42',
-      head: 'esds-symbols/1.2.3-dev.42',
+      title: 'chore: x@1.2.3-dev.42',
+      body: 'x@1.2.3-dev.42',
+      head: 'esds/symbols/1.2.3-dev.42',
       base: 'main',
     });
   });
@@ -128,22 +134,21 @@ describe('publishSfSymbols', () => {
   it('uses the package version as-is in prod mode', async () => {
     const options = createPublishOptions('prod');
     await writeOutlineFile(options.outlinesDirectory);
-    createIosSymbolsPublishGithubBranchMock.mockResolvedValue([
-      { mode: 'create', file: 'Sources/ESDSSymbols/Symbols.xcassets' },
-    ] satisfies GitChanges);
+    mockBranchChanges();
 
     await publishSfSymbols(options);
 
     expect(createIosSymbolsPublishGithubBranchMock).toHaveBeenCalledWith(
       expect.objectContaining({
+        packageName: 'x',
         version: '1.2.3',
-        branchName: 'esds-symbols/1.2.3',
+        branchName: 'esds/symbols/1.2.3',
       }),
     );
     expect(createGithubPullRequestMock).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: 'chore: Update symbols to 1.2.3',
-        head: 'esds-symbols/1.2.3',
+        title: 'chore: x@1.2.3',
+        head: 'esds/symbols/1.2.3',
       }),
     );
   });

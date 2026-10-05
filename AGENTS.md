@@ -44,6 +44,12 @@ design-system/
 │   │   └── scripts/
 │   │       ├── scripts/         # import-svgs, generate-sf-symbols, publish-sf-symbols, build-legacy-svgs
 │   │       └── shared/          # sf-symbols/ (template engine, xcassets builder), svg/ helpers
+│   ├── figma/                   # Figma plugins (packages/figma/<full-plugin-name>/, each with its own tsconfig)
+│   │   └── figma-plugin-icons/  # "ESDS icons" Figma plugin (multi-size icon generator) — private package, released as GitHub Release asset
+│   │   ├── src/                 # Sandbox code (TS, bundled to dist/code.js)
+│   │   ├── ui/                  # Plugin iframe (TS + HTML template, inlined into dist/ui.html)
+│   │   ├── manifest.json        # Points to dist/ (built locally, imported as dev plugin)
+│   │   └── dist/                # Build output (gitignored)
 │   └── components/              # Web components library
 │       ├── src/                 # Component source + stories
 │       └── tests/visual-regression/      # Playwright visual regression suite
@@ -71,23 +77,26 @@ design-system/
 
 ### Command Patterns
 
-| Task                         | Command                                    |
-| ---------------------------- | ------------------------------------------ |
-| Install deps                 | `yarn install`                             |
-| Dev server (docs)            | `cd apps/docs && yarn dev`                 |
-| Dev server (Storybook)       | `cd apps/docs && yarn storybook`           |
-| Build all packages           | `yarn build`                               |
-| Build tokens only            | `yarn build:tokens`                        |
-| Build SF Symbols (iOS)       | `yarn build:sf-symbols`                    |
-| Run tests                    | `yarn test`                                |
-| Test coverage                | `yarn test:coverage`                       |
-| Visual regression tests      | `yarn test:vrt`                            |
-| Format code                  | `yarn format`                              |
-| PR validation                | `yarn ci:on-pull-request`                  |
-| CI publish (manual)          | `GITHUB_REF_NAME=develop yarn ci:publish`  |
-| CI visual regression comment | `yarn ci:visual-regression --mode=comment` |
-| Create changeset             | `yarn changeset`                           |
-| Version + changelog (manual) | `yarn changeset:version`                   |
+| Task                         | Command                                      |
+| ---------------------------- | -------------------------------------------- |
+| Install deps                 | `yarn install`                               |
+| Dev server (docs)            | `cd apps/docs && yarn dev`                   |
+| Dev server (Storybook)       | `cd apps/docs && yarn storybook`             |
+| Build all packages           | `yarn build`                                 |
+| Build tokens only            | `yarn build:tokens`                          |
+| Validate tokens              | `cd packages/tokens && yarn validate:tokens` |
+| Build SF Symbols (iOS)       | `yarn build:sf-symbols`                      |
+| Build Figma plugin (icons)   | `yarn build:figma-plugin-icons`              |
+| Dev Figma plugin (watch)     | `yarn dev:figma-plugin-icons`                |
+| Run tests                    | `yarn test`                                  |
+| Test coverage                | `yarn test:coverage`                         |
+| Visual regression tests      | `yarn test:vrt`                              |
+| Format code                  | `yarn format`                                |
+| PR validation                | `yarn ci:on-pull-request`                    |
+| CI publish (manual)          | `GITHUB_REF_NAME=develop yarn ci:publish`    |
+| CI visual regression comment | `yarn ci:visual-regression --mode=comment`   |
+| Create changeset             | `yarn changeset`                             |
+| Version + changelog (manual) | `yarn changeset:version`                     |
 
 ### Code Style
 
@@ -115,10 +124,14 @@ design-system/
 
 ### Workspace Structure
 
-- Monorepo with 3 workspaces:
+- Monorepo with 7 workspaces:
   1. `@infomaniak-design-system/tokens`
   2. `@infomaniak-design-system/tokens/demo`
-  3. `@infomaniak-design-system/docs`
+  3. `@infomaniak-design-system/components`
+  4. `@infomaniak-design-system/svg-assets`
+  5. `@infomaniak-design-system/fonts`
+  6. `@infomaniak-design-system/figma-plugin-icons`
+  7. `@infomaniak-design-system/docs`
 
 ### DTCG Token Structure
 
@@ -190,7 +203,7 @@ const meta = {
 - **Purpose:** Collect structured change descriptions, automate version bumps, and generate `CHANGELOG.md` files. Changesets do **not** handle publishing — `ci:publish` remains the publish mechanism.
 - **Config:** `.changeset/config.json` with `baseBranch: "develop"`, `access: "public"`, ignores non-publishable packages.
 - **Versioning:** Automated via `.github/workflows/publish.yml`.
-- **Only publishable packages are versioned:** `@infomaniak-design-system/tokens` and `@infomaniak-design-system/components` (those with a `publish` script). PRs touching only docs/apps/scripts don't need a changeset.
+- **Only packages with a `publish` script are versioned:** `@infomaniak-design-system/tokens` and `@infomaniak-design-system/components` (published to npm), plus `@infomaniak-design-system/fonts`, `@infomaniak-design-system/figma-plugin-icons` (published as GitHub Release assets — no npm), and `@infomaniak-design-system/svg-assets` (published directly on a server). Changesets are required for all of these packages, except `@infomaniak-design-system/svg-assets` (automatically bumped). PRs touching only docs/apps/scripts don't need a changeset.
 - **Creating a changeset:** Use the `generate-changeset` skill (`.agents/skills/generate-changeset/SKILL.md`) — it runs `git diff develop...HEAD`, determines the semver bump, identifies affected packages, and writes a formatted `.changeset/*.md` file. Prefer this over the manual `yarn changeset` flow.
 
 ---

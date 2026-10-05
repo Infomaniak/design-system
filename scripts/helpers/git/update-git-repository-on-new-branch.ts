@@ -19,6 +19,11 @@ export interface UpdateGitRepositoryOnNewBranchUpdateFunctionContext {
   readonly logger: Logger;
 }
 
+export type UpdateGitRepositoryOnNewBranchChangesHookFunction = (changes: GitChanges) => GitChanges;
+
+const DEFAULT_CHANGES_HOOK: UpdateGitRepositoryOnNewBranchChangesHookFunction = (changes) =>
+  changes;
+
 export interface UpdateGitRepositoryOnNewBranchOptions {
   readonly repository: string;
   readonly accessToken?: string;
@@ -26,6 +31,7 @@ export interface UpdateGitRepositoryOnNewBranchOptions {
   readonly mainBranchName?: string;
   readonly allowEmpty?: 'yes' | 'no' | 'yes-skip-push';
   readonly update: UpdateGitRepositoryOnNewBranchUpdateFunction;
+  readonly changesHook?: UpdateGitRepositoryOnNewBranchChangesHookFunction;
   readonly cwd?: string;
   readonly logger: Logger;
 }
@@ -37,6 +43,7 @@ export async function updateGitRepositoryOnNewBranch({
   mainBranchName = 'main',
   allowEmpty = 'no',
   update,
+  changesHook = DEFAULT_CHANGES_HOOK,
   cwd = '.tmp',
   logger,
 }: UpdateGitRepositoryOnNewBranchOptions): Promise<GitChanges> {
@@ -90,10 +97,12 @@ export async function updateGitRepositoryOnNewBranch({
       cwd,
     });
 
-    const changes: GitChanges = await gitChanges({
-      logger,
-      cwd,
-    });
+    const changes: GitChanges = changesHook(
+      await gitChanges({
+        logger,
+        cwd,
+      }),
+    );
 
     if (changes.length > 0 || allowEmpty !== 'yes-skip-push') {
       await gitPush({

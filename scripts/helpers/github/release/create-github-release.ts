@@ -7,6 +7,7 @@ import { Logger } from '../../log/logger.ts';
 import { execCommandInherit } from '../../misc/exec-command.ts';
 import { githubRequest } from '../api/github-request.ts';
 import type { GithubRelease } from '../api/types.ts';
+import { getGithubReleaseByTag } from './get-github-release-by-tag.ts';
 import { uploadGithubReleaseAsset } from './upload-github-release-asset.ts';
 
 export interface CreateGithubReleaseOptions {
@@ -20,6 +21,12 @@ export interface CreateGithubReleaseOptions {
   readonly draft?: boolean;
   readonly prerelease?: boolean;
   readonly generateReleaseNotes?: boolean;
+  /**
+   * When true, an existing release for `tagName` is returned untouched
+   * (no asset upload or overwrite) instead of failing with a tag conflict.
+   * @default false
+   */
+  readonly skipIfExists?: boolean;
   /**
    * Directory whose files are uploaded as release assets (recursively).
    */
@@ -60,11 +67,26 @@ export async function createGithubRelease({
   draft = false,
   prerelease = false,
   generateReleaseNotes = false,
+  skipIfExists = false,
   assetsDirectory,
   zip = false,
   zipFileName = `${basename(assetsDirectory)}.zip`,
   logger = Logger.never(),
 }: CreateGithubReleaseOptions): Promise<GithubRelease> {
+  if (skipIfExists) {
+    const existingRelease: GithubRelease | null = await getGithubReleaseByTag({
+      owner,
+      repository,
+      authToken,
+      tagName,
+    });
+
+    if (existingRelease !== null) {
+      logger.debug(`SKIP: release ${tagName} already exists (${existingRelease.html_url}).`);
+      return existingRelease;
+    }
+  }
+
   const assetFiles: readonly GithubReleaseAssetFile[] = await listAssetFiles(assetsDirectory);
   const assetsZipPath: string | undefined =
     zip && assetFiles.length > 0

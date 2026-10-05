@@ -175,8 +175,34 @@ Where `<category>` is a project name or a category type of icons.
 @kdrive @knote
 ```
 
+#### Aliases
+
+Aliases are a way to create alternative names for SVGs.
+
+An alias may be defined using the following syntax:
+
+```txt
+!<alias>
+```
+
+Where `<alias>` is an alternative name for an SVG.
+
+> [!WARNING]
+> Aliases **MUST** only be used to _**deprecate**_ a name without introducing a breaking change.
+
+##### Example
+
+We want to rename `dots-six` to `dots-six-vertical` (on Figma):
+
+1. rename the icon to `dots-six-vertical`
+2. add an alias to `dots-six`
+
+```txt
+!dots-six
+```
+
 > [!NOTE]
-> Tags and categories can be mixed: `#house @kdrive`
+> Tags, categories, and aliases can be mixed: `#house @kdrive !home`
 
 ---
 
