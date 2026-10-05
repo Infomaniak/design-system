@@ -839,16 +839,25 @@ export class IconifyApi {
 
         if (/^[a-zA-Z0-9#!]/.test(part)) {
           // └> prefixed with an alphanumeric char, #, or !
+          const cleanPart: string = /^[#!]/.test(part) ? lowercasePart.slice(1) : lowercasePart;
+
           return (
             // search in name
-            lowercaseName.includes(lowercasePart) ||
+            lowercaseName.includes(cleanPart) ||
             // in tags
-            Array.from(categories).some((category: string): boolean => {
-              return category.startsWith('#') && category.toLowerCase().includes(lowercasePart);
-            }) ||
+            Array.from(categories)
+              .filter((category: string): boolean => {
+                return category.startsWith('#');
+              })
+              .map((category: string): string => {
+                return category.slice(1);
+              })
+              .some((category: string): boolean => {
+                return category.toLowerCase().includes(cleanPart);
+              }) ||
             // and in aliases
             Array.from(aliases).some((alias: string): boolean => {
-              return alias.toLowerCase().includes(lowercasePart.slice(1));
+              return alias.toLowerCase().includes(cleanPart);
             })
           );
         } else {
