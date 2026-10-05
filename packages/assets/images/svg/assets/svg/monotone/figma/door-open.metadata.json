@@ -11,5 +11,6 @@
     "signin",
     "signout"
   ],
-  "categories": []
+  "categories": [],
+  "aliases": []
 }
