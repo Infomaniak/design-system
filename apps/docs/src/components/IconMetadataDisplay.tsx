@@ -1,14 +1,7 @@
 import type { IconMetadataDisplayProps } from '../types/icon-metadata.ts';
 
-function toPill(label: string) {
-  return (
-    <span
-      key={label}
-      className="metadata-pill"
-    >
-      {label}
-    </span>
-  );
+function Pill({ label }: { label: string }) {
+  return <span className="metadata-pill">{label}</span>;
 }
 
 const IconMetadataDisplay = ({
@@ -47,19 +40,34 @@ const IconMetadataDisplay = ({
       {tags.length > 0 && (
         <div className="metadata-section">
           <div className="metadata-label">Tags:</div>
-          {tags.map(toPill)}
+          {tags.map((tag: string) => (
+            <Pill
+              key={tag}
+              label={tag}
+            />
+          ))}
         </div>
       )}
       {categories.length > 0 && (
         <div className="metadata-section">
           <div className="metadata-label">Categories:</div>
-          {categories.map(toPill)}
+          {categories.map((category: string) => (
+            <Pill
+              key={category}
+              label={category}
+            />
+          ))}
         </div>
       )}
       {aliases.length > 0 && (
         <div className="metadata-section">
           <div className="metadata-label">Aliases (deprecated):</div>
-          {aliases.map(toPill)}
+          {aliases.map((alias: string) => (
+            <Pill
+              key={alias}
+              label={alias}
+            />
+          ))}
         </div>
       )}
       <div className="metadata-section">
