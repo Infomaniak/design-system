@@ -11,5 +11,6 @@
     "connect",
     "publish"
   ],
-  "categories": []
+  "categories": [],
+  "aliases": []
 }

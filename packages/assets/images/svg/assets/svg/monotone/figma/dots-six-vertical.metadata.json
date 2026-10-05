@@ -13,5 +13,8 @@
     "menu",
     "rearrange"
   ],
-  "categories": []
+  "categories": [],
+  "aliases": [
+    "dots-six"
+  ]
 }
