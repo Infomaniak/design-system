@@ -151,7 +151,7 @@
         },
         "warning": {
           "dim1": {
-            "$value": "{color.orange.600}"
+            "$value": "{color.orange.500}"
           },
           "dim2": {
             "$value": "{color.orange.200}"

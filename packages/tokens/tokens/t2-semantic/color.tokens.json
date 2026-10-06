@@ -362,7 +362,7 @@
         "warning": {
           "$description": "Warning feedback background colors.",
           "dim1": {
-            "$value": "{color.orange.600}",
+            "$value": "{color.orange.500}",
             "$description": "Strong warning background (dim1).",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
