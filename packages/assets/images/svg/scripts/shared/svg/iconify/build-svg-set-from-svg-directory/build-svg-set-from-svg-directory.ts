@@ -148,7 +148,7 @@ export async function buildSvgSetFromSvgDirectory({
 
     for await (const entry of glob(`${sourceDirectory}/*.metadata.json`)) {
       const iconName: string = basename(entry, '.metadata.json');
-      const { tags, categories }: FigmaSvgMetadata = JSON.parse(
+      const { tags, categories, aliases }: FigmaSvgMetadata = JSON.parse(
         await readFile(entry, {
           encoding: 'utf8',
         }),
@@ -160,6 +160,10 @@ export async function buildSvgSetFromSvgDirectory({
 
       for (const category of categories) {
         iconSet.toggleCategory(iconName, `@${category}`, true);
+      }
+
+      for (const alias of aliases) {
+        iconSet.setAlias(alias, iconName);
       }
     }
 

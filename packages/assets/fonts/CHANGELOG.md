@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1
+
+### Patch Changes
+
+- [#381](https://github.com/Infomaniak/design-system/pull/381) [`7fe6e6d`](https://github.com/Infomaniak/design-system/commit/7fe6e6d7d2d0736191a95a100139818574215817): Renamed the TTF font family from "Infomaniak Variable" to "Infomaniak Sans".
+
 ## 0.1.0
 
 ### Minor Changes

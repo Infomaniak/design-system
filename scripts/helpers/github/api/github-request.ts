@@ -3,6 +3,11 @@ export interface GithubRequestOptions {
   readonly path: string;
   readonly token: string;
   readonly body?: unknown;
+  /**
+   * When true, a 404 response resolves to `undefined` instead of throwing.
+   * @default false
+   */
+  readonly allowNotFound?: boolean;
 }
 
 export async function githubRequest<TResponse>({
@@ -10,6 +15,7 @@ export async function githubRequest<TResponse>({
   path,
   token,
   body,
+  allowNotFound = false,
 }: GithubRequestOptions): Promise<TResponse> {
   const response: Response = await fetch(`https://api.github.com${path}`, {
     method,
@@ -24,6 +30,10 @@ export async function githubRequest<TResponse>({
   });
 
   if (!response.ok) {
+    if (response.status === 404 && allowNotFound) {
+      return undefined as TResponse;
+    }
+
     const text: string = await response.text();
     throw new Error(`GitHub API ${method} ${path} failed (${response.status}): ${text}`);
   }

@@ -6,12 +6,14 @@
   "scripts": {
     "=== DEV ===": "",
     "dev:docs": "yarn workspace @infomaniak-design-system/docs dev",
+    "dev:figma-plugin-icons": "yarn workspace @infomaniak-design-system/figma-plugin-icons dev",
     "=== BUILD ===": "",
     "build": "yarn workspaces foreach -Apt run build",
     "build:tokens": "yarn workspace @infomaniak-design-system/tokens build",
     "build:components": "yarn workspace @infomaniak-design-system/components build",
     "build:sf-symbols": "yarn workspace @infomaniak-design-system/svg-assets build:sf-symbols",
     "build:fonts": "yarn workspace @infomaniak-design-system/fonts build",
+    "build:figma-plugin-icons": "yarn workspace @infomaniak-design-system/figma-plugin-icons build",
     "build:docs": "yarn workspace @infomaniak-design-system/docs build",
     "=== CODE QUALITY ===": "",
     "format": "yarn format:fix",
@@ -26,7 +28,7 @@
     "lint:check:stylelint": "stylelint \"**/*.{css,scss}\"",
     "lint:fix:stylelint": "stylelint \"**/*.{css,scss}\" --fix",
     "check": "yarn check:types && yarn format:check && yarn lint:check",
-    "check:types": "tsc -p tsconfig.json --noEmit",
+    "check:types": "tsc -p tsconfig.json --noEmit && tsc -p packages/figma/figma-plugin-icons/tsconfig.json --noEmit",
     "=== TEST ===": "",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -66,6 +68,7 @@
       "packages/components",
       "packages/assets/images/svg",
       "packages/assets/fonts",
+      "packages/figma/*",
       "apps/docs"
     ]
   },

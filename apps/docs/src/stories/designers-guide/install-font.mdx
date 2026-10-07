@@ -1,0 +1,28 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Designers Guide/Install the Font" />
+
+# Install the font locally
+
+Figma shows a warning when inspecting a text element that uses **Infomaniak Sans** if the font is
+not installed on your computer. Installing the font locally fixes it.
+
+## 1. Download the font files
+
+Download the two TTF files from the [design-system repository](https://github.com/Infomaniak/design-system/tree/main/packages/assets/fonts/fonts/infomaniak-sans):
+
+- `infomaniak-sans.variable.normal.[opsz,wght].ttf`
+- `infomaniak-sans.variable.italic.[opsz,wght].ttf`
+
+## 2. Install with Font Book
+
+Double-click each downloaded `.ttf` file. The macOS **Font Book** app opens a preview of the font,
+click **Install**. That's it, the font is installed system-wide.
+
+## 3. Restart Figma
+
+If Figma was open, restart it. **Infomaniak Sans** now appears in the font picker and the missing-font warning is gone.
+
+## Using the font on the web?
+
+The web usage (CSS/HTML) is documented on the [Typography](./?path=/docs/typography--docs) page.

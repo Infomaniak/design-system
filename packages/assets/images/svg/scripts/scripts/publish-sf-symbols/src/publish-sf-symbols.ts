@@ -47,7 +47,7 @@ export async function publishSfSymbols({
       return;
     }
 
-    const { version }: PackageJson = await readPackageJsonFile(
+    const { name, version }: PackageJson = await readPackageJsonFile(
       join(packageRootDirectory, 'package.json'),
     );
 
@@ -57,24 +57,24 @@ export async function publishSfSymbols({
       prerelease,
     });
 
-    const publishBranchName: string = `esds-symbols/${publishVersion}`;
-    const pullRequestTitle: string = `chore: Update symbols to ${publishVersion}`;
+    const publishBranchName: string = `esds/symbols/${publishVersion}`;
 
-    const branchChanges: GitChanges = await createIosSymbolsPublishGithubBranch({
+    const changes: GitChanges = await createIosSymbolsPublishGithubBranch({
       logger,
       xcassetsDirectory: join(outputDirectory, SYMBOLS_XCASSETS_DIRECTORY_NAME),
       swiftFile: join(outputDirectory, SYMBOLS_SWIFT_FILE_NAME),
+      packageName: name,
       version: publishVersion,
       branchName: publishBranchName,
     });
 
-    if (branchChanges.length > 0) {
+    if (changes.length > 0) {
       await createGithubPullRequest({
         owner: INFOMANIAK_GITHUB_ORGANIZATION,
         repository: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
         authToken: getEnvCiPullRequestAuthTokenMobile(),
-        title: pullRequestTitle,
-        body: pullRequestTitle,
+        title: `chore: ${name}@${publishVersion}`,
+        body: `${name}@${publishVersion}`,
         head: publishBranchName,
         base: 'main',
       });
