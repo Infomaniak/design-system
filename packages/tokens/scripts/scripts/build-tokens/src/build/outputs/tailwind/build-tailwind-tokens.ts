@@ -115,73 +115,78 @@ export function buildTailwindTokens({
 
                 if (tokenName.startsWith('color')) {
                   // --color-*
-                  const tailwindVariableName: SegmentsReference = block((): SegmentsReference => {
-                    // NOTE: https://github.com/tailwindlabs/tailwindcss/blob/90f8ff41c8e2a4d17bc76921e23e9d672123da76/packages/tailwindcss/src/utilities.ts#L2952
-                    //  not in the documentation, but we may associate color tokens to specific tailwind utilities.
-                    if (tokenName.startsWith('color.background')) {
-                      return ['background-color', ...token.name.slice(2)];
-                    } else if (tokenName.startsWith('color.border')) {
-                      return ['border-color', ...token.name.slice(2)];
-                    } else if (tokenName.startsWith('color.content')) {
-                      return ['text-color', ...token.name.slice(2)];
-                    } else {
-                      return ['color', ...token.name.slice(1)];
-                    }
-                  });
-
-                  let extra: readonly CssVariableDeclaration[] = [];
-
-                  // generate the state tokens applied to the other color tokens
-                  if (
-                    tokenName.startsWith('color.background') ||
-                    tokenName.startsWith('color.transparent')
-                  ) {
-                    extra = stateTokens.map(
-                      (stateToken: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
-                        const sourceCssVariable: string = segmentsReferenceToCssVariableReference(
-                          stateToken.name,
-                          cssOptions,
-                        );
-
-                        const sourceAlphaCssVariable: string =
-                          segmentsReferenceToCssVariableReference(
-                            [...stateToken.name, 'a'],
-                            cssOptions,
-                          );
-
-                        const destinationCssVariable: string =
-                          segmentsReferenceToCssVariableReference(token.name, cssOptions);
-
-                        const destinationAlphaCssVariable: string =
-                          segmentsReferenceToCssVariableReference([...token.name, 'a'], cssOptions);
-
-                        return {
-                          name: DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
-                            ...tailwindVariableName,
-                            'state',
-                            ...stateToken.name.slice(2),
-                          ]),
-                          value: dedent`
-                            color-mix(
-                              in srgb,
-                              rgb(from ${sourceCssVariable} r g b / 100%) calc(${sourceAlphaCssVariable} * 100%),
-                              rgb(from ${destinationCssVariable} r g b / 100%)
-                                calc(${destinationAlphaCssVariable} * (1 - ${sourceAlphaCssVariable}) * 100%)
-                            )
-                          `,
-                          description: `State effect ${JSON.stringify(sourceCssVariable)} applied to ${JSON.stringify(destinationCssVariable)}${stateToken.description === undefined ? '' : `: ${stateToken.description}`}`,
-                          deprecated: token.deprecated || stateToken.deprecated,
-                        };
-                      },
-                    );
-                  }
 
                   return [
                     generateTailwindToken(
                       token,
-                      DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(tailwindVariableName),
+                      DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(
+                        block((): SegmentsReference => {
+                          // NOTE: https://github.com/tailwindlabs/tailwindcss/blob/90f8ff41c8e2a4d17bc76921e23e9d672123da76/packages/tailwindcss/src/utilities.ts#L2952
+                          //  not in the documentation, but we may associate color tokens to specific tailwind utilities.
+                          if (tokenName.startsWith('color.background')) {
+                            return ['background-color', ...token.name.slice(2)];
+                          } else if (tokenName.startsWith('color.border')) {
+                            return ['border-color', ...token.name.slice(2)];
+                          } else if (tokenName.startsWith('color.content')) {
+                            return ['text-color', ...token.name.slice(2)];
+                          } else {
+                            return ['color', ...token.name.slice(1)];
+                          }
+                        }),
+                      ),
                     ),
-                    ...extra,
+                    ...block((): readonly CssVariableDeclaration[] => {
+                      // generate the state tokens applied to the other color tokens
+                      if (
+                        tokenName.startsWith('color.background') ||
+                        tokenName.startsWith('color.transparent')
+                      ) {
+                        return stateTokens.map(
+                          (
+                            stateToken: GenericDesignTokensCollectionToken,
+                          ): CssVariableDeclaration => {
+                            const sourceCssVariable: string =
+                              segmentsReferenceToCssVariableReference(stateToken.name, cssOptions);
+
+                            const sourceAlphaCssVariable: string =
+                              segmentsReferenceToCssVariableReference(
+                                [...stateToken.name, 'a'],
+                                cssOptions,
+                              );
+
+                            const destinationCssVariable: string =
+                              segmentsReferenceToCssVariableReference(token.name, cssOptions);
+
+                            const destinationAlphaCssVariable: string =
+                              segmentsReferenceToCssVariableReference(
+                                [...token.name, 'a'],
+                                cssOptions,
+                              );
+
+                            return {
+                              name: DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
+                                'background-color',
+                                ...token.name.slice(2),
+                                'state',
+                                ...stateToken.name.slice(2),
+                              ]),
+                              value: dedent`
+                                color-mix(
+                                  in srgb,
+                                  rgb(from ${sourceCssVariable} r g b / 100%) calc(${sourceAlphaCssVariable} * 100%),
+                                  rgb(from ${destinationCssVariable} r g b / 100%)
+                                    calc(${destinationAlphaCssVariable} * (1 - ${sourceAlphaCssVariable}) * 100%)
+                                )
+                              `,
+                              description: `State effect ${JSON.stringify(sourceCssVariable)} applied to ${JSON.stringify(destinationCssVariable)}${stateToken.description === undefined ? '' : `: ${stateToken.description}`}`,
+                              deprecated: token.deprecated || stateToken.deprecated,
+                            };
+                          },
+                        );
+                      }
+
+                      return [];
+                    }),
                   ];
                 } else if (tokenName.startsWith('font.family')) {
                   // --font-*
