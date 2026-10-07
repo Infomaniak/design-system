@@ -5,7 +5,10 @@ on:
     types: [closed]
 
 concurrency:
-  group: gh-pages-deployment
+  # Do not rejoin the `gh-pages-deployment` group: sharing it let a PR-close
+  # cleanup replace a pending deploy run and cancel main/develop deploys on
+  # every merge.
+  group: gh-pages-cleanup
   cancel-in-progress: false
 
 jobs:

@@ -6,6 +6,7 @@ import { block } from '../../../../../../../../../scripts/helpers/misc/block.ts'
 import { dedent } from '../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import { indent } from '../../../../../../../../../scripts/helpers/misc/string/indent/indent.ts';
 import { removeTrailingSlash } from '../../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
+import type { SegmentsReference } from '../../../../../../shared/dtcg/design-token/reference/types/segments/segments-reference.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { CssVariableDeclaration } from '../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
 import { cssVariableDeclarationsToString } from '../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/to/css-variable-declarations-to-string.ts';
@@ -66,6 +67,13 @@ export function buildTailwindTokens({
         };
       };
 
+      // list the state tokens
+      const stateTokens: readonly GenericDesignTokensCollectionToken[] = Array.from(
+        baseCollection.tokens().filter((token: GenericDesignTokensCollectionToken): boolean => {
+          return token.name.join('.').startsWith('color.state');
+        }),
+      );
+
       const cssVariables: string = cssVariableDeclarationsToString([
         // NOTE: when all namespaces will be bound, we'll swap to `--*: initial`
         ...[
@@ -102,20 +110,17 @@ export function buildTailwindTokens({
           .tokens()
           .flatMap(
             (token: GenericDesignTokensCollectionToken): readonly CssVariableDeclaration[] => {
-              const tokenName: string = token.name.join('.');
+              if (isTailwindToken(token)) {
+                const tokenName: string = token.name.join('.');
 
-              const isNotT1Token: boolean = token.files.every(
-                (file: string): boolean => !file.includes(T1_DIRECTORY_NAME),
-              );
-
-              if (isNotT1Token) {
                 if (tokenName.startsWith('color')) {
                   // --color-*
+
                   return [
                     generateTailwindToken(
                       token,
                       DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(
-                        block((): string[] => {
+                        block((): SegmentsReference => {
                           // NOTE: https://github.com/tailwindlabs/tailwindcss/blob/90f8ff41c8e2a4d17bc76921e23e9d672123da76/packages/tailwindcss/src/utilities.ts#L2952
                           //  not in the documentation, but we may associate color tokens to specific tailwind utilities.
                           if (tokenName.startsWith('color.background')) {
@@ -130,6 +135,58 @@ export function buildTailwindTokens({
                         }),
                       ),
                     ),
+                    ...block((): readonly CssVariableDeclaration[] => {
+                      // generate the state tokens applied to the other color tokens
+                      if (
+                        tokenName.startsWith('color.background') ||
+                        tokenName.startsWith('color.transparent')
+                      ) {
+                        return stateTokens.map(
+                          (
+                            stateToken: GenericDesignTokensCollectionToken,
+                          ): CssVariableDeclaration => {
+                            const sourceCssVariable: string =
+                              segmentsReferenceToCssVariableReference(stateToken.name, cssOptions);
+
+                            const sourceAlphaCssVariable: string =
+                              segmentsReferenceToCssVariableReference(
+                                [...stateToken.name, 'a'],
+                                cssOptions,
+                              );
+
+                            const destinationCssVariable: string =
+                              segmentsReferenceToCssVariableReference(token.name, cssOptions);
+
+                            const destinationAlphaCssVariable: string =
+                              segmentsReferenceToCssVariableReference(
+                                [...token.name, 'a'],
+                                cssOptions,
+                              );
+
+                            return {
+                              name: DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
+                                'background-color',
+                                ...token.name.slice(2),
+                                'state',
+                                ...stateToken.name.slice(2),
+                              ]),
+                              value: dedent`
+                                color-mix(
+                                  in srgb,
+                                  rgb(from ${sourceCssVariable} r g b / 100%) calc(${sourceAlphaCssVariable} * 100%),
+                                  rgb(from ${destinationCssVariable} r g b / 100%)
+                                    calc(${destinationAlphaCssVariable} * (1 - ${sourceAlphaCssVariable}) * 100%)
+                                )
+                              `,
+                              description: `State effect ${JSON.stringify(sourceCssVariable)} applied to ${JSON.stringify(destinationCssVariable)}${stateToken.description === undefined ? '' : `: ${stateToken.description}`}`,
+                              deprecated: token.deprecated || stateToken.deprecated,
+                            };
+                          },
+                        );
+                      }
+
+                      return [];
+                    }),
                   ];
                 } else if (tokenName.startsWith('font.family')) {
                   // --font-*
@@ -239,4 +296,14 @@ export function buildTailwindTokens({
       ),
     ]);
   });
+}
+
+/* INTERNAL */
+
+function isTailwindToken(token: GenericDesignTokensCollectionToken): boolean {
+  return (
+    token.files.every(
+      (file: string): boolean => !file.includes(T1_DIRECTORY_NAME),
+    ) /* not a T1 token */ || token.name.join('.').startsWith('color.transparent')
+  );
 }
