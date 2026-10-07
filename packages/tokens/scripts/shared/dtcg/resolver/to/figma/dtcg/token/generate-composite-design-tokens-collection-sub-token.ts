@@ -44,9 +44,9 @@ export function generateCompositeDesignTokensCollectionSubToken<
   const mapValueOrCurlyReference = (
     value: ValueOrCurlyReference<GCompositeTokenValue>,
   ): ValueOrCurlyReference<GSubTokenValue> => {
-    return isCurlyReference(compositeToken.value)
+    return isCurlyReference(value)
       ? segmentsReferenceToCurlyReference([
-          ...curlyReferenceToSegmentsReference(compositeToken.value),
+          ...curlyReferenceToSegmentsReference(value),
           subTokenKey,
         ])
       : (value as Record<GSubTokenKey, GCompositeTokenValue>)[subTokenKey];
