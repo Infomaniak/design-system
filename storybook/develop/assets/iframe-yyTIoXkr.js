@@ -1,0 +1,1 @@
+import{t as e}from"./iframe-DiVYA44b.js";e();
