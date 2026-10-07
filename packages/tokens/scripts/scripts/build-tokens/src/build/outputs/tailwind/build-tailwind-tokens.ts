@@ -67,6 +67,7 @@ export function buildTailwindTokens({
         };
       };
 
+      // list the state tokens
       const stateTokens: readonly GenericDesignTokensCollectionToken[] = Array.from(
         baseCollection.tokens().filter((token: GenericDesignTokensCollectionToken): boolean => {
           return token.name.join('.').startsWith('color.state');
@@ -109,13 +110,9 @@ export function buildTailwindTokens({
           .tokens()
           .flatMap(
             (token: GenericDesignTokensCollectionToken): readonly CssVariableDeclaration[] => {
-              const tokenName: string = token.name.join('.');
+              if (isTailwindToken(token)) {
+                const tokenName: string = token.name.join('.');
 
-              const isNotT1Token: boolean = token.files.every(
-                (file: string): boolean => !file.includes(T1_DIRECTORY_NAME),
-              );
-
-              if (isNotT1Token || tokenName.startsWith('color.transparent')) {
                 if (tokenName.startsWith('color')) {
                   // --color-*
                   const tailwindVariableName: SegmentsReference = block((): SegmentsReference => {
@@ -134,7 +131,7 @@ export function buildTailwindTokens({
 
                   let extra: readonly CssVariableDeclaration[] = [];
 
-                  // generate state tokens
+                  // generate the state tokens applied to the other color tokens
                   if (
                     tokenName.startsWith('color.background') ||
                     tokenName.startsWith('color.transparent')
@@ -294,4 +291,14 @@ export function buildTailwindTokens({
       ),
     ]);
   });
+}
+
+/* INTERNAL */
+
+function isTailwindToken(token: GenericDesignTokensCollectionToken): boolean {
+  return (
+    token.files.every(
+      (file: string): boolean => !file.includes(T1_DIRECTORY_NAME),
+    ) /* not a T1 token */ || token.name.join('.').startsWith('color.transparent')
+  );
 }
