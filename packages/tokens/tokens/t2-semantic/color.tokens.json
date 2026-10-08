@@ -1568,7 +1568,7 @@
           }
         },
         "medium": {
-          "$value": "{color.blue.900-16}",
+          "$value": "{color.blue.900-30}",
           "$description": "Medium pressed overlay for subtle active feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]

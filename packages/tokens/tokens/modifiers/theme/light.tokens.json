@@ -668,7 +668,7 @@
           "$value": "{color.blue.900-12}"
         },
         "medium": {
-          "$value": "{color.blue.900-16}"
+          "$value": "{color.blue.900-30}"
         },
         "strong": {
           "$value": "{color.blue.900-80}"

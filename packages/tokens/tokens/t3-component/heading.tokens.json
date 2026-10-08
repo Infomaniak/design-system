@@ -5,10 +5,16 @@
       "$description": "Extra-small heading style.",
       "font": {
         "base": {
-          "$value": "{typography.xl.base}"
+          "$value": "{typography.xl.base}",
+          "$extensions": {
+            "scopes": []
+          }
         },
         "emphasized": {
-          "$value": "{typography.xl.emphasized}"
+          "$value": "{typography.xl.emphasized}",
+          "$extensions": {
+            "scopes": []
+          }
         }
       }
     },
@@ -16,10 +22,16 @@
       "$description": "Small heading style.",
       "font": {
         "base": {
-          "$value": "{typography.2xl.base}"
+          "$value": "{typography.2xl.base}",
+          "$extensions": {
+            "scopes": []
+          }
         },
         "emphasized": {
-          "$value": "{typography.2xl.emphasized}"
+          "$value": "{typography.2xl.emphasized}",
+          "$extensions": {
+            "scopes": []
+          }
         }
       }
     },
@@ -27,10 +39,16 @@
       "$description": "Medium heading style.",
       "font": {
         "base": {
-          "$value": "{typography.3xl.base}"
+          "$value": "{typography.3xl.base}",
+          "$extensions": {
+            "scopes": []
+          }
         },
         "emphasized": {
-          "$value": "{typography.3xl.emphasized}"
+          "$value": "{typography.3xl.emphasized}",
+          "$extensions": {
+            "scopes": []
+          }
         }
       }
     },
@@ -38,10 +56,16 @@
       "$description": "Large heading style.",
       "font": {
         "base": {
-          "$value": "{typography.4xl.base}"
+          "$value": "{typography.4xl.base}",
+          "$extensions": {
+            "scopes": []
+          }
         },
         "emphasized": {
-          "$value": "{typography.4xl.emphasized}"
+          "$value": "{typography.4xl.emphasized}",
+          "$extensions": {
+            "scopes": []
+          }
         }
       }
     },
@@ -49,10 +73,16 @@
       "$description": "Extra-large heading style.",
       "font": {
         "base": {
-          "$value": "{typography.5xl.base}"
+          "$value": "{typography.5xl.base}",
+          "$extensions": {
+            "scopes": []
+          }
         },
         "emphasized": {
-          "$value": "{typography.5xl.emphasized}"
+          "$value": "{typography.5xl.emphasized}",
+          "$extensions": {
+            "scopes": []
+          }
         }
       }
     }
