@@ -153,7 +153,7 @@ export async function convertFigmaTokens({
             for (let i: number = 1; i < resolved.trace.length; i++) {
               const name: ArrayDesignTokenName = resolved.trace[i];
               if (!modifiers.has(name[0])) {
-                return segmentsReferenceToCurlyReference(name.slice(1));
+                return segmentsReferenceToCurlyReference(name);
               }
             }
 
