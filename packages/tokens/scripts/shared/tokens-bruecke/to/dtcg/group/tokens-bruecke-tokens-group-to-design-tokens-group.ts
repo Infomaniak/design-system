@@ -32,25 +32,6 @@ export function tokensBrueckeTokensGroupToDesignTokensGroup(
       /* NOTE: UNOFFICIAL CONVERSION TO DIMENSION */
       lineHeight: dimensionTokensBrueckeDesignTokenToDimensionDesignToken(children.lineHeight, ctx),
     });
-
-    // return isCurlyReference($value)
-    //   ? {
-    //       $value,
-    //       ...removeUndefinedProperties({
-    //         $description,
-    //         $deprecated,
-    //         $extensions,
-    //       }),
-    //     }
-    //   : ({
-    //       $type: 'typography',
-    //       $value,
-    //       ...removeUndefinedProperties({
-    //         $description,
-    //         $deprecated,
-    //         $extensions,
-    //       }),
-    //     } satisfies TypographyDesignToken);
   }
 
   return {
