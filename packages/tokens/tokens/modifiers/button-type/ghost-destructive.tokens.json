@@ -32,6 +32,16 @@
           "$value": "{color.content.disabled}"
         }
       }
+    },
+    "color": {
+      "state": {
+        "hover": {
+          "$value": "{color.state.hover.soft}"
+        },
+        "pressed": {
+          "$value": "{color.state.pressed.soft}"
+        }
+      }
     }
   }
 }

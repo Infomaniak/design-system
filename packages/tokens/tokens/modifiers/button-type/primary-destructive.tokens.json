@@ -32,6 +32,16 @@
           "$value": "{color.content.on.disabled}"
         }
       }
+    },
+    "color": {
+      "state": {
+        "hover": {
+          "$value": "{color.state.hover.medium}"
+        },
+        "pressed": {
+          "$value": "{color.state.pressed.medium}"
+        }
+      }
     }
   }
 }
