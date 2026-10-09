@@ -6,8 +6,12 @@ export interface IconMetadata {
   readonly name: string;
   /** Full icon ID with prefix (e.g., 'material-symbols:home') */
   readonly iconId: string;
-  /** Associated tags and aliases */
+  /** Associated tags */
   readonly tags: readonly string[];
+  /** Associated categories */
+  readonly categories: readonly string[];
+  /** Associated aliases */
+  readonly aliases: readonly string[];
   /** Collection/prefix name */
   readonly collection: string;
   /** License information */

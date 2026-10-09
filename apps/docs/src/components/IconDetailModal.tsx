@@ -1,4 +1,9 @@
-import { iconifyApiListIconsResponseToIconifyApiIconList } from '@infomaniak-design-system/components';
+import {
+  type IconifyApiIconList,
+  type IconifyApiIconListIcon,
+  type IconifyApiListIconsResponse,
+  iconifyApiListIconsResponseToIconifyApiIconList,
+} from '@infomaniak-design-system/components';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { iconifyApi } from '../lib/iconify-api.ts';
@@ -14,14 +19,25 @@ export default function IconDetailModal({ icon, isOpen, prefix, onClose }: IconD
       // Fetch metadata from Iconify API with collection info
       iconifyApi
         .listIconsCached({ prefix, info: true })
-        .then((response) => {
-          const icons = iconifyApiListIconsResponseToIconifyApiIconList(response);
-          const foundIcon = icons.find((i) => i.name === icon.name);
+        .then((response: IconifyApiListIconsResponse): void => {
+          const icons: IconifyApiIconList =
+            iconifyApiListIconsResponseToIconifyApiIconList(response);
+
+          const foundIcon: IconifyApiIconListIcon | undefined = icons.find(
+            (entry: IconifyApiIconListIcon): boolean => entry.name === icon.name,
+          );
+
           if (foundIcon) {
             setMetadata({
               name: foundIcon.name,
               iconId: `${prefix}:${foundIcon.name}`,
-              tags: Array.from(foundIcon.categories || new Set()),
+              tags: Array.from(foundIcon.categories)
+                .filter((entry: string): boolean => entry.startsWith('#'))
+                .map((entry: string): string => entry.slice(1)),
+              categories: Array.from(foundIcon.categories)
+                .filter((entry: string): boolean => entry.startsWith('@') && entry !== '@all')
+                .map((entry: string): string => entry.slice(1)),
+              aliases: Array.from(foundIcon.aliases),
               collection: response.info?.name ?? prefix,
               license: response.info?.license?.title ?? 'Unknown License',
             });
@@ -136,22 +152,49 @@ export default function IconDetailModal({ icon, isOpen, prefix, onClose }: IconD
           style={{
             display: 'flex',
             justifyContent: 'center',
-            marginBottom: 'var(--esds-spacing-2xl)',
+            alignItems: 'center',
+            flexDirection: 'column',
+            gap: 'var(--esds-spacing-2xl)',
           }}
         >
-          <esds-icon
-            style={{ fontSize: 'var(--esds-icon-size-xl)' }}
-            name={iconName}
-          />
-        </div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: 'var(--esds-spacing-2xl)',
+            }}
+          >
+            {['xs', 'sm', 'md', 'lg', 'xl'].map((size) => (
+              <esds-icon
+                title={`var(--esds-icon-size-${size})`}
+                style={{
+                  fontSize: `var(--esds-icon-size-${size})`,
+                  border: 'var(--esds-border-xs-width) dashed var(--esds-color-border-dim1)',
+                  boxSizing: 'content-box',
+                  borderRadius: 'var(--esds-radius-xs)',
+                }}
+                name={iconName}
+              />
+            ))}
+          </div>
 
-        <div style={{ marginBottom: 'var(--esds-spacing-2xl)' }}>
           <CopyableText
             value={iconName}
             label=""
             size="lg"
           />
         </div>
+
+        <hr
+          style={{
+            margin: 'var(--esds-spacing-2xl) 0',
+            borderColor: 'var(--esds-separator-color)',
+            opacity: 0.3,
+          }}
+        />
+
         <div style={{ marginBottom: 'var(--esds-spacing-2xl)' }}>
           <CopyableText
             value={esdsSnippet}

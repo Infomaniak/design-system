@@ -12,7 +12,10 @@
           "letterSpacing": "{text.xs.letter-spacing}",
           "lineHeight": "{text.xs.line-height}"
         },
-        "$description": "Extra-small base typography (regular weight)."
+        "$description": "Extra-small base typography (regular weight).",
+        "$extensions": {
+          "scopes": []
+        }
       },
       "emphasized": {
         "$value": {
@@ -22,7 +25,10 @@
           "letterSpacing": "{text.xs.letter-spacing}",
           "lineHeight": "{text.xs.line-height}"
         },
-        "$description": "Extra-small emphasized typography (medium weight)."
+        "$description": "Extra-small emphasized typography (medium weight).",
+        "$extensions": {
+          "scopes": []
+        }
       }
     },
     "sm": {
@@ -35,7 +41,10 @@
           "letterSpacing": "{text.sm.letter-spacing}",
           "lineHeight": "{text.sm.line-height}"
         },
-        "$description": "Small base typography (regular weight)."
+        "$description": "Small base typography (regular weight).",
+        "$extensions": {
+          "scopes": []
+        }
       },
       "emphasized": {
         "$value": {
@@ -45,7 +54,10 @@
           "letterSpacing": "{text.sm.letter-spacing}",
           "lineHeight": "{text.sm.line-height}"
         },
-        "$description": "Small emphasized typography (medium weight)."
+        "$description": "Small emphasized typography (medium weight).",
+        "$extensions": {
+          "scopes": []
+        }
       }
     },
     "md": {
@@ -58,7 +70,10 @@
           "letterSpacing": "{text.md.letter-spacing}",
           "lineHeight": "{text.md.line-height}"
         },
-        "$description": "Medium base typography (regular weight)."
+        "$description": "Medium base typography (regular weight).",
+        "$extensions": {
+          "scopes": []
+        }
       },
       "emphasized": {
         "$value": {
@@ -68,7 +83,10 @@
           "letterSpacing": "{text.md.letter-spacing}",
           "lineHeight": "{text.md.line-height}"
         },
-        "$description": "Medium emphasized typography (medium weight)."
+        "$description": "Medium emphasized typography (medium weight).",
+        "$extensions": {
+          "scopes": []
+        }
       }
     },
     "lg": {
@@ -81,7 +99,10 @@
           "letterSpacing": "{text.lg.letter-spacing}",
           "lineHeight": "{text.lg.line-height}"
         },
-        "$description": "Large base typography (regular weight)."
+        "$description": "Large base typography (regular weight).",
+        "$extensions": {
+          "scopes": []
+        }
       },
       "emphasized": {
         "$value": {
@@ -91,7 +112,10 @@
           "letterSpacing": "{text.lg.letter-spacing}",
           "lineHeight": "{text.lg.line-height}"
         },
-        "$description": "Large emphasized typography (medium weight)."
+        "$description": "Large emphasized typography (medium weight).",
+        "$extensions": {
+          "scopes": []
+        }
       }
     },
     "xl": {
@@ -104,7 +128,10 @@
           "letterSpacing": "{text.xl.letter-spacing}",
           "lineHeight": "{text.xl.line-height}"
         },
-        "$description": "Extra-large base typography (regular weight)."
+        "$description": "Extra-large base typography (regular weight).",
+        "$extensions": {
+          "scopes": []
+        }
       },
       "emphasized": {
         "$value": {
@@ -114,7 +141,10 @@
           "letterSpacing": "{text.xl.letter-spacing}",
           "lineHeight": "{text.xl.line-height}"
         },
-        "$description": "Extra-large emphasized typography (medium weight)."
+        "$description": "Extra-large emphasized typography (medium weight).",
+        "$extensions": {
+          "scopes": []
+        }
       }
     },
     "2xl": {
@@ -127,7 +157,10 @@
           "letterSpacing": "{text.2xl.letter-spacing}",
           "lineHeight": "{text.2xl.line-height}"
         },
-        "$description": "2x-large base typography (regular weight)."
+        "$description": "2x-large base typography (regular weight).",
+        "$extensions": {
+          "scopes": []
+        }
       },
       "emphasized": {
         "$value": {
@@ -137,7 +170,10 @@
           "letterSpacing": "{text.2xl.letter-spacing}",
           "lineHeight": "{text.2xl.line-height}"
         },
-        "$description": "2x-large emphasized typography (medium weight)."
+        "$description": "2x-large emphasized typography (medium weight).",
+        "$extensions": {
+          "scopes": []
+        }
       }
     },
     "3xl": {
@@ -150,7 +186,10 @@
           "letterSpacing": "{text.3xl.letter-spacing}",
           "lineHeight": "{text.3xl.line-height}"
         },
-        "$description": "3x-large base typography (regular weight)."
+        "$description": "3x-large base typography (regular weight).",
+        "$extensions": {
+          "scopes": []
+        }
       },
       "emphasized": {
         "$value": {
@@ -160,7 +199,10 @@
           "letterSpacing": "{text.3xl.letter-spacing}",
           "lineHeight": "{text.3xl.line-height}"
         },
-        "$description": "3x-large emphasized typography (medium weight)."
+        "$description": "3x-large emphasized typography (medium weight).",
+        "$extensions": {
+          "scopes": []
+        }
       }
     },
     "4xl": {
@@ -173,7 +215,10 @@
           "letterSpacing": "{text.4xl.letter-spacing}",
           "lineHeight": "{text.4xl.line-height}"
         },
-        "$description": "4x-large base typography (regular weight)."
+        "$description": "4x-large base typography (regular weight).",
+        "$extensions": {
+          "scopes": []
+        }
       },
       "emphasized": {
         "$value": {
@@ -183,7 +228,10 @@
           "letterSpacing": "{text.4xl.letter-spacing}",
           "lineHeight": "{text.4xl.line-height}"
         },
-        "$description": "4x-large emphasized typography (medium weight)."
+        "$description": "4x-large emphasized typography (medium weight).",
+        "$extensions": {
+          "scopes": []
+        }
       }
     },
     "5xl": {
@@ -196,7 +244,10 @@
           "letterSpacing": "{text.5xl.letter-spacing}",
           "lineHeight": "{text.5xl.line-height}"
         },
-        "$description": "5x-large base typography (regular weight)."
+        "$description": "5x-large base typography (regular weight).",
+        "$extensions": {
+          "scopes": []
+        }
       },
       "emphasized": {
         "$value": {
@@ -206,7 +257,10 @@
           "letterSpacing": "{text.5xl.letter-spacing}",
           "lineHeight": "{text.5xl.line-height}"
         },
-        "$description": "5x-large emphasized typography (medium weight)."
+        "$description": "5x-large emphasized typography (medium weight).",
+        "$extensions": {
+          "scopes": []
+        }
       }
     }
   }

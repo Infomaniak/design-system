@@ -10,6 +10,8 @@ export function iconifyApiListIconsResponseToIconifyApiIconList(
     Set<string>
   >();
 
+  const iconNameToIconAliases: Map<string /* name */, Set<string>> = new Map<string, Set<string>>();
+
   if (response.uncategorized !== undefined) {
     for (const icon of response.uncategorized) {
       allIcons.add(icon);
@@ -31,10 +33,22 @@ export function iconifyApiListIconsResponseToIconifyApiIconList(
     }
   }
 
+  if (response.aliases !== undefined) {
+    for (const [alias, icon] of Object.entries(response.aliases)) {
+      let aliases: Set<string> | undefined = iconNameToIconAliases.get(icon);
+      if (aliases === undefined) {
+        aliases = new Set<string>();
+        iconNameToIconAliases.set(icon, aliases);
+      }
+      aliases.add(alias);
+    }
+  }
+
   return Array.from(allIcons, (name: string): IconifyApiIconListIcon => {
     return {
       name,
       categories: iconNameToIconCategories.get(name) ?? new Set<string>(),
+      aliases: iconNameToIconAliases.get(name) ?? new Set<string>(),
     };
   });
 }

@@ -157,6 +157,21 @@ Each modifier also generates an `all.attr.css` file which imports the attribute 
 <button class="bg-brand-default">Click me!</button>
 ```
 
+##### Namespace
+
+Tailwind tokens are scoped by their respective namespace.
+For example, `color.background.*` tokens are scoped to `bg-` classes, `color.content.*` tokens are scoped to `text-` classes, etc.
+
+##### States
+
+States may be applied to _background_ color tokens by suffixing a `bg-` token with `-state-[state-token-name]`.
+
+_Example:_ `bg-brand-state-selected-strong` will apply the `color.state.selected-strong` state token to the `color.background.brand` background token.
+
+Both are mixed to form a combined color that you may use to style the background of an element when it is in a specific state.
+
+For the previous example, a common usage would be `active:bg-brand-state-selected-strong`.
+
 ### LLM/AI
 
 Use the generated <a href="./?path=/docs/design-tokens-design-md--docs">DESIGN.md</a> file to provide design system context to your AI agent or LLM. It contains a structured, machine-readable reference of the entire token system in a format optimized for AI consumption.

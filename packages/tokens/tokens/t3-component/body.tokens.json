@@ -5,10 +5,16 @@
       "$description": "Extra-small body text style.",
       "font": {
         "base": {
-          "$value": "{typography.xs.base}"
+          "$value": "{typography.xs.base}",
+          "$extensions": {
+            "scopes": []
+          }
         },
         "emphasized": {
-          "$value": "{typography.xs.emphasized}"
+          "$value": "{typography.xs.emphasized}",
+          "$extensions": {
+            "scopes": []
+          }
         }
       }
     },
@@ -16,10 +22,16 @@
       "$description": "Small body text style.",
       "font": {
         "base": {
-          "$value": "{typography.sm.base}"
+          "$value": "{typography.sm.base}",
+          "$extensions": {
+            "scopes": []
+          }
         },
         "emphasized": {
-          "$value": "{typography.sm.emphasized}"
+          "$value": "{typography.sm.emphasized}",
+          "$extensions": {
+            "scopes": []
+          }
         }
       }
     },
@@ -27,10 +39,16 @@
       "$description": "Medium (default) body text style.",
       "font": {
         "base": {
-          "$value": "{typography.md.base}"
+          "$value": "{typography.md.base}",
+          "$extensions": {
+            "scopes": []
+          }
         },
         "emphasized": {
-          "$value": "{typography.md.emphasized}"
+          "$value": "{typography.md.emphasized}",
+          "$extensions": {
+            "scopes": []
+          }
         }
       }
     },
@@ -38,10 +56,16 @@
       "$description": "Large body text style.",
       "font": {
         "base": {
-          "$value": "{typography.lg.base}"
+          "$value": "{typography.lg.base}",
+          "$extensions": {
+            "scopes": []
+          }
         },
         "emphasized": {
-          "$value": "{typography.lg.emphasized}"
+          "$value": "{typography.lg.emphasized}",
+          "$extensions": {
+            "scopes": []
+          }
         }
       }
     }

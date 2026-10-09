@@ -10,12 +10,7 @@
         }
       },
       "width": {
-        "$root": {
-          "$value": "{border.none.width}"
-        },
-        "disabled": {
-          "$value": "{border.none.width}"
-        }
+        "$value": "{border.none.width}"
       }
     },
     "background": {
@@ -35,6 +30,16 @@
         },
         "disabled": {
           "$value": "{color.content.on.disabled}"
+        }
+      }
+    },
+    "color": {
+      "state": {
+        "hover": {
+          "$value": "{color.state.hover.medium}"
+        },
+        "pressed": {
+          "$value": "{color.state.pressed.medium}"
         }
       }
     }

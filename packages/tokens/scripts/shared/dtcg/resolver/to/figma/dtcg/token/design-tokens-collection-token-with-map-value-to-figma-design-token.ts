@@ -1,4 +1,3 @@
-import { isObject } from '../../../../../../../../../../scripts/helpers/misc/object/is-object.ts';
 import { removeUndefinedProperties } from '../../../../../../../../../../scripts/helpers/misc/object/remove-undefined-properties.ts';
 import type { DesignTokensCollectionTokenWithType } from '../../../../token/design-tokens-collection-token.ts';
 import type {
@@ -6,6 +5,11 @@ import type {
   FigmaDesignTokenScope,
 } from '../../figma/token/figma-design-token.ts';
 import { valueOrCurlyReferenceToValueOrFigmaReference } from '../../reference/value-or-curly-reference-to-figma-reference.ts';
+import {
+  type DesignTokensCollectionTokenMode,
+  getDesignTokensCollectionTokenMode,
+} from './extensions/get-design-tokens-collection-token-mode.ts';
+import { getDesignTokensCollectionTokenScopes } from './extensions/get-design-tokens-collection-token-scopes.ts';
 
 export function designTokensCollectionTokenWithMapValueToFigmaDesignToken<
   GValue,
@@ -16,20 +20,10 @@ export function designTokensCollectionTokenWithMapValueToFigmaDesignToken<
   $type: GFigmaType,
   mapValue: (value: GValue) => GFigmaValue,
 ): FigmaDesignToken<GFigmaType, GFigmaValue> {
-  let scopes: readonly FigmaDesignTokenScope[] | undefined = undefined;
-  let mode: Record<string, string> | undefined = undefined;
-
-  if (token.extensions !== undefined) {
-    if (
-      Reflect.has(token.extensions, 'scopes') &&
-      Array.isArray(Reflect.get(token.extensions, 'scopes'))
-    ) {
-      scopes = Reflect.get(token.extensions, 'scopes') as readonly FigmaDesignTokenScope[];
-    }
-    if (Reflect.has(token.extensions, 'mode') && isObject(Reflect.get(token.extensions, 'mode'))) {
-      mode = Reflect.get(token.extensions, 'mode') as Record<string, string>;
-    }
-  }
+  const scopes: readonly FigmaDesignTokenScope[] | undefined =
+    getDesignTokensCollectionTokenScopes(token);
+  const mode: DesignTokensCollectionTokenMode<GValue> | undefined =
+    getDesignTokensCollectionTokenMode<GValue>(token);
 
   let $extensions: Record<string, unknown> | undefined = undefined;
 

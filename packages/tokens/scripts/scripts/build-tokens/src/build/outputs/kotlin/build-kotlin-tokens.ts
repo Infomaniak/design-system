@@ -70,7 +70,7 @@ export function buildKotlinTokens({
         const fileName: string = `${toPascalCase(prefix)}PrimitiveTokens`;
 
         await writeTextFileSafe(
-          `${kotlinOutputDirectory}/PrimitiveTokens/src/main/kotlin/com/infomaniak/designsystem/primitivetokens/${fileName}.kt`,
+          `${kotlinOutputDirectory}/PrimitiveTokens/src/commonMain/kotlin/com/infomaniak/designsystem/primitivetokens/${fileName}.kt`,
           kotlinVariableDeclarationsToPrimitiveKotlinTokenFileContent({
             packageName: primitiveTokensPackageName,
             declarations: tokens.map(
@@ -88,7 +88,7 @@ export function buildKotlinTokens({
     });
 
     await logger.asyncTask('Foundation', async (logger: Logger): Promise<void> => {
-      const foundationCoreDirectory: string = `${kotlinOutputDirectory}/Foundation/src/main/kotlin/com/infomaniak/designsystem/core`;
+      const foundationCoreDirectory: string = `${kotlinOutputDirectory}/Foundation/src/commonMain/kotlin/com/infomaniak/designsystem/core`;
 
       await logger.asyncTask('tokens', async (): Promise<void> => {
         const grouped: GroupedTokensByPrefix = groupTokensByPrefixes(
@@ -173,7 +173,7 @@ export function buildKotlinTokens({
           });
 
           await createKotlinPublicClassInstancesWithInternalFiles({
-            outputDirectory: `${packageRootDirectory}/src/main/kotlin/com/infomaniak/designsystem/${product}`,
+            outputDirectory: `${packageRootDirectory}/src/commonMain/kotlin/com/infomaniak/designsystem/${product}`,
             packageName,
             prefix: `${toPascalCase(product)}${toPascalCase(theme)}`,
             collection: entry.collection,
@@ -357,10 +357,12 @@ async function createKotlinGradleFile({
           id("${designSystemPackageName}.convention.theme")
       }
       
-      android {
-          namespace = "${packageName}"
+      kotlin {
+          android {
+              namespace = "${packageName}"
+          }
       }
-    `,
+    ` + '\n',
   );
 }
 
@@ -452,7 +454,6 @@ function isExcludedToken(token: GenericDesignTokensCollectionToken): boolean {
     /^border\./.test(name) ||
     /^border-width\./.test(name) ||
     /^blur\./.test(name) ||
-    /^opacity\./.test(name) ||
     /^ratio\./.test(name) ||
     /^shadow\./.test(name) ||
     /^typography\./.test(name)

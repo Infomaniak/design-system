@@ -42,7 +42,10 @@
     },
     "font": {
       "$value": "{body.xs.font.emphasized}",
-      "$description": "Default keyboard key typography (extra-small emphasized body text)."
+      "$description": "Default keyboard key typography (extra-small emphasized body text).",
+      "$extensions": {
+        "scopes": []
+      }
     },
     "gap": {
       "$value": "{spacing.xs}",
