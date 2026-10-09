@@ -151,7 +151,7 @@
         },
         "warning": {
           "dim1": {
-            "$value": "{color.orange.600}"
+            "$value": "{color.orange.500}"
           },
           "dim2": {
             "$value": "{color.orange.200}"
@@ -668,7 +668,7 @@
           "$value": "{color.blue.900-12}"
         },
         "medium": {
-          "$value": "{color.blue.900-16}"
+          "$value": "{color.blue.900-30}"
         },
         "strong": {
           "$value": "{color.blue.900-80}"

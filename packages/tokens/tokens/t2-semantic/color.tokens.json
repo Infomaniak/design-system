@@ -37,7 +37,7 @@
       "brand": {
         "$description": "Brand-specific background colors.",
         "$root": {
-          "$value": "{color.blue.600}",
+          "$value": "{color.background.brand.infomaniak}",
           "$description": "Default brand background (Infomaniak).",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
@@ -309,7 +309,7 @@
           }
         },
         "dim1": {
-          "$value": "{color.blue.500}",
+          "$value": "{color.background.dataviz.blue.dim1}",
           "$description": "Default dim1 data-viz background.",
           "$extensions": {
             "scopes": ["FRAME_FILL", "SHAPE_FILL"],
@@ -317,7 +317,7 @@
           }
         },
         "dim2": {
-          "$value": "{color.blue.200}",
+          "$value": "{color.background.dataviz.blue.dim2}",
           "$description": "Default dim2 data-viz background.",
           "$extensions": {
             "scopes": ["FRAME_FILL", "SHAPE_FILL"],
@@ -325,7 +325,7 @@
           }
         },
         "dim3": {
-          "$value": "{color.blue.50}",
+          "$value": "{color.background.dataviz.blue.dim3}",
           "$description": "Default dim3 data-viz background.",
           "$extensions": {
             "scopes": ["FRAME_FILL", "SHAPE_FILL"],
@@ -362,7 +362,7 @@
         "warning": {
           "$description": "Warning feedback background colors.",
           "dim1": {
-            "$value": "{color.orange.600}",
+            "$value": "{color.orange.500}",
             "$description": "Strong warning background (dim1).",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
@@ -478,7 +478,7 @@
         "brand": {
           "$description": "Foreground colors placed on brand backgrounds.",
           "$root": {
-            "$value": "{color.white}",
+            "$value": "{color.content.on.brand.infomaniak}",
             "$description": "Default foreground on brand backgrounds.",
             "$extensions": {
               "scopes": ["ALL_FILLS"]
@@ -750,7 +750,7 @@
             }
           },
           "dim1": {
-            "$value": "{color.blue.50}",
+            "$value": "{color.content.on.dataviz.blue.dim1}",
             "$description": "Default foreground on data-viz dim1 backgrounds.",
             "$extensions": {
               "scopes": ["ALL_FILLS"],
@@ -758,7 +758,7 @@
             }
           },
           "dim2": {
-            "$value": "{color.blue.900}",
+            "$value": "{color.content.on.dataviz.blue.dim2}",
             "$description": "Default foreground on data-viz dim2 backgrounds.",
             "$extensions": {
               "scopes": ["ALL_FILLS"],
@@ -766,7 +766,7 @@
             }
           },
           "dim3": {
-            "$value": "{color.blue.700}",
+            "$value": "{color.content.on.dataviz.blue.dim3}",
             "$description": "Default foreground on data-viz dim3 backgrounds.",
             "$extensions": {
               "scopes": ["ALL_FILLS"],
@@ -896,7 +896,7 @@
       "brand": {
         "$description": "Brand foreground colors for text and icons, with interaction states.",
         "$root": {
-          "$value": "{color.blue.600}",
+          "$value": "{color.content.brand.infomaniak}",
           "$description": "Default brand foreground color.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
@@ -1062,7 +1062,7 @@
       },
       "dataviz": {
         "$root": {
-          "$value": "{color.blue.600}",
+          "$value": "{color.content.dataviz.blue}",
           "$description": "Default data-viz foreground color.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
@@ -1131,7 +1131,7 @@
       "brand": {
         "$description": "Brand-specific border colors with interaction states.",
         "$root": {
-          "$value": "{color.blue.600}",
+          "$value": "{color.border.brand.infomaniak}",
           "$description": "Default brand border color.",
           "$extensions": {
             "scopes": ["STROKE_COLOR"]
@@ -1347,7 +1347,7 @@
           }
         },
         "dim1": {
-          "$value": "{color.blue.600}",
+          "$value": "{color.border.dataviz.blue.dim1}",
           "$description": "Default dim1 data-viz border.",
           "$extensions": {
             "scopes": ["STROKE_COLOR"],
@@ -1355,7 +1355,7 @@
           }
         },
         "dim2": {
-          "$value": "{color.blue.200}",
+          "$value": "{color.border.dataviz.blue.dim2}",
           "$description": "Default dim2 data-viz border.",
           "$extensions": {
             "scopes": ["STROKE_COLOR"],
@@ -1568,7 +1568,7 @@
           }
         },
         "medium": {
-          "$value": "{color.blue.900-16}",
+          "$value": "{color.blue.900-30}",
           "$description": "Medium pressed overlay for subtle active feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
