@@ -1,0 +1,1 @@
+import{t as e}from"./iframe-MHvpp1ch.js";e();
