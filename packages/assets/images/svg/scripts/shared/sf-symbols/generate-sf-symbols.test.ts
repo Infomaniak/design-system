@@ -73,10 +73,10 @@ describe('generateSfSymbols', () => {
     });
     expect(await readdir(symbolsetDirectory)).toEqual(['Contents.json', 'a-square.symbol.svg']);
     expect(await readFile(join(outputDirectory, SYMBOLS_SWIFT_FILE_NAME), 'utf8')).toContain(
-      'public static let aSquare = Symbol(name: "a-square")',
+      'public static let aSquare = ESDSSymbols(name: "a-square")',
     );
     expect(await readFile(join(outputDirectory, SYMBOLS_SWIFT_FILE_NAME), 'utf8')).toContain(
-      'public static let bCircle = Symbol(name: "b-circle")',
+      'public static let bCircle = ESDSSymbols(name: "b-circle")',
     );
     await expect(readFile(join(outputDirectory, 'stale.txt'), 'utf8')).rejects.toThrow();
   });
