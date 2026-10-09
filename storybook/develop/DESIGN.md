@@ -145,8 +145,8 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.elevation.sunken | #f1f5f9 | #020618 | var(--esds-color-background-elevation-sunken) | Background for sunken, recessed surfaces below the base level. |
 | color.background.elevation.surface | #fff | #192334 | var(--esds-color-background-elevation-surface) | Background for the default surface level, the base UI layer. |
 | color.background.elevation.raised | #f8fafc | #0f172b | var(--esds-color-background-elevation-raised) | Background for raised, elevated surfaces such as cards. |
-| color.background.elevation.overlay | #fff | #192334 | var(--esds-color-background-elevation-overlay) | Background for overlay and modal surfaces above the base UI. |
-| color.background.brand | #0077cf | #0077cf | var(--esds-color-background-brand) | Default brand background (Infomaniak). |
+| color.background.elevation.overlay | #fff | #314158 | var(--esds-color-background-elevation-overlay) | Background for overlay and modal surfaces above the base UI. |
+| color.background.brand | #0077cf | #36adfa | var(--esds-color-background-brand) | Default brand background (Infomaniak). |
 | color.background.brand.infomaniak | #0077cf | #36adfa | var(--esds-color-background-brand-infomaniak) | Infomaniak brand background colors. |
 | color.background.brand.mail | #e9004c | #ff97af | var(--esds-color-background-brand-mail) | Mail product brand background colors. |
 | color.background.brand.kdrive | #3e66f3 | #95b5fb | var(--esds-color-background-brand-kdrive) | kDrive product brand background colors. |
@@ -181,13 +181,13 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.dataviz.gray.dim1 | #62748e | #90a1b9 | var(--esds-color-background-dataviz-gray-dim1) | Strong gray data-viz background (dim1). |
 | color.background.dataviz.gray.dim2 | #e2e8f0 | #192334 | var(--esds-color-background-dataviz-gray-dim2) | Soft gray data-viz background (dim2). |
 | color.background.dataviz.gray.dim3 | #f8fafc | #020618 | var(--esds-color-background-dataviz-gray-dim3) | Subtle gray data-viz background (dim3). |
-| color.background.dataviz.dim1 | #0c93eb | #0c93eb | var(--esds-color-background-dataviz-dim1) | Default dim1 data-viz background. |
-| color.background.dataviz.dim2 | #b9e0fe | #b9e0fe | var(--esds-color-background-dataviz-dim2) | Default dim2 data-viz background. |
-| color.background.dataviz.dim3 | #f0f8ff | #f0f8ff | var(--esds-color-background-dataviz-dim3) | Default dim3 data-viz background. |
+| color.background.dataviz.dim1 | #0c93eb | #36adfa | var(--esds-color-background-dataviz-dim1) | Default dim1 data-viz background. |
+| color.background.dataviz.dim2 | #b9e0fe | #064e86 | var(--esds-color-background-dataviz-dim2) | Default dim2 data-viz background. |
+| color.background.dataviz.dim3 | #f0f8ff | #072a4a | var(--esds-color-background-dataviz-dim3) | Default dim3 data-viz background. |
 | color.background.feedback.success.dim1 | #12a74a | #41e17c | var(--esds-color-background-feedback-success-dim1) | Strong success background (dim1). |
 | color.background.feedback.success.dim2 | #b9f9d0 | #12552d | var(--esds-color-background-feedback-success-dim2) | Soft success background (dim2). |
 | color.background.feedback.success.dim3 | #f0fdf4 | #042f16 | var(--esds-color-background-feedback-success-dim3) | Subtle success background (dim3). |
-| color.background.feedback.warning.dim1 | #dd4f02 | #ffa032 | var(--esds-color-background-feedback-warning-dim1) | Strong warning background (dim1). |
+| color.background.feedback.warning.dim1 | #f97207 | #ffa032 | var(--esds-color-background-feedback-warning-dim1) | Strong warning background (dim1). |
 | color.background.feedback.warning.dim2 | #ffd188 | #7a200d | var(--esds-color-background-feedback-warning-dim2) | Soft warning background (dim2). |
 | color.background.feedback.warning.dim3 | #fff7eb | #460d02 | var(--esds-color-background-feedback-warning-dim3) | Subtle warning background (dim3). |
 | color.background.feedback.error.dim1 | #db1a1a | #fe6b6b | var(--esds-color-background-feedback-error-dim1) | Strong error background (dim1). |
@@ -201,7 +201,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.feedback.neutral.dim3 | #f8fafc | #020618 | var(--esds-color-background-feedback-neutral-dim3) | Subtle neutral background (dim3). |
 | color.background.disabled | #e2e8f0 | #0f172b | var(--esds-color-background-disabled) | Background for disabled, non-interactive elements. |
 | color.content.on.disabled | #90a1b9 | #62748e | var(--esds-color-content-on-disabled) | Content color for disabled states on backgrounds. |
-| color.content.on.brand | #fff | #fff | var(--esds-color-content-on-brand) | Default foreground on brand backgrounds. |
+| color.content.on.brand | #fff | #072a4a | var(--esds-color-content-on-brand) | Default foreground on brand backgrounds. |
 | color.content.on.brand.infomaniak | #fff | #072a4a | var(--esds-color-content-on-brand-infomaniak) | Foreground on Infomaniak brand backgrounds. |
 | color.content.on.brand.calendar | #fff | #001f23 | var(--esds-color-content-on-brand-calendar) | Foreground on Calendar brand backgrounds. |
 | color.content.on.brand.contacts | #fff | #370b6a | var(--esds-color-content-on-brand-contacts) | Foreground on Contacts brand backgrounds. |
@@ -236,9 +236,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.on.dataviz.gray.dim1 | #f8fafc | #020618 | var(--esds-color-content-on-dataviz-gray-dim1) | Foreground on strong gray data-viz backgrounds (dim1). |
 | color.content.on.dataviz.gray.dim2 | #0f172b | #f1f5f9 | var(--esds-color-content-on-dataviz-gray-dim2) | Foreground on soft gray data-viz backgrounds (dim2). |
 | color.content.on.dataviz.gray.dim3 | #314158 | #cad5e2 | var(--esds-color-content-on-dataviz-gray-dim3) | Foreground on subtle gray data-viz backgrounds (dim3). |
-| color.content.on.dataviz.dim1 | #f0f8ff | #f0f8ff | var(--esds-color-content-on-dataviz-dim1) | Default foreground on data-viz dim1 backgrounds. |
-| color.content.on.dataviz.dim2 | #0b426f | #0b426f | var(--esds-color-content-on-dataviz-dim2) | Default foreground on data-viz dim2 backgrounds. |
-| color.content.on.dataviz.dim3 | #015ca3 | #015ca3 | var(--esds-color-content-on-dataviz-dim3) | Default foreground on data-viz dim3 backgrounds. |
+| color.content.on.dataviz.dim1 | #f0f8ff | #072a4a | var(--esds-color-content-on-dataviz-dim1) | Default foreground on data-viz dim1 backgrounds. |
+| color.content.on.dataviz.dim2 | #0b426f | #e0effe | var(--esds-color-content-on-dataviz-dim2) | Default foreground on data-viz dim2 backgrounds. |
+| color.content.on.dataviz.dim3 | #015ca3 | #7cc8fd | var(--esds-color-content-on-dataviz-dim3) | Default foreground on data-viz dim3 backgrounds. |
 | color.content.on.feedback.success.dim1 | #fff | #042f16 | var(--esds-color-content-on-feedback-success-dim1) | Foreground on strong success backgrounds (dim1). |
 | color.content.on.feedback.success.dim2 | #12552d | #f0fdf4 | var(--esds-color-content-on-feedback-success-dim2) | Foreground on soft success backgrounds (dim2). |
 | color.content.on.feedback.success.dim3 | #12833d | #83f2ac | var(--esds-color-content-on-feedback-success-dim3) | Foreground on subtle success backgrounds (dim3). |
@@ -254,7 +254,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.on.feedback.neutral.dim1 | #fff | #020618 | var(--esds-color-content-on-feedback-neutral-dim1) | Foreground on strong neutral backgrounds (dim1). |
 | color.content.on.feedback.neutral.dim2 | #0f172b | #f8fafc | var(--esds-color-content-on-feedback-neutral-dim2) | Foreground on soft neutral backgrounds (dim2). |
 | color.content.on.feedback.neutral.dim3 | #314158 | #cad5e2 | var(--esds-color-content-on-feedback-neutral-dim3) | Foreground on subtle neutral backgrounds (dim3). |
-| color.content.brand | #0077cf | #0077cf | var(--esds-color-content-brand) | Default brand foreground color. |
+| color.content.brand | #0077cf | #36adfa | var(--esds-color-content-brand) | Default brand foreground color. |
 | color.content.brand.infomaniak | #0077cf | #36adfa | var(--esds-color-content-brand-infomaniak) | Infomaniak brand foreground colors. |
 | color.content.brand.mail | #d7004b | #ff5d86 | var(--esds-color-content-brand-mail) | Mail product brand foreground colors. |
 | color.content.brand.kdrive | #3e66f3 | #95b5fb | var(--esds-color-content-brand-kdrive) | kDrive product brand foreground colors. |
@@ -277,7 +277,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.feedback.neutral | #45556c | #90a1b9 | var(--esds-color-content-feedback-neutral) | Neutral foreground color with interaction states. |
 | color.content.visited | #8f30f7 | #cab1ff | var(--esds-color-content-visited) | Visited-link content colors with interaction states. |
 | color.content.muted | #62748e | #90a1b9 | var(--esds-color-content-muted) | Muted content color for de-emphasized, secondary text. |
-| color.content.dataviz | #0077cf | #0077cf | var(--esds-color-content-dataviz) | Default data-viz foreground color. |
+| color.content.dataviz | #0077cf | #36adfa | var(--esds-color-content-dataviz) | Default data-viz foreground color. |
 | color.content.dataviz.blue | #0077cf | #36adfa | var(--esds-color-content-dataviz-blue) | Blue data-viz foreground color. |
 | color.content.dataviz.emerald | #15864e | #3cb572 | var(--esds-color-content-dataviz-emerald) | Emerald data-viz foreground color. |
 | color.content.dataviz.orange | #f97207 | #ffa032 | var(--esds-color-content-dataviz-orange) | Orange data-viz foreground color. |
@@ -286,7 +286,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.dataviz.violet | #8f30f7 | #b185ff | var(--esds-color-content-dataviz-violet) | Violet data-viz foreground color. |
 | color.content.dataviz.yellow | #ecb306 | #fccf20 | var(--esds-color-content-dataviz-yellow) | Yellow data-viz foreground color. |
 | color.content.dataviz.gray | #45556c | #90a1b9 | var(--esds-color-content-dataviz-gray) | Gray data-viz foreground color. |
-| color.border.brand | #0077cf | #0077cf | var(--esds-color-border-brand) | Default brand border color. |
+| color.border.brand | #0077cf | #36adfa | var(--esds-color-border-brand) | Default brand border color. |
 | color.border.brand.infomaniak | #0077cf | #36adfa | var(--esds-color-border-brand-infomaniak) | Infomaniak brand border colors. |
 | color.border.brand.mail | #e9004c | #ff97af | var(--esds-color-border-brand-mail) | Mail product brand border colors. |
 | color.border.brand.kdrive | #3e66f3 | #95b5fb | var(--esds-color-border-brand-kdrive) | kDrive product brand border colors. |
@@ -313,8 +313,8 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.dataviz.yellow.dim2 | #fff089 | #a26206 | var(--esds-color-border-dataviz-yellow-dim2) | Soft yellow data-viz border (dim2). |
 | color.border.dataviz.gray.dim1 | #45556c | #90a1b9 | var(--esds-color-border-dataviz-gray-dim1) | Strong gray data-viz border (dim1). |
 | color.border.dataviz.gray.dim2 | #e2e8f0 | #314158 | var(--esds-color-border-dataviz-gray-dim2) | Soft gray data-viz border (dim2). |
-| color.border.dataviz.dim1 | #0077cf | #0077cf | var(--esds-color-border-dataviz-dim1) | Default dim1 data-viz border. |
-| color.border.dataviz.dim2 | #b9e0fe | #b9e0fe | var(--esds-color-border-dataviz-dim2) | Default dim2 data-viz border. |
+| color.border.dataviz.dim1 | #0077cf | #36adfa | var(--esds-color-border-dataviz-dim1) | Default dim1 data-viz border. |
+| color.border.dataviz.dim2 | #b9e0fe | #015ca3 | var(--esds-color-border-dataviz-dim2) | Default dim2 data-viz border. |
 | color.border.feedback.error.dim1 | #db1a1a | #fe6b6b | var(--esds-color-border-feedback-error-dim1) | Strong error border (dim1). |
 | color.border.feedback.error.dim2 | #ffc8c8 | #c01515 | var(--esds-color-border-feedback-error-dim2) | Soft error border (dim2). |
 | color.border.feedback.success.dim1 | #12a74a | #41e17c | var(--esds-color-border-feedback-success-dim1) | Strong success border (dim1). |
@@ -340,7 +340,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.state.hover.medium | #0b426f1f | #f8fafc1f | var(--esds-color-state-hover-medium) | Medium hover overlay for subtle interactive feedback. |
 | color.state.hover.strong | #0b426f99 | #f8fafc33 | var(--esds-color-state-hover-strong) | Strong hover overlay for prominent interactive feedback. |
 | color.state.pressed.soft | #0b426f1f | #f8fafc1f | var(--esds-color-state-pressed-soft) | Medium pressed overlay for subtle active feedback. |
-| color.state.pressed.medium | #0b426f29 | #f8fafc29 | var(--esds-color-state-pressed-medium) | Medium pressed overlay for subtle active feedback. |
+| color.state.pressed.medium | #0b426f4d | #f8fafc4d | var(--esds-color-state-pressed-medium) | Medium pressed overlay for subtle active feedback. |
 | color.state.pressed.strong | #0b426fcc | #f8fafc66 | var(--esds-color-state-pressed-strong) | Strong pressed overlay for prominent active feedback. |
 | color.state.selected.soft | #0b426f0f | #f8fafc1f | var(--esds-color-state-selected-soft) | Medium selected overlay for subtle selection feedback. |
 | color.state.selected.medium | #0b426f1f | #f8fafc29 | var(--esds-color-state-selected-medium) | Medium selected overlay for subtle selection feedback. |
@@ -491,17 +491,17 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | button.gap.row | 6px | 6px | var(--esds-button-gap-row) | N/A |
 | button.gap.column | 6px | 6px | var(--esds-button-gap-column) | N/A |
 | button.border.radius | 8px | 8px | var(--esds-button-border-radius) | N/A |
-| button.border.color | #0077cf | #0077cf | var(--esds-button-border-color) | N/A |
+| button.border.color | #0077cf | #36adfa | var(--esds-button-border-color) | N/A |
 | button.border.color.disabled | #e2e8f0 | #0f172b | var(--esds-button-border-color-disabled) | N/A |
 | button.border.width | 0px | 0px | var(--esds-button-border-width) | N/A |
 | button.border.width.disabled | 0px | 0px | var(--esds-button-border-width-disabled) | N/A |
-| button.background.color | #0077cf | #0077cf | var(--esds-button-background-color) | N/A |
+| button.background.color | #0077cf | #36adfa | var(--esds-button-background-color) | N/A |
 | button.background.color.disabled | #e2e8f0 | #0f172b | var(--esds-button-background-color-disabled) | N/A |
-| button.content.color | #fff | #fff | var(--esds-button-content-color) | N/A |
+| button.content.color | #fff | #072a4a | var(--esds-button-content-color) | N/A |
 | button.content.color.disabled | #90a1b9 | #62748e | var(--esds-button-content-color-disabled) | N/A |
 | button.content.font | 500 1rem/24px Infomaniak Sans | 500 1rem/24px Infomaniak Sans | var(--esds-button-content-font) | N/A |
 | button.color.state.hover | #0b426f1f | #f8fafc1f | var(--esds-button-color-state-hover) | N/A |
-| button.color.state.pressed | #0b426f29 | #f8fafc29 | var(--esds-button-color-state-pressed) | N/A |
+| button.color.state.pressed | #0b426f4d | #f8fafc4d | var(--esds-button-color-state-pressed) | N/A |
 | button.icon.size | 24px | 24px | var(--esds-button-icon-size) | N/A |
 | focus.border.color | #0077cf | #36adfa | var(--esds-focus-border-color) | Focus-effect border color. |
 | focus.border.radius | 2px | 2px | var(--esds-focus-border-radius) | Focus-effect border radius. |
@@ -529,7 +529,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | separator.color | #cad5e2 | #62748e | var(--esds-separator-color) | Default separator line color (strong neutral border). |
 | separator.padding | 2px | 2px | var(--esds-separator-padding) | Default padding across the separator line. |
 | separator.width | 1px | 1px | var(--esds-separator-width) | Default separator line width. |
-| text-link.content.color.default | #0077cf | #0077cf | var(--esds-text-link-content-color-default) | Default text link color. |
+| text-link.content.color.default | #0077cf | #36adfa | var(--esds-text-link-content-color-default) | Default text link color. |
 | text-link.content.color.visited | #8f30f7 | #cab1ff | var(--esds-text-link-content-color-visited) | Default visited text link color. |
 
 ## 4. AI Implementation Directives
