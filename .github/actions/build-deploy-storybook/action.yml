@@ -1,0 +1,140 @@
+name: 'Build and deploy Storybook to GitHub Pages'
+description: 'Builds the docs Storybook, normalizes it for subpath hosting and deploys it to gh-pages. Retries the deployment once when a concurrent gh-pages deployment rejects the push, and uploads a fallback artifact when the deployment still fails. On pull_request events it also runs the PR build decision and posts the preview status comment.'
+
+inputs:
+  iconify_api_url:
+    description: 'Iconify API server URL injected at build time.'
+    required: false
+    default: 'https://iconify.preprod.dev.infomaniak.ch/'
+  fonts_css_url:
+    description: 'Fonts CSS URL injected at build time. Empty keeps the default dev stylesheet.'
+    required: false
+    default: ''
+  kchat_webhook_id:
+    description: 'KChat webhook id used by the build to announce deployments.'
+    required: true
+
+outputs:
+  should_build:
+    description: 'Whether the Storybook build ran (PR build decision, always true for branch pushes).'
+    value: ${{ steps.prepare.outputs.should_build || 'true' }}
+  public_url:
+    description: 'Public URL of the Storybook deployment target.'
+    value: ${{ steps.pages.outputs.public_url }}
+  build_outcome:
+    description: 'Outcome of the Storybook build step.'
+    value: ${{ steps.build.outcome }}
+  deploy_outcome:
+    description: 'Final deployment outcome (success, failure or skipped).'
+    value: ${{ steps.deploy.outcome == 'failure' && steps.deploy_retry.outcome || steps.deploy.outcome }}
+  artifact_name:
+    description: 'Name of the uploaded fallback artifact, empty when the deployment succeeded.'
+    value: ${{ steps.upload_artifact.outcome == 'success' && (github.event_name == 'pull_request' && steps.prepare.outputs.artifact_name || format('storybook-{0}-{1}', steps.pages.outputs.target || 'manual', github.sha)) || '' }}
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v7
+
+    - name: Enable Corepack
+      run: corepack enable
+      shell: bash
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v7
+      with:
+        node-version: '24'
+        registry-url: 'https://npm.pkg.github.com'
+        cache: 'yarn'
+      env:
+        NODE_AUTH_TOKEN: ${{ github.token }}
+
+    - name: Install dependencies
+      run: yarn install --immutable
+      shell: bash
+
+    - name: Prepare Storybook build decision
+      if: github.event_name == 'pull_request'
+      id: prepare
+      run: yarn ci:storybook-pr --mode=prepare
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Prepare Storybook Pages context
+      id: pages
+      run: yarn ci:storybook-pages --mode=prepare
+      shell: bash
+
+    - name: Build Storybook
+      id: build
+      if: github.event_name != 'pull_request' || steps.prepare.outputs.should_build == 'true'
+      run: yarn build
+      shell: bash
+      env:
+        VITE_ICONIFY_API_URL: ${{ inputs.iconify_api_url }}
+        VITE_FONTS_CSS_URL: ${{ inputs.fonts_css_url != '' && inputs.fonts_css_url || 'https://fonts.storage.infomaniak.com/design-system/dev/infomaniak-sans.min.css' }}
+        KCHAT_WEBHOOK_ID: ${{ inputs.kchat_webhook_id }}
+
+    - name: Normalize Storybook build for subpath hosting
+      if: steps.build.outcome == 'success'
+      run: yarn ci:storybook-pages --mode=postbuild
+      shell: bash
+
+    - name: Deploy Storybook to GitHub Pages
+      id: deploy
+      continue-on-error: true
+      if: steps.build.outcome == 'success' && steps.pages.outputs.should_deploy == 'true'
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ github.token }}
+        publish_branch: gh-pages
+        publish_dir: apps/docs/storybook-static
+        destination_dir: ${{ steps.pages.outputs.destination_dir }}
+        keep_files: true
+        enable_jekyll: false
+
+    # Two Storybook deployments (e.g. a develop push and a release-PR preview)
+    # can start within seconds of each other and slip through the shared
+    # `gh-pages-deployment` concurrency group: the loser of the race gets its
+    # push rejected with "cannot lock ref". peaceiris re-clones gh-pages on
+    # every run, so retrying once picks up the winner's commit and applies
+    # this deployment on top instead of dying on the rejected push.
+    - name: Deploy Storybook to GitHub Pages (retry)
+      id: deploy_retry
+      if: ${{ !cancelled() && steps.deploy.outcome == 'failure' }}
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ github.token }}
+        publish_branch: gh-pages
+        publish_dir: apps/docs/storybook-static
+        destination_dir: ${{ steps.pages.outputs.destination_dir }}
+        keep_files: true
+        enable_jekyll: false
+
+    - name: Upload Storybook artifact
+      id: upload_artifact
+      if: ${{ !cancelled() && steps.build.outcome == 'success' && steps.deploy.outcome != 'success' && steps.deploy_retry.outcome != 'success' }}
+      uses: actions/upload-artifact@v7
+      with:
+        name: ${{ github.event_name == 'pull_request' && steps.prepare.outputs.artifact_name || format('storybook-{0}-{1}', steps.pages.outputs.target || 'manual', github.sha) }}
+        path: apps/docs/storybook-static/
+        retention-days: 3
+        if-no-files-found: error
+
+    - name: Post/Update PR comment
+      if: ${{ always() && github.event_name == 'pull_request' }}
+      run: yarn ci:storybook-pr --mode=comment
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        STORYBOOK_SHOULD_BUILD: ${{ steps.prepare.outputs.should_build }}
+        STORYBOOK_DECISION_REASON: ${{ steps.prepare.outputs.decision_reason }}
+        STORYBOOK_CHANGED_FILES_COUNT: ${{ steps.prepare.outputs.changed_files_count }}
+        STORYBOOK_RELEVANT_FILES_JSON: ${{ steps.prepare.outputs.relevant_files_json }}
+        STORYBOOK_ARTIFACT_NAME: ${{ steps.upload_artifact.outcome == 'success' && (github.event_name == 'pull_request' && steps.prepare.outputs.artifact_name || format('storybook-{0}-{1}', steps.pages.outputs.target || 'manual', github.sha)) || '' }}
+        STORYBOOK_ARTIFACT_RETENTION_DAYS: '3'
+        STORYBOOK_BUILD_OUTCOME: ${{ steps.build.outcome }}
+        STORYBOOK_DEPLOY_OUTCOME: ${{ steps.deploy.outcome == 'failure' && steps.deploy_retry.outcome || steps.deploy.outcome }}
+        STORYBOOK_DEPLOYMENT_URL: ${{ steps.pages.outputs.public_url }}

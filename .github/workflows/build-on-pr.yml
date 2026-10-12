@@ -17,87 +17,15 @@ jobs:
       contents: write
       pull-requests: write
     outputs:
-      should_build: ${{ steps.prepare.outputs.should_build }}
-      deployment_url: ${{ steps.pages.outputs.public_url }}
+      should_build: ${{ steps.storybook.outputs.should_build }}
+      public_url: ${{ steps.storybook.outputs.public_url }}
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
+      - name: Build and deploy Storybook (PR preview)
+        id: storybook
+        uses: ./.github/actions/build-deploy-storybook
         with:
-          node-version: '24'
-          registry-url: 'https://npm.pkg.github.com'
-          cache: 'yarn'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Install dependencies
-        run: yarn install --immutable
-
-      - name: Prepare Storybook build decision
-        if: github.event_name == 'pull_request'
-        id: prepare
-        run: yarn ci:storybook-pr --mode=prepare
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Prepare Storybook Pages context
-        id: pages
-        run: yarn ci:storybook-pages --mode=prepare
-
-      - name: Build Storybook
-        id: build
-        if: github.event_name != 'pull_request' || steps.prepare.outputs.should_build == 'true'
-        run: yarn build
-        env:
-          VITE_ICONIFY_API_URL: 'https://iconify.preprod.dev.infomaniak.ch/'
-          KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
-
-      - name: Normalize Storybook build for subpath hosting
-        if: steps.build.outcome == 'success'
-        run: yarn ci:storybook-pages --mode=postbuild
-
-      - name: Deploy Storybook to GitHub Pages
-        id: deploy
-        if: github.event_name == 'pull_request' && steps.prepare.outputs.should_build == 'true' && steps.build.outcome == 'success' && steps.pages.outputs.should_deploy == 'true'
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: apps/docs/storybook-static
-          destination_dir: ${{ steps.pages.outputs.destination_dir }}
-          keep_files: true
-          enable_jekyll: false
-
-      - name: Upload Storybook artifact
-        id: upload_artifact
-        if: steps.build.outcome == 'success' && (github.event_name != 'pull_request' || steps.deploy.outcome != 'success')
-        uses: actions/upload-artifact@v7
-        with:
-          name: ${{ github.event_name == 'pull_request' && steps.prepare.outputs.artifact_name || format('storybook-manual-{0}', github.sha) }}
-          path: apps/docs/storybook-static/
-          retention-days: 3
-          if-no-files-found: error
-
-      - name: Post/Update PR comment
-        if: github.event_name == 'pull_request' && always()
-        run: yarn ci:storybook-pr --mode=comment
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          STORYBOOK_SHOULD_BUILD: ${{ steps.prepare.outputs.should_build }}
-          STORYBOOK_DECISION_REASON: ${{ steps.prepare.outputs.decision_reason }}
-          STORYBOOK_CHANGED_FILES_COUNT: ${{ steps.prepare.outputs.changed_files_count }}
-          STORYBOOK_RELEVANT_FILES_JSON: ${{ steps.prepare.outputs.relevant_files_json }}
-          STORYBOOK_ARTIFACT_NAME: ${{ steps.upload_artifact.outcome == 'success' && steps.prepare.outputs.artifact_name || '' }}
-          STORYBOOK_ARTIFACT_RETENTION_DAYS: '3'
-          STORYBOOK_BUILD_OUTCOME: ${{ steps.build.outcome }}
-          STORYBOOK_DEPLOY_OUTCOME: ${{ steps.deploy.outcome }}
-          STORYBOOK_DEPLOYMENT_URL: ${{ steps.pages.outputs.public_url }}
+          kchat_webhook_id: ${{ secrets.KCHAT_WEBHOOK_ID }}
 
   visual-regression:
     name: Visual Regression
@@ -109,12 +37,9 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
       - name: Wait for PR Storybook deployment
         run: |
-          url="${{ needs.build-storybook-pr.outputs.deployment_url }}/index.json"
+          url="${{ needs.build-storybook-pr.outputs.public_url }}/index.json"
           echo "Waiting for Storybook deployment to be reachable at $url"
           timeout=180
           elapsed=0
@@ -150,7 +75,7 @@ jobs:
         id: vrt
         run: yarn test:vrt
         env:
-          VR_STORYBOOK_URL: ${{ needs.build-storybook-pr.outputs.deployment_url }}
+          VR_STORYBOOK_URL: ${{ needs.build-storybook-pr.outputs.public_url }}
           VR_DEVELOP_URL: https://infomaniak.github.io/design-system/storybook/develop
         continue-on-error: true
 
