@@ -21,6 +21,9 @@ jobs:
       contents: write
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
       - name: Build and deploy Storybook
         id: storybook
         uses: ./.github/actions/build-deploy-storybook

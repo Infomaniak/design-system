@@ -34,9 +34,8 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Checkout repository
-      uses: actions/checkout@v7
-
+    # NOTE: this local action is resolved from the workspace, so the calling
+    # workflow must run actions/checkout BEFORE invoking it.
     - name: Enable Corepack
       run: corepack enable
       shell: bash

@@ -21,6 +21,9 @@ jobs:
       public_url: ${{ steps.storybook.outputs.public_url }}
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
       - name: Build and deploy Storybook (PR preview)
         id: storybook
         uses: ./.github/actions/build-deploy-storybook
