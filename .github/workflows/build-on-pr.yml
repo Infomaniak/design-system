@@ -40,6 +40,9 @@ jobs:
       pull-requests: write
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
       - name: Wait for PR Storybook deployment
         run: |
           url="${{ needs.build-storybook-pr.outputs.public_url }}/index.json"
