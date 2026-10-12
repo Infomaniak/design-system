@@ -91,6 +91,8 @@ export function buildTokens({
       logger,
     });
 
+    return;
+
     // FIGMA
     await buildFigmaTokens({
       baseCollection,
