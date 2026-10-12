@@ -481,6 +481,74 @@
       }
     },
     "border": {
+      "on": {
+        "dataviz": {
+          "orange": {
+            "dim2": {
+              "$value": "{color.orange.900}"
+            },
+            "dim3": {
+              "$value": "{color.orange.700}"
+            }
+          },
+          "emerald": {
+            "dim2": {
+              "$value": "{color.emerald.900}"
+            },
+            "dim3": {
+              "$value": "{color.emerald.700}"
+            }
+          },
+          "blue": {
+            "dim2": {
+              "$value": "{color.blue.900}"
+            },
+            "dim3": {
+              "$value": "{color.blue.700}"
+            }
+          },
+          "violet": {
+            "dim2": {
+              "$value": "{color.violet.900}"
+            },
+            "dim3": {
+              "$value": "{color.violet.700}"
+            }
+          },
+          "purple": {
+            "dim2": {
+              "$value": "{color.purple.900}"
+            },
+            "dim3": {
+              "$value": "{color.purple.700}"
+            }
+          },
+          "pink": {
+            "dim2": {
+              "$value": "{color.pink.900}"
+            },
+            "dim3": {
+              "$value": "{color.pink.700}"
+            }
+          },
+          "yellow": {
+            "dim2": {
+              "$value": "{color.yellow.900}"
+            },
+            "dim3": {
+              "$value": "{color.yellow.700}"
+            }
+          },
+          "gray": {
+            "dim2": {
+              "$value": "{color.gray.900}"
+            },
+            "dim3": {
+              "$value": "{color.gray.700}"
+            }
+          }
+        }
+      },
       "brand": {
         "infomaniak": {
           "$value": "{color.blue.600}"
@@ -511,72 +579,6 @@
         },
         "contacts": {
           "$value": "{color.violet.500}"
-        }
-      },
-      "dataviz": {
-        "orange": {
-          "dim1": {
-            "$value": "{color.orange.600}"
-          },
-          "dim2": {
-            "$value": "{color.orange.200}"
-          }
-        },
-        "emerald": {
-          "dim1": {
-            "$value": "{color.emerald.600}"
-          },
-          "dim2": {
-            "$value": "{color.emerald.200}"
-          }
-        },
-        "blue": {
-          "dim1": {
-            "$value": "{color.blue.600}"
-          },
-          "dim2": {
-            "$value": "{color.blue.200}"
-          }
-        },
-        "violet": {
-          "dim1": {
-            "$value": "{color.violet.600}"
-          },
-          "dim2": {
-            "$value": "{color.violet.200}"
-          }
-        },
-        "purple": {
-          "dim1": {
-            "$value": "{color.purple.600}"
-          },
-          "dim2": {
-            "$value": "{color.purple.200}"
-          }
-        },
-        "pink": {
-          "dim1": {
-            "$value": "{color.pink.600}"
-          },
-          "dim2": {
-            "$value": "{color.pink.200}"
-          }
-        },
-        "yellow": {
-          "dim1": {
-            "$value": "{color.yellow.600}"
-          },
-          "dim2": {
-            "$value": "{color.yellow.200}"
-          }
-        },
-        "gray": {
-          "dim1": {
-            "$value": "{color.gray.600}"
-          },
-          "dim2": {
-            "$value": "{color.gray.200}"
-          }
         }
       },
       "feedback": {
@@ -619,6 +621,32 @@
           "dim2": {
             "$value": "{color.gray.200}"
           }
+        }
+      },
+      "dataviz": {
+        "orange": {
+          "$value": "{color.orange.500}"
+        },
+        "emerald": {
+          "$value": "{color.emerald.600}"
+        },
+        "blue": {
+          "$value": "{color.blue.600}"
+        },
+        "violet": {
+          "$value": "{color.violet.600}"
+        },
+        "purple": {
+          "$value": "{color.purple.600}"
+        },
+        "pink": {
+          "$value": "{color.pink.600}"
+        },
+        "yellow": {
+          "$value": "{color.yellow.500}"
+        },
+        "gray": {
+          "$value": "{color.gray.600}"
         }
       },
       "dim2": {

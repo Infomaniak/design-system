@@ -1128,6 +1128,218 @@
     },
     "border": {
       "$description": "Semantic border colors across brands, data-viz, feedback, and neutral dimensions.",
+      "on": {
+        "dataviz": {
+          "blue": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong blue data-viz backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.blue.900}",
+              "$description": "Border on soft blue data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.blue.700}",
+              "$description": "Border on subtle blue data-viz backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "emerald": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong emerald data-viz backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.emerald.900}",
+              "$description": "Border on soft emerald data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.emerald.700}",
+              "$description": "Border on subtle emerald data-viz backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "orange": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong orange data-viz backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.orange.900}",
+              "$description": "Border on soft orange data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.orange.700}",
+              "$description": "Border on subtle orange data-viz backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "pink": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong pink data-viz backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.pink.900}",
+              "$description": "Border on soft pink data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.pink.700}",
+              "$description": "Border on subtle pink data-viz backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "purple": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong purple data-viz backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.purple.900}",
+              "$description": "Border on soft purple data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.purple.700}",
+              "$description": "Border on subtle purple data-viz backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "violet": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong violet data-viz backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.violet.900}",
+              "$description": "Border on soft violet data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.violet.700}",
+              "$description": "Border on subtle violet data-viz backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "yellow": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong yellow data-viz backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.yellow.900}",
+              "$description": "Border on soft yellow data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.yellow.700}",
+              "$description": "Border on subtle yellow data-viz backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "gray": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong gray data-viz backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.gray.900}",
+              "$description": "Border on soft gray data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.gray.700}",
+              "$description": "Border on subtle gray data-viz backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "dim1": {
+            "$value": "{color.border.on.dataviz.blue.dim1}",
+            "$description": "Default border on data-viz dim1 backgrounds.",
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"],
+              "figmaName": ["color", "border", "on", "dataviz", "@root", "dim1"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.border.on.dataviz.blue.dim2}",
+            "$description": "Default border on data-viz dim2 backgrounds.",
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"],
+              "figmaName": ["color", "border", "on", "dataviz", "@root", "dim2"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.border.on.dataviz.blue.dim3}",
+            "$description": "Default border on data-viz dim3 backgrounds.",
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"],
+              "figmaName": ["color", "border", "on", "dataviz", "@root", "dim3"]
+            }
+          }
+        }
+      },
       "brand": {
         "$description": "Brand-specific border colors with interaction states.",
         "$root": {
@@ -1210,156 +1422,67 @@
       },
       "dataviz": {
         "$description": "Data-visualization border colors across hues and dimensions.",
+        "$root": {
+          "$value": "{color.border.dataviz.blue}",
+          "$description": "Default data-viz border color.",
+          "$extensions": {
+            "scopes": ["STROKE_COLOR"]
+          }
+        },
         "blue": {
-          "$description": "Blue data-viz border colors.",
-          "dim1": {
-            "$value": "{color.blue.600}",
-            "$description": "Strong blue data-viz border (dim1).",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "dim2": {
-            "$value": "{color.blue.200}",
-            "$description": "Soft blue data-viz border (dim2).",
-            "$extensions": {
-              "scopes": []
-            }
+          "$value": "{color.blue.600}",
+          "$description": "Blue data-viz border color.",
+          "$extensions": {
+            "scopes": []
           }
         },
         "emerald": {
-          "$description": "Emerald data-viz border colors.",
-          "dim1": {
-            "$value": "{color.emerald.600}",
-            "$description": "Strong emerald data-viz border (dim1).",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "dim2": {
-            "$value": "{color.emerald.200}",
-            "$description": "Soft emerald data-viz border (dim2).",
-            "$extensions": {
-              "scopes": []
-            }
+          "$value": "{color.emerald.600}",
+          "$description": "Emerald data-viz border color.",
+          "$extensions": {
+            "scopes": []
           }
         },
         "orange": {
-          "$description": "Orange data-viz border colors.",
-          "dim1": {
-            "$value": "{color.orange.600}",
-            "$description": "Strong orange data-viz border (dim1).",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "dim2": {
-            "$value": "{color.orange.200}",
-            "$description": "Soft orange data-viz border (dim2).",
-            "$extensions": {
-              "scopes": []
-            }
+          "$value": "{color.orange.500}",
+          "$description": "Orange data-viz border color.",
+          "$extensions": {
+            "scopes": []
           }
         },
         "pink": {
-          "$description": "Pink data-viz border colors.",
-          "dim1": {
-            "$value": "{color.pink.600}",
-            "$description": "Strong pink data-viz border (dim1).",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "dim2": {
-            "$value": "{color.pink.200}",
-            "$description": "Soft pink data-viz border (dim2).",
-            "$extensions": {
-              "scopes": []
-            }
+          "$value": "{color.pink.600}",
+          "$description": "Pink data-viz border color.",
+          "$extensions": {
+            "scopes": []
           }
         },
         "purple": {
-          "$description": "Purple data-viz border colors.",
-          "dim1": {
-            "$value": "{color.purple.600}",
-            "$description": "Strong purple data-viz border (dim1).",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "dim2": {
-            "$value": "{color.purple.200}",
-            "$description": "Soft purple data-viz border (dim2).",
-            "$extensions": {
-              "scopes": []
-            }
+          "$value": "{color.purple.600}",
+          "$description": "Purple data-viz border color.",
+          "$extensions": {
+            "scopes": []
           }
         },
         "violet": {
-          "$description": "Violet data-viz border colors.",
-          "dim1": {
-            "$value": "{color.violet.600}",
-            "$description": "Strong violet data-viz border (dim1).",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "dim2": {
-            "$value": "{color.violet.200}",
-            "$description": "Soft violet data-viz border (dim2).",
-            "$extensions": {
-              "scopes": []
-            }
+          "$value": "{color.violet.600}",
+          "$description": "Violet data-viz border color.",
+          "$extensions": {
+            "scopes": []
           }
         },
         "yellow": {
-          "$description": "Yellow data-viz border colors.",
-          "dim1": {
-            "$value": "{color.yellow.600}",
-            "$description": "Strong yellow data-viz border (dim1).",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "dim2": {
-            "$value": "{color.yellow.200}",
-            "$description": "Soft yellow data-viz border (dim2).",
-            "$extensions": {
-              "scopes": []
-            }
+          "$value": "{color.yellow.500}",
+          "$description": "Yellow data-viz border color.",
+          "$extensions": {
+            "scopes": []
           }
         },
         "gray": {
-          "$description": "Gray data-viz border colors.",
-          "dim1": {
-            "$value": "{color.gray.600}",
-            "$description": "Strong gray data-viz border (dim1).",
-            "$extensions": {
-              "scopes": []
-            }
-          },
-          "dim2": {
-            "$value": "{color.gray.200}",
-            "$description": "Soft gray data-viz border (dim2).",
-            "$extensions": {
-              "scopes": []
-            }
-          }
-        },
-        "dim1": {
-          "$value": "{color.border.dataviz.blue.dim1}",
-          "$description": "Default dim1 data-viz border.",
+          "$value": "{color.gray.600}",
+          "$description": "Gray data-viz border color.",
           "$extensions": {
-            "scopes": ["STROKE_COLOR"],
-            "figmaName": ["color", "border", "dataviz", "@root", "dim1"]
-          }
-        },
-        "dim2": {
-          "$value": "{color.border.dataviz.blue.dim2}",
-          "$description": "Default dim2 data-viz border.",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"],
-            "figmaName": ["color", "border", "dataviz", "@root", "dim2"]
+            "scopes": []
           }
         }
       },
