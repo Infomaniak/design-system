@@ -15,7 +15,7 @@ export interface MarkdownRenderContext {
 
   /**
    * The tier prefix of the token group being rendered.
-   * One of: 't1', 't2', 't3', 'material'.
+   * One of: 't1', 't2', 't3'.
    */
   readonly tierPrefix: string;
 }
