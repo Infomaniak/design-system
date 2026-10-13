@@ -22,6 +22,8 @@ Analyze the changes to determine the impact on the public API:
 - **minor**: New features, new non-breaking public APIs, or deprecation notices.
 - **major**: Breaking changes, removal of public APIs, or fundamental changes to existing expected behavior.
 
+> **Special case — MAJOR version `0`:** while a package's MAJOR version is `0`, the semantics shift down by one slot: `0.[semantic major].[semantic minor/patch]` instead of `MAJOR.MINOR.PATCH` (which is the normal situation once MAJOR >= 1). In that case, write **minor** for semantic-major changes (breaking changes, removal of public APIs, …) and **patch** for semantic-minor and semantic-patch changes (new features, non-breaking APIs, bug fixes, …).
+
 ## 3. Identify Affected Packages
 
 List only the packages/workspaces that were meaningfully affected and require a release. Do not include test packages or purely internal tooling unless requested.

@@ -3,19 +3,14 @@
     "border": {
       "color": {
         "$root": {
-          "$value": "{color.border.feedback.error.dim1}"
+          "$value": "{color.border.feedback.error}"
         },
         "disabled": {
           "$value": "{color.background.disabled}"
         }
       },
       "width": {
-        "$root": {
-          "$value": "{border.xs.width}"
-        },
-        "disabled": {
-          "$value": "{border.none.width}"
-        }
+        "$value": "{border.xs.width}"
       }
     },
     "background": {
@@ -35,6 +30,16 @@
         },
         "disabled": {
           "$value": "{color.content.on.disabled}"
+        }
+      }
+    },
+    "color": {
+      "state": {
+        "hover": {
+          "$value": "{color.state.hover.soft}"
+        },
+        "pressed": {
+          "$value": "{color.state.pressed.soft}"
         }
       }
     }
