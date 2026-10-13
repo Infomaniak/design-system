@@ -21,17 +21,27 @@ export function tokensBrueckeTokensGroupToDesignTokensGroup(
   ctx: TokensBrueckeToDtcgContext,
 ): DesignTokensGroup | TypographyDesignToken {
   if (isTypographyTokensBrueckeDesignTokensGroup(children)) {
-    return compactFigmaCompositeTokenValue<TypographyDesignToken>({
-      fontFamily: stringTokensBrueckeDesignTokenToFontFamilyDesignToken(children.fontFamily, ctx),
-      fontSize: dimensionTokensBrueckeDesignTokenToDimensionDesignToken(children.fontSize, ctx),
-      fontWeight: dimensionTokensBrueckeDesignTokenToNumberDesignToken(children.fontWeight, ctx),
-      letterSpacing: dimensionTokensBrueckeDesignTokenToDimensionDesignToken(
-        children.letterSpacing,
-        ctx,
-      ),
-      /* NOTE: UNOFFICIAL CONVERSION TO DIMENSION */
-      lineHeight: dimensionTokensBrueckeDesignTokenToDimensionDesignToken(children.lineHeight, ctx),
-    });
+    return compactFigmaCompositeTokenValue<TypographyDesignToken>(
+      {
+        fontFamily: stringTokensBrueckeDesignTokenToFontFamilyDesignToken(children.fontFamily, ctx),
+        fontSize: dimensionTokensBrueckeDesignTokenToDimensionDesignToken(children.fontSize, ctx),
+        fontWeight: dimensionTokensBrueckeDesignTokenToNumberDesignToken(children.fontWeight, ctx),
+        letterSpacing: dimensionTokensBrueckeDesignTokenToDimensionDesignToken(
+          children.letterSpacing,
+          ctx,
+        ),
+        /* NOTE: UNOFFICIAL CONVERSION TO DIMENSION */
+        lineHeight: dimensionTokensBrueckeDesignTokenToDimensionDesignToken(
+          children.lineHeight,
+          ctx,
+        ),
+      },
+      {
+        $description,
+        $deprecated,
+        $extensions,
+      },
+    );
   }
 
   return {
@@ -58,6 +68,7 @@ export function tokensBrueckeTokensGroupToDesignTokensGroup(
 
 export function compactFigmaCompositeTokenValue<GToken extends GenericDesignToken>(
   tokens: Record<string, GenericDesignToken>,
+  group: Pick<TokensBrueckeDesignTokensGroup, '$description' | '$deprecated' | '$extensions'>,
 ): GToken {
   const entries: [string, GenericDesignToken][] = Object.entries(tokens);
 
@@ -134,7 +145,8 @@ export function compactFigmaCompositeTokenValue<GToken extends GenericDesignToke
     );
   }
 
-  let $extensions: Record<string, unknown> | undefined = firstToken.$extensions;
+  let $extensions: Record<string, unknown> | undefined =
+    group.$extensions ?? firstToken.$extensions;
 
   if (mode !== undefined) {
     $extensions = {
@@ -142,14 +154,15 @@ export function compactFigmaCompositeTokenValue<GToken extends GenericDesignToke
       mode,
     };
   }
+
   return {
     ...removeUndefinedProperties({
       $type: isCurlyReference($value) ? undefined : 'typography',
     }),
     $value,
     ...removeUndefinedProperties({
-      $description: firstToken.$description,
-      $deprecated: firstToken.$deprecated,
+      $description: group.$description ?? firstToken.$description,
+      $deprecated: group.$deprecated ?? firstToken.$deprecated,
       $extensions,
     }),
   } as GToken;
