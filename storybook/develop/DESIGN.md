@@ -286,6 +286,33 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.dataviz.violet | #8f30f7 | #b185ff | var(--esds-color-content-dataviz-violet) | Violet data-viz foreground color. |
 | color.content.dataviz.yellow | #ecb306 | #fccf20 | var(--esds-color-content-dataviz-yellow) | Yellow data-viz foreground color. |
 | color.content.dataviz.gray | #45556c | #90a1b9 | var(--esds-color-content-dataviz-gray) | Gray data-viz foreground color. |
+| color.border.on.dataviz.blue.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-blue-dim1) | Border on strong blue data-viz backgrounds (dim1). |
+| color.border.on.dataviz.blue.dim2 | #0b426f | #e0effe | var(--esds-color-border-on-dataviz-blue-dim2) | Border on soft blue data-viz backgrounds (dim2). |
+| color.border.on.dataviz.blue.dim3 | #015ca3 | #7cc8fd | var(--esds-color-border-on-dataviz-blue-dim3) | Border on subtle blue data-viz backgrounds (dim3). |
+| color.border.on.dataviz.emerald.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-emerald-dim1) | Border on strong emerald data-viz backgrounds (dim1). |
+| color.border.on.dataviz.emerald.dim2 | #0e462d | #d6f5df | var(--esds-color-border-on-dataviz-emerald-dim2) | Border on soft emerald data-viz backgrounds (dim2). |
+| color.border.on.dataviz.emerald.dim3 | #116b40 | #7bdaa2 | var(--esds-color-border-on-dataviz-emerald-dim3) | Border on subtle emerald data-viz backgrounds (dim3). |
+| color.border.on.dataviz.orange.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-orange-dim1) | Border on strong orange data-viz backgrounds (dim1). |
+| color.border.on.dataviz.orange.dim2 | #7a200d | #ffe9c6 | var(--esds-color-border-on-dataviz-orange-dim2) | Border on soft orange data-viz backgrounds (dim2). |
+| color.border.on.dataviz.orange.dim3 | #b73206 | #ffb34a | var(--esds-color-border-on-dataviz-orange-dim3) | Border on subtle orange data-viz backgrounds (dim3). |
+| color.border.on.dataviz.pink.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-pink-dim1) | Border on strong pink data-viz backgrounds (dim1). |
+| color.border.on.dataviz.pink.dim2 | #990241 | #ffe0e6 | var(--esds-color-border-on-dataviz-pink-dim2) | Border on soft pink data-viz backgrounds (dim2). |
+| color.border.on.dataviz.pink.dim3 | #d7004b | #ff97af | var(--esds-color-border-on-dataviz-pink-dim3) | Border on subtle pink data-viz backgrounds (dim3). |
+| color.border.on.dataviz.purple.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-purple-dim1) | Border on strong purple data-viz backgrounds (dim1). |
+| color.border.on.dataviz.purple.dim2 | #2c3983 | #dfecff | var(--esds-color-border-on-dataviz-purple-dim2) | Border on soft purple data-viz backgrounds (dim2). |
+| color.border.on.dataviz.purple.dim3 | #3546cd | #a3c4fe | var(--esds-color-border-on-dataviz-purple-dim3) | Border on subtle purple data-viz backgrounds (dim3). |
+| color.border.on.dataviz.violet.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-violet-dim1) | Border on strong violet data-viz backgrounds (dim1). |
+| color.border.on.dataviz.violet.dim2 | #59169c | #efe8ff | var(--esds-color-border-on-dataviz-violet-dim2) | Border on soft violet data-viz backgrounds (dim2). |
+| color.border.on.dataviz.violet.dim3 | #811ee3 | #cab1ff | var(--esds-color-border-on-dataviz-violet-dim3) | Border on subtle violet data-viz backgrounds (dim3). |
+| color.border.on.dataviz.yellow.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-yellow-dim1) | Border on strong yellow data-viz backgrounds (dim1). |
+| color.border.on.dataviz.yellow.dim2 | #723f11 | #fef9c3 | var(--esds-color-border-on-dataviz-yellow-dim2) | Border on soft yellow data-viz backgrounds (dim2). |
+| color.border.on.dataviz.yellow.dim3 | #a26206 | #fee046 | var(--esds-color-border-on-dataviz-yellow-dim3) | Border on subtle yellow data-viz backgrounds (dim3). |
+| color.border.on.dataviz.gray.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-gray-dim1) | Border on strong gray data-viz backgrounds (dim1). |
+| color.border.on.dataviz.gray.dim2 | #0f172b | #f1f5f9 | var(--esds-color-border-on-dataviz-gray-dim2) | Border on soft gray data-viz backgrounds (dim2). |
+| color.border.on.dataviz.gray.dim3 | #314158 | #cad5e2 | var(--esds-color-border-on-dataviz-gray-dim3) | Border on subtle gray data-viz backgrounds (dim3). |
+| color.border.on.dataviz.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-dim1) | Default border on data-viz dim1 backgrounds. |
+| color.border.on.dataviz.dim2 | #0b426f | #e0effe | var(--esds-color-border-on-dataviz-dim2) | Default border on data-viz dim2 backgrounds. |
+| color.border.on.dataviz.dim3 | #015ca3 | #7cc8fd | var(--esds-color-border-on-dataviz-dim3) | Default border on data-viz dim3 backgrounds. |
 | color.border.brand | #0077cf | #36adfa | var(--esds-color-border-brand) | Default brand border color. |
 | color.border.brand.infomaniak | #0077cf | #36adfa | var(--esds-color-border-brand-infomaniak) | Infomaniak brand border colors. |
 | color.border.brand.mail | #e9004c | #ff97af | var(--esds-color-border-brand-mail) | Mail product brand border colors. |
@@ -297,24 +324,15 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.brand.contacts | #9346ff | #cab1ff | var(--esds-color-border-brand-contacts) | Contacts product brand border colors. |
 | color.border.brand.knote | #f94f00 | #ffb36b | var(--esds-color-border-brand-knote) | kNote product brand border colors. |
 | color.border.brand.swisstransfer | #15864e | #7bdaa2 | var(--esds-color-border-brand-swisstransfer) | SwissTransfer product brand border colors. |
-| color.border.dataviz.blue.dim1 | #0077cf | #36adfa | var(--esds-color-border-dataviz-blue-dim1) | Strong blue data-viz border (dim1). |
-| color.border.dataviz.blue.dim2 | #b9e0fe | #015ca3 | var(--esds-color-border-dataviz-blue-dim2) | Soft blue data-viz border (dim2). |
-| color.border.dataviz.emerald.dim1 | #15864e | #3cb572 | var(--esds-color-border-dataviz-emerald-dim1) | Strong emerald data-viz border (dim1). |
-| color.border.dataviz.emerald.dim2 | #afebc4 | #116b40 | var(--esds-color-border-dataviz-emerald-dim2) | Soft emerald data-viz border (dim2). |
-| color.border.dataviz.orange.dim1 | #dd4f02 | #ffa032 | var(--esds-color-border-dataviz-orange-dim1) | Strong orange data-viz border (dim1). |
-| color.border.dataviz.orange.dim2 | #ffd188 | #b73206 | var(--esds-color-border-dataviz-orange-dim2) | Soft orange data-viz border (dim2). |
-| color.border.dataviz.pink.dim1 | #e9004c | #ff5d86 | var(--esds-color-border-dataviz-pink-dim1) | Strong pink data-viz border (dim1). |
-| color.border.dataviz.pink.dim2 | #ffc6d3 | #d7004b | var(--esds-color-border-dataviz-pink-dim2) | Soft pink data-viz border (dim2). |
-| color.border.dataviz.purple.dim1 | #4d62ea | #7ea1fb | var(--esds-color-border-dataviz-purple-dim1) | Strong purple data-viz border (dim1). |
-| color.border.dataviz.purple.dim2 | #c6dcff | #3546cd | var(--esds-color-border-dataviz-purple-dim2) | Soft purple data-viz border (dim2). |
-| color.border.dataviz.violet.dim1 | #8f30f7 | #b185ff | var(--esds-color-border-dataviz-violet-dim1) | Strong violet data-viz border (dim1). |
-| color.border.dataviz.violet.dim2 | #e0d4ff | #811ee3 | var(--esds-color-border-dataviz-violet-dim2) | Soft violet data-viz border (dim2). |
-| color.border.dataviz.yellow.dim1 | #cc8a02 | #fccf20 | var(--esds-color-border-dataviz-yellow-dim1) | Strong yellow data-viz border (dim1). |
-| color.border.dataviz.yellow.dim2 | #fff089 | #a26206 | var(--esds-color-border-dataviz-yellow-dim2) | Soft yellow data-viz border (dim2). |
-| color.border.dataviz.gray.dim1 | #45556c | #90a1b9 | var(--esds-color-border-dataviz-gray-dim1) | Strong gray data-viz border (dim1). |
-| color.border.dataviz.gray.dim2 | #e2e8f0 | #314158 | var(--esds-color-border-dataviz-gray-dim2) | Soft gray data-viz border (dim2). |
-| color.border.dataviz.dim1 | #0077cf | #36adfa | var(--esds-color-border-dataviz-dim1) | Default dim1 data-viz border. |
-| color.border.dataviz.dim2 | #b9e0fe | #015ca3 | var(--esds-color-border-dataviz-dim2) | Default dim2 data-viz border. |
+| color.border.dataviz | #0077cf | #36adfa | var(--esds-color-border-dataviz) | Default data-viz border color. |
+| color.border.dataviz.blue | #0077cf | #36adfa | var(--esds-color-border-dataviz-blue) | Blue data-viz border color. |
+| color.border.dataviz.emerald | #15864e | #3cb572 | var(--esds-color-border-dataviz-emerald) | Emerald data-viz border color. |
+| color.border.dataviz.orange | #f97207 | #ffa032 | var(--esds-color-border-dataviz-orange) | Orange data-viz border color. |
+| color.border.dataviz.pink | #e9004c | #ff5d86 | var(--esds-color-border-dataviz-pink) | Pink data-viz border color. |
+| color.border.dataviz.purple | #4d62ea | #7ea1fb | var(--esds-color-border-dataviz-purple) | Purple data-viz border color. |
+| color.border.dataviz.violet | #8f30f7 | #b185ff | var(--esds-color-border-dataviz-violet) | Violet data-viz border color. |
+| color.border.dataviz.yellow | #ecb306 | #fccf20 | var(--esds-color-border-dataviz-yellow) | Yellow data-viz border color. |
+| color.border.dataviz.gray | #45556c | #90a1b9 | var(--esds-color-border-dataviz-gray) | Gray data-viz border color. |
 | color.border.feedback.error.dim1 | #db1a1a | #fe6b6b | var(--esds-color-border-feedback-error-dim1) | Strong error border (dim1). |
 | color.border.feedback.error.dim2 | #ffc8c8 | #c01515 | var(--esds-color-border-feedback-error-dim2) | Soft error border (dim2). |
 | color.border.feedback.success.dim1 | #12a74a | #41e17c | var(--esds-color-border-feedback-success-dim1) | Strong success border (dim1). |
