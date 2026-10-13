@@ -66,6 +66,10 @@ design-system/
 ├── docs/                        # Project documentation
 │   ├── figma/                   # Figma integration docs
 │   └── plans/                   # Implementation plans and execution docs
+├── .github/                     # GitHub workflows + shared composite actions
+│   ├── workflows/               # CI workflows (Storybook build/deploy, publish, VRT, …)
+│   └── actions/
+│       └── build-deploy-storybook/  # Shared Storybook build + gh-pages deploy pipeline (race-safe retry)
 ├── .agents/skills/              # Agent skills
 │   └── generate-changeset/      # SKILL.md — analyzes diff, writes changeset file
 └── index.js                     # Root entry point

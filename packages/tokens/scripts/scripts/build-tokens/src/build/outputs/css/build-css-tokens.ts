@@ -139,10 +139,13 @@ export function buildCssTokens({
                 let cssVariables: string = cssVariableDeclarationsToString(declarations);
 
                 if (declarationsToRedeclare.length > 0) {
-                  cssVariables += dedent`
-                    /* REDECLARED */
-                    ${cssVariableDeclarationsToString(declarationsToRedeclare)}
-                  `;
+                  cssVariables +=
+                    '\n\n' +
+                    dedent`
+                      /* REDECLARED */
+                      
+                      ${cssVariableDeclarationsToString(declarationsToRedeclare)}
+                    `;
                 }
 
                 await Promise.all([

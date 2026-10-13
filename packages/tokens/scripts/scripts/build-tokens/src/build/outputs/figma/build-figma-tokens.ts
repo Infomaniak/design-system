@@ -20,7 +20,6 @@ import {
   FIGMA_T1_COLLECTION_NAME,
   FIGMA_T2_COLLECTION_NAME,
   FIGMA_T3_COLLECTION_NAME,
-  T1_DIRECTORY_NAME,
 } from '../../../constants/design-token-tiers.ts';
 
 export interface BuildFigmaTokensOptions {
@@ -39,93 +38,69 @@ export function buildFigmaTokens({
   return logger.asyncTask('figma', async (): Promise<void> => {
     const figmaBaseCollection: DesignTokensCollection = baseCollection.clone();
 
+    const modifiedTokens: Map<string /* token name */, string /* modifier */> = new Map();
+
+    /*
+     NOTES:
+       modifiers override existing tokens, however, in figma, modifiers must form a chain:
+         - t2, t3 must point to a modifier
+         - references to a modified token must point to a modifier
+         - this forms a chain, ex: t2 -> product -> theme -> t1
+    */
+
     // for each modifier -> context -> token => add the token in the collection with the associated mode
     for (const [modifier, contexts] of modifiers.entries()) {
       for (const [context, collection] of sortDesignTokenContextEntries(modifier, contexts)) {
-        for (const token of getTokensOfDesignTokensCollectionFilteredByPath(
+        for (const modifierToken of getTokensOfDesignTokensCollectionFilteredByPath(
           collection,
           `${modifier}/${context}`,
         )) {
-          const newName: ArrayDesignTokenName = [modifier, ...token.name];
+          const tokenName: ArrayDesignTokenName = modifierToken.name;
+          const tokenNameAsCurlyReference: string =
+            DesignTokensCollection.arrayDesignTokenNameToCurlyReference(tokenName);
 
-          if (!isCurlyReference(token.value)) {
+          const newModifierTokenName: ArrayDesignTokenName = [modifier, ...tokenName];
+
+          if (!isCurlyReference(modifierToken.value)) {
             throw new Error(
-              `<modifier>(${modifier}), <context>(${context}), <token>(${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)}): token's value must be a curly reference.`,
+              `<modifier>(${modifier}), <context>(${context}), <token>(${tokenNameAsCurlyReference}): token's value must be a curly reference.`,
             );
           }
 
           const mode: Record<string, string> = {
-            ...(figmaBaseCollection.getOptional(newName)?.extensions?.['mode'] as
+            ...(figmaBaseCollection.getOptional(newModifierTokenName)?.extensions?.['mode'] as
               object | undefined),
-            [context]: token.value,
+            [context]: modifierToken.value,
           };
 
           figmaBaseCollection.set({
-            ...token,
-            name: newName,
+            ...modifierToken,
+            value: modifierToken.value,
+            name: newModifierTokenName,
             extensions: {
-              ...token.extensions,
+              ...modifierToken.extensions,
               mode,
             },
           });
-        }
-      }
-    }
 
-    /*
-      NOTES:
-        modifiers override existing tokens, however, in figma, modifiers must form a chain:
-          - t2, t3 must point to a modifier
-          - references to a modified token must point to a modifier
-          - this forms a chain, ex: t2 -> product -> theme -> t1
-     */
-
-    // for each modifier -> context -> token => make existing tokens point to the corresponding modifier
-    for (const [modifier, contexts] of modifiers.entries()) {
-      for (const [context, collection] of contexts.entries()) {
-        for (const token of getTokensOfDesignTokensCollectionFilteredByPath(
-          collection,
-          `${modifier}/${context}`,
-        )) {
-          const existingToken: GenericDesignTokensCollectionToken | undefined =
-            figmaBaseCollection.getOptional(token.name);
-
-          if (existingToken !== undefined) {
-            if (!isCurlyReference(existingToken.value)) {
+          if (modifiedTokens.has(tokenNameAsCurlyReference)) {
+            if (modifiedTokens.get(tokenNameAsCurlyReference) !== modifier) {
               throw new Error(
-                `<modifier>(${modifier}), <context>(${context}), <token>(${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)}): token's value must be a curly reference.`,
+                `<modifier>(${modifier}), <context>(${context}), <token>(${tokenNameAsCurlyReference}): token's already modified.`,
               );
             }
+          } else {
+            modifiedTokens.set(tokenNameAsCurlyReference, modifier);
 
-            if (
-              !tokenBelongsToATier(existingToken) &&
-              !existingToken.files.some((path: string): boolean => path.includes(T1_DIRECTORY_NAME))
-            ) {
-              throw new Error(
-                `<modifier>(${modifier}), <context>(${context}), <token>(${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)}): expected t2 or t3 token.`,
-              );
-            }
+            const modifiedToken: GenericDesignTokensCollectionToken =
+              figmaBaseCollection.get(tokenName);
 
-            // t2, t3 tokens must point to the modifier
             figmaBaseCollection.set({
-              ...existingToken,
-              value: segmentsReferenceToCurlyReference([modifier, ...existingToken.name]),
+              ...modifiedToken,
+              value: segmentsReferenceToCurlyReference(newModifierTokenName),
             });
           }
-
-          // references to this token must point now on the modifier
-          // we update only the references present into other modifiers
-          figmaBaseCollection.rename(token.name, [modifier, ...token.name], {
-            onExistingTokenBehaviour: 'only-references',
-            filter: (subToken: GenericDesignTokensCollectionToken): boolean => {
-              return modifiers.has(subToken.name[0]);
-            },
-          });
         }
-
-        // we've made all tokens of this modifier present into `figmaBaseCollection` point to this corresponding modifier
-        // as tokens present into the different context collections have the same names, we don't have to iterate further
-        break;
       }
     }
 

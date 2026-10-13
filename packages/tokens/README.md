@@ -39,7 +39,7 @@ flowchart TD
         O_CSS["CSS variables"]
         O_TW["Tailwind theme"]
         O_Swift["Swift package"]
-        O_JC["Lib Jetpack Compose"]
+        O_JC["Lib Compose Multiplatform"]
         O_FT["figma-tokens.json<br/>(TokensBrücke)"]
     end
 
@@ -247,6 +247,8 @@ swift.target(
 #### Kotlin
 
 The package is published into [a dedicated GitHub repository](https://github.com/Infomaniak/android-design-system).
+
+The tokens are generated as Kotlin Multiplatform modules (`PrimitiveTokens`, `Foundation` and one `Theme*` module per product), with sources in the `commonMain` source set, so they can be used from Compose Multiplatform as well as Jetpack Compose.
 
 ##### Installation
 

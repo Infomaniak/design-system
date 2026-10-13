@@ -6,7 +6,6 @@ import type {
   GenericDesignTokensCollectionTokenWithType,
 } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import {
-  MATERIAL_DIRECTORY_NAME,
   T1_DIRECTORY_NAME,
   T2_DIRECTORY_NAME,
   T3_DIRECTORY_NAME,
@@ -85,14 +84,6 @@ describe('renderTokenToRow', () => {
     it('should omit tailwindClasses for T1 tokens', () => {
       const token = createMockColorToken(T1_DIRECTORY_NAME);
       const context = createContextWithTokens('t1', [token]);
-      const row = renderTokenToRow(token, context);
-      expect(row).toBeDefined();
-      expect(row!.tailwindClasses).toBeUndefined();
-    });
-
-    it('should omit tailwindClasses for material tokens', () => {
-      const token = createMockColorToken(MATERIAL_DIRECTORY_NAME);
-      const context = createContextWithTokens('material', [token]);
       const row = renderTokenToRow(token, context);
       expect(row).toBeDefined();
       expect(row!.tailwindClasses).toBeUndefined();
@@ -182,19 +173,6 @@ describe('generateRowContent', () => {
     const html = generateRowContent(row);
     expect(html).not.toContain('Tailwind:');
     expect(html).toContain('var(--esds-color-background-base)');
-  });
-
-  it('should omit CSS variable for material tokens', () => {
-    const row: MarkdownTokenRow = {
-      preview: '<div>Preview</div>',
-      name: 'material.elevation.1',
-      cssVariable: '--esds-material-elevation-1',
-      description: 'Material token',
-    };
-    const html = generateRowContent(row);
-    expect(html).not.toContain('CSS:');
-    expect(html).not.toContain('var(--esds-material-elevation-1)');
-    expect(html).toContain('material.elevation.1');
   });
 
   it('should include all parts for a normal token row', () => {

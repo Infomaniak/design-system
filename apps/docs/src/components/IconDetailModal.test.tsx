@@ -28,10 +28,15 @@ describe('IconDetailModal', () => {
     mockListIcons.mockResolvedValue({
       prefix: 'material-symbols',
       total: 2,
+      uncategorized: ['home', 'settings'],
       categories: {
+        '#home': ['home'],
+        '@buildings': ['home'],
+        '@all': ['home'],
         buildings: ['home'],
-        navigation: ['home'],
-        action: ['settings'],
+      },
+      aliases: {
+        'home-outline': 'home',
       },
       info: {
         name: 'Material Symbols',
@@ -236,6 +241,27 @@ describe('IconDetailModal', () => {
     // Wait for async data to load
     await vi.waitFor(() => {
       expect(screen.getByText('Material Symbols')).toBeInTheDocument();
+    });
+  });
+
+  it('displays tags, categories and aliases from API response', async () => {
+    render(
+      <IconDetailModal
+        icon={mockIcon}
+        isOpen={true}
+        prefix="material-symbols"
+        onClose={mockOnClose}
+      />,
+    );
+
+    // Wait for async data to load
+    await vi.waitFor(() => {
+      expect(screen.getByText('Tags:')).toBeInTheDocument();
+      expect(screen.getByText('home')).toBeInTheDocument();
+      expect(screen.getByText('Categories:')).toBeInTheDocument();
+      expect(screen.getByText('buildings')).toBeInTheDocument();
+      expect(screen.getByText('Aliases (deprecated):')).toBeInTheDocument();
+      expect(screen.getByText('home-outline')).toBeInTheDocument();
     });
   });
 

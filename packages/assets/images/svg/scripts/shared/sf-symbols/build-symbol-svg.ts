@@ -1,12 +1,10 @@
 import {
   applyPathTransformToPathData,
-  computePathsBoundingBox,
-  type PathBoundingBox,
   type PathTransform,
 } from '../icons/bake-transform-into-path.ts';
 import type { SvgOutlinePath, WindingRule } from '../icons/outline-path.ts';
 import type { SymbolTemplate, SymbolTemplateVariant } from './parse-symbol-template.ts';
-import { SYMBOL_FILL_RATIO } from './sf-symbols-config.ts';
+import { SYMBOL_FILL_RATIO, SYMBOL_OUTLINE_VIEW_BOX_SIZE } from './sf-symbols-config.ts';
 
 export interface FittedSymbolPath {
   readonly d: string;
@@ -18,24 +16,28 @@ const EVENODD_FILL_RULE_ATTRIBUTE = 'evenodd';
 
 export function fitSymbolOutlinePathsToVariant({
   outlinedPaths,
-  boundingBox,
   variant,
   template,
 }: {
   readonly outlinedPaths: readonly SvgOutlinePath[];
-  readonly boundingBox: PathBoundingBox;
   readonly variant: SymbolTemplateVariant;
   readonly template: SymbolTemplate;
 }): readonly FittedSymbolPath[] {
-  const iconWidth: number = boundingBox.maxX - boundingBox.minX;
-  const iconHeight: number = boundingBox.maxY - boundingBox.minY;
   const cellHeight: number = template.baselineY - template.caplineY;
 
+  /*
+    Maps the outline canvas (0..SYMBOL_OUTLINE_VIEW_BOX_SIZE) onto the cell instead of the tight
+    artwork bounding box, preserving the padding designed inside the canvas (as in web icons).
+    Template cells are wider than tall, so the canvas is height-anchored: its top and bottom
+    edges land on the capline and baseline.
+   */
   const scale: number =
-    Math.min(variant.cellWidth / iconWidth, cellHeight / iconHeight) * SYMBOL_FILL_RATIO;
-  const translateX: number =
-    variant.cellWidth / 2 - (scale * (boundingBox.minX + boundingBox.maxX)) / 2;
-  const translateY: number = -cellHeight / 2 - (scale * (boundingBox.minY + boundingBox.maxY)) / 2;
+    Math.min(
+      variant.cellWidth / SYMBOL_OUTLINE_VIEW_BOX_SIZE,
+      cellHeight / SYMBOL_OUTLINE_VIEW_BOX_SIZE,
+    ) * SYMBOL_FILL_RATIO;
+  const translateX: number = variant.cellWidth / 2 - (scale * SYMBOL_OUTLINE_VIEW_BOX_SIZE) / 2;
+  const translateY: number = -cellHeight / 2 - (scale * SYMBOL_OUTLINE_VIEW_BOX_SIZE) / 2;
 
   const fitTransform: PathTransform = [
     [scale, 0, translateX],
@@ -60,18 +62,11 @@ export function buildSymbolSvg({
     throw new Error(`Symbol ${JSON.stringify(symbolName)} has no outline paths.`);
   }
 
-  // per-path bounding box: joining path data strings would resolve a relative
-  // command against the previous path's endpoint
-  const boundingBox: PathBoundingBox = computePathsBoundingBox(
-    outlinedPaths.map(({ d }: SvgOutlinePath): string => d),
-  );
-
   let content: string = template.content;
 
   for (const variant of template.variants) {
     const fittedPaths: readonly FittedSymbolPath[] = fitSymbolOutlinePathsToVariant({
       outlinedPaths,
-      boundingBox,
       variant,
       template,
     });

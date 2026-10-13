@@ -6,6 +6,7 @@ import { removeTrailingSlash } from '../../../../../../scripts/helpers/path/remo
 import type { CurlyReference } from '../../../shared/dtcg/design-token/reference/types/curly/curly-reference.ts';
 import { isCurlyReference } from '../../../shared/dtcg/design-token/reference/types/curly/is-curly-reference.ts';
 import { curlyReferenceToSegmentsReference } from '../../../shared/dtcg/design-token/reference/types/curly/to/segments-reference/curly-reference-to-segments-reference.ts';
+import type { ValueOrCurlyReference } from '../../../shared/dtcg/design-token/reference/types/curly/value-or/value-or-curly-reference.ts';
 import type { SegmentsReference } from '../../../shared/dtcg/design-token/reference/types/segments/segments-reference.ts';
 import { segmentsReferenceToCurlyReference } from '../../../shared/dtcg/design-token/reference/types/segments/to/curly-reference/segments-reference-to-curly-reference.ts';
 import type { DesignTokensTree } from '../../../shared/dtcg/design-token/tree/design-tokens-tree.ts';
@@ -88,15 +89,46 @@ export async function convertFigmaTokens({
       );
     }
 
+    const modifier: string = token.name[0];
+
     const contexts: Set<string> = mapGetOrInsertComputed(
       modifiers,
-      token.name[0],
+      modifier,
       (): Set<string> => new Set(),
     );
 
     for (const mode of Object.keys(token.extensions['mode'] as Record<string, unknown>)) {
       contexts.add(mode);
     }
+
+    const applyDefaultModifier = (forModifier: string, context: string): void => {
+      if (forModifier !== modifier) {
+        return;
+      }
+
+      const currentValue: CurlyReference = token.value;
+      const defaultValue: ValueOrCurlyReference<unknown> = (
+        token.extensions as Record<'mode', Record<string, unknown>>
+      )['mode'][context];
+
+      if (!isCurlyReference(defaultValue)) {
+        throw new Error(
+          `Expected token ${DesignTokensCollection.arrayDesignTokenNameToCurlyReference(token.name)}'s extensions.mode[${JSON.stringify(context)}] to be a curly reference.`,
+        );
+      }
+      if (currentValue !== defaultValue) {
+        rootCollection.set({
+          ...token,
+          value: defaultValue,
+        });
+      }
+    };
+
+    applyDefaultModifier('theme', 'light');
+    applyDefaultModifier('product', 'infomaniak');
+    applyDefaultModifier('dataviz', 'blue');
+    applyDefaultModifier('button-size', 'medium');
+    applyDefaultModifier('button-type', 'primary');
   }
 
   // the "main" collection
@@ -121,7 +153,7 @@ export async function convertFigmaTokens({
             for (let i: number = 1; i < resolved.trace.length; i++) {
               const name: ArrayDesignTokenName = resolved.trace[i];
               if (!modifiers.has(name[0])) {
-                return segmentsReferenceToCurlyReference(name.slice(1));
+                return segmentsReferenceToCurlyReference(name);
               }
             }
 

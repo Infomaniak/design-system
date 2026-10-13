@@ -28,7 +28,7 @@ export interface MarkdownTokenRow {
    * The Tailwind utility classes mapped from this token.
    * `null` or `undefined` when the Tailwind row should be omitted:
    * - `null` when the token has no Tailwind mapping.
-   * - `undefined` for tiers that do not show Tailwind classes (t1, material).
+   * - `undefined` for tiers that do not show Tailwind classes (t1).
    */
   readonly tailwindClasses?: string[] | null;
 
