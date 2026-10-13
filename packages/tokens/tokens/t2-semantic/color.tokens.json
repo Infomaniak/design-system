@@ -1338,6 +1338,124 @@
               "figmaName": ["color", "border", "on", "dataviz", "@root", "dim3"]
             }
           }
+        },
+        "feedback": {
+          "$description": "Border colors placed on feedback backgrounds.",
+          "success": {
+            "dim1": {
+              "$value": "{color.white}",
+              "$description": "Border on strong success backgrounds (dim1).",
+              "$extensions": {
+                "scopes": ["STROKE_COLOR"]
+              }
+            },
+            "dim2": {
+              "$value": "{color.lime.900}",
+              "$description": "Border on soft success backgrounds (dim2).",
+              "$extensions": {
+                "scopes": ["STROKE_COLOR"]
+              }
+            },
+            "dim3": {
+              "$value": "{color.lime.700}",
+              "$description": "Border on subtle success backgrounds (dim3).",
+              "$extensions": {
+                "scopes": ["STROKE_COLOR"]
+              }
+            }
+          },
+          "warning": {
+            "dim1": {
+              "$value": "{color.white}",
+              "$description": "Border on strong warning backgrounds (dim1).",
+              "$extensions": {
+                "scopes": ["STROKE_COLOR"]
+              }
+            },
+            "dim2": {
+              "$value": "{color.orange.900}",
+              "$description": "Border on soft warning backgrounds (dim2).",
+              "$extensions": {
+                "scopes": ["STROKE_COLOR"]
+              }
+            },
+            "dim3": {
+              "$value": "{color.orange.700}",
+              "$description": "Border on subtle warning backgrounds (dim3).",
+              "$extensions": {
+                "scopes": ["STROKE_COLOR"]
+              }
+            }
+          },
+          "error": {
+            "dim1": {
+              "$value": "{color.white}",
+              "$description": "Border on strong error backgrounds (dim1).",
+              "$extensions": {
+                "scopes": ["STROKE_COLOR"]
+              }
+            },
+            "dim2": {
+              "$value": "{color.red.900}",
+              "$description": "Border on soft error backgrounds (dim2).",
+              "$extensions": {
+                "scopes": ["STROKE_COLOR"]
+              }
+            },
+            "dim3": {
+              "$value": "{color.red.700}",
+              "$description": "Border on subtle error backgrounds (dim3).",
+              "$extensions": {
+                "scopes": ["STROKE_COLOR"]
+              }
+            }
+          },
+          "information": {
+            "dim1": {
+              "$value": "{color.white}",
+              "$description": "Border on strong information backgrounds (dim1).",
+              "$extensions": {
+                "scopes": ["STROKE_COLOR"]
+              }
+            },
+            "dim2": {
+              "$value": "{color.blue.900}",
+              "$description": "Border on soft information backgrounds (dim2).",
+              "$extensions": {
+                "scopes": ["STROKE_COLOR"]
+              }
+            },
+            "dim3": {
+              "$value": "{color.blue.700}",
+              "$description": "Border on subtle information backgrounds (dim3).",
+              "$extensions": {
+                "scopes": ["STROKE_COLOR"]
+              }
+            }
+          },
+          "neutral": {
+            "dim1": {
+              "$value": "{color.white}",
+              "$description": "Border on strong neutral backgrounds (dim1).",
+              "$extensions": {
+                "scopes": ["STROKE_COLOR"]
+              }
+            },
+            "dim2": {
+              "$value": "{color.gray.900}",
+              "$description": "Border on soft neutral backgrounds (dim2).",
+              "$extensions": {
+                "scopes": ["STROKE_COLOR"]
+              }
+            },
+            "dim3": {
+              "$value": "{color.gray.700}",
+              "$description": "Border on subtle neutral backgrounds (dim3).",
+              "$extensions": {
+                "scopes": ["STROKE_COLOR"]
+              }
+            }
+          }
         }
       },
       "brand": {
@@ -1487,90 +1605,40 @@
         }
       },
       "feedback": {
-        "$description": "Feedback border colors (error, success, warning) in two dimensions.",
+        "$description": "Feedback border colors (error, success, warning).",
         "error": {
           "$description": "Error feedback border colors.",
-          "dim1": {
-            "$value": "{color.red.600}",
-            "$description": "Strong error border (dim1).",
-            "$extensions": {
-              "scopes": ["STROKE_COLOR"]
-            }
-          },
-          "dim2": {
-            "$value": "{color.red.200}",
-            "$description": "Soft error border (dim2).",
-            "$extensions": {
-              "scopes": ["STROKE_COLOR"]
-            }
+          "$value": "{color.red.600}",
+          "$extensions": {
+            "scopes": ["STROKE_COLOR"]
           }
         },
         "success": {
           "$description": "Success feedback border colors.",
-          "dim1": {
-            "$value": "{color.lime.600}",
-            "$description": "Strong success border (dim1).",
-            "$extensions": {
-              "scopes": ["STROKE_COLOR"]
-            }
-          },
-          "dim2": {
-            "$value": "{color.lime.200}",
-            "$description": "Soft success border (dim2).",
-            "$extensions": {
-              "scopes": ["STROKE_COLOR"]
-            }
+          "$value": "{color.lime.600}",
+          "$extensions": {
+            "scopes": ["STROKE_COLOR"]
           }
         },
         "warning": {
           "$description": "Warning feedback border colors.",
-          "dim1": {
-            "$value": "{color.orange.600}",
-            "$description": "Strong warning border (dim1).",
-            "$extensions": {
-              "scopes": ["STROKE_COLOR"]
-            }
-          },
-          "dim2": {
-            "$value": "{color.orange.200}",
-            "$description": "Soft warning border (dim2).",
-            "$extensions": {
-              "scopes": ["STROKE_COLOR"]
-            }
+          "$value": "{color.orange.600}",
+          "$extensions": {
+            "scopes": ["STROKE_COLOR"]
           }
         },
         "information": {
           "$description": "Information feedback border colors.",
-          "dim1": {
-            "$value": "{color.blue.600}",
-            "$description": "Strong information border (dim1).",
-            "$extensions": {
-              "scopes": ["STROKE_COLOR"]
-            }
-          },
-          "dim2": {
-            "$value": "{color.blue.200}",
-            "$description": "Soft information border (dim2).",
-            "$extensions": {
-              "scopes": ["STROKE_COLOR"]
-            }
+          "$value": "{color.blue.600}",
+          "$extensions": {
+            "scopes": ["STROKE_COLOR"]
           }
         },
         "neutral": {
           "$description": "Neutral feedback border colors.",
-          "dim1": {
-            "$value": "{color.gray.600}",
-            "$description": "Strong neutral border (dim1).",
-            "$extensions": {
-              "scopes": ["STROKE_COLOR"]
-            }
-          },
-          "dim2": {
-            "$value": "{color.gray.200}",
-            "$description": "Soft neutral border (dim2).",
-            "$extensions": {
-              "scopes": ["STROKE_COLOR"]
-            }
+          "$value": "{color.gray.600}",
+          "$extensions": {
+            "scopes": ["STROKE_COLOR"]
           }
         }
       },
