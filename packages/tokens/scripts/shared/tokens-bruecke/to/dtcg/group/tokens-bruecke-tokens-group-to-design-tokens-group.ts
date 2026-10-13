@@ -145,7 +145,8 @@ export function compactFigmaCompositeTokenValue<GToken extends GenericDesignToke
     );
   }
 
-  let $extensions: Record<string, unknown> | undefined = group.$extensions;
+  let $extensions: Record<string, unknown> | undefined =
+    group.$extensions ?? firstToken.$extensions;
 
   if (mode !== undefined) {
     $extensions = {
@@ -160,8 +161,8 @@ export function compactFigmaCompositeTokenValue<GToken extends GenericDesignToke
     }),
     $value,
     ...removeUndefinedProperties({
-      $description: group.$description,
-      $deprecated: group.$deprecated,
+      $description: group.$description ?? firstToken.$description,
+      $deprecated: group.$deprecated ?? firstToken.$deprecated,
       $extensions,
     }),
   } as GToken;
