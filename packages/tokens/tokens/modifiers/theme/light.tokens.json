@@ -547,6 +547,63 @@
               "$value": "{color.gray.700}"
             }
           }
+        },
+        "feedback": {
+          "success": {
+            "dim1": {
+              "$value": "{color.white}"
+            },
+            "dim2": {
+              "$value": "{color.lime.900}"
+            },
+            "dim3": {
+              "$value": "{color.lime.700}"
+            }
+          },
+          "warning": {
+            "dim1": {
+              "$value": "{color.white}"
+            },
+            "dim2": {
+              "$value": "{color.orange.900}"
+            },
+            "dim3": {
+              "$value": "{color.orange.700}"
+            }
+          },
+          "error": {
+            "dim1": {
+              "$value": "{color.white}"
+            },
+            "dim2": {
+              "$value": "{color.red.900}"
+            },
+            "dim3": {
+              "$value": "{color.red.700}"
+            }
+          },
+          "information": {
+            "dim1": {
+              "$value": "{color.white}"
+            },
+            "dim2": {
+              "$value": "{color.blue.900}"
+            },
+            "dim3": {
+              "$value": "{color.blue.700}"
+            }
+          },
+          "neutral": {
+            "dim1": {
+              "$value": "{color.white}"
+            },
+            "dim2": {
+              "$value": "{color.gray.900}"
+            },
+            "dim3": {
+              "$value": "{color.gray.700}"
+            }
+          }
         }
       },
       "brand": {
@@ -583,44 +640,19 @@
       },
       "feedback": {
         "success": {
-          "dim1": {
-            "$value": "{color.lime.600}"
-          },
-          "dim2": {
-            "$value": "{color.lime.200}"
-          }
+          "$value": "{color.lime.600}"
         },
         "warning": {
-          "dim1": {
-            "$value": "{color.orange.600}"
-          },
-          "dim2": {
-            "$value": "{color.orange.200}"
-          }
+          "$value": "{color.orange.600}"
         },
         "error": {
-          "dim1": {
-            "$value": "{color.red.600}"
-          },
-          "dim2": {
-            "$value": "{color.red.200}"
-          }
+          "$value": "{color.red.600}"
         },
         "information": {
-          "dim1": {
-            "$value": "{color.blue.600}"
-          },
-          "dim2": {
-            "$value": "{color.blue.200}"
-          }
+          "$value": "{color.blue.600}"
         },
         "neutral": {
-          "dim1": {
-            "$value": "{color.gray.600}"
-          },
-          "dim2": {
-            "$value": "{color.gray.200}"
-          }
+          "$value": "{color.gray.600}"
         }
       },
       "dataviz": {

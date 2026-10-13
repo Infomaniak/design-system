@@ -3,7 +3,7 @@
     "border": {
       "color": {
         "$root": {
-          "$value": "{color.border.feedback.error.dim1}"
+          "$value": "{color.border.feedback.error}"
         },
         "disabled": {
           "$value": "{color.background.disabled}"
