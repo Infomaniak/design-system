@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.1
+
+### Patch Changes
+
+- [#401](https://github.com/Infomaniak/design-system/pull/401) [`ac2e53e`](https://github.com/Infomaniak/design-system/commit/ac2e53ecc05979592a16127e4513d09b0c36a322): Icon search in the Iconify API icon list now also matches icon aliases, making it easier to find icons by their alternative names.
+
 ## 0.5.0
 
 ### Minor Changes
