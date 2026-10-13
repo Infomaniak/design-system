@@ -24,54 +24,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
+      - name: Build and deploy Storybook
+        id: storybook
+        uses: ./.github/actions/build-deploy-storybook
         with:
-          node-version: '24'
-          registry-url: 'https://npm.pkg.github.com'
-          cache: 'yarn'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Install dependencies
-        run: yarn install --immutable
-
-      - name: Prepare Storybook Pages context
-        id: pages
-        run: yarn ci:storybook-pages --mode=prepare
-
-      - name: Build Storybook
-        id: build
-        run: yarn build
-        env:
-          VITE_ICONIFY_API_URL: ${{ (github.ref == 'refs/heads/main' || github.ref_type == 'tag') && 'https://iconify.infomaniak.com/' || 'https://iconify.preprod.dev.infomaniak.ch/' }}
-          VITE_FONTS_CSS_URL: ${{ (github.ref == 'refs/heads/main' || github.ref_type == 'tag') && 'https://fonts.storage.infomaniak.com/design-system/latest/infomaniak-sans.min.css' || 'https://fonts.storage.infomaniak.com/design-system/dev/infomaniak-sans.min.css' }}
-          KCHAT_WEBHOOK_ID: ${{ secrets.KCHAT_WEBHOOK_ID }}
-
-      - name: Normalize Storybook build for subpath hosting
-        if: steps.build.outcome == 'success'
-        run: yarn ci:storybook-pages --mode=postbuild
-
-      - name: Deploy Storybook to GitHub Pages
-        id: deploy
-        if: steps.build.outcome == 'success' && steps.pages.outputs.should_deploy == 'true'
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: apps/docs/storybook-static
-          destination_dir: ${{ steps.pages.outputs.destination_dir }}
-          keep_files: true
-          enable_jekyll: false
-
-      - name: Upload Storybook artifact
-        if: steps.build.outcome == 'success' && steps.deploy.outcome != 'success'
-        uses: actions/upload-artifact@v7
-        with:
-          name: storybook-${{ steps.pages.outputs.target || 'manual' }}-${{ github.sha }}
-          path: apps/docs/storybook-static/
-          retention-days: 3
-          if-no-files-found: error
+          iconify_api_url: ${{ (github.ref == 'refs/heads/main' || github.ref_type == 'tag') && 'https://iconify.infomaniak.com/' || 'https://iconify.preprod.dev.infomaniak.ch/' }}
+          fonts_css_url: ${{ (github.ref == 'refs/heads/main' || github.ref_type == 'tag') && 'https://fonts.storage.infomaniak.com/design-system/latest/infomaniak-sans.min.css' || 'https://fonts.storage.infomaniak.com/design-system/dev/infomaniak-sans.min.css' }}
+          kchat_webhook_id: ${{ secrets.KCHAT_WEBHOOK_ID }}

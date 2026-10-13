@@ -34,7 +34,6 @@ import { isNumberDesignTokensCollectionToken } from '../../../../../../shared/dt
 import { isShadowDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/composite/shadow/is-shadow-design-tokens-collection-token.ts';
 import { isTypographyDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/composite/typography/is-typography-design-tokens-collection-token.ts';
 import {
-  MATERIAL_DIRECTORY_NAME,
   T1_DIRECTORY_NAME,
   T2_DIRECTORY_NAME,
   T3_DIRECTORY_NAME,
@@ -57,7 +56,6 @@ function getTokenGroupPrefix(filePath: string): string {
   if (path.includes(`/${T1_DIRECTORY_NAME}/`)) return 't1';
   if (path.includes(`/${T2_DIRECTORY_NAME}/`)) return 't2';
   if (path.includes(`/${T3_DIRECTORY_NAME}/`)) return 't3';
-  if (path.includes(`/${MATERIAL_DIRECTORY_NAME}/`)) return 'material';
 
   throw new Error("Unable to determine token's group.");
 }
@@ -232,13 +230,12 @@ export function generateRowContent(row: MarkdownTokenRow): string {
       <td>
         <div class="token-row">
           <button class="token-value" data-clipboard="${name}" type="button">${name}</button>
-        </div>${
-          row.name.startsWith('material')
-            ? ''
-            : `<div class="token-row">
-                CSS: <button class="token-value" data-clipboard="var(${cssVariable})" type="button">var(${cssVariable})</button>
-              </div>`
-        }${tailwindRow}<div class="token-row token-description">${description}</div>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(${cssVariable})" type="button">var(${cssVariable})</button>
+        </div>
+        ${tailwindRow}
+        <div class="token-row token-description">${description}</div>
       </td>
     </tr>`;
 }

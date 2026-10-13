@@ -15,7 +15,6 @@ import customElements from '../../../packages/components/custom-elements.json' w
 import Collapsible from '../src/components/Collapsible.tsx';
 import DocsLink from '../src/components/docs-link.tsx';
 import FontPreview from '../src/components/FontPreview.tsx';
-import MaterialThemeBuilderLink from '../src/components/MaterialThemeBuilderLink.tsx';
 import Table from '../src/components/Table.tsx';
 import { FONT_BASE } from '../src/lib/font-stack.ts';
 import { loadFontsCss } from '../src/lib/fonts-css.ts';
@@ -42,34 +41,24 @@ import '../src/styles/token-tables.css';
 import '../src/styles/fonts.css';
 
 // Import base CSS tokens
-import '@infomaniak-design-system/tokens/dist/web/css/material/tokens.root.css';
+import '@infomaniak-design-system/tokens/dist/web/css/tokens.root.css';
 
 // Import fonts dynamically from remote storage (URL configurable via VITE_FONTS_CSS_URL)
 loadFontsCss().catch((error: unknown): void => {
   console.error(error);
 });
 
-// Import all product modifiers (for dynamic switching via data-esds-product attribute)
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/calendar.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/contacts.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/euria.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/infomaniak.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/kchat.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/kdrive.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/knote.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/mail.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/security.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/product/swisstransfer.attr.css';
-
 // Import all theme modifiers (for dynamic switching via data-esds-theme attribute)
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/dark.attr.css';
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/theme/light.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/modifiers/theme/all.attr.css';
+
+// Import all product modifiers (for dynamic switching via data-esds-product attribute)
+import '@infomaniak-design-system/tokens/dist/web/css/modifiers/product/all.attr.css';
 
 // Import all button-size modifiers
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-size/all.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/modifiers/button-size/all.attr.css';
 
 // Import all button-type modifiers
-import '@infomaniak-design-system/tokens/dist/web/css/material/modifiers/button-type/all.attr.css';
+import '@infomaniak-design-system/tokens/dist/web/css/modifiers/button-type/all.attr.css';
 
 // Initialize <esds-icon> and provide IconifyApi via root InjectionContext
 EsdsIconComponent.define();
@@ -314,7 +303,6 @@ const preview: Preview = {
         Collapsible,
         Table,
         FontPreview,
-        MaterialThemeBuilderLink,
         a: DocsLink,
       },
     },
@@ -331,7 +319,7 @@ const preview: Preview = {
           'Designers Guide',
           ['Getting Started', 'Install the Font', 'Figma Plugins'],
           'Design Tokens',
-          ['Getting Started', '*', 'Material', 'CHANGELOG'],
+          ['Getting Started', '*', 'CHANGELOG'],
           'Icons',
           ['Getting Started', '*'],
           'Typography',

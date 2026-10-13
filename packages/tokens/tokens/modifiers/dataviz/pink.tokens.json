@@ -1,5 +1,23 @@
 {
   "color": {
+    "border": {
+      "dataviz": {
+        "$value": "{color.border.dataviz.pink}"
+      },
+      "on": {
+        "dataviz": {
+          "dim1": {
+            "$value": "{color.border.on.dataviz.pink.dim1}"
+          },
+          "dim2": {
+            "$value": "{color.border.on.dataviz.pink.dim2}"
+          },
+          "dim3": {
+            "$value": "{color.border.on.dataviz.pink.dim3}"
+          }
+        }
+      }
+    },
     "content": {
       "dataviz": {
         "$value": "{color.content.dataviz.pink}"
@@ -28,16 +46,6 @@
         },
         "dim3": {
           "$value": "{color.background.dataviz.pink.dim3}"
-        }
-      }
-    },
-    "border": {
-      "dataviz": {
-        "dim1": {
-          "$value": "{color.border.dataviz.pink.dim1}"
-        },
-        "dim2": {
-          "$value": "{color.border.dataviz.pink.dim2}"
         }
       }
     }
