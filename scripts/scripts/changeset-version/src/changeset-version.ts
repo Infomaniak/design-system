@@ -2,7 +2,7 @@ import { glob, readdir } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 
 import { readTextFile } from '../../../helpers/file/read-text-file.ts';
-import { writeTextFileAtomic } from '../../../helpers/file/write-text-file-atomic.ts';
+import { writeTextFileSafe } from '../../../helpers/file/write-text-file-safe.ts';
 import { Logger } from '../../../helpers/log/logger.ts';
 import { execCommandInherit } from '../../../helpers/misc/exec-command.ts';
 
@@ -128,7 +128,7 @@ async function stampChangelogFiles({
         continue;
       }
 
-      await writeTextFileAtomic(changelogPath, stampedContent);
+      await writeTextFileSafe(changelogPath, stampedContent);
 
       logger.info(`Added release date (${date}) to ${changelogRelativePath}`);
     } catch (error: unknown) {
