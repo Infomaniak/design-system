@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.7.0 (2026-10-14)
+
+### Minor Changes
+
+- [#414](https://github.com/Infomaniak/design-system/pull/414) [`27d9550`](https://github.com/Infomaniak/design-system/commit/27d955011ecf63cec0a9e965f63381d516d44d12): Flatten feedback border tokens and add on-feedback border tokens.
+
+  - Removed `color.border.feedback.{error,success,warning,information,neutral}.dim1` and `.dim2` tokens: each feedback border color is now a single token (`color.border.feedback.{error,success,warning,information,neutral}`), resolving to the former `dim1` (strong) value in both light and dark themes.
+  - Added `color.border.on.feedback.{success,warning,error,information,neutral}.dim1`, `.dim2` and `.dim3` tokens for borders rendered on top of feedback backgrounds.
+  - Updated the `secondary-destructive` button modifier to reference the flattened `color.border.feedback.error` token.
+
+- [#407](https://github.com/Infomaniak/design-system/pull/407) [`31cebf9`](https://github.com/Infomaniak/design-system/commit/31cebf93babc179b5272d055a69de650d77d2397): Kotlin tokens are now generated for Kotlin/Compose Multiplatform: sources are emitted in the `commonMain` source set (`src/commonMain/kotlin`) instead of `src/main/kotlin`, and theme modules' `build.gradle.kts` now declare their namespace inside a `kotlin { android { ... } }` block.
+
+- [#411](https://github.com/Infomaniak/design-system/pull/411) [`2ded88c`](https://github.com/Infomaniak/design-system/commit/2ded88cfe25973e73b2248dfa3361b68dee6434f): Removed the Material token tier. All Material-specific tokens and build outputs are gone, including the CSS files under `dist/web/css/material/` and the Material Theme Builder documentation page. Import the standard tokens instead (`dist/web/css/tokens.root.css`, `dist/web/css/modifiers/…`).
+
+- [#412](https://github.com/Infomaniak/design-system/pull/412) [`1cce78b`](https://github.com/Infomaniak/design-system/commit/1cce78bb54ccfec85ab21b61cf81fd6b60e0eb1c): Synced DTCG tokens from the latest Figma export. Data-viz border tokens were restructured to match the data-viz foreground structure:
+
+  - `color.border.dataviz.<hue>` is now a single token (holding the former `dim1` value), replacing the `dim1`/`dim2` variants. Orange and yellow borders moved from the 600 to the 500 shade, aligning with their data-viz foreground colors.
+  - Added `color.border.on.dataviz.<hue>.{dim1,dim2,dim3}` tokens for borders drawn on data-viz backgrounds: no border (`transparent`) on strong backgrounds, and theme-aware shades on soft (`dim2`) and subtle (`dim3`) backgrounds.
+
+  Consumers referencing the removed `--esds-color-border-dataviz-<hue>-dim1` / `-dim2` CSS custom properties must update to the new token paths.
+
+- [#404](https://github.com/Infomaniak/design-system/pull/404) [`98b912f`](https://github.com/Infomaniak/design-system/commit/98b912f2415544cf5d1d6c68035e538461f02340): Tailwind tokens now ship state helpers: any `bg-` token can be suffixed with `-state-[state-token-name]` to blend a background color with a state color.
+
+  _Example:_ `active:bg-brand-state-selected-strong` applies the `color.state.selected-strong` state token over the `color.background.brand` background token.
+
+### Patch Changes
+
+- [#408](https://github.com/Infomaniak/design-system/pull/408) [`50d1305`](https://github.com/Infomaniak/design-system/commit/50d1305ca55dabc7295867c973562047b585d805): All button types now expose `color.state.hover` and `color.state.pressed` tokens: primary buttons blend the `medium` state intensity over their background, while secondary and ghost buttons use the `soft` intensity, so hover and pressed states can be applied consistently across button variants.
+
+- [#405](https://github.com/Infomaniak/design-system/pull/405) [`d4153bf`](https://github.com/Infomaniak/design-system/commit/d4153bf9698f01109b50d370ed429d82413789cd): Kotlin tokens now include opacity tokens, which were previously excluded from the generated output.
+
+- [#406](https://github.com/Infomaniak/design-system/pull/406) [`fc0e48a`](https://github.com/Infomaniak/design-system/commit/fc0e48ace2199df1c6a9574e6e9a8c38452f9d3d): Synced design tokens with the latest Figma export. Pressed overlays are now more pronounced (interaction opacity raised from 16% to 30%), the light-theme warning feedback background uses a softer orange, and the dark-theme surface color was lightened. Disabled secondary buttons now keep their border instead of losing it. New primitive alpha shades `color.gray.50-30` and `color.blue.900-30` are available, and semantic brand and data-viz tokens now reference their dedicated semantic tokens for more consistent theming.
+
 ## 0.6.1
 
 ### Patch Changes

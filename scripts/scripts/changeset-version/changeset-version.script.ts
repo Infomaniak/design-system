@@ -11,6 +11,7 @@ await runScript(
   async (logger: Logger): Promise<RunScriptNotification | void> => {
     await runChangesetVersion({
       changesetDirectory: join(process.cwd(), '.changeset'),
+      packagesDirectory: join(process.cwd(), 'packages'),
       logger,
     });
   },

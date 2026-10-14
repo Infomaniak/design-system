@@ -831,20 +831,33 @@ export class IconifyApi {
 
     const parts: readonly string[] = query.split(/\s+/g);
 
-    return icons.filter(({ name, categories }: IconifyApiIconListIcon): boolean => {
+    return icons.filter(({ name, categories, aliases }: IconifyApiIconListIcon): boolean => {
       const lowercaseName: string = name.toLowerCase();
 
       return parts.every((part: string): boolean => {
         const lowercasePart: string = part.toLowerCase();
 
-        if (/^[a-zA-Z0-9#]/.test(part)) {
-          // └> prefixed with an alphanumeric char or #
+        if (/^[a-zA-Z0-9#!]/.test(part)) {
+          // └> prefixed with an alphanumeric char, #, or !
+          const cleanPart: string = /^[#!]/.test(part) ? lowercasePart.slice(1) : lowercasePart;
+
           return (
             // search in name
-            lowercaseName.includes(lowercasePart) ||
-            // and in tags
-            Array.from(categories).some((category: string): boolean => {
-              return category.startsWith('#') && category.toLowerCase().includes(lowercasePart);
+            lowercaseName.includes(cleanPart) ||
+            // in tags
+            Array.from(categories)
+              .filter((category: string): boolean => {
+                return category.startsWith('#');
+              })
+              .map((category: string): string => {
+                return category.slice(1);
+              })
+              .some((category: string): boolean => {
+                return category.toLowerCase().includes(cleanPart);
+              }) ||
+            // and in aliases
+            Array.from(aliases).some((alias: string): boolean => {
+              return alias.toLowerCase().includes(cleanPart);
             })
           );
         } else {

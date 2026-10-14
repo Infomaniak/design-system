@@ -4,7 +4,6 @@ import type { SvgOutlinePath } from '../icons/outline-path.ts';
 import { buildSymbolSvg, fitSymbolOutlinePathsToVariant } from './build-symbol-svg.ts';
 import type { SymbolTemplate } from './parse-symbol-template.ts';
 import { parseSymbolTemplate, readSymbolTemplate } from './parse-symbol-template.ts';
-import { SYMBOL_FILL_RATIO } from './sf-symbols-config.ts';
 
 const SQUARE_OUTLINED_PATH: readonly SvgOutlinePath[] = [
   { d: 'M 4 4 L 20 4 L 20 20 L 4 20 Z', windingRule: 'NONZERO' },
@@ -61,9 +60,20 @@ describe('buildSymbolSvg', () => {
     expect(
       new Set(fittedBoundingBoxes.map(({ minX, maxX }): string => (maxX - minX).toFixed(3))).size,
     ).toBe(1);
-    expect(fittedBoundingBoxes[0]!.minY).toBeCloseTo(-70.459, 3);
-    expect(fittedBoundingBoxes[0]!.maxY).toBeCloseTo(0, 3);
-    expect(fittedBoundingBoxes[0]!.minX).toBeCloseTo(3.761, 3);
+
+    // the outline canvas is mapped onto the cell (height-anchored): gaps and artwork keep their
+    // canvas share of the capline-to-baseline height (square 4..20: 4 units padding, 16 units art)
+    const cellHeight: number = template.baselineY - template.caplineY;
+    expect((fittedBoundingBoxes[0]!.minY + cellHeight) / cellHeight).toBeCloseTo(4 / 24, 3);
+    expect((0 - fittedBoundingBoxes[0]!.maxY) / cellHeight).toBeCloseTo(4 / 24, 3);
+    expect((fittedBoundingBoxes[0]!.maxX - fittedBoundingBoxes[0]!.minX) / cellHeight).toBeCloseTo(
+      16 / 24,
+      3,
+    );
+    expect((fittedBoundingBoxes[0]!.minX + fittedBoundingBoxes[0]!.maxX) / 2).toBeCloseTo(
+      template.variants[0]!.cellWidth / 2,
+      3,
+    );
 
     expect(svg).toContain('Generated from square');
     expect(svg).not.toContain('Generated from symbol');
@@ -90,7 +100,7 @@ describe('buildSymbolSvg', () => {
     }
   });
 
-  test('computes the bounding box per path, supporting relative path starts', async () => {
+  test('transforms each path independently, supporting relative path starts', async () => {
     const template = await readSymbolTemplate();
     const svg = buildSymbolSvg({
       symbolName: 'relative',
@@ -101,20 +111,37 @@ describe('buildSymbolSvg', () => {
       template,
     });
 
-    const regularVariant = template.variants.find(({ id }): boolean => id === 'Regular-S')!;
     const groupBody: string =
       new RegExp(`<g id="Regular-S"[^>]*>([\\s\\S]*?)</g>`).exec(svg)?.[1] ?? '';
     const fittedPathDataList: readonly string[] = [...groupBody.matchAll(/d="([^"]+)"/g)].map(
       (match: RegExpMatchArray): string => match[1]!,
     );
-    const fittedBoundingBox = computePathDataBoundingBox(fittedPathDataList.join(' '));
 
+    // 'm 1 1' resolves its relative start within its own path data; 'L 3 3' is absolute
+    expect(fittedPathDataList[0]).toBe('M 9.9771 -70.459 L 15.8487 -70.459');
+    expect(fittedPathDataList[1]).toBe('M 7.0413 -67.5232 L 12.9129 -61.6516 Z');
+  });
+
+  test('preserves the padding designed inside the outline canvas', async () => {
+    const template = await readSymbolTemplate();
+    const regularVariant = template.variants.find(({ id }): boolean => id === 'Regular-S')!;
+    const fittedPaths = fitSymbolOutlinePathsToVariant({
+      outlinedPaths: [{ d: 'M 2 2 L 22 2 L 22 22 L 2 22 Z', windingRule: 'NONZERO' }],
+      variant: regularVariant,
+      template,
+    });
+    const fittedBoundingBox = computePathDataBoundingBox(fittedPaths[0]!.d);
+
+    // square 2..22: 2 units of canvas padding on each side, 20 units of artwork; the padding
+    // keeps its canvas share of the capline-to-baseline height instead of being squeezed out
     const cellHeight: number = template.baselineY - template.caplineY;
-    const scale: number =
-      Math.min(regularVariant.cellWidth / 3, cellHeight / 3) * SYMBOL_FILL_RATIO;
-
-    expect(fittedBoundingBox.minX).toBeCloseTo(regularVariant.cellWidth / 2 - 1.5 * scale, 3);
-    expect(fittedBoundingBox.maxX).toBeCloseTo(regularVariant.cellWidth / 2 + 1.5 * scale, 3);
+    expect((fittedBoundingBox.minY + cellHeight) / cellHeight).toBeCloseTo(2 / 24, 3);
+    expect((0 - fittedBoundingBox.maxY) / cellHeight).toBeCloseTo(2 / 24, 3);
+    expect((fittedBoundingBox.maxX - fittedBoundingBox.minX) / cellHeight).toBeCloseTo(20 / 24, 3);
+    expect((fittedBoundingBox.minX + fittedBoundingBox.maxX) / 2).toBeCloseTo(
+      regularVariant.cellWidth / 2,
+      3,
+    );
   });
 
   test('adds a fill-rule attribute for EVENODD winding', async () => {
@@ -164,18 +191,19 @@ describe('buildSymbolSvg', () => {
 });
 
 describe('fitSymbolOutlinePathsToVariant', () => {
-  test('fits the icon into the variant cell', async () => {
+  test('fits the outline canvas into the variant cell, preserving designed padding', async () => {
     const template = await readSymbolTemplate();
     const regularVariant = template.variants.find(({ id }) => id === 'Regular-S')!;
     const fittedPaths = fitSymbolOutlinePathsToVariant({
       outlinedPaths: SQUARE_OUTLINED_PATH,
-      boundingBox: { minX: 4, minY: 4, maxX: 20, maxY: 20 },
       variant: regularVariant,
       template,
     });
 
     expect(fittedPaths).toHaveLength(1);
     expect(fittedPaths[0]!.windingRule).toBe('NONZERO');
-    expect(fittedPaths[0]!.d).toBe('M 4.1055 -70.459 L 74.5645 -70.459 L 74.5645 0 L 4.1055 0 Z');
+    expect(fittedPaths[0]!.d).toBe(
+      'M 15.8487 -58.7158 L 62.8213 -58.7158 L 62.8213 -11.7432 L 15.8487 -11.7432 Z',
+    );
   });
 });

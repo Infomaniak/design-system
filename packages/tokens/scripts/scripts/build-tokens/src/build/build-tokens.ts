@@ -10,7 +10,6 @@ import {
 } from '../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import {
   DESIGN_TOKEN_TIERS,
-  MATERIAL_DIRECTORY_NAME,
   MODIFIERS_DIRECTORY_NAME,
   T2_DIRECTORY_NAME,
   T3_DIRECTORY_NAME,
@@ -124,40 +123,12 @@ export function buildTokens({
       logger,
     });
 
-    // MATERIAL
-    await logger.asyncTask('material', async (logger: Logger): Promise<void> => {
-      // IMPORT MATERIAL TOKENS
-      const materialCollection: DesignTokensCollection = await baseCollection
-        .clone()
-        .fromFiles([`${sourceDirectory}/${MATERIAL_DIRECTORY_NAME}/tokens/**/*.tokens.json`], {
-          forEachTokenBehaviour: 'only-new-token',
-        });
-
-      // IMPORT MATERIAL MODIFIERS
-      const materialModifiers: DesignTokenModifiers = await extractDesignTokenModifiers({
-        sourceDirectories: [
-          `${sourceDirectory}/${MODIFIERS_DIRECTORY_NAME}`,
-          `${sourceDirectory}/${MATERIAL_DIRECTORY_NAME}/${MODIFIERS_DIRECTORY_NAME}`,
-        ],
-        baseCollection: materialCollection,
-      });
-
-      // CSS
-      await buildCssTokens({
-        baseCollection: materialCollection,
-        modifiers: materialModifiers,
-        outputDirectory,
-        subDirectory: 'material',
-        logger,
-      });
-
-      // MARKDOWN
-      await buildMarkdownTokens({
-        baseCollection: materialCollection,
-        modifiers: materialModifiers,
-        outputDirectory,
-        logger,
-      });
+    // MARKDOWN
+    await buildMarkdownTokens({
+      baseCollection,
+      modifiers,
+      outputDirectory,
+      logger,
     });
   });
 }

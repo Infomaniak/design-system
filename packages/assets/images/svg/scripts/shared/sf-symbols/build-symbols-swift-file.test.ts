@@ -35,16 +35,16 @@ describe('buildSymbolsSwiftFile', () => {
 
     expect(content).toContain('import SwiftUI');
     expect(content).toContain('#if canImport(UIKit)\nimport UIKit\n#endif');
-    expect(content).toContain('public enum ESDSSymbols: Sendable {');
-    expect(content).toContain('public struct Symbol: Sendable {');
+    expect(content).toContain('public struct ESDSSymbols: Sendable {');
+    expect(content).toContain('private init(name: String) {\n        self.name = name\n    }');
     expect(content).toContain(
-      'public var image: SwiftUI.Image {\n            SwiftUI.Image(name, bundle: .module)\n        }',
+      'public var image: SwiftUI.Image {\n        SwiftUI.Image(name, bundle: .module)\n    }',
     );
     expect(content).toContain(
-      'public var uiImage: UIKit.UIImage {\n            guard let image = UIKit.UIImage(named: name, in: .module, compatibleWith: nil)',
+      'public var uiImage: UIKit.UIImage {\n        guard let image = UIKit.UIImage(named: name, in: .module, compatibleWith: nil)',
     );
-    expect(content).toContain('public static let aSquare = Symbol(name: "a-square")');
-    expect(content).toContain('public static let `class` = Symbol(name: "class")');
+    expect(content).toContain('public static let aSquare = ESDSSymbols(name: "a-square")');
+    expect(content).toContain('public static let `class` = ESDSSymbols(name: "class")');
   });
 
   test('rejects icon names that generate the same Swift identifier', async () => {

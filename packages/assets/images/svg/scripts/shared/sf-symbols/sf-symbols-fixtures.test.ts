@@ -4,7 +4,10 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterEach, beforeEach, describe, expect, test } from 'vitest';
 import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
-import { computePathDataBoundingBox } from '../icons/bake-transform-into-path.ts';
+import {
+  computePathDataBoundingBox,
+  type PathBoundingBox,
+} from '../icons/bake-transform-into-path.ts';
 import { generateSfSymbols } from './generate-sf-symbols.ts';
 import { readSymbolTemplate, type SymbolTemplate } from './parse-symbol-template.ts';
 import { SYMBOLS_XCASSETS_DIRECTORY_NAME } from './sf-symbols-config.ts';
@@ -22,6 +25,15 @@ const FIXTURE_PATH_COUNTS: Readonly<Record<string, number>> = {
   check: 1,
 };
 const WIREFRAME_PATH_PATTERN = /<path class="SFSymbolsPreviewWireframe" d="([^"]+)"/g;
+/*
+ * Raw artwork bounding boxes inside the 24x24 outline canvas, measured once from the committed
+ * fixture outlines. Update alongside the fixtures if they change.
+ */
+const FIXTURE_RAW_BOUNDING_BOXES: Readonly<Record<string, PathBoundingBox>> = {
+  'circle-check-filled': { minX: 1.125, minY: 1.125, maxX: 22.875, maxY: 22.875 },
+  'magnifying-glass': { minX: 2.125, minY: 2.125, maxX: 21.9604, maxY: 21.9604 },
+  check: { minX: 3.0396, minY: 5.0396, maxX: 20.9604, maxY: 17.9604 },
+};
 
 describe('sf-symbols fixtures', () => {
   let outputDirectory: string;
@@ -85,6 +97,8 @@ describe('sf-symbols fixtures', () => {
       const content: string = await readSymbolSvg(iconName);
       expect(content).toContain(`Generated from ${iconName}</text>`);
 
+      const rawBoundingBox = FIXTURE_RAW_BOUNDING_BOXES[iconName]!;
+
       for (const variant of template.variants) {
         const groupOpenTag: string =
           new RegExp(`<g id="${variant.id}"[^>]*>`).exec(content)?.[0] ?? '';
@@ -101,15 +115,22 @@ describe('sf-symbols fixtures', () => {
         expect(fittedPaths).toHaveLength(FIXTURE_PATH_COUNTS[iconName]!);
 
         const boundingBox = computePathDataBoundingBox(fittedPaths.join(' '));
-        const width: number = boundingBox.maxX - boundingBox.minX;
-        const height: number = boundingBox.maxY - boundingBox.minY;
 
-        // the artwork is maximally scaled: it fills the cell in at least one dimension
-        // (width-limited for wide icons, height-limited otherwise)
-        expect(Math.max(width / variant.cellWidth, height / cellHeight)).toBeCloseTo(1, 2);
-        // centered horizontally in the cell, vertically between capline and baseline
-        expect((boundingBox.minX + boundingBox.maxX) / 2).toBeCloseTo(variant.cellWidth / 2, 2);
-        expect((boundingBox.minY + boundingBox.maxY) / 2).toBeCloseTo(-cellHeight / 2, 2);
+        // the outline canvas (0..24) is mapped onto the cell, height-anchored: gaps and artwork
+        // keep their canvas share of the capline-to-baseline height (padding preserved, as in
+        // web icons); the width follows the same uniform scale
+        expect((boundingBox.maxY - boundingBox.minY) / cellHeight).toBeCloseTo(
+          (rawBoundingBox.maxY - rawBoundingBox.minY) / 24,
+          3,
+        );
+        expect((boundingBox.minY + cellHeight) / cellHeight).toBeCloseTo(
+          rawBoundingBox.minY / 24,
+          3,
+        );
+        expect((boundingBox.maxX - boundingBox.minX) / cellHeight).toBeCloseTo(
+          (rawBoundingBox.maxX - rawBoundingBox.minX) / 24,
+          3,
+        );
         // fully inside the cell
         expect(boundingBox.minY).toBeGreaterThanOrEqual(-cellHeight - 0.01);
         expect(boundingBox.maxY).toBeLessThanOrEqual(0.01);
