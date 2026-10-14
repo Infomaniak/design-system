@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.5.1
+## 0.5.1 (2026-10-14)
 
 ### Patch Changes
 
