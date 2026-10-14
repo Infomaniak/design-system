@@ -42,8 +42,8 @@ design-system/
 │   ├── assets/images/svg/       # SVG assets (icons, illustrations) — private package
 │   │   ├── assets/svg/          # Committed SVGs + figma/outlines/ (feed SF Symbols)
 │   │   └── scripts/
-│   │       ├── scripts/         # import-svgs, generate-sf-symbols, publish-sf-symbols, build-legacy-svgs
-│   │       └── shared/          # sf-symbols/ (template engine, xcassets builder), svg/ helpers
+│   │       ├── scripts/         # import-svgs, build/publish-sf-symbols, build/publish-android-icons, build-legacy-svgs
+│   │       └── shared/          # sf-symbols/ (template engine, xcassets builder), android-icons/ (SVGO + Valkyrie → Compose ImageVectors, needs Java 21), svg/ helpers
 │   ├── figma/                   # Figma plugins (packages/figma/<full-plugin-name>/, each with its own tsconfig)
 │   │   └── figma-plugin-icons/  # "ESDS icons" Figma plugin (multi-size icon generator) — private package, released as GitHub Release asset
 │   │   ├── src/                 # Sandbox code (TS, bundled to dist/code.js)
@@ -86,6 +86,7 @@ design-system/
 | Build tokens only            | `yarn build:tokens`                          |
 | Validate tokens              | `cd packages/tokens && yarn validate:tokens` |
 | Build SF Symbols (iOS)       | `yarn build:sf-symbols`                      |
+| Build Android icons          | `yarn build:android-icons`                   |
 | Build Figma plugin (icons)   | `yarn build:figma-plugin-icons`              |
 | Dev Figma plugin (watch)     | `yarn dev:figma-plugin-icons`                |
 | Run tests                    | `yarn test`                                  |
