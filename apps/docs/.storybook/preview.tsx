@@ -317,7 +317,7 @@ const preview: Preview = {
         order: [
           'Welcome',
           'Designers Guide',
-          ['Getting Started', 'Install the Font', 'Figma Plugins'],
+          ['Getting Started', 'Install the Font', 'Figma Plugins', 'Helpers'],
           'Design Tokens',
           ['Getting Started', '*', 'CHANGELOG'],
           'Icons',
