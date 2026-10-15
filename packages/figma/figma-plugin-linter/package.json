@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "=== BUILD ===": "",
-    "build": "node --no-warnings=ExperimentalWarning scripts/scripts/build-figma-lint-plugin/build-figma-lint-plugin.script.ts",
+    "build": "yarn generate:icon-names && node --no-warnings=ExperimentalWarning scripts/scripts/build-figma-lint-plugin/build-figma-lint-plugin.script.ts",
+    "=== GENERATE ===": "",
+    "generate:icon-names": "node --no-warnings=ExperimentalWarning scripts/scripts/generate-icon-names/generate-icon-names.script.ts",
     "=== PUBLISH ===": "",
     "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-figma-plugin-linter/publish-figma-plugin-linter.script.ts"
   },

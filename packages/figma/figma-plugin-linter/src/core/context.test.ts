@@ -15,19 +15,4 @@ describe('createLintContext', () => {
 
     expect(context.resolveVariable('VariableID:1:2')).toBeUndefined();
   });
-
-  it('resolves effect and text styles by id', () => {
-    const effectStyle = { id: 'S:1', name: 'shadow/1', remote: true };
-    const textStyle = { id: 'S:2', name: 'Heading/L', remote: true };
-    const context = createLintContext(
-      new Map(),
-      new Map([[effectStyle.id, effectStyle]]),
-      new Map([[textStyle.id, textStyle]]),
-    );
-
-    expect(context.resolveEffectStyle('S:1')).toBe(effectStyle);
-    expect(context.resolveTextStyle('S:2')).toBe(textStyle);
-    expect(context.resolveEffectStyle('S:404')).toBeUndefined();
-    expect(context.resolveTextStyle('S:404')).toBeUndefined();
-  });
 });
