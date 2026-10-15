@@ -32,6 +32,7 @@ import type {
 } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { sortDesignTokensCollectionTokensByDependencies } from '../../../../../../shared/dtcg/resolver/token/operations/sort/by-dependencies/sort-design-tokens-collection-tokens-by-dependencies.ts';
 import { T1_DIRECTORY_NAME, T2_DIRECTORY_NAME } from '../../../constants/design-token-tiers.ts';
+import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header.ts';
 
 export interface BuildKotlinTokensOptions {
   readonly baseCollection: DesignTokensCollection;
@@ -353,6 +354,10 @@ async function createKotlinGradleFile({
   await writeTextFileSafe(
     `${outputDirectory}/build.gradle.kts`,
     dedent`
+      /*
+        ${AUTO_GENERATED_FILE_HEADER}
+      */
+    
       plugins {
           id("${designSystemPackageName}.convention.theme")
       }
