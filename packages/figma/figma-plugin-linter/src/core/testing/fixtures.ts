@@ -20,6 +20,13 @@ export function stringPart(value: string): LintPropertyPart {
   return { id: 'part', value: { kind: 'string', value } };
 }
 
+export function colorProperty(
+  kind: 'fill' | 'stroke',
+  ...parts: readonly LintPropertyPart[]
+): LintProperty {
+  return { kind, valueKind: 'color', parts };
+}
+
 export function numberProperty(
   kind: 'padding' | 'gap' | 'cornerRadius',
   ...parts: readonly LintPropertyPart[]

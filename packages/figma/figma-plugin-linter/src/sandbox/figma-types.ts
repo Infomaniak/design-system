@@ -3,16 +3,20 @@
  *
  * The **API surfaces** (the `figma` global, variables, styles, library
  * descriptors) come from the official `@figma/plugin-typings` package via the
- * ambient declarations pulled in by `src/figma-env.d.ts` — hand-rolled mirrors
- * drift from the real runtime.
+ * ambient declarations pulled in by `src/figma-env.d.ts` — the hand-rolled
+ * mirrors that used to live here drifted from the real runtime four times in
+ * one release cycle (`valuesByMode` shape, the dynamic-page `mainComponent`
+ * ban, the teamLibrary method names, the manifest permission), which is
+ * exactly what the official typings prevent.
  *
  * The types exported below are either aliases onto the official ambient
  * interfaces or the structural types that stay hand-rolled on purpose:
- * `AnyFigmaNode` (+ its permissive `FigmaPaint`/`FigmaEffect` read shapes) is
- * a deliberately permissive read shape: the adapter and the instance-identity
- * collector traverse ANY node kind and read a union of properties without
- * narrowing — the official per-node interfaces would force narrowing churn
- * with no safety gain.
+ * - `AnyFigmaNode` (+ its permissive `FigmaPaint`/`FigmaEffect` read shapes)
+ *   is a deliberately permissive read shape: the adapter and the
+ *   instance-identity collector traverse ANY node kind and read a union of
+ *   properties without narrowing — the official per-node interfaces would
+ *   force narrowing churn with no safety gain.
+ * - `FixableNode` is the minimal write surface for fix application.
  *
  * `figma.mixed` is a unique symbol — any `| symbol` below models a mixed
  * (multi-value) field, which the plugin skips.
@@ -102,4 +106,20 @@ export interface AnyFigmaNode {
    * for the forbidden sync `mainComponent` getter. Null for detached instances.
    */
   readonly getMainComponentAsync?: () => Promise<AnyFigmaNode | null>;
+}
+
+/** Minimal write surface for fix application (`sandbox/fix-apply.ts`). */
+export interface FixableNode {
+  readonly setBoundVariable?: (field: string, variableId: string) => void;
+  readonly fills?: readonly FigmaPaint[] | symbol;
+  readonly strokes?: readonly FigmaPaint[] | symbol;
+}
+
+export function isFigmaVariableAlias(value: unknown): value is FigmaVariableAlias {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    (value as FigmaVariableAlias).type === 'VARIABLE_ALIAS' &&
+    typeof (value as FigmaVariableAlias).id === 'string'
+  );
 }

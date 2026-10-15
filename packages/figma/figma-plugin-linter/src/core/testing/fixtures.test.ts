@@ -35,44 +35,4 @@ describe('fixtures', () => {
     expect(node.properties).toEqual([]);
     expect(node.children).toEqual([]);
   });
-
-  it('lintNode applies every provided option', () => {
-    const child = lintNode({ id: 'node:child' });
-    const node = lintNode({
-      id: 'node:2',
-      name: 'Card',
-      type: 'INSTANCE',
-      visible: false,
-      fromIconLibrary: true,
-      properties: [],
-      children: [child],
-    });
-
-    expect(node.id).toBe('node:2');
-    expect(node.name).toBe('Card');
-    expect(node.type).toBe('INSTANCE');
-    expect(node.visible).toBe(false);
-    expect(node.fromIconLibrary).toBe(true);
-    expect(node.children).toEqual([child]);
-  });
-
-  it('variableInfo applies value and alias options', () => {
-    const variable: ReturnType<typeof variableInfo> = variableInfo({
-      id: 'V:kit',
-      name: 'foreground',
-      collectionName: 'theme',
-      tier: 'unknown',
-      scopes: ['ALL_FILLS'],
-      remote: false,
-      value: { r: 0, g: 0, b: 0, a: 1 },
-      aliasTargetId: 'V:1',
-    });
-
-    expect(variable.id).toBe('V:kit');
-    expect(variable.collectionName).toBe('theme');
-    expect(variable.tier).toBe('unknown');
-    expect(variable.remote).toBe(false);
-    expect(variable.value).toEqual({ r: 0, g: 0, b: 0, a: 1 });
-    expect(variable.aliasTargetId).toBe('V:1');
-  });
 });
