@@ -57,18 +57,7 @@ const TABLE_HEADER = '| Name | Type | Default | Required | Description |';
 const TABLE_ALIGNMENT = '| :--- | :--- | :--- | :--- | :--- |';
 
 export function parseCem(raw: string): CustomElementsManifest {
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(raw);
-  } catch {
-    throw new Error('Invalid custom elements manifest');
-  }
-  const manifest =
-    typeof parsed === 'object' && parsed !== null ? (parsed as CustomElementsManifest) : {};
-  return {
-    schemaVersion: manifest.schemaVersion,
-    modules: Array.isArray(manifest.modules) ? manifest.modules : [],
-  };
+  return JSON.parse(raw) as CustomElementsManifest;
 }
 
 export function toPropRow(attr: CemAttribute): PropRow {
@@ -93,29 +82,6 @@ export function findElementByTagName(
     }
   }
   return null;
-}
-
-export function findElementByModulePath(
-  cem: CustomElementsManifest,
-  modulePath: string,
-): CemElementDocs | null {
-  const candidates = (cem.modules ?? [])
-    .map((module) => ({ module, score: suffixMatchScore(module.path, modulePath) }))
-    .filter((candidate) => candidate.score > 0);
-  if (candidates.length === 0) {
-    return null;
-  }
-  const best = candidates.reduce((current, candidate) =>
-    candidate.score > current.score ? candidate : current,
-  );
-  const ties = candidates.filter((candidate) => candidate.score === best.score);
-  if (ties.length > 1) {
-    return null;
-  }
-  const declaration = (best.module.declarations ?? []).find(
-    (candidate) => candidate.customElement === true,
-  );
-  return declaration ? toElementDocs(declaration) : null;
 }
 
 export function escapeTableCell(value: string): string {
@@ -152,37 +118,11 @@ export function renderApiSection(docs: CemElementDocs): string {
   return `## API\n\n${subsections.join('\n\n')}`;
 }
 
-function normalizeStoriesBasename(segment: string): string {
-  return segment.replace(/\.stories\./, '.');
-}
-
-function suffixMatchScore(modulePath: string, queryPath: string): number {
-  const moduleSegments = modulePath.split('/');
-  const querySegments = queryPath.split('/');
-  const moduleBasename = moduleSegments[moduleSegments.length - 1];
-  const queryBasename = querySegments[querySegments.length - 1];
-  if (normalizeStoriesBasename(moduleBasename) !== normalizeStoriesBasename(queryBasename)) {
-    return 0;
-  }
-  let score = 1;
-  const parentLimit = Math.min(moduleSegments.length - 1, querySegments.length - 1);
-  for (let offset = 1; offset <= parentLimit; offset += 1) {
-    const moduleSegment = moduleSegments[moduleSegments.length - 1 - offset];
-    const querySegment = querySegments[querySegments.length - 1 - offset];
-    if (moduleSegment !== querySegment) {
-      break;
-    }
-    score += 1;
-  }
-  return score;
-}
-
 function toElementDocs(declaration: CemDeclaration): CemElementDocs {
   return {
     tagName: declaration.tagName ?? '',
     className: declaration.name,
     attributes: (declaration.attributes ?? []).map(toPropRow),
-    properties: [],
     events: (declaration.events ?? []).map((event) => ({
       name: event.name,
       type: event.type?.text,

@@ -1,11 +1,6 @@
 import { dirname, join } from 'node:path';
 import { parseCem } from './cem.ts';
-import {
-  filterEntries,
-  groupEntriesByTitle,
-  orderTitleGroups,
-  parseStorybookIndex,
-} from './index-entries.ts';
+import { groupEntriesByTitle, orderTitleGroups, parseStorybookIndex } from './index-entries.ts';
 import { renderLlmsFullTxt } from './llms-full-txt.ts';
 import { renderLlmsTxt, validateLlmsTxtLinks } from './llms-txt.ts';
 import { buildPageModel, renderPageMarkdown } from './page-renderer.ts';
@@ -42,7 +37,7 @@ export function generateLlmsDocs(
   deps: FileSystemDeps,
 ): GenerateLlmsDocsResult {
   const index = parseStorybookIndex(deps.readFile(join(options.distDir, 'index.json')));
-  const groups = orderTitleGroups(groupEntriesByTitle(filterEntries(Object.values(index.entries))));
+  const groups = orderTitleGroups(groupEntriesByTitle(Object.values(index.entries)));
   const cem = parseCem(deps.readFile(join(options.componentsDir, 'custom-elements.json')));
 
   const pages = groups.map((group) =>

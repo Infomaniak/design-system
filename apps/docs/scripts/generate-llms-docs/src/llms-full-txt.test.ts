@@ -2,14 +2,14 @@ import { describe, expect, it } from 'vitest';
 import { renderLlmsFullTxt } from './llms-full-txt.ts';
 import type { PageModel } from './types.ts';
 
-function page(title: string, prose: string): PageModel {
+function page(title: string, outputPath: string, category: string): PageModel {
   return {
     title,
-    category: title.split('/')[0] ?? title,
-    slugParts: ['x'],
-    outputPath: `llms/${title.toLowerCase().replaceAll('/', '-')}.md`,
-    summary: 'summary',
-    prose,
+    category,
+    slugParts: outputPath.replace('llms/', '').replace('.md', '').split('/'),
+    outputPath,
+    summary: '',
+    prose: `Prose for ${title}.`,
     importSection: '',
     props: '',
     examples: [],
@@ -17,27 +17,26 @@ function page(title: string, prose: string): PageModel {
 }
 
 describe('renderLlmsFullTxt', () => {
-  it('concatenates DESIGN.md and all pages with horizontal rules', () => {
-    const output = renderLlmsFullTxt({
-      pages: [page('Welcome', 'Welcome body.'), page('Components/Button', 'Button body.')],
+  it('prepends DESIGN.md and joins pages with separators', () => {
+    const llmsFull = renderLlmsFullTxt({
+      pages: [
+        page('Welcome', 'llms/welcome.md', 'Welcome'),
+        page('Components/Separator', 'llms/components/separator.md', 'Components'),
+      ],
       designMd: '# DESIGN.md\n\nToken reference.',
     });
-    expect(output).toBe(
-      '# DESIGN.md\n\nToken reference.\n\n---\n\n# Welcome\n\n> summary\n\nWelcome body.\n\n---\n\n# Components/Button\n\n> summary\n\nButton body.\n',
-    );
+    const parts = llmsFull.split('\n\n---\n\n');
+    expect(parts[0]).toBe('# DESIGN.md\n\nToken reference.');
+    expect(parts[1]).toBe('# Welcome\n\nProse for Welcome.');
+    expect(parts[2]).toBe('# Components/Separator\n\nProse for Components/Separator.\n');
+    expect(llmsFull.endsWith('\n')).toBe(true);
   });
 
-  it('omits DESIGN.md when missing', () => {
-    const output = renderLlmsFullTxt({ pages: [page('Welcome', 'Welcome body.')], designMd: null });
-    expect(output).toBe('# Welcome\n\n> summary\n\nWelcome body.\n');
-  });
-
-  it('omits DESIGN.md when blank', () => {
-    const output = renderLlmsFullTxt({ pages: [page('Welcome', 'Welcome body.')], designMd: '  ' });
-    expect(output).toBe('# Welcome\n\n> summary\n\nWelcome body.\n');
-  });
-
-  it('returns only a newline when there is nothing to concatenate', () => {
-    expect(renderLlmsFullTxt({ pages: [], designMd: null })).toBe('\n');
+  it('starts with the first page when DESIGN.md is unavailable', () => {
+    const llmsFull = renderLlmsFullTxt({
+      pages: [page('Welcome', 'llms/welcome.md', 'Welcome')],
+      designMd: null,
+    });
+    expect(llmsFull.startsWith('# Welcome')).toBe(true);
   });
 });

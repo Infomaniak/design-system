@@ -36,7 +36,6 @@ export interface CemElementDocs {
   tagName: string;
   className: string;
   attributes: PropRow[];
-  properties: PropRow[];
   events: PropRow[];
   slots: PropRow[];
   cssProperties: PropRow[];

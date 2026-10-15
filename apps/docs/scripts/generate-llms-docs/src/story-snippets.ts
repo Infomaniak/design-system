@@ -250,7 +250,7 @@ function unescapeStringLiteral(value: string): string {
   });
 }
 
-export function parseValueLiteral(source: string, index: number): ParsedValue | null {
+function parseValueLiteral(source: string, index: number): ParsedValue | null {
   const char = source[index];
   if (char === "'" || char === '"') {
     const end = scanStringLiteral(source, index);
@@ -311,7 +311,7 @@ function parseArgsLiteral(body: string): ArgsRecord {
   return record;
 }
 
-export function parsePropertyArgs(body: string): ArgsRecord | null {
+function parsePropertyArgs(body: string): ArgsRecord | null {
   const match = ARGS_PROPERTY_PATTERN.exec(body);
   if (match === null) return null;
   const valueStart = skipWhitespace(body, match.index + match[0].length);
@@ -336,7 +336,7 @@ function extractInteractiveArgs(body: string): ArgsRecord | null {
   return parseArgsLiteral(callBody.slice(openBrace + 1, braceEnd - 1));
 }
 
-export function extractRenderTemplate(body: string): string | null {
+function extractRenderTemplate(body: string): string | null {
   const match = RENDER_PATTERN.exec(body);
   if (match === null) return null;
   const backtick = match.index + match[0].length - 1;
@@ -346,7 +346,7 @@ export function extractRenderTemplate(body: string): string | null {
 }
 
 function matchQuotedProperty(body: string, property: string): string | null {
-  const pattern = new RegExp(`\\b${property}\\s*:\\s*'([^']+)'`);
+  const pattern = new RegExp(`\\b${property}\\s*:\\s*['"]([^'"]+)['"]`);
   return pattern.exec(body)?.[1] ?? null;
 }
 

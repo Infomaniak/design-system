@@ -14,36 +14,7 @@ const GETTING_STARTED_SEGMENT = 'Getting Started';
 const CHANGELOG_SEGMENT = 'CHANGELOG';
 
 export function parseStorybookIndex(raw: string): StorybookIndex {
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(raw) as unknown;
-  } catch {
-    throw new Error('Invalid storybook index');
-  }
-  if (!isStorybookIndex(parsed)) {
-    throw new Error('Invalid storybook index');
-  }
-  return parsed;
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
-}
-
-function isStorybookIndex(value: unknown): value is StorybookIndex {
-  if (!isRecord(value)) return false;
-  if (typeof value['v'] !== 'number') return false;
-  if (!isRecord(value['entries'])) return false;
-  return true;
-}
-
-export function filterEntries(entries: IndexEntry[]): IndexEntry[] {
-  return entries.filter(
-    (entry) =>
-      !entry.tags.includes('test-only') &&
-      !entry.tags.includes('internal') &&
-      !entry.name.startsWith('_'),
-  );
+  return JSON.parse(raw) as StorybookIndex;
 }
 
 export function groupEntriesByTitle(entries: IndexEntry[]): TitleGroup[] {

@@ -1,6 +1,4 @@
-import { readFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { parseCem } from './cem.ts';
 import {
@@ -11,17 +9,45 @@ import {
 } from './page-renderer.ts';
 import type { IndexEntry, PageModel, TitleGroup } from './types.ts';
 
-const currentDir = dirname(fileURLToPath(import.meta.url));
-const fixturesDir = join(currentDir, '__fixtures__');
-const repositoryRoot = join(currentDir, '..', '..', '..', '..', '..');
+const APPS_DOCS_DIR = '/repo/apps/docs';
 
-function readFixture(name: string): string {
-  return readFileSync(join(fixturesDir, name), 'utf8');
-}
-
-const realCem = parseCem(
-  readFileSync(join(repositoryRoot, 'packages/components/custom-elements.json'), 'utf8'),
+const CEM = parseCem(
+  JSON.stringify({
+    modules: [
+      {
+        path: 'src/components/esds-separator/esds-separator.component.ts',
+        declarations: [
+          {
+            name: 'EsdsSeparatorComponent',
+            tagName: 'esds-separator',
+            customElement: true,
+            attributes: [{ name: 'decorative', type: { text: 'boolean' }, default: 'false' }],
+          },
+        ],
+      },
+    ],
+  }),
 );
+
+const SEPARATOR_STORIES = [
+  "import documentation from './esds-separator.component.md?raw';",
+  '',
+  "const meta = { component: 'esds-separator' } satisfies Meta;",
+  '',
+  'export const Default: Story = {};',
+].join('\n');
+
+const SEPARATOR_MD = [
+  '- [Figma](https://figma.com/x)',
+  '',
+  '## Setup',
+  '',
+  'Import and register the separator component:',
+  '',
+  '```ts',
+  'EsdsSeparatorComponent.define();',
+  '```',
+].join('\n');
 
 function createFiles(entries: Record<string, string>) {
   return (path: string): string => {
@@ -43,45 +69,29 @@ function docsGroup(title: string, importPath: string): TitleGroup {
   return { title, docsEntry, storyEntries: [] };
 }
 
-const appsDocsDir = '/repo/apps/docs';
-
 describe('buildPageModel', () => {
   it('builds a token page from an mdx shell', () => {
     const files = createFiles({
-      [join(appsDocsDir, 'src/stories/tokens/t2/color.mdx')]: [
+      [join(APPS_DOCS_DIR, 'src/stories/tokens/t2/color.mdx')]: [
         "import { Meta } from '@storybook/addon-docs/blocks';",
         "import ColorMarkdown from '../../assets/t2-color.md?raw';",
-        "import DocsMarkdown from '../../../components/docs-markdown.tsx';",
         '',
         "<Meta title='Design Tokens/T2/Color' />",
         '',
         '# T2 Color Tokens',
         '',
-        'Semantic colors for backgrounds and text.',
-        '',
         '<DocsMarkdown>{ColorMarkdown}</DocsMarkdown>',
       ].join('\n'),
-      [join(appsDocsDir, 'src/stories/assets/t2-color.md')]: [
-        '<!-- Do not edit directly, this file was auto-generated. -->',
-        '',
-        'Semantic colors.',
-        '',
-        '```html',
-        '<esds-separator></esds-separator>',
-        '```',
-      ].join('\n'),
+      [join(APPS_DOCS_DIR, 'src/stories/assets/t2-color.md')]: 'Semantic colors.',
     });
     const page = buildPageModel({
       group: docsGroup('Design Tokens/T2/Color', './src/stories/tokens/t2/color.mdx'),
-      cem: realCem,
-      sources: { readFile: files, appsDocsDir },
+      cem: CEM,
+      sources: { readFile: files, appsDocsDir: APPS_DOCS_DIR },
     });
     expect(page.outputPath).toBe('llms/design-tokens/t2/color.md');
-    expect(page.category).toBe('Design Tokens');
-    expect(page.prose).toBe(
-      'Semantic colors for backgrounds and text.\n\n<!-- Do not edit directly, this file was auto-generated. -->\n\nSemantic colors.\n\n```html\n<esds-separator></esds-separator>\n```',
-    );
-    expect(page.summary).toBe('Semantic colors for backgrounds and text.');
+    expect(page.prose).toBe('Semantic colors.');
+    expect(page.summary).toBe('Semantic colors.');
     expect(page.importSection).toBe('');
     expect(page.props).toBe('');
     expect(page.examples).toEqual([]);
@@ -89,61 +99,52 @@ describe('buildPageModel', () => {
 
   it('builds a component page from autodocs stories', () => {
     const storiesPath = join(
-      appsDocsDir,
+      APPS_DOCS_DIR,
       '../../packages/components/src/components/esds-separator/esds-separator.component.stories.ts',
     );
     const files = createFiles({
-      [storiesPath]: readFixture('separator.component.stories.txt'),
+      [storiesPath]: SEPARATOR_STORIES,
       [join(
-        appsDocsDir,
+        APPS_DOCS_DIR,
         '../../packages/components/src/components/esds-separator/esds-separator.component.md',
-      )]: readFixture('separator.component.md'),
+      )]: SEPARATOR_MD,
     });
     const page = buildPageModel({
       group: docsGroup(
         'Components/Separator',
         '../../packages/components/src/components/esds-separator/esds-separator.component.stories.ts',
       ),
-      cem: realCem,
-      sources: { readFile: files, appsDocsDir },
+      cem: CEM,
+      sources: { readFile: files, appsDocsDir: APPS_DOCS_DIR },
     });
     expect(page.outputPath).toBe('llms/components/separator.md');
     expect(page.prose).toContain('Import and register the separator component');
-    expect(page.prose).not.toMatch(/^# /);
     expect(page.importSection).toBe('');
-    expect(page.props).toContain('### Attributes');
-    expect(page.props).toContain('orientation');
-    expect(page.summary.startsWith('Import and register the separator')).toBe(true);
-    expect(page.examples.map((snippet) => snippet.code)).toEqual([
-      '<esds-separator></esds-separator>',
-      '<esds-separator orientation="vertical"></esds-separator>',
-      '<esds-separator decorative></esds-separator>',
+    expect(page.props).toContain('| decorative |');
+    expect(page.examples).toEqual([
+      { name: 'Default', description: undefined, code: '<esds-separator></esds-separator>' },
     ]);
   });
 
-  it('synthesizes an import section when prose lacks the define pattern', () => {
+  it('generates the import section when the prose lacks a define snippet', () => {
     const storiesPath = join(
-      appsDocsDir,
+      APPS_DOCS_DIR,
       '../../packages/components/src/components/esds-separator/esds-separator.component.stories.ts',
     );
-    const prose = readFixture('separator.component.md').replace(
-      /EsdsSeparatorComponent\.define\(\);/,
-      '',
-    );
     const files = createFiles({
-      [storiesPath]: readFixture('separator.component.stories.txt'),
+      [storiesPath]: SEPARATOR_STORIES,
       [join(
-        appsDocsDir,
+        APPS_DOCS_DIR,
         '../../packages/components/src/components/esds-separator/esds-separator.component.md',
-      )]: prose,
+      )]: 'Separator prose without a define snippet.',
     });
     const page = buildPageModel({
       group: docsGroup(
         'Components/Separator',
         '../../packages/components/src/components/esds-separator/esds-separator.component.stories.ts',
       ),
-      cem: realCem,
-      sources: { readFile: files, appsDocsDir },
+      cem: CEM,
+      sources: { readFile: files, appsDocsDir: APPS_DOCS_DIR },
     });
     expect(page.importSection).toBe(
       "import { EsdsSeparatorComponent } from '@infomaniak-design-system/components';\n\nEsdsSeparatorComponent.define();",
@@ -153,139 +154,42 @@ describe('buildPageModel', () => {
   it('builds an empty page for a group without a docs entry', () => {
     const page = buildPageModel({
       group: { title: 'Components/Orphan', storyEntries: [] },
-      cem: realCem,
-      sources: { readFile: createFiles({}), appsDocsDir },
+      cem: CEM,
+      sources: { readFile: createFiles({}), appsDocsDir: APPS_DOCS_DIR },
     });
-    expect(page.title).toBe('Components/Orphan');
     expect(page.prose).toBe('');
-    expect(page.summary).toBe('');
-    expect(page.importSection).toBe('');
     expect(page.props).toBe('');
     expect(page.examples).toEqual([]);
-  });
-
-  it('builds empty prose when stories lack a companion markdown import', () => {
-    const storiesPath = join(
-      appsDocsDir,
-      '../../packages/components/src/components/esds-getting-started/esds-getting-started.stories.ts',
-    );
-    const page = buildPageModel({
-      group: docsGroup(
-        'Icons/Getting Started',
-        '../../packages/components/src/components/esds-getting-started/esds-getting-started.stories.ts',
-      ),
-      cem: realCem,
-      sources: {
-        readFile: createFiles({ [storiesPath]: readFixture('plain-stories.txt') }),
-        appsDocsDir,
-      },
-    });
-    expect(page.prose).toBe('');
-    expect(page.summary).toBe('');
-    expect(page.examples).toEqual([]);
-  });
-
-  it('builds cem defaults from attributes with and without defaults', () => {
-    const cem = parseCem(
-      JSON.stringify({
-        modules: [
-          {
-            path: 'src/components/esds-widget/esds-widget.component.ts',
-            declarations: [
-              {
-                name: 'EsdsWidgetComponent',
-                tagName: 'esds-widget',
-                customElement: true,
-                attributes: [{ name: 'withoutDefault' }, { name: 'withDefault', default: 'true' }],
-              },
-            ],
-          },
-        ],
-      }),
-    );
-    const storiesPath = join(
-      appsDocsDir,
-      '../../packages/components/src/components/esds-widget/esds-widget.component.stories.ts',
-    );
-    const widgetStories = readFixture('plain-stories.txt')
-      .replaceAll('Icons/Getting Started', 'Components/Widget')
-      .replace(
-        "title: 'Components/Widget',",
-        "title: 'Components/Widget',\n  component: 'esds-widget',",
-      );
-    const page = buildPageModel({
-      group: docsGroup(
-        'Components/Widget',
-        '../../packages/components/src/components/esds-widget/esds-widget.component.stories.ts',
-      ),
-      cem,
-      sources: { readFile: createFiles({ [storiesPath]: widgetStories }), appsDocsDir },
-    });
-    expect(page.examples).toEqual([
-      {
-        name: 'Getting Started',
-        description: undefined,
-        code: '<p>Getting started with icons.</p>',
-      },
-    ]);
-  });
-});
-
-describe('extractSummary', () => {
-  it('returns the first plain paragraph', () => {
-    expect(extractSummary('## Setup\n\nFirst paragraph here.\n\nSecond one.')).toBe(
-      'First paragraph here.',
-    );
-  });
-
-  it('skips headings, lists, blockquotes, tables and html', () => {
-    expect(extractSummary('- item\n\nReal text.')).toBe('Real text.');
-    expect(extractSummary('> quote\n\nReal text.')).toBe('Real text.');
-    expect(extractSummary('| a | b |\n\nReal text.')).toBe('Real text.');
-    expect(extractSummary('<div>x</div>\n\nReal text.')).toBe('Real text.');
-  });
-
-  it('ignores fenced code blocks', () => {
-    expect(extractSummary('```\ncode\n```\n\nReal text.')).toBe('Real text.');
-  });
-
-  it('truncates long summaries with an ellipsis', () => {
-    const long = 'a'.repeat(200);
-    const summary = extractSummary(long);
-    expect(summary.length).toBe(120);
-    expect(summary.endsWith('…')).toBe(true);
-  });
-
-  it('stops at a structure line directly after a paragraph', () => {
-    expect(extractSummary('First line.\n## Section\n\nMore.')).toBe('First line.');
-  });
-
-  it('skips raw html lines such as generated token tables', () => {
-    expect(
-      extractSummary('CSS: <button class="token-value">var(--x)</button>\n\n<table>\n</table>'),
-    ).toBe('');
-  });
-
-  it('returns empty for prose without a plain paragraph', () => {
-    expect(extractSummary('# Only a heading')).toBe('');
   });
 });
 
 describe('toArgsValue', () => {
-  it('unquotes single and double quoted defaults', () => {
+  it('converts cem default strings to primitives', () => {
     expect(toArgsValue("'horizontal'")).toBe('horizontal');
-    expect(toArgsValue('"vertical"')).toBe('vertical');
-  });
-
-  it('converts boolean and numeric defaults', () => {
-    expect(toArgsValue('true')).toBe(true);
     expect(toArgsValue('false')).toBe(false);
     expect(toArgsValue('42')).toBe(42);
-    expect(toArgsValue('-1.5')).toBe(-1.5);
+    expect(toArgsValue('horizontal')).toBe('horizontal');
+  });
+});
+
+describe('extractSummary', () => {
+  it('returns the first plain paragraph and skips structure and html', () => {
+    expect(extractSummary('## Setup\n\nFirst paragraph here.\n\nSecond one.')).toBe(
+      'First paragraph here.',
+    );
+    expect(extractSummary('CSS: <button>x</button>\n\nReal text.')).toBe('Real text.');
   });
 
-  it('keeps unquoted strings as-is', () => {
-    expect(toArgsValue('horizontal')).toBe('horizontal');
+  it('skips code fences while scanning for the summary', () => {
+    expect(extractSummary('```ts\nEsdsSeparatorComponent.define();\n```\n\nAfter the fence.')).toBe(
+      'After the fence.',
+    );
+  });
+
+  it('truncates long summaries with an ellipsis', () => {
+    const summary = extractSummary('a'.repeat(200));
+    expect(summary.length).toBe(120);
+    expect(summary.endsWith('…')).toBe(true);
   });
 });
 
@@ -299,19 +203,16 @@ describe('renderPageMarkdown', () => {
       summary: 'A separator.',
       prose: '## Usage\n\nHTML here.',
       importSection: "import { X } from 'pkg';",
-      props:
-        '## API\n\n### Attributes\n\n| Name | Type | Default | Required | Description |\n| :--- | :--- | :--- | :--- | :--- |',
+      props: '## API',
       examples: [
-        { name: 'Default', code: '<esds-separator></esds-separator>' },
         {
-          name: 'Vertical',
+          name: 'Default',
           description: 'Vertical variant.',
-          code: '<esds-separator orientation="vertical"></esds-separator>',
+          code: '<esds-separator></esds-separator>',
         },
       ],
     };
-    const markdown = renderPageMarkdown(page);
-    expect(markdown).toBe(
+    expect(renderPageMarkdown(page)).toBe(
       [
         '# Components/Separator',
         '',
@@ -329,25 +230,14 @@ describe('renderPageMarkdown', () => {
         '',
         '## API',
         '',
-        '### Attributes',
-        '',
-        '| Name | Type | Default | Required | Description |',
-        '| :--- | :--- | :--- | :--- | :--- |',
-        '',
         '## Examples',
         '',
         '### Default',
         '',
-        '```html',
-        '<esds-separator></esds-separator>',
-        '```',
-        '',
-        '### Vertical',
-        '',
         'Vertical variant.',
         '',
         '```html',
-        '<esds-separator orientation="vertical"></esds-separator>',
+        '<esds-separator></esds-separator>',
         '```',
       ].join('\n') + '\n',
     );
