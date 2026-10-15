@@ -173,6 +173,9 @@ test-results/
 # Local git worktrees
 .worktrees
 
+# Figma plugin generated sources
+packages/figma/figma-plugin-linter/src/core/generated/
+
 # Generated files
 apps/docs/public/DESIGN.md
 apps/docs/src/stories/assets/*.md

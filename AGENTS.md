@@ -45,11 +45,15 @@ design-system/
 │   │       ├── scripts/         # import-svgs, generate-sf-symbols, publish-sf-symbols, build-legacy-svgs
 │   │       └── shared/          # sf-symbols/ (template engine, xcassets builder), svg/ helpers
 │   ├── figma/                   # Figma plugins (packages/figma/<full-plugin-name>/, each with its own tsconfig)
-│   │   └── figma-plugin-icons/  # "ESDS icons" Figma plugin (multi-size icon generator) — private package, released as GitHub Release asset
-│   │   ├── src/                 # Sandbox code (TS, bundled to dist/code.js)
-│   │   ├── ui/                  # Plugin iframe (TS + HTML template, inlined into dist/ui.html)
-│   │   ├── manifest.json        # Points to dist/ (built locally, imported as dev plugin)
-│   │   └── dist/                # Build output (gitignored)
+│   │   ├── figma-plugin-icons/  # "ESDS icons" Figma plugin (multi-size icon generator) — private package, released as GitHub Release asset
+│   │   │   ├── src/             # Sandbox code (TS, bundled to dist/code.js)
+│   │   │   ├── ui/              # Plugin iframe (TS + HTML template, inlined into dist/ui.html)
+│   │   │   ├── manifest.json    # Points to dist/ (built locally, imported as dev plugin)
+│   │   │   └── dist/            # Build output (gitignored)
+│   │   └── figma-plugin-linter/ # "ESDS linter" Figma plugin (design-token compliance linter) — private package, released as GitHub Release asset
+│   │       ├── src/             # core/ (pure) + sandbox/ + ui/, bundled to dist/
+│   │       ├── manifest.json    # Points to dist/ (built locally, imported as dev plugin)
+│   │       └── dist/            # Build output (gitignored)
 │   └── components/              # Web components library
 │       ├── src/                 # Component source + stories
 │       └── tests/visual-regression/      # Playwright visual regression suite
@@ -91,6 +95,7 @@ design-system/
 | Validate tokens              | `cd packages/tokens && yarn validate:tokens` |
 | Build SF Symbols (iOS)       | `yarn build:sf-symbols`                      |
 | Build Figma plugin (icons)   | `yarn build:figma-plugin-icons`              |
+| Build Figma plugin (linter)  | `yarn build:figma-plugin-linter`             |
 | Dev Figma plugin (watch)     | `yarn dev:figma-plugin-icons`                |
 | Run tests                    | `yarn test`                                  |
 | Test coverage                | `yarn test:coverage`                         |
@@ -128,14 +133,15 @@ design-system/
 
 ### Workspace Structure
 
-- Monorepo with 7 workspaces:
+- Monorepo with 8 workspaces:
   1. `@infomaniak-design-system/tokens`
   2. `@infomaniak-design-system/tokens/demo`
   3. `@infomaniak-design-system/components`
   4. `@infomaniak-design-system/svg-assets`
   5. `@infomaniak-design-system/fonts`
   6. `@infomaniak-design-system/figma-plugin-icons`
-  7. `@infomaniak-design-system/docs`
+  7. `@infomaniak-design-system/figma-plugin-linter`
+  8. `@infomaniak-design-system/docs`
 
 ### DTCG Token Structure
 
@@ -207,7 +213,7 @@ const meta = {
 - **Purpose:** Collect structured change descriptions, automate version bumps, and generate `CHANGELOG.md` files. Changesets do **not** handle publishing — `ci:publish` remains the publish mechanism.
 - **Config:** `.changeset/config.json` with `baseBranch: "develop"`, `access: "public"`, ignores non-publishable packages.
 - **Versioning:** Automated via `.github/workflows/publish.yml`.
-- **Only packages with a `publish` script are versioned:** `@infomaniak-design-system/tokens` and `@infomaniak-design-system/components` (published to npm), plus `@infomaniak-design-system/fonts`, `@infomaniak-design-system/figma-plugin-icons` (published as GitHub Release assets — no npm), and `@infomaniak-design-system/svg-assets` (published directly on a server). Changesets are required for all of these packages, except `@infomaniak-design-system/svg-assets` (automatically bumped). PRs touching only docs/apps/scripts don't need a changeset.
+- **Only packages with a `publish` script are versioned:** `@infomaniak-design-system/tokens` and `@infomaniak-design-system/components` (published to npm), plus `@infomaniak-design-system/fonts`, `@infomaniak-design-system/figma-plugin-icons`, `@infomaniak-design-system/figma-plugin-linter` (published as GitHub Release assets — no npm), and `@infomaniak-design-system/svg-assets` (published directly on a server). Changesets are required for all of these packages, except `@infomaniak-design-system/svg-assets` (automatically bumped). PRs touching only docs/apps/scripts don't need a changeset.
 - **Creating a changeset:** Use the `generate-changeset` skill (`.agents/skills/generate-changeset/SKILL.md`) — it runs `git diff develop...HEAD`, determines the semver bump, identifies affected packages, and writes a formatted `.changeset/*.md` file. Prefer this over the manual `yarn changeset` flow.
 
 ---
