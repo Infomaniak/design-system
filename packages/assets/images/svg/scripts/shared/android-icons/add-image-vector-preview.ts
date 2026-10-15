@@ -5,6 +5,7 @@ import { writeTextFileSafe } from '../../../../../../../scripts/helpers/file/wri
 import {
   ANDROID_ICON_PACK_NAME,
   ANDROID_ICONS_PACKAGE_NAME,
+  ANDROID_IMAGE_VECTORS_PACKAGE_NAME,
   ANDROID_PREVIEW_ICON_SIZE_NAME,
 } from './android-icons-config.ts';
 
@@ -12,6 +13,9 @@ const KOTLIN_FILE_EXTENSION = '.kt';
 const KOTLIN_IMPORT_KEYWORD = 'import ';
 /** Consecutive `import …` lines, as emitted by Valkyrie right after the `package` statement. */
 const KOTLIN_IMPORT_BLOCK_PATTERN: RegExp = /^(?:import .+\n)+/m;
+
+/** Valkyrie expects the icon pack in the generated package, but `EsdsIcons` lives in its parent. */
+const VALKYRIE_ICON_PACK_IMPORT = `${ANDROID_IMAGE_VECTORS_PACKAGE_NAME}.${ANDROID_ICON_PACK_NAME}`;
 
 const IMAGE_VECTOR_PREVIEW_IMPORTS: readonly string[] = [
   'androidx.compose.foundation.Image',
@@ -27,12 +31,13 @@ const IMAGE_VECTOR_PREVIEW_IMPORTS: readonly string[] = [
 ];
 
 /**
- * Adds the preview to every generated `<IconName>.kt` file of the directory.
+ * Adds the preview to every generated `<IconName>.kt` file of the nested icon pack directory.
  *
  * @returns the sorted list of icon names (the file names without extension).
  */
 export async function addImageVectorPreviewsToDirectory(
   directory: string,
+  nestedPackName: string,
 ): Promise<readonly string[]> {
   const fileNames: readonly string[] = (await readdir(directory))
     .filter((fileName: string): boolean => fileName.endsWith(KOTLIN_FILE_EXTENSION))
@@ -40,35 +45,48 @@ export async function addImageVectorPreviewsToDirectory(
 
   await Promise.all(
     fileNames.map((fileName: string): Promise<void> => {
-      return addImageVectorPreviewToFile(join(directory, fileName));
+      return addImageVectorPreviewToFile(join(directory, fileName), nestedPackName);
     }),
   );
 
   return fileNames.map((fileName: string): string => basename(fileName, KOTLIN_FILE_EXTENSION));
 }
 
-async function addImageVectorPreviewToFile(filePath: string): Promise<void> {
+async function addImageVectorPreviewToFile(
+  filePath: string,
+  nestedPackName: string,
+): Promise<void> {
   const iconName: string = basename(filePath, KOTLIN_FILE_EXTENSION);
   const source: string = await readTextFile(filePath);
 
-  await writeTextFileSafe(filePath, addImageVectorPreview(source, iconName));
+  await writeTextFileSafe(filePath, addImageVectorPreview(source, iconName, nestedPackName));
 }
 
-/** Adds the imports and the private `preview` composable rendering `EsdsIcons.<iconName>`. */
-export function addImageVectorPreview(source: string, iconName: string): string {
+/**
+ * Fixes the icon pack import, then adds the imports and the private `Preview` composable rendering
+ * `EsdsIcons.<nestedPackName>.<iconName>`.
+ */
+export function addImageVectorPreview(
+  source: string,
+  iconName: string,
+  nestedPackName: string,
+): string {
   return appendKotlinDeclaration(
-    addKotlinImports(source, IMAGE_VECTOR_PREVIEW_IMPORTS),
-    buildImageVectorPreviewFunction(iconName),
+    addKotlinImports(
+      removeKotlinImport(source, VALKYRIE_ICON_PACK_IMPORT),
+      IMAGE_VECTOR_PREVIEW_IMPORTS,
+    ),
+    buildImageVectorPreviewFunction(iconName, nestedPackName),
   );
 }
 
-export function buildImageVectorPreviewFunction(iconName: string): string {
+export function buildImageVectorPreviewFunction(iconName: string, nestedPackName: string): string {
   return `@Preview
 @Composable
 private fun Preview() {
     Box(modifier = Modifier.background(Color.White)) {
         Image(
-            imageVector = ${ANDROID_ICON_PACK_NAME}.${iconName},
+            imageVector = ${ANDROID_ICON_PACK_NAME}.${nestedPackName}.${iconName},
             contentDescription = null,
             modifier = Modifier.size(${ANDROID_PREVIEW_ICON_SIZE_NAME}),
         )
@@ -99,6 +117,10 @@ export function addKotlinImports(source: string, imports: readonly string[]): st
     mergedImportBlock +
     source.slice(importBlock.index + importBlock[0].length)
   );
+}
+
+export function removeKotlinImport(source: string, kotlinImport: string): string {
+  return source.replace(`${KOTLIN_IMPORT_KEYWORD}${kotlinImport}\n`, '');
 }
 
 function appendKotlinDeclaration(source: string, declaration: string): string {

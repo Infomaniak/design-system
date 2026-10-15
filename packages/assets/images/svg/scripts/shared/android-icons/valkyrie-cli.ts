@@ -50,17 +50,20 @@ export interface ConvertSvgsToImageVectorsOptions {
   readonly valkyrieCliJarPath: string;
   readonly svgsDirectory: string;
   readonly outputDirectory: string;
+  /** Nested icon pack of `EsdsIcons` (e.g. `Medium`) the icons belong to. */
+  readonly nestedPackName: string;
   readonly logger: Logger;
 }
 
 /**
- * Converts every SVG of the directory into a `EsdsIcons.<IconName>` Compose `ImageVector`
- * Kotlin file (one file per icon, named `<IconName>.kt`).
+ * Converts every SVG of the directory into a `EsdsIcons.<NestedPackName>.<IconName>` Compose
+ * `ImageVector` Kotlin file, written by Valkyrie in `<outputDirectory>/<nestedpackname>/<IconName>.kt`.
  */
 export async function convertSvgsToImageVectors({
   valkyrieCliJarPath,
   svgsDirectory,
   outputDirectory,
+  nestedPackName,
   logger,
 }: ConvertSvgsToImageVectorsOptions): Promise<void> {
   await execCommandInherit(logger, 'java', [
@@ -71,6 +74,7 @@ export async function convertSvgsToImageVectors({
     `--output-path=${outputDirectory}`,
     `--package-name=${ANDROID_IMAGE_VECTORS_PACKAGE_NAME}`,
     `--iconpack-name=${ANDROID_ICON_PACK_NAME}`,
+    `--nested-pack-name=${nestedPackName}`,
     '--explicit-mode=true',
     '--trailing-comma=true',
   ]);
