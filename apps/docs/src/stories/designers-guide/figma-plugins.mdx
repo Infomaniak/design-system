@@ -9,6 +9,7 @@ every merge to `develop`. They are installed locally in Figma Desktop as develop
 are not published to the Figma Community.
 
 - **ESDS icons** — generates multi-size variants (16, 20, 24, 32, 40 px) of a 24×24px system icon.
+- **ESDS linter** — lints a selection for design-token compliance: raw values, wrong tokens or scopes, leftover placeholder copy, …
 
 ---
 
@@ -35,3 +36,57 @@ The plugin appears under **Plugins → Development → ESDS icons**. To generate
 
 Download the latest zip, unzip it over the previous folder and reload the plugin in Figma
 (**Plugins → Development → ESDS icons → Reload**).
+
+---
+
+## ESDS linter
+
+The **ESDS linter** plugin lints the selected layers for design-token compliance and reports
+errors and warnings: raw (unbound) values, variables used outside their intended scope,
+semantic tokens used on the wrong property, tokens from unrecognized collections, effects and
+typography not driven by the token libraries, leftover placeholder copy, …
+
+The plugin is read-only: it never modifies the document — the only writes happen when **you**
+click a Fix button (see [Fix mode](#fix-mode)).
+
+### 1. Download the plugin
+
+Open the
+[plugin releases page](https://github.com/Infomaniak/design-system/releases?q=figma-plugin-linter)
+and download the `esds-linter.zip` asset of the newest release.
+
+### 2. Install it in Figma
+
+Unzip the archive, then in Figma Desktop: **Plugins → Development → Import plugin from
+manifest…** and select the unzipped `esds-linter/manifest.json`.
+
+The plugin appears under **Plugins → Development → ESDS linter**.
+
+### 3. Run a lint
+
+1. Pick a scope in the panel — **Selection** (default), **Page** or **File**
+2. For the Selection scope, select one or more frames or layers on the canvas
+3. Hit **Run lint**
+4. Results appear as `N errors · M warnings`, grouped by rule within each severity — expand a
+   rule section to see its findings
+5. Click a finding to select the offending layer on canvas (and zoom to it)
+6. Hit **Copy report** to get a markdown summary for handoff tickets
+7. Fix the layers and hit **Run again** — results are a snapshot, there is no live watching
+
+> [!NOTE]
+> The Selection scope requires a non-empty selection. The Page and File scopes lint the whole
+> current page or every page — use them for broader cleanups; progress can be cancelled
+> mid-scan.
+
+### Fix mode
+
+Some findings (raw values matching exactly one token) carry a **Fix** button: clicking it binds
+the suggested token to the property. Rule groups with several fixable findings offer a batch
+**Apply** button with a confirmation step. Applying a batch reverts with a single undo, and the
+panel re-lints automatically so you can see what is left. Suggestions are conservative: a fix
+never introduces a new lint finding, and ambiguous values offer a choice of tokens.
+
+### Update the plugin
+
+Download the latest zip, unzip it over the previous folder and reload the plugin in Figma
+(**Plugins → Development → ESDS linter → Reload**).
