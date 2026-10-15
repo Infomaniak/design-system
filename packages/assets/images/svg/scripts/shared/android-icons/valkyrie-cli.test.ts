@@ -73,11 +73,12 @@ describe('convertSvgsToImageVectors', () => {
     execCommandInheritMock.mockReset();
   });
 
-  test('runs Valkyrie with the EsdsIcons pack in the imagevector package', async () => {
+  test('runs Valkyrie with the EsdsIcons nested pack in the imagevector package', async () => {
     await convertSvgsToImageVectors({
       valkyrieCliJarPath: '/cli/valkyrie.jar',
-      svgsDirectory: '/dist/svgs',
+      svgsDirectory: '/dist/svgs/medium',
       outputDirectory: '/dist/kt',
+      nestedPackName: 'Medium',
       logger,
     });
 
@@ -85,10 +86,11 @@ describe('convertSvgsToImageVectors', () => {
       '-jar',
       '/cli/valkyrie.jar',
       'svgxml2imagevector',
-      '--input-path=/dist/svgs',
+      '--input-path=/dist/svgs/medium',
       '--output-path=/dist/kt',
       '--package-name=com.infomaniak.designsystem.icons.imagevector',
       '--iconpack-name=EsdsIcons',
+      '--nested-pack-name=Medium',
       '--explicit-mode=true',
       '--trailing-comma=true',
     ]);

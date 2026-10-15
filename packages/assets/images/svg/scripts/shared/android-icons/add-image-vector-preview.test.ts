@@ -7,15 +7,17 @@ import {
   addImageVectorPreviewsToDirectory,
   addKotlinImports,
   buildImageVectorPreviewFunction,
+  removeKotlinImport,
 } from './add-image-vector-preview.ts';
 
-const VALKYRIE_SOURCE = `package com.infomaniak.designsystem.icons.imagevector
+const VALKYRIE_SOURCE = `package com.infomaniak.designsystem.icons.imagevector.medium
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import com.infomaniak.designsystem.icons.imagevector.EsdsIcons
 
-public val EsdsIcons.Check: ImageVector
+public val EsdsIcons.Medium.Check: ImageVector
     get() = TODO()
 `;
 
@@ -24,7 +26,7 @@ const EXPECTED_PREVIEW_FUNCTION = `@Preview
 private fun Preview() {
     Box(modifier = Modifier.background(Color.White)) {
         Image(
-            imageVector = EsdsIcons.Check,
+            imageVector = EsdsIcons.Medium.Check,
             contentDescription = null,
             modifier = Modifier.size(previewIconSize),
         )
@@ -32,8 +34,8 @@ private fun Preview() {
 }`;
 
 describe('buildImageVectorPreviewFunction', () => {
-  test('renders the icon in a white box sized with previewIconSize', () => {
-    expect(buildImageVectorPreviewFunction('Check')).toBe(EXPECTED_PREVIEW_FUNCTION);
+  test('renders the nested pack icon in a white box sized with previewIconSize', () => {
+    expect(buildImageVectorPreviewFunction('Check', 'Medium')).toBe(EXPECTED_PREVIEW_FUNCTION);
   });
 });
 
@@ -64,10 +66,22 @@ val x = 1
   });
 });
 
+describe('removeKotlinImport', () => {
+  test('removes the import line', () => {
+    expect(removeKotlinImport('import b.A\nimport b.B\n\nval x = 1\n', 'b.A')).toBe(
+      'import b.B\n\nval x = 1\n',
+    );
+  });
+
+  test('keeps the source unchanged when the import is missing', () => {
+    expect(removeKotlinImport('import b.B\n', 'b.A')).toBe('import b.B\n');
+  });
+});
+
 describe('addImageVectorPreview', () => {
-  test('adds the preview imports and appends the preview function', () => {
-    expect(addImageVectorPreview(VALKYRIE_SOURCE, 'Check'))
-      .toBe(`package com.infomaniak.designsystem.icons.imagevector
+  test('fixes the icon pack import, adds the preview imports and appends the preview function', () => {
+    expect(addImageVectorPreview(VALKYRIE_SOURCE, 'Check', 'Medium'))
+      .toBe(`package com.infomaniak.designsystem.icons.imagevector.medium
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -82,7 +96,7 @@ import androidx.compose.ui.unit.dp
 import com.infomaniak.designsystem.icons.EsdsIcons
 import com.infomaniak.designsystem.icons.previewIconSize
 
-public val EsdsIcons.Check: ImageVector
+public val EsdsIcons.Medium.Check: ImageVector
     get() = TODO()
 
 ${EXPECTED_PREVIEW_FUNCTION}
@@ -106,12 +120,15 @@ describe('addImageVectorPreviewsToDirectory', () => {
     await writeFile(join(tempDir, 'AlarmClock.kt'), VALKYRIE_SOURCE, 'utf8');
     await writeFile(join(tempDir, 'notes.txt'), 'ignored', 'utf8');
 
-    expect(await addImageVectorPreviewsToDirectory(tempDir)).toEqual(['AlarmClock', 'Check']);
+    expect(await addImageVectorPreviewsToDirectory(tempDir, 'Medium')).toEqual([
+      'AlarmClock',
+      'Check',
+    ]);
     expect(await readFile(join(tempDir, 'Check.kt'), 'utf8')).toBe(
-      addImageVectorPreview(VALKYRIE_SOURCE, 'Check'),
+      addImageVectorPreview(VALKYRIE_SOURCE, 'Check', 'Medium'),
     );
     expect(await readFile(join(tempDir, 'AlarmClock.kt'), 'utf8')).toContain(
-      'imageVector = EsdsIcons.AlarmClock,',
+      'imageVector = EsdsIcons.Medium.AlarmClock,',
     );
     expect(await readFile(join(tempDir, 'notes.txt'), 'utf8')).toBe('ignored');
   });

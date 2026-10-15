@@ -17,7 +17,7 @@ const logger = Logger.never();
 const installValkyrieCliMock = vi.mocked(installValkyrieCli);
 const convertSvgsToImageVectorsMock = vi.mocked(convertSvgsToImageVectors);
 
-const STROKED_ICON = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 9V13" stroke="black"/></svg>`;
+const STROKED_ICON = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 9V13" stroke="black" stroke-width="1.75"/></svg>`;
 
 describe('generateAndroidIcons', () => {
   let tempDir: string;
@@ -34,10 +34,14 @@ describe('generateAndroidIcons', () => {
     convertSvgsToImageVectorsMock
       .mockReset()
       .mockImplementation(
-        async ({ outputDirectory }: ConvertSvgsToImageVectorsOptions): Promise<void> => {
-          await mkdir(outputDirectory, { recursive: true });
+        async ({
+          outputDirectory,
+          nestedPackName,
+        }: ConvertSvgsToImageVectorsOptions): Promise<void> => {
+          const nestedPackDirectory: string = join(outputDirectory, nestedPackName.toLowerCase());
+          await mkdir(nestedPackDirectory, { recursive: true });
           await writeFile(
-            join(outputDirectory, 'Check.kt'),
+            join(nestedPackDirectory, 'Check.kt'),
             'package p\n\nimport a.B\n\nval x = 1\n',
             'utf8',
           );
@@ -49,7 +53,7 @@ describe('generateAndroidIcons', () => {
     await rm(tempDir, { force: true, recursive: true });
   });
 
-  test('wipes the output then writes optimized SVGs and previewed ImageVectors', async () => {
+  test('wipes the output then writes optimized SVGs and previewed ImageVectors per size', async () => {
     await mkdir(outputDirectory, { recursive: true });
     await writeFile(join(outputDirectory, 'stale.txt'), 'stale', 'utf8');
     await writeFile(join(sourceDirectory, 'check.svg'), STROKED_ICON, 'utf8');
@@ -61,22 +65,33 @@ describe('generateAndroidIcons', () => {
         valkyrieCliInstallDirectory: join(tempDir, 'cache'),
         logger,
       }),
-    ).toEqual(['Check']);
+    ).toEqual(['Large.Check', 'Medium.Check', 'Small.Check', 'XLarge.Check', 'XSmall.Check']);
 
     await expect(stat(join(outputDirectory, 'stale.txt'))).rejects.toThrow();
-    expect(await readdir(join(outputDirectory, 'svgs'))).toEqual(['check.svg']);
+    expect((await readdir(join(outputDirectory, 'svgs'))).sort()).toEqual([
+      'large',
+      'medium',
+      'small',
+      'xlarge',
+      'xsmall',
+    ]);
+    expect(await readFile(join(outputDirectory, 'svgs', 'xsmall', 'check.svg'), 'utf8')).toContain(
+      'stroke-width="2.25"',
+    );
     expect(installValkyrieCliMock).toHaveBeenCalledExactlyOnceWith({
       installDirectory: join(tempDir, 'cache'),
       logger,
     });
-    expect(convertSvgsToImageVectorsMock).toHaveBeenCalledExactlyOnceWith({
+    expect(convertSvgsToImageVectorsMock).toHaveBeenCalledTimes(5);
+    expect(convertSvgsToImageVectorsMock).toHaveBeenCalledWith({
       valkyrieCliJarPath: '/cli/valkyrie.jar',
-      svgsDirectory: join(outputDirectory, 'svgs'),
+      svgsDirectory: join(outputDirectory, 'svgs', 'medium'),
       outputDirectory: join(outputDirectory, 'kt'),
+      nestedPackName: 'Medium',
       logger,
     });
-    expect(await readFile(join(outputDirectory, 'kt', 'Check.kt'), 'utf8')).toContain(
-      'private fun Preview()',
+    expect(await readFile(join(outputDirectory, 'kt', 'medium', 'Check.kt'), 'utf8')).toContain(
+      'imageVector = EsdsIcons.Medium.Check,',
     );
   });
 });
