@@ -1,0 +1,5 @@
+---
+'@infomaniak-design-system/figma-plugin-linter': minor
+---
+
+Added fix mode: unbound values whose raw hex or float matches exactly one scope-covered token variable get a Fix button (per row and per rule group with confirmation); applying a batch is a single undo step and the panel re-lints automatically. Suggestions are tier-aware (published library tokens are imported and preferred over local primitives — a fix never creates a primitive-misuse, wrong-token or unknown-collection finding) and non-semantic matches yield no suggestion. When several tokens share the observed value, the Fix button opens a choice list ordered most-semantic first (t3 > t2 > t1, canonical `@root` variants before their base) with the recommendation marked; single-candidate rows keep the one-click Fix button. Also fixes variable value plumbing — variable values were never read from the Figma API (`valuesByMode`), which silently broke alias-chain classification (kit tokens re-pointed to published DS tokens warned as unknown-collection instead of being accepted).

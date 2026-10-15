@@ -9,7 +9,41 @@ effects and stroke weights, hand-set opacity over colored layers, non-default bl
 modes, brand/dataviz tokens missing their `@root` variant, leftover lorem ipsum copy,
 and typography not driven by published text styles.
 
-The plugin reads the document and lints it; it never modifies it.
+The plugin reads the document and lints it; the only writes happen when **you** click a
+Fix button (see « Fix mode » below) — reporting itself never modifies the document.
+
+## Fix mode
+
+Findings whose raw value matches exactly one scope-covered token variable offer a
+**Fix** button that binds the token (`#FF0000` → the token holding `#FF0000`); rule
+sections with fixable findings offer a batch **Apply** button with a confirmation step.
+The fix contract is deliberately narrow (exact matches only):
+
+- **Colors** (fills, strokes): the observed hex must equal the variable's resolved
+  value exactly; the match must be unique across scope-covered variables — two
+  different tokens sharing the value → no suggestion
+- **Floats** (padding, gap, corner radius, stroke weight): exact float equality, raw
+  `0` never suggested; scope coverage required so Figma accepts the binding
+- **Never suggested**: effects, opacity, text styles (no exact-match contract for
+  them)
+
+Suggestions are **tier-aware** so a fix never trades one warning for another:
+
+- published library tokens are considered too (the plugin imports the enabled
+  libraries' variables at lint time — cached by Figma per session), so consumer
+  files get pointed at `color/background/brand/@root`, not at a local WIP primitive
+- unknown-tier variables (local WIP collections) are never suggested
+- colors are only suggested from t2/t3 tokens whose semantic category fits the
+  property (a fix must never create a primitive-misuse or wrong-token finding);
+  number fixes may use t1 primitives (spacing/radius usage is expected)
+- when several tokens share the value, the Fix button opens a **choice list** —
+  candidates ordered most-semantic first (t3 > t2 > t1, `@root` variants before
+  their base), recommended candidate marked; a single candidate keeps the
+  one-click Fix button
+
+Applying a batch is one undo step (mutations run without interleaved async work); the
+panel re-lints automatically after applying, and failed rows (layer gone, binding
+rejected) stay visible with a `fix failed` marker.
 
 ## What it checks
 
@@ -162,7 +196,7 @@ flowchart LR
 
     subgraph Core["Core — pure (no Figma, no DOM)"]
         Engine["engine — traverse + lint"]
-        Rules["rules × 18"]
+        Rules["rules × 6"]
         Helpers["scopes + semantic-usage"]
         Report["report — summarize + markdown"]
     end
@@ -198,9 +232,9 @@ the panel → click a row → sandbox selects and zooms to the node.
 
 - **Add a rule**: one file in `src/core/rules/` + one line in `registry.ts` — rules
   are pure functions over `PropertyObservation`s and never traverse the tree
-- **Add a checked property**: extend the extraction in `sandbox/node-adapter.ts` +
-  the required scopes in `core/scopes.ts`; existing rules pick it up via their
-  `appliesTo` list
+- **Add a checked property** (e.g. effects in v2): extend the extraction in
+  `sandbox/node-adapter.ts` + the required scopes in `core/scopes.ts`; existing rules
+  pick it up via their `appliesTo` list
 
 ## Development
 
@@ -250,3 +284,7 @@ Manual smoke checklist after a build:
 - Frame named `chevron-right` (or `esds/icon/chevron-right`) → icon-as-frame error; a real kit-icon instance of the same name → clean
 - Duplicated icon component in the file → local-duplicate warning
 - Renamed icon frame (`plus copy`) → no component finding (exact-match policy)
+- Raw `#FF0000` fill matching exactly one token → Fix button; apply → fill bound, auto re-lint clears the finding, one undo reverts
+- 3 raw paddings matching tokens → batch Apply button, confirm → all applied, single undo reverts the batch; a failing row shows `fix failed`
+- Findings for effects/opacity/text styles → no Fix button
+- Kit token aliased to a published DS t2/t3 token → accepted (alias chains re-verified with the values plumbing fix)

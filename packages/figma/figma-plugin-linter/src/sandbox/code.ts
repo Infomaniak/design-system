@@ -3,6 +3,7 @@ import { collectBoundVariableIds } from '../core/engine/collect-bound-variable-i
 import { collectEffectStyleIds } from '../core/engine/collect-effect-style-ids.ts';
 import { collectTextStyleIds } from '../core/engine/collect-text-style-ids.ts';
 import { lintTree } from '../core/engine/lint.ts';
+import { parseFixRequestItems, type FixRequestItem } from '../core/fix-request.ts';
 import type { LintNode } from '../core/model/lint-node.ts';
 import type { VariableInfo } from '../core/model/variable-info.ts';
 import { LINT_RULES } from '../core/rules/registry.ts';
@@ -13,9 +14,10 @@ import {
   type ScanRootsDescriptor,
   type ScanScope,
 } from '../core/scan-scope.ts';
-import type { SandboxToUiMessage, UiToSandboxMessage } from '../messages.ts';
+import type { FixFailure, SandboxToUiMessage, UiToSandboxMessage } from '../messages.ts';
 import { loadEffectStyleMetadata } from './effect-style-metadata.ts';
 import type { AnyFigmaNode } from './figma-types.ts';
+import { applyFixToNode, asFixable } from './fix-apply.ts';
 import { collectInstanceIdentities, type InstanceIdentity } from './instance-identities.ts';
 import { toLintNode } from './node-adapter.ts';
 import { loadTextStyleMetadata } from './text-style-metadata.ts';
@@ -59,6 +61,9 @@ figma.ui.onmessage = (message: unknown): void => {
       break;
     case 'select-finding':
       void selectFinding(uiMessage.nodeId);
+      break;
+    case 'fix-request':
+      void applyFixes(uiMessage.items);
       break;
   }
 };
@@ -150,6 +155,84 @@ async function selectFinding(nodeId: string): Promise<void> {
 
   figma.currentPage.selection = [node as SceneNode];
   figma.viewport.scrollAndZoomIntoView([node]);
+}
+
+/**
+ * Applies fix suggestions (fix mode — the read-only contract ends here).
+ *
+ * All nodes are preloaded BEFORE any mutation and the mutations then run
+ * synchronously in one turn: Figma coalesces mutations without interleaved
+ * awaits into a single undo step, so a whole batch reverts with one ⌘Z.
+ * Payloads are validated in core first; invalid payloads report every item
+ * failed instead of throwing at the API surface.
+ */
+async function applyFixes(items: readonly FixRequestItem[]): Promise<void> {
+  const applied: string[] = [];
+  const failed: FixFailure[] = [];
+
+  let validated: readonly FixRequestItem[];
+
+  try {
+    validated = parseFixRequestItems(items);
+  } catch (error: unknown) {
+    debug('fix-request rejected', error instanceof Error ? error.message : String(error));
+    post({ type: 'fix-result', applied, failed: toFailures(items, 'Invalid fix request.') });
+    return;
+  }
+
+  const nodeIds: readonly string[] = [
+    ...new Set(validated.map((item: FixRequestItem): string => item.nodeId)),
+  ];
+  const nodes: readonly ({ readonly id: string; readonly name: string } | null)[] =
+    await Promise.all(
+      nodeIds.map(
+        async (nodeId: string): Promise<{ readonly id: string; readonly name: string } | null> =>
+          figma.getNodeByIdAsync(nodeId),
+      ),
+    );
+  const nodesById: ReadonlyMap<string, { readonly id: string; readonly name: string } | null> =
+    new Map(
+      nodeIds.map(
+        (
+          nodeId: string,
+          index: number,
+        ): readonly [string, { readonly id: string; readonly name: string } | null] => [
+          nodeId,
+          nodes[index] ?? null,
+        ],
+      ),
+    );
+
+  for (const item of validated) {
+    const node = nodesById.get(item.nodeId);
+
+    if (node === undefined || node === null) {
+      failed.push({ nodeId: item.nodeId, reason: 'Layer not found — removed or out of scope.' });
+      continue;
+    }
+
+    try {
+      applyFixToNode(asFixable(node), item.fix);
+      applied.push(item.nodeId);
+    } catch (error: unknown) {
+      const reason: string = error instanceof Error ? error.message : String(error);
+      debug('fix failed', `${item.fix.label} on ${item.nodeId} — ${reason}`);
+      failed.push({ nodeId: item.nodeId, reason });
+    }
+  }
+
+  debug('fixes applied', `${applied.length} ok, ${failed.length} failed`);
+
+  post({ type: 'fix-result', applied, failed });
+}
+
+function toFailures(
+  items: readonly FixRequestItem[] | readonly unknown[],
+  reason: string,
+): readonly FixFailure[] {
+  return (items as readonly FixRequestItem[])
+    .filter((item: FixRequestItem): boolean => typeof item?.nodeId === 'string')
+    .map((item: FixRequestItem): FixFailure => ({ nodeId: item.nodeId, reason }));
 }
 
 /**
