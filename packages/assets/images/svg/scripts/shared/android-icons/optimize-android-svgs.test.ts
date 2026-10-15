@@ -16,8 +16,11 @@ describe('optimizeAndroidSvg', () => {
     );
   });
 
-  test('applies the optical stroke width of the icon size', () => {
-    expect(optimizeAndroidSvg(STROKED_ICON, 16)).toContain('stroke-width="2.25"');
+  test('applies the size and the optical stroke width of the icon size', () => {
+    const optimizedSvg: string = optimizeAndroidSvg(STROKED_ICON, 16);
+
+    expect(optimizedSvg).toContain('width="16" height="16" viewBox="0 0 24 24"');
+    expect(optimizedSvg).toContain('stroke-width="2.25"');
   });
 });
 

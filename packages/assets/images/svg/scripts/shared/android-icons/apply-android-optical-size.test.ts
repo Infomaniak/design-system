@@ -18,13 +18,14 @@ describe('computeAndroidOpticalStrokeWidth', () => {
 });
 
 describe('applyAndroidOpticalSize', () => {
-  test('replaces the stroke width with the optical stroke width of the icon size', () => {
+  test('sizes the SVG and applies the optical stroke width of the icon size', () => {
     const svg: SVG = new SVG(
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path stroke="#000" stroke-width="1.75" d="M12 9v4"/></svg>',
     );
 
     applyAndroidOpticalSize(svg, 32);
 
+    expect(svg.toString()).toContain('viewBox="0 0 24 24" width="32" height="32"');
     expect(svg.toMinifiedString()).toContain('stroke-width="1.5"');
   });
 });
