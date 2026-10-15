@@ -99,7 +99,7 @@ export function buildTokens({
       logger,
     });
 
-    return;
+    // TODO continue here
 
     // SWIFT
     await buildSwiftTokens({
