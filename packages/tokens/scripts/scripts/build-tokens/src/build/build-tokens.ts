@@ -91,8 +91,6 @@ export function buildTokens({
       logger,
     });
 
-    return;
-
     // FIGMA
     await buildFigmaTokens({
       baseCollection,
@@ -100,6 +98,8 @@ export function buildTokens({
       outputDirectory,
       logger,
     });
+
+    return;
 
     // SWIFT
     await buildSwiftTokens({
