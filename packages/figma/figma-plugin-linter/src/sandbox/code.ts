@@ -1,5 +1,7 @@
 import { createLintContext } from '../core/context.ts';
 import { collectBoundVariableIds } from '../core/engine/collect-bound-variable-ids.ts';
+import { collectEffectStyleIds } from '../core/engine/collect-effect-style-ids.ts';
+import { collectTextStyleIds } from '../core/engine/collect-text-style-ids.ts';
 import { lintTree } from '../core/engine/lint.ts';
 import type { LintNode } from '../core/model/lint-node.ts';
 import type { VariableInfo } from '../core/model/variable-info.ts';
@@ -12,17 +14,20 @@ import {
   type ScanScope,
 } from '../core/scan-scope.ts';
 import type { SandboxToUiMessage, UiToSandboxMessage } from '../messages.ts';
+import { loadEffectStyleMetadata } from './effect-style-metadata.ts';
 import type { AnyFigmaNode } from './figma-types.ts';
 import { collectInstanceIdentities, type InstanceIdentity } from './instance-identities.ts';
 import { toLintNode } from './node-adapter.ts';
+import { loadTextStyleMetadata } from './text-style-metadata.ts';
 import { loadTokenMetadata } from './token-metadata.ts';
 
 /**
  * Sandbox entry point (glue — not unit tested). Wires the Figma runtime to the
  * engine: reads the scan roots for the requested scope (selection, current
  * page or the whole file), resolves token metadata (local variables in bulk,
- * bound ids on demand — e.g. tokens bound from a published library), runs the
- * lint and posts progress/results to the panel.
+ * bound ids on demand — e.g. tokens bound from a published library) and
+ * effect/text style metadata (local styles in bulk, referenced ids on demand),
+ * runs the lint and posts progress/results to the panel.
  */
 // `figma` is the ambient PluginAPI global from @figma/plugin-typings (see figma-env.d.ts).
 declare const __html__: string;
@@ -96,9 +101,23 @@ async function runLint(scope: ScanScope): Promise<void> {
 
   debug('token metadata loaded', `${variablesById.size} variables`);
 
+  const effectStyleIds: readonly string[] = collectEffectStyleIds(nodes);
+  debug('effect style ids', `${effectStyleIds.length} collected`);
+
+  const effectStylesById = await loadEffectStyleMetadata(figma, effectStyleIds);
+
+  debug('effect style metadata loaded', `${effectStylesById.size} styles`);
+
+  const textStyleIds: readonly string[] = collectTextStyleIds(nodes);
+  debug('text style ids', `${textStyleIds.length} collected`);
+
+  const textStylesById = await loadTextStyleMetadata(figma, textStyleIds);
+
+  debug('text style metadata loaded', `${textStylesById.size} styles`);
+
   const result = await lintTree(nodes, {
     rules: LINT_RULES,
-    context: createLintContext(variablesById),
+    context: createLintContext(variablesById, effectStylesById, textStylesById),
     onProgress: (completed: number, total: number): void => {
       post({ type: 'lint-progress', completed, total });
     },

@@ -4,8 +4,10 @@ A Figma plugin that lints a selection for design-token compliance. A designer se
 one or more layers, runs the plugin, and gets a list of errors and warnings: raw
 (unbound) values, variables used outside their intended scope, semantic tokens used on
 the wrong property, primitive tokens used where semantic tokens are expected, tokens
-bound from unrecognized collections, bindings that cannot be resolved, and leftover
-lorem ipsum copy.
+bound from unrecognized or local collections, bindings that cannot be resolved, raw
+effects and stroke weights, hand-set opacity over colored layers, non-default blend
+modes, brand/dataviz tokens missing their `@root` variant, leftover lorem ipsum copy,
+and typography not driven by published text styles.
 
 The plugin reads the document and lints it; it never modifies it.
 
@@ -16,10 +18,21 @@ The plugin reads the document and lints it; it never modifies it.
 | Unbound value      | Error    | Property set with a raw value (`#4A90D9`, `16px`, `1` stroke weight…) and no design token bound     |
 | Wrong scope        | Error    | A variable IS bound, but its Figma scopes don't cover the property (e.g. a stroke token on a fill)  |
 | Wrong token        | Error    | A semantic (t2) color variable IS bound, but its category doesn't match the property                |
+| Unbound effect     | Error    | An effect (shadow, blur…) is set with raw settings — no effect style or variable bound              |
+| No text style      | Error    | A TEXT node carries no text style — typography set by hand                                          |
+| Icon as frame      | Error    | A drawn container (frame/section/group) is named exactly like a kit icon — instance the icon        |
 | Primitive misuse   | Warning  | The bound token effectively resolves to a primitive (t1) token — directly or through an alias chain |
 | Unknown collection | Warning  | A variable IS bound, but points at no known token tier (t1/t2/t3)                                   |
 | Unresolved token   | Warning  | A variable IS bound, but it can't be resolved from this file's variables or an accessible library   |
+| Opacity over color | Warning  | The layer's opacity is hand-set below 100% while it carries a colored fill                          |
+| Local effect style | Warning  | The effect comes from a style local to the file, not published from the token library               |
+| Local text style   | Warning  | The text style is local to the file, not published from the token library                           |
+| Style override     | Warning  | The node overrides a published text style (size, weight, decoration or line height)                 |
+| Blend mode         | Warning  | The node's blend mode differs from the accepted `NORMAL`/`PASS_THROUGH`                             |
+| Brand/dataviz root | Warning  | A bound t2 brand/dataviz token is not the `@root` variant (only those are published)                |
+| Local collection   | Warning  | The bound variable comes from a collection local to the file — unpublished                          |
 | Lorem ipsum        | Warning  | The text layer still carries placeholder copy (`lorem`/`ipsum`, any casing)                         |
+| Local duplicate    | Warning  | A local component (or set) is named exactly like a kit icon — a duplicated icon in the file         |
 
 **Alias chains**: a variable's value may be an alias to another variable. This is what
 lets third-party tokens (e.g. a Shadcn kit's `foreground`) be re-pointed to DS tokens
@@ -39,6 +52,15 @@ instance's layer name — the sync getter is off-limits in dynamic-page mode):
 renaming an icon instance keeps it exempt, but extracting its glyph out of it
 re-flags the binding.
 
+**Icon component checks**: every node also carries its raw Figma type, letting two
+rules police icon usage by name — `icon-as-frame` (error) for drawn containers named
+exactly like a kit icon, `local-duplicate` (warning) for local components duplicating
+one. The name match is exact against the icon inventory generated from the svg-assets
+package (`assets/svg/monotone/figma/*.svg`): renamed or partial names (`plus copy`,
+`icon plus`) pass silently — the heuristic is deliberately conservative to avoid
+name-based false positives. Detached icon instances surface as `icon-as-frame`
+errors (detaching produces a frame keeping the icon name).
+
 The "wrong token" rule derives the category of a bound variable from its own name
 (`color/background/…`, `color/content/…`) — read live from the file, so it can't drift
 from the token set:
@@ -52,11 +74,15 @@ from the token set:
 
 - Checked properties: colors (fills & strokes, incl. text color), auto-layout padding
   & gap, corner radius, stroke weight (only on nodes that actually carry a visible
-  stroke — Figma defaults the weight to 1 everywhere). Uniform multi-part values (same
+  stroke — Figma defaults the weight to 1 everywhere), opacity (semi-transparent
+  only), blend modes (non-default only), effects (per-effect, incl. effect-style
+  bindings), text styles (applied style + size/weight/decoration/line-height
+  overrides) and text content (placeholder copy). Uniform multi-part values (same
   value and binding on all padding sides / corners) are merged into a single finding
 - Silently skipped: gradients, image/video fills, hidden layers (and their subtrees),
   hidden paint/effect layers, mixed values, zero-valued padding/gap/radius/stroke
-  weight, and anything the rules can't classify
+  weight, default opacity (100%) and opacity 0 (reads as intentional hiding), default
+  blend modes, and anything the rules can't classify
 - Component instances **are** linted: overrides applied on an instance are the
   designer's responsibility, and bindings inherited from the source component are
   reported too. Token-bound findings display the token's collection
@@ -136,7 +162,7 @@ flowchart LR
 
     subgraph Core["Core — pure (no Figma, no DOM)"]
         Engine["engine — traverse + lint"]
-        Rules["rules × 7"]
+        Rules["rules × 18"]
         Helpers["scopes + semantic-usage"]
         Report["report — summarize + markdown"]
     end
@@ -208,5 +234,19 @@ Manual smoke checklist after a build:
 - Page scope lints the whole current page (progress counts climb); cancel mid-scan stops promptly
 - Empty page → clean pass message
 - File scope on the DS source file: cancel responds within ~1s, no UI freeze (perf gate)
-- `esds/icon/…` instance (glyph stroke weights bound to the iconography library's `Collection 1`) → no unknown-collection warning; the same binding outside an icon → warning
+- Shape with a raw 1px stroke → unbound-value error naming the stroke weight
+- Frame at 50% opacity with a bound background color → opacity-over-color warning
+- Drop shadow with default (raw) settings → unbound-effect error
+- Local effect style applied to a layer → local-effect-style warning; remote style → clean
+- Frame set to Multiply → blend-mode warning
+- Non-`@root` brand t2 token bound to a fill → brand/dataviz warning; `@root` variant → clean
+- Local variable bound to a fill → local-collection warning (also inside the DS source file)
 - Text layer with lorem placeholder → lorem-ipsum warning
+- `esds/icon/…` instance (glyph stroke weights bound to the iconography library's `Collection 1`) → no unknown-collection warning; the same binding outside an icon → warning
+- Text layer styled by hand → no-text-style error
+- Local text style applied → local-text-style warning; remote style → clean
+- Remote Token Core style applied, then size changed → style-override warning naming `font size`
+- Regression: text color still linted (a raw text fill → unbound-value error)
+- Frame named `chevron-right` (or `esds/icon/chevron-right`) → icon-as-frame error; a real kit-icon instance of the same name → clean
+- Duplicated icon component in the file → local-duplicate warning
+- Renamed icon frame (`plus copy`) → no component finding (exact-match policy)
