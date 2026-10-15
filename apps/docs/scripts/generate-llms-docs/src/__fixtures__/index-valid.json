@@ -1,0 +1,32 @@
+{
+  "v": 5,
+  "entries": {
+    "welcome--docs": {
+      "id": "welcome--docs",
+      "title": "Welcome",
+      "name": "Docs",
+      "importPath": "./src/stories/welcome.mdx",
+      "type": "docs",
+      "tags": ["dev", "test", "manifest", "unattached-mdx"]
+    },
+    "components-button--docs": {
+      "id": "components-button--docs",
+      "title": "Components/Button",
+      "name": "Docs",
+      "importPath": "../../packages/components/src/components/esds-button/esds-button.attr.stories.ts",
+      "type": "docs",
+      "tags": ["dev", "test", "manifest", "autodocs", "vr-test"],
+      "storiesImports": []
+    },
+    "components-button--button": {
+      "id": "components-button--button",
+      "title": "Components/Button",
+      "name": "Button",
+      "importPath": "../../packages/components/src/components/esds-button/esds-button.attr.stories.ts",
+      "type": "story",
+      "subtype": "story",
+      "exportName": "Button",
+      "tags": ["dev", "test", "manifest", "autodocs", "vr-test"]
+    }
+  }
+}

@@ -1,0 +1,74 @@
+import { html } from 'lit';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { storybookInteractiveControls } from '../helpers/storybook-interactive-controls.ts';
+
+const args = {};
+const argTypes = {};
+
+const meta = {
+  title: 'Components/Button',
+  component: 'esds-button',
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'documentation',
+      },
+    },
+  },
+  args,
+  argTypes,
+  render: (args) => html`<button>${template(args)}</button>`,
+} satisfies Meta;
+
+export default meta;
+
+/**
+ * Renders a link version of the button.
+ */
+export const Link: StoryObj = {
+  ...storybookInteractiveControls({
+    href: 'https://infomaniak.com',
+    content: 'Link content',
+  }),
+  render: (args) => html`<a
+    ${defineComponentAttr}
+    esds-button
+    href="${args.href}"
+    >${args.content}</a>`,
+};
+
+export const WithBadge: StoryObj = {
+  ...storybookInteractiveControls({
+    content: 'Badge',
+    badgeType: { value: 'primary', type: 'select', options: ['primary', 'secondary'] },
+  }),
+  render: (args) => html`<button esds-button data-badge=${ifDefined(args.badgeType)}>
+    ${args.content}
+  </button>`,
+};
+
+export const WithComment: StoryObj = {
+  args: {
+    content: 'Commented',
+  },
+  render: (args) => html`<button esds-button>
+    <!-- a TODO comment -->
+    ${args.content}
+  </button>`,
+};
+
+export const Mapped: StoryObj = {
+  ...storybookInteractiveControls({
+    content: 'Mapped',
+  }),
+  render: (args) => html`${['a', 'b'].map(
+    (variant) => html`<span>${variant} ${args.content}</span>`,
+  )}`,
+};
+
+export const NoRender: StoryObj = {
+  ...storybookInteractiveControls({
+    content: 'Canonical',
+  }),
+};
