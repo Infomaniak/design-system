@@ -1,4 +1,4 @@
-# Infomaniak's Design System - Figma Design Linter
+# Infomaniak's Design System - ESDS Linter
 
 A Figma plugin that lints a selection for design-token compliance. A designer selects
 one or more layers, runs the plugin, and gets a list of errors and warnings: raw

@@ -246,7 +246,7 @@ function buildActionsRow(...buttons: readonly HTMLElement[]): HTMLElement {
 }
 
 function buildHeader(): HTMLElement {
-  return element('h1', 'title', 'Infomaniak Design Linter');
+  return element('h1', 'title', 'ESDS Linter');
 }
 
 function buildActionButton(label: string, action: string, modifier?: string): HTMLElement {

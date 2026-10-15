@@ -50,7 +50,7 @@ design-system/
 │   │   │   ├── ui/              # Plugin iframe (TS + HTML template, inlined into dist/ui.html)
 │   │   │   ├── manifest.json    # Points to dist/ (built locally, imported as dev plugin)
 │   │   │   └── dist/            # Build output (gitignored)
-│   │   └── figma-plugin-linter/ # "ESDS linter" Figma plugin (design-token compliance linter) — private package, released as GitHub Release asset
+│   │   └── figma-plugin-linter/ # "ESDS Linter" Figma plugin (design-token compliance linter) — private package, released as GitHub Release asset
 │   │       ├── src/             # core/ (pure) + sandbox/ + ui/, bundled to dist/
 │   │       ├── manifest.json    # Points to dist/ (built locally, imported as dev plugin)
 │   │       └── dist/            # Build output (gitignored)

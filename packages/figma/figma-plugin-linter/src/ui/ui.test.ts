@@ -30,7 +30,7 @@ describe('renderPanel', () => {
   it('renders the idle state with a run button and hint', () => {
     const root: HTMLElement = render({ kind: 'idle' });
 
-    expect(root.querySelector('.title')!.textContent).toBe('Infomaniak Design Linter');
+    expect(root.querySelector('.title')!.textContent).toBe('ESDS Linter');
     expect(root.querySelector('.hint')!.textContent).toBe('Select at least one layer to lint.');
 
     const runButton: HTMLElement = root.querySelector('[data-action="run"]')!;
