@@ -25,8 +25,14 @@ export function computeAndroidOpticalStrokeWidth(iconSize: number): number {
   );
 }
 
-/** Applies the web optical sizing to the SVG, with the stroke width of the given icon size. */
+/**
+ * Applies the web optical sizing to the SVG, with the stroke width of the given icon size, and sets
+ * its `width` / `height` to the icon size (becoming the ImageVector `defaultWidth` / `defaultHeight`).
+ */
 export function applyAndroidOpticalSize(svg: SVG, iconSize: number): void {
+  Reflect.set(svg.$svg.attribs, 'width', String(iconSize));
+  Reflect.set(svg.$svg.attribs, 'height', String(iconSize));
+
   applyOpticalSizes(svg, {
     ...DEFAULT_OPTICAL_SIZE_OPTIONS,
     equation: String(computeAndroidOpticalStrokeWidth(iconSize)),
