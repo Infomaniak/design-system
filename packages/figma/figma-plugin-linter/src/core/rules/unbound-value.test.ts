@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { createLintContext } from '../context.ts';
+import type { LintPropertyPart } from '../model/lint-property.ts';
 import {
   colorProperty,
   hexPart,
@@ -7,6 +8,7 @@ import {
   numberPart,
   numberProperty,
   observation,
+  variableInfo,
 } from '../testing/fixtures.ts';
 import { unboundValueRule } from './unbound-value.ts';
 
@@ -94,5 +96,75 @@ describe('unbound-value rule', () => {
       'strokeWeight',
     ]);
     expect(unboundValueRule.severity).toBe('error');
+  });
+
+  describe('fix suggestions', () => {
+    const paintPart = (hex: string): LintPropertyPart => ({
+      id: 'paint:0',
+      value: { kind: 'color', hex },
+    });
+
+    it('attaches ordered suggestedFixes when a variable holds the hex', () => {
+      const token = variableInfo({
+        id: 'V:1',
+        name: 'color/background/surface-primary',
+        value: { r: 74 / 255, g: 144 / 255, b: 217 / 255, a: 1 },
+      });
+      const context = createLintContext(new Map([[token.id, token]]));
+      const node = lintNode({ id: 'node:1', name: 'Card', type: 'FRAME' });
+      const property = colorProperty('fill', paintPart('#4A90D9'));
+
+      const findings = unboundValueRule.evaluate(
+        observation(node, property, property.parts[0]!),
+        context,
+      );
+
+      expect(findings[0]!.suggestedFixes).toEqual([
+        {
+          label: 'surface-primary',
+          kind: 'paint',
+          target: 'V:1',
+          fields: ['fills'],
+          paintIndex: 0,
+        },
+      ]);
+    });
+
+    it('omits suggestedFixes when no variable matches', () => {
+      const node = lintNode();
+      const property = colorProperty('fill', paintPart('#4A90D9'));
+
+      const findings = unboundValueRule.evaluate(
+        observation(node, property, property.parts[0]!),
+        context,
+      );
+
+      expect(findings[0]!.suggestedFixes).toBeUndefined();
+      expect(findings[0]).not.toHaveProperty('suggestedFixes');
+    });
+
+    it('suggests float tokens for number parts', () => {
+      const token = variableInfo({ id: 'V:space', name: 'spacing/16', value: 16 });
+      const context = createLintContext(new Map([[token.id, token]]));
+      const node = lintNode();
+      const property = numberProperty('padding', {
+        id: 'uniform',
+        value: { kind: 'number', value: 16 },
+      });
+
+      const findings = unboundValueRule.evaluate(
+        observation(node, property, property.parts[0]!),
+        context,
+      );
+
+      expect(findings[0]!.suggestedFixes).toEqual([
+        {
+          label: '16',
+          kind: 'field',
+          target: 'V:space',
+          fields: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
+        },
+      ]);
+    });
   });
 });

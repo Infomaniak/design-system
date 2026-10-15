@@ -1,9 +1,11 @@
-import type { Finding } from '../core/model/finding.ts';
+import type { FixRequestItem } from '../core/fix-request.ts';
+import type { Finding, FixSuggestion } from '../core/model/finding.ts';
 import { findingsToMarkdown } from '../core/report/markdown.ts';
 import { summarizeFindings } from '../core/report/summarize.ts';
 import { parseScanScope, type ScanScope } from '../core/scan-scope.ts';
 import type { SandboxToUiMessage, UiToSandboxMessage } from '../messages.ts';
 import { copyTextToClipboard } from './clipboard.ts';
+import type { FixFeedback } from './ui.ts';
 import { renderPanel, type LintPanelState } from './ui.ts';
 
 /**
@@ -25,6 +27,8 @@ let latestState: LintPanelState = { kind: 'idle' };
 let expandedRuleIds: readonly string[] = [];
 let selectedScope: ScanScope = 'selection';
 let runStartedAt: number = 0;
+/** Fix feedback waiting to ride on the next lint-result (auto re-lint). */
+let pendingFixFeedback: FixFeedback | undefined;
 
 function update(state: LintPanelState): void {
   latestState = state;
@@ -59,6 +63,21 @@ root.addEventListener('click', (event: MouseEvent): void => {
       return;
     case 'copy-report':
       void copyReport();
+      return;
+    case 'fix-finding':
+      requestSingleFix(target);
+      return;
+    case 'fix-toggle-picker':
+      toggleFixPicker(target);
+      return;
+    case 'fix-rule':
+      setConfirmRule(target.dataset['ruleId']);
+      return;
+    case 'fix-rule-confirm':
+      requestBatchFix(target.dataset['ruleId']);
+      return;
+    case 'fix-rule-cancel':
+      setConfirmRule(undefined);
       return;
   }
 
@@ -117,6 +136,69 @@ function toggleSection(ruleId: string | undefined): void {
   update({ ...latestState, expandedRuleIds, refreshed: false });
 }
 
+function setConfirmRule(ruleId: string | undefined): void {
+  if (latestState.kind !== 'results') {
+    return;
+  }
+
+  update({ ...latestState, confirmRuleId: ruleId, refreshed: false });
+}
+
+function requestSingleFix(target: HTMLElement): void {
+  const index: string | undefined = target.dataset['findingIndex'];
+  const finding: Finding | undefined =
+    index === undefined ? undefined : latestFindings[Number(index)];
+
+  if (finding === undefined || (finding.suggestedFixes?.length ?? 0) === 0) {
+    return;
+  }
+
+  const fix: FixSuggestion | undefined =
+    finding.suggestedFixes![Number(target.dataset['fixIndex'] ?? '0')] ??
+    finding.suggestedFixes![0]!;
+
+  post({ type: 'fix-request', items: [{ nodeId: finding.nodeId, fix }] });
+}
+
+/** Opens or closes the fix-choice picker of one finding row. */
+function toggleFixPicker(target: HTMLElement): void {
+  if (latestState.kind !== 'results') {
+    return;
+  }
+
+  const index: number = Number(target.dataset['findingIndex'] ?? '-1');
+
+  if (index < 0) {
+    return;
+  }
+
+  update({
+    ...latestState,
+    openFixRow: latestState.openFixRow === index ? undefined : index,
+    refreshed: false,
+  });
+}
+
+function requestBatchFix(ruleId: string | undefined): void {
+  if (ruleId === undefined || latestState.kind !== 'results') {
+    return;
+  }
+
+  const items: readonly FixRequestItem[] = latestFindings.flatMap(
+    (finding: Finding): FixRequestItem[] =>
+      finding.ruleId === ruleId && (finding.suggestedFixes?.length ?? 0) > 0
+        ? [{ nodeId: finding.nodeId, fix: finding.suggestedFixes![0]! }]
+        : [],
+  );
+
+  if (items.length === 0) {
+    return;
+  }
+
+  setConfirmRule(undefined);
+  post({ type: 'fix-request', items });
+}
+
 async function copyReport(): Promise<void> {
   const state: LintPanelState = latestState;
 
@@ -157,6 +239,9 @@ window.onmessage = (event: MessageEvent): void => {
           (section): readonly Finding[] => section.findings,
         );
         expandedRuleIds = [];
+        const fixFeedback: FixFeedback | undefined = pendingFixFeedback;
+
+        pendingFixFeedback = undefined;
 
         if (summary.errorCount === 0 && summary.warningCount === 0 && !message.cancelled) {
           update({
@@ -164,6 +249,7 @@ window.onmessage = (event: MessageEvent): void => {
             inspectedCount: message.inspectedCount,
             refreshed: true,
             scope: selectedScope,
+            ...(fixFeedback === undefined ? {} : { fixFeedback }),
           });
         } else {
           update({
@@ -174,17 +260,42 @@ window.onmessage = (event: MessageEvent): void => {
             expandedRuleIds,
             refreshed: true,
             scope: selectedScope,
+            ...(fixFeedback === undefined ? {} : { fixFeedback }),
           });
         }
       });
       break;
     case 'lint-setup-error':
       applyRunResult((): void => {
+        pendingFixFeedback = undefined;
         update({ kind: 'setup-error', message: message.message, scope: selectedScope });
       });
       break;
+    case 'fix-result':
+      applyFixResult(message.applied, message.failed);
+      break;
   }
 };
+
+/**
+ * Fix feedback + auto re-lint: the panel switches to a running state and the
+ * same scope is re-linted; the feedback rides on the refreshed results so the
+ * user sees «N applied · M failed» next to the updated findings.
+ */
+function applyFixResult(
+  applied: readonly string[],
+  failed: readonly { readonly nodeId: string; readonly reason: string }[],
+): void {
+  pendingFixFeedback = {
+    appliedCount: applied.length,
+    failedCount: failed.length,
+    failedNodeIds: failed.map((failure: { readonly nodeId: string }): string => failure.nodeId),
+  };
+
+  update({ kind: 'running', completed: 0, total: 0 });
+  runStartedAt = Date.now();
+  post({ type: 'lint-request', scope: selectedScope });
+}
 
 function applyRunResult(apply: () => void): void {
   const remainingMs: number = MIN_RUNNING_MS - (Date.now() - runStartedAt);
