@@ -1,13 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { getObservationPropertyLabel, partValueToLabel, variableToLabel } from './labels.ts';
-import {
-  hexPart,
-  lintNode,
-  numberPart,
-  numberProperty,
-  observation,
-  variableInfo,
-} from './testing/fixtures.ts';
+import { getObservationPropertyLabel } from './labels.ts';
+import { hexPart, lintNode, numberPart, numberProperty, observation } from './testing/fixtures.ts';
 
 describe('getObservationPropertyLabel', () => {
   it('labels property-level parts without a suffix', () => {
@@ -97,55 +90,5 @@ describe('getObservationPropertyLabel', () => {
     expect(getObservationPropertyLabel(observation(node, component, component.parts[0]!))).toBe(
       'Component',
     );
-  });
-});
-
-describe('partValueToLabel', () => {
-  it('formats colors as hex', () => {
-    expect(partValueToLabel({ kind: 'color', hex: '#4A90D9' })).toBe('#4A90D9');
-  });
-
-  it('formats numbers with px', () => {
-    expect(partValueToLabel({ kind: 'number', value: 16 })).toBe('16px');
-  });
-
-  it('formats strings as-is', () => {
-    expect(partValueToLabel({ kind: 'string', value: 'Heading/L' })).toBe('Heading/L');
-  });
-
-  it('formats effects with type, radius and offset', () => {
-    expect(partValueToLabel({ kind: 'effect', effectType: 'DROP_SHADOW' })).toBe('DROP_SHADOW');
-    expect(partValueToLabel({ kind: 'effect', effectType: 'DROP_SHADOW', radius: 4 })).toBe(
-      'DROP_SHADOW 4px',
-    );
-    expect(
-      partValueToLabel({
-        kind: 'effect',
-        effectType: 'DROP_SHADOW',
-        radius: 4,
-        offset: { x: 0, y: 2 },
-      }),
-    ).toBe('DROP_SHADOW 4px 0/2');
-  });
-});
-
-describe('variableToLabel', () => {
-  it('joins name segments with slashes and appends the collection', () => {
-    const token: ReturnType<typeof variableInfo> = variableInfo({
-      name: 'color/content/primary',
-      collectionName: 't2',
-    });
-
-    expect(variableToLabel(token)).toBe('color/content/primary · t2');
-  });
-
-  it('omits the collection when it could not be resolved', () => {
-    const token: ReturnType<typeof variableInfo> = variableInfo({
-      name: 'gray/900',
-      collectionName: '',
-      tier: 'unknown',
-    });
-
-    expect(variableToLabel(token)).toBe('gray/900');
   });
 });

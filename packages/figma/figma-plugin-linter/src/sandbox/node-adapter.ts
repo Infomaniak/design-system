@@ -2,7 +2,6 @@ import { rgbaToHex } from '../core/format-color.ts';
 import { isIconLibraryComponent } from '../core/icon-library.ts';
 import type { LintNode, LintNodeType } from '../core/model/lint-node.ts';
 import type { LintProperty, LintPropertyPart } from '../core/model/lint-property.ts';
-import { formatLineHeight } from '../core/model/text-style-info.ts';
 import type { AnyFigmaNode, FigmaEffect, FigmaPaint } from './figma-types.ts';
 import type { InstanceIdentity } from './instance-identities.ts';
 
@@ -172,11 +171,6 @@ function extractProperties(node: AnyFigmaNode): readonly LintProperty[] {
   const textContent: LintProperty | undefined = extractTextContent(node);
   if (textContent !== undefined) {
     properties.push(textContent);
-  }
-
-  const textStyle: LintProperty | undefined = extractTextStyle(node);
-  if (textStyle !== undefined) {
-    properties.push(textStyle);
   }
 
   return properties;
@@ -491,43 +485,5 @@ function extractComponentIdentity(node: AnyFigmaNode): LintProperty {
     kind: 'component',
     valueKind: 'string',
     parts: [{ id: 'uniform', value: { kind: 'string', value: node.type } }],
-  };
-}
-
-/**
- * Text-style binding of TEXT nodes: one property-level part carrying the
- * applied style id (when any) and the node's current style-relevant props —
- * the payload `no-text-style`, `local-text-style` and `style-override` reason
- * over. Mixed props are omitted individually, never guessed.
- */
-function extractTextStyle(node: AnyFigmaNode): LintProperty | undefined {
-  if (node.type !== 'TEXT') {
-    return undefined;
-  }
-
-  const styleId: string | symbol | undefined = node.textStyleId;
-  const fontName: { readonly family: string; readonly style: string } | symbol | undefined =
-    node.fontName;
-
-  return {
-    kind: 'textStyle',
-    valueKind: 'string',
-    parts: [
-      {
-        id: 'uniform',
-        value: {
-          kind: 'textStyle',
-          ...(typeof styleId === 'string' ? { styleId } : {}),
-          ...(typeof node.fontSize === 'number' ? { fontSize: node.fontSize } : {}),
-          ...(typeof fontName === 'object' ? { fontWeight: fontName.style } : {}),
-          ...(typeof node.textDecoration === 'string'
-            ? { textDecoration: node.textDecoration }
-            : {}),
-          ...(typeof node.lineHeight === 'object'
-            ? { lineHeight: formatLineHeight(node.lineHeight) }
-            : {}),
-        },
-      },
-    ],
   };
 }

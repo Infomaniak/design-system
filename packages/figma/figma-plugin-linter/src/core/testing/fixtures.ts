@@ -20,74 +20,11 @@ export function stringPart(value: string): LintPropertyPart {
   return { id: 'part', value: { kind: 'string', value } };
 }
 
-export interface EffectPartOptions {
-  readonly effectType?: string;
-  readonly radius?: number;
-  readonly offset?: { readonly x: number; readonly y: number };
-  readonly styleId?: string;
-  readonly boundVariableId?: string;
-}
-
-export function effectPart(options: EffectPartOptions = {}): LintPropertyPart {
-  const { effectType = 'DROP_SHADOW', radius, offset, styleId, boundVariableId } = options;
-
-  return {
-    id: 'part',
-    value: {
-      kind: 'effect',
-      effectType,
-      ...(radius === undefined ? {} : { radius }),
-      ...(offset === undefined ? {} : { offset }),
-      ...(styleId === undefined ? {} : { styleId }),
-    },
-    boundVariableId,
-  };
-}
-
-export function colorProperty(
-  kind: 'fill' | 'stroke',
-  ...parts: readonly LintPropertyPart[]
-): LintProperty {
-  return { kind, valueKind: 'color', parts };
-}
-
 export function numberProperty(
   kind: 'padding' | 'gap' | 'cornerRadius',
   ...parts: readonly LintPropertyPart[]
 ): LintProperty {
   return { kind, valueKind: 'number', parts };
-}
-
-export function effectProperty(...parts: readonly LintPropertyPart[]): LintProperty {
-  return { kind: 'effect', valueKind: 'effect', parts };
-}
-
-export interface TextStylePartOptions {
-  readonly styleId?: string;
-  readonly fontSize?: number;
-  readonly fontWeight?: string;
-  readonly textDecoration?: string;
-  readonly lineHeight?: string;
-}
-
-export function textStylePart(options: TextStylePartOptions = {}): LintPropertyPart {
-  const { styleId, fontSize, fontWeight, textDecoration, lineHeight } = options;
-
-  return {
-    id: 'part',
-    value: {
-      kind: 'textStyle',
-      ...(styleId === undefined ? {} : { styleId }),
-      ...(fontSize === undefined ? {} : { fontSize }),
-      ...(fontWeight === undefined ? {} : { fontWeight }),
-      ...(textDecoration === undefined ? {} : { textDecoration }),
-      ...(lineHeight === undefined ? {} : { lineHeight }),
-    },
-  };
-}
-
-export function textStyleProperty(...parts: readonly LintPropertyPart[]): LintProperty {
-  return { kind: 'textStyle', valueKind: 'string', parts };
 }
 
 export function stringProperty(

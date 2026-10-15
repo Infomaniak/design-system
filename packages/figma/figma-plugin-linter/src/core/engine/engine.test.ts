@@ -30,7 +30,27 @@ const TEXT_RULE: LintRule = {
   ],
 };
 
-const RULES: readonly LintRule[] = [TEXT_RULE];
+/** A rule that only applies to fills (exercises the not-applicable skip branch on text parts). */
+const COLOR_RULE: LintRule = {
+  id: 'color-stub',
+  title: 'Color stub',
+  severity: 'error',
+  appliesTo: ['fill'],
+  evaluate: (observation): readonly Finding[] => [
+    {
+      ruleId: COLOR_RULE.id,
+      ruleTitle: COLOR_RULE.title,
+      severity: COLOR_RULE.severity,
+      nodeId: observation.node.id,
+      nodeName: observation.node.name,
+      propertyLabel: 'Fill',
+      valueLabel: '#4A90D9',
+      message: 'Fill observed.',
+    },
+  ],
+};
+
+const RULES: readonly LintRule[] = [COLOR_RULE, TEXT_RULE];
 
 describe('traverseLintableNodes', () => {
   it('yields visible nodes depth-first', () => {
@@ -97,10 +117,15 @@ describe('traverseLintableNodes', () => {
 
 describe('lintTree', () => {
   it('evaluates applicable rules on every observed part and reports findings', async () => {
+    const fillProperty = {
+      kind: 'fill' as const,
+      valueKind: 'color' as const,
+      parts: [{ id: 'paint', value: { kind: 'color' as const, hex: '#4A90D9' } }],
+    };
     const tree = lintNode({
       id: 'root',
       name: 'Card',
-      properties: [stringProperty('textContent', stringPart('Hello world'))],
+      properties: [fillProperty, stringProperty('textContent', stringPart('Hello world'))],
     });
 
     const result = await lintTree([tree], {
@@ -110,8 +135,10 @@ describe('lintTree', () => {
 
     expect(result.inspectedCount).toBe(1);
     expect(result.cancelled).toBe(false);
-    expect(result.findings).toHaveLength(1);
-    expect(result.findings[0]).toMatchObject({ ruleId: 'text-stub', nodeName: 'Card' });
+    expect(result.findings.map((finding: Finding): string => finding.ruleId)).toEqual([
+      'color-stub',
+      'text-stub',
+    ]);
   });
 
   it('reports progress per node', async () => {

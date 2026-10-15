@@ -12,22 +12,6 @@ export type LintPropertyKind =
   | 'textContent'
   | 'component';
 
-/** Every property kind the engine observes — the full `appliesTo` universe. */
-export const ALL_PROPERTY_KINDS: readonly LintPropertyKind[] = [
-  'fill',
-  'stroke',
-  'padding',
-  'gap',
-  'cornerRadius',
-  'strokeWeight',
-  'effect',
-  'opacity',
-  'blendMode',
-  'textStyle',
-  'textContent',
-  'component',
-];
-
 export type LintValueKind = 'color' | 'number' | 'string' | 'effect';
 
 export type LintPartValue =

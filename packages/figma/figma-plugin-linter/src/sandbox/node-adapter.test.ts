@@ -677,7 +677,7 @@ describe('toLintNode — effect extraction', () => {
       effects: [
         { type: 'DROP_SHADOW', visible: false },
         { type: 'INNER_SHADOW', radius: 2 },
-        { type: 'LAYER_BLUR', radius: 8 },
+        { type: 'NOISE', radius: 8 },
       ],
     };
 
@@ -686,7 +686,7 @@ describe('toLintNode — effect extraction', () => {
     expect(parts).toHaveLength(2);
     expect(parts[0]!.label).toBe('inner shadow');
     expect(parts[0]!.id).toBe('effect:1');
-    expect(parts[1]!.label).toBe('layer blur');
+    expect(parts[1]!.label).toBe('noise');
     expect(parts[1]!.id).toBe('effect:2');
   });
 
@@ -716,23 +716,20 @@ describe('toLintNode — text content extraction', () => {
     });
   });
 
-  it('skips empty, whitespace-only and mixed text but keeps the text-style property', () => {
+  it('skips empty, whitespace-only and mixed text', () => {
     const empty = toLintNode({ id: '1', name: 'A', type: 'TEXT', characters: '' });
 
-    expect(empty.properties.map((property): string => property.kind)).toEqual([
-      'component',
-      'textStyle',
-    ]);
+    expect(empty.properties.map((property): string => property.kind)).toEqual(['component']);
     expect(
       toLintNode({ id: '1', name: 'A', type: 'TEXT', characters: '   ' }).properties.map(
         (property): string => property.kind,
       ),
-    ).toEqual(['component', 'textStyle']);
+    ).toEqual(['component']);
     expect(
       toLintNode({ id: '1', name: 'A', type: 'TEXT', characters: MIXED }).properties.map(
         (property): string => property.kind,
       ),
-    ).toEqual(['component', 'textStyle']);
+    ).toEqual(['component']);
   });
 });
 
@@ -805,80 +802,6 @@ describe('toLintNode — icon library marking', () => {
     const node: AnyFigmaNode = { id: '1', name: 'esds/icon/plus', type: 'FRAME' };
 
     expect(toLintNode(node).fromIconLibrary).toBeUndefined();
-  });
-});
-
-describe('toLintNode — text style extraction', () => {
-  it('extracts the applied style id and the node style props', () => {
-    const node: AnyFigmaNode = {
-      id: '1',
-      name: 'Title',
-      type: 'TEXT',
-      textStyleId: 'S:1',
-      fontSize: 24,
-      fontName: { family: 'Inter', style: 'Bold' },
-      textDecoration: 'NONE',
-      lineHeight: { value: 32, unit: 'PIXELS' },
-    };
-
-    expect(toLintNode(node).properties.at(-1)).toEqual({
-      kind: 'textStyle',
-      valueKind: 'string',
-      parts: [
-        {
-          id: 'uniform',
-          value: {
-            kind: 'textStyle',
-            styleId: 'S:1',
-            fontSize: 24,
-            fontWeight: 'Bold',
-            textDecoration: 'NONE',
-            lineHeight: '32px',
-          },
-        },
-      ],
-    });
-  });
-
-  it('emits the property without a style id for hand-styled text', () => {
-    const node: AnyFigmaNode = {
-      id: '1',
-      name: 'Body',
-      type: 'TEXT',
-      fontSize: 14,
-      fontName: { family: 'Inter', style: 'Regular' },
-      lineHeight: { value: 150, unit: 'PERCENT' },
-    };
-
-    expect(toLintNode(node).properties.at(-1)!.parts[0]!.value).toEqual({
-      kind: 'textStyle',
-      fontSize: 14,
-      fontWeight: 'Regular',
-      lineHeight: '150%',
-    });
-  });
-
-  it('omits mixed props individually and skips non-TEXT nodes', () => {
-    const node: AnyFigmaNode = {
-      id: '1',
-      name: 'Body',
-      type: 'TEXT',
-      textStyleId: 'S:1',
-      fontSize: MIXED,
-      fontName: MIXED,
-      textDecoration: MIXED,
-      lineHeight: MIXED,
-    };
-
-    expect(toLintNode(node).properties.at(-1)!.parts[0]!.value).toEqual({
-      kind: 'textStyle',
-      styleId: 'S:1',
-    });
-    expect(
-      toLintNode({ id: '2', name: 'Frame', type: 'FRAME', fontSize: 16 }).properties.map(
-        (property): string => property.kind,
-      ),
-    ).toEqual(['component']);
   });
 });
 
