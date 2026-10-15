@@ -1,24 +1,74 @@
 # Infomaniak's Design System - Figma Design Linter
 
 A Figma plugin that lints a selection for design-token compliance. A designer selects
-one or more layers, runs the plugin, and gets a list of errors and warnings. This
-first slice ships the read-only foundation — scan scopes, rule-grouped results,
-report export — with the `lorem-ipsum` check (leftover placeholder copy); the
-design-token rules and the fix mode land in follow-up slices.
+one or more layers, runs the plugin, and gets a list of errors and warnings: raw
+(unbound) values, variables used outside their intended scope, semantic tokens used on
+the wrong property, primitive tokens used where semantic tokens are expected, tokens
+bound from unrecognized collections, bindings that cannot be resolved, and leftover
+lorem ipsum copy.
 
 The plugin reads the document and lints it; it never modifies it.
 
 ## What it checks
 
-| Rule        | Severity | Meaning                                                                     |
-| ----------- | -------- | --------------------------------------------------------------------------- |
-| Lorem ipsum | Warning  | The text layer still carries placeholder copy (`lorem`/`ipsum`, any casing) |
+| Rule               | Severity | Meaning                                                                                             |
+| ------------------ | -------- | --------------------------------------------------------------------------------------------------- |
+| Unbound value      | Error    | Property set with a raw value (`#4A90D9`, `16px`, `1` stroke weight…) and no design token bound     |
+| Wrong scope        | Error    | A variable IS bound, but its Figma scopes don't cover the property (e.g. a stroke token on a fill)  |
+| Wrong token        | Error    | A semantic (t2) color variable IS bound, but its category doesn't match the property                |
+| Primitive misuse   | Warning  | The bound token effectively resolves to a primitive (t1) token — directly or through an alias chain |
+| Unknown collection | Warning  | A variable IS bound, but points at no known token tier (t1/t2/t3)                                   |
+| Unresolved token   | Warning  | A variable IS bound, but it can't be resolved from this file's variables or an accessible library   |
+| Lorem ipsum        | Warning  | The text layer still carries placeholder copy (`lorem`/`ipsum`, any casing)                         |
 
-The pattern set is word-bounded and case-insensitive: `lorem` or `ipsum` as
-standalone words. Real product copy never contains these words, and partial matches
-("Lorem-ipsum-body", "LOREM IPSUM DOLOR") are caught too.
+**Alias chains**: a variable's value may be an alias to another variable. This is what
+lets third-party tokens (e.g. a Shadcn kit's `foreground`) be re-pointed to DS tokens
+in Figma: when the alias chain resolves to a t2/t3 token, the binding is **accepted**
+— no warning fires. Chains landing on a t1 token are still flagged as primitive
+misuse, and chains that dead-end (raw value, deleted target, cycle) keep the
+unknown-collection warning. Wrong-token is deliberately not validated through the
+chain (the alias only affects tier classification).
+
+**Icon library exemption**: the Edelweiss Iconography library (`esds/icon/…`
+components) publishes its own token collection (`Collection 1`), which is not a
+t1/t2/t3 tier. Bindings inside instances of `esds/icon/…` components are therefore
+exempt from the unknown-collection rule — the icon library's stroke-width tokens are
+expected there. The identity is resolved per instance through
+`getMainComponentAsync()` (component-set name, then component name, then the
+instance's layer name — the sync getter is off-limits in dynamic-page mode):
+renaming an icon instance keeps it exempt, but extracting its glyph out of it
+re-flags the binding.
+
+The "wrong token" rule derives the category of a bound variable from its own name
+(`color/background/…`, `color/content/…`) — read live from the file, so it can't drift
+from the token set:
+
+| `color.*` category | Frame fill | Shape / icon fill | Text fill | Stroke |
+| ------------------ | ---------- | ----------------- | --------- | ------ |
+| `background`       | ✓          | ✓                 | ✗         | ✗      |
+| `content`          | ✗          | ✓                 | ✓         | ✗      |
+| `border`           | ✗          | ✗                 | ✗         | ✓      |
+| `shadow`           | ✗          | ✗                 | ✗         | ✗      |
+
+- Checked properties: colors (fills & strokes, incl. text color), auto-layout padding
+  & gap, corner radius, stroke weight (only on nodes that actually carry a visible
+  stroke — Figma defaults the weight to 1 everywhere). Uniform multi-part values (same
+  value and binding on all padding sides / corners) are merged into a single finding
+- Silently skipped: gradients, image/video fills, hidden layers (and their subtrees),
+  hidden paint/effect layers, mixed values, zero-valued padding/gap/radius/stroke
+  weight, and anything the rules can't classify
+- Component instances **are** linted: overrides applied on an instance are the
+  designer's responsibility, and bindings inherited from the source component are
+  reported too. Token-bound findings display the token's collection
+  (`color/content/primary · t2`) so unrecognized collections are immediately visible
 
 ## Using the plugin in Figma
+
+> [!NOTE]
+> The plugin reads the design tokens **live from the file's variables** — variables
+> local to the file, or bound from a published library, resolved on demand through the
+> Figma Variables API. A file without any token variables still lints raw values via
+> the unbound-value rule.
 
 ### Build and install (development)
 
@@ -61,6 +111,10 @@ same in every scope.
 | Results     | Run finished or cancelled      | Counts, findings grouped by rule (collapsible sections), Run again + Copy report   |
 | Clean pass  | Run finished, zero findings    | "0 errors, 0 warnings — all checked properties are token-bound.", Run again        |
 
+> [!NOTE]
+> If the file's variables carry no scopes, the wrong-scope rule stays dormant — the
+> wrong-token rule is unaffected.
+
 ## Architecture
 
 Three layers with dependencies pointing inward: the Figma sandbox and the UI iframe
@@ -77,20 +131,23 @@ flowchart LR
     subgraph Sandbox["Sandbox — code.js"]
         Entry["code.ts — entry"]
         Adapter["node-adapter"]
-        Identities["instance-identities"]
+        Metadata["token-metadata"]
     end
 
     subgraph Core["Core — pure (no Figma, no DOM)"]
         Engine["engine — traverse + lint"]
-        Rules["rules"]
+        Rules["rules × 7"]
+        Helpers["scopes + semantic-usage"]
         Report["report — summarize + markdown"]
     end
 
     Main -- "lint-request / cancel / select-finding" --> Entry
     Entry -- "progress / results / setup-error" --> Main
-    Entry --> Identities
     Entry --> Adapter
+    Entry --> Metadata
     Adapter --> Engine
+    Metadata --> Engine
+    Helpers --> Rules
     Engine --> Rules
     Engine --> Report
     Report --> Main
@@ -98,24 +155,26 @@ flowchart LR
 
 - **`core/`** — pure functions and types: the data model (`LintNode` tree → property
   observations), the rules (pure functions over observations), the traversal +
-  lint engine (progress, cancellation via cooperative yields), and the report
-  builders
+  lint engine (progress, cancellation via cooperative yields), scope/semantic-usage
+  helpers, and the report builders
 - **`sandbox/`** — thin adapter over the Figma plugin runtime: converts the Figma
-  selection into `LintNode`s (resolving icon-library instance identities async —
-  the sync getter is off-limits in dynamic-page mode) and posts messages to the UI
+  selection into `LintNode`s, preloads token metadata once per run (local variables in
+  bulk, then bound ids resolved on demand — collections → tiers, variable names →
+  semantic categories, scopes), and posts messages to the UI
 - **`ui/`** — the plugin panel: a pure state → DOM renderer plus a small bootstrap
   that wires clicks (run/cancel/copy/select) and sandbox messages
 
-One run: `Run` → sandbox reads the scan roots → node tree adapted → engine traverses
-and evaluates the rules → findings summarized → posted to the panel → click a row →
-sandbox selects and zooms to the node.
+One run: `Run` → sandbox reads the selection → token metadata preloaded → node tree
+adapted → engine traverses and evaluates the rules → findings summarized → posted to
+the panel → click a row → sandbox selects and zooms to the node.
 
 ### Extending
 
 - **Add a rule**: one file in `src/core/rules/` + one line in `registry.ts` — rules
   are pure functions over `PropertyObservation`s and never traverse the tree
-- **Add a checked property**: extend the extraction in `sandbox/node-adapter.ts`;
-  existing rules pick it up via their `appliesTo` list
+- **Add a checked property**: extend the extraction in `sandbox/node-adapter.ts` +
+  the required scopes in `core/scopes.ts`; existing rules pick it up via their
+  `appliesTo` list
 
 ## Development
 
@@ -133,13 +192,21 @@ bootstrap, build script — is excluded explicitly in the root `vitest.config.ts
 
 Manual smoke checklist after a build:
 
-- Text layer with lorem placeholder → lorem-ipsum warning
-- Text layer with real copy → clean
-- `LOREM IPSUM DOLOR` / `Lorem-ipsum-body` → warning (case-insensitive, word-bounded)
-- Frame with a planted raw fill → clean for now (token rules come next); no crash
-- Hidden layers → skipped; instances linted
-- Selection scope with empty selection → setup error with Retry
+- Frame with a planted raw fill → error
+- Content token on a background → error
+- Background token on text → error
+- Primitive radius → warning
+- t1 token bound on an instance fill → primitive-misuse warning
+- Token bound from an unrecognized collection (e.g. a third-party kit) → unknown-collection warning
+- Third-party token aliased to a t2/t3 token → accepted
+- Third-party token aliased to a t1 token → primitive-misuse warning
+- Instance + hidden layers → hidden skipped, instance linted
+- Token bound from a published library → classified correctly
+- Token bound to a deleted variable → unresolved-token warning
+- Check the file's variables carry scopes (see note above)
+- ≥2 rules triggered × ≥2 findings each → results grouped by rule within severity, counts correct, Copy report mirrors the grouping
 - Page scope lints the whole current page (progress counts climb); cancel mid-scan stops promptly
 - Empty page → clean pass message
-- ≥1 rule triggered × ≥2 findings → results grouped by rule within severity, counts correct, Copy report mirrors the grouping
-- Click a finding → the layer is selected and zoomed on canvas
+- File scope on the DS source file: cancel responds within ~1s, no UI freeze (perf gate)
+- `esds/icon/…` instance (glyph stroke weights bound to the iconography library's `Collection 1`) → no unknown-collection warning; the same binding outside an icon → warning
+- Text layer with lorem placeholder → lorem-ipsum warning

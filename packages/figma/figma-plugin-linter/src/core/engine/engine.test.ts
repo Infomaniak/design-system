@@ -1,56 +1,16 @@
 import { describe, expect, it } from 'vitest';
 import { createLintContext } from '../context.ts';
-import type { Finding } from '../model/finding.ts';
-import type { LintRule } from '../rules/rule.ts';
-import { lintNode, stringPart, stringProperty } from '../testing/fixtures.ts';
+import { LINT_RULES } from '../rules/registry.ts';
+import {
+  colorProperty,
+  hexPart,
+  lintNode,
+  numberPart,
+  numberProperty,
+  variableInfo,
+} from '../testing/fixtures.ts';
 import { lintTree } from './lint.ts';
 import { countLintableNodes, traverseLintableNodes } from './traverse.ts';
-
-/**
- * Engine tests run against a stub rule so the engine mechanics stay covered
- * independently of the registered rule set (which grows branch by branch).
- */
-const TEXT_RULE: LintRule = {
-  id: 'text-stub',
-  title: 'Text stub',
-  severity: 'warning',
-  appliesTo: ['textContent'],
-  evaluate: (observation): readonly Finding[] => [
-    {
-      ruleId: TEXT_RULE.id,
-      ruleTitle: TEXT_RULE.title,
-      severity: TEXT_RULE.severity,
-      nodeId: observation.node.id,
-      nodeName: observation.node.name,
-      propertyLabel: 'Text content',
-      valueLabel:
-        observation.part.value.kind === 'string' ? observation.part.value.value : 'unknown',
-      message: 'Text observed.',
-    },
-  ],
-};
-
-/** A rule that only applies to fills (exercises the not-applicable skip branch on text parts). */
-const COLOR_RULE: LintRule = {
-  id: 'color-stub',
-  title: 'Color stub',
-  severity: 'error',
-  appliesTo: ['fill'],
-  evaluate: (observation): readonly Finding[] => [
-    {
-      ruleId: COLOR_RULE.id,
-      ruleTitle: COLOR_RULE.title,
-      severity: COLOR_RULE.severity,
-      nodeId: observation.node.id,
-      nodeName: observation.node.name,
-      propertyLabel: 'Fill',
-      valueLabel: '#4A90D9',
-      message: 'Fill observed.',
-    },
-  ],
-};
-
-const RULES: readonly LintRule[] = [COLOR_RULE, TEXT_RULE];
 
 describe('traverseLintableNodes', () => {
   it('yields visible nodes depth-first', () => {
@@ -117,28 +77,28 @@ describe('traverseLintableNodes', () => {
 
 describe('lintTree', () => {
   it('evaluates applicable rules on every observed part and reports findings', async () => {
-    const fillProperty = {
-      kind: 'fill' as const,
-      valueKind: 'color' as const,
-      parts: [{ id: 'paint', value: { kind: 'color' as const, hex: '#4A90D9' } }],
-    };
     const tree = lintNode({
       id: 'root',
       name: 'Card',
-      properties: [fillProperty, stringProperty('textContent', stringPart('Hello world'))],
+      properties: [
+        colorProperty('fill', hexPart('#4A90D9')),
+        numberProperty('gap', numberPart(12)),
+      ],
     });
 
     const result = await lintTree([tree], {
-      rules: RULES,
+      rules: LINT_RULES,
       context: createLintContext(new Map()),
     });
 
     expect(result.inspectedCount).toBe(1);
     expect(result.cancelled).toBe(false);
-    expect(result.findings.map((finding: Finding): string => finding.ruleId)).toEqual([
-      'color-stub',
-      'text-stub',
-    ]);
+    expect(result.findings).toHaveLength(2);
+    expect(
+      result.findings.every(
+        (finding: { readonly severity: string }): boolean => finding.severity === 'error',
+      ),
+    ).toBe(true);
   });
 
   it('reports progress per node', async () => {
@@ -146,7 +106,7 @@ describe('lintTree', () => {
     const progress: Array<readonly [number, number]> = [];
 
     await lintTree(trees, {
-      rules: RULES,
+      rules: LINT_RULES,
       context: createLintContext(new Map()),
       onProgress: (completed: number, total: number): void => {
         progress.push([completed, total] as const);
@@ -162,13 +122,13 @@ describe('lintTree', () => {
 
   it('cancels between nodes and keeps partial findings', async () => {
     const trees = [
-      lintNode({ id: 'a', properties: [stringProperty('textContent', stringPart('Hi'))] }),
+      lintNode({ id: 'a', properties: [colorProperty('fill', hexPart('#111111'))] }),
       lintNode({ id: 'b' }),
     ];
     let remaining: number = 1;
 
     const result = await lintTree(trees, {
-      rules: RULES,
+      rules: LINT_RULES,
       context: createLintContext(new Map()),
       shouldContinue: (): boolean => {
         remaining -= 1;
@@ -189,7 +149,7 @@ describe('lintTree', () => {
     let yields: number = 0;
 
     await lintTree(trees, {
-      rules: RULES,
+      rules: LINT_RULES,
       context: createLintContext(new Map()),
       yieldEveryNodes: 2,
       yieldNow: (): Promise<void> => {
@@ -208,12 +168,47 @@ describe('lintTree', () => {
     );
 
     const result = await lintTree(trees, {
-      rules: RULES,
+      rules: LINT_RULES,
       context: createLintContext(new Map()),
       yieldEveryNodes: 1,
     });
 
     expect(result.inspectedCount).toBe(3);
     expect(result.cancelled).toBe(false);
+  });
+
+  it('skips rules that do not apply to the property kind', async () => {
+    const token: ReturnType<typeof variableInfo> = variableInfo({
+      id: 'VariableID:1:1',
+      name: 'spacing/md',
+      scopes: ['GAP'],
+    });
+    const tree = lintNode({
+      properties: [numberProperty('gap', numberPart(12, token.id))],
+    });
+
+    const result = await lintTree([tree], {
+      rules: LINT_RULES,
+      context: createLintContext(new Map([[token.id, token]])),
+    });
+
+    expect(result.findings).toEqual([]);
+  });
+
+  it('keeps bound token usage clean', async () => {
+    const token: ReturnType<typeof variableInfo> = variableInfo({
+      id: 'VariableID:1:1',
+      name: 'color/background/elevation/surface/default',
+    });
+    const tree = lintNode({
+      properties: [colorProperty('fill', hexPart('#FFFFFF', token.id))],
+    });
+
+    const result = await lintTree([tree], {
+      rules: LINT_RULES,
+      context: createLintContext(new Map([[token.id, token]])),
+    });
+
+    expect(result.findings).toEqual([]);
   });
 });

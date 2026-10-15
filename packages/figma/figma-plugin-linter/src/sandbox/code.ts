@@ -1,6 +1,8 @@
 import { createLintContext } from '../core/context.ts';
+import { collectBoundVariableIds } from '../core/engine/collect-bound-variable-ids.ts';
 import { lintTree } from '../core/engine/lint.ts';
 import type { LintNode } from '../core/model/lint-node.ts';
+import type { VariableInfo } from '../core/model/variable-info.ts';
 import { LINT_RULES } from '../core/rules/registry.ts';
 import {
   parseScanScope,
@@ -13,12 +15,14 @@ import type { SandboxToUiMessage, UiToSandboxMessage } from '../messages.ts';
 import type { AnyFigmaNode } from './figma-types.ts';
 import { collectInstanceIdentities, type InstanceIdentity } from './instance-identities.ts';
 import { toLintNode } from './node-adapter.ts';
+import { loadTokenMetadata } from './token-metadata.ts';
 
 /**
  * Sandbox entry point (glue — not unit tested). Wires the Figma runtime to the
  * engine: reads the scan roots for the requested scope (selection, current
- * page or the whole file), adapts the node tree and runs the lint, posting
- * progress/results to the panel.
+ * page or the whole file), resolves token metadata (local variables in bulk,
+ * bound ids on demand — e.g. tokens bound from a published library), runs the
+ * lint and posts progress/results to the panel.
  */
 // `figma` is the ambient PluginAPI global from @figma/plugin-typings (see figma-env.d.ts).
 declare const __html__: string;
@@ -80,9 +84,21 @@ async function runLint(scope: ScanScope): Promise<void> {
 
   debug('node tree adapted', `${nodes.length} roots`);
 
+  const variableIds: readonly string[] = collectBoundVariableIds(nodes);
+  debug('bound variable ids', `${variableIds.length} collected`);
+
+  const variablesById: ReadonlyMap<string, VariableInfo> = await loadTokenMetadata(
+    figma.variables,
+    variableIds,
+    (): TeamLibraryAPI | undefined => figma.teamLibrary,
+    debug,
+  );
+
+  debug('token metadata loaded', `${variablesById.size} variables`);
+
   const result = await lintTree(nodes, {
     rules: LINT_RULES,
-    context: createLintContext(new Map()),
+    context: createLintContext(variablesById),
     onProgress: (completed: number, total: number): void => {
       post({ type: 'lint-progress', completed, total });
     },
