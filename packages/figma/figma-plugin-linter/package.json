@@ -11,7 +11,7 @@
     "=== PUBLISH ===": "",
     "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-figma-plugin-linter/publish-figma-plugin-linter.script.ts"
   },
-  "description": "Infomaniak Design Linter — Figma plugin that lints selections for design-token compliance",
+  "description": "ESDS Linter — Figma plugin that lints selections for design-token compliance",
   "keywords": [
     "Infomaniak",
     "Figma",

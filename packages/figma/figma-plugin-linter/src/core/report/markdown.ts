@@ -29,7 +29,7 @@ export function findingsToMarkdown(
   options: MarkdownReportOptions = {},
 ): string {
   const summary: LintSummary = summarizeFindings(findings);
-  const lines: string[] = ['# Infomaniak Design Linter', '', formatCounts(summary)];
+  const lines: string[] = ['# ESDS Linter', '', formatCounts(summary)];
 
   if (options.inspectedCount !== undefined) {
     lines[2] = `${formatCounts(summary)} — ${options.inspectedCount} layers inspected`;

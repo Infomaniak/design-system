@@ -34,7 +34,7 @@ describe('findingsToMarkdown', () => {
 
     expect(markdown).toBe(
       [
-        '# Infomaniak Design Linter',
+        '# ESDS Linter',
         '',
         '**1 errors · 1 warnings**',
         '',
@@ -61,7 +61,7 @@ describe('findingsToMarkdown', () => {
 
     expect(markdown).toBe(
       [
-        '# Infomaniak Design Linter',
+        '# ESDS Linter',
         '',
         '**3 errors · 0 warnings**',
         '',
@@ -93,7 +93,7 @@ describe('findingsToMarkdown', () => {
   it('renders a clean pass for zero findings', () => {
     expect(findingsToMarkdown([])).toBe(
       [
-        '# Infomaniak Design Linter',
+        '# ESDS Linter',
         '',
         '**0 errors · 0 warnings**',
         '',
