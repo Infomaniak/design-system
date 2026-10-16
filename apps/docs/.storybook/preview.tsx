@@ -324,6 +324,7 @@ const preview: Preview = {
           ['Getting Started', '*'],
           'Typography',
           ['*'],
+          'AI & LLMs',
           'Components',
           ['Getting Started', '*', 'CHANGELOG'],
           '*',
