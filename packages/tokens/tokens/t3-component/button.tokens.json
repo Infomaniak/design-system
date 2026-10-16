@@ -1,5 +1,11 @@
 {
   "button": {
+    "size": {
+      "$value": "{scale.40}",
+      "$extensions": {
+        "scopes": []
+      }
+    },
     "padding": {
       "inline": {
         "$value": "{spacing.lg}",
