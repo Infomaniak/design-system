@@ -105,6 +105,13 @@ jobs:
           git config --global user.name "${{ vars.INFOMANIAK_BOT_USERNAME }}"
           git config --global user.email "${{ vars.INFOMANIAK_BOT_EMAIL }}"
 
+      # Java 21 is required by the Valkyrie CLI (Android icons build)
+      - name: Setup Java
+        uses: actions/setup-java@v6
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
       - name: Install dependencies
         run: yarn install --immutable
 
