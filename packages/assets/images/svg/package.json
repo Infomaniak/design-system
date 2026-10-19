@@ -7,11 +7,14 @@
     "=== IMPORT ===": "",
     "import": "node --no-warnings=ExperimentalWarning scripts/scripts/import-svgs/import-svgs.script.ts",
     "=== BUILD ===": "",
-    "build": "yarn build:sf-symbols",
+    "build": "yarn build:sf-symbols && yarn build:android-icons",
     "build:sf-symbols": "node --no-warnings=ExperimentalWarning scripts/scripts/build-sf-symbols/build-sf-symbols.script.ts",
+    "build:android-icons": "node --no-warnings=ExperimentalWarning scripts/scripts/build-android-icons/build-android-icons.script.ts",
     "build:legacy-svgs": "node --no-warnings=ExperimentalWarning scripts/scripts/build-legacy-svgs/build-legacy-svgs.script.ts",
     "=== PUBLISH ===": "",
-    "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-sf-symbols/publish-sf-symbols.script.ts"
+    "publish": "yarn publish:sf-symbols && yarn publish:android-icons",
+    "publish:sf-symbols": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-sf-symbols/publish-sf-symbols.script.ts",
+    "publish:android-icons": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-android-icons/publish-android-icons.script.ts"
   },
   "devDependencies": {
     "@iconify/tools": "^5.0.14",

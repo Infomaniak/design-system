@@ -550,9 +550,6 @@
         },
         "feedback": {
           "success": {
-            "dim1": {
-              "$value": "{color.white}"
-            },
             "dim2": {
               "$value": "{color.lime.900}"
             },
@@ -561,9 +558,6 @@
             }
           },
           "warning": {
-            "dim1": {
-              "$value": "{color.white}"
-            },
             "dim2": {
               "$value": "{color.orange.900}"
             },
@@ -572,9 +566,6 @@
             }
           },
           "error": {
-            "dim1": {
-              "$value": "{color.white}"
-            },
             "dim2": {
               "$value": "{color.red.900}"
             },
@@ -583,9 +574,6 @@
             }
           },
           "information": {
-            "dim1": {
-              "$value": "{color.white}"
-            },
             "dim2": {
               "$value": "{color.blue.900}"
             },
@@ -594,9 +582,6 @@
             }
           },
           "neutral": {
-            "dim1": {
-              "$value": "{color.white}"
-            },
             "dim2": {
               "$value": "{color.gray.900}"
             },
@@ -638,23 +623,6 @@
           "$value": "{color.violet.500}"
         }
       },
-      "feedback": {
-        "success": {
-          "$value": "{color.lime.600}"
-        },
-        "warning": {
-          "$value": "{color.orange.600}"
-        },
-        "error": {
-          "$value": "{color.red.600}"
-        },
-        "information": {
-          "$value": "{color.blue.600}"
-        },
-        "neutral": {
-          "$value": "{color.gray.600}"
-        }
-      },
       "dataviz": {
         "orange": {
           "$value": "{color.orange.500}"
@@ -689,6 +657,23 @@
       },
       "dim4": {
         "$value": "{color.gray.100}"
+      },
+      "feedback": {
+        "success": {
+          "$value": "{color.lime.600}"
+        },
+        "warning": {
+          "$value": "{color.orange.600}"
+        },
+        "error": {
+          "$value": "{color.red.600}"
+        },
+        "information": {
+          "$value": "{color.blue.600}"
+        },
+        "neutral": {
+          "$value": "{color.gray.600}"
+        }
       }
     },
     "shadow": {

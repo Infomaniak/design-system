@@ -13,6 +13,7 @@ import {
 } from '../../helpers/github/api/github-ci-context.ts';
 import { githubRequest } from '../../helpers/github/api/github-request.ts';
 import { upsertComment } from '../../helpers/github/api/issue-comments.ts';
+import type { GithubPullRequestLabel } from '../../helpers/github/api/types.ts';
 import {
   GITHUB_API_MAX_PAGES,
   GITHUB_API_PAGE_SIZE,
@@ -22,6 +23,7 @@ import { Logger } from '../../helpers/log/logger.ts';
 import {
   createStorybookPrCommentMessage,
   evaluateStorybookPrBuild,
+  hasStorybookPreviewLabel,
   resolveStorybookPrBuildOutcome,
   STORYBOOK_PR_COMMENT_MARKER,
   type StorybookPrBuildReason,
@@ -47,7 +49,12 @@ function getMode(): StorybookPrScriptMode {
 }
 
 function parseReason(value: string | undefined): StorybookPrBuildReason {
-  if (value === 'draft-pr' || value === 'no-relevant-change' || value === 'relevant-change') {
+  if (
+    value === 'draft-pr' ||
+    value === 'no-relevant-change' ||
+    value === 'preview-label' ||
+    value === 'relevant-change'
+  ) {
     return value;
   }
 
@@ -124,6 +131,11 @@ async function runPrepareMode(): Promise<void> {
 
   const decision = evaluateStorybookPrBuild({
     changedFiles,
+    hasPreviewLabel: hasStorybookPreviewLabel(
+      payload.pull_request.labels?.map((label: GithubPullRequestLabel): string => {
+        return label.name;
+      }),
+    ),
     isDraft: payload.pull_request.draft,
   });
 
