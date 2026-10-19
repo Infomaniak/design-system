@@ -38,7 +38,7 @@
     },
     "background": {
       "color": {
-        "$value": "{color.background.feedback.neutral.dim1}",
+        "$value": "{color.background.brand}",
         "$extensions": {
           "scopes": []
         }
@@ -46,7 +46,7 @@
     },
     "content": {
       "color": {
-        "$value": "{color.content.on.feedback.neutral.dim1}",
+        "$value": "{color.content.on.brand}",
         "$extensions": {
           "scopes": []
         }

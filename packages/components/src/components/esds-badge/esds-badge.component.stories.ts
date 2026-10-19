@@ -30,7 +30,7 @@ const meta = {
 
 export default meta;
 
-const BADGE_TYPES = ['neutral', 'primary', 'destructive'] as const;
+const BADGE_TYPES = ['primary', 'destructive', 'neutral'] as const;
 
 interface ExtraControls {
   badgeType: (typeof BADGE_TYPES)[number];
@@ -38,7 +38,7 @@ interface ExtraControls {
 
 const extraControls: Record<string, StoryPropertyConfigLike> = {
   badgeType: {
-    value: 'neutral',
+    value: 'primary',
     type: 'select',
     options: BADGE_TYPES,
   },

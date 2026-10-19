@@ -24,9 +24,9 @@ Represents a badge. If no content is provided, the badge will be compacted as a 
 
 List of all available button types:
 
-- `neutral` (default): neutral style
-- `primary`: primary style
+- `primary` (default): primary style
 - `destructive`: destructive style
+- `neutral`: neutral style
 
 ##### Import
 
