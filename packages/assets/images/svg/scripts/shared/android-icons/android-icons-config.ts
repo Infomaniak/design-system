@@ -21,11 +21,11 @@ export interface AndroidIconSize {
 
 /** T-shirt sizes generated as nested icon packs, mirroring the `icon.size.*` tokens. */
 export const ANDROID_ICON_SIZES: readonly AndroidIconSize[] = [
-  { name: 'XSmall', size: 16 },
+  { name: 'ExtraSmall', size: 16 },
   { name: 'Small', size: 20 },
   { name: 'Medium', size: 24 },
   { name: 'Large', size: 32 },
-  { name: 'XLarge', size: 40 },
+  { name: 'ExtraLarge', size: 40 },
 ];
 
 /** Size of the `viewBox` of the source icons, in which the stroke width is expressed. */

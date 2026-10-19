@@ -65,19 +65,25 @@ describe('generateAndroidIcons', () => {
         valkyrieCliInstallDirectory: join(tempDir, 'cache'),
         logger,
       }),
-    ).toEqual(['Large.Check', 'Medium.Check', 'Small.Check', 'XLarge.Check', 'XSmall.Check']);
+    ).toEqual([
+      'ExtraLarge.Check',
+      'ExtraSmall.Check',
+      'Large.Check',
+      'Medium.Check',
+      'Small.Check',
+    ]);
 
     await expect(stat(join(outputDirectory, 'stale.txt'))).rejects.toThrow();
     expect((await readdir(join(outputDirectory, 'svgs'))).sort()).toEqual([
+      'extralarge',
+      'extrasmall',
       'large',
       'medium',
       'small',
-      'xlarge',
-      'xsmall',
     ]);
-    expect(await readFile(join(outputDirectory, 'svgs', 'xsmall', 'check.svg'), 'utf8')).toContain(
-      'stroke-width="2.25"',
-    );
+    expect(
+      await readFile(join(outputDirectory, 'svgs', 'extrasmall', 'check.svg'), 'utf8'),
+    ).toContain('stroke-width="2.25"');
     expect(installValkyrieCliMock).toHaveBeenCalledExactlyOnceWith({
       installDirectory: join(tempDir, 'cache'),
       logger,
