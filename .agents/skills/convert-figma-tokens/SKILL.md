@@ -40,7 +40,6 @@ Give the user a concise report: counts of added / modified / removed token files
 ## 5. Ask for validation
 
 Ask the user a strict yes/no question: "Do you validate these token changes?" Do not commit, push, or open a PR on an ambiguous answer.
-generate-changeset
 
 ## 6. If YES — generate the changeset
 
@@ -56,7 +55,22 @@ Show the generated changeset to the user and iterate on it — semver bump, affe
 - Push with `git push -u origin <branch>`.
 - Open the PR against `develop` with `gh pr create --base develop`, title = commit message, body = the summary from step 4. Do NOT squash or amend history.
 
-## 8. If NO — rollback
+## 8. If NO — resolve or rollback
+
+First clarify whether the objection is scoped (specific tokens/files) or global (the whole export is bad).
+
+### 8a. Scoped objection — resolve like a merge
+
+Treat the conversion output as a merge: keep it, and resolve conflicts per-file.
+
+1. Restore ONLY the disputed files: `git restore -- packages/tokens/tokens/<file>`.
+2. Re-run `yarn build:tokens` from `packages/tokens` so `dist/` stays coherent with the resolved tokens.
+3. Re-present the reduced diff and re-ask validation (step 5).
+4. Remind the user to fix the source in Figma (e.g. re-add the missing token) so future exports stop dropping it.
+
+Typical case: a token deliberately added in the repo (merged PR, changeset — e.g. `scale.50`, PR #432) but absent from the Figma export. Keep the repo version, convert everything else.
+
+### 8b. Global objection — full rollback
 
 Restore the regenerated tokens and discard leftovers, scoped strictly to the tokens directory (never a global `git clean`):
 

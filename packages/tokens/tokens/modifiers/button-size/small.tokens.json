@@ -1,5 +1,8 @@
 {
   "button": {
+    "size": {
+      "$value": "{scale.32}"
+    },
     "padding": {
       "inline": {
         "$value": "{spacing.md}"
