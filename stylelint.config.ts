@@ -17,7 +17,7 @@ export default {
     'selector-no-deprecated': true, // prevent deprecated selectors
     'selector-no-invalid': true, // prevent invalid selectors
     // scss
-    'scss/at-rule-no-unknown': [true, { ignoreAtRules: ['reference'] }], // for tailwind support
+    'scss/at-rule-no-unknown': [true, { ignoreAtRules: ['reference', 'utility'] }], // for tailwind support
     'scss/operator-no-newline-after': null, // for prettier compatibility
   },
   ignoreFiles: [

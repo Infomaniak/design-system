@@ -3,8 +3,6 @@
 :root {
   /* TODO: migrate into tokens when transitions will be managed */
   --esds-button-transition: 150ms linear 0s;
-  /* TODO: await `scale.50` token */
-  --esds-button-size: 50px;
 }
 
 [esds-button] {
