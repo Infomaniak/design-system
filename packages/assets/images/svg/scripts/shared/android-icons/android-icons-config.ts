@@ -2,7 +2,7 @@
 export const ANDROID_ICONS_PACKAGE_NAME = 'com.infomaniak.designsystem.icons';
 export const ANDROID_ICON_PACK_NAME = 'EsdsIcons';
 /** Top-level `Dp` declared next to `EsdsIcons`, shared by every generated preview. */
-export const ANDROID_PREVIEW_ICON_SIZE_NAME = 'previewIconSize';
+export const ANDROID_PREVIEW_ICON_SIZE_NAME = 'PreviewIconSize';
 
 export const ANDROID_IMAGE_VECTORS_DIRECTORY_NAME = 'imagevector';
 export const ANDROID_IMAGE_VECTORS_PACKAGE_NAME = `${ANDROID_ICONS_PACKAGE_NAME}.${ANDROID_IMAGE_VECTORS_DIRECTORY_NAME}`;
