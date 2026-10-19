@@ -2,7 +2,7 @@ name: Build and Deploy Storybook on PR
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
+    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft, labeled, unlabeled]
   workflow_dispatch:
 
 concurrency:
@@ -16,6 +16,14 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+    # Same pattern as the 'dev' label in publish.yml: labeled/unlabeled events
+    # only run when the pull request carries the 'preview' label, so adding or
+    # removing any other label does not trigger a build. Regular PR events
+    # (opened, synchronize, ...) keep their current behavior; while 'preview'
+    # is present, the build decision is forced by the ci:storybook-pr script.
+    if: >-
+      github.event.action != 'labeled' && github.event.action != 'unlabeled' ||
+      contains(github.event.pull_request.labels.*.name, 'preview')
     outputs:
       should_build: ${{ steps.storybook.outputs.should_build }}
       public_url: ${{ steps.storybook.outputs.public_url }}
