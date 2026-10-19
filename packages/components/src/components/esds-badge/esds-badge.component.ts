@@ -18,10 +18,12 @@ export class EsdsBadgeComponent extends SignalWatcher(LitElement) {
 
   static override styles = unsafeCSS(style);
 
-  constructor() {
-    super();
+  override connectedCallback(): void {
+    super.connectedCallback();
 
-    this.setAttribute('role', 'status');
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'status');
+    }
   }
 
   override render() {
