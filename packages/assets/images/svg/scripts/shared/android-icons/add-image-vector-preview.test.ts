@@ -28,13 +28,13 @@ private fun Preview() {
         Image(
             imageVector = EsdsIcons.Medium.Check,
             contentDescription = null,
-            modifier = Modifier.size(previewIconSize),
+            modifier = Modifier.size(PreviewIconSize),
         )
     }
 }`;
 
 describe('buildImageVectorPreviewFunction', () => {
-  test('renders the nested pack icon in a white box sized with previewIconSize', () => {
+  test('renders the nested pack icon in a white box sized with PreviewIconSize', () => {
     expect(buildImageVectorPreviewFunction('Check', 'Medium')).toBe(EXPECTED_PREVIEW_FUNCTION);
   });
 });
@@ -94,7 +94,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.infomaniak.designsystem.icons.EsdsIcons
-import com.infomaniak.designsystem.icons.previewIconSize
+import com.infomaniak.designsystem.icons.PreviewIconSize
 
 public val EsdsIcons.Medium.Check: ImageVector
     get() = TODO()
