@@ -145,6 +145,15 @@
         "scopes": ["WIDTH_HEIGHT"]
       }
     },
+    "50": {
+      "$value": {
+        "value": 50,
+        "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["WIDTH_HEIGHT"]
+      }
+    },
     "56": {
       "$value": {
         "value": 56,
