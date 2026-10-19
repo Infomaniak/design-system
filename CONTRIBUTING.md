@@ -169,6 +169,7 @@ Or use the `generate-changeset` agent skill (`.agents/skills/generate-changeset/
   - Trigger: PR events (`opened`, `synchronize`, `reopened`, `ready_for_review`, `converted_to_draft`, `labeled`, `unlabeled`) and manual dispatch.
   - `labeled`/`unlabeled` events only run when the pull request carries the `preview` label (same pattern as the `dev` label in `publish.yml`).
   - While the `preview` label is present, the build decision is forced: Storybook builds even for drafts or PRs without Storybook-related changes.
+  - Visual regression tests are skipped while the `preview` label is present.
   - Uses `scripts/ci/storybook-pr/storybook-pr.script.ts` to:
     - detect relevant changed files (docs/packages/build-related)
     - decide build vs skip for draft/non-relevant updates

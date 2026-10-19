@@ -41,7 +41,12 @@ jobs:
   visual-regression:
     name: Visual Regression
     needs: [build-storybook-pr]
-    if: github.event_name == 'pull_request' && needs.build-storybook-pr.outputs.should_build == 'true'
+    # Skip while the 'preview' label is present: it forces an on-demand build
+    # that must not trigger a visual regression diff against develop.
+    if: >-
+      github.event_name == 'pull_request' &&
+      needs.build-storybook-pr.outputs.should_build == 'true' &&
+      !contains(github.event.pull_request.labels.*.name, 'preview')
     runs-on: ubuntu-latest
     permissions:
       contents: read
