@@ -46,14 +46,14 @@ List of all available button types:
 To import all button types:
 
 ```css
-@import '@infomaniak-design-system/tokens/css/modifiers/button-types/all.attr.css';
+@import '@infomaniak-design-system/tokens/css/modifiers/button-type/all.attr.css';
 ```
 
 Or individually:
 
 ```css
-@import '@infomaniak-design-system/tokens/css/modifiers/button-types/[type].attr.css';
-/* example: @import '@infomaniak-design-system/tokens/css/modifiers/button-types/primary.attr.css'; */
+@import '@infomaniak-design-system/tokens/css/modifiers/button-type/[type].attr.css';
+/* example: @import '@infomaniak-design-system/tokens/css/modifiers/button-type/primary.attr.css'; */
 ```
 
 ##### Apply
@@ -82,14 +82,14 @@ List of all available button sizes:
 To import all button sizes:
 
 ```css
-@import '@infomaniak-design-system/tokens/css/modifiers/button-sizes/all.attr.css';
+@import '@infomaniak-design-system/tokens/css/modifiers/button-size/all.attr.css';
 ```
 
 Or individually:
 
 ```css
-@import '@infomaniak-design-system/tokens/css/modifiers/button-sizes/[size].attr.css';
-/* example: @import '@infomaniak-design-system/tokens/css/modifiers/button-sizes/small.attr.css'; */
+@import '@infomaniak-design-system/tokens/css/modifiers/button-size/[size].attr.css';
+/* example: @import '@infomaniak-design-system/tokens/css/modifiers/button-size/small.attr.css'; */
 ```
 
 ##### Apply

@@ -33,14 +33,14 @@ List of all available button types:
 To import all badge types:
 
 ```css
-@import '@infomaniak-design-system/tokens/css/modifiers/badge-types/all.attr.css';
+@import '@infomaniak-design-system/tokens/css/modifiers/badge-type/all.attr.css';
 ```
 
 Or individually:
 
 ```css
-@import '@infomaniak-design-system/tokens/css/modifiers/badge-types/[type].attr.css';
-/* example: @import '@infomaniak-design-system/tokens/css/modifiers/badge-types/primary.attr.css'; */
+@import '@infomaniak-design-system/tokens/css/modifiers/badge-type/[type].attr.css';
+/* example: @import '@infomaniak-design-system/tokens/css/modifiers/badge-type/primary.attr.css'; */
 ```
 
 ##### Apply
