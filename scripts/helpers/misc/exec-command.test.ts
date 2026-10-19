@@ -18,6 +18,15 @@ describe('execCommand', () => {
     expect(output).toBe('x'.repeat(size));
   });
 
+  it('should not corrupt multi-byte characters split across chunks', async () => {
+    const count: number = 1_000_000;
+    const output: string = await execCommand(logger, 'node', [
+      '-e',
+      `process.stdout.write('é'.repeat(${count}))`,
+    ]);
+    expect(output).toBe('é'.repeat(count));
+  });
+
   it('should reject with stderr on failure', async () => {
     const promise: Promise<string> = execCommand(logger, 'node', [
       '-e',

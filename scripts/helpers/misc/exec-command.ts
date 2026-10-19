@@ -59,9 +59,9 @@ export function execCommand(
           return Promise.resolve('');
         }
 
-        // chunks are already split arbitrarily by the OS pipe: they must be concatenated as is
+        // chunks are split arbitrarily by the OS pipe (even inside a multi-byte character): decode only once concatenated
         return stream.toArray().then((chunks: readonly ExplicitAny[]): string => {
-          return chunks.map((chunk: ExplicitAny): string => chunk.toString()).join('');
+          return Buffer.concat(chunks).toString();
         });
       };
 
