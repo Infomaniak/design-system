@@ -1,0 +1,9 @@
+{
+  "badge": {
+    "background": {
+      "color": {
+        "$value": "{color.background.feedback.error.dim1}"
+      }
+    }
+  }
+}

@@ -23,6 +23,10 @@ EsdsButtonAttr.define();
 </a>
 ```
 
+## Description
+
+Adding the custom attribute `esds-button` to a `<button>` or `<a>` element, applies the `esds-button` styles to this element.
+
 ### Styles
 
 #### Types
@@ -112,9 +116,5 @@ Both `data-esds-button-type` and `data-esds-button-size` can be combined:
   Button
 </button>
 ```
-
-## Description
-
-Adding the custom attribute `esds-button` to a `<button>` or `<a>` element, applies the `esds-button` styles to this element.
 
 ## Demo

@@ -1,0 +1,39 @@
+:host {
+  display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--esds-badge-size-content);
+  height: var(--esds-badge-size-content);
+  border-radius: var(--esds-badge-border-radius);
+  padding-inline: var(--esds-badge-padding-inline);
+  padding-block: var(--esds-badge-padding-block);
+  font: var(--esds-badge-content-font);
+  color: var(--esds-badge-content-color);
+  background-color: var(--esds-badge-background-color);
+
+  & slot {
+    display: contents;
+  }
+}
+
+:host(:empty) {
+  width: var(--esds-badge-size-dot);
+  height: var(--esds-badge-size-dot);
+  min-width: 0;
+  padding: 0;
+}
+
+/*
+/*
+TODO: within buttons
+
+button ::slotted(esds-badge) {
+  position: absolute;
+  inset-block-start: 0px;
+  inset-inline-end: 0px;
+  translate: 50% -50%;
+  pointer-events: none;
+}
+
+*/
