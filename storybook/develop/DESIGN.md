@@ -514,6 +514,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | body.md.font.emphasized | 500 1rem/24px Infomaniak Sans | 500 1rem/24px Infomaniak Sans | var(--esds-body-md-font-emphasized) | Medium (default) body text style. |
 | body.lg.font.base | 400 1.125rem/26px Infomaniak Sans | 400 1.125rem/26px Infomaniak Sans | var(--esds-body-lg-font-base) | Large body text style. |
 | body.lg.font.emphasized | 500 1.125rem/26px Infomaniak Sans | 500 1.125rem/26px Infomaniak Sans | var(--esds-body-lg-font-emphasized) | Large body text style. |
+| button.size | 40px | 40px | var(--esds-button-size) | N/A |
 | button.padding.inline | 12px | 12px | var(--esds-button-padding-inline) | N/A |
 | button.padding.block | 8px | 8px | var(--esds-button-padding-block) | N/A |
 | button.gap.row | 6px | 6px | var(--esds-button-gap-row) | N/A |
