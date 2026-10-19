@@ -18,11 +18,15 @@ const STORYBOOK_RELEVANT_FILES: ReadonlySet<string> = new Set<string>([
 
 export const STORYBOOK_PR_COMMENT_MARKER: string = '<!-- storybook-build-status -->';
 
-export type StorybookPrBuildReason = 'draft-pr' | 'no-relevant-change' | 'relevant-change';
+export const STORYBOOK_PREVIEW_LABEL: string = 'preview';
+
+export type StorybookPrBuildReason =
+  'draft-pr' | 'no-relevant-change' | 'preview-label' | 'relevant-change';
 
 export interface EvaluateStorybookPrBuildInput {
   readonly isDraft: boolean;
   readonly changedFiles: readonly string[];
+  readonly hasPreviewLabel: boolean;
 }
 
 export interface StorybookPrBuildDecision {
@@ -67,11 +71,27 @@ export function isStorybookRelevantPath(filePath: string): boolean {
   });
 }
 
+export function hasStorybookPreviewLabel(labels: readonly string[] | undefined): boolean {
+  return labels?.includes(STORYBOOK_PREVIEW_LABEL) ?? false;
+}
+
 export function evaluateStorybookPrBuild({
   changedFiles,
+  hasPreviewLabel,
   isDraft,
 }: EvaluateStorybookPrBuildInput): StorybookPrBuildDecision {
   const relevantFiles: readonly string[] = changedFiles.filter(isStorybookRelevantPath);
+
+  // An explicit 'preview' label opts the pull request into Storybook builds,
+  // bypassing both the draft and the relevant-files decision.
+  if (hasPreviewLabel) {
+    return {
+      shouldBuild: true,
+      reason: 'preview-label',
+      changedFilesCount: changedFiles.length,
+      relevantFiles,
+    };
+  }
 
   if (isDraft) {
     return {
@@ -126,6 +146,10 @@ function getReasonLabel(reason: StorybookPrBuildReason): string {
 
   if (reason === 'no-relevant-change') {
     return 'no Storybook-related file changed';
+  }
+
+  if (reason === 'preview-label') {
+    return `'${STORYBOOK_PREVIEW_LABEL}' label present`;
   }
 
   return 'relevant files changed';

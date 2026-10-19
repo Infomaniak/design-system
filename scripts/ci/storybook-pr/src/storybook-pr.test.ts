@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   createStorybookPrCommentMessage,
   evaluateStorybookPrBuild,
+  hasStorybookPreviewLabel,
   isStorybookRelevantPath,
   resolveStorybookPrBuildOutcome,
 } from './storybook-pr.ts';
@@ -34,11 +35,26 @@ describe('isStorybookRelevantPath', () => {
   });
 });
 
+describe('hasStorybookPreviewLabel', () => {
+  it('returns true when labels contain the preview label', () => {
+    expect(hasStorybookPreviewLabel(['bug', 'preview'])).toBe(true);
+  });
+
+  it('returns false when labels do not contain the preview label', () => {
+    expect(hasStorybookPreviewLabel(['bug', 'dev'])).toBe(false);
+  });
+
+  it('returns false when labels are undefined', () => {
+    expect(hasStorybookPreviewLabel(undefined)).toBe(false);
+  });
+});
+
 describe('evaluateStorybookPrBuild', () => {
   it('skips when pull request is draft', () => {
     expect(
       evaluateStorybookPrBuild({
         changedFiles: ['apps/docs/src/main.tsx'],
+        hasPreviewLabel: false,
         isDraft: true,
       }),
     ).toEqual({
@@ -53,6 +69,7 @@ describe('evaluateStorybookPrBuild', () => {
     expect(
       evaluateStorybookPrBuild({
         changedFiles: ['README.md', 'docs/figma/readme.md'],
+        hasPreviewLabel: false,
         isDraft: false,
       }),
     ).toEqual({
@@ -67,12 +84,43 @@ describe('evaluateStorybookPrBuild', () => {
     expect(
       evaluateStorybookPrBuild({
         changedFiles: ['README.md', 'apps/docs/src/main.tsx'],
+        hasPreviewLabel: false,
         isDraft: false,
       }),
     ).toEqual({
       changedFilesCount: 2,
       reason: 'relevant-change',
       relevantFiles: ['apps/docs/src/main.tsx'],
+      shouldBuild: true,
+    });
+  });
+
+  it('builds when preview label is present even if pull request is draft', () => {
+    expect(
+      evaluateStorybookPrBuild({
+        changedFiles: ['apps/docs/src/main.tsx'],
+        hasPreviewLabel: true,
+        isDraft: true,
+      }),
+    ).toEqual({
+      changedFilesCount: 1,
+      reason: 'preview-label',
+      relevantFiles: ['apps/docs/src/main.tsx'],
+      shouldBuild: true,
+    });
+  });
+
+  it('builds when preview label is present even if no relevant file changed', () => {
+    expect(
+      evaluateStorybookPrBuild({
+        changedFiles: ['README.md', 'docs/figma/readme.md'],
+        hasPreviewLabel: true,
+        isDraft: false,
+      }),
+    ).toEqual({
+      changedFilesCount: 2,
+      reason: 'preview-label',
+      relevantFiles: [],
       shouldBuild: true,
     });
   });
@@ -163,6 +211,20 @@ describe('createStorybookPrCommentMessage', () => {
 
     expect(message).toContain('⏭️ Storybook build skipped');
     expect(message).toContain('pull request is still in draft');
+  });
+
+  it('builds success message for preview label decision', () => {
+    const message = createStorybookPrCommentMessage({
+      changedFilesCount: 1,
+      deploymentUrl: 'https://infomaniak.github.io/design-system/storybook/mr/42/',
+      outcome: 'success',
+      reason: 'preview-label',
+      relevantFiles: [],
+      runUrl: 'https://github.com/owner/repo/actions/runs/1234',
+    });
+
+    expect(message).toContain('✅ Storybook build successful');
+    expect(message).toContain("'preview' label present");
   });
 
   it('builds failure message', () => {
