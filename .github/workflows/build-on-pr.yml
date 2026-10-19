@@ -41,12 +41,14 @@ jobs:
   visual-regression:
     name: Visual Regression
     needs: [build-storybook-pr]
-    # Skip while the 'preview' label is present: it forces an on-demand build
-    # that must not trigger a visual regression diff against develop.
+    # Skip for draft PRs carrying the 'preview' label: it forces an on-demand
+    # build that must not trigger a visual regression diff against develop.
+    # Once the pull request is ready for review, VRT runs normally again.
     if: >-
       github.event_name == 'pull_request' &&
       needs.build-storybook-pr.outputs.should_build == 'true' &&
-      !contains(github.event.pull_request.labels.*.name, 'preview')
+      (github.event.pull_request.draft == false ||
+      !contains(github.event.pull_request.labels.*.name, 'preview'))
     runs-on: ubuntu-latest
     permissions:
       contents: read
