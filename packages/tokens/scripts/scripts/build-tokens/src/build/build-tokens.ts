@@ -121,16 +121,16 @@ export function buildTokens({
         outputDirectory,
         logger,
       });
-
-      // DESIGN.md
-      await buildDesignMdTokens({
-        baseCollection,
-        modifiers,
-        outputDirectory,
-        logger,
-      });
     }
     /* eslint-enable */ // TODO remove
+
+    // DESIGN.md
+    await buildDesignMdTokens({
+      baseCollection,
+      modifiers,
+      outputDirectory,
+      logger,
+    });
 
     // MARKDOWN
     await buildMarkdownTokens({
