@@ -1,6 +1,18 @@
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { DocsContext, type DocsContextProps } from '@storybook/addon-docs/blocks';
+import { fireEvent, render, screen } from '@testing-library/react';
+import type { ReactElement, MouseEvent as ReactMouseEvent } from 'react';
+import { NAVIGATE_URL } from 'storybook/internal/core-events';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import DocsLink, { isExternalHref } from './docs-link.tsx';
+
+const DOCS_ENTRY_ID = 'design-tokens-getting-started--docs';
+
+const renderWithDocsChannel = (ui: ReactElement) => {
+  const emit = vi.fn();
+  const context = { channel: { emit } } as unknown as DocsContextProps;
+  render(<DocsContext.Provider value={context}>{ui}</DocsContext.Provider>);
+  return { emit };
+};
 
 describe('isExternalHref', () => {
   it('recognizes absolute http(s) URLs as external, case-insensitively', () => {
@@ -19,6 +31,10 @@ describe('isExternalHref', () => {
 });
 
 describe('DocsLink', () => {
+  afterEach(() => {
+    window.history.replaceState(null, '', '/');
+  });
+
   it('opens external links in a new tab and appends the external icon', () => {
     render(
       <DocsLink
@@ -38,28 +54,6 @@ describe('DocsLink', () => {
     const icon = link.querySelector('esds-icon')!;
     expect(icon).toHaveAttribute('name', 'esds:square-arrow-out-up-right');
     expect(icon).toHaveAttribute('inline');
-  });
-
-  it.each([
-    ['relative path', '/?path=/docs/designers-guide-getting-started--docs'],
-    ['anchor', '#contribution'],
-    ['mailto', 'mailto:design@infomaniak.com'],
-  ])('renders %s links as plain anchors', (_label, href) => {
-    render(<DocsLink href={href}>Guide</DocsLink>);
-
-    const link = screen.getByText('Guide').closest('a')!;
-    expect(link).toHaveAttribute('href', href);
-    expect(link).not.toHaveAttribute('target');
-    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
-    expect(link.querySelector('esds-icon')).toBeNull();
-  });
-
-  it('renders an anchor without href when none is provided', () => {
-    render(<DocsLink>No link</DocsLink>);
-
-    const link = screen.getByText('No link').closest('a')!;
-    expect(link).not.toHaveAttribute('href');
-    expect(link.querySelector('esds-icon')).toBeNull();
   });
 
   it('always opens external links in a new tab, ignoring a caller-provided target', () => {
@@ -107,10 +101,46 @@ describe('DocsLink', () => {
     );
   });
 
+  it.each([
+    ['an in-page anchor (no docs entry in the iframe URL)', '#contribution', '#contribution'],
+    ['a mailto link', 'mailto:design@infomaniak.com', 'mailto:design@infomaniak.com'],
+    [
+      'a bare ?path query',
+      '?path=/docs/designers-guide-getting-started--docs',
+      './?path=/docs/designers-guide-getting-started--docs',
+    ],
+    [
+      'a root-relative ?path query',
+      '/?path=/docs/designers-guide-getting-started--docs',
+      './?path=/docs/designers-guide-getting-started--docs',
+    ],
+    [
+      'an absolute /docs path',
+      '/docs/designers-guide-getting-started--docs',
+      './?path=/docs/designers-guide-getting-started--docs',
+    ],
+  ])('renders %s as an internal anchor resolving to %s', (_label, href, expectedHref) => {
+    render(<DocsLink href={href}>Guide</DocsLink>);
+
+    const link = screen.getByText('Guide').closest('a')!;
+    expect(link).toHaveAttribute('href', expectedHref);
+    expect(link).not.toHaveAttribute('target');
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(link.querySelector('esds-icon')).toBeNull();
+  });
+
+  it('renders an anchor without href when none is provided', () => {
+    render(<DocsLink>No link</DocsLink>);
+
+    const link = screen.getByText('No link').closest('a')!;
+    expect(link).not.toHaveAttribute('href');
+    expect(link.querySelector('esds-icon')).toBeNull();
+  });
+
   it('merges caller-provided rel tokens with the security tokens on internal links', () => {
     render(
       <DocsLink
-        href="/?path=/docs/x--docs"
+        href="./?path=/docs/x--docs"
         rel="nofollow"
       >
         Guide
@@ -120,5 +150,79 @@ describe('DocsLink', () => {
     const link = screen.getByText('Guide').closest('a')!;
     expect(link).toHaveAttribute('rel', 'nofollow noopener noreferrer');
     expect(link).not.toHaveAttribute('target');
+  });
+
+  describe('internal navigation through the Storybook channel', () => {
+    it('routes in-page anchors to the app URL of the current docs entry', () => {
+      window.history.replaceState(null, '', `/iframe.html?viewMode=docs&id=${DOCS_ENTRY_ID}`);
+      const { emit } = renderWithDocsChannel(<DocsLink href="#install-from-npm">Install</DocsLink>);
+
+      const link = screen.getByText('Install').closest('a')!;
+      expect(link).toHaveAttribute('href', `./?path=/docs/${DOCS_ENTRY_ID}#install-from-npm`);
+
+      fireEvent.click(link);
+      expect(emit).toHaveBeenCalledWith(NAVIGATE_URL, '#install-from-npm');
+    });
+
+    it('keeps the raw anchor when the iframe URL has no docs entry', () => {
+      const { emit } = renderWithDocsChannel(
+        <DocsLink href="#contribution">Contribution</DocsLink>,
+      );
+
+      const link = screen.getByText('Contribution').closest('a')!;
+      expect(link).toHaveAttribute('href', '#contribution');
+
+      fireEvent.click(link);
+      expect(emit).not.toHaveBeenCalled();
+    });
+
+    it.each([
+      ['an absolute /docs path', '/docs/components-icon--docs'],
+      ['a bare ?path query', '?path=/docs/components-icon--docs'],
+      ['a root-relative ?path query', '/?path=/docs/components-icon--docs'],
+      ['the canonical ./?path form', './?path=/docs/components-icon--docs'],
+    ])('routes %s through NAVIGATE_URL', (_label, href) => {
+      const { emit } = renderWithDocsChannel(<DocsLink href={href}>Icon</DocsLink>);
+
+      const link = screen.getByText('Icon').closest('a')!;
+      expect(link).toHaveAttribute('href', './?path=/docs/components-icon--docs');
+
+      fireEvent.click(link);
+      expect(emit).toHaveBeenCalledWith(NAVIGATE_URL, './?path=/docs/components-icon--docs');
+    });
+
+    it('lets a caller-provided onClick prevent the internal routing', () => {
+      const onClick = vi.fn((event: ReactMouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault();
+      });
+      const { emit } = renderWithDocsChannel(
+        <DocsLink
+          href="./?path=/docs/x--docs"
+          onClick={onClick}
+        >
+          Guide
+        </DocsLink>,
+      );
+
+      fireEvent.click(screen.getByText('Guide'));
+      expect(onClick).toHaveBeenCalled();
+      expect(emit).not.toHaveBeenCalled();
+    });
+
+    it('forwards the caller-provided onClick before routing internally', () => {
+      const onClick = vi.fn();
+      const { emit } = renderWithDocsChannel(
+        <DocsLink
+          href="./?path=/docs/x--docs"
+          onClick={onClick}
+        >
+          Guide
+        </DocsLink>,
+      );
+
+      fireEvent.click(screen.getByText('Guide'));
+      expect(onClick).toHaveBeenCalled();
+      expect(emit).toHaveBeenCalledWith(NAVIGATE_URL, './?path=/docs/x--docs');
+    });
   });
 });
