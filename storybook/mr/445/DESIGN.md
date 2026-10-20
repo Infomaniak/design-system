@@ -507,7 +507,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | Token Name | Light Value | Dark Value | CSS Variable | Description |
 |---|---|---|---|---|
 | badge.size.content | 20px | 20px | var(--esds-badge-size-content) | N/A |
-| badge.size.dot | 6px | 6px | var(--esds-badge-size-dot) | N/A |
+| badge.size.dot | 4px | 4px | var(--esds-badge-size-dot) | N/A |
 | badge.padding.inline | 2px | 2px | var(--esds-badge-padding-inline) | N/A |
 | badge.padding.block | 0px | 0px | var(--esds-badge-padding-block) | N/A |
 | badge.border.radius | 1000px | 1000px | var(--esds-badge-border-radius) | N/A |
