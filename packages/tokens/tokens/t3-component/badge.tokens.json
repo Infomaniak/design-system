@@ -8,7 +8,7 @@
         }
       },
       "dot": {
-        "$value": "{scale.6}",
+        "$value": "{scale.4}",
         "$extensions": {
           "scopes": []
         }

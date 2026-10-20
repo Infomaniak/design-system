@@ -37,15 +37,6 @@
         "scopes": ["WIDTH_HEIGHT"]
       }
     },
-    "6": {
-      "$value": {
-        "value": 6,
-        "unit": "px"
-      },
-      "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
-      }
-    },
     "8": {
       "$value": {
         "value": 8,
