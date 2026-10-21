@@ -234,7 +234,12 @@ Here's an example of how to apply raw styles:
       <Source
         language="html"
         code={
-          '<span style="text-decoration: underline dashed; text-underline-offset: var(--esds-spacing-2xs)">underlined</span>'
+          `
+            <span
+              style="text-decoration: underline dashed;
+              text-underline-offset: var(--esds-spacing-2xs)"
+            >underlined dashed</span>
+          `
         }
       />,
       <p style={{ font: 'var(--esds-body-md-font)', margin: 0 }}>
