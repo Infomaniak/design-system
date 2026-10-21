@@ -31,10 +31,11 @@ export default defineConfig({
       // include: ['src/**/*.ts'],
       include: ['./**/*.ts'],
       exclude: [
+        '**/*.d.ts',
         'src/**/*.{test,bench}.ts',
         'src/**/*.skip-test*.ts',
         'src/**/*.skip-test*/**/*.ts',
-        'dist/**/*',
+        '**/dist/**',
         'node_modules/**/*',
         '**/*.e2e.ts',
         '**/*.e2e-spec.ts',
