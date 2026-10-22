@@ -1,4 +1,5 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta, Source } from '@storybook/addon-docs/blocks';
+import DocsLink from '../../components/docs-link.tsx';
 
 <Meta title="Typography" />
 
@@ -95,7 +96,7 @@ font: var(--esds-typography-md-base);
 
 Headings are used to break up content into sections to provide a clear hierarchy of information.
 
-#### Custom attribute
+#### Custom attribute _(recommended)_
 
 The [esds-heading](./?path=/docs/components-heading--docs) attribute **must** be used to apply `heading` text styles to elements:
 
@@ -127,7 +128,7 @@ Here's an example of how to apply raw styles:
 
 Body texts are used as blocks or lines of text.
 
-#### Custom attribute
+#### Custom attribute _(recommended)_
 
 The [esds-body](./?path=/docs/components-body--docs) attribute **must** be used to apply `body` text styles to elements:
 
@@ -163,3 +164,124 @@ Here's an example of how to apply raw styles:
   font style, size, and spacing that will be used throughout your content.
 </p>
 ```
+
+### Text styles
+
+<Table
+  headers={['Text style', 'Code', 'Result']}
+  rows={[
+    [
+      <DocsLink href={'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/sup'}>
+        Superscript
+      </DocsLink>,
+      <Source
+        language="html"
+        code={'Infomaniak<sup>TM</sup>'}
+      />,
+      <p style={{ font: 'var(--esds-body-md-font)', margin: 0 }}>
+        Infomaniak<sup>TM</sup>
+      </p>,
+    ],
+    [
+      <DocsLink href={'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/sub'}>
+        Subscript
+      </DocsLink>,
+      <Source
+        language="html"
+        code={'H<sub>2</sub>O'}
+      />,
+      <p style={{ font: 'var(--esds-body-md-font)', margin: 0 }}>
+        H<sub>2</sub>O
+      </p>,
+    ],
+    [
+      <DocsLink href={'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/em'}>
+        Italic
+      </DocsLink>,
+      <Source
+        language="html"
+        code={'<em>italic</em>'}
+      />,
+      <p style={{ font: 'var(--esds-body-md-font)', margin: 0 }}>
+        <em>italic</em>
+      </p>,
+    ],
+    [
+      <DocsLink
+        href={
+          'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-decoration'
+        }
+      >
+        Underlined
+      </DocsLink>,
+      <Source
+        language="html"
+        code={'<span style="text-decoration: underline">underlined</span>'}
+      />,
+      <p style={{ font: 'var(--esds-body-md-font)', margin: 0 }}>
+        <span style={{ textDecoration: 'underline', /* textDecorationSkipInk: 'auto' */ }}>underlined</span>
+      </p>,
+    ],
+    [
+      <DocsLink
+        href={
+          'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-decoration'
+        }
+      >
+        {/*TODO: make a component*/}
+        Underlined Dashed
+      </DocsLink>,
+      <Source
+        language="html"
+        code={
+          `
+            <span
+              style="text-decoration: underline dashed;
+              text-underline-offset: var(--esds-spacing-2xs)"
+            >underlined dashed</span>
+          `
+        }
+      />,
+      <p style={{ font: 'var(--esds-body-md-font)', margin: 0 }}>
+        <span
+          style={{
+            textDecoration: 'underline dashed',
+            textUnderlineOffset: 'var(--esds-spacing-2xs)',
+            /* textDecorationSkipInk: 'auto' */
+        }}
+        >
+          underlined dashed
+        </span>
+      </p>,
+    ],
+    [
+      <DocsLink href={'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/del'}>
+        Strike Through
+      </DocsLink>,
+      <Source
+        language="html"
+        code={'<del>deleted</del>'}
+      />,
+      <p style={{ font: 'var(--esds-body-md-font)', margin: 0 }}>
+        <del>deleted</del>
+      </p>,
+    ],
+    [
+      <DocsLink
+        href={
+          'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-transform'
+        }
+      >
+        Uppercase
+      </DocsLink>,
+      <Source
+        language="html"
+        code={'<span style="text-transform: uppercase">uppercase</span>'}
+      />,
+      <p style={{ font: 'var(--esds-body-md-font)', margin: 0 }}>
+        <span style={{ textTransform: 'uppercase' }}>uppercase</span>
+      </p>,
+    ],
+
+]}
+/>
