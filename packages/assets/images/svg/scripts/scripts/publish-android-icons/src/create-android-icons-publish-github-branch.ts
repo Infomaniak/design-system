@@ -1,4 +1,4 @@
-import { cp, rm } from 'node:fs/promises';
+import { cp, mkdir, readdir, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import type { GitChanges } from '../../../../../../../../scripts/helpers/git/git-changes.ts';
 import {
@@ -11,24 +11,31 @@ import { formatKotlinFiles } from '../../../../../../../../scripts/helpers/kotli
 import type { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
 import { UPDATE_PACKAGE_VERSIONS_FILE_CHANGES_HOOK } from '../../../../../../../../scripts/helpers/publish/update-package-versions-file/update-package-versions-file-changes-hook.ts';
 import { updatePackageVersionsFile } from '../../../../../../../../scripts/helpers/publish/update-package-versions-file/update-package-versions-file.ts';
-import { ANDROID_IMAGE_VECTORS_DESTINATION_PATH } from '../../../shared/android-icons/android-icons-config.ts';
+import {
+  ANDROID_IMAGE_VECTORS_DESTINATION_PATH,
+  ANDROID_SYMBOL_INTERFACE_NAME,
+  ANDROID_SYMBOLS_DESTINATION_PATH,
+} from '../../../shared/android-icons/android-icons-config.ts';
 
 export interface CreateAndroidIconsPublishGithubBranchOptions {
   readonly logger: Logger;
   /** Directory of the generated `<IconName>.kt` files to copy into the Android repository. */
   readonly imageVectorsDirectory: string;
+  /** Directory of the generated `<IconName>.kt` symbol files to copy into the Android repository. */
+  readonly symbolsDirectory: string;
   readonly packageName: string;
   readonly version: string;
   readonly branchName: string;
 }
 
 /**
- * Creates a new branch with the generated ImageVectors and pushes it to the remote Android
+ * Creates a new branch with the generated ImageVectors and symbols and pushes it to the remote Android
  * repository.
  */
 export function createAndroidIconsPublishGithubBranch({
   logger,
   imageVectorsDirectory,
+  symbolsDirectory,
   packageName,
   version,
   branchName,
@@ -44,8 +51,13 @@ export function createAndroidIconsPublishGithubBranch({
       // Replace the whole directory so removed icons are not kept stale on the Android side.
       await rm(destinationDirectory, { recursive: true, force: true });
 
+      const symbolsDestinationDirectory: string = join(cwd, ANDROID_SYMBOLS_DESTINATION_PATH);
+
+      await removeObsoleteSymbols(symbolsDestinationDirectory);
+
       await Promise.all([
         cp(imageVectorsDirectory, destinationDirectory, { recursive: true, force: true }),
+        cp(symbolsDirectory, symbolsDestinationDirectory, { recursive: true, force: true }),
         updatePackageVersionsFile({
           packageName,
           version,
@@ -61,4 +73,17 @@ export function createAndroidIconsPublishGithubBranch({
     logger,
     allowEmpty: 'yes-skip-push',
   });
+}
+
+/** Removes every generated symbol, keeping the hand-written `Symbol.kt` interface. */
+async function removeObsoleteSymbols(directory: string): Promise<void> {
+  await mkdir(directory, { recursive: true });
+
+  await Promise.all(
+    (await readdir(directory))
+      .filter((fileName: string): boolean => fileName !== `${ANDROID_SYMBOL_INTERFACE_NAME}.kt`)
+      .map((fileName: string): Promise<void> => {
+        return rm(join(directory, fileName), { recursive: true, force: true });
+      }),
+  );
 }

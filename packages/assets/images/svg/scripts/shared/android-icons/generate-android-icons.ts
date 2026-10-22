@@ -6,15 +6,18 @@ import {
   ANDROID_ICON_SIZES,
   ANDROID_ICONS_KOTLIN_DIRECTORY_NAME,
   ANDROID_ICONS_SVGS_DIRECTORY_NAME,
+  ANDROID_SYMBOLS_DIRECTORY_NAME,
   type AndroidIconSize,
 } from './android-icons-config.ts';
+import { generateAndroidSymbols } from './generate-android-symbols.ts';
+import { makeImageVectorsInternalInDirectory } from './make-image-vectors-internal.ts';
 import { optimizeAndroidSvgs } from './optimize-android-svgs.ts';
 import { convertSvgsToImageVectors, installValkyrieCli } from './valkyrie-cli.ts';
 
 export interface GenerateAndroidIconsOptions {
   /** Directory of the stroked Figma icons. */
   readonly sourceDirectory: string;
-  /** Directory wiped and filled with the `svgs/` and `kt/` sub-directories. */
+  /** Directory wiped and filled with the `svgs/`, `kt/` and `symbols/` sub-directories. */
   readonly outputDirectory: string;
   readonly valkyrieCliInstallDirectory: string;
   readonly logger: Logger;
@@ -24,7 +27,8 @@ export interface GenerateAndroidIconsOptions {
  * Wipes the output directory then generates the Android icons of every t-shirt size:
  * 1. optimizes the stroked SVGs with SVGO and applies the optical stroke width into `svgs/<size>/`,
  * 2. converts them into `EsdsIcons.<Size>` Compose `ImageVector`s with Valkyrie into `kt/<size>/`,
- * 3. adds a preview to every generated Kotlin file.
+ * 3. makes the ImageVectors `internal` and adds a preview to every generated Kotlin file,
+ * 4. generates one `Symbol` per icon, grouping its sizes, into `symbols/`.
  *
  * @returns the sorted list of generated icons, as `<Size>.<IconName>`.
  */
@@ -41,19 +45,33 @@ export async function generateAndroidIcons({
     logger,
   });
 
-  const iconNamesBySize: readonly (readonly string[])[] = await Promise.all(
-    ANDROID_ICON_SIZES.map((iconSize: AndroidIconSize): Promise<readonly string[]> => {
-      return generateAndroidIconsOfSize({
-        sourceDirectory,
-        outputDirectory,
-        valkyrieCliJarPath,
-        iconSize,
-        logger,
-      });
-    }),
+  const iconNamesBySize: ReadonlyMap<string, readonly string[]> = new Map(
+    await Promise.all(
+      ANDROID_ICON_SIZES.map(
+        async (iconSize: AndroidIconSize): Promise<[string, readonly string[]]> => {
+          return [
+            iconSize.name,
+            await generateAndroidIconsOfSize({
+              sourceDirectory,
+              outputDirectory,
+              valkyrieCliJarPath,
+              iconSize,
+              logger,
+            }),
+          ];
+        },
+      ),
+    ),
   );
 
-  return iconNamesBySize.flat().sort();
+  await generateAndroidSymbols({
+    outputDirectory: join(outputDirectory, ANDROID_SYMBOLS_DIRECTORY_NAME),
+    iconNamesBySize,
+  });
+
+  return [...iconNamesBySize]
+    .flatMap(([sizeName, iconNames]) => iconNames.map((iconName) => `${sizeName}.${iconName}`))
+    .sort();
 }
 
 interface GenerateAndroidIconsOfSizeOptions {
@@ -93,12 +111,9 @@ async function generateAndroidIconsOfSize({
     logger,
   });
 
-  const iconNames: readonly string[] = await addImageVectorPreviewsToDirectory(
-    join(kotlinDirectory, sizeDirectoryName),
-    iconSize.name,
-  );
+  await makeImageVectorsInternalInDirectory(join(kotlinDirectory, sizeDirectoryName));
 
-  return iconNames.map((iconName: string): string => `${iconSize.name}.${iconName}`);
+  return addImageVectorPreviewsToDirectory(join(kotlinDirectory, sizeDirectoryName), iconSize.name);
 }
 
 /** Valkyrie writes each nested icon pack into a directory named after it, in lower case. */
