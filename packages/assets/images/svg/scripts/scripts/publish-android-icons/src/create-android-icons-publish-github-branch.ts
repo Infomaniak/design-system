@@ -13,7 +13,7 @@ import { UPDATE_PACKAGE_VERSIONS_FILE_CHANGES_HOOK } from '../../../../../../../
 import { updatePackageVersionsFile } from '../../../../../../../../scripts/helpers/publish/update-package-versions-file/update-package-versions-file.ts';
 import {
   ANDROID_IMAGE_VECTORS_DESTINATION_PATH,
-  ANDROID_SYMBOL_INTERFACE_NAME,
+  ANDROID_SYMBOL_INTERFACE_FILE_NAME,
   ANDROID_SYMBOLS_DESTINATION_PATH,
 } from '../../../shared/android-icons/android-icons-config.ts';
 
@@ -75,13 +75,13 @@ export function createAndroidIconsPublishGithubBranch({
   });
 }
 
-/** Removes every generated symbol, keeping the hand-written `Symbol.kt` interface. */
+/** Removes every generated symbol, keeping the hand-written `_Symbol.kt` interface. */
 async function removeObsoleteSymbols(directory: string): Promise<void> {
   await mkdir(directory, { recursive: true });
 
   await Promise.all(
     (await readdir(directory))
-      .filter((fileName: string): boolean => fileName !== `${ANDROID_SYMBOL_INTERFACE_NAME}.kt`)
+      .filter((fileName: string): boolean => fileName !== ANDROID_SYMBOL_INTERFACE_FILE_NAME)
       .map((fileName: string): Promise<void> => {
         return rm(join(directory, fileName), { recursive: true, force: true });
       }),

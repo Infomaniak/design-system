@@ -119,13 +119,13 @@ describe('createAndroidIconsPublishGithubBranch', () => {
     });
   });
 
-  it('replaces the generated symbols but keeps the hand-written Symbol.kt', async () => {
+  it('replaces the generated symbols but keeps the hand-written _Symbol.kt', async () => {
     const symbolsDestinationDirectory: string = join(
       repositoryDirectory,
       ANDROID_SYMBOLS_DESTINATION_PATH,
     );
     await mkdir(symbolsDestinationDirectory, { recursive: true });
-    await writeFile(join(symbolsDestinationDirectory, 'Symbol.kt'), 'interface', 'utf8');
+    await writeFile(join(symbolsDestinationDirectory, '_Symbol.kt'), 'interface', 'utf8');
     await writeFile(join(symbolsDestinationDirectory, 'Removed.kt'), 'stale', 'utf8');
 
     await createBranch();
@@ -133,8 +133,8 @@ describe('createAndroidIconsPublishGithubBranch', () => {
     expect(ANDROID_SYMBOLS_DESTINATION_PATH).toBe(
       'Icons/src/commonMain/kotlin/com/infomaniak/designsystem/icons/symbols',
     );
-    expect((await readdir(symbolsDestinationDirectory)).sort()).toEqual(['Check.kt', 'Symbol.kt']);
-    expect(await readFile(join(symbolsDestinationDirectory, 'Symbol.kt'), 'utf8')).toBe(
+    expect((await readdir(symbolsDestinationDirectory)).sort()).toEqual(['Check.kt', '_Symbol.kt']);
+    expect(await readFile(join(symbolsDestinationDirectory, '_Symbol.kt'), 'utf8')).toBe(
       'interface',
     );
   });

@@ -9,8 +9,9 @@ export const ANDROID_IMAGE_VECTORS_PACKAGE_NAME = `${ANDROID_ICONS_PACKAGE_NAME}
 
 export const ANDROID_SYMBOLS_DIRECTORY_NAME = 'symbols';
 export const ANDROID_SYMBOLS_PACKAGE_NAME = `${ANDROID_ICONS_PACKAGE_NAME}.${ANDROID_SYMBOLS_DIRECTORY_NAME}`;
-/** Hand-written `Symbol` interface, living next to the generated symbols and never overwritten. */
 export const ANDROID_SYMBOL_INTERFACE_NAME = 'Symbol';
+/** File of the hand-written `Symbol` interface, living next to the generated symbols and never overwritten. */
+export const ANDROID_SYMBOL_INTERFACE_FILE_NAME = '_Symbol.kt';
 
 export const ANDROID_ICONS_SVGS_DIRECTORY_NAME = 'svgs';
 export const ANDROID_ICONS_KOTLIN_DIRECTORY_NAME = 'kt';
