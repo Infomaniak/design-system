@@ -12,4 +12,6 @@
 svg {
   display: block;
   margin: auto;
+  width: inherit;
+  height: inherit;
 }
