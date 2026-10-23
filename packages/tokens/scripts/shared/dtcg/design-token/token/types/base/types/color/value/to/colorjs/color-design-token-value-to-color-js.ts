@@ -1,5 +1,6 @@
 import Color from 'colorjs.io';
 import type { Coords } from 'colorjs.io/src/color.js';
+import { isCurlyReference } from '../../../../../../../../reference/types/curly/is-curly-reference.ts';
 import { resolveValueOrJsonReference } from '../../../../../../../../reference/types/json/value-or/resolve/resolve-value-or-json-reference.ts';
 import type { ValueOrJsonReference } from '../../../../../../../../reference/types/json/value-or/value-or-json-reference.ts';
 import type { ColorDesignTokenValue } from '../../color-design-token-value.ts';
@@ -16,6 +17,13 @@ export function colorDesignTokenValueToColorJs(
 ): Color {
   const space: ColorDesignTokenColorSpace = resolveValueOrJsonReference(colorSpace, root);
 
+  /**
+   * NOTE: Curly reference is not official
+   */
+  if (isCurlyReference(components)) {
+    throw new Error('Curly references are not supported');
+  }
+
   const coords: Coords = resolveValueOrJsonReference(components, root)
     .map(
       (
@@ -27,6 +35,13 @@ export function colorDesignTokenValueToColorJs(
     .map((component: ColorDesignTokenValueComponent): number | null => {
       return component === 'none' ? null : component;
     }) as Coords;
+
+  /**
+   * NOTE: Curly reference is not official
+   */
+  if (isCurlyReference(alpha)) {
+    throw new Error('Curly references are not supported');
+  }
 
   const resolvedAlpha: number | undefined = resolveValueOrJsonReference(alpha, root);
 

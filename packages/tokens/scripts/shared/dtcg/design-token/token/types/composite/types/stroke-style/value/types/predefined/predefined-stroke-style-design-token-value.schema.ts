@@ -1,6 +1,6 @@
 import * as z from 'zod';
 
-export const predefinedStrokeStyleDesignTokenValueSchema = z.enum([
+export const predefinedStrokeStyleDesignTokenValueSchema = z.literal([
   'solid',
   'dashed',
   'dotted',

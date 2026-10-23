@@ -99,21 +99,30 @@ export function buildTokens({
       logger,
     });
 
-    // SWIFT
-    await buildSwiftTokens({
-      baseCollection,
-      modifiers,
-      outputDirectory,
-      logger,
-    });
+    // TODO continue here
 
-    // KOTLIN
-    await buildKotlinTokens({
-      baseCollection,
-      modifiers,
-      outputDirectory,
-      logger,
-    });
+    /* eslint-disable */ // TODO remove
+    if (false) {
+      // TODO remove
+      // @ts-ignore // TODO remove
+
+      // SWIFT
+      await buildSwiftTokens({
+        baseCollection,
+        modifiers,
+        outputDirectory,
+        logger,
+      });
+
+      // KOTLIN
+      await buildKotlinTokens({
+        baseCollection,
+        modifiers,
+        outputDirectory,
+        logger,
+      });
+    }
+    /* eslint-enable */ // TODO remove
 
     // DESIGN.md
     await buildDesignMdTokens({
