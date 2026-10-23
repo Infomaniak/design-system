@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import type { PackageJson } from '../../../../../../../../scripts/helpers/file/package-json/package-json.ts';
 import { readPackageJsonFile } from '../../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
 import type { GitChanges } from '../../../../../../../../scripts/helpers/git/git-changes.ts';
+import { deleteGithubObsoletePublishBranches } from '../../../../../../../../scripts/helpers/github/branch/delete-github-obsolete-publish-branches.ts';
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import { IOS_DESIGN_SYSTEM_REPOSITORY_NAME } from '../../../../../../../../scripts/helpers/github/constants/ios-design-system-repository-name.constant.ts';
 import { createGithubPullRequest } from '../../../../../../../../scripts/helpers/github/pull-request/create-github-pull-request.ts';
@@ -57,7 +58,8 @@ export async function publishSfSymbols({
       prerelease,
     });
 
-    const publishBranchName: string = `esds/symbols/${publishVersion}`;
+    const publishBranchPrefix: string = 'esds/symbols/';
+    const publishBranchName: string = `${publishBranchPrefix}${publishVersion}`;
 
     const changes: GitChanges = await createIosSymbolsPublishGithubBranch({
       logger,
@@ -69,14 +71,25 @@ export async function publishSfSymbols({
     });
 
     if (changes.length > 0) {
+      const authToken: string = getEnvCiPullRequestAuthTokenMobile();
+
       await createGithubPullRequest({
         owner: INFOMANIAK_GITHUB_ORGANIZATION,
         repository: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
-        authToken: getEnvCiPullRequestAuthTokenMobile(),
+        authToken,
         title: `chore: ${name}@${publishVersion}`,
         body: `${name}@${publishVersion}`,
         head: publishBranchName,
         base: 'main',
+      });
+
+      await deleteGithubObsoletePublishBranches({
+        owner: INFOMANIAK_GITHUB_ORGANIZATION,
+        repository: IOS_DESIGN_SYSTEM_REPOSITORY_NAME,
+        authToken,
+        branchPrefix: publishBranchPrefix,
+        currentBranchName: publishBranchName,
+        logger,
       });
     } else {
       logger.info('SKIP (non-blocking): No changes to publish');

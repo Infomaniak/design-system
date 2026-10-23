@@ -42,6 +42,29 @@ export const Default: Story = {
   },
 };
 
+export const Inline: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Add the `inline` attribute so the icon aligns with the surrounding text flow, e.g. inside a link.',
+      },
+    },
+  },
+  args: {
+    name: 'esds:square-arrow-out-up-right',
+  },
+  render: (args) => html`
+    <a href="#">
+      Follow this link
+      <esds-icon
+        name="${args.name}"
+        inline
+      ></esds-icon>
+    </a>
+  `,
+};
+
 export const Preprod: Story = {
   args: {
     name: 'esds:bug',

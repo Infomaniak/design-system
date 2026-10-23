@@ -10,6 +10,18 @@ EsdsIconComponent.define();
 
 > **Important:** `define()` must be called before any component renders `<esds-icon>`.
 
+## Usage
+
+The icon inherits its size based on the **local** `font-size`.
+It is by default `inline-block` making it suitable to integrate into `flex` container.
+
+```html
+<esds-icon
+  name="esds:headset"
+  style="font-size: var(--esds-icon-size-md); /* or let it be inherited from a parent element */"
+></esds-icon>
+```
+
 ## Configuration (Optional)
 
 If you need custom icon resources (e.g., a specific icon server), set the `InjectionContext`:

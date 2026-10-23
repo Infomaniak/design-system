@@ -1343,7 +1343,7 @@
           "$description": "Border colors placed on feedback backgrounds.",
           "success": {
             "dim1": {
-              "$value": "{color.white}",
+              "$value": "{color.transparent}",
               "$description": "Border on strong success backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["STROKE_COLOR"]
@@ -1366,7 +1366,7 @@
           },
           "warning": {
             "dim1": {
-              "$value": "{color.white}",
+              "$value": "{color.transparent}",
               "$description": "Border on strong warning backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["STROKE_COLOR"]
@@ -1389,7 +1389,7 @@
           },
           "error": {
             "dim1": {
-              "$value": "{color.white}",
+              "$value": "{color.transparent}",
               "$description": "Border on strong error backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["STROKE_COLOR"]
@@ -1412,7 +1412,7 @@
           },
           "information": {
             "dim1": {
-              "$value": "{color.white}",
+              "$value": "{color.transparent}",
               "$description": "Border on strong information backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["STROKE_COLOR"]
@@ -1435,7 +1435,7 @@
           },
           "neutral": {
             "dim1": {
-              "$value": "{color.white}",
+              "$value": "{color.transparent}",
               "$description": "Border on strong neutral backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["STROKE_COLOR"]
@@ -1604,44 +1604,6 @@
           }
         }
       },
-      "feedback": {
-        "$description": "Feedback border colors (error, success, warning).",
-        "error": {
-          "$description": "Error feedback border colors.",
-          "$value": "{color.red.600}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
-        },
-        "success": {
-          "$description": "Success feedback border colors.",
-          "$value": "{color.lime.600}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
-        },
-        "warning": {
-          "$description": "Warning feedback border colors.",
-          "$value": "{color.orange.600}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
-        },
-        "information": {
-          "$description": "Information feedback border colors.",
-          "$value": "{color.blue.600}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
-        },
-        "neutral": {
-          "$description": "Neutral feedback border colors.",
-          "$value": "{color.gray.600}",
-          "$extensions": {
-            "scopes": ["STROKE_COLOR"]
-          }
-        }
-      },
       "dim1": {
         "$value": "{color.gray.400}",
         "$description": "Strongest neutral border color with interaction states.",
@@ -1668,6 +1630,44 @@
         "$description": "Faintest neutral border color with interaction states.",
         "$extensions": {
           "scopes": ["STROKE_COLOR"]
+        }
+      },
+      "feedback": {
+        "$description": "Feedback border colors (error, success, warning).",
+        "error": {
+          "$value": "{color.red.600}",
+          "$description": "Error feedback border colors.",
+          "$extensions": {
+            "scopes": ["STROKE_COLOR"]
+          }
+        },
+        "success": {
+          "$value": "{color.lime.600}",
+          "$description": "Success feedback border colors.",
+          "$extensions": {
+            "scopes": ["STROKE_COLOR"]
+          }
+        },
+        "warning": {
+          "$value": "{color.orange.600}",
+          "$description": "Warning feedback border colors.",
+          "$extensions": {
+            "scopes": ["STROKE_COLOR"]
+          }
+        },
+        "information": {
+          "$value": "{color.blue.600}",
+          "$description": "Information feedback border colors.",
+          "$extensions": {
+            "scopes": ["STROKE_COLOR"]
+          }
+        },
+        "neutral": {
+          "$value": "{color.gray.600}",
+          "$description": "Neutral feedback border colors.",
+          "$extensions": {
+            "scopes": ["STROKE_COLOR"]
+          }
         }
       }
     },
