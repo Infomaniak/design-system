@@ -54,36 +54,33 @@ export function execCommand(
         ...options,
       });
 
-      const getStreamOutput = (stream: Readable): Promise<string> => {
-        return stream.toArray().then((lines: readonly ExplicitAny[]): string => {
-          return lines
-            .map((line: ExplicitAny): string => {
-              return line.toString();
-            })
-            .join('\n');
+      const getStreamOutput = (stream: Readable | null): Promise<string> => {
+        if (stream === null) {
+          return Promise.resolve('');
+        }
+
+        // chunks are split arbitrarily by the OS pipe (even inside a multi-byte character): decode only once concatenated
+        return stream.toArray().then((chunks: readonly ExplicitAny[]): string => {
+          return Buffer.concat(chunks).toString();
         });
       };
 
-      childProcess.on('exit', (exitCode: number | null): void => {
+      // the streams must be consumed while the process runs: otherwise a large output fills the pipe buffer and blocks the process forever
+      const stdoutPromise: Promise<string> = getStreamOutput(childProcess.stdout);
+      const stderrPromise: Promise<string> = getStreamOutput(childProcess.stderr);
+
+      childProcess.on('close', (exitCode: number | null): void => {
         if (exitCode === null) {
           exitCode = -1;
         }
 
         if (exitCode === 0) {
-          if (childProcess.stdout === null) {
-            resolve('');
-          } else {
-            getStreamOutput(childProcess.stdout).then(resolve, reject);
-          }
+          stdoutPromise.then(resolve, reject);
         } else {
-          if (childProcess.stderr === null) {
-            reject(new ExecCommandError({ command, exitCode }));
-          } else {
-            getStreamOutput(childProcess.stderr).then(
-              (stderr: string) => reject(new ExecCommandError({ command, exitCode, stderr })),
-              reject,
-            );
-          }
+          stderrPromise.then(
+            (stderr: string) => reject(new ExecCommandError({ command, exitCode, stderr })),
+            reject,
+          );
         }
       });
 

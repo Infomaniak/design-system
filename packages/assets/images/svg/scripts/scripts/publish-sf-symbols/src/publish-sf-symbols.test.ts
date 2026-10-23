@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { PackageJson } from '../../../../../../../../scripts/helpers/file/package-json/package-json.ts';
 import { readPackageJsonFile } from '../../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
 import type { GitChanges } from '../../../../../../../../scripts/helpers/git/git-changes.ts';
+import { deleteGithubObsoletePublishBranches } from '../../../../../../../../scripts/helpers/github/branch/delete-github-obsolete-publish-branches.ts';
 import type { GithubCiPullRequest } from '../../../../../../../../scripts/helpers/github/github-ci-config/github-ci-config.ts';
 import { createGithubPullRequest } from '../../../../../../../../scripts/helpers/github/pull-request/create-github-pull-request.ts';
 import { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
@@ -17,6 +18,9 @@ import { publishSfSymbols, type PublishSfSymbolsOptions } from './publish-sf-sym
 
 vi.mock('./create-ios-symbols-publish-github-branch.ts');
 vi.mock(
+  '../../../../../../../../scripts/helpers/github/branch/delete-github-obsolete-publish-branches.ts',
+);
+vi.mock(
   '../../../../../../../../scripts/helpers/github/pull-request/create-github-pull-request.ts',
 );
 vi.mock('../../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts');
@@ -26,6 +30,7 @@ const logger = Logger.never();
 const createIosSymbolsPublishGithubBranchMock = vi.mocked(createIosSymbolsPublishGithubBranch);
 const createGithubPullRequestMock = vi.mocked(createGithubPullRequest);
 const readPackageJsonFileMock = vi.mocked(readPackageJsonFile);
+const deleteGithubObsoletePublishBranchesMock = vi.mocked(deleteGithubObsoletePublishBranches);
 
 describe('publishSfSymbols', () => {
   let tempDir: string;
@@ -36,6 +41,7 @@ describe('publishSfSymbols', () => {
     createIosSymbolsPublishGithubBranchMock.mockReset();
     createGithubPullRequestMock.mockReset();
     readPackageJsonFileMock.mockReset();
+    deleteGithubObsoletePublishBranchesMock.mockReset();
 
     readPackageJsonFileMock.mockResolvedValue({ name: 'x', version: '1.2.3' } as PackageJson);
     createGithubPullRequestMock.mockResolvedValue({} as GithubCiPullRequest);
@@ -129,6 +135,14 @@ describe('publishSfSymbols', () => {
       head: 'esds/symbols/1.2.3-dev.42',
       base: 'main',
     });
+    expect(deleteGithubObsoletePublishBranchesMock).toHaveBeenCalledWith({
+      owner: 'Infomaniak',
+      repository: 'ios-design-system',
+      authToken: 'test-token',
+      branchPrefix: 'esds/symbols/',
+      currentBranchName: 'esds/symbols/1.2.3-dev.42',
+      logger,
+    });
   });
 
   it('uses the package version as-is in prod mode', async () => {
@@ -162,5 +176,6 @@ describe('publishSfSymbols', () => {
 
     expect(createIosSymbolsPublishGithubBranchMock).toHaveBeenCalledOnce();
     expect(createGithubPullRequestMock).not.toHaveBeenCalled();
+    expect(deleteGithubObsoletePublishBranchesMock).not.toHaveBeenCalled();
   });
 });

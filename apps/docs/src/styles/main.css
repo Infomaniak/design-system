@@ -201,3 +201,16 @@ a.card {
     gap: 16px;
   }
 }
+
+/*
+ * Storybook's `<Source>` block is designed as a full-width page block
+ * (25px/40px outer margins, 20px pre padding). Inside doc tables (e.g. the
+ * code + result comparisons), tighten it so rows stay compact.
+ */
+table .docblock-source {
+  margin: 0;
+}
+
+table .docblock-source pre.prismjs {
+  padding: 8px 12px;
+}

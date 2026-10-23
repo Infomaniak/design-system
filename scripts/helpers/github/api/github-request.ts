@@ -1,5 +1,5 @@
 export interface GithubRequestOptions {
-  readonly method: 'GET' | 'POST' | 'PATCH';
+  readonly method: 'GET' | 'POST' | 'PATCH' | 'DELETE';
   readonly path: string;
   readonly token: string;
   readonly body?: unknown;
