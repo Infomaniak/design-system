@@ -26,6 +26,7 @@ const readPackageJsonFileMock = vi.mocked(readPackageJsonFile);
 const deleteGithubObsoletePublishBranchesMock = vi.mocked(deleteGithubObsoletePublishBranches);
 
 const IMAGE_VECTORS_DIRECTORY = '/svg-assets/dist/android/icons/kt';
+const SYMBOLS_DIRECTORY = '/svg-assets/dist/android/icons/symbols';
 
 describe('publishAndroidIcons', () => {
   beforeEach(() => {
@@ -48,6 +49,7 @@ describe('publishAndroidIcons', () => {
       ...(mode === 'dev' ? { mode, prerelease: '42' } : { mode }),
       packageRootDirectory: '/svg-assets',
       imageVectorsDirectory: IMAGE_VECTORS_DIRECTORY,
+      symbolsDirectory: SYMBOLS_DIRECTORY,
       logger,
     };
   };
@@ -67,6 +69,7 @@ describe('publishAndroidIcons', () => {
     expect(createAndroidIconsPublishGithubBranchMock).toHaveBeenCalledWith({
       logger,
       imageVectorsDirectory: IMAGE_VECTORS_DIRECTORY,
+      symbolsDirectory: SYMBOLS_DIRECTORY,
       packageName: 'x',
       version: '1.2.3-dev.42',
       branchName: 'esds/icons/1.2.3-dev.42',

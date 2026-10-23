@@ -18,16 +18,19 @@ export interface PublishAndroidIconsOptions extends PublishConfig {
   readonly packageRootDirectory: string;
   /** Directory containing the generated `<IconName>.kt` ImageVector files. */
   readonly imageVectorsDirectory: string;
+  /** Directory containing the generated `<IconName>.kt` Symbol files. */
+  readonly symbolsDirectory: string;
 }
 
 /**
- * Publishes the generated Compose ImageVectors to the Android design system repository:
+ * Publishes the generated Compose ImageVectors and Symbols to the Android design system repository:
  * pushes them on a dedicated branch and opens a pull request.
  */
 export async function publishAndroidIcons({
   logger,
   packageRootDirectory,
   imageVectorsDirectory,
+  symbolsDirectory,
   // shared publish options
   mode,
   prerelease,
@@ -49,6 +52,7 @@ export async function publishAndroidIcons({
     const changes: GitChanges = await createAndroidIconsPublishGithubBranch({
       logger,
       imageVectorsDirectory,
+      symbolsDirectory,
       packageName: name,
       version: publishVersion,
       branchName: publishBranchName,
