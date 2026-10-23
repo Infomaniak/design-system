@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "yarn workspace @infomaniak-design-system/components analyze:cem --watch & storybook dev -p 6006",
-    "build": "storybook build"
+    "build": "storybook build && yarn build:llms",
+    "build:llms": "node --no-warnings=ExperimentalWarning scripts/generate-llms-docs/generate-llms-docs.script.ts --dist storybook-static"
   },
   "dependencies": {
     "@infomaniak-design-system/components": "workspace:^",
