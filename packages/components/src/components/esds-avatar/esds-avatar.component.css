@@ -1,0 +1,33 @@
+:host {
+  --esds-avatar-size: var(--esds-scale-48);
+  --esds-avatar-border-radius: var(--esds-radius-lg);
+  --esds-avatar-content-font: var(--esds-body-lg-font-emphasized);
+  --esds-avatar-content-color: var(--esds-color-content-on-dataviz-dim2);
+  --esds-avatar-background-color: var(--esds-color-background-dataviz-dim2);
+  --esds-avatar-icon-size: var(--esds-icon-size-lg);
+
+  display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  width: var(--esds-avatar-size);
+  height: var(--esds-avatar-size);
+  border-radius: var(--esds-avatar-border-radius);
+  background-color: var(--esds-avatar-background-color);
+  overflow: hidden;
+
+  & > img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  & > esds-icon {
+    font-size: var(--esds-avatar-icon-size);
+  }
+
+  & > .initials {
+    font: var(--esds-avatar-content-font);
+    color: var(--esds-avatar-content-color);
+  }
+}
