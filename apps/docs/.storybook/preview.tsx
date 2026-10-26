@@ -60,6 +60,9 @@ import '@infomaniak-design-system/tokens/dist/web/css/modifiers/button-size/all.
 // Import all button-type modifiers
 import '@infomaniak-design-system/tokens/dist/web/css/modifiers/button-type/all.attr.css';
 
+// Import all badge-type modifiers
+import '@infomaniak-design-system/tokens/dist/web/css/modifiers/badge-type/all.attr.css';
+
 // Initialize <esds-icon> and provide IconifyApi via root InjectionContext
 EsdsIconComponent.define();
 
@@ -317,7 +320,7 @@ const preview: Preview = {
         order: [
           'Welcome',
           'Designers Guide',
-          ['Getting Started', 'Install the Font', 'Figma Plugins'],
+          ['Getting Started', 'Install the Font', 'Figma Plugins', 'Helpers'],
           'Design Tokens',
           ['Getting Started', '*', 'CHANGELOG'],
           'Icons',

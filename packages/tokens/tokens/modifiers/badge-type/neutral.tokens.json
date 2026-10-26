@@ -1,0 +1,14 @@
+{
+  "badge": {
+    "background": {
+      "color": {
+        "$value": "{color.background.feedback.neutral.dim1}"
+      }
+    },
+    "content": {
+      "color": {
+        "$value": "{color.content.on.feedback.neutral.dim1}"
+      }
+    }
+  }
+}
