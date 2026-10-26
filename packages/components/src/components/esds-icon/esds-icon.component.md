@@ -22,6 +22,17 @@ It is by default `inline-block` making it suitable to integrate into `flex` cont
 ></esds-icon>
 ```
 
+### Tailwind
+
+You may set the icon size using the tailwind `text-icon-{size}` class:
+
+```html
+<esds-icon
+  name="esds:headset"
+  class="text-icon-md"
+></esds-icon>
+```
+
 ## Configuration (Optional)
 
 If you need custom icon resources (e.g., a specific icon server), set the `InjectionContext`:
