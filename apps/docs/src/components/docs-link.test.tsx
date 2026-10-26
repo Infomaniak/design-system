@@ -1,5 +1,5 @@
 import { DocsContext, type DocsContextProps } from '@storybook/addon-docs/blocks';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { createEvent, fireEvent, render, screen } from '@testing-library/react';
 import type { ReactElement, MouseEvent as ReactMouseEvent } from 'react';
 import { NAVIGATE_URL } from 'storybook/internal/core-events';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -101,6 +101,25 @@ describe('DocsLink', () => {
     );
   });
 
+  // The caller spy prevents the default action so the test stays independent
+  // from browser navigation behavior.
+  it('forwards caller-provided onClick on external links', () => {
+    const onClick = vi.fn((event: ReactMouseEvent<HTMLAnchorElement>) => {
+      event.preventDefault();
+    });
+    render(
+      <DocsLink
+        href="https://infomaniak.com"
+        onClick={onClick}
+      >
+        Infomaniak
+      </DocsLink>,
+    );
+
+    fireEvent.click(screen.getByText('Infomaniak'));
+    expect(onClick).toHaveBeenCalled();
+  });
+
   it.each([
     ['an in-page anchor (no docs entry in the iframe URL)', '#contribution', '#contribution'],
     ['a mailto link', 'mailto:design@infomaniak.com', 'mailto:design@infomaniak.com'],
@@ -135,6 +154,37 @@ describe('DocsLink', () => {
     const link = screen.getByText('No link').closest('a')!;
     expect(link).not.toHaveAttribute('href');
     expect(link.querySelector('esds-icon')).toBeNull();
+  });
+
+  // The caller spy prevents the default action: happy-dom would otherwise
+  // resolve the mailto: URL into window.location and pollute the next tests.
+  it.each([
+    ['a raw in-page anchor', '#contribution'],
+    ['a mailto link', 'mailto:design@infomaniak.com'],
+  ])('forwards caller-provided onClick on %s without routing', (_label, href) => {
+    const onClick = vi.fn((event: ReactMouseEvent<HTMLAnchorElement>) => {
+      event.preventDefault();
+    });
+    const { emit } = renderWithDocsChannel(
+      <DocsLink
+        href={href}
+        onClick={onClick}
+      >
+        Guide
+      </DocsLink>,
+    );
+
+    fireEvent.click(screen.getByText('Guide'));
+    expect(onClick).toHaveBeenCalled();
+    expect(emit).not.toHaveBeenCalled();
+  });
+
+  it('forwards caller-provided onClick on anchors without href', () => {
+    const onClick = vi.fn();
+    render(<DocsLink onClick={onClick}>No link</DocsLink>);
+
+    fireEvent.click(screen.getByText('No link'));
+    expect(onClick).toHaveBeenCalled();
   });
 
   it('merges caller-provided rel tokens with the security tokens on internal links', () => {
@@ -222,6 +272,65 @@ describe('DocsLink', () => {
 
       fireEvent.click(screen.getByText('Guide'));
       expect(onClick).toHaveBeenCalled();
+      expect(emit).toHaveBeenCalledWith(NAVIGATE_URL, './?path=/docs/x--docs');
+    });
+
+    it.each([
+      ['ctrl-click', { ctrlKey: true }],
+      ['meta-click', { metaKey: true }],
+      ['shift-click', { shiftKey: true }],
+      ['alt-click', { altKey: true }],
+      ['a non-primary button click', { button: 1 }],
+    ])('leaves %s on internal links to the browser', (_label, init) => {
+      const onClick = vi.fn();
+      const { emit } = renderWithDocsChannel(
+        <DocsLink
+          href="./?path=/docs/x--docs"
+          onClick={onClick}
+        >
+          Guide
+        </DocsLink>,
+      );
+
+      const link = screen.getByText('Guide').closest('a')!;
+      const clickEvent = createEvent.click(link, init);
+      fireEvent(link, clickEvent);
+
+      expect(onClick).toHaveBeenCalled();
+      expect(clickEvent.defaultPrevented).toBe(false);
+      expect(emit).not.toHaveBeenCalled();
+    });
+
+    it('leaves internal links with a non-default target to the browser', () => {
+      const { emit } = renderWithDocsChannel(
+        <DocsLink
+          href="./?path=/docs/x--docs"
+          target="_blank"
+        >
+          Guide
+        </DocsLink>,
+      );
+
+      const link = screen.getByText('Guide').closest('a')!;
+      expect(link).toHaveAttribute('target', '_blank');
+
+      const clickEvent = createEvent.click(link);
+      fireEvent(link, clickEvent);
+      expect(clickEvent.defaultPrevented).toBe(false);
+      expect(emit).not.toHaveBeenCalled();
+    });
+
+    it('still routes target="_self" internal links through the channel', () => {
+      const { emit } = renderWithDocsChannel(
+        <DocsLink
+          href="./?path=/docs/x--docs"
+          target="_self"
+        >
+          Guide
+        </DocsLink>,
+      );
+
+      fireEvent.click(screen.getByText('Guide'));
       expect(emit).toHaveBeenCalledWith(NAVIGATE_URL, './?path=/docs/x--docs');
     });
   });
