@@ -1,6 +1,7 @@
 import { mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { writeTextFileSafe } from '../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
+import { dedent } from '../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
 import {
   ANDROID_ICON_PACK_NAME,
   ANDROID_ICON_SIZES,
@@ -83,17 +84,20 @@ export function buildAndroidSymbolFile(iconName: string): string {
     return `    override val ${name}: ImageVector get() = ${ANDROID_ICON_PACK_NAME}.${name}.${iconName}`;
   }).join('\n');
 
-  return `${SYMBOL_FILE_HEADER}
-package ${ANDROID_SYMBOLS_PACKAGE_NAME}
+  return (
+    dedent`
+      ${SYMBOL_FILE_HEADER}
+      package ${ANDROID_SYMBOLS_PACKAGE_NAME}
 
-import androidx.compose.ui.graphics.vector.ImageVector
-import ${ANDROID_ICONS_PACKAGE_NAME}.${ANDROID_ICON_PACK_NAME}
-${sizeImports}
+      import androidx.compose.ui.graphics.vector.ImageVector
+      import ${ANDROID_ICONS_PACKAGE_NAME}.${ANDROID_ICON_PACK_NAME}
+      ${sizeImports}
 
-val ${ANDROID_ICON_PACK_NAME}.${iconName}: ${ANDROID_SYMBOL_INTERFACE_NAME} get() = ${objectName}
+      val ${ANDROID_ICON_PACK_NAME}.${iconName}: ${ANDROID_SYMBOL_INTERFACE_NAME} get() = ${objectName}
 
-private object ${objectName} : ${ANDROID_SYMBOL_INTERFACE_NAME} {
-${sizeProperties}
-}
-`;
+      private object ${objectName} : ${ANDROID_SYMBOL_INTERFACE_NAME} {
+      ${sizeProperties}
+      }
+    ` + '\n'
+  );
 }
