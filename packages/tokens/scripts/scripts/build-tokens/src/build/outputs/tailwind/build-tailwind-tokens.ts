@@ -221,6 +221,18 @@ export function buildTailwindTokens({
                       ),
                     ];
                   }
+                } else if (tokenName.startsWith('icon.size')) {
+                  // --text-* -> --text-icon-*
+                  return [
+                    generateTailwindToken(
+                      token,
+                      RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
+                        'text',
+                        'icon',
+                        ...token.name.slice(2),
+                      ]),
+                    ),
+                  ];
                 } else if (tokenName.startsWith('font.weight')) {
                   // --font-weight-*
                   return [
