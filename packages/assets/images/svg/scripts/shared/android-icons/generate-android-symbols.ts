@@ -9,6 +9,7 @@ import {
   ANDROID_IMAGE_VECTORS_PACKAGE_NAME,
   ANDROID_SYMBOL_INTERFACE_NAME,
   ANDROID_SYMBOLS_PACKAGE_NAME,
+  KOTLIN_FILE_EXTENSION,
   type AndroidIconSize,
 } from './android-icons-config.ts';
 
@@ -40,7 +41,7 @@ export async function generateAndroidSymbols({
   await Promise.all(
     iconNames.map((iconName: string): Promise<void> => {
       return writeTextFileSafe(
-        join(outputDirectory, `${iconName}.kt`),
+        join(outputDirectory, `${iconName}${KOTLIN_FILE_EXTENSION}`),
         buildAndroidSymbolFile(iconName),
       );
     }),

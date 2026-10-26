@@ -2,9 +2,7 @@ import { readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { readTextFile } from '../../../../../../../scripts/helpers/file/read-text-file.ts';
 import { writeTextFileSafe } from '../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
-import { ANDROID_ICON_PACK_NAME } from './android-icons-config.ts';
-
-const KOTLIN_FILE_EXTENSION = '.kt';
+import { ANDROID_ICON_PACK_NAME, KOTLIN_FILE_EXTENSION } from './android-icons-config.ts';
 
 /** Valkyrie emits `public val` because of `--explicit-mode=true`, and has no visibility option. */
 const PUBLIC_IMAGE_VECTOR_PATTERN: RegExp = new RegExp(
