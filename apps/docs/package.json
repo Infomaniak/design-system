@@ -32,7 +32,7 @@
     "@wc-toolkit/storybook-helpers": "^10.7.7",
     "lit": "^3.3.3",
     "rolldown": "^1.2.9",
-    "storybook": "^10.6.0",
+    "storybook": "^10.6.2",
     "typescript": "~7.0.2",
     "vite": "^8.3.3"
   }
