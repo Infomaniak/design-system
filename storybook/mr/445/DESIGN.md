@@ -511,8 +511,8 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | badge.padding.inline | 2px | 2px | var(--esds-badge-padding-inline) | N/A |
 | badge.padding.block | 0px | 0px | var(--esds-badge-padding-block) | N/A |
 | badge.border.radius | 1000px | 1000px | var(--esds-badge-border-radius) | N/A |
-| badge.background.color | #0077cf | #36adfa | var(--esds-badge-background-color) | N/A |
-| badge.content.color | #fff | #072a4a | var(--esds-badge-content-color) | N/A |
+| badge.background.color | #db1a1a | #fe6b6b | var(--esds-badge-background-color) | N/A |
+| badge.content.color | #fff | #480707 | var(--esds-badge-content-color) | N/A |
 | badge.content.font | 500 0.75rem/16px Infomaniak Sans | 500 0.75rem/16px Infomaniak Sans | var(--esds-badge-content-font) | N/A |
 | body.xs.font.base | 400 0.75rem/16px Infomaniak Sans | 400 0.75rem/16px Infomaniak Sans | var(--esds-body-xs-font-base) | Extra-small body text style. |
 | body.xs.font.emphasized | 500 0.75rem/16px Infomaniak Sans | 500 0.75rem/16px Infomaniak Sans | var(--esds-body-xs-font-emphasized) | Extra-small body text style. |
