@@ -13,7 +13,7 @@ EsdsIconComponent.define();
 ## Usage
 
 The icon inherits its size based on the **local** `font-size`.
-It is by default `inline-block` making it suitable to integrate into `flex` container.
+It is by default `inline-flex` making it suitable to integrate into `flex` container.
 
 ```html
 <esds-icon
