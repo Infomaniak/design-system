@@ -70,11 +70,30 @@ describe('HctPaletteGenerator', () => {
     fireEvent.blur(backgroundInput);
     expect(backgroundInput).toHaveValue('#FFFFFF');
 
+    expect(backgroundInput).not.toHaveAttribute('aria-describedby');
+  });
+
+  it('keeps the palette on the last valid background while the background is invalid', () => {
+    render(<HctPaletteGenerator />);
+    const backgroundInput = screen.getByLabelText('Output background');
+
+    fireEvent.change(backgroundInput, { target: { value: '#222222' } });
     fireEvent.change(backgroundInput, { target: { value: 'nope' } });
     fireEvent.blur(backgroundInput);
+
     expect(backgroundInput).toHaveValue('nope');
-    expect(screen.getByLabelText('Pick output background')).toHaveValue('#d1d1d1');
-    expect(screen.getByRole('alert')).toHaveTextContent('Use a 6-digit hex color');
+    expect(backgroundInput).toHaveAttribute('aria-invalid', 'true');
+    expect(backgroundInput).toHaveAccessibleDescription(
+      'Use a 6-digit hex color. The preview keeps the last valid background (#222222).',
+    );
+    expect(screen.getByLabelText('Pick output background')).toHaveValue('#222222');
+    expect(screen.getByRole('list', { name: 'Tonal palette' })).toHaveStyle({
+      background: '#222222',
+      color: '#FFFFFF',
+    });
+    expect(getTiles()).toHaveLength(19);
+    expect(screen.getByRole('button', { name: 'Copy output' })).toBeEnabled();
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
 
   it('spaces the swatches with the spacing slider', () => {
@@ -122,9 +141,11 @@ describe('HctPaletteGenerator', () => {
 
     expect(writeText).toHaveBeenCalledWith('  0  #000000\n100  #FFFFFF');
     expect(button).toHaveTextContent('Copied!');
+    expect(screen.getByRole('status')).toHaveTextContent('Copied palette');
 
     act(() => vi.advanceTimersByTime(1500));
     expect(button).toHaveTextContent('Copy output');
+    expect(screen.getByRole('status')).toBeEmptyDOMElement();
   });
 
   it('copies a single tone when its tile is clicked', async () => {
@@ -137,6 +158,7 @@ describe('HctPaletteGenerator', () => {
 
     expect(writeText).toHaveBeenCalledWith('#6750A4');
     expect(tile).toHaveTextContent('40Copied!');
+    expect(screen.getByRole('status')).toHaveTextContent('Copied tone 40 (#6750A4)');
     expect(screen.getByRole('button', { name: 'Copy output' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Copy tone 0 (#000000)' })).toHaveTextContent(
       '0#000000',
@@ -152,6 +174,7 @@ describe('HctPaletteGenerator', () => {
     await act(async () => fireEvent.click(screen.getByRole('button', { name: 'Copy output' })));
 
     expect(screen.getByRole('button', { name: 'Failed to copy' })).toBeInTheDocument();
+    expect(screen.getByRole('status')).toHaveTextContent('Failed to copy palette');
     unmount();
   });
 });

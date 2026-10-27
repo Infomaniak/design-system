@@ -15,6 +15,7 @@ type CopyTarget = 'all' | number;
 
 interface CopyFeedback {
   readonly target: CopyTarget;
+  readonly label: string;
   readonly status: 'copied' | 'failed';
 }
 
@@ -22,20 +23,14 @@ type PaletteResult =
   | {
       readonly ok: true;
       readonly entries: PaletteEntry[];
-      readonly background: string;
       readonly text: string;
     }
   | { readonly ok: false; readonly error: string; readonly text: '' };
 
-function computePalette(source: string, tones: string, background: string): PaletteResult {
+function computePalette(source: string, tones: string): PaletteResult {
   try {
     const entries: PaletteEntry[] = generateTonalPalette(source, parseTones(tones));
-    return {
-      ok: true,
-      entries,
-      background: normalizeHex(background),
-      text: formatPalette(entries),
-    };
+    return { ok: true, entries, text: formatPalette(entries) };
   } catch (error) {
     return { ok: false, error: (error as Error).message, text: '' };
   }
@@ -54,14 +49,13 @@ const HctPaletteGenerator: React.FC = () => {
   const [source, setSource] = useState<string>('#6750A4');
   const [tones, setTones] = useState<string>(DEFAULT_TONES.join(', '));
   const [background, setBackground] = useState<string>('#D1D1D1');
+  const [previewBackground, setPreviewBackground] = useState<string>('#D1D1D1');
   const [spacing, setSpacing] = useState<number>(0);
   const [copyFeedback, setCopyFeedback] = useState<CopyFeedback | null>(null);
   const resetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const result: PaletteResult = useMemo(
-    () => computePalette(source, tones, background),
-    [source, tones, background],
-  );
+  const result: PaletteResult = useMemo(() => computePalette(source, tones), [source, tones]);
+  const isBackgroundValid: boolean = toPickerValue(background, '') !== '';
 
   useEffect(
     () => () => {
@@ -72,12 +66,20 @@ const HctPaletteGenerator: React.FC = () => {
     [],
   );
 
-  async function handleCopy(text: string, target: CopyTarget): Promise<void> {
+  function handleBackgroundChange(value: string): void {
+    setBackground(value);
+    const normalized: string = toPickerValue(value, '').toUpperCase();
+    if (normalized) {
+      setPreviewBackground(normalized);
+    }
+  }
+
+  async function handleCopy(text: string, target: CopyTarget, label: string): Promise<void> {
     try {
       await navigator.clipboard.writeText(text);
-      setCopyFeedback({ target, status: 'copied' });
+      setCopyFeedback({ target, label, status: 'copied' });
     } catch {
-      setCopyFeedback({ target, status: 'failed' });
+      setCopyFeedback({ target, label, status: 'failed' });
     }
     if (resetTimeoutRef.current) {
       clearTimeout(resetTimeoutRef.current);
@@ -90,6 +92,15 @@ const HctPaletteGenerator: React.FC = () => {
       return idleLabel;
     }
     return copyFeedback.status === 'copied' ? 'Copied!' : 'Failed to copy';
+  }
+
+  function feedbackAnnouncement(): string {
+    if (!copyFeedback) {
+      return '';
+    }
+    return copyFeedback.status === 'copied'
+      ? `Copied ${copyFeedback.label}`
+      : `Failed to copy ${copyFeedback.label}`;
   }
 
   return (
@@ -168,6 +179,20 @@ const HctPaletteGenerator: React.FC = () => {
         .hct-palette__error {
           margin: 0;
           color: var(--esds-color-content-feedback-error);
+        }
+        .hct-palette__input[aria-invalid='true'] {
+          border-color: var(--esds-color-content-feedback-error);
+        }
+        .hct-palette__hint {
+          font-size: 12px;
+        }
+        .hct-palette__visually-hidden {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          overflow: hidden;
+          clip: rect(0 0 0 0);
+          white-space: nowrap;
         }
         .hct-palette__slider {
           flex: 1;
@@ -286,7 +311,9 @@ const HctPaletteGenerator: React.FC = () => {
                 id="hct-palette-background"
                 className="hct-palette__input"
                 value={background}
-                onChange={(event) => setBackground(event.target.value)}
+                aria-invalid={!isBackgroundValid}
+                aria-describedby={isBackgroundValid ? undefined : 'hct-palette-background-error'}
+                onChange={(event) => handleBackgroundChange(event.target.value)}
                 onBlur={() =>
                   setBackground((value) => toPickerValue(value, '').toUpperCase() || value)
                 }
@@ -295,10 +322,19 @@ const HctPaletteGenerator: React.FC = () => {
                 type="color"
                 className="hct-palette__picker"
                 aria-label="Pick output background"
-                value={toPickerValue(background, '#d1d1d1')}
-                onChange={(event) => setBackground(event.target.value.toUpperCase())}
+                value={previewBackground.toLowerCase()}
+                onChange={(event) => handleBackgroundChange(event.target.value)}
               />
             </div>
+            {!isBackgroundValid && (
+              <p
+                id="hct-palette-background-error"
+                className="hct-palette__error hct-palette__hint"
+              >
+                Use a 6-digit hex color. The preview keeps the last valid background (
+                {previewBackground}).
+              </p>
+            )}
           </div>
 
           <div className="hct-palette__field">
@@ -326,7 +362,7 @@ const HctPaletteGenerator: React.FC = () => {
             type="button"
             className="hct-palette__button"
             disabled={!result.ok}
-            onClick={() => handleCopy(result.text, 'all')}
+            onClick={() => handleCopy(result.text, 'all', 'palette')}
           >
             {feedbackFor('all', 'Copy output')}
           </button>
@@ -338,8 +374,8 @@ const HctPaletteGenerator: React.FC = () => {
             aria-label="Tonal palette"
             style={{
               gap: `${spacing}px`,
-              background: result.background,
-              color: isDark(result.background) ? '#FFFFFF' : '#000000',
+              background: previewBackground,
+              color: isDark(previewBackground) ? '#FFFFFF' : '#000000',
             }}
           >
             {result.entries.map(({ tone, hex }, index) => (
@@ -348,7 +384,7 @@ const HctPaletteGenerator: React.FC = () => {
                   type="button"
                   className="hct-palette__entry"
                   aria-label={`Copy tone ${tone} (${hex})`}
-                  onClick={() => handleCopy(hex, index)}
+                  onClick={() => handleCopy(hex, index, `tone ${tone} (${hex})`)}
                 >
                   <span
                     className="hct-palette__swatch"
@@ -370,6 +406,14 @@ const HctPaletteGenerator: React.FC = () => {
             Error: {result.error}
           </p>
         )}
+
+        <p
+          className="hct-palette__visually-hidden"
+          role="status"
+          aria-live="polite"
+        >
+          {feedbackAnnouncement()}
+        </p>
       </div>
     </>
   );
