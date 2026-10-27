@@ -18,6 +18,12 @@ export default defineConfig({
     dir: '.',
     environment: 'happy-dom',
     setupFiles: ['./apps/docs/src/test.setup.ts'],
+    server: {
+      deps: {
+        // Ships extensionless relative imports that Node's ESM resolver rejects.
+        inline: ['@material/material-color-utilities'],
+      },
+    },
     exclude: [
       '**/node_modules/**',
       '**/dist/**',
