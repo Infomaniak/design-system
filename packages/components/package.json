@@ -56,5 +56,5 @@
     "vite": "^8.3.4"
   },
   "customElements": "custom-elements.json",
-  "web-types": "dist/web-types.json"
+  "web-types": "./dist/web-types.json"
 }
