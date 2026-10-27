@@ -7,9 +7,9 @@ import {
   ANDROID_ICONS_PACKAGE_NAME,
   ANDROID_IMAGE_VECTORS_PACKAGE_NAME,
   ANDROID_PREVIEW_ICON_SIZE_NAME,
+  KOTLIN_FILE_EXTENSION,
 } from './android-icons-config.ts';
 
-const KOTLIN_FILE_EXTENSION = '.kt';
 const KOTLIN_IMPORT_KEYWORD = 'import ';
 /** Consecutive `import …` lines, as emitted by Valkyrie right after the `package` statement. */
 const KOTLIN_IMPORT_BLOCK_PATTERN: RegExp = /^(?:import .+\n)+/m;

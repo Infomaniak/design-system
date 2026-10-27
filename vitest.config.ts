@@ -17,6 +17,22 @@ export default defineConfig({
     // dir: 'src',
     dir: '.',
     environment: 'happy-dom',
+    environmentOptions: {
+      happyDOM: {
+        settings: {
+          // Unit tests must not perform real navigations: clicking an anchor
+          // whose default action is not prevented would otherwise fetch the
+          // URL in a child page (e.g. a dev server running on localhost:3000,
+          // the environment default). With navigation disabled, happy-dom
+          // falls back to updating the URL only.
+          navigation: {
+            disableMainFrameNavigation: true,
+            disableChildFrameNavigation: true,
+            disableChildPageNavigation: true,
+          },
+        },
+      },
+    },
     setupFiles: ['./apps/docs/src/test.setup.ts'],
     server: {
       deps: {

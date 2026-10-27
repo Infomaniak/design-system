@@ -10,7 +10,10 @@ import type {
 import { updateGitRepositoryOnNewBranch } from '../../../../../../../../scripts/helpers/git/update-git-repository-on-new-branch.ts';
 import { formatKotlinFiles } from '../../../../../../../../scripts/helpers/kotlin/format-kotlin-files.ts';
 import { Logger } from '../../../../../../../../scripts/helpers/log/logger.ts';
-import { ANDROID_IMAGE_VECTORS_DESTINATION_PATH } from '../../../shared/android-icons/android-icons-config.ts';
+import {
+  ANDROID_IMAGE_VECTORS_DESTINATION_PATH,
+  ANDROID_SYMBOLS_DESTINATION_PATH,
+} from '../../../shared/android-icons/android-icons-config.ts';
 import { createAndroidIconsPublishGithubBranch } from './create-android-icons-publish-github-branch.ts';
 
 vi.mock('../../../../../../../../scripts/helpers/git/update-git-repository-on-new-branch.ts');
@@ -26,12 +29,16 @@ const CHANGES: GitChanges = [{ mode: 'create', file: 'Icons/src/commonMain/kotli
 describe('createAndroidIconsPublishGithubBranch', () => {
   let tempDir: string;
   let imageVectorsDirectory: string;
+  let symbolsDirectory: string;
   let repositoryDirectory: string;
 
   beforeEach(async () => {
     tempDir = await mkdtemp(join(tmpdir(), 'android-icons-publish-'));
     imageVectorsDirectory = join(tempDir, 'kt');
+    symbolsDirectory = join(tempDir, 'symbols');
     repositoryDirectory = join(tempDir, 'repository');
+    await mkdir(symbolsDirectory, { recursive: true });
+    await writeFile(join(symbolsDirectory, 'Check.kt'), 'val symbol = 1', 'utf8');
     await mkdir(imageVectorsDirectory, { recursive: true });
     await mkdir(repositoryDirectory, { recursive: true });
     await writeFile(join(imageVectorsDirectory, 'Check.kt'), 'val check = 1', 'utf8');
@@ -67,6 +74,7 @@ describe('createAndroidIconsPublishGithubBranch', () => {
     return createAndroidIconsPublishGithubBranch({
       logger,
       imageVectorsDirectory,
+      symbolsDirectory,
       packageName: '@infomaniak-design-system/svg-assets',
       version: '1.2.3',
       branchName: 'esds/icons/1.2.3',
@@ -109,5 +117,33 @@ describe('createAndroidIconsPublishGithubBranch', () => {
       cwd: repositoryDirectory,
       logger,
     });
+  });
+
+  it('replaces the generated symbols but keeps the hand-written _Symbol.kt', async () => {
+    const symbolsDestinationDirectory: string = join(
+      repositoryDirectory,
+      ANDROID_SYMBOLS_DESTINATION_PATH,
+    );
+    await mkdir(symbolsDestinationDirectory, { recursive: true });
+    await writeFile(join(symbolsDestinationDirectory, '_Symbol.kt'), 'interface', 'utf8');
+    await writeFile(join(symbolsDestinationDirectory, 'Removed.kt'), 'stale', 'utf8');
+
+    await createBranch();
+
+    expect(ANDROID_SYMBOLS_DESTINATION_PATH).toBe(
+      'Icons/src/commonMain/kotlin/com/infomaniak/designsystem/icons/symbols',
+    );
+    expect((await readdir(symbolsDestinationDirectory)).sort()).toEqual(['Check.kt', '_Symbol.kt']);
+    expect(await readFile(join(symbolsDestinationDirectory, '_Symbol.kt'), 'utf8')).toBe(
+      'interface',
+    );
+  });
+
+  it('creates the symbols directory when the Android repository has none yet', async () => {
+    await createBranch();
+
+    expect(await readdir(join(repositoryDirectory, ANDROID_SYMBOLS_DESTINATION_PATH))).toEqual([
+      'Check.kt',
+    ]);
   });
 });

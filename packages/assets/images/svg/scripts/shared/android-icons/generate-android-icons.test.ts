@@ -42,7 +42,7 @@ describe('generateAndroidIcons', () => {
           await mkdir(nestedPackDirectory, { recursive: true });
           await writeFile(
             join(nestedPackDirectory, 'Check.kt'),
-            'package p\n\nimport a.B\n\nval x = 1\n',
+            'package p\n\nimport a.B\n\npublic val EsdsIcons.Medium.Check: ImageVector\n    get() = TODO()\n',
             'utf8',
           );
         },
@@ -96,8 +96,15 @@ describe('generateAndroidIcons', () => {
       nestedPackName: 'Medium',
       logger,
     });
-    expect(await readFile(join(outputDirectory, 'kt', 'medium', 'Check.kt'), 'utf8')).toContain(
-      'imageVector = EsdsIcons.Medium.Check,',
+    const imageVector: string = await readFile(
+      join(outputDirectory, 'kt', 'medium', 'Check.kt'),
+      'utf8',
+    );
+    expect(imageVector).toContain('imageVector = EsdsIcons.Medium.Check,');
+    expect(imageVector).toContain('internal val EsdsIcons.Medium.Check: ImageVector');
+    expect(await readdir(join(outputDirectory, 'symbols'))).toEqual(['Check.kt']);
+    expect(await readFile(join(outputDirectory, 'symbols', 'Check.kt'), 'utf8')).toContain(
+      'val EsdsIcons.Check: Symbol get() = CheckSymbol',
     );
   });
 });
