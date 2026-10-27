@@ -42,8 +42,8 @@ design-system/
 │   ├── assets/images/svg/       # SVG assets (icons, illustrations) — private package
 │   │   ├── assets/svg/          # Committed SVGs + figma/outlines/ (feed SF Symbols)
 │   │   └── scripts/
-│   │       ├── scripts/         # import-svgs, generate-sf-symbols, publish-sf-symbols, build-legacy-svgs
-│   │       └── shared/          # sf-symbols/ (template engine, xcassets builder), svg/ helpers
+│   │       ├── scripts/         # import-svgs, build/publish-sf-symbols, build/publish-android-icons, build-legacy-svgs
+│   │       └── shared/          # sf-symbols/ (template engine, xcassets builder), android-icons/ (SVGO + Valkyrie → Compose ImageVectors, needs Java 21), svg/ helpers
 │   ├── figma/                   # Figma plugins (packages/figma/<full-plugin-name>/, each with its own tsconfig)
 │   │   └── figma-plugin-icons/  # "ESDS icons" Figma plugin (multi-size icon generator) — private package, released as GitHub Release asset
 │   │   ├── src/                 # Sandbox code (TS, bundled to dist/code.js)
@@ -81,26 +81,26 @@ design-system/
 
 ### Command Patterns
 
-| Task                         | Command                                      |
-| ---------------------------- | -------------------------------------------- |
-| Install deps                 | `yarn install`                               |
-| Dev server (docs)            | `cd apps/docs && yarn dev`                   |
-| Dev server (Storybook)       | `cd apps/docs && yarn storybook`             |
-| Build all packages           | `yarn build`                                 |
-| Build tokens only            | `yarn build:tokens`                          |
-| Validate tokens              | `cd packages/tokens && yarn validate:tokens` |
-| Build SF Symbols (iOS)       | `yarn build:sf-symbols`                      |
-| Build Figma plugin (icons)   | `yarn build:figma-plugin-icons`              |
-| Dev Figma plugin (watch)     | `yarn dev:figma-plugin-icons`                |
-| Run tests                    | `yarn test`                                  |
-| Test coverage                | `yarn test:coverage`                         |
-| Visual regression tests      | `yarn test:vrt`                              |
-| Format code                  | `yarn format`                                |
-| PR validation                | `yarn ci:on-pull-request`                    |
-| CI publish (manual)          | `GITHUB_REF_NAME=develop yarn ci:publish`    |
-| CI visual regression comment | `yarn ci:visual-regression --mode=comment`   |
-| Create changeset             | `yarn changeset`                             |
-| Version + changelog (manual) | `yarn changeset:version`                     |
+| Task                         | Command                                                         |
+| ---------------------------- | --------------------------------------------------------------- |
+| Install deps                 | `yarn install`                                                  |
+| Dev server (docs)            | `cd apps/docs && yarn dev`                                      |
+| Dev server (Storybook)       | `cd apps/docs && yarn storybook`                                |
+| Build all packages           | `yarn build`                                                    |
+| Build tokens only            | `yarn build:tokens` (validates the tokens as part of the build) |
+| Build SF Symbols (iOS)       | `yarn build:sf-symbols`                                         |
+| Build Android icons          | `yarn build:android-icons`                                      |
+| Build Figma plugin (icons)   | `yarn build:figma-plugin-icons`                                 |
+| Dev Figma plugin (watch)     | `yarn dev:figma-plugin-icons`                                   |
+| Run tests                    | `yarn test`                                                     |
+| Test coverage                | `yarn test:coverage`                                            |
+| Visual regression tests      | `yarn test:vrt`                                                 |
+| Format code                  | `yarn format`                                                   |
+| PR validation                | `yarn ci:on-pull-request`                                       |
+| CI publish (manual)          | `GITHUB_REF_NAME=develop yarn ci:publish`                       |
+| CI visual regression comment | `yarn ci:visual-regression --mode=comment`                      |
+| Create changeset             | `yarn changeset`                                                |
+| Version + changelog (manual) | `yarn changeset:version`                                        |
 
 ### Code Style
 

@@ -17,7 +17,7 @@
     "publish": "node --no-warnings=ExperimentalWarning scripts/scripts/publish-figma-plugin-icons/publish-figma-plugin-icons.script.ts"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "^1.120.0",
-    "esbuild": "^0.28.1"
+    "@figma/plugin-typings": "^1.141.0",
+    "esbuild": "^0.28.2"
   }
 }

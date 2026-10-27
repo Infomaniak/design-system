@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.0 (2026-10-26)
+
+### Minor Changes
+
+- [#445](https://github.com/Infomaniak/design-system/pull/445) [`ea776ff`](https://github.com/Infomaniak/design-system/commit/ea776ffdfadc49fcadf36a1f9a438b5bffcbd83d): Add the `esds-badge` web component and its design tokens.
+
+  - New `esds-badge` component that renders a compact status badge around its slotted content (`role="status"`).
+  - New `badge` component tokens (size, padding, radius, colors, font) and `badge-type` modifiers (`primary`, `neutral`).
+
+### Patch Changes
+
+- [#442](https://github.com/Infomaniak/design-system/pull/442) [`bf96e37`](https://github.com/Infomaniak/design-system/commit/bf96e375d3b64abeed6855e0078e17febe0597da): Added `button.size` design tokens. Square `esds-button` elements are now sized by the design system (32 px for `small`, 40 px for `medium` — also the default — and 50 px for `large`) instead of a hardcoded 50 px fallback, so they previously ignored the selected `data-esds-button-size` and always rendered 50 px.
+
 ## 0.5.1 (2026-10-14)
 
 ### Patch Changes

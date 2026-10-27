@@ -3,9 +3,14 @@ export interface GithubIssueComment {
   readonly body: string | null;
 }
 
+export interface GithubPullRequestLabel {
+  readonly name: string;
+}
+
 export interface GithubPullRequestSummary {
   readonly number: number;
   readonly draft: boolean;
+  readonly labels?: readonly GithubPullRequestLabel[];
 }
 
 export interface GithubEventPayload {

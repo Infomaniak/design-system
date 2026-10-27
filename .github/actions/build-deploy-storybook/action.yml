@@ -49,6 +49,13 @@ runs:
       env:
         NODE_AUTH_TOKEN: ${{ github.token }}
 
+    # Java 21 is required by the Valkyrie CLI (Android icons build)
+    - name: Setup Java
+      uses: actions/setup-java@v6
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+
     - name: Install dependencies
       run: yarn install --immutable
       shell: bash
