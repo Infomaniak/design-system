@@ -1,0 +1,1 @@
+import{t as e}from"./iframe-COrnv_0F.js";e();
