@@ -313,19 +313,19 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.on.dataviz.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-dim1) | Default border on data-viz dim1 backgrounds. |
 | color.border.on.dataviz.dim2 | #0b426f | #e0effe | var(--esds-color-border-on-dataviz-dim2) | Default border on data-viz dim2 backgrounds. |
 | color.border.on.dataviz.dim3 | #015ca3 | #7cc8fd | var(--esds-color-border-on-dataviz-dim3) | Default border on data-viz dim3 backgrounds. |
-| color.border.on.feedback.success.dim1 | #fff | #042f16 | var(--esds-color-border-on-feedback-success-dim1) | Border on strong success backgrounds (dim1). |
+| color.border.on.feedback.success.dim1 | #0000 | #0000 | var(--esds-color-border-on-feedback-success-dim1) | Border on strong success backgrounds (dim1). |
 | color.border.on.feedback.success.dim2 | #12552d | #f0fdf4 | var(--esds-color-border-on-feedback-success-dim2) | Border on soft success backgrounds (dim2). |
 | color.border.on.feedback.success.dim3 | #12833d | #83f2ac | var(--esds-color-border-on-feedback-success-dim3) | Border on subtle success backgrounds (dim3). |
-| color.border.on.feedback.warning.dim1 | #fff | #460d02 | var(--esds-color-border-on-feedback-warning-dim1) | Border on strong warning backgrounds (dim1). |
+| color.border.on.feedback.warning.dim1 | #0000 | #0000 | var(--esds-color-border-on-feedback-warning-dim1) | Border on strong warning backgrounds (dim1). |
 | color.border.on.feedback.warning.dim2 | #7a200d | #fff7eb | var(--esds-color-border-on-feedback-warning-dim2) | Border on soft warning backgrounds (dim2). |
 | color.border.on.feedback.warning.dim3 | #b73206 | #ffb34a | var(--esds-color-border-on-feedback-warning-dim3) | Border on subtle warning backgrounds (dim3). |
-| color.border.on.feedback.error.dim1 | #fff | #480707 | var(--esds-color-border-on-feedback-error-dim1) | Border on strong error backgrounds (dim1). |
+| color.border.on.feedback.error.dim1 | #0000 | #0000 | var(--esds-color-border-on-feedback-error-dim1) | Border on strong error backgrounds (dim1). |
 | color.border.on.feedback.error.dim2 | #831919 | #fff1f1 | var(--esds-color-border-on-feedback-error-dim2) | Border on soft error backgrounds (dim2). |
 | color.border.on.feedback.error.dim3 | #c01515 | #ffa1a1 | var(--esds-color-border-on-feedback-error-dim3) | Border on subtle error backgrounds (dim3). |
-| color.border.on.feedback.information.dim1 | #fff | #072a4a | var(--esds-color-border-on-feedback-information-dim1) | Border on strong information backgrounds (dim1). |
+| color.border.on.feedback.information.dim1 | #0000 | #0000 | var(--esds-color-border-on-feedback-information-dim1) | Border on strong information backgrounds (dim1). |
 | color.border.on.feedback.information.dim2 | #0b426f | #f0f8ff | var(--esds-color-border-on-feedback-information-dim2) | Border on soft information backgrounds (dim2). |
 | color.border.on.feedback.information.dim3 | #015ca3 | #7cc8fd | var(--esds-color-border-on-feedback-information-dim3) | Border on subtle information backgrounds (dim3). |
-| color.border.on.feedback.neutral.dim1 | #fff | #020618 | var(--esds-color-border-on-feedback-neutral-dim1) | Border on strong neutral backgrounds (dim1). |
+| color.border.on.feedback.neutral.dim1 | #0000 | #0000 | var(--esds-color-border-on-feedback-neutral-dim1) | Border on strong neutral backgrounds (dim1). |
 | color.border.on.feedback.neutral.dim2 | #0f172b | #f8fafc | var(--esds-color-border-on-feedback-neutral-dim2) | Border on soft neutral backgrounds (dim2). |
 | color.border.on.feedback.neutral.dim3 | #314158 | #cad5e2 | var(--esds-color-border-on-feedback-neutral-dim3) | Border on subtle neutral backgrounds (dim3). |
 | color.border.brand | #0077cf | #36adfa | var(--esds-color-border-brand) | Default brand border color. |
@@ -348,15 +348,15 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.dataviz.violet | #8f30f7 | #b185ff | var(--esds-color-border-dataviz-violet) | Violet data-viz border color. |
 | color.border.dataviz.yellow | #ecb306 | #fccf20 | var(--esds-color-border-dataviz-yellow) | Yellow data-viz border color. |
 | color.border.dataviz.gray | #45556c | #90a1b9 | var(--esds-color-border-dataviz-gray) | Gray data-viz border color. |
+| color.border.dim1 | #90a1b9 | #90a1b9 | var(--esds-color-border-dim1) | Strongest neutral border color with interaction states. |
+| color.border.dim2 | #cad5e2 | #62748e | var(--esds-color-border-dim2) | Strong neutral border color with interaction states. |
+| color.border.dim3 | #e2e8f0 | #45556c | var(--esds-color-border-dim3) | Subtle neutral border color with interaction states. |
+| color.border.dim4 | #f1f5f9 | #314158 | var(--esds-color-border-dim4) | Faintest neutral border color with interaction states. |
 | color.border.feedback.error | #db1a1a | #fe6b6b | var(--esds-color-border-feedback-error) | Error feedback border colors. |
 | color.border.feedback.success | #12a74a | #41e17c | var(--esds-color-border-feedback-success) | Success feedback border colors. |
 | color.border.feedback.warning | #dd4f02 | #ffa032 | var(--esds-color-border-feedback-warning) | Warning feedback border colors. |
 | color.border.feedback.information | #0077cf | #36adfa | var(--esds-color-border-feedback-information) | Information feedback border colors. |
 | color.border.feedback.neutral | #45556c | #90a1b9 | var(--esds-color-border-feedback-neutral) | Neutral feedback border colors. |
-| color.border.dim1 | #90a1b9 | #90a1b9 | var(--esds-color-border-dim1) | Strongest neutral border color with interaction states. |
-| color.border.dim2 | #cad5e2 | #62748e | var(--esds-color-border-dim2) | Strong neutral border color with interaction states. |
-| color.border.dim3 | #e2e8f0 | #45556c | var(--esds-color-border-dim3) | Subtle neutral border color with interaction states. |
-| color.border.dim4 | #f1f5f9 | #314158 | var(--esds-color-border-dim4) | Faintest neutral border color with interaction states. |
 | color.shadow.xs | #90a1b90f | #0206180f | var(--esds-color-shadow-xs) | Shadow color for the xs elevation. |
 | color.shadow.sm | #90a1b90f | #0206180f | var(--esds-color-shadow-sm) | Shadow color for the sm elevation. |
 | color.shadow.md | #90a1b914 | #02061814 | var(--esds-color-shadow-md) | Shadow color for the md elevation. |
@@ -506,6 +506,14 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 
 | Token Name | Light Value | Dark Value | CSS Variable | Description |
 |---|---|---|---|---|
+| badge.size.content | 20px | 20px | var(--esds-badge-size-content) | N/A |
+| badge.size.dot | 4px | 4px | var(--esds-badge-size-dot) | N/A |
+| badge.padding.inline | 2px | 2px | var(--esds-badge-padding-inline) | N/A |
+| badge.padding.block | 0px | 0px | var(--esds-badge-padding-block) | N/A |
+| badge.border.radius | 1000px | 1000px | var(--esds-badge-border-radius) | N/A |
+| badge.background.color | #db1a1a | #fe6b6b | var(--esds-badge-background-color) | N/A |
+| badge.content.color | #fff | #480707 | var(--esds-badge-content-color) | N/A |
+| badge.content.font | 500 0.75rem/16px Infomaniak Sans | 500 0.75rem/16px Infomaniak Sans | var(--esds-badge-content-font) | N/A |
 | body.xs.font.base | 400 0.75rem/16px Infomaniak Sans | 400 0.75rem/16px Infomaniak Sans | var(--esds-body-xs-font-base) | Extra-small body text style. |
 | body.xs.font.emphasized | 500 0.75rem/16px Infomaniak Sans | 500 0.75rem/16px Infomaniak Sans | var(--esds-body-xs-font-emphasized) | Extra-small body text style. |
 | body.sm.font.base | 400 0.875rem/20px Infomaniak Sans | 400 0.875rem/20px Infomaniak Sans | var(--esds-body-sm-font-base) | Small body text style. |
@@ -514,6 +522,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | body.md.font.emphasized | 500 1rem/24px Infomaniak Sans | 500 1rem/24px Infomaniak Sans | var(--esds-body-md-font-emphasized) | Medium (default) body text style. |
 | body.lg.font.base | 400 1.125rem/26px Infomaniak Sans | 400 1.125rem/26px Infomaniak Sans | var(--esds-body-lg-font-base) | Large body text style. |
 | body.lg.font.emphasized | 500 1.125rem/26px Infomaniak Sans | 500 1.125rem/26px Infomaniak Sans | var(--esds-body-lg-font-emphasized) | Large body text style. |
+| button.size | 40px | 40px | var(--esds-button-size) | N/A |
 | button.padding.inline | 12px | 12px | var(--esds-button-padding-inline) | N/A |
 | button.padding.block | 8px | 8px | var(--esds-button-padding-block) | N/A |
 | button.gap.row | 6px | 6px | var(--esds-button-gap-row) | N/A |
