@@ -91,9 +91,28 @@ const buildRel = (incoming: string | string[] | undefined): string => {
 };
 
 /**
+ * Clicks the browser must handle itself instead of the in-app routing:
+ * modified clicks (open in new tab / new window), non-primary buttons and
+ * links with an explicit non-`_self` target keep navigating the normalized
+ * href natively.
+ */
+const isBrowserHandledClick = (
+  event: React.MouseEvent<HTMLAnchorElement>,
+  target: string | undefined,
+): boolean =>
+  event.button !== 0 ||
+  event.metaKey ||
+  event.altKey ||
+  event.ctrlKey ||
+  event.shiftKey ||
+  (target !== undefined && target !== '_self');
+
+/**
  * Anchor for docs content. External links (absolute http(s) URLs) open in a new
  * tab and get a visual cue; internal links are normalized and routed through
- * the Storybook channel. Used as the `a` override for MDX and token markdown.
+ * the Storybook channel on unmodified primary clicks — other clicks (modified
+ * clicks, explicit targets) keep the native navigation. Used as the `a`
+ * override for MDX and token markdown.
  */
 const DocsLink: React.FC<DocsLinkProps> = ({ children, href, rel, onClick, ...rest }) => {
   const context = useContext(DocsContext) as DocsContextProps | null;
@@ -103,6 +122,7 @@ const DocsLink: React.FC<DocsLinkProps> = ({ children, href, rel, onClick, ...re
     return (
       <a
         href={href}
+        onClick={onClick}
         {...rest}
         target="_blank"
         rel={buildRel(rel)}
@@ -124,6 +144,7 @@ const DocsLink: React.FC<DocsLinkProps> = ({ children, href, rel, onClick, ...re
       const routedClick = (event: React.MouseEvent<HTMLAnchorElement>): void => {
         onClick?.(event);
         if (event.defaultPrevented) return;
+        if (isBrowserHandledClick(event, rest.target)) return;
         event.preventDefault();
         channel?.emit(NAVIGATE_URL, appLink.navigateHref);
       };
@@ -144,6 +165,7 @@ const DocsLink: React.FC<DocsLinkProps> = ({ children, href, rel, onClick, ...re
       <a
         href={href}
         rel={buildRel(rel)}
+        onClick={onClick}
         {...rest}
       >
         {children}
@@ -154,6 +176,7 @@ const DocsLink: React.FC<DocsLinkProps> = ({ children, href, rel, onClick, ...re
   return (
     <a
       rel={buildRel(rel)}
+      onClick={onClick}
       {...rest}
     >
       {children}
