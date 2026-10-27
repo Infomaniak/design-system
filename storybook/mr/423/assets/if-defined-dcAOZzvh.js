@@ -1,1 +1,0 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{h as t,v as n}from"./dist-BocxiTde.js";var r;function i(){return(i=e((()=>{n(),r=e=>e??t})))()}function a(){return(a=e((()=>{i()})))()}export{i as n,r,a as t};
