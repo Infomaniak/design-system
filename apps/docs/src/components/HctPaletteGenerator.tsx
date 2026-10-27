@@ -11,7 +11,12 @@ import {
 
 const COPY_FEEDBACK_DURATION_MS = 1500;
 
-type CopyStatus = 'idle' | 'copied' | 'failed';
+type CopyTarget = 'all' | number;
+
+interface CopyFeedback {
+  readonly target: CopyTarget;
+  readonly status: 'copied' | 'failed';
+}
 
 type PaletteResult =
   | {
@@ -48,8 +53,9 @@ function toPickerValue(value: string, fallback: string): string {
 const HctPaletteGenerator: React.FC = () => {
   const [source, setSource] = useState<string>('#6750A4');
   const [tones, setTones] = useState<string>(DEFAULT_TONES.join(', '));
-  const [background, setBackground] = useState<string>('#888888');
-  const [copyStatus, setCopyStatus] = useState<CopyStatus>('idle');
+  const [background, setBackground] = useState<string>('#D1D1D1');
+  const [spacing, setSpacing] = useState<number>(0);
+  const [copyFeedback, setCopyFeedback] = useState<CopyFeedback | null>(null);
   const resetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const result: PaletteResult = useMemo(
@@ -66,25 +72,25 @@ const HctPaletteGenerator: React.FC = () => {
     [],
   );
 
-  async function handleCopy(): Promise<void> {
+  async function handleCopy(text: string, target: CopyTarget): Promise<void> {
     try {
-      await navigator.clipboard.writeText(result.text);
-      setCopyStatus('copied');
+      await navigator.clipboard.writeText(text);
+      setCopyFeedback({ target, status: 'copied' });
     } catch {
-      setCopyStatus('failed');
+      setCopyFeedback({ target, status: 'failed' });
     }
     if (resetTimeoutRef.current) {
       clearTimeout(resetTimeoutRef.current);
     }
-    resetTimeoutRef.current = setTimeout(() => setCopyStatus('idle'), COPY_FEEDBACK_DURATION_MS);
+    resetTimeoutRef.current = setTimeout(() => setCopyFeedback(null), COPY_FEEDBACK_DURATION_MS);
   }
 
-  const contrastColor: string = result.ok && isDark(result.background) ? '#FFFFFF' : '#000000';
-  const copyLabel: Record<CopyStatus, string> = {
-    idle: 'Copy output',
-    copied: 'Copied!',
-    failed: 'Failed to copy',
-  };
+  function feedbackFor(target: CopyTarget, idleLabel: string): string {
+    if (copyFeedback?.target !== target) {
+      return idleLabel;
+    }
+    return copyFeedback.status === 'copied' ? 'Copied!' : 'Failed to copy';
+  }
 
   return (
     <>
@@ -93,10 +99,15 @@ const HctPaletteGenerator: React.FC = () => {
           display: flex;
           flex-direction: column;
           gap: 16px;
-          max-width: 480px;
           margin: 24px 0;
           font-size: 14px;
           color: var(--esds-color-content-primary);
+        }
+        .hct-palette__form {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          max-width: 480px;
         }
         .hct-palette__field {
           display: flex;
@@ -158,121 +169,196 @@ const HctPaletteGenerator: React.FC = () => {
           margin: 0;
           color: var(--esds-color-content-feedback-error);
         }
+        .hct-palette__slider {
+          flex: 1;
+          accent-color: var(--esds-color-content-brand);
+        }
+        .hct-palette__slider-value {
+          min-width: 4ch;
+          font-family: ui-monospace, monospace;
+          text-align: right;
+        }
         .hct-palette__output {
+          display: flex;
+          flex-direction: column;
+          align-self: flex-start;
           margin: 0;
-          padding: 12px 16px;
+          padding: 16px 24px 16px 16px;
           border-radius: 8px;
           list-style: none;
-          font-family: ui-monospace, monospace;
-          white-space: pre;
         }
         .hct-palette__entry {
           display: flex;
           align-items: center;
-          gap: 8px;
-          line-height: 24px;
+          gap: 16px;
+          padding: 0;
+          border: none;
+          background: none;
+          color: inherit;
+          font: inherit;
+          text-align: left;
+          cursor: pointer;
+        }
+        .hct-palette__entry:focus-visible {
+          outline: 2px solid var(--esds-color-border-brand);
+          outline-offset: 2px;
+        }
+        .hct-palette__entry:hover .hct-palette__info {
+          text-decoration: underline;
         }
         .hct-palette__swatch {
-          width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          border: 1px solid;
-          box-sizing: border-box;
+          width: 160px;
+          height: 40px;
+        }
+        .hct-palette__output li:first-child .hct-palette__swatch {
+          border-radius: 6px 6px 0 0;
+        }
+        .hct-palette__output li:last-child .hct-palette__swatch {
+          border-radius: 0 0 6px 6px;
+        }
+        .hct-palette__output li:only-child .hct-palette__swatch,
+        .hct-palette__output.hct-palette__output--spaced li .hct-palette__swatch {
+          border-radius: 6px;
+        }
+        .hct-palette__info {
+          display: flex;
+          gap: 12px;
+          font-family: ui-monospace, monospace;
+          white-space: pre;
+        }
+        .hct-palette__tone {
+          min-width: 3ch;
+          text-align: right;
+          font-weight: 600;
         }
       `}</style>
       <div className="hct-palette sb-unstyled">
-        <div className="hct-palette__field">
-          <label
-            className="hct-palette__label"
-            htmlFor="hct-palette-source"
-          >
-            Base color (source HEX)
-          </label>
-          <div className="hct-palette__row">
+        <div className="hct-palette__form">
+          <div className="hct-palette__field">
+            <label
+              className="hct-palette__label"
+              htmlFor="hct-palette-source"
+            >
+              Base color (source HEX)
+            </label>
+            <div className="hct-palette__row">
+              <input
+                id="hct-palette-source"
+                className="hct-palette__input"
+                value={source}
+                onChange={(event) => setSource(event.target.value)}
+                onBlur={() => setSource((value) => toPickerValue(value, '').toUpperCase() || value)}
+              />
+              <input
+                type="color"
+                className="hct-palette__picker"
+                aria-label="Pick base color"
+                value={toPickerValue(source, '#000000')}
+                onChange={(event) => setSource(event.target.value.toUpperCase())}
+              />
+            </div>
+          </div>
+
+          <div className="hct-palette__field">
+            <label
+              className="hct-palette__label"
+              htmlFor="hct-palette-tones"
+            >
+              Tones (comma separated)
+            </label>
             <input
-              id="hct-palette-source"
+              id="hct-palette-tones"
               className="hct-palette__input"
-              value={source}
-              onChange={(event) => setSource(event.target.value)}
-              onBlur={() => setSource((value) => toPickerValue(value, '').toUpperCase() || value)}
-            />
-            <input
-              type="color"
-              className="hct-palette__picker"
-              aria-label="Pick base color"
-              value={toPickerValue(source, '#000000')}
-              onChange={(event) => setSource(event.target.value.toUpperCase())}
+              value={tones}
+              onChange={(event) => setTones(event.target.value)}
             />
           </div>
-        </div>
 
-        <div className="hct-palette__field">
-          <label
-            className="hct-palette__label"
-            htmlFor="hct-palette-tones"
-          >
-            Tones (comma separated)
-          </label>
-          <input
-            id="hct-palette-tones"
-            className="hct-palette__input"
-            value={tones}
-            onChange={(event) => setTones(event.target.value)}
-          />
-        </div>
-
-        <div className="hct-palette__field">
-          <label
-            className="hct-palette__label"
-            htmlFor="hct-palette-background"
-          >
-            Output background
-          </label>
-          <div className="hct-palette__row">
-            <input
-              id="hct-palette-background"
-              className="hct-palette__input"
-              value={background}
-              onChange={(event) => setBackground(event.target.value)}
-              onBlur={() =>
-                setBackground((value) => toPickerValue(value, '').toUpperCase() || value)
-              }
-            />
-            <input
-              type="color"
-              className="hct-palette__picker"
-              aria-label="Pick output background"
-              value={toPickerValue(background, '#888888')}
-              onChange={(event) => setBackground(event.target.value.toUpperCase())}
-            />
+          <div className="hct-palette__field">
+            <label
+              className="hct-palette__label"
+              htmlFor="hct-palette-background"
+            >
+              Output background
+            </label>
+            <div className="hct-palette__row">
+              <input
+                id="hct-palette-background"
+                className="hct-palette__input"
+                value={background}
+                onChange={(event) => setBackground(event.target.value)}
+                onBlur={() =>
+                  setBackground((value) => toPickerValue(value, '').toUpperCase() || value)
+                }
+              />
+              <input
+                type="color"
+                className="hct-palette__picker"
+                aria-label="Pick output background"
+                value={toPickerValue(background, '#d1d1d1')}
+                onChange={(event) => setBackground(event.target.value.toUpperCase())}
+              />
+            </div>
           </div>
-        </div>
 
-        <button
-          type="button"
-          className="hct-palette__button"
-          disabled={!result.ok}
-          onClick={handleCopy}
-        >
-          {copyLabel[copyStatus]}
-        </button>
+          <div className="hct-palette__field">
+            <label
+              className="hct-palette__label"
+              htmlFor="hct-palette-spacing"
+            >
+              Spacing
+            </label>
+            <div className="hct-palette__row">
+              <input
+                id="hct-palette-spacing"
+                type="range"
+                className="hct-palette__slider"
+                min={0}
+                max={16}
+                value={spacing}
+                onChange={(event) => setSpacing(Number(event.target.value))}
+              />
+              <span className="hct-palette__slider-value">{spacing}px</span>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className="hct-palette__button"
+            disabled={!result.ok}
+            onClick={() => handleCopy(result.text, 'all')}
+          >
+            {feedbackFor('all', 'Copy output')}
+          </button>
+        </div>
 
         {result.ok ? (
           <ul
-            className="hct-palette__output"
+            className={`hct-palette__output${spacing > 0 ? ' hct-palette__output--spaced' : ''}`}
             aria-label="Tonal palette"
-            style={{ background: result.background, color: contrastColor }}
+            style={{
+              gap: `${spacing}px`,
+              background: result.background,
+              color: isDark(result.background) ? '#FFFFFF' : '#000000',
+            }}
           >
             {result.entries.map(({ tone, hex }, index) => (
-              <li
-                key={`${index}-${tone}`}
-                className="hct-palette__entry"
-              >
-                <span
-                  className="hct-palette__swatch"
-                  style={{ background: hex, borderColor: contrastColor }}
-                />
-                {`${String(tone).padStart(3)}  ${hex}`}
+              <li key={`${index}-${tone}`}>
+                <button
+                  type="button"
+                  className="hct-palette__entry"
+                  aria-label={`Copy tone ${tone} (${hex})`}
+                  onClick={() => handleCopy(hex, index)}
+                >
+                  <span
+                    className="hct-palette__swatch"
+                    style={{ background: hex }}
+                  />
+                  <span className="hct-palette__info">
+                    <span className="hct-palette__tone">{tone}</span>
+                    <span>{feedbackFor(index, hex)}</span>
+                  </span>
+                </button>
               </li>
             ))}
           </ul>

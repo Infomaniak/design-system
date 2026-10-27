@@ -2,10 +2,12 @@ import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import HctPaletteGenerator from './HctPaletteGenerator.tsx';
 
-function getEntries(): string[] {
-  return within(screen.getByRole('list', { name: 'Tonal palette' }))
-    .getAllByRole('listitem')
-    .map((item: HTMLElement) => item.textContent ?? '');
+function getTiles(): HTMLElement[] {
+  return within(screen.getByRole('list', { name: 'Tonal palette' })).getAllByRole('button');
+}
+
+function getTileLabels(): string[] {
+  return getTiles().map((tile: HTMLElement) => tile.getAttribute('aria-label') ?? '');
 }
 
 describe('HctPaletteGenerator', () => {
@@ -17,10 +19,11 @@ describe('HctPaletteGenerator', () => {
   it('renders the default palette of #6750A4', () => {
     render(<HctPaletteGenerator />);
 
-    const entries: string[] = getEntries();
-    expect(entries).toHaveLength(19);
-    expect(entries[0]).toBe('  0  #000000');
-    expect(entries[8]).toBe(' 40  #6750A4');
+    const labels: string[] = getTileLabels();
+    expect(labels).toHaveLength(19);
+    expect(labels[0]).toBe('Copy tone 0 (#000000)');
+    expect(labels[8]).toBe('Copy tone 40 (#6750A4)');
+    expect(getTiles()[8]).toHaveTextContent('40#6750A4');
   });
 
   it('regenerates the palette live from the source and tones inputs', () => {
@@ -33,7 +36,7 @@ describe('HctPaletteGenerator', () => {
       target: { value: '10, 60' },
     });
 
-    expect(getEntries()).toEqual([' 10  #400014', ' 60  #FF4E7C']);
+    expect(getTileLabels()).toEqual(['Copy tone 10 (#400014)', 'Copy tone 60 (#FF4E7C)']);
   });
 
   it('syncs the text input with the color picker and normalizes on blur', () => {
@@ -50,12 +53,13 @@ describe('HctPaletteGenerator', () => {
     expect(sourcePicker).toHaveValue('#0098ff');
   });
 
-  it('applies the output background and a contrasting text color', () => {
+  it('renders swatches on the output background with a contrasting text color', () => {
     render(<HctPaletteGenerator />);
     const output = screen.getByRole('list', { name: 'Tonal palette' });
     const backgroundInput = screen.getByLabelText('Output background');
 
-    expect(output).toHaveStyle({ background: '#888888', color: '#000000' });
+    expect(output).toHaveStyle({ background: '#D1D1D1', color: '#000000' });
+    expect(getTiles()[8].firstElementChild).toHaveStyle({ background: '#6750A4' });
 
     fireEvent.change(screen.getByLabelText('Pick output background'), {
       target: { value: '#111111' },
@@ -69,8 +73,22 @@ describe('HctPaletteGenerator', () => {
     fireEvent.change(backgroundInput, { target: { value: 'nope' } });
     fireEvent.blur(backgroundInput);
     expect(backgroundInput).toHaveValue('nope');
-    expect(screen.getByLabelText('Pick output background')).toHaveValue('#888888');
+    expect(screen.getByLabelText('Pick output background')).toHaveValue('#d1d1d1');
     expect(screen.getByRole('alert')).toHaveTextContent('Use a 6-digit hex color');
+  });
+
+  it('spaces the swatches with the spacing slider', () => {
+    render(<HctPaletteGenerator />);
+    const output = screen.getByRole('list', { name: 'Tonal palette' });
+
+    expect(output).toHaveStyle({ gap: '0px' });
+    expect(output).not.toHaveClass('hct-palette__output--spaced');
+
+    fireEvent.change(screen.getByLabelText('Spacing'), { target: { value: '8' } });
+
+    expect(output).toHaveStyle({ gap: '8px' });
+    expect(output).toHaveClass('hct-palette__output--spaced');
+    expect(screen.getByText('8px')).toBeInTheDocument();
   });
 
   it('shows an error and disables copy while an input is invalid', () => {
@@ -107,6 +125,22 @@ describe('HctPaletteGenerator', () => {
 
     act(() => vi.advanceTimersByTime(1500));
     expect(button).toHaveTextContent('Copy output');
+  });
+
+  it('copies a single tone when its tile is clicked', async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    vi.stubGlobal('navigator', { clipboard: { writeText } });
+    render(<HctPaletteGenerator />);
+
+    const tile: HTMLElement = screen.getByRole('button', { name: 'Copy tone 40 (#6750A4)' });
+    await act(async () => fireEvent.click(tile));
+
+    expect(writeText).toHaveBeenCalledWith('#6750A4');
+    expect(tile).toHaveTextContent('40Copied!');
+    expect(screen.getByRole('button', { name: 'Copy output' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Copy tone 0 (#000000)' })).toHaveTextContent(
+      '0#000000',
+    );
   });
 
   it('reports a clipboard failure', async () => {
