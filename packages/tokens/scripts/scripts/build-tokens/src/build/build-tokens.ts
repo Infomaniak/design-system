@@ -99,20 +99,20 @@ export function buildTokens({
       logger,
     });
 
+    // SWIFT
+    await buildSwiftTokens({
+      baseCollection,
+      modifiers,
+      outputDirectory,
+      logger,
+    });
+
     // TODO continue here
 
     /* eslint-disable */ // TODO remove
     if (false) {
       // TODO remove
       // @ts-ignore // TODO remove
-
-      // SWIFT
-      await buildSwiftTokens({
-        baseCollection,
-        modifiers,
-        outputDirectory,
-        logger,
-      });
 
       // KOTLIN
       await buildKotlinTokens({
