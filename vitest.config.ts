@@ -17,7 +17,29 @@ export default defineConfig({
     // dir: 'src',
     dir: '.',
     environment: 'happy-dom',
+    environmentOptions: {
+      happyDOM: {
+        settings: {
+          // Unit tests must not perform real navigations: clicking an anchor
+          // whose default action is not prevented would otherwise fetch the
+          // URL in a child page (e.g. a dev server running on localhost:3000,
+          // the environment default). With navigation disabled, happy-dom
+          // falls back to updating the URL only.
+          navigation: {
+            disableMainFrameNavigation: true,
+            disableChildFrameNavigation: true,
+            disableChildPageNavigation: true,
+          },
+        },
+      },
+    },
     setupFiles: ['./apps/docs/src/test.setup.ts'],
+    server: {
+      deps: {
+        // Ships extensionless relative imports that Node's ESM resolver rejects.
+        inline: ['@material/material-color-utilities'],
+      },
+    },
     exclude: [
       '**/node_modules/**',
       '**/dist/**',
@@ -31,10 +53,11 @@ export default defineConfig({
       // include: ['src/**/*.ts'],
       include: ['./**/*.ts'],
       exclude: [
+        '**/*.d.ts',
         'src/**/*.{test,bench}.ts',
         'src/**/*.skip-test*.ts',
         'src/**/*.skip-test*/**/*.ts',
-        'dist/**/*',
+        '**/dist/**',
         'node_modules/**/*',
         '**/*.e2e.ts',
         '**/*.e2e-spec.ts',

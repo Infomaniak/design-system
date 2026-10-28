@@ -60,6 +60,9 @@ import '@infomaniak-design-system/tokens/dist/web/css/modifiers/button-size/all.
 // Import all button-type modifiers
 import '@infomaniak-design-system/tokens/dist/web/css/modifiers/button-type/all.attr.css';
 
+// Import all badge-type modifiers
+import '@infomaniak-design-system/tokens/dist/web/css/modifiers/badge-type/all.attr.css';
+
 // Initialize <esds-icon> and provide IconifyApi via root InjectionContext
 EsdsIconComponent.define();
 

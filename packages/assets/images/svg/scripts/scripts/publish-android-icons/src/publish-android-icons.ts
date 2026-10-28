@@ -2,6 +2,7 @@ import { join } from 'node:path';
 import type { PackageJson } from '../../../../../../../../scripts/helpers/file/package-json/package-json.ts';
 import { readPackageJsonFile } from '../../../../../../../../scripts/helpers/file/package-json/read-package-json-file.ts';
 import type { GitChanges } from '../../../../../../../../scripts/helpers/git/git-changes.ts';
+import { deleteGithubObsoletePublishBranches } from '../../../../../../../../scripts/helpers/github/branch/delete-github-obsolete-publish-branches.ts';
 import { ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME } from '../../../../../../../../scripts/helpers/github/constants/android-design-system-repository-name.constant.ts';
 import { INFOMANIAK_GITHUB_ORGANIZATION } from '../../../../../../../../scripts/helpers/github/constants/infomaniak-github-organization.constant.ts';
 import { createGithubPullRequest } from '../../../../../../../../scripts/helpers/github/pull-request/create-github-pull-request.ts';
@@ -17,16 +18,19 @@ export interface PublishAndroidIconsOptions extends PublishConfig {
   readonly packageRootDirectory: string;
   /** Directory containing the generated `<IconName>.kt` ImageVector files. */
   readonly imageVectorsDirectory: string;
+  /** Directory containing the generated `<IconName>.kt` Symbol files. */
+  readonly symbolsDirectory: string;
 }
 
 /**
- * Publishes the generated Compose ImageVectors to the Android design system repository:
+ * Publishes the generated Compose ImageVectors and Symbols to the Android design system repository:
  * pushes them on a dedicated branch and opens a pull request.
  */
 export async function publishAndroidIcons({
   logger,
   packageRootDirectory,
   imageVectorsDirectory,
+  symbolsDirectory,
   // shared publish options
   mode,
   prerelease,
@@ -42,25 +46,38 @@ export async function publishAndroidIcons({
       prerelease,
     });
 
-    const publishBranchName: string = `esds/icons/${publishVersion}`;
+    const publishBranchPrefix: string = 'esds/icons/';
+    const publishBranchName: string = `${publishBranchPrefix}${publishVersion}`;
 
     const changes: GitChanges = await createAndroidIconsPublishGithubBranch({
       logger,
       imageVectorsDirectory,
+      symbolsDirectory,
       packageName: name,
       version: publishVersion,
       branchName: publishBranchName,
     });
 
     if (changes.length > 0) {
+      const authToken: string = getEnvCiPullRequestAuthTokenMobile();
+
       await createGithubPullRequest({
         owner: INFOMANIAK_GITHUB_ORGANIZATION,
         repository: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
-        authToken: getEnvCiPullRequestAuthTokenMobile(),
+        authToken,
         title: `chore: ${name}@${publishVersion}`,
         body: `${name}@${publishVersion}`,
         head: publishBranchName,
         base: 'main',
+      });
+
+      await deleteGithubObsoletePublishBranches({
+        owner: INFOMANIAK_GITHUB_ORGANIZATION,
+        repository: ANDROID_DESIGN_SYSTEM_REPOSITORY_NAME,
+        authToken,
+        branchPrefix: publishBranchPrefix,
+        currentBranchName: publishBranchName,
+        logger,
       });
     } else {
       logger.info('SKIP (non-blocking): No changes to publish');
