@@ -6,7 +6,14 @@ export function isTokensBrueckeDesignTokenFontWeightDesignToken(
   ctx: TokensBrueckeToDtcgContext,
 ): boolean {
   return (
-    ctx.path.join('.').includes('font.weight') ||
+    (ctx.path.join('.').includes('font.weight') && !ctx.path.join('.').endsWith('-italic')) ||
     (input.scopes !== undefined && input.scopes.includes('FONT_WEIGHT'))
   );
+}
+
+export function isTokensBrueckeDesignTokenFakeFontWeightDesignToken(
+  input: GenericTokensBrueckeDesignToken,
+  ctx: TokensBrueckeToDtcgContext,
+): boolean {
+  return ctx.path.join('.').includes('font.weight') && ctx.path.join('.').endsWith('-italic');
 }
