@@ -10,6 +10,7 @@
   "dependencies": {
     "@infomaniak-design-system/components": "workspace:^",
     "@infomaniak-design-system/tokens": "workspace:^",
+    "@material/material-color-utilities": "^0.4.0",
     "markdown-to-jsx": "^9.10.3",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"

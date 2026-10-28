@@ -1310,6 +1310,7 @@ __metadata:
     "@iconify/types": "npm:^2.0.0"
     "@infomaniak-design-system/components": "workspace:^"
     "@infomaniak-design-system/tokens": "workspace:^"
+    "@material/material-color-utilities": "npm:^0.4.0"
     "@rolldown/plugin-babel": "npm:^0.2.4"
     "@storybook/addon-a11y": "npm:^10.6.2"
     "@storybook/addon-docs": "npm:^10.6.2"
@@ -1608,6 +1609,13 @@ __metadata:
     tinyglobby: "npm:^0.2.13"
     yaml: "npm:^2.9.0"
   checksum: 10c0/05c8ece3b3b3ff170765ecf230f0a5408543f1ad43f8b5dc97651adff0ffed3d860dabdd1e2d1068aa247832d473c4de583791675b8f3d07568da4cab2a0ebc3
+  languageName: node
+  linkType: hard
+
+"@material/material-color-utilities@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "@material/material-color-utilities@npm:0.4.0"
+  checksum: 10c0/cf4e6ea31ce4d357cd305efd2ef4f22f1830a2f3718f8da3f0968b6eb426290c86e148245530056311ff3d24d39aa9e7c931e5c5b345b3ed21294aa938976ea6
   languageName: node
   linkType: hard
 
