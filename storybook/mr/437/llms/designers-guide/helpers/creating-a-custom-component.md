@@ -1,0 +1,91 @@
+# Designers Guide/Helpers/Creating a custom component
+
+> Use this guide only when nothing can be reused from the native kit **and** the DS team has approved the creation of a...
+
+Use this guide only when nothing can be reused from the native kit **and** the DS team has approved the creation of a custom component. If that approval hasn't happened yet, talk to the DS team before you start.
+
+> 👑 **Golden rule**: don't do anything now that will have to be undone later. The component must be able to join its kit as is when it's integrated, without being taken apart.
+
+## Which tokens for which component?
+
+- 🍎 iOS/iPadOS component:
+  [Token Core](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2-260&t=U8dJUATnrl0en4i0-11)
+- 🤖 Material component:
+  [Material kit](https://www.figma.com/design/r4D2DKWIyzVoigyiTh16Hh/Edelweiss---Material-Kit?m=auto&t=6Praqzvd4yFcNUmT-6)
+- 🕸️ Shadcn component:
+  [Shadcn kit](https://www.figma.com/design/eOY97TGxMkMx9ub9zt8e6v/Edelweiss---Shadcn-Kit--Paid-?m=auto&t=6Praqzvd4yFcNUmT-6)
+
+<img
+  src={CustomComponentTokens}
+  alt="Applying kit tokens and text styles in Figma for Token Core, iOS/iPadOS, Material and Shadcn components"
+/>
+
+## 1. Design in context 🎨
+
+1. Start with a simple frame in auto layout.
+2. Place it in a real screen filled with real content. At this stage, it's not a component yet. The goal is to find the right shape first. Componentizing too early locks in things that will still change several times.
+3. Once the component concept is set, validate it with the DS team and the dev teams to make sure it's feasible.
+4. Once it's validated, convert it into a component, add all states and/or variants, then move on to step 2.
+
+<img
+  src={CustomComponentDesignInContext}
+  alt="A calendar event designed in a real screen: ready for the DS team to approve vs one that shouldn't be a component at this stage"
+/>
+
+## 2. Test the edge cases 😥
+
+- Very long text
+- Empty content
+- Variable widths
+- Liquid Glass background for iOS/iPadOS 🍎
+
+<img
+  src={CustomComponentEdgeCases}
+  alt="An event component with a very long title wrapping onto two lines instead of overlapping the trailing icons"
+/>
+
+## 3. Extract only when needed 🧩
+
+- Create a subcomponent only if it has its own states or is reused elsewhere. Otherwise, keep a simple frame.
+- For an internal subcomponent, prefix its name with `.` or `_`: Figma won't publish it to the library.
+
+<img
+  src={CustomComponentSubcomponents}
+  alt="An internal _month-cell subcomponent reused as labels inside a calendar component"
+/>
+
+## 4. Ready-to-use component checklist ✅
+
+### Tokens
+
+- The tokens from its respective kit are applied
+- The right tokens are used (e.g. no `background` token on text)
+- No hard-coded values left (color, spacing, radius)
+- Text styles are applied, not local sizes and weights
+- The component is checked in light and dark mode
+- Icons come from Iconography, with no imported or flattened icons
+
+### Properties
+
+- Default values are usable as is (default state, realistic text)
+- Properties are properly named, in English
+- Native kit naming is used whenever possible (e.g. symbol, leading, trailing…)
+- Showing or hiding an element uses a boolean, not a variant
+- Instance swaps offer preferred values (e.g. the relevant Iconography icons)
+- Properties of nested instances are exposed when needed
+- No unused or invalid properties left behind
+
+### Structure
+
+- No detached instances
+- Auto layout is applied
+- Layers are named (no "Frame 427"), with no hidden layers or leftover groups
+- The component resizes correctly (hug and fill tested, min/max width if needed)
+- Long-text behavior is defined (wrapping or truncation)
+- Slots are used wisely (e.g. avoid multiple variants just to change how many times an element appears)
+- Internal subcomponents are prefixed with `.` or `_`
+
+## 5. Integration into the kit by the DS team 🌼
+
+- All states required by the kit are present
+- A usage doc explains why this component exists instead of a native equivalent
