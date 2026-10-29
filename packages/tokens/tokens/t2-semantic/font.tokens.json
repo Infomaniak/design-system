@@ -100,6 +100,13 @@
           "scopes": []
         }
       },
+      "lg": {
+        "$value": "{font.line-height.26}",
+        "$description": "Large line-height for the lg font size.",
+        "$extensions": {
+          "scopes": []
+        }
+      },
       "xl": {
         "$value": "{font.line-height.28}",
         "$description": "Large line-height for relaxed headings.",
@@ -131,13 +138,6 @@
       "5xl": {
         "$value": "{font.line-height.56}",
         "$description": "5x-large line-height for hero display text.",
-        "$extensions": {
-          "scopes": []
-        }
-      },
-      "lg": {
-        "$value": "{font.line-height.26}",
-        "$description": "Large line-height for the lg font size.",
         "$extensions": {
           "scopes": []
         }

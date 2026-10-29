@@ -472,7 +472,7 @@
           "$value": "{color.gray.400}",
           "$description": "Content color for disabled states on backgrounds.",
           "$extensions": {
-            "scopes": ["TEXT_FILL"]
+            "scopes": ["ALL_FILLS"]
           }
         },
         "brand": {
