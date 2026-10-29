@@ -32,7 +32,7 @@
       }
     },
     "size": {
-      "$value": "{dimensions.32}"
+      "$value": "{dimension.32}"
     }
   }
 }

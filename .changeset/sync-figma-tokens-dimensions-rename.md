@@ -4,7 +4,7 @@
 
 Sync DTCG tokens from the Figma export:
 
-- Renamed the primitive `scale` tokens to `dimensions`; all values are unchanged (including `50`), references now point to `{dimensions.N}`.
+- Renamed the primitive `scale` tokens to `dimension`; all values are unchanged (including `50`), references now point to `{dimension.N}`.
 - Added `dim1` feedback color variants (success, warning, error, information, neutral) for light and dark themes.
 - Added italic font weight tokens (`weight.400-italic`, `weight.500-italic`).
-- Removed the badge component tokens and the `badge-type` modifiers, no longer part of the Figma token export.
+- Badge tokens now use the new `dim1` feedback colors (background and content).

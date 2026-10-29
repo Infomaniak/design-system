@@ -1,6 +1,6 @@
 {
   "$type": "dimension",
-  "dimensions": {
+  "dimension": {
     "0": {
       "$value": {
         "value": 0,
