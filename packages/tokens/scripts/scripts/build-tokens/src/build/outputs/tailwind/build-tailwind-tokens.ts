@@ -74,7 +74,7 @@ export function buildTailwindTokens({
         }),
       );
 
-      const cssVariables: string = cssVariableDeclarationsToString([
+      const themeVariableDeclarations: readonly CssVariableDeclaration[] = [
         // NOTE: when all namespaces will be bound, we'll swap to `--*: initial`
         ...[
           'color',
@@ -282,9 +282,28 @@ export function buildTailwindTokens({
           name: '--spacing',
           value: '0.25rem',
         },
-      ]);
+      ];
 
-      return wrapCssVariableDeclarationsWithCssSelector(cssVariables, '@theme inline');
+      // NOTE: theme modifiers (dark/light) only swap `--esds-color-*`, so spacing and
+      // radius values are literals or references to theme-invariant variables. They must
+      // NOT be inlined: `@theme inline` substitutes values in utilities and drops the
+      // variables from the Theme object, hiding them from value-resolution tooling.
+      const themeInvariantVariables: string = cssVariableDeclarationsToString(
+        themeVariableDeclarations.filter((declaration: CssVariableDeclaration): boolean => {
+          return isThemeInvariant(declaration);
+        }),
+      );
+
+      const swappableVariables: string = cssVariableDeclarationsToString(
+        themeVariableDeclarations.filter((declaration: CssVariableDeclaration): boolean => {
+          return !isThemeInvariant(declaration);
+        }),
+      );
+
+      return [
+        wrapCssVariableDeclarationsWithCssSelector(themeInvariantVariables, '@theme'),
+        wrapCssVariableDeclarationsWithCssSelector(swappableVariables, '@theme inline'),
+      ].join('\n');
     });
 
     const components: string = await logger.asyncTask('components', async () => {
@@ -318,4 +337,8 @@ function isTailwindToken(token: GenericDesignTokensCollectionToken): boolean {
       (file: string): boolean => !file.includes(T1_DIRECTORY_NAME),
     ) /* not a T1 token */ || token.name.join('.').startsWith('color.transparent')
   );
+}
+
+function isThemeInvariant(declaration: CssVariableDeclaration): boolean {
+  return declaration.name.startsWith('--spacing') || declaration.name.startsWith('--radius');
 }
