@@ -192,7 +192,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.feedback.warning.dim3 | #fff7eb | #460d02 | var(--esds-color-background-feedback-warning-dim3) | Subtle warning background (dim3). |
 | color.background.feedback.error.dim1 | #db1a1a | #fe6b6b | var(--esds-color-background-feedback-error-dim1) | Strong error background (dim1). |
 | color.background.feedback.error.dim2 | #ffc8c8 | #831919 | var(--esds-color-background-feedback-error-dim2) | Soft error background (dim2). |
-| color.background.feedback.error.dim3 | #fff1f1 | #480707 | var(--esds-color-background-feedback-error-dim3) | Subtle success background (dim3). |
+| color.background.feedback.error.dim3 | #fff1f1 | #480707 | var(--esds-color-background-feedback-error-dim3) | Subtle error background (dim3). |
 | color.background.feedback.information.dim1 | #0077cf | #36adfa | var(--esds-color-background-feedback-information-dim1) | Strong information background (dim1). |
 | color.background.feedback.information.dim2 | #b9e0fe | #0b426f | var(--esds-color-background-feedback-information-dim2) | Soft information background (dim2). |
 | color.background.feedback.information.dim3 | #f0f8ff | #072a4a | var(--esds-color-background-feedback-information-dim3) | Subtle information background (dim3). |
@@ -313,19 +313,19 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.on.dataviz.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-dim1) | Default border on data-viz dim1 backgrounds. |
 | color.border.on.dataviz.dim2 | #0b426f | #e0effe | var(--esds-color-border-on-dataviz-dim2) | Default border on data-viz dim2 backgrounds. |
 | color.border.on.dataviz.dim3 | #015ca3 | #7cc8fd | var(--esds-color-border-on-dataviz-dim3) | Default border on data-viz dim3 backgrounds. |
-| color.border.on.feedback.success.dim1 | #0000 | #0000 | var(--esds-color-border-on-feedback-success-dim1) | Border on strong success backgrounds (dim1). |
+| color.border.on.feedback.success.dim1 | #fff | #042f16 | var(--esds-color-border-on-feedback-success-dim1) | Border on strong success backgrounds (dim1). |
 | color.border.on.feedback.success.dim2 | #12552d | #f0fdf4 | var(--esds-color-border-on-feedback-success-dim2) | Border on soft success backgrounds (dim2). |
 | color.border.on.feedback.success.dim3 | #12833d | #83f2ac | var(--esds-color-border-on-feedback-success-dim3) | Border on subtle success backgrounds (dim3). |
-| color.border.on.feedback.warning.dim1 | #0000 | #0000 | var(--esds-color-border-on-feedback-warning-dim1) | Border on strong warning backgrounds (dim1). |
+| color.border.on.feedback.warning.dim1 | #fff | #460d02 | var(--esds-color-border-on-feedback-warning-dim1) | Border on strong warning backgrounds (dim1). |
 | color.border.on.feedback.warning.dim2 | #7a200d | #fff7eb | var(--esds-color-border-on-feedback-warning-dim2) | Border on soft warning backgrounds (dim2). |
 | color.border.on.feedback.warning.dim3 | #b73206 | #ffb34a | var(--esds-color-border-on-feedback-warning-dim3) | Border on subtle warning backgrounds (dim3). |
-| color.border.on.feedback.error.dim1 | #0000 | #0000 | var(--esds-color-border-on-feedback-error-dim1) | Border on strong error backgrounds (dim1). |
+| color.border.on.feedback.error.dim1 | #fff | #480707 | var(--esds-color-border-on-feedback-error-dim1) | Border on strong error backgrounds (dim1). |
 | color.border.on.feedback.error.dim2 | #831919 | #fff1f1 | var(--esds-color-border-on-feedback-error-dim2) | Border on soft error backgrounds (dim2). |
 | color.border.on.feedback.error.dim3 | #c01515 | #ffa1a1 | var(--esds-color-border-on-feedback-error-dim3) | Border on subtle error backgrounds (dim3). |
-| color.border.on.feedback.information.dim1 | #0000 | #0000 | var(--esds-color-border-on-feedback-information-dim1) | Border on strong information backgrounds (dim1). |
+| color.border.on.feedback.information.dim1 | #fff | #072a4a | var(--esds-color-border-on-feedback-information-dim1) | Border on strong information backgrounds (dim1). |
 | color.border.on.feedback.information.dim2 | #0b426f | #f0f8ff | var(--esds-color-border-on-feedback-information-dim2) | Border on soft information backgrounds (dim2). |
 | color.border.on.feedback.information.dim3 | #015ca3 | #7cc8fd | var(--esds-color-border-on-feedback-information-dim3) | Border on subtle information backgrounds (dim3). |
-| color.border.on.feedback.neutral.dim1 | #0000 | #0000 | var(--esds-color-border-on-feedback-neutral-dim1) | Border on strong neutral backgrounds (dim1). |
+| color.border.on.feedback.neutral.dim1 | #fff | #020618 | var(--esds-color-border-on-feedback-neutral-dim1) | Border on strong neutral backgrounds (dim1). |
 | color.border.on.feedback.neutral.dim2 | #0f172b | #f8fafc | var(--esds-color-border-on-feedback-neutral-dim2) | Border on soft neutral backgrounds (dim2). |
 | color.border.on.feedback.neutral.dim3 | #314158 | #cad5e2 | var(--esds-color-border-on-feedback-neutral-dim3) | Border on subtle neutral backgrounds (dim3). |
 | color.border.brand | #0077cf | #36adfa | var(--esds-color-border-brand) | Default brand border color. |
@@ -364,14 +364,14 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.shadow.xl | #90a1b91a | #0206181a | var(--esds-color-shadow-xl) | Shadow color for the xl elevation. |
 | color.shadow.2xl | #90a1b924 | #02061824 | var(--esds-color-shadow-2xl) | Shadow color for the 2xl elevation. |
 | color.state.focus | #0077cf | #36adfa | var(--esds-color-state-focus) | Focus ring color for focused interactive elements. |
-| color.state.hover.soft | #0b426f0f | #f8fafc0f | var(--esds-color-state-hover-soft) | Medium hover overlay for subtle interactive feedback. |
-| color.state.hover.medium | #0b426f1f | #f8fafc1f | var(--esds-color-state-hover-medium) | Medium hover overlay for subtle interactive feedback. |
+| color.state.hover.soft | #0b426f0f | #f8fafc0f | var(--esds-color-state-hover-soft) | Soft hover overlay for subtle interactive feedback. |
+| color.state.hover.medium | #0b426f1f | #f8fafc1f | var(--esds-color-state-hover-medium) | Medium hover overlay for balanced interactive feedback. |
 | color.state.hover.strong | #0b426f99 | #f8fafc33 | var(--esds-color-state-hover-strong) | Strong hover overlay for prominent interactive feedback. |
-| color.state.pressed.soft | #0b426f1f | #f8fafc1f | var(--esds-color-state-pressed-soft) | Medium pressed overlay for subtle active feedback. |
-| color.state.pressed.medium | #0b426f4d | #f8fafc4d | var(--esds-color-state-pressed-medium) | Medium pressed overlay for subtle active feedback. |
+| color.state.pressed.soft | #0b426f1f | #f8fafc1f | var(--esds-color-state-pressed-soft) | Soft pressed overlay for subtle active feedback. |
+| color.state.pressed.medium | #0b426f4d | #f8fafc4d | var(--esds-color-state-pressed-medium) | Medium pressed overlay for balanced active feedback. |
 | color.state.pressed.strong | #0b426fcc | #f8fafc66 | var(--esds-color-state-pressed-strong) | Strong pressed overlay for prominent active feedback. |
-| color.state.selected.soft | #0b426f0f | #f8fafc1f | var(--esds-color-state-selected-soft) | Medium selected overlay for subtle selection feedback. |
-| color.state.selected.medium | #0b426f1f | #f8fafc29 | var(--esds-color-state-selected-medium) | Medium selected overlay for subtle selection feedback. |
+| color.state.selected.soft | #0b426f0f | #f8fafc1f | var(--esds-color-state-selected-soft) | Soft selected overlay for subtle selection feedback. |
+| color.state.selected.medium | #0b426f1f | #f8fafc29 | var(--esds-color-state-selected-medium) | Medium selected overlay for balanced selection feedback. |
 | color.state.selected.strong | #0b426f99 | #f8fafc66 | var(--esds-color-state-selected-strong) | Strong selected overlay for prominent selection feedback. |
 | font.size.xs | 0.75rem | 0.75rem | var(--esds-font-size-xs) | Extra-small font size for captions and metadata. |
 | font.size.sm | 0.875rem | 0.875rem | var(--esds-font-size-sm) | Small font size for helper text and compact UI. |
@@ -386,12 +386,12 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | font.line-height.xs | 16px | 16px | var(--esds-font-line-height-xs) | Extra-small line-height for the tightest text. |
 | font.line-height.sm | 20px | 20px | var(--esds-font-line-height-sm) | Small line-height for compact text blocks. |
 | font.line-height.md | 24px | 24px | var(--esds-font-line-height-md) | Medium line-height for default body text. |
+| font.line-height.lg | 26px | 26px | var(--esds-font-line-height-lg) | Large line-height for the lg font size. |
 | font.line-height.xl | 28px | 28px | var(--esds-font-line-height-xl) | Large line-height for relaxed headings. |
 | font.line-height.2xl | 32px | 32px | var(--esds-font-line-height-2xl) | 2x-large line-height for prominent headings. |
 | font.line-height.3xl | 40px | 40px | var(--esds-font-line-height-3xl) | 3x-large line-height for display headings. |
 | font.line-height.4xl | 48px | 48px | var(--esds-font-line-height-4xl) | 4x-large line-height for large display text. |
 | font.line-height.5xl | 56px | 56px | var(--esds-font-line-height-5xl) | 5x-large line-height for hero display text. |
-| font.line-height.lg | 26px | 26px | var(--esds-font-line-height-lg) | Large line-height for the lg font size. |
 | font.letter-spacing.md | 0px | 0px | var(--esds-font-letter-spacing-md) | Default letter spacing for body and UI text. |
 | font.weight.regular | 400 | 400 | var(--esds-font-weight-regular) | Regular weight for body copy and default text. |
 | font.weight.medium | 500 | 500 | var(--esds-font-weight-medium) | Medium weight for emphasized labels and headings. |
@@ -506,54 +506,54 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 
 | Token Name | Light Value | Dark Value | CSS Variable | Description |
 |---|---|---|---|---|
-| badge.size.content | 20px | 20px | var(--esds-badge-size-content) | N/A |
-| badge.size.dot | 4px | 4px | var(--esds-badge-size-dot) | N/A |
-| badge.padding.inline | 2px | 2px | var(--esds-badge-padding-inline) | N/A |
-| badge.padding.block | 0px | 0px | var(--esds-badge-padding-block) | N/A |
-| badge.border.radius | 1000px | 1000px | var(--esds-badge-border-radius) | N/A |
-| badge.background.color | #db1a1a | #fe6b6b | var(--esds-badge-background-color) | N/A |
-| badge.content.color | #fff | #480707 | var(--esds-badge-content-color) | N/A |
-| badge.content.font | 500 0.75rem/16px Infomaniak Sans | 500 0.75rem/16px Infomaniak Sans | var(--esds-badge-content-font) | N/A |
-| body.xs.font.base | 400 0.75rem/16px Infomaniak Sans | 400 0.75rem/16px Infomaniak Sans | var(--esds-body-xs-font-base) | Extra-small body text style. |
-| body.xs.font.emphasized | 500 0.75rem/16px Infomaniak Sans | 500 0.75rem/16px Infomaniak Sans | var(--esds-body-xs-font-emphasized) | Extra-small body text style. |
-| body.sm.font.base | 400 0.875rem/20px Infomaniak Sans | 400 0.875rem/20px Infomaniak Sans | var(--esds-body-sm-font-base) | Small body text style. |
-| body.sm.font.emphasized | 500 0.875rem/20px Infomaniak Sans | 500 0.875rem/20px Infomaniak Sans | var(--esds-body-sm-font-emphasized) | Small body text style. |
-| body.md.font.base | 400 1rem/24px Infomaniak Sans | 400 1rem/24px Infomaniak Sans | var(--esds-body-md-font-base) | Medium (default) body text style. |
-| body.md.font.emphasized | 500 1rem/24px Infomaniak Sans | 500 1rem/24px Infomaniak Sans | var(--esds-body-md-font-emphasized) | Medium (default) body text style. |
-| body.lg.font.base | 400 1.125rem/26px Infomaniak Sans | 400 1.125rem/26px Infomaniak Sans | var(--esds-body-lg-font-base) | Large body text style. |
-| body.lg.font.emphasized | 500 1.125rem/26px Infomaniak Sans | 500 1.125rem/26px Infomaniak Sans | var(--esds-body-lg-font-emphasized) | Large body text style. |
-| button.size | 40px | 40px | var(--esds-button-size) | N/A |
-| button.padding.inline | 12px | 12px | var(--esds-button-padding-inline) | N/A |
-| button.padding.block | 8px | 8px | var(--esds-button-padding-block) | N/A |
-| button.gap.row | 6px | 6px | var(--esds-button-gap-row) | N/A |
-| button.gap.column | 6px | 6px | var(--esds-button-gap-column) | N/A |
-| button.border.radius | 8px | 8px | var(--esds-button-border-radius) | N/A |
-| button.border.color | #0077cf | #36adfa | var(--esds-button-border-color) | N/A |
-| button.border.color.disabled | #e2e8f0 | #0f172b | var(--esds-button-border-color-disabled) | N/A |
-| button.border.width | 0px | 0px | var(--esds-button-border-width) | N/A |
-| button.border.width.disabled | 0px | 0px | var(--esds-button-border-width-disabled) | N/A |
-| button.background.color | #0077cf | #36adfa | var(--esds-button-background-color) | N/A |
-| button.background.color.disabled | #e2e8f0 | #0f172b | var(--esds-button-background-color-disabled) | N/A |
-| button.content.color | #fff | #072a4a | var(--esds-button-content-color) | N/A |
-| button.content.color.disabled | #90a1b9 | #62748e | var(--esds-button-content-color-disabled) | N/A |
-| button.content.font | 500 1rem/24px Infomaniak Sans | 500 1rem/24px Infomaniak Sans | var(--esds-button-content-font) | N/A |
-| button.color.state.hover | #0b426f1f | #f8fafc1f | var(--esds-button-color-state-hover) | N/A |
-| button.color.state.pressed | #0b426f4d | #f8fafc4d | var(--esds-button-color-state-pressed) | N/A |
-| button.icon.size | 24px | 24px | var(--esds-button-icon-size) | N/A |
+| badge.size.content | 20px | 20px | var(--esds-badge-size-content) | Default badge size for content badges. |
+| badge.size.dot | 4px | 4px | var(--esds-badge-size-dot) | Default badge size for dot badges. |
+| badge.padding.inline | 2px | 2px | var(--esds-badge-padding-inline) | Default badge inline padding. |
+| badge.padding.block | 0px | 0px | var(--esds-badge-padding-block) | Default badge block padding. |
+| badge.border.radius | 1000px | 1000px | var(--esds-badge-border-radius) | Default badge corner radius. |
+| badge.background.color | #db1a1a | #fe6b6b | var(--esds-badge-background-color) | Default badge background color. |
+| badge.content.color | #fff | #480707 | var(--esds-badge-content-color) | Default badge label color. |
+| badge.content.font | 500 0.75rem/16px Infomaniak Sans | 500 0.75rem/16px Infomaniak Sans | var(--esds-badge-content-font) | Default badge label typography. |
+| body.xs.font.base | 400 0.75rem/16px Infomaniak Sans | 400 0.75rem/16px Infomaniak Sans | var(--esds-body-xs-font-base) | Extra-small body text typography (regular weight). |
+| body.xs.font.emphasized | 500 0.75rem/16px Infomaniak Sans | 500 0.75rem/16px Infomaniak Sans | var(--esds-body-xs-font-emphasized) | Extra-small body text typography (medium weight). |
+| body.sm.font.base | 400 0.875rem/20px Infomaniak Sans | 400 0.875rem/20px Infomaniak Sans | var(--esds-body-sm-font-base) | Small body text typography (regular weight). |
+| body.sm.font.emphasized | 500 0.875rem/20px Infomaniak Sans | 500 0.875rem/20px Infomaniak Sans | var(--esds-body-sm-font-emphasized) | Small body text typography (medium weight). |
+| body.md.font.base | 400 1rem/24px Infomaniak Sans | 400 1rem/24px Infomaniak Sans | var(--esds-body-md-font-base) | Medium body text typography (regular weight). |
+| body.md.font.emphasized | 500 1rem/24px Infomaniak Sans | 500 1rem/24px Infomaniak Sans | var(--esds-body-md-font-emphasized) | Medium body text typography (medium weight). |
+| body.lg.font.base | 400 1.125rem/26px Infomaniak Sans | 400 1.125rem/26px Infomaniak Sans | var(--esds-body-lg-font-base) | Large body text typography (regular weight). |
+| body.lg.font.emphasized | 500 1.125rem/26px Infomaniak Sans | 500 1.125rem/26px Infomaniak Sans | var(--esds-body-lg-font-emphasized) | Large body text typography (medium weight). |
+| button.padding.inline | 12px | 12px | var(--esds-button-padding-inline) | Default button inline padding. |
+| button.padding.block | 8px | 8px | var(--esds-button-padding-block) | Default button block padding. |
+| button.gap.row | 6px | 6px | var(--esds-button-gap-row) | Default row gap between button content elements. |
+| button.gap.column | 6px | 6px | var(--esds-button-gap-column) | Default column gap between button content elements. |
+| button.border.radius | 8px | 8px | var(--esds-button-border-radius) | Default button corner radius. |
+| button.border.color | #0077cf | #36adfa | var(--esds-button-border-color) | Default button border color. |
+| button.border.color.disabled | #e2e8f0 | #0f172b | var(--esds-button-border-color-disabled) | Disabled button border color. |
+| button.border.width | 0px | 0px | var(--esds-button-border-width) | Default button border width. |
+| button.border.width.disabled | 0px | 0px | var(--esds-button-border-width-disabled) | Disabled button border width. |
+| button.background.color | #0077cf | #36adfa | var(--esds-button-background-color) | Default button background color. |
+| button.background.color.disabled | #e2e8f0 | #0f172b | var(--esds-button-background-color-disabled) | Disabled button background color. |
+| button.content.color | #fff | #072a4a | var(--esds-button-content-color) | Default button label color. |
+| button.content.color.disabled | #90a1b9 | #62748e | var(--esds-button-content-color-disabled) | Disabled button label color. |
+| button.content.font | 500 1rem/24px Infomaniak Sans | 500 1rem/24px Infomaniak Sans | var(--esds-button-content-font) | Default button label typography. |
+| button.color.state.hover | #0b426f1f | #f8fafc1f | var(--esds-button-color-state-hover) | Hover overlay applied on the button background. |
+| button.color.state.pressed | #0b426f4d | #f8fafc4d | var(--esds-button-color-state-pressed) | Pressed overlay applied on the button background. |
+| button.icon.size | 24px | 24px | var(--esds-button-icon-size) | Default button icon size. |
+| button.size | 40px | 40px | var(--esds-button-size) | Default button height. |
 | focus.border.color | #0077cf | #36adfa | var(--esds-focus-border-color) | Focus-effect border color. |
 | focus.border.radius | 2px | 2px | var(--esds-focus-border-radius) | Focus-effect border radius. |
 | focus.border.width | 2px | 2px | var(--esds-focus-border-width) | Focus-effect border width. |
 | focus.border.offset | 2px | 2px | var(--esds-focus-border-offset) | Focus-effect border offset. |
-| heading.xs.font.base | 400 1.25rem/28px Infomaniak Sans | 400 1.25rem/28px Infomaniak Sans | var(--esds-heading-xs-font-base) | Extra-small heading style. |
-| heading.xs.font.emphasized | 500 1.25rem/28px Infomaniak Sans | 500 1.25rem/28px Infomaniak Sans | var(--esds-heading-xs-font-emphasized) | Extra-small heading style. |
-| heading.sm.font.base | 400 1.5rem/32px Infomaniak Sans | 400 1.5rem/32px Infomaniak Sans | var(--esds-heading-sm-font-base) | Small heading style. |
-| heading.sm.font.emphasized | 500 1.5rem/32px Infomaniak Sans | 500 1.5rem/32px Infomaniak Sans | var(--esds-heading-sm-font-emphasized) | Small heading style. |
-| heading.md.font.base | 400 2rem/40px Infomaniak Sans | 400 2rem/40px Infomaniak Sans | var(--esds-heading-md-font-base) | Medium heading style. |
-| heading.md.font.emphasized | 500 2rem/40px Infomaniak Sans | 500 2rem/40px Infomaniak Sans | var(--esds-heading-md-font-emphasized) | Medium heading style. |
-| heading.lg.font.base | 400 2.5rem/48px Infomaniak Sans | 400 2.5rem/48px Infomaniak Sans | var(--esds-heading-lg-font-base) | Large heading style. |
-| heading.lg.font.emphasized | 500 2.5rem/48px Infomaniak Sans | 500 2.5rem/48px Infomaniak Sans | var(--esds-heading-lg-font-emphasized) | Large heading style. |
-| heading.xl.font.base | 400 3rem/56px Infomaniak Sans | 400 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font-base) | Extra-large heading style. |
-| heading.xl.font.emphasized | 500 3rem/56px Infomaniak Sans | 500 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font-emphasized) | Extra-large heading style. |
+| heading.xs.font.base | 400 1.25rem/28px Infomaniak Sans | 400 1.25rem/28px Infomaniak Sans | var(--esds-heading-xs-font-base) | Extra-small heading typography (regular weight). |
+| heading.xs.font.emphasized | 500 1.25rem/28px Infomaniak Sans | 500 1.25rem/28px Infomaniak Sans | var(--esds-heading-xs-font-emphasized) | Extra-small heading typography (medium weight). |
+| heading.sm.font.base | 400 1.5rem/32px Infomaniak Sans | 400 1.5rem/32px Infomaniak Sans | var(--esds-heading-sm-font-base) | Small heading typography (regular weight). |
+| heading.sm.font.emphasized | 500 1.5rem/32px Infomaniak Sans | 500 1.5rem/32px Infomaniak Sans | var(--esds-heading-sm-font-emphasized) | Small heading typography (medium weight). |
+| heading.md.font.base | 400 2rem/40px Infomaniak Sans | 400 2rem/40px Infomaniak Sans | var(--esds-heading-md-font-base) | Medium heading typography (regular weight). |
+| heading.md.font.emphasized | 500 2rem/40px Infomaniak Sans | 500 2rem/40px Infomaniak Sans | var(--esds-heading-md-font-emphasized) | Medium heading typography (medium weight). |
+| heading.lg.font.base | 400 2.5rem/48px Infomaniak Sans | 400 2.5rem/48px Infomaniak Sans | var(--esds-heading-lg-font-base) | Large heading typography (regular weight). |
+| heading.lg.font.emphasized | 500 2.5rem/48px Infomaniak Sans | 500 2.5rem/48px Infomaniak Sans | var(--esds-heading-lg-font-emphasized) | Large heading typography (medium weight). |
+| heading.xl.font.base | 400 3rem/56px Infomaniak Sans | 400 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font-base) | Extra-large heading typography (regular weight). |
+| heading.xl.font.emphasized | 500 3rem/56px Infomaniak Sans | 500 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font-emphasized) | Extra-large heading typography (medium weight). |
 | kbd.background-color | #fff | #192334 | var(--esds-kbd-background-color) | Default keyboard key background color. |
 | kbd.border.color | #e2e8f0 | #45556c | var(--esds-kbd-border-color) | Default keyboard key border color. |
 | kbd.border.width | 1px | 1px | var(--esds-kbd-border-width) | Default keyboard key border width. |
