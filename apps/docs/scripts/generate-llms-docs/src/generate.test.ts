@@ -226,4 +226,15 @@ describe('generateLlmsDocs', () => {
     expect(llmsFull).toContain('(./llms.txt)');
     expect(llmsFull).toContain('(./DESIGN.md)');
   });
+
+  it('mirrors the root files to the public dir when provided', () => {
+    const { deps, outputs } = createDeps(createInputFiles());
+    const publicDir = join(APPS_DOCS_DIR, 'public');
+    const result = generateLlmsDocs({ ...BASE_OPTIONS, publicDir }, deps);
+    expect(result.fileCount).toBe(6);
+    expect(outputs.get(join(publicDir, 'llms.txt'))).toBe(outputs.get(join(DIST_DIR, 'llms.txt')));
+    expect(outputs.get(join(publicDir, 'llms-full.txt'))).toBe(
+      outputs.get(join(DIST_DIR, 'llms-full.txt')),
+    );
+  });
 });

@@ -19,6 +19,7 @@ function main(): void {
       componentsDir: join(repositoryRoot, 'packages', 'components'),
       designMdPath: join(appsDocsDir, 'public', 'DESIGN.md'),
       baseUrl,
+      publicDir: join(appsDocsDir, 'public'),
     },
     {
       readFile: (path) => readFileSync(path, 'utf8'),
@@ -28,6 +29,9 @@ function main(): void {
   );
   console.log(
     `[generate-llms-docs] Generated ${result.pageCount} pages and ${result.fileCount} files in ${join(appsDocsDir, dist)}`,
+  );
+  console.log(
+    '[generate-llms-docs] Mirrored llms.txt and llms-full.txt to public/ (served by the dev server)',
   );
 }
 

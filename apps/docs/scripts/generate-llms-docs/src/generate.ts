@@ -11,6 +11,11 @@ export interface GenerateLlmsDocsOptions {
   componentsDir: string;
   designMdPath: string;
   baseUrl: string;
+  /**
+   * When set, llms.txt and llms-full.txt are also written here so the docs
+   * dev server serves them at the site root, like DESIGN.md.
+   */
+  publicDir?: string;
 }
 
 export interface FileSystemDeps {
@@ -74,6 +79,12 @@ export function generateLlmsDocs(
   });
   deps.writeFile(join(options.distDir, 'llms.txt'), llmsTxt);
   fileCount += 1;
+
+  if (options.publicDir !== undefined) {
+    deps.mkdir(options.publicDir, { recursive: true });
+    deps.writeFile(join(options.publicDir, 'llms-full.txt'), llmsFullTxt);
+    deps.writeFile(join(options.publicDir, 'llms.txt'), llmsTxt);
+  }
 
   return { pageCount: pages.length, fileCount };
 }
