@@ -87,17 +87,32 @@
     "weight": {
       "400": {
         "$value": 400,
+        "$type": "fontWeight",
         "$extensions": {
           "scopes": []
         }
       },
       "500": {
         "$value": 500,
+        "$type": "fontWeight",
         "$extensions": {
           "scopes": []
         }
       },
-      "$type": "fontWeight"
+      "400-italic": {
+        "$value": "Italic",
+        "$type": "fontFamily",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "500-italic": {
+        "$value": "SemiBold Italic",
+        "$type": "fontFamily",
+        "$extensions": {
+          "scopes": []
+        }
+      }
     },
     "letter-spacing": {
       "0": {

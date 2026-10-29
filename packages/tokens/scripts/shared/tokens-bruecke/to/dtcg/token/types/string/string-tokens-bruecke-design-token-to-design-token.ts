@@ -5,7 +5,10 @@ import type { StringTokensBrueckeDesignToken } from '../../../../../tokens-bruec
 import type { TokensBrueckeToDtcgContext } from '../../../context/tokens-bruecke-to-dtcg-context.ts';
 import { isTokensBrueckeDesignTokenFontFamilyDesignToken } from '../../infer-dtcg-type/is-tokens-bruecke-design-token-font-family-design-token.ts';
 import { isTokensBrueckeDesignTokenFontStyleDesignToken } from '../../infer-dtcg-type/is-tokens-bruecke-design-token-font-style-design-token.ts';
-import { isTokensBrueckeDesignTokenFontWeightDesignToken } from '../../infer-dtcg-type/is-tokens-bruecke-design-token-font-weight-design-token.ts';
+import {
+  isTokensBrueckeDesignTokenFakeFontWeightDesignToken,
+  isTokensBrueckeDesignTokenFontWeightDesignToken,
+} from '../../infer-dtcg-type/is-tokens-bruecke-design-token-font-weight-design-token.ts';
 import { stringTokensBrueckeDesignTokenToFontFamilyDesignToken } from './string-tokens-bruecke-design-token-to-font-family-design-token.ts';
 import { stringTokensBrueckeDesignTokenToFontStyleDesignToken } from './string-tokens-bruecke-design-token-to-font-style-design-token.ts';
 import { stringTokensBrueckeDesignTokenToFontWeightDesignToken } from './string-tokens-bruecke-design-token-to-font-weight-design-token.ts';
@@ -20,6 +23,8 @@ export function stringTokensBrueckeDesignTokenToDesignToken(
     return stringTokensBrueckeDesignTokenToFontStyleDesignToken(input, ctx);
   } else if (isTokensBrueckeDesignTokenFontWeightDesignToken(input, ctx)) {
     return stringTokensBrueckeDesignTokenToFontWeightDesignToken(input, ctx);
+  } else if (isTokensBrueckeDesignTokenFakeFontWeightDesignToken(input, ctx)) {
+    return stringTokensBrueckeDesignTokenToFontFamilyDesignToken(input, ctx);
   } else {
     throw new Error(`[${ctx.path.join('.')}] - Unable to transform "string" type`);
   }
