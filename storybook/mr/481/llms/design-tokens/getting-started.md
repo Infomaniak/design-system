@@ -1,0 +1,338 @@
+# Design Tokens/Getting Started
+
+> Our design system is powered by design tokens: name-value pairs that define the visual language of Infomaniak product...
+
+<div className="welcome-section">
+  <h1>Design Tokens</h1>
+  <p className="welcome-description">
+    Our design system is powered by design tokens: name-value pairs that define the visual language
+    of Infomaniak products. Tokens ensure consistency across platforms while remaining flexible
+    enough for different contexts.
+  </p>
+</div>
+
+- [Token Architecture](#token-architecture)
+- [Consuming Tokens](#consuming-tokens)
+  - [Web](#web)
+    - [Install from NPM](#install-from-npm)
+    - [CSS Files](#css-files)
+    - [Using `*.root.css` files](#using-rootcss-files)
+    - [Using `*.attr.css` files](#using-attrcss-files)
+      - [Import all contexts (all.attr files)](#import-all-contexts-allattrcss-files)
+    - [Tailwind CSS V4](#tailwind-css-v4)
+  - [LLM/AI](#llmai)
+  - [iOS](#ios)
+    - [Installation](#installation)
+    - [Usage](#usage)
+- [How It Works](#how-it-works)
+  - [Token Resolution Chain](#token-resolution-chain)
+  - [Modifiers Override by Path Matching](#modifiers-override-by-path-matching)
+
+## Token Architecture
+
+Our token system follows the Design Tokens Community Group (DTCG) standard with a three-tier architecture:
+
+- <a href="t1.md">T1 Primitive tokens</a> for foundational tokens
+  values
+- <a href="t2.md">T2 Semantic tokens</a> for semantic abstraction
+  tokens
+- <a href="t3.md">T3 Component tokens</a> for component-specific
+  tokens
+
+## Consuming Tokens
+
+### Web
+
+#### Install from NPM
+
+```bash
+npm install @infomaniak-design-system/tokens
+```
+
+#### CSS Files
+
+We offer two CSS file formats:
+
+<Table
+  headers={['File format', 'CSS Selector', 'Usage']}
+  rows={[
+    [
+      <code>*.root.css</code>,
+      <code>:root, :host</code>,
+      <p>
+        <code>*.root.css</code> files apply globally via <code>:root</code> immediately.
+        <br />
+        Use <code>media</code> queries with theme files to prevent conflicts (e.g., loading both
+        light and dark simultaneously).
+      </p>,
+    ],
+    [
+      <code>*.attr.css</code>,
+      <code>[data-esds-&lt;modifier&gt;="&lt;context&gt;"]</code>,
+      <div>
+        <p>
+          <code>.attr.css</code> files only affect elements inside a container with the matching
+          data attribute.
+        </p>
+        <ul>
+          <li>
+            <code>&lt;modifier&gt;</code>: "theme" | "product"
+          </li>
+          <li>
+            <code>&lt;context&gt;</code>: "infomaniak" | "mail" | "euria" | ...
+          </li>
+        </ul>
+      </div>,
+    ],
+  ]}
+/>
+
+#### Using `*.root.css` files
+
+Root CSS files could be loaded using query, for example:
+
+```html
+<link
+  rel="stylesheet"
+  href="@infomaniak-design-system/tokens/css/tokens.root.css"
+/>
+<link
+  rel="stylesheet"
+  href="@infomaniak-design-system/tokens/css/modifiers/product/mail.root.css"
+/>
+
+<!-- Auto-switch based on system preference -->
+<link
+  rel="stylesheet"
+  href="@infomaniak-design-system/tokens/css/modifiers/theme/light.root.css"
+  media="(prefers-color-scheme: light)"
+/>
+<link
+  rel="stylesheet"
+  href="@infomaniak-design-system/tokens/css/modifiers/theme/dark.root.css"
+  media="(prefers-color-scheme: dark)"
+/>
+```
+
+#### Using `*.attr.css` files
+
+Attr CSS file could be imported via CSS and activated using data attributes:
+
+**NOTE**: `*.attr.css` CSS files are **optional** and should be imported only if necessary.
+
+```css
+@import '@infomaniak-design-system/tokens/css/tokens.attr.css';
+@import '@infomaniak-design-system/tokens/css/modifiers/product/mail.attr.css';
+@import '@infomaniak-design-system/tokens/css/modifiers/theme/dark.attr.css';
+```
+
+Modifiers can also be set on container elements:
+
+```html
+<body
+  data-esds-theme="dark"
+  data-esds-product="mail"
+>
+  <!-- Dark theme and product mail applies to children -->
+</body>
+```
+
+##### Import all contexts (`all.attr.css` files)
+
+Each modifier also generates an `all.attr.css` file which imports the attribute CSS of all its contexts at once, for example:
+
+```css
+@import '@infomaniak-design-system/tokens/css/modifiers/theme/all.attr.css';
+```
+
+#### Tailwind CSS V4
+
+```css
+@import 'tailwindcss';
+@import '@infomaniak-design-system/tokens/css/tokens.root.css';
+@import '@infomaniak-design-system/tokens/tailwind.css';
+```
+
+```html
+<button class="bg-brand-default">Click me!</button>
+```
+
+##### Namespace
+
+Tailwind tokens are scoped by their respective namespace.
+For example, `color.background.*` tokens are scoped to `bg-` classes, `color.content.*` tokens are scoped to `text-` classes, etc.
+
+##### States
+
+States may be applied to _background_ color tokens by suffixing a `bg-` token with `-state-[state-token-name]`.
+
+_Example:_ `bg-brand-state-selected-strong` will apply the `color.state.selected-strong` state token to the `color.background.brand` background token.
+
+Both are mixed to form a combined color that you may use to style the background of an element when it is in a specific state.
+
+For the previous example, a common usage would be `active:bg-brand-state-selected-strong`.
+
+### LLM/AI
+
+Use the <a href="../ai-llms.md">AI &amp; LLMs</a> resources (`DESIGN.md`, `llms.txt` and `llms-full.txt`) to provide design system context to your AI agent or LLM. They contain a structured, machine-readable reference of the entire token system in a format optimized for AI consumption.
+
+### iOS
+
+#### Installation
+
+Swift Package Manager — via Xcode or Package.swift:
+
+```swift
+swift.package(url: "https://github.com/Infomaniak/ios-design-system", branch: "main")
+swift.target(
+    name: "MyTarget",
+    dependencies: [
+        .product(name: "DesignSystem", package: "ios-design-system")
+    ]
+)
+```
+
+_Supported platforms: iOS 16+, macOS 13+, visionOS 1+_
+
+##### Package structure
+
+```
+CatalogApp/               ← Demo app
+Sources/DesignSystem/     ← Tokens, SwiftUI components
+Tests/DesignSystemTests/  ← Unit tests
+```
+
+#### Usage
+
+##### Configure environment
+
+```swift
+import DesignSystem
+
+// Get theme via environment variable
+@Environment(\.esdsTheme) var theme
+```
+
+##### Access tokens in **SwiftUI**
+
+```swift
+struct ContentView: View {
+    @Environment(\.esdsTheme) var theme
+
+    var body: some View {
+        VStack {
+            Text("Hello")
+                .foregroundColor(theme.color.text.default)
+                .padding(theme.spacing.medium)
+        }
+        .background(theme.color.background.default)
+    }
+}
+```
+
+##### Set theme
+
+```swift
+// In your app
+@main
+struct MyApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .environment(\.esdsTheme, EsdsTheme.kdrive)
+        }
+    }
+}
+```
+
+## How It Works
+
+### Token Resolution Chain
+
+Token values reference each other in a hierarchy, ensuring consistency across the system:
+
+```
+T3-Component  →  button.background.error
+                    ↓
+T2-Semantic   →  color.background.error.default
+                    ↓
+T1-Primitive  →  color.red.600 (#E21C40)
+```
+
+When a primitive value changes, every token referencing it updates automatically.
+
+### Modifiers Override by Path Matching
+
+Modifiers let you swap the values of existing tokens without changing their names. They work by matching the path of a T2 (semantic) or T3 (component) token and replacing its value for specific contexts.
+
+**How it works:**
+
+1. A modifier file contains the same token path as the base token
+2. When applied, it replaces that path's value in the CSS cascade
+3. Resolution continues with the new value
+
+**Example**: The `euria` product modifier
+
+The `euria.tokens.json` modifier overrides `color.background.brand` (the default brand background) by including the same path with a different value:
+
+Base `t2-semantic/color.tokens.json`:
+
+```json
+{
+  "color": {
+    "background": {
+      "brand": {
+        "$root": { "$value": "{color.background.brand.infomaniak}" },
+        "infomaniak": { "$value": "{color.blue.600}" },
+        "euria": { "$value": "{color.ocean.700}" }
+      }
+    }
+  }
+}
+```
+
+`modifiers/product/euria.tokens.json`:
+
+```json
+{
+  "color": {
+    "background": {
+      "brand": {
+        "$value": "{color.background.brand.euria}"
+      }
+    }
+  }
+}
+```
+
+**Resolution with modifiers:**
+
+Multiple modifiers can be applied simultaneously. In the example below, the `euria` modifier points the brand background to the Euria brand token, then `dark` further adjusts it for the dark theme:
+
+```
+With data-esds-product="euria" data-esds-theme="dark":
+
+              T3: button.background.color
+                      ↓
+              T2: color.background.brand
+                      ↓
+  Euria modifier: color.background.brand.euria (color.ocean.700)
+                      ↓
+   Dark modifier: color.background.brand.euria (color.ocean.400)
+                      ↓
+              T1: color.ocean.400
+```
+
+**Apply modifiers using data attributes:**
+
+```html
+<body
+  data-esds-product="euria"
+  data-esds-theme="dark"
+>
+  <!-- All children resolve with both modifiers applied -->
+  <button style="background: var(--esds-color-background-brand)">
+    Gets a color.ocean.400 background
+  </button>
+</body>
+```
