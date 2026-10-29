@@ -12,7 +12,7 @@ export function isTokensBrueckeDesignTokenFontWeightDesignToken(
 }
 
 export function isTokensBrueckeDesignTokenFakeFontWeightDesignToken(
-  input: GenericTokensBrueckeDesignToken,
+  _input: GenericTokensBrueckeDesignToken,
   ctx: TokensBrueckeToDtcgContext,
 ): boolean {
   return ctx.path.join('.').includes('font.weight') && ctx.path.join('.').endsWith('-italic');
