@@ -4,7 +4,10 @@ import { Logger } from '../../../../../../../scripts/helpers/log/logger.ts';
 import { runScript } from '../../../../../../../scripts/helpers/misc/run-script/run-script.ts';
 import { getEnvPublishConfig } from '../../../../../../../scripts/helpers/publish/publish-config/env/get-env-publish-config.ts';
 import type { PublishConfig } from '../../../../../../../scripts/helpers/publish/publish-config/publish-config.ts';
-import { ANDROID_ICONS_KOTLIN_DIRECTORY_NAME } from '../../shared/android-icons/android-icons-config.ts';
+import {
+  ANDROID_ICONS_KOTLIN_DIRECTORY_NAME,
+  ANDROID_SYMBOLS_DIRECTORY_NAME,
+} from '../../shared/android-icons/android-icons-config.ts';
 import { publishAndroidIcons } from './src/publish-android-icons.ts';
 
 const SCRIPT_DIR: string = dirname(fileURLToPath(import.meta.url));
@@ -18,6 +21,7 @@ await runScript('publish-android-icons', async (logger: Logger): Promise<void> =
     ...publishConfig,
     packageRootDirectory: PACKAGE_ROOT_DIR,
     imageVectorsDirectory: join(OUTPUT_DIR, ANDROID_ICONS_KOTLIN_DIRECTORY_NAME),
+    symbolsDirectory: join(OUTPUT_DIR, ANDROID_SYMBOLS_DIRECTORY_NAME),
     logger,
   });
 });

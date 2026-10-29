@@ -30,7 +30,7 @@ const meta = {
 
 export default meta;
 
-const BADGE_TYPES = ['primary', 'destructive', 'neutral'] as const;
+const BADGE_TYPES = ['primary', 'neutral'] as const;
 
 interface ExtraControls {
   badgeType: (typeof BADGE_TYPES)[number];

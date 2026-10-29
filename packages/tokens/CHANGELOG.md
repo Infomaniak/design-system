@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.8.0 (2026-10-26)
+
+### Minor Changes
+
+- [#445](https://github.com/Infomaniak/design-system/pull/445) [`ea776ff`](https://github.com/Infomaniak/design-system/commit/ea776ffdfadc49fcadf36a1f9a438b5bffcbd83d): Add the `esds-badge` web component and its design tokens.
+
+  - New `esds-badge` component that renders a compact status badge around its slotted content (`role="status"`).
+  - New `badge` component tokens (size, padding, radius, colors, font) and `badge-type` modifiers (`primary`, `neutral`).
+
+### Patch Changes
+
+- [#432](https://github.com/Infomaniak/design-system/pull/432) [`bb3203c`](https://github.com/Infomaniak/design-system/commit/bb3203ce13aea5a2a8186d4658d4a92af5779078): Added a new `50` value to the scale token, usable for width/height sizing.
+
+- [#460](https://github.com/Infomaniak/design-system/pull/460) [`3814fd1`](https://github.com/Infomaniak/design-system/commit/3814fd1d10863a74ad7ec9f27f501d985fbb19c4): Added Tailwind CSS variables for icon sizes: semantic `icon.size` tokens are now exposed as `--text-icon-*` variables, so icon sizes can be applied through `text-icon-*` utilities.
+
+- [#442](https://github.com/Infomaniak/design-system/pull/442) [`bf96e37`](https://github.com/Infomaniak/design-system/commit/bf96e375d3b64abeed6855e0078e17febe0597da): Added `button.size` design tokens. Square `esds-button` elements are now sized by the design system (32 px for `small`, 40 px for `medium` — also the default — and 50 px for `large`) instead of a hardcoded 50 px fallback, so they previously ignored the selected `data-esds-button-size` and always rendered 50 px.
+
+- [#455](https://github.com/Infomaniak/design-system/pull/455) [`ec0df07`](https://github.com/Infomaniak/design-system/commit/ec0df0708ee2dfb8551a92842550e591a2513669): Publishing tokens to the iOS and Android repositories now deletes the previous `esds/tokens/*` branches from the same release channel (`rc`, `dev`, or prod), which also closes their pull requests.
+
+- [#431](https://github.com/Infomaniak/design-system/pull/431) [`a2649a1`](https://github.com/Infomaniak/design-system/commit/a2649a162f98f4fb9f00a2d644a2e6e7b46fa6a8): Added the "do not edit directly" auto-generated header to the Kotlin `build.gradle.kts` files, matching the other generated outputs.
+
+- [#430](https://github.com/Infomaniak/design-system/pull/430) [`9f46096`](https://github.com/Infomaniak/design-system/commit/9f46096020e13d5684a2c339a6e80f2fc63141b1): `esds-body` and `esds-heading` Tailwind typography classes are now defined as Tailwind v4 custom utilities (`@utility`) instead of component-layer classes. They can be combined with Tailwind variants (e.g. `hover:`, `md:`) and participate correctly in Tailwind's utility ordering. Class names are unchanged.
+
+- [#440](https://github.com/Infomaniak/design-system/pull/440) [`ada09b1`](https://github.com/Infomaniak/design-system/commit/ada09b14bf035fac732f74b39239112132e36261): Synced DTCG tokens with the latest Figma export: borders rendered on strong (dim1) feedback backgrounds are now transparent in both light and dark themes, instead of white in light theme and dark 950 shades in dark theme. Strong feedback surfaces no longer draw an outline. The theme modifier overrides for these borders were removed accordingly; the `color.border.on.feedback.*.dim1` token paths are unchanged.
+
 ## 0.7.0 (2026-10-14)
 
 ### Minor Changes

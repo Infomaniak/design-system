@@ -1,4 +1,4 @@
-- [Figma ↗](TODO)
+- [Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2671-6&p=f&t=0Y9wp336CpvkcrCz-0)
 
 ## Usage
 
@@ -22,10 +22,9 @@ Represents a badge. If no content is provided, the badge will be compacted as a 
 
 #### Types
 
-List of all available button types:
+List of all available badge types:
 
 - `primary` (default): primary style
-- `destructive`: destructive style
 - `neutral`: neutral style
 
 ##### Import

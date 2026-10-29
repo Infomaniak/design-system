@@ -1,20 +1,16 @@
 {
   "button": {
-    "size": {
-      "$value": "{scale.40}",
-      "$extensions": {
-        "scopes": []
-      }
-    },
     "padding": {
       "inline": {
         "$value": "{spacing.lg}",
+        "$description": "Default button inline padding.",
         "$extensions": {
           "scopes": []
         }
       },
       "block": {
         "$value": "{spacing.md}",
+        "$description": "Default button block padding.",
         "$extensions": {
           "scopes": []
         }
@@ -23,12 +19,14 @@
     "gap": {
       "row": {
         "$value": "{spacing.sm}",
+        "$description": "Default row gap between button content elements.",
         "$extensions": {
           "scopes": []
         }
       },
       "column": {
         "$value": "{spacing.sm}",
+        "$description": "Default column gap between button content elements.",
         "$extensions": {
           "scopes": []
         }
@@ -37,6 +35,7 @@
     "border": {
       "radius": {
         "$value": "{radius.lg}",
+        "$description": "Default button corner radius.",
         "$extensions": {
           "scopes": []
         }
@@ -44,12 +43,14 @@
       "color": {
         "$root": {
           "$value": "{color.background.brand}",
+          "$description": "Default button border color.",
           "$extensions": {
             "scopes": []
           }
         },
         "disabled": {
           "$value": "{color.background.disabled}",
+          "$description": "Disabled button border color.",
           "$extensions": {
             "scopes": []
           }
@@ -58,12 +59,14 @@
       "width": {
         "$root": {
           "$value": "{border.none.width}",
+          "$description": "Default button border width.",
           "$extensions": {
             "scopes": []
           }
         },
         "disabled": {
           "$value": "{border.none.width}",
+          "$description": "Disabled button border width.",
           "$extensions": {
             "scopes": []
           }
@@ -74,12 +77,14 @@
       "color": {
         "$root": {
           "$value": "{color.background.brand}",
+          "$description": "Default button background color.",
           "$extensions": {
             "scopes": []
           }
         },
         "disabled": {
           "$value": "{color.background.disabled}",
+          "$description": "Disabled button background color.",
           "$extensions": {
             "scopes": []
           }
@@ -90,12 +95,14 @@
       "color": {
         "$root": {
           "$value": "{color.content.on.brand}",
+          "$description": "Default button label color.",
           "$extensions": {
             "scopes": []
           }
         },
         "disabled": {
           "$value": "{color.content.on.disabled}",
+          "$description": "Disabled button label color.",
           "$extensions": {
             "scopes": []
           }
@@ -103,6 +110,7 @@
       },
       "font": {
         "$value": "{body.md.font.emphasized}",
+        "$description": "Default button label typography.",
         "$extensions": {
           "scopes": []
         }
@@ -112,12 +120,14 @@
       "state": {
         "hover": {
           "$value": "{color.state.hover.medium}",
+          "$description": "Hover overlay applied on the button background.",
           "$extensions": {
             "scopes": []
           }
         },
         "pressed": {
           "$value": "{color.state.pressed.medium}",
+          "$description": "Pressed overlay applied on the button background.",
           "$extensions": {
             "scopes": []
           }
@@ -127,9 +137,17 @@
     "icon": {
       "size": {
         "$value": "{icon.size.md}",
+        "$description": "Default button icon size.",
         "$extensions": {
           "scopes": []
         }
+      }
+    },
+    "size": {
+      "$value": "{dimension.40}",
+      "$description": "Default button height.",
+      "$extensions": {
+        "scopes": []
       }
     }
   }
