@@ -575,7 +575,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 - **Prefer Tier 2 (Semantic) tokens** for all component styling. Only use Tier 3 (Component) tokens when they explicitly exist for the element you are building.
 - **Never reference Tier 1 (Primitive) tokens directly** in component code; they exist only for alias resolution and designer reference.
 - **Theme awareness**: The design system supports `light` and `dark` modes. Use the `data-esds-theme` attribute or corresponding modifier CSS file to apply themes.
-- **Portable product tokens**: When building components for a specific product (calendar, mail, swisstransfer, etc.), always use the token names exactly as shown in this file (e.g., `color.background.brand.default` with `var(--esds-color-background-brand-default)`). The build system automatically resolves these to the correct product-specific colors. **Never** use product-specific primitive names such as `color.background.brand.calendar.default` directly in component code. **Never** create separate component variants or branches per product when the same semantic token exists. All products share the same token API — only the resolved values differ.
+- **Portable product tokens**: When building components for a specific product (calendar, mail, swisstransfer, etc.), always use the token names exactly as shown in this file (e.g., `color.background.brand` with `var(--esds-color-background-brand)`). The build system automatically resolves these to the correct product-specific colors. **Never** use product-specific token names such as `color.background.brand.calendar` directly in component code. **Never** create separate component variants or branches per product when the same semantic token exists. All products share the same token API — only the resolved values differ.
 
 ---
 
@@ -2123,7 +2123,7 @@ Modifiers let you swap the values of existing tokens without changing their name
 
 **Example**: The `euria` product modifier
 
-The `euria.tokens.json` modifier overrides `color.background.brand.default` by including the same path with a different value:
+The `euria.tokens.json` modifier overrides `color.background.brand` (the default brand background) by including the same path with a different value:
 
 Base `t2-semantic/color.tokens.json`:
 
@@ -2132,7 +2132,9 @@ Base `t2-semantic/color.tokens.json`:
   "color": {
     "background": {
       "brand": {
-        "default": { "$value": "{color.sky.700}" }
+        "$root": { "$value": "{color.background.brand.infomaniak}" },
+        "infomaniak": { "$value": "{color.blue.600}" },
+        "euria": { "$value": "{color.ocean.700}" }
       }
     }
   }
@@ -2146,7 +2148,7 @@ Base `t2-semantic/color.tokens.json`:
   "color": {
     "background": {
       "brand": {
-        "default": { "$value": "{color.ocean.700}" }
+        "$value": "{color.background.brand.euria}"
       }
     }
   }
@@ -2155,18 +2157,18 @@ Base `t2-semantic/color.tokens.json`:
 
 **Resolution with modifiers:**
 
-Multiple modifiers can be applied simultaneously. In the example below, the `euria` modifier changes the base brand color, then `dark` further adjusts it for the dark theme:
+Multiple modifiers can be applied simultaneously. In the example below, the `euria` modifier points the brand background to the Euria brand token, then `dark` further adjusts it for the dark theme:
 
 ```
 With data-esds-product="euria" data-esds-theme="dark":
 
-              T3: button.background.brand.default
+              T3: button.background.color
                       ↓
-              T2: color.background.brand.default
+              T2: color.background.brand
                       ↓
-  Euria modifier: color.background.brand.default (color.ocean.700)
+  Euria modifier: color.background.brand.euria (color.ocean.700)
                       ↓
-   Dark modifier: color.background.brand.default (color.ocean.400)
+   Dark modifier: color.background.brand.euria (color.ocean.400)
                       ↓
               T1: color.ocean.400
 ```
@@ -2179,7 +2181,7 @@ With data-esds-product="euria" data-esds-theme="dark":
   data-esds-theme="dark"
 >
   <!-- All children resolve with both modifiers applied -->
-  <button style="background: var(--esds-color-background-brand-default)">
+  <button style="background: var(--esds-color-background-brand)">
     Gets a color.ocean.400 background
   </button>
 </body>
@@ -13598,6 +13600,7 @@ npm install @infomaniak-design-system/components
 Import and register the components you need. **Call `define()` in your application's entry file** (e.g., `main.ts`) so custom elements are defined before we try to render them:
 
 ```ts
+import { EsdsIconComponent } from '@infomaniak-design-system/components';
 
 EsdsIconComponent.define();
 ```
@@ -13623,6 +13626,7 @@ Import the components you need from `@infomaniak-design-system/components`, and 
 Add `schemas: [CUSTOM_ELEMENTS_SCHEMA]` to any Angular module or component that uses the Design System components:
 
 ```ts
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   // ...

@@ -21,6 +21,7 @@ npm install @infomaniak-design-system/components
 Import and register the components you need. **Call `define()` in your application's entry file** (e.g., `main.ts`) so custom elements are defined before we try to render them:
 
 ```ts
+import { EsdsIconComponent } from '@infomaniak-design-system/components';
 
 EsdsIconComponent.define();
 ```
@@ -46,6 +47,7 @@ Import the components you need from `@infomaniak-design-system/components`, and 
 Add `schemas: [CUSTOM_ELEMENTS_SCHEMA]` to any Angular module or component that uses the Design System components:
 
 ```ts
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   // ...
