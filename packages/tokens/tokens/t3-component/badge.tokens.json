@@ -3,12 +3,14 @@
     "size": {
       "content": {
         "$value": "{dimension.20}",
+        "$description": "Default badge size for content badges.",
         "$extensions": {
           "scopes": []
         }
       },
       "dot": {
         "$value": "{dimension.4}",
+        "$description": "Default badge size for dot badges.",
         "$extensions": {
           "scopes": []
         }
@@ -17,12 +19,14 @@
     "padding": {
       "inline": {
         "$value": "{spacing.2xs}",
+        "$description": "Default badge inline padding.",
         "$extensions": {
           "scopes": []
         }
       },
       "block": {
         "$value": "{spacing.none}",
+        "$description": "Default badge block padding.",
         "$extensions": {
           "scopes": []
         }
@@ -31,6 +35,7 @@
     "border": {
       "radius": {
         "$value": "{radius.full}",
+        "$description": "Default badge corner radius.",
         "$extensions": {
           "scopes": []
         }
@@ -39,6 +44,7 @@
     "background": {
       "color": {
         "$value": "{color.background.feedback.error.dim1}",
+        "$description": "Default badge background color.",
         "$extensions": {
           "scopes": []
         }
@@ -47,12 +53,14 @@
     "content": {
       "color": {
         "$value": "{color.content.on.feedback.error.dim1}",
+        "$description": "Default badge label color.",
         "$extensions": {
           "scopes": []
         }
       },
       "font": {
         "$value": "{body.xs.font.emphasized}",
+        "$description": "Default badge label typography.",
         "$extensions": {
           "scopes": []
         }
