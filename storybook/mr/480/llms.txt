@@ -1,0 +1,100 @@
+# Infomaniak Design System
+
+> Official Lit web components library, DTCG design tokens, and usage guidelines for Infomaniak web applications.
+
+Always import components from the root package (`import { EsdsIconComponent } from '@infomaniak-design-system/components'`) and call `.define()` on each component before rendering any `<esds-*>` element. Never hardcode hex colors, spacing, or typography values; always use the semantic design token CSS custom properties documented in these pages. Prefer composing the existing components over re-implementing them with custom CSS; the look and feel is owned by the token layer, not by consumers. DESIGN.md is already included at the top of llms-full.txt, so ingest one or the other, not both.
+
+For complete single-file context ingestion, see [Full Design System Documentation](llms-full.txt).
+
+## Welcome
+
+- [Welcome](llms/welcome.md): A comprehensive design system powering Infomaniak products with consistent design tokens, reusable components, and cl...
+
+## Designers Guide
+
+- [Designers Guide/Getting Started](llms/designers-guide/getting-started.md): Infomaniak's design system for designers. This page points you to the right kit for your project and how to use it.
+- [Designers Guide/Android/Android - Technical Limitations](llms/designers-guide/android/android-technical-limitations.md): **Goal:** determine how the components can be used and any related constraints.
+- [Designers Guide/Android/Exporting Token Updates](llms/designers-guide/android/exporting-token-updates.md): This guide walks you through updating the Material color tokens in Figma and exporting them for the Android team. **N...
+- [Designers Guide/Android/HCT Tonal Palette](llms/designers-guide/android/hct-tonal-palette.md): Generates the tonal palette of a color in the [HCT color space](https://m3.material.io/blog/science-of-color-design)...
+- [Designers Guide/Android/Material Kit](llms/designers-guide/android/material-kit.md): **The figma kit includes:**
+- [Designers Guide/Figma Plugins](llms/designers-guide/figma-plugins.md): Infomaniak's design system Figma plugins are distributed as zip files built automatically by CI on every merge to `de...
+- [Designers Guide/Helpers/Creating a custom component](llms/designers-guide/helpers/creating-a-custom-component.md): Use this guide only when nothing can be reused from the native kit **and** the DS team has approved the creation of a...
+- [Designers Guide/Install the Font](llms/designers-guide/install-the-font.md): Figma shows a warning when inspecting a text element that uses **Infomaniak Sans** if the font is not installed on yo...
+- [Designers Guide/iOS/iOS - iPadOS Kit](llms/designers-guide/ios/ios-ipados-kit.md): **The figma kit includes:**
+- [Designers Guide/iOS/iOS - Technical Limitations](llms/designers-guide/ios/ios-technical-limitations.md): **Goal:** identify which components can be modified and their related constraints.
+- [Designers Guide/Web/Shadcn Kit](llms/designers-guide/web/shadcn-kit.md): **The figma kit includes:**
+- [Designers Guide/Web/Shadcn Token Mapping](llms/designers-guide/web/shadcn-token-mapping.md): Mapping between the shadcn/ui semantic tokens (CSS variables on the dev side) and the design system tokens used in th...
+
+## Design Tokens
+
+- [Design Tokens/Getting Started](llms/design-tokens/getting-started.md): Our design system is powered by design tokens: name-value pairs that define the visual language of Infomaniak product...
+- [Design Tokens/T1](llms/design-tokens/t1.md): T1 tokens are the foundational design tokens that define the raw values of your design system. These are the base val...
+- [Design Tokens/T1/Blur](llms/design-tokens/t1/blur.md)
+- [Design Tokens/T1/Border Width](llms/design-tokens/t1/border-width.md)
+- [Design Tokens/T1/Breakpoint](llms/design-tokens/t1/breakpoint.md)
+- [Design Tokens/T1/Color](llms/design-tokens/t1/color.md)
+- [Design Tokens/T1/Font](llms/design-tokens/t1/font.md)
+- [Design Tokens/T1/Opacity](llms/design-tokens/t1/opacity.md)
+- [Design Tokens/T1/Radius](llms/design-tokens/t1/radius.md)
+- [Design Tokens/T1/Ratio](llms/design-tokens/t1/ratio.md)
+- [Design Tokens/T1/Scale](llms/design-tokens/t1/scale.md)
+- [Design Tokens/T1/Shadow](llms/design-tokens/t1/shadow.md)
+- [Design Tokens/T1/Spacing](llms/design-tokens/t1/spacing.md)
+- [Design Tokens/T2](llms/design-tokens/t2.md): T2 tokens are semantic design tokens that reference T1 (primitive) values. They define aliases and common names to ab...
+- [Design Tokens/T2/Blur](llms/design-tokens/t2/blur.md): T2 Blur tokens provide semantic blur style definitions for elements and components.
+- [Design Tokens/T2/Border](llms/design-tokens/t2/border.md): T2 Border tokens provide semantic border style definitions for elements and components.
+- [Design Tokens/T2/Color](llms/design-tokens/t2/color.md): T2 Color tokens provide semantic color definitions for backgrounds, text, borders, and interactive states. Use the to...
+- [Design Tokens/T2/Font](llms/design-tokens/t2/font.md): T2 Font tokens provide semantic typography definitions for fonts and typefaces.
+- [Design Tokens/T2/Icon](llms/design-tokens/t2/icon.md): T2 Icon tokens provide icon-related definitions for sizing and styling icons.
+- [Design Tokens/T2/Opacity](llms/design-tokens/t2/opacity.md): T2 Opacity tokens provide semantic opacities for elements and components.
+- [Design Tokens/T2/Radius](llms/design-tokens/t2/radius.md): T2 Radius tokens provide semantic border radius definitions for rounded corners.
+- [Design Tokens/T2/Shadow](llms/design-tokens/t2/shadow.md): T2 Shadow tokens provide semantic shadow definitions for elements.
+- [Design Tokens/T2/Spacing](llms/design-tokens/t2/spacing.md): T2 Spacing tokens provide semantic spacing definitions for margins, padding, and gaps.
+- [Design Tokens/T2/Text](llms/design-tokens/t2/text.md): T2 Text tokens provide text styling definitions for typography elements.
+- [Design Tokens/T2/Typography](llms/design-tokens/t2/typography.md)
+- [Design Tokens/T3](llms/design-tokens/t3.md): T3 tokens are component-specific design tokens that reference T1 (primitive) and T2 (semantic) values. They define vi...
+- [Design Tokens/T3/Badge](llms/design-tokens/t3/badge.md)
+- [Design Tokens/T3/Body](llms/design-tokens/t3/body.md)
+- [Design Tokens/T3/Button](llms/design-tokens/t3/button.md)
+- [Design Tokens/T3/Heading](llms/design-tokens/t3/heading.md)
+- [Design Tokens/T3/Kbd](llms/design-tokens/t3/kbd.md)
+- [Design Tokens/T3/Separator](llms/design-tokens/t3/separator.md)
+- [Design Tokens/T3/Text Link](llms/design-tokens/t3/text-link.md)
+
+## Icons
+
+- [Icons/Getting Started](llms/icons/getting-started.md): Our icon system is powered by a self-hosted Iconify server. This enables consistent visual language across all Infoma...
+- [Icons/Icon Component](llms/icons/icon-component.md): For full documentation of the `esds-icon` web component, see:
+- [Icons/Icon Contribution](llms/icons/icon-contribution.md): A guide for designers on how to create icons.
+- [Icons/Icon Gallery](llms/icons/icon-gallery.md)
+
+## Typography
+
+- [Typography](llms/typography.md): This page describes the typography basics of the design system.
+
+## AI & LLMs
+
+- [AI & LLMs](llms/ai-llms.md): The design system publishes machine-readable resources so AI agents, coding assistants and LLMs can consume accurate,...
+
+## Components
+
+- [Components/Getting Started](llms/components/getting-started.md): Reusable web components built for Infomaniak products. Each component is framework-agnostic and can be used in any pr...
+- [Components/Badge](llms/components/badge.md): Import and register the custom element `esds-badge`:
+- [Components/Body](llms/components/body.md): Import and register the custom attribute `esds-body`:
+- [Components/Button](llms/components/button.md): Import and register the custom attribute `esds-button`:
+- [Components/Heading](llms/components/heading.md): Import and register the custom attribute `esds-heading`:
+- [Components/Helpers/InjectionContext](llms/components/helpers/injectioncontext.md): An `InjectionContext` is a way to pass data to a component tree.
+- [Components/Icon](llms/components/icon.md): Import and register the icon component in your application's entry file (e.g., `main.ts` or `index.ts`):
+- [Components/Kbd](llms/components/kbd.md): Import and register the custom attribute `esds-kbd`:
+- [Components/Separator](llms/components/separator.md): Import and register the separator component in your application's entry file (e.g., `main.ts` or `index.ts`):
+- [Components/Text Link](llms/components/text-link.md): Import and register the custom attribute `esds-text-link`:
+
+## Help and Feedback
+
+- [Help and Feedback](llms/help-and-feedback.md): Questions, bug reports, or feedback about the Design System? Internal consumers can reach out to the Design System te...
+
+## Optional
+
+- [Design Tokens/CHANGELOG](llms/design-tokens/changelog.md): Consumers referencing the removed `--esds-color-border-dataviz-<hue>-dim1` / `-dim2` CSS custom properties must updat...
+- [Components/CHANGELOG](llms/components/changelog.md): The `heading.{xs..xl}.font` and `body.{xs..lg}.font` tokens now expose `base` and `emphasized` variants instead of a...
+- [DESIGN.md (raw token reference)](DESIGN.md): Machine-readable token hierarchy with resolved values for all themes, optimized for AI consumption.
