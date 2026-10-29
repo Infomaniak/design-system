@@ -95,7 +95,7 @@
       "color": {
         "$root": {
           "$value": "{color.content.on.brand}",
-          "$description": "Default button label color (on brand background).",
+          "$description": "Default button label color.",
           "$extensions": {
             "scopes": []
           }
@@ -110,7 +110,7 @@
       },
       "font": {
         "$value": "{body.md.font.emphasized}",
-        "$description": "Default button label typography (medium emphasized body text).",
+        "$description": "Default button label typography.",
         "$extensions": {
           "scopes": []
         }
