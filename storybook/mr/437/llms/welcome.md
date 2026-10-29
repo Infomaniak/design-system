@@ -14,7 +14,7 @@
   <div className="welcome-section">
     <h2>Explore the Design System</h2>
     <div className="card-grid">
-      <a href="./?path=/docs/design-tokens-getting-started--docs" className="card card--vertical">
+      <a href="design-tokens/getting-started.md" className="card card--vertical">
         <h3 className="card__title">Design Tokens</h3>
         <p className="card__description">Foundation values for colors, spacing, typography, and more across all tiers (T1, T2, T3).</p>
         <span className="card__link">
@@ -22,7 +22,7 @@
         </span>
       </a>
 
-      <a href="./?path=/docs/icons-getting-started--docs" className="card card--vertical">
+      <a href="icons/getting-started.md" className="card card--vertical">
         <h3 className="card__title">Icons</h3>
         <p className="card__description">A comprehensive library of icons for consistent visual communication across products.</p>
         <span className="card__link">
@@ -30,7 +30,7 @@
         </span>
       </a>
 
-      <a href="./?path=/docs/ai-llms--docs" className="card card--vertical">
+      <a href="ai-llms.md" className="card card--vertical">
         <h3 className="card__title">AI &amp; LLMs</h3>
         <p className="card__description">llms.txt, llms-full.txt and DESIGN.md: machine-readable docs for AI agents and LLM consumption.</p>
         <span className="card__link">
@@ -44,7 +44,7 @@
 <div className="welcome-section">
   <h2>Resources</h2>
   <div className="card-grid">
-    <a href="./?path=/docs/help-and-feedback--docs" className="card card--horizontal">
+    <a href="help-and-feedback.md" className="card card--horizontal">
       <div className="card__icon">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/>

@@ -29,7 +29,7 @@ and how to use it.
 - System icons contribution file
 
 **[Figma file](https://www.figma.com/design/GiBEx5gisOnNe3cikN0z1U/ESDS-Team---System-icons---Contribution?node-id=2-8276&p=f&t=T3CL24pct9LcIv0K-0)**
-| **[How to use](./?path=/docs/icons-icon-contribution--docs)**
+| **[How to use](../icons/icon-contribution.md)**
 
 ---
 
@@ -39,8 +39,8 @@ and how to use it.
 - System icons embedded within native components
 
 **[Figma file](https://www.figma.com/design/OFCRdaeYW6GWhyq3ocHSOc/Edelweiss---iOS---iPadOS-Kit?m=auto&t=6Praqzvd4yFcNUmT-6)**
-| **[How to use](./?path=/docs/designers-guide-ios-ios-ipados-kit--docs)** | **[Technical
-limitations](./?path=/docs/designers-guide-ios-ios-technical-limitations--docs)**
+| **[How to use](ios/ios-ipados-kit.md)** | **[Technical
+limitations](ios/ios-technical-limitations.md)**
 
 ---
 
@@ -51,9 +51,9 @@ limitations](./?path=/docs/designers-guide-ios-ios-technical-limitations--docs)*
 - System icons embedded within native components
 
 **[Figma file](https://www.figma.com/design/r4D2DKWIyzVoigyiTh16Hh/Edelweiss---Material-Kit?m=auto&t=6Praqzvd4yFcNUmT-6)**
-| **[How to use](./?path=/docs/designers-guide-android-material-kit--docs)** | **[Tokens
-export](./?path=/docs/designers-guide-android-exporting-token-updates--docs)** | **[Technical
-limitations](./?path=/docs/designers-guide-android-android-technical-limitations--docs)**
+| **[How to use](android/material-kit.md)** | **[Tokens
+export](android/exporting-token-updates.md)** | **[Technical
+limitations](android/android-technical-limitations.md)**
 
 ---
 
@@ -64,13 +64,13 @@ limitations](./?path=/docs/designers-guide-android-android-technical-limitations
 - System icons embedded within native components
 
 **[Figma file](https://www.figma.com/design/eOY97TGxMkMx9ub9zt8e6v/Edelweiss---Shadcn-Kit--Paid-?m=auto&t=6Praqzvd4yFcNUmT-6)**
-| **[How to use](./?path=/docs/designers-guide-web-shadcn-kit--docs)** | **[Token
-mapping](./?path=/docs/designers-guide-web-shadcn-token-mapping--docs)**
+| **[How to use](web/shadcn-kit.md)** | **[Token
+mapping](web/shadcn-token-mapping.md)**
 
 ## 🧰 Helpers
 
 - **[Creating a custom
-  component](./?path=/docs/designers-guide-helpers-creating-a-custom-component--docs)** — build a
+  component](helpers/creating-a-custom-component.md)** — build a
   component the DS team has approved, ready to be integrated into its kit without rework.
 
 ## 💻 Which kit for which project?
@@ -103,7 +103,7 @@ Use the Figma Linter plugin (currently in progress) on your frame to guide you.
 <Collapsible summary="The Infomaniak Sans font is missing in Figma?">
 
 Install the font locally by following the
-[Install the Font](./?path=/docs/designers-guide-install-the-font--docs) guide.
+[Install the Font](install-the-font.md) guide.
 
 </Collapsible>
 

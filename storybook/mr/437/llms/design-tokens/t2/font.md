@@ -132,6 +132,19 @@ T2 Font tokens provide semantic typography definitions for fonts and typefaces.
       </td>
     </tr>
     <tr>
+      <td><p style=" font-size: var(--esds-font-size-6xl); margin: 0; padding: 8px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; line-height: 1.4; " > Edelweiss prefers rocky limestone locations </p> <div data-preview-value="--esds-font-size-6xl"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="font.size.6xl" type="button">font.size.6xl</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-font-size-6xl)" type="button">var(--esds-font-size-6xl)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-6xl" type="button">text-6xl</button></div>
+        <div class="token-row token-description">6x-large font size for the largest display text.</div>
+      </td>
+    </tr>
+    <tr>
       <td><p style=" font-family: var(--esds-font-family-base); font-size: 16px; margin: 0; padding: 8px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; " > Edelweiss prefers rocky limestone locations </p></td>
       <td>
         <div class="token-row">
@@ -259,6 +272,19 @@ T2 Font tokens provide semantic typography definitions for fonts and typefaces.
         </div>
         <div class="token-row">Tailwind: <button class="token-value" data-clipboard="leading-5xl" type="button">leading-5xl</button></div>
         <div class="token-row token-description">5x-large line-height for hero display text.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-font-line-height-6xl); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-font-line-height-6xl"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="font.line-height.6xl" type="button">font.line-height.6xl</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-font-line-height-6xl)" type="button">var(--esds-font-line-height-6xl)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="leading-6xl" type="button">leading-6xl</button></div>
+        <div class="token-row token-description">6x-large line-height for the largest display text.</div>
       </td>
     </tr>
     <tr>

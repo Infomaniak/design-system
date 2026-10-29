@@ -365,5 +365,44 @@ T2 Text tokens provide text styling definitions for typography elements.
         <div class="token-row token-description">Letter spacing for 5x-large text.</div>
       </td>
     </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-text-6xl-size); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-text-6xl-size"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="text.6xl.size" type="button">text.6xl.size</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-text-6xl-size)" type="button">var(--esds-text-6xl-size)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-6xl" type="button">text-6xl</button></div>
+        <div class="token-row token-description">Font size for 6x-large text.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-text-6xl-line-height); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-text-6xl-line-height"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="text.6xl.line-height" type="button">text.6xl.line-height</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-text-6xl-line-height)" type="button">var(--esds-text-6xl-line-height)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="leading-6xl" type="button">leading-6xl</button></div>
+        <div class="token-row token-description">Line-height for 6x-large text.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-text-6xl-letter-spacing); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-text-6xl-letter-spacing"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="text.6xl.letter-spacing" type="button">text.6xl.letter-spacing</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-text-6xl-letter-spacing)" type="button">var(--esds-text-6xl-letter-spacing)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="tracking-6xl" type="button">tracking-6xl</button></div>
+        <div class="token-row token-description">Letter spacing for 6x-large text.</div>
+      </td>
+    </tr>
   </tbody>
 </table>

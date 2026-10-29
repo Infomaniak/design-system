@@ -27,7 +27,7 @@ and download the `esds-icons.zip` asset of the newest release.
 Unzip the archive, then in Figma Desktop: **Plugins → Development → Import plugin from
 manifest…** and select the unzipped `esds-icons/manifest.json`.
 
-The plugin appears under **Plugins → Development → ESDS icons**. To generate the icon variants, follow the steps in the [icon contribution guide](./?path=/docs/icons-icon-contribution--docs#4-select-icon-and-run-esds-icons-plugin).
+The plugin appears under **Plugins → Development → ESDS icons**. To generate the icon variants, follow the steps in the [icon contribution guide](../icons/icon-contribution.md#4-select-icon-and-run-esds-icons-plugin).
 
 ### Update the plugin
 

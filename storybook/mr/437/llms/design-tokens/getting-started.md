@@ -32,11 +32,11 @@
 
 Our token system follows the Design Tokens Community Group (DTCG) standard with a three-tier architecture:
 
-- <a href="./?path=/docs/design-tokens-t1--docs">T1 Primitive tokens</a> for foundational tokens
+- <a href="t1.md">T1 Primitive tokens</a> for foundational tokens
   values
-- <a href="./?path=/docs/design-tokens-t2--docs">T2 Semantic tokens</a> for semantic abstraction
+- <a href="t2.md">T2 Semantic tokens</a> for semantic abstraction
   tokens
-- <a href="./?path=/docs/design-tokens-t3--docs">T3 Component tokens</a> for component-specific
+- <a href="t3.md">T3 Component tokens</a> for component-specific
   tokens
 
 ## Consuming Tokens
@@ -174,7 +174,7 @@ For the previous example, a common usage would be `active:bg-brand-state-selecte
 
 ### LLM/AI
 
-Use the <a href="./?path=/docs/ai-llms--docs">AI &amp; LLMs</a> resources (`DESIGN.md`, `llms.txt` and `llms-full.txt`) to provide design system context to your AI agent or LLM. They contain a structured, machine-readable reference of the entire token system in a format optimized for AI consumption.
+Use the <a href="../ai-llms.md">AI &amp; LLMs</a> resources (`DESIGN.md`, `llms.txt` and `llms-full.txt`) to provide design system context to your AI agent or LLM. They contain a structured, machine-readable reference of the entire token system in a format optimized for AI consumption.
 
 ### iOS
 

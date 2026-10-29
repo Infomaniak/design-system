@@ -40,4 +40,4 @@
 
 ### Token mapping
 
-See how the shadcn tokens map to the design system tokens: [Shadcn Token Mapping](./?path=/docs/designers-guide-web-shadcn-token-mapping--docs).
+See how the shadcn tokens map to the design system tokens: [Shadcn Token Mapping](shadcn-token-mapping.md).

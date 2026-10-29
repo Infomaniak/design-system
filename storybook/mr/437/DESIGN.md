@@ -117,6 +117,19 @@ typography:
       fontWeight: "500"
       lineHeight: "56px"
       letterSpacing: "0px"
+  6xl:
+    base:
+      fontFamily: "Infomaniak Sans"
+      fontSize: "3.25rem"
+      fontWeight: "400"
+      lineHeight: "60px"
+      letterSpacing: "0px"
+    emphasized:
+      fontFamily: "Infomaniak Sans"
+      fontSize: "3.25rem"
+      fontWeight: "500"
+      lineHeight: "60px"
+      letterSpacing: "0px"
 ---
 
 # Design Tokens Reference
@@ -382,6 +395,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | font.size.3xl | 2rem | 2rem | var(--esds-font-size-3xl) | 3x-large font size for prominent headings. |
 | font.size.4xl | 2.5rem | 2.5rem | var(--esds-font-size-4xl) | 4x-large font size for display headings. |
 | font.size.5xl | 3rem | 3rem | var(--esds-font-size-5xl) | 5x-large font size for hero display text. |
+| font.size.6xl | 3.25rem | 3.25rem | var(--esds-font-size-6xl) | 6x-large font size for the largest display text. |
 | font.family.base | "Infomaniak Sans" | "Infomaniak Sans" | var(--esds-font-family-base) | Base font family used across the design system. |
 | font.line-height.xs | 16px | 16px | var(--esds-font-line-height-xs) | Extra-small line-height for the tightest text. |
 | font.line-height.sm | 20px | 20px | var(--esds-font-line-height-sm) | Small line-height for compact text blocks. |
@@ -392,6 +406,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | font.line-height.3xl | 40px | 40px | var(--esds-font-line-height-3xl) | 3x-large line-height for display headings. |
 | font.line-height.4xl | 48px | 48px | var(--esds-font-line-height-4xl) | 4x-large line-height for large display text. |
 | font.line-height.5xl | 56px | 56px | var(--esds-font-line-height-5xl) | 5x-large line-height for hero display text. |
+| font.line-height.6xl | 60px | 60px | var(--esds-font-line-height-6xl) | 6x-large line-height for the largest display text. |
 | font.letter-spacing.md | 0px | 0px | var(--esds-font-letter-spacing-md) | Default letter spacing for body and UI text. |
 | font.weight.regular | 400 | 400 | var(--esds-font-weight-regular) | Regular weight for body copy and default text. |
 | font.weight.medium | 500 | 500 | var(--esds-font-weight-medium) | Medium weight for emphasized labels and headings. |
@@ -483,6 +498,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | text.5xl.size | 3rem | 3rem | var(--esds-text-5xl-size) | Font size for 5x-large text. |
 | text.5xl.line-height | 56px | 56px | var(--esds-text-5xl-line-height) | Line-height for 5x-large text. |
 | text.5xl.letter-spacing | 0px | 0px | var(--esds-text-5xl-letter-spacing) | Letter spacing for 5x-large text. |
+| text.6xl.size | 3.25rem | 3.25rem | var(--esds-text-6xl-size) | Font size for 6x-large text. |
+| text.6xl.line-height | 60px | 60px | var(--esds-text-6xl-line-height) | Line-height for 6x-large text. |
+| text.6xl.letter-spacing | 0px | 0px | var(--esds-text-6xl-letter-spacing) | Letter spacing for 6x-large text. |
 | typography.xs.base | 400 0.75rem/16px Infomaniak Sans | 400 0.75rem/16px Infomaniak Sans | var(--esds-typography-xs-base) | Extra-small base typography (regular weight). |
 | typography.xs.emphasized | 500 0.75rem/16px Infomaniak Sans | 500 0.75rem/16px Infomaniak Sans | var(--esds-typography-xs-emphasized) | Extra-small emphasized typography (medium weight). |
 | typography.sm.base | 400 0.875rem/20px Infomaniak Sans | 400 0.875rem/20px Infomaniak Sans | var(--esds-typography-sm-base) | Small base typography (regular weight). |
@@ -501,6 +519,8 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | typography.4xl.emphasized | 500 2.5rem/48px Infomaniak Sans | 500 2.5rem/48px Infomaniak Sans | var(--esds-typography-4xl-emphasized) | 4x-large emphasized typography (medium weight). |
 | typography.5xl.base | 400 3rem/56px Infomaniak Sans | 400 3rem/56px Infomaniak Sans | var(--esds-typography-5xl-base) | 5x-large base typography (regular weight). |
 | typography.5xl.emphasized | 500 3rem/56px Infomaniak Sans | 500 3rem/56px Infomaniak Sans | var(--esds-typography-5xl-emphasized) | 5x-large emphasized typography (medium weight). |
+| typography.6xl.base | 400 3.25rem/60px Infomaniak Sans | 400 3.25rem/60px Infomaniak Sans | var(--esds-typography-6xl-base) | 6x-large base typography (regular weight). |
+| typography.6xl.emphasized | 500 3.25rem/60px Infomaniak Sans | 500 3.25rem/60px Infomaniak Sans | var(--esds-typography-6xl-emphasized) | 6x-large emphasized typography (medium weight). |
 
 ## 3. Component Tokens
 
@@ -554,6 +574,8 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | heading.lg.font.emphasized | 500 2.5rem/48px Infomaniak Sans | 500 2.5rem/48px Infomaniak Sans | var(--esds-heading-lg-font-emphasized) | Large heading typography (medium weight). |
 | heading.xl.font.base | 400 3rem/56px Infomaniak Sans | 400 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font-base) | Extra-large heading typography (regular weight). |
 | heading.xl.font.emphasized | 500 3rem/56px Infomaniak Sans | 500 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font-emphasized) | Extra-large heading typography (medium weight). |
+| heading.2xl.font.base | 400 3.25rem/60px Infomaniak Sans | 400 3.25rem/60px Infomaniak Sans | var(--esds-heading-2xl-font-base) | 2x-large heading typography (regular weight). |
+| heading.2xl.font.emphasized | 500 3.25rem/60px Infomaniak Sans | 500 3.25rem/60px Infomaniak Sans | var(--esds-heading-2xl-font-emphasized) | 2x-large heading typography (medium weight). |
 | kbd.background-color | #fff | #192334 | var(--esds-kbd-background-color) | Default keyboard key background color. |
 | kbd.border.color | #e2e8f0 | #45556c | var(--esds-kbd-border-color) | Default keyboard key border color. |
 | kbd.border.width | 1px | 1px | var(--esds-kbd-border-width) | Default keyboard key border width. |

@@ -128,6 +128,19 @@
       </td>
     </tr>
     <tr>
+      <td><p style=" font-size: var(--esds-font-size-52); margin: 0; padding: 8px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; line-height: 1.4; " > Edelweiss prefers rocky limestone locations </p> <div data-preview-value="--esds-font-size-52"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="font.size.52" type="button">font.size.52</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-font-size-52)" type="button">var(--esds-font-size-52)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
       <td><p style=" font-weight: var(--esds-font-weight-400); font-size: 16px; font-family: system-ui, sans-serif; margin: 0; padding: 8px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; " > Edelweiss prefers rocky limestone locations </p> <div data-preview-value="--esds-font-weight-400"></div></td>
       <td>
         <div class="token-row">
@@ -304,6 +317,19 @@
         </div>
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-font-line-height-56)" type="button">var(--esds-font-line-height-56)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-font-line-height-60); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-font-line-height-60"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="font.line-height.60" type="button">font.line-height.60</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-font-line-height-60)" type="button">var(--esds-font-line-height-60)</button>
         </div>
 
         <div class="token-row token-description"></div>

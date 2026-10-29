@@ -23,4 +23,4 @@ If Figma was open, restart it. **Infomaniak Sans** now appears in the font picke
 
 ## Using the font on the web?
 
-The web usage (CSS/HTML) is documented on the [Typography](./?path=/docs/typography--docs) page.
+The web usage (CSS/HTML) is documented on the [Typography](../typography.md) page.

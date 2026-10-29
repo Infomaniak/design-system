@@ -244,5 +244,31 @@
         <div class="token-row token-description">5x-large emphasized typography (medium weight).</div>
       </td>
     </tr>
+    <tr>
+      <td><p style=" font: var(--esds-typography-6xl-base); margin: 0; padding: 12px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; max-width: 300px; " > Edelweiss prefers rocky limestone locations </p> <div data-preview-value="--esds-typography-6xl-base"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="typography.6xl.base" type="button">typography.6xl.base</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-typography-6xl-base)" type="button">var(--esds-typography-6xl-base)</button>
+        </div>
+
+        <div class="token-row token-description">6x-large base typography (regular weight).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><p style=" font: var(--esds-typography-6xl-emphasized); margin: 0; padding: 12px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; max-width: 300px; " > Edelweiss prefers rocky limestone locations </p> <div data-preview-value="--esds-typography-6xl-emphasized"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="typography.6xl.emphasized" type="button">typography.6xl.emphasized</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-typography-6xl-emphasized)" type="button">var(--esds-typography-6xl-emphasized)</button>
+        </div>
+
+        <div class="token-row token-description">6x-large emphasized typography (medium weight).</div>
+      </td>
+    </tr>
   </tbody>
 </table>

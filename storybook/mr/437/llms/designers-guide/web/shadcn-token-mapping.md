@@ -2,7 +2,7 @@
 
 > Mapping between the shadcn/ui semantic tokens (CSS variables on the dev side) and the design system tokens used in th...
 
-Mapping between the shadcn/ui semantic tokens (CSS variables on the dev side) and the design system tokens used in the [Shadcn kit](./?path=/docs/designers-guide-web-shadcn-kit--docs).
+Mapping between the shadcn/ui semantic tokens (CSS variables on the dev side) and the design system tokens used in the [Shadcn kit](shadcn-kit.md).
 
 ## Base
 

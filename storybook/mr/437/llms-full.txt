@@ -117,6 +117,19 @@ typography:
       fontWeight: "500"
       lineHeight: "56px"
       letterSpacing: "0px"
+  6xl:
+    base:
+      fontFamily: "Infomaniak Sans"
+      fontSize: "3.25rem"
+      fontWeight: "400"
+      lineHeight: "60px"
+      letterSpacing: "0px"
+    emphasized:
+      fontFamily: "Infomaniak Sans"
+      fontSize: "3.25rem"
+      fontWeight: "500"
+      lineHeight: "60px"
+      letterSpacing: "0px"
 ---
 
 # Design Tokens Reference
@@ -382,6 +395,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | font.size.3xl | 2rem | 2rem | var(--esds-font-size-3xl) | 3x-large font size for prominent headings. |
 | font.size.4xl | 2.5rem | 2.5rem | var(--esds-font-size-4xl) | 4x-large font size for display headings. |
 | font.size.5xl | 3rem | 3rem | var(--esds-font-size-5xl) | 5x-large font size for hero display text. |
+| font.size.6xl | 3.25rem | 3.25rem | var(--esds-font-size-6xl) | 6x-large font size for the largest display text. |
 | font.family.base | "Infomaniak Sans" | "Infomaniak Sans" | var(--esds-font-family-base) | Base font family used across the design system. |
 | font.line-height.xs | 16px | 16px | var(--esds-font-line-height-xs) | Extra-small line-height for the tightest text. |
 | font.line-height.sm | 20px | 20px | var(--esds-font-line-height-sm) | Small line-height for compact text blocks. |
@@ -392,6 +406,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | font.line-height.3xl | 40px | 40px | var(--esds-font-line-height-3xl) | 3x-large line-height for display headings. |
 | font.line-height.4xl | 48px | 48px | var(--esds-font-line-height-4xl) | 4x-large line-height for large display text. |
 | font.line-height.5xl | 56px | 56px | var(--esds-font-line-height-5xl) | 5x-large line-height for hero display text. |
+| font.line-height.6xl | 60px | 60px | var(--esds-font-line-height-6xl) | 6x-large line-height for the largest display text. |
 | font.letter-spacing.md | 0px | 0px | var(--esds-font-letter-spacing-md) | Default letter spacing for body and UI text. |
 | font.weight.regular | 400 | 400 | var(--esds-font-weight-regular) | Regular weight for body copy and default text. |
 | font.weight.medium | 500 | 500 | var(--esds-font-weight-medium) | Medium weight for emphasized labels and headings. |
@@ -483,6 +498,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | text.5xl.size | 3rem | 3rem | var(--esds-text-5xl-size) | Font size for 5x-large text. |
 | text.5xl.line-height | 56px | 56px | var(--esds-text-5xl-line-height) | Line-height for 5x-large text. |
 | text.5xl.letter-spacing | 0px | 0px | var(--esds-text-5xl-letter-spacing) | Letter spacing for 5x-large text. |
+| text.6xl.size | 3.25rem | 3.25rem | var(--esds-text-6xl-size) | Font size for 6x-large text. |
+| text.6xl.line-height | 60px | 60px | var(--esds-text-6xl-line-height) | Line-height for 6x-large text. |
+| text.6xl.letter-spacing | 0px | 0px | var(--esds-text-6xl-letter-spacing) | Letter spacing for 6x-large text. |
 | typography.xs.base | 400 0.75rem/16px Infomaniak Sans | 400 0.75rem/16px Infomaniak Sans | var(--esds-typography-xs-base) | Extra-small base typography (regular weight). |
 | typography.xs.emphasized | 500 0.75rem/16px Infomaniak Sans | 500 0.75rem/16px Infomaniak Sans | var(--esds-typography-xs-emphasized) | Extra-small emphasized typography (medium weight). |
 | typography.sm.base | 400 0.875rem/20px Infomaniak Sans | 400 0.875rem/20px Infomaniak Sans | var(--esds-typography-sm-base) | Small base typography (regular weight). |
@@ -501,6 +519,8 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | typography.4xl.emphasized | 500 2.5rem/48px Infomaniak Sans | 500 2.5rem/48px Infomaniak Sans | var(--esds-typography-4xl-emphasized) | 4x-large emphasized typography (medium weight). |
 | typography.5xl.base | 400 3rem/56px Infomaniak Sans | 400 3rem/56px Infomaniak Sans | var(--esds-typography-5xl-base) | 5x-large base typography (regular weight). |
 | typography.5xl.emphasized | 500 3rem/56px Infomaniak Sans | 500 3rem/56px Infomaniak Sans | var(--esds-typography-5xl-emphasized) | 5x-large emphasized typography (medium weight). |
+| typography.6xl.base | 400 3.25rem/60px Infomaniak Sans | 400 3.25rem/60px Infomaniak Sans | var(--esds-typography-6xl-base) | 6x-large base typography (regular weight). |
+| typography.6xl.emphasized | 500 3.25rem/60px Infomaniak Sans | 500 3.25rem/60px Infomaniak Sans | var(--esds-typography-6xl-emphasized) | 6x-large emphasized typography (medium weight). |
 
 ## 3. Component Tokens
 
@@ -554,6 +574,8 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | heading.lg.font.emphasized | 500 2.5rem/48px Infomaniak Sans | 500 2.5rem/48px Infomaniak Sans | var(--esds-heading-lg-font-emphasized) | Large heading typography (medium weight). |
 | heading.xl.font.base | 400 3rem/56px Infomaniak Sans | 400 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font-base) | Extra-large heading typography (regular weight). |
 | heading.xl.font.emphasized | 500 3rem/56px Infomaniak Sans | 500 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font-emphasized) | Extra-large heading typography (medium weight). |
+| heading.2xl.font.base | 400 3.25rem/60px Infomaniak Sans | 400 3.25rem/60px Infomaniak Sans | var(--esds-heading-2xl-font-base) | 2x-large heading typography (regular weight). |
+| heading.2xl.font.emphasized | 500 3.25rem/60px Infomaniak Sans | 500 3.25rem/60px Infomaniak Sans | var(--esds-heading-2xl-font-emphasized) | 2x-large heading typography (medium weight). |
 | kbd.background-color | #fff | #192334 | var(--esds-kbd-background-color) | Default keyboard key background color. |
 | kbd.border.color | #e2e8f0 | #45556c | var(--esds-kbd-border-color) | Default keyboard key border color. |
 | kbd.border.width | 1px | 1px | var(--esds-kbd-border-width) | Default keyboard key border width. |
@@ -595,7 +617,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
   <div className="welcome-section">
     <h2>Explore the Design System</h2>
     <div className="card-grid">
-      <a href="./?path=/docs/design-tokens-getting-started--docs" className="card card--vertical">
+      <a href="design-tokens/getting-started.md" className="card card--vertical">
         <h3 className="card__title">Design Tokens</h3>
         <p className="card__description">Foundation values for colors, spacing, typography, and more across all tiers (T1, T2, T3).</p>
         <span className="card__link">
@@ -603,7 +625,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
         </span>
       </a>
 
-      <a href="./?path=/docs/icons-getting-started--docs" className="card card--vertical">
+      <a href="icons/getting-started.md" className="card card--vertical">
         <h3 className="card__title">Icons</h3>
         <p className="card__description">A comprehensive library of icons for consistent visual communication across products.</p>
         <span className="card__link">
@@ -611,7 +633,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
         </span>
       </a>
 
-      <a href="./?path=/docs/ai-llms--docs" className="card card--vertical">
+      <a href="ai-llms.md" className="card card--vertical">
         <h3 className="card__title">AI &amp; LLMs</h3>
         <p className="card__description">llms.txt, llms-full.txt and DESIGN.md: machine-readable docs for AI agents and LLM consumption.</p>
         <span className="card__link">
@@ -625,7 +647,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 <div className="welcome-section">
   <h2>Resources</h2>
   <div className="card-grid">
-    <a href="./?path=/docs/help-and-feedback--docs" className="card card--horizontal">
+    <a href="help-and-feedback.md" className="card card--horizontal">
       <div className="card__icon">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/>
@@ -719,7 +741,7 @@ and how to use it.
 - System icons contribution file
 
 **[Figma file](https://www.figma.com/design/GiBEx5gisOnNe3cikN0z1U/ESDS-Team---System-icons---Contribution?node-id=2-8276&p=f&t=T3CL24pct9LcIv0K-0)**
-| **[How to use](./?path=/docs/icons-icon-contribution--docs)**
+| **[How to use](../icons/icon-contribution.md)**
 
 ---
 
@@ -729,8 +751,8 @@ and how to use it.
 - System icons embedded within native components
 
 **[Figma file](https://www.figma.com/design/OFCRdaeYW6GWhyq3ocHSOc/Edelweiss---iOS---iPadOS-Kit?m=auto&t=6Praqzvd4yFcNUmT-6)**
-| **[How to use](./?path=/docs/designers-guide-ios-ios-ipados-kit--docs)** | **[Technical
-limitations](./?path=/docs/designers-guide-ios-ios-technical-limitations--docs)**
+| **[How to use](ios/ios-ipados-kit.md)** | **[Technical
+limitations](ios/ios-technical-limitations.md)**
 
 ---
 
@@ -741,9 +763,9 @@ limitations](./?path=/docs/designers-guide-ios-ios-technical-limitations--docs)*
 - System icons embedded within native components
 
 **[Figma file](https://www.figma.com/design/r4D2DKWIyzVoigyiTh16Hh/Edelweiss---Material-Kit?m=auto&t=6Praqzvd4yFcNUmT-6)**
-| **[How to use](./?path=/docs/designers-guide-android-material-kit--docs)** | **[Tokens
-export](./?path=/docs/designers-guide-android-exporting-token-updates--docs)** | **[Technical
-limitations](./?path=/docs/designers-guide-android-android-technical-limitations--docs)**
+| **[How to use](android/material-kit.md)** | **[Tokens
+export](android/exporting-token-updates.md)** | **[Technical
+limitations](android/android-technical-limitations.md)**
 
 ---
 
@@ -754,13 +776,13 @@ limitations](./?path=/docs/designers-guide-android-android-technical-limitations
 - System icons embedded within native components
 
 **[Figma file](https://www.figma.com/design/eOY97TGxMkMx9ub9zt8e6v/Edelweiss---Shadcn-Kit--Paid-?m=auto&t=6Praqzvd4yFcNUmT-6)**
-| **[How to use](./?path=/docs/designers-guide-web-shadcn-kit--docs)** | **[Token
-mapping](./?path=/docs/designers-guide-web-shadcn-token-mapping--docs)**
+| **[How to use](web/shadcn-kit.md)** | **[Token
+mapping](web/shadcn-token-mapping.md)**
 
 ## 🧰 Helpers
 
 - **[Creating a custom
-  component](./?path=/docs/designers-guide-helpers-creating-a-custom-component--docs)** — build a
+  component](helpers/creating-a-custom-component.md)** — build a
   component the DS team has approved, ready to be integrated into its kit without rework.
 
 ## 💻 Which kit for which project?
@@ -793,7 +815,7 @@ Use the Figma Linter plugin (currently in progress) on your frame to guide you.
 <Collapsible summary="The Infomaniak Sans font is missing in Figma?">
 
 Install the font locally by following the
-[Install the Font](./?path=/docs/designers-guide-install-the-font--docs) guide.
+[Install the Font](install-the-font.md) guide.
 
 </Collapsible>
 
@@ -1012,7 +1034,7 @@ Android team. **Never export before an Android developer has approved the change
 Make sure you have:
 
 - edit access to the [Material kit](https://www.figma.com/design/r4D2DKWIyzVoigyiTh16Hh/Edelweiss---Material-Kit?m=auto&t=6Praqzvd4yFcNUmT-6).
-- access to the **[HCT Tonal Palette](./?path=/docs/designers-guide-android-hct-tonal-palette--docs)** generator, our in-house tool (only needed if you create a new color palette).
+- access to the **[HCT Tonal Palette](hct-tonal-palette.md)** generator, our in-house tool (only needed if you create a new color palette).
 - a Figma variables export plugin (e.g. [Variables Pro](https://www.figma.com/community/plugin/1264578192495051449/variables-pro-swap-import-export-variables)).
 - an Android developer who will review your changes.
 
@@ -1022,7 +1044,7 @@ Make sure you have:
 
 Skip this step if you are only changing values in existing palettes.
 
-1. Open the **[HCT Tonal Palette](./?path=/docs/designers-guide-android-hct-tonal-palette--docs)** generator.
+1. Open the **[HCT Tonal Palette](hct-tonal-palette.md)** generator.
 2. Enter the source color (hex) of the new palette.
 3. Generate the full tonal palette, including tones you don't plan to use yet: Material roles rely on many different tones across all contrast modes.
 4. Add the palette to the **Primitives** collection.
@@ -1158,7 +1180,7 @@ and download the `esds-icons.zip` asset of the newest release.
 Unzip the archive, then in Figma Desktop: **Plugins → Development → Import plugin from
 manifest…** and select the unzipped `esds-icons/manifest.json`.
 
-The plugin appears under **Plugins → Development → ESDS icons**. To generate the icon variants, follow the steps in the [icon contribution guide](./?path=/docs/icons-icon-contribution--docs#4-select-icon-and-run-esds-icons-plugin).
+The plugin appears under **Plugins → Development → ESDS icons**. To generate the icon variants, follow the steps in the [icon contribution guide](../icons/icon-contribution.md#4-select-icon-and-run-esds-icons-plugin).
 
 ### Update the plugin
 
@@ -1286,7 +1308,7 @@ If Figma was open, restart it. **Infomaniak Sans** now appears in the font picke
 
 ## Using the font on the web?
 
-The web usage (CSS/HTML) is documented on the [Typography](./?path=/docs/typography--docs) page.
+The web usage (CSS/HTML) is documented on the [Typography](../typography.md) page.
 
 ---
 
@@ -1562,7 +1584,7 @@ Hold actions:
 
 ### Token mapping
 
-See how the shadcn tokens map to the design system tokens: [Shadcn Token Mapping](./?path=/docs/designers-guide-web-shadcn-token-mapping--docs).
+See how the shadcn tokens map to the design system tokens: [Shadcn Token Mapping](shadcn-token-mapping.md).
 
 ---
 
@@ -1570,7 +1592,7 @@ See how the shadcn tokens map to the design system tokens: [Shadcn Token Mapping
 
 > Mapping between the shadcn/ui semantic tokens (CSS variables on the dev side) and the design system tokens used in th...
 
-Mapping between the shadcn/ui semantic tokens (CSS variables on the dev side) and the design system tokens used in the [Shadcn kit](./?path=/docs/designers-guide-web-shadcn-kit--docs).
+Mapping between the shadcn/ui semantic tokens (CSS variables on the dev side) and the design system tokens used in the [Shadcn kit](shadcn-kit.md).
 
 ## Base
 
@@ -1882,11 +1904,11 @@ Mapping between the shadcn/ui semantic tokens (CSS variables on the dev side) an
 
 Our token system follows the Design Tokens Community Group (DTCG) standard with a three-tier architecture:
 
-- <a href="./?path=/docs/design-tokens-t1--docs">T1 Primitive tokens</a> for foundational tokens
+- <a href="t1.md">T1 Primitive tokens</a> for foundational tokens
   values
-- <a href="./?path=/docs/design-tokens-t2--docs">T2 Semantic tokens</a> for semantic abstraction
+- <a href="t2.md">T2 Semantic tokens</a> for semantic abstraction
   tokens
-- <a href="./?path=/docs/design-tokens-t3--docs">T3 Component tokens</a> for component-specific
+- <a href="t3.md">T3 Component tokens</a> for component-specific
   tokens
 
 ## Consuming Tokens
@@ -2024,7 +2046,7 @@ For the previous example, a common usage would be `active:bg-brand-state-selecte
 
 ### LLM/AI
 
-Use the <a href="./?path=/docs/ai-llms--docs">AI &amp; LLMs</a> resources (`DESIGN.md`, `llms.txt` and `llms-full.txt`) to provide design system context to your AI agent or LLM. They contain a structured, machine-readable reference of the entire token system in a format optimized for AI consumption.
+Use the <a href="../ai-llms.md">AI &amp; LLMs</a> resources (`DESIGN.md`, `llms.txt` and `llms-full.txt`) to provide design system context to your AI agent or LLM. They contain a structured, machine-readable reference of the entire token system in a format optimized for AI consumption.
 
 ### iOS
 
@@ -2209,23 +2231,23 @@ T1 tokens are the foundational design tokens that define the raw values of your 
 <Table
   headers={['Category', 'Description']}
   rows={[
-    [<a href="./?path=/docs/design-tokens-t1-blur--docs">Blur</a>, 'Background blur effects'],
+    [<a href="t1/blur.md">Blur</a>, 'Background blur effects'],
     [
-      <a href="./?path=/docs/design-tokens-t1-border-width--docs">Border Width</a>,
+      <a href="t1/border-width.md">Border Width</a>,
       'Border thickness values',
     ],
     [
-      <a href="./?path=/docs/design-tokens-t1-breakpoint--docs">Breakpoint</a>,
+      <a href="t1/breakpoint.md">Breakpoint</a>,
       'Responsive breakpoints',
     ],
-    [<a href="./?path=/docs/design-tokens-t1-color--docs">Color</a>, 'Color palette'],
-    [<a href="./?path=/docs/design-tokens-t1-dimension--docs">Dimension</a>, 'Dimension values'],
-    [<a href="./?path=/docs/design-tokens-t1-font--docs">Font</a>, 'Typography tokens'],
-    [<a href="./?path=/docs/design-tokens-t1-opacity--docs">Opacity</a>, 'Opacity values'],
-    [<a href="./?path=/docs/design-tokens-t1-radius--docs">Radius</a>, 'Border radius values'],
-    [<a href="./?path=/docs/design-tokens-t1-ratio--docs">Ratio</a>, 'Aspect ratios'],
-    [<a href="./?path=/docs/design-tokens-t1-shadow--docs">Shadow</a>, 'Shadow effects'],
-    [<a href="./?path=/docs/design-tokens-t1-spacing--docs">Spacing</a>, 'Spacing values'],
+    [<a href="t1/color.md">Color</a>, 'Color palette'],
+    [<a href="t1/dimension.md">Dimension</a>, 'Dimension values'],
+    [<a href="t1/font.md">Font</a>, 'Typography tokens'],
+    [<a href="t1/opacity.md">Opacity</a>, 'Opacity values'],
+    [<a href="t1/radius.md">Radius</a>, 'Border radius values'],
+    [<a href="t1/ratio.md">Ratio</a>, 'Aspect ratios'],
+    [<a href="t1/shadow.md">Shadow</a>, 'Shadow effects'],
+    [<a href="t1/spacing.md">Spacing</a>, 'Spacing values'],
   ]}
 />
 
@@ -5579,6 +5601,19 @@ T1 tokens are the foundational design tokens that define the raw values of your 
       </td>
     </tr>
     <tr>
+      <td><p style=" font-size: var(--esds-font-size-52); margin: 0; padding: 8px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; line-height: 1.4; " > Edelweiss prefers rocky limestone locations </p> <div data-preview-value="--esds-font-size-52"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="font.size.52" type="button">font.size.52</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-font-size-52)" type="button">var(--esds-font-size-52)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
       <td><p style=" font-weight: var(--esds-font-weight-400); font-size: 16px; font-family: system-ui, sans-serif; margin: 0; padding: 8px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; " > Edelweiss prefers rocky limestone locations </p> <div data-preview-value="--esds-font-weight-400"></div></td>
       <td>
         <div class="token-row">
@@ -5755,6 +5790,19 @@ T1 tokens are the foundational design tokens that define the raw values of your 
         </div>
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-font-line-height-56)" type="button">var(--esds-font-line-height-56)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-font-line-height-60); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-font-line-height-60"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="font.line-height.60" type="button">font.line-height.60</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-font-line-height-60)" type="button">var(--esds-font-line-height-60)</button>
         </div>
 
         <div class="token-row token-description"></div>
@@ -6864,16 +6912,16 @@ T2 tokens are semantic design tokens that reference T1 (primitive) values. They 
 <Table
   headers={['Category', 'Description']}
   rows={[
-    [<a href="./?path=/docs/design-tokens-t2-blur--docs">Blur</a>, 'Semantic blur styles'],
-    [<a href="./?path=/docs/design-tokens-t2-border--docs">Border</a>, 'Semantic border styles'],
-    [<a href="./?path=/docs/design-tokens-t2-color--docs">Color</a>, 'Semantic color aliases'],
-    [<a href="./?path=/docs/design-tokens-t2-font--docs">Font</a>, 'Semantic typography'],
-    [<a href="./?path=/docs/design-tokens-t2-icon--docs">Icon</a>, 'Icon-related tokens'],
-    [<a href="./?path=/docs/design-tokens-t2-opacity--docs">Opacity</a>, 'Semantic opacity tokens'],
-    [<a href="./?path=/docs/design-tokens-t2-radius--docs">Radius</a>, 'Semantic border radius'],
-    [<a href="./?path=/docs/design-tokens-t2-spacing--docs">Spacing</a>, 'Semantic spacing'],
-    [<a href="./?path=/docs/design-tokens-t2-text--docs">Text</a>, 'Text styling tokens'],
-    [<a href="./?path=/docs/design-tokens-t2-typography--docs">Typography</a>, 'Typography tokens'],
+    [<a href="t2/blur.md">Blur</a>, 'Semantic blur styles'],
+    [<a href="t2/border.md">Border</a>, 'Semantic border styles'],
+    [<a href="t2/color.md">Color</a>, 'Semantic color aliases'],
+    [<a href="t2/font.md">Font</a>, 'Semantic typography'],
+    [<a href="t2/icon.md">Icon</a>, 'Icon-related tokens'],
+    [<a href="t2/opacity.md">Opacity</a>, 'Semantic opacity tokens'],
+    [<a href="t2/radius.md">Radius</a>, 'Semantic border radius'],
+    [<a href="t2/spacing.md">Spacing</a>, 'Semantic spacing'],
+    [<a href="t2/text.md">Text</a>, 'Text styling tokens'],
+    [<a href="t2/typography.md">Typography</a>, 'Typography tokens'],
   ]}
 />
 
@@ -10248,6 +10296,19 @@ T2 Font tokens provide semantic typography definitions for fonts and typefaces.
       </td>
     </tr>
     <tr>
+      <td><p style=" font-size: var(--esds-font-size-6xl); margin: 0; padding: 8px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; line-height: 1.4; " > Edelweiss prefers rocky limestone locations </p> <div data-preview-value="--esds-font-size-6xl"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="font.size.6xl" type="button">font.size.6xl</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-font-size-6xl)" type="button">var(--esds-font-size-6xl)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-6xl" type="button">text-6xl</button></div>
+        <div class="token-row token-description">6x-large font size for the largest display text.</div>
+      </td>
+    </tr>
+    <tr>
       <td><p style=" font-family: var(--esds-font-family-base); font-size: 16px; margin: 0; padding: 8px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; " > Edelweiss prefers rocky limestone locations </p></td>
       <td>
         <div class="token-row">
@@ -10375,6 +10436,19 @@ T2 Font tokens provide semantic typography definitions for fonts and typefaces.
         </div>
         <div class="token-row">Tailwind: <button class="token-value" data-clipboard="leading-5xl" type="button">leading-5xl</button></div>
         <div class="token-row token-description">5x-large line-height for hero display text.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-font-line-height-6xl); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-font-line-height-6xl"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="font.line-height.6xl" type="button">font.line-height.6xl</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-font-line-height-6xl)" type="button">var(--esds-font-line-height-6xl)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="leading-6xl" type="button">leading-6xl</button></div>
+        <div class="token-row token-description">6x-large line-height for the largest display text.</div>
       </td>
     </tr>
     <tr>
@@ -11686,6 +11760,45 @@ T2 Text tokens provide text styling definitions for typography elements.
         <div class="token-row token-description">Letter spacing for 5x-large text.</div>
       </td>
     </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-text-6xl-size); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-text-6xl-size"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="text.6xl.size" type="button">text.6xl.size</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-text-6xl-size)" type="button">var(--esds-text-6xl-size)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-6xl" type="button">text-6xl</button></div>
+        <div class="token-row token-description">Font size for 6x-large text.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-text-6xl-line-height); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-text-6xl-line-height"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="text.6xl.line-height" type="button">text.6xl.line-height</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-text-6xl-line-height)" type="button">var(--esds-text-6xl-line-height)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="leading-6xl" type="button">leading-6xl</button></div>
+        <div class="token-row token-description">Line-height for 6x-large text.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-text-6xl-letter-spacing); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-text-6xl-letter-spacing"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="text.6xl.letter-spacing" type="button">text.6xl.letter-spacing</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-text-6xl-letter-spacing)" type="button">var(--esds-text-6xl-letter-spacing)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="tracking-6xl" type="button">tracking-6xl</button></div>
+        <div class="token-row token-description">Letter spacing for 6x-large text.</div>
+      </td>
+    </tr>
   </tbody>
 </table>
 
@@ -11937,6 +12050,32 @@ T2 Text tokens provide text styling definitions for typography elements.
         <div class="token-row token-description">5x-large emphasized typography (medium weight).</div>
       </td>
     </tr>
+    <tr>
+      <td><p style=" font: var(--esds-typography-6xl-base); margin: 0; padding: 12px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; max-width: 300px; " > Edelweiss prefers rocky limestone locations </p> <div data-preview-value="--esds-typography-6xl-base"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="typography.6xl.base" type="button">typography.6xl.base</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-typography-6xl-base)" type="button">var(--esds-typography-6xl-base)</button>
+        </div>
+
+        <div class="token-row token-description">6x-large base typography (regular weight).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><p style=" font: var(--esds-typography-6xl-emphasized); margin: 0; padding: 12px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; max-width: 300px; " > Edelweiss prefers rocky limestone locations </p> <div data-preview-value="--esds-typography-6xl-emphasized"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="typography.6xl.emphasized" type="button">typography.6xl.emphasized</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-typography-6xl-emphasized)" type="button">var(--esds-typography-6xl-emphasized)</button>
+        </div>
+
+        <div class="token-row token-description">6x-large emphasized typography (medium weight).</div>
+      </td>
+    </tr>
   </tbody>
 </table>
 
@@ -11968,20 +12107,20 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
 <Table
   headers={['Category', 'Description']}
   rows={[
-    [<a href="./?path=/docs/design-tokens-t3-badge--docs">Badge</a>, 'Badge component tokens'],
-    [<a href="./?path=/docs/design-tokens-t3-body--docs">Body</a>, 'Body component styles'],
-    [<a href="./?path=/docs/design-tokens-t3-button--docs">Button</a>, 'Button component tokens'],
+    [<a href="t3/badge.md">Badge</a>, 'Badge component tokens'],
+    [<a href="t3/body.md">Body</a>, 'Body component styles'],
+    [<a href="t3/button.md">Button</a>, 'Button component tokens'],
     [
-      <a href="./?path=/docs/design-tokens-t3-heading--docs">Heading</a>,
+      <a href="t3/heading.md">Heading</a>,
       'Heading component styles',
     ],
-    [<a href="./?path=/docs/design-tokens-t3-kbd--docs">Kbd</a>, 'Kbd component tokens'],
+    [<a href="t3/kbd.md">Kbd</a>, 'Kbd component tokens'],
     [
-      <a href="./?path=/docs/design-tokens-t3-separator--docs">Separator</a>,
+      <a href="t3/separator.md">Separator</a>,
       'Separator component tokens',
     ],
     [
-      <a href="./?path=/docs/design-tokens-t3-text-link--docs">Text Link</a>,
+      <a href="t3/text-link.md">Text Link</a>,
       'Text Link component tokens',
     ],
   ]}
@@ -12624,6 +12763,32 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
         <div class="token-row token-description">Extra-large heading typography (medium weight).</div>
       </td>
     </tr>
+    <tr>
+      <td><p style=" font: var(--esds-heading-2xl-font-base); margin: 0; padding: 12px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; max-width: 300px; " > Edelweiss prefers rocky limestone locations </p> <div data-preview-value="--esds-heading-2xl-font-base"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="heading.2xl.font.base" type="button">heading.2xl.font.base</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-heading-2xl-font-base)" type="button">var(--esds-heading-2xl-font-base)</button>
+        </div>
+
+        <div class="token-row token-description">2x-large heading typography (regular weight).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><p style=" font: var(--esds-heading-2xl-font-emphasized); margin: 0; padding: 12px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; max-width: 300px; " > Edelweiss prefers rocky limestone locations </p> <div data-preview-value="--esds-heading-2xl-font-emphasized"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="heading.2xl.font.emphasized" type="button">heading.2xl.font.emphasized</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-heading-2xl-font-emphasized)" type="button">var(--esds-heading-2xl-font-emphasized)</button>
+        </div>
+
+        <div class="token-row token-description">2x-large heading typography (medium weight).</div>
+      </td>
+    </tr>
   </tbody>
 </table>
 
@@ -13035,7 +13200,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
 
 <div className="card-grid">
   <a
-    href="./?path=/docs/icons-icon-gallery--docs"
+    href="icon-gallery.md"
     className="card card--vertical"
   >
     <h3 className="card__title">Browse All Icons</h3>
@@ -13045,7 +13210,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
     <span className="card__link">Open Gallery →</span>
   </a>
   <a
-    href="./?path=/docs/icons-icon-component--docs"
+    href="icon-component.md"
     className="card card--vertical"
   >
     <h3 className="card__title">Icon Component - Web</h3>
@@ -13174,7 +13339,7 @@ Symbols follow the same naming convention with the `esds-` prefix (e.g. `Image("
 
 For full documentation of the `esds-icon` web component, see:
 
-[Components/esds-icon](./?path=/docs/components-icon--docs)
+[Components/esds-icon](../components/icon.md)
 
 ---
 
@@ -13215,7 +13380,7 @@ A guide for designers on how to create icons.
 ### 4. Select icon and run ESDS icons plugin
 
 Download and install the
-[ESDS icons plugin](./?path=/docs/designers-guide-figma-plugins--docs#esds-icons).
+[ESDS icons plugin](../designers-guide/figma-plugins.md#esds-icons).
 
 <img
   src={SystemIconsStep4}
@@ -13302,7 +13467,7 @@ It is available in different font weights.
 </table>
 
 > Installing the font locally to use it in Figma or another desktop app? Follow the
-> [Install the Font](./?path=/docs/designers-guide-install-the-font--docs) guide.
+> [Install the Font](designers-guide/install-the-font.md) guide.
 
 ### Usage
 
@@ -13351,11 +13516,11 @@ By using `rem`, the font-sizes scale nicely with the user defined value.
 
 ### Tokens
 
-[Text tokens](./?path=/docs/design-tokens-t2-text--docs) (font sizes and line-heights) are defined by the `text.{xs..5xl}.{size|line-height|letter-spacing}` design tokens.
+[Text tokens](design-tokens/t2/text.md) (font sizes and line-heights) are defined by the `text.{xs..5xl}.{size|line-height|letter-spacing}` design tokens.
 
 ## Typography
 
-[Typography tokens](./?path=/docs/design-tokens-t2-typography--docs) group the font family, size, weight, etc. into a single token: `typography.{xs..5xl}.{base|emphasized}`.
+[Typography tokens](design-tokens/t2/typography.md) group the font family, size, weight, etc. into a single token: `typography.{xs..5xl}.{base|emphasized}`.
 
 It makes it easier to apply the expected font:
 
@@ -13371,7 +13536,7 @@ Headings are used to break up content into sections to provide a clear hierarchy
 
 #### Custom attribute _(recommended)_
 
-The [esds-heading](./?path=/docs/components-heading--docs) attribute **must** be used to apply `heading` text styles to elements:
+The [esds-heading](components/heading.md) attribute **must** be used to apply `heading` text styles to elements:
 
 ```html
 <h1 esds-heading="xl">Large text</h1>
@@ -13385,16 +13550,16 @@ On projects using Tailwind-based UI elements, we provide the custom class `esds-
 <h1 class="esds-heading-xl">Large text</h1>
 ```
 
-For `emphasized` text, you may use the `esds-heading-{xs..xl}-emphasized` class.
+For `emphasized` text, you may use the `esds-heading-{xs..2xl}-emphasized` class.
 
 #### Tokens
 
-[Heading tokens](./?path=/docs/design-tokens-t3-heading--docs) are defined by the `heading.{xs..xl}.{font}` design tokens, and are used by the `esds-heading` custom attribute.
+[Heading tokens](design-tokens/t3/heading.md) are defined by the `heading.{xs..2xl}.{font}` design tokens, and are used by the `esds-heading` custom attribute.
 
 Here's an example of how to apply raw styles:
 
 ```html
-<h1 style="font: var(--esds-heading-xl-font)">Heading 1</h1>
+<h1 style="font: var(--esds-heading-xl-font-base)">Heading 1</h1>
 ```
 
 ### Body Text
@@ -13403,7 +13568,7 @@ Body texts are used as blocks or lines of text.
 
 #### Custom attribute _(recommended)_
 
-The [esds-body](./?path=/docs/components-body--docs) attribute **must** be used to apply `body` text styles to elements:
+The [esds-body](components/body.md) attribute **must** be used to apply `body` text styles to elements:
 
 ```html
 <p esds-body="md">
@@ -13427,7 +13592,7 @@ For `emphasized` text, you may use the `esds-body-{xs..lg}-emphasized` class.
 
 #### Tokens
 
-[Body tokens](./?path=/docs/design-tokens-t3-body--docs) are defined by the `body.{xs..lg}.{font}` design tokens, and are used by the `esds-body` custom attribute.
+[Body tokens](design-tokens/t3/body.md) are defined by the `body.{xs..lg}.{font}` design tokens, and are used by the `esds-body` custom attribute.
 
 Here's an example of how to apply raw styles:
 

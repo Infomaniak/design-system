@@ -4,4 +4,4 @@
 
 For full documentation of the `esds-icon` web component, see:
 
-[Components/esds-icon](./?path=/docs/components-icon--docs)
+[Components/esds-icon](../components/icon.md)

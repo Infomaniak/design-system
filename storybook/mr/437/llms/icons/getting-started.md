@@ -12,7 +12,7 @@
 
 <div className="card-grid">
   <a
-    href="./?path=/docs/icons-icon-gallery--docs"
+    href="icon-gallery.md"
     className="card card--vertical"
   >
     <h3 className="card__title">Browse All Icons</h3>
@@ -22,7 +22,7 @@
     <span className="card__link">Open Gallery →</span>
   </a>
   <a
-    href="./?path=/docs/icons-icon-component--docs"
+    href="icon-component.md"
     className="card card--vertical"
   >
     <h3 className="card__title">Icon Component - Web</h3>

@@ -35,7 +35,7 @@ A guide for designers on how to create icons.
 ### 4. Select icon and run ESDS icons plugin
 
 Download and install the
-[ESDS icons plugin](./?path=/docs/designers-guide-figma-plugins--docs#esds-icons).
+[ESDS icons plugin](../designers-guide/figma-plugins.md#esds-icons).
 
 <img
   src={SystemIconsStep4}

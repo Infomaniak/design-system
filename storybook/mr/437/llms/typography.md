@@ -26,7 +26,7 @@ It is available in different font weights.
 </table>
 
 > Installing the font locally to use it in Figma or another desktop app? Follow the
-> [Install the Font](./?path=/docs/designers-guide-install-the-font--docs) guide.
+> [Install the Font](designers-guide/install-the-font.md) guide.
 
 ### Usage
 
@@ -75,11 +75,11 @@ By using `rem`, the font-sizes scale nicely with the user defined value.
 
 ### Tokens
 
-[Text tokens](./?path=/docs/design-tokens-t2-text--docs) (font sizes and line-heights) are defined by the `text.{xs..5xl}.{size|line-height|letter-spacing}` design tokens.
+[Text tokens](design-tokens/t2/text.md) (font sizes and line-heights) are defined by the `text.{xs..5xl}.{size|line-height|letter-spacing}` design tokens.
 
 ## Typography
 
-[Typography tokens](./?path=/docs/design-tokens-t2-typography--docs) group the font family, size, weight, etc. into a single token: `typography.{xs..5xl}.{base|emphasized}`.
+[Typography tokens](design-tokens/t2/typography.md) group the font family, size, weight, etc. into a single token: `typography.{xs..5xl}.{base|emphasized}`.
 
 It makes it easier to apply the expected font:
 
@@ -95,7 +95,7 @@ Headings are used to break up content into sections to provide a clear hierarchy
 
 #### Custom attribute _(recommended)_
 
-The [esds-heading](./?path=/docs/components-heading--docs) attribute **must** be used to apply `heading` text styles to elements:
+The [esds-heading](components/heading.md) attribute **must** be used to apply `heading` text styles to elements:
 
 ```html
 <h1 esds-heading="xl">Large text</h1>
@@ -109,16 +109,16 @@ On projects using Tailwind-based UI elements, we provide the custom class `esds-
 <h1 class="esds-heading-xl">Large text</h1>
 ```
 
-For `emphasized` text, you may use the `esds-heading-{xs..xl}-emphasized` class.
+For `emphasized` text, you may use the `esds-heading-{xs..2xl}-emphasized` class.
 
 #### Tokens
 
-[Heading tokens](./?path=/docs/design-tokens-t3-heading--docs) are defined by the `heading.{xs..xl}.{font}` design tokens, and are used by the `esds-heading` custom attribute.
+[Heading tokens](design-tokens/t3/heading.md) are defined by the `heading.{xs..2xl}.{font}` design tokens, and are used by the `esds-heading` custom attribute.
 
 Here's an example of how to apply raw styles:
 
 ```html
-<h1 style="font: var(--esds-heading-xl-font)">Heading 1</h1>
+<h1 style="font: var(--esds-heading-xl-font-base)">Heading 1</h1>
 ```
 
 ### Body Text
@@ -127,7 +127,7 @@ Body texts are used as blocks or lines of text.
 
 #### Custom attribute _(recommended)_
 
-The [esds-body](./?path=/docs/components-body--docs) attribute **must** be used to apply `body` text styles to elements:
+The [esds-body](components/body.md) attribute **must** be used to apply `body` text styles to elements:
 
 ```html
 <p esds-body="md">
@@ -151,7 +151,7 @@ For `emphasized` text, you may use the `esds-body-{xs..lg}-emphasized` class.
 
 #### Tokens
 
-[Body tokens](./?path=/docs/design-tokens-t3-body--docs) are defined by the `body.{xs..lg}.{font}` design tokens, and are used by the `esds-body` custom attribute.
+[Body tokens](design-tokens/t3/body.md) are defined by the `body.{xs..lg}.{font}` design tokens, and are used by the `esds-body` custom attribute.
 
 Here's an example of how to apply raw styles:
 

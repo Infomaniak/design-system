@@ -12,7 +12,7 @@ Android team. **Never export before an Android developer has approved the change
 Make sure you have:
 
 - edit access to the [Material kit](https://www.figma.com/design/r4D2DKWIyzVoigyiTh16Hh/Edelweiss---Material-Kit?m=auto&t=6Praqzvd4yFcNUmT-6).
-- access to the **[HCT Tonal Palette](./?path=/docs/designers-guide-android-hct-tonal-palette--docs)** generator, our in-house tool (only needed if you create a new color palette).
+- access to the **[HCT Tonal Palette](hct-tonal-palette.md)** generator, our in-house tool (only needed if you create a new color palette).
 - a Figma variables export plugin (e.g. [Variables Pro](https://www.figma.com/community/plugin/1264578192495051449/variables-pro-swap-import-export-variables)).
 - an Android developer who will review your changes.
 
@@ -22,7 +22,7 @@ Make sure you have:
 
 Skip this step if you are only changing values in existing palettes.
 
-1. Open the **[HCT Tonal Palette](./?path=/docs/designers-guide-android-hct-tonal-palette--docs)** generator.
+1. Open the **[HCT Tonal Palette](hct-tonal-palette.md)** generator.
 2. Enter the source color (hex) of the new palette.
 3. Generate the full tonal palette, including tones you don't plan to use yet: Material roles rely on many different tones across all contrast modes.
 4. Add the palette to the **Primitives** collection.
