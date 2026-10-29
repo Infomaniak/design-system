@@ -4,7 +4,7 @@ import {
   DESIGN_SYSTEM_TAGLINE,
   buildLinkUrl,
   renderLlmsTxt,
-  validateLlmsTxtLinks,
+  validateLlmsTxtTargets,
 } from './llms-txt.ts';
 import type { PageModel } from './types.ts';
 
@@ -87,46 +87,30 @@ describe('buildLinkUrl', () => {
   });
 });
 
-describe('validateLlmsTxtLinks', () => {
-  it('validates relative link targets against the dist directory', () => {
+describe('validateLlmsTxtTargets', () => {
+  it('validates every target against the dist directory', () => {
     expect(() =>
-      validateLlmsTxtLinks({
-        llmsTxt: '- [Welcome](llms/welcome.md)\n- [Full](llms-full.txt)',
+      validateLlmsTxtTargets({
         distDir: '/dist',
-        baseUrl: '',
+        targets: ['llms/welcome.md', 'llms-full.txt'],
         readFile: () => 'content',
       }),
     ).not.toThrow();
   });
 
-  it('throws on missing or empty link targets', () => {
-    const readFile = (path: string): string => {
-      if (path === '/dist/empty.md') return '';
-      if (path === '/dist/a.md') return 'x';
-      throw new Error(`File not found: ${path}`);
+  it('throws on missing targets', () => {
+    const readFile = (): string => {
+      throw new Error('File not found');
     };
-    const input = { distDir: '/dist', baseUrl: '', readFile };
-    expect(() => validateLlmsTxtLinks({ llmsTxt: '- [X](llms/missing.md)', ...input })).toThrow(
-      'Broken llms.txt link: llms/missing.md',
-    );
-    expect(() => validateLlmsTxtLinks({ llmsTxt: '- [X](empty.md)', ...input })).toThrow(
-      'Empty llms.txt link target: empty.md',
-    );
+    expect(() =>
+      validateLlmsTxtTargets({ distDir: '/dist', targets: ['llms/missing.md'], readFile }),
+    ).toThrow('Missing llms.txt target: llms/missing.md');
   });
 
-  it('strips the base url prefix and skips external links', () => {
-    const readFileCalls: string[] = [];
+  it('throws on empty targets', () => {
+    const readFile = (): string => '';
     expect(() =>
-      validateLlmsTxtLinks({
-        llmsTxt: '- [A](https://github.com/x)\n- [B](https://example.com/base/llms/a.md)',
-        distDir: '/dist',
-        baseUrl: 'https://example.com/base',
-        readFile: (path) => {
-          readFileCalls.push(path);
-          return 'x';
-        },
-      }),
-    ).not.toThrow();
-    expect(readFileCalls).toEqual(['/dist/llms/a.md']);
+      validateLlmsTxtTargets({ distDir: '/dist', targets: ['empty.md'], readFile }),
+    ).toThrow('Empty llms.txt target: empty.md');
   });
 });

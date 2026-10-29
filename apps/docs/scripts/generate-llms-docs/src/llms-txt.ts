@@ -1,4 +1,4 @@
-import { resolve } from 'node:path';
+import { join } from 'node:path';
 import type { PageModel } from './types.ts';
 
 export const DESIGN_SYSTEM_NAME = 'Infomaniak Design System';
@@ -14,8 +14,6 @@ const CORE_RULES = [
 ].join(' ');
 
 const OPTIONAL_TITLE_SUFFIXES = ['CHANGELOG', 'DESIGN.md'];
-
-const LINK_PATTERN = /\[([^\]]+)\]\(([^)]+)\)/g;
 
 export function buildLinkUrl(outputPath: string, baseUrl: string): string {
   if (baseUrl === '') return outputPath;
@@ -73,37 +71,25 @@ export function renderLlmsTxt(input: {
   return `${sections.join('\n\n')}\n`;
 }
 
-export function validateLlmsTxtLinks(input: {
-  llmsTxt: string;
+/**
+ * Verifies every file referenced by llms.txt exists and is non-empty in the
+ * dist directory. Targets are the dist-relative paths the generator itself
+ * constructs; prose links inside page summaries are not validated.
+ */
+export function validateLlmsTxtTargets(input: {
   distDir: string;
-  baseUrl: string;
+  targets: string[];
   readFile: (path: string) => string;
 }): void {
-  const normalizedBaseUrl = input.baseUrl.replace(/\/+$/, '');
-  const pattern = new RegExp(LINK_PATTERN.source, 'g');
-  let match = pattern.exec(input.llmsTxt);
-  while (match !== null) {
-    const url = match[2];
-    const isExternal = /^https?:\/\//.test(url);
-    const isBaseRelative = normalizedBaseUrl !== '' && url.startsWith(`${normalizedBaseUrl}/`);
-    if (isExternal && !isBaseRelative) {
-      match = pattern.exec(input.llmsTxt);
-      continue;
-    }
-    let relative = url;
-    if (normalizedBaseUrl !== '' && url.startsWith(`${normalizedBaseUrl}/`)) {
-      relative = url.slice(normalizedBaseUrl.length + 1);
-    }
-    const filePath = resolve(input.distDir, relative);
+  for (const target of input.targets) {
     let content: string;
     try {
-      content = input.readFile(filePath);
+      content = input.readFile(join(input.distDir, target));
     } catch {
-      throw new Error(`Broken llms.txt link: ${url}`);
+      throw new Error(`Missing llms.txt target: ${target}`);
     }
     if (content.trim() === '') {
-      throw new Error(`Empty llms.txt link target: ${url}`);
+      throw new Error(`Empty llms.txt target: ${target}`);
     }
-    match = pattern.exec(input.llmsTxt);
   }
 }

@@ -70,6 +70,16 @@ const WELCOME_MDX = [
   'The Infomaniak Design System documentation.',
 ].join('\n');
 
+const WELCOME_MDX_WITH_PROSE_LINK = [
+  "import { Meta } from '@storybook/addon-docs/blocks';",
+  '',
+  '<Meta title="Welcome" />',
+  '',
+  '# Welcome',
+  '',
+  'Ask [questions](mailto:support@infomaniak.ch) or jump to [styles](#styles).',
+].join('\n');
+
 const CHANGELOG_MDX = [
   "import { Meta } from '@storybook/addon-docs/blocks';",
   "import ChangelogMarkdown from '../assets/components-changelog.md?raw';",
@@ -189,11 +199,24 @@ describe('generateLlmsDocs', () => {
     expect(llmsFull).toContain('# Components/CHANGELOG');
   });
 
-  it('throws when a link target is missing from the dist directory', () => {
+  it('throws when a validated target is missing from the dist directory', () => {
     const inputs = createInputFiles();
     delete inputs[join(DIST_DIR, 'DESIGN.md')];
     const { deps } = createDeps(inputs);
-    expect(() => generateLlmsDocs(BASE_OPTIONS, deps)).toThrow('Broken llms.txt link: DESIGN.md');
+    expect(() => generateLlmsDocs(BASE_OPTIONS, deps)).toThrow(
+      'Missing llms.txt target: DESIGN.md',
+    );
+  });
+
+  it('keeps prose links in summaries without resolving them as file paths', () => {
+    const inputs = createInputFiles({
+      [join(APPS_DOCS_DIR, 'src/stories/welcome.mdx')]: WELCOME_MDX_WITH_PROSE_LINK,
+    });
+    const { deps, outputs } = createDeps(inputs);
+    expect(() => generateLlmsDocs(BASE_OPTIONS, deps)).not.toThrow();
+    const llmsTxt = outputs.get(join(DIST_DIR, 'llms.txt')) ?? '';
+    expect(llmsTxt).toContain('[questions](mailto:support@infomaniak.ch)');
+    expect(llmsTxt).toContain('[styles](#styles)');
   });
 
   it('omits the DESIGN.md optional link when the source file is unavailable', () => {

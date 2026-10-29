@@ -2,7 +2,7 @@ import { dirname, join } from 'node:path';
 import { parseCem } from './cem.ts';
 import { groupEntriesByTitle, orderTitleGroups, parseStorybookIndex } from './index-entries.ts';
 import { renderLlmsFullTxt } from './llms-full-txt.ts';
-import { renderLlmsTxt, validateLlmsTxtLinks } from './llms-txt.ts';
+import { renderLlmsTxt, validateLlmsTxtTargets } from './llms-txt.ts';
 import { buildPageModel, relativizeRootFileLinks, renderPageMarkdown } from './page-renderer.ts';
 
 export interface GenerateLlmsDocsOptions {
@@ -71,10 +71,13 @@ export function generateLlmsDocs(
     baseUrl: options.baseUrl,
     designMdAvailable: designMd !== null,
   });
-  validateLlmsTxtLinks({
-    llmsTxt,
+  validateLlmsTxtTargets({
     distDir: options.distDir,
-    baseUrl: options.baseUrl,
+    targets: [
+      ...pages.map((page) => page.outputPath),
+      'llms-full.txt',
+      ...(designMd !== null ? ['DESIGN.md'] : []),
+    ],
     readFile: deps.readFile,
   });
   deps.writeFile(join(options.distDir, 'llms.txt'), llmsTxt);
