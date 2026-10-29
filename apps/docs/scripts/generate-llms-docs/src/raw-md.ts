@@ -8,6 +8,7 @@ const EXCESS_NEWLINES_PATTERN: RegExp = /\n{3,}/g;
 const LEADING_BLANK_LINES_PATTERN: RegExp = /^\n+/;
 const TRAILING_BLANK_LINES_PATTERN: RegExp = /\n+$/;
 const REGEX_SPECIAL_CHARS_PATTERN: RegExp = /[.*+?^${}()|[\]\\]/g;
+const FENCE_OPEN_PATTERN: RegExp = /^[ \t]{0,3}(`{3,}|~{3,})/;
 
 export interface RawMdImport {
   identifier: string;
@@ -23,10 +24,7 @@ export function extractRawMdImports(mdxSource: string): RawMdImport[] {
 }
 
 export function cleanMdxContent(mdxSource: string, resolved: Map<string, string>): string {
-  let content = mdxSource
-    .replace(NAMED_IMPORT_PATTERN, '')
-    .replace(BARE_IMPORT_PATTERN, '')
-    .replace(META_TAG_PATTERN, '');
+  let content = stripImportsAndMeta(mdxSource);
   for (const [identifier, markdown] of resolved) {
     content = content.replace(docsMarkdownPattern(identifier), () => markdown);
   }
@@ -35,6 +33,48 @@ export function cleanMdxContent(mdxSource: string, resolved: Map<string, string>
     .replace(EXCESS_NEWLINES_PATTERN, '\n\n')
     .replace(LEADING_BLANK_LINES_PATTERN, '')
     .replace(TRAILING_BLANK_LINES_PATTERN, '');
+}
+
+/**
+ * Removes MDX-only syntax (import statements and `<Meta/>` tags) while leaving
+ * fenced code blocks untouched: import statements inside fences are sample
+ * code, not MDX imports.
+ */
+export function stripImportsAndMeta(mdxSource: string): string {
+  const lines = mdxSource.split('\n');
+  const stripped: string[] = [];
+  let inFence = false;
+  let fenceChar = '';
+  let fenceLength = 0;
+
+  for (const line of lines) {
+    if (inFence) {
+      if (isClosingFence(line, fenceChar, fenceLength)) {
+        inFence = false;
+      }
+      stripped.push(line);
+      continue;
+    }
+    const opening = FENCE_OPEN_PATTERN.exec(line);
+    if (opening !== null) {
+      inFence = true;
+      fenceChar = opening[1]![0]!;
+      fenceLength = opening[1]!.length;
+      stripped.push(line);
+      continue;
+    }
+    stripped.push(
+      line
+        .replace(NAMED_IMPORT_PATTERN, '')
+        .replace(BARE_IMPORT_PATTERN, '')
+        .replace(META_TAG_PATTERN, ''),
+    );
+  }
+  return stripped.join('\n');
+}
+
+function isClosingFence(line: string, fenceChar: string, fenceLength: number): boolean {
+  return new RegExp(`^[ \\\\t]{0,3}[${fenceChar}]{${fenceLength},}[ \\\\t]*$`).test(line);
 }
 
 function docsMarkdownPattern(identifier: string): RegExp {

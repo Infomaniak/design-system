@@ -53,4 +53,38 @@ describe('cleanMdxContent', () => {
   it('collapses excessive blank lines', () => {
     expect(cleanMdxContent('a\n\n\n\n\nb', new Map())).toBe('a\n\nb');
   });
+
+  it('keeps import statements inside fenced code blocks', () => {
+    const mdx = [
+      "import { Meta } from '@storybook/addon-docs/blocks';",
+      '',
+      '<Meta title="Components/Getting Started" />',
+      '',
+      '```ts',
+      "import { EsdsIconComponent } from '@infomaniak-design-system/components';",
+      '',
+      'EsdsIconComponent.define();',
+      '```',
+    ].join('\n');
+    expect(cleanMdxContent(mdx, new Map())).toBe(
+      [
+        '```ts',
+        "import { EsdsIconComponent } from '@infomaniak-design-system/components';",
+        '',
+        'EsdsIconComponent.define();',
+        '```',
+      ].join('\n'),
+    );
+  });
+
+  it('does not close a fence on a shorter marker line', () => {
+    const mdx = [
+      '````md',
+      '```ts',
+      "import { EsdsIconComponent } from '@infomaniak-design-system/components';",
+      '```',
+      '````',
+    ].join('\n');
+    expect(cleanMdxContent(mdx, new Map())).toBe(mdx);
+  });
 });
