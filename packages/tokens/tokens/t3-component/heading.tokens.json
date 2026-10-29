@@ -95,6 +95,25 @@
           }
         }
       }
+    },
+    "2xl": {
+      "$description": "2x-large heading style.",
+      "font": {
+        "base": {
+          "$value": "{typography.6xl.base}",
+          "$description": "2x-large heading typography (regular weight).",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "emphasized": {
+          "$value": "{typography.6xl.emphasized}",
+          "$description": "2x-large heading typography (medium weight).",
+          "$extensions": {
+            "scopes": []
+          }
+        }
+      }
     }
   }
 }

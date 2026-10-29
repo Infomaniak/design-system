@@ -65,6 +65,13 @@
         "$extensions": {
           "scopes": []
         }
+      },
+      "6xl": {
+        "$value": "{font.size.52}",
+        "$description": "6x-large font size for the largest display text.",
+        "$extensions": {
+          "scopes": []
+        }
       }
     },
     "family": {
@@ -138,6 +145,13 @@
       "5xl": {
         "$value": "{font.line-height.56}",
         "$description": "5x-large line-height for hero display text.",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "6xl": {
+        "$value": "{font.line-height.60}",
+        "$description": "6x-large line-height for the largest display text.",
         "$extensions": {
           "scopes": []
         }

@@ -82,6 +82,15 @@
           "scopes": []
         }
       },
+      "52": {
+        "$value": {
+          "value": 3.25,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "scopes": []
+        }
+      },
       "$type": "dimension"
     },
     "weight": {
@@ -202,6 +211,15 @@
       "56": {
         "$value": {
           "value": 56,
+          "unit": "px"
+        },
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "60": {
+        "$value": {
+          "value": 60,
           "unit": "px"
         },
         "$extensions": {
