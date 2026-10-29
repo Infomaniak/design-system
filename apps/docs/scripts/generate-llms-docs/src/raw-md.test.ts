@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cleanMdxContent, extractRawMdImports } from './raw-md.ts';
+import { cleanMdxContent, extractRawMdImports, transformOutsideFences } from './raw-md.ts';
 
 const TOKEN_SHELL = [
   "import { Meta } from '@storybook/addon-docs/blocks';",
@@ -86,5 +86,26 @@ describe('cleanMdxContent', () => {
       '````',
     ].join('\n');
     expect(cleanMdxContent(mdx, new Map())).toBe(mdx);
+  });
+});
+
+describe('transformOutsideFences', () => {
+  it('transforms prose runs and leaves fenced blocks untouched', () => {
+    const source = ['before', '', '```js', 'import x', '```', 'after'].join('\n');
+    expect(transformOutsideFences(source, (text) => text.toUpperCase())).toBe(
+      ['BEFORE', '', '```js', 'import x', '```', 'AFTER'].join('\n'),
+    );
+  });
+
+  it('leaves an unterminated fence untouched until the end', () => {
+    const source = ['before', '', '```js', 'still fenced'].join('\n');
+    expect(transformOutsideFences(source, (text) => text.toUpperCase())).toBe(
+      ['BEFORE', '', '```js', 'still fenced'].join('\n'),
+    );
+  });
+
+  it('handles adjacent fences without prose between them', () => {
+    const source = ['```js', 'x', '```', '```js', 'y', '```'].join('\n');
+    expect(transformOutsideFences(source, (text) => text.toUpperCase())).toBe(source);
   });
 });

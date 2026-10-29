@@ -12,6 +12,8 @@ import type { IndexEntry, PageModel, TitleGroup } from './types.ts';
 
 const APPS_DOCS_DIR = '/repo/apps/docs';
 
+const STORY_LINK_TARGETS = new Map<string, string>();
+
 const CEM = parseCem(
   JSON.stringify({
     modules: [
@@ -88,6 +90,7 @@ describe('buildPageModel', () => {
     const page = buildPageModel({
       group: docsGroup('Design Tokens/T2/Color', './src/stories/tokens/t2/color.mdx'),
       cem: CEM,
+      storyLinkTargets: STORY_LINK_TARGETS,
       sources: { readFile: files, appsDocsDir: APPS_DOCS_DIR },
     });
     expect(page.outputPath).toBe('llms/design-tokens/t2/color.md');
@@ -116,6 +119,7 @@ describe('buildPageModel', () => {
         '../../packages/components/src/components/esds-separator/esds-separator.component.stories.ts',
       ),
       cem: CEM,
+      storyLinkTargets: STORY_LINK_TARGETS,
       sources: { readFile: files, appsDocsDir: APPS_DOCS_DIR },
     });
     expect(page.outputPath).toBe('llms/components/separator.md');
@@ -145,6 +149,7 @@ describe('buildPageModel', () => {
         '../../packages/components/src/components/esds-separator/esds-separator.component.stories.ts',
       ),
       cem: CEM,
+      storyLinkTargets: STORY_LINK_TARGETS,
       sources: { readFile: files, appsDocsDir: APPS_DOCS_DIR },
     });
     expect(page.importSection).toBe(
@@ -156,11 +161,41 @@ describe('buildPageModel', () => {
     const page = buildPageModel({
       group: { title: 'Components/Orphan', storyEntries: [] },
       cem: CEM,
+      storyLinkTargets: STORY_LINK_TARGETS,
       sources: { readFile: createFiles({}), appsDocsDir: APPS_DOCS_DIR },
     });
     expect(page.prose).toBe('');
     expect(page.props).toBe('');
     expect(page.examples).toEqual([]);
+  });
+
+  it('rewrites storybook links in the prose and summary', () => {
+    const files = createFiles({
+      [join(APPS_DOCS_DIR, 'src/stories/welcome.mdx')]: [
+        "import { Meta } from '@storybook/addon-docs/blocks';",
+        '',
+        "<Meta title='Welcome' />",
+        '',
+        '# Welcome',
+        '',
+        'See [the icons](./?path=/docs/icons-getting-started--docs) and [this page](./?path=/docs/welcome--docs#anchor).',
+      ].join('\n'),
+    });
+    const page = buildPageModel({
+      group: docsGroup('Welcome', './src/stories/welcome.mdx'),
+      cem: CEM,
+      storyLinkTargets: new Map([
+        ['icons-getting-started--docs', 'llms/icons/getting-started.md'],
+        ['welcome--docs', 'llms/welcome.md'],
+      ]),
+      sources: { readFile: files, appsDocsDir: APPS_DOCS_DIR },
+    });
+    expect(page.prose).toBe(
+      'See [the icons](icons/getting-started.md) and [this page](welcome.md#anchor).',
+    );
+    expect(page.summary).toBe(
+      'See [the icons](icons/getting-started.md) and [this page](welcome.md#anchor).',
+    );
   });
 });
 

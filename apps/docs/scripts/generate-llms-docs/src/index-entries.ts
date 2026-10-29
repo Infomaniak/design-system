@@ -58,6 +58,22 @@ export function buildOutputPath(slugParts: string[]): string {
   return `llms/${slugParts.join('/')}.md`;
 }
 
+/**
+ * Maps every Storybook docs entry id (e.g. `design-tokens-t1--docs`) to the
+ * output path of the generated markdown page, so prose links written as
+ * `./?path=/docs/<id>` can be relativized.
+ */
+export function buildStoryLinkTargets(groups: TitleGroup[]): Map<string, string> {
+  const targets = new Map<string, string>();
+  for (const group of groups) {
+    if (group.docsEntry === undefined) {
+      continue;
+    }
+    targets.set(group.docsEntry.id, buildOutputPath(slugifyTitle(group.title)));
+  }
+  return targets;
+}
+
 export function orderTitleGroups(groups: TitleGroup[]): TitleGroup[] {
   return [...groups].sort(compareGroups);
 }

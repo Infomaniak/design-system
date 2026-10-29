@@ -1,9 +1,10 @@
 import { resolve } from 'node:path';
 import { findElementByTagName, renderApiSection, type CustomElementsManifest } from './cem.ts';
 import { loadComponentDocs, resolveImportPath } from './component-docs.ts';
-import { slugifyTitle } from './index-entries.ts';
+import { buildOutputPath, slugifyTitle } from './index-entries.ts';
 import { cleanMdxContent, extractRawMdImports } from './raw-md.ts';
 import { buildStorySnippets, parseStoriesFile, type ArgsRecord } from './story-snippets.ts';
+import { relativizeStorybookLinks } from './storybook-links.ts';
 import type { CemElementDocs, PageModel, StorySnippet, TitleGroup } from './types.ts';
 
 export interface PageSources {
@@ -23,12 +24,14 @@ const ROOT_FILE_LINK_PATTERN = /\]\((?:\.{1,2}\/)?(llms\.txt|llms-full\.txt|DESI
 export function buildPageModel(input: {
   group: TitleGroup;
   cem: CustomElementsManifest;
+  storyLinkTargets: ReadonlyMap<string, string>;
   sources: PageSources;
 }): PageModel {
-  const { group, cem, sources } = input;
+  const { group, cem, storyLinkTargets, sources } = input;
   const slugParts = slugifyTitle(group.title);
   const categoryEnd = group.title.indexOf('/');
   const category = categoryEnd < 0 ? group.title : group.title.slice(0, categoryEnd).trim();
+  const outputPath = buildOutputPath(slugParts);
   const docsEntry = group.docsEntry;
 
   let prose = '';
@@ -53,6 +56,7 @@ export function buildPageModel(input: {
   }
 
   prose = stripLeadingH1(prose);
+  prose = relativizeStorybookLinks(prose, storyLinkTargets, outputPath);
 
   const cemDocs = tagName === null ? null : findElementByTagName(cem, tagName);
   const examples =
@@ -62,7 +66,7 @@ export function buildPageModel(input: {
     title: group.title,
     category,
     slugParts,
-    outputPath: `llms/${slugParts.join('/')}.md`,
+    outputPath,
     summary: extractSummary(prose),
     prose,
     importSection: buildImportSection(cemDocs, prose),

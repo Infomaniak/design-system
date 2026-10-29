@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   buildOutputPath,
+  buildStoryLinkTargets,
   groupEntriesByTitle,
   orderTitleGroups,
   parseStorybookIndex,
@@ -50,6 +51,20 @@ describe('buildOutputPath', () => {
   it('builds the llms output path', () => {
     expect(buildOutputPath(['design-tokens', 't1', 'color'])).toBe(
       'llms/design-tokens/t1/color.md',
+    );
+  });
+});
+
+describe('buildStoryLinkTargets', () => {
+  it('maps docs entry ids to output paths', () => {
+    const groups = groupEntriesByTitle([
+      entry({ id: 'b--docs', title: 'Components/Button' }),
+      entry({ id: 'b--one', title: 'Components/Button', type: 'story' }),
+      entry({ id: 's--docs', title: 'Story Only', type: 'story' }),
+      entry({ id: 'x--docs', title: '' }),
+    ]);
+    expect(buildStoryLinkTargets(groups)).toEqual(
+      new Map([['b--docs', 'llms/components/button.md']]),
     );
   });
 });

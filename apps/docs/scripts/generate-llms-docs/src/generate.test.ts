@@ -199,6 +199,27 @@ describe('generateLlmsDocs', () => {
     expect(llmsFull).toContain('# Components/CHANGELOG');
   });
 
+  it('rewrites storybook links to the generated pages', () => {
+    const welcomeMdx = [
+      "import { Meta } from '@storybook/addon-docs/blocks';",
+      '',
+      '<Meta title="Welcome" />',
+      '',
+      '# Welcome',
+      '',
+      'Read [the AI resources](./?path=/docs/ai-llms--docs) or the [changelog](./?path=/docs/components-changelog--docs).',
+    ].join('\n');
+    const { deps, outputs } = createDeps(
+      createInputFiles({ [join(APPS_DOCS_DIR, 'src/stories/welcome.mdx')]: welcomeMdx }),
+    );
+    generateLlmsDocs(BASE_OPTIONS, deps);
+    const page = outputs.get(join(DIST_DIR, 'llms/welcome.md')) ?? '';
+    expect(page).toContain('[the AI resources](ai-llms.md)');
+    expect(page).toContain('[changelog](components/changelog.md)');
+    const llmsFull = outputs.get(join(DIST_DIR, 'llms-full.txt')) ?? '';
+    expect(llmsFull).toContain('[the AI resources](ai-llms.md)');
+  });
+
   it('throws when a validated target is missing from the dist directory', () => {
     const inputs = createInputFiles();
     delete inputs[join(DIST_DIR, 'DESIGN.md')];
