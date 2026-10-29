@@ -41,36 +41,60 @@ export function cleanMdxContent(mdxSource: string, resolved: Map<string, string>
  * code, not MDX imports.
  */
 export function stripImportsAndMeta(mdxSource: string): string {
-  const lines = mdxSource.split('\n');
-  const stripped: string[] = [];
+  return transformOutsideFences(mdxSource, (text) =>
+    text
+      .replace(NAMED_IMPORT_PATTERN, '')
+      .replace(BARE_IMPORT_PATTERN, '')
+      .replace(META_TAG_PATTERN, ''),
+  );
+}
+
+/**
+ * Applies a transform to the text outside fenced code blocks and returns the
+ * fences untouched. The transform receives contiguous runs of non-fence text
+ * (without the surrounding newlines) and must behave like an idempotent
+ * substitution.
+ */
+export function transformOutsideFences(
+  source: string,
+  transform: (text: string) => string,
+): string {
+  const lines = source.split('\n');
+  const output: string[] = [];
+  let proseChunk: string[] = [];
   let inFence = false;
   let fenceChar = '';
   let fenceLength = 0;
+
+  const flushProseChunk = (): void => {
+    if (proseChunk.length === 0) {
+      return;
+    }
+    output.push(transform(proseChunk.join('\n')));
+    proseChunk = [];
+  };
 
   for (const line of lines) {
     if (inFence) {
       if (isClosingFence(line, fenceChar, fenceLength)) {
         inFence = false;
       }
-      stripped.push(line);
+      output.push(line);
       continue;
     }
     const opening = FENCE_OPEN_PATTERN.exec(line);
     if (opening !== null) {
+      flushProseChunk();
       inFence = true;
       fenceChar = opening[1]![0]!;
       fenceLength = opening[1]!.length;
-      stripped.push(line);
+      output.push(line);
       continue;
     }
-    stripped.push(
-      line
-        .replace(NAMED_IMPORT_PATTERN, '')
-        .replace(BARE_IMPORT_PATTERN, '')
-        .replace(META_TAG_PATTERN, ''),
-    );
+    proseChunk.push(line);
   }
-  return stripped.join('\n');
+  flushProseChunk();
+  return output.join('\n');
 }
 
 function isClosingFence(line: string, fenceChar: string, fenceLength: number): boolean {

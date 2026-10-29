@@ -1,6 +1,11 @@
 import { dirname, join } from 'node:path';
 import { parseCem } from './cem.ts';
-import { groupEntriesByTitle, orderTitleGroups, parseStorybookIndex } from './index-entries.ts';
+import {
+  buildStoryLinkTargets,
+  groupEntriesByTitle,
+  orderTitleGroups,
+  parseStorybookIndex,
+} from './index-entries.ts';
 import { renderLlmsFullTxt } from './llms-full-txt.ts';
 import { renderLlmsTxt, validateLlmsTxtTargets } from './llms-txt.ts';
 import { buildPageModel, relativizeRootFileLinks, renderPageMarkdown } from './page-renderer.ts';
@@ -43,12 +48,14 @@ export function generateLlmsDocs(
 ): GenerateLlmsDocsResult {
   const index = parseStorybookIndex(deps.readFile(join(options.distDir, 'index.json')));
   const groups = orderTitleGroups(groupEntriesByTitle(Object.values(index.entries)));
+  const storyLinkTargets = buildStoryLinkTargets(groups);
   const cem = parseCem(deps.readFile(join(options.componentsDir, 'custom-elements.json')));
 
   const pages = groups.map((group) =>
     buildPageModel({
       group,
       cem,
+      storyLinkTargets,
       sources: { readFile: deps.readFile, appsDocsDir: options.appsDocsDir },
     }),
   );
