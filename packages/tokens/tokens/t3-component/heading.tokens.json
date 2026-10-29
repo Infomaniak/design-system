@@ -6,12 +6,14 @@
       "font": {
         "base": {
           "$value": "{typography.xl.base}",
+          "$description": "Extra-small heading typography (regular weight).",
           "$extensions": {
             "scopes": []
           }
         },
         "emphasized": {
           "$value": "{typography.xl.emphasized}",
+          "$description": "Extra-small heading typography (medium weight).",
           "$extensions": {
             "scopes": []
           }
@@ -23,12 +25,14 @@
       "font": {
         "base": {
           "$value": "{typography.2xl.base}",
+          "$description": "Small heading typography (regular weight).",
           "$extensions": {
             "scopes": []
           }
         },
         "emphasized": {
           "$value": "{typography.2xl.emphasized}",
+          "$description": "Small heading typography (medium weight).",
           "$extensions": {
             "scopes": []
           }
@@ -40,12 +44,14 @@
       "font": {
         "base": {
           "$value": "{typography.3xl.base}",
+          "$description": "Medium heading typography (regular weight).",
           "$extensions": {
             "scopes": []
           }
         },
         "emphasized": {
           "$value": "{typography.3xl.emphasized}",
+          "$description": "Medium heading typography (medium weight).",
           "$extensions": {
             "scopes": []
           }
@@ -57,12 +63,14 @@
       "font": {
         "base": {
           "$value": "{typography.4xl.base}",
+          "$description": "Large heading typography (regular weight).",
           "$extensions": {
             "scopes": []
           }
         },
         "emphasized": {
           "$value": "{typography.4xl.emphasized}",
+          "$description": "Large heading typography (medium weight).",
           "$extensions": {
             "scopes": []
           }
@@ -74,12 +82,14 @@
       "font": {
         "base": {
           "$value": "{typography.5xl.base}",
+          "$description": "Extra-large heading typography (regular weight).",
           "$extensions": {
             "scopes": []
           }
         },
         "emphasized": {
           "$value": "{typography.5xl.emphasized}",
+          "$description": "Extra-large heading typography (medium weight).",
           "$extensions": {
             "scopes": []
           }

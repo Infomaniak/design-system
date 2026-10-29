@@ -401,7 +401,7 @@
           },
           "dim3": {
             "$value": "{color.red.50}",
-            "$description": "Subtle success background (dim3).",
+            "$description": "Subtle error background (dim3).",
             "$extensions": {
               "scopes": ["FRAME_FILL", "SHAPE_FILL"]
             }
@@ -472,7 +472,7 @@
           "$value": "{color.gray.400}",
           "$description": "Content color for disabled states on backgrounds.",
           "$extensions": {
-            "scopes": ["TEXT_FILL"]
+            "scopes": ["ALL_FILLS"]
           }
         },
         "brand": {
@@ -1726,17 +1726,17 @@
         }
       },
       "hover": {
-        "$description": "Hover state overlay colors in medium and strong intensities.",
+        "$description": "Hover state overlay colors in soft, medium and strong intensities.",
         "soft": {
           "$value": "{color.blue.900-6}",
-          "$description": "Medium hover overlay for subtle interactive feedback.",
+          "$description": "Soft hover overlay for subtle interactive feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "medium": {
           "$value": "{color.blue.900-12}",
-          "$description": "Medium hover overlay for subtle interactive feedback.",
+          "$description": "Medium hover overlay for balanced interactive feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
@@ -1750,17 +1750,17 @@
         }
       },
       "pressed": {
-        "$description": "Pressed state overlay colors in medium and strong intensities.",
+        "$description": "Pressed state overlay colors in soft, medium and strong intensities.",
         "soft": {
           "$value": "{color.blue.900-12}",
-          "$description": "Medium pressed overlay for subtle active feedback.",
+          "$description": "Soft pressed overlay for subtle active feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "medium": {
           "$value": "{color.blue.900-30}",
-          "$description": "Medium pressed overlay for subtle active feedback.",
+          "$description": "Medium pressed overlay for balanced active feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
@@ -1774,17 +1774,17 @@
         }
       },
       "selected": {
-        "$description": "Selected state overlay colors in medium and strong intensities.",
+        "$description": "Selected state overlay colors in soft, medium and strong intensities.",
         "soft": {
           "$value": "{color.blue.900-6}",
-          "$description": "Medium selected overlay for subtle selection feedback.",
+          "$description": "Soft selected overlay for subtle selection feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "medium": {
           "$value": "{color.blue.900-12}",
-          "$description": "Medium selected overlay for subtle selection feedback.",
+          "$description": "Medium selected overlay for balanced selection feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }

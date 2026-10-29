@@ -26,6 +26,7 @@ export interface PackageJson {
   readonly sideEffects?: boolean | readonly string[];
   readonly files?: readonly string[];
   readonly customElements?: string;
+  readonly 'web-types'?: string;
 }
 
 export type PackageJsonScripts = Record<string, string>;

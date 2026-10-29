@@ -5,6 +5,7 @@ import { isCurlyReference } from '../../../../dtcg/design-token/reference/types/
 import type { DesignToken } from '../../../../dtcg/design-token/token/design-token.ts';
 import type { GenericTokensBrueckeDesignToken } from '../../../tokens-bruecke/token/generic-tokens-bruecke-design-token.ts';
 import type { TokensBrueckeDesignToken } from '../../../tokens-bruecke/token/tokens-bruecke-design-token.ts';
+import { fixTokensBrueckeCurlyReference } from '../reference/fix-tokens-bruecke-curly-reference.ts';
 
 export function tokensBrueckeDesignTokenWithMapValueToDesignToken<
   GInputValue,
@@ -16,7 +17,9 @@ export function tokensBrueckeDesignTokenWithMapValueToDesignToken<
   mapValue: (value: GInputValue) => GValue,
 ): DesignToken<GType, GValue> {
   return {
-    $value: isCurlyReference(token.$value) ? token.$value : mapValue(token.$value),
+    $value: isCurlyReference(token.$value)
+      ? fixTokensBrueckeCurlyReference(token.$value)
+      : mapValue(token.$value),
     $type,
     ...removeUndefinedProperties({
       $deprecated: tokensBrueckeDesignTokenToDesignTokenDeprecated(token),
@@ -69,7 +72,10 @@ function tokensBrueckeDesignTokenToDesignTokenExtensions(
       mode: Object.fromEntries(
         Object.entries($extensions['mode'] as Record<string, unknown>).map(
           ([key, value]: [string, unknown]): [string, unknown] => {
-            return [key, isCurlyReference(value) ? value : mapValue(value)];
+            return [
+              key,
+              isCurlyReference(value) ? fixTokensBrueckeCurlyReference(value) : mapValue(value),
+            ];
           },
         ),
       ),
