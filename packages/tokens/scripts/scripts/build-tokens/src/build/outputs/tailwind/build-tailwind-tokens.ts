@@ -95,6 +95,7 @@ export function buildTailwindTokens({
           // 'aspect',
           // 'ease',
           // 'animate',
+          'opacity',
         ].map((tailwindNamespace: string): CssVariableDeclaration => {
           return {
             name: `--${tailwindNamespace}-*`,
@@ -106,6 +107,10 @@ export function buildTailwindTokens({
         //   name: `--*`,
         //   value: 'initial',
         // },
+        {
+          name: '--spacing',
+          value: '0.25rem',
+        },
         ...baseCollection
           .tokens()
           .flatMap(
@@ -272,16 +277,28 @@ export function buildTailwindTokens({
                       RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION(['blur', ...token.name.slice(1)]),
                     ),
                   ];
+                } else if (tokenName.startsWith('opacity')) {
+                  // --opacity-*
+                  return [
+                    generateTailwindToken(
+                      token,
+                      RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION(['opacity', ...token.name.slice(1)]),
+                    ),
+                  ];
+                } else if (tokenName.startsWith('spacing')) {
+                  // --spacing-*
+                  return [
+                    generateTailwindToken(
+                      token,
+                      RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION(['spacing', ...token.name.slice(1)]),
+                    ),
+                  ];
                 }
               }
 
               return [];
             },
           ),
-        {
-          name: '--spacing',
-          value: '0.25rem',
-        },
       ];
 
       // NOTE: theme modifiers (dark/light) only swap `--esds-color-*`, so spacing and
