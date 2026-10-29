@@ -4,6 +4,7 @@ import { parseCem } from './cem.ts';
 import {
   buildPageModel,
   extractSummary,
+  relativizeRootFileLinks,
   renderPageMarkdown,
   toArgsValue,
 } from './page-renderer.ts';
@@ -189,7 +190,7 @@ describe('extractSummary', () => {
   it('truncates long summaries with an ellipsis', () => {
     const summary = extractSummary('a'.repeat(200));
     expect(summary.length).toBe(120);
-    expect(summary.endsWith('…')).toBe(true);
+    expect(summary.endsWith('...')).toBe(true);
   });
 });
 
@@ -256,5 +257,32 @@ describe('renderPageMarkdown', () => {
       examples: [],
     };
     expect(renderPageMarkdown(page)).toBe('# Welcome\n');
+  });
+});
+
+describe('relativizeRootFileLinks', () => {
+  it('prefixes root file links with the depth of the output path', () => {
+    const markdown = [
+      '- [llms.txt](./llms.txt)',
+      '- [llms-full.txt](./llms-full.txt)',
+      '- [DESIGN.md](./DESIGN.md)',
+      '- [bare](DESIGN.md)',
+    ].join('\n');
+    expect(relativizeRootFileLinks(markdown, 'llms/ai-llms.md')).toBe(
+      [
+        '- [llms.txt](../llms.txt)',
+        '- [llms-full.txt](../llms-full.txt)',
+        '- [DESIGN.md](../DESIGN.md)',
+        '- [bare](../DESIGN.md)',
+      ].join('\n'),
+    );
+    expect(
+      relativizeRootFileLinks('- [llms.txt](./llms.txt)', 'llms/components/separator.md'),
+    ).toBe('- [llms.txt](../../llms.txt)');
+  });
+
+  it('leaves links to non-root files untouched', () => {
+    const markdown = '[docs](./?path=/docs/x) [kit](./kit.md) [site](https://example.com)';
+    expect(relativizeRootFileLinks(markdown, 'llms/welcome.md')).toBe(markdown);
   });
 });

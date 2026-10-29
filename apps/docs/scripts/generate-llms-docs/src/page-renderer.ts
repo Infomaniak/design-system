@@ -13,6 +13,13 @@ export interface PageSources {
 
 const SUMMARY_MAX_LENGTH = 120;
 
+/**
+ * Root resource files (llms.txt, llms-full.txt, DESIGN.md) live at the site
+ * root, so links to them written in MDX are correct for the Storybook page and
+ * llms-full.txt, but not from generated pages which sit under `llms/`.
+ */
+const ROOT_FILE_LINK_PATTERN = /\]\((?:\.{1,2}\/)?(llms\.txt|llms-full\.txt|DESIGN\.md)\)/g;
+
 export function buildPageModel(input: {
   group: TitleGroup;
   cem: CustomElementsManifest;
@@ -137,7 +144,7 @@ export function extractSummary(prose: string, maxLength: number = SUMMARY_MAX_LE
   }
   const summary = paragraph.join(' ');
   if (summary.length <= maxLength) return summary;
-  return `${summary.slice(0, maxLength - 1).trimEnd()}…`;
+  return `${summary.slice(0, maxLength - 3).trimEnd()}...`;
 }
 
 export function renderPageMarkdown(page: PageModel): string {
@@ -162,4 +169,9 @@ export function renderPageMarkdown(page: PageModel): string {
     sections.push(`## Examples\n\n${blocks.join('\n\n')}`);
   }
   return `${sections.join('\n\n')}\n`;
+}
+
+export function relativizeRootFileLinks(markdown: string, outputPath: string): string {
+  const prefix = '../'.repeat(outputPath.split('/').length - 1);
+  return markdown.replace(ROOT_FILE_LINK_PATTERN, (_match, file: string) => `](${prefix}${file})`);
 }

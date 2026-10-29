@@ -3,7 +3,7 @@ import { parseCem } from './cem.ts';
 import { groupEntriesByTitle, orderTitleGroups, parseStorybookIndex } from './index-entries.ts';
 import { renderLlmsFullTxt } from './llms-full-txt.ts';
 import { renderLlmsTxt, validateLlmsTxtLinks } from './llms-txt.ts';
-import { buildPageModel, renderPageMarkdown } from './page-renderer.ts';
+import { buildPageModel, relativizeRootFileLinks, renderPageMarkdown } from './page-renderer.ts';
 
 export interface GenerateLlmsDocsOptions {
   distDir: string;
@@ -52,12 +52,13 @@ export function generateLlmsDocs(
   for (const page of pages) {
     const filePath = join(options.distDir, page.outputPath);
     deps.mkdir(dirname(filePath), { recursive: true });
-    deps.writeFile(filePath, renderPageMarkdown(page));
+    deps.writeFile(filePath, relativizeRootFileLinks(renderPageMarkdown(page), page.outputPath));
   }
   fileCount += pages.length;
 
   const designMd = readOptionalFile(deps.readFile, options.designMdPath);
-  deps.writeFile(join(options.distDir, 'llms-full.txt'), renderLlmsFullTxt({ pages, designMd }));
+  const llmsFullTxt = renderLlmsFullTxt({ pages, designMd });
+  deps.writeFile(join(options.distDir, 'llms-full.txt'), llmsFullTxt);
   fileCount += 1;
 
   const llmsTxt = renderLlmsTxt({

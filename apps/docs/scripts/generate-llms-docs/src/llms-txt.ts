@@ -10,7 +10,7 @@ const CORE_RULES = [
   "Always import components from the root package (`import { EsdsIconComponent } from '@infomaniak-design-system/components'`) and call `.define()` on each component before rendering any `<esds-*>` element.",
   'Never hardcode hex colors, spacing, or typography values; always use the semantic design token CSS custom properties documented in these pages.',
   'Prefer composing the existing components over re-implementing them with custom CSS; the look and feel is owned by the token layer, not by consumers.',
-  'DESIGN.md is already included at the top of llms-full.txt — ingest one or the other, not both.',
+  'DESIGN.md is already included at the top of llms-full.txt, so ingest one or the other, not both.',
 ].join(' ');
 
 const OPTIONAL_TITLE_SUFFIXES = ['CHANGELOG', 'DESIGN.md'];

@@ -32,6 +32,14 @@ const MINI_INDEX = {
       type: 'docs',
       tags: ['dev'],
     },
+    'ai-llms--docs': {
+      id: 'ai-llms--docs',
+      title: 'AI & LLMs',
+      name: 'Docs',
+      importPath: './src/stories/ai-llms.mdx',
+      type: 'docs',
+      tags: ['dev'],
+    },
     'components-separator--docs': {
       id: 'components-separator--docs',
       title: 'Components/Separator',
@@ -73,6 +81,20 @@ const CHANGELOG_MDX = [
 
 const CHANGELOG_MD = ['# Changelog', '', '- 0.5.1: initial release.'].join('\n');
 
+const AI_LLMS_MDX = [
+  "import { Meta } from '@storybook/addon-docs/blocks';",
+  '',
+  '<Meta title="AI & LLMs" />',
+  '',
+  '# AI & LLMs',
+  '',
+  'Machine-readable resources for AI agents:',
+  '',
+  '- [llms.txt](./llms.txt) — the index.',
+  '- [llms-full.txt](./llms-full.txt) — the full docs.',
+  '- [DESIGN.md](./DESIGN.md) — the token reference.',
+].join('\n');
+
 const SEPARATOR_STORIES = [
   "import documentation from './esds-separator.component.md?raw';",
   '',
@@ -112,6 +134,7 @@ function createInputFiles(overrides: Record<string, string> = {}): Record<string
     [join(DIST_DIR, 'DESIGN.md')]: '# DESIGN.md\n\nToken reference.',
     [join(APPS_DOCS_DIR, 'public/DESIGN.md')]: '# DESIGN.md\n\nToken reference.',
     [join(APPS_DOCS_DIR, 'src/stories/welcome.mdx')]: WELCOME_MDX,
+    [join(APPS_DOCS_DIR, 'src/stories/ai-llms.mdx')]: AI_LLMS_MDX,
     [join(APPS_DOCS_DIR, 'src/stories/components/changelog.mdx')]: CHANGELOG_MDX,
     [join(APPS_DOCS_DIR, 'src/stories/assets/components-changelog.md')]: CHANGELOG_MD,
     [join(
@@ -139,9 +162,10 @@ describe('generateLlmsDocs', () => {
   it('generates all pages, llms.txt and llms-full.txt', () => {
     const { deps, outputs } = createDeps(createInputFiles());
     const result = generateLlmsDocs(BASE_OPTIONS, deps);
-    expect(result.pageCount).toBe(3);
-    expect(result.fileCount).toBe(5);
+    expect(result.pageCount).toBe(4);
+    expect(result.fileCount).toBe(6);
     expect(outputs.has(join(DIST_DIR, 'llms/welcome.md'))).toBe(true);
+    expect(outputs.has(join(DIST_DIR, 'llms/ai-llms.md'))).toBe(true);
     expect(outputs.has(join(DIST_DIR, 'llms/components/separator.md'))).toBe(true);
     expect(outputs.has(join(DIST_DIR, 'llms/components/changelog.md'))).toBe(true);
     expect(outputs.has(join(DIST_DIR, 'llms-full.txt'))).toBe(true);
@@ -158,6 +182,7 @@ describe('generateLlmsDocs', () => {
     expect(llmsTxt).toContain('## Optional');
     expect(llmsTxt).toContain('- [Components/CHANGELOG](llms/components/changelog.md)');
     expect(llmsTxt).toContain('(DESIGN.md)');
+    expect([...llmsTxt].every((char) => char.charCodeAt(0) <= 0x7f)).toBe(true);
 
     const llmsFull = outputs.get(join(DIST_DIR, 'llms-full.txt')) ?? '';
     expect(llmsFull.startsWith('# DESIGN.md')).toBe(true);
@@ -188,5 +213,17 @@ describe('generateLlmsDocs', () => {
     const llmsTxt = outputs.get(join(DIST_DIR, 'llms.txt')) ?? '';
     expect(llmsTxt).toContain('(https://example.com/base/llms/welcome.md)');
     expect(llmsTxt).toContain('(https://example.com/base/llms-full.txt)');
+  });
+
+  it('re-anchors root file links on generated pages, not in llms-full.txt', () => {
+    const { deps, outputs } = createDeps(createInputFiles());
+    generateLlmsDocs(BASE_OPTIONS, deps);
+    const page = outputs.get(join(DIST_DIR, 'llms/ai-llms.md')) ?? '';
+    expect(page).toContain('](../llms.txt)');
+    expect(page).toContain('](../llms-full.txt)');
+    expect(page).toContain('](../DESIGN.md)');
+    const llmsFull = outputs.get(join(DIST_DIR, 'llms-full.txt')) ?? '';
+    expect(llmsFull).toContain('(./llms.txt)');
+    expect(llmsFull).toContain('(./DESIGN.md)');
   });
 });
