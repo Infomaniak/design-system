@@ -19,7 +19,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
     - [Using `*.root.css` files](#using-rootcss-files)
     - [Using `*.attr.css` files](#using-attrcss-files)
       - [Import all contexts (all.attr files)](#import-all-contexts-allattrcss-files)
-    - [Tailwind CSS](#tailwind-css)
+    - [Tailwind CSS V4](#tailwind-css-v4)
   - [LLM/AI](#llmai)
   - [iOS](#ios)
     - [Installation](#installation)
@@ -145,7 +145,7 @@ Each modifier also generates an `all.attr.css` file which imports the attribute 
 @import '@infomaniak-design-system/tokens/css/modifiers/theme/all.attr.css';
 ```
 
-#### Tailwind CSS
+#### Tailwind CSS V4
 
 ```css
 @import 'tailwindcss';
@@ -174,7 +174,7 @@ For the previous example, a common usage would be `active:bg-brand-state-selecte
 
 ### LLM/AI
 
-Use the generated <a href="./?path=/docs/design-tokens-design-md--docs">DESIGN.md</a> file to provide design system context to your AI agent or LLM. It contains a structured, machine-readable reference of the entire token system in a format optimized for AI consumption.
+Use the <a href="./?path=/docs/ai-llms--docs">AI &amp; LLMs</a> resources (`DESIGN.md`, `llms.txt` and `llms-full.txt`) to provide design system context to your AI agent or LLM. They contain a structured, machine-readable reference of the entire token system in a format optimized for AI consumption.
 
 ### iOS
 
@@ -273,7 +273,7 @@ Modifiers let you swap the values of existing tokens without changing their name
 
 **Example**: The `euria` product modifier
 
-The `euria.tokens.json` modifier overrides `color.background.brand.default` by including the same path with a different value:
+The `euria.tokens.json` modifier overrides `color.background.brand` (the default brand background) by including the same path with a different value:
 
 Base `t2-semantic/color.tokens.json`:
 
@@ -282,7 +282,9 @@ Base `t2-semantic/color.tokens.json`:
   "color": {
     "background": {
       "brand": {
-        "default": { "$value": "{color.sky.700}" }
+        "$root": { "$value": "{color.background.brand.infomaniak}" },
+        "infomaniak": { "$value": "{color.blue.600}" },
+        "euria": { "$value": "{color.ocean.700}" }
       }
     }
   }
@@ -296,7 +298,7 @@ Base `t2-semantic/color.tokens.json`:
   "color": {
     "background": {
       "brand": {
-        "default": { "$value": "{color.ocean.700}" }
+        "$value": "{color.background.brand.euria}"
       }
     }
   }
@@ -305,18 +307,18 @@ Base `t2-semantic/color.tokens.json`:
 
 **Resolution with modifiers:**
 
-Multiple modifiers can be applied simultaneously. In the example below, the `euria` modifier changes the base brand color, then `dark` further adjusts it for the dark theme:
+Multiple modifiers can be applied simultaneously. In the example below, the `euria` modifier points the brand background to the Euria brand token, then `dark` further adjusts it for the dark theme:
 
 ```
 With data-esds-product="euria" data-esds-theme="dark":
 
-              T3: button.background.brand.default
+              T3: button.background.color
                       ↓
-              T2: color.background.brand.default
+              T2: color.background.brand
                       ↓
-  Euria modifier: color.background.brand.default (color.ocean.700)
+  Euria modifier: color.background.brand.euria (color.ocean.700)
                       ↓
-   Dark modifier: color.background.brand.default (color.ocean.400)
+   Dark modifier: color.background.brand.euria (color.ocean.400)
                       ↓
               T1: color.ocean.400
 ```
@@ -329,7 +331,7 @@ With data-esds-product="euria" data-esds-theme="dark":
   data-esds-theme="dark"
 >
   <!-- All children resolve with both modifiers applied -->
-  <button style="background: var(--esds-color-background-brand-default)">
+  <button style="background: var(--esds-color-background-brand)">
     Gets a color.ocean.400 background
   </button>
 </body>
