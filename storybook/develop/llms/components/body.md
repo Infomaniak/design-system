@@ -38,7 +38,11 @@ Use the `<strong>` element to emphasize text within a body text element, or use 
 ### Default
 
 ```html
-<esds-body text="This is a body example" size="md"></esds-body>
+<p
+      esds-body="md"
+    >
+      This is a body example
+    </p>
 ```
 
 ### With Strong Content
@@ -54,5 +58,5 @@ Use the `<strong>` element to emphasize text within a body text element, or use 
 ### All Sizes
 
 ```html
-<esds-body text="This is a body example"></esds-body>
+<p esds-body></p>
 ```

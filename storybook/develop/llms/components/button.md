@@ -137,29 +137,48 @@ Both `data-esds-button-type` and `data-esds-button-size` can be combined:
 ### Button
 
 ```html
-<esds-button content="Text content" buttonType="primary" size="medium"></esds-button>
+<button
+      esds-button
+      data-esds-button-type="primary"
+      data-esds-button-size="medium"
+    >
+      <esds-icon name="esds:plus"></esds-icon>
+      Text content
+      <kbd esds-kbd="">⌘</kbd>
+    </button>
 ```
 
 ### Link
 
 ```html
-<esds-button content="Link content" href="https://infomaniak.com"></esds-button>
+<a
+      esds-button
+      href="https://infomaniak.com"
+      target="_blank"
+    >
+      <esds-icon name="esds:plus"></esds-icon>
+      Link content
+    </a>
 ```
 
 ### Text Only
 
 ```html
-<esds-button content="Text content"></esds-button>
+<button
+      esds-button
+    >
+      Text content
+    </button>
 ```
 
 ### Types
 
 ```html
-<esds-button></esds-button>
+<button esds-button></button>
 ```
 
 ### Sizes
 
 ```html
-<esds-button></esds-button>
+<button esds-button></button>
 ```

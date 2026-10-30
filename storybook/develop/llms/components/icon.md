@@ -81,8 +81,7 @@ InjectionContext.root = new InjectionContext([
       Follow this link
       <esds-icon
         name="esds:square-arrow-out-up-right"
-        inline
-      ></esds-icon>
+        inline></esds-icon>
     </a>
 ```
 

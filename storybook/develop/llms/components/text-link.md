@@ -55,9 +55,7 @@ Adding the custom attribute `esds-text-link` to an `<a>` element, applies the `e
 ```html
 <a
       esds-text-link
-      href="https://infomaniak.com"
-      >Text link</a
-    >
+      href="https://infomaniak.com">Text link</a>
 ```
 
 ### External
@@ -67,9 +65,7 @@ Adding the custom attribute `esds-text-link` to an `<a>` element, applies the `e
       esds-text-link
       href="https://infomaniak.com"
       target="_blank"
-      rel="noopener noreferrer nofollow"
-      >Opens in new tab</a
-    >
+      rel="noopener noreferrer nofollow">Opens in new tab</a>
 ```
 
 ### Download
@@ -95,8 +91,7 @@ Adding the custom attribute `esds-text-link` to an `<a>` element, applies the `e
       Infomaniak
       <esds-icon
         name="esds:square-arrow-out-up-right"
-        inline
-      ></esds-icon>
+        inline></esds-icon>
     </a>
 ```
 

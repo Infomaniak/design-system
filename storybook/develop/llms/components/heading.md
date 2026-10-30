@@ -38,7 +38,11 @@ Use the `<strong>` element to emphasize text within a heading text element, or u
 ### Default
 
 ```html
-<esds-heading text="This is a heading example" size="md"></esds-heading>
+<h1
+      esds-heading="md"
+    >
+      This is a heading example
+    </h1>
 ```
 
 ### With Strong Content
@@ -54,5 +58,34 @@ Use the `<strong>` element to emphasize text within a heading text element, or u
 ### All Sizes
 
 ```html
-<esds-heading text="This is a heading example"></esds-heading>
+<h1
+      esds-heading="2xl"
+    >
+      This is a heading example
+    </h1>
+    <h2
+      esds-heading="xl"
+    >
+      This is a heading example
+    </h2>
+    <h3
+      esds-heading="lg"
+    >
+      This is a heading example
+    </h3>
+    <h4
+      esds-heading="md"
+    >
+      This is a heading example
+    </h4>
+    <h5
+      esds-heading="sm"
+    >
+      This is a heading example
+    </h5>
+    <h6
+      esds-heading="xs"
+    >
+      This is a heading example
+    </h6>
 ```

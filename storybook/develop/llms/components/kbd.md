@@ -71,9 +71,7 @@ Its appearance is driven by the design tokens; changes to the look belong to the
 <p>
       Press
       <kbd
-        esds-kbd
-        >K</kbd
-      >
+        esds-kbd>K</kbd>
       to open the search.
     </p>
 ```
@@ -84,9 +82,7 @@ Its appearance is driven by the design tokens; changes to the look belong to the
 <p>
       Press
       <kbd
-        esds-kbd
-        >⌘<span>+</span>K</kbd
-      >
+        esds-kbd>⌘<span>+</span>K</kbd>
       to open the command menu.
     </p>
 ```
@@ -96,60 +92,32 @@ Its appearance is driven by the design tokens; changes to the look belong to the
 ```html
 <div style="display: flex; flex-wrap: wrap; gap: var(--esds-spacing-sm);">
       <kbd
-        esds-kbd
-        >⇧</kbd
-      >
+        esds-kbd>⇧</kbd>
       <kbd
-        esds-kbd
-        >⌥</kbd
-      >
+        esds-kbd>⌥</kbd>
       <kbd
-        esds-kbd
-        >⌘</kbd
-      >
+        esds-kbd>⌘</kbd>
       <kbd
-        esds-kbd
-        >⌃</kbd
-      >
+        esds-kbd>⌃</kbd>
       <kbd
-        esds-kbd
-        >⏎</kbd
-      >
+        esds-kbd>⏎</kbd>
       <kbd
-        esds-kbd
-        >⌫</kbd
-      >
+        esds-kbd>⌫</kbd>
       <kbd
-        esds-kbd
-        >⇥</kbd
-      >
+        esds-kbd>⇥</kbd>
       <kbd
-        esds-kbd
-        >⎋</kbd
-      >
+        esds-kbd>⎋</kbd>
       <kbd
-        esds-kbd
-        >⇪</kbd
-      >
+        esds-kbd>⇪</kbd>
       <kbd
-        esds-kbd
-        >⏏</kbd
-      >
+        esds-kbd>⏏</kbd>
       <kbd
-        esds-kbd
-        >←</kbd
-      >
+        esds-kbd>←</kbd>
       <kbd
-        esds-kbd
-        >↑</kbd
-      >
+        esds-kbd>↑</kbd>
       <kbd
-        esds-kbd
-        >→</kbd
-      >
+        esds-kbd>→</kbd>
       <kbd
-        esds-kbd
-        >↓</kbd
-      >
+        esds-kbd>↓</kbd>
     </div>
 ```

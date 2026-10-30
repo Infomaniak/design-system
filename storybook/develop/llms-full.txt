@@ -13899,7 +13899,7 @@ Add the attribute `data-esds-badge-type="[type]"` to apply a badge type:
 ### Default
 
 ```html
-<esds-badge default-slot="3"></esds-badge>
+<esds-badge>3</esds-badge>
 ```
 
 ### Empty
@@ -13950,7 +13950,11 @@ Use the `<strong>` element to emphasize text within a body text element, or use 
 ### Default
 
 ```html
-<esds-body text="This is a body example" size="md"></esds-body>
+<p
+      esds-body="md"
+    >
+      This is a body example
+    </p>
 ```
 
 ### With Strong Content
@@ -13966,7 +13970,7 @@ Use the `<strong>` element to emphasize text within a body text element, or use 
 ### All Sizes
 
 ```html
-<esds-body text="This is a body example"></esds-body>
+<p esds-body></p>
 ```
 
 ---
@@ -14110,31 +14114,50 @@ Both `data-esds-button-type` and `data-esds-button-size` can be combined:
 ### Button
 
 ```html
-<esds-button content="Text content" buttonType="primary" size="medium"></esds-button>
+<button
+      esds-button
+      data-esds-button-type="primary"
+      data-esds-button-size="medium"
+    >
+      <esds-icon name="esds:plus"></esds-icon>
+      Text content
+      <kbd esds-kbd="">⌘</kbd>
+    </button>
 ```
 
 ### Link
 
 ```html
-<esds-button content="Link content" href="https://infomaniak.com"></esds-button>
+<a
+      esds-button
+      href="https://infomaniak.com"
+      target="_blank"
+    >
+      <esds-icon name="esds:plus"></esds-icon>
+      Link content
+    </a>
 ```
 
 ### Text Only
 
 ```html
-<esds-button content="Text content"></esds-button>
+<button
+      esds-button
+    >
+      Text content
+    </button>
 ```
 
 ### Types
 
 ```html
-<esds-button></esds-button>
+<button esds-button></button>
 ```
 
 ### Sizes
 
 ```html
-<esds-button></esds-button>
+<button esds-button></button>
 ```
 
 ---
@@ -14179,7 +14202,11 @@ Use the `<strong>` element to emphasize text within a heading text element, or u
 ### Default
 
 ```html
-<esds-heading text="This is a heading example" size="md"></esds-heading>
+<h1
+      esds-heading="md"
+    >
+      This is a heading example
+    </h1>
 ```
 
 ### With Strong Content
@@ -14195,7 +14222,36 @@ Use the `<strong>` element to emphasize text within a heading text element, or u
 ### All Sizes
 
 ```html
-<esds-heading text="This is a heading example"></esds-heading>
+<h1
+      esds-heading="2xl"
+    >
+      This is a heading example
+    </h1>
+    <h2
+      esds-heading="xl"
+    >
+      This is a heading example
+    </h2>
+    <h3
+      esds-heading="lg"
+    >
+      This is a heading example
+    </h3>
+    <h4
+      esds-heading="md"
+    >
+      This is a heading example
+    </h4>
+    <h5
+      esds-heading="sm"
+    >
+      This is a heading example
+    </h5>
+    <h6
+      esds-heading="xs"
+    >
+      This is a heading example
+    </h6>
 ```
 
 ---
@@ -14492,8 +14548,7 @@ InjectionContext.root = new InjectionContext([
       Follow this link
       <esds-icon
         name="esds:square-arrow-out-up-right"
-        inline
-      ></esds-icon>
+        inline></esds-icon>
     </a>
 ```
 
@@ -14578,9 +14633,7 @@ Its appearance is driven by the design tokens; changes to the look belong to the
 <p>
       Press
       <kbd
-        esds-kbd
-        >K</kbd
-      >
+        esds-kbd>K</kbd>
       to open the search.
     </p>
 ```
@@ -14591,9 +14644,7 @@ Its appearance is driven by the design tokens; changes to the look belong to the
 <p>
       Press
       <kbd
-        esds-kbd
-        >⌘<span>+</span>K</kbd
-      >
+        esds-kbd>⌘<span>+</span>K</kbd>
       to open the command menu.
     </p>
 ```
@@ -14603,61 +14654,33 @@ Its appearance is driven by the design tokens; changes to the look belong to the
 ```html
 <div style="display: flex; flex-wrap: wrap; gap: var(--esds-spacing-sm);">
       <kbd
-        esds-kbd
-        >⇧</kbd
-      >
+        esds-kbd>⇧</kbd>
       <kbd
-        esds-kbd
-        >⌥</kbd
-      >
+        esds-kbd>⌥</kbd>
       <kbd
-        esds-kbd
-        >⌘</kbd
-      >
+        esds-kbd>⌘</kbd>
       <kbd
-        esds-kbd
-        >⌃</kbd
-      >
+        esds-kbd>⌃</kbd>
       <kbd
-        esds-kbd
-        >⏎</kbd
-      >
+        esds-kbd>⏎</kbd>
       <kbd
-        esds-kbd
-        >⌫</kbd
-      >
+        esds-kbd>⌫</kbd>
       <kbd
-        esds-kbd
-        >⇥</kbd
-      >
+        esds-kbd>⇥</kbd>
       <kbd
-        esds-kbd
-        >⎋</kbd
-      >
+        esds-kbd>⎋</kbd>
       <kbd
-        esds-kbd
-        >⇪</kbd
-      >
+        esds-kbd>⇪</kbd>
       <kbd
-        esds-kbd
-        >⏏</kbd
-      >
+        esds-kbd>⏏</kbd>
       <kbd
-        esds-kbd
-        >←</kbd
-      >
+        esds-kbd>←</kbd>
       <kbd
-        esds-kbd
-        >↑</kbd
-      >
+        esds-kbd>↑</kbd>
       <kbd
-        esds-kbd
-        >→</kbd
-      >
+        esds-kbd>→</kbd>
       <kbd
-        esds-kbd
-        >↓</kbd
-      >
+        esds-kbd>↓</kbd>
     </div>
 ```
 
@@ -14812,9 +14835,7 @@ Adding the custom attribute `esds-text-link` to an `<a>` element, applies the `e
 ```html
 <a
       esds-text-link
-      href="https://infomaniak.com"
-      >Text link</a
-    >
+      href="https://infomaniak.com">Text link</a>
 ```
 
 ### External
@@ -14824,9 +14845,7 @@ Adding the custom attribute `esds-text-link` to an `<a>` element, applies the `e
       esds-text-link
       href="https://infomaniak.com"
       target="_blank"
-      rel="noopener noreferrer nofollow"
-      >Opens in new tab</a
-    >
+      rel="noopener noreferrer nofollow">Opens in new tab</a>
 ```
 
 ### Download
@@ -14852,8 +14871,7 @@ Adding the custom attribute `esds-text-link` to an `<a>` element, applies the `e
       Infomaniak
       <esds-icon
         name="esds:square-arrow-out-up-right"
-        inline
-      ></esds-icon>
+        inline></esds-icon>
     </a>
 ```
 

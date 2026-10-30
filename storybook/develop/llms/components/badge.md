@@ -69,7 +69,7 @@ Add the attribute `data-esds-badge-type="[type]"` to apply a badge type:
 ### Default
 
 ```html
-<esds-badge default-slot="3"></esds-badge>
+<esds-badge>3</esds-badge>
 ```
 
 ### Empty
