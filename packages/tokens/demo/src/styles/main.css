@@ -2,7 +2,7 @@
 @reference '#tailwind';
 
 body {
-  @apply flex flex-col items-start gap-8 p-4;
+  @apply flex flex-col items-start gap-4xl p-xl;
 
   background-color: var(--esds-color-background-elevation-surface-default);
   /*display: flex;*/
