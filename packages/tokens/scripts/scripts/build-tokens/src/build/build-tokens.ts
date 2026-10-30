@@ -107,22 +107,13 @@ export function buildTokens({
       logger,
     });
 
-    // TODO continue here
-
-    /* eslint-disable */ // TODO remove
-    if (false) {
-      // TODO remove
-      // @ts-ignore // TODO remove
-
-      // KOTLIN
-      await buildKotlinTokens({
-        baseCollection,
-        modifiers,
-        outputDirectory,
-        logger,
-      });
-    }
-    /* eslint-enable */ // TODO remove
+    // KOTLIN
+    await buildKotlinTokens({
+      baseCollection,
+      modifiers,
+      outputDirectory,
+      logger,
+    });
 
     // DESIGN.md
     await buildDesignMdTokens({
