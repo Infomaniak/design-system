@@ -597,8 +597,8 @@ describe('buildDesignMdTokens', () => {
     // Non-themeable T2 token should be single scalar in YAML
     expect(content).toContain('typography:');
 
-    // CSS variables in markdown tables
-    expect(content).toContain('var(--esds-color-background-brand-default)');
+    // AI implementation directives reference real token names
+    expect(content).toContain('`color.background.brand` with `var(--esds-color-background-brand)`');
     expect(content).toContain('var(--esds-typography-heading-lg)');
 
     // Tier separation (T1 is excluded; sections are renumbered)
@@ -654,10 +654,10 @@ describe('buildDesignMdTokens', () => {
 
     const content = await readFile(join(tempDir, 'design-md', 'DESIGN.md'), 'utf-8');
 
-    // Should contain the portable token guidance
+    // Should contain the portable token guidance, referencing real token names
     expect(content).toContain('Portable product tokens');
-    expect(content).toContain('color.background.brand.default');
-    expect(content).toContain('color.background.brand.calendar.default');
+    expect(content).toContain('`color.background.brand` with `var(--esds-color-background-brand)`');
+    expect(content).toContain('color.background.brand.calendar');
   });
 
   it('should omit component tokens section when no T3 tokens exist', async () => {
