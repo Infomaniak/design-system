@@ -37,3 +37,11 @@
 @utility esds-heading-xl-emphasized {
   font: var(--esds-heading-xl-font-emphasized);
 }
+
+@utility esds-heading-2xl {
+  font: var(--esds-heading-2xl-font-base);
+}
+
+@utility esds-heading-2xl-emphasized {
+  font: var(--esds-heading-2xl-font-emphasized);
+}

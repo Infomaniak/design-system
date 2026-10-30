@@ -32,7 +32,7 @@ const meta = {
 
 export default meta;
 
-const HEADER_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+const HEADER_SIZES = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 
 export const Default: StoryObj<
   EsdsHeadingAttr &
@@ -103,38 +103,45 @@ export const AllSizes: StoryObj<
   render: (args) => html`
     <h1
       ${defineEsdsHeadingAttr}
-      esds-heading="xl"
+      esds-heading="2xl"
       ?emphasized="${args.emphasized}"
     >
       ${args.text}
     </h1>
     <h2
       ${defineEsdsHeadingAttr}
-      esds-heading="lg"
+      esds-heading="xl"
       ?emphasized="${args.emphasized}"
     >
       ${args.text}
     </h2>
     <h3
       ${defineEsdsHeadingAttr}
-      esds-heading="md"
+      esds-heading="lg"
       ?emphasized="${args.emphasized}"
     >
       ${args.text}
     </h3>
     <h4
       ${defineEsdsHeadingAttr}
-      esds-heading="sm"
+      esds-heading="md"
       ?emphasized="${args.emphasized}"
     >
       ${args.text}
     </h4>
     <h5
       ${defineEsdsHeadingAttr}
-      esds-heading="xs"
+      esds-heading="sm"
       ?emphasized="${args.emphasized}"
     >
       ${args.text}
     </h5>
+    <h6
+      ${defineEsdsHeadingAttr}
+      esds-heading="xs"
+      ?emphasized="${args.emphasized}"
+    >
+      ${args.text}
+    </h6>
   `,
 };

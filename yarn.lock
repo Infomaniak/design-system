@@ -1288,6 +1288,8 @@ __metadata:
     "@storybook/web-components-vite": "npm:^10.6.2"
     "@wc-toolkit/jsx-types": "npm:^1.8.2"
     "@wc-toolkit/type-parser": "npm:1.3.1"
+    custom-element-jet-brains-integration: "npm:^1.8.0"
+    custom-element-vs-code-integration: "npm:^1.5.0"
     fake-indexeddb: "npm:^6.2.5"
     idb: "npm:^8.0.4"
     lit: "npm:^3.3.3"
@@ -2258,6 +2260,17 @@ __metadata:
   version: 1100.0.1
   resolution: "@pnpm/deps.graph-sequencer@npm:1100.0.1"
   checksum: 10c0/b38a152e1184055a358e7c522f068572e84759a88dfc56c98a349125b11d3cce72e452424c235af5cf18258a5034f88fe203c72ba57ffbe70b297afc50d08dea
+  languageName: node
+  linkType: hard
+
+"@prettier/sync@npm:^0.5.2":
+  version: 0.5.5
+  resolution: "@prettier/sync@npm:0.5.5"
+  dependencies:
+    make-synchronized: "npm:^0.4.2"
+  peerDependencies:
+    prettier: "*"
+  checksum: 10c0/65d6854a58f47f42fe734d192b9c67ab5651bbab462cc5f8f1121e9259dd3ab91a77b8cd4b4a32baf4ba0a25148dad052732efe483b76fcdd6692d0cc48fb262
   languageName: node
   linkType: hard
 
@@ -4317,6 +4330,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"custom-element-jet-brains-integration@npm:^1.8.0":
+  version: 1.8.0
+  resolution: "custom-element-jet-brains-integration@npm:1.8.0"
+  dependencies:
+    "@prettier/sync": "npm:^0.5.2"
+  checksum: 10c0/a4f6c1cc1bf1802578e1a7499e46c5e5af478d166b6622a9214689b4a229765e7b7c73ed4895ea4a5c1b6454775d57b10d7050095d07640624fc07ec81558c26
+  languageName: node
+  linkType: hard
+
+"custom-element-vs-code-integration@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "custom-element-vs-code-integration@npm:1.5.0"
+  dependencies:
+    "@prettier/sync": "npm:^0.5.2"
+  checksum: 10c0/3b2d9bef271e1157e58688c73020da42d0bf299fc006e7a5d38fa1c57008b9fcdcab09ee31e1191d8fed185e03d8e8356114740c578a327396252843acba4388
+  languageName: node
+  linkType: hard
+
 "custom-elements-manifest@npm:1.0.0":
   version: 1.0.0
   resolution: "custom-elements-manifest@npm:1.0.0"
@@ -6272,6 +6303,13 @@ __metadata:
     "@babel/types": "npm:^7.29.7"
     source-map-js: "npm:^1.2.1"
   checksum: 10c0/d27e94cd1e85f1736f97ab0c6e542170a818c7e573261722d056b3ec4a520e16d836ce4c6b0cd3dd215b1171d83592d48a3736f3da5997a55629a0de05f66e7d
+  languageName: node
+  linkType: hard
+
+"make-synchronized@npm:^0.4.2":
+  version: 0.4.2
+  resolution: "make-synchronized@npm:0.4.2"
+  checksum: 10c0/29015b2101dfbed9dcb486d3fe557d86305887952b47a632bfba70d5a69fe31d02d713c55224f0efb7bd10d3bcb28adb026902b951e727f657d017adb9093b39
   languageName: node
   linkType: hard
 
