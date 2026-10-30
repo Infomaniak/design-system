@@ -101,7 +101,7 @@ function stripLeadingH1(prose: string): string {
   return prose.trim();
 }
 
-function buildStoryExamples(storiesSource: string, cemDocs: CemElementDocs): StorySnippet[] {
+export function buildStoryExamples(storiesSource: string, cemDocs: CemElementDocs): StorySnippet[] {
   const parsed = parseStoriesFile(storiesSource);
   const cemDefaults: ArgsRecord = {};
   for (const attribute of cemDocs.attributes) {

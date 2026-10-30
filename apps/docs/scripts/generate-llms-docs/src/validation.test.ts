@@ -2,13 +2,8 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import { collectCustomAttributeTagNames, parseCem } from './cem.ts';
-import {
-  buildStorySnippets,
-  parseStoriesFile,
-  toSnippetContext,
-  type SnippetContext,
-} from './story-snippets.ts';
+import { collectCustomAttributeTagNames, findElementByTagName, parseCem } from './cem.ts';
+import { buildStoryExamples } from './page-renderer.ts';
 import type { PageModel, StorySnippet } from './types.ts';
 import {
   collectGeneratedPageIssues,
@@ -161,193 +156,178 @@ describe('validateGeneratedPages', () => {
 });
 
 describe('real component stories pass the guardrail', () => {
+  /**
+   * Minimal CEM fixture mirroring the generated manifest for the 8 components
+   * (see `packages/components/custom-elements.json`).
+   */
+  const REAL_CEM = parseCem(
+    JSON.stringify({
+      modules: [
+        {
+          path: 'src/components/esds-badge/esds-badge.component.ts',
+          declarations: [
+            {
+              name: 'EsdsBadgeComponent',
+              tagName: 'esds-badge',
+              customElement: true,
+              superclass: { name: 'LitElement', package: 'lit' },
+              slots: [{ name: '' }],
+            },
+          ],
+        },
+        {
+          path: 'src/components/esds-button/esds-button.attr.ts',
+          declarations: [
+            {
+              name: 'EsdsButtonAttr',
+              tagName: 'esds-button',
+              customElement: true,
+              superclass: { name: 'CustomAttribute', module: '/src/helpers/custom-attribute.ts' },
+              attributes: [{ name: 'disabled' }, { name: 'loading' }],
+            },
+          ],
+        },
+        {
+          path: 'src/components/esds-body/esds-body.attr.ts',
+          declarations: [
+            {
+              name: 'EsdsBodyAttr',
+              tagName: 'esds-body',
+              customElement: true,
+              superclass: { name: 'CustomAttribute', module: '/src/helpers/custom-attribute.ts' },
+            },
+          ],
+        },
+        {
+          path: 'src/components/esds-heading/esds-heading.attr.ts',
+          declarations: [
+            {
+              name: 'EsdsHeadingAttr',
+              tagName: 'esds-heading',
+              customElement: true,
+              superclass: { name: 'CustomAttribute', module: '/src/helpers/custom-attribute.ts' },
+            },
+          ],
+        },
+        {
+          path: 'src/components/esds-icon/esds-icon.component.ts',
+          declarations: [
+            {
+              name: 'EsdsIconComponent',
+              tagName: 'esds-icon',
+              customElement: true,
+              superclass: { name: 'LitElement', package: 'lit' },
+              attributes: [
+                { name: 'name', type: { text: 'string' } },
+                { name: 'inline', default: 'false' },
+              ],
+            },
+          ],
+        },
+        {
+          path: 'src/components/esds-kbd/esds-kbd.attr.ts',
+          declarations: [
+            {
+              name: 'EsdsKbdAttr',
+              tagName: 'esds-kbd',
+              customElement: true,
+              superclass: { name: 'CustomAttribute', module: '/src/helpers/custom-attribute.ts' },
+            },
+          ],
+        },
+        {
+          path: 'src/components/esds-separator/esds-separator.component.ts',
+          declarations: [
+            {
+              name: 'EsdsSeparatorComponent',
+              tagName: 'esds-separator',
+              customElement: true,
+              superclass: { name: 'LitElement', package: 'lit' },
+              attributes: [
+                { name: 'orientation', default: "'horizontal'" },
+                { name: 'decorative', default: 'false' },
+              ],
+            },
+          ],
+        },
+        {
+          path: 'src/components/esds-text-link/esds-text-link.attr.ts',
+          declarations: [
+            {
+              name: 'EsdsTextLinkAttr',
+              tagName: 'esds-text-link',
+              customElement: true,
+              superclass: { name: 'CustomAttribute', module: '/src/helpers/custom-attribute.ts' },
+            },
+          ],
+        },
+      ],
+    }),
+  );
+
   const REAL_CASES = [
     {
       file: 'esds-badge/esds-badge.component.stories.ts',
-      context: {
-        kind: 'element',
-        tagName: 'esds-badge',
-        attributeName: 'esds-badge',
-        attributeNames: new Set<string>(),
-        slotNames: new Set(['']),
-      } satisfies SnippetContext,
-      cemDefaults: {},
-      componentKind: 'element',
-      componentTagName: 'esds-badge',
-      componentAttributeNames: [],
+      tagName: 'esds-badge',
       title: 'Components/Badge',
     },
-    {
-      file: 'esds-body/esds-body.attr.stories.ts',
-      context: {
-        kind: 'attribute',
-        tagName: 'esds-body',
-        attributeName: 'esds-body',
-        attributeNames: new Set<string>(),
-        slotNames: new Set(),
-      } satisfies SnippetContext,
-      cemDefaults: {},
-      componentKind: 'attribute',
-      componentTagName: 'esds-body',
-      componentAttributeNames: [],
-      title: 'Components/Body',
-    },
+    { file: 'esds-body/esds-body.attr.stories.ts', tagName: 'esds-body', title: 'Components/Body' },
     {
       file: 'esds-button/esds-button.attr.stories.ts',
-      context: {
-        kind: 'attribute',
-        tagName: 'esds-button',
-        attributeName: 'esds-button',
-        attributeNames: new Set(['disabled', 'loading']),
-        slotNames: new Set(),
-      } satisfies SnippetContext,
-      cemDefaults: {},
-      componentKind: 'attribute',
-      componentTagName: 'esds-button',
-      componentAttributeNames: ['disabled', 'loading'],
+      tagName: 'esds-button',
       title: 'Components/Button',
     },
     {
       file: 'esds-heading/esds-heading.attr.stories.ts',
-      context: {
-        kind: 'attribute',
-        tagName: 'esds-heading',
-        attributeName: 'esds-heading',
-        attributeNames: new Set<string>(),
-        slotNames: new Set(),
-      } satisfies SnippetContext,
-      cemDefaults: {},
-      componentKind: 'attribute',
-      componentTagName: 'esds-heading',
-      componentAttributeNames: [],
+      tagName: 'esds-heading',
       title: 'Components/Heading',
     },
     {
       file: 'esds-icon/esds-icon.component.stories.ts',
-      context: {
-        kind: 'element',
-        tagName: 'esds-icon',
-        attributeName: 'esds-icon',
-        attributeNames: new Set(['name', 'inline']),
-        slotNames: new Set(),
-      } satisfies SnippetContext,
-      cemDefaults: { inline: false },
-      componentKind: 'element',
-      componentTagName: 'esds-icon',
-      componentAttributeNames: ['name', 'inline'],
+      tagName: 'esds-icon',
       title: 'Components/Icon',
     },
-    {
-      file: 'esds-kbd/esds-kbd.attr.stories.ts',
-      context: {
-        kind: 'attribute',
-        tagName: 'esds-kbd',
-        attributeName: 'esds-kbd',
-        attributeNames: new Set<string>(),
-        slotNames: new Set(),
-      } satisfies SnippetContext,
-      cemDefaults: {},
-      componentKind: 'attribute',
-      componentTagName: 'esds-kbd',
-      componentAttributeNames: [],
-      title: 'Components/Kbd',
-    },
+    { file: 'esds-kbd/esds-kbd.attr.stories.ts', tagName: 'esds-kbd', title: 'Components/Kbd' },
     {
       file: 'esds-separator/esds-separator.component.stories.ts',
-      context: {
-        kind: 'element',
-        tagName: 'esds-separator',
-        attributeName: 'esds-separator',
-        attributeNames: new Set(['orientation', 'decorative']),
-        slotNames: new Set(),
-      } satisfies SnippetContext,
-      cemDefaults: { orientation: 'horizontal', decorative: false },
-      componentKind: 'element',
-      componentTagName: 'esds-separator',
-      componentAttributeNames: ['orientation', 'decorative'],
+      tagName: 'esds-separator',
       title: 'Components/Separator',
     },
     {
       file: 'esds-text-link/esds-text-link.attr.stories.ts',
-      context: {
-        kind: 'attribute',
-        tagName: 'esds-text-link',
-        attributeName: 'esds-text-link',
-        attributeNames: new Set<string>(),
-        slotNames: new Set(),
-      } satisfies SnippetContext,
-      cemDefaults: {},
-      componentKind: 'attribute',
-      componentTagName: 'esds-text-link',
-      componentAttributeNames: [],
+      tagName: 'esds-text-link',
       title: 'Components/Text Link',
     },
   ];
 
-  it('the CEM fixture flags the 5 custom attributes', () => {
-    const cem = parseCem(
-      JSON.stringify({
-        modules: [
-          {
-            path: 'src/components/esds-button/esds-button.attr.ts',
-            declarations: [
-              {
-                name: 'EsdsButtonAttr',
-                tagName: 'esds-button',
-                customElement: true,
-                superclass: { name: 'CustomAttribute', module: '/src/helpers/custom-attribute.ts' },
-                attributes: [{ name: 'disabled' }, { name: 'loading' }],
-              },
-            ],
-          },
-          {
-            path: 'src/components/esds-separator/esds-separator.component.ts',
-            declarations: [
-              {
-                name: 'EsdsSeparatorComponent',
-                tagName: 'esds-separator',
-                customElement: true,
-                superclass: { name: 'LitElement', package: 'lit' },
-              },
-            ],
-          },
-        ],
-      }),
-    );
-    expect([...collectCustomAttributeTagNames(cem)]).toEqual(['esds-button']);
+  it('flags the 5 custom attributes and the 3 elements', () => {
+    expect([...collectCustomAttributeTagNames(REAL_CEM)].sort()).toEqual([
+      'esds-body',
+      'esds-button',
+      'esds-heading',
+      'esds-kbd',
+      'esds-text-link',
+    ]);
+    expect(REAL_CASES).toHaveLength(8);
   });
 
   for (const realCase of REAL_CASES) {
     it(`produces valid snippets for the real ${realCase.title} stories`, () => {
+      const cemDocs = findElementByTagName(REAL_CEM, realCase.tagName);
+      if (cemDocs === null) throw new Error(`Missing CEM fixture entry for ${realCase.tagName}`);
       const source = readFileSync(join(componentsDir, realCase.file), 'utf8');
-      const parsed = parseStoriesFile(source);
-      const examples = buildStorySnippets({
-        context: toSnippetContext({
-          tagName: realCase.context.tagName,
-          className: 'ClassName',
-          kind: realCase.context.kind,
-          attributeName: realCase.context.attributeName,
-          attributes: [...realCase.context.attributeNames].map((name) => ({ name })),
-          events: [],
-          slots: [...realCase.context.slotNames].map((name) => ({ name, required: false })),
-          cssProperties: [],
-          cssParts: [],
-        }),
-        cemDefaults: realCase.cemDefaults,
-        meta: parsed.meta,
-        stories: parsed.stories,
-      });
+      const examples = buildStoryExamples(source, cemDocs);
       const issues = collectGeneratedPageIssues({
         pages: [
           page({
             title: realCase.title,
-            componentKind: realCase.componentKind,
-            componentTagName: realCase.componentTagName,
-            componentAttributeNames: realCase.componentAttributeNames,
+            componentKind: cemDocs.kind,
+            componentTagName: cemDocs.tagName,
+            componentAttributeNames: cemDocs.attributes.map((attribute) => attribute.name),
             examples,
           }),
         ],
-        attributeTagNames: ATTRIBUTE_TAG_NAMES,
+        attributeTagNames: collectCustomAttributeTagNames(REAL_CEM),
       });
       expect(issues).toEqual([]);
       expect(examples.length).toBeGreaterThan(0);
