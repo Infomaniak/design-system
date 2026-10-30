@@ -1,5 +1,10 @@
 ---
-'@infomaniak-design-system/tokens': patch
+'@infomaniak-design-system/tokens': minor
 ---
 
-Added opacity and spacing token bindings to the generated Tailwind CSS: `--opacity-*` and `--spacing-*` variables are now emitted in the `@theme` block, so Tailwind utilities such as `opacity-*` and spacing-based utilities (e.g. `w-8`, `p-4`) resolve against the design tokens. The `--spacing: 0.25rem` base scale is now emitted before the token variables so specific spacing tokens take precedence over the default scale.
+Bound the opacity and spacing token namespaces to the generated Tailwind CSS, and locked numeric utility scales to the design tokens:
+
+- `--opacity-*` and `--spacing-*` variables are emitted in the `@theme` block, so utilities such as `opacity-subtle` or `p-md` resolve against the design tokens.
+- Numeric spacing utilities are disabled (the `--spacing` base scale is reset to `initial`): `p-4`, `w-8`, `gap-2` and similar no longer generate; use the token names instead (`p-md`, `w-xl`, `gap-2xl`, ...).
+- Numeric opacity utilities are blocked (`opacity-0` through `opacity-100` by 5); arbitrary values such as `opacity-[0.4]` keep working.
+- Editor suggestions for the removed numeric values may still appear (hardcoded in Tailwind's engine); variant-prefixed forms (e.g. `hover:opacity-50`) still compile for the same reason.
