@@ -1,0 +1,26 @@
+{
+  "debug": {
+    "alpha": {
+      "50": {
+        "$type": "number",
+        "$value": 0.5
+      }
+    },
+    "color": {
+      "$type": "color",
+      "red": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [1, 0, 0]
+        }
+      },
+      "red-50": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": "{debug.color.red}",
+          "alpha": "{debug.alpha.50}"
+        }
+      }
+    }
+  }
+}

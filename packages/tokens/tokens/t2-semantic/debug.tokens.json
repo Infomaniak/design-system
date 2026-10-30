@@ -1,0 +1,12 @@
+{
+  "debug2": {
+    "color": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": "{color.background.brand}",
+        "alpha": "{opacity.medium}"
+      }
+    }
+  }
+}

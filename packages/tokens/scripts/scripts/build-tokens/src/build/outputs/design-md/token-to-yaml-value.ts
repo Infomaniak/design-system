@@ -95,7 +95,13 @@ export function resolvedTokenToYamlValue(
   switch (resolvedToken.type) {
     case 'color':
       return colorDesignTokensCollectionTokenValueToCssValue(
-        fullyResolved as Parameters<typeof colorDesignTokensCollectionTokenValueToCssValue>[0],
+        (Array.isArray(
+          (fullyResolved as Parameters<typeof colorDesignTokensCollectionTokenValueToCssValue>[0])
+            .components,
+        )
+          ? fullyResolved
+          : (fullyResolved as Parameters<typeof colorDesignTokensCollectionTokenValueToCssValue>[0])
+              .components) as Parameters<typeof colorDesignTokensCollectionTokenValueToCssValue>[0],
       );
     case 'dimension':
       return dimensionDesignTokensCollectionTokenValueToCssValue(
