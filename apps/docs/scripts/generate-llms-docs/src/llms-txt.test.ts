@@ -17,6 +17,9 @@ function page(overrides: Partial<PageModel> & Pick<PageModel, 'title' | 'outputP
     importSection: '',
     props: '',
     examples: [],
+    componentKind: null,
+    componentTagName: null,
+    componentAttributeNames: [],
     ...overrides,
   };
 }

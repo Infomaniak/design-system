@@ -1,5 +1,5 @@
 import { dirname, join } from 'node:path';
-import { parseCem } from './cem.ts';
+import { collectCustomAttributeTagNames, parseCem } from './cem.ts';
 import {
   buildStoryLinkTargets,
   groupEntriesByTitle,
@@ -9,6 +9,7 @@ import {
 import { renderLlmsFullTxt } from './llms-full-txt.ts';
 import { renderLlmsTxt, validateLlmsTxtTargets } from './llms-txt.ts';
 import { buildPageModel, relativizeRootFileLinks, renderPageMarkdown } from './page-renderer.ts';
+import { validateGeneratedPages } from './validation.ts';
 
 export interface GenerateLlmsDocsOptions {
   distDir: string;
@@ -59,6 +60,8 @@ export function generateLlmsDocs(
       sources: { readFile: deps.readFile, appsDocsDir: options.appsDocsDir },
     }),
   );
+
+  validateGeneratedPages({ pages, attributeTagNames: collectCustomAttributeTagNames(cem) });
 
   let fileCount = 0;
   for (const page of pages) {
