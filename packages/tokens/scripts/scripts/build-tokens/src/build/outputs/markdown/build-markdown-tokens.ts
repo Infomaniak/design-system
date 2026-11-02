@@ -111,6 +111,8 @@ export function renderTokenToRow(
     type: context.collection.resolve(token).type,
   };
 
+  const tokenName: string = tokenWithType.name.join('.');
+
   const row = ((): MarkdownTokenRow | undefined => {
     if (isColorDesignTokensCollectionToken(tokenWithType)) {
       return colorDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
@@ -118,31 +120,27 @@ export function renderTokenToRow(
 
     if (isDimensionDesignTokensCollectionToken(tokenWithType)) {
       // Special handling for radius tokens - show as boxes with border-radius applied
-      if (tokenWithType.name[0] === 'radius') {
+      if (tokenName.includes('radius')) {
         return radiusDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
       }
       // Special handling for border-width tokens - show as boxes with border applied
       // Matches both T1 (border-width.0) and T2 (border.xs.width) naming patterns
-      if (
-        tokenWithType.name[0] === 'border-width' ||
-        (tokenWithType.name[0] === 'border' &&
-          tokenWithType.name[tokenWithType.name.length - 1] === 'width')
-      ) {
+      if (tokenName.includes('border.width') || tokenName.includes('border-width')) {
         return borderWidthDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
       }
       // Special handling for breakpoint tokens - show value as text (too large to visualize)
-      if (tokenWithType.name[0] === 'breakpoint') {
+      if (tokenName.includes('breakpoint')) {
         return breakpointDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
       }
       // Font-size tokens - show sample text with font-size applied
-      if (tokenWithType.name[0] === 'font' && tokenWithType.name[1] === 'size') {
+      if (tokenName.includes('font.size')) {
         return fontSizeDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
       }
       // Letter-spacing tokens - show sample text with letter-spacing applied
-      if (tokenWithType.name[0] === 'font' && tokenWithType.name[1] === 'letter-spacing') {
+      if (tokenName.includes('font.letter-spacing')) {
         return letterSpacingDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
       }
-      if (tokenWithType.name[0] === 'icon') {
+      if (tokenName.startsWith('icon')) {
         return dimensionDesignTokensCollectionTokenToMarkdown(tokenWithType, context, {
           previewHeight: 'auto',
         });
