@@ -30,14 +30,22 @@ const meta = {
 
 export default meta;
 
+const AVATAR_SHAPES = ['circle', 'square'] as const;
+
 const AVATAR_SIZES = ['xl'] as const;
 
 interface ExtraControls {
-  avatarSize: (typeof AVATAR_SIZES)[number];
+  shape: (typeof AVATAR_SHAPES)[number];
+  size: (typeof AVATAR_SIZES)[number];
 }
 
 const extraControls: Record<string, StoryPropertyConfigLike> = {
-  avatarSize: {
+  shape: {
+    value: 'circle',
+    type: 'select',
+    options: AVATAR_SHAPES,
+  },
+  size: {
     value: 'xl',
     type: 'select',
     options: AVATAR_SIZES,
@@ -53,7 +61,8 @@ export const Default: StoryObj<EsdsAvatarComponent & ExtraControls> = {
   },
   render: (args) =>
     html`<esds-avatar
-      data-esds-avatar-size=${ifDefined(args.avatarSize)}
+      data-esds-avatar-size=${ifDefined(args.size)}
+      shape="${ifDefined(args.shape)}"
       image="${ifDefined(args.image)}"
       icon="${ifDefined(args.icon)}"
       initials="${ifDefined(args.initials)}"
@@ -66,7 +75,8 @@ export const WithImage: StoryObj<EsdsAvatarComponent & ExtraControls> = {
   }),
   render: (args) =>
     html`<esds-avatar
-      data-esds-avatar-size=${ifDefined(args.avatarSize)}
+      data-esds-avatar-size=${ifDefined(args.size)}
+      shape="${ifDefined(args.shape)}"
       image="https://picsum.photos/200"
     ></esds-avatar>`,
 };
@@ -77,7 +87,8 @@ export const WithIcon: StoryObj<EsdsAvatarComponent & ExtraControls> = {
   }),
   render: (args) =>
     html`<esds-avatar
-      data-esds-avatar-size=${ifDefined(args.avatarSize)}
+      data-esds-avatar-size=${ifDefined(args.size)}
+      shape="${ifDefined(args.shape)}"
       icon="esds:calendar-user"
     ></esds-avatar>`,
 };
@@ -88,7 +99,8 @@ export const WithInitials: StoryObj<EsdsAvatarComponent & ExtraControls> = {
   }),
   render: (args) =>
     html`<esds-avatar
-      data-esds-avatar-size=${ifDefined(args.avatarSize)}
+      data-esds-avatar-size=${ifDefined(args.size)}
+      shape="${ifDefined(args.shape)}"
       initials="AB"
     ></esds-avatar>`,
 };

@@ -1,0 +1,68 @@
+{
+  "avatar": {
+    "size": {
+      "$value": "{dimension.48}",
+      "$extensions": {
+        "scopes": []
+      }
+    },
+    "border": {
+      "color": {
+        "$value": "{color.border.dim4}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "width": {
+        "$value": "{border.sm.width}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "radius": {
+        "circle": {
+          "$value": "{radius.full}",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "square": {
+          "$value": "{radius.lg}",
+          "$extensions": {
+            "scopes": []
+          }
+        }
+      }
+    },
+    "content": {
+      "color": {
+        "$value": "{color.content.on.dataviz.dim2}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "font": {
+        "$value": "{body.lg.font.emphasized}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    },
+    "background": {
+      "color": {
+        "$value": "{color.background.dataviz.dim2}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    },
+    "icon": {
+      "size": {
+        "$value": "{icon.size.lg}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    }
+  }
+}
