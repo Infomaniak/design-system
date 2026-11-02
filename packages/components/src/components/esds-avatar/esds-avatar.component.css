@@ -26,6 +26,7 @@
   }
 }
 
-:host([shape='square']) {
+:host([shape='square']),
+:host-context(esds-avatar-group[shape='square']) {
   border-radius: var(--esds-avatar-border-radius-square);
 }

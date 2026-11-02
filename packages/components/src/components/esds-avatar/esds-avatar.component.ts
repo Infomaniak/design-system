@@ -13,6 +13,7 @@ import style from './esds-avatar.component.css?inline';
  *
  * @summary EsdsAvatarComponent component
  * @element esds-avatar
+ * @attr {'circle' | 'square'} shape - Avatar's shape.
  */
 export class EsdsAvatarComponent extends SignalWatcher(LitElement) {
   static define() {

@@ -63,6 +63,14 @@
           "scopes": []
         }
       }
+    },
+    "group": {
+      "gap": {
+        "$value": "{dimension.8}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
     }
   }
 }

@@ -10,10 +10,8 @@ import { EsdsAvatarComponent } from '@infomaniak-design-system/components';
 EsdsAvatarComponent.define();
 ```
 
-[//]: # 'TODO doc'
-
 ```html
-<esds-avatar></esds-avatar>
+<esds-avatar initials="AB"></esds-avatar>
 ```
 
 ## Description
@@ -22,35 +20,39 @@ Represents an avatar.
 
 ### Styles
 
-#### Types
+#### Sizes
 
-List of all available button types:
+List of all available avatar sizes:
 
-- `lg` (default): primary style
-- `destructive`: destructive style
-- `neutral`: neutral style
+- `large`: large avatar
+- `medium` (default): large avatar
+- `small`: small avatar
+- `extra-small`: tiny avatar
 
 ##### Import
 
-To import all avatar types:
+To import all avatar sizes:
 
 ```css
-@import '@infomaniak-design-system/tokens/css/modifiers/avatar-type/all.attr.css';
+@import '@infomaniak-design-system/tokens/css/modifiers/avatar-size/all.attr.css';
 ```
 
 Or individually:
 
 ```css
-@import '@infomaniak-design-system/tokens/css/modifiers/avatar-type/[type].attr.css';
-/* example: @import '@infomaniak-design-system/tokens/css/modifiers/avatar-type/primary.attr.css'; */
+@import '@infomaniak-design-system/tokens/css/modifiers/avatar-size/[size].attr.css';
+/* example: @import '@infomaniak-design-system/tokens/css/modifiers/avatar-size/medium.attr.css'; */
 ```
 
 ##### Apply
 
-Add the attribute `data-esds-avatar-type="[type]"` to apply a avatar type:
+Add the attribute `data-esds-avatar-size="[size]"` to apply an avatar size:
 
 ```html
-<esds-avatar data-esds-avatar-type="primary">3</esds-avatar>
+<esds-avatar
+  data-esds-avatar-size="large"
+  initials="AB"
+></esds-avatar>
 ```
 
 ## Demo

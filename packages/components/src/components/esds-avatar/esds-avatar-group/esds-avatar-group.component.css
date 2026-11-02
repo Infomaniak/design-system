@@ -1,0 +1,10 @@
+:host {
+  display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+
+  & ::slotted(esds-avatar:not(:first-child)) {
+    margin-left: calc(var(--esds-avatar-group-gap) * -1);
+  }
+}
