@@ -1,4 +1,4 @@
-import type { CemElementDocs, PropRow } from './types.ts';
+import type { CemComponentKind, CemElementDocs, PropRow } from './types.ts';
 
 export interface CemAttribute {
   name: string;
@@ -31,10 +31,18 @@ export interface CemCssPart {
   description?: string;
 }
 
+export interface CemSuperclass {
+  name?: string;
+  module?: string;
+}
+
 export interface CemDeclaration {
   name: string;
   tagName?: string;
   customElement?: boolean;
+  /** Explicit marker of a custom attribute declaration (forward-compat field). */
+  customAttribute?: boolean;
+  superclass?: CemSuperclass;
   attributes?: CemAttribute[];
   events?: CemEvent[];
   slots?: CemSlot[];
@@ -56,8 +64,65 @@ export interface CustomElementsManifest {
 const TABLE_HEADER = '| Name | Type | Default | Required | Description |';
 const TABLE_ALIGNMENT = '| :--- | :--- | :--- | :--- | :--- |';
 
+const CUSTOM_ATTRIBUTE_SUPERCLASS_NAME = 'CustomAttribute';
+const CUSTOM_ATTRIBUTE_MODULE_HINT = 'custom-attribute';
+
 export function parseCem(raw: string): CustomElementsManifest {
   return JSON.parse(raw) as CustomElementsManifest;
+}
+
+function iterateDeclarations(cem: CustomElementsManifest): CemDeclaration[] {
+  return (cem.modules ?? []).flatMap((module) => module.declarations ?? []);
+}
+
+/**
+ * Mirrors the `custom-attributes-ide-contributions` plugin detection: a
+ * declaration is a custom attribute when it extends `CustomAttribute` (directly,
+ * transitively, or via a module hint) or carries an explicit
+ * `customAttribute: true` marker.
+ */
+export function collectCustomAttributeClassNames(cem: CustomElementsManifest): ReadonlySet<string> {
+  const declarations = iterateDeclarations(cem);
+  const names = new Set<string>();
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const declaration of declarations) {
+      if (names.has(declaration.name)) continue;
+      if (!isCustomAttributeDeclaration(declaration, names)) continue;
+      names.add(declaration.name);
+      changed = true;
+    }
+  }
+  return names;
+}
+
+function isCustomAttributeDeclaration(
+  declaration: CemDeclaration,
+  knownAttributeClassNames: ReadonlySet<string>,
+): boolean {
+  if (declaration.customAttribute === true) return true;
+  const superclass = declaration.superclass;
+  if (superclass === undefined) return false;
+  if (superclass.name === CUSTOM_ATTRIBUTE_SUPERCLASS_NAME) return true;
+  if ((superclass.module ?? '').includes(CUSTOM_ATTRIBUTE_MODULE_HINT)) return true;
+  return superclass.name !== undefined && knownAttributeClassNames.has(superclass.name);
+}
+
+/**
+ * Collects the tag names of the manifest declarations describing a custom
+ * attribute (a class extending `CustomAttribute`) instead of a real custom
+ * element. The CEM `tagName` field doubles as the attribute name.
+ */
+export function collectCustomAttributeTagNames(cem: CustomElementsManifest): Set<string> {
+  const classNames = collectCustomAttributeClassNames(cem);
+  const tagNames = new Set<string>();
+  for (const declaration of iterateDeclarations(cem)) {
+    if (declaration.tagName !== undefined && classNames.has(declaration.name)) {
+      tagNames.add(declaration.tagName);
+    }
+  }
+  return tagNames;
 }
 
 export function toPropRow(attr: CemAttribute): PropRow {
@@ -74,10 +139,12 @@ export function findElementByTagName(
   cem: CustomElementsManifest,
   tagName: string,
 ): CemElementDocs | null {
+  const attributeClassNames = collectCustomAttributeClassNames(cem);
   for (const module of cem.modules ?? []) {
     for (const declaration of module.declarations ?? []) {
       if (declaration.customElement === true && declaration.tagName === tagName) {
-        return toElementDocs(declaration);
+        const kind = toDeclarationKind(declaration, attributeClassNames);
+        return toElementDocs(declaration, kind);
       }
     }
   }
@@ -118,10 +185,19 @@ export function renderApiSection(docs: CemElementDocs): string {
   return `## API\n\n${subsections.join('\n\n')}`;
 }
 
-function toElementDocs(declaration: CemDeclaration): CemElementDocs {
+function toDeclarationKind(
+  declaration: CemDeclaration,
+  attributeClassNames: ReadonlySet<string>,
+): CemComponentKind {
+  return attributeClassNames.has(declaration.name) ? 'attribute' : 'element';
+}
+
+function toElementDocs(declaration: CemDeclaration, kind: CemComponentKind): CemElementDocs {
   return {
     tagName: declaration.tagName ?? '',
     className: declaration.name,
+    kind,
+    attributeName: declaration.tagName ?? '',
     attributes: (declaration.attributes ?? []).map(toPropRow),
     events: (declaration.events ?? []).map((event) => ({
       name: event.name,

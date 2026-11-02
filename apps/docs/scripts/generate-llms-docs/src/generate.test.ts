@@ -220,6 +220,58 @@ describe('generateLlmsDocs', () => {
     expect(llmsFull).toContain('[the AI resources](ai-llms.md)');
   });
 
+  it('throws when a generated snippet uses a custom attribute as an element tag', () => {
+    const phantomStories = [
+      "import documentation from './esds-body.attr.md?raw';",
+      '',
+      "const meta = { component: 'esds-body' } satisfies Meta;",
+      '',
+      'export const Default: Story = {',
+      '  render: () => html`',
+      '    <p esds-body="md">Deprecated: the old <code><esds-body></code> tag is gone.</p>',
+      '  `,',
+      '};',
+    ].join('\n');
+    const cemWithAttribute = JSON.stringify({
+      modules: [
+        {
+          path: 'src/components/esds-body/esds-body.attr.ts',
+          declarations: [
+            {
+              name: 'EsdsBodyAttr',
+              tagName: 'esds-body',
+              customElement: true,
+              superclass: { name: 'CustomAttribute', module: '/src/helpers/custom-attribute.ts' },
+            },
+          ],
+        },
+      ],
+    });
+    const bodyIndexEntry = {
+      id: 'components-body--docs',
+      title: 'Components/Body',
+      name: 'Docs',
+      importPath: '../../packages/components/src/components/esds-body/esds-body.attr.stories.ts',
+      type: 'docs',
+      tags: ['dev'],
+    };
+    const inputs = createInputFiles({
+      [join(DIST_DIR, 'index.json')]: JSON.stringify({
+        ...MINI_INDEX,
+        entries: { ...MINI_INDEX.entries, 'components-body--docs': bodyIndexEntry },
+      }),
+      [join(
+        APPS_DOCS_DIR,
+        '../../packages/components/src/components/esds-body/esds-body.attr.stories.ts',
+      )]: phantomStories,
+      [join(APPS_DOCS_DIR, '../../packages/components/src/components/esds-body/esds-body.attr.md')]:
+        'Body prose.',
+      [join(APPS_DOCS_DIR, '../../packages/components/custom-elements.json')]: cemWithAttribute,
+    });
+    const { deps } = createDeps(inputs);
+    expect(() => generateLlmsDocs(BASE_OPTIONS, deps)).toThrow('Invalid generated page snippets');
+  });
+
   it('throws when a validated target is missing from the dist directory', () => {
     const inputs = createInputFiles();
     delete inputs[join(DIST_DIR, 'DESIGN.md')];

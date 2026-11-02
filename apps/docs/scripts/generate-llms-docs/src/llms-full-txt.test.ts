@@ -13,6 +13,9 @@ function page(title: string, outputPath: string, category: string): PageModel {
     importSection: '',
     props: '',
     examples: [],
+    componentKind: null,
+    componentTagName: null,
+    componentAttributeNames: [],
   };
 }
 
