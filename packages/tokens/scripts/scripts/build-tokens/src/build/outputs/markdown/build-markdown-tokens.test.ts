@@ -70,7 +70,7 @@ describe('renderTokenToRow', () => {
       const context = createContextWithTokens('t2', [token]);
       const row = renderTokenToRow(token, context);
       expect(row).toBeDefined();
-      expect(row!.tailwindClasses).toStrictEqual(['bg-background-base']);
+      expect(row!.tailwindClasses).toStrictEqual(['bg-base']);
     });
 
     it('should attach tailwindClasses for T3 tokens', () => {
@@ -78,7 +78,7 @@ describe('renderTokenToRow', () => {
       const context = createContextWithTokens('t3', [token]);
       const row = renderTokenToRow(token, context);
       expect(row).toBeDefined();
-      expect(row!.tailwindClasses).toStrictEqual(['bg-background-base']);
+      expect(row!.tailwindClasses).toStrictEqual(['bg-base']);
     });
 
     it('should omit tailwindClasses for T1 tokens', () => {
