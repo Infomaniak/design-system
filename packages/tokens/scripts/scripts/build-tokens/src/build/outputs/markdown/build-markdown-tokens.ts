@@ -125,7 +125,11 @@ export function renderTokenToRow(
       }
       // Special handling for border-width tokens - show as boxes with border applied
       // Matches both T1 (border-width.0) and T2 (border.xs.width) naming patterns
-      if (tokenName.includes('border.width') || tokenName.includes('border-width')) {
+      if (
+        tokenName.includes('border.width') ||
+        tokenName.includes('border-width') ||
+        /border\.\w+\.width/.test(tokenName)
+      ) {
         return borderWidthDesignTokensCollectionTokenToMarkdown(tokenWithType, context);
       }
       // Special handling for breakpoint tokens - show value as text (too large to visualize)

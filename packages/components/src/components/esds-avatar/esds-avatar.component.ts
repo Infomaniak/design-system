@@ -1,10 +1,10 @@
-import { EsdsIconComponent } from '@infomaniak-design-system/components';
 import { SignalWatcher } from '@lit-labs/signals';
 import { html, LitElement, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators.js';
 import { defineComponent } from '../../helpers/.private/component/define-component.ts';
 import { signalProperty } from '../../helpers/.private/signal/component/signal-property/signal-property.ts';
 import type { WritableSignal } from '../../helpers/.private/signal/signal/writable-signal.ts';
+import { EsdsIconComponent } from '../esds-icon/esds-icon.component.ts';
 
 import style from './esds-avatar.component.css?inline';
 
@@ -85,7 +85,11 @@ export class EsdsAvatarComponent extends SignalWatcher(LitElement) {
         aria-label="${label}"
       />`;
     } else if (this.#icon.get()) {
-      return html`<esds-icon name=${this.#icon.get()}></esds-icon>`;
+      return html`<esds-icon
+        role="img"
+        name=${this.#icon.get()}
+        aria-label="${this.#label.get() ?? 'avatar with icon'}"
+      ></esds-icon>`;
     } else if (this.#initials.get()) {
       return html`<div
         class="initials"
@@ -95,7 +99,11 @@ export class EsdsAvatarComponent extends SignalWatcher(LitElement) {
         ${this.#initials.get()}
       </div>`;
     } else {
-      return html`<esds-icon name="esds:user"></esds-icon>`;
+      return html`<esds-icon
+        role="img"
+        name="esds:user"
+        aria-label="${this.#label.get() ?? 'avatar with icon'}"
+      ></esds-icon>`;
     }
   }
 }

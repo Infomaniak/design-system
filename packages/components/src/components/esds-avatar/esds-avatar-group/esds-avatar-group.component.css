@@ -8,3 +8,9 @@
     margin-left: calc(var(--esds-avatar-group-gap) * -1);
   }
 }
+
+:host([shape='square']) {
+  & ::slotted(esds-avatar) {
+    border-radius: var(--esds-avatar-border-radius-square);
+  }
+}

@@ -25,7 +25,7 @@ Represents an avatar.
 List of all available avatar sizes:
 
 - `large`: large avatar
-- `medium` (default): large avatar
+- `medium` (default): medium avatar
 - `small`: small avatar
 - `extra-small`: tiny avatar
 
