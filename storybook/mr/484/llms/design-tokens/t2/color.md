@@ -15,6 +15,19 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
   </thead>
   <tbody>
     <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-debug-color); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-debug-color"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="debug.color" type="button">debug.color</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-debug-color)" type="button">var(--esds-debug-color)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
       <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-elevation-sunken); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-elevation-sunken"></div></td>
       <td>
         <div class="token-row">

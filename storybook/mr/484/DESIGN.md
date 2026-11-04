@@ -1,5 +1,5 @@
 ---
-debug2:
+debug:
   color:
     light: "#0077cf"
     dark: "#36adfa"
@@ -159,6 +159,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | border.sm.width | 2px | 2px | var(--esds-border-sm-width) | Small border width for subtle outlines. |
 | border.md.width | 3px | 3px | var(--esds-border-md-width) | Medium border width for default element outlines. |
 | border.lg.width | 4px | 4px | var(--esds-border-lg-width) | Large border width for emphasized outlines. |
+| debug.color | #0077cf | #36adfa | var(--esds-debug-color) | N/A |
 | color.background.elevation.sunken | #f1f5f9 | #020618 | var(--esds-color-background-elevation-sunken) | Background for sunken, recessed surfaces below the base level. |
 | color.background.elevation.surface | #fff | #192334 | var(--esds-color-background-elevation-surface) | Background for the default surface level, the base UI layer. |
 | color.background.elevation.raised | #f8fafc | #0f172b | var(--esds-color-background-elevation-raised) | Background for raised, elevated surfaces such as cards. |
@@ -390,7 +391,6 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.state.selected.soft | #0b426f0f | #f8fafc1f | var(--esds-color-state-selected-soft) | Soft selected overlay for subtle selection feedback. |
 | color.state.selected.medium | #0b426f1f | #f8fafc29 | var(--esds-color-state-selected-medium) | Medium selected overlay for balanced selection feedback. |
 | color.state.selected.strong | #0b426f99 | #f8fafc66 | var(--esds-color-state-selected-strong) | Strong selected overlay for prominent selection feedback. |
-| debug2.color | #0077cf | #36adfa | var(--esds-debug2-color) | N/A |
 | font.size.xs | 0.75rem | 0.75rem | var(--esds-font-size-xs) | Extra-small font size for captions and metadata. |
 | font.size.sm | 0.875rem | 0.875rem | var(--esds-font-size-sm) | Small font size for helper text and compact UI. |
 | font.size.md | 1rem | 1rem | var(--esds-font-size-md) | Medium (base) font size for body copy and default text. |
