@@ -36,7 +36,7 @@ T2 Border tokens provide semantic border style definitions for elements and comp
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-border-xs-width)" type="button">var(--esds-border-xs-width)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-xs" type="button">border-xs</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-xs" type="button">border-xs</button> <button class="token-value" data-clipboard="outline-xs" type="button">outline-xs</button></div>
         <div class="token-row token-description">Extra-small border width for fine hairline borders.</div>
       </td>
     </tr>
@@ -49,7 +49,7 @@ T2 Border tokens provide semantic border style definitions for elements and comp
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-border-sm-width)" type="button">var(--esds-border-sm-width)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-sm" type="button">border-sm</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-sm" type="button">border-sm</button> <button class="token-value" data-clipboard="outline-sm" type="button">outline-sm</button></div>
         <div class="token-row token-description">Small border width for subtle outlines.</div>
       </td>
     </tr>
@@ -62,7 +62,7 @@ T2 Border tokens provide semantic border style definitions for elements and comp
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-border-md-width)" type="button">var(--esds-border-md-width)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-md" type="button">border-md</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-md" type="button">border-md</button> <button class="token-value" data-clipboard="outline-md" type="button">outline-md</button></div>
         <div class="token-row token-description">Medium border width for default element outlines.</div>
       </td>
     </tr>
@@ -75,7 +75,7 @@ T2 Border tokens provide semantic border style definitions for elements and comp
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-border-lg-width)" type="button">var(--esds-border-lg-width)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-lg" type="button">border-lg</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-lg" type="button">border-lg</button> <button class="token-value" data-clipboard="outline-lg" type="button">outline-lg</button></div>
         <div class="token-row token-description">Large border width for emphasized outlines.</div>
       </td>
     </tr>

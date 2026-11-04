@@ -23,7 +23,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-elevation-sunken)" type="button">var(--esds-color-background-elevation-sunken)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-elevation-sunken" type="button">bg-background-elevation-sunken</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-elevation-sunken" type="button">bg-elevation-sunken</button></div>
         <div class="token-row token-description">Background for sunken, recessed surfaces below the base level.</div>
       </td>
     </tr>
@@ -36,7 +36,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-elevation-surface)" type="button">var(--esds-color-background-elevation-surface)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-elevation-surface" type="button">bg-background-elevation-surface</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-elevation-surface" type="button">bg-elevation-surface</button></div>
         <div class="token-row token-description">Background for the default surface level, the base UI layer.</div>
       </td>
     </tr>
@@ -49,7 +49,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-elevation-raised)" type="button">var(--esds-color-background-elevation-raised)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-elevation-raised" type="button">bg-background-elevation-raised</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-elevation-raised" type="button">bg-elevation-raised</button></div>
         <div class="token-row token-description">Background for raised, elevated surfaces such as cards.</div>
       </td>
     </tr>
@@ -62,7 +62,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-elevation-overlay)" type="button">var(--esds-color-background-elevation-overlay)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-elevation-overlay" type="button">bg-background-elevation-overlay</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-elevation-overlay" type="button">bg-elevation-overlay</button></div>
         <div class="token-row token-description">Background for overlay and modal surfaces above the base UI.</div>
       </td>
     </tr>
@@ -75,7 +75,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand)" type="button">var(--esds-color-background-brand)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-brand" type="button">bg-background-brand</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand" type="button">bg-brand</button></div>
         <div class="token-row token-description">Default brand background (Infomaniak).</div>
       </td>
     </tr>
@@ -88,7 +88,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-infomaniak)" type="button">var(--esds-color-background-brand-infomaniak)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-brand-infomaniak" type="button">bg-background-brand-infomaniak</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-infomaniak" type="button">bg-brand-infomaniak</button></div>
         <div class="token-row token-description">Infomaniak brand background colors.</div>
       </td>
     </tr>
@@ -101,7 +101,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-mail)" type="button">var(--esds-color-background-brand-mail)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-brand-mail" type="button">bg-background-brand-mail</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-mail" type="button">bg-brand-mail</button></div>
         <div class="token-row token-description">Mail product brand background colors.</div>
       </td>
     </tr>
@@ -114,7 +114,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-kdrive)" type="button">var(--esds-color-background-brand-kdrive)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-brand-kdrive" type="button">bg-background-brand-kdrive</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-kdrive" type="button">bg-brand-kdrive</button></div>
         <div class="token-row token-description">kDrive product brand background colors.</div>
       </td>
     </tr>
@@ -127,7 +127,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-euria)" type="button">var(--esds-color-background-brand-euria)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-brand-euria" type="button">bg-background-brand-euria</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-euria" type="button">bg-brand-euria</button></div>
         <div class="token-row token-description">Euria product brand background colors.</div>
       </td>
     </tr>
@@ -140,7 +140,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-kchat)" type="button">var(--esds-color-background-brand-kchat)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-brand-kchat" type="button">bg-background-brand-kchat</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-kchat" type="button">bg-brand-kchat</button></div>
         <div class="token-row token-description">kChat product brand background colors.</div>
       </td>
     </tr>
@@ -153,7 +153,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-security)" type="button">var(--esds-color-background-brand-security)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-brand-security" type="button">bg-background-brand-security</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-security" type="button">bg-brand-security</button></div>
         <div class="token-row token-description">Security product brand background colors.</div>
       </td>
     </tr>
@@ -166,7 +166,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-calendar)" type="button">var(--esds-color-background-brand-calendar)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-brand-calendar" type="button">bg-background-brand-calendar</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-calendar" type="button">bg-brand-calendar</button></div>
         <div class="token-row token-description">Calendar product brand background colors.</div>
       </td>
     </tr>
@@ -179,7 +179,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-contacts)" type="button">var(--esds-color-background-brand-contacts)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-brand-contacts" type="button">bg-background-brand-contacts</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-contacts" type="button">bg-brand-contacts</button></div>
         <div class="token-row token-description">Contacts product brand background colors.</div>
       </td>
     </tr>
@@ -192,7 +192,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-knote)" type="button">var(--esds-color-background-brand-knote)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-brand-knote" type="button">bg-background-brand-knote</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-knote" type="button">bg-brand-knote</button></div>
         <div class="token-row token-description">kNote product brand background colors.</div>
       </td>
     </tr>
@@ -205,7 +205,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-swisstransfer)" type="button">var(--esds-color-background-brand-swisstransfer)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-brand-swisstransfer" type="button">bg-background-brand-swisstransfer</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-swisstransfer" type="button">bg-brand-swisstransfer</button></div>
         <div class="token-row token-description">SwissTransfer product brand background colors.</div>
       </td>
     </tr>
@@ -218,7 +218,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-orange-dim1)" type="button">var(--esds-color-background-dataviz-orange-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-orange-dim1" type="button">bg-background-dataviz-orange-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-orange-dim1" type="button">bg-dataviz-orange-dim1</button></div>
         <div class="token-row token-description">Strong orange data-viz background (dim1).</div>
       </td>
     </tr>
@@ -231,7 +231,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-orange-dim2)" type="button">var(--esds-color-background-dataviz-orange-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-orange-dim2" type="button">bg-background-dataviz-orange-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-orange-dim2" type="button">bg-dataviz-orange-dim2</button></div>
         <div class="token-row token-description">Soft orange data-viz background (dim2).</div>
       </td>
     </tr>
@@ -244,7 +244,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-orange-dim3)" type="button">var(--esds-color-background-dataviz-orange-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-orange-dim3" type="button">bg-background-dataviz-orange-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-orange-dim3" type="button">bg-dataviz-orange-dim3</button></div>
         <div class="token-row token-description">Subtle orange data-viz background (dim3).</div>
       </td>
     </tr>
@@ -257,7 +257,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-emerald-dim1)" type="button">var(--esds-color-background-dataviz-emerald-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-emerald-dim1" type="button">bg-background-dataviz-emerald-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-emerald-dim1" type="button">bg-dataviz-emerald-dim1</button></div>
         <div class="token-row token-description">Strong emerald data-viz background (dim1).</div>
       </td>
     </tr>
@@ -270,7 +270,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-emerald-dim2)" type="button">var(--esds-color-background-dataviz-emerald-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-emerald-dim2" type="button">bg-background-dataviz-emerald-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-emerald-dim2" type="button">bg-dataviz-emerald-dim2</button></div>
         <div class="token-row token-description">Soft emerald data-viz background (dim2).</div>
       </td>
     </tr>
@@ -283,7 +283,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-emerald-dim3)" type="button">var(--esds-color-background-dataviz-emerald-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-emerald-dim3" type="button">bg-background-dataviz-emerald-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-emerald-dim3" type="button">bg-dataviz-emerald-dim3</button></div>
         <div class="token-row token-description">Subtle emerald data-viz background (dim3).</div>
       </td>
     </tr>
@@ -296,7 +296,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-blue-dim1)" type="button">var(--esds-color-background-dataviz-blue-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-blue-dim1" type="button">bg-background-dataviz-blue-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-blue-dim1" type="button">bg-dataviz-blue-dim1</button></div>
         <div class="token-row token-description">Strong blue data-viz background (dim1).</div>
       </td>
     </tr>
@@ -309,7 +309,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-blue-dim2)" type="button">var(--esds-color-background-dataviz-blue-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-blue-dim2" type="button">bg-background-dataviz-blue-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-blue-dim2" type="button">bg-dataviz-blue-dim2</button></div>
         <div class="token-row token-description">Soft blue data-viz background (dim2).</div>
       </td>
     </tr>
@@ -322,7 +322,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-blue-dim3)" type="button">var(--esds-color-background-dataviz-blue-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-blue-dim3" type="button">bg-background-dataviz-blue-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-blue-dim3" type="button">bg-dataviz-blue-dim3</button></div>
         <div class="token-row token-description">Subtle blue data-viz background (dim3).</div>
       </td>
     </tr>
@@ -335,7 +335,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-violet-dim1)" type="button">var(--esds-color-background-dataviz-violet-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-violet-dim1" type="button">bg-background-dataviz-violet-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-violet-dim1" type="button">bg-dataviz-violet-dim1</button></div>
         <div class="token-row token-description">Strong violet data-viz background (dim1).</div>
       </td>
     </tr>
@@ -348,7 +348,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-violet-dim2)" type="button">var(--esds-color-background-dataviz-violet-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-violet-dim2" type="button">bg-background-dataviz-violet-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-violet-dim2" type="button">bg-dataviz-violet-dim2</button></div>
         <div class="token-row token-description">Soft violet data-viz background (dim2).</div>
       </td>
     </tr>
@@ -361,7 +361,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-violet-dim3)" type="button">var(--esds-color-background-dataviz-violet-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-violet-dim3" type="button">bg-background-dataviz-violet-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-violet-dim3" type="button">bg-dataviz-violet-dim3</button></div>
         <div class="token-row token-description">Subtle violet data-viz background (dim3).</div>
       </td>
     </tr>
@@ -374,7 +374,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-purple-dim1)" type="button">var(--esds-color-background-dataviz-purple-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-purple-dim1" type="button">bg-background-dataviz-purple-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-purple-dim1" type="button">bg-dataviz-purple-dim1</button></div>
         <div class="token-row token-description">Strong purple data-viz background (dim1).</div>
       </td>
     </tr>
@@ -387,7 +387,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-purple-dim2)" type="button">var(--esds-color-background-dataviz-purple-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-purple-dim2" type="button">bg-background-dataviz-purple-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-purple-dim2" type="button">bg-dataviz-purple-dim2</button></div>
         <div class="token-row token-description">Soft purple data-viz background (dim2).</div>
       </td>
     </tr>
@@ -400,7 +400,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-purple-dim3)" type="button">var(--esds-color-background-dataviz-purple-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-purple-dim3" type="button">bg-background-dataviz-purple-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-purple-dim3" type="button">bg-dataviz-purple-dim3</button></div>
         <div class="token-row token-description">Subtle purple data-viz background (dim3).</div>
       </td>
     </tr>
@@ -413,7 +413,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-pink-dim1)" type="button">var(--esds-color-background-dataviz-pink-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-pink-dim1" type="button">bg-background-dataviz-pink-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-pink-dim1" type="button">bg-dataviz-pink-dim1</button></div>
         <div class="token-row token-description">Strong pink data-viz background (dim1).</div>
       </td>
     </tr>
@@ -426,7 +426,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-pink-dim2)" type="button">var(--esds-color-background-dataviz-pink-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-pink-dim2" type="button">bg-background-dataviz-pink-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-pink-dim2" type="button">bg-dataviz-pink-dim2</button></div>
         <div class="token-row token-description">Soft pink data-viz background (dim2).</div>
       </td>
     </tr>
@@ -439,7 +439,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-pink-dim3)" type="button">var(--esds-color-background-dataviz-pink-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-pink-dim3" type="button">bg-background-dataviz-pink-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-pink-dim3" type="button">bg-dataviz-pink-dim3</button></div>
         <div class="token-row token-description">Subtle pink data-viz background (dim3).</div>
       </td>
     </tr>
@@ -452,7 +452,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-yellow-dim1)" type="button">var(--esds-color-background-dataviz-yellow-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-yellow-dim1" type="button">bg-background-dataviz-yellow-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-yellow-dim1" type="button">bg-dataviz-yellow-dim1</button></div>
         <div class="token-row token-description">Strong yellow data-viz background (dim1).</div>
       </td>
     </tr>
@@ -465,7 +465,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-yellow-dim2)" type="button">var(--esds-color-background-dataviz-yellow-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-yellow-dim2" type="button">bg-background-dataviz-yellow-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-yellow-dim2" type="button">bg-dataviz-yellow-dim2</button></div>
         <div class="token-row token-description">Soft yellow data-viz background (dim2).</div>
       </td>
     </tr>
@@ -478,7 +478,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-yellow-dim3)" type="button">var(--esds-color-background-dataviz-yellow-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-yellow-dim3" type="button">bg-background-dataviz-yellow-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-yellow-dim3" type="button">bg-dataviz-yellow-dim3</button></div>
         <div class="token-row token-description">Subtle yellow data-viz background (dim3).</div>
       </td>
     </tr>
@@ -491,7 +491,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-gray-dim1)" type="button">var(--esds-color-background-dataviz-gray-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-gray-dim1" type="button">bg-background-dataviz-gray-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-gray-dim1" type="button">bg-dataviz-gray-dim1</button></div>
         <div class="token-row token-description">Strong gray data-viz background (dim1).</div>
       </td>
     </tr>
@@ -504,7 +504,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-gray-dim2)" type="button">var(--esds-color-background-dataviz-gray-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-gray-dim2" type="button">bg-background-dataviz-gray-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-gray-dim2" type="button">bg-dataviz-gray-dim2</button></div>
         <div class="token-row token-description">Soft gray data-viz background (dim2).</div>
       </td>
     </tr>
@@ -517,7 +517,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-gray-dim3)" type="button">var(--esds-color-background-dataviz-gray-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-gray-dim3" type="button">bg-background-dataviz-gray-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-gray-dim3" type="button">bg-dataviz-gray-dim3</button></div>
         <div class="token-row token-description">Subtle gray data-viz background (dim3).</div>
       </td>
     </tr>
@@ -530,7 +530,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-dim1)" type="button">var(--esds-color-background-dataviz-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-dim1" type="button">bg-background-dataviz-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-dim1" type="button">bg-dataviz-dim1</button></div>
         <div class="token-row token-description">Default dim1 data-viz background.</div>
       </td>
     </tr>
@@ -543,7 +543,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-dim2)" type="button">var(--esds-color-background-dataviz-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-dim2" type="button">bg-background-dataviz-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-dim2" type="button">bg-dataviz-dim2</button></div>
         <div class="token-row token-description">Default dim2 data-viz background.</div>
       </td>
     </tr>
@@ -556,7 +556,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-dim3)" type="button">var(--esds-color-background-dataviz-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-dataviz-dim3" type="button">bg-background-dataviz-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-dim3" type="button">bg-dataviz-dim3</button></div>
         <div class="token-row token-description">Default dim3 data-viz background.</div>
       </td>
     </tr>
@@ -569,7 +569,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-feedback-success-dim1)" type="button">var(--esds-color-background-feedback-success-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-feedback-success-dim1" type="button">bg-background-feedback-success-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-feedback-success-dim1" type="button">bg-feedback-success-dim1</button></div>
         <div class="token-row token-description">Strong success background (dim1).</div>
       </td>
     </tr>
@@ -582,7 +582,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-feedback-success-dim2)" type="button">var(--esds-color-background-feedback-success-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-feedback-success-dim2" type="button">bg-background-feedback-success-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-feedback-success-dim2" type="button">bg-feedback-success-dim2</button></div>
         <div class="token-row token-description">Soft success background (dim2).</div>
       </td>
     </tr>
@@ -595,7 +595,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-feedback-success-dim3)" type="button">var(--esds-color-background-feedback-success-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-feedback-success-dim3" type="button">bg-background-feedback-success-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-feedback-success-dim3" type="button">bg-feedback-success-dim3</button></div>
         <div class="token-row token-description">Subtle success background (dim3).</div>
       </td>
     </tr>
@@ -608,7 +608,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-feedback-warning-dim1)" type="button">var(--esds-color-background-feedback-warning-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-feedback-warning-dim1" type="button">bg-background-feedback-warning-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-feedback-warning-dim1" type="button">bg-feedback-warning-dim1</button></div>
         <div class="token-row token-description">Strong warning background (dim1).</div>
       </td>
     </tr>
@@ -621,7 +621,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-feedback-warning-dim2)" type="button">var(--esds-color-background-feedback-warning-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-feedback-warning-dim2" type="button">bg-background-feedback-warning-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-feedback-warning-dim2" type="button">bg-feedback-warning-dim2</button></div>
         <div class="token-row token-description">Soft warning background (dim2).</div>
       </td>
     </tr>
@@ -634,7 +634,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-feedback-warning-dim3)" type="button">var(--esds-color-background-feedback-warning-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-feedback-warning-dim3" type="button">bg-background-feedback-warning-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-feedback-warning-dim3" type="button">bg-feedback-warning-dim3</button></div>
         <div class="token-row token-description">Subtle warning background (dim3).</div>
       </td>
     </tr>
@@ -647,7 +647,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-feedback-error-dim1)" type="button">var(--esds-color-background-feedback-error-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-feedback-error-dim1" type="button">bg-background-feedback-error-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-feedback-error-dim1" type="button">bg-feedback-error-dim1</button></div>
         <div class="token-row token-description">Strong error background (dim1).</div>
       </td>
     </tr>
@@ -660,7 +660,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-feedback-error-dim2)" type="button">var(--esds-color-background-feedback-error-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-feedback-error-dim2" type="button">bg-background-feedback-error-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-feedback-error-dim2" type="button">bg-feedback-error-dim2</button></div>
         <div class="token-row token-description">Soft error background (dim2).</div>
       </td>
     </tr>
@@ -673,7 +673,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-feedback-error-dim3)" type="button">var(--esds-color-background-feedback-error-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-feedback-error-dim3" type="button">bg-background-feedback-error-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-feedback-error-dim3" type="button">bg-feedback-error-dim3</button></div>
         <div class="token-row token-description">Subtle error background (dim3).</div>
       </td>
     </tr>
@@ -686,7 +686,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-feedback-information-dim1)" type="button">var(--esds-color-background-feedback-information-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-feedback-information-dim1" type="button">bg-background-feedback-information-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-feedback-information-dim1" type="button">bg-feedback-information-dim1</button></div>
         <div class="token-row token-description">Strong information background (dim1).</div>
       </td>
     </tr>
@@ -699,7 +699,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-feedback-information-dim2)" type="button">var(--esds-color-background-feedback-information-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-feedback-information-dim2" type="button">bg-background-feedback-information-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-feedback-information-dim2" type="button">bg-feedback-information-dim2</button></div>
         <div class="token-row token-description">Soft information background (dim2).</div>
       </td>
     </tr>
@@ -712,7 +712,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-feedback-information-dim3)" type="button">var(--esds-color-background-feedback-information-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-feedback-information-dim3" type="button">bg-background-feedback-information-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-feedback-information-dim3" type="button">bg-feedback-information-dim3</button></div>
         <div class="token-row token-description">Subtle information background (dim3).</div>
       </td>
     </tr>
@@ -725,7 +725,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-feedback-neutral-dim1)" type="button">var(--esds-color-background-feedback-neutral-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-feedback-neutral-dim1" type="button">bg-background-feedback-neutral-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-feedback-neutral-dim1" type="button">bg-feedback-neutral-dim1</button></div>
         <div class="token-row token-description">Strong neutral background (dim1).</div>
       </td>
     </tr>
@@ -738,7 +738,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-feedback-neutral-dim2)" type="button">var(--esds-color-background-feedback-neutral-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-feedback-neutral-dim2" type="button">bg-background-feedback-neutral-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-feedback-neutral-dim2" type="button">bg-feedback-neutral-dim2</button></div>
         <div class="token-row token-description">Soft neutral background (dim2).</div>
       </td>
     </tr>
@@ -751,7 +751,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-feedback-neutral-dim3)" type="button">var(--esds-color-background-feedback-neutral-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-feedback-neutral-dim3" type="button">bg-background-feedback-neutral-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-feedback-neutral-dim3" type="button">bg-feedback-neutral-dim3</button></div>
         <div class="token-row token-description">Subtle neutral background (dim3).</div>
       </td>
     </tr>
@@ -764,7 +764,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-background-disabled)" type="button">var(--esds-color-background-disabled)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-background-disabled" type="button">bg-background-disabled</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-disabled" type="button">bg-disabled</button></div>
         <div class="token-row token-description">Background for disabled, non-interactive elements.</div>
       </td>
     </tr>
@@ -777,7 +777,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-disabled)" type="button">var(--esds-color-content-on-disabled)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-disabled" type="button">text-content-on-disabled</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-disabled" type="button">text-on-disabled</button></div>
         <div class="token-row token-description">Content color for disabled states on backgrounds.</div>
       </td>
     </tr>
@@ -790,7 +790,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand)" type="button">var(--esds-color-content-on-brand)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-brand" type="button">text-content-on-brand</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand" type="button">text-on-brand</button></div>
         <div class="token-row token-description">Default foreground on brand backgrounds.</div>
       </td>
     </tr>
@@ -803,7 +803,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-infomaniak)" type="button">var(--esds-color-content-on-brand-infomaniak)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-brand-infomaniak" type="button">text-content-on-brand-infomaniak</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-infomaniak" type="button">text-on-brand-infomaniak</button></div>
         <div class="token-row token-description">Foreground on Infomaniak brand backgrounds.</div>
       </td>
     </tr>
@@ -816,7 +816,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-calendar)" type="button">var(--esds-color-content-on-brand-calendar)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-brand-calendar" type="button">text-content-on-brand-calendar</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-calendar" type="button">text-on-brand-calendar</button></div>
         <div class="token-row token-description">Foreground on Calendar brand backgrounds.</div>
       </td>
     </tr>
@@ -829,7 +829,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-contacts)" type="button">var(--esds-color-content-on-brand-contacts)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-brand-contacts" type="button">text-content-on-brand-contacts</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-contacts" type="button">text-on-brand-contacts</button></div>
         <div class="token-row token-description">Foreground on Contacts brand backgrounds.</div>
       </td>
     </tr>
@@ -842,7 +842,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-euria)" type="button">var(--esds-color-content-on-brand-euria)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-brand-euria" type="button">text-content-on-brand-euria</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-euria" type="button">text-on-brand-euria</button></div>
         <div class="token-row token-description">Foreground on Euria brand backgrounds.</div>
       </td>
     </tr>
@@ -855,7 +855,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-kchat)" type="button">var(--esds-color-content-on-brand-kchat)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-brand-kchat" type="button">text-content-on-brand-kchat</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-kchat" type="button">text-on-brand-kchat</button></div>
         <div class="token-row token-description">Foreground on kChat brand backgrounds.</div>
       </td>
     </tr>
@@ -868,7 +868,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-kdrive)" type="button">var(--esds-color-content-on-brand-kdrive)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-brand-kdrive" type="button">text-content-on-brand-kdrive</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-kdrive" type="button">text-on-brand-kdrive</button></div>
         <div class="token-row token-description">Foreground on kDrive brand backgrounds.</div>
       </td>
     </tr>
@@ -881,7 +881,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-knote)" type="button">var(--esds-color-content-on-brand-knote)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-brand-knote" type="button">text-content-on-brand-knote</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-knote" type="button">text-on-brand-knote</button></div>
         <div class="token-row token-description">Foreground on kNote brand backgrounds.</div>
       </td>
     </tr>
@@ -894,7 +894,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-mail)" type="button">var(--esds-color-content-on-brand-mail)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-brand-mail" type="button">text-content-on-brand-mail</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-mail" type="button">text-on-brand-mail</button></div>
         <div class="token-row token-description">Foreground on Mail brand backgrounds.</div>
       </td>
     </tr>
@@ -907,7 +907,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-security)" type="button">var(--esds-color-content-on-brand-security)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-brand-security" type="button">text-content-on-brand-security</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-security" type="button">text-on-brand-security</button></div>
         <div class="token-row token-description">Foreground on Security brand backgrounds.</div>
       </td>
     </tr>
@@ -920,7 +920,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-swisstransfer)" type="button">var(--esds-color-content-on-brand-swisstransfer)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-brand-swisstransfer" type="button">text-content-on-brand-swisstransfer</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-swisstransfer" type="button">text-on-brand-swisstransfer</button></div>
         <div class="token-row token-description">Foreground on SwissTransfer brand backgrounds.</div>
       </td>
     </tr>
@@ -933,7 +933,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-blue-dim1)" type="button">var(--esds-color-content-on-dataviz-blue-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-blue-dim1" type="button">text-content-on-dataviz-blue-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-blue-dim1" type="button">text-on-dataviz-blue-dim1</button></div>
         <div class="token-row token-description">Foreground on strong blue data-viz backgrounds (dim1).</div>
       </td>
     </tr>
@@ -946,7 +946,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-blue-dim2)" type="button">var(--esds-color-content-on-dataviz-blue-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-blue-dim2" type="button">text-content-on-dataviz-blue-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-blue-dim2" type="button">text-on-dataviz-blue-dim2</button></div>
         <div class="token-row token-description">Foreground on soft blue data-viz backgrounds (dim2).</div>
       </td>
     </tr>
@@ -959,7 +959,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-blue-dim3)" type="button">var(--esds-color-content-on-dataviz-blue-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-blue-dim3" type="button">text-content-on-dataviz-blue-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-blue-dim3" type="button">text-on-dataviz-blue-dim3</button></div>
         <div class="token-row token-description">Foreground on subtle blue data-viz backgrounds (dim3).</div>
       </td>
     </tr>
@@ -972,7 +972,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-emerald-dim1)" type="button">var(--esds-color-content-on-dataviz-emerald-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-emerald-dim1" type="button">text-content-on-dataviz-emerald-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-emerald-dim1" type="button">text-on-dataviz-emerald-dim1</button></div>
         <div class="token-row token-description">Foreground on strong emerald data-viz backgrounds (dim1).</div>
       </td>
     </tr>
@@ -985,7 +985,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-emerald-dim2)" type="button">var(--esds-color-content-on-dataviz-emerald-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-emerald-dim2" type="button">text-content-on-dataviz-emerald-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-emerald-dim2" type="button">text-on-dataviz-emerald-dim2</button></div>
         <div class="token-row token-description">Foreground on soft emerald data-viz backgrounds (dim2).</div>
       </td>
     </tr>
@@ -998,7 +998,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-emerald-dim3)" type="button">var(--esds-color-content-on-dataviz-emerald-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-emerald-dim3" type="button">text-content-on-dataviz-emerald-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-emerald-dim3" type="button">text-on-dataviz-emerald-dim3</button></div>
         <div class="token-row token-description">Foreground on subtle emerald data-viz backgrounds (dim3).</div>
       </td>
     </tr>
@@ -1011,7 +1011,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-orange-dim1)" type="button">var(--esds-color-content-on-dataviz-orange-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-orange-dim1" type="button">text-content-on-dataviz-orange-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-orange-dim1" type="button">text-on-dataviz-orange-dim1</button></div>
         <div class="token-row token-description">Foreground on strong orange data-viz backgrounds (dim1).</div>
       </td>
     </tr>
@@ -1024,7 +1024,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-orange-dim2)" type="button">var(--esds-color-content-on-dataviz-orange-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-orange-dim2" type="button">text-content-on-dataviz-orange-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-orange-dim2" type="button">text-on-dataviz-orange-dim2</button></div>
         <div class="token-row token-description">Foreground on soft orange data-viz backgrounds (dim2).</div>
       </td>
     </tr>
@@ -1037,7 +1037,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-orange-dim3)" type="button">var(--esds-color-content-on-dataviz-orange-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-orange-dim3" type="button">text-content-on-dataviz-orange-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-orange-dim3" type="button">text-on-dataviz-orange-dim3</button></div>
         <div class="token-row token-description">Foreground on subtle orange data-viz backgrounds (dim3).</div>
       </td>
     </tr>
@@ -1050,7 +1050,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-pink-dim1)" type="button">var(--esds-color-content-on-dataviz-pink-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-pink-dim1" type="button">text-content-on-dataviz-pink-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-pink-dim1" type="button">text-on-dataviz-pink-dim1</button></div>
         <div class="token-row token-description">Foreground on strong pink data-viz backgrounds (dim1).</div>
       </td>
     </tr>
@@ -1063,7 +1063,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-pink-dim2)" type="button">var(--esds-color-content-on-dataviz-pink-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-pink-dim2" type="button">text-content-on-dataviz-pink-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-pink-dim2" type="button">text-on-dataviz-pink-dim2</button></div>
         <div class="token-row token-description">Foreground on soft pink data-viz backgrounds (dim2).</div>
       </td>
     </tr>
@@ -1076,7 +1076,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-pink-dim3)" type="button">var(--esds-color-content-on-dataviz-pink-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-pink-dim3" type="button">text-content-on-dataviz-pink-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-pink-dim3" type="button">text-on-dataviz-pink-dim3</button></div>
         <div class="token-row token-description">Foreground on subtle pink data-viz backgrounds (dim3).</div>
       </td>
     </tr>
@@ -1089,7 +1089,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-purple-dim1)" type="button">var(--esds-color-content-on-dataviz-purple-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-purple-dim1" type="button">text-content-on-dataviz-purple-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-purple-dim1" type="button">text-on-dataviz-purple-dim1</button></div>
         <div class="token-row token-description">Foreground on strong purple data-viz backgrounds (dim1).</div>
       </td>
     </tr>
@@ -1102,7 +1102,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-purple-dim2)" type="button">var(--esds-color-content-on-dataviz-purple-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-purple-dim2" type="button">text-content-on-dataviz-purple-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-purple-dim2" type="button">text-on-dataviz-purple-dim2</button></div>
         <div class="token-row token-description">Foreground on soft purple data-viz backgrounds (dim2).</div>
       </td>
     </tr>
@@ -1115,7 +1115,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-purple-dim3)" type="button">var(--esds-color-content-on-dataviz-purple-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-purple-dim3" type="button">text-content-on-dataviz-purple-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-purple-dim3" type="button">text-on-dataviz-purple-dim3</button></div>
         <div class="token-row token-description">Foreground on subtle purple data-viz backgrounds (dim3).</div>
       </td>
     </tr>
@@ -1128,7 +1128,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-violet-dim1)" type="button">var(--esds-color-content-on-dataviz-violet-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-violet-dim1" type="button">text-content-on-dataviz-violet-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-violet-dim1" type="button">text-on-dataviz-violet-dim1</button></div>
         <div class="token-row token-description">Foreground on strong violet data-viz backgrounds (dim1).</div>
       </td>
     </tr>
@@ -1141,7 +1141,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-violet-dim2)" type="button">var(--esds-color-content-on-dataviz-violet-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-violet-dim2" type="button">text-content-on-dataviz-violet-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-violet-dim2" type="button">text-on-dataviz-violet-dim2</button></div>
         <div class="token-row token-description">Foreground on soft violet data-viz backgrounds (dim2).</div>
       </td>
     </tr>
@@ -1154,7 +1154,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-violet-dim3)" type="button">var(--esds-color-content-on-dataviz-violet-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-violet-dim3" type="button">text-content-on-dataviz-violet-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-violet-dim3" type="button">text-on-dataviz-violet-dim3</button></div>
         <div class="token-row token-description">Foreground on subtle violet data-viz backgrounds (dim3).</div>
       </td>
     </tr>
@@ -1167,7 +1167,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-yellow-dim1)" type="button">var(--esds-color-content-on-dataviz-yellow-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-yellow-dim1" type="button">text-content-on-dataviz-yellow-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-yellow-dim1" type="button">text-on-dataviz-yellow-dim1</button></div>
         <div class="token-row token-description">Foreground on strong yellow data-viz backgrounds (dim1).</div>
       </td>
     </tr>
@@ -1180,7 +1180,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-yellow-dim2)" type="button">var(--esds-color-content-on-dataviz-yellow-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-yellow-dim2" type="button">text-content-on-dataviz-yellow-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-yellow-dim2" type="button">text-on-dataviz-yellow-dim2</button></div>
         <div class="token-row token-description">Foreground on soft yellow data-viz backgrounds (dim2).</div>
       </td>
     </tr>
@@ -1193,7 +1193,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-yellow-dim3)" type="button">var(--esds-color-content-on-dataviz-yellow-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-yellow-dim3" type="button">text-content-on-dataviz-yellow-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-yellow-dim3" type="button">text-on-dataviz-yellow-dim3</button></div>
         <div class="token-row token-description">Foreground on subtle yellow data-viz backgrounds (dim3).</div>
       </td>
     </tr>
@@ -1206,7 +1206,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-gray-dim1)" type="button">var(--esds-color-content-on-dataviz-gray-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-gray-dim1" type="button">text-content-on-dataviz-gray-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-gray-dim1" type="button">text-on-dataviz-gray-dim1</button></div>
         <div class="token-row token-description">Foreground on strong gray data-viz backgrounds (dim1).</div>
       </td>
     </tr>
@@ -1219,7 +1219,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-gray-dim2)" type="button">var(--esds-color-content-on-dataviz-gray-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-gray-dim2" type="button">text-content-on-dataviz-gray-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-gray-dim2" type="button">text-on-dataviz-gray-dim2</button></div>
         <div class="token-row token-description">Foreground on soft gray data-viz backgrounds (dim2).</div>
       </td>
     </tr>
@@ -1232,7 +1232,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-gray-dim3)" type="button">var(--esds-color-content-on-dataviz-gray-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-gray-dim3" type="button">text-content-on-dataviz-gray-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-gray-dim3" type="button">text-on-dataviz-gray-dim3</button></div>
         <div class="token-row token-description">Foreground on subtle gray data-viz backgrounds (dim3).</div>
       </td>
     </tr>
@@ -1245,7 +1245,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-dim1)" type="button">var(--esds-color-content-on-dataviz-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-dim1" type="button">text-content-on-dataviz-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-dim1" type="button">text-on-dataviz-dim1</button></div>
         <div class="token-row token-description">Default foreground on data-viz dim1 backgrounds.</div>
       </td>
     </tr>
@@ -1258,7 +1258,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-dim2)" type="button">var(--esds-color-content-on-dataviz-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-dim2" type="button">text-content-on-dataviz-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-dim2" type="button">text-on-dataviz-dim2</button></div>
         <div class="token-row token-description">Default foreground on data-viz dim2 backgrounds.</div>
       </td>
     </tr>
@@ -1271,7 +1271,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-dim3)" type="button">var(--esds-color-content-on-dataviz-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-dataviz-dim3" type="button">text-content-on-dataviz-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-dim3" type="button">text-on-dataviz-dim3</button></div>
         <div class="token-row token-description">Default foreground on data-viz dim3 backgrounds.</div>
       </td>
     </tr>
@@ -1284,7 +1284,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-feedback-success-dim1)" type="button">var(--esds-color-content-on-feedback-success-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-feedback-success-dim1" type="button">text-content-on-feedback-success-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-feedback-success-dim1" type="button">text-on-feedback-success-dim1</button></div>
         <div class="token-row token-description">Foreground on strong success backgrounds (dim1).</div>
       </td>
     </tr>
@@ -1297,7 +1297,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-feedback-success-dim2)" type="button">var(--esds-color-content-on-feedback-success-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-feedback-success-dim2" type="button">text-content-on-feedback-success-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-feedback-success-dim2" type="button">text-on-feedback-success-dim2</button></div>
         <div class="token-row token-description">Foreground on soft success backgrounds (dim2).</div>
       </td>
     </tr>
@@ -1310,7 +1310,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-feedback-success-dim3)" type="button">var(--esds-color-content-on-feedback-success-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-feedback-success-dim3" type="button">text-content-on-feedback-success-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-feedback-success-dim3" type="button">text-on-feedback-success-dim3</button></div>
         <div class="token-row token-description">Foreground on subtle success backgrounds (dim3).</div>
       </td>
     </tr>
@@ -1323,7 +1323,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-feedback-warning-dim1)" type="button">var(--esds-color-content-on-feedback-warning-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-feedback-warning-dim1" type="button">text-content-on-feedback-warning-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-feedback-warning-dim1" type="button">text-on-feedback-warning-dim1</button></div>
         <div class="token-row token-description">Foreground on strong warning backgrounds (dim1).</div>
       </td>
     </tr>
@@ -1336,7 +1336,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-feedback-warning-dim2)" type="button">var(--esds-color-content-on-feedback-warning-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-feedback-warning-dim2" type="button">text-content-on-feedback-warning-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-feedback-warning-dim2" type="button">text-on-feedback-warning-dim2</button></div>
         <div class="token-row token-description">Foreground on soft warning backgrounds (dim2).</div>
       </td>
     </tr>
@@ -1349,7 +1349,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-feedback-warning-dim3)" type="button">var(--esds-color-content-on-feedback-warning-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-feedback-warning-dim3" type="button">text-content-on-feedback-warning-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-feedback-warning-dim3" type="button">text-on-feedback-warning-dim3</button></div>
         <div class="token-row token-description">Foreground on subtle warning backgrounds (dim3).</div>
       </td>
     </tr>
@@ -1362,7 +1362,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-feedback-error-dim1)" type="button">var(--esds-color-content-on-feedback-error-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-feedback-error-dim1" type="button">text-content-on-feedback-error-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-feedback-error-dim1" type="button">text-on-feedback-error-dim1</button></div>
         <div class="token-row token-description">Foreground on strong error backgrounds (dim1).</div>
       </td>
     </tr>
@@ -1375,7 +1375,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-feedback-error-dim2)" type="button">var(--esds-color-content-on-feedback-error-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-feedback-error-dim2" type="button">text-content-on-feedback-error-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-feedback-error-dim2" type="button">text-on-feedback-error-dim2</button></div>
         <div class="token-row token-description">Foreground on soft error backgrounds (dim2).</div>
       </td>
     </tr>
@@ -1388,7 +1388,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-feedback-error-dim3)" type="button">var(--esds-color-content-on-feedback-error-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-feedback-error-dim3" type="button">text-content-on-feedback-error-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-feedback-error-dim3" type="button">text-on-feedback-error-dim3</button></div>
         <div class="token-row token-description">Foreground on subtle error backgrounds (dim3).</div>
       </td>
     </tr>
@@ -1401,7 +1401,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-feedback-information-dim1)" type="button">var(--esds-color-content-on-feedback-information-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-feedback-information-dim1" type="button">text-content-on-feedback-information-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-feedback-information-dim1" type="button">text-on-feedback-information-dim1</button></div>
         <div class="token-row token-description">Foreground on strong information backgrounds (dim1).</div>
       </td>
     </tr>
@@ -1414,7 +1414,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-feedback-information-dim2)" type="button">var(--esds-color-content-on-feedback-information-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-feedback-information-dim2" type="button">text-content-on-feedback-information-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-feedback-information-dim2" type="button">text-on-feedback-information-dim2</button></div>
         <div class="token-row token-description">Foreground on soft information backgrounds (dim2).</div>
       </td>
     </tr>
@@ -1427,7 +1427,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-feedback-information-dim3)" type="button">var(--esds-color-content-on-feedback-information-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-feedback-information-dim3" type="button">text-content-on-feedback-information-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-feedback-information-dim3" type="button">text-on-feedback-information-dim3</button></div>
         <div class="token-row token-description">Foreground on subtle information backgrounds (dim3).</div>
       </td>
     </tr>
@@ -1440,7 +1440,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-feedback-neutral-dim1)" type="button">var(--esds-color-content-on-feedback-neutral-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-feedback-neutral-dim1" type="button">text-content-on-feedback-neutral-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-feedback-neutral-dim1" type="button">text-on-feedback-neutral-dim1</button></div>
         <div class="token-row token-description">Foreground on strong neutral backgrounds (dim1).</div>
       </td>
     </tr>
@@ -1453,7 +1453,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-feedback-neutral-dim2)" type="button">var(--esds-color-content-on-feedback-neutral-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-feedback-neutral-dim2" type="button">text-content-on-feedback-neutral-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-feedback-neutral-dim2" type="button">text-on-feedback-neutral-dim2</button></div>
         <div class="token-row token-description">Foreground on soft neutral backgrounds (dim2).</div>
       </td>
     </tr>
@@ -1466,7 +1466,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-feedback-neutral-dim3)" type="button">var(--esds-color-content-on-feedback-neutral-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-on-feedback-neutral-dim3" type="button">text-content-on-feedback-neutral-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-feedback-neutral-dim3" type="button">text-on-feedback-neutral-dim3</button></div>
         <div class="token-row token-description">Foreground on subtle neutral backgrounds (dim3).</div>
       </td>
     </tr>
@@ -1479,7 +1479,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-brand)" type="button">var(--esds-color-content-brand)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-brand" type="button">text-content-brand</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-brand" type="button">text-brand</button></div>
         <div class="token-row token-description">Default brand foreground color.</div>
       </td>
     </tr>
@@ -1492,7 +1492,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-brand-infomaniak)" type="button">var(--esds-color-content-brand-infomaniak)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-brand-infomaniak" type="button">text-content-brand-infomaniak</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-brand-infomaniak" type="button">text-brand-infomaniak</button></div>
         <div class="token-row token-description">Infomaniak brand foreground colors.</div>
       </td>
     </tr>
@@ -1505,7 +1505,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-brand-mail)" type="button">var(--esds-color-content-brand-mail)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-brand-mail" type="button">text-content-brand-mail</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-brand-mail" type="button">text-brand-mail</button></div>
         <div class="token-row token-description">Mail product brand foreground colors.</div>
       </td>
     </tr>
@@ -1518,7 +1518,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-brand-kdrive)" type="button">var(--esds-color-content-brand-kdrive)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-brand-kdrive" type="button">text-content-brand-kdrive</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-brand-kdrive" type="button">text-brand-kdrive</button></div>
         <div class="token-row token-description">kDrive product brand foreground colors.</div>
       </td>
     </tr>
@@ -1531,7 +1531,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-brand-euria)" type="button">var(--esds-color-content-brand-euria)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-brand-euria" type="button">text-content-brand-euria</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-brand-euria" type="button">text-brand-euria</button></div>
         <div class="token-row token-description">Euria product brand foreground colors.</div>
       </td>
     </tr>
@@ -1544,7 +1544,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-brand-kchat)" type="button">var(--esds-color-content-brand-kchat)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-brand-kchat" type="button">text-content-brand-kchat</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-brand-kchat" type="button">text-brand-kchat</button></div>
         <div class="token-row token-description">kChat product brand foreground colors.</div>
       </td>
     </tr>
@@ -1557,7 +1557,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-brand-security)" type="button">var(--esds-color-content-brand-security)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-brand-security" type="button">text-content-brand-security</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-brand-security" type="button">text-brand-security</button></div>
         <div class="token-row token-description">Security product brand foreground colors.</div>
       </td>
     </tr>
@@ -1570,7 +1570,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-brand-calendar)" type="button">var(--esds-color-content-brand-calendar)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-brand-calendar" type="button">text-content-brand-calendar</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-brand-calendar" type="button">text-brand-calendar</button></div>
         <div class="token-row token-description">Calendar product brand foreground colors.</div>
       </td>
     </tr>
@@ -1583,7 +1583,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-brand-contacts)" type="button">var(--esds-color-content-brand-contacts)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-brand-contacts" type="button">text-content-brand-contacts</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-brand-contacts" type="button">text-brand-contacts</button></div>
         <div class="token-row token-description">Contacts product brand foreground colors.</div>
       </td>
     </tr>
@@ -1596,7 +1596,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-brand-knote)" type="button">var(--esds-color-content-brand-knote)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-brand-knote" type="button">text-content-brand-knote</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-brand-knote" type="button">text-brand-knote</button></div>
         <div class="token-row token-description">kNote product brand foreground colors.</div>
       </td>
     </tr>
@@ -1609,7 +1609,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-brand-swisstransfer)" type="button">var(--esds-color-content-brand-swisstransfer)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-brand-swisstransfer" type="button">text-content-brand-swisstransfer</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-brand-swisstransfer" type="button">text-brand-swisstransfer</button></div>
         <div class="token-row token-description">SwissTransfer product brand foreground colors.</div>
       </td>
     </tr>
@@ -1622,7 +1622,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-primary)" type="button">var(--esds-color-content-primary)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-primary" type="button">text-content-primary</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-primary" type="button">text-primary</button></div>
         <div class="token-row token-description">Primary content color for main text and headings.</div>
       </td>
     </tr>
@@ -1635,7 +1635,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-secondary)" type="button">var(--esds-color-content-secondary)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-secondary" type="button">text-content-secondary</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-secondary" type="button">text-secondary</button></div>
         <div class="token-row token-description">Secondary content color for supporting text.</div>
       </td>
     </tr>
@@ -1648,7 +1648,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-tertiary)" type="button">var(--esds-color-content-tertiary)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-tertiary" type="button">text-content-tertiary</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-tertiary" type="button">text-tertiary</button></div>
         <div class="token-row token-description">Tertiary content color for subtle, low-emphasis text.</div>
       </td>
     </tr>
@@ -1661,7 +1661,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-disabled)" type="button">var(--esds-color-content-disabled)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-disabled" type="button">text-content-disabled</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-disabled" type="button">text-disabled</button></div>
         <div class="token-row token-description">Content color for disabled text and icons.</div>
       </td>
     </tr>
@@ -1674,7 +1674,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-inverse)" type="button">var(--esds-color-content-inverse)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-inverse" type="button">text-content-inverse</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-inverse" type="button">text-inverse</button></div>
         <div class="token-row token-description">Inverse content color for use on dark backgrounds.</div>
       </td>
     </tr>
@@ -1687,7 +1687,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-feedback-error)" type="button">var(--esds-color-content-feedback-error)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-feedback-error" type="button">text-content-feedback-error</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-feedback-error" type="button">text-feedback-error</button></div>
         <div class="token-row token-description">Error foreground color with interaction states.</div>
       </td>
     </tr>
@@ -1700,7 +1700,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-feedback-success)" type="button">var(--esds-color-content-feedback-success)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-feedback-success" type="button">text-content-feedback-success</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-feedback-success" type="button">text-feedback-success</button></div>
         <div class="token-row token-description">Success foreground color with interaction states.</div>
       </td>
     </tr>
@@ -1713,7 +1713,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-feedback-warning)" type="button">var(--esds-color-content-feedback-warning)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-feedback-warning" type="button">text-content-feedback-warning</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-feedback-warning" type="button">text-feedback-warning</button></div>
         <div class="token-row token-description">Warning foreground color with interaction states.</div>
       </td>
     </tr>
@@ -1726,7 +1726,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-feedback-information)" type="button">var(--esds-color-content-feedback-information)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-feedback-information" type="button">text-content-feedback-information</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-feedback-information" type="button">text-feedback-information</button></div>
         <div class="token-row token-description">Information foreground color with interaction states.</div>
       </td>
     </tr>
@@ -1739,7 +1739,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-feedback-neutral)" type="button">var(--esds-color-content-feedback-neutral)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-feedback-neutral" type="button">text-content-feedback-neutral</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-feedback-neutral" type="button">text-feedback-neutral</button></div>
         <div class="token-row token-description">Neutral foreground color with interaction states.</div>
       </td>
     </tr>
@@ -1752,7 +1752,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-visited)" type="button">var(--esds-color-content-visited)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-visited" type="button">text-content-visited</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-visited" type="button">text-visited</button></div>
         <div class="token-row token-description">Visited-link content colors with interaction states.</div>
       </td>
     </tr>
@@ -1765,7 +1765,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-muted)" type="button">var(--esds-color-content-muted)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-muted" type="button">text-content-muted</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-muted" type="button">text-muted</button></div>
         <div class="token-row token-description">Muted content color for de-emphasized, secondary text.</div>
       </td>
     </tr>
@@ -1778,7 +1778,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-dataviz)" type="button">var(--esds-color-content-dataviz)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-dataviz" type="button">text-content-dataviz</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-dataviz" type="button">text-dataviz</button></div>
         <div class="token-row token-description">Default data-viz foreground color.</div>
       </td>
     </tr>
@@ -1791,7 +1791,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-dataviz-blue)" type="button">var(--esds-color-content-dataviz-blue)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-dataviz-blue" type="button">text-content-dataviz-blue</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-dataviz-blue" type="button">text-dataviz-blue</button></div>
         <div class="token-row token-description">Blue data-viz foreground color.</div>
       </td>
     </tr>
@@ -1804,7 +1804,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-dataviz-emerald)" type="button">var(--esds-color-content-dataviz-emerald)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-dataviz-emerald" type="button">text-content-dataviz-emerald</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-dataviz-emerald" type="button">text-dataviz-emerald</button></div>
         <div class="token-row token-description">Emerald data-viz foreground color.</div>
       </td>
     </tr>
@@ -1817,7 +1817,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-dataviz-orange)" type="button">var(--esds-color-content-dataviz-orange)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-dataviz-orange" type="button">text-content-dataviz-orange</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-dataviz-orange" type="button">text-dataviz-orange</button></div>
         <div class="token-row token-description">Orange data-viz foreground color.</div>
       </td>
     </tr>
@@ -1830,7 +1830,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-dataviz-pink)" type="button">var(--esds-color-content-dataviz-pink)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-dataviz-pink" type="button">text-content-dataviz-pink</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-dataviz-pink" type="button">text-dataviz-pink</button></div>
         <div class="token-row token-description">Pink data-viz foreground color.</div>
       </td>
     </tr>
@@ -1843,7 +1843,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-dataviz-purple)" type="button">var(--esds-color-content-dataviz-purple)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-dataviz-purple" type="button">text-content-dataviz-purple</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-dataviz-purple" type="button">text-dataviz-purple</button></div>
         <div class="token-row token-description">Purple data-viz foreground color.</div>
       </td>
     </tr>
@@ -1856,7 +1856,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-dataviz-violet)" type="button">var(--esds-color-content-dataviz-violet)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-dataviz-violet" type="button">text-content-dataviz-violet</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-dataviz-violet" type="button">text-dataviz-violet</button></div>
         <div class="token-row token-description">Violet data-viz foreground color.</div>
       </td>
     </tr>
@@ -1869,7 +1869,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-dataviz-yellow)" type="button">var(--esds-color-content-dataviz-yellow)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-dataviz-yellow" type="button">text-content-dataviz-yellow</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-dataviz-yellow" type="button">text-dataviz-yellow</button></div>
         <div class="token-row token-description">Yellow data-viz foreground color.</div>
       </td>
     </tr>
@@ -1882,7 +1882,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-content-dataviz-gray)" type="button">var(--esds-color-content-dataviz-gray)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-content-dataviz-gray" type="button">text-content-dataviz-gray</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-dataviz-gray" type="button">text-dataviz-gray</button></div>
         <div class="token-row token-description">Gray data-viz foreground color.</div>
       </td>
     </tr>
@@ -1895,7 +1895,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-blue-dim1)" type="button">var(--esds-color-border-on-dataviz-blue-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-blue-dim1" type="button">border-border-on-dataviz-blue-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-blue-dim1" type="button">border-on-dataviz-blue-dim1</button> <button class="token-value" data-clipboard="outline-on-dataviz-blue-dim1" type="button">outline-on-dataviz-blue-dim1</button></div>
         <div class="token-row token-description">Border on strong blue data-viz backgrounds (dim1).</div>
       </td>
     </tr>
@@ -1908,7 +1908,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-blue-dim2)" type="button">var(--esds-color-border-on-dataviz-blue-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-blue-dim2" type="button">border-border-on-dataviz-blue-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-blue-dim2" type="button">border-on-dataviz-blue-dim2</button> <button class="token-value" data-clipboard="outline-on-dataviz-blue-dim2" type="button">outline-on-dataviz-blue-dim2</button></div>
         <div class="token-row token-description">Border on soft blue data-viz backgrounds (dim2).</div>
       </td>
     </tr>
@@ -1921,7 +1921,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-blue-dim3)" type="button">var(--esds-color-border-on-dataviz-blue-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-blue-dim3" type="button">border-border-on-dataviz-blue-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-blue-dim3" type="button">border-on-dataviz-blue-dim3</button> <button class="token-value" data-clipboard="outline-on-dataviz-blue-dim3" type="button">outline-on-dataviz-blue-dim3</button></div>
         <div class="token-row token-description">Border on subtle blue data-viz backgrounds (dim3).</div>
       </td>
     </tr>
@@ -1934,7 +1934,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-emerald-dim1)" type="button">var(--esds-color-border-on-dataviz-emerald-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-emerald-dim1" type="button">border-border-on-dataviz-emerald-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-emerald-dim1" type="button">border-on-dataviz-emerald-dim1</button> <button class="token-value" data-clipboard="outline-on-dataviz-emerald-dim1" type="button">outline-on-dataviz-emerald-dim1</button></div>
         <div class="token-row token-description">Border on strong emerald data-viz backgrounds (dim1).</div>
       </td>
     </tr>
@@ -1947,7 +1947,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-emerald-dim2)" type="button">var(--esds-color-border-on-dataviz-emerald-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-emerald-dim2" type="button">border-border-on-dataviz-emerald-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-emerald-dim2" type="button">border-on-dataviz-emerald-dim2</button> <button class="token-value" data-clipboard="outline-on-dataviz-emerald-dim2" type="button">outline-on-dataviz-emerald-dim2</button></div>
         <div class="token-row token-description">Border on soft emerald data-viz backgrounds (dim2).</div>
       </td>
     </tr>
@@ -1960,7 +1960,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-emerald-dim3)" type="button">var(--esds-color-border-on-dataviz-emerald-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-emerald-dim3" type="button">border-border-on-dataviz-emerald-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-emerald-dim3" type="button">border-on-dataviz-emerald-dim3</button> <button class="token-value" data-clipboard="outline-on-dataviz-emerald-dim3" type="button">outline-on-dataviz-emerald-dim3</button></div>
         <div class="token-row token-description">Border on subtle emerald data-viz backgrounds (dim3).</div>
       </td>
     </tr>
@@ -1973,7 +1973,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-orange-dim1)" type="button">var(--esds-color-border-on-dataviz-orange-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-orange-dim1" type="button">border-border-on-dataviz-orange-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-orange-dim1" type="button">border-on-dataviz-orange-dim1</button> <button class="token-value" data-clipboard="outline-on-dataviz-orange-dim1" type="button">outline-on-dataviz-orange-dim1</button></div>
         <div class="token-row token-description">Border on strong orange data-viz backgrounds (dim1).</div>
       </td>
     </tr>
@@ -1986,7 +1986,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-orange-dim2)" type="button">var(--esds-color-border-on-dataviz-orange-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-orange-dim2" type="button">border-border-on-dataviz-orange-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-orange-dim2" type="button">border-on-dataviz-orange-dim2</button> <button class="token-value" data-clipboard="outline-on-dataviz-orange-dim2" type="button">outline-on-dataviz-orange-dim2</button></div>
         <div class="token-row token-description">Border on soft orange data-viz backgrounds (dim2).</div>
       </td>
     </tr>
@@ -1999,7 +1999,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-orange-dim3)" type="button">var(--esds-color-border-on-dataviz-orange-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-orange-dim3" type="button">border-border-on-dataviz-orange-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-orange-dim3" type="button">border-on-dataviz-orange-dim3</button> <button class="token-value" data-clipboard="outline-on-dataviz-orange-dim3" type="button">outline-on-dataviz-orange-dim3</button></div>
         <div class="token-row token-description">Border on subtle orange data-viz backgrounds (dim3).</div>
       </td>
     </tr>
@@ -2012,7 +2012,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-pink-dim1)" type="button">var(--esds-color-border-on-dataviz-pink-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-pink-dim1" type="button">border-border-on-dataviz-pink-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-pink-dim1" type="button">border-on-dataviz-pink-dim1</button> <button class="token-value" data-clipboard="outline-on-dataviz-pink-dim1" type="button">outline-on-dataviz-pink-dim1</button></div>
         <div class="token-row token-description">Border on strong pink data-viz backgrounds (dim1).</div>
       </td>
     </tr>
@@ -2025,7 +2025,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-pink-dim2)" type="button">var(--esds-color-border-on-dataviz-pink-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-pink-dim2" type="button">border-border-on-dataviz-pink-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-pink-dim2" type="button">border-on-dataviz-pink-dim2</button> <button class="token-value" data-clipboard="outline-on-dataviz-pink-dim2" type="button">outline-on-dataviz-pink-dim2</button></div>
         <div class="token-row token-description">Border on soft pink data-viz backgrounds (dim2).</div>
       </td>
     </tr>
@@ -2038,7 +2038,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-pink-dim3)" type="button">var(--esds-color-border-on-dataviz-pink-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-pink-dim3" type="button">border-border-on-dataviz-pink-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-pink-dim3" type="button">border-on-dataviz-pink-dim3</button> <button class="token-value" data-clipboard="outline-on-dataviz-pink-dim3" type="button">outline-on-dataviz-pink-dim3</button></div>
         <div class="token-row token-description">Border on subtle pink data-viz backgrounds (dim3).</div>
       </td>
     </tr>
@@ -2051,7 +2051,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-purple-dim1)" type="button">var(--esds-color-border-on-dataviz-purple-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-purple-dim1" type="button">border-border-on-dataviz-purple-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-purple-dim1" type="button">border-on-dataviz-purple-dim1</button> <button class="token-value" data-clipboard="outline-on-dataviz-purple-dim1" type="button">outline-on-dataviz-purple-dim1</button></div>
         <div class="token-row token-description">Border on strong purple data-viz backgrounds (dim1).</div>
       </td>
     </tr>
@@ -2064,7 +2064,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-purple-dim2)" type="button">var(--esds-color-border-on-dataviz-purple-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-purple-dim2" type="button">border-border-on-dataviz-purple-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-purple-dim2" type="button">border-on-dataviz-purple-dim2</button> <button class="token-value" data-clipboard="outline-on-dataviz-purple-dim2" type="button">outline-on-dataviz-purple-dim2</button></div>
         <div class="token-row token-description">Border on soft purple data-viz backgrounds (dim2).</div>
       </td>
     </tr>
@@ -2077,7 +2077,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-purple-dim3)" type="button">var(--esds-color-border-on-dataviz-purple-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-purple-dim3" type="button">border-border-on-dataviz-purple-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-purple-dim3" type="button">border-on-dataviz-purple-dim3</button> <button class="token-value" data-clipboard="outline-on-dataviz-purple-dim3" type="button">outline-on-dataviz-purple-dim3</button></div>
         <div class="token-row token-description">Border on subtle purple data-viz backgrounds (dim3).</div>
       </td>
     </tr>
@@ -2090,7 +2090,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-violet-dim1)" type="button">var(--esds-color-border-on-dataviz-violet-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-violet-dim1" type="button">border-border-on-dataviz-violet-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-violet-dim1" type="button">border-on-dataviz-violet-dim1</button> <button class="token-value" data-clipboard="outline-on-dataviz-violet-dim1" type="button">outline-on-dataviz-violet-dim1</button></div>
         <div class="token-row token-description">Border on strong violet data-viz backgrounds (dim1).</div>
       </td>
     </tr>
@@ -2103,7 +2103,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-violet-dim2)" type="button">var(--esds-color-border-on-dataviz-violet-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-violet-dim2" type="button">border-border-on-dataviz-violet-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-violet-dim2" type="button">border-on-dataviz-violet-dim2</button> <button class="token-value" data-clipboard="outline-on-dataviz-violet-dim2" type="button">outline-on-dataviz-violet-dim2</button></div>
         <div class="token-row token-description">Border on soft violet data-viz backgrounds (dim2).</div>
       </td>
     </tr>
@@ -2116,7 +2116,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-violet-dim3)" type="button">var(--esds-color-border-on-dataviz-violet-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-violet-dim3" type="button">border-border-on-dataviz-violet-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-violet-dim3" type="button">border-on-dataviz-violet-dim3</button> <button class="token-value" data-clipboard="outline-on-dataviz-violet-dim3" type="button">outline-on-dataviz-violet-dim3</button></div>
         <div class="token-row token-description">Border on subtle violet data-viz backgrounds (dim3).</div>
       </td>
     </tr>
@@ -2129,7 +2129,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-yellow-dim1)" type="button">var(--esds-color-border-on-dataviz-yellow-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-yellow-dim1" type="button">border-border-on-dataviz-yellow-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-yellow-dim1" type="button">border-on-dataviz-yellow-dim1</button> <button class="token-value" data-clipboard="outline-on-dataviz-yellow-dim1" type="button">outline-on-dataviz-yellow-dim1</button></div>
         <div class="token-row token-description">Border on strong yellow data-viz backgrounds (dim1).</div>
       </td>
     </tr>
@@ -2142,7 +2142,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-yellow-dim2)" type="button">var(--esds-color-border-on-dataviz-yellow-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-yellow-dim2" type="button">border-border-on-dataviz-yellow-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-yellow-dim2" type="button">border-on-dataviz-yellow-dim2</button> <button class="token-value" data-clipboard="outline-on-dataviz-yellow-dim2" type="button">outline-on-dataviz-yellow-dim2</button></div>
         <div class="token-row token-description">Border on soft yellow data-viz backgrounds (dim2).</div>
       </td>
     </tr>
@@ -2155,7 +2155,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-yellow-dim3)" type="button">var(--esds-color-border-on-dataviz-yellow-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-yellow-dim3" type="button">border-border-on-dataviz-yellow-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-yellow-dim3" type="button">border-on-dataviz-yellow-dim3</button> <button class="token-value" data-clipboard="outline-on-dataviz-yellow-dim3" type="button">outline-on-dataviz-yellow-dim3</button></div>
         <div class="token-row token-description">Border on subtle yellow data-viz backgrounds (dim3).</div>
       </td>
     </tr>
@@ -2168,7 +2168,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-gray-dim1)" type="button">var(--esds-color-border-on-dataviz-gray-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-gray-dim1" type="button">border-border-on-dataviz-gray-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-gray-dim1" type="button">border-on-dataviz-gray-dim1</button> <button class="token-value" data-clipboard="outline-on-dataviz-gray-dim1" type="button">outline-on-dataviz-gray-dim1</button></div>
         <div class="token-row token-description">Border on strong gray data-viz backgrounds (dim1).</div>
       </td>
     </tr>
@@ -2181,7 +2181,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-gray-dim2)" type="button">var(--esds-color-border-on-dataviz-gray-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-gray-dim2" type="button">border-border-on-dataviz-gray-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-gray-dim2" type="button">border-on-dataviz-gray-dim2</button> <button class="token-value" data-clipboard="outline-on-dataviz-gray-dim2" type="button">outline-on-dataviz-gray-dim2</button></div>
         <div class="token-row token-description">Border on soft gray data-viz backgrounds (dim2).</div>
       </td>
     </tr>
@@ -2194,7 +2194,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-gray-dim3)" type="button">var(--esds-color-border-on-dataviz-gray-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-gray-dim3" type="button">border-border-on-dataviz-gray-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-gray-dim3" type="button">border-on-dataviz-gray-dim3</button> <button class="token-value" data-clipboard="outline-on-dataviz-gray-dim3" type="button">outline-on-dataviz-gray-dim3</button></div>
         <div class="token-row token-description">Border on subtle gray data-viz backgrounds (dim3).</div>
       </td>
     </tr>
@@ -2207,7 +2207,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-dim1)" type="button">var(--esds-color-border-on-dataviz-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-dim1" type="button">border-border-on-dataviz-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-dim1" type="button">border-on-dataviz-dim1</button> <button class="token-value" data-clipboard="outline-on-dataviz-dim1" type="button">outline-on-dataviz-dim1</button></div>
         <div class="token-row token-description">Default border on data-viz dim1 backgrounds.</div>
       </td>
     </tr>
@@ -2220,7 +2220,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-dim2)" type="button">var(--esds-color-border-on-dataviz-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-dim2" type="button">border-border-on-dataviz-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-dim2" type="button">border-on-dataviz-dim2</button> <button class="token-value" data-clipboard="outline-on-dataviz-dim2" type="button">outline-on-dataviz-dim2</button></div>
         <div class="token-row token-description">Default border on data-viz dim2 backgrounds.</div>
       </td>
     </tr>
@@ -2233,7 +2233,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-dim3)" type="button">var(--esds-color-border-on-dataviz-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-dataviz-dim3" type="button">border-border-on-dataviz-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-dim3" type="button">border-on-dataviz-dim3</button> <button class="token-value" data-clipboard="outline-on-dataviz-dim3" type="button">outline-on-dataviz-dim3</button></div>
         <div class="token-row token-description">Default border on data-viz dim3 backgrounds.</div>
       </td>
     </tr>
@@ -2246,7 +2246,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-feedback-success-dim1)" type="button">var(--esds-color-border-on-feedback-success-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-feedback-success-dim1" type="button">border-border-on-feedback-success-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-feedback-success-dim1" type="button">border-on-feedback-success-dim1</button> <button class="token-value" data-clipboard="outline-on-feedback-success-dim1" type="button">outline-on-feedback-success-dim1</button></div>
         <div class="token-row token-description">Border on strong success backgrounds (dim1).</div>
       </td>
     </tr>
@@ -2259,7 +2259,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-feedback-success-dim2)" type="button">var(--esds-color-border-on-feedback-success-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-feedback-success-dim2" type="button">border-border-on-feedback-success-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-feedback-success-dim2" type="button">border-on-feedback-success-dim2</button> <button class="token-value" data-clipboard="outline-on-feedback-success-dim2" type="button">outline-on-feedback-success-dim2</button></div>
         <div class="token-row token-description">Border on soft success backgrounds (dim2).</div>
       </td>
     </tr>
@@ -2272,7 +2272,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-feedback-success-dim3)" type="button">var(--esds-color-border-on-feedback-success-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-feedback-success-dim3" type="button">border-border-on-feedback-success-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-feedback-success-dim3" type="button">border-on-feedback-success-dim3</button> <button class="token-value" data-clipboard="outline-on-feedback-success-dim3" type="button">outline-on-feedback-success-dim3</button></div>
         <div class="token-row token-description">Border on subtle success backgrounds (dim3).</div>
       </td>
     </tr>
@@ -2285,7 +2285,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-feedback-warning-dim1)" type="button">var(--esds-color-border-on-feedback-warning-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-feedback-warning-dim1" type="button">border-border-on-feedback-warning-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-feedback-warning-dim1" type="button">border-on-feedback-warning-dim1</button> <button class="token-value" data-clipboard="outline-on-feedback-warning-dim1" type="button">outline-on-feedback-warning-dim1</button></div>
         <div class="token-row token-description">Border on strong warning backgrounds (dim1).</div>
       </td>
     </tr>
@@ -2298,7 +2298,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-feedback-warning-dim2)" type="button">var(--esds-color-border-on-feedback-warning-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-feedback-warning-dim2" type="button">border-border-on-feedback-warning-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-feedback-warning-dim2" type="button">border-on-feedback-warning-dim2</button> <button class="token-value" data-clipboard="outline-on-feedback-warning-dim2" type="button">outline-on-feedback-warning-dim2</button></div>
         <div class="token-row token-description">Border on soft warning backgrounds (dim2).</div>
       </td>
     </tr>
@@ -2311,7 +2311,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-feedback-warning-dim3)" type="button">var(--esds-color-border-on-feedback-warning-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-feedback-warning-dim3" type="button">border-border-on-feedback-warning-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-feedback-warning-dim3" type="button">border-on-feedback-warning-dim3</button> <button class="token-value" data-clipboard="outline-on-feedback-warning-dim3" type="button">outline-on-feedback-warning-dim3</button></div>
         <div class="token-row token-description">Border on subtle warning backgrounds (dim3).</div>
       </td>
     </tr>
@@ -2324,7 +2324,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-feedback-error-dim1)" type="button">var(--esds-color-border-on-feedback-error-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-feedback-error-dim1" type="button">border-border-on-feedback-error-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-feedback-error-dim1" type="button">border-on-feedback-error-dim1</button> <button class="token-value" data-clipboard="outline-on-feedback-error-dim1" type="button">outline-on-feedback-error-dim1</button></div>
         <div class="token-row token-description">Border on strong error backgrounds (dim1).</div>
       </td>
     </tr>
@@ -2337,7 +2337,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-feedback-error-dim2)" type="button">var(--esds-color-border-on-feedback-error-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-feedback-error-dim2" type="button">border-border-on-feedback-error-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-feedback-error-dim2" type="button">border-on-feedback-error-dim2</button> <button class="token-value" data-clipboard="outline-on-feedback-error-dim2" type="button">outline-on-feedback-error-dim2</button></div>
         <div class="token-row token-description">Border on soft error backgrounds (dim2).</div>
       </td>
     </tr>
@@ -2350,7 +2350,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-feedback-error-dim3)" type="button">var(--esds-color-border-on-feedback-error-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-feedback-error-dim3" type="button">border-border-on-feedback-error-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-feedback-error-dim3" type="button">border-on-feedback-error-dim3</button> <button class="token-value" data-clipboard="outline-on-feedback-error-dim3" type="button">outline-on-feedback-error-dim3</button></div>
         <div class="token-row token-description">Border on subtle error backgrounds (dim3).</div>
       </td>
     </tr>
@@ -2363,7 +2363,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-feedback-information-dim1)" type="button">var(--esds-color-border-on-feedback-information-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-feedback-information-dim1" type="button">border-border-on-feedback-information-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-feedback-information-dim1" type="button">border-on-feedback-information-dim1</button> <button class="token-value" data-clipboard="outline-on-feedback-information-dim1" type="button">outline-on-feedback-information-dim1</button></div>
         <div class="token-row token-description">Border on strong information backgrounds (dim1).</div>
       </td>
     </tr>
@@ -2376,7 +2376,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-feedback-information-dim2)" type="button">var(--esds-color-border-on-feedback-information-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-feedback-information-dim2" type="button">border-border-on-feedback-information-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-feedback-information-dim2" type="button">border-on-feedback-information-dim2</button> <button class="token-value" data-clipboard="outline-on-feedback-information-dim2" type="button">outline-on-feedback-information-dim2</button></div>
         <div class="token-row token-description">Border on soft information backgrounds (dim2).</div>
       </td>
     </tr>
@@ -2389,7 +2389,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-feedback-information-dim3)" type="button">var(--esds-color-border-on-feedback-information-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-feedback-information-dim3" type="button">border-border-on-feedback-information-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-feedback-information-dim3" type="button">border-on-feedback-information-dim3</button> <button class="token-value" data-clipboard="outline-on-feedback-information-dim3" type="button">outline-on-feedback-information-dim3</button></div>
         <div class="token-row token-description">Border on subtle information backgrounds (dim3).</div>
       </td>
     </tr>
@@ -2402,7 +2402,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-feedback-neutral-dim1)" type="button">var(--esds-color-border-on-feedback-neutral-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-feedback-neutral-dim1" type="button">border-border-on-feedback-neutral-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-feedback-neutral-dim1" type="button">border-on-feedback-neutral-dim1</button> <button class="token-value" data-clipboard="outline-on-feedback-neutral-dim1" type="button">outline-on-feedback-neutral-dim1</button></div>
         <div class="token-row token-description">Border on strong neutral backgrounds (dim1).</div>
       </td>
     </tr>
@@ -2415,7 +2415,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-feedback-neutral-dim2)" type="button">var(--esds-color-border-on-feedback-neutral-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-feedback-neutral-dim2" type="button">border-border-on-feedback-neutral-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-feedback-neutral-dim2" type="button">border-on-feedback-neutral-dim2</button> <button class="token-value" data-clipboard="outline-on-feedback-neutral-dim2" type="button">outline-on-feedback-neutral-dim2</button></div>
         <div class="token-row token-description">Border on soft neutral backgrounds (dim2).</div>
       </td>
     </tr>
@@ -2428,7 +2428,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-feedback-neutral-dim3)" type="button">var(--esds-color-border-on-feedback-neutral-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-on-feedback-neutral-dim3" type="button">border-border-on-feedback-neutral-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-feedback-neutral-dim3" type="button">border-on-feedback-neutral-dim3</button> <button class="token-value" data-clipboard="outline-on-feedback-neutral-dim3" type="button">outline-on-feedback-neutral-dim3</button></div>
         <div class="token-row token-description">Border on subtle neutral backgrounds (dim3).</div>
       </td>
     </tr>
@@ -2441,7 +2441,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-brand)" type="button">var(--esds-color-border-brand)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-brand" type="button">border-border-brand</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-brand" type="button">border-brand</button> <button class="token-value" data-clipboard="outline-brand" type="button">outline-brand</button></div>
         <div class="token-row token-description">Default brand border color.</div>
       </td>
     </tr>
@@ -2454,7 +2454,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-brand-infomaniak)" type="button">var(--esds-color-border-brand-infomaniak)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-brand-infomaniak" type="button">border-border-brand-infomaniak</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-brand-infomaniak" type="button">border-brand-infomaniak</button> <button class="token-value" data-clipboard="outline-brand-infomaniak" type="button">outline-brand-infomaniak</button></div>
         <div class="token-row token-description">Infomaniak brand border colors.</div>
       </td>
     </tr>
@@ -2467,7 +2467,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-brand-mail)" type="button">var(--esds-color-border-brand-mail)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-brand-mail" type="button">border-border-brand-mail</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-brand-mail" type="button">border-brand-mail</button> <button class="token-value" data-clipboard="outline-brand-mail" type="button">outline-brand-mail</button></div>
         <div class="token-row token-description">Mail product brand border colors.</div>
       </td>
     </tr>
@@ -2480,7 +2480,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-brand-kdrive)" type="button">var(--esds-color-border-brand-kdrive)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-brand-kdrive" type="button">border-border-brand-kdrive</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-brand-kdrive" type="button">border-brand-kdrive</button> <button class="token-value" data-clipboard="outline-brand-kdrive" type="button">outline-brand-kdrive</button></div>
         <div class="token-row token-description">kDrive product brand border colors.</div>
       </td>
     </tr>
@@ -2493,7 +2493,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-brand-euria)" type="button">var(--esds-color-border-brand-euria)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-brand-euria" type="button">border-border-brand-euria</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-brand-euria" type="button">border-brand-euria</button> <button class="token-value" data-clipboard="outline-brand-euria" type="button">outline-brand-euria</button></div>
         <div class="token-row token-description">Euria product brand border colors.</div>
       </td>
     </tr>
@@ -2506,7 +2506,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-brand-kchat)" type="button">var(--esds-color-border-brand-kchat)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-brand-kchat" type="button">border-border-brand-kchat</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-brand-kchat" type="button">border-brand-kchat</button> <button class="token-value" data-clipboard="outline-brand-kchat" type="button">outline-brand-kchat</button></div>
         <div class="token-row token-description">kChat product brand border colors.</div>
       </td>
     </tr>
@@ -2519,7 +2519,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-brand-security)" type="button">var(--esds-color-border-brand-security)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-brand-security" type="button">border-border-brand-security</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-brand-security" type="button">border-brand-security</button> <button class="token-value" data-clipboard="outline-brand-security" type="button">outline-brand-security</button></div>
         <div class="token-row token-description">Security product brand border colors.</div>
       </td>
     </tr>
@@ -2532,7 +2532,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-brand-calendar)" type="button">var(--esds-color-border-brand-calendar)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-brand-calendar" type="button">border-border-brand-calendar</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-brand-calendar" type="button">border-brand-calendar</button> <button class="token-value" data-clipboard="outline-brand-calendar" type="button">outline-brand-calendar</button></div>
         <div class="token-row token-description">Calendar product brand border colors.</div>
       </td>
     </tr>
@@ -2545,7 +2545,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-brand-contacts)" type="button">var(--esds-color-border-brand-contacts)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-brand-contacts" type="button">border-border-brand-contacts</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-brand-contacts" type="button">border-brand-contacts</button> <button class="token-value" data-clipboard="outline-brand-contacts" type="button">outline-brand-contacts</button></div>
         <div class="token-row token-description">Contacts product brand border colors.</div>
       </td>
     </tr>
@@ -2558,7 +2558,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-brand-knote)" type="button">var(--esds-color-border-brand-knote)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-brand-knote" type="button">border-border-brand-knote</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-brand-knote" type="button">border-brand-knote</button> <button class="token-value" data-clipboard="outline-brand-knote" type="button">outline-brand-knote</button></div>
         <div class="token-row token-description">kNote product brand border colors.</div>
       </td>
     </tr>
@@ -2571,7 +2571,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-brand-swisstransfer)" type="button">var(--esds-color-border-brand-swisstransfer)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-brand-swisstransfer" type="button">border-border-brand-swisstransfer</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-brand-swisstransfer" type="button">border-brand-swisstransfer</button> <button class="token-value" data-clipboard="outline-brand-swisstransfer" type="button">outline-brand-swisstransfer</button></div>
         <div class="token-row token-description">SwissTransfer product brand border colors.</div>
       </td>
     </tr>
@@ -2584,7 +2584,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dataviz)" type="button">var(--esds-color-border-dataviz)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-dataviz" type="button">border-border-dataviz</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dataviz" type="button">border-dataviz</button> <button class="token-value" data-clipboard="outline-dataviz" type="button">outline-dataviz</button></div>
         <div class="token-row token-description">Default data-viz border color.</div>
       </td>
     </tr>
@@ -2597,7 +2597,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dataviz-blue)" type="button">var(--esds-color-border-dataviz-blue)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-dataviz-blue" type="button">border-border-dataviz-blue</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dataviz-blue" type="button">border-dataviz-blue</button> <button class="token-value" data-clipboard="outline-dataviz-blue" type="button">outline-dataviz-blue</button></div>
         <div class="token-row token-description">Blue data-viz border color.</div>
       </td>
     </tr>
@@ -2610,7 +2610,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dataviz-emerald)" type="button">var(--esds-color-border-dataviz-emerald)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-dataviz-emerald" type="button">border-border-dataviz-emerald</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dataviz-emerald" type="button">border-dataviz-emerald</button> <button class="token-value" data-clipboard="outline-dataviz-emerald" type="button">outline-dataviz-emerald</button></div>
         <div class="token-row token-description">Emerald data-viz border color.</div>
       </td>
     </tr>
@@ -2623,7 +2623,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dataviz-orange)" type="button">var(--esds-color-border-dataviz-orange)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-dataviz-orange" type="button">border-border-dataviz-orange</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dataviz-orange" type="button">border-dataviz-orange</button> <button class="token-value" data-clipboard="outline-dataviz-orange" type="button">outline-dataviz-orange</button></div>
         <div class="token-row token-description">Orange data-viz border color.</div>
       </td>
     </tr>
@@ -2636,7 +2636,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dataviz-pink)" type="button">var(--esds-color-border-dataviz-pink)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-dataviz-pink" type="button">border-border-dataviz-pink</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dataviz-pink" type="button">border-dataviz-pink</button> <button class="token-value" data-clipboard="outline-dataviz-pink" type="button">outline-dataviz-pink</button></div>
         <div class="token-row token-description">Pink data-viz border color.</div>
       </td>
     </tr>
@@ -2649,7 +2649,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dataviz-purple)" type="button">var(--esds-color-border-dataviz-purple)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-dataviz-purple" type="button">border-border-dataviz-purple</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dataviz-purple" type="button">border-dataviz-purple</button> <button class="token-value" data-clipboard="outline-dataviz-purple" type="button">outline-dataviz-purple</button></div>
         <div class="token-row token-description">Purple data-viz border color.</div>
       </td>
     </tr>
@@ -2662,7 +2662,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dataviz-violet)" type="button">var(--esds-color-border-dataviz-violet)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-dataviz-violet" type="button">border-border-dataviz-violet</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dataviz-violet" type="button">border-dataviz-violet</button> <button class="token-value" data-clipboard="outline-dataviz-violet" type="button">outline-dataviz-violet</button></div>
         <div class="token-row token-description">Violet data-viz border color.</div>
       </td>
     </tr>
@@ -2675,7 +2675,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dataviz-yellow)" type="button">var(--esds-color-border-dataviz-yellow)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-dataviz-yellow" type="button">border-border-dataviz-yellow</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dataviz-yellow" type="button">border-dataviz-yellow</button> <button class="token-value" data-clipboard="outline-dataviz-yellow" type="button">outline-dataviz-yellow</button></div>
         <div class="token-row token-description">Yellow data-viz border color.</div>
       </td>
     </tr>
@@ -2688,7 +2688,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dataviz-gray)" type="button">var(--esds-color-border-dataviz-gray)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-dataviz-gray" type="button">border-border-dataviz-gray</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dataviz-gray" type="button">border-dataviz-gray</button> <button class="token-value" data-clipboard="outline-dataviz-gray" type="button">outline-dataviz-gray</button></div>
         <div class="token-row token-description">Gray data-viz border color.</div>
       </td>
     </tr>
@@ -2701,7 +2701,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dim1)" type="button">var(--esds-color-border-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-dim1" type="button">border-border-dim1</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dim1" type="button">border-dim1</button> <button class="token-value" data-clipboard="outline-dim1" type="button">outline-dim1</button></div>
         <div class="token-row token-description">Strongest neutral border color with interaction states.</div>
       </td>
     </tr>
@@ -2714,7 +2714,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dim2)" type="button">var(--esds-color-border-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-dim2" type="button">border-border-dim2</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dim2" type="button">border-dim2</button> <button class="token-value" data-clipboard="outline-dim2" type="button">outline-dim2</button></div>
         <div class="token-row token-description">Strong neutral border color with interaction states.</div>
       </td>
     </tr>
@@ -2727,7 +2727,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dim3)" type="button">var(--esds-color-border-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-dim3" type="button">border-border-dim3</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dim3" type="button">border-dim3</button> <button class="token-value" data-clipboard="outline-dim3" type="button">outline-dim3</button></div>
         <div class="token-row token-description">Subtle neutral border color with interaction states.</div>
       </td>
     </tr>
@@ -2740,7 +2740,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dim4)" type="button">var(--esds-color-border-dim4)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-dim4" type="button">border-border-dim4</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dim4" type="button">border-dim4</button> <button class="token-value" data-clipboard="outline-dim4" type="button">outline-dim4</button></div>
         <div class="token-row token-description">Faintest neutral border color with interaction states.</div>
       </td>
     </tr>
@@ -2753,7 +2753,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-feedback-error)" type="button">var(--esds-color-border-feedback-error)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-feedback-error" type="button">border-border-feedback-error</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-feedback-error" type="button">border-feedback-error</button> <button class="token-value" data-clipboard="outline-feedback-error" type="button">outline-feedback-error</button></div>
         <div class="token-row token-description">Error feedback border colors.</div>
       </td>
     </tr>
@@ -2766,7 +2766,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-feedback-success)" type="button">var(--esds-color-border-feedback-success)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-feedback-success" type="button">border-border-feedback-success</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-feedback-success" type="button">border-feedback-success</button> <button class="token-value" data-clipboard="outline-feedback-success" type="button">outline-feedback-success</button></div>
         <div class="token-row token-description">Success feedback border colors.</div>
       </td>
     </tr>
@@ -2779,7 +2779,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-feedback-warning)" type="button">var(--esds-color-border-feedback-warning)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-feedback-warning" type="button">border-border-feedback-warning</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-feedback-warning" type="button">border-feedback-warning</button> <button class="token-value" data-clipboard="outline-feedback-warning" type="button">outline-feedback-warning</button></div>
         <div class="token-row token-description">Warning feedback border colors.</div>
       </td>
     </tr>
@@ -2792,7 +2792,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-feedback-information)" type="button">var(--esds-color-border-feedback-information)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-feedback-information" type="button">border-border-feedback-information</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-feedback-information" type="button">border-feedback-information</button> <button class="token-value" data-clipboard="outline-feedback-information" type="button">outline-feedback-information</button></div>
         <div class="token-row token-description">Information feedback border colors.</div>
       </td>
     </tr>
@@ -2805,7 +2805,7 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-border-feedback-neutral)" type="button">var(--esds-color-border-feedback-neutral)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-border-feedback-neutral" type="button">border-border-feedback-neutral</button></div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-feedback-neutral" type="button">border-feedback-neutral</button> <button class="token-value" data-clipboard="outline-feedback-neutral" type="button">outline-feedback-neutral</button></div>
         <div class="token-row token-description">Neutral feedback border colors.</div>
       </td>
     </tr>
