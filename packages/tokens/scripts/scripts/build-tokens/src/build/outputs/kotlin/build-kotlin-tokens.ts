@@ -451,6 +451,7 @@ function isExcludedToken(token: GenericDesignTokensCollectionToken): boolean {
 
   return (
     token.files.some((path: string): boolean => path.endsWith('/debug.tokens.json')) ||
+    token.type === 'color' ||
     // TODO: Kotlin does not support more than 248 properties, thus, we skip the colors -> remove in the future
     /^color\./.test(name) ||
     // TODO: Kotlin does not requires some tokens, thus, we skip them -> remove in the future
