@@ -6,6 +6,7 @@ import type { GenericDesignTokensCollectionToken } from '../../../../../../../..
 import type { ArrayDesignTokenName } from '../../../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
 import { T1_DIRECTORY_NAME } from '../../../../../constants/design-token-tiers.ts';
 import { tokenToSwiftValue } from '../../swift-tokens-format.ts';
+import { resolveColorWithOpacitySwiftValue } from './resolve-color-with-opacity.ts';
 
 const MAX_REFERENCE_DEPTH = 32;
 
@@ -61,16 +62,18 @@ export function resolveThemeTokenSwiftValue(
   const { rawTokensPrefix } = context;
 
   if (swiftType === 'SwiftUI.Color') {
-    const lightT1 = chaseToT1Token(
-      name,
-      context.lightCollection,
-      THEME_LIGHT_PATH_FRAGMENT,
-      context,
-    );
-    const darkT1 = chaseToT1Token(name, context.darkCollection, THEME_DARK_PATH_FRAGMENT, context);
-
-    const light = tokenToSwiftValue(rawTokensPrefix, lightT1);
-    const dark = tokenToSwiftValue(rawTokensPrefix, darkT1);
+    const light = resolveColorWithOpacitySwiftValue(name, {
+      productCollection: context.productCollection,
+      themeCollection: context.lightCollection,
+      themePathFragment: THEME_LIGHT_PATH_FRAGMENT,
+      rawTokensPrefix,
+    });
+    const dark = resolveColorWithOpacitySwiftValue(name, {
+      productCollection: context.productCollection,
+      themeCollection: context.darkCollection,
+      themePathFragment: THEME_DARK_PATH_FRAGMENT,
+      rawTokensPrefix,
+    });
 
     return `SwiftUI.Color(light: ${light}, dark: ${dark})`;
   }

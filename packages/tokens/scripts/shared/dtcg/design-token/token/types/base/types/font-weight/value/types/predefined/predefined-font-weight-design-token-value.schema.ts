@@ -1,6 +1,6 @@
 import * as z from 'zod';
 
-export const predefinedFontWeightDesignTokenValueSchema = z.enum([
+export const predefinedFontWeightDesignTokenValueSchema = z.literal([
   'thin',
   'hairline',
   'extra-light',

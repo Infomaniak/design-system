@@ -19,6 +19,10 @@ import {
   buildSwiftT2,
   buildSwiftThemes,
 } from './built-steps/build-swift-theme-structs/build-swift-theme-structs.ts';
+import {
+  isColorTokenWithReferenceMembers,
+  resolveColorWithOpacitySwiftValue,
+} from './built-steps/build-swift-theme-structs/resolve-color-with-opacity.ts';
 import { buildXcAssets } from './built-steps/build-xcassets.ts';
 import { SWIFT_FILE_HEADER } from './helpers/build-swift-file-header.ts';
 import { buildSwiftFile, indentSwiftLines } from './helpers/build-swift-file.ts';
@@ -61,6 +65,18 @@ public extension SwiftUI.Color {
     }
 }
 `;
+
+function getSwiftPrimitiveGroupImports(
+  groupName: string,
+  declarations: readonly SwiftEnumDeclaration[],
+): string[] {
+  const usesSwiftUIColor: boolean = declarations.some(
+    (item: SwiftEnumDeclaration): boolean =>
+      item.$type === 'declaration' && item.valueType === 'SwiftUI.Color',
+  );
+
+  return groupName === 'Color' || usesSwiftUIColor ? ['SwiftUI'] : ['Foundation'];
+}
 
 export async function buildSwiftTokens({
   baseCollection,
@@ -108,6 +124,25 @@ export async function buildSwiftTokens({
     await logger.asyncTask('t1-tokens', async (logger: Logger): Promise<void> => {
       await logger.asyncTask('color-tokens', async (): Promise<void> => {
         for (const token of t1TokenColors) {
+          if (isColorTokenWithReferenceMembers(token)) {
+            const groupName = getSwiftTokenGroupName(token);
+            if (!declarations.has(groupName)) {
+              declarations.set(groupName, []);
+            }
+            declarations.get(groupName)!.push({
+              $type: 'declaration',
+              name: segmentsToSwiftIdentifier(token.name, 1),
+              valueType: 'SwiftUI.Color',
+              value: resolveColorWithOpacitySwiftValue(token.name, {
+                productCollection: baseCollection,
+                themeCollection: baseCollection,
+                themePathFragment: '',
+                rawTokensPrefix: SWIFT_PRIMITIVE_TOKENS,
+              }),
+            });
+            continue;
+          }
+
           const { colorsetName } = await buildXcAssets({
             token,
             outputDirectory: primitivesTargetDirectory,
@@ -158,7 +193,7 @@ export async function buildSwiftTokens({
 
         for (const [groupName, declaration] of declarations) {
           const content: string = buildSwiftFile({
-            imports: groupName === 'Color' ? ['SwiftUI'] : ['Foundation'],
+            imports: getSwiftPrimitiveGroupImports(groupName, declaration),
             type: 'public extension',
             name: SWIFT_PRIMITIVE_TOKENS,
             protocols: [],
