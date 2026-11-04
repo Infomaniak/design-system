@@ -294,6 +294,93 @@ describe('resolvedTokenToYamlValue', () => {
     expect(resolvedTokenToYamlValue(collection, resolvedToken)).toBe('#ff000080');
   });
 
+  it('should format a color token whose components chain through a referenced color', () => {
+    const collection = new DesignTokensCollection([
+      {
+        files: ['/tokens/t1-primitive/color.tokens.json'],
+        name: ['color', 'red', '500'],
+        type: 'color',
+        value: { hex: '#ff0000', components: [1, 0, 0], colorSpace: 'srgb' },
+      },
+      {
+        files: ['/tokens/t2-semantic/color.tokens.json'],
+        name: ['color', 'accent'],
+        type: 'color',
+        value: { colorSpace: 'srgb', components: '{color.red.500}' },
+      },
+      {
+        files: ['/tokens/t3-component/button.tokens.json'],
+        name: ['button', 'accent'],
+        type: 'color',
+        value: { colorSpace: 'srgb', components: '{color.accent}', alpha: 0.5 },
+      },
+    ]);
+    const resolvedToken = createMockToken({
+      name: ['button', 'accent'],
+      type: 'color',
+      value: { colorSpace: 'srgb', components: '{color.accent}', alpha: 0.5 },
+    });
+    expect(resolvedTokenToYamlValue(collection, resolvedToken)).toBe('#ff000080');
+  });
+
+  it('should keep the nearest referenced color alpha through a chain when the token has none', () => {
+    const collection = new DesignTokensCollection([
+      {
+        files: ['/tokens/t1-primitive/color.tokens.json'],
+        name: ['color', 'red', 'translucent'],
+        type: 'color',
+        value: { hex: '#ff0000', components: [1, 0, 0], colorSpace: 'srgb', alpha: 0.25 },
+      },
+      {
+        files: ['/tokens/t2-semantic/color.tokens.json'],
+        name: ['color', 'accent'],
+        type: 'color',
+        value: { colorSpace: 'srgb', components: '{color.red.translucent}', alpha: 0.5 },
+      },
+      {
+        files: ['/tokens/t3-component/button.tokens.json'],
+        name: ['button', 'accent'],
+        type: 'color',
+        value: { colorSpace: 'srgb', components: '{color.accent}' },
+      },
+    ]);
+    const resolvedToken = createMockToken({
+      name: ['button', 'accent'],
+      type: 'color',
+      value: { colorSpace: 'srgb', components: '{color.accent}' },
+    });
+    expect(resolvedTokenToYamlValue(collection, resolvedToken)).toBe('#ff000080');
+  });
+
+  it('should format a chained color token without any alpha as opaque', () => {
+    const collection = new DesignTokensCollection([
+      {
+        files: ['/tokens/t1-primitive/color.tokens.json'],
+        name: ['color', 'red', '500'],
+        type: 'color',
+        value: { hex: '#ff0000', components: [1, 0, 0], colorSpace: 'srgb' },
+      },
+      {
+        files: ['/tokens/t2-semantic/color.tokens.json'],
+        name: ['color', 'accent'],
+        type: 'color',
+        value: { colorSpace: 'srgb', components: '{color.red.500}' },
+      },
+      {
+        files: ['/tokens/t3-component/button.tokens.json'],
+        name: ['button', 'accent'],
+        type: 'color',
+        value: { colorSpace: 'srgb', components: '{color.accent}' },
+      },
+    ]);
+    const resolvedToken = createMockToken({
+      name: ['button', 'accent'],
+      type: 'color',
+      value: { colorSpace: 'srgb', components: '{color.accent}' },
+    });
+    expect(resolvedTokenToYamlValue(collection, resolvedToken)).toBe('#f00');
+  });
+
   it('should format dimension tokens as CSS dimension strings', () => {
     const collection = new DesignTokensCollection([]);
     const resolvedToken = createMockToken({

@@ -106,6 +106,31 @@ function isResolvedReferencedColorValue(value: unknown): value is ColorValue {
   );
 }
 
+/**
+ * Unwraps a resolved color value whose `components` member references another
+ * whole color token, recursively.
+ *
+ * NOTE: Curly reference is not official
+ *
+ * A `components` member referencing a whole color token resolves to the
+ * referenced color value itself (an object, not a component list). Reference
+ * chains (e.g. T3 → T2 → T1) resolve to nested color values, so unwrapping
+ * recurses until the actual component list is reached, preserving the outer
+ * alpha override at each level.
+ */
+function unwrapReferencedColorValue(value: ColorValue): ColorValue {
+  const components: unknown = value.components;
+
+  if (!isResolvedReferencedColorValue(components)) {
+    return value;
+  }
+
+  return unwrapReferencedColorValue({
+    ...components,
+    alpha: value.alpha ?? components.alpha,
+  });
+}
+
 export function resolvedTokenToYamlValue(
   collection: DesignTokensCollection,
   resolvedToken: GenericResolvedDesignTokensCollectionToken,
@@ -113,20 +138,10 @@ export function resolvedTokenToYamlValue(
   const fullyResolved = deepResolveValue(collection, resolvedToken.value);
 
   switch (resolvedToken.type) {
-    case 'color': {
-      const value = fullyResolved as ColorValue;
-
-      const components: unknown = value.components;
-
-      if (isResolvedReferencedColorValue(components)) {
-        return colorDesignTokensCollectionTokenValueToCssValue({
-          ...components,
-          alpha: value.alpha ?? components.alpha,
-        });
-      }
-
-      return colorDesignTokensCollectionTokenValueToCssValue(value);
-    }
+    case 'color':
+      return colorDesignTokensCollectionTokenValueToCssValue(
+        unwrapReferencedColorValue(fullyResolved as ColorValue),
+      );
     case 'dimension':
       return dimensionDesignTokensCollectionTokenValueToCssValue(
         fullyResolved as Parameters<typeof dimensionDesignTokensCollectionTokenValueToCssValue>[0],
