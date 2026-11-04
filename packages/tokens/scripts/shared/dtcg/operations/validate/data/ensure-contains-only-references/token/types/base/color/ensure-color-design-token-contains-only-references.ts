@@ -1,6 +1,19 @@
+import { isDesignTokenReference } from '../../../../../../../../design-token/reference/is-design-token-reference.ts';
 import { expectDesignTokenReference } from '../../../../../../../../design-token/reference/value-or/expect/expect-design-token-reference.ts';
 import type { ColorDesignToken } from '../../../../../../../../design-token/token/types/base/types/color/color-design-token.ts';
 
 export function ensureColorDesignTokenContainsOnlyReferences(token: ColorDesignToken): void {
-  expectDesignTokenReference(token.$value);
+  /**
+   * NOTE: Curly reference is not official
+   */
+  if (!isDesignTokenReference(token.$value)) {
+    expectDesignTokenReference(token.$value.components);
+
+    if (token.$value.alpha !== undefined) {
+      expectDesignTokenReference(token.$value.alpha);
+    }
+  }
+
+  // NOTE: official
+  // expectDesignTokenReference(token.$value);
 }
