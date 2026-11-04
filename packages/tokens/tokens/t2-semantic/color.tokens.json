@@ -1,4 +1,14 @@
 {
+  "debug": {
+    "color": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": "{color.background.brand}",
+        "alpha": "{opacity.medium}"
+      }
+    }
+  },
   "color": {
     "$description": "Semantic color tokens for backgrounds, content, borders, and shadows.",
     "background": {
