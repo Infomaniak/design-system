@@ -8,7 +8,10 @@ export function ensureColorDesignTokenContainsOnlyReferences(token: ColorDesignT
    */
   if (!isDesignTokenReference(token.$value)) {
     expectDesignTokenReference(token.$value.components);
-    expectDesignTokenReference(token.$value.alpha);
+
+    if (token.$value.alpha !== undefined) {
+      expectDesignTokenReference(token.$value.alpha);
+    }
   }
 
   // NOTE: official
