@@ -233,3 +233,36 @@ export const Sizes: StoryObj<EsdsButtonAttr & HTMLButtonElement & ExtraControls>
     </div>
   `,
 };
+
+export const AuthorAriaLabel: StoryObj = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Both elements carry an author-defined `aria-label` and identical content: the custom attribute must preserve it on both, so that screen readers announce a unique accessible name per control. Compare the two after the attribute upgrade: currently the `<a>` loses its `aria-label` on connect while the `<button>` keeps it.',
+      },
+    },
+  },
+  render: () => html`
+    ${BUTTON_GRID_STYLES}
+    <div class="buttons-container">
+      <a
+        ${defineEsdsButtonAttr}
+        esds-button
+        href="#"
+        aria-label="open link"
+      >
+        <esds-icon name="esds:plus"></esds-icon>
+        open
+      </a>
+      <button
+        ${defineEsdsButtonAttr}
+        esds-button
+        aria-label="open button"
+      >
+        <esds-icon name="esds:plus"></esds-icon>
+        open
+      </button>
+    </div>
+  `,
+};
