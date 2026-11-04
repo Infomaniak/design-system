@@ -30,4 +30,39 @@ describe('ensureColorDesignTokenContainsOnlyReferences', () => {
 
     expect(() => ensureColorDesignTokenContainsOnlyReferences(token)).toThrow();
   });
+
+  test('should not throw when token contains a referenced components and no alpha', () => {
+    const token: ColorDesignToken = {
+      $value: {
+        colorSpace: 'srgb',
+        components: '{color.red.500}',
+      },
+    };
+
+    expect(() => ensureColorDesignTokenContainsOnlyReferences(token)).not.toThrow();
+  });
+
+  test('should not throw when token contains referenced components and alpha', () => {
+    const token: ColorDesignToken = {
+      $value: {
+        colorSpace: 'srgb',
+        components: '{color.red.500}',
+        alpha: '{opacity.20}',
+      },
+    };
+
+    expect(() => ensureColorDesignTokenContainsOnlyReferences(token)).not.toThrow();
+  });
+
+  test('should throw when token contains referenced components with a literal alpha', () => {
+    const token: ColorDesignToken = {
+      $value: {
+        colorSpace: 'srgb',
+        components: '{color.red.500}',
+        alpha: 0.5,
+      },
+    };
+
+    expect(() => ensureColorDesignTokenContainsOnlyReferences(token)).toThrow();
+  });
 });

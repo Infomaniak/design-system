@@ -24,6 +24,8 @@ import { designTokenValueToDesignTokensCollectionTokenValue } from './token/from
 import type { ArrayDesignTokenName } from './token/name/array-design-token-name.ts';
 import type { DesignTokenNameLike } from './token/name/design-token-name-like.ts';
 import { isDesignTokensCollectionTokenReferencing } from './token/operations/is-referencing/is-design-tokens-collection-token-referencing.ts';
+import { isColorDesignTokensCollectionToken } from './token/types/base/color/is-color-design-tokens-collection-token.ts';
+import { updateColorDesignTokensCollectionTokenValueReferences } from './token/types/base/color/value/operations/update/update-color-design-tokens-collection-token-value-references.ts';
 import { isBorderDesignTokensCollectionToken } from './token/types/composite/border/is-border-design-tokens-collection-token.ts';
 import { updateBorderDesignTokensCollectionTokenValueReferences } from './token/types/composite/border/value/operations/update/update-border-design-tokens-collection-token-value-references.ts';
 import { isGradientDesignTokensCollectionToken } from './token/types/composite/gradient/is-gradient-design-tokens-collection-token.ts';
@@ -557,7 +559,12 @@ export class DesignTokensCollection {
           throw new Error('Expected token with type.');
         }
 
-        if (isBorderDesignTokensCollectionToken(token)) {
+        if (isColorDesignTokensCollectionToken(token)) {
+          /**
+           * NOTE: Curly reference is not official
+           */
+          value = updateColorDesignTokensCollectionTokenValueReferences(token.value, update);
+        } else if (isBorderDesignTokensCollectionToken(token)) {
           value = updateBorderDesignTokensCollectionTokenValueReferences(token.value, update);
         } else if (isGradientDesignTokensCollectionToken(token)) {
           value = updateGradientDesignTokensCollectionTokenValueReferences(token.value, update);

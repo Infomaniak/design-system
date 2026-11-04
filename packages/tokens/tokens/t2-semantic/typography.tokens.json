@@ -262,6 +262,35 @@
           "scopes": []
         }
       }
+    },
+    "6xl": {
+      "$description": "6x-large typography style for the largest display text.",
+      "base": {
+        "$value": {
+          "fontFamily": "{font.family.base}",
+          "fontSize": "{text.6xl.size}",
+          "fontWeight": "{font.weight.regular}",
+          "letterSpacing": "{text.6xl.letter-spacing}",
+          "lineHeight": "{text.6xl.line-height}"
+        },
+        "$description": "6x-large base typography (regular weight).",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "emphasized": {
+        "$value": {
+          "fontFamily": "{font.family.base}",
+          "fontSize": "{text.6xl.size}",
+          "fontWeight": "{font.weight.medium}",
+          "letterSpacing": "{text.6xl.letter-spacing}",
+          "lineHeight": "{text.6xl.line-height}"
+        },
+        "$description": "6x-large emphasized typography (medium weight).",
+        "$extensions": {
+          "scopes": []
+        }
+      }
     }
   }
 }

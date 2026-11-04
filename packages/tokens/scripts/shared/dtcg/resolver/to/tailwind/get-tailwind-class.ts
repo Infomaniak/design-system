@@ -9,7 +9,7 @@ import { arrayDesignTokenNameToCssVariableSegments } from '../css/token/name/arr
  * |---|---|
  * | `color.background.*` | `bg-{rest}` |
  * | `color.content.*` | `text-{rest}` |
- * | `color.border.*` | `border-{rest}` |
+ * | `color.border.*` | `border-{rest}` / `outline-{rest}` |
  * | `color.*` (fallback) | `bg-{rest}` |
  * | `font.family.*` | `font-{rest}` |
  * | `font.size.*` | `text-{rest}` |
@@ -24,7 +24,7 @@ import { arrayDesignTokenNameToCssVariableSegments } from '../css/token/name/arr
  * | `spacing.*` | `p-{rest}` / `m-{rest}` / `gap-{rest}` |
  * | `shadow.*` | `shadow-{rest}` |
  * | `opacity.*` | `opacity-{rest}` |
- * | `border.*.width` | `border-{rest}` |
+ * | `border.*.width` | `border-{rest}` / `outline-{rest}` (except `none`: `border-none`) |
  *
  * Returns `null` when no meaningful Tailwind equivalent exists.
  */
@@ -33,7 +33,7 @@ export function getTailwindClass(tokenName: ArrayDesignTokenName): string[] | nu
 
   if (tokenNameStr.startsWith('color.')) {
     const colorCategory = tokenName[1];
-    const rest = arrayDesignTokenNameToCssVariableSegments(tokenName.slice(1));
+    const rest = arrayDesignTokenNameToCssVariableSegments(tokenName.slice(2));
 
     if (colorCategory === 'background') {
       return [`bg-${rest}`];
@@ -44,10 +44,11 @@ export function getTailwindClass(tokenName: ArrayDesignTokenName): string[] | nu
     }
 
     if (colorCategory === 'border') {
-      return [`border-${rest}`];
+      return [`border-${rest}`, `outline-${rest}`];
     }
 
-    return [`bg-${rest}`];
+    // fallback colors bind to the generic `--color-*` namespace, category included
+    return [`bg-${arrayDesignTokenNameToCssVariableSegments(tokenName.slice(1))}`];
   }
 
   if (tokenNameStr.startsWith('font.family.')) {
@@ -110,7 +111,14 @@ export function getTailwindClass(tokenName: ArrayDesignTokenName): string[] | nu
 
   if (tokenNameStr.startsWith('border.')) {
     if (tokenNameStr.endsWith('.width')) {
-      return [`border-${arrayDesignTokenNameToCssVariableSegments(tokenName.slice(1, -1))}`];
+      const rest = arrayDesignTokenNameToCssVariableSegments(tokenName.slice(1, -1));
+
+      // NOTE: `outline-none` is an outline style utility: never map an outline width to it.
+      if (rest === 'none') {
+        return [`border-${rest}`];
+      }
+
+      return [`border-${rest}`, `outline-${rest}`];
     }
 
     return null;

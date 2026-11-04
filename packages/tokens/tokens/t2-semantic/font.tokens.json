@@ -65,6 +65,13 @@
         "$extensions": {
           "scopes": []
         }
+      },
+      "6xl": {
+        "$value": "{font.size.52}",
+        "$description": "6x-large font size for the largest display text.",
+        "$extensions": {
+          "scopes": []
+        }
       }
     },
     "family": {
@@ -96,6 +103,13 @@
       "md": {
         "$value": "{font.line-height.24}",
         "$description": "Medium line-height for default body text.",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "lg": {
+        "$value": "{font.line-height.26}",
+        "$description": "Large line-height for the lg font size.",
         "$extensions": {
           "scopes": []
         }
@@ -135,9 +149,9 @@
           "scopes": []
         }
       },
-      "lg": {
-        "$value": "{font.line-height.26}",
-        "$description": "Large line-height for the lg font size.",
+      "6xl": {
+        "$value": "{font.line-height.60}",
+        "$description": "6x-large line-height for the largest display text.",
         "$extensions": {
           "scopes": []
         }

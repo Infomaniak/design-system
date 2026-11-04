@@ -125,6 +125,38 @@ and `mobile` OR `desktop` _platform_.
 
 `light`, `dark`, `mobile` and `desktop` are _contexts_ and `theme` and `platform` are _modifiers_.
 
+## Spec
+
+The tokens follow the DTCG spec. However, we've added the following exceptions.
+
+### color.$value.components/alpha
+
+The `color` tokens (`$type: "color"`) may have `components` and `alpha` being `curly-references` instead of their literal counterparts.
+Here's the interface describing it:
+
+```ts
+interface ColorDesignTokenValue {
+  readonly colorSpace: ValueOrJsonReference<ColorDesignTokenColorSpace>;
+  readonly components: ValueOrDesignTokenReference<ColorDesignTokenValueComponents>;
+  readonly alpha?: ValueOrDesignTokenReference<ColorDesignTokenAlpha>; // [0, 1]
+  readonly hex?: ValueOrJsonReference<ColorDesignTokenHex>;
+}
+```
+
+> [!NOTE]
+> On the web, color tokens whose `components` or `alpha` reference another token are emitted
+> using the CSS relative color syntax (ex: `rgb(from var(--color-red) r g b / var(--opacity-20))`).
+
+### typography.$value.lineHeight
+
+The `typography` tokens (`$type: "typography"`) may have `lineHeight` being a `dimension` token instead of just a `number` token.
+Here's the interface describing it:
+
+```ts
+export type TypographyDesignTokenValueLineHeight =
+  NumberTypographyDesignTokenValueLineHeight | DimensionTypographyDesignTokenValueLineHeight;
+```
+
 ## Platforms
 
 ### Web

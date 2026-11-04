@@ -6,12 +6,14 @@
       "font": {
         "base": {
           "$value": "{typography.xs.base}",
+          "$description": "Extra-small body text typography (regular weight).",
           "$extensions": {
             "scopes": []
           }
         },
         "emphasized": {
           "$value": "{typography.xs.emphasized}",
+          "$description": "Extra-small body text typography (medium weight).",
           "$extensions": {
             "scopes": []
           }
@@ -23,12 +25,14 @@
       "font": {
         "base": {
           "$value": "{typography.sm.base}",
+          "$description": "Small body text typography (regular weight).",
           "$extensions": {
             "scopes": []
           }
         },
         "emphasized": {
           "$value": "{typography.sm.emphasized}",
+          "$description": "Small body text typography (medium weight).",
           "$extensions": {
             "scopes": []
           }
@@ -40,12 +44,14 @@
       "font": {
         "base": {
           "$value": "{typography.md.base}",
+          "$description": "Medium body text typography (regular weight).",
           "$extensions": {
             "scopes": []
           }
         },
         "emphasized": {
           "$value": "{typography.md.emphasized}",
+          "$description": "Medium body text typography (medium weight).",
           "$extensions": {
             "scopes": []
           }
@@ -57,12 +63,14 @@
       "font": {
         "base": {
           "$value": "{typography.lg.base}",
+          "$description": "Large body text typography (regular weight).",
           "$extensions": {
             "scopes": []
           }
         },
         "emphasized": {
           "$value": "{typography.lg.emphasized}",
+          "$description": "Large body text typography (medium weight).",
           "$extensions": {
             "scopes": []
           }

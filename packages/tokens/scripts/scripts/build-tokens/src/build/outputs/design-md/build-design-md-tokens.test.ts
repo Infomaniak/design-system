@@ -234,6 +234,66 @@ describe('resolvedTokenToYamlValue', () => {
     expect(resolvedTokenToYamlValue(collection, resolvedToken)).toBe('#f00');
   });
 
+  it('should merge referenced components with the token alpha', () => {
+    const collection = new DesignTokensCollection([
+      {
+        files: ['/tokens/t1-primitive/color.tokens.json'],
+        name: ['color', 'red', '500'],
+        type: 'color',
+        value: { hex: '#ff0000', components: [1, 0, 0], colorSpace: 'srgb' },
+      },
+      {
+        files: ['/tokens/t1-primitive/opacity.tokens.json'],
+        name: ['opacity', 'medium'],
+        type: 'number',
+        value: 0.5,
+      },
+      {
+        files: ['/tokens/t2-semantic/color.tokens.json'],
+        name: ['color', 'accent'],
+        type: 'color',
+        value: {
+          colorSpace: 'srgb',
+          components: '{color.red.500}',
+          alpha: '{opacity.medium}',
+        },
+      },
+    ]);
+    const resolvedToken = createMockToken({
+      name: ['color', 'accent'],
+      type: 'color',
+      value: {
+        colorSpace: 'srgb',
+        components: '{color.red.500}',
+        alpha: '{opacity.medium}',
+      },
+    });
+    expect(resolvedTokenToYamlValue(collection, resolvedToken)).toBe('#ff000080');
+  });
+
+  it('should keep the referenced color alpha when the token has none', () => {
+    const collection = new DesignTokensCollection([
+      {
+        files: ['/tokens/t1-primitive/color.tokens.json'],
+        name: ['color', 'red', 'translucent'],
+        type: 'color',
+        value: { hex: '#ff0000', components: [1, 0, 0], colorSpace: 'srgb', alpha: 0.5 },
+      },
+      {
+        files: ['/tokens/t2-semantic/color.tokens.json'],
+        name: ['color', 'accent'],
+        type: 'color',
+        value: { colorSpace: 'srgb', components: '{color.red.translucent}' },
+      },
+    ]);
+    const resolvedToken = createMockToken({
+      name: ['color', 'accent'],
+      type: 'color',
+      value: { colorSpace: 'srgb', components: '{color.red.translucent}' },
+    });
+    expect(resolvedTokenToYamlValue(collection, resolvedToken)).toBe('#ff000080');
+  });
+
   it('should format dimension tokens as CSS dimension strings', () => {
     const collection = new DesignTokensCollection([]);
     const resolvedToken = createMockToken({
@@ -597,8 +657,8 @@ describe('buildDesignMdTokens', () => {
     // Non-themeable T2 token should be single scalar in YAML
     expect(content).toContain('typography:');
 
-    // CSS variables in markdown tables
-    expect(content).toContain('var(--esds-color-background-brand-default)');
+    // AI implementation directives reference real token names
+    expect(content).toContain('`color.background.brand` with `var(--esds-color-background-brand)`');
     expect(content).toContain('var(--esds-typography-heading-lg)');
 
     // Tier separation (T1 is excluded; sections are renumbered)
@@ -654,10 +714,10 @@ describe('buildDesignMdTokens', () => {
 
     const content = await readFile(join(tempDir, 'design-md', 'DESIGN.md'), 'utf-8');
 
-    // Should contain the portable token guidance
+    // Should contain the portable token guidance, referencing real token names
     expect(content).toContain('Portable product tokens');
-    expect(content).toContain('color.background.brand.default');
-    expect(content).toContain('color.background.brand.calendar.default');
+    expect(content).toContain('`color.background.brand` with `var(--esds-color-background-brand)`');
+    expect(content).toContain('color.background.brand.calendar');
   });
 
   it('should omit component tokens section when no T3 tokens exist', async () => {
