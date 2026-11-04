@@ -5,5 +5,5 @@ import type { ColorDesignTokenValueComponent } from '../../../../../../../../../
 export interface ColorFigmaDesignTokenObjectValue {
   readonly colorSpace?: ColorDesignTokenColorSpace;
   readonly components: ValueOrCurlyReference<readonly ColorDesignTokenValueComponent[]>;
-  readonly alpha?: ValueOrCurlyReference<number | undefined>;
+  readonly alpha?: ValueOrCurlyReference<number>;
 }
