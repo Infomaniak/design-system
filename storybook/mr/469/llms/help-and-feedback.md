@@ -1,0 +1,12 @@
+# Help and Feedback
+
+> Questions, bug reports, or feedback about the Design System? Internal consumers can reach out to the Design System te...
+
+<div className="welcome-section">
+  <h1>Help and Feedback</h1>
+  <p className="welcome-description">
+    Questions, bug reports, or feedback about the Design System? Internal consumers can reach out to
+    the Design System team directly. Everyone else is welcome to open an issue on [GitHub
+    Issues](https://github.com/Infomaniak/design-system/issues).
+  </p>
+</div>
