@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
+  collectCustomAttributeClassNames,
+  collectCustomAttributeTagNames,
   escapeTableCell,
   findElementByTagName,
   parseCem,
@@ -48,13 +50,25 @@ const CEM = JSON.stringify({
         },
       ],
     },
+    {
+      path: 'src/components/esds-button/esds-button.attr.ts',
+      declarations: [
+        {
+          name: 'EsdsButtonAttr',
+          tagName: 'esds-button',
+          customElement: true,
+          superclass: { name: 'CustomAttribute', module: '/src/helpers/custom-attribute.ts' },
+          attributes: [{ name: 'disabled' }, { name: 'loading' }],
+        },
+      ],
+    },
   ],
 });
 
 describe('parseCem', () => {
   it('parses the raw manifest json', () => {
     const cem = parseCem(CEM);
-    expect(cem.modules).toHaveLength(2);
+    expect(cem.modules).toHaveLength(3);
   });
 });
 
@@ -64,6 +78,8 @@ describe('findElementByTagName', () => {
     expect(docs).toEqual({
       tagName: 'esds-separator',
       className: 'EsdsSeparatorComponent',
+      kind: 'element',
+      attributeName: 'esds-separator',
       attributes: [
         {
           name: 'orientation',
@@ -85,6 +101,17 @@ describe('findElementByTagName', () => {
       cssProperties: [],
       cssParts: [],
     });
+  });
+
+  it('detects custom attributes from the superclass and keeps the attribute name', () => {
+    const docs = findElementByTagName(parseCem(CEM), 'esds-button');
+    expect(docs).toMatchObject({
+      tagName: 'esds-button',
+      className: 'EsdsButtonAttr',
+      kind: 'attribute',
+      attributeName: 'esds-button',
+    });
+    expect(docs?.attributes.map((attribute) => attribute.name)).toEqual(['disabled', 'loading']);
   });
 
   it('returns null for an unknown tag name', () => {
@@ -147,5 +174,130 @@ describe('renderApiSection', () => {
     expect(section).toContain('### Attributes');
     expect(section).not.toContain('### Events');
     expect(renderApiSection({ ...docs!, attributes: [] })).toBe('');
+  });
+});
+
+describe('collectCustomAttributeClassNames', () => {
+  it('collects class names of custom attribute declarations', () => {
+    const classNames = collectCustomAttributeClassNames(parseCem(CEM));
+    expect([...classNames]).toEqual(['EsdsButtonAttr']);
+  });
+
+  it('detects attributes from a superclass module hint', () => {
+    const cem = parseCem(
+      JSON.stringify({
+        modules: [
+          {
+            declarations: [
+              {
+                name: 'EsdsSomethingAttr',
+                tagName: 'esds-something',
+                customElement: true,
+                superclass: {
+                  name: 'EsdsBaseAttr',
+                  module: '/src/helpers/custom-attribute/base.ts',
+                },
+              },
+            ],
+          },
+        ],
+      }),
+    );
+    expect([...collectCustomAttributeClassNames(cem)]).toEqual(['EsdsSomethingAttr']);
+  });
+
+  it('detects attributes from an explicit customAttribute marker', () => {
+    const cem = parseCem(
+      JSON.stringify({
+        modules: [
+          {
+            declarations: [
+              {
+                name: 'EsdsMarkedAttr',
+                tagName: 'esds-marked',
+                customElement: true,
+                customAttribute: true,
+              },
+            ],
+          },
+        ],
+      }),
+    );
+    expect([...collectCustomAttributeClassNames(cem)]).toEqual(['EsdsMarkedAttr']);
+  });
+
+  it('detects attributes transitively regardless of declaration order', () => {
+    const cem = parseCem(
+      JSON.stringify({
+        modules: [
+          {
+            declarations: [
+              {
+                name: 'EsdsChildAttr',
+                tagName: 'esds-child',
+                customElement: true,
+                superclass: { name: 'EsdsBaseAttr' },
+              },
+              {
+                name: 'EsdsBaseAttr',
+                customElement: true,
+                superclass: { name: 'CustomAttribute', module: '/src/helpers/custom-attribute.ts' },
+              },
+            ],
+          },
+        ],
+      }),
+    );
+    expect([...collectCustomAttributeClassNames(cem)]).toEqual(['EsdsBaseAttr', 'EsdsChildAttr']);
+  });
+
+  it('returns an empty set for a manifest of plain elements', () => {
+    const cem = parseCem(
+      JSON.stringify({
+        modules: [
+          {
+            declarations: [
+              {
+                name: 'EsdsSeparatorComponent',
+                tagName: 'esds-separator',
+                customElement: true,
+                superclass: { name: 'LitElement', package: 'lit' },
+              },
+            ],
+          },
+        ],
+      }),
+    );
+    expect(collectCustomAttributeClassNames(cem).size).toBe(0);
+  });
+});
+
+describe('collectCustomAttributeTagNames', () => {
+  it('collects tag names of custom attribute declarations', () => {
+    expect([...collectCustomAttributeTagNames(parseCem(CEM))]).toEqual(['esds-button']);
+  });
+
+  it('skips attribute classes without a tag name', () => {
+    const cem = parseCem(
+      JSON.stringify({
+        modules: [
+          {
+            declarations: [
+              {
+                name: 'EsdsBaseAttr',
+                superclass: { name: 'CustomAttribute', module: '/src/helpers/custom-attribute.ts' },
+              },
+              {
+                name: 'EsdsButtonAttr',
+                tagName: 'esds-button',
+                customElement: true,
+                superclass: { name: 'EsdsBaseAttr' },
+              },
+            ],
+          },
+        ],
+      }),
+    );
+    expect([...collectCustomAttributeTagNames(cem)]).toEqual(['esds-button']);
   });
 });

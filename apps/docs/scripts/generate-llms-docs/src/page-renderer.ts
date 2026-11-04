@@ -3,7 +3,12 @@ import { findElementByTagName, renderApiSection, type CustomElementsManifest } f
 import { loadComponentDocs, resolveImportPath } from './component-docs.ts';
 import { buildOutputPath, slugifyTitle } from './index-entries.ts';
 import { cleanMdxContent, extractRawMdImports } from './raw-md.ts';
-import { buildStorySnippets, parseStoriesFile, type ArgsRecord } from './story-snippets.ts';
+import {
+  buildStorySnippets,
+  parseStoriesFile,
+  toSnippetContext,
+  type ArgsRecord,
+} from './story-snippets.ts';
 import { relativizeStorybookLinks } from './storybook-links.ts';
 import type { CemElementDocs, PageModel, StorySnippet, TitleGroup } from './types.ts';
 
@@ -72,6 +77,9 @@ export function buildPageModel(input: {
     importSection: buildImportSection(cemDocs, prose),
     props: cemDocs === null ? '' : renderApiSection(cemDocs),
     examples,
+    componentKind: cemDocs?.kind ?? null,
+    componentTagName: cemDocs?.tagName ?? null,
+    componentAttributeNames: (cemDocs?.attributes ?? []).map((attribute) => attribute.name),
   };
 }
 
@@ -93,7 +101,7 @@ function stripLeadingH1(prose: string): string {
   return prose.trim();
 }
 
-function buildStoryExamples(storiesSource: string, cemDocs: CemElementDocs): StorySnippet[] {
+export function buildStoryExamples(storiesSource: string, cemDocs: CemElementDocs): StorySnippet[] {
   const parsed = parseStoriesFile(storiesSource);
   const cemDefaults: ArgsRecord = {};
   for (const attribute of cemDocs.attributes) {
@@ -102,7 +110,7 @@ function buildStoryExamples(storiesSource: string, cemDocs: CemElementDocs): Sto
     }
   }
   return buildStorySnippets({
-    tagName: cemDocs.tagName,
+    context: toSnippetContext(cemDocs),
     cemDefaults,
     meta: parsed.meta,
     stories: parsed.stories,

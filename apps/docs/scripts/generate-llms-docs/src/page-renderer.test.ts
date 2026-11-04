@@ -126,6 +126,9 @@ describe('buildPageModel', () => {
     expect(page.prose).toContain('Import and register the separator component');
     expect(page.importSection).toBe('');
     expect(page.props).toContain('| decorative |');
+    expect(page.componentKind).toBe('element');
+    expect(page.componentTagName).toBe('esds-separator');
+    expect(page.componentAttributeNames).toEqual(['decorative']);
     expect(page.examples).toEqual([
       { name: 'Default', description: undefined, code: '<esds-separator></esds-separator>' },
     ]);
@@ -247,6 +250,9 @@ describe('renderPageMarkdown', () => {
           code: '<esds-separator></esds-separator>',
         },
       ],
+      componentKind: 'element',
+      componentTagName: 'esds-separator',
+      componentAttributeNames: [],
     };
     expect(renderPageMarkdown(page)).toBe(
       [
@@ -290,6 +296,9 @@ describe('renderPageMarkdown', () => {
       importSection: '',
       props: '',
       examples: [],
+      componentKind: null,
+      componentTagName: null,
+      componentAttributeNames: [],
     };
     expect(renderPageMarkdown(page)).toBe('# Welcome\n');
   });
