@@ -152,7 +152,9 @@ export function findElementByTagName(
 }
 
 export function escapeTableCell(value: string): string {
-  return value.replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim();
+  // Escape backslashes first so a literal `\|` in the source becomes `\\\|`,
+  // which renders back as `\|` instead of breaking the table cell.
+  return value.replace(/\\/g, '\\\\').replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim();
 }
 
 export function renderPropTable(rows: PropRow[]): string {

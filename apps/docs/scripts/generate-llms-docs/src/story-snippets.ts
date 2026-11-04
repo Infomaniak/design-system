@@ -741,7 +741,9 @@ export function cleanRenderTemplate(
   args: ArgsRecord,
   context: SnippetContext | null = null,
 ): string | null {
-  const withoutComments = template.replace(/<!--[\s\S]*?-->/g, '');
+  // The alternation also consumes a dangling `<!--` opener, which a plain
+  // comment-to-closer match would leave behind.
+  const withoutComments = template.replace(/<!--[\s\S]*?-->|<!--/g, '');
   const replaced = replaceExpressions(withoutComments, args, context);
   if (replaced === null) return null;
   const withoutBlankLines = replaced

@@ -149,6 +149,15 @@ describe('escapeTableCell', () => {
   it('escapes pipes and collapses whitespace', () => {
     expect(escapeTableCell("'a' | 'b'\nsecond  line")).toBe("'a' \\| 'b' second line");
   });
+
+  it('escapes backslashes before pipes', () => {
+    // Source contains a literal `\|`; the escaped `\\\|` renders back as `\|` in GFM.
+    expect(escapeTableCell('use \\| to escape')).toBe('use \\\\\\| to escape');
+  });
+
+  it('escapes a lone backslash', () => {
+    expect(escapeTableCell('a \\ b')).toBe('a \\\\ b');
+  });
 });
 
 describe('renderPropTable', () => {
