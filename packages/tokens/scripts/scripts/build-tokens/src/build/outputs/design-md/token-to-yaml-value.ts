@@ -86,6 +86,26 @@ function innerFormatResolvedValue(value: unknown): string {
 
 /*-- resolvedTokenToYamlValue --*/
 
+type ColorValue = Parameters<typeof colorDesignTokensCollectionTokenValueToCssValue>[0];
+
+/**
+ * Checks whether a resolved `components` member holds a referenced color value.
+ *
+ * NOTE: Curly reference is not official
+ *
+ * A `components` member referencing a whole color token resolves to the
+ * referenced color value itself (an object, not a component list).
+ */
+function isResolvedReferencedColorValue(value: unknown): value is ColorValue {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    !Array.isArray(value) &&
+    'colorSpace' in value &&
+    'components' in value
+  );
+}
+
 export function resolvedTokenToYamlValue(
   collection: DesignTokensCollection,
   resolvedToken: GenericResolvedDesignTokensCollectionToken,
@@ -93,16 +113,20 @@ export function resolvedTokenToYamlValue(
   const fullyResolved = deepResolveValue(collection, resolvedToken.value);
 
   switch (resolvedToken.type) {
-    case 'color':
-      return colorDesignTokensCollectionTokenValueToCssValue(
-        (Array.isArray(
-          (fullyResolved as Parameters<typeof colorDesignTokensCollectionTokenValueToCssValue>[0])
-            .components,
-        )
-          ? fullyResolved
-          : (fullyResolved as Parameters<typeof colorDesignTokensCollectionTokenValueToCssValue>[0])
-              .components) as Parameters<typeof colorDesignTokensCollectionTokenValueToCssValue>[0],
-      );
+    case 'color': {
+      const value = fullyResolved as ColorValue;
+
+      const components: unknown = value.components;
+
+      if (isResolvedReferencedColorValue(components)) {
+        return colorDesignTokensCollectionTokenValueToCssValue({
+          ...components,
+          alpha: value.alpha ?? components.alpha,
+        });
+      }
+
+      return colorDesignTokensCollectionTokenValueToCssValue(value);
+    }
     case 'dimension':
       return dimensionDesignTokensCollectionTokenValueToCssValue(
         fullyResolved as Parameters<typeof dimensionDesignTokensCollectionTokenValueToCssValue>[0],

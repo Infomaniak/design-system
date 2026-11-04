@@ -38,7 +38,12 @@ export function colorDesignTokensCollectionTokenValueToCssValue(
         return formatColor(
           colorDesignTokensCollectionTokenValueToColorInstance({
             ...value,
-            alpha: value.alpha,
+            /**
+             * NOTE: Curly reference is not official
+             * The alpha (possibly a reference) is appended separately below,
+             * and must not be part of the source color.
+             */
+            alpha: undefined,
           }),
         );
       },
