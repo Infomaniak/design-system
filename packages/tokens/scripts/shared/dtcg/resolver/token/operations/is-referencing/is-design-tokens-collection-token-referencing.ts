@@ -4,6 +4,8 @@ import {
   type GenericDesignTokensCollectionToken,
   isDesignTokensCollectionTokenWithType,
 } from '../../design-tokens-collection-token.ts';
+import { isColorDesignTokensCollectionToken } from '../../types/base/color/is-color-design-tokens-collection-token.ts';
+import { isColorDesignTokensCollectionTokenValueReferencing } from '../../types/base/color/value/operations/is-referencing/is-color-design-tokens-collection-token-value-referencing.ts';
 import { isBorderDesignTokensCollectionToken } from '../../types/composite/border/is-border-design-tokens-collection-token.ts';
 import { isBorderDesignTokensCollectionTokenValueReferencing } from '../../types/composite/border/value/operations/is-referencing/is-border-design-tokens-collection-token-value-referencing.ts';
 import { isGradientDesignTokensCollectionToken } from '../../types/composite/gradient/is-gradient-design-tokens-collection-token.ts';
@@ -26,6 +28,8 @@ export function isDesignTokensCollectionTokenReferencing(
 
     if (isBorderDesignTokensCollectionToken(token)) {
       return isBorderDesignTokensCollectionTokenValueReferencing(token.value, target);
+    } else if (isColorDesignTokensCollectionToken(token)) {
+      return isColorDesignTokensCollectionTokenValueReferencing(token.value, target);
     } else if (isGradientDesignTokensCollectionToken(token)) {
       throw 'TODO: implement'; // TODO
     } else if (isShadowDesignTokensCollectionToken(token)) {
