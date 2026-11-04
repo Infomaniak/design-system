@@ -60,7 +60,7 @@ Mapping between the shadcn/ui semantic tokens (CSS variables on the dev side) an
 <Table
   headers={['shadcn token', 'CSS variable', 'Design System token']}
   rows={[
-    [<code>accent</code>, <code>--accent</code>, <code>color.background.elevation.overlay</code>],
+    [<code>accent</code>, <code>--accent</code>, <code>color.state.hover.medium</code>],
     [
       <code>accent-foreground</code>,
       <code>--accent-foreground</code>,
