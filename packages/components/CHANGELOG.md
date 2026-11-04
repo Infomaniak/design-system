@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.7.0 (2026-11-04)
+
+### Minor Changes
+
+- [#477](https://github.com/Infomaniak/design-system/pull/477) [`42d4d3c`](https://github.com/Infomaniak/design-system/commit/42d4d3cec1f85762bfa4105565fcf4d1cda66f99): Added a new `2xl` size to the `esds-heading` custom attribute and its Tailwind utilities:
+
+  - `[esds-heading='2xl']` applies the new `heading.2xl` design tokens (base and emphasized variants).
+  - New `esds-heading-2xl` and `esds-heading-2xl-emphasized` Tailwind utilities.
+  - Updated the Storybook stories: the size selector now offers `2xl`, and the `AllSizes` story covers `h1`..`h6` (`2xl`..`xs`).
+
+### Patch Changes
+
+- [#472](https://github.com/Infomaniak/design-system/pull/472) [`dae7600`](https://github.com/Infomaniak/design-system/commit/dae760089ce0b5dc5a80af1adcf325456e2a6568): Improve IDE support for custom attributes and native elements.
+
+  - Custom attributes (e.g. `esds-button`) are now contributed to IDEs as attributes instead of custom element tags: they are autocompleted on any element, including native ones (e.g. `<a esds-button>`, `<button esds-button>`).
+  - JetBrains IDEs now automatically detect the package's `web-types.json` (the `web-types` field previously pointed to a file that was not published).
+
 ## 0.6.0 (2026-10-26)
 
 ### Minor Changes
