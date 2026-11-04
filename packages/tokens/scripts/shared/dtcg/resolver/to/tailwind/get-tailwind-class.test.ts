@@ -6,18 +6,17 @@ describe('getTailwindClass', () => {
     it('should map background color to bg-{rest}', () => {
       expect(
         getTailwindClass(['color', 'background', 'elevation', 'surface', 'pressed']),
-      ).toStrictEqual(['bg-background-elevation-surface-pressed']);
+      ).toStrictEqual(['bg-elevation-surface-pressed']);
     });
 
     it('should map content color to text-{rest}', () => {
-      expect(getTailwindClass(['color', 'content', 'primary'])).toStrictEqual([
-        'text-content-primary',
-      ]);
+      expect(getTailwindClass(['color', 'content', 'primary'])).toStrictEqual(['text-primary']);
     });
 
-    it('should map border color to border-{rest}', () => {
+    it('should map border color to border-{rest} / outline-{rest}', () => {
       expect(getTailwindClass(['color', 'border', 'default'])).toStrictEqual([
-        'border-border-default',
+        'border-default',
+        'outline-default',
       ]);
     });
 
@@ -26,9 +25,7 @@ describe('getTailwindClass', () => {
     });
 
     it('should handle minimal color background token', () => {
-      expect(getTailwindClass(['color', 'background', 'base'])).toStrictEqual([
-        'bg-background-base',
-      ]);
+      expect(getTailwindClass(['color', 'background', 'base'])).toStrictEqual(['bg-base']);
     });
   });
 
@@ -103,8 +100,15 @@ describe('getTailwindClass', () => {
   });
 
   describe('border tokens', () => {
-    it('should map border width to border-{rest}', () => {
-      expect(getTailwindClass(['border', 'sm', 'width'])).toStrictEqual(['border-sm']);
+    it('should map border width to border-{rest} / outline-{rest}', () => {
+      expect(getTailwindClass(['border', 'sm', 'width'])).toStrictEqual([
+        'border-sm',
+        'outline-sm',
+      ]);
+    });
+
+    it('should map the none border width to border-none only', () => {
+      expect(getTailwindClass(['border', 'none', 'width'])).toStrictEqual(['border-none']);
     });
 
     it('should return null for unmapped border tokens', () => {
