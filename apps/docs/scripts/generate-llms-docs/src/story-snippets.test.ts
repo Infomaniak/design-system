@@ -335,6 +335,11 @@ describe('cleanRenderTemplate', () => {
     expect(cleanRenderTemplate('<b>x</b><!--', {})).toBe('<b>x</b>');
   });
 
+  it('re-strips openers re-formed when fragment removal joins pieces', () => {
+    expect(cleanRenderTemplate('<b><!<!--c-->--x</b>', {})).toBe('<b>x</b>');
+    expect(cleanRenderTemplate('<!<!--X-->--', {})).toBeNull();
+  });
+
   it('expands template(args) with the component tag for element kind', () => {
     expect(
       cleanRenderTemplate(

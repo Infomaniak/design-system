@@ -736,14 +736,23 @@ function replaceExpressions(
   return output;
 }
 
+// One pass can fuse fragments into a fresh `<!--`, so strip until stable.
+function stripHtmlComments(template: string): string {
+  let current = template;
+  let previous: string | null = null;
+  while (current !== previous) {
+    previous = current;
+    current = current.replace(/<!--[\s\S]*?-->|<!--/g, '');
+  }
+  return current;
+}
+
 export function cleanRenderTemplate(
   template: string,
   args: ArgsRecord,
   context: SnippetContext | null = null,
 ): string | null {
-  // The alternation also consumes a dangling `<!--` opener, which a plain
-  // comment-to-closer match would leave behind.
-  const withoutComments = template.replace(/<!--[\s\S]*?-->|<!--/g, '');
+  const withoutComments = stripHtmlComments(template);
   const replaced = replaceExpressions(withoutComments, args, context);
   if (replaced === null) return null;
   const withoutBlankLines = replaced
