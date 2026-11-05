@@ -617,7 +617,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
   <div className="welcome-section">
     <h2>Explore the Design System</h2>
     <div className="card-grid">
-      <a href="design-tokens/getting-started.md" className="card card--vertical">
+      <a href="llms/design-tokens/getting-started.md" className="card card--vertical">
         <h3 className="card__title">Design Tokens</h3>
         <p className="card__description">Foundation values for colors, spacing, typography, and more across all tiers (T1, T2, T3).</p>
         <span className="card__link">
@@ -625,7 +625,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
         </span>
       </a>
 
-      <a href="icons/getting-started.md" className="card card--vertical">
+      <a href="llms/icons/getting-started.md" className="card card--vertical">
         <h3 className="card__title">Icons</h3>
         <p className="card__description">A comprehensive library of icons for consistent visual communication across products.</p>
         <span className="card__link">
@@ -633,7 +633,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
         </span>
       </a>
 
-      <a href="ai-llms.md" className="card card--vertical">
+      <a href="llms/ai-llms.md" className="card card--vertical">
         <h3 className="card__title">AI &amp; LLMs</h3>
         <p className="card__description">llms.txt, llms-full.txt and DESIGN.md: machine-readable docs for AI agents and LLM consumption.</p>
         <span className="card__link">
@@ -647,7 +647,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 <div className="welcome-section">
   <h2>Resources</h2>
   <div className="card-grid">
-    <a href="help-and-feedback.md" className="card card--horizontal">
+    <a href="llms/help-and-feedback.md" className="card card--horizontal">
       <div className="card__icon">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/>
@@ -741,7 +741,7 @@ and how to use it.
 - System icons contribution file
 
 **[Figma file](https://www.figma.com/design/GiBEx5gisOnNe3cikN0z1U/ESDS-Team---System-icons---Contribution?node-id=2-8276&p=f&t=T3CL24pct9LcIv0K-0)**
-| **[How to use](../icons/icon-contribution.md)**
+| **[How to use](llms/icons/icon-contribution.md)**
 
 ---
 
@@ -751,8 +751,8 @@ and how to use it.
 - System icons embedded within native components
 
 **[Figma file](https://www.figma.com/design/OFCRdaeYW6GWhyq3ocHSOc/Edelweiss---iOS---iPadOS-Kit?m=auto&t=6Praqzvd4yFcNUmT-6)**
-| **[How to use](ios/ios-ipados-kit.md)** | **[Technical
-limitations](ios/ios-technical-limitations.md)**
+| **[How to use](llms/designers-guide/ios/ios-ipados-kit.md)** | **[Technical
+limitations](llms/designers-guide/ios/ios-technical-limitations.md)**
 
 ---
 
@@ -763,9 +763,9 @@ limitations](ios/ios-technical-limitations.md)**
 - System icons embedded within native components
 
 **[Figma file](https://www.figma.com/design/r4D2DKWIyzVoigyiTh16Hh/Edelweiss---Material-Kit?m=auto&t=6Praqzvd4yFcNUmT-6)**
-| **[How to use](android/material-kit.md)** | **[Tokens
-export](android/exporting-token-updates.md)** | **[Technical
-limitations](android/android-technical-limitations.md)**
+| **[How to use](llms/designers-guide/android/material-kit.md)** | **[Tokens
+export](llms/designers-guide/android/exporting-token-updates.md)** | **[Technical
+limitations](llms/designers-guide/android/android-technical-limitations.md)**
 
 ---
 
@@ -776,13 +776,13 @@ limitations](android/android-technical-limitations.md)**
 - System icons embedded within native components
 
 **[Figma file](https://www.figma.com/design/eOY97TGxMkMx9ub9zt8e6v/Edelweiss---Shadcn-Kit--Paid-?m=auto&t=6Praqzvd4yFcNUmT-6)**
-| **[How to use](web/shadcn-kit.md)** | **[Token
-mapping](web/shadcn-token-mapping.md)**
+| **[How to use](llms/designers-guide/web/shadcn-kit.md)** | **[Token
+mapping](llms/designers-guide/web/shadcn-token-mapping.md)**
 
 ## 🧰 Helpers
 
 - **[Creating a custom
-  component](helpers/creating-a-custom-component.md)** — build a
+  component](llms/designers-guide/helpers/creating-a-custom-component.md)** — build a
   component the DS team has approved, ready to be integrated into its kit without rework.
 
 ## 💻 Which kit for which project?
@@ -815,7 +815,7 @@ Use the Figma Linter plugin (currently in progress) on your frame to guide you.
 <Collapsible summary="The Infomaniak Sans font is missing in Figma?">
 
 Install the font locally by following the
-[Install the Font](install-the-font.md) guide.
+[Install the Font](llms/designers-guide/install-the-font.md) guide.
 
 </Collapsible>
 
@@ -1034,7 +1034,7 @@ Android team. **Never export before an Android developer has approved the change
 Make sure you have:
 
 - edit access to the [Material kit](https://www.figma.com/design/r4D2DKWIyzVoigyiTh16Hh/Edelweiss---Material-Kit?m=auto&t=6Praqzvd4yFcNUmT-6).
-- access to the **[HCT Tonal Palette](hct-tonal-palette.md)** generator, our in-house tool (only needed if you create a new color palette).
+- access to the **[HCT Tonal Palette](llms/designers-guide/android/hct-tonal-palette.md)** generator, our in-house tool (only needed if you create a new color palette).
 - a Figma variables export plugin (e.g. [Variables Pro](https://www.figma.com/community/plugin/1264578192495051449/variables-pro-swap-import-export-variables)).
 - an Android developer who will review your changes.
 
@@ -1044,7 +1044,7 @@ Make sure you have:
 
 Skip this step if you are only changing values in existing palettes.
 
-1. Open the **[HCT Tonal Palette](hct-tonal-palette.md)** generator.
+1. Open the **[HCT Tonal Palette](llms/designers-guide/android/hct-tonal-palette.md)** generator.
 2. Enter the source color (hex) of the new palette.
 3. Generate the full tonal palette, including tones you don't plan to use yet: Material roles rely on many different tones across all contrast modes.
 4. Add the palette to the **Primitives** collection.
@@ -1180,7 +1180,7 @@ and download the `esds-icons.zip` asset of the newest release.
 Unzip the archive, then in Figma Desktop: **Plugins → Development → Import plugin from
 manifest…** and select the unzipped `esds-icons/manifest.json`.
 
-The plugin appears under **Plugins → Development → ESDS icons**. To generate the icon variants, follow the steps in the [icon contribution guide](../icons/icon-contribution.md#4-select-icon-and-run-esds-icons-plugin).
+The plugin appears under **Plugins → Development → ESDS icons**. To generate the icon variants, follow the steps in the [icon contribution guide](llms/icons/icon-contribution.md#4-select-icon-and-run-esds-icons-plugin).
 
 ### Update the plugin
 
@@ -1308,7 +1308,7 @@ If Figma was open, restart it. **Infomaniak Sans** now appears in the font picke
 
 ## Using the font on the web?
 
-The web usage (CSS/HTML) is documented on the [Typography](../typography.md) page.
+The web usage (CSS/HTML) is documented on the [Typography](llms/typography.md) page.
 
 ---
 
@@ -1584,7 +1584,7 @@ Hold actions:
 
 ### Token mapping
 
-See how the shadcn tokens map to the design system tokens: [Shadcn Token Mapping](shadcn-token-mapping.md).
+See how the shadcn tokens map to the design system tokens: [Shadcn Token Mapping](llms/designers-guide/web/shadcn-token-mapping.md).
 
 ---
 
@@ -1592,7 +1592,7 @@ See how the shadcn tokens map to the design system tokens: [Shadcn Token Mapping
 
 > Mapping between the shadcn/ui semantic tokens (CSS variables on the dev side) and the design system tokens used in th...
 
-Mapping between the shadcn/ui semantic tokens (CSS variables on the dev side) and the design system tokens used in the [Shadcn kit](shadcn-kit.md).
+Mapping between the shadcn/ui semantic tokens (CSS variables on the dev side) and the design system tokens used in the [Shadcn kit](llms/designers-guide/web/shadcn-kit.md).
 
 ## Base
 
@@ -1904,11 +1904,11 @@ Mapping between the shadcn/ui semantic tokens (CSS variables on the dev side) an
 
 Our token system follows the Design Tokens Community Group (DTCG) standard with a three-tier architecture:
 
-- <a href="t1.md">T1 Primitive tokens</a> for foundational tokens
+- <a href="llms/design-tokens/t1.md">T1 Primitive tokens</a> for foundational tokens
   values
-- <a href="t2.md">T2 Semantic tokens</a> for semantic abstraction
+- <a href="llms/design-tokens/t2.md">T2 Semantic tokens</a> for semantic abstraction
   tokens
-- <a href="t3.md">T3 Component tokens</a> for component-specific
+- <a href="llms/design-tokens/t3.md">T3 Component tokens</a> for component-specific
   tokens
 
 ## Consuming Tokens
@@ -2046,7 +2046,7 @@ For the previous example, a common usage would be `active:bg-brand-state-selecte
 
 ### LLM/AI
 
-Use the <a href="../ai-llms.md">AI &amp; LLMs</a> resources (`DESIGN.md`, `llms.txt` and `llms-full.txt`) to provide design system context to your AI agent or LLM. They contain a structured, machine-readable reference of the entire token system in a format optimized for AI consumption.
+Use the <a href="llms/ai-llms.md">AI &amp; LLMs</a> resources (`DESIGN.md`, `llms.txt` and `llms-full.txt`) to provide design system context to your AI agent or LLM. They contain a structured, machine-readable reference of the entire token system in a format optimized for AI consumption.
 
 ### iOS
 
@@ -2231,23 +2231,23 @@ T1 tokens are the foundational design tokens that define the raw values of your 
 <Table
   headers={['Category', 'Description']}
   rows={[
-    [<a href="t1/blur.md">Blur</a>, 'Background blur effects'],
+    [<a href="llms/design-tokens/t1/blur.md">Blur</a>, 'Background blur effects'],
     [
-      <a href="t1/border-width.md">Border Width</a>,
+      <a href="llms/design-tokens/t1/border-width.md">Border Width</a>,
       'Border thickness values',
     ],
     [
-      <a href="t1/breakpoint.md">Breakpoint</a>,
+      <a href="llms/design-tokens/t1/breakpoint.md">Breakpoint</a>,
       'Responsive breakpoints',
     ],
-    [<a href="t1/color.md">Color</a>, 'Color palette'],
-    [<a href="t1/dimension.md">Dimension</a>, 'Dimension values'],
-    [<a href="t1/font.md">Font</a>, 'Typography tokens'],
-    [<a href="t1/opacity.md">Opacity</a>, 'Opacity values'],
-    [<a href="t1/radius.md">Radius</a>, 'Border radius values'],
-    [<a href="t1/ratio.md">Ratio</a>, 'Aspect ratios'],
-    [<a href="t1/shadow.md">Shadow</a>, 'Shadow effects'],
-    [<a href="t1/spacing.md">Spacing</a>, 'Spacing values'],
+    [<a href="llms/design-tokens/t1/color.md">Color</a>, 'Color palette'],
+    [<a href="llms/design-tokens/t1/dimension.md">Dimension</a>, 'Dimension values'],
+    [<a href="llms/design-tokens/t1/font.md">Font</a>, 'Typography tokens'],
+    [<a href="llms/design-tokens/t1/opacity.md">Opacity</a>, 'Opacity values'],
+    [<a href="llms/design-tokens/t1/radius.md">Radius</a>, 'Border radius values'],
+    [<a href="llms/design-tokens/t1/ratio.md">Ratio</a>, 'Aspect ratios'],
+    [<a href="llms/design-tokens/t1/shadow.md">Shadow</a>, 'Shadow effects'],
+    [<a href="llms/design-tokens/t1/spacing.md">Spacing</a>, 'Spacing values'],
   ]}
 />
 
@@ -6912,16 +6912,16 @@ T2 tokens are semantic design tokens that reference T1 (primitive) values. They 
 <Table
   headers={['Category', 'Description']}
   rows={[
-    [<a href="t2/blur.md">Blur</a>, 'Semantic blur styles'],
-    [<a href="t2/border.md">Border</a>, 'Semantic border styles'],
-    [<a href="t2/color.md">Color</a>, 'Semantic color aliases'],
-    [<a href="t2/font.md">Font</a>, 'Semantic typography'],
-    [<a href="t2/icon.md">Icon</a>, 'Icon-related tokens'],
-    [<a href="t2/opacity.md">Opacity</a>, 'Semantic opacity tokens'],
-    [<a href="t2/radius.md">Radius</a>, 'Semantic border radius'],
-    [<a href="t2/spacing.md">Spacing</a>, 'Semantic spacing'],
-    [<a href="t2/text.md">Text</a>, 'Text styling tokens'],
-    [<a href="t2/typography.md">Typography</a>, 'Typography tokens'],
+    [<a href="llms/design-tokens/t2/blur.md">Blur</a>, 'Semantic blur styles'],
+    [<a href="llms/design-tokens/t2/border.md">Border</a>, 'Semantic border styles'],
+    [<a href="llms/design-tokens/t2/color.md">Color</a>, 'Semantic color aliases'],
+    [<a href="llms/design-tokens/t2/font.md">Font</a>, 'Semantic typography'],
+    [<a href="llms/design-tokens/t2/icon.md">Icon</a>, 'Icon-related tokens'],
+    [<a href="llms/design-tokens/t2/opacity.md">Opacity</a>, 'Semantic opacity tokens'],
+    [<a href="llms/design-tokens/t2/radius.md">Radius</a>, 'Semantic border radius'],
+    [<a href="llms/design-tokens/t2/spacing.md">Spacing</a>, 'Semantic spacing'],
+    [<a href="llms/design-tokens/t2/text.md">Text</a>, 'Text styling tokens'],
+    [<a href="llms/design-tokens/t2/typography.md">Typography</a>, 'Typography tokens'],
   ]}
 />
 
@@ -12107,20 +12107,20 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
 <Table
   headers={['Category', 'Description']}
   rows={[
-    [<a href="t3/badge.md">Badge</a>, 'Badge component tokens'],
-    [<a href="t3/body.md">Body</a>, 'Body component styles'],
-    [<a href="t3/button.md">Button</a>, 'Button component tokens'],
+    [<a href="llms/design-tokens/t3/badge.md">Badge</a>, 'Badge component tokens'],
+    [<a href="llms/design-tokens/t3/body.md">Body</a>, 'Body component styles'],
+    [<a href="llms/design-tokens/t3/button.md">Button</a>, 'Button component tokens'],
     [
-      <a href="t3/heading.md">Heading</a>,
+      <a href="llms/design-tokens/t3/heading.md">Heading</a>,
       'Heading component styles',
     ],
-    [<a href="t3/kbd.md">Kbd</a>, 'Kbd component tokens'],
+    [<a href="llms/design-tokens/t3/kbd.md">Kbd</a>, 'Kbd component tokens'],
     [
-      <a href="t3/separator.md">Separator</a>,
+      <a href="llms/design-tokens/t3/separator.md">Separator</a>,
       'Separator component tokens',
     ],
     [
-      <a href="t3/text-link.md">Text Link</a>,
+      <a href="llms/design-tokens/t3/text-link.md">Text Link</a>,
       'Text Link component tokens',
     ],
   ]}
@@ -13245,7 +13245,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
 
 <div className="card-grid">
   <a
-    href="icon-gallery.md"
+    href="llms/icons/icon-gallery.md"
     className="card card--vertical"
   >
     <h3 className="card__title">Browse All Icons</h3>
@@ -13255,7 +13255,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
     <span className="card__link">Open Gallery →</span>
   </a>
   <a
-    href="icon-component.md"
+    href="llms/icons/icon-component.md"
     className="card card--vertical"
   >
     <h3 className="card__title">Icon Component - Web</h3>
@@ -13384,7 +13384,7 @@ Symbols follow the same naming convention with the `esds-` prefix (e.g. `Image("
 
 For full documentation of the `esds-icon` web component, see:
 
-[Components/esds-icon](../components/icon.md)
+[Components/esds-icon](llms/components/icon.md)
 
 ---
 
@@ -13425,7 +13425,7 @@ A guide for designers on how to create icons.
 ### 4. Select icon and run ESDS icons plugin
 
 Download and install the
-[ESDS icons plugin](../designers-guide/figma-plugins.md#esds-icons).
+[ESDS icons plugin](llms/designers-guide/figma-plugins.md#esds-icons).
 
 <img
   src={SystemIconsStep4}
@@ -13512,7 +13512,7 @@ It is available in different font weights.
 </table>
 
 > Installing the font locally to use it in Figma or another desktop app? Follow the
-> [Install the Font](designers-guide/install-the-font.md) guide.
+> [Install the Font](llms/designers-guide/install-the-font.md) guide.
 
 ### Usage
 
@@ -13561,11 +13561,11 @@ By using `rem`, the font-sizes scale nicely with the user defined value.
 
 ### Tokens
 
-[Text tokens](design-tokens/t2/text.md) (font sizes and line-heights) are defined by the `text.{xs..5xl}.{size|line-height|letter-spacing}` design tokens.
+[Text tokens](llms/design-tokens/t2/text.md) (font sizes and line-heights) are defined by the `text.{xs..5xl}.{size|line-height|letter-spacing}` design tokens.
 
 ## Typography
 
-[Typography tokens](design-tokens/t2/typography.md) group the font family, size, weight, etc. into a single token: `typography.{xs..5xl}.{base|emphasized}`.
+[Typography tokens](llms/design-tokens/t2/typography.md) group the font family, size, weight, etc. into a single token: `typography.{xs..5xl}.{base|emphasized}`.
 
 It makes it easier to apply the expected font:
 
@@ -13581,7 +13581,7 @@ Headings are used to break up content into sections to provide a clear hierarchy
 
 #### Custom attribute _(recommended)_
 
-The [esds-heading](components/heading.md) attribute **must** be used to apply `heading` text styles to elements:
+The [esds-heading](llms/components/heading.md) attribute **must** be used to apply `heading` text styles to elements:
 
 ```html
 <h1 esds-heading="xl">Large text</h1>
@@ -13599,7 +13599,7 @@ For `emphasized` text, you may use the `esds-heading-{xs..2xl}-emphasized` class
 
 #### Tokens
 
-[Heading tokens](design-tokens/t3/heading.md) are defined by the `heading.{xs..2xl}.{font}` design tokens, and are used by the `esds-heading` custom attribute.
+[Heading tokens](llms/design-tokens/t3/heading.md) are defined by the `heading.{xs..2xl}.{font}` design tokens, and are used by the `esds-heading` custom attribute.
 
 Here's an example of how to apply raw styles:
 
@@ -13613,7 +13613,7 @@ Body texts are used as blocks or lines of text.
 
 #### Custom attribute _(recommended)_
 
-The [esds-body](components/body.md) attribute **must** be used to apply `body` text styles to elements:
+The [esds-body](llms/components/body.md) attribute **must** be used to apply `body` text styles to elements:
 
 ```html
 <p esds-body="md">
@@ -13637,7 +13637,7 @@ For `emphasized` text, you may use the `esds-body-{xs..lg}-emphasized` class.
 
 #### Tokens
 
-[Body tokens](design-tokens/t3/body.md) are defined by the `body.{xs..lg}.{font}` design tokens, and are used by the `esds-body` custom attribute.
+[Body tokens](llms/design-tokens/t3/body.md) are defined by the `body.{xs..lg}.{font}` design tokens, and are used by the `esds-body` custom attribute.
 
 Here's an example of how to apply raw styles:
 
@@ -13778,11 +13778,11 @@ Here's an example of how to apply raw styles:
 The design system publishes machine-readable resources so AI agents, coding assistants and LLMs
 can consume accurate, up-to-date documentation:
 
-- [llms.txt](./llms.txt) — lightweight index and router: global coding rules plus categorized
+- [llms.txt](llms.txt) — lightweight index and router: global coding rules plus categorized
   links to every documentation page. Start here for agent discovery.
-- [llms-full.txt](./llms-full.txt) — the complete documentation in a single file (includes
+- [llms-full.txt](llms-full.txt) — the complete documentation in a single file (includes
   DESIGN.md), for one-shot ingestion (Cursor `@Docs`, RAG pipelines, chat uploads).
-- [DESIGN.md](./DESIGN.md) — machine-readable token reference generated from our token
+- [DESIGN.md](DESIGN.md) — machine-readable token reference generated from our token
   definitions, in a format optimized for AI consumption.
 
 ---
