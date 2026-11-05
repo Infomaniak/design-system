@@ -6,7 +6,7 @@ import {
   orderTitleGroups,
   parseStorybookIndex,
 } from './index-entries.ts';
-import { renderLlmsFullTxt } from './llms-full-txt.ts';
+import { renderLlmsFullTxt, validateLlmsFullTxtLinks } from './llms-full-txt.ts';
 import { renderLlmsTxt, validateLlmsTxtTargets } from './llms-txt.ts';
 import { buildPageModel, relativizeRootFileLinks, renderPageMarkdown } from './page-renderer.ts';
 import { validateGeneratedPages } from './validation.ts';
@@ -92,6 +92,15 @@ export function generateLlmsDocs(
   });
   deps.writeFile(join(options.distDir, 'llms.txt'), llmsTxt);
   fileCount += 1;
+
+  // Runs once the whole dist tree is written, because llms-full.txt links to
+  // llms.txt, llms-full.txt itself and DESIGN.md at the site root.
+  validateLlmsFullTxtLinks({
+    distDir: options.distDir,
+    content: llmsFullTxt,
+    designMd,
+    readFile: deps.readFile,
+  });
 
   if (options.publicDir !== undefined) {
     deps.mkdir(options.publicDir, { recursive: true });
