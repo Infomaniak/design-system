@@ -1,6 +1,6 @@
 import * as z from 'zod';
 
-export const colorDesignTokenColorSpaceSchema = z.enum([
+export const colorDesignTokenColorSpaceSchema = z.literal([
   'srgb',
   'srgb-linear',
   'hsl',

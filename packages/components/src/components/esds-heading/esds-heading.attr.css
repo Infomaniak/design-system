@@ -47,6 +47,15 @@
   }
 }
 
+[esds-heading='2xl'] {
+  font: var(--esds-heading-2xl-font-base);
+
+  &[emphasized],
+  & strong {
+    font: var(--esds-heading-2xl-font-emphasized);
+  }
+}
+
 h1,
 h2,
 h3,

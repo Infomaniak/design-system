@@ -28,6 +28,7 @@ interface PackageJsonWithPaths {
   readonly peerDependencies?: unknown;
   readonly optionalDependencies?: unknown;
   readonly customElements?: string;
+  readonly 'web-types'?: string;
 }
 
 /**
@@ -222,5 +223,9 @@ export function transformPackageJsonPaths<P extends PackageJsonWithPaths>(
     types: packageJson.types ? transformPath(packageJson.types) : undefined,
     exports: packageJson.exports ? transformExports(packageJson.exports) : undefined,
     files: packageJson.files?.map((file: string) => transformPath(file)),
+    customElements: packageJson.customElements
+      ? transformPath(packageJson.customElements)
+      : undefined,
+    'web-types': packageJson['web-types'] ? transformPath(packageJson['web-types']) : undefined,
   } as P;
 }

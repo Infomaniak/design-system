@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "yarn workspace @infomaniak-design-system/components analyze:cem --watch & storybook dev -p 6006",
-    "build": "storybook build"
+    "build": "storybook build && yarn build:llms",
+    "build:llms": "node --no-warnings=ExperimentalWarning scripts/generate-llms-docs/generate-llms-docs.script.ts --dist=storybook-static"
   },
   "dependencies": {
     "@infomaniak-design-system/components": "workspace:^",
     "@infomaniak-design-system/tokens": "workspace:^",
+    "@material/material-color-utilities": "^0.4.0",
     "markdown-to-jsx": "^9.10.3",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"

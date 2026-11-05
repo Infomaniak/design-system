@@ -416,4 +416,30 @@ describe('transformPackageJsonPaths', () => {
       expect(result.files).toEqual(['dist/nested/', 'custom-elements.json']);
     });
   });
+
+  describe('custom elements and web-types transformation', () => {
+    it('should transform customElements and web-types paths', () => {
+      const pkg = {
+        name: 'test',
+        version: '1.0.0',
+        customElements: './custom-elements.json',
+        'web-types': './dist/web-types.json',
+      };
+      const result = transformPackageJsonPaths(pkg, defaultConfig);
+      expect(result.customElements).toBe('./custom-elements.json');
+      expect(result['web-types']).toBe('./web-types.json');
+    });
+
+    it('should keep customElements and web-types unchanged when no pattern matches', () => {
+      const pkg = {
+        name: 'test',
+        version: '1.0.0',
+        customElements: 'custom-elements.json',
+        'web-types': 'web-types.json',
+      };
+      const result = transformPackageJsonPaths(pkg, defaultConfig);
+      expect(result.customElements).toBe('custom-elements.json');
+      expect(result['web-types']).toBe('web-types.json');
+    });
+  });
 });

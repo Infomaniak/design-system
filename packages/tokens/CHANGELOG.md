@@ -1,5 +1,50 @@
 # Changelog
 
+## 0.9.0 (2026-11-04)
+
+### Minor Changes
+
+- [#482](https://github.com/Infomaniak/design-system/pull/482) [`9050b63`](https://github.com/Infomaniak/design-system/commit/9050b63295f7b0ce0192a42d7912bd7242db5308): Added border width token bindings to the generated Tailwind CSS:
+
+  - `--border-width-*` variables are emitted in the `@theme` block, so utilities such as `border-xs`, `border-md`, `border-t-lg` or `border-b-sm` resolve against the design tokens (all side variants included).
+  - Numeric border width utilities are blocked to keep border widths token-driven: `border-0`, `border-2`, `border-4`, `border-8` and every side variant (`border-t-2`, `border-x-4`, ...).
+  - Editor suggestions for the removed numeric values may still appear (hardcoded in Tailwind's engine).
+
+- [#486](https://github.com/Infomaniak/design-system/pull/486) [`9cb4e3f`](https://github.com/Infomaniak/design-system/commit/9cb4e3f8d66dc2d6256f11f15fb22b3fa50c476e): Added outline token bindings to the generated Tailwind CSS:
+
+  - `outline-{name}` color utilities (e.g. `outline-dim1`, `outline-feedback-error`) now resolve against the border color tokens, including opacity modifiers (`outline-dim1/50`) and variants (`hover:outline-dim1`).
+  - `outline-xs`, `outline-sm`, `outline-md` and `outline-lg` width utilities resolve against the border width scales (the `none` scale is skipped to keep the built-in `outline-none` style utility untouched).
+  - Numeric outline width utilities are blocked to keep outline widths token-driven: `outline-0`, `outline-1`, `outline-2`, `outline-4`, `outline-8`. Other bare values (`outline-3`, `outline-16`, ...) remain available (hardcoded in Tailwind's engine).
+  - Corrected the Tailwind class names reported for the background, content and border color tokens in the generated documentation (the previously reported names, which included the token category, did not compile).
+
+- [#476](https://github.com/Infomaniak/design-system/pull/476) [`96d58a4`](https://github.com/Infomaniak/design-system/commit/96d58a428fa156c99544cbd973dcd193798f143b): Sync DTCG tokens from the Figma export:
+
+  - Renamed the primitive `scale` tokens to `dimension`; all values are unchanged (including `50`), references now point to `{dimension.N}`.
+  - Added `dim1` feedback color variants (success, warning, error, information, neutral) for light and dark themes.
+  - Added italic font weight tokens (`weight.400-italic`, `weight.500-italic`).
+  - Badge tokens now use the new `dim1` feedback colors (background and content).
+
+- [#482](https://github.com/Infomaniak/design-system/pull/482) [`a6575f8`](https://github.com/Infomaniak/design-system/commit/a6575f8ebb802e5fa0d1a2a06080610ea7dd6b03): Bound the opacity and spacing token namespaces to the generated Tailwind CSS, and locked numeric utility scales to the design tokens:
+
+  - `--opacity-*` and `--spacing-*` variables are emitted in the `@theme` block, so utilities such as `opacity-subtle` or `p-md` resolve against the design tokens.
+  - Numeric spacing utilities are disabled (the `--spacing` base scale is reset to `initial`): `p-4`, `w-8`, `gap-2` and similar no longer generate; use the token names instead (`p-md`, `w-xl`, `gap-2xl`, ...).
+  - Numeric opacity utilities are blocked (`opacity-0` through `opacity-100` by 5); arbitrary values such as `opacity-[0.4]` keep working.
+  - Editor suggestions for the removed numeric values may still appear (hardcoded in Tailwind's engine); variant-prefixed forms (e.g. `hover:opacity-50`) still compile for the same reason.
+
+- [#477](https://github.com/Infomaniak/design-system/pull/477) [`6f4ad3e`](https://github.com/Infomaniak/design-system/commit/6f4ad3edfd767f667582d1e4bd9a158f086b7560): Added a new 6xl typography size (font.size.52 / font.line-height.60) to the token core and every Figma collection:
+
+  - Added primitive tokens `font.size.52` (3.25rem) and `font.line-height.60` (60px).
+  - Added semantic tokens `font.size.6xl`, `font.line-height.6xl`, the `text.6xl` preset, and the `typography.6xl.base` / `typography.6xl.emphasized` presets (regular and medium weights).
+  - Added the `heading.2xl` component token style referencing the new 6xl typography (regular and medium weights).
+
+### Patch Changes
+
+- [#473](https://github.com/Infomaniak/design-system/pull/473) [`112b995`](https://github.com/Infomaniak/design-system/commit/112b995ed5dba7865d817cfc32fe55d7cc572f0f): Added support for opacity (alpha) on color tokens in the generated iOS (Swift) tokens. Colors whose components or alpha reference other tokens are now emitted as `Color.opacity(...)` expressions, and opacity tokens are no longer excluded from the Swift output.
+
+  Color tokens are now excluded from the Kotlin output by token type instead of by name, and are exported to Figma as DTCG color objects (`{ colorSpace, components, alpha }`) instead of hex strings. On the web, color tokens whose components or alpha reference other tokens are emitted using the CSS relative color syntax (ex: `rgb(from var(--color-red) r g b / var(--opacity-20))`).
+
+- [#474](https://github.com/Infomaniak/design-system/pull/474) [`c3bcded`](https://github.com/Infomaniak/design-system/commit/c3bcded9eecc7ce23a7968822357a45553c79e90): Fixed Tailwind tooling resolution of spacing and radius tokens in the generated Tailwind CSS: `--spacing` and `--radius-*` are now emitted in a non-inline `@theme` block instead of `@theme inline`, so utilities such as `w-8` or `rounded-xs` reference `var(--spacing)` / `var(--radius-xs)` and the variables stay exposed on the Theme object for value-resolution tooling (linters, IntelliSense, equivalence checkers). No rendering change: values are identical at runtime and dark/light theming is unaffected (colors remain inline).
+
 ## 0.8.0 (2026-10-26)
 
 ### Minor Changes

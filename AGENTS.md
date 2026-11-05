@@ -34,7 +34,7 @@ design-system/
 │       ├── .storybook/          # Storybook configuration (preview.tsx = entry)
 │       └── dist/                # Built docs output
 ├── packages/
-│   ├── tokens/                  # Design tokens library (DTCG format)
+│   ├── tokens/                  # Design tokens library (DTCG format + documented exceptions, see `packages/tokens/README.md`)
 │   │   ├── tokens/              # Token definitions (t1-primitive, t2-semantic, t3-component)
 │   │   ├── scripts/             # Token build/validation scripts
 │   │   ├── demo/                # Live demo app for tokens

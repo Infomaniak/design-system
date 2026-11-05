@@ -550,6 +550,9 @@
         },
         "feedback": {
           "success": {
+            "dim1": {
+              "$value": "{color.white}"
+            },
             "dim2": {
               "$value": "{color.lime.900}"
             },
@@ -558,6 +561,9 @@
             }
           },
           "warning": {
+            "dim1": {
+              "$value": "{color.white}"
+            },
             "dim2": {
               "$value": "{color.orange.900}"
             },
@@ -566,6 +572,9 @@
             }
           },
           "error": {
+            "dim1": {
+              "$value": "{color.white}"
+            },
             "dim2": {
               "$value": "{color.red.900}"
             },
@@ -574,6 +583,9 @@
             }
           },
           "information": {
+            "dim1": {
+              "$value": "{color.white}"
+            },
             "dim2": {
               "$value": "{color.blue.900}"
             },
@@ -582,6 +594,9 @@
             }
           },
           "neutral": {
+            "dim1": {
+              "$value": "{color.white}"
+            },
             "dim2": {
               "$value": "{color.gray.900}"
             },

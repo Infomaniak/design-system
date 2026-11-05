@@ -216,6 +216,30 @@
           "scopes": []
         }
       }
+    },
+    "6xl": {
+      "$description": "6x-large text style for the largest display text.",
+      "size": {
+        "$value": "{font.size.6xl}",
+        "$description": "Font size for 6x-large text.",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "line-height": {
+        "$value": "{font.line-height.6xl}",
+        "$description": "Line-height for 6x-large text.",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "letter-spacing": {
+        "$value": "{font.letter-spacing.md}",
+        "$description": "Letter spacing for 6x-large text.",
+        "$extensions": {
+          "scopes": []
+        }
+      }
     }
   }
 }
