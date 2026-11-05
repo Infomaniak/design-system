@@ -217,7 +217,8 @@ describe('generateLlmsDocs', () => {
     expect(page).toContain('[the AI resources](ai-llms.md)');
     expect(page).toContain('[changelog](components/changelog.md)');
     const llmsFull = outputs.get(join(DIST_DIR, 'llms-full.txt')) ?? '';
-    expect(llmsFull).toContain('[the AI resources](ai-llms.md)');
+    expect(llmsFull).toContain('[the AI resources](llms/ai-llms.md)');
+    expect(llmsFull).toContain('[changelog](llms/components/changelog.md)');
   });
 
   it('throws when a generated snippet uses a custom attribute as an element tag', () => {
@@ -311,7 +312,7 @@ describe('generateLlmsDocs', () => {
     expect(llmsTxt).toContain('(https://example.com/base/llms-full.txt)');
   });
 
-  it('re-anchors root file links on generated pages, not in llms-full.txt', () => {
+  it('re-anchors root file links on pages and rebases them in llms-full.txt', () => {
     const { deps, outputs } = createDeps(createInputFiles());
     generateLlmsDocs(BASE_OPTIONS, deps);
     const page = outputs.get(join(DIST_DIR, 'llms/ai-llms.md')) ?? '';
@@ -319,8 +320,18 @@ describe('generateLlmsDocs', () => {
     expect(page).toContain('](../llms-full.txt)');
     expect(page).toContain('](../DESIGN.md)');
     const llmsFull = outputs.get(join(DIST_DIR, 'llms-full.txt')) ?? '';
-    expect(llmsFull).toContain('(./llms.txt)');
-    expect(llmsFull).toContain('(./DESIGN.md)');
+    expect(llmsFull).toContain('(llms.txt)');
+    expect(llmsFull).toContain('(DESIGN.md)');
+  });
+
+  it('throws when an llms-full.txt link target is missing from the dist directory', () => {
+    const aiLlmsMdx = [...AI_LLMS_MDX, '- [missing](./missing.md) — not generated.'].join('\n');
+    const { deps } = createDeps(
+      createInputFiles({ [join(APPS_DOCS_DIR, 'src/stories/ai-llms.mdx')]: aiLlmsMdx }),
+    );
+    expect(() => generateLlmsDocs(BASE_OPTIONS, deps)).toThrow(
+      'Missing llms-full.txt link target: llms/missing.md',
+    );
   });
 
   it('mirrors the root files to the public dir when provided', () => {

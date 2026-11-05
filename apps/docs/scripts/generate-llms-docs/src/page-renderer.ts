@@ -24,7 +24,18 @@ const SUMMARY_MAX_LENGTH = 120;
  * root, so links to them written in MDX are correct for the Storybook page and
  * llms-full.txt, but not from generated pages which sit under `llms/`.
  */
-const ROOT_FILE_LINK_PATTERN = /\]\((?:\.{1,2}\/)?(llms\.txt|llms-full\.txt|DESIGN\.md)\)/g;
+const ROOT_FILE_TARGET_PATTERN = /^(?:\.{1,2}\/)?(llms\.txt|llms-full\.txt|DESIGN\.md)$/;
+
+const ROOT_FILE_LINK_PATTERN = /\]\(([^()\s]+)\)/g;
+
+/**
+ * Root resource files are authored relative to the site root (optionally
+ * prefixed with `./` or `../`), regardless of the location of the document
+ * they appear in.
+ */
+export function isRootFileTarget(target: string): boolean {
+  return ROOT_FILE_TARGET_PATTERN.test(target);
+}
 
 export function buildPageModel(input: {
   group: TitleGroup;
@@ -185,5 +196,7 @@ export function renderPageMarkdown(page: PageModel): string {
 
 export function relativizeRootFileLinks(markdown: string, outputPath: string): string {
   const prefix = '../'.repeat(outputPath.split('/').length - 1);
-  return markdown.replace(ROOT_FILE_LINK_PATTERN, (_match, file: string) => `](${prefix}${file})`);
+  return markdown.replace(ROOT_FILE_LINK_PATTERN, (match, target: string) =>
+    isRootFileTarget(target) ? `](${prefix}${target.replace(/^\.{1,2}\//, '')})` : match,
+  );
 }
