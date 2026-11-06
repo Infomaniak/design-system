@@ -1,3 +1,5 @@
+export * from './components/esds-avatar/esds-avatar-group/esds-avatar-group.component.ts';
+export * from './components/esds-avatar/esds-avatar.component.ts';
 export * from './components/esds-badge/esds-badge.component.ts';
 export * from './components/esds-body/esds-body.attr.ts';
 export * from './components/esds-button/esds-button.attr.ts';
