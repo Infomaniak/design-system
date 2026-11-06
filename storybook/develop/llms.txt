@@ -27,7 +27,11 @@ For complete single-file context ingestion, see [Full Design System Documentatio
 
 ## Design Tokens
 
-- [Design Tokens/Getting Started](llms/design-tokens/getting-started.md): Our design system is powered by design tokens: name-value pairs that define the visual language of Infomaniak product...
+- [Design Tokens/Getting Started/AI & LLMs](llms/design-tokens/getting-started/ai-llms.md)
+- [Design Tokens/Getting Started/Definition & Architecture](llms/design-tokens/getting-started/definition-architecture.md): define the visual language of Infomaniak products. Tokens ensure consistency across platforms while remaining flexibl...
+- [Design Tokens/Getting Started/iOS](llms/design-tokens/getting-started/ios.md): A comprehensive guide on how to install and consume the Design System tokens on iOS.
+- [Design Tokens/Getting Started/Web/CSS](llms/design-tokens/getting-started/web/css.md): A comprehensive guide on how to install and consume the Design System tokens on the web using CSS.
+- [Design Tokens/Getting Started/Web/Tailwind (v4)](llms/design-tokens/getting-started/web/tailwind-v4.md): A comprehensive guide on how to install and consume the Design System tokens on the web using Tailwind v4.
 - [Design Tokens/T1](llms/design-tokens/t1.md): T1 tokens are the foundational design tokens that define the raw values of your design system. These are the base val...
 - [Design Tokens/T1/Blur](llms/design-tokens/t1/blur.md)
 - [Design Tokens/T1/Border Width](llms/design-tokens/t1/border-width.md)
