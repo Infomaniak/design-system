@@ -7,7 +7,7 @@
 
 Contains the list of Infomaniak's Design System tokens based on the [Design Tokens Community Group - (DTCG - 2025.10)](https://www.designtokens.org/tr/2025.10/format) format, and scripts to convert them to different formats (CSS, Figma, Tailwind, etc.).
 
-- [Documentation ↗](https://infomaniak.github.io/design-system/storybook/main/?path=/docs/design-tokens-getting-started--docs)
+- [Documentation ↗](https://infomaniak.github.io/design-system/storybook/main/?path=/docs/design-tokens-getting-started-definition-architecture--docs)
 
 ## Project architecture
 
