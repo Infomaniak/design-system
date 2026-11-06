@@ -86,6 +86,51 @@ function innerFormatResolvedValue(value: unknown): string {
 
 /*-- resolvedTokenToYamlValue --*/
 
+type ColorValue = Parameters<typeof colorDesignTokensCollectionTokenValueToCssValue>[0];
+
+/**
+ * Checks whether a resolved `components` member holds a referenced color value.
+ *
+ * NOTE: Curly reference is not official
+ *
+ * A `components` member referencing a whole color token resolves to the
+ * referenced color value itself (an object, not a component list).
+ */
+function isResolvedReferencedColorValue(value: unknown): value is ColorValue {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    !Array.isArray(value) &&
+    'colorSpace' in value &&
+    'components' in value
+  );
+}
+
+/**
+ * Unwraps a resolved color value whose `components` member references another
+ * whole color token, recursively.
+ *
+ * NOTE: Curly reference is not official
+ *
+ * A `components` member referencing a whole color token resolves to the
+ * referenced color value itself (an object, not a component list). Reference
+ * chains (e.g. T3 → T2 → T1) resolve to nested color values, so unwrapping
+ * recurses until the actual component list is reached, preserving the outer
+ * alpha override at each level.
+ */
+function unwrapReferencedColorValue(value: ColorValue): ColorValue {
+  const components: unknown = value.components;
+
+  if (!isResolvedReferencedColorValue(components)) {
+    return value;
+  }
+
+  return unwrapReferencedColorValue({
+    ...components,
+    alpha: value.alpha ?? components.alpha,
+  });
+}
+
 export function resolvedTokenToYamlValue(
   collection: DesignTokensCollection,
   resolvedToken: GenericResolvedDesignTokensCollectionToken,
@@ -95,7 +140,7 @@ export function resolvedTokenToYamlValue(
   switch (resolvedToken.type) {
     case 'color':
       return colorDesignTokensCollectionTokenValueToCssValue(
-        fullyResolved as Parameters<typeof colorDesignTokensCollectionTokenValueToCssValue>[0],
+        unwrapReferencedColorValue(fullyResolved as ColorValue),
       );
     case 'dimension':
       return dimensionDesignTokensCollectionTokenValueToCssValue(

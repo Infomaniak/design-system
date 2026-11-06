@@ -329,6 +329,17 @@ describe('cleanRenderTemplate', () => {
     expect(cleanRenderTemplate("<b>${ifDefined(args['a'])}</b>", { a: 'x' })).toBe('<b>x</b>');
   });
 
+  it('strips comments, including a dangling comment opener', () => {
+    expect(cleanRenderTemplate('<!-- note --><b>x</b>', {})).toBe('<b>x</b>');
+    expect(cleanRenderTemplate('<!--><b>x</b>', {})).toBe('><b>x</b>');
+    expect(cleanRenderTemplate('<b>x</b><!--', {})).toBe('<b>x</b>');
+  });
+
+  it('re-strips openers re-formed when fragment removal joins pieces', () => {
+    expect(cleanRenderTemplate('<b><!<!--c-->--x</b>', {})).toBe('<b>x</b>');
+    expect(cleanRenderTemplate('<!<!--X-->--', {})).toBeNull();
+  });
+
   it('expands template(args) with the component tag for element kind', () => {
     expect(
       cleanRenderTemplate(

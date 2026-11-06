@@ -46,6 +46,9 @@ const NUMERIC_VALUE_GUARDS: readonly string[] = [
   // bare numeric border widths suggested by the engine, every side
   // (`border-0`, `border-t-2`, `border-r-4`, ...)
   '@source not inline("border-{,x-,y-,t-,r-,b-,l-,s-,e-}{0,2,4,8}");',
+  // bare numeric outline widths suggested by the engine
+  // (`outline-0`, `outline-1`, `outline-2`, `outline-4`, `outline-8`)
+  '@source not inline("outline-{0,1,2,4,8}");',
 ];
 
 export interface BuildTailwindTokensOptions {
@@ -105,6 +108,7 @@ export function buildTailwindTokens({
           // 'spacing',
           'radius',
           'border-width',
+          'outline-width',
           // 'shadow',
           // 'inset-shadow',
           // 'drop-shadow',
@@ -138,27 +142,28 @@ export function buildTailwindTokens({
                 const tokenName: string = token.name.join('.');
 
                 if (tokenName.startsWith('color')) {
-                  // --color-*
-
+                  // --color-* / --{utility}-color-* / --outline-color-*
                   return [
-                    generateTailwindToken(
-                      token,
-                      DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION(
-                        block((): SegmentsReference => {
-                          // NOTE: https://github.com/tailwindlabs/tailwindcss/blob/90f8ff41c8e2a4d17bc76921e23e9d672123da76/packages/tailwindcss/src/utilities.ts#L2952
-                          //  not in the documentation, but we may associate color tokens to specific tailwind utilities.
-                          if (tokenName.startsWith('color.background')) {
-                            return ['background-color', ...token.name.slice(2)];
-                          } else if (tokenName.startsWith('color.border')) {
-                            return ['border-color', ...token.name.slice(2)];
-                          } else if (tokenName.startsWith('color.content')) {
-                            return ['text-color', ...token.name.slice(2)];
-                          } else {
-                            return ['color', ...token.name.slice(1)];
-                          }
-                        }),
-                      ),
-                    ),
+                    ...block((): readonly SegmentsReference[] => {
+                      // NOTE: https://github.com/tailwindlabs/tailwindcss/blob/90f8ff41c8e2a4d17bc76921e23e9d672123da76/packages/tailwindcss/src/utilities.ts#L2952
+                      //  not in the documentation, but we may associate color tokens to specific tailwind utilities.
+                      if (tokenName.startsWith('color.background')) {
+                        return [['background-color', ...token.name.slice(2)]];
+                      } else if (tokenName.startsWith('color.border')) {
+                        return [
+                          ['border-color', ...token.name.slice(2)],
+                          ['outline-color', ...token.name.slice(2)],
+                        ];
+                      } else if (tokenName.startsWith('color.content')) {
+                        return [['text-color', ...token.name.slice(2)]];
+                      } else {
+                        return [['color', ...token.name.slice(1)]];
+                      }
+                    })
+                      .map(DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION)
+                      .map((tailwindToken: string): CssVariableDeclaration => {
+                        return generateTailwindToken(token, tailwindToken);
+                      }),
                     ...block((): readonly CssVariableDeclaration[] => {
                       // generate the state tokens applied to the other color tokens
                       if (
@@ -299,6 +304,25 @@ export function buildTailwindTokens({
                         ...token.name.slice(1, -1),
                       ]),
                     ),
+                    // bind the outline width to the same token (`--outline-width-{scale}`)
+                    ...block((): readonly CssVariableDeclaration[] => {
+                      // NOTE: `outline-none` is an outline STYLE utility built into the engine:
+                      //  binding `--outline-width-none` would merge an outline width into it.
+                      if (tokenName.startsWith('border.none.width')) {
+                        return [];
+                      }
+
+                      return [
+                        generateTailwindToken(
+                          token,
+                          RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
+                            'outline',
+                            'width',
+                            ...token.name.slice(1, -1),
+                          ]),
+                        ),
+                      ];
+                    }),
                   ];
                 } else if (tokenName.startsWith('blur')) {
                   // --blur-*
@@ -417,6 +441,7 @@ function isThemeInvariant(declaration: CssVariableDeclaration): boolean {
   return (
     declaration.name.startsWith('--spacing') ||
     declaration.name.startsWith('--radius') ||
-    declaration.name.startsWith('--border-width')
+    declaration.name.startsWith('--border-width') ||
+    declaration.name.startsWith('--outline-width')
   );
 }
