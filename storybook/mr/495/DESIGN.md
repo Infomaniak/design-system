@@ -1,4 +1,36 @@
 ---
+colors:
+  state:
+    hover:
+      soft:
+        light: "#0b426f0f"
+        dark: "#f8fafc0f"
+      medium:
+        light: "#0b426f1f"
+        dark: "#f8fafc1f"
+      strong:
+        light: "#0b426f99"
+        dark: "#f8fafc33"
+    pressed:
+      soft:
+        light: "#0b426f1f"
+        dark: "#f8fafc1f"
+      medium:
+        light: "#0b426f4d"
+        dark: "#f8fafc4d"
+      strong:
+        light: "#0b426fcc"
+        dark: "#f8fafc66"
+    selected:
+      soft:
+        light: "#0b426f0f"
+        dark: "#f8fafc1f"
+      medium:
+        light: "#0b426f1f"
+        dark: "#f8fafc29"
+      strong:
+        light: "#0b426f99"
+        dark: "#f8fafc66"
 typography:
   xs:
     base:
