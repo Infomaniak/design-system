@@ -67,9 +67,11 @@ export function buildFigmaTokens({
             !isCurlyReference(modifierToken.value) &&
             // NOTE: for color tokens we allow "raw" alpha values instead of just curly references (it provides a better experience in Figma)
             //   remove the following condition when this exception is no more wanted
-            isDesignTokensCollectionTokenWithType(modifierToken) &&
-            isColorDesignTokensCollectionToken(modifierToken) &&
-            isCurlyReference(modifierToken.value.components)
+            !(
+              isDesignTokensCollectionTokenWithType(modifierToken) &&
+              isColorDesignTokensCollectionToken(modifierToken) &&
+              isCurlyReference(modifierToken.value.components)
+            )
           ) {
             throw new Error(
               `<modifier>(${modifier}), <context>(${context}), <token>(${tokenNameAsCurlyReference}): token's value must be a curly reference.`,
