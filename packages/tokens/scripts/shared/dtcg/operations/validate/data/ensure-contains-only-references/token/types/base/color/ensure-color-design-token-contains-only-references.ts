@@ -9,9 +9,11 @@ export function ensureColorDesignTokenContainsOnlyReferences(token: ColorDesignT
   if (!isDesignTokenReference(token.$value)) {
     expectDesignTokenReference(token.$value.components);
 
-    if (token.$value.alpha !== undefined) {
-      expectDesignTokenReference(token.$value.alpha);
-    }
+    // NOTE: for alpha we allow "raw" values instead of just curly references (it provides a better experience in Figma)
+    //   uncomment the following code when this exception is no more wanted
+    // if (token.$value.alpha !== undefined) {
+    //   expectDesignTokenReference(token.$value.alpha);
+    // }
   }
 
   // NOTE: official

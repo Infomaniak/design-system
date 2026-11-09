@@ -54,7 +54,7 @@ describe('ensureColorDesignTokenContainsOnlyReferences', () => {
     expect(() => ensureColorDesignTokenContainsOnlyReferences(token)).not.toThrow();
   });
 
-  test('should throw when token contains referenced components with a literal alpha', () => {
+  test('should not throw when token contains referenced components with a raw alpha (documented Figma exception)', () => {
     const token: ColorDesignToken = {
       $value: {
         colorSpace: 'srgb',
@@ -63,6 +63,6 @@ describe('ensureColorDesignTokenContainsOnlyReferences', () => {
       },
     };
 
-    expect(() => ensureColorDesignTokenContainsOnlyReferences(token)).toThrow();
+    expect(() => ensureColorDesignTokenContainsOnlyReferences(token)).not.toThrow();
   });
 });
