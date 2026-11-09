@@ -714,35 +714,80 @@
     "state": {
       "hover": {
         "soft": {
-          "$value": "{color.blue.900-6}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.06
+          }
         },
         "medium": {
-          "$value": "{color.blue.900-12}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.12
+          }
         },
         "strong": {
-          "$value": "{color.blue.900-60}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.6
+          }
         }
       },
       "pressed": {
         "soft": {
-          "$value": "{color.blue.900-12}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.12
+          }
         },
         "medium": {
-          "$value": "{color.blue.900-30}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.3
+          }
         },
         "strong": {
-          "$value": "{color.blue.900-80}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.8
+          }
         }
       },
       "selected": {
         "soft": {
-          "$value": "{color.blue.900-6}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.06
+          }
         },
         "medium": {
-          "$value": "{color.blue.900-12}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.12
+          }
         },
         "strong": {
-          "$value": "{color.blue.900-60}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.6
+          }
         }
       },
       "focus": {
