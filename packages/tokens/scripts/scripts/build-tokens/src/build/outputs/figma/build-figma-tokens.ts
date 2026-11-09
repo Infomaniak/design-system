@@ -12,6 +12,7 @@ import type {
 import { designTokensCollectionToFigmaDesignTokensGroup } from '../../../../../../shared/dtcg/resolver/to/figma/dtcg/design-tokens-collection-to-figma-design-tokens-group.ts';
 import type { FigmaDesignTokensGroup } from '../../../../../../shared/dtcg/resolver/to/figma/figma/group/figma-design-tokens-group.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
+import { isDesignTokensCollectionTokenWithType } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
 import { isColorDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/types/base/color/is-color-design-tokens-collection-token.ts';
 import {
@@ -62,17 +63,17 @@ export function buildFigmaTokens({
 
           const newModifierTokenName: ArrayDesignTokenName = [modifier, ...tokenName];
 
-          if (!isCurlyReference(modifierToken.value)) {
+          if (
+            !isCurlyReference(modifierToken.value) &&
             // NOTE: for color tokens we allow "raw" alpha values instead of just curly references (it provides a better experience in Figma)
             //   remove the following condition when this exception is no more wanted
-            if (
-              !isColorDesignTokensCollectionToken(modifierToken) ||
-              !isCurlyReference(modifierToken.value.components)
-            ) {
-              throw new Error(
-                `<modifier>(${modifier}), <context>(${context}), <token>(${tokenNameAsCurlyReference}): token's value must be a curly reference.`,
-              );
-            }
+            isDesignTokensCollectionTokenWithType(modifierToken) &&
+            isColorDesignTokensCollectionToken(modifierToken) &&
+            isCurlyReference(modifierToken.value.components)
+          ) {
+            throw new Error(
+              `<modifier>(${modifier}), <context>(${context}), <token>(${tokenNameAsCurlyReference}): token's value must be a curly reference.`,
+            );
           }
 
           const mode: Record<string, string> = {
