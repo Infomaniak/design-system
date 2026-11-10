@@ -30,6 +30,18 @@
         "$extensions": {
           "scopes": []
         }
+      },
+      "color": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": "{color.gray.400}",
+          "alpha": 0.06
+        },
+        "$description": "Shadow color for the xs elevation.",
+        "$extensions": {
+          "scopes": ["EFFECT_COLOR"]
+        }
       }
     },
     "sm": {
@@ -60,6 +72,18 @@
         "$description": "Spread of the sm shadow.",
         "$extensions": {
           "scopes": []
+        }
+      },
+      "color": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": "{color.gray.400}",
+          "alpha": 0.06
+        },
+        "$description": "Shadow color for the sm elevation.",
+        "$extensions": {
+          "scopes": ["EFFECT_COLOR"]
         }
       }
     },
@@ -92,6 +116,18 @@
         "$extensions": {
           "scopes": []
         }
+      },
+      "color": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": "{color.gray.400}",
+          "alpha": 0.08
+        },
+        "$description": "Shadow color for the md elevation.",
+        "$extensions": {
+          "scopes": ["EFFECT_COLOR"]
+        }
       }
     },
     "lg": {
@@ -122,6 +158,18 @@
         "$description": "Spread of the lg shadow.",
         "$extensions": {
           "scopes": []
+        }
+      },
+      "color": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": "{color.gray.400}",
+          "alpha": 0.1
+        },
+        "$description": "Shadow color for the lg elevation.",
+        "$extensions": {
+          "scopes": ["EFFECT_COLOR"]
         }
       }
     },
@@ -154,6 +202,18 @@
         "$extensions": {
           "scopes": []
         }
+      },
+      "color": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": "{color.gray.400}",
+          "alpha": 0.1
+        },
+        "$description": "Shadow color for the xl elevation.",
+        "$extensions": {
+          "scopes": ["EFFECT_COLOR"]
+        }
       }
     },
     "2xl": {
@@ -184,6 +244,18 @@
         "$description": "Spread of the 2xl shadow.",
         "$extensions": {
           "scopes": []
+        }
+      },
+      "color": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": "{color.gray.400}",
+          "alpha": 0.14
+        },
+        "$description": "Shadow color for the 2xl elevation.",
+        "$extensions": {
+          "scopes": ["EFFECT_COLOR"]
         }
       }
     }
