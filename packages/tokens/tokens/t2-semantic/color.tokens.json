@@ -1671,51 +1671,6 @@
         }
       }
     },
-    "shadow": {
-      "$description": "Semantic shadow colors for elevation and depth effects.",
-      "xs": {
-        "$value": "{color.gray.400-6}",
-        "$description": "Shadow color for the xs elevation.",
-        "$extensions": {
-          "scopes": ["EFFECT_COLOR"]
-        }
-      },
-      "sm": {
-        "$value": "{color.gray.400-6}",
-        "$description": "Shadow color for the sm elevation.",
-        "$extensions": {
-          "scopes": ["EFFECT_COLOR"]
-        }
-      },
-      "md": {
-        "$value": "{color.gray.400-8}",
-        "$description": "Shadow color for the md elevation.",
-        "$extensions": {
-          "scopes": ["EFFECT_COLOR"]
-        }
-      },
-      "lg": {
-        "$value": "{color.gray.400-10}",
-        "$description": "Shadow color for the lg elevation.",
-        "$extensions": {
-          "scopes": ["EFFECT_COLOR"]
-        }
-      },
-      "xl": {
-        "$value": "{color.gray.400-10}",
-        "$description": "Shadow color for the xl elevation.",
-        "$extensions": {
-          "scopes": ["EFFECT_COLOR"]
-        }
-      },
-      "2xl": {
-        "$value": "{color.gray.400-14}",
-        "$description": "Shadow color for the 2xl elevation.",
-        "$extensions": {
-          "scopes": ["EFFECT_COLOR"]
-        }
-      }
-    },
     "state": {
       "$description": "Interaction state colors for focus, hover, pressed, and selected states.",
       "focus": {
