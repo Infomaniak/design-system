@@ -5,7 +5,7 @@
   justify-content: center;
 
   & ::slotted(esds-avatar:not(:first-child)) {
-    margin-left: calc(var(--esds-avatar-group-gap) * -1);
+    margin-left: var(--esds-avatar-group-gap);
   }
 }
 

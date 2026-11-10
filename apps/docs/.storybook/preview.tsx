@@ -51,9 +51,6 @@ loadFontsCss().catch((error: unknown): void => {
 // Import all the modifiers
 import '@infomaniak-design-system/tokens/dist/web/css/modifiers/all.attr.css';
 
-// Import all avatar-size modifiers
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/avatar-size/all.attr.css';
-
 // Initialize <esds-icon> and provide IconifyApi via root InjectionContext
 EsdsIconComponent.define();
 
