@@ -1,4 +1,36 @@
 ---
+colors:
+  state:
+    hover:
+      soft:
+        light: "#0b426f0f"
+        dark: "#f8fafc0f"
+      medium:
+        light: "#0b426f1f"
+        dark: "#f8fafc1f"
+      strong:
+        light: "#0b426f99"
+        dark: "#f8fafc33"
+    pressed:
+      soft:
+        light: "#0b426f1f"
+        dark: "#f8fafc1f"
+      medium:
+        light: "#0b426f4d"
+        dark: "#f8fafc4d"
+      strong:
+        light: "#0b426fcc"
+        dark: "#f8fafc66"
+    selected:
+      soft:
+        light: "#0b426f0f"
+        dark: "#f8fafc1f"
+      medium:
+        light: "#0b426f1f"
+        dark: "#f8fafc29"
+      strong:
+        light: "#0b426f99"
+        dark: "#f8fafc66"
 typography:
   xs:
     base:
@@ -527,7 +559,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | Token Name | Light Value | Dark Value | CSS Variable | Description |
 |---|---|---|---|---|
 | badge.size.content | 20px | 20px | var(--esds-badge-size-content) | Default badge size for content badges. |
-| badge.size.dot | 4px | 4px | var(--esds-badge-size-dot) | Default badge size for dot badges. |
+| badge.size.dot | 8px | 8px | var(--esds-badge-size-dot) | Default badge size for dot badges. |
 | badge.padding.inline | 2px | 2px | var(--esds-badge-padding-inline) | Default badge inline padding. |
 | badge.padding.block | 0px | 0px | var(--esds-badge-padding-block) | Default badge block padding. |
 | badge.border.radius | 1000px | 1000px | var(--esds-badge-border-radius) | Default badge corner radius. |
