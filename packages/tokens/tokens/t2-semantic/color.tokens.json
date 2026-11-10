@@ -1728,21 +1728,36 @@
       "hover": {
         "$description": "Hover state overlay colors in soft, medium and strong intensities.",
         "soft": {
-          "$value": "{color.blue.900-6}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.06
+          },
           "$description": "Soft hover overlay for subtle interactive feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "medium": {
-          "$value": "{color.blue.900-12}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.12
+          },
           "$description": "Medium hover overlay for balanced interactive feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "strong": {
-          "$value": "{color.blue.900-60}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.6
+          },
           "$description": "Strong hover overlay for prominent interactive feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
@@ -1752,21 +1767,36 @@
       "pressed": {
         "$description": "Pressed state overlay colors in soft, medium and strong intensities.",
         "soft": {
-          "$value": "{color.blue.900-12}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.12
+          },
           "$description": "Soft pressed overlay for subtle active feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "medium": {
-          "$value": "{color.blue.900-30}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.3
+          },
           "$description": "Medium pressed overlay for balanced active feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "strong": {
-          "$value": "{color.blue.900-80}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.8
+          },
           "$description": "Strong pressed overlay for prominent active feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
@@ -1776,21 +1806,36 @@
       "selected": {
         "$description": "Selected state overlay colors in soft, medium and strong intensities.",
         "soft": {
-          "$value": "{color.blue.900-6}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.06
+          },
           "$description": "Soft selected overlay for subtle selection feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "medium": {
-          "$value": "{color.blue.900-12}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.12
+          },
           "$description": "Medium selected overlay for balanced selection feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "strong": {
-          "$value": "{color.blue.900-60}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.6
+          },
           "$description": "Strong selected overlay for prominent selection feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
