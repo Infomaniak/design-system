@@ -1,0 +1,101 @@
+@use '../../../styles' as styles;
+
+[esds-avatar-button] {
+  /* reset esds-button style */
+  --esds-button-padding-inline: 0px;
+  --esds-button-padding-block: 0px;
+  --esds-button-gap-row: 0px;
+  --esds-button-gap-column: 0px;
+  --esds-button-border-radius: var(--esds-avatar-border-radius-circle);
+  --esds-button-border-color: transparent;
+  --esds-button-border-color-disabled: transparent;
+  --esds-button-border-width: 0px;
+  --esds-button-border-width-disabled: 0px;
+  --esds-button-background-color: transparent;
+  --esds-button-background-color-a: 0;
+  --esds-button-background-color-disabled: transparent;
+  --esds-button-background-color-disabled-a: 0;
+  --esds-button-content-color: transparent;
+  --esds-button-content-color-disabled: transparent;
+  --esds-button-color-state-hover: transparent;
+  --esds-button-color-state-hover-a: 0;
+  --esds-button-color-state-pressed: transparent;
+  --esds-button-color-state-pressed-a: 0;
+  --esds-button-icon-size: 0px;
+  --esds-button-size: 0px;
+
+  --esds-focus-border-radius: var(--esds-avatar-border-radius-circle);
+
+  &:not(:disabled, [disabled]) {
+    &:hover,
+    &:active {
+      & > esds-avatar {
+        /* has an image */
+        &[image]:not([image='']) {
+          background-color: var(--esds-avatar-background-color);
+          position: relative;
+
+          &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      & > esds-avatar {
+        &:not([image]:not([image=''])) {
+          background-color: styles.source-over(
+            --esds-avatar-background-color,
+            --esds-avatar-color-state-hover
+          );
+        }
+
+        /* has an image */
+        &[image]:not([image='']) {
+          &::after {
+            background-color: var(--esds-avatar-color-state-hover);
+          }
+        }
+      }
+    }
+
+    &:active {
+      & > esds-avatar {
+        &:not([image]:not([image=''])) {
+          background-color: styles.source-over(
+            --esds-avatar-background-color,
+            --esds-avatar-color-state-pressed
+          );
+        }
+
+        /* has an image */
+        &[image]:not([image='']) {
+          &::after {
+            background-color: var(--esds-avatar-color-state-pressed);
+          }
+        }
+      }
+    }
+  }
+
+  /* disabled */
+  &:is(:disabled, [disabled]) {
+    & > esds-avatar {
+      background-color: var(--esds-avatar-background-color-disabled);
+      color: var(--esds-avatar-content-color-disabled);
+
+      /* has an image */
+      &[image]:not([image='']) {
+        opacity: var(--esds-avatar-opacity-disabled);
+      }
+    }
+  }
+
+  &:has(> esds-avatar[shape='square']) {
+    --esds-button-border-radius: var(--esds-avatar-border-radius-square);
+    --esds-focus-border-radius: var(--esds-avatar-border-radius-square);
+  }
+}

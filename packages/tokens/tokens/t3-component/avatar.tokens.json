@@ -36,9 +36,17 @@
     },
     "content": {
       "color": {
-        "$value": "{color.content.on.dataviz.dim2}",
-        "$extensions": {
-          "scopes": []
+        "$root": {
+          "$value": "{color.content.on.dataviz.dim2}",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "disabled": {
+          "$value": "{color.content.on.disabled}",
+          "$extensions": {
+            "scopes": []
+          }
         }
       },
       "font": {
@@ -50,7 +58,39 @@
     },
     "background": {
       "color": {
-        "$value": "{color.background.dataviz.dim2}",
+        "$root": {
+          "$value": "{color.background.dataviz.dim2}",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "disabled": {
+          "$value": "{color.background.disabled}",
+          "$extensions": {
+            "scopes": []
+          }
+        }
+      }
+    },
+    "color": {
+      "state": {
+        "hover": {
+          "$value": "{color.state.hover.soft}",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "pressed": {
+          "$value": "{color.state.pressed.soft}",
+          "$extensions": {
+            "scopes": []
+          }
+        }
+      }
+    },
+    "opacity": {
+      "disabled": {
+        "$value": "{opacity.medium}",
         "$extensions": {
           "scopes": []
         }

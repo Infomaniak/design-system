@@ -33,7 +33,7 @@ export class EsdsAvatarComponent extends SignalWatcher(LitElement) {
    *
    * @attr image
    */
-  @property({ type: String })
+  @property({ type: String, reflect: true })
   accessor image: string | undefined;
 
   readonly #image: WritableSignal<string | undefined> = signalProperty(this, 'image');
@@ -45,7 +45,7 @@ export class EsdsAvatarComponent extends SignalWatcher(LitElement) {
    *
    * @attr icon
    */
-  @property({ type: String })
+  @property({ type: String, reflect: true })
   accessor icon: string | undefined;
 
   readonly #icon: WritableSignal<string | undefined> = signalProperty(this, 'icon');
@@ -57,7 +57,7 @@ export class EsdsAvatarComponent extends SignalWatcher(LitElement) {
    *
    * @attr initials
    */
-  @property({ type: String })
+  @property({ type: String, reflect: true })
   accessor initials: string | undefined;
 
   readonly #initials: WritableSignal<string | undefined> = signalProperty(this, 'initials');

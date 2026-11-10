@@ -17,7 +17,7 @@ EsdsAvatarComponent.define();
 const { args, argTypes } = getStorybookHelpers<EsdsAvatarGroupComponent>('esds-avatar-group');
 
 const meta = {
-  title: 'Components/Avatar/Group',
+  title: 'Components/Avatar/Avatar Group',
   component: 'esds-avatar-group',
   tags: ['autodocs', 'vr-test'],
   parameters: {

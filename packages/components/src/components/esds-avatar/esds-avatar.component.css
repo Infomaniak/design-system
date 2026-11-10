@@ -8,6 +8,7 @@
   border-radius: var(--esds-avatar-border-radius-circle);
   border: var(--esds-avatar-border-width) solid var(--esds-avatar-border-color);
   background-color: var(--esds-avatar-background-color);
+  color: var(--esds-avatar-content-color);
   overflow: hidden;
 
   & > img {
@@ -22,7 +23,6 @@
 
   & > .initials {
     font: var(--esds-avatar-content-font);
-    color: var(--esds-avatar-content-color);
   }
 }
 
