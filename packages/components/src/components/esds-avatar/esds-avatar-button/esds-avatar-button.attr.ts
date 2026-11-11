@@ -1,7 +1,7 @@
-import { EsdsButtonAttr } from '../../esds-button/esds-button.attr.ts';
 import type { CleanUpFunction } from '../../../helpers/.private/misc/clean-up-function.ts';
 import { InjectableStyleSheet } from '../../../helpers/.private/style/injectable-style-sheet.ts';
 import { AttributeRegistry } from '../../../helpers/custom-attribute/custom-attribute.ts';
+import { EsdsButtonAttr } from '../../esds-button/esds-button.attr.ts';
 
 import style from './esds-avatar-button.attr.scss?inline';
 
@@ -29,12 +29,6 @@ export class EsdsAvatarButtonAttr extends EsdsButtonAttr {
   }
 
   #cleanup: CleanUpFunction | undefined;
-
-  constructor(attr: Attr) {
-    super(attr);
-
-    this.ownerElement!.setAttribute('esds-button', '');
-  }
 
   override connectedCallback(): void {
     super.connectedCallback();
