@@ -22,7 +22,7 @@
     },
     "group": {
       "gap": {
-        "$value": "{dimension.minus-8}"
+        "$value": "{spacing.minus-md}"
       }
     }
   }
