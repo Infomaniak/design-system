@@ -1,4 +1,4 @@
-import { EsdsButtonAttr } from '@infomaniak-design-system/components';
+import { EsdsButtonAttr } from '../../esds-button/esds-button.attr.ts';
 import type { CleanUpFunction } from '../../../helpers/.private/misc/clean-up-function.ts';
 import { InjectableStyleSheet } from '../../../helpers/.private/style/injectable-style-sheet.ts';
 import { AttributeRegistry } from '../../../helpers/custom-attribute/custom-attribute.ts';
