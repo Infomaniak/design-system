@@ -1,4 +1,4 @@
-[//]: # (- [Figma ↗]&#40;TODO&#41;)
+[//]: # '- [Figma ↗](TODO)'
 
 ## Usage
 
