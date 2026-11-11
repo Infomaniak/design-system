@@ -1,4 +1,4 @@
-[//]: # '- [Figma ↗](TODO)'
+[Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-2&p=f&t=utLUqVyj1askiodz-0)
 
 ## Usage
 
