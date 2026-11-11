@@ -14405,9 +14405,9 @@ Then add or append the following configuration:
 
 # Components/Avatar
 
-> [//]: # (- [Figma ↗]&#40;TODO&#41;)
+> [Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-2&p=f&t=utLUqVyj1as...
 
-[//]: # (- [Figma ↗]&#40;TODO&#41;)
+[Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-2&p=f&t=utLUqVyj1askiodz-0)
 
 ## Usage
 
@@ -14518,9 +14518,9 @@ Add the attribute `data-esds-avatar-size="[size]"` to apply an avatar size:
 
 # Components/Avatar/Avatar Button
 
-> [//]: # (- [Figma ↗]&#40;TODO&#41;)
+> [Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-2&p=f&t=utLUqVyj1as...
 
-[//]: # (- [Figma ↗]&#40;TODO&#41;)
+[Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-2&p=f&t=utLUqVyj1askiodz-0)
 
 ## Usage
 
@@ -14594,9 +14594,9 @@ It inherits the same behavior and properties as the [esds-button](llms/component
 
 # Components/Avatar/Avatar Group
 
-> [//]: # (- [Figma ↗]&#40;TODO&#41;)
+> [Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-425&t=utLUqVyj1aski...
 
-[//]: # (- [Figma ↗]&#40;TODO&#41;)
+[Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-425&t=utLUqVyj1askiodz-0)
 
 ## Usage
 

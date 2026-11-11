@@ -1,8 +1,8 @@
 # Components/Avatar/Avatar Group
 
-> [//]: # (- [Figma ↗]&#40;TODO&#41;)
+> [Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-425&t=utLUqVyj1aski...
 
-[//]: # (- [Figma ↗]&#40;TODO&#41;)
+[Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-425&t=utLUqVyj1askiodz-0)
 
 ## Usage
 
