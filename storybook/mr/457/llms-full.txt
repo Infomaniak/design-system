@@ -492,6 +492,8 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | shadow.2xl.y | 25px | 25px | var(--esds-shadow-2xl-y) | Vertical offset of the 2xl shadow. |
 | shadow.2xl.blur | 50px | 50px | var(--esds-shadow-2xl-blur) | Blur radius of the 2xl shadow. |
 | shadow.2xl.spread | -12px | -12px | var(--esds-shadow-2xl-spread) | Spread of the 2xl shadow. |
+| spacing.minus-md | -8px | -8px | var(--esds-spacing-minus-md) | Negative medium spacing for overlapping elements (e.g. stacked avatars). |
+| spacing.minus-sm | -6px | -6px | var(--esds-spacing-minus-sm) | Negative small spacing for tightly overlapping elements (e.g. small stacked avatars). |
 | spacing.none | 0px | 0px | var(--esds-spacing-none) | No spacing; zero gap. |
 | spacing.2xs | 2px | 2px | var(--esds-spacing-2xs) | 2x-small spacing for tight, dense layouts. |
 | spacing.xs | 4px | 4px | var(--esds-spacing-xs) | Extra-small spacing for compact groupings. |
@@ -561,21 +563,23 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 
 | Token Name | Light Value | Dark Value | CSS Variable | Description |
 |---|---|---|---|---|
-| avatar.size | 48px | 48px | var(--esds-avatar-size) | N/A |
-| avatar.border.color | #f1f5f9 | #314158 | var(--esds-avatar-border-color) | N/A |
-| avatar.border.width | 2px | 2px | var(--esds-avatar-border-width) | N/A |
-| avatar.border.radius.circle | 1000px | 1000px | var(--esds-avatar-border-radius-circle) | N/A |
-| avatar.border.radius.square | 8px | 8px | var(--esds-avatar-border-radius-square) | N/A |
-| avatar.content.color | #0b426f | #e0effe | var(--esds-avatar-content-color) | N/A |
-| avatar.content.color.disabled | #90a1b9 | #62748e | var(--esds-avatar-content-color-disabled) | N/A |
-| avatar.content.font | 500 1.125rem/26px Infomaniak Sans | 500 1.125rem/26px Infomaniak Sans | var(--esds-avatar-content-font) | N/A |
-| avatar.background.color | #b9e0fe | #064e86 | var(--esds-avatar-background-color) | N/A |
-| avatar.background.color.disabled | #e2e8f0 | #0f172b | var(--esds-avatar-background-color-disabled) | N/A |
-| avatar.color.state.hover | #0b426f0f | #f8fafc0f | var(--esds-avatar-color-state-hover) | N/A |
-| avatar.color.state.pressed | #0b426f1f | #f8fafc1f | var(--esds-avatar-color-state-pressed) | N/A |
-| avatar.opacity.disabled | 0.5 | 0.5 | var(--esds-avatar-opacity-disabled) | N/A |
-| avatar.icon.size | 32px | 32px | var(--esds-avatar-icon-size) | N/A |
-| avatar.group.gap | -8px | -8px | var(--esds-avatar-group-gap) | N/A |
+| avatar.size | 48px | 48px | var(--esds-avatar-size) | Default avatar size. |
+| avatar.border.color | #f1f5f9 | #314158 | var(--esds-avatar-border-color) | Default avatar border color. |
+| avatar.border.width | 2px | 2px | var(--esds-avatar-border-width) | Default avatar border width. |
+| avatar.border.radius.circle | 1000px | 1000px | var(--esds-avatar-border-radius-circle) | Corner radius for circle avatars. |
+| avatar.border.radius.square | 8px | 8px | var(--esds-avatar-border-radius-square) | Corner radius for square avatars. |
+| avatar.content.color | #0b426f | #e0effe | var(--esds-avatar-content-color) | Default avatar initials and icon color. |
+| avatar.content.color.disabled | #90a1b9 | #62748e | var(--esds-avatar-content-color-disabled) | Avatar initials and icon color when disabled. |
+| avatar.content.font | 500 1.25rem/28px Infomaniak Sans | 500 1.25rem/28px Infomaniak Sans | var(--esds-avatar-content-font) | Default avatar initials typography. |
+| avatar.background.color | #b9e0fe | #064e86 | var(--esds-avatar-background-color) | Default avatar background color. |
+| avatar.background.color.disabled | #e2e8f0 | #0f172b | var(--esds-avatar-background-color-disabled) | Avatar background color when disabled. |
+| avatar.color.state.hover | #0b426f0f | #f8fafc0f | var(--esds-avatar-color-state-hover) | Avatar hover overlay for icon and content variants. |
+| avatar.color.state.hover.image | #0b426f1f | #f8fafc1f | var(--esds-avatar-color-state-hover-image) | Avatar hover overlay for the image variant. |
+| avatar.color.state.pressed | #0b426f1f | #f8fafc1f | var(--esds-avatar-color-state-pressed) | Avatar pressed overlay for icon and content variants. |
+| avatar.color.state.pressed.image | #0b426f4d | #f8fafc4d | var(--esds-avatar-color-state-pressed-image) | Avatar pressed overlay for the image variant. |
+| avatar.opacity.disabled | 0.5 | 0.5 | var(--esds-avatar-opacity-disabled) | Avatar image opacity when disabled. |
+| avatar.icon.size | 32px | 32px | var(--esds-avatar-icon-size) | Default avatar icon size. |
+| avatar.group.gap | -8px | -8px | var(--esds-avatar-group-gap) | Default overlap between stacked avatars. |
 | badge.size.content | 20px | 20px | var(--esds-badge-size-content) | Default badge size for content badges. |
 | badge.size.dot | 8px | 8px | var(--esds-badge-size-dot) | Default badge size for dot badges. |
 | badge.padding.inline | 2px | 2px | var(--esds-badge-padding-inline) | Default badge inline padding. |
@@ -5688,32 +5692,6 @@ T1 tokens are the foundational design tokens that define the raw values of your 
         <div class="token-row token-description"></div>
       </td>
     </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-dimension-minus-8); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-dimension-minus-8"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="dimension.minus-8" type="button">dimension.minus-8</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-dimension-minus-8)" type="button">var(--esds-dimension-minus-8)</button>
-        </div>
-
-        <div class="token-row token-description"></div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-dimension-minus-6); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-dimension-minus-6"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="dimension.minus-6" type="button">dimension.minus-6</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-dimension-minus-6)" type="button">var(--esds-dimension-minus-6)</button>
-        </div>
-
-        <div class="token-row token-description"></div>
-      </td>
-    </tr>
   </tbody>
 </table>
 
@@ -7124,6 +7102,32 @@ T1 tokens are the foundational design tokens that define the raw values of your 
         </div>
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-spacing-100)" type="button">var(--esds-spacing-100)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-spacing-minus-8); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-spacing-minus-8"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="spacing.minus-8" type="button">spacing.minus-8</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-spacing-minus-8)" type="button">var(--esds-spacing-minus-8)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-spacing-minus-6); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-spacing-minus-6"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="spacing.minus-6" type="button">spacing.minus-6</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-spacing-minus-6)" type="button">var(--esds-spacing-minus-6)</button>
         </div>
 
         <div class="token-row token-description"></div>
@@ -11468,6 +11472,32 @@ T2 Spacing tokens provide semantic spacing definitions for margins, padding, and
   </thead>
   <tbody>
     <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-spacing-minus-md); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-spacing-minus-md"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="spacing.minus-md" type="button">spacing.minus-md</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-spacing-minus-md)" type="button">var(--esds-spacing-minus-md)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="p-minus-md" type="button">p-minus-md</button> <button class="token-value" data-clipboard="m-minus-md" type="button">m-minus-md</button> <button class="token-value" data-clipboard="gap-minus-md" type="button">gap-minus-md</button></div>
+        <div class="token-row token-description">Negative medium spacing for overlapping elements (e.g. stacked avatars).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-spacing-minus-sm); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-spacing-minus-sm"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="spacing.minus-sm" type="button">spacing.minus-sm</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-spacing-minus-sm)" type="button">var(--esds-spacing-minus-sm)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="p-minus-sm" type="button">p-minus-sm</button> <button class="token-value" data-clipboard="m-minus-sm" type="button">m-minus-sm</button> <button class="token-value" data-clipboard="gap-minus-sm" type="button">gap-minus-sm</button></div>
+        <div class="token-row token-description">Negative small spacing for tightly overlapping elements (e.g. small stacked avatars).</div>
+      </td>
+    </tr>
+    <tr>
       <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-spacing-none); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-spacing-none"></div></td>
       <td>
         <div class="token-row">
@@ -12412,7 +12442,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-size)" type="button">var(--esds-avatar-size)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Default avatar size.</div>
       </td>
     </tr>
     <tr>
@@ -12425,7 +12455,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-border-color)" type="button">var(--esds-avatar-border-color)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Default avatar border color.</div>
       </td>
     </tr>
     <tr>
@@ -12438,7 +12468,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-border-width)" type="button">var(--esds-avatar-border-width)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Default avatar border width.</div>
       </td>
     </tr>
     <tr>
@@ -12451,7 +12481,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-border-radius-circle)" type="button">var(--esds-avatar-border-radius-circle)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Corner radius for circle avatars.</div>
       </td>
     </tr>
     <tr>
@@ -12464,7 +12494,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-border-radius-square)" type="button">var(--esds-avatar-border-radius-square)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Corner radius for square avatars.</div>
       </td>
     </tr>
     <tr>
@@ -12477,7 +12507,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-content-color)" type="button">var(--esds-avatar-content-color)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Default avatar initials and icon color.</div>
       </td>
     </tr>
     <tr>
@@ -12490,7 +12520,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-content-color-disabled)" type="button">var(--esds-avatar-content-color-disabled)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Avatar initials and icon color when disabled.</div>
       </td>
     </tr>
     <tr>
@@ -12503,7 +12533,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-content-font)" type="button">var(--esds-avatar-content-font)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Default avatar initials typography.</div>
       </td>
     </tr>
     <tr>
@@ -12516,7 +12546,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-background-color)" type="button">var(--esds-avatar-background-color)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Default avatar background color.</div>
       </td>
     </tr>
     <tr>
@@ -12529,7 +12559,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-background-color-disabled)" type="button">var(--esds-avatar-background-color-disabled)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Avatar background color when disabled.</div>
       </td>
     </tr>
     <tr>
@@ -12542,7 +12572,20 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-color-state-hover)" type="button">var(--esds-avatar-color-state-hover)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Avatar hover overlay for icon and content variants.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-avatar-color-state-hover-image); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-avatar-color-state-hover-image"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.color.state.hover.image" type="button">avatar.color.state.hover.image</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-color-state-hover-image)" type="button">var(--esds-avatar-color-state-hover-image)</button>
+        </div>
+
+        <div class="token-row token-description">Avatar hover overlay for the image variant.</div>
       </td>
     </tr>
     <tr>
@@ -12555,7 +12598,20 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-color-state-pressed)" type="button">var(--esds-avatar-color-state-pressed)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Avatar pressed overlay for icon and content variants.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-avatar-color-state-pressed-image); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-avatar-color-state-pressed-image"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.color.state.pressed.image" type="button">avatar.color.state.pressed.image</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-color-state-pressed-image)" type="button">var(--esds-avatar-color-state-pressed-image)</button>
+        </div>
+
+        <div class="token-row token-description">Avatar pressed overlay for the image variant.</div>
       </td>
     </tr>
     <tr>
@@ -12568,7 +12624,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-opacity-disabled)" type="button">var(--esds-avatar-opacity-disabled)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Avatar image opacity when disabled.</div>
       </td>
     </tr>
     <tr>
@@ -12581,7 +12637,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-icon-size)" type="button">var(--esds-avatar-icon-size)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Default avatar icon size.</div>
       </td>
     </tr>
     <tr>
@@ -12594,7 +12650,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-group-gap)" type="button">var(--esds-avatar-group-gap)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Default overlap between stacked avatars.</div>
       </td>
     </tr>
   </tbody>
@@ -14349,9 +14405,9 @@ Then add or append the following configuration:
 
 # Components/Avatar
 
-> [//]: # (- [Figma ↗]&#40;TODO&#41;)
+> [Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-2&p=f&t=utLUqVyj1as...
 
-[//]: # (- [Figma ↗]&#40;TODO&#41;)
+[Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-2&p=f&t=utLUqVyj1askiodz-0)
 
 ## Usage
 
@@ -14377,10 +14433,10 @@ Represents an avatar.
 
 List of all available avatar sizes:
 
-- `large`: large avatar
-- `medium` (default): medium avatar
-- `small`: small avatar
-- `extra-small`: tiny avatar
+- `extra-large` (default): extra-large avatar (48px)
+- `large`: large avatar (40px)
+- `medium`: medium avatar (32px)
+- `small`: small avatar (24px)
 
 ##### Import
 
@@ -14394,7 +14450,7 @@ Or individually:
 
 ```css
 @import '@infomaniak-design-system/tokens/css/modifiers/avatar-size/[size].attr.css';
-/* example: @import '@infomaniak-design-system/tokens/css/modifiers/avatar-size/medium.attr.css'; */
+/* example: @import '@infomaniak-design-system/tokens/css/modifiers/avatar-size/large.attr.css'; */
 ```
 
 ##### Apply
@@ -14403,7 +14459,7 @@ Add the attribute `data-esds-avatar-size="[size]"` to apply an avatar size:
 
 ```html
 <esds-avatar
-  data-esds-avatar-size="large"
+  data-esds-avatar-size="extra-large"
   initials="AB"
 ></esds-avatar>
 ```
@@ -14462,9 +14518,9 @@ Add the attribute `data-esds-avatar-size="[size]"` to apply an avatar size:
 
 # Components/Avatar/Avatar Button
 
-> [//]: # (- [Figma ↗]&#40;TODO&#41;)
+> [Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-2&p=f&t=utLUqVyj1as...
 
-[//]: # (- [Figma ↗]&#40;TODO&#41;)
+[Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-2&p=f&t=utLUqVyj1askiodz-0)
 
 ## Usage
 
@@ -14479,7 +14535,7 @@ EsdsAvatarButtonAttr.define();
 ```html
 <button
   esds-avatar-button
-  data-esds-avatar-size="medium"
+  data-esds-avatar-size="large"
 >
   <esds-avatar
     shape="square"
@@ -14538,9 +14594,9 @@ It inherits the same behavior and properties as the [esds-button](llms/component
 
 # Components/Avatar/Avatar Group
 
-> [//]: # (- [Figma ↗]&#40;TODO&#41;)
+> [Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-425&t=utLUqVyj1aski...
 
-[//]: # (- [Figma ↗]&#40;TODO&#41;)
+[Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-425&t=utLUqVyj1askiodz-0)
 
 ## Usage
 
@@ -14572,7 +14628,7 @@ You may apply [the same styles](llms/components/avatar.md#styles) as the avatar 
 
 ```html
 <esds-avatar-group
-  data-esds-avatar-size="large"
+  data-esds-avatar-size="extra-large"
   shape="square"
 >
   <esds-avatar initials="AB"></esds-avatar>
