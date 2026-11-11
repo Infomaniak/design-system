@@ -63,7 +63,7 @@
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-badge-border-radius); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-badge-border-radius"></div></td>
+      <td><div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: var(--esds-badge-border-radius); display: inline-block; " ></div> <div data-preview-value="--esds-badge-border-radius"></div></td>
       <td>
         <div class="token-row">
           <button class="token-value" data-clipboard="badge.border.radius" type="button">badge.border.radius</button>

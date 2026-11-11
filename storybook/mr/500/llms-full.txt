@@ -563,23 +563,21 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 
 | Token Name | Light Value | Dark Value | CSS Variable | Description |
 |---|---|---|---|---|
-| avatar.size | 48px | 48px | var(--esds-avatar-size) | Default avatar size. |
-| avatar.border.color | #f1f5f9 | #314158 | var(--esds-avatar-border-color) | Default avatar border color. |
-| avatar.border.width | 2px | 2px | var(--esds-avatar-border-width) | Default avatar border width. |
-| avatar.border.radius.circle | 1000px | 1000px | var(--esds-avatar-border-radius-circle) | Corner radius for circle avatars. |
-| avatar.border.radius.square | 8px | 8px | var(--esds-avatar-border-radius-square) | Corner radius for square avatars. |
-| avatar.background.color | #b9e0fe | #064e86 | var(--esds-avatar-background-color) | Default avatar background color. |
-| avatar.background.color.disabled | #e2e8f0 | #0f172b | var(--esds-avatar-background-color-disabled) | Avatar background color when disabled. |
-| avatar.content.color | #0b426f | #e0effe | var(--esds-avatar-content-color) | Default avatar initials and icon color. |
-| avatar.content.color.disabled | #90a1b9 | #62748e | var(--esds-avatar-content-color-disabled) | Avatar initials and icon color when disabled. |
-| avatar.content.font | 500 1.25rem/28px Infomaniak Sans | 500 1.25rem/28px Infomaniak Sans | var(--esds-avatar-content-font) | Default avatar initials typography. |
-| avatar.icon.size | 32px | 32px | var(--esds-avatar-icon-size) | Default avatar icon size. |
-| avatar.color.state.hover | #0b426f0f | #f8fafc0f | var(--esds-avatar-color-state-hover) | Avatar hover overlay for icon and content variants. |
-| avatar.color.state.hover.image | #0b426f1f | #f8fafc1f | var(--esds-avatar-color-state-hover-image) | Avatar hover overlay for the image variant. |
-| avatar.color.state.pressed | #0b426f1f | #f8fafc1f | var(--esds-avatar-color-state-pressed) | Avatar pressed overlay for icon and content variants. |
-| avatar.color.state.pressed.image | #0b426f4d | #f8fafc4d | var(--esds-avatar-color-state-pressed-image) | Avatar pressed overlay for the image variant. |
-| avatar.opacity.disabled | 0.5 | 0.5 | var(--esds-avatar-opacity-disabled) | Avatar image opacity when disabled. |
-| avatar.group.gap | -8px | -8px | var(--esds-avatar-group-gap) | Default overlap between stacked avatars. |
+| avatar.size | 48px | 48px | var(--esds-avatar-size) | N/A |
+| avatar.border.color | #f1f5f9 | #314158 | var(--esds-avatar-border-color) | N/A |
+| avatar.border.width | 2px | 2px | var(--esds-avatar-border-width) | N/A |
+| avatar.border.radius.circle | 1000px | 1000px | var(--esds-avatar-border-radius-circle) | N/A |
+| avatar.border.radius.square | 8px | 8px | var(--esds-avatar-border-radius-square) | N/A |
+| avatar.content.color | #0b426f | #e0effe | var(--esds-avatar-content-color) | N/A |
+| avatar.content.color.disabled | #90a1b9 | #62748e | var(--esds-avatar-content-color-disabled) | N/A |
+| avatar.content.font | 500 1.125rem/26px Infomaniak Sans | 500 1.125rem/26px Infomaniak Sans | var(--esds-avatar-content-font) | N/A |
+| avatar.background.color | #b9e0fe | #064e86 | var(--esds-avatar-background-color) | N/A |
+| avatar.background.color.disabled | #e2e8f0 | #0f172b | var(--esds-avatar-background-color-disabled) | N/A |
+| avatar.color.state.hover | #0b426f0f | #f8fafc0f | var(--esds-avatar-color-state-hover) | N/A |
+| avatar.color.state.pressed | #0b426f1f | #f8fafc1f | var(--esds-avatar-color-state-pressed) | N/A |
+| avatar.opacity.disabled | 0.5 | 0.5 | var(--esds-avatar-opacity-disabled) | N/A |
+| avatar.icon.size | 32px | 32px | var(--esds-avatar-icon-size) | N/A |
+| avatar.group.gap | -8px | -8px | var(--esds-avatar-group-gap) | N/A |
 | badge.size.content | 20px | 20px | var(--esds-badge-size-content) | Default badge size for content badges. |
 | badge.size.dot | 8px | 8px | var(--esds-badge-size-dot) | Default badge size for dot badges. |
 | badge.padding.inline | 2px | 2px | var(--esds-badge-padding-inline) | Default badge inline padding. |
@@ -5700,6 +5698,19 @@ T1 tokens are the foundational design tokens that define the raw values of your 
         </div>
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-dimension-minus-8)" type="button">var(--esds-dimension-minus-8)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-dimension-minus-6); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-dimension-minus-6"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="dimension.minus-6" type="button">dimension.minus-6</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-dimension-minus-6)" type="button">var(--esds-dimension-minus-6)</button>
         </div>
 
         <div class="token-row token-description"></div>
@@ -12411,6 +12422,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
 <Table
   headers={['Category', 'Description']}
   rows={[
+    [<a href="llms/design-tokens/t3/avatar.md">Avatar</a>, 'Avatar component tokens'],
     [<a href="llms/design-tokens/t3/badge.md">Badge</a>, 'Badge component tokens'],
     [<a href="llms/design-tokens/t3/body.md">Body</a>, 'Body component styles'],
     [<a href="llms/design-tokens/t3/button.md">Button</a>, 'Button component tokens'],
@@ -12429,6 +12441,218 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
     ],
   ]}
 />
+
+---
+
+# Design Tokens/T3/Avatar
+
+<!-- Do not edit directly, this file was auto-generated. -->
+
+<table class="token-table">
+  <thead>
+    <tr>
+      <th style="width: 20%;">Preview</th>
+      <th style="width: 80%;">Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-avatar-size); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-avatar-size"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.size" type="button">avatar.size</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-size)" type="button">var(--esds-avatar-size)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-avatar-border-color); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-avatar-border-color"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.border.color" type="button">avatar.border.color</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-border-color)" type="button">var(--esds-avatar-border-color)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" width: 50px; height: 50px; background: #f1f5f9; border: var(--esds-avatar-border-width) solid #374151; display: inline-block; " ></div> <div data-preview-value="--esds-avatar-border-width"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.border.width" type="button">avatar.border.width</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-border-width)" type="button">var(--esds-avatar-border-width)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: var(--esds-avatar-border-radius-circle); display: inline-block; " ></div> <div data-preview-value="--esds-avatar-border-radius-circle"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.border.radius.circle" type="button">avatar.border.radius.circle</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-border-radius-circle)" type="button">var(--esds-avatar-border-radius-circle)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: var(--esds-avatar-border-radius-square); display: inline-block; " ></div> <div data-preview-value="--esds-avatar-border-radius-square"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.border.radius.square" type="button">avatar.border.radius.square</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-border-radius-square)" type="button">var(--esds-avatar-border-radius-square)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-avatar-content-color); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-avatar-content-color"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.content.color" type="button">avatar.content.color</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-content-color)" type="button">var(--esds-avatar-content-color)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-avatar-content-color-disabled); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-avatar-content-color-disabled"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.content.color.disabled" type="button">avatar.content.color.disabled</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-content-color-disabled)" type="button">var(--esds-avatar-content-color-disabled)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><p style=" font: var(--esds-avatar-content-font); margin: 0; padding: 12px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; max-width: 300px; " > Edelweiss prefers rocky limestone locations </p> <div data-preview-value="--esds-avatar-content-font"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.content.font" type="button">avatar.content.font</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-content-font)" type="button">var(--esds-avatar-content-font)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-avatar-background-color); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-avatar-background-color"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.background.color" type="button">avatar.background.color</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-background-color)" type="button">var(--esds-avatar-background-color)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-avatar-background-color-disabled); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-avatar-background-color-disabled"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.background.color.disabled" type="button">avatar.background.color.disabled</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-background-color-disabled)" type="button">var(--esds-avatar-background-color-disabled)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-avatar-color-state-hover); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-avatar-color-state-hover"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.color.state.hover" type="button">avatar.color.state.hover</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-color-state-hover)" type="button">var(--esds-avatar-color-state-hover)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-avatar-color-state-pressed); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-avatar-color-state-pressed"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.color.state.pressed" type="button">avatar.color.state.pressed</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-color-state-pressed)" type="button">var(--esds-avatar-color-state-pressed)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #f3f4f6; padding: 8px 12px; border-radius: 4px; border: 1px solid #e5e7eb; font-family: monospace; font-size: 14px; color: #9ca3af; display: inline-block; min-width: 60px; text-align: center; " > var(--esds-avatar-opacity-disabled) </div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.opacity.disabled" type="button">avatar.opacity.disabled</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-opacity-disabled)" type="button">var(--esds-avatar-opacity-disabled)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-avatar-icon-size); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-avatar-icon-size"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.icon.size" type="button">avatar.icon.size</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-icon-size)" type="button">var(--esds-avatar-icon-size)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-avatar-group-gap); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-avatar-group-gap"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.group.gap" type="button">avatar.group.gap</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-group-gap)" type="button">var(--esds-avatar-group-gap)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
@@ -12497,7 +12721,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-badge-border-radius); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-badge-border-radius"></div></td>
+      <td><div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: var(--esds-badge-border-radius); display: inline-block; " ></div> <div data-preview-value="--esds-badge-border-radius"></div></td>
       <td>
         <div class="token-row">
           <button class="token-value" data-clipboard="badge.border.radius" type="button">badge.border.radius</button>
@@ -12739,7 +12963,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-button-border-radius); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-button-border-radius"></div></td>
+      <td><div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: var(--esds-button-border-radius); display: inline-block; " ></div> <div data-preview-value="--esds-button-border-radius"></div></td>
       <td>
         <div class="token-row">
           <button class="token-value" data-clipboard="button.border.radius" type="button">button.border.radius</button>
@@ -12778,7 +13002,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-button-border-width); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-button-border-width"></div></td>
+      <td><div style=" width: 50px; height: 50px; background: #f1f5f9; border: var(--esds-button-border-width) solid #374151; display: inline-block; " ></div> <div data-preview-value="--esds-button-border-width"></div></td>
       <td>
         <div class="token-row">
           <button class="token-value" data-clipboard="button.border.width" type="button">button.border.width</button>
@@ -12791,7 +13015,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-button-border-width-disabled); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-button-border-width-disabled"></div></td>
+      <td><div style=" width: 50px; height: 50px; background: #f1f5f9; border: var(--esds-button-border-width-disabled) solid #374151; display: inline-block; " ></div> <div data-preview-value="--esds-button-border-width-disabled"></div></td>
       <td>
         <div class="token-row">
           <button class="token-value" data-clipboard="button.border.width.disabled" type="button">button.border.width.disabled</button>
@@ -13137,7 +13361,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-kbd-border-width); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-kbd-border-width"></div></td>
+      <td><div style=" width: 50px; height: 50px; background: #f1f5f9; border: var(--esds-kbd-border-width) solid #374151; display: inline-block; " ></div> <div data-preview-value="--esds-kbd-border-width"></div></td>
       <td>
         <div class="token-row">
           <button class="token-value" data-clipboard="kbd.border.width" type="button">kbd.border.width</button>
@@ -13150,7 +13374,7 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-kbd-border-radius); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-kbd-border-radius"></div></td>
+      <td><div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: var(--esds-kbd-border-radius); display: inline-block; " ></div> <div data-preview-value="--esds-kbd-border-radius"></div></td>
       <td>
         <div class="token-row">
           <button class="token-value" data-clipboard="kbd.border.radius" type="button">kbd.border.radius</button>
@@ -14173,6 +14397,262 @@ Then add or append the following configuration:
     "./node_modules/@infomaniak-design-system/components/vscode.css-custom-data.json"
   ]
 }
+```
+
+---
+
+# Components/Avatar
+
+> [//]: # (- [Figma ↗]&#40;TODO&#41;)
+
+[//]: # (- [Figma ↗]&#40;TODO&#41;)
+
+## Usage
+
+Import and register the custom element `esds-avatar`:
+
+```ts
+import { EsdsAvatarComponent } from '@infomaniak-design-system/components';
+
+EsdsAvatarComponent.define();
+```
+
+```html
+<esds-avatar initials="AB"></esds-avatar>
+```
+
+## Description
+
+Represents an avatar.
+
+### Styles
+
+#### Sizes
+
+List of all available avatar sizes:
+
+- `large`: large avatar
+- `medium` (default): medium avatar
+- `small`: small avatar
+- `extra-small`: tiny avatar
+
+##### Import
+
+To import all avatar sizes:
+
+```css
+@import '@infomaniak-design-system/tokens/css/modifiers/avatar-size/all.attr.css';
+```
+
+Or individually:
+
+```css
+@import '@infomaniak-design-system/tokens/css/modifiers/avatar-size/[size].attr.css';
+/* example: @import '@infomaniak-design-system/tokens/css/modifiers/avatar-size/medium.attr.css'; */
+```
+
+##### Apply
+
+Add the attribute `data-esds-avatar-size="[size]"` to apply an avatar size:
+
+```html
+<esds-avatar
+  data-esds-avatar-size="large"
+  initials="AB"
+></esds-avatar>
+```
+
+## Demo
+
+## API
+
+### Attributes
+
+| Name | Type | Default | Required | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| image | string \| undefined | — | No | Image source url. |
+| icon | string \| undefined | — | No | Icon identifier in `prefix:name` format. |
+| initials | string \| undefined | — | No | Initials to display. |
+| label | string \| undefined | — | No | Label for assistive technologies. |
+| shape | 'circle' \| 'square' | — | No | Avatar's shape. |
+
+## Examples
+
+### Default
+
+```html
+<esds-avatar
+      image="https://picsum.photos/seed/esds-avatar/48"></esds-avatar>
+```
+
+### With Image
+
+```html
+<esds-avatar
+      image="https://picsum.photos/seed/esds-avatar/48"></esds-avatar>
+```
+
+### With Icon
+
+```html
+<esds-avatar
+      icon="esds:calendar-user"></esds-avatar>
+```
+
+### With Initials
+
+```html
+<esds-avatar
+      initials="AB"></esds-avatar>
+```
+
+### All Sizes
+
+```html
+<esds-avatar></esds-avatar>
+```
+
+---
+
+# Components/Avatar/Avatar Button
+
+> [//]: # (- [Figma ↗]&#40;TODO&#41;)
+
+[//]: # (- [Figma ↗]&#40;TODO&#41;)
+
+## Usage
+
+Import and register the custom attribute `esds-avatar-button`:
+
+```ts
+import { EsdsAvatarButtonAttr } from '@infomaniak-design-system/components';
+
+EsdsAvatarButtonAttr.define();
+```
+
+```html
+<button
+  esds-avatar-button
+  data-esds-avatar-size="medium"
+>
+  <esds-avatar
+    shape="square"
+    initials="AB"
+  ></esds-avatar>
+</button>
+```
+
+> [!NOTE]
+> The `data-esds-avatar-size` **MUST** be placed on the `button` instead of the `avatar`.
+
+## Description
+
+A wrapper to create a _button_ around an avatar.
+
+It inherits the same behavior and properties as the [esds-button](llms/components/button.md).
+
+## Demo
+
+## API
+
+### Attributes
+
+| Name | Type | Default | Required | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| disabled | — | — | No | Disables the button |
+| loading | — | — | No | No loading state |
+
+## Examples
+
+### Default
+
+```html
+<button esds-avatar-button></button>
+```
+
+### With Image
+
+```html
+<button esds-avatar-button></button>
+```
+
+### With Icon
+
+```html
+<button esds-avatar-button></button>
+```
+
+### With Initials
+
+```html
+<button esds-avatar-button></button>
+```
+
+---
+
+# Components/Avatar/Avatar Group
+
+> [//]: # (- [Figma ↗]&#40;TODO&#41;)
+
+[//]: # (- [Figma ↗]&#40;TODO&#41;)
+
+## Usage
+
+Import and register the custom element `esds-avatar-group`:
+
+```ts
+import { EsdsAvatarGroupComponent } from '@infomaniak-design-system/components';
+
+EsdsAvatarGroupComponent.define();
+```
+
+```html
+<esds-avatar-group>
+  <esds-avatar initials="AB"></esds-avatar>
+  <esds-avatar initials="CD"></esds-avatar>
+  <esds-avatar initials="EF"></esds-avatar>
+</esds-avatar-group>
+```
+
+## Description
+
+Groups many avatars.
+
+### Styles
+
+You may apply [the same styles](llms/components/avatar.md#styles) as the avatar component.
+
+#### Example:
+
+```html
+<esds-avatar-group
+  data-esds-avatar-size="large"
+  shape="square"
+>
+  <esds-avatar initials="AB"></esds-avatar>
+  <esds-avatar initials="CD"></esds-avatar>
+  <esds-avatar initials="EF"></esds-avatar>
+</esds-avatar-group>
+```
+
+## Demo
+
+## API
+
+### Attributes
+
+| Name | Type | Default | Required | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| shape | 'circle' \| 'square' | — | No | Avatar's shape. |
+
+## Examples
+
+### Default
+
+```html
+<esds-avatar-group
+    >
+    </esds-avatar-group>
 ```
 
 ---

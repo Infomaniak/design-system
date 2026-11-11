@@ -57,6 +57,7 @@ For complete single-file context ingestion, see [Full Design System Documentatio
 - [Design Tokens/T2/Text](llms/design-tokens/t2/text.md): T2 Text tokens provide text styling definitions for typography elements.
 - [Design Tokens/T2/Typography](llms/design-tokens/t2/typography.md)
 - [Design Tokens/T3](llms/design-tokens/t3.md): T3 tokens are component-specific design tokens that reference T1 (primitive) and T2 (semantic) values. They define vi...
+- [Design Tokens/T3/Avatar](llms/design-tokens/t3/avatar.md)
 - [Design Tokens/T3/Badge](llms/design-tokens/t3/badge.md)
 - [Design Tokens/T3/Body](llms/design-tokens/t3/body.md)
 - [Design Tokens/T3/Button](llms/design-tokens/t3/button.md)
@@ -83,6 +84,9 @@ For complete single-file context ingestion, see [Full Design System Documentatio
 ## Components
 
 - [Components/Getting Started](llms/components/getting-started.md): Reusable web components built for Infomaniak products. Each component is framework-agnostic and can be used in any pr...
+- [Components/Avatar](llms/components/avatar.md): [//]: # (- [Figma ↗]&#40;TODO&#41;)
+- [Components/Avatar/Avatar Button](llms/components/avatar/avatar-button.md): [//]: # (- [Figma ↗]&#40;TODO&#41;)
+- [Components/Avatar/Avatar Group](llms/components/avatar/avatar-group.md): [//]: # (- [Figma ↗]&#40;TODO&#41;)
 - [Components/Badge](llms/components/badge.md): Import and register the custom element `esds-badge`:
 - [Components/Body](llms/components/body.md): Import and register the custom attribute `esds-body`:
 - [Components/Button](llms/components/button.md): Import and register the custom attribute `esds-button`:
