@@ -13,7 +13,7 @@ EsdsAvatarButtonAttr.define();
 ```html
 <button
   esds-avatar-button
-  data-esds-avatar-size="medium"
+  data-esds-avatar-size="large"
 >
   <esds-avatar
     shape="square"

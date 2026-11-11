@@ -24,10 +24,10 @@ Represents an avatar.
 
 List of all available avatar sizes:
 
-- `large`: large avatar
-- `medium` (default): medium avatar
-- `small`: small avatar
-- `extra-small`: tiny avatar
+- `extra-large` (default): extra-large avatar (48px)
+- `large`: large avatar (40px)
+- `medium`: medium avatar (32px)
+- `small`: small avatar (24px)
 
 ##### Import
 
@@ -41,7 +41,7 @@ Or individually:
 
 ```css
 @import '@infomaniak-design-system/tokens/css/modifiers/avatar-size/[size].attr.css';
-/* example: @import '@infomaniak-design-system/tokens/css/modifiers/avatar-size/medium.attr.css'; */
+/* example: @import '@infomaniak-design-system/tokens/css/modifiers/avatar-size/large.attr.css'; */
 ```
 
 ##### Apply
@@ -50,7 +50,7 @@ Add the attribute `data-esds-avatar-size="[size]"` to apply an avatar size:
 
 ```html
 <esds-avatar
-  data-esds-avatar-size="large"
+  data-esds-avatar-size="extra-large"
   initials="AB"
 ></esds-avatar>
 ```

@@ -2,7 +2,7 @@ import type { StoryPropertyConfigLike } from '../../../../../apps/docs/src/helpe
 
 export const AVATAR_SHAPES = ['circle', 'square'] as const;
 
-export const AVATAR_SIZES = ['large', 'medium', 'small', 'extra-small'] as const;
+export const AVATAR_SIZES = ['extra-large', 'large', 'medium', 'small'] as const;
 
 export interface AvatarStoryExtraControls {
   shape: (typeof AVATAR_SHAPES)[number];
@@ -16,7 +16,7 @@ export const avatarStoryExtraControls: Record<string, StoryPropertyConfigLike> =
     options: AVATAR_SHAPES,
   },
   size: {
-    value: 'medium',
+    value: 'large',
     type: 'select',
     options: AVATAR_SIZES,
   },

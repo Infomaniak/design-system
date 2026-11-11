@@ -30,7 +30,7 @@ You may apply [the same styles](./?path=/docs/components-avatar--docs#styles) as
 
 ```html
 <esds-avatar-group
-  data-esds-avatar-size="large"
+  data-esds-avatar-size="extra-large"
   shape="square"
 >
   <esds-avatar initials="AB"></esds-avatar>
