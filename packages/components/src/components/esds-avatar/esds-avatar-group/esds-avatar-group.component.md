@@ -1,4 +1,4 @@
-[//]: # (- [Figma ↗]&#40;TODO&#41;)
+[Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-425&t=utLUqVyj1askiodz-0)
 
 ## Usage
 
@@ -30,7 +30,7 @@ You may apply [the same styles](./?path=/docs/components-avatar--docs#styles) as
 
 ```html
 <esds-avatar-group
-  data-esds-avatar-size="large"
+  data-esds-avatar-size="extra-large"
   shape="square"
 >
   <esds-avatar initials="AB"></esds-avatar>

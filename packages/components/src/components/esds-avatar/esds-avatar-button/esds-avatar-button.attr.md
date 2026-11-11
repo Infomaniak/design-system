@@ -1,4 +1,4 @@
-[//]: # (- [Figma ↗]&#40;TODO&#41;)
+[Figma ↗](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2854-2&p=f&t=utLUqVyj1askiodz-0)
 
 ## Usage
 
@@ -13,7 +13,7 @@ EsdsAvatarButtonAttr.define();
 ```html
 <button
   esds-avatar-button
-  data-esds-avatar-size="medium"
+  data-esds-avatar-size="large"
 >
   <esds-avatar
     shape="square"

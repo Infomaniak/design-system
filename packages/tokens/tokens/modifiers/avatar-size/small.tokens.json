@@ -1,7 +1,7 @@
 {
   "avatar": {
     "size": {
-      "$value": "{dimension.32}"
+      "$value": "{dimension.24}"
     },
     "border": {
       "radius": {
@@ -12,17 +12,17 @@
     },
     "content": {
       "font": {
-        "$value": "{body.md.font.emphasized}"
+        "$value": "{body.xs.font.emphasized}"
       }
     },
     "icon": {
       "size": {
-        "$value": "{icon.size.sm}"
+        "$value": "{icon.size.xs}"
       }
     },
     "group": {
       "gap": {
-        "$value": "{dimension.minus-8}"
+        "$value": "{spacing.minus-sm}"
       }
     }
   }
