@@ -1,6 +1,6 @@
 ---
-'@infomaniak-design-system/components': patch
-'@infomaniak-design-system/tokens': patch
+'@infomaniak-design-system/components': minor
+'@infomaniak-design-system/tokens': minor
 ---
 
 Add the new Avatar components and their design tokens:
