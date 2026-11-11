@@ -1,0 +1,77 @@
+# Design Tokens/Getting Started/iOS
+
+> A comprehensive guide on how to install and consume the Design System tokens on iOS.
+
+<div className="welcome-section">
+  <h1>Design Tokens - iOS</h1>
+  <p className="welcome-description">
+    A comprehensive guide on how to install and consume the Design System tokens on iOS.
+  </p>
+</div>
+
+## Installation
+
+Swift Package Manager — via Xcode or Package.swift:
+
+```swift
+swift.package(url: "https://github.com/Infomaniak/ios-design-system", branch: "main")
+swift.target(
+    name: "MyTarget",
+    dependencies: [
+        .product(name: "DesignSystem", package: "ios-design-system")
+    ]
+)
+```
+
+_Supported platforms: iOS 16+, macOS 13+, visionOS 1+_
+
+### Package structure
+
+```
+CatalogApp/               ← Demo app
+Sources/DesignSystem/     ← Tokens, SwiftUI components
+Tests/DesignSystemTests/  ← Unit tests
+```
+
+## Usage
+
+### Configure environment
+
+```swift
+import DesignSystem
+
+// Get theme via environment variable
+@Environment(\.esdsTheme) var theme
+```
+
+### Access tokens in **SwiftUI**
+
+```swift
+struct ContentView: View {
+    @Environment(\.esdsTheme) var theme
+
+    var body: some View {
+        VStack {
+            Text("Hello")
+                .foregroundColor(theme.color.text.default)
+                .padding(theme.spacing.medium)
+        }
+        .background(theme.color.background.default)
+    }
+}
+```
+
+### Set theme
+
+```swift
+// In your app
+@main
+struct MyApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .environment(\.esdsTheme, EsdsTheme.kdrive)
+        }
+    }
+}
+```
