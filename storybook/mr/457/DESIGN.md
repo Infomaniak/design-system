@@ -1,5 +1,7 @@
 ---
 colors:
+  background:
+    backdrop: "#00000080"
   state:
     hover:
       soft:
@@ -245,6 +247,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.feedback.neutral.dim2 | #e2e8f0 | #0f172b | var(--esds-color-background-feedback-neutral-dim2) | Soft neutral background (dim2). |
 | color.background.feedback.neutral.dim3 | #f8fafc | #020618 | var(--esds-color-background-feedback-neutral-dim3) | Subtle neutral background (dim3). |
 | color.background.disabled | #e2e8f0 | #0f172b | var(--esds-color-background-disabled) | Background for disabled, non-interactive elements. |
+| color.background.backdrop | #00000080 | #00000080 | var(--esds-color-background-backdrop) | Backdrop overlay color displayed behind modals and dialogs. |
 | color.content.on.disabled | #90a1b9 | #62748e | var(--esds-color-content-on-disabled) | Content color for disabled states on backgrounds. |
 | color.content.on.brand | #fff | #072a4a | var(--esds-color-content-on-brand) | Default foreground on brand backgrounds. |
 | color.content.on.brand.infomaniak | #fff | #072a4a | var(--esds-color-content-on-brand-infomaniak) | Foreground on Infomaniak brand backgrounds. |

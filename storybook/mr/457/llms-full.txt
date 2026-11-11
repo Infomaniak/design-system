@@ -1,5 +1,7 @@
 ---
 colors:
+  background:
+    backdrop: "#00000080"
   state:
     hover:
       soft:
@@ -245,6 +247,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.feedback.neutral.dim2 | #e2e8f0 | #0f172b | var(--esds-color-background-feedback-neutral-dim2) | Soft neutral background (dim2). |
 | color.background.feedback.neutral.dim3 | #f8fafc | #020618 | var(--esds-color-background-feedback-neutral-dim3) | Subtle neutral background (dim3). |
 | color.background.disabled | #e2e8f0 | #0f172b | var(--esds-color-background-disabled) | Background for disabled, non-interactive elements. |
+| color.background.backdrop | #00000080 | #00000080 | var(--esds-color-background-backdrop) | Backdrop overlay color displayed behind modals and dialogs. |
 | color.content.on.disabled | #90a1b9 | #62748e | var(--esds-color-content-on-disabled) | Content color for disabled states on backgrounds. |
 | color.content.on.brand | #fff | #072a4a | var(--esds-color-content-on-brand) | Default foreground on brand backgrounds. |
 | color.content.on.brand.infomaniak | #fff | #072a4a | var(--esds-color-content-on-brand-infomaniak) | Foreground on Infomaniak brand backgrounds. |
@@ -5270,6 +5273,19 @@ T1 tokens are the foundational design tokens that define the raw values of your 
       </td>
     </tr>
     <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-dimension-6); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-dimension-6"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="dimension.6" type="button">dimension.6</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-dimension-6)" type="button">var(--esds-dimension-6)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
       <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-dimension-8); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-dimension-8"></div></td>
       <td>
         <div class="token-row">
@@ -5355,6 +5371,19 @@ T1 tokens are the foundational design tokens that define the raw values of your 
         </div>
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-dimension-24)" type="button">var(--esds-dimension-24)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-dimension-28); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-dimension-28"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="dimension.28" type="button">dimension.28</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-dimension-28)" type="button">var(--esds-dimension-28)</button>
         </div>
 
         <div class="token-row token-description"></div>
@@ -5472,6 +5501,19 @@ T1 tokens are the foundational design tokens that define the raw values of your 
         </div>
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-dimension-80)" type="button">var(--esds-dimension-80)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-dimension-85); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-dimension-85"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="dimension.85" type="button">dimension.85</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-dimension-85)" type="button">var(--esds-dimension-85)</button>
         </div>
 
         <div class="token-row token-description"></div>
@@ -8112,6 +8154,19 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         </div>
         <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-disabled" type="button">bg-disabled</button></div>
         <div class="token-row token-description">Background for disabled, non-interactive elements.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-backdrop); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-backdrop"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.backdrop" type="button">color.background.backdrop</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-backdrop)" type="button">var(--esds-color-background-backdrop)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-backdrop" type="button">bg-backdrop</button></div>
+        <div class="token-row token-description">Backdrop overlay color displayed behind modals and dialogs.</div>
       </td>
     </tr>
     <tr>
