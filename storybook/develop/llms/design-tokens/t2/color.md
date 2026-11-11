@@ -769,6 +769,19 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
       </td>
     </tr>
     <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-backdrop); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-backdrop"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.backdrop" type="button">color.background.backdrop</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-backdrop)" type="button">var(--esds-color-background-backdrop)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-backdrop" type="button">bg-backdrop</button></div>
+        <div class="token-row token-description">Backdrop overlay color displayed behind modals and dialogs.</div>
+      </td>
+    </tr>
+    <tr>
       <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-disabled); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-disabled"></div></td>
       <td>
         <div class="token-row">

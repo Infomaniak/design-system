@@ -63,6 +63,19 @@
       </td>
     </tr>
     <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-dimension-6); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-dimension-6"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="dimension.6" type="button">dimension.6</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-dimension-6)" type="button">var(--esds-dimension-6)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
       <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-dimension-8); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-dimension-8"></div></td>
       <td>
         <div class="token-row">
@@ -148,6 +161,19 @@
         </div>
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-dimension-24)" type="button">var(--esds-dimension-24)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-dimension-28); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-dimension-28"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="dimension.28" type="button">dimension.28</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-dimension-28)" type="button">var(--esds-dimension-28)</button>
         </div>
 
         <div class="token-row token-description"></div>
@@ -265,6 +291,19 @@
         </div>
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-dimension-80)" type="button">var(--esds-dimension-80)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-dimension-85); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-dimension-85"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="dimension.85" type="button">dimension.85</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-dimension-85)" type="button">var(--esds-dimension-85)</button>
         </div>
 
         <div class="token-row token-description"></div>
@@ -434,6 +473,19 @@
         </div>
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-dimension-384)" type="button">var(--esds-dimension-384)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-dimension-minus-8); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-dimension-minus-8"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="dimension.minus-8" type="button">dimension.minus-8</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-dimension-minus-8)" type="button">var(--esds-dimension-minus-8)</button>
         </div>
 
         <div class="token-row token-description"></div>
