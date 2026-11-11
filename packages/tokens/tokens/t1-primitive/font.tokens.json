@@ -237,9 +237,17 @@
         }
       },
       "infomaniak-sans": {
-        "$value": "Infomaniak Sans",
-        "$extensions": {
-          "scopes": []
+        "$root": {
+          "$value": "Infomaniak Sans",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "ex-alphabetic": {
+          "$value": "Infomaniak Sans ExAlphabetic",
+          "$extensions": {
+            "scopes": []
+          }
         }
       }
     }
