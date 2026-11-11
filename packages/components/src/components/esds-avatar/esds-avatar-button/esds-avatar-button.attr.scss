@@ -1,6 +1,12 @@
 @use '../../../styles' as styles;
 
 [esds-avatar-button] {
+  /*
+    NOTE: the _state_ effect only applies to the **background-color** of an element,
+    as a consequence it is by default applied to the button's background, not the avatar's one (and image background are not supported).
+    So, we have to patch the avatar's background to reflect properly the _state_ effect.
+  */
+
   /* reset esds-button style */
   --esds-button-padding-inline: 0px;
   --esds-button-padding-block: 0px;
@@ -26,6 +32,16 @@
 
   --esds-focus-border-radius: var(--esds-avatar-border-radius-circle);
 
+  & > esds-avatar {
+    transition:
+      background-color var(--esds-button-transition),
+      opacity var(--esds-button-transition);
+
+    &::after {
+      transition: background-color var(--esds-button-transition);
+    }
+  }
+
   &:not(:disabled, [disabled]) {
     &:hover,
     &:active {
@@ -39,6 +55,7 @@
             content: '';
             position: absolute;
             inset: 0;
+            background-color: transparent;
           }
         }
       }
