@@ -1,28 +1,28 @@
 {
   "avatar": {
     "size": {
-      "$value": "{dimension.24}"
+      "$value": "{dimension.48}"
     },
     "border": {
       "radius": {
         "square": {
-          "$value": "{radius.md}"
+          "$value": "{radius.lg}"
         }
       }
     },
     "content": {
       "font": {
-        "$value": "{body.xs.font.emphasized}"
+        "$value": "{heading.xs.font.emphasized}"
       }
     },
     "icon": {
       "size": {
-        "$value": "{icon.size.xs}"
+        "$value": "{icon.size.lg}"
       }
     },
     "group": {
       "gap": {
-        "$value": "{spacing.minus-sm}"
+        "$value": "{spacing.minus-md}"
       }
     }
   }

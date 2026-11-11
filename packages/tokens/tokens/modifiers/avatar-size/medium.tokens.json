@@ -1,23 +1,23 @@
 {
   "avatar": {
     "size": {
-      "$value": "{dimension.40}"
+      "$value": "{dimension.32}"
     },
     "border": {
       "radius": {
         "square": {
-          "$value": "{radius.lg}"
+          "$value": "{radius.md}"
         }
       }
     },
     "content": {
       "font": {
-        "$value": "{body.lg.font.emphasized}"
+        "$value": "{body.md.font.emphasized}"
       }
     },
     "icon": {
       "size": {
-        "$value": "{icon.size.md}"
+        "$value": "{icon.size.sm}"
       }
     },
     "group": {
