@@ -1,0 +1,116 @@
+{
+  "avatar": {
+    "size": {
+      "$value": "{dimension.48}",
+      "$extensions": {
+        "scopes": []
+      }
+    },
+    "border": {
+      "color": {
+        "$value": "{color.border.dim4}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "width": {
+        "$value": "{border.sm.width}",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "radius": {
+        "circle": {
+          "$value": "{radius.full}",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "square": {
+          "$value": "{radius.lg}",
+          "$extensions": {
+            "scopes": []
+          }
+        }
+      }
+    },
+    "content": {
+      "color": {
+        "$root": {
+          "$value": "{color.content.on.dataviz.dim2}",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "disabled": {
+          "$value": "{color.content.on.disabled}",
+          "$extensions": {
+            "scopes": []
+          }
+        }
+      },
+      "font": {
+        "$value": "{body.lg.font.emphasized}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    },
+    "background": {
+      "color": {
+        "$root": {
+          "$value": "{color.background.dataviz.dim2}",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "disabled": {
+          "$value": "{color.background.disabled}",
+          "$extensions": {
+            "scopes": []
+          }
+        }
+      }
+    },
+    "color": {
+      "state": {
+        "hover": {
+          "$value": "{color.state.hover.soft}",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "pressed": {
+          "$value": "{color.state.pressed.soft}",
+          "$extensions": {
+            "scopes": []
+          }
+        }
+      }
+    },
+    "opacity": {
+      "disabled": {
+        "$value": "{opacity.medium}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    },
+    "icon": {
+      "size": {
+        "$value": "{icon.size.lg}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    },
+    "group": {
+      "gap": {
+        "$value": "{dimension.minus-8}",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    }
+  }
+}

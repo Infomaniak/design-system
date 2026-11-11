@@ -10,6 +10,15 @@
         "scopes": ["WIDTH_HEIGHT"]
       }
     },
+    "minus-6": {
+      "$value": {
+        "value": -6,
+        "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["WIDTH_HEIGHT"]
+      }
+    },
     "0": {
       "$value": {
         "value": 0,
