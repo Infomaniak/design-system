@@ -563,21 +563,23 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 
 | Token Name | Light Value | Dark Value | CSS Variable | Description |
 |---|---|---|---|---|
-| avatar.size | 48px | 48px | var(--esds-avatar-size) | N/A |
-| avatar.border.color | #f1f5f9 | #314158 | var(--esds-avatar-border-color) | N/A |
-| avatar.border.width | 2px | 2px | var(--esds-avatar-border-width) | N/A |
-| avatar.border.radius.circle | 1000px | 1000px | var(--esds-avatar-border-radius-circle) | N/A |
-| avatar.border.radius.square | 8px | 8px | var(--esds-avatar-border-radius-square) | N/A |
-| avatar.content.color | #0b426f | #e0effe | var(--esds-avatar-content-color) | N/A |
-| avatar.content.color.disabled | #90a1b9 | #62748e | var(--esds-avatar-content-color-disabled) | N/A |
-| avatar.content.font | 500 1.125rem/26px Infomaniak Sans | 500 1.125rem/26px Infomaniak Sans | var(--esds-avatar-content-font) | N/A |
-| avatar.background.color | #b9e0fe | #064e86 | var(--esds-avatar-background-color) | N/A |
-| avatar.background.color.disabled | #e2e8f0 | #0f172b | var(--esds-avatar-background-color-disabled) | N/A |
-| avatar.color.state.hover | #0b426f0f | #f8fafc0f | var(--esds-avatar-color-state-hover) | N/A |
-| avatar.color.state.pressed | #0b426f1f | #f8fafc1f | var(--esds-avatar-color-state-pressed) | N/A |
-| avatar.opacity.disabled | 0.5 | 0.5 | var(--esds-avatar-opacity-disabled) | N/A |
-| avatar.icon.size | 32px | 32px | var(--esds-avatar-icon-size) | N/A |
-| avatar.group.gap | -8px | -8px | var(--esds-avatar-group-gap) | N/A |
+| avatar.size | 48px | 48px | var(--esds-avatar-size) | Default avatar size. |
+| avatar.border.color | #f1f5f9 | #314158 | var(--esds-avatar-border-color) | Default avatar border color. |
+| avatar.border.width | 2px | 2px | var(--esds-avatar-border-width) | Default avatar border width. |
+| avatar.border.radius.circle | 1000px | 1000px | var(--esds-avatar-border-radius-circle) | Corner radius for circle avatars. |
+| avatar.border.radius.square | 8px | 8px | var(--esds-avatar-border-radius-square) | Corner radius for square avatars. |
+| avatar.content.color | #0b426f | #e0effe | var(--esds-avatar-content-color) | Default avatar initials and icon color. |
+| avatar.content.color.disabled | #90a1b9 | #62748e | var(--esds-avatar-content-color-disabled) | Avatar initials and icon color when disabled. |
+| avatar.content.font | 500 1.25rem/28px Infomaniak Sans | 500 1.25rem/28px Infomaniak Sans | var(--esds-avatar-content-font) | Default avatar initials typography. |
+| avatar.background.color | #b9e0fe | #064e86 | var(--esds-avatar-background-color) | Default avatar background color. |
+| avatar.background.color.disabled | #e2e8f0 | #0f172b | var(--esds-avatar-background-color-disabled) | Avatar background color when disabled. |
+| avatar.color.state.hover | #0b426f0f | #f8fafc0f | var(--esds-avatar-color-state-hover) | Avatar hover overlay for icon and content variants. |
+| avatar.color.state.hover.image | #0b426f1f | #f8fafc1f | var(--esds-avatar-color-state-hover-image) | Avatar hover overlay for the image variant. |
+| avatar.color.state.pressed | #0b426f1f | #f8fafc1f | var(--esds-avatar-color-state-pressed) | Avatar pressed overlay for icon and content variants. |
+| avatar.color.state.pressed.image | #0b426f4d | #f8fafc4d | var(--esds-avatar-color-state-pressed-image) | Avatar pressed overlay for the image variant. |
+| avatar.opacity.disabled | 0.5 | 0.5 | var(--esds-avatar-opacity-disabled) | Avatar image opacity when disabled. |
+| avatar.icon.size | 32px | 32px | var(--esds-avatar-icon-size) | Default avatar icon size. |
+| avatar.group.gap | -8px | -8px | var(--esds-avatar-group-gap) | Default overlap between stacked avatars. |
 | badge.size.content | 20px | 20px | var(--esds-badge-size-content) | Default badge size for content badges. |
 | badge.size.dot | 8px | 8px | var(--esds-badge-size-dot) | Default badge size for dot badges. |
 | badge.padding.inline | 2px | 2px | var(--esds-badge-padding-inline) | Default badge inline padding. |

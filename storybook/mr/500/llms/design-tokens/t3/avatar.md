@@ -20,7 +20,7 @@
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-size)" type="button">var(--esds-avatar-size)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Default avatar size.</div>
       </td>
     </tr>
     <tr>
@@ -33,7 +33,7 @@
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-border-color)" type="button">var(--esds-avatar-border-color)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Default avatar border color.</div>
       </td>
     </tr>
     <tr>
@@ -46,7 +46,7 @@
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-border-width)" type="button">var(--esds-avatar-border-width)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Default avatar border width.</div>
       </td>
     </tr>
     <tr>
@@ -59,7 +59,7 @@
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-border-radius-circle)" type="button">var(--esds-avatar-border-radius-circle)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Corner radius for circle avatars.</div>
       </td>
     </tr>
     <tr>
@@ -72,7 +72,7 @@
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-border-radius-square)" type="button">var(--esds-avatar-border-radius-square)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Corner radius for square avatars.</div>
       </td>
     </tr>
     <tr>
@@ -85,7 +85,7 @@
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-content-color)" type="button">var(--esds-avatar-content-color)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Default avatar initials and icon color.</div>
       </td>
     </tr>
     <tr>
@@ -98,7 +98,7 @@
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-content-color-disabled)" type="button">var(--esds-avatar-content-color-disabled)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Avatar initials and icon color when disabled.</div>
       </td>
     </tr>
     <tr>
@@ -111,7 +111,7 @@
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-content-font)" type="button">var(--esds-avatar-content-font)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Default avatar initials typography.</div>
       </td>
     </tr>
     <tr>
@@ -124,7 +124,7 @@
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-background-color)" type="button">var(--esds-avatar-background-color)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Default avatar background color.</div>
       </td>
     </tr>
     <tr>
@@ -137,7 +137,7 @@
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-background-color-disabled)" type="button">var(--esds-avatar-background-color-disabled)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Avatar background color when disabled.</div>
       </td>
     </tr>
     <tr>
@@ -150,7 +150,20 @@
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-color-state-hover)" type="button">var(--esds-avatar-color-state-hover)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Avatar hover overlay for icon and content variants.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-avatar-color-state-hover-image); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-avatar-color-state-hover-image"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.color.state.hover.image" type="button">avatar.color.state.hover.image</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-color-state-hover-image)" type="button">var(--esds-avatar-color-state-hover-image)</button>
+        </div>
+
+        <div class="token-row token-description">Avatar hover overlay for the image variant.</div>
       </td>
     </tr>
     <tr>
@@ -163,7 +176,20 @@
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-color-state-pressed)" type="button">var(--esds-avatar-color-state-pressed)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Avatar pressed overlay for icon and content variants.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-avatar-color-state-pressed-image); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-avatar-color-state-pressed-image"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="avatar.color.state.pressed.image" type="button">avatar.color.state.pressed.image</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-avatar-color-state-pressed-image)" type="button">var(--esds-avatar-color-state-pressed-image)</button>
+        </div>
+
+        <div class="token-row token-description">Avatar pressed overlay for the image variant.</div>
       </td>
     </tr>
     <tr>
@@ -176,7 +202,7 @@
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-opacity-disabled)" type="button">var(--esds-avatar-opacity-disabled)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Avatar image opacity when disabled.</div>
       </td>
     </tr>
     <tr>
@@ -189,7 +215,7 @@
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-icon-size)" type="button">var(--esds-avatar-icon-size)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Default avatar icon size.</div>
       </td>
     </tr>
     <tr>
@@ -202,7 +228,7 @@
           CSS: <button class="token-value" data-clipboard="var(--esds-avatar-group-gap)" type="button">var(--esds-avatar-group-gap)</button>
         </div>
 
-        <div class="token-row token-description"></div>
+        <div class="token-row token-description">Default overlap between stacked avatars.</div>
       </td>
     </tr>
   </tbody>
