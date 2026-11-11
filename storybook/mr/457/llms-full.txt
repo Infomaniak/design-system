@@ -574,7 +574,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | avatar.icon.size | 32px | 32px | var(--esds-avatar-icon-size) | N/A |
 | avatar.group.gap | -8px | -8px | var(--esds-avatar-group-gap) | N/A |
 | badge.size.content | 20px | 20px | var(--esds-badge-size-content) | Default badge size for content badges. |
-| badge.size.dot | 4px | 4px | var(--esds-badge-size-dot) | Default badge size for dot badges. |
+| badge.size.dot | 8px | 8px | var(--esds-badge-size-dot) | Default badge size for dot badges. |
 | badge.padding.inline | 2px | 2px | var(--esds-badge-padding-inline) | Default badge inline padding. |
 | badge.padding.block | 0px | 0px | var(--esds-badge-padding-block) | Default badge block padding. |
 | badge.border.radius | 1000px | 1000px | var(--esds-badge-border-radius) | Default badge corner radius. |
