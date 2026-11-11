@@ -79,14 +79,14 @@ Add the attribute `data-esds-avatar-size="[size]"` to apply an avatar size:
 
 ```html
 <esds-avatar
-      image="https://picsum.photos/200"></esds-avatar>
+      image="https://picsum.photos/seed/esds-avatar/48"></esds-avatar>
 ```
 
 ### With Image
 
 ```html
 <esds-avatar
-      image="https://picsum.photos/200"></esds-avatar>
+      image="https://picsum.photos/seed/esds-avatar/48"></esds-avatar>
 ```
 
 ### With Icon
