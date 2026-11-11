@@ -34,7 +34,7 @@ You may apply [the same styles](../avatar.md#styles) as the avatar component.
 
 ```html
 <esds-avatar-group
-  data-esds-avatar-size="large"
+  data-esds-avatar-size="extra-large"
   shape="square"
 >
   <esds-avatar initials="AB"></esds-avatar>
