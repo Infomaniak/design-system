@@ -462,6 +462,18 @@
         "$extensions": {
           "scopes": ["FRAME_FILL"]
         }
+      },
+      "backdrop": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": "{color.black}",
+          "alpha": 0.5
+        },
+        "$description": "Backdrop overlay color displayed behind modals and dialogs.",
+        "$extensions": {
+          "scopes": []
+        }
       }
     },
     "content": {
