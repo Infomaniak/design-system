@@ -167,6 +167,7 @@ The CEM is auto-generated during `yarn build` and verified in CI via `git diff -
 
 - Branch naming: `feat/`, `fix/`, `docs/` prefixes
 - Commits: Conventional Commits format
+- PR lifecycle: keep the PR in `Draft` while work is in progress (back to `Draft` whenever a new change is requested) and mark it `Ready` for review only once done — see `CONTRIBUTING.md`
 - Coverage: 100% code coverage required
 - Formatting: Run `yarn format` before requesting review
 - Do NOT squash commits on merge (preserve history)
