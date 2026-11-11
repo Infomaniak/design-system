@@ -56,7 +56,7 @@ const avatarButtonExtraControls: Record<string, StoryPropertyConfigLike> = {
     value: false,
     type: 'boolean',
   },
-  image: 'https://picsum.photos/200',
+  image: 'https://picsum.photos/seed/esds-avatar/48',
   icon: '',
   initials: '',
 };
@@ -99,7 +99,7 @@ export const WithImage: StoryObj<
     >
       <esds-avatar
         shape="${ifDefined(args.shape)}"
-        image="https://picsum.photos/200"
+        image="https://picsum.photos/seed/esds-avatar/48"
       ></esds-avatar>
     </button>
   `,

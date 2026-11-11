@@ -37,7 +37,7 @@ export const Default: StoryObj<EsdsAvatarComponent & AvatarStoryExtraControls> =
     ...avatarStoryExtraControls,
   }),
   args: {
-    image: 'https://picsum.photos/200',
+    image: 'https://picsum.photos/seed/esds-avatar/48',
   },
   render: (args) =>
     html`<esds-avatar
@@ -57,7 +57,7 @@ export const WithImage: StoryObj<EsdsAvatarComponent & AvatarStoryExtraControls>
     html`<esds-avatar
       data-esds-avatar-size=${ifDefined(args.size)}
       shape="${ifDefined(args.shape)}"
-      image="https://picsum.photos/200"
+      image="https://picsum.photos/seed/esds-avatar/48"
     ></esds-avatar>`,
 };
 

@@ -46,7 +46,7 @@ export const Default: StoryObj<
     ...avatarStoryExtraControls,
   }),
   args: {
-    image: 'https://picsum.photos/200',
+    image: 'https://picsum.photos/seed/esds-avatar/48',
     icon: '',
     initials: '',
     count: 3,
