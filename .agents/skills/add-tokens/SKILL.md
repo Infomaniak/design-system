@@ -1,6 +1,6 @@
 ---
 name: add-tokens
-description: Use when the user wants to add, update, or remove design tokens in the repo (keywords add tokens, new token, nouvelle taille, Token Core, DTCG, kodification, codification, 6xl, token request). Adapts guidance to a UX designer or a developer audience, codifies the token chain in packages/tokens/tokens, validates with the build, then ships a branch, commit, changeset, push, and a PR (kept in Draft while any work remains, Ready for review once done — per CONTRIBUTING.md).
+description: Use when the user wants to add, update, or remove design tokens in the repo (keywords add tokens, new token, nouvelle taille, Token Core, DTCG, kodification, codification, 6xl, token request). Adapts guidance to a UX designer or a developer audience, codifies the token chain in packages/tokens/tokens, validates with the build, then ships a branch, commit, changeset, push, and a PR.
 ---
 
 # Context
@@ -79,7 +79,7 @@ If a PR already exists for this work (iteration after step 8), the ship-time dra
 
 ## 8. Ship (only after explicit validation)
 
-Follow [CONTRIBUTING.md](../../CONTRIBUTING.md) ("Submit a pull request"), especially its draft lifecycle rule:
+Follow [CONTRIBUTING.md](../../../CONTRIBUTING.md) ("Submit a pull request"), especially its draft lifecycle rule:
 
 1. **Branch**: `git fetch origin` and create the branch from `origin/develop` (name: `feat/<short-slug>` for additions, `fix/` for value corrections). If the worktree is dirty or HEAD is not `develop`, ask the user how to proceed.
 2. **Changeset**: required — the tokens package is published. Run the `generate-changeset` skill; since changes are typically uncommitted at this point, compare with `git diff develop -- packages/tokens/tokens`. Additions → minor, value corrections → patch. Show the changeset and get approval.
