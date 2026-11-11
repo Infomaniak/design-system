@@ -1,0 +1,149 @@
+{
+  "avatar": {
+    "size": {
+      "$value": "{dimension.48}",
+      "$description": "Default avatar size.",
+      "$extensions": {
+        "scopes": []
+      }
+    },
+    "border": {
+      "color": {
+        "$value": "{color.border.dim4}",
+        "$description": "Default avatar border color.",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "width": {
+        "$value": "{border.sm.width}",
+        "$description": "Default avatar border width.",
+        "$extensions": {
+          "scopes": []
+        }
+      },
+      "radius": {
+        "circle": {
+          "$value": "{radius.full}",
+          "$description": "Corner radius for circle avatars.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "square": {
+          "$value": "{radius.lg}",
+          "$description": "Corner radius for square avatars.",
+          "$extensions": {
+            "scopes": []
+          }
+        }
+      }
+    },
+    "background": {
+      "color": {
+        "$root": {
+          "$value": "{color.background.dataviz.dim2}",
+          "$description": "Default avatar background color.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "disabled": {
+          "$value": "{color.background.disabled}",
+          "$description": "Avatar background color when disabled.",
+          "$extensions": {
+            "scopes": []
+          }
+        }
+      }
+    },
+    "content": {
+      "color": {
+        "$root": {
+          "$value": "{color.content.on.dataviz.dim2}",
+          "$description": "Default avatar initials and icon color.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "disabled": {
+          "$value": "{color.content.on.disabled}",
+          "$description": "Avatar initials and icon color when disabled.",
+          "$extensions": {
+            "scopes": []
+          }
+        }
+      },
+      "font": {
+        "$value": "{heading.xs.font.emphasized}",
+        "$description": "Default avatar initials typography.",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    },
+    "icon": {
+      "size": {
+        "$value": "{icon.size.lg}",
+        "$description": "Default avatar icon size.",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    },
+    "color": {
+      "state": {
+        "hover": {
+          "$root": {
+            "$value": "{color.state.hover.soft}",
+            "$description": "Avatar hover overlay for icon and content variants.",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "image": {
+            "$value": "{color.state.hover.medium}",
+            "$description": "Avatar hover overlay for the image variant.",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "pressed": {
+          "$root": {
+            "$value": "{color.state.pressed.soft}",
+            "$description": "Avatar pressed overlay for icon and content variants.",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "image": {
+            "$value": "{color.state.pressed.medium}",
+            "$description": "Avatar pressed overlay for the image variant.",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        }
+      }
+    },
+    "opacity": {
+      "disabled": {
+        "$value": "{opacity.medium}",
+        "$description": "Avatar image opacity when disabled.",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    },
+    "group": {
+      "gap": {
+        "$value": "{spacing.minus-md}",
+        "$description": "Default overlap between stacked avatars.",
+        "$extensions": {
+          "scopes": []
+        }
+      }
+    }
+  }
+}
