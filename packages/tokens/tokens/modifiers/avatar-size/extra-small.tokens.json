@@ -22,7 +22,7 @@
     },
     "group": {
       "gap": {
-        "$value": "{dimension.neg-6}"
+        "$value": "{dimension.minus-6}"
       }
     }
   }

@@ -106,7 +106,7 @@
     },
     "group": {
       "gap": {
-        "$value": "{dimension.neg-8}",
+        "$value": "{dimension.minus-8}",
         "$extensions": {
           "scopes": []
         }
