@@ -1,0 +1,17 @@
+# Designers Guide/Android/HCT Tonal Palette
+
+> Generates the tonal palette of a color in the [HCT color space](https://m3.material.io/blog/science-of-color-design)...
+
+Generates the tonal palette of a color in the
+[HCT color space](https://m3.material.io/blog/science-of-color-design) (Hue, Chroma, Tone), the
+one used by Material Design 3. The hue and chroma of the source color are kept, only the tone
+(perceived lightness, from `0` = black to `100` = white) changes.
+
+1. Enter or pick the **base color**.
+2. Adjust the **tones** to generate if needed.
+3. Click a color to copy its HEX, or **Copy output** to copy the whole `tone  #HEX` list.
+
+The **output background** only changes the preview, to check the swatches against a light or dark
+surface.
+
+<HctPaletteGenerator />
