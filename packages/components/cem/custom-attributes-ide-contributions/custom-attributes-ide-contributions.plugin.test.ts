@@ -106,6 +106,63 @@ describe('collectCustomAttributeTagNames', () => {
   it('should return an empty set for an empty manifest', () => {
     expect(collectCustomAttributeTagNames({})).toEqual(new Set());
   });
+
+  it('should resolve superclass chains transitively', () => {
+    const manifest = {
+      modules: [
+        {
+          declarations: [
+            {
+              tagName: 'esds-avatar-button',
+              superclass: {
+                name: 'EsdsHeadlessButtonAttr',
+                module: '/src/components/esds-headless-button/esds-headless-button.attr.ts',
+              },
+            },
+            {
+              name: 'EsdsHeadlessButtonAttr',
+              tagName: 'esds-headless-button',
+              superclass: {
+                name: 'CustomAttribute',
+                module: '/src/helpers/custom-attribute/custom-attribute.ts',
+              },
+            },
+          ],
+        },
+      ],
+    };
+
+    expect(collectCustomAttributeTagNames(manifest)).toEqual(
+      new Set(['esds-avatar-button', 'esds-headless-button']),
+    );
+  });
+
+  it('should stop the resolution at unknown superclasses', () => {
+    const manifest = {
+      modules: [
+        {
+          declarations: [{ tagName: 'esds-unknown', superclass: { name: 'UnknownClass' } }],
+        },
+      ],
+    };
+
+    expect(collectCustomAttributeTagNames(manifest)).toEqual(new Set());
+  });
+
+  it('should guard against cycles in the superclass chain', () => {
+    const manifest = {
+      modules: [
+        {
+          declarations: [
+            { name: 'ClassA', tagName: 'esds-a', superclass: { name: 'ClassB' } },
+            { name: 'ClassB', tagName: 'esds-b', superclass: { name: 'ClassA' } },
+          ],
+        },
+      ],
+    };
+
+    expect(collectCustomAttributeTagNames(manifest)).toEqual(new Set());
+  });
 });
 
 describe('moveWebTypesElementsToAttributes', () => {

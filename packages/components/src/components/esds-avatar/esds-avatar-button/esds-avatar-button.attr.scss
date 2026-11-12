@@ -1,0 +1,112 @@
+/* POC (forward-port from PR #457, head 86ddd849): see the header of esds-avatar-button.attr.ts. */
+
+@use '../../../styles' as styles;
+
+[esds-avatar-button] {
+  /*
+    POC-only local fallbacks: the avatar tokens (t3-component/avatar) live in PR #457, not on
+    develop. Delete when the tokens land.
+  */
+  --esds-avatar-border-radius-circle: 9999px;
+  --esds-avatar-border-radius-square: 8px;
+
+  /*
+    Local transition: was `--esds-button-transition`, previously provided by the esds-button look
+    sheet, which is no longer injected since the behavior/look split.
+    TODO: same token migration as in esds-button.attr.scss.
+  */
+  --esds-avatar-button-transition: 150ms linear 0s;
+
+  /* Element reset — owned by the look layer (shared chrome reset; layout is avatar-specific). */
+  @include styles.reset-native-button;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--esds-focus-border-radius);
+
+  --esds-focus-border-radius: var(--esds-avatar-border-radius-circle);
+
+  & > esds-avatar {
+    transition:
+      background-color var(--esds-avatar-button-transition),
+      opacity var(--esds-avatar-button-transition);
+
+    &::after {
+      transition: background-color var(--esds-avatar-button-transition);
+    }
+  }
+
+  &:not(:disabled, [disabled]) {
+    &:hover,
+    &:active {
+      & > esds-avatar {
+        /* has an image */
+        &[image]:not([image='']) {
+          background-color: var(--esds-avatar-background-color);
+          position: relative;
+
+          &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: transparent;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      & > esds-avatar {
+        &:not([image]:not([image=''])) {
+          background-color: styles.source-over(
+            --esds-avatar-background-color,
+            --esds-avatar-color-state-hover
+          );
+        }
+
+        /* has an image */
+        &[image]:not([image='']) {
+          &::after {
+            background-color: var(--esds-avatar-color-state-hover);
+          }
+        }
+      }
+    }
+
+    &:active {
+      & > esds-avatar {
+        &:not([image]:not([image=''])) {
+          background-color: styles.source-over(
+            --esds-avatar-background-color,
+            --esds-avatar-color-state-pressed
+          );
+        }
+
+        /* has an image */
+        &[image]:not([image='']) {
+          &::after {
+            background-color: var(--esds-avatar-color-state-pressed);
+          }
+        }
+      }
+    }
+  }
+
+  /* disabled */
+  &:is(:disabled, [disabled]) {
+    & > esds-avatar {
+      background-color: var(--esds-avatar-background-color-disabled);
+      color: var(--esds-avatar-content-color-disabled);
+
+      /* has an image */
+      &[image]:not([image='']) {
+        opacity: var(--esds-avatar-opacity-disabled);
+      }
+    }
+  }
+
+  &:has(> esds-avatar[shape='square']) {
+    --esds-focus-border-radius: var(--esds-avatar-border-radius-square);
+  }
+}
