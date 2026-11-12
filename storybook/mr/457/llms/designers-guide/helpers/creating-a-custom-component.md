@@ -8,17 +8,17 @@ Use this guide only when nothing can be reused from the native kit **and** the D
 
 ## Which tokens for which component?
 
-- 🍎 iOS/iPadOS component:
-  [Token Core](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2-260&t=U8dJUATnrl0en4i0-11)
-- 🤖 Material component:
-  [Material kit](https://www.figma.com/design/r4D2DKWIyzVoigyiTh16Hh/Edelweiss---Material-Kit?m=auto&t=6Praqzvd4yFcNUmT-6)
-- 🕸️ Shadcn component:
-  [Shadcn kit](https://www.figma.com/design/eOY97TGxMkMx9ub9zt8e6v/Edelweiss---Shadcn-Kit--Paid-?m=auto&t=6Praqzvd4yFcNUmT-6)
-
-<img
-  src={CustomComponentTokens}
-  alt="Applying kit tokens and text styles in Figma for Token Core, iOS/iPadOS, Material and Shadcn components"
-/>
+- 🍎 **iOS/iPadOS component**
+  - Colors:
+    [Token Core](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2-260&t=U8dJUATnrl0en4i0-11)
+  - Text styles:
+    [iOS/iPadOS kit](https://www.figma.com/design/OFCRdaeYW6GWhyq3ocHSOc/Edelweiss---iOS---iPadOS-Kit?m=auto&t=6Praqzvd4yFcNUmT-6)
+- 🤖 **Material component**
+  - Colors and text styles:
+    [Material kit](https://www.figma.com/design/r4D2DKWIyzVoigyiTh16Hh/Edelweiss---Material-Kit?m=auto&t=6Praqzvd4yFcNUmT-6)
+- ⬛️ **Shadcn component**
+  - Colors and text styles:
+    [Token Core](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2-260&t=U8dJUATnrl0en4i0-11)
 
 ## 1. Design in context 🎨
 
@@ -32,7 +32,15 @@ Use this guide only when nothing can be reused from the native kit **and** the D
   alt="A calendar event designed in a real screen: ready for the DS team to approve vs one that shouldn't be a component at this stage"
 />
 
-## 2. Test the edge cases 😥
+## 2. Name your component 🏷️
+
+- Use **kebab-case** for the component name (e.g. `calendar-event`, `event-card`).
+- For an iOS/iPadOS 🍎 or Android 🤖 component, follow the **native naming** of the platform kit instead, so the component reads like the native ones next to it.
+- For an internal subcomponent that must not be published, prefix its name with `.` or `_`: Figma won't publish it to the library.
+  - Use the same prefix as the native kit the component belongs to.
+  - If there's no native convention to follow (e.g. Token Core), use `.` (e.g. `.month-cell`).
+
+## 3. Test the edge cases 😥
 
 - Very long text
 - Empty content
@@ -44,17 +52,17 @@ Use this guide only when nothing can be reused from the native kit **and** the D
   alt="An event component with a very long title wrapping onto two lines instead of overlapping the trailing icons"
 />
 
-## 3. Extract only when needed 🧩
+## 4. Extract only when needed 🧩
 
 - Create a subcomponent only if it has its own states or is reused elsewhere. Otherwise, keep a simple frame.
-- For an internal subcomponent, prefix its name with `.` or `_`: Figma won't publish it to the library.
+- For an internal subcomponent, prefix its name with `.` or `_` following the naming rules from step 2: Figma won't publish it to the library.
 
 <img
   src={CustomComponentSubcomponents}
-  alt="An internal _month-cell subcomponent reused as labels inside a calendar component"
+  alt="An internal month-cell subcomponent reused as labels inside a calendar component"
 />
 
-## 4. Ready-to-use component checklist ✅
+## 5. Ready-to-use component checklist ✅
 
 ### Tokens
 
@@ -83,9 +91,10 @@ Use this guide only when nothing can be reused from the native kit **and** the D
 - The component resizes correctly (hug and fill tested, min/max width if needed)
 - Long-text behavior is defined (wrapping or truncation)
 - Slots are used wisely (e.g. avoid multiple variants just to change how many times an element appears)
-- Internal subcomponents are prefixed with `.` or `_`
+- The component is named in kebab-case, or follows the native kit naming (see step 2)
+- Internal subcomponents are prefixed with `.` or `_`, following the native kit convention (`.` by default)
 
-## 5. Integration into the kit by the DS team 🌼
+## 6. Integration into the kit by the DS team 🌼
 
 - All states required by the kit are present
 - A usage doc explains why this component exists instead of a native equivalent
