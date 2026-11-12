@@ -1,46 +1,32 @@
+/* Targets PR #457 (88cd9efc): proves the headless-button behavior/look split on top of the avatar family. */
+
 @use '../../../styles' as styles;
 
 [esds-avatar-button] {
   /*
-    NOTE: the _state_ effect only applies to the **background-color** of an element,
-    as a consequence it is by default applied to the button's background, not the avatar's one (and image background are not supported).
-    So, we have to patch the avatar's background to reflect properly the _state_ effect.
+    Local transition: was `--esds-button-transition`, previously provided by the esds-button look
+    sheet, which is no longer injected since the behavior/look split.
+    TODO: same token migration as in esds-button.attr.scss.
   */
+  --esds-avatar-button-transition: 150ms linear 0s;
 
-  /* reset anchor style */
-  text-decoration: none;
+  /* Element reset — owned by the look layer (shared chrome reset; layout is avatar-specific). */
+  @include styles.reset-native-button;
 
-  /* reset button style */
-  appearance: none;
-  margin: 0;
-  padding: 0;
-  width: auto;
-  border: none;
-  background: none;
-
-  /* custom style */
   display: inline-flex;
-  box-sizing: border-box;
   align-items: center;
   justify-content: center;
-  gap: 0;
-  cursor: default;
-  border-radius: var(--esds-avatar-border-radius-circle);
+  border-radius: var(--esds-focus-border-radius);
 
-  /* focus effect */
-  &:focus-visible {
-    outline: var(--esds-focus-border-width) solid var(--esds-focus-border-color);
-    outline-offset: var(--esds-focus-border-offset);
-    border-radius: var(--esds-avatar-border-radius-circle);
-  }
+  --esds-focus-border-radius: var(--esds-avatar-border-radius-circle);
 
   & > esds-avatar {
     transition:
-      background-color var(--esds-button-transition),
-      opacity var(--esds-button-transition);
+      background-color var(--esds-avatar-button-transition),
+      opacity var(--esds-avatar-button-transition);
 
     &::after {
-      transition: background-color var(--esds-button-transition);
+      transition: background-color var(--esds-avatar-button-transition);
     }
   }
 
@@ -102,8 +88,6 @@
 
   /* disabled */
   &:is(:disabled, [disabled]) {
-    cursor: not-allowed;
-
     & > esds-avatar {
       background-color: var(--esds-avatar-background-color-disabled);
       color: var(--esds-avatar-content-color-disabled);
@@ -116,10 +100,6 @@
   }
 
   &:has(> esds-avatar[shape='square']) {
-    border-radius: var(--esds-avatar-border-radius-square);
-
-    &:focus-visible {
-      border-radius: var(--esds-avatar-border-radius-square);
-    }
+    --esds-focus-border-radius: var(--esds-avatar-border-radius-square);
   }
 }
