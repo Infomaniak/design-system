@@ -22,6 +22,23 @@ EsdsAvatarComponent.define();
 
 Represents an avatar.
 
+### Image fallback
+
+While the image is loading, or if it fails to load, the avatar displays a fallback content instead, in this order:
+
+1. the `icon`, if provided;
+2. otherwise the `initials`, if provided;
+3. otherwise a default `esds:user` icon.
+
+The image loading state is reflected on the host as the `data-image-state` attribute (`loading`, `loaded` or `error`); the attribute is absent when no image is provided:
+
+```html
+<esds-avatar
+  image="avatar.png"
+  data-image-state="loaded"
+></esds-avatar>
+```
+
 ### Styles
 
 #### Sizes
@@ -72,21 +89,21 @@ Add the attribute `data-esds-avatar-size="[size]"` to apply an avatar size:
 | initials | string \| undefined | — | No | Initials to display. |
 | label | string \| undefined | — | No | Label for assistive technologies. |
 | shape | 'circle' \| 'square' | — | No | Avatar's shape. |
+| data-image-state | 'loading' \| 'loaded' \| 'error' | — | No | Image loading state, absent when no image is provided. |
 
 ## Examples
 
 ### Default
 
 ```html
-<esds-avatar
-      image="https://picsum.photos/seed/esds-avatar/48"></esds-avatar>
+<esds-avatar></esds-avatar>
 ```
 
 ### With Image
 
 ```html
 <esds-avatar
-      image="https://picsum.photos/seed/esds-avatar/48"></esds-avatar>
+      image=""></esds-avatar>
 ```
 
 ### With Icon
@@ -101,6 +118,12 @@ Add the attribute `data-esds-avatar-size="[size]"` to apply an avatar size:
 ```html
 <esds-avatar
       initials="AB"></esds-avatar>
+```
+
+### Image Fallback
+
+```html
+<esds-avatar></esds-avatar>
 ```
 
 ### All Sizes
