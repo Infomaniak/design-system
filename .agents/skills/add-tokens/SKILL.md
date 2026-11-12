@@ -1,6 +1,6 @@
 ---
 name: add-tokens
-description: Use when the user wants to add, update, or remove design tokens in the repo (keywords add tokens, new token, nouvelle taille, Token Core, DTCG, kodification, codification, 6xl, token request). Adapts guidance to a UX designer or a developer audience, codifies the token chain in packages/tokens/tokens, validates with the build, then ships a branch, commit, changeset, push, and a PR (ready by default, draft on explicit request).
+description: Use when the user wants to add, update, or remove design tokens in the repo (keywords add tokens, new token, nouvelle taille, Token Core, DTCG, kodification, codification, 6xl, token request). Adapts guidance to a UX designer or a developer audience, codifies the token chain in packages/tokens/tokens, validates with the build, then ships a branch, commit, changeset, push, and a PR.
 ---
 
 # Context
@@ -75,10 +75,15 @@ Summarize per tier: token name, value/reference (a table works well), plus the v
 
 If the user is not satisfied: adjust the token sources, re-run step 5, re-present. Loop until explicit validation. Never ship on an ambiguous "OK-ish".
 
+If a PR already exists for this work (iteration after step 8), the ship-time draft rule applies to this loop too: keep the PR in `Draft` (`gh pr ready --undo`) while the requested changes are in progress, and only flip it back to `Ready` once the new round is implemented, validated (step 5), and committed/pushed with the user's approval.
+
 ## 8. Ship (only after explicit validation)
+
+Follow [CONTRIBUTING.md](../../../CONTRIBUTING.md) ("Submit a pull request"), especially its draft lifecycle rule:
 
 1. **Branch**: `git fetch origin` and create the branch from `origin/develop` (name: `feat/<short-slug>` for additions, `fix/` for value corrections). If the worktree is dirty or HEAD is not `develop`, ask the user how to proceed.
 2. **Changeset**: required — the tokens package is published. Run the `generate-changeset` skill; since changes are typically uncommitted at this point, compare with `git diff develop -- packages/tokens/tokens`. Additions → minor, value corrections → patch. Show the changeset and get approval.
 3. **Commit**: stage ONLY the touched `packages/tokens/tokens/**` files and the approved `.changeset/*.md`. Conventional Commits message, e.g. `feat(tokens): add 6xl typography size (52/60) to core, semantic and heading tokens`.
 4. **Push**: `git push -u origin <branch>`.
-5. **PR**: `gh pr create --base <base>` (add `--draft` only if the user explicitly asked for a draft PR; otherwise the PR is created as ready for review). Title = commit headline. Body (English) must contain: the token chain table, the validated generated outputs (CSS variables, Figma bridge, Storybook markdown), the changeset note, the Figma mirroring follow-up, and a stacked-on note when the base is not `develop`.
+5. **PR (created as Draft)**: per CONTRIBUTING.md — "The PR must be marked as `Draft` while you're working on the feature/fix" — create it with `gh pr create --base <base> --draft`. Title = commit headline. Body (English) must contain: the token chain table, the validated generated outputs (CSS variables, Figma bridge, Storybook markdown), the changeset note, the Figma mirroring follow-up, and a stacked-on note when the base is not `develop`.
+6. **Ready for review (only when done)**: per CONTRIBUTING.md, flip the PR to `Ready` (`gh pr ready`) only once you have fully finished — all ship steps completed, `yarn check` passing, and no pending modification request from the user. If the user then asks for another change on a ready PR, convert it back to `Draft` (`gh pr ready --undo`) while you work, and mark it `Ready` again only when finished (loop back to step 7).
