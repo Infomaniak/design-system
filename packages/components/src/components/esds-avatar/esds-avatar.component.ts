@@ -57,7 +57,7 @@ export class EsdsAvatarComponent extends SignalWatcher(LitElement) {
    *
    * It is `undefined` while no image is provided, `'loading'` while the image is loading,
    * `'loaded'` once loaded, and `'error'` if loading failed. While the image is not loaded,
-   * a fallback content is displayed instead (icon, initials or default user icon).
+   * a fallback content is displayed instead (initials, icon or default user icon).
    */
   readonly #imageState: WritableSignal<EsdsAvatarComponentImageState | undefined> = signal<
     EsdsAvatarComponentImageState | undefined
@@ -150,19 +150,13 @@ export class EsdsAvatarComponent extends SignalWatcher(LitElement) {
   };
 
   /**
-   * Renders the best available non-image content: the icon, the initials, or a default user icon.
+   * Renders the best available non-image content: the initials, the icon, or a default user icon.
    *
    * It is displayed as-is when no image is provided, and as a fallback while the image is
    * loading or when it failed to load.
    */
   #renderFallbackContent(): TemplateResult {
-    if (this.#icon.get()) {
-      return html`<esds-icon
-        role="img"
-        name=${this.#icon.get()}
-        aria-label="${this.#label.get() ?? 'avatar with icon'}"
-      ></esds-icon>`;
-    } else if (this.#initials.get()) {
+    if (this.#initials.get()) {
       return html`<div
         class="initials"
         role="img"
@@ -170,6 +164,12 @@ export class EsdsAvatarComponent extends SignalWatcher(LitElement) {
       >
         ${this.#initials.get()}
       </div>`;
+    } else if (this.#icon.get()) {
+      return html`<esds-icon
+        role="img"
+        name=${this.#icon.get()}
+        aria-label="${this.#label.get() ?? 'avatar with icon'}"
+      ></esds-icon>`;
     } else {
       return html`<esds-icon
         role="img"

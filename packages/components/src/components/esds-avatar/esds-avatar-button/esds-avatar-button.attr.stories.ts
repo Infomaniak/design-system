@@ -106,27 +106,6 @@ export const WithImage: StoryObj<
   `,
 };
 
-export const WithIcon: StoryObj<
-  EsdsAvatarButtonAttr & EsdsAvatarComponent & AvatarButtonExtraControls
-> = {
-  ...storybookInteractiveControls({
-    ...avatarButtonExtraControls,
-  }),
-  render: (args) => html`
-    <button
-      ${defineEsdsAvatarButtonAttr}
-      esds-avatar-button
-      data-esds-avatar-size="${args.size}"
-      ?disabled=${args.disabled}
-    >
-      <esds-avatar
-        shape="${ifDefined(args.shape)}"
-        icon="esds:calendar-user"
-      ></esds-avatar>
-    </button>
-  `,
-};
-
 export const WithInitials: StoryObj<
   EsdsAvatarButtonAttr & EsdsAvatarComponent & AvatarButtonExtraControls
 > = {
@@ -143,6 +122,27 @@ export const WithInitials: StoryObj<
       <esds-avatar
         shape="${ifDefined(args.shape)}"
         initials="AB"
+      ></esds-avatar>
+    </button>
+  `,
+};
+
+export const WithIcon: StoryObj<
+  EsdsAvatarButtonAttr & EsdsAvatarComponent & AvatarButtonExtraControls
+> = {
+  ...storybookInteractiveControls({
+    ...avatarButtonExtraControls,
+  }),
+  render: (args) => html`
+    <button
+      ${defineEsdsAvatarButtonAttr}
+      esds-avatar-button
+      data-esds-avatar-size="${args.size}"
+      ?disabled=${args.disabled}
+    >
+      <esds-avatar
+        shape="${ifDefined(args.shape)}"
+        icon="esds:calendar-user"
       ></esds-avatar>
     </button>
   `,

@@ -62,18 +62,6 @@ export const WithImage: StoryObj<EsdsAvatarComponent & AvatarStoryExtraControls>
     ></esds-avatar>`,
 };
 
-export const WithIcon: StoryObj<EsdsAvatarComponent & AvatarStoryExtraControls> = {
-  ...storybookInteractiveControls({
-    ...avatarStoryExtraControls,
-  }),
-  render: (args) =>
-    html`<esds-avatar
-      data-esds-avatar-size=${ifDefined(args.size)}
-      shape="${ifDefined(args.shape)}"
-      icon="esds:calendar-user"
-    ></esds-avatar>`,
-};
-
 export const WithInitials: StoryObj<EsdsAvatarComponent & AvatarStoryExtraControls> = {
   ...storybookInteractiveControls({
     ...avatarStoryExtraControls,
@@ -83,6 +71,18 @@ export const WithInitials: StoryObj<EsdsAvatarComponent & AvatarStoryExtraContro
       data-esds-avatar-size=${ifDefined(args.size)}
       shape="${ifDefined(args.shape)}"
       initials="AB"
+    ></esds-avatar>`,
+};
+
+export const WithIcon: StoryObj<EsdsAvatarComponent & AvatarStoryExtraControls> = {
+  ...storybookInteractiveControls({
+    ...avatarStoryExtraControls,
+  }),
+  render: (args) =>
+    html`<esds-avatar
+      data-esds-avatar-size=${ifDefined(args.size)}
+      shape="${ifDefined(args.shape)}"
+      icon="esds:calendar-user"
     ></esds-avatar>`,
 };
 

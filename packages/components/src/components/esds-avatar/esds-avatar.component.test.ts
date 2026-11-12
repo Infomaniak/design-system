@@ -116,14 +116,14 @@ describe('EsdsAvatarComponent', () => {
       expect(el.shadowRoot?.querySelector('.initials')).toBeNull();
     });
 
-    it('should prioritize icon over initials', async () => {
+    it('should prioritize initials over icon', async () => {
       const el = createElement();
       el.icon = 'esds:user';
       el.initials = 'AB';
       await el.updateComplete;
 
-      expect(el.shadowRoot?.querySelector('esds-icon')).not.toBeNull();
-      expect(el.shadowRoot?.querySelector('.initials')).toBeNull();
+      expect(el.shadowRoot?.querySelector('.initials')).not.toBeNull();
+      expect(el.shadowRoot?.querySelector('esds-icon')).toBeNull();
     });
 
     it('should switch to the image when set after another content', async () => {
@@ -198,11 +198,25 @@ describe('EsdsAvatarComponent', () => {
       expect(el.getAttribute('data-image-state')).toBe('error');
     });
 
-    it('should fall back to the icon when the image fails to load', async () => {
+    it('should prioritize the initials over the icon when the image fails to load', async () => {
       const el = createElement();
       el.image = 'https://example.com/me.png';
       el.icon = 'esds:user';
       el.initials = 'AB';
+      await el.updateComplete;
+
+      el.shadowRoot?.querySelector('img')?.dispatchEvent(new Event('error'));
+      await el.updateComplete;
+
+      expect(el.shadowRoot?.querySelector('.initials')?.textContent?.trim()).toBe('AB');
+      expect(el.shadowRoot?.querySelector('esds-icon')).toBeNull();
+      expect(el.getAttribute('data-image-state')).toBe('error');
+    });
+
+    it('should fall back to the icon when the image fails to load', async () => {
+      const el = createElement();
+      el.image = 'https://example.com/me.png';
+      el.icon = 'esds:user';
       await el.updateComplete;
 
       el.shadowRoot?.querySelector('img')?.dispatchEvent(new Event('error'));

@@ -22,8 +22,8 @@ Represents an avatar.
 
 While the image is loading, or if it fails to load, the avatar displays a fallback content instead, in this order:
 
-1. the `icon`, if provided;
-2. otherwise the `initials`, if provided;
+1. the `initials`, if provided;
+2. otherwise the `icon`, if provided;
 3. otherwise a default `esds:user` icon.
 
 The image loading state is reflected on the host as the `data-image-state` attribute (`loading`, `loaded` or `error`); the attribute is absent when no image is provided:
