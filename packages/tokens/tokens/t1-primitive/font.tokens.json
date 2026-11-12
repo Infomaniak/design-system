@@ -82,9 +82,9 @@
           "scopes": []
         }
       },
-      "52": {
+      "56": {
         "$value": {
-          "value": 3.25,
+          "value": 3.5,
           "unit": "rem"
         },
         "$extensions": {
