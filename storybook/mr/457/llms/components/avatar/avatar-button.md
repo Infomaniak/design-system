@@ -60,13 +60,13 @@ It inherits the same behavior and properties as the [esds-button](../button.md).
 <button esds-avatar-button></button>
 ```
 
-### With Icon
+### With Initials
 
 ```html
 <button esds-avatar-button></button>
 ```
 
-### With Initials
+### With Icon
 
 ```html
 <button esds-avatar-button></button>
