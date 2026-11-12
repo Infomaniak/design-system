@@ -4,6 +4,7 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { storybookInteractiveControls } from '../../../../../../apps/docs/src/helpers/storybook-interactive-controls.ts';
 import {
+  AVATAR_STORY_IMAGE,
   avatarStoryExtraControls,
   type AvatarStoryExtraControls,
 } from '../esds-avatar.component.stories.shared.ts';
@@ -46,7 +47,7 @@ export const Default: StoryObj<
     ...avatarStoryExtraControls,
   }),
   args: {
-    image: 'https://picsum.photos/seed/esds-avatar/48',
+    image: AVATAR_STORY_IMAGE,
     icon: '',
     initials: '',
     count: 3,

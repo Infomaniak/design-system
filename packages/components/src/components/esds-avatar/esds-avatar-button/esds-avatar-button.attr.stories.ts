@@ -9,6 +9,7 @@ import {
 import { htmlElementRef } from '../../../helpers/.private/component/html-element-ref.ts';
 import { AttributeRegistry } from '../../../helpers/custom-attribute/custom-attribute.ts';
 import {
+  AVATAR_STORY_IMAGE,
   avatarStoryExtraControls,
   type AvatarStoryExtraControls,
 } from '../esds-avatar.component.stories.shared.ts';
@@ -56,7 +57,7 @@ const avatarButtonExtraControls: Record<string, StoryPropertyConfigLike> = {
     value: false,
     type: 'boolean',
   },
-  image: 'https://picsum.photos/seed/esds-avatar/48',
+  image: AVATAR_STORY_IMAGE,
   icon: '',
   initials: '',
 };
@@ -99,7 +100,7 @@ export const WithImage: StoryObj<
     >
       <esds-avatar
         shape="${ifDefined(args.shape)}"
-        image="https://picsum.photos/seed/esds-avatar/48"
+        image="${AVATAR_STORY_IMAGE}"
       ></esds-avatar>
     </button>
   `,

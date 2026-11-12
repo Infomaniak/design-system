@@ -81,6 +81,10 @@ describe('EsdsAvatarComponent', () => {
 
       const img = el.shadowRoot?.querySelector('img');
       expect(img?.getAttribute('src')).toBe('https://example.com/me.png');
+
+      img?.dispatchEvent(new Event('load'));
+      await el.updateComplete;
+
       expect(el.shadowRoot?.querySelector('esds-icon')).toBeNull();
       expect(el.shadowRoot?.querySelector('.initials')).toBeNull();
     });
@@ -102,6 +106,9 @@ describe('EsdsAvatarComponent', () => {
       el.image = 'https://example.com/me.png';
       el.icon = 'esds:user';
       el.initials = 'AB';
+      await el.updateComplete;
+
+      el.shadowRoot?.querySelector('img')?.dispatchEvent(new Event('load'));
       await el.updateComplete;
 
       expect(el.shadowRoot?.querySelector('img')).not.toBeNull();
@@ -128,6 +135,9 @@ describe('EsdsAvatarComponent', () => {
       el.image = 'https://example.com/me.png';
       await el.updateComplete;
 
+      el.shadowRoot?.querySelector('img')?.dispatchEvent(new Event('load'));
+      await el.updateComplete;
+
       expect(el.shadowRoot?.querySelector('img')).not.toBeNull();
       expect(el.shadowRoot?.querySelector('.initials')).toBeNull();
     });
@@ -143,6 +153,123 @@ describe('EsdsAvatarComponent', () => {
 
       const icon = el.shadowRoot?.querySelector('esds-icon');
       expect(icon?.getAttribute('name')).toBe('esds:user');
+    });
+  });
+
+  describe('image fallback', () => {
+    it('should render a fallback while the image is loading', async () => {
+      const el = createElement();
+      el.image = 'https://example.com/me.png';
+      el.initials = 'AB';
+      await el.updateComplete;
+
+      const img = el.shadowRoot?.querySelector('img');
+      expect(img).not.toBeNull();
+      expect(img?.hasAttribute('hidden')).toBe(true);
+      expect(el.shadowRoot?.querySelector('.initials')?.textContent?.trim()).toBe('AB');
+      expect(el.getAttribute('data-image-state')).toBe('loading');
+    });
+
+    it('should reveal the image once loaded', async () => {
+      const el = createElement();
+      el.image = 'https://example.com/me.png';
+      el.initials = 'AB';
+      await el.updateComplete;
+
+      el.shadowRoot?.querySelector('img')?.dispatchEvent(new Event('load'));
+      await el.updateComplete;
+
+      expect(el.shadowRoot?.querySelector('img')?.hasAttribute('hidden')).toBe(false);
+      expect(el.shadowRoot?.querySelector('.initials')).toBeNull();
+      expect(el.getAttribute('data-image-state')).toBe('loaded');
+    });
+
+    it('should fall back to the initials when the image fails to load', async () => {
+      const el = createElement();
+      el.image = 'https://example.com/me.png';
+      el.initials = 'AB';
+      await el.updateComplete;
+
+      el.shadowRoot?.querySelector('img')?.dispatchEvent(new Event('error'));
+      await el.updateComplete;
+
+      expect(el.shadowRoot?.querySelector('.initials')?.textContent?.trim()).toBe('AB');
+      expect(el.shadowRoot?.querySelector('img')?.hasAttribute('hidden')).toBe(true);
+      expect(el.getAttribute('data-image-state')).toBe('error');
+    });
+
+    it('should fall back to the icon when the image fails to load', async () => {
+      const el = createElement();
+      el.image = 'https://example.com/me.png';
+      el.icon = 'esds:user';
+      el.initials = 'AB';
+      await el.updateComplete;
+
+      el.shadowRoot?.querySelector('img')?.dispatchEvent(new Event('error'));
+      await el.updateComplete;
+
+      expect(el.shadowRoot?.querySelector('esds-icon')?.getAttribute('name')).toBe('esds:user');
+      expect(el.shadowRoot?.querySelector('.initials')).toBeNull();
+      expect(el.getAttribute('data-image-state')).toBe('error');
+    });
+
+    it('should fall back to the default user icon when the image fails to load', async () => {
+      const el = createElement();
+      el.image = 'https://example.com/me.png';
+      await el.updateComplete;
+
+      el.shadowRoot?.querySelector('img')?.dispatchEvent(new Event('error'));
+      await el.updateComplete;
+
+      const icon = el.shadowRoot?.querySelector('esds-icon');
+      expect(icon?.getAttribute('name')).toBe('esds:user');
+      expect(el.getAttribute('data-image-state')).toBe('error');
+    });
+
+    it('should reset the state to loading when the image changes', async () => {
+      const el = createElement();
+      el.image = 'https://example.com/me.png';
+      el.initials = 'AB';
+      await el.updateComplete;
+
+      el.shadowRoot?.querySelector('img')?.dispatchEvent(new Event('load'));
+      await el.updateComplete;
+      expect(el.getAttribute('data-image-state')).toBe('loaded');
+
+      el.image = 'https://example.com/other.png';
+      await el.updateComplete;
+
+      expect(el.getAttribute('data-image-state')).toBe('loading');
+      expect(el.shadowRoot?.querySelector('img')?.hasAttribute('hidden')).toBe(true);
+      expect(el.shadowRoot?.querySelector('.initials')?.textContent?.trim()).toBe('AB');
+    });
+
+    it('should remove the image state when the image is removed', async () => {
+      const el = createElement();
+      el.image = 'https://example.com/me.png';
+      await el.updateComplete;
+
+      el.shadowRoot?.querySelector('img')?.dispatchEvent(new Event('error'));
+      await el.updateComplete;
+
+      el.image = undefined;
+      await el.updateComplete;
+
+      expect(el.getAttribute('data-image-state')).toBeNull();
+      expect(el.shadowRoot?.querySelector('img')).toBeNull();
+    });
+
+    it('should label the fallback exposed while the image is loading', async () => {
+      const el = createElement();
+      el.image = 'https://example.com/me.png';
+      el.initials = 'AB';
+      el.label = 'Valentin Dupont';
+      await el.updateComplete;
+
+      expect(el.shadowRoot?.querySelector('.initials')?.getAttribute('aria-label')).toBe(
+        'Valentin Dupont',
+      );
+      expect(el.getAttribute('data-image-state')).toBe('loading');
     });
   });
 

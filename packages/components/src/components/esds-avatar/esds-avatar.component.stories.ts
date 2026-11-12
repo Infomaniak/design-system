@@ -6,6 +6,7 @@ import { storybookInteractiveControls } from '../../../../../apps/docs/src/helpe
 import documentation from './esds-avatar.component.md?raw';
 import {
   AVATAR_SIZES,
+  AVATAR_STORY_IMAGE,
   avatarStoryExtraControls,
   type AvatarStoryExtraControls,
 } from './esds-avatar.component.stories.shared.ts';
@@ -37,7 +38,7 @@ export const Default: StoryObj<EsdsAvatarComponent & AvatarStoryExtraControls> =
     ...avatarStoryExtraControls,
   }),
   args: {
-    image: 'https://picsum.photos/seed/esds-avatar/48',
+    image: AVATAR_STORY_IMAGE,
   },
   render: (args) =>
     html`<esds-avatar
@@ -57,7 +58,7 @@ export const WithImage: StoryObj<EsdsAvatarComponent & AvatarStoryExtraControls>
     html`<esds-avatar
       data-esds-avatar-size=${ifDefined(args.size)}
       shape="${ifDefined(args.shape)}"
-      image="https://picsum.photos/seed/esds-avatar/48"
+      image="${AVATAR_STORY_IMAGE}"
     ></esds-avatar>`,
 };
 
@@ -83,6 +84,44 @@ export const WithInitials: StoryObj<EsdsAvatarComponent & AvatarStoryExtraContro
       shape="${ifDefined(args.shape)}"
       initials="AB"
     ></esds-avatar>`,
+};
+
+export const ImageFallback: StoryObj<EsdsAvatarComponent & AvatarStoryExtraControls> = {
+  ...storybookInteractiveControls({
+    ...avatarStoryExtraControls,
+  }),
+  render: (args) => html`
+    <style>
+      .avatars-container {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        gap: 24px;
+      }
+    </style>
+    <div class="avatars-container">
+      <!-- the image fails to load, falling back to the initials -->
+      <esds-avatar
+        data-esds-avatar-size="${args.size}"
+        shape="${ifDefined(args.shape)}"
+        image="data:image/png;base64,aW52YWxpZA=="
+        initials="AB"
+      ></esds-avatar>
+      <!-- the image fails to load, falling back to the icon -->
+      <esds-avatar
+        data-esds-avatar-size="${args.size}"
+        shape="${ifDefined(args.shape)}"
+        image="data:image/png;base64,aW52YWxpZA=="
+        icon="esds:calendar-user"
+      ></esds-avatar>
+      <!-- the image fails to load, falling back to the default user icon -->
+      <esds-avatar
+        data-esds-avatar-size="${args.size}"
+        shape="${ifDefined(args.shape)}"
+        image="data:image/png;base64,aW52YWxpZA=="
+      ></esds-avatar>
+    </div>
+  `,
 };
 
 export const AllSizes: StoryObj<EsdsAvatarComponent & AvatarStoryExtraControls> = {
