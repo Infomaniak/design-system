@@ -280,9 +280,11 @@ describe('EsdsAvatarComponent', () => {
       await el.updateComplete;
 
       const img = el.shadowRoot?.querySelector('img');
-      expect(img?.getAttribute('role')).toBe('img');
       expect(img?.getAttribute('alt')).toBe('avatar with image');
-      expect(img?.getAttribute('aria-label')).toBe('avatar with image');
+      // the native <img> already maps to the implicit `img` role, and `alt` is the native
+      // naming attribute: neither `role="img"` nor `aria-label` should be set
+      expect(img?.getAttribute('role')).toBeNull();
+      expect(img?.getAttribute('aria-label')).toBeNull();
     });
 
     it('should label the icon content by default', async () => {

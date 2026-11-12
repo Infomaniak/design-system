@@ -118,10 +118,8 @@ export class EsdsAvatarComponent extends SignalWatcher(LitElement) {
     return html`
       ${imageLoaded ? nothing : this.#renderFallbackContent()}
       <img
-        role="img"
         src=${image}
         alt="${label}"
-        aria-label="${label}"
         ?hidden=${!imageLoaded}
         @load=${this.#onImageLoad}
         @error=${this.#onImageError}

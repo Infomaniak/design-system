@@ -34,35 +34,42 @@ const meta = {
 
 export default meta;
 
+interface AvatarStoryPerson {
+  readonly image?: string;
+  readonly icon?: string;
+  readonly initials?: string;
+}
+
+const AVATAR_STORY_PEOPLE: readonly AvatarStoryPerson[] = [
+  { image: AVATAR_STORY_IMAGE },
+  { initials: 'IK' },
+  { image: 'https://github.com/lifaon74.png' },
+  { icon: 'esds:calendar-user' },
+  { image: 'https://github.com/vjo.png' },
+  { image: 'data:image/png,broken' }, // intentionally broken image → default user icon fallback
+];
+
 export const Default: StoryObj<
-  EsdsAvatarGroupComponent &
-    AvatarStoryExtraControls & {
-      image?: string;
-      icon?: string;
-      initials?: string;
-      count: number;
-    }
+  EsdsAvatarGroupComponent & AvatarStoryExtraControls & { count: number }
 > = {
   ...storybookInteractiveControls({
     ...avatarStoryExtraControls,
+    count: {
+      value: 4,
+      type: 'number',
+    },
   }),
-  args: {
-    image: AVATAR_STORY_IMAGE,
-    icon: '',
-    initials: '',
-    count: 3,
-  },
   render: (args) =>
     html`<esds-avatar-group
       data-esds-avatar-size=${ifDefined(args.size)}
       shape="${ifDefined(args.shape)}"
     >
-      ${Array.from({ length: args.count }).map(
-        () => html`
+      ${AVATAR_STORY_PEOPLE.slice(0, args.count).map(
+        (person) => html`
           <esds-avatar
-            image="${ifDefined(args.image)}"
-            icon="${ifDefined(args.icon)}"
-            initials="${ifDefined(args.initials)}"
+            image="${ifDefined(person.image)}"
+            icon="${ifDefined(person.icon)}"
+            initials="${ifDefined(person.initials)}"
           ></esds-avatar>
         `,
       )}
