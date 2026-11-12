@@ -1,24 +1,24 @@
 # Designers Guide/Helpers/Creating a custom component
 
-> Use this guide only when nothing can be reused from the native kit **and** the DS team has approved the creation of a...
+> Use this guide only when no native component covers the need, even with its properties or slots, **and** the DS team...
 
-Use this guide only when nothing can be reused from the native kit **and** the DS team has approved the creation of a custom component. If that approval hasn't happened yet, talk to the DS team before you start.
+Use this guide only when no native component covers the need, even with its properties or slots, **and** the DS team has approved the creation of a custom component. If that approval hasn't happened yet, talk to the DS team before you start.
 
 > 👑 **Golden rule**: don't do anything now that will have to be undone later. The component must be able to join its kit as is when it's integrated, without being taken apart.
 
 ## Which tokens for which component?
 
-- 🍎 iOS/iPadOS component:
-  [Token Core](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2-260&t=U8dJUATnrl0en4i0-11)
-- 🤖 Material component:
-  [Material kit](https://www.figma.com/design/r4D2DKWIyzVoigyiTh16Hh/Edelweiss---Material-Kit?m=auto&t=6Praqzvd4yFcNUmT-6)
-- 🕸️ Shadcn component:
-  [Shadcn kit](https://www.figma.com/design/eOY97TGxMkMx9ub9zt8e6v/Edelweiss---Shadcn-Kit--Paid-?m=auto&t=6Praqzvd4yFcNUmT-6)
-
-<img
-  src={CustomComponentTokens}
-  alt="Applying kit tokens and text styles in Figma for Token Core, iOS/iPadOS, Material and Shadcn components"
-/>
+- 🍎 **iOS/iPadOS component**
+  - Colors:
+    [Token Core](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2-260&t=U8dJUATnrl0en4i0-11)
+  - Text styles:
+    [iOS/iPadOS kit](https://www.figma.com/design/OFCRdaeYW6GWhyq3ocHSOc/Edelweiss---iOS---iPadOS-Kit?m=auto&t=6Praqzvd4yFcNUmT-6)
+- 🤖 **Material component**
+  - Colors and text styles:
+    [Material kit](https://www.figma.com/design/r4D2DKWIyzVoigyiTh16Hh/Edelweiss---Material-Kit?m=auto&t=6Praqzvd4yFcNUmT-6)
+- ⬛️ **Shadcn component**
+  - Colors and text styles:
+    [Token Core](https://www.figma.com/design/OgklXBGhUgpzlYPnVusMpw/Edelweiss---Token-Core?node-id=2-260&t=U8dJUATnrl0en4i0-11)
 
 ## 1. Design in context 🎨
 
@@ -34,17 +34,33 @@ Use this guide only when nothing can be reused from the native kit **and** the D
 
 ## 2. Name your component 🏷️
 
-- Use **camelCase** for the component name (e.g. `calendarEvent`, `eventCard`).
+- Use **kebab-case** for the component name (e.g. `calendar-event`, `event-card`).
 - For an iOS/iPadOS 🍎 or Android 🤖 component, follow the **native naming** of the platform kit instead, so the component reads like the native ones next to it.
 - For an internal subcomponent that must not be published, prefix its name with `.` or `_`: Figma won't publish it to the library.
   - Use the same prefix as the native kit the component belongs to.
-  - If there's no native convention to follow (e.g. Token Core), use `.` (e.g. `.monthCell`).
+  - If there's no native convention to follow (e.g. Token Core), use `.` (e.g. `.month-cell`).
 
-## 3. Test the edge cases 😥
+## 3. Assemble native components 🧱
+
+When native components cover part of the design, assemble them in a custom container and draw only what's genuinely missing.
+
+- Native parts stay native: use **linked instances** of the official kit, never detached or overridden beyond their own properties, so that a kit update reaches the component without anyone touching it.
+- Expose the properties of nested native instances instead of recreating them on the container.
+- Don't recreate native states as variants of the container: a disabled Button is handled by the Button itself.
+- Native instances keep their native name (Button, Toggle…).
+- Each native part must have a code equivalent.
+
+<img
+  src={CustomComponentExposeDontDuplicate}
+  alt="A snackbar component exposing its nested native Button instance vs one recreating the Button states as variants"
+/>
+
+## 4. Test the edge cases 😥
 
 - Very long text
 - Empty content
 - Variable widths
+- Native states inside each container state
 - Liquid Glass background for iOS/iPadOS 🍎
 
 <img
@@ -52,17 +68,17 @@ Use this guide only when nothing can be reused from the native kit **and** the D
   alt="An event component with a very long title wrapping onto two lines instead of overlapping the trailing icons"
 />
 
-## 4. Extract only when needed 🧩
+## 5. Extract only when needed 🧩
 
 - Create a subcomponent only if it has its own states or is reused elsewhere. Otherwise, keep a simple frame.
 - For an internal subcomponent, prefix its name with `.` or `_` following the naming rules from step 2: Figma won't publish it to the library.
 
 <img
   src={CustomComponentSubcomponents}
-  alt="An internal .monthCell subcomponent reused as labels inside a calendar component"
+  alt="An internal month-cell subcomponent reused as labels inside a calendar component"
 />
 
-## 5. Ready-to-use component checklist ✅
+## 6. Ready-to-use component checklist ✅
 
 ### Tokens
 
@@ -83,18 +99,23 @@ Use this guide only when nothing can be reused from the native kit **and** the D
 - Properties of nested instances are exposed when needed
 - No unused or invalid properties left behind
 
+### Native instances
+
+- Native parts are linked instances from the official kit library
+- No detached instances, no overrides beyond their own properties
+- Native layers keep their native name (Button, Toggle…)
+
 ### Structure
 
-- No detached instances
 - Auto layout is applied
 - Layers are named (no "Frame 427"), with no hidden layers or leftover groups
 - The component resizes correctly (hug and fill tested, min/max width if needed)
 - Long-text behavior is defined (wrapping or truncation)
 - Slots are used wisely (e.g. avoid multiple variants just to change how many times an element appears)
-- The component is named in camelCase, or follows the native kit naming (see step 2)
+- The component is named in kebab-case, or follows the native kit naming (see step 2)
 - Internal subcomponents are prefixed with `.` or `_`, following the native kit convention (`.` by default)
 
-## 6. Integration into the kit by the DS team 🌼
+## 7. Integration into the kit by the DS team 🌼
 
 - All states required by the kit are present
 - A usage doc explains why this component exists instead of a native equivalent

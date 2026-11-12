@@ -72,9 +72,6 @@ mapping](web/shadcn-token-mapping.md)**
 - **[Creating a custom
   component](helpers/creating-a-custom-component.md)** — build a
   component the DS team has approved, ready to be integrated into its kit without rework.
-- **[Creating a semi-custom
-  component](helpers/creating-a-semi-custom-component.md)** —
-  assemble native kit components in a custom container, keeping every native part linked to its kit.
 
 ## 💻 Which kit for which project?
 
