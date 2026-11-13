@@ -196,6 +196,14 @@
       },
       "disabled": {
         "$value": "{color.gray.200}"
+      },
+      "backdrop": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": "{color.black}",
+          "alpha": 0.5
+        }
       }
     },
     "content": {
@@ -484,6 +492,9 @@
       "on": {
         "dataviz": {
           "orange": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
             "dim2": {
               "$value": "{color.orange.900}"
             },
@@ -492,6 +503,9 @@
             }
           },
           "emerald": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
             "dim2": {
               "$value": "{color.emerald.900}"
             },
@@ -500,6 +514,9 @@
             }
           },
           "blue": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
             "dim2": {
               "$value": "{color.blue.900}"
             },
@@ -508,6 +525,9 @@
             }
           },
           "violet": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
             "dim2": {
               "$value": "{color.violet.900}"
             },
@@ -516,6 +536,9 @@
             }
           },
           "purple": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
             "dim2": {
               "$value": "{color.purple.900}"
             },
@@ -524,6 +547,9 @@
             }
           },
           "pink": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
             "dim2": {
               "$value": "{color.pink.900}"
             },
@@ -532,6 +558,9 @@
             }
           },
           "yellow": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
             "dim2": {
               "$value": "{color.yellow.900}"
             },
@@ -540,6 +569,9 @@
             }
           },
           "gray": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
             "dim2": {
               "$value": "{color.gray.900}"
             },
@@ -664,6 +696,9 @@
           "$value": "{color.gray.600}"
         }
       },
+      "dim1": {
+        "$value": "{color.gray.400}"
+      },
       "dim2": {
         "$value": "{color.gray.300}"
       },
@@ -714,35 +749,80 @@
     "state": {
       "hover": {
         "soft": {
-          "$value": "{color.blue.900-6}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.06
+          }
         },
         "medium": {
-          "$value": "{color.blue.900-12}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.12
+          }
         },
         "strong": {
-          "$value": "{color.blue.900-60}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.6
+          }
         }
       },
       "pressed": {
         "soft": {
-          "$value": "{color.blue.900-12}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.12
+          }
         },
         "medium": {
-          "$value": "{color.blue.900-30}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.3
+          }
         },
         "strong": {
-          "$value": "{color.blue.900-80}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.8
+          }
         }
       },
       "selected": {
         "soft": {
-          "$value": "{color.blue.900-6}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.06
+          }
         },
         "medium": {
-          "$value": "{color.blue.900-12}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.12
+          }
         },
         "strong": {
-          "$value": "{color.blue.900-60}"
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.6
+          }
         }
       },
       "focus": {

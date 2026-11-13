@@ -21,10 +21,10 @@ describe('public-api-scan', () => {
       const patterns = buildGlobExcludePatterns();
 
       expect(patterns).toContain('**/public-api.ts');
-      expect(patterns).toContain('**/*.{private,test,stories,mock}.ts');
-      expect(patterns).toContain('**/*.{private,test,stories,mock}.d.ts');
-      expect(patterns).toContain('**/*.{private,test,stories,mock}/**/*.ts');
-      expect(patterns).toContain('**/*.{private,test,stories,mock}/**/*.d.ts');
+      expect(patterns).toContain('**/*.{private,test,stories,stories.shared,mock}.ts');
+      expect(patterns).toContain('**/*.{private,test,stories,stories.shared,mock}.d.ts');
+      expect(patterns).toContain('**/*.{private,test,stories,stories.shared,mock}/**/*.ts');
+      expect(patterns).toContain('**/*.{private,test,stories,stories.shared,mock}/**/*.d.ts');
     });
   });
 
@@ -36,6 +36,8 @@ describe('public-api-scan', () => {
       { name: 'foo.private.d.ts', expected: true },
       { name: 'foo.test.ts', expected: true },
       { name: 'foo.stories.ts', expected: true },
+      { name: 'foo.stories.shared.ts', expected: true },
+      { name: 'foo.stories.shared.d.ts', expected: true },
       { name: 'foo.mock.ts', expected: true },
       { name: 'public-api.ts', expected: true },
       { name: 'foo.js', expected: true },
@@ -57,12 +59,14 @@ describe('public-api-scan', () => {
         'quz.private.d.ts',
         'baz.test.ts',
         'qux.stories.ts',
+        'quz.stories.shared.ts',
         'quux.mock.ts',
         'public-api.ts',
         'corge.js',
         'sub/deep.ts',
         'sub/ignored.test.ts',
         'sub/nested.private.d.ts',
+        'sub/nested.stories.shared.d.ts',
       ];
 
       for (const file of tree) {

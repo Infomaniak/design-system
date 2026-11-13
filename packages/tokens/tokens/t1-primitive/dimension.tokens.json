@@ -37,6 +37,15 @@
         "scopes": ["WIDTH_HEIGHT"]
       }
     },
+    "6": {
+      "$value": {
+        "value": 6,
+        "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["WIDTH_HEIGHT"]
+      }
+    },
     "8": {
       "$value": {
         "value": 8,
@@ -94,6 +103,15 @@
     "24": {
       "$value": {
         "value": 24,
+        "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["WIDTH_HEIGHT"]
+      }
+    },
+    "28": {
+      "$value": {
+        "value": 28,
         "unit": "px"
       },
       "$extensions": {
@@ -175,6 +193,15 @@
     "80": {
       "$value": {
         "value": 80,
+        "unit": "px"
+      },
+      "$extensions": {
+        "scopes": ["WIDTH_HEIGHT"]
+      }
+    },
+    "85": {
+      "$value": {
+        "value": 85,
         "unit": "px"
       },
       "$extensions": {

@@ -1,0 +1,16 @@
+:host {
+  display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+
+  & ::slotted(esds-avatar:not(:first-child)) {
+    margin-inline-start: var(--esds-avatar-group-gap);
+  }
+}
+
+:host([shape='square']) {
+  & ::slotted(esds-avatar) {
+    border-radius: var(--esds-avatar-border-radius-square);
+  }
+}

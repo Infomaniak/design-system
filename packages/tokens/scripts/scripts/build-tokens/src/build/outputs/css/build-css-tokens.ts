@@ -20,7 +20,6 @@ import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-
 const CSS_AUTO_GENERATED_FILE_HEADER = `/*
   ${indent(AUTO_GENERATED_FILE_HEADER)}
 */
-
 `;
 
 export interface BuildCssTokensOptions {
@@ -85,9 +84,11 @@ export function buildCssTokens({
     });
 
     await logger.asyncTask('modifier', async (logger: Logger): Promise<void> => {
+      const modifiersOutputDirectory: string = `${cssOutputDirectory}/modifiers`;
+
       for (const [modifier, contexts] of modifiers.entries()) {
         await logger.asyncTask(modifier, async (logger: Logger): Promise<void> => {
-          const modifierOutputDirectory: string = `${cssOutputDirectory}/modifiers/${modifier}`;
+          const modifierOutputDirectory: string = `${modifiersOutputDirectory}/${modifier}`;
 
           await logger.asyncTask('context', async (logger: Logger): Promise<void> => {
             for (const [context, collection] of contexts.entries()) {
@@ -183,6 +184,41 @@ export function buildCssTokens({
           );
         });
       }
+
+      await writeTextFileSafe(
+        `${modifiersOutputDirectory}/all.attr.css`,
+        dedent`
+          ${CSS_AUTO_GENERATED_FILE_HEADER}
+          ${Array.from(modifiers.keys())
+            .sort(sortModifiersByPriority)
+            .map((modifier: string): string => {
+              return `@import "./${modifier}/all.attr.css";`;
+            })
+            .join('\n')}
+        `,
+      );
     });
   });
+}
+
+/* INTERNAL */
+
+const MODIFIERS_PRIORITY = ['theme', 'product'];
+
+function sortModifiersByPriority(modifierA: string, modifierB: string): number {
+  const indexA: number = MODIFIERS_PRIORITY.indexOf(modifierA);
+  const indexB: number = MODIFIERS_PRIORITY.indexOf(modifierB);
+
+  if (indexA === indexB) {
+    return 0;
+  } else if (indexA === -1) {
+    // B before A
+    return 1;
+  } else if (indexB === -1) {
+    // A before B
+    return -1;
+  } else {
+    // modifier with lower index first
+    return indexA - indexB;
+  }
 }
