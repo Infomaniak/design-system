@@ -1,6 +1,20 @@
 {
   "spacing": {
     "$description": "Semantic spacing scale for padding, margins, and gaps.",
+    "minus-md": {
+      "$value": "{spacing.minus-8}",
+      "$description": "Negative medium spacing for overlapping elements (e.g. stacked avatars).",
+      "$extensions": {
+        "scopes": ["GAP"]
+      }
+    },
+    "minus-sm": {
+      "$value": "{spacing.minus-6}",
+      "$description": "Negative small spacing for tightly overlapping elements (e.g. small stacked avatars).",
+      "$extensions": {
+        "scopes": ["GAP"]
+      }
+    },
     "none": {
       "$value": "{spacing.0}",
       "$description": "No spacing; zero gap.",

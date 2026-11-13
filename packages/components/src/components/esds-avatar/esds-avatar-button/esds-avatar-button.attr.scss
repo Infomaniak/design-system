@@ -1,0 +1,125 @@
+@use '../../../styles' as styles;
+
+[esds-avatar-button] {
+  /*
+    NOTE: the _state_ effect only applies to the **background-color** of an element,
+    as a consequence it is by default applied to the button's background, not the avatar's one (and image background are not supported).
+    So, we have to patch the avatar's background to reflect properly the _state_ effect.
+  */
+
+  /* reset anchor style */
+  text-decoration: none;
+
+  /* reset button style */
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  border: none;
+  background: none;
+
+  /* custom style */
+  display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  cursor: default;
+  border-radius: var(--esds-avatar-border-radius-circle);
+
+  /* focus effect */
+  &:focus-visible {
+    outline: var(--esds-focus-border-width) solid var(--esds-focus-border-color);
+    outline-offset: var(--esds-focus-border-offset);
+    border-radius: var(--esds-avatar-border-radius-circle);
+  }
+
+  & > esds-avatar {
+    transition:
+      background-color var(--esds-button-transition),
+      opacity var(--esds-button-transition);
+
+    &::after {
+      transition: background-color var(--esds-button-transition);
+    }
+  }
+
+  &:not(:disabled, [disabled]) {
+    &:hover,
+    &:active {
+      & > esds-avatar {
+        /* image loaded */
+        &[data-image-state='loaded'] {
+          background-color: var(--esds-avatar-background-color);
+          position: relative;
+
+          &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: transparent;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      & > esds-avatar {
+        &:not([data-image-state='loaded']) {
+          background-color: styles.source-over(
+            --esds-avatar-background-color,
+            --esds-avatar-color-state-hover
+          );
+        }
+
+        /* image loaded */
+        &[data-image-state='loaded'] {
+          &::after {
+            background-color: var(--esds-avatar-color-state-hover);
+          }
+        }
+      }
+    }
+
+    &:active {
+      & > esds-avatar {
+        &:not([data-image-state='loaded']) {
+          background-color: styles.source-over(
+            --esds-avatar-background-color,
+            --esds-avatar-color-state-pressed
+          );
+        }
+
+        /* image loaded */
+        &[data-image-state='loaded'] {
+          &::after {
+            background-color: var(--esds-avatar-color-state-pressed);
+          }
+        }
+      }
+    }
+  }
+
+  /* disabled */
+  &:is(:disabled, [disabled]) {
+    cursor: not-allowed;
+
+    & > esds-avatar {
+      background-color: var(--esds-avatar-background-color-disabled);
+      color: var(--esds-avatar-content-color-disabled);
+
+      /* image loaded */
+      &[data-image-state='loaded'] {
+        opacity: var(--esds-avatar-opacity-disabled);
+      }
+    }
+  }
+
+  &:has(> esds-avatar[shape='square']) {
+    border-radius: var(--esds-avatar-border-radius-square);
+
+    &:focus-visible {
+      border-radius: var(--esds-avatar-border-radius-square);
+    }
+  }
+}
