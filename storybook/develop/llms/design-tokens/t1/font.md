@@ -128,13 +128,13 @@
       </td>
     </tr>
     <tr>
-      <td><p style=" font-size: var(--esds-font-size-52); margin: 0; padding: 8px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; line-height: 1.4; " > Edelweiss prefers rocky limestone locations </p> <div data-preview-value="--esds-font-size-52"></div></td>
+      <td><p style=" font-size: var(--esds-font-size-56); margin: 0; padding: 8px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb; line-height: 1.4; " > Edelweiss prefers rocky limestone locations </p> <div data-preview-value="--esds-font-size-56"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="font.size.52" type="button">font.size.52</button>
+          <button class="token-value" data-clipboard="font.size.56" type="button">font.size.56</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-font-size-52)" type="button">var(--esds-font-size-52)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-font-size-56)" type="button">var(--esds-font-size-56)</button>
         </div>
 
         <div class="token-row token-description"></div>

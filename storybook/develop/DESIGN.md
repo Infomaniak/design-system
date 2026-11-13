@@ -154,13 +154,13 @@ typography:
   6xl:
     base:
       fontFamily: "Infomaniak Sans"
-      fontSize: "3.25rem"
+      fontSize: "3.5rem"
       fontWeight: "400"
       lineHeight: "60px"
       letterSpacing: "0px"
     emphasized:
       fontFamily: "Infomaniak Sans"
-      fontSize: "3.25rem"
+      fontSize: "3.5rem"
       fontWeight: "500"
       lineHeight: "60px"
       letterSpacing: "0px"
@@ -430,7 +430,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | font.size.3xl | 2rem | 2rem | var(--esds-font-size-3xl) | 3x-large font size for prominent headings. |
 | font.size.4xl | 2.5rem | 2.5rem | var(--esds-font-size-4xl) | 4x-large font size for display headings. |
 | font.size.5xl | 3rem | 3rem | var(--esds-font-size-5xl) | 5x-large font size for hero display text. |
-| font.size.6xl | 3.25rem | 3.25rem | var(--esds-font-size-6xl) | 6x-large font size for the largest display text. |
+| font.size.6xl | 3.5rem | 3.5rem | var(--esds-font-size-6xl) | 6x-large font size for the largest display text. |
 | font.family.base | "Infomaniak Sans" | "Infomaniak Sans" | var(--esds-font-family-base) | Base font family used across the design system. |
 | font.line-height.xs | 16px | 16px | var(--esds-font-line-height-xs) | Extra-small line-height for the tightest text. |
 | font.line-height.sm | 20px | 20px | var(--esds-font-line-height-sm) | Small line-height for compact text blocks. |
@@ -492,6 +492,8 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | shadow.2xl.y | 25px | 25px | var(--esds-shadow-2xl-y) | Vertical offset of the 2xl shadow. |
 | shadow.2xl.blur | 50px | 50px | var(--esds-shadow-2xl-blur) | Blur radius of the 2xl shadow. |
 | shadow.2xl.spread | -12px | -12px | var(--esds-shadow-2xl-spread) | Spread of the 2xl shadow. |
+| spacing.minus-md | -8px | -8px | var(--esds-spacing-minus-md) | Negative medium spacing for overlapping elements (e.g. stacked avatars). |
+| spacing.minus-sm | -6px | -6px | var(--esds-spacing-minus-sm) | Negative small spacing for tightly overlapping elements (e.g. small stacked avatars). |
 | spacing.none | 0px | 0px | var(--esds-spacing-none) | No spacing; zero gap. |
 | spacing.2xs | 2px | 2px | var(--esds-spacing-2xs) | 2x-small spacing for tight, dense layouts. |
 | spacing.xs | 4px | 4px | var(--esds-spacing-xs) | Extra-small spacing for compact groupings. |
@@ -533,7 +535,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | text.5xl.size | 3rem | 3rem | var(--esds-text-5xl-size) | Font size for 5x-large text. |
 | text.5xl.line-height | 56px | 56px | var(--esds-text-5xl-line-height) | Line-height for 5x-large text. |
 | text.5xl.letter-spacing | 0px | 0px | var(--esds-text-5xl-letter-spacing) | Letter spacing for 5x-large text. |
-| text.6xl.size | 3.25rem | 3.25rem | var(--esds-text-6xl-size) | Font size for 6x-large text. |
+| text.6xl.size | 3.5rem | 3.5rem | var(--esds-text-6xl-size) | Font size for 6x-large text. |
 | text.6xl.line-height | 60px | 60px | var(--esds-text-6xl-line-height) | Line-height for 6x-large text. |
 | text.6xl.letter-spacing | 0px | 0px | var(--esds-text-6xl-letter-spacing) | Letter spacing for 6x-large text. |
 | typography.xs.base | 400 0.75rem/16px Infomaniak Sans | 400 0.75rem/16px Infomaniak Sans | var(--esds-typography-xs-base) | Extra-small base typography (regular weight). |
@@ -554,13 +556,30 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | typography.4xl.emphasized | 500 2.5rem/48px Infomaniak Sans | 500 2.5rem/48px Infomaniak Sans | var(--esds-typography-4xl-emphasized) | 4x-large emphasized typography (medium weight). |
 | typography.5xl.base | 400 3rem/56px Infomaniak Sans | 400 3rem/56px Infomaniak Sans | var(--esds-typography-5xl-base) | 5x-large base typography (regular weight). |
 | typography.5xl.emphasized | 500 3rem/56px Infomaniak Sans | 500 3rem/56px Infomaniak Sans | var(--esds-typography-5xl-emphasized) | 5x-large emphasized typography (medium weight). |
-| typography.6xl.base | 400 3.25rem/60px Infomaniak Sans | 400 3.25rem/60px Infomaniak Sans | var(--esds-typography-6xl-base) | 6x-large base typography (regular weight). |
-| typography.6xl.emphasized | 500 3.25rem/60px Infomaniak Sans | 500 3.25rem/60px Infomaniak Sans | var(--esds-typography-6xl-emphasized) | 6x-large emphasized typography (medium weight). |
+| typography.6xl.base | 400 3.5rem/60px Infomaniak Sans | 400 3.5rem/60px Infomaniak Sans | var(--esds-typography-6xl-base) | 6x-large base typography (regular weight). |
+| typography.6xl.emphasized | 500 3.5rem/60px Infomaniak Sans | 500 3.5rem/60px Infomaniak Sans | var(--esds-typography-6xl-emphasized) | 6x-large emphasized typography (medium weight). |
 
 ## 3. Component Tokens
 
 | Token Name | Light Value | Dark Value | CSS Variable | Description |
 |---|---|---|---|---|
+| avatar.size | 48px | 48px | var(--esds-avatar-size) | Default avatar size. |
+| avatar.border.color | #f1f5f9 | #314158 | var(--esds-avatar-border-color) | Default avatar border color. |
+| avatar.border.width | 2px | 2px | var(--esds-avatar-border-width) | Default avatar border width. |
+| avatar.border.radius.circle | 1000px | 1000px | var(--esds-avatar-border-radius-circle) | Corner radius for circle avatars. |
+| avatar.border.radius.square | 8px | 8px | var(--esds-avatar-border-radius-square) | Corner radius for square avatars. |
+| avatar.content.color | #0b426f | #e0effe | var(--esds-avatar-content-color) | Default avatar initials and icon color. |
+| avatar.content.color.disabled | #90a1b9 | #62748e | var(--esds-avatar-content-color-disabled) | Avatar initials and icon color when disabled. |
+| avatar.content.font | 500 1.25rem/28px Infomaniak Sans | 500 1.25rem/28px Infomaniak Sans | var(--esds-avatar-content-font) | Default avatar initials typography. |
+| avatar.background.color | #b9e0fe | #064e86 | var(--esds-avatar-background-color) | Default avatar background color. |
+| avatar.background.color.disabled | #e2e8f0 | #0f172b | var(--esds-avatar-background-color-disabled) | Avatar background color when disabled. |
+| avatar.color.state.hover | #0b426f0f | #f8fafc0f | var(--esds-avatar-color-state-hover) | Avatar hover overlay for icon and content variants. |
+| avatar.color.state.hover.image | #0b426f1f | #f8fafc1f | var(--esds-avatar-color-state-hover-image) | Avatar hover overlay for the image variant. |
+| avatar.color.state.pressed | #0b426f1f | #f8fafc1f | var(--esds-avatar-color-state-pressed) | Avatar pressed overlay for icon and content variants. |
+| avatar.color.state.pressed.image | #0b426f4d | #f8fafc4d | var(--esds-avatar-color-state-pressed-image) | Avatar pressed overlay for the image variant. |
+| avatar.opacity.disabled | 0.5 | 0.5 | var(--esds-avatar-opacity-disabled) | Avatar image opacity when disabled. |
+| avatar.icon.size | 32px | 32px | var(--esds-avatar-icon-size) | Default avatar icon size. |
+| avatar.group.gap | -8px | -8px | var(--esds-avatar-group-gap) | Default overlap between stacked avatars. |
 | badge.size.content | 20px | 20px | var(--esds-badge-size-content) | Default badge size for content badges. |
 | badge.size.dot | 8px | 8px | var(--esds-badge-size-dot) | Default badge size for dot badges. |
 | badge.padding.inline | 2px | 2px | var(--esds-badge-padding-inline) | Default badge inline padding. |
@@ -609,8 +628,8 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | heading.lg.font.emphasized | 500 2.5rem/48px Infomaniak Sans | 500 2.5rem/48px Infomaniak Sans | var(--esds-heading-lg-font-emphasized) | Large heading typography (medium weight). |
 | heading.xl.font.base | 400 3rem/56px Infomaniak Sans | 400 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font-base) | Extra-large heading typography (regular weight). |
 | heading.xl.font.emphasized | 500 3rem/56px Infomaniak Sans | 500 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font-emphasized) | Extra-large heading typography (medium weight). |
-| heading.2xl.font.base | 400 3.25rem/60px Infomaniak Sans | 400 3.25rem/60px Infomaniak Sans | var(--esds-heading-2xl-font-base) | 2x-large heading typography (regular weight). |
-| heading.2xl.font.emphasized | 500 3.25rem/60px Infomaniak Sans | 500 3.25rem/60px Infomaniak Sans | var(--esds-heading-2xl-font-emphasized) | 2x-large heading typography (medium weight). |
+| heading.2xl.font.base | 400 3.5rem/60px Infomaniak Sans | 400 3.5rem/60px Infomaniak Sans | var(--esds-heading-2xl-font-base) | 2x-large heading typography (regular weight). |
+| heading.2xl.font.emphasized | 500 3.5rem/60px Infomaniak Sans | 500 3.5rem/60px Infomaniak Sans | var(--esds-heading-2xl-font-emphasized) | 2x-large heading typography (medium weight). |
 | kbd.background-color | #fff | #192334 | var(--esds-kbd-background-color) | Default keyboard key background color. |
 | kbd.border.color | #e2e8f0 | #45556c | var(--esds-kbd-border-color) | Default keyboard key border color. |
 | kbd.border.width | 1px | 1px | var(--esds-kbd-border-width) | Default keyboard key border width. |

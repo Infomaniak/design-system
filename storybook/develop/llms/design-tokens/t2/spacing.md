@@ -15,6 +15,32 @@ T2 Spacing tokens provide semantic spacing definitions for margins, padding, and
   </thead>
   <tbody>
     <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-spacing-minus-md); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-spacing-minus-md"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="spacing.minus-md" type="button">spacing.minus-md</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-spacing-minus-md)" type="button">var(--esds-spacing-minus-md)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="p-minus-md" type="button">p-minus-md</button> <button class="token-value" data-clipboard="m-minus-md" type="button">m-minus-md</button> <button class="token-value" data-clipboard="gap-minus-md" type="button">gap-minus-md</button></div>
+        <div class="token-row token-description">Negative medium spacing for overlapping elements (e.g. stacked avatars).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-spacing-minus-sm); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-spacing-minus-sm"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="spacing.minus-sm" type="button">spacing.minus-sm</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-spacing-minus-sm)" type="button">var(--esds-spacing-minus-sm)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="p-minus-sm" type="button">p-minus-sm</button> <button class="token-value" data-clipboard="m-minus-sm" type="button">m-minus-sm</button> <button class="token-value" data-clipboard="gap-minus-sm" type="button">gap-minus-sm</button></div>
+        <div class="token-row token-description">Negative small spacing for tightly overlapping elements (e.g. small stacked avatars).</div>
+      </td>
+    </tr>
+    <tr>
       <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-spacing-none); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-spacing-none"></div></td>
       <td>
         <div class="token-row">
