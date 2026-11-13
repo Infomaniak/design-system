@@ -104,7 +104,7 @@ export function buildTailwindTokens({
           'tracking',
           // 'leading',
           // 'breakpoint',
-          // 'container',
+          'container',
           // 'spacing',
           'radius',
           'border-width',
