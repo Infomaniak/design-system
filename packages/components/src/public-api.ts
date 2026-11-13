@@ -5,6 +5,7 @@ export * from './components/esds-badge/esds-badge.component.ts';
 export * from './components/esds-body/esds-body.attr.ts';
 export * from './components/esds-button/esds-button.attr.ts';
 export * from './components/esds-heading/esds-heading.attr.ts';
+export * from './components/esds-headless-button/esds-headless-button.attr.ts';
 export * from './components/esds-icon/esds-icon.component.ts';
 export * from './components/esds-kbd/esds-kbd.attr.ts';
 export * from './components/esds-separator/esds-separator.component.ts';

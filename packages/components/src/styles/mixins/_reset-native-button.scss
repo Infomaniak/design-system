@@ -1,0 +1,18 @@
+/**
+ * Resets the native chrome of an interactive element (`<button>`, `<a>`) so a look layer can style
+ * it from a clean slate.
+ *
+ * Layout (display, alignment) and border-radius are intentionally NOT included: they belong to the
+ * look layer, as they differ per component (e.g. a clickable card would not be inline-flex-centered).
+ */
+@mixin reset-native-button {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  box-sizing: border-box;
+}

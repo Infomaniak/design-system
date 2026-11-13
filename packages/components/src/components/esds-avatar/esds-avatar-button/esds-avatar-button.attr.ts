@@ -1,7 +1,12 @@
+/*
+  Targets PR #457 (88cd9efc): proves the headless-button behavior/look split on top of the avatar
+  family. #457 adopts the headless base on landing — reconcile then.
+*/
+
 import type { CleanUpFunction } from '../../../helpers/.private/misc/clean-up-function.ts';
 import { InjectableStyleSheet } from '../../../helpers/.private/style/injectable-style-sheet.ts';
 import { AttributeRegistry } from '../../../helpers/custom-attribute/custom-attribute.ts';
-import { EsdsButtonAttr } from '../../esds-button/esds-button.attr.ts';
+import { EsdsHeadlessButtonAttr } from '../../esds-headless-button/esds-headless-button.attr.ts';
 
 import style from './esds-avatar-button.attr.scss?inline';
 
@@ -12,20 +17,23 @@ export interface EsdsAvatarButtonAttrDefineOptions {
 }
 
 /**
- * A custom attribute for styling avatar buttons while preserving native anchor behavior.
+ * A custom attribute turning a `<button>` or `<a>` element into an avatar button.
+ *
+ * The button behavior (semantics, keyboard activation, state sync) is inherited from
+ * `EsdsHeadlessButtonAttr`; this class only adds the avatar-button look.
  *
  * @summary Avatar Button attribute
  * @element esds-avatar-button
  * @attr disabled - Disables the button
- * @attr loading - No loading state
+ * @attr loading - Pauses interactions and mirrors `aria-busy` while loading (no spinner on the avatar)
  */
-export class EsdsAvatarButtonAttr extends EsdsButtonAttr {
+export class EsdsAvatarButtonAttr extends EsdsHeadlessButtonAttr {
   static override define({
     registry = AttributeRegistry.root,
   }: EsdsAvatarButtonAttrDefineOptions = {}): void {
     registry.defineOptionally('esds-avatar-button', EsdsAvatarButtonAttr);
 
-    EsdsButtonAttr.define();
+    EsdsHeadlessButtonAttr.define();
   }
 
   #cleanup: CleanUpFunction | undefined;

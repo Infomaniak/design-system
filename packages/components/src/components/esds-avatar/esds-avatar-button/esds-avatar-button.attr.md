@@ -29,6 +29,6 @@ EsdsAvatarButtonAttr.define();
 
 A wrapper to create a _button_ around an avatar.
 
-It inherits the same behavior and properties as the [esds-button](./?path=/docs/components-button--docs).
+It inherits the same **behavior** as the [esds-headless-button](./?path=/docs/components-headless-button--docs) attribute and owns the avatar-button look.
 
 ## Demo
