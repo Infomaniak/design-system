@@ -1809,6 +1809,18 @@
           }
         }
       }
+    },
+    "shadow": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": "{color.gray.700}",
+        "alpha": 0.3
+      },
+      "$description": "Color used by the elevation shadows.",
+      "$extensions": {
+        "scopes": ["EFFECT_COLOR"]
+      }
     }
   }
 }

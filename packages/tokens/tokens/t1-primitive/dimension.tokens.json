@@ -1,6 +1,42 @@
 {
   "$type": "dimension",
   "dimension": {
+    "minus-12": {
+      "$value": {
+        "value": -12,
+        "unit": "px"
+      },
+      "$extensions": {
+        "scopes": []
+      }
+    },
+    "minus-6": {
+      "$value": {
+        "value": -6,
+        "unit": "px"
+      },
+      "$extensions": {
+        "scopes": []
+      }
+    },
+    "minus-3": {
+      "$value": {
+        "value": -3,
+        "unit": "px"
+      },
+      "$extensions": {
+        "scopes": []
+      }
+    },
+    "minus-1": {
+      "$value": {
+        "value": -1,
+        "unit": "px"
+      },
+      "$extensions": {
+        "scopes": []
+      }
+    },
     "0": {
       "$value": {
         "value": 0,
@@ -107,6 +143,15 @@
       },
       "$extensions": {
         "scopes": ["WIDTH_HEIGHT"]
+      }
+    },
+    "25": {
+      "$value": {
+        "value": 25,
+        "unit": "px"
+      },
+      "$extensions": {
+        "scopes": []
       }
     },
     "28": {

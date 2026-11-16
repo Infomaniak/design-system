@@ -10,6 +10,7 @@ import { isBorderDesignTokensCollectionToken } from '../../types/composite/borde
 import { isBorderDesignTokensCollectionTokenValueReferencing } from '../../types/composite/border/value/operations/is-referencing/is-border-design-tokens-collection-token-value-referencing.ts';
 import { isGradientDesignTokensCollectionToken } from '../../types/composite/gradient/is-gradient-design-tokens-collection-token.ts';
 import { isShadowDesignTokensCollectionToken } from '../../types/composite/shadow/is-shadow-design-tokens-collection-token.ts';
+import { isShadowDesignTokensCollectionTokenValueReferencing } from '../../types/composite/shadow/value/is-referencing/is-shadow-design-tokens-collection-token-value-referencing.ts';
 import { isStrokeStyleDesignTokensCollectionToken } from '../../types/composite/stroke-style/is-stroke-style-design-tokens-collection-token.ts';
 import { isTransitionDesignTokensCollectionToken } from '../../types/composite/transition/is-transition-design-tokens-collection-token.ts';
 import { isTypographyDesignTokensCollectionToken } from '../../types/composite/typography/is-typography-design-tokens-collection-token.ts';
@@ -33,7 +34,7 @@ export function isDesignTokensCollectionTokenReferencing(
     } else if (isGradientDesignTokensCollectionToken(token)) {
       throw 'TODO: implement'; // TODO
     } else if (isShadowDesignTokensCollectionToken(token)) {
-      throw 'TODO: implement'; // TODO
+      return isShadowDesignTokensCollectionTokenValueReferencing(token.value, target);
     } else if (isStrokeStyleDesignTokensCollectionToken(token)) {
       throw 'TODO: implement'; // TODO
     } else if (isTransitionDesignTokensCollectionToken(token)) {
