@@ -86,6 +86,87 @@ describe('collectCustomAttributeTagNames', () => {
     expect(collectCustomAttributeTagNames(manifest)).toEqual(new Set(['esds-body']));
   });
 
+  it('should collect tag names of custom attribute subclasses through the superclass chain', () => {
+    const manifest = {
+      modules: [
+        {
+          declarations: [
+            {
+              name: 'EsdsAvatarButtonAttr',
+              tagName: 'esds-avatar-button',
+              superclass: {
+                name: 'EsdsButtonAttr',
+                module: '/src/components/esds-button/esds-button.attr.ts',
+              },
+            },
+            {
+              name: 'EsdsButtonAttr',
+              tagName: 'esds-button',
+              superclass: { name: 'CustomAttribute' },
+            },
+          ],
+        },
+      ],
+    };
+
+    expect(collectCustomAttributeTagNames(manifest)).toEqual(
+      new Set(['esds-button', 'esds-avatar-button']),
+    );
+  });
+
+  it('should not collect tag names of subclasses of an unrelated class hierarchy', () => {
+    const manifest = {
+      modules: [
+        {
+          declarations: [
+            {
+              name: 'EsdsFoo',
+              tagName: 'esds-foo',
+              superclass: { name: 'EsdsBar', module: '/src/components/esds-bar/esds-bar.ts' },
+            },
+            { name: 'EsdsBar', tagName: 'esds-bar', superclass: { name: 'LitElement' } },
+          ],
+        },
+      ],
+    };
+
+    expect(collectCustomAttributeTagNames(manifest)).toEqual(new Set());
+  });
+
+  it('should not collect tag names when the superclass chain is not resolvable', () => {
+    const manifest = {
+      modules: [
+        {
+          declarations: [
+            {
+              name: 'EsdsFoo',
+              tagName: 'esds-foo',
+              superclass: { name: 'UnknownBaseClass' },
+            },
+          ],
+        },
+      ],
+    };
+
+    expect(collectCustomAttributeTagNames(manifest)).toEqual(new Set());
+  });
+
+  it('should not hang when the superclass chain contains a cycle', () => {
+    const manifest = {
+      modules: [
+        {
+          declarations: [
+            { name: 'BaseA', tagName: 'foo-a', superclass: { name: 'BaseB' } },
+            { name: 'BaseB', tagName: 'foo-b', superclass: { name: 'BaseA' } },
+            { name: 'EsdsFoo', tagName: 'esds-foo', superclass: { name: 'BaseA' } },
+          ],
+        },
+      ],
+    };
+
+    expect(collectCustomAttributeTagNames(manifest)).toEqual(new Set());
+  });
+
   it('should ignore declarations without tag name or with an unrelated superclass', () => {
     const manifest = {
       modules: [

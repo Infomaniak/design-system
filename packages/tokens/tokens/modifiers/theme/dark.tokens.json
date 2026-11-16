@@ -726,56 +726,6 @@
         }
       }
     },
-    "shadow": {
-      "xs": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": "{color.gray.500}",
-          "alpha": 0.3
-        }
-      },
-      "sm": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": "{color.gray.500}",
-          "alpha": 0.3
-        }
-      },
-      "md": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": "{color.gray.500}",
-          "alpha": 0.3
-        }
-      },
-      "lg": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": "{color.gray.500}",
-          "alpha": 0.3
-        }
-      },
-      "xl": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": "{color.gray.500}",
-          "alpha": 0.3
-        }
-      },
-      "2xl": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": "{color.gray.500}",
-          "alpha": 0.3
-        }
-      }
-    },
     "state": {
       "hover": {
         "soft": {
@@ -857,6 +807,68 @@
       },
       "focus": {
         "$value": "{color.blue.400}"
+      }
+    }
+  },
+  "shadow": {
+    "xs": {
+      "color": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": "{color.gray.950}",
+          "alpha": 0.06
+        }
+      }
+    },
+    "sm": {
+      "color": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": "{color.gray.950}",
+          "alpha": 0.06
+        }
+      }
+    },
+    "md": {
+      "color": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": "{color.gray.950}",
+          "alpha": 0.08
+        }
+      }
+    },
+    "lg": {
+      "color": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": "{color.gray.950}",
+          "alpha": 0.1
+        }
+      }
+    },
+    "xl": {
+      "color": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": "{color.gray.950}",
+          "alpha": 0.1
+        }
+      }
+    },
+    "2xl": {
+      "color": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": "{color.gray.950}",
+          "alpha": 0.14
+        }
       }
     }
   }

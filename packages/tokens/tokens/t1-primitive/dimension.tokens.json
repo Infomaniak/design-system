@@ -1,15 +1,6 @@
 {
   "$type": "dimension",
   "dimension": {
-    "minus-8": {
-      "$value": {
-        "value": -8,
-        "unit": "px"
-      },
-      "$extensions": {
-        "scopes": ["WIDTH_HEIGHT"]
-      }
-    },
     "0": {
       "$value": {
         "value": 0,
