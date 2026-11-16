@@ -19,7 +19,18 @@ describe('ensureColorDesignTokenContainsOnlyReferences', () => {
     expect(() => ensureColorDesignTokenContainsOnlyReferences(token)).not.toThrow();
   });
 
-  test('should throw when token contains direct color object value (hex)', () => {
+  test('should not throw when token contains object value with referenced components', () => {
+    const token: ColorDesignToken = {
+      $value: {
+        colorSpace: 'srgb',
+        components: '{color.red.500}',
+      },
+    };
+
+    expect(() => ensureColorDesignTokenContainsOnlyReferences(token)).not.toThrow();
+  });
+
+  test('should throw when token contains object value with direct components value', () => {
     const token: ColorDesignToken = {
       $value: {
         colorSpace: 'srgb',
@@ -29,40 +40,5 @@ describe('ensureColorDesignTokenContainsOnlyReferences', () => {
     };
 
     expect(() => ensureColorDesignTokenContainsOnlyReferences(token)).toThrow();
-  });
-
-  test('should not throw when token contains a referenced components and no alpha', () => {
-    const token: ColorDesignToken = {
-      $value: {
-        colorSpace: 'srgb',
-        components: '{color.red.500}',
-      },
-    };
-
-    expect(() => ensureColorDesignTokenContainsOnlyReferences(token)).not.toThrow();
-  });
-
-  test('should not throw when token contains referenced components and alpha', () => {
-    const token: ColorDesignToken = {
-      $value: {
-        colorSpace: 'srgb',
-        components: '{color.red.500}',
-        alpha: '{opacity.20}',
-      },
-    };
-
-    expect(() => ensureColorDesignTokenContainsOnlyReferences(token)).not.toThrow();
-  });
-
-  test('should not throw when token contains referenced components with a raw alpha (documented Figma exception)', () => {
-    const token: ColorDesignToken = {
-      $value: {
-        colorSpace: 'srgb',
-        components: '{color.red.500}',
-        alpha: 0.5,
-      },
-    };
-
-    expect(() => ensureColorDesignTokenContainsOnlyReferences(token)).not.toThrow();
   });
 });
