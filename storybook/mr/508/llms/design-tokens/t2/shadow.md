@@ -67,6 +67,19 @@ T2 Shadow tokens provide semantic shadow definitions for elements.
       </td>
     </tr>
     <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-shadow-xs-color); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-shadow-xs-color"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="shadow.xs.color" type="button">shadow.xs.color</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-xs-color)" type="button">var(--esds-shadow-xs-color)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-xs-color" type="button">shadow-xs-color</button></div>
+        <div class="token-row token-description">Color of the xs shadow.</div>
+      </td>
+    </tr>
+    <tr>
       <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-sm-x); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-sm-x"></div></td>
       <td>
         <div class="token-row">
@@ -116,6 +129,19 @@ T2 Shadow tokens provide semantic shadow definitions for elements.
         </div>
         <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-sm-spread" type="button">shadow-sm-spread</button></div>
         <div class="token-row token-description">Spread of the sm shadow.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-shadow-sm-color); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-shadow-sm-color"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="shadow.sm.color" type="button">shadow.sm.color</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-sm-color)" type="button">var(--esds-shadow-sm-color)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-sm-color" type="button">shadow-sm-color</button></div>
+        <div class="token-row token-description">Color of the sm shadow.</div>
       </td>
     </tr>
     <tr>
@@ -171,6 +197,19 @@ T2 Shadow tokens provide semantic shadow definitions for elements.
       </td>
     </tr>
     <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-shadow-md-color); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-shadow-md-color"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="shadow.md.color" type="button">shadow.md.color</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-md-color)" type="button">var(--esds-shadow-md-color)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-md-color" type="button">shadow-md-color</button></div>
+        <div class="token-row token-description">Color of the md shadow.</div>
+      </td>
+    </tr>
+    <tr>
       <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-lg-x); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-lg-x"></div></td>
       <td>
         <div class="token-row">
@@ -220,6 +259,19 @@ T2 Shadow tokens provide semantic shadow definitions for elements.
         </div>
         <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-lg-spread" type="button">shadow-lg-spread</button></div>
         <div class="token-row token-description">Spread of the lg shadow.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-shadow-lg-color); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-shadow-lg-color"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="shadow.lg.color" type="button">shadow.lg.color</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-lg-color)" type="button">var(--esds-shadow-lg-color)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-lg-color" type="button">shadow-lg-color</button></div>
+        <div class="token-row token-description">Color of the lg shadow.</div>
       </td>
     </tr>
     <tr>
@@ -275,6 +327,19 @@ T2 Shadow tokens provide semantic shadow definitions for elements.
       </td>
     </tr>
     <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-shadow-xl-color); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-shadow-xl-color"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="shadow.xl.color" type="button">shadow.xl.color</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-xl-color)" type="button">var(--esds-shadow-xl-color)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-xl-color" type="button">shadow-xl-color</button></div>
+        <div class="token-row token-description">Color of the xl shadow.</div>
+      </td>
+    </tr>
+    <tr>
       <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-2xl-x); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-2xl-x"></div></td>
       <td>
         <div class="token-row">
@@ -324,6 +389,19 @@ T2 Shadow tokens provide semantic shadow definitions for elements.
         </div>
         <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-2xl-spread" type="button">shadow-2xl-spread</button></div>
         <div class="token-row token-description">Spread of the 2xl shadow.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-shadow-2xl-color); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-shadow-2xl-color"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="shadow.2xl.color" type="button">shadow.2xl.color</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-2xl-color)" type="button">var(--esds-shadow-2xl-color)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-2xl-color" type="button">shadow-2xl-color</button></div>
+        <div class="token-row token-description">Color of the 2xl shadow.</div>
       </td>
     </tr>
   </tbody>
