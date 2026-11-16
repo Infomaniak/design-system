@@ -212,25 +212,25 @@
             }
           }
         },
-        "purple": {
-          "$description": "Purple data-viz background colors.",
+        "citrus": {
+          "$description": "Citrus data-viz background colors.",
           "dim1": {
-            "$value": "{color.purple.500}",
-            "$description": "Strong purple data-viz background (dim1).",
+            "$value": "{color.citrus.500}",
+            "$description": "Strong citrus data-viz background (dim1).",
             "$extensions": {
               "scopes": []
             }
           },
           "dim2": {
-            "$value": "{color.purple.200}",
-            "$description": "Soft purple data-viz background (dim2).",
+            "$value": "{color.citrus.200}",
+            "$description": "Soft citrus data-viz background (dim2).",
             "$extensions": {
               "scopes": []
             }
           },
           "dim3": {
-            "$value": "{color.purple.50}",
-            "$description": "Subtle purple data-viz background (dim3).",
+            "$value": "{color.citrus.50}",
+            "$description": "Subtle citrus data-viz background (dim3).",
             "$extensions": {
               "scopes": []
             }
@@ -303,6 +303,54 @@
           "dim3": {
             "$value": "{color.gray.50}",
             "$description": "Subtle gray data-viz background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "brown": {
+          "$description": "Brown data-viz background colors.",
+          "dim1": {
+            "$value": "{color.brown.500}",
+            "$description": "Strong brown data-viz background (dim1).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim2": {
+            "$value": "{color.brown.200}",
+            "$description": "Soft brown data-viz background (dim2).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim3": {
+            "$value": "{color.brown.50}",
+            "$description": "Subtle brown data-viz background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "magenta": {
+          "$description": "Magenta data-viz background colors.",
+          "dim1": {
+            "$value": "{color.magenta.500}",
+            "$description": "Strong magenta data-viz background (dim1).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim2": {
+            "$value": "{color.magenta.200}",
+            "$description": "Soft magenta data-viz background (dim2).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim3": {
+            "$value": "{color.magenta.50}",
+            "$description": "Subtle magenta data-viz background (dim3).",
             "$extensions": {
               "scopes": []
             }
@@ -665,25 +713,25 @@
               }
             }
           },
-          "purple": {
-            "$description": "Foreground on purple data-viz backgrounds.",
+          "citrus": {
+            "$description": "Foreground on citrus data-viz backgrounds.",
             "dim1": {
-              "$value": "{color.purple.50}",
-              "$description": "Foreground on strong purple data-viz backgrounds (dim1).",
+              "$value": "{color.citrus.950}",
+              "$description": "Foreground on strong citrus data-viz backgrounds (dim1).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim2": {
-              "$value": "{color.purple.900}",
-              "$description": "Foreground on soft purple data-viz backgrounds (dim2).",
+              "$value": "{color.citrus.900}",
+              "$description": "Foreground on soft citrus data-viz backgrounds (dim2).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim3": {
-              "$value": "{color.purple.700}",
-              "$description": "Foreground on subtle purple data-viz backgrounds (dim3).",
+              "$value": "{color.citrus.700}",
+              "$description": "Foreground on subtle citrus data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -756,6 +804,54 @@
             "dim3": {
               "$value": "{color.gray.700}",
               "$description": "Foreground on subtle gray data-viz backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "brown": {
+            "$description": "Foreground on brown data-viz backgrounds.",
+            "dim1": {
+              "$value": "{color.brown.50}",
+              "$description": "Foreground on strong brown data-viz backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.brown.900}",
+              "$description": "Foreground on soft brown data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.brown.700}",
+              "$description": "Foreground on subtle brown data-viz backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "magenta": {
+            "$description": "Foreground on magenta data-viz backgrounds.",
+            "dim1": {
+              "$value": "{color.magenta.50}",
+              "$description": "Foreground on strong magenta data-viz backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.magenta.900}",
+              "$description": "Foreground on soft magenta data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.magenta.700}",
+              "$description": "Foreground on subtle magenta data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -1108,9 +1204,9 @@
             "scopes": ["ALL_FILLS"]
           }
         },
-        "purple": {
-          "$value": "{color.purple.600}",
-          "$description": "Purple data-viz foreground color.",
+        "citrus": {
+          "$value": "{color.citrus.600}",
+          "$description": "Citrus data-viz foreground color.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
@@ -1132,6 +1228,20 @@
         "gray": {
           "$value": "{color.gray.600}",
           "$description": "Gray data-viz foreground color.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "brown": {
+          "$value": "{color.brown.600}",
+          "$description": "Brown data-viz foreground color.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "magenta": {
+          "$value": "{color.magenta.600}",
+          "$description": "Magenta data-viz foreground color.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
@@ -1234,24 +1344,24 @@
               }
             }
           },
-          "purple": {
+          "citrus": {
             "dim1": {
               "$value": "{color.transparent}",
-              "$description": "Border on strong purple data-viz backgrounds (dim1).",
+              "$description": "Border on strong citrus data-viz backgrounds (dim1).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim2": {
-              "$value": "{color.purple.900}",
-              "$description": "Border on soft purple data-viz backgrounds (dim2).",
+              "$value": "{color.citrus.900}",
+              "$description": "Border on soft citrus data-viz backgrounds (dim2).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim3": {
-              "$value": "{color.purple.700}",
-              "$description": "Border on subtle purple data-viz backgrounds (dim3).",
+              "$value": "{color.citrus.700}",
+              "$description": "Border on subtle citrus data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -1321,6 +1431,52 @@
             "dim3": {
               "$value": "{color.gray.700}",
               "$description": "Border on subtle gray data-viz backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "brown": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong brown data-viz backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.brown.900}",
+              "$description": "Border on soft brown data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.brown.700}",
+              "$description": "Border on subtle brown data-viz backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "magenta": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong magenta data-viz backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.magenta.900}",
+              "$description": "Border on soft magenta data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.magenta.700}",
+              "$description": "Border on subtle magenta data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -1587,9 +1743,9 @@
             "scopes": []
           }
         },
-        "purple": {
-          "$value": "{color.purple.600}",
-          "$description": "Purple data-viz border color.",
+        "citrus": {
+          "$value": "{color.citrus.600}",
+          "$description": "Citrus data-viz border color.",
           "$extensions": {
             "scopes": []
           }
@@ -1611,6 +1767,20 @@
         "gray": {
           "$value": "{color.gray.600}",
           "$description": "Gray data-viz border color.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "brown": {
+          "$value": "{color.brown.600}",
+          "$description": "Brown data-viz border color.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "magenta": {
+          "$value": "{color.magenta.600}",
+          "$description": "Magenta data-viz border color.",
           "$extensions": {
             "scopes": []
           }
