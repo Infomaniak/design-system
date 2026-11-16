@@ -92,12 +92,6 @@ export class EsdsButtonAttr extends CustomAttribute implements CustomAttributeDe
         }
       }
     }
-
-    if (isElementLoading(element)) {
-      element.setAttribute('aria-label', element.textContent.trim());
-    } else {
-      element.removeAttribute('aria-label');
-    }
   }
 
   connectedCallback(): void {
