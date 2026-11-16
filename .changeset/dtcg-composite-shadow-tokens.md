@@ -10,5 +10,6 @@
 - The 30% opacity now lives in `color.shadow` (previously `color.gray.400` at 6–14% in the light theme and `color.gray.950` at 6–14% in the dark theme), giving more visible elevation.
 - New T1 primitives: `blur.{1,2,6,10,50}`, `dimension.25` and `dimension.minus-{1,3,6,12}`.
 - Removed the now-unused alpha primitives `color.gray.400-{6,8,10,14}` and `color.gray.950-{6,8,10,14}`.
+- The Tailwind output now binds the `--shadow-*` theme namespace to the tokens: Tailwind's built-in shadow scale is cleared and the `shadow-{xs,sm,md,lg,xl,2xl}` utilities resolve to `--esds-shadow-*`, staying theme-swappable.
 
 Offsets, blur and spread values are unchanged.

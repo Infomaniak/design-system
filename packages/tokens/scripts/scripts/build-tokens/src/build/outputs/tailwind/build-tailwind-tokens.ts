@@ -109,7 +109,7 @@ export function buildTailwindTokens({
           'radius',
           'border-width',
           'outline-width',
-          // 'shadow',
+          'shadow',
           // 'inset-shadow',
           // 'drop-shadow',
           'blur',
@@ -323,6 +323,14 @@ export function buildTailwindTokens({
                         ),
                       ];
                     }),
+                  ];
+                } else if (tokenName.startsWith('shadow')) {
+                  // --shadow-*
+                  return [
+                    generateTailwindToken(
+                      token,
+                      RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION(['shadow', ...token.name.slice(1)]),
+                    ),
                   ];
                 } else if (tokenName.startsWith('blur')) {
                   // --blur-*
