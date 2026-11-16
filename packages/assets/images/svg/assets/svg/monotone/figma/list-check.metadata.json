@@ -15,5 +15,7 @@
     "rich-text"
   ],
   "categories": [],
-  "aliases": []
+  "aliases": [
+    "checkmark-list"
+  ]
 }
