@@ -117,4 +117,10 @@ Both `data-esds-button-type` and `data-esds-button-size` can be combined:
 </button>
 ```
 
+## Accessibility
+
+The custom attribute never modifies the accessible name: an author-defined `aria-label` is always preserved.
+
+While `loading`, an `<a>` element gets the `aria-disabled` and `aria-busy` attributes, and the spinner is a CSS pseudo-element that is not exposed to assistive technologies.
+
 ## Demo

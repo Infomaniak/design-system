@@ -239,7 +239,7 @@ export const AuthorAriaLabel: StoryObj = {
     docs: {
       description: {
         story:
-          'Both elements carry an author-defined `aria-label` and identical content: the custom attribute must preserve it on both, so that screen readers announce a unique accessible name per control. Compare the two after the attribute upgrade: currently the `<a>` loses its `aria-label` on connect while the `<button>` keeps it.',
+          'Both elements carry an author-defined `aria-label` and identical content: the custom attribute preserves it on both element types, so that screen readers announce a unique accessible name per control.',
       },
     },
   },

@@ -40,7 +40,7 @@ describe('EsdsButtonAttr', () => {
     expect(el.getAttribute('aria-label')).toBe('open link 2');
   });
 
-  it('should announce the text content while loading when no author-defined aria-label exists (anchor)', async () => {
+  it('should convey the loading state with aria-busy and aria-disabled without injecting an aria-label (anchor)', async () => {
     const el = document.createElement('a');
     el.href = '#';
     el.setAttribute('esds-button', '');
@@ -54,25 +54,28 @@ describe('EsdsButtonAttr', () => {
 
     await Promise.resolve();
 
-    expect(el.getAttribute('aria-label')).toBe('open link 3');
+    expect(el.getAttribute('aria-label')).toBeNull();
+    expect(el.getAttribute('aria-busy')).toBe('true');
+    expect(el.getAttribute('aria-disabled')).toBe('true');
 
     el.removeAttribute('loading');
 
     await Promise.resolve();
 
-    expect(el.getAttribute('aria-label')).toBeNull();
+    expect(el.getAttribute('aria-busy')).toBeNull();
+    expect(el.getAttribute('aria-disabled')).toBeNull();
   });
 
   it('should keep an author-defined aria-label on connect (button)', async () => {
     const el = document.createElement('button');
     el.setAttribute('esds-button', '');
-    el.setAttribute('aria-label', 'open link 4');
+    el.setAttribute('aria-label', 'open button 4');
     el.textContent = 'open';
 
     document.body.appendChild(el);
 
     await Promise.resolve();
 
-    expect(el.getAttribute('aria-label')).toBe('open link 4');
+    expect(el.getAttribute('aria-label')).toBe('open button 4');
   });
 });
