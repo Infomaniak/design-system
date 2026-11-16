@@ -9,10 +9,10 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.3.3",
-    "tailwindcss": "^4.3.3",
+    "@tailwindcss/vite": "^4.3.5",
+    "tailwindcss": "^4.3.5",
     "typescript": "~6.0.3",
-    "vite": "^8.3.4"
+    "vite": "^8.3.7"
   },
   "dependencies": {
     "@infomaniak-design-system/tokens": "workspace:*",
