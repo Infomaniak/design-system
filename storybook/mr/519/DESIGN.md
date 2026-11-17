@@ -33,6 +33,100 @@ colors:
       strong:
         light: "#0b426f99"
         dark: "#f8fafc66"
+  shadow:
+    light: "#3141584d"
+    dark: "#62748e4d"
+shadow:
+  xs:
+    light:
+      offsetX: "0px"
+      offsetY: "1px"
+      blur: "1px"
+      spread: "0px"
+      color: "#3141584d"
+      inset: false
+    dark:
+      offsetX: "0px"
+      offsetY: "1px"
+      blur: "1px"
+      spread: "0px"
+      color: "#62748e4d"
+      inset: false
+  sm:
+    light:
+      offsetX: "0px"
+      offsetY: "1px"
+      blur: "2px"
+      spread: "0px"
+      color: "#3141584d"
+      inset: false
+    dark:
+      offsetX: "0px"
+      offsetY: "1px"
+      blur: "2px"
+      spread: "0px"
+      color: "#62748e4d"
+      inset: false
+  md:
+    light:
+      offsetX: "0px"
+      offsetY: "2px"
+      blur: "4px"
+      spread: "-1px"
+      color: "#3141584d"
+      inset: false
+    dark:
+      offsetX: "0px"
+      offsetY: "2px"
+      blur: "4px"
+      spread: "-1px"
+      color: "#62748e4d"
+      inset: false
+  lg:
+    light:
+      offsetX: "0px"
+      offsetY: "4px"
+      blur: "6px"
+      spread: "-3px"
+      color: "#3141584d"
+      inset: false
+    dark:
+      offsetX: "0px"
+      offsetY: "4px"
+      blur: "6px"
+      spread: "-3px"
+      color: "#62748e4d"
+      inset: false
+  xl:
+    light:
+      offsetX: "0px"
+      offsetY: "10px"
+      blur: "10px"
+      spread: "-6px"
+      color: "#3141584d"
+      inset: false
+    dark:
+      offsetX: "0px"
+      offsetY: "10px"
+      blur: "10px"
+      spread: "-6px"
+      color: "#62748e4d"
+      inset: false
+  2xl:
+    light:
+      offsetX: "0px"
+      offsetY: "25px"
+      blur: "50px"
+      spread: "-12px"
+      color: "#3141584d"
+      inset: false
+    dark:
+      offsetX: "0px"
+      offsetY: "25px"
+      blur: "50px"
+      spread: "-12px"
+      color: "#62748e4d"
+      inset: false
 typography:
   xs:
     base:
@@ -427,12 +521,6 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.feedback.warning | #dd4f02 | #ffa032 | var(--esds-color-border-feedback-warning) | Warning feedback border colors. |
 | color.border.feedback.information | #0077cf | #36adfa | var(--esds-color-border-feedback-information) | Information feedback border colors. |
 | color.border.feedback.neutral | #45556c | #90a1b9 | var(--esds-color-border-feedback-neutral) | Neutral feedback border colors. |
-| color.shadow.xs | #90a1b90f | #0206180f | var(--esds-color-shadow-xs) | Shadow color for the xs elevation. |
-| color.shadow.sm | #90a1b90f | #0206180f | var(--esds-color-shadow-sm) | Shadow color for the sm elevation. |
-| color.shadow.md | #90a1b914 | #02061814 | var(--esds-color-shadow-md) | Shadow color for the md elevation. |
-| color.shadow.lg | #90a1b91a | #0206181a | var(--esds-color-shadow-lg) | Shadow color for the lg elevation. |
-| color.shadow.xl | #90a1b91a | #0206181a | var(--esds-color-shadow-xl) | Shadow color for the xl elevation. |
-| color.shadow.2xl | #90a1b924 | #02061824 | var(--esds-color-shadow-2xl) | Shadow color for the 2xl elevation. |
 | color.state.focus | #0077cf | #36adfa | var(--esds-color-state-focus) | Focus ring color for focused interactive elements. |
 | color.state.hover.soft | #0b426f0f | #f8fafc0f | var(--esds-color-state-hover-soft) | Soft hover overlay for subtle interactive feedback. |
 | color.state.hover.medium | #0b426f1f | #f8fafc1f | var(--esds-color-state-hover-medium) | Medium hover overlay for balanced interactive feedback. |
@@ -443,6 +531,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.state.selected.soft | #0b426f0f | #f8fafc1f | var(--esds-color-state-selected-soft) | Soft selected overlay for subtle selection feedback. |
 | color.state.selected.medium | #0b426f1f | #f8fafc29 | var(--esds-color-state-selected-medium) | Medium selected overlay for balanced selection feedback. |
 | color.state.selected.strong | #0b426f99 | #f8fafc66 | var(--esds-color-state-selected-strong) | Strong selected overlay for prominent selection feedback. |
+| color.shadow | #3141584d | #62748e4d | var(--esds-color-shadow) | Color used by the elevation shadows. |
 | font.size.xs | 0.75rem | 0.75rem | var(--esds-font-size-xs) | Extra-small font size for captions and metadata. |
 | font.size.sm | 0.875rem | 0.875rem | var(--esds-font-size-sm) | Small font size for helper text and compact UI. |
 | font.size.md | 1rem | 1rem | var(--esds-font-size-md) | Medium (base) font size for body copy and default text. |
@@ -490,30 +579,12 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | radius.3xl | 24px | 24px | var(--esds-radius-3xl) | 3x-large radius for heavily rounded corners. |
 | radius.4xl | 32px | 32px | var(--esds-radius-4xl) | 4x-large radius for extremely rounded corners. |
 | radius.full | 1000px | 1000px | var(--esds-radius-full) | Fully rounded radius for pill and circular shapes. |
-| shadow.xs.x | 0px | 0px | var(--esds-shadow-xs-x) | Horizontal offset of the xs shadow. |
-| shadow.xs.y | 1px | 1px | var(--esds-shadow-xs-y) | Vertical offset of the xs shadow. |
-| shadow.xs.blur | 1px | 1px | var(--esds-shadow-xs-blur) | Blur radius of the xs shadow. |
-| shadow.xs.spread | 0px | 0px | var(--esds-shadow-xs-spread) | Spread of the xs shadow. |
-| shadow.sm.x | 0px | 0px | var(--esds-shadow-sm-x) | Horizontal offset of the sm shadow. |
-| shadow.sm.y | 1px | 1px | var(--esds-shadow-sm-y) | Vertical offset of the sm shadow. |
-| shadow.sm.blur | 2px | 2px | var(--esds-shadow-sm-blur) | Blur radius of the sm shadow. |
-| shadow.sm.spread | 0px | 0px | var(--esds-shadow-sm-spread) | Spread of the sm shadow. |
-| shadow.md.x | 0px | 0px | var(--esds-shadow-md-x) | Horizontal offset of the md shadow. |
-| shadow.md.y | 2px | 2px | var(--esds-shadow-md-y) | Vertical offset of the md shadow. |
-| shadow.md.blur | 4px | 4px | var(--esds-shadow-md-blur) | Blur radius of the md shadow. |
-| shadow.md.spread | -1px | -1px | var(--esds-shadow-md-spread) | Spread of the md shadow. |
-| shadow.lg.x | 0px | 0px | var(--esds-shadow-lg-x) | Horizontal offset of the lg shadow. |
-| shadow.lg.y | 4px | 4px | var(--esds-shadow-lg-y) | Vertical offset of the lg shadow. |
-| shadow.lg.blur | 6px | 6px | var(--esds-shadow-lg-blur) | Blur radius of the lg shadow. |
-| shadow.lg.spread | -3px | -3px | var(--esds-shadow-lg-spread) | Spread of the lg shadow. |
-| shadow.xl.x | 0px | 0px | var(--esds-shadow-xl-x) | Horizontal offset of the xl shadow. |
-| shadow.xl.y | 10px | 10px | var(--esds-shadow-xl-y) | Vertical offset of the xl shadow. |
-| shadow.xl.blur | 10px | 10px | var(--esds-shadow-xl-blur) | Blur radius of the xl shadow. |
-| shadow.xl.spread | -6px | -6px | var(--esds-shadow-xl-spread) | Spread of the xl shadow. |
-| shadow.2xl.x | 0px | 0px | var(--esds-shadow-2xl-x) | Horizontal offset of the 2xl shadow. |
-| shadow.2xl.y | 25px | 25px | var(--esds-shadow-2xl-y) | Vertical offset of the 2xl shadow. |
-| shadow.2xl.blur | 50px | 50px | var(--esds-shadow-2xl-blur) | Blur radius of the 2xl shadow. |
-| shadow.2xl.spread | -12px | -12px | var(--esds-shadow-2xl-spread) | Spread of the 2xl shadow. |
+| shadow.xs | 0px 1px 1px 0px #3141584d | 0px 1px 1px 0px #62748e4d | var(--esds-shadow-xs) | Extra-small shadow for subtle elevation. |
+| shadow.sm | 0px 1px 2px 0px #3141584d | 0px 1px 2px 0px #62748e4d | var(--esds-shadow-sm) | Small shadow for light elevation. |
+| shadow.md | 0px 2px 4px -1px #3141584d | 0px 2px 4px -1px #62748e4d | var(--esds-shadow-md) | Medium shadow for default elevation. |
+| shadow.lg | 0px 4px 6px -3px #3141584d | 0px 4px 6px -3px #62748e4d | var(--esds-shadow-lg) | Large shadow for emphasized elevation. |
+| shadow.xl | 0px 10px 10px -6px #3141584d | 0px 10px 10px -6px #62748e4d | var(--esds-shadow-xl) | Extra-large shadow for prominent elevation. |
+| shadow.2xl | 0px 25px 50px -12px #3141584d | 0px 25px 50px -12px #62748e4d | var(--esds-shadow-2xl) | 2x-large shadow for maximum elevation. |
 | spacing.minus-md | -8px | -8px | var(--esds-spacing-minus-md) | Negative medium spacing for overlapping elements (e.g. stacked avatars). |
 | spacing.minus-sm | -6px | -6px | var(--esds-spacing-minus-sm) | Negative small spacing for tightly overlapping elements (e.g. small stacked avatars). |
 | spacing.none | 0px | 0px | var(--esds-spacing-none) | No spacing; zero gap. |

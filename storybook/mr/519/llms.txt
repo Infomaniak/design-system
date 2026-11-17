@@ -42,7 +42,6 @@ For complete single-file context ingestion, see [Full Design System Documentatio
 - [Design Tokens/T1/Opacity](llms/design-tokens/t1/opacity.md)
 - [Design Tokens/T1/Radius](llms/design-tokens/t1/radius.md)
 - [Design Tokens/T1/Ratio](llms/design-tokens/t1/ratio.md)
-- [Design Tokens/T1/Shadow](llms/design-tokens/t1/shadow.md)
 - [Design Tokens/T1/Spacing](llms/design-tokens/t1/spacing.md)
 - [Design Tokens/T2](llms/design-tokens/t2.md): T2 tokens are semantic design tokens that reference T1 (primitive) values. They define aliases and common names to ab...
 - [Design Tokens/T2/Blur](llms/design-tokens/t2/blur.md): T2 Blur tokens provide semantic blur style definitions for elements and components.
