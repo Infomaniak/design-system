@@ -216,9 +216,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.dataviz.violet.dim1 | #9346ff | #b185ff | var(--esds-color-background-dataviz-violet-dim1) | Strong violet data-viz background (dim1). |
 | color.background.dataviz.violet.dim2 | #e0d4ff | #6c18bf | var(--esds-color-background-dataviz-violet-dim2) | Soft violet data-viz background (dim2). |
 | color.background.dataviz.violet.dim3 | #f6f2ff | #370b6a | var(--esds-color-background-dataviz-violet-dim3) | Subtle violet data-viz background (dim3). |
-| color.background.dataviz.purple.dim1 | #607ff4 | #7ea1fb | var(--esds-color-background-dataviz-purple-dim1) | Strong purple data-viz background (dim1). |
-| color.background.dataviz.purple.dim2 | #c6dcff | #2d3da6 | var(--esds-color-background-dataviz-purple-dim2) | Soft purple data-viz background (dim2). |
-| color.background.dataviz.purple.dim3 | #eef5ff | #1a204c | var(--esds-color-background-dataviz-purple-dim3) | Subtle purple data-viz background (dim3). |
+| color.background.dataviz.citrus.dim1 | #83bb03 | #9fd506 | var(--esds-color-background-dataviz-citrus-dim1) | Strong citrus data-viz background (dim1). |
+| color.background.dataviz.citrus.dim2 | #d5f289 | #375c07 | var(--esds-color-background-dataviz-citrus-dim2) | Soft citrus data-viz background (dim2). |
+| color.background.dataviz.citrus.dim3 | #f4fce2 | #182d04 | var(--esds-color-background-dataviz-citrus-dim3) | Subtle citrus data-viz background (dim3). |
 | color.background.dataviz.pink.dim1 | #ff2461 | #ff5d86 | var(--esds-color-background-dataviz-pink-dim1) | Strong pink data-viz background (dim1). |
 | color.background.dataviz.pink.dim2 | #ffc6d3 | #b40045 | var(--esds-color-background-dataviz-pink-dim2) | Soft pink data-viz background (dim2). |
 | color.background.dataviz.pink.dim3 | #ffeff2 | #570022 | var(--esds-color-background-dataviz-pink-dim3) | Subtle pink data-viz background (dim3). |
@@ -228,6 +228,12 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.dataviz.gray.dim1 | #62748e | #90a1b9 | var(--esds-color-background-dataviz-gray-dim1) | Strong gray data-viz background (dim1). |
 | color.background.dataviz.gray.dim2 | #e2e8f0 | #192334 | var(--esds-color-background-dataviz-gray-dim2) | Soft gray data-viz background (dim2). |
 | color.background.dataviz.gray.dim3 | #f8fafc | #020618 | var(--esds-color-background-dataviz-gray-dim3) | Subtle gray data-viz background (dim3). |
+| color.background.dataviz.brown.dim1 | #b87138 | #d0905a | var(--esds-color-background-dataviz-brown-dim1) | Strong brown data-viz background (dim1). |
+| color.background.dataviz.brown.dim2 | #f0d4b7 | #6a391b | var(--esds-color-background-dataviz-brown-dim2) | Soft brown data-viz background (dim2). |
+| color.background.dataviz.brown.dim3 | #fcf6ee | #32190c | var(--esds-color-background-dataviz-brown-dim3) | Subtle brown data-viz background (dim3). |
+| color.background.dataviz.magenta.dim1 | #d734cc | #e76edf | var(--esds-color-background-dataviz-magenta-dim1) | Strong magenta data-viz background (dim1). |
+| color.background.dataviz.magenta.dim2 | #f7caf4 | #88007a | var(--esds-color-background-dataviz-magenta-dim2) | Soft magenta data-viz background (dim2). |
+| color.background.dataviz.magenta.dim3 | #fcf1fb | #45033b | var(--esds-color-background-dataviz-magenta-dim3) | Subtle magenta data-viz background (dim3). |
 | color.background.dataviz.dim1 | #0c93eb | #36adfa | var(--esds-color-background-dataviz-dim1) | Default dim1 data-viz background. |
 | color.background.dataviz.dim2 | #b9e0fe | #064e86 | var(--esds-color-background-dataviz-dim2) | Default dim2 data-viz background. |
 | color.background.dataviz.dim3 | #f0f8ff | #072a4a | var(--esds-color-background-dataviz-dim3) | Default dim3 data-viz background. |
@@ -272,9 +278,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.on.dataviz.pink.dim1 | #ffeff2 | #570022 | var(--esds-color-content-on-dataviz-pink-dim1) | Foreground on strong pink data-viz backgrounds (dim1). |
 | color.content.on.dataviz.pink.dim2 | #990241 | #ffe0e6 | var(--esds-color-content-on-dataviz-pink-dim2) | Foreground on soft pink data-viz backgrounds (dim2). |
 | color.content.on.dataviz.pink.dim3 | #d7004b | #ff97af | var(--esds-color-content-on-dataviz-pink-dim3) | Foreground on subtle pink data-viz backgrounds (dim3). |
-| color.content.on.dataviz.purple.dim1 | #eef5ff | #1a204c | var(--esds-color-content-on-dataviz-purple-dim1) | Foreground on strong purple data-viz backgrounds (dim1). |
-| color.content.on.dataviz.purple.dim2 | #2c3983 | #dfecff | var(--esds-color-content-on-dataviz-purple-dim2) | Foreground on soft purple data-viz backgrounds (dim2). |
-| color.content.on.dataviz.purple.dim3 | #3546cd | #a3c4fe | var(--esds-color-content-on-dataviz-purple-dim3) | Foreground on subtle purple data-viz backgrounds (dim3). |
+| color.content.on.dataviz.citrus.dim1 | #182d04 | #182d04 | var(--esds-color-content-on-dataviz-citrus-dim1) | Foreground on strong citrus data-viz backgrounds (dim1). |
+| color.content.on.dataviz.citrus.dim2 | #2e4c0a | #e8f9c0 | var(--esds-color-content-on-dataviz-citrus-dim2) | Foreground on soft citrus data-viz backgrounds (dim2). |
+| color.content.on.dataviz.citrus.dim3 | #477300 | #bae744 | var(--esds-color-content-on-dataviz-citrus-dim3) | Foreground on subtle citrus data-viz backgrounds (dim3). |
 | color.content.on.dataviz.violet.dim1 | #f6f2ff | #370b6a | var(--esds-color-content-on-dataviz-violet-dim1) | Foreground on strong violet data-viz backgrounds (dim1). |
 | color.content.on.dataviz.violet.dim2 | #59169c | #efe8ff | var(--esds-color-content-on-dataviz-violet-dim2) | Foreground on soft violet data-viz backgrounds (dim2). |
 | color.content.on.dataviz.violet.dim3 | #811ee3 | #cab1ff | var(--esds-color-content-on-dataviz-violet-dim3) | Foreground on subtle violet data-viz backgrounds (dim3). |
@@ -284,6 +290,12 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.on.dataviz.gray.dim1 | #f8fafc | #020618 | var(--esds-color-content-on-dataviz-gray-dim1) | Foreground on strong gray data-viz backgrounds (dim1). |
 | color.content.on.dataviz.gray.dim2 | #0f172b | #f1f5f9 | var(--esds-color-content-on-dataviz-gray-dim2) | Foreground on soft gray data-viz backgrounds (dim2). |
 | color.content.on.dataviz.gray.dim3 | #314158 | #cad5e2 | var(--esds-color-content-on-dataviz-gray-dim3) | Foreground on subtle gray data-viz backgrounds (dim3). |
+| color.content.on.dataviz.brown.dim1 | #fcf6ee | #32190c | var(--esds-color-content-on-dataviz-brown-dim1) | Foreground on strong brown data-viz backgrounds (dim1). |
+| color.content.on.dataviz.brown.dim2 | #572f18 | #f7e9d7 | var(--esds-color-content-on-dataviz-brown-dim2) | Foreground on soft brown data-viz backgrounds (dim2). |
+| color.content.on.dataviz.brown.dim3 | #84481f | #e5b78c | var(--esds-color-content-on-dataviz-brown-dim3) | Foreground on subtle brown data-viz backgrounds (dim3). |
+| color.content.on.dataviz.magenta.dim1 | #fcf1fb | #45033b | var(--esds-color-content-on-dataviz-magenta-dim1) | Foreground on strong magenta data-viz backgrounds (dim1). |
+| color.content.on.dataviz.magenta.dim2 | #700262 | #fbe2f9 | var(--esds-color-content-on-dataviz-magenta-dim2) | Foreground on soft magenta data-viz backgrounds (dim2). |
+| color.content.on.dataviz.magenta.dim3 | #a40196 | #f1a3ec | var(--esds-color-content-on-dataviz-magenta-dim3) | Foreground on subtle magenta data-viz backgrounds (dim3). |
 | color.content.on.dataviz.dim1 | #f0f8ff | #072a4a | var(--esds-color-content-on-dataviz-dim1) | Default foreground on data-viz dim1 backgrounds. |
 | color.content.on.dataviz.dim2 | #0b426f | #e0effe | var(--esds-color-content-on-dataviz-dim2) | Default foreground on data-viz dim2 backgrounds. |
 | color.content.on.dataviz.dim3 | #015ca3 | #7cc8fd | var(--esds-color-content-on-dataviz-dim3) | Default foreground on data-viz dim3 backgrounds. |
@@ -330,10 +342,12 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.dataviz.emerald | #15864e | #3cb572 | var(--esds-color-content-dataviz-emerald) | Emerald data-viz foreground color. |
 | color.content.dataviz.orange | #f97207 | #ffa032 | var(--esds-color-content-dataviz-orange) | Orange data-viz foreground color. |
 | color.content.dataviz.pink | #e9004c | #ff5d86 | var(--esds-color-content-dataviz-pink) | Pink data-viz foreground color. |
-| color.content.dataviz.purple | #4d62ea | #7ea1fb | var(--esds-color-content-dataviz-purple) | Purple data-viz foreground color. |
+| color.content.dataviz.citrus | #5f9202 | #9fd506 | var(--esds-color-content-dataviz-citrus) | Citrus data-viz foreground color. |
 | color.content.dataviz.violet | #8f30f7 | #b185ff | var(--esds-color-content-dataviz-violet) | Violet data-viz foreground color. |
 | color.content.dataviz.yellow | #ecb306 | #fccf20 | var(--esds-color-content-dataviz-yellow) | Yellow data-viz foreground color. |
 | color.content.dataviz.gray | #45556c | #90a1b9 | var(--esds-color-content-dataviz-gray) | Gray data-viz foreground color. |
+| color.content.dataviz.brown | #9f5b29 | #d0905a | var(--esds-color-content-dataviz-brown) | Brown data-viz foreground color. |
+| color.content.dataviz.magenta | #c002b4 | #e76edf | var(--esds-color-content-dataviz-magenta) | Magenta data-viz foreground color. |
 | color.border.on.dataviz.blue.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-blue-dim1) | Border on strong blue data-viz backgrounds (dim1). |
 | color.border.on.dataviz.blue.dim2 | #0b426f | #e0effe | var(--esds-color-border-on-dataviz-blue-dim2) | Border on soft blue data-viz backgrounds (dim2). |
 | color.border.on.dataviz.blue.dim3 | #015ca3 | #7cc8fd | var(--esds-color-border-on-dataviz-blue-dim3) | Border on subtle blue data-viz backgrounds (dim3). |
@@ -346,9 +360,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.on.dataviz.pink.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-pink-dim1) | Border on strong pink data-viz backgrounds (dim1). |
 | color.border.on.dataviz.pink.dim2 | #990241 | #ffe0e6 | var(--esds-color-border-on-dataviz-pink-dim2) | Border on soft pink data-viz backgrounds (dim2). |
 | color.border.on.dataviz.pink.dim3 | #d7004b | #ff97af | var(--esds-color-border-on-dataviz-pink-dim3) | Border on subtle pink data-viz backgrounds (dim3). |
-| color.border.on.dataviz.purple.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-purple-dim1) | Border on strong purple data-viz backgrounds (dim1). |
-| color.border.on.dataviz.purple.dim2 | #2c3983 | #dfecff | var(--esds-color-border-on-dataviz-purple-dim2) | Border on soft purple data-viz backgrounds (dim2). |
-| color.border.on.dataviz.purple.dim3 | #3546cd | #a3c4fe | var(--esds-color-border-on-dataviz-purple-dim3) | Border on subtle purple data-viz backgrounds (dim3). |
+| color.border.on.dataviz.citrus.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-citrus-dim1) | Border on strong citrus data-viz backgrounds (dim1). |
+| color.border.on.dataviz.citrus.dim2 | #2e4c0a | #e8f9c0 | var(--esds-color-border-on-dataviz-citrus-dim2) | Border on soft citrus data-viz backgrounds (dim2). |
+| color.border.on.dataviz.citrus.dim3 | #477300 | #bae744 | var(--esds-color-border-on-dataviz-citrus-dim3) | Border on subtle citrus data-viz backgrounds (dim3). |
 | color.border.on.dataviz.violet.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-violet-dim1) | Border on strong violet data-viz backgrounds (dim1). |
 | color.border.on.dataviz.violet.dim2 | #59169c | #efe8ff | var(--esds-color-border-on-dataviz-violet-dim2) | Border on soft violet data-viz backgrounds (dim2). |
 | color.border.on.dataviz.violet.dim3 | #811ee3 | #cab1ff | var(--esds-color-border-on-dataviz-violet-dim3) | Border on subtle violet data-viz backgrounds (dim3). |
@@ -358,6 +372,12 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.on.dataviz.gray.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-gray-dim1) | Border on strong gray data-viz backgrounds (dim1). |
 | color.border.on.dataviz.gray.dim2 | #0f172b | #f1f5f9 | var(--esds-color-border-on-dataviz-gray-dim2) | Border on soft gray data-viz backgrounds (dim2). |
 | color.border.on.dataviz.gray.dim3 | #314158 | #cad5e2 | var(--esds-color-border-on-dataviz-gray-dim3) | Border on subtle gray data-viz backgrounds (dim3). |
+| color.border.on.dataviz.brown.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-brown-dim1) | Border on strong brown data-viz backgrounds (dim1). |
+| color.border.on.dataviz.brown.dim2 | #572f18 | #f7e9d7 | var(--esds-color-border-on-dataviz-brown-dim2) | Border on soft brown data-viz backgrounds (dim2). |
+| color.border.on.dataviz.brown.dim3 | #84481f | #e5b78c | var(--esds-color-border-on-dataviz-brown-dim3) | Border on subtle brown data-viz backgrounds (dim3). |
+| color.border.on.dataviz.magenta.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-magenta-dim1) | Border on strong magenta data-viz backgrounds (dim1). |
+| color.border.on.dataviz.magenta.dim2 | #700262 | #fbe2f9 | var(--esds-color-border-on-dataviz-magenta-dim2) | Border on soft magenta data-viz backgrounds (dim2). |
+| color.border.on.dataviz.magenta.dim3 | #a40196 | #f1a3ec | var(--esds-color-border-on-dataviz-magenta-dim3) | Border on subtle magenta data-viz backgrounds (dim3). |
 | color.border.on.dataviz.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-dim1) | Default border on data-viz dim1 backgrounds. |
 | color.border.on.dataviz.dim2 | #0b426f | #e0effe | var(--esds-color-border-on-dataviz-dim2) | Default border on data-viz dim2 backgrounds. |
 | color.border.on.dataviz.dim3 | #015ca3 | #7cc8fd | var(--esds-color-border-on-dataviz-dim3) | Default border on data-viz dim3 backgrounds. |
@@ -392,10 +412,12 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.dataviz.emerald | #15864e | #3cb572 | var(--esds-color-border-dataviz-emerald) | Emerald data-viz border color. |
 | color.border.dataviz.orange | #f97207 | #ffa032 | var(--esds-color-border-dataviz-orange) | Orange data-viz border color. |
 | color.border.dataviz.pink | #e9004c | #ff5d86 | var(--esds-color-border-dataviz-pink) | Pink data-viz border color. |
-| color.border.dataviz.purple | #4d62ea | #7ea1fb | var(--esds-color-border-dataviz-purple) | Purple data-viz border color. |
+| color.border.dataviz.citrus | #5f9202 | #9fd506 | var(--esds-color-border-dataviz-citrus) | Citrus data-viz border color. |
 | color.border.dataviz.violet | #8f30f7 | #b185ff | var(--esds-color-border-dataviz-violet) | Violet data-viz border color. |
 | color.border.dataviz.yellow | #ecb306 | #fccf20 | var(--esds-color-border-dataviz-yellow) | Yellow data-viz border color. |
 | color.border.dataviz.gray | #45556c | #90a1b9 | var(--esds-color-border-dataviz-gray) | Gray data-viz border color. |
+| color.border.dataviz.brown | #9f5b29 | #d0905a | var(--esds-color-border-dataviz-brown) | Brown data-viz border color. |
+| color.border.dataviz.magenta | #c002b4 | #e76edf | var(--esds-color-border-dataviz-magenta) | Magenta data-viz border color. |
 | color.border.dim1 | #90a1b9 | #90a1b9 | var(--esds-color-border-dim1) | Strongest neutral border color with interaction states. |
 | color.border.dim2 | #cad5e2 | #62748e | var(--esds-color-border-dim2) | Strong neutral border color with interaction states. |
 | color.border.dim3 | #e2e8f0 | #45556c | var(--esds-color-border-dim3) | Subtle neutral border color with interaction states. |
