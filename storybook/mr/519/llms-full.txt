@@ -14252,7 +14252,7 @@ Icon: `esds/icon/house`
 - **icon**: asset type
 - **house**: `icon name`
 
-Filled icon (*dev only*): `esds/icon/house-filled`
+Filled icon (_dev only_): `esds/icon/house-filled`
 
 - **esds**: Design System acronym
 - **icon**: asset type
@@ -14260,12 +14260,13 @@ Filled icon (*dev only*): `esds/icon/house-filled`
 
 #### 6.2 Naming convention
 
-Name an icon after what it shows, not what it's used for.
+Name an icon after what it shows, not what it's used for, following the
+[internal icon naming convention](https://infomaniak.pages.infomaniak.com/handbook/activites/frontend/convention-nommage-icones/). The key rules:
 
 - **Describe, don't prescribe**: the name says what the icon shows (`envelope`), not what it means in a given context (`mail`).
-- **Word order follows what you see first**: when an icon combines several elements, name them in the order the eye notices them. The most prominent element comes first, smaller details or badges after. For example, an envelope with a small checkmark is `envelope-check`, not `check-envelope`.
+- **Modifiers come as a suffix**: a detail completing the object goes after it. An envelope with a small checkmark is `envelope-check`, not `check-envelope`.
+- **Multiple objects follow their order of importance**: the most prominent element comes first, smaller details or badges after.
 - **Search works through tags**: the uses ("mail", "email", "message"…) go in the description tags (see step 7). People can still find the icon by searching "mail" without it being its name.
-- **A common practice**: [Lucide](https://lucide.dev/contribute/icons/naming-conventions) (`floppy-disk`, not `save`) and [Font Awesome](https://blog.fontawesome.com/icon-naming-conventions/) (`house`, not `home`; `magnifying-glass`, not `search`) both follow this rule.
 
 ### 7. Final adjustments on both dev and designer components
 
