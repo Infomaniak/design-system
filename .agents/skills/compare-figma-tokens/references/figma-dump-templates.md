@@ -11,11 +11,14 @@ const collections = await figma.variables.getLocalVariableCollectionsAsync();
 const variables = await figma.variables.getLocalVariablesAsync();
 const idToName = {};
 for (const v of variables) idToName[v.id] = v.name;
-const col = collections.find(c => c.name === 't1'); // 't2' | 't3' for the others
+const col = collections.find((c) => c.name === 't1'); // 't2' | 't3' for the others
 function fmt(val) {
   if (val && val.type === 'VARIABLE_ALIAS') return '@' + idToName[val.id];
   if (val && typeof val === 'object' && 'r' in val) {
-    const to255 = x => Math.round(x * 255).toString(16).padStart(2, '0');
+    const to255 = (x) =>
+      Math.round(x * 255)
+        .toString(16)
+        .padStart(2, '0');
     const hex = '#' + to255(val.r) + to255(val.g) + to255(val.b);
     const a = val.a === undefined ? 1 : val.a;
     return a < 1 ? hex + '@' + Math.round(a * 100) : hex;
@@ -23,9 +26,12 @@ function fmt(val) {
   if (val && typeof val === 'object') return 'JSON:' + JSON.stringify(val);
   return String(val);
 }
-const sorted = variables.filter(v => v.variableCollectionId === col.id).sort((a, b) => a.name.localeCompare(b.name));
+const sorted = variables
+  .filter((v) => v.variableCollectionId === col.id)
+  .sort((a, b) => a.name.localeCompare(b.name));
 const lines = [];
-for (const v of sorted.slice(0, 250)) { // paginate with slice(0,250) / slice(250)
+for (const v of sorted.slice(0, 250)) {
+  // paginate with slice(0,250) / slice(250)
   const parts = [];
   for (const val of Object.values(v.valuesByMode)) parts.push(fmt(val));
   lines.push(v.name + '|' + parts.join('~'));
@@ -40,11 +46,20 @@ Save each chunk to `figma-t1.txt`, `figma-t2a.txt` + `figma-t2b.txt`, `figma-t3.
 Line format: `[collection] name|mode=value~mode=value` for small collections; `[collection] ` prefix omitted for `theme` (`figma-theme-a.txt`, `figma-theme-b.txt`).
 
 ```js
-const smallNames = ['product', 'dataviz', 'button-type', 'button-size', 'badge-type', 'avatar-size']; // or ['theme'] alone
+const smallNames = [
+  'product',
+  'dataviz',
+  'button-type',
+  'button-size',
+  'badge-type',
+  'avatar-size',
+]; // or ['theme'] alone
 const out = [];
 for (const col of collections) {
   if (!smallNames.includes(col.name)) continue;
-  const sorted = variables.filter(v => v.variableCollectionId === col.id).sort((a, b) => a.name.localeCompare(b.name));
+  const sorted = variables
+    .filter((v) => v.variableCollectionId === col.id)
+    .sort((a, b) => a.name.localeCompare(b.name));
   for (const v of sorted) {
     const parts = [];
     for (const m of col.modes) {
@@ -52,7 +67,10 @@ for (const col of collections) {
       let s;
       if (val && val.type === 'VARIABLE_ALIAS') s = '@' + idToName[val.id];
       else if (val && typeof val === 'object' && 'r' in val) {
-        const to255 = x => Math.round(x * 255).toString(16).padStart(2, '0');
+        const to255 = (x) =>
+          Math.round(x * 255)
+            .toString(16)
+            .padStart(2, '0');
         s = '#' + to255(val.r) + to255(val.g) + to255(val.b);
         const a = val.a === undefined ? 1 : val.a;
         if (a < 1) s += '@' + Math.round(a * 100);
@@ -88,12 +106,12 @@ return out;
 Before reporting any mismatch as real, verify the exact variable in Figma (by collection + name, all modes):
 
 ```js
-const col = collections.find(c => c.name === 'button-size');
+const col = collections.find((c) => c.name === 'button-size');
 for (const v of variables) {
   if (v.variableCollectionId === col.id && v.name === 'button/icon/size') {
     const modes = {};
     for (const [mid, val] of Object.entries(v.valuesByMode)) {
-      modes[col.modes.find(m => m.modeId === mid)?.name] = fmt(val);
+      modes[col.modes.find((m) => m.modeId === mid)?.name] = fmt(val);
     }
     res[v.name] = modes;
   }
@@ -115,11 +133,17 @@ const collections = await figma.variables.getLocalVariableCollectionsAsync();
 const variables = await figma.variables.getLocalVariablesAsync();
 const counts = {};
 for (const v of variables) {
-  const col = collections.find(c => c.id === v.variableCollectionId);
+  const col = collections.find((c) => c.id === v.variableCollectionId);
   counts[col?.name ?? 'UNKNOWN'] = (counts[col?.name ?? 'UNKNOWN'] || 0) + 1;
 }
 return {
   total: variables.length,
-  collections: collections.map(c => ({ name: c.name, modes: c.modes.map(m => m.name), variables: counts[c.name] || 0 })).sort((a, b) => a.name.localeCompare(b.name)),
+  collections: collections
+    .map((c) => ({
+      name: c.name,
+      modes: c.modes.map((m) => m.name),
+      variables: counts[c.name] || 0,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name)),
 };
 ```
