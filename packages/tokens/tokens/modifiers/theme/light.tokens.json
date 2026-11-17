@@ -804,26 +804,6 @@
         }
       }
     },
-    "shadow": {
-      "xs": {
-        "$value": "{color.gray.400-6}"
-      },
-      "sm": {
-        "$value": "{color.gray.400-6}"
-      },
-      "md": {
-        "$value": "{color.gray.400-8}"
-      },
-      "lg": {
-        "$value": "{color.gray.400-10}"
-      },
-      "xl": {
-        "$value": "{color.gray.400-10}"
-      },
-      "2xl": {
-        "$value": "{color.gray.400-14}"
-      }
-    },
     "state": {
       "hover": {
         "soft": {
@@ -905,6 +885,14 @@
       },
       "focus": {
         "$value": "{color.blue.600}"
+      }
+    },
+    "shadow": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": "{color.gray.700}",
+        "alpha": 0.3
       }
     }
   }

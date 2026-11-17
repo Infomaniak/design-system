@@ -4,6 +4,7 @@ import type { ShadowDesignToken } from '../../../../../../../../design-token/tok
 import type { ObjectArrayShadowDesignTokenValue } from '../../../../../../../../design-token/token/types/composite/types/shadow/value/types/object-array/object-array-shadow-design-token-value.ts';
 import { isObjectShadowDesignTokenValue } from '../../../../../../../../design-token/token/types/composite/types/shadow/value/types/object/is-object-shadow-design-token-value.ts';
 import type { ObjectShadowDesignTokenValue } from '../../../../../../../../design-token/token/types/composite/types/shadow/value/types/object/object-shadow-design-token-value.ts';
+import { ensureColorDesignTokenValueIsOrContainsOnlyReferences } from '../../base/color/ensure-color-design-token-value-is-or-contains-only-references.ts';
 
 export function ensureShadowDesignTokenContainsOnlyReferences(token: ShadowDesignToken): void {
   if (!isDesignTokenReference(token.$value)) {
@@ -18,7 +19,10 @@ export function ensureShadowDesignTokenContainsOnlyReferences(token: ShadowDesig
 export function ensureObjectShadowDesignTokenValueContainsOnlyReferences(
   value: ObjectShadowDesignTokenValue,
 ): void {
-  expectDesignTokenReference(value.color);
+  /**
+   * NOTE: Curly reference is not official
+   */
+  ensureColorDesignTokenValueIsOrContainsOnlyReferences(value.color);
   expectDesignTokenReference(value.offsetX);
   expectDesignTokenReference(value.offsetY);
   expectDesignTokenReference(value.blur);

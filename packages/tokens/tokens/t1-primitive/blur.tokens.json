@@ -10,6 +10,24 @@
         "scopes": []
       }
     },
+    "1": {
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      },
+      "$extensions": {
+        "scopes": []
+      }
+    },
+    "2": {
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      },
+      "$extensions": {
+        "scopes": []
+      }
+    },
     "4": {
       "$value": {
         "value": 4,
@@ -19,9 +37,27 @@
         "scopes": []
       }
     },
+    "6": {
+      "$value": {
+        "value": 6,
+        "unit": "px"
+      },
+      "$extensions": {
+        "scopes": []
+      }
+    },
     "8": {
       "$value": {
         "value": 8,
+        "unit": "px"
+      },
+      "$extensions": {
+        "scopes": []
+      }
+    },
+    "10": {
+      "$value": {
+        "value": 10,
         "unit": "px"
       },
       "$extensions": {
@@ -58,6 +94,15 @@
     "40": {
       "$value": {
         "value": 40,
+        "unit": "px"
+      },
+      "$extensions": {
+        "scopes": []
+      }
+    },
+    "50": {
+      "$value": {
+        "value": 50,
         "unit": "px"
       },
       "$extensions": {
