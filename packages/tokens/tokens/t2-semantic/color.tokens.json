@@ -1511,7 +1511,7 @@
           "$description": "Border colors placed on feedback backgrounds.",
           "success": {
             "dim1": {
-              "$value": "{color.transparent}",
+              "$value": "{color.white}",
               "$description": "Border on strong success backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["STROKE_COLOR"]
@@ -1534,7 +1534,7 @@
           },
           "warning": {
             "dim1": {
-              "$value": "{color.transparent}",
+              "$value": "{color.white}",
               "$description": "Border on strong warning backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["STROKE_COLOR"]
@@ -1557,7 +1557,7 @@
           },
           "error": {
             "dim1": {
-              "$value": "{color.transparent}",
+              "$value": "{color.white}",
               "$description": "Border on strong error backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["STROKE_COLOR"]
@@ -1580,7 +1580,7 @@
           },
           "information": {
             "dim1": {
-              "$value": "{color.transparent}",
+              "$value": "{color.white}",
               "$description": "Border on strong information backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["STROKE_COLOR"]
@@ -1603,7 +1603,7 @@
           },
           "neutral": {
             "dim1": {
-              "$value": "{color.transparent}",
+              "$value": "{color.white}",
               "$description": "Border on strong neutral backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["STROKE_COLOR"]
