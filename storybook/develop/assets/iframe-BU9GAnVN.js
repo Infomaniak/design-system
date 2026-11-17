@@ -1,0 +1,1 @@
+import{t as e}from"./iframe-BBBYBgU6.js";e();
