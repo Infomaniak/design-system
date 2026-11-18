@@ -623,7 +623,7 @@
         "scopes": []
       }
     },
-    "purple": {
+    "indigo": {
       "50": {
         "$value": {
           "colorSpace": "srgb",
@@ -1082,7 +1082,7 @@
         }
       }
     },
-    "indigo": {
+    "cobalt": {
       "50": {
         "$value": {
           "colorSpace": "srgb",
@@ -1306,7 +1306,7 @@
         }
       }
     },
-    "violet": {
+    "purple": {
       "50": {
         "$value": {
           "colorSpace": "srgb",

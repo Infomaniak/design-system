@@ -58,7 +58,7 @@
           }
         },
         "kdrive": {
-          "$value": "{color.indigo.500}",
+          "$value": "{color.cobalt.500}",
           "$description": "kDrive product brand background colors.",
           "$extensions": {
             "scopes": []
@@ -79,7 +79,7 @@
           }
         },
         "security": {
-          "$value": "{color.purple.600}",
+          "$value": "{color.indigo.600}",
           "$description": "Security product brand background colors.",
           "$extensions": {
             "scopes": []
@@ -93,7 +93,7 @@
           }
         },
         "contacts": {
-          "$value": "{color.violet.500}",
+          "$value": "{color.purple.500}",
           "$description": "Contacts product brand background colors.",
           "$extensions": {
             "scopes": []
@@ -188,25 +188,25 @@
             }
           }
         },
-        "violet": {
-          "$description": "Violet data-viz background colors.",
+        "purple": {
+          "$description": "Purple data-viz background colors.",
           "dim1": {
-            "$value": "{color.violet.500}",
-            "$description": "Strong violet data-viz background (dim1).",
+            "$value": "{color.purple.500}",
+            "$description": "Strong purple data-viz background (dim1).",
             "$extensions": {
               "scopes": []
             }
           },
           "dim2": {
-            "$value": "{color.violet.200}",
-            "$description": "Soft violet data-viz background (dim2).",
+            "$value": "{color.purple.200}",
+            "$description": "Soft purple data-viz background (dim2).",
             "$extensions": {
               "scopes": []
             }
           },
           "dim3": {
-            "$value": "{color.violet.50}",
-            "$description": "Subtle violet data-viz background (dim3).",
+            "$value": "{color.purple.50}",
+            "$description": "Subtle purple data-viz background (dim3).",
             "$extensions": {
               "scopes": []
             }
@@ -737,25 +737,25 @@
               }
             }
           },
-          "violet": {
-            "$description": "Foreground on violet data-viz backgrounds.",
+          "purple": {
+            "$description": "Foreground on purple data-viz backgrounds.",
             "dim1": {
-              "$value": "{color.violet.50}",
-              "$description": "Foreground on strong violet data-viz backgrounds (dim1).",
+              "$value": "{color.purple.50}",
+              "$description": "Foreground on strong purple data-viz backgrounds (dim1).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim2": {
-              "$value": "{color.violet.900}",
-              "$description": "Foreground on soft violet data-viz backgrounds (dim2).",
+              "$value": "{color.purple.900}",
+              "$description": "Foreground on soft purple data-viz backgrounds (dim2).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim3": {
-              "$value": "{color.violet.700}",
-              "$description": "Foreground on subtle violet data-viz backgrounds (dim3).",
+              "$value": "{color.purple.700}",
+              "$description": "Foreground on subtle purple data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -1025,7 +1025,7 @@
           }
         },
         "kdrive": {
-          "$value": "{color.indigo.500}",
+          "$value": "{color.cobalt.500}",
           "$description": "kDrive product brand foreground colors.",
           "$extensions": {
             "scopes": []
@@ -1046,7 +1046,7 @@
           }
         },
         "security": {
-          "$value": "{color.purple.600}",
+          "$value": "{color.indigo.600}",
           "$description": "Security product brand foreground colors.",
           "$extensions": {
             "scopes": []
@@ -1060,7 +1060,7 @@
           }
         },
         "contacts": {
-          "$value": "{color.violet.500}",
+          "$value": "{color.purple.500}",
           "$description": "Contacts product brand foreground colors.",
           "$extensions": {
             "scopes": []
@@ -1155,7 +1155,7 @@
         }
       },
       "visited": {
-        "$value": "{color.violet.600}",
+        "$value": "{color.purple.600}",
         "$description": "Visited-link content colors with interaction states.",
         "$extensions": {
           "scopes": ["ALL_FILLS"]
@@ -1211,9 +1211,9 @@
             "scopes": ["ALL_FILLS"]
           }
         },
-        "violet": {
-          "$value": "{color.violet.600}",
-          "$description": "Violet data-viz foreground color.",
+        "purple": {
+          "$value": "{color.purple.600}",
+          "$description": "Purple data-viz foreground color.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
@@ -1367,24 +1367,24 @@
               }
             }
           },
-          "violet": {
+          "purple": {
             "dim1": {
               "$value": "{color.transparent}",
-              "$description": "Border on strong violet data-viz backgrounds (dim1).",
+              "$description": "Border on strong purple data-viz backgrounds (dim1).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim2": {
-              "$value": "{color.violet.900}",
-              "$description": "Border on soft violet data-viz backgrounds (dim2).",
+              "$value": "{color.purple.900}",
+              "$description": "Border on soft purple data-viz backgrounds (dim2).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim3": {
-              "$value": "{color.violet.700}",
-              "$description": "Border on subtle violet data-viz backgrounds (dim3).",
+              "$value": "{color.purple.700}",
+              "$description": "Border on subtle purple data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -1650,7 +1650,7 @@
           }
         },
         "kdrive": {
-          "$value": "{color.indigo.500}",
+          "$value": "{color.cobalt.500}",
           "$description": "kDrive product brand border colors.",
           "$extensions": {
             "scopes": []
@@ -1671,7 +1671,7 @@
           }
         },
         "security": {
-          "$value": "{color.purple.600}",
+          "$value": "{color.indigo.600}",
           "$description": "Security product brand border colors.",
           "$extensions": {
             "scopes": []
@@ -1685,7 +1685,7 @@
           }
         },
         "contacts": {
-          "$value": "{color.violet.500}",
+          "$value": "{color.purple.500}",
           "$description": "Contacts product brand border colors.",
           "$extensions": {
             "scopes": []
@@ -1750,9 +1750,9 @@
             "scopes": []
           }
         },
-        "violet": {
-          "$value": "{color.violet.600}",
-          "$description": "Violet data-viz border color.",
+        "purple": {
+          "$value": "{color.purple.600}",
+          "$description": "Purple data-viz border color.",
           "$extensions": {
             "scopes": []
           }
