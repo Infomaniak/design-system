@@ -1,0 +1,53 @@
+{
+  "color": {
+    "border": {
+      "dataviz": {
+        "$value": "{color.border.dataviz.citrus}"
+      },
+      "on": {
+        "dataviz": {
+          "dim1": {
+            "$value": "{color.border.on.dataviz.citrus.dim1}"
+          },
+          "dim2": {
+            "$value": "{color.border.on.dataviz.citrus.dim2}"
+          },
+          "dim3": {
+            "$value": "{color.border.on.dataviz.citrus.dim3}"
+          }
+        }
+      }
+    },
+    "content": {
+      "dataviz": {
+        "$value": "{color.content.dataviz.citrus}"
+      },
+      "on": {
+        "dataviz": {
+          "dim1": {
+            "$value": "{color.content.on.dataviz.citrus.dim1}"
+          },
+          "dim2": {
+            "$value": "{color.content.on.dataviz.citrus.dim2}"
+          },
+          "dim3": {
+            "$value": "{color.content.on.dataviz.citrus.dim3}"
+          }
+        }
+      }
+    },
+    "background": {
+      "dataviz": {
+        "dim1": {
+          "$value": "{color.background.dataviz.citrus.dim1}"
+        },
+        "dim2": {
+          "$value": "{color.background.dataviz.citrus.dim2}"
+        },
+        "dim3": {
+          "$value": "{color.background.dataviz.citrus.dim3}"
+        }
+      }
+    }
+  }
+}

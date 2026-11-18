@@ -535,6 +535,7 @@ describe('real component stories', () => {
       'Text Only',
       'Types',
       'Sizes',
+      'Author Aria Label',
     ]);
     expect(snippets.map((snippet) => snippet.code)).toEqual([
       [
@@ -561,6 +562,25 @@ describe('real component stories', () => {
       '<button\n      esds-button\n    >\n      Text content\n    </button>',
       '<button esds-button></button>',
       '<button esds-button></button>',
+      [
+        '<div class="buttons-container">',
+        '      <a',
+        '        esds-button',
+        '        href="#"',
+        '        aria-label="open link"',
+        '      >',
+        '        <esds-icon name="esds:plus"></esds-icon>',
+        '        open',
+        '      </a>',
+        '      <button',
+        '        esds-button',
+        '        aria-label="open button"',
+        '      >',
+        '        <esds-icon name="esds:plus"></esds-icon>',
+        '        open',
+        '      </button>',
+        '    </div>',
+      ].join('\n'),
     ]);
   });
 

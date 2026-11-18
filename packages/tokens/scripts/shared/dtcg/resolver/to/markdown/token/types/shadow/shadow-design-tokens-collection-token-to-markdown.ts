@@ -9,10 +9,8 @@
  */
 
 import { CSS_VARIABLE_PREFIX } from '../../../../../../../../scripts/build-tokens/src/constants/css-variable-prefix.ts';
-import { isCurlyReference } from '../../../../../../design-token/reference/types/curly/is-curly-reference.ts';
 import type { ShadowDesignTokensCollectionToken } from '../../../../../token/types/composite/shadow/shadow-design-tokens-collection-token.ts';
 import { createCssVariableNameGenerator } from '../../../../css/token/name/create-css-variable-name-generator.ts';
-import { shadowDesignTokensCollectionTokenValueToCssValue } from '../../../../css/token/types/composite/shadow/value/shadow-design-tokens-collection-token-value-to-css-value.ts';
 import type { MarkdownRenderContext } from '../../markdown-render-context.ts';
 import type { MarkdownTokenRow } from '../../markdown-token-row.ts';
 
@@ -59,22 +57,6 @@ export function shadowDesignTokensCollectionTokenToMarkdown(
     prefix: CSS_VARIABLE_PREFIX,
   })(token.name);
 
-  // Show the display value only for T1 (direct value - no curly ref)
-  let displayValue: string = '';
-  if (!isCurlyReference(token.value)) {
-    displayValue = /* HTML */ `<div
-      style="
-      font-family: monospace;
-      font-size: 11px;
-      color: #6b7280;
-      max-width: 200px;
-      word-wrap: break-word;
-    "
-    >
-      ${shadowDesignTokensCollectionTokenValueToCssValue(token.value)}
-    </div>`;
-  }
-
   // Create the shadow preview HTML using CSS variable directly
   // The browser resolves var(--esds-*) via the CSS cascade
   const preview = /* HTML */ `
@@ -89,7 +71,7 @@ export function shadowDesignTokensCollectionTokenToMarkdown(
       margin: 16px;
     "
     ></div>
-    ${displayValue}
+    <div data-preview-value="${cssVariable}"></div>
   `;
 
   return {

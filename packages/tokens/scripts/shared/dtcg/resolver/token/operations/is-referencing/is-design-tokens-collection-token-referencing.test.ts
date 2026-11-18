@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import type { ColorDesignTokensCollectionToken } from '../../types/base/color/color-design-tokens-collection-token.ts';
+import type { ShadowDesignTokensCollectionToken } from '../../types/composite/shadow/shadow-design-tokens-collection-token.ts';
 import type { TypographyDesignTokensCollectionToken } from '../../types/composite/typography/typography-design-tokens-collection-token.ts';
 import { isDesignTokensCollectionTokenReferencing } from './is-design-tokens-collection-token-referencing.ts';
 
@@ -71,6 +72,23 @@ describe('isDesignTokensCollectionTokenReferencing', () => {
     };
 
     expect(isDesignTokensCollectionTokenReferencing(token, TARGET)).toBe(false);
+  });
+
+  test('should return true for a shadow object-value referencing the target', () => {
+    const token: ShadowDesignTokensCollectionToken = {
+      type: 'shadow',
+      name: ['shadow', 'card'],
+      value: {
+        offsetX: '{dimension.0}',
+        offsetY: '{dimension.1}',
+        blur: '{blur.1}',
+        spread: '{dimension.0}',
+        color: TARGET,
+      },
+      files: [],
+    };
+
+    expect(isDesignTokensCollectionTokenReferencing(token, TARGET)).toBe(true);
   });
 
   test('should still return true for a typography value referencing the target', () => {

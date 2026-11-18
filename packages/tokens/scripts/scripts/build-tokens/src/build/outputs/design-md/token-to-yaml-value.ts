@@ -66,7 +66,7 @@ function innerFormatResolvedValue(value: unknown): string {
 
     if (isColorValue(obj)) {
       return colorDesignTokensCollectionTokenValueToCssValue(
-        value as Parameters<typeof colorDesignTokensCollectionTokenValueToCssValue>[0],
+        unwrapReferencedColorValue(value as ColorValue),
       );
     }
 
