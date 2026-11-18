@@ -1,0 +1,37 @@
+# Designers Guide/Android/Material Kit
+
+> **The figma kit includes:**
+
+**The figma kit includes:**
+
+- Material Tokens
+- Native components
+- System icons embedded within native components
+
+**[Figma file](https://www.figma.com/design/r4D2DKWIyzVoigyiTh16Hh/Edelweiss---Material-Kit?m=auto&t=6Praqzvd4yFcNUmT-6)**
+
+---
+
+### 1. Add the kit to your file
+
+<img
+  src={MaterialStep1}
+  alt="Add the kit to your file"
+/>
+
+### 2. Insert any component you need to your file
+
+<img
+  src={MaterialStep2}
+  alt="Insert any component you need to your file"
+/>
+
+### 3. Add the following Appearance settings on the components
+
+<img
+  src={MaterialStep3}
+  alt="Appearance settings on the components"
+/>
+
+- **Theme:** Switch between light and dark mode.
+- **Product:** Switch the accent color between products (Infomaniak, Calendar…).
