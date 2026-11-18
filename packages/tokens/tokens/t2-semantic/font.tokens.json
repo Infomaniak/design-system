@@ -67,7 +67,7 @@
         }
       },
       "6xl": {
-        "$value": "{font.size.52}",
+        "$value": "{font.size.56}",
         "$description": "6x-large font size for the largest display text.",
         "$extensions": {
           "scopes": []

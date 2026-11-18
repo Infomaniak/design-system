@@ -212,25 +212,25 @@
             }
           }
         },
-        "purple": {
-          "$description": "Purple data-viz background colors.",
+        "citrus": {
+          "$description": "Citrus data-viz background colors.",
           "dim1": {
-            "$value": "{color.purple.500}",
-            "$description": "Strong purple data-viz background (dim1).",
+            "$value": "{color.citrus.500}",
+            "$description": "Strong citrus data-viz background (dim1).",
             "$extensions": {
               "scopes": []
             }
           },
           "dim2": {
-            "$value": "{color.purple.200}",
-            "$description": "Soft purple data-viz background (dim2).",
+            "$value": "{color.citrus.200}",
+            "$description": "Soft citrus data-viz background (dim2).",
             "$extensions": {
               "scopes": []
             }
           },
           "dim3": {
-            "$value": "{color.purple.50}",
-            "$description": "Subtle purple data-viz background (dim3).",
+            "$value": "{color.citrus.50}",
+            "$description": "Subtle citrus data-viz background (dim3).",
             "$extensions": {
               "scopes": []
             }
@@ -303,6 +303,54 @@
           "dim3": {
             "$value": "{color.gray.50}",
             "$description": "Subtle gray data-viz background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "brown": {
+          "$description": "Brown data-viz background colors.",
+          "dim1": {
+            "$value": "{color.brown.500}",
+            "$description": "Strong brown data-viz background (dim1).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim2": {
+            "$value": "{color.brown.200}",
+            "$description": "Soft brown data-viz background (dim2).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim3": {
+            "$value": "{color.brown.50}",
+            "$description": "Subtle brown data-viz background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "magenta": {
+          "$description": "Magenta data-viz background colors.",
+          "dim1": {
+            "$value": "{color.magenta.500}",
+            "$description": "Strong magenta data-viz background (dim1).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim2": {
+            "$value": "{color.magenta.200}",
+            "$description": "Soft magenta data-viz background (dim2).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim3": {
+            "$value": "{color.magenta.50}",
+            "$description": "Subtle magenta data-viz background (dim3).",
             "$extensions": {
               "scopes": []
             }
@@ -461,6 +509,18 @@
         "$description": "Background for disabled, non-interactive elements.",
         "$extensions": {
           "scopes": ["FRAME_FILL"]
+        }
+      },
+      "backdrop": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": "{color.black}",
+          "alpha": 0.5
+        },
+        "$description": "Backdrop overlay color displayed behind modals and dialogs.",
+        "$extensions": {
+          "scopes": []
         }
       }
     },
@@ -653,25 +713,25 @@
               }
             }
           },
-          "purple": {
-            "$description": "Foreground on purple data-viz backgrounds.",
+          "citrus": {
+            "$description": "Foreground on citrus data-viz backgrounds.",
             "dim1": {
-              "$value": "{color.purple.50}",
-              "$description": "Foreground on strong purple data-viz backgrounds (dim1).",
+              "$value": "{color.citrus.950}",
+              "$description": "Foreground on strong citrus data-viz backgrounds (dim1).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim2": {
-              "$value": "{color.purple.900}",
-              "$description": "Foreground on soft purple data-viz backgrounds (dim2).",
+              "$value": "{color.citrus.900}",
+              "$description": "Foreground on soft citrus data-viz backgrounds (dim2).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim3": {
-              "$value": "{color.purple.700}",
-              "$description": "Foreground on subtle purple data-viz backgrounds (dim3).",
+              "$value": "{color.citrus.700}",
+              "$description": "Foreground on subtle citrus data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -744,6 +804,54 @@
             "dim3": {
               "$value": "{color.gray.700}",
               "$description": "Foreground on subtle gray data-viz backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "brown": {
+            "$description": "Foreground on brown data-viz backgrounds.",
+            "dim1": {
+              "$value": "{color.brown.50}",
+              "$description": "Foreground on strong brown data-viz backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.brown.900}",
+              "$description": "Foreground on soft brown data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.brown.700}",
+              "$description": "Foreground on subtle brown data-viz backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "magenta": {
+            "$description": "Foreground on magenta data-viz backgrounds.",
+            "dim1": {
+              "$value": "{color.magenta.50}",
+              "$description": "Foreground on strong magenta data-viz backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.magenta.900}",
+              "$description": "Foreground on soft magenta data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.magenta.700}",
+              "$description": "Foreground on subtle magenta data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -1096,9 +1204,9 @@
             "scopes": ["ALL_FILLS"]
           }
         },
-        "purple": {
-          "$value": "{color.purple.600}",
-          "$description": "Purple data-viz foreground color.",
+        "citrus": {
+          "$value": "{color.citrus.600}",
+          "$description": "Citrus data-viz foreground color.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
@@ -1120,6 +1228,20 @@
         "gray": {
           "$value": "{color.gray.600}",
           "$description": "Gray data-viz foreground color.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "brown": {
+          "$value": "{color.brown.600}",
+          "$description": "Brown data-viz foreground color.",
+          "$extensions": {
+            "scopes": ["ALL_FILLS"]
+          }
+        },
+        "magenta": {
+          "$value": "{color.magenta.600}",
+          "$description": "Magenta data-viz foreground color.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
@@ -1222,24 +1344,24 @@
               }
             }
           },
-          "purple": {
+          "citrus": {
             "dim1": {
               "$value": "{color.transparent}",
-              "$description": "Border on strong purple data-viz backgrounds (dim1).",
+              "$description": "Border on strong citrus data-viz backgrounds (dim1).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim2": {
-              "$value": "{color.purple.900}",
-              "$description": "Border on soft purple data-viz backgrounds (dim2).",
+              "$value": "{color.citrus.900}",
+              "$description": "Border on soft citrus data-viz backgrounds (dim2).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim3": {
-              "$value": "{color.purple.700}",
-              "$description": "Border on subtle purple data-viz backgrounds (dim3).",
+              "$value": "{color.citrus.700}",
+              "$description": "Border on subtle citrus data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -1314,6 +1436,52 @@
               }
             }
           },
+          "brown": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong brown data-viz backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.brown.900}",
+              "$description": "Border on soft brown data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.brown.700}",
+              "$description": "Border on subtle brown data-viz backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "magenta": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong magenta data-viz backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.magenta.900}",
+              "$description": "Border on soft magenta data-viz backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.magenta.700}",
+              "$description": "Border on subtle magenta data-viz backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
           "dim1": {
             "$value": "{color.border.on.dataviz.blue.dim1}",
             "$description": "Default border on data-viz dim1 backgrounds.",
@@ -1343,7 +1511,7 @@
           "$description": "Border colors placed on feedback backgrounds.",
           "success": {
             "dim1": {
-              "$value": "{color.transparent}",
+              "$value": "{color.white}",
               "$description": "Border on strong success backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["STROKE_COLOR"]
@@ -1366,7 +1534,7 @@
           },
           "warning": {
             "dim1": {
-              "$value": "{color.transparent}",
+              "$value": "{color.white}",
               "$description": "Border on strong warning backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["STROKE_COLOR"]
@@ -1389,7 +1557,7 @@
           },
           "error": {
             "dim1": {
-              "$value": "{color.transparent}",
+              "$value": "{color.white}",
               "$description": "Border on strong error backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["STROKE_COLOR"]
@@ -1412,7 +1580,7 @@
           },
           "information": {
             "dim1": {
-              "$value": "{color.transparent}",
+              "$value": "{color.white}",
               "$description": "Border on strong information backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["STROKE_COLOR"]
@@ -1435,7 +1603,7 @@
           },
           "neutral": {
             "dim1": {
-              "$value": "{color.transparent}",
+              "$value": "{color.white}",
               "$description": "Border on strong neutral backgrounds (dim1).",
               "$extensions": {
                 "scopes": ["STROKE_COLOR"]
@@ -1575,9 +1743,9 @@
             "scopes": []
           }
         },
-        "purple": {
-          "$value": "{color.purple.600}",
-          "$description": "Purple data-viz border color.",
+        "citrus": {
+          "$value": "{color.citrus.600}",
+          "$description": "Citrus data-viz border color.",
           "$extensions": {
             "scopes": []
           }
@@ -1599,6 +1767,20 @@
         "gray": {
           "$value": "{color.gray.600}",
           "$description": "Gray data-viz border color.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "brown": {
+          "$value": "{color.brown.600}",
+          "$description": "Brown data-viz border color.",
+          "$extensions": {
+            "scopes": []
+          }
+        },
+        "magenta": {
+          "$value": "{color.magenta.600}",
+          "$description": "Magenta data-viz border color.",
           "$extensions": {
             "scopes": []
           }
@@ -1671,51 +1853,6 @@
         }
       }
     },
-    "shadow": {
-      "$description": "Semantic shadow colors for elevation and depth effects.",
-      "xs": {
-        "$value": "{color.gray.400-6}",
-        "$description": "Shadow color for the xs elevation.",
-        "$extensions": {
-          "scopes": ["EFFECT_COLOR"]
-        }
-      },
-      "sm": {
-        "$value": "{color.gray.400-6}",
-        "$description": "Shadow color for the sm elevation.",
-        "$extensions": {
-          "scopes": ["EFFECT_COLOR"]
-        }
-      },
-      "md": {
-        "$value": "{color.gray.400-8}",
-        "$description": "Shadow color for the md elevation.",
-        "$extensions": {
-          "scopes": ["EFFECT_COLOR"]
-        }
-      },
-      "lg": {
-        "$value": "{color.gray.400-10}",
-        "$description": "Shadow color for the lg elevation.",
-        "$extensions": {
-          "scopes": ["EFFECT_COLOR"]
-        }
-      },
-      "xl": {
-        "$value": "{color.gray.400-10}",
-        "$description": "Shadow color for the xl elevation.",
-        "$extensions": {
-          "scopes": ["EFFECT_COLOR"]
-        }
-      },
-      "2xl": {
-        "$value": "{color.gray.400-14}",
-        "$description": "Shadow color for the 2xl elevation.",
-        "$extensions": {
-          "scopes": ["EFFECT_COLOR"]
-        }
-      }
-    },
     "state": {
       "$description": "Interaction state colors for focus, hover, pressed, and selected states.",
       "focus": {
@@ -1728,21 +1865,36 @@
       "hover": {
         "$description": "Hover state overlay colors in soft, medium and strong intensities.",
         "soft": {
-          "$value": "{color.blue.900-6}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.06
+          },
           "$description": "Soft hover overlay for subtle interactive feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "medium": {
-          "$value": "{color.blue.900-12}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.12
+          },
           "$description": "Medium hover overlay for balanced interactive feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "strong": {
-          "$value": "{color.blue.900-60}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.6
+          },
           "$description": "Strong hover overlay for prominent interactive feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
@@ -1752,21 +1904,36 @@
       "pressed": {
         "$description": "Pressed state overlay colors in soft, medium and strong intensities.",
         "soft": {
-          "$value": "{color.blue.900-12}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.12
+          },
           "$description": "Soft pressed overlay for subtle active feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "medium": {
-          "$value": "{color.blue.900-30}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.3
+          },
           "$description": "Medium pressed overlay for balanced active feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "strong": {
-          "$value": "{color.blue.900-80}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.8
+          },
           "$description": "Strong pressed overlay for prominent active feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
@@ -1776,26 +1943,53 @@
       "selected": {
         "$description": "Selected state overlay colors in soft, medium and strong intensities.",
         "soft": {
-          "$value": "{color.blue.900-6}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.06
+          },
           "$description": "Soft selected overlay for subtle selection feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "medium": {
-          "$value": "{color.blue.900-12}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.12
+          },
           "$description": "Medium selected overlay for balanced selection feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         },
         "strong": {
-          "$value": "{color.blue.900-60}",
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": "{color.blue.900}",
+            "alpha": 0.6
+          },
           "$description": "Strong selected overlay for prominent selection feedback.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
         }
+      }
+    },
+    "shadow": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": "{color.gray.700}",
+        "alpha": 0.3
+      },
+      "$description": "Color used by the elevation shadows.",
+      "$extensions": {
+        "scopes": ["EFFECT_COLOR"]
       }
     }
   }

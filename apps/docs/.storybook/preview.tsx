@@ -48,20 +48,8 @@ loadFontsCss().catch((error: unknown): void => {
   console.error(error);
 });
 
-// Import all theme modifiers (for dynamic switching via data-esds-theme attribute)
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/theme/all.attr.css';
-
-// Import all product modifiers (for dynamic switching via data-esds-product attribute)
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/product/all.attr.css';
-
-// Import all button-size modifiers
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/button-size/all.attr.css';
-
-// Import all button-type modifiers
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/button-type/all.attr.css';
-
-// Import all badge-type modifiers
-import '@infomaniak-design-system/tokens/dist/web/css/modifiers/badge-type/all.attr.css';
+// Import all the modifiers
+import '@infomaniak-design-system/tokens/dist/web/css/modifiers/all.attr.css';
 
 // Initialize <esds-icon> and provide IconifyApi via root InjectionContext
 EsdsIconComponent.define();
@@ -322,7 +310,12 @@ const preview: Preview = {
           'Designers Guide',
           ['Getting Started', 'Install the Font', 'Figma Plugins', 'Helpers'],
           'Design Tokens',
-          ['Getting Started', '*', 'CHANGELOG'],
+          [
+            'Getting Started',
+            ['Definition & Architecture', 'Web', ['CSS', 'Tailwind (v4)'], 'iOS', 'AI & LLMs'],
+            '*',
+            'CHANGELOG',
+          ],
           'Icons',
           ['Getting Started', '*'],
           'Typography',

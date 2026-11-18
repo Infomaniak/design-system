@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.7.1 (2026-11-18)
+
+### Patch Changes
+
+- [#457](https://github.com/Infomaniak/design-system/pull/457) [`7ce9eeb`](https://github.com/Infomaniak/design-system/commit/7ce9eeb38c68d2a48b18a16c2267b01d2d48b228): Add the new Avatar components and their design tokens, aligned with the Avatar component in the Figma file _Edelweiss – Token Core_:
+
+  - New `esds-avatar` component supporting image, icon and initials avatars, with shape and size variants.
+  - While an image is loading or failing to load, `esds-avatar` falls back to the icon, the initials or the default user icon; the new `data-image-state` attribute reflects the image loading state and drives the image-specific styles of `esds-avatar-button`.
+  - New `esds-avatar-group` component to stack and group avatars.
+  - New `esds-avatar-button` attribute to make an avatar interactive, with hover, focus, active and disabled states.
+  - New T3 `avatar` tokens and `avatar-size` modifier contexts matching Figma: `small` (24px), `medium` (32px), `large` (40px) and `extra-large` (48px, default).
+  - Stacked-avatar overlap (`avatar.group.gap`) uses the new negative spacing tokens `spacing.minus-sm` (-6px) and `spacing.minus-md` (-8px).
+  - New `avatar.color.state.hover.image` / `avatar.color.state.pressed.image` tokens provide the stronger overlays used by the image variant.
+  - The default initials typography (`heading.xs` emphasized) matches the 48px default size.
+
+- [#517](https://github.com/Infomaniak/design-system/pull/517) [`c39d0bd`](https://github.com/Infomaniak/design-system/commit/c39d0bd752fc601e6ba09d80bb12703e7a5e253a): Fixed `esds-button` removing an author-defined `aria-label` from anchor buttons (`<a esds-button>`) when the element was upgraded or when its state changed. The accessible name of a button or anchor button is now never modified; the loading state is conveyed with the `aria-disabled` and `aria-busy` attributes instead.
+
 ## 0.7.0 (2026-11-04)
 
 ### Minor Changes

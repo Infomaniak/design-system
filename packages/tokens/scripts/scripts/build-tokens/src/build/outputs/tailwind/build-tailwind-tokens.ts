@@ -104,12 +104,12 @@ export function buildTailwindTokens({
           'tracking',
           // 'leading',
           // 'breakpoint',
-          // 'container',
+          'container',
           // 'spacing',
           'radius',
           'border-width',
           'outline-width',
-          // 'shadow',
+          'shadow',
           // 'inset-shadow',
           // 'drop-shadow',
           'blur',
@@ -250,18 +250,6 @@ export function buildTailwindTokens({
                       ),
                     ];
                   }
-                } else if (tokenName.startsWith('icon.size')) {
-                  // --text-* -> --text-icon-*
-                  return [
-                    generateTailwindToken(
-                      token,
-                      RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
-                        'text',
-                        'icon',
-                        ...token.name.slice(2),
-                      ]),
-                    ),
-                  ];
                 } else if (tokenName.startsWith('font.weight')) {
                   // --font-weight-*
                   return [
@@ -281,6 +269,18 @@ export function buildTailwindTokens({
                       token,
                       DEFAULT_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
                         'tracking',
+                        ...token.name.slice(2),
+                      ]),
+                    ),
+                  ];
+                } else if (tokenName.startsWith('icon.size')) {
+                  // --text-* -> --text-icon-*
+                  return [
+                    generateTailwindToken(
+                      token,
+                      RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION([
+                        'text',
+                        'icon',
                         ...token.name.slice(2),
                       ]),
                     ),
@@ -323,6 +323,14 @@ export function buildTailwindTokens({
                         ),
                       ];
                     }),
+                  ];
+                } else if (tokenName.startsWith('shadow')) {
+                  // --shadow-*
+                  return [
+                    generateTailwindToken(
+                      token,
+                      RAW_GENERATE_CSS_VARIABLE_NAME_FUNCTION(['shadow', ...token.name.slice(1)]),
+                    ),
                   ];
                 } else if (tokenName.startsWith('blur')) {
                   // --blur-*

@@ -9,7 +9,7 @@
         }
       },
       "dot": {
-        "$value": "{dimension.4}",
+        "$value": "{dimension.8}",
         "$description": "Default badge size for dot badges.",
         "$extensions": {
           "scopes": []

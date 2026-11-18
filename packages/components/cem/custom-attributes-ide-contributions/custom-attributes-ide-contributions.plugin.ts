@@ -39,6 +39,7 @@ interface CemModule {
 }
 
 interface CemDeclaration {
+  readonly name?: string;
   readonly tagName?: string;
   readonly superclass?: CemSuperclass;
 }
@@ -153,15 +154,32 @@ export function customAttributesIdePlugin(
  * Collects the tag names of the manifest declarations describing a custom attribute (a class
  * extending `CustomAttribute`) instead of a real custom element.
  *
+ * The superclass chain of a declaration is resolved transitively through the class declarations of
+ * the manifest, so subclasses of custom attributes (e.g. `EsdsAvatarButtonAttr` extending
+ * `EsdsButtonAttr`) are recognized as custom attributes too.
+ *
  * @param manifest - Custom Elements Manifest.
  * @returns The tag names of the custom attributes.
  */
 export function collectCustomAttributeTagNames(manifest: CustomElementsManifest): Set<string> {
+  const classesByName = new Map<string, CemDeclaration>();
+
+  for (const module of manifest.modules ?? []) {
+    for (const declaration of module.declarations ?? []) {
+      if (declaration.name !== undefined && !classesByName.has(declaration.name)) {
+        classesByName.set(declaration.name, declaration);
+      }
+    }
+  }
+
   const tagNames = new Set<string>();
 
   for (const module of manifest.modules ?? []) {
     for (const declaration of module.declarations ?? []) {
-      if (declaration.tagName === undefined || !isCustomAttributeDeclaration(declaration)) {
+      if (
+        declaration.tagName === undefined ||
+        !isCustomAttributeDeclaration(declaration, classesByName)
+      ) {
         continue;
       }
 
@@ -172,14 +190,41 @@ export function collectCustomAttributeTagNames(manifest: CustomElementsManifest)
   return tagNames;
 }
 
-function isCustomAttributeDeclaration(declaration: CemDeclaration): boolean {
-  const superclass = declaration.superclass;
+/**
+ * Whether the declaration describes a custom attribute, i.e. its superclass chain reaches
+ * `CustomAttribute`. Cycles are guarded against, and unknown superclasses stop the resolution.
+ */
+function isCustomAttributeDeclaration(
+  declaration: CemDeclaration,
+  classesByName: ReadonlyMap<string, CemDeclaration>,
+): boolean {
+  const visited = new Set<string>();
+  let superclass = declaration.superclass;
 
-  return (
-    superclass !== undefined &&
-    (superclass.name === CUSTOM_ATTRIBUTE_SUPERCLASS_NAME ||
-      (superclass.module ?? '').includes(CUSTOM_ATTRIBUTE_MODULE_HINT))
-  );
+  while (superclass !== undefined) {
+    if (
+      superclass.name === CUSTOM_ATTRIBUTE_SUPERCLASS_NAME ||
+      (superclass.module ?? '').includes(CUSTOM_ATTRIBUTE_MODULE_HINT)
+    ) {
+      return true;
+    }
+
+    if (superclass.name === undefined || visited.has(superclass.name)) {
+      return false;
+    }
+
+    visited.add(superclass.name);
+
+    const parent = classesByName.get(superclass.name);
+
+    if (parent === undefined) {
+      return false;
+    }
+
+    superclass = parent.superclass;
+  }
+
+  return false;
 }
 
 /* WEB-TYPES TRANSFORMATION */

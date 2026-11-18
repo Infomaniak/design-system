@@ -1,0 +1,29 @@
+{
+  "avatar": {
+    "size": {
+      "$value": "{dimension.24}"
+    },
+    "border": {
+      "radius": {
+        "square": {
+          "$value": "{radius.md}"
+        }
+      }
+    },
+    "content": {
+      "font": {
+        "$value": "{body.xs.font.emphasized}"
+      }
+    },
+    "icon": {
+      "size": {
+        "$value": "{icon.size.xs}"
+      }
+    },
+    "group": {
+      "gap": {
+        "$value": "{spacing.minus-sm}"
+      }
+    }
+  }
+}
