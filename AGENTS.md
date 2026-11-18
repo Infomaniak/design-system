@@ -71,6 +71,10 @@ design-system/
 │   └── actions/
 │       └── build-deploy-storybook/  # Shared Storybook build + gh-pages deploy pipeline (race-safe retry)
 ├── .agents/skills/              # Agent skills
+│   ├── add-tokens/              # SKILL.md — add/codify design tokens (DTCG + changeset + PR)
+│   ├── compare-figma-tokens/    # SKILL.md + scripts — read-only Figma ↔ repo token audit & drift report
+│   ├── convert-figma-tokens/    # SKILL.md — sync a TokensBrücke export into the repo DTCG files
+│   ├── draft-release-announcement/  # SKILL.md — draft the release announcement message
 │   └── generate-changeset/      # SKILL.md — analyzes diff, writes changeset file
 └── index.js                     # Root entry point
 ```
