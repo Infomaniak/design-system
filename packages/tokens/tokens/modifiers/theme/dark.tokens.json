@@ -23,7 +23,7 @@
           "$value": "{color.pink.300}"
         },
         "kdrive": {
-          "$value": "{color.indigo.300}"
+          "$value": "{color.cobalt.300}"
         },
         "euria": {
           "$value": "{color.ocean.400}"
@@ -32,13 +32,13 @@
           "$value": "{color.cyan.300}"
         },
         "security": {
-          "$value": "{color.purple.300}"
+          "$value": "{color.indigo.300}"
         },
         "calendar": {
           "$value": "{color.aqua.300}"
         },
         "contacts": {
-          "$value": "{color.violet.300}"
+          "$value": "{color.purple.300}"
         },
         "knote": {
           "$value": "{color.coral.300}"
@@ -81,15 +81,15 @@
             "$value": "{color.blue.950}"
           }
         },
-        "violet": {
+        "purple": {
           "dim1": {
-            "$value": "{color.violet.400}"
+            "$value": "{color.purple.400}"
           },
           "dim2": {
-            "$value": "{color.violet.800}"
+            "$value": "{color.purple.800}"
           },
           "dim3": {
-            "$value": "{color.violet.950}"
+            "$value": "{color.purple.950}"
           }
         },
         "citrus": {
@@ -241,7 +241,7 @@
             "$value": "{color.aqua.950}"
           },
           "contacts": {
-            "$value": "{color.violet.950}"
+            "$value": "{color.purple.950}"
           },
           "euria": {
             "$value": "{color.ocean.950}"
@@ -250,7 +250,7 @@
             "$value": "{color.cyan.950}"
           },
           "kdrive": {
-            "$value": "{color.indigo.950}"
+            "$value": "{color.cobalt.950}"
           },
           "knote": {
             "$value": "{color.coral.950}"
@@ -259,7 +259,7 @@
             "$value": "{color.pink.950}"
           },
           "security": {
-            "$value": "{color.purple.950}"
+            "$value": "{color.indigo.950}"
           },
           "swisstransfer": {
             "$value": "{color.emerald.950}"
@@ -299,15 +299,15 @@
               "$value": "{color.blue.300}"
             }
           },
-          "violet": {
+          "purple": {
             "dim1": {
-              "$value": "{color.violet.950}"
+              "$value": "{color.purple.950}"
             },
             "dim2": {
-              "$value": "{color.violet.100}"
+              "$value": "{color.purple.100}"
             },
             "dim3": {
-              "$value": "{color.violet.300}"
+              "$value": "{color.purple.300}"
             }
           },
           "citrus": {
@@ -443,7 +443,7 @@
           "$value": "{color.pink.400}"
         },
         "kdrive": {
-          "$value": "{color.indigo.300}"
+          "$value": "{color.cobalt.300}"
         },
         "euria": {
           "$value": "{color.ocean.400}"
@@ -452,13 +452,13 @@
           "$value": "{color.cyan.400}"
         },
         "security": {
-          "$value": "{color.purple.400}"
+          "$value": "{color.indigo.400}"
         },
         "calendar": {
           "$value": "{color.aqua.400}"
         },
         "contacts": {
-          "$value": "{color.violet.300}"
+          "$value": "{color.purple.300}"
         },
         "knote": {
           "$value": "{color.coral.400}"
@@ -500,7 +500,7 @@
         "$value": "{color.gray.800}"
       },
       "visited": {
-        "$value": "{color.violet.300}"
+        "$value": "{color.purple.300}"
       },
       "muted": {
         "$value": "{color.gray.400}"
@@ -515,8 +515,8 @@
         "blue": {
           "$value": "{color.blue.400}"
         },
-        "violet": {
-          "$value": "{color.violet.400}"
+        "purple": {
+          "$value": "{color.purple.400}"
         },
         "citrus": {
           "$value": "{color.citrus.400}"
@@ -574,15 +574,15 @@
               "$value": "{color.blue.300}"
             }
           },
-          "violet": {
+          "purple": {
             "dim1": {
               "$value": "{color.transparent}"
             },
             "dim2": {
-              "$value": "{color.violet.100}"
+              "$value": "{color.purple.100}"
             },
             "dim3": {
-              "$value": "{color.violet.300}"
+              "$value": "{color.purple.300}"
             }
           },
           "citrus": {
@@ -718,7 +718,7 @@
           "$value": "{color.pink.300}"
         },
         "kdrive": {
-          "$value": "{color.indigo.300}"
+          "$value": "{color.cobalt.300}"
         },
         "euria": {
           "$value": "{color.ocean.400}"
@@ -727,7 +727,7 @@
           "$value": "{color.cyan.300}"
         },
         "security": {
-          "$value": "{color.purple.300}"
+          "$value": "{color.indigo.300}"
         },
         "calendar": {
           "$value": "{color.aqua.300}"
@@ -739,7 +739,7 @@
           "$value": "{color.emerald.300}"
         },
         "contacts": {
-          "$value": "{color.violet.300}"
+          "$value": "{color.purple.300}"
         }
       },
       "dataviz": {
@@ -752,8 +752,8 @@
         "blue": {
           "$value": "{color.blue.400}"
         },
-        "violet": {
-          "$value": "{color.violet.400}"
+        "purple": {
+          "$value": "{color.purple.400}"
         },
         "citrus": {
           "$value": "{color.citrus.400}"

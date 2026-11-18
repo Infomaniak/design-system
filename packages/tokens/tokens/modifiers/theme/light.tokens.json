@@ -23,7 +23,7 @@
           "$value": "{color.pink.600}"
         },
         "kdrive": {
-          "$value": "{color.indigo.500}"
+          "$value": "{color.cobalt.500}"
         },
         "euria": {
           "$value": "{color.ocean.700}"
@@ -32,13 +32,13 @@
           "$value": "{color.cyan.600}"
         },
         "security": {
-          "$value": "{color.purple.600}"
+          "$value": "{color.indigo.600}"
         },
         "calendar": {
           "$value": "{color.aqua.500}"
         },
         "contacts": {
-          "$value": "{color.violet.500}"
+          "$value": "{color.purple.500}"
         },
         "knote": {
           "$value": "{color.coral.600}"
@@ -81,15 +81,15 @@
             "$value": "{color.blue.50}"
           }
         },
-        "violet": {
+        "purple": {
           "dim1": {
-            "$value": "{color.violet.500}"
+            "$value": "{color.purple.500}"
           },
           "dim2": {
-            "$value": "{color.violet.200}"
+            "$value": "{color.purple.200}"
           },
           "dim3": {
-            "$value": "{color.violet.50}"
+            "$value": "{color.purple.50}"
           }
         },
         "citrus": {
@@ -299,15 +299,15 @@
               "$value": "{color.blue.700}"
             }
           },
-          "violet": {
+          "purple": {
             "dim1": {
-              "$value": "{color.violet.50}"
+              "$value": "{color.purple.50}"
             },
             "dim2": {
-              "$value": "{color.violet.900}"
+              "$value": "{color.purple.900}"
             },
             "dim3": {
-              "$value": "{color.violet.700}"
+              "$value": "{color.purple.700}"
             }
           },
           "citrus": {
@@ -443,7 +443,7 @@
           "$value": "{color.pink.700}"
         },
         "kdrive": {
-          "$value": "{color.indigo.500}"
+          "$value": "{color.cobalt.500}"
         },
         "euria": {
           "$value": "{color.ocean.600}"
@@ -452,13 +452,13 @@
           "$value": "{color.cyan.600}"
         },
         "security": {
-          "$value": "{color.purple.600}"
+          "$value": "{color.indigo.600}"
         },
         "calendar": {
           "$value": "{color.aqua.700}"
         },
         "contacts": {
-          "$value": "{color.violet.500}"
+          "$value": "{color.purple.500}"
         },
         "knote": {
           "$value": "{color.coral.600}"
@@ -500,7 +500,7 @@
         "$value": "{color.gray.100}"
       },
       "visited": {
-        "$value": "{color.violet.600}"
+        "$value": "{color.purple.600}"
       },
       "muted": {
         "$value": "{color.gray.500}"
@@ -515,8 +515,8 @@
         "blue": {
           "$value": "{color.blue.600}"
         },
-        "violet": {
-          "$value": "{color.violet.600}"
+        "purple": {
+          "$value": "{color.purple.600}"
         },
         "citrus": {
           "$value": "{color.citrus.600}"
@@ -574,15 +574,15 @@
               "$value": "{color.blue.700}"
             }
           },
-          "violet": {
+          "purple": {
             "dim1": {
               "$value": "{color.transparent}"
             },
             "dim2": {
-              "$value": "{color.violet.900}"
+              "$value": "{color.purple.900}"
             },
             "dim3": {
-              "$value": "{color.violet.700}"
+              "$value": "{color.purple.700}"
             }
           },
           "citrus": {
@@ -718,7 +718,7 @@
           "$value": "{color.pink.600}"
         },
         "kdrive": {
-          "$value": "{color.indigo.500}"
+          "$value": "{color.cobalt.500}"
         },
         "euria": {
           "$value": "{color.ocean.700}"
@@ -727,7 +727,7 @@
           "$value": "{color.cyan.600}"
         },
         "security": {
-          "$value": "{color.purple.600}"
+          "$value": "{color.indigo.600}"
         },
         "calendar": {
           "$value": "{color.aqua.500}"
@@ -739,7 +739,7 @@
           "$value": "{color.emerald.600}"
         },
         "contacts": {
-          "$value": "{color.violet.500}"
+          "$value": "{color.purple.500}"
         }
       },
       "dataviz": {
@@ -752,8 +752,8 @@
         "blue": {
           "$value": "{color.blue.600}"
         },
-        "violet": {
-          "$value": "{color.violet.600}"
+        "purple": {
+          "$value": "{color.purple.600}"
         },
         "citrus": {
           "$value": "{color.citrus.600}"
