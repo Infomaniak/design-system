@@ -15,315 +15,81 @@ T2 Shadow tokens provide semantic shadow definitions for elements.
   </thead>
   <tbody>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-xs-x); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-xs-x"></div></td>
+      <td><div style=" width: 50px; height: 50px; background: white; border: 1px solid #e5e7eb; border-radius: 4px; box-shadow: var(--esds-shadow-xs); margin: 16px; " ></div> <div data-preview-value="--esds-shadow-xs"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.xs.x" type="button">shadow.xs.x</button>
+          <button class="token-value" data-clipboard="shadow.xs" type="button">shadow.xs</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-xs-x)" type="button">var(--esds-shadow-xs-x)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-xs)" type="button">var(--esds-shadow-xs)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-xs-x" type="button">shadow-xs-x</button></div>
-        <div class="token-row token-description">Horizontal offset of the xs shadow.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-xs" type="button">shadow-xs</button></div>
+        <div class="token-row token-description">Extra-small shadow for subtle elevation.</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-xs-y); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-xs-y"></div></td>
+      <td><div style=" width: 50px; height: 50px; background: white; border: 1px solid #e5e7eb; border-radius: 4px; box-shadow: var(--esds-shadow-sm); margin: 16px; " ></div> <div data-preview-value="--esds-shadow-sm"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.xs.y" type="button">shadow.xs.y</button>
+          <button class="token-value" data-clipboard="shadow.sm" type="button">shadow.sm</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-xs-y)" type="button">var(--esds-shadow-xs-y)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-sm)" type="button">var(--esds-shadow-sm)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-xs-y" type="button">shadow-xs-y</button></div>
-        <div class="token-row token-description">Vertical offset of the xs shadow.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-sm" type="button">shadow-sm</button></div>
+        <div class="token-row token-description">Small shadow for light elevation.</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-xs-blur); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-xs-blur"></div></td>
+      <td><div style=" width: 50px; height: 50px; background: white; border: 1px solid #e5e7eb; border-radius: 4px; box-shadow: var(--esds-shadow-md); margin: 16px; " ></div> <div data-preview-value="--esds-shadow-md"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.xs.blur" type="button">shadow.xs.blur</button>
+          <button class="token-value" data-clipboard="shadow.md" type="button">shadow.md</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-xs-blur)" type="button">var(--esds-shadow-xs-blur)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-md)" type="button">var(--esds-shadow-md)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-xs-blur" type="button">shadow-xs-blur</button></div>
-        <div class="token-row token-description">Blur radius of the xs shadow.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-md" type="button">shadow-md</button></div>
+        <div class="token-row token-description">Medium shadow for default elevation.</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-xs-spread); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-xs-spread"></div></td>
+      <td><div style=" width: 50px; height: 50px; background: white; border: 1px solid #e5e7eb; border-radius: 4px; box-shadow: var(--esds-shadow-lg); margin: 16px; " ></div> <div data-preview-value="--esds-shadow-lg"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.xs.spread" type="button">shadow.xs.spread</button>
+          <button class="token-value" data-clipboard="shadow.lg" type="button">shadow.lg</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-xs-spread)" type="button">var(--esds-shadow-xs-spread)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-lg)" type="button">var(--esds-shadow-lg)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-xs-spread" type="button">shadow-xs-spread</button></div>
-        <div class="token-row token-description">Spread of the xs shadow.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-lg" type="button">shadow-lg</button></div>
+        <div class="token-row token-description">Large shadow for emphasized elevation.</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-sm-x); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-sm-x"></div></td>
+      <td><div style=" width: 50px; height: 50px; background: white; border: 1px solid #e5e7eb; border-radius: 4px; box-shadow: var(--esds-shadow-xl); margin: 16px; " ></div> <div data-preview-value="--esds-shadow-xl"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.sm.x" type="button">shadow.sm.x</button>
+          <button class="token-value" data-clipboard="shadow.xl" type="button">shadow.xl</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-sm-x)" type="button">var(--esds-shadow-sm-x)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-xl)" type="button">var(--esds-shadow-xl)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-sm-x" type="button">shadow-sm-x</button></div>
-        <div class="token-row token-description">Horizontal offset of the sm shadow.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-xl" type="button">shadow-xl</button></div>
+        <div class="token-row token-description">Extra-large shadow for prominent elevation.</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-sm-y); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-sm-y"></div></td>
+      <td><div style=" width: 50px; height: 50px; background: white; border: 1px solid #e5e7eb; border-radius: 4px; box-shadow: var(--esds-shadow-2xl); margin: 16px; " ></div> <div data-preview-value="--esds-shadow-2xl"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.sm.y" type="button">shadow.sm.y</button>
+          <button class="token-value" data-clipboard="shadow.2xl" type="button">shadow.2xl</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-sm-y)" type="button">var(--esds-shadow-sm-y)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-2xl)" type="button">var(--esds-shadow-2xl)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-sm-y" type="button">shadow-sm-y</button></div>
-        <div class="token-row token-description">Vertical offset of the sm shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-sm-blur); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-sm-blur"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.sm.blur" type="button">shadow.sm.blur</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-sm-blur)" type="button">var(--esds-shadow-sm-blur)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-sm-blur" type="button">shadow-sm-blur</button></div>
-        <div class="token-row token-description">Blur radius of the sm shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-sm-spread); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-sm-spread"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.sm.spread" type="button">shadow.sm.spread</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-sm-spread)" type="button">var(--esds-shadow-sm-spread)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-sm-spread" type="button">shadow-sm-spread</button></div>
-        <div class="token-row token-description">Spread of the sm shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-md-x); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-md-x"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.md.x" type="button">shadow.md.x</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-md-x)" type="button">var(--esds-shadow-md-x)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-md-x" type="button">shadow-md-x</button></div>
-        <div class="token-row token-description">Horizontal offset of the md shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-md-y); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-md-y"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.md.y" type="button">shadow.md.y</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-md-y)" type="button">var(--esds-shadow-md-y)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-md-y" type="button">shadow-md-y</button></div>
-        <div class="token-row token-description">Vertical offset of the md shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-md-blur); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-md-blur"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.md.blur" type="button">shadow.md.blur</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-md-blur)" type="button">var(--esds-shadow-md-blur)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-md-blur" type="button">shadow-md-blur</button></div>
-        <div class="token-row token-description">Blur radius of the md shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-md-spread); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-md-spread"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.md.spread" type="button">shadow.md.spread</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-md-spread)" type="button">var(--esds-shadow-md-spread)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-md-spread" type="button">shadow-md-spread</button></div>
-        <div class="token-row token-description">Spread of the md shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-lg-x); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-lg-x"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.lg.x" type="button">shadow.lg.x</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-lg-x)" type="button">var(--esds-shadow-lg-x)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-lg-x" type="button">shadow-lg-x</button></div>
-        <div class="token-row token-description">Horizontal offset of the lg shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-lg-y); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-lg-y"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.lg.y" type="button">shadow.lg.y</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-lg-y)" type="button">var(--esds-shadow-lg-y)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-lg-y" type="button">shadow-lg-y</button></div>
-        <div class="token-row token-description">Vertical offset of the lg shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-lg-blur); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-lg-blur"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.lg.blur" type="button">shadow.lg.blur</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-lg-blur)" type="button">var(--esds-shadow-lg-blur)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-lg-blur" type="button">shadow-lg-blur</button></div>
-        <div class="token-row token-description">Blur radius of the lg shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-lg-spread); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-lg-spread"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.lg.spread" type="button">shadow.lg.spread</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-lg-spread)" type="button">var(--esds-shadow-lg-spread)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-lg-spread" type="button">shadow-lg-spread</button></div>
-        <div class="token-row token-description">Spread of the lg shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-xl-x); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-xl-x"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.xl.x" type="button">shadow.xl.x</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-xl-x)" type="button">var(--esds-shadow-xl-x)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-xl-x" type="button">shadow-xl-x</button></div>
-        <div class="token-row token-description">Horizontal offset of the xl shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-xl-y); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-xl-y"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.xl.y" type="button">shadow.xl.y</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-xl-y)" type="button">var(--esds-shadow-xl-y)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-xl-y" type="button">shadow-xl-y</button></div>
-        <div class="token-row token-description">Vertical offset of the xl shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-xl-blur); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-xl-blur"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.xl.blur" type="button">shadow.xl.blur</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-xl-blur)" type="button">var(--esds-shadow-xl-blur)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-xl-blur" type="button">shadow-xl-blur</button></div>
-        <div class="token-row token-description">Blur radius of the xl shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-xl-spread); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-xl-spread"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.xl.spread" type="button">shadow.xl.spread</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-xl-spread)" type="button">var(--esds-shadow-xl-spread)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-xl-spread" type="button">shadow-xl-spread</button></div>
-        <div class="token-row token-description">Spread of the xl shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-2xl-x); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-2xl-x"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.2xl.x" type="button">shadow.2xl.x</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-2xl-x)" type="button">var(--esds-shadow-2xl-x)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-2xl-x" type="button">shadow-2xl-x</button></div>
-        <div class="token-row token-description">Horizontal offset of the 2xl shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-2xl-y); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-2xl-y"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.2xl.y" type="button">shadow.2xl.y</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-2xl-y)" type="button">var(--esds-shadow-2xl-y)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-2xl-y" type="button">shadow-2xl-y</button></div>
-        <div class="token-row token-description">Vertical offset of the 2xl shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-2xl-blur); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-2xl-blur"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.2xl.blur" type="button">shadow.2xl.blur</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-2xl-blur)" type="button">var(--esds-shadow-2xl-blur)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-2xl-blur" type="button">shadow-2xl-blur</button></div>
-        <div class="token-row token-description">Blur radius of the 2xl shadow.</div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-shadow-2xl-spread); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-shadow-2xl-spread"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="shadow.2xl.spread" type="button">shadow.2xl.spread</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-shadow-2xl-spread)" type="button">var(--esds-shadow-2xl-spread)</button>
-        </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-2xl-spread" type="button">shadow-2xl-spread</button></div>
-        <div class="token-row token-description">Spread of the 2xl shadow.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="shadow-2xl" type="button">shadow-2xl</button></div>
+        <div class="token-row token-description">2x-large shadow for maximum elevation.</div>
       </td>
     </tr>
   </tbody>

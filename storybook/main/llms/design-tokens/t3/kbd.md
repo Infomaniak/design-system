@@ -37,7 +37,7 @@
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-kbd-border-width); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-kbd-border-width"></div></td>
+      <td><div style=" width: 50px; height: 50px; background: #f1f5f9; border: var(--esds-kbd-border-width) solid #374151; display: inline-block; " ></div> <div data-preview-value="--esds-kbd-border-width"></div></td>
       <td>
         <div class="token-row">
           <button class="token-value" data-clipboard="kbd.border.width" type="button">kbd.border.width</button>
@@ -50,7 +50,7 @@
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-kbd-border-radius); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-kbd-border-radius"></div></td>
+      <td><div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: var(--esds-kbd-border-radius); display: inline-block; " ></div> <div data-preview-value="--esds-kbd-border-radius"></div></td>
       <td>
         <div class="token-row">
           <button class="token-value" data-clipboard="kbd.border.radius" type="button">kbd.border.radius</button>

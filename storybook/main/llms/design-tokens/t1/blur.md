@@ -24,6 +24,32 @@
       </td>
     </tr>
     <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-blur-1); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-blur-1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="blur.1" type="button">blur.1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-blur-1)" type="button">var(--esds-blur-1)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-blur-2); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-blur-2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="blur.2" type="button">blur.2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-blur-2)" type="button">var(--esds-blur-2)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
       <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-blur-4); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-blur-4"></div></td>
       <td>
         <div class="token-row">
@@ -37,6 +63,19 @@
       </td>
     </tr>
     <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-blur-6); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-blur-6"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="blur.6" type="button">blur.6</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-blur-6)" type="button">var(--esds-blur-6)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
       <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-blur-8); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-blur-8"></div></td>
       <td>
         <div class="token-row">
@@ -44,6 +83,19 @@
         </div>
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-blur-8)" type="button">var(--esds-blur-8)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-blur-10); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-blur-10"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="blur.10" type="button">blur.10</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-blur-10)" type="button">var(--esds-blur-10)</button>
         </div>
 
         <div class="token-row token-description"></div>
@@ -96,6 +148,19 @@
         </div>
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-blur-40)" type="button">var(--esds-blur-40)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-blur-50); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-blur-50"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="blur.50" type="button">blur.50</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-blur-50)" type="button">var(--esds-blur-50)</button>
         </div>
 
         <div class="token-row token-description"></div>

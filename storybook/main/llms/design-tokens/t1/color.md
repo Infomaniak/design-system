@@ -375,110 +375,6 @@
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-gray-400-6); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-gray-400-6"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="color.gray.400-6" type="button">color.gray.400-6</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-gray-400-6)" type="button">var(--esds-color-gray-400-6)</button>
-        </div>
-
-        <div class="token-row token-description"></div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-gray-400-8); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-gray-400-8"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="color.gray.400-8" type="button">color.gray.400-8</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-gray-400-8)" type="button">var(--esds-color-gray-400-8)</button>
-        </div>
-
-        <div class="token-row token-description"></div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-gray-400-10); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-gray-400-10"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="color.gray.400-10" type="button">color.gray.400-10</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-gray-400-10)" type="button">var(--esds-color-gray-400-10)</button>
-        </div>
-
-        <div class="token-row token-description"></div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-gray-400-14); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-gray-400-14"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="color.gray.400-14" type="button">color.gray.400-14</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-gray-400-14)" type="button">var(--esds-color-gray-400-14)</button>
-        </div>
-
-        <div class="token-row token-description"></div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-gray-950-6); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-gray-950-6"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="color.gray.950-6" type="button">color.gray.950-6</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-gray-950-6)" type="button">var(--esds-color-gray-950-6)</button>
-        </div>
-
-        <div class="token-row token-description"></div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-gray-950-8); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-gray-950-8"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="color.gray.950-8" type="button">color.gray.950-8</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-gray-950-8)" type="button">var(--esds-color-gray-950-8)</button>
-        </div>
-
-        <div class="token-row token-description"></div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-gray-950-10); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-gray-950-10"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="color.gray.950-10" type="button">color.gray.950-10</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-gray-950-10)" type="button">var(--esds-color-gray-950-10)</button>
-        </div>
-
-        <div class="token-row token-description"></div>
-      </td>
-    </tr>
-    <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-gray-950-14); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-gray-950-14"></div></td>
-      <td>
-        <div class="token-row">
-          <button class="token-value" data-clipboard="color.gray.950-14" type="button">color.gray.950-14</button>
-        </div>
-        <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-gray-950-14)" type="button">var(--esds-color-gray-950-14)</button>
-        </div>
-
-        <div class="token-row token-description"></div>
-      </td>
-    </tr>
-    <tr>
       <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-pink-50); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-pink-50"></div></td>
       <td>
         <div class="token-row">
@@ -2475,6 +2371,435 @@
         </div>
         <div class="token-row">
           CSS: <button class="token-value" data-clipboard="var(--esds-color-yellow-950)" type="button">var(--esds-color-yellow-950)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-brown-50); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-brown-50"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.brown.50" type="button">color.brown.50</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-brown-50)" type="button">var(--esds-color-brown-50)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-brown-100); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-brown-100"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.brown.100" type="button">color.brown.100</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-brown-100)" type="button">var(--esds-color-brown-100)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-brown-200); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-brown-200"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.brown.200" type="button">color.brown.200</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-brown-200)" type="button">var(--esds-color-brown-200)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-brown-300); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-brown-300"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.brown.300" type="button">color.brown.300</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-brown-300)" type="button">var(--esds-color-brown-300)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-brown-400); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-brown-400"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.brown.400" type="button">color.brown.400</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-brown-400)" type="button">var(--esds-color-brown-400)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-brown-500); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-brown-500"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.brown.500" type="button">color.brown.500</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-brown-500)" type="button">var(--esds-color-brown-500)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-brown-600); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-brown-600"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.brown.600" type="button">color.brown.600</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-brown-600)" type="button">var(--esds-color-brown-600)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-brown-700); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-brown-700"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.brown.700" type="button">color.brown.700</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-brown-700)" type="button">var(--esds-color-brown-700)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-brown-800); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-brown-800"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.brown.800" type="button">color.brown.800</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-brown-800)" type="button">var(--esds-color-brown-800)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-brown-900); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-brown-900"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.brown.900" type="button">color.brown.900</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-brown-900)" type="button">var(--esds-color-brown-900)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-brown-950); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-brown-950"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.brown.950" type="button">color.brown.950</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-brown-950)" type="button">var(--esds-color-brown-950)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-magenta-50); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-magenta-50"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.magenta.50" type="button">color.magenta.50</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-magenta-50)" type="button">var(--esds-color-magenta-50)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-magenta-100); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-magenta-100"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.magenta.100" type="button">color.magenta.100</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-magenta-100)" type="button">var(--esds-color-magenta-100)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-magenta-200); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-magenta-200"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.magenta.200" type="button">color.magenta.200</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-magenta-200)" type="button">var(--esds-color-magenta-200)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-magenta-300); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-magenta-300"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.magenta.300" type="button">color.magenta.300</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-magenta-300)" type="button">var(--esds-color-magenta-300)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-magenta-400); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-magenta-400"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.magenta.400" type="button">color.magenta.400</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-magenta-400)" type="button">var(--esds-color-magenta-400)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-magenta-500); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-magenta-500"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.magenta.500" type="button">color.magenta.500</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-magenta-500)" type="button">var(--esds-color-magenta-500)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-magenta-600); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-magenta-600"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.magenta.600" type="button">color.magenta.600</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-magenta-600)" type="button">var(--esds-color-magenta-600)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-magenta-700); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-magenta-700"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.magenta.700" type="button">color.magenta.700</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-magenta-700)" type="button">var(--esds-color-magenta-700)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-magenta-800); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-magenta-800"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.magenta.800" type="button">color.magenta.800</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-magenta-800)" type="button">var(--esds-color-magenta-800)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-magenta-900); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-magenta-900"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.magenta.900" type="button">color.magenta.900</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-magenta-900)" type="button">var(--esds-color-magenta-900)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-magenta-950); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-magenta-950"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.magenta.950" type="button">color.magenta.950</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-magenta-950)" type="button">var(--esds-color-magenta-950)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-citrus-50); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-citrus-50"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.citrus.50" type="button">color.citrus.50</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-citrus-50)" type="button">var(--esds-color-citrus-50)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-citrus-100); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-citrus-100"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.citrus.100" type="button">color.citrus.100</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-citrus-100)" type="button">var(--esds-color-citrus-100)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-citrus-200); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-citrus-200"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.citrus.200" type="button">color.citrus.200</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-citrus-200)" type="button">var(--esds-color-citrus-200)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-citrus-300); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-citrus-300"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.citrus.300" type="button">color.citrus.300</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-citrus-300)" type="button">var(--esds-color-citrus-300)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-citrus-400); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-citrus-400"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.citrus.400" type="button">color.citrus.400</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-citrus-400)" type="button">var(--esds-color-citrus-400)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-citrus-500); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-citrus-500"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.citrus.500" type="button">color.citrus.500</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-citrus-500)" type="button">var(--esds-color-citrus-500)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-citrus-600); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-citrus-600"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.citrus.600" type="button">color.citrus.600</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-citrus-600)" type="button">var(--esds-color-citrus-600)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-citrus-700); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-citrus-700"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.citrus.700" type="button">color.citrus.700</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-citrus-700)" type="button">var(--esds-color-citrus-700)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-citrus-800); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-citrus-800"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.citrus.800" type="button">color.citrus.800</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-citrus-800)" type="button">var(--esds-color-citrus-800)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-citrus-900); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-citrus-900"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.citrus.900" type="button">color.citrus.900</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-citrus-900)" type="button">var(--esds-color-citrus-900)</button>
+        </div>
+
+        <div class="token-row token-description"></div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-citrus-950); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-citrus-950"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.citrus.950" type="button">color.citrus.950</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-citrus-950)" type="button">var(--esds-color-citrus-950)</button>
         </div>
 
         <div class="token-row token-description"></div>

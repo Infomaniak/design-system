@@ -4,11 +4,10 @@
 
 **The figma kit includes:**
 
-- Shadcn tokens linked to Token Core
-- Native components
+- Native components (tokens linked to Token Core)
 - System icons embedded within native components
 
-**[Figma file](https://www.figma.com/design/eOY97TGxMkMx9ub9zt8e6v/Edelweiss---Shadcn-Kit--Paid-?m=auto&t=6Praqzvd4yFcNUmT-6)**
+**[Figma file](https://www.figma.com/design/eOY97TGxMkMx9ub9zt8e6v/Edelweiss---Shadcn-Kit?m=auto&t=M0yu9R498lNZs4eD-6)**
 
 ---
 
@@ -33,11 +32,5 @@
   alt="Appearance settings on the components"
 />
 
-- **Theme:** Switch between light and dark mode.
 - **Product:** Switch the accent color between products (Infomaniak, Calendar…).
-
----
-
-### Token mapping
-
-See how the shadcn tokens map to the design system tokens: [Shadcn Token Mapping](shadcn-token-mapping.md).
+- **Theme:** Switch between light and dark mode.

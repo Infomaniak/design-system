@@ -63,7 +63,7 @@
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-button-border-radius); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-button-border-radius"></div></td>
+      <td><div style=" width: 100px; height: 100px; background: #dcfce8; border: 2px solid #374151; border-radius: var(--esds-button-border-radius); display: inline-block; " ></div> <div data-preview-value="--esds-button-border-radius"></div></td>
       <td>
         <div class="token-row">
           <button class="token-value" data-clipboard="button.border.radius" type="button">button.border.radius</button>
@@ -102,7 +102,7 @@
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-button-border-width); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-button-border-width"></div></td>
+      <td><div style=" width: 50px; height: 50px; background: #f1f5f9; border: var(--esds-button-border-width) solid #374151; display: inline-block; " ></div> <div data-preview-value="--esds-button-border-width"></div></td>
       <td>
         <div class="token-row">
           <button class="token-value" data-clipboard="button.border.width" type="button">button.border.width</button>
@@ -115,7 +115,7 @@
       </td>
     </tr>
     <tr>
-      <td><div style=" background: #dcfce8; height: 16px; width: var(--esds-button-border-width-disabled); border-radius: 2px; border: 1px solid #86efad; position: relative; aspect-ratio: 1 / 1; " ></div> <div data-preview-value="--esds-button-border-width-disabled"></div></td>
+      <td><div style=" width: 50px; height: 50px; background: #f1f5f9; border: var(--esds-button-border-width-disabled) solid #374151; display: inline-block; " ></div> <div data-preview-value="--esds-button-border-width-disabled"></div></td>
       <td>
         <div class="token-row">
           <button class="token-value" data-clipboard="button.border.width.disabled" type="button">button.border.width.disabled</button>

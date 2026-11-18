@@ -57,15 +57,13 @@ limitations](android/android-technical-limitations.md)**
 
 ---
 
-### 5. Shadcn kit 🕸️
+### 5. Shadcn kit ⬛️
 
-- Shadcn tokens linked to Token Core
-- Native components
+- Native components (tokens linked to Token Core)
 - System icons embedded within native components
 
-**[Figma file](https://www.figma.com/design/eOY97TGxMkMx9ub9zt8e6v/Edelweiss---Shadcn-Kit--Paid-?m=auto&t=6Praqzvd4yFcNUmT-6)**
-| **[How to use](web/shadcn-kit.md)** | **[Token
-mapping](web/shadcn-token-mapping.md)**
+**[Figma file](https://www.figma.com/design/eOY97TGxMkMx9ub9zt8e6v/Edelweiss---Shadcn-Kit?m=auto&t=M0yu9R498lNZs4eD-6)**
+| **[How to use](web/shadcn-kit.md)**
 
 ## 🧰 Helpers
 

@@ -1,4 +1,132 @@
 ---
+colors:
+  background:
+    backdrop: "#00000080"
+  state:
+    hover:
+      soft:
+        light: "#0b426f0f"
+        dark: "#f8fafc0f"
+      medium:
+        light: "#0b426f1f"
+        dark: "#f8fafc1f"
+      strong:
+        light: "#0b426f99"
+        dark: "#f8fafc33"
+    pressed:
+      soft:
+        light: "#0b426f1f"
+        dark: "#f8fafc1f"
+      medium:
+        light: "#0b426f4d"
+        dark: "#f8fafc4d"
+      strong:
+        light: "#0b426fcc"
+        dark: "#f8fafc66"
+    selected:
+      soft:
+        light: "#0b426f0f"
+        dark: "#f8fafc1f"
+      medium:
+        light: "#0b426f1f"
+        dark: "#f8fafc29"
+      strong:
+        light: "#0b426f99"
+        dark: "#f8fafc66"
+  shadow:
+    light: "#3141584d"
+    dark: "#62748e4d"
+shadow:
+  xs:
+    light:
+      offsetX: "0px"
+      offsetY: "1px"
+      blur: "1px"
+      spread: "0px"
+      color: "#3141584d"
+      inset: false
+    dark:
+      offsetX: "0px"
+      offsetY: "1px"
+      blur: "1px"
+      spread: "0px"
+      color: "#62748e4d"
+      inset: false
+  sm:
+    light:
+      offsetX: "0px"
+      offsetY: "1px"
+      blur: "2px"
+      spread: "0px"
+      color: "#3141584d"
+      inset: false
+    dark:
+      offsetX: "0px"
+      offsetY: "1px"
+      blur: "2px"
+      spread: "0px"
+      color: "#62748e4d"
+      inset: false
+  md:
+    light:
+      offsetX: "0px"
+      offsetY: "2px"
+      blur: "4px"
+      spread: "-1px"
+      color: "#3141584d"
+      inset: false
+    dark:
+      offsetX: "0px"
+      offsetY: "2px"
+      blur: "4px"
+      spread: "-1px"
+      color: "#62748e4d"
+      inset: false
+  lg:
+    light:
+      offsetX: "0px"
+      offsetY: "4px"
+      blur: "6px"
+      spread: "-3px"
+      color: "#3141584d"
+      inset: false
+    dark:
+      offsetX: "0px"
+      offsetY: "4px"
+      blur: "6px"
+      spread: "-3px"
+      color: "#62748e4d"
+      inset: false
+  xl:
+    light:
+      offsetX: "0px"
+      offsetY: "10px"
+      blur: "10px"
+      spread: "-6px"
+      color: "#3141584d"
+      inset: false
+    dark:
+      offsetX: "0px"
+      offsetY: "10px"
+      blur: "10px"
+      spread: "-6px"
+      color: "#62748e4d"
+      inset: false
+  2xl:
+    light:
+      offsetX: "0px"
+      offsetY: "25px"
+      blur: "50px"
+      spread: "-12px"
+      color: "#3141584d"
+      inset: false
+    dark:
+      offsetX: "0px"
+      offsetY: "25px"
+      blur: "50px"
+      spread: "-12px"
+      color: "#62748e4d"
+      inset: false
 typography:
   xs:
     base:
@@ -120,13 +248,13 @@ typography:
   6xl:
     base:
       fontFamily: "Infomaniak Sans"
-      fontSize: "3.25rem"
+      fontSize: "3.5rem"
       fontWeight: "400"
       lineHeight: "60px"
       letterSpacing: "0px"
     emphasized:
       fontFamily: "Infomaniak Sans"
-      fontSize: "3.25rem"
+      fontSize: "3.5rem"
       fontWeight: "500"
       lineHeight: "60px"
       letterSpacing: "0px"
@@ -182,9 +310,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.dataviz.violet.dim1 | #9346ff | #b185ff | var(--esds-color-background-dataviz-violet-dim1) | Strong violet data-viz background (dim1). |
 | color.background.dataviz.violet.dim2 | #e0d4ff | #6c18bf | var(--esds-color-background-dataviz-violet-dim2) | Soft violet data-viz background (dim2). |
 | color.background.dataviz.violet.dim3 | #f6f2ff | #370b6a | var(--esds-color-background-dataviz-violet-dim3) | Subtle violet data-viz background (dim3). |
-| color.background.dataviz.purple.dim1 | #607ff4 | #7ea1fb | var(--esds-color-background-dataviz-purple-dim1) | Strong purple data-viz background (dim1). |
-| color.background.dataviz.purple.dim2 | #c6dcff | #2d3da6 | var(--esds-color-background-dataviz-purple-dim2) | Soft purple data-viz background (dim2). |
-| color.background.dataviz.purple.dim3 | #eef5ff | #1a204c | var(--esds-color-background-dataviz-purple-dim3) | Subtle purple data-viz background (dim3). |
+| color.background.dataviz.citrus.dim1 | #83bb03 | #9fd506 | var(--esds-color-background-dataviz-citrus-dim1) | Strong citrus data-viz background (dim1). |
+| color.background.dataviz.citrus.dim2 | #d5f289 | #375c07 | var(--esds-color-background-dataviz-citrus-dim2) | Soft citrus data-viz background (dim2). |
+| color.background.dataviz.citrus.dim3 | #f4fce2 | #182d04 | var(--esds-color-background-dataviz-citrus-dim3) | Subtle citrus data-viz background (dim3). |
 | color.background.dataviz.pink.dim1 | #ff2461 | #ff5d86 | var(--esds-color-background-dataviz-pink-dim1) | Strong pink data-viz background (dim1). |
 | color.background.dataviz.pink.dim2 | #ffc6d3 | #b40045 | var(--esds-color-background-dataviz-pink-dim2) | Soft pink data-viz background (dim2). |
 | color.background.dataviz.pink.dim3 | #ffeff2 | #570022 | var(--esds-color-background-dataviz-pink-dim3) | Subtle pink data-viz background (dim3). |
@@ -194,6 +322,12 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.dataviz.gray.dim1 | #62748e | #90a1b9 | var(--esds-color-background-dataviz-gray-dim1) | Strong gray data-viz background (dim1). |
 | color.background.dataviz.gray.dim2 | #e2e8f0 | #192334 | var(--esds-color-background-dataviz-gray-dim2) | Soft gray data-viz background (dim2). |
 | color.background.dataviz.gray.dim3 | #f8fafc | #020618 | var(--esds-color-background-dataviz-gray-dim3) | Subtle gray data-viz background (dim3). |
+| color.background.dataviz.brown.dim1 | #b87138 | #d0905a | var(--esds-color-background-dataviz-brown-dim1) | Strong brown data-viz background (dim1). |
+| color.background.dataviz.brown.dim2 | #f0d4b7 | #6a391b | var(--esds-color-background-dataviz-brown-dim2) | Soft brown data-viz background (dim2). |
+| color.background.dataviz.brown.dim3 | #fcf6ee | #32190c | var(--esds-color-background-dataviz-brown-dim3) | Subtle brown data-viz background (dim3). |
+| color.background.dataviz.magenta.dim1 | #d734cc | #e76edf | var(--esds-color-background-dataviz-magenta-dim1) | Strong magenta data-viz background (dim1). |
+| color.background.dataviz.magenta.dim2 | #f7caf4 | #88007a | var(--esds-color-background-dataviz-magenta-dim2) | Soft magenta data-viz background (dim2). |
+| color.background.dataviz.magenta.dim3 | #fcf1fb | #45033b | var(--esds-color-background-dataviz-magenta-dim3) | Subtle magenta data-viz background (dim3). |
 | color.background.dataviz.dim1 | #0c93eb | #36adfa | var(--esds-color-background-dataviz-dim1) | Default dim1 data-viz background. |
 | color.background.dataviz.dim2 | #b9e0fe | #064e86 | var(--esds-color-background-dataviz-dim2) | Default dim2 data-viz background. |
 | color.background.dataviz.dim3 | #f0f8ff | #072a4a | var(--esds-color-background-dataviz-dim3) | Default dim3 data-viz background. |
@@ -213,6 +347,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.feedback.neutral.dim2 | #e2e8f0 | #0f172b | var(--esds-color-background-feedback-neutral-dim2) | Soft neutral background (dim2). |
 | color.background.feedback.neutral.dim3 | #f8fafc | #020618 | var(--esds-color-background-feedback-neutral-dim3) | Subtle neutral background (dim3). |
 | color.background.disabled | #e2e8f0 | #0f172b | var(--esds-color-background-disabled) | Background for disabled, non-interactive elements. |
+| color.background.backdrop | #00000080 | #00000080 | var(--esds-color-background-backdrop) | Backdrop overlay color displayed behind modals and dialogs. |
 | color.content.on.disabled | #90a1b9 | #62748e | var(--esds-color-content-on-disabled) | Content color for disabled states on backgrounds. |
 | color.content.on.brand | #fff | #072a4a | var(--esds-color-content-on-brand) | Default foreground on brand backgrounds. |
 | color.content.on.brand.infomaniak | #fff | #072a4a | var(--esds-color-content-on-brand-infomaniak) | Foreground on Infomaniak brand backgrounds. |
@@ -237,9 +372,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.on.dataviz.pink.dim1 | #ffeff2 | #570022 | var(--esds-color-content-on-dataviz-pink-dim1) | Foreground on strong pink data-viz backgrounds (dim1). |
 | color.content.on.dataviz.pink.dim2 | #990241 | #ffe0e6 | var(--esds-color-content-on-dataviz-pink-dim2) | Foreground on soft pink data-viz backgrounds (dim2). |
 | color.content.on.dataviz.pink.dim3 | #d7004b | #ff97af | var(--esds-color-content-on-dataviz-pink-dim3) | Foreground on subtle pink data-viz backgrounds (dim3). |
-| color.content.on.dataviz.purple.dim1 | #eef5ff | #1a204c | var(--esds-color-content-on-dataviz-purple-dim1) | Foreground on strong purple data-viz backgrounds (dim1). |
-| color.content.on.dataviz.purple.dim2 | #2c3983 | #dfecff | var(--esds-color-content-on-dataviz-purple-dim2) | Foreground on soft purple data-viz backgrounds (dim2). |
-| color.content.on.dataviz.purple.dim3 | #3546cd | #a3c4fe | var(--esds-color-content-on-dataviz-purple-dim3) | Foreground on subtle purple data-viz backgrounds (dim3). |
+| color.content.on.dataviz.citrus.dim1 | #182d04 | #182d04 | var(--esds-color-content-on-dataviz-citrus-dim1) | Foreground on strong citrus data-viz backgrounds (dim1). |
+| color.content.on.dataviz.citrus.dim2 | #2e4c0a | #e8f9c0 | var(--esds-color-content-on-dataviz-citrus-dim2) | Foreground on soft citrus data-viz backgrounds (dim2). |
+| color.content.on.dataviz.citrus.dim3 | #477300 | #bae744 | var(--esds-color-content-on-dataviz-citrus-dim3) | Foreground on subtle citrus data-viz backgrounds (dim3). |
 | color.content.on.dataviz.violet.dim1 | #f6f2ff | #370b6a | var(--esds-color-content-on-dataviz-violet-dim1) | Foreground on strong violet data-viz backgrounds (dim1). |
 | color.content.on.dataviz.violet.dim2 | #59169c | #efe8ff | var(--esds-color-content-on-dataviz-violet-dim2) | Foreground on soft violet data-viz backgrounds (dim2). |
 | color.content.on.dataviz.violet.dim3 | #811ee3 | #cab1ff | var(--esds-color-content-on-dataviz-violet-dim3) | Foreground on subtle violet data-viz backgrounds (dim3). |
@@ -249,6 +384,12 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.on.dataviz.gray.dim1 | #f8fafc | #020618 | var(--esds-color-content-on-dataviz-gray-dim1) | Foreground on strong gray data-viz backgrounds (dim1). |
 | color.content.on.dataviz.gray.dim2 | #0f172b | #f1f5f9 | var(--esds-color-content-on-dataviz-gray-dim2) | Foreground on soft gray data-viz backgrounds (dim2). |
 | color.content.on.dataviz.gray.dim3 | #314158 | #cad5e2 | var(--esds-color-content-on-dataviz-gray-dim3) | Foreground on subtle gray data-viz backgrounds (dim3). |
+| color.content.on.dataviz.brown.dim1 | #fcf6ee | #32190c | var(--esds-color-content-on-dataviz-brown-dim1) | Foreground on strong brown data-viz backgrounds (dim1). |
+| color.content.on.dataviz.brown.dim2 | #572f18 | #f7e9d7 | var(--esds-color-content-on-dataviz-brown-dim2) | Foreground on soft brown data-viz backgrounds (dim2). |
+| color.content.on.dataviz.brown.dim3 | #84481f | #e5b78c | var(--esds-color-content-on-dataviz-brown-dim3) | Foreground on subtle brown data-viz backgrounds (dim3). |
+| color.content.on.dataviz.magenta.dim1 | #fcf1fb | #45033b | var(--esds-color-content-on-dataviz-magenta-dim1) | Foreground on strong magenta data-viz backgrounds (dim1). |
+| color.content.on.dataviz.magenta.dim2 | #700262 | #fbe2f9 | var(--esds-color-content-on-dataviz-magenta-dim2) | Foreground on soft magenta data-viz backgrounds (dim2). |
+| color.content.on.dataviz.magenta.dim3 | #a40196 | #f1a3ec | var(--esds-color-content-on-dataviz-magenta-dim3) | Foreground on subtle magenta data-viz backgrounds (dim3). |
 | color.content.on.dataviz.dim1 | #f0f8ff | #072a4a | var(--esds-color-content-on-dataviz-dim1) | Default foreground on data-viz dim1 backgrounds. |
 | color.content.on.dataviz.dim2 | #0b426f | #e0effe | var(--esds-color-content-on-dataviz-dim2) | Default foreground on data-viz dim2 backgrounds. |
 | color.content.on.dataviz.dim3 | #015ca3 | #7cc8fd | var(--esds-color-content-on-dataviz-dim3) | Default foreground on data-viz dim3 backgrounds. |
@@ -295,10 +436,12 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.dataviz.emerald | #15864e | #3cb572 | var(--esds-color-content-dataviz-emerald) | Emerald data-viz foreground color. |
 | color.content.dataviz.orange | #f97207 | #ffa032 | var(--esds-color-content-dataviz-orange) | Orange data-viz foreground color. |
 | color.content.dataviz.pink | #e9004c | #ff5d86 | var(--esds-color-content-dataviz-pink) | Pink data-viz foreground color. |
-| color.content.dataviz.purple | #4d62ea | #7ea1fb | var(--esds-color-content-dataviz-purple) | Purple data-viz foreground color. |
+| color.content.dataviz.citrus | #5f9202 | #9fd506 | var(--esds-color-content-dataviz-citrus) | Citrus data-viz foreground color. |
 | color.content.dataviz.violet | #8f30f7 | #b185ff | var(--esds-color-content-dataviz-violet) | Violet data-viz foreground color. |
 | color.content.dataviz.yellow | #ecb306 | #fccf20 | var(--esds-color-content-dataviz-yellow) | Yellow data-viz foreground color. |
 | color.content.dataviz.gray | #45556c | #90a1b9 | var(--esds-color-content-dataviz-gray) | Gray data-viz foreground color. |
+| color.content.dataviz.brown | #9f5b29 | #d0905a | var(--esds-color-content-dataviz-brown) | Brown data-viz foreground color. |
+| color.content.dataviz.magenta | #c002b4 | #e76edf | var(--esds-color-content-dataviz-magenta) | Magenta data-viz foreground color. |
 | color.border.on.dataviz.blue.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-blue-dim1) | Border on strong blue data-viz backgrounds (dim1). |
 | color.border.on.dataviz.blue.dim2 | #0b426f | #e0effe | var(--esds-color-border-on-dataviz-blue-dim2) | Border on soft blue data-viz backgrounds (dim2). |
 | color.border.on.dataviz.blue.dim3 | #015ca3 | #7cc8fd | var(--esds-color-border-on-dataviz-blue-dim3) | Border on subtle blue data-viz backgrounds (dim3). |
@@ -311,9 +454,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.on.dataviz.pink.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-pink-dim1) | Border on strong pink data-viz backgrounds (dim1). |
 | color.border.on.dataviz.pink.dim2 | #990241 | #ffe0e6 | var(--esds-color-border-on-dataviz-pink-dim2) | Border on soft pink data-viz backgrounds (dim2). |
 | color.border.on.dataviz.pink.dim3 | #d7004b | #ff97af | var(--esds-color-border-on-dataviz-pink-dim3) | Border on subtle pink data-viz backgrounds (dim3). |
-| color.border.on.dataviz.purple.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-purple-dim1) | Border on strong purple data-viz backgrounds (dim1). |
-| color.border.on.dataviz.purple.dim2 | #2c3983 | #dfecff | var(--esds-color-border-on-dataviz-purple-dim2) | Border on soft purple data-viz backgrounds (dim2). |
-| color.border.on.dataviz.purple.dim3 | #3546cd | #a3c4fe | var(--esds-color-border-on-dataviz-purple-dim3) | Border on subtle purple data-viz backgrounds (dim3). |
+| color.border.on.dataviz.citrus.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-citrus-dim1) | Border on strong citrus data-viz backgrounds (dim1). |
+| color.border.on.dataviz.citrus.dim2 | #2e4c0a | #e8f9c0 | var(--esds-color-border-on-dataviz-citrus-dim2) | Border on soft citrus data-viz backgrounds (dim2). |
+| color.border.on.dataviz.citrus.dim3 | #477300 | #bae744 | var(--esds-color-border-on-dataviz-citrus-dim3) | Border on subtle citrus data-viz backgrounds (dim3). |
 | color.border.on.dataviz.violet.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-violet-dim1) | Border on strong violet data-viz backgrounds (dim1). |
 | color.border.on.dataviz.violet.dim2 | #59169c | #efe8ff | var(--esds-color-border-on-dataviz-violet-dim2) | Border on soft violet data-viz backgrounds (dim2). |
 | color.border.on.dataviz.violet.dim3 | #811ee3 | #cab1ff | var(--esds-color-border-on-dataviz-violet-dim3) | Border on subtle violet data-viz backgrounds (dim3). |
@@ -323,6 +466,12 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.on.dataviz.gray.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-gray-dim1) | Border on strong gray data-viz backgrounds (dim1). |
 | color.border.on.dataviz.gray.dim2 | #0f172b | #f1f5f9 | var(--esds-color-border-on-dataviz-gray-dim2) | Border on soft gray data-viz backgrounds (dim2). |
 | color.border.on.dataviz.gray.dim3 | #314158 | #cad5e2 | var(--esds-color-border-on-dataviz-gray-dim3) | Border on subtle gray data-viz backgrounds (dim3). |
+| color.border.on.dataviz.brown.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-brown-dim1) | Border on strong brown data-viz backgrounds (dim1). |
+| color.border.on.dataviz.brown.dim2 | #572f18 | #f7e9d7 | var(--esds-color-border-on-dataviz-brown-dim2) | Border on soft brown data-viz backgrounds (dim2). |
+| color.border.on.dataviz.brown.dim3 | #84481f | #e5b78c | var(--esds-color-border-on-dataviz-brown-dim3) | Border on subtle brown data-viz backgrounds (dim3). |
+| color.border.on.dataviz.magenta.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-magenta-dim1) | Border on strong magenta data-viz backgrounds (dim1). |
+| color.border.on.dataviz.magenta.dim2 | #700262 | #fbe2f9 | var(--esds-color-border-on-dataviz-magenta-dim2) | Border on soft magenta data-viz backgrounds (dim2). |
+| color.border.on.dataviz.magenta.dim3 | #a40196 | #f1a3ec | var(--esds-color-border-on-dataviz-magenta-dim3) | Border on subtle magenta data-viz backgrounds (dim3). |
 | color.border.on.dataviz.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-dim1) | Default border on data-viz dim1 backgrounds. |
 | color.border.on.dataviz.dim2 | #0b426f | #e0effe | var(--esds-color-border-on-dataviz-dim2) | Default border on data-viz dim2 backgrounds. |
 | color.border.on.dataviz.dim3 | #015ca3 | #7cc8fd | var(--esds-color-border-on-dataviz-dim3) | Default border on data-viz dim3 backgrounds. |
@@ -357,10 +506,12 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.dataviz.emerald | #15864e | #3cb572 | var(--esds-color-border-dataviz-emerald) | Emerald data-viz border color. |
 | color.border.dataviz.orange | #f97207 | #ffa032 | var(--esds-color-border-dataviz-orange) | Orange data-viz border color. |
 | color.border.dataviz.pink | #e9004c | #ff5d86 | var(--esds-color-border-dataviz-pink) | Pink data-viz border color. |
-| color.border.dataviz.purple | #4d62ea | #7ea1fb | var(--esds-color-border-dataviz-purple) | Purple data-viz border color. |
+| color.border.dataviz.citrus | #5f9202 | #9fd506 | var(--esds-color-border-dataviz-citrus) | Citrus data-viz border color. |
 | color.border.dataviz.violet | #8f30f7 | #b185ff | var(--esds-color-border-dataviz-violet) | Violet data-viz border color. |
 | color.border.dataviz.yellow | #ecb306 | #fccf20 | var(--esds-color-border-dataviz-yellow) | Yellow data-viz border color. |
 | color.border.dataviz.gray | #45556c | #90a1b9 | var(--esds-color-border-dataviz-gray) | Gray data-viz border color. |
+| color.border.dataviz.brown | #9f5b29 | #d0905a | var(--esds-color-border-dataviz-brown) | Brown data-viz border color. |
+| color.border.dataviz.magenta | #c002b4 | #e76edf | var(--esds-color-border-dataviz-magenta) | Magenta data-viz border color. |
 | color.border.dim1 | #90a1b9 | #90a1b9 | var(--esds-color-border-dim1) | Strongest neutral border color with interaction states. |
 | color.border.dim2 | #cad5e2 | #62748e | var(--esds-color-border-dim2) | Strong neutral border color with interaction states. |
 | color.border.dim3 | #e2e8f0 | #45556c | var(--esds-color-border-dim3) | Subtle neutral border color with interaction states. |
@@ -370,12 +521,6 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.feedback.warning | #dd4f02 | #ffa032 | var(--esds-color-border-feedback-warning) | Warning feedback border colors. |
 | color.border.feedback.information | #0077cf | #36adfa | var(--esds-color-border-feedback-information) | Information feedback border colors. |
 | color.border.feedback.neutral | #45556c | #90a1b9 | var(--esds-color-border-feedback-neutral) | Neutral feedback border colors. |
-| color.shadow.xs | #90a1b90f | #0206180f | var(--esds-color-shadow-xs) | Shadow color for the xs elevation. |
-| color.shadow.sm | #90a1b90f | #0206180f | var(--esds-color-shadow-sm) | Shadow color for the sm elevation. |
-| color.shadow.md | #90a1b914 | #02061814 | var(--esds-color-shadow-md) | Shadow color for the md elevation. |
-| color.shadow.lg | #90a1b91a | #0206181a | var(--esds-color-shadow-lg) | Shadow color for the lg elevation. |
-| color.shadow.xl | #90a1b91a | #0206181a | var(--esds-color-shadow-xl) | Shadow color for the xl elevation. |
-| color.shadow.2xl | #90a1b924 | #02061824 | var(--esds-color-shadow-2xl) | Shadow color for the 2xl elevation. |
 | color.state.focus | #0077cf | #36adfa | var(--esds-color-state-focus) | Focus ring color for focused interactive elements. |
 | color.state.hover.soft | #0b426f0f | #f8fafc0f | var(--esds-color-state-hover-soft) | Soft hover overlay for subtle interactive feedback. |
 | color.state.hover.medium | #0b426f1f | #f8fafc1f | var(--esds-color-state-hover-medium) | Medium hover overlay for balanced interactive feedback. |
@@ -386,6 +531,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.state.selected.soft | #0b426f0f | #f8fafc1f | var(--esds-color-state-selected-soft) | Soft selected overlay for subtle selection feedback. |
 | color.state.selected.medium | #0b426f1f | #f8fafc29 | var(--esds-color-state-selected-medium) | Medium selected overlay for balanced selection feedback. |
 | color.state.selected.strong | #0b426f99 | #f8fafc66 | var(--esds-color-state-selected-strong) | Strong selected overlay for prominent selection feedback. |
+| color.shadow | #3141584d | #62748e4d | var(--esds-color-shadow) | Color used by the elevation shadows. |
 | font.size.xs | 0.75rem | 0.75rem | var(--esds-font-size-xs) | Extra-small font size for captions and metadata. |
 | font.size.sm | 0.875rem | 0.875rem | var(--esds-font-size-sm) | Small font size for helper text and compact UI. |
 | font.size.md | 1rem | 1rem | var(--esds-font-size-md) | Medium (base) font size for body copy and default text. |
@@ -395,7 +541,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | font.size.3xl | 2rem | 2rem | var(--esds-font-size-3xl) | 3x-large font size for prominent headings. |
 | font.size.4xl | 2.5rem | 2.5rem | var(--esds-font-size-4xl) | 4x-large font size for display headings. |
 | font.size.5xl | 3rem | 3rem | var(--esds-font-size-5xl) | 5x-large font size for hero display text. |
-| font.size.6xl | 3.25rem | 3.25rem | var(--esds-font-size-6xl) | 6x-large font size for the largest display text. |
+| font.size.6xl | 3.5rem | 3.5rem | var(--esds-font-size-6xl) | 6x-large font size for the largest display text. |
 | font.family.base | "Infomaniak Sans" | "Infomaniak Sans" | var(--esds-font-family-base) | Base font family used across the design system. |
 | font.line-height.xs | 16px | 16px | var(--esds-font-line-height-xs) | Extra-small line-height for the tightest text. |
 | font.line-height.sm | 20px | 20px | var(--esds-font-line-height-sm) | Small line-height for compact text blocks. |
@@ -433,30 +579,14 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | radius.3xl | 24px | 24px | var(--esds-radius-3xl) | 3x-large radius for heavily rounded corners. |
 | radius.4xl | 32px | 32px | var(--esds-radius-4xl) | 4x-large radius for extremely rounded corners. |
 | radius.full | 1000px | 1000px | var(--esds-radius-full) | Fully rounded radius for pill and circular shapes. |
-| shadow.xs.x | 0px | 0px | var(--esds-shadow-xs-x) | Horizontal offset of the xs shadow. |
-| shadow.xs.y | 1px | 1px | var(--esds-shadow-xs-y) | Vertical offset of the xs shadow. |
-| shadow.xs.blur | 1px | 1px | var(--esds-shadow-xs-blur) | Blur radius of the xs shadow. |
-| shadow.xs.spread | 0px | 0px | var(--esds-shadow-xs-spread) | Spread of the xs shadow. |
-| shadow.sm.x | 0px | 0px | var(--esds-shadow-sm-x) | Horizontal offset of the sm shadow. |
-| shadow.sm.y | 1px | 1px | var(--esds-shadow-sm-y) | Vertical offset of the sm shadow. |
-| shadow.sm.blur | 2px | 2px | var(--esds-shadow-sm-blur) | Blur radius of the sm shadow. |
-| shadow.sm.spread | 0px | 0px | var(--esds-shadow-sm-spread) | Spread of the sm shadow. |
-| shadow.md.x | 0px | 0px | var(--esds-shadow-md-x) | Horizontal offset of the md shadow. |
-| shadow.md.y | 2px | 2px | var(--esds-shadow-md-y) | Vertical offset of the md shadow. |
-| shadow.md.blur | 4px | 4px | var(--esds-shadow-md-blur) | Blur radius of the md shadow. |
-| shadow.md.spread | -1px | -1px | var(--esds-shadow-md-spread) | Spread of the md shadow. |
-| shadow.lg.x | 0px | 0px | var(--esds-shadow-lg-x) | Horizontal offset of the lg shadow. |
-| shadow.lg.y | 4px | 4px | var(--esds-shadow-lg-y) | Vertical offset of the lg shadow. |
-| shadow.lg.blur | 6px | 6px | var(--esds-shadow-lg-blur) | Blur radius of the lg shadow. |
-| shadow.lg.spread | -3px | -3px | var(--esds-shadow-lg-spread) | Spread of the lg shadow. |
-| shadow.xl.x | 0px | 0px | var(--esds-shadow-xl-x) | Horizontal offset of the xl shadow. |
-| shadow.xl.y | 10px | 10px | var(--esds-shadow-xl-y) | Vertical offset of the xl shadow. |
-| shadow.xl.blur | 10px | 10px | var(--esds-shadow-xl-blur) | Blur radius of the xl shadow. |
-| shadow.xl.spread | -6px | -6px | var(--esds-shadow-xl-spread) | Spread of the xl shadow. |
-| shadow.2xl.x | 0px | 0px | var(--esds-shadow-2xl-x) | Horizontal offset of the 2xl shadow. |
-| shadow.2xl.y | 25px | 25px | var(--esds-shadow-2xl-y) | Vertical offset of the 2xl shadow. |
-| shadow.2xl.blur | 50px | 50px | var(--esds-shadow-2xl-blur) | Blur radius of the 2xl shadow. |
-| shadow.2xl.spread | -12px | -12px | var(--esds-shadow-2xl-spread) | Spread of the 2xl shadow. |
+| shadow.xs | 0px 1px 1px 0px #3141584d | 0px 1px 1px 0px #62748e4d | var(--esds-shadow-xs) | Extra-small shadow for subtle elevation. |
+| shadow.sm | 0px 1px 2px 0px #3141584d | 0px 1px 2px 0px #62748e4d | var(--esds-shadow-sm) | Small shadow for light elevation. |
+| shadow.md | 0px 2px 4px -1px #3141584d | 0px 2px 4px -1px #62748e4d | var(--esds-shadow-md) | Medium shadow for default elevation. |
+| shadow.lg | 0px 4px 6px -3px #3141584d | 0px 4px 6px -3px #62748e4d | var(--esds-shadow-lg) | Large shadow for emphasized elevation. |
+| shadow.xl | 0px 10px 10px -6px #3141584d | 0px 10px 10px -6px #62748e4d | var(--esds-shadow-xl) | Extra-large shadow for prominent elevation. |
+| shadow.2xl | 0px 25px 50px -12px #3141584d | 0px 25px 50px -12px #62748e4d | var(--esds-shadow-2xl) | 2x-large shadow for maximum elevation. |
+| spacing.minus-md | -8px | -8px | var(--esds-spacing-minus-md) | Negative medium spacing for overlapping elements (e.g. stacked avatars). |
+| spacing.minus-sm | -6px | -6px | var(--esds-spacing-minus-sm) | Negative small spacing for tightly overlapping elements (e.g. small stacked avatars). |
 | spacing.none | 0px | 0px | var(--esds-spacing-none) | No spacing; zero gap. |
 | spacing.2xs | 2px | 2px | var(--esds-spacing-2xs) | 2x-small spacing for tight, dense layouts. |
 | spacing.xs | 4px | 4px | var(--esds-spacing-xs) | Extra-small spacing for compact groupings. |
@@ -498,7 +628,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | text.5xl.size | 3rem | 3rem | var(--esds-text-5xl-size) | Font size for 5x-large text. |
 | text.5xl.line-height | 56px | 56px | var(--esds-text-5xl-line-height) | Line-height for 5x-large text. |
 | text.5xl.letter-spacing | 0px | 0px | var(--esds-text-5xl-letter-spacing) | Letter spacing for 5x-large text. |
-| text.6xl.size | 3.25rem | 3.25rem | var(--esds-text-6xl-size) | Font size for 6x-large text. |
+| text.6xl.size | 3.5rem | 3.5rem | var(--esds-text-6xl-size) | Font size for 6x-large text. |
 | text.6xl.line-height | 60px | 60px | var(--esds-text-6xl-line-height) | Line-height for 6x-large text. |
 | text.6xl.letter-spacing | 0px | 0px | var(--esds-text-6xl-letter-spacing) | Letter spacing for 6x-large text. |
 | typography.xs.base | 400 0.75rem/16px Infomaniak Sans | 400 0.75rem/16px Infomaniak Sans | var(--esds-typography-xs-base) | Extra-small base typography (regular weight). |
@@ -519,15 +649,32 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | typography.4xl.emphasized | 500 2.5rem/48px Infomaniak Sans | 500 2.5rem/48px Infomaniak Sans | var(--esds-typography-4xl-emphasized) | 4x-large emphasized typography (medium weight). |
 | typography.5xl.base | 400 3rem/56px Infomaniak Sans | 400 3rem/56px Infomaniak Sans | var(--esds-typography-5xl-base) | 5x-large base typography (regular weight). |
 | typography.5xl.emphasized | 500 3rem/56px Infomaniak Sans | 500 3rem/56px Infomaniak Sans | var(--esds-typography-5xl-emphasized) | 5x-large emphasized typography (medium weight). |
-| typography.6xl.base | 400 3.25rem/60px Infomaniak Sans | 400 3.25rem/60px Infomaniak Sans | var(--esds-typography-6xl-base) | 6x-large base typography (regular weight). |
-| typography.6xl.emphasized | 500 3.25rem/60px Infomaniak Sans | 500 3.25rem/60px Infomaniak Sans | var(--esds-typography-6xl-emphasized) | 6x-large emphasized typography (medium weight). |
+| typography.6xl.base | 400 3.5rem/60px Infomaniak Sans | 400 3.5rem/60px Infomaniak Sans | var(--esds-typography-6xl-base) | 6x-large base typography (regular weight). |
+| typography.6xl.emphasized | 500 3.5rem/60px Infomaniak Sans | 500 3.5rem/60px Infomaniak Sans | var(--esds-typography-6xl-emphasized) | 6x-large emphasized typography (medium weight). |
 
 ## 3. Component Tokens
 
 | Token Name | Light Value | Dark Value | CSS Variable | Description |
 |---|---|---|---|---|
+| avatar.size | 48px | 48px | var(--esds-avatar-size) | Default avatar size. |
+| avatar.border.color | #f1f5f9 | #314158 | var(--esds-avatar-border-color) | Default avatar border color. |
+| avatar.border.width | 2px | 2px | var(--esds-avatar-border-width) | Default avatar border width. |
+| avatar.border.radius.circle | 1000px | 1000px | var(--esds-avatar-border-radius-circle) | Corner radius for circle avatars. |
+| avatar.border.radius.square | 8px | 8px | var(--esds-avatar-border-radius-square) | Corner radius for square avatars. |
+| avatar.content.color | #0b426f | #e0effe | var(--esds-avatar-content-color) | Default avatar initials and icon color. |
+| avatar.content.color.disabled | #90a1b9 | #62748e | var(--esds-avatar-content-color-disabled) | Avatar initials and icon color when disabled. |
+| avatar.content.font | 500 1.25rem/28px Infomaniak Sans | 500 1.25rem/28px Infomaniak Sans | var(--esds-avatar-content-font) | Default avatar initials typography. |
+| avatar.background.color | #b9e0fe | #064e86 | var(--esds-avatar-background-color) | Default avatar background color. |
+| avatar.background.color.disabled | #e2e8f0 | #0f172b | var(--esds-avatar-background-color-disabled) | Avatar background color when disabled. |
+| avatar.color.state.hover | #0b426f0f | #f8fafc0f | var(--esds-avatar-color-state-hover) | Avatar hover overlay for icon and content variants. |
+| avatar.color.state.hover.image | #0b426f1f | #f8fafc1f | var(--esds-avatar-color-state-hover-image) | Avatar hover overlay for the image variant. |
+| avatar.color.state.pressed | #0b426f1f | #f8fafc1f | var(--esds-avatar-color-state-pressed) | Avatar pressed overlay for icon and content variants. |
+| avatar.color.state.pressed.image | #0b426f4d | #f8fafc4d | var(--esds-avatar-color-state-pressed-image) | Avatar pressed overlay for the image variant. |
+| avatar.opacity.disabled | 0.5 | 0.5 | var(--esds-avatar-opacity-disabled) | Avatar image opacity when disabled. |
+| avatar.icon.size | 32px | 32px | var(--esds-avatar-icon-size) | Default avatar icon size. |
+| avatar.group.gap | -8px | -8px | var(--esds-avatar-group-gap) | Default overlap between stacked avatars. |
 | badge.size.content | 20px | 20px | var(--esds-badge-size-content) | Default badge size for content badges. |
-| badge.size.dot | 4px | 4px | var(--esds-badge-size-dot) | Default badge size for dot badges. |
+| badge.size.dot | 8px | 8px | var(--esds-badge-size-dot) | Default badge size for dot badges. |
 | badge.padding.inline | 2px | 2px | var(--esds-badge-padding-inline) | Default badge inline padding. |
 | badge.padding.block | 0px | 0px | var(--esds-badge-padding-block) | Default badge block padding. |
 | badge.border.radius | 1000px | 1000px | var(--esds-badge-border-radius) | Default badge corner radius. |
@@ -574,8 +721,8 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | heading.lg.font.emphasized | 500 2.5rem/48px Infomaniak Sans | 500 2.5rem/48px Infomaniak Sans | var(--esds-heading-lg-font-emphasized) | Large heading typography (medium weight). |
 | heading.xl.font.base | 400 3rem/56px Infomaniak Sans | 400 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font-base) | Extra-large heading typography (regular weight). |
 | heading.xl.font.emphasized | 500 3rem/56px Infomaniak Sans | 500 3rem/56px Infomaniak Sans | var(--esds-heading-xl-font-emphasized) | Extra-large heading typography (medium weight). |
-| heading.2xl.font.base | 400 3.25rem/60px Infomaniak Sans | 400 3.25rem/60px Infomaniak Sans | var(--esds-heading-2xl-font-base) | 2x-large heading typography (regular weight). |
-| heading.2xl.font.emphasized | 500 3.25rem/60px Infomaniak Sans | 500 3.25rem/60px Infomaniak Sans | var(--esds-heading-2xl-font-emphasized) | 2x-large heading typography (medium weight). |
+| heading.2xl.font.base | 400 3.5rem/60px Infomaniak Sans | 400 3.5rem/60px Infomaniak Sans | var(--esds-heading-2xl-font-base) | 2x-large heading typography (regular weight). |
+| heading.2xl.font.emphasized | 500 3.5rem/60px Infomaniak Sans | 500 3.5rem/60px Infomaniak Sans | var(--esds-heading-2xl-font-emphasized) | 2x-large heading typography (medium weight). |
 | kbd.background-color | #fff | #192334 | var(--esds-kbd-background-color) | Default keyboard key background color. |
 | kbd.border.color | #e2e8f0 | #45556c | var(--esds-kbd-border-color) | Default keyboard key border color. |
 | kbd.border.width | 1px | 1px | var(--esds-kbd-border-width) | Default keyboard key border width. |

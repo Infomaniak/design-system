@@ -14,7 +14,7 @@
   <div className="welcome-section">
     <h2>Explore the Design System</h2>
     <div className="card-grid">
-      <a href="design-tokens/getting-started.md" className="card card--vertical">
+      <a href="design-tokens/getting-started/definition-architecture.md" className="card card--vertical">
         <h3 className="card__title">Design Tokens</h3>
         <p className="card__description">Foundation values for colors, spacing, typography, and more across all tiers (T1, T2, T3).</p>
         <span className="card__link">
