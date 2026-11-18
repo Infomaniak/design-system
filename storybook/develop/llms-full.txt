@@ -307,9 +307,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.dataviz.blue.dim1 | #0c93eb | #36adfa | var(--esds-color-background-dataviz-blue-dim1) | Strong blue data-viz background (dim1). |
 | color.background.dataviz.blue.dim2 | #b9e0fe | #064e86 | var(--esds-color-background-dataviz-blue-dim2) | Soft blue data-viz background (dim2). |
 | color.background.dataviz.blue.dim3 | #f0f8ff | #072a4a | var(--esds-color-background-dataviz-blue-dim3) | Subtle blue data-viz background (dim3). |
-| color.background.dataviz.violet.dim1 | #9346ff | #b185ff | var(--esds-color-background-dataviz-violet-dim1) | Strong violet data-viz background (dim1). |
-| color.background.dataviz.violet.dim2 | #e0d4ff | #6c18bf | var(--esds-color-background-dataviz-violet-dim2) | Soft violet data-viz background (dim2). |
-| color.background.dataviz.violet.dim3 | #f6f2ff | #370b6a | var(--esds-color-background-dataviz-violet-dim3) | Subtle violet data-viz background (dim3). |
+| color.background.dataviz.purple.dim1 | #9346ff | #b185ff | var(--esds-color-background-dataviz-purple-dim1) | Strong purple data-viz background (dim1). |
+| color.background.dataviz.purple.dim2 | #e0d4ff | #6c18bf | var(--esds-color-background-dataviz-purple-dim2) | Soft purple data-viz background (dim2). |
+| color.background.dataviz.purple.dim3 | #f6f2ff | #370b6a | var(--esds-color-background-dataviz-purple-dim3) | Subtle purple data-viz background (dim3). |
 | color.background.dataviz.citrus.dim1 | #83bb03 | #9fd506 | var(--esds-color-background-dataviz-citrus-dim1) | Strong citrus data-viz background (dim1). |
 | color.background.dataviz.citrus.dim2 | #d5f289 | #375c07 | var(--esds-color-background-dataviz-citrus-dim2) | Soft citrus data-viz background (dim2). |
 | color.background.dataviz.citrus.dim3 | #f4fce2 | #182d04 | var(--esds-color-background-dataviz-citrus-dim3) | Subtle citrus data-viz background (dim3). |
@@ -375,9 +375,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.on.dataviz.citrus.dim1 | #182d04 | #182d04 | var(--esds-color-content-on-dataviz-citrus-dim1) | Foreground on strong citrus data-viz backgrounds (dim1). |
 | color.content.on.dataviz.citrus.dim2 | #2e4c0a | #e8f9c0 | var(--esds-color-content-on-dataviz-citrus-dim2) | Foreground on soft citrus data-viz backgrounds (dim2). |
 | color.content.on.dataviz.citrus.dim3 | #477300 | #bae744 | var(--esds-color-content-on-dataviz-citrus-dim3) | Foreground on subtle citrus data-viz backgrounds (dim3). |
-| color.content.on.dataviz.violet.dim1 | #f6f2ff | #370b6a | var(--esds-color-content-on-dataviz-violet-dim1) | Foreground on strong violet data-viz backgrounds (dim1). |
-| color.content.on.dataviz.violet.dim2 | #59169c | #efe8ff | var(--esds-color-content-on-dataviz-violet-dim2) | Foreground on soft violet data-viz backgrounds (dim2). |
-| color.content.on.dataviz.violet.dim3 | #811ee3 | #cab1ff | var(--esds-color-content-on-dataviz-violet-dim3) | Foreground on subtle violet data-viz backgrounds (dim3). |
+| color.content.on.dataviz.purple.dim1 | #f6f2ff | #370b6a | var(--esds-color-content-on-dataviz-purple-dim1) | Foreground on strong purple data-viz backgrounds (dim1). |
+| color.content.on.dataviz.purple.dim2 | #59169c | #efe8ff | var(--esds-color-content-on-dataviz-purple-dim2) | Foreground on soft purple data-viz backgrounds (dim2). |
+| color.content.on.dataviz.purple.dim3 | #811ee3 | #cab1ff | var(--esds-color-content-on-dataviz-purple-dim3) | Foreground on subtle purple data-viz backgrounds (dim3). |
 | color.content.on.dataviz.yellow.dim1 | #fefce8 | #422006 | var(--esds-color-content-on-dataviz-yellow-dim1) | Foreground on strong yellow data-viz backgrounds (dim1). |
 | color.content.on.dataviz.yellow.dim2 | #723f11 | #fef9c3 | var(--esds-color-content-on-dataviz-yellow-dim2) | Foreground on soft yellow data-viz backgrounds (dim2). |
 | color.content.on.dataviz.yellow.dim3 | #a26206 | #fee046 | var(--esds-color-content-on-dataviz-yellow-dim3) | Foreground on subtle yellow data-viz backgrounds (dim3). |
@@ -437,7 +437,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.dataviz.orange | #f97207 | #ffa032 | var(--esds-color-content-dataviz-orange) | Orange data-viz foreground color. |
 | color.content.dataviz.pink | #e9004c | #ff5d86 | var(--esds-color-content-dataviz-pink) | Pink data-viz foreground color. |
 | color.content.dataviz.citrus | #5f9202 | #9fd506 | var(--esds-color-content-dataviz-citrus) | Citrus data-viz foreground color. |
-| color.content.dataviz.violet | #8f30f7 | #b185ff | var(--esds-color-content-dataviz-violet) | Violet data-viz foreground color. |
+| color.content.dataviz.purple | #8f30f7 | #b185ff | var(--esds-color-content-dataviz-purple) | Purple data-viz foreground color. |
 | color.content.dataviz.yellow | #ecb306 | #fccf20 | var(--esds-color-content-dataviz-yellow) | Yellow data-viz foreground color. |
 | color.content.dataviz.gray | #45556c | #90a1b9 | var(--esds-color-content-dataviz-gray) | Gray data-viz foreground color. |
 | color.content.dataviz.brown | #9f5b29 | #d0905a | var(--esds-color-content-dataviz-brown) | Brown data-viz foreground color. |
@@ -457,9 +457,9 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.on.dataviz.citrus.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-citrus-dim1) | Border on strong citrus data-viz backgrounds (dim1). |
 | color.border.on.dataviz.citrus.dim2 | #2e4c0a | #e8f9c0 | var(--esds-color-border-on-dataviz-citrus-dim2) | Border on soft citrus data-viz backgrounds (dim2). |
 | color.border.on.dataviz.citrus.dim3 | #477300 | #bae744 | var(--esds-color-border-on-dataviz-citrus-dim3) | Border on subtle citrus data-viz backgrounds (dim3). |
-| color.border.on.dataviz.violet.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-violet-dim1) | Border on strong violet data-viz backgrounds (dim1). |
-| color.border.on.dataviz.violet.dim2 | #59169c | #efe8ff | var(--esds-color-border-on-dataviz-violet-dim2) | Border on soft violet data-viz backgrounds (dim2). |
-| color.border.on.dataviz.violet.dim3 | #811ee3 | #cab1ff | var(--esds-color-border-on-dataviz-violet-dim3) | Border on subtle violet data-viz backgrounds (dim3). |
+| color.border.on.dataviz.purple.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-purple-dim1) | Border on strong purple data-viz backgrounds (dim1). |
+| color.border.on.dataviz.purple.dim2 | #59169c | #efe8ff | var(--esds-color-border-on-dataviz-purple-dim2) | Border on soft purple data-viz backgrounds (dim2). |
+| color.border.on.dataviz.purple.dim3 | #811ee3 | #cab1ff | var(--esds-color-border-on-dataviz-purple-dim3) | Border on subtle purple data-viz backgrounds (dim3). |
 | color.border.on.dataviz.yellow.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-yellow-dim1) | Border on strong yellow data-viz backgrounds (dim1). |
 | color.border.on.dataviz.yellow.dim2 | #723f11 | #fef9c3 | var(--esds-color-border-on-dataviz-yellow-dim2) | Border on soft yellow data-viz backgrounds (dim2). |
 | color.border.on.dataviz.yellow.dim3 | #a26206 | #fee046 | var(--esds-color-border-on-dataviz-yellow-dim3) | Border on subtle yellow data-viz backgrounds (dim3). |
@@ -507,7 +507,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.border.dataviz.orange | #f97207 | #ffa032 | var(--esds-color-border-dataviz-orange) | Orange data-viz border color. |
 | color.border.dataviz.pink | #e9004c | #ff5d86 | var(--esds-color-border-dataviz-pink) | Pink data-viz border color. |
 | color.border.dataviz.citrus | #5f9202 | #9fd506 | var(--esds-color-border-dataviz-citrus) | Citrus data-viz border color. |
-| color.border.dataviz.violet | #8f30f7 | #b185ff | var(--esds-color-border-dataviz-violet) | Violet data-viz border color. |
+| color.border.dataviz.purple | #8f30f7 | #b185ff | var(--esds-color-border-dataviz-purple) | Purple data-viz border color. |
 | color.border.dataviz.yellow | #ecb306 | #fccf20 | var(--esds-color-border-dataviz-yellow) | Yellow data-viz border color. |
 | color.border.dataviz.gray | #45556c | #90a1b9 | var(--esds-color-border-dataviz-gray) | Gray data-viz border color. |
 | color.border.dataviz.brown | #9f5b29 | #d0905a | var(--esds-color-border-dataviz-brown) | Brown data-viz border color. |
@@ -916,15 +916,13 @@ limitations](llms/designers-guide/android/android-technical-limitations.md)**
 
 ---
 
-### 5. Shadcn kit 🕸️
+### 5. Shadcn kit ⬛️
 
-- Shadcn tokens linked to Token Core
-- Native components
+- Native components (tokens linked to Token Core)
 - System icons embedded within native components
 
-**[Figma file](https://www.figma.com/design/eOY97TGxMkMx9ub9zt8e6v/Edelweiss---Shadcn-Kit--Paid-?m=auto&t=6Praqzvd4yFcNUmT-6)**
-| **[How to use](llms/designers-guide/web/shadcn-kit.md)** | **[Token
-mapping](llms/designers-guide/web/shadcn-token-mapping.md)**
+**[Figma file](https://www.figma.com/design/eOY97TGxMkMx9ub9zt8e6v/Edelweiss---Shadcn-Kit?m=auto&t=M0yu9R498lNZs4eD-6)**
+| **[How to use](llms/designers-guide/web/shadcn-kit.md)**
 
 ## 🧰 Helpers
 
@@ -1755,288 +1753,6 @@ Hold actions:
 
 - **Product:** Switch the accent color between products (Infomaniak, Calendar…).
 - **Theme:** Switch between light and dark mode.
-
----
-
-# Designers Guide/Web/Shadcn Token Mapping
-
-> Mapping between the shadcn/ui semantic tokens (CSS variables on the dev side) and the design system tokens used in th...
-
-Mapping between the shadcn/ui semantic tokens (CSS variables on the dev side) and the design system tokens used in the [Shadcn kit](llms/designers-guide/web/shadcn-kit.md).
-
-## Base
-
-<Table
-  headers={['shadcn token', 'CSS variable', 'Design System token']}
-  rows={[
-    [
-      <code>background</code>,
-      <code>--background</code>,
-      <code>color.background.elevation.surface</code>,
-    ],
-    [<code>foreground</code>, <code>--foreground</code>, <code>color.content.primary</code>],
-  ]}
-/>
-
-## Primary
-
-<Table
-  headers={['shadcn token', 'CSS variable', 'Design System token']}
-  rows={[
-    [<code>primary</code>, <code>--primary</code>, <code>color.background.brand</code>],
-    [
-      <code>primary-foreground</code>,
-      <code>--primary-foreground</code>,
-      <code>color.content.on.brand</code>,
-    ],
-    [
-      <code>primary-muted</code>,
-      <code>--primary-muted</code>,
-      <code>color.background.disabled</code>,
-    ],
-  ]}
-/>
-
-## Secondary
-
-<Table
-  headers={['shadcn token', 'CSS variable', 'Design System token']}
-  rows={[
-    [
-      <code>secondary</code>,
-      <code>--secondary</code>,
-      <code>color.background.elevation.overlay</code>,
-    ],
-    [
-      <code>secondary-foreground</code>,
-      <code>--secondary-foreground</code>,
-      <code>color.content.primary</code>,
-    ],
-  ]}
-/>
-
-## Accent
-
-<Table
-  headers={['shadcn token', 'CSS variable', 'Design System token']}
-  rows={[
-    [<code>accent</code>, <code>--accent</code>, <code>color.state.hover.medium</code>],
-    [
-      <code>accent-foreground</code>,
-      <code>--accent-foreground</code>,
-      <code>color.content.primary</code>,
-    ],
-  ]}
-/>
-
-## Muted
-
-<Table
-  headers={['shadcn token', 'CSS variable', 'Design System token']}
-  rows={[
-    [<code>muted</code>, <code>--muted</code>, <code>color.background.disabled</code>],
-    [
-      <code>muted-foreground</code>,
-      <code>--muted-foreground</code>,
-      <code>color.content.secondary</code>,
-    ],
-  ]}
-/>
-
-## Card
-
-<Table
-  headers={['shadcn token', 'CSS variable', 'Design System token']}
-  rows={[
-    [<code>card</code>, <code>--card</code>, <code>color.background.elevation.surface</code>],
-    [
-      <code>card-foreground</code>,
-      <code>--card-foreground</code>,
-      <code>color.content.primary</code>,
-    ],
-  ]}
-/>
-
-## Popover
-
-<Table
-  headers={['shadcn token', 'CSS variable', 'Design System token']}
-  rows={[
-    [<code>popover</code>, <code>--popover</code>, <code>color.background.elevation.surface</code>],
-    [
-      <code>popover-foreground</code>,
-      <code>--popover-foreground</code>,
-      <code>color.content.primary</code>,
-    ],
-  ]}
-/>
-
-## Destructive
-
-<Table
-  headers={['shadcn token', 'CSS variable', 'Design System token']}
-  rows={[
-    [
-      <code>destructive</code>,
-      <code>--destructive</code>,
-      <code>color.background.feedback.error.dim1</code>,
-    ],
-    [
-      <code>destructive-foreground</code>,
-      <code>--destructive-foreground</code>,
-      <code>color.content.on.feedback.error.dim1</code>,
-    ],
-  ]}
-/>
-
-## Border, Input & Ring
-
-<Table
-  headers={['shadcn token', 'CSS variable', 'Design System token']}
-  rows={[
-    [<code>border</code>, <code>--border</code>, <code>color.border.dim3</code>],
-    [<code>input</code>, <code>--input</code>, <code>color.border.dim3</code>],
-    [<code>ring</code>, <code>--ring</code>, <code>color.border.dim1</code>],
-    [
-      <code>ring-offset</code>,
-      <code>--ring-offset</code>,
-      <code>color.background.elevation.surface</code>,
-    ],
-  ]}
-/>
-
-## Sidebar
-
-<Table
-  headers={['shadcn token', 'CSS variable', 'Design System token']}
-  rows={[
-    [<code>sidebar</code>, <code>--sidebar</code>, <code>color.background.elevation.sunken</code>],
-    [
-      <code>sidebar-foreground</code>,
-      <code>--sidebar-foreground</code>,
-      <code>color.content.primary</code>,
-    ],
-    [
-      <code>sidebar-primary</code>,
-      <code>--sidebar-primary</code>,
-      <code>color.background.brand</code>,
-    ],
-    [
-      <code>sidebar-primary-foreground</code>,
-      <code>--sidebar-primary-foreground</code>,
-      <code>color.content.on.brand</code>,
-    ],
-    [
-      <code>sidebar-accent</code>,
-      <code>--sidebar-accent</code>,
-      <code>color.state.selected.soft</code>,
-    ],
-    [
-      <code>sidebar-accent-foreground</code>,
-      <code>--sidebar-accent-foreground</code>,
-      <code>color.content.brand</code>,
-    ],
-    [<code>sidebar-border</code>, <code>--sidebar-border</code>, <code>color.border.dim3</code>],
-    [<code>sidebar-ring</code>, <code>--sidebar-ring</code>, <code>color.border.dim1</code>],
-  ]}
-/>
-
-## Charts
-
-<Table
-  headers={['shadcn token', 'CSS variable', 'Design System token']}
-  rows={[
-    [<code>chart-1</code>, <code>--chart-1</code>, <code>color.pink.500</code>],
-    [<code>chart-2</code>, <code>--chart-2</code>, <code>color.emerald.400</code>],
-    [<code>chart-3</code>, <code>--chart-3</code>, <code>color.yellow.400</code>],
-    [<code>chart-4</code>, <code>--chart-4</code>, <code>color.blue.400</code>],
-    [<code>chart-5</code>, <code>--chart-5</code>, <code>color.orange.400</code>],
-  ]}
-/>
-
-> ℹ️ The `chart-*` tokens point directly to primitive tokens (palette), unlike the others, which use semantic tokens.
-
-## Custom
-
-### Feedback
-
-<Table
-  headers={['shadcn token', 'CSS variable', 'Design System token']}
-  rows={[
-    [
-      <code>information</code>,
-      <code>--information</code>,
-      <code>color.content.feedback.information</code>,
-    ],
-    [
-      <code>information-background</code>,
-      <code>--information-background</code>,
-      <code>color.background.feedback.information.dim3</code>,
-    ],
-    [
-      <code>information-foreground</code>,
-      <code>--information-foreground</code>,
-      <code>color.content.on.feedback.information.dim3</code>,
-    ],
-    [
-      <code>information-border</code>,
-      <code>--information-border</code>,
-      <code>color.border.on.feedback.information.dim3</code>,
-    ],
-    [<code>success</code>, <code>--success</code>, <code>color.content.feedback.success</code>],
-    [
-      <code>success-background</code>,
-      <code>--success-background</code>,
-      <code>color.background.feedback.success.dim3</code>,
-    ],
-    [
-      <code>success-foreground</code>,
-      <code>--success-foreground</code>,
-      <code>color.content.on.feedback.success.dim3</code>,
-    ],
-    [
-      <code>success-border</code>,
-      <code>--success-border</code>,
-      <code>color.border.on.feedback.success.dim3</code>,
-    ],
-    [<code>warning</code>, <code>--warning</code>, <code>color.content.feedback.warning</code>],
-    [
-      <code>warning-background</code>,
-      <code>--warning-background</code>,
-      <code>color.background.feedback.warning.dim3</code>,
-    ],
-    [
-      <code>warning-foreground</code>,
-      <code>--warning-foreground</code>,
-      <code>color.content.on.feedback.warning.dim3</code>,
-    ],
-    [
-      <code>warning-border</code>,
-      <code>--warning-border</code>,
-      <code>color.border.on.feedback.warning.dim3</code>,
-    ],
-    [<code>error</code>, <code>--error</code>, <code>color.content.feedback.error</code>],
-    [
-      <code>error-background</code>,
-      <code>--error-background</code>,
-      <code>color.background.feedback.error.dim3</code>,
-    ],
-    [
-      <code>error-foreground</code>,
-      <code>--error-foreground</code>,
-      <code>color.content.on.feedback.error.dim3</code>,
-    ],
-    [
-      <code>error-border</code>,
-      <code>--error-border</code>,
-      <code>color.border.on.feedback.error.dim3</code>,
-    ],
-  ]}
-/>
-
-### Dataviz
-
-> ℹ️ Duplicates the `dataviz` modifier defined in Token Core (tier 2).
 
 ---
 
@@ -3698,143 +3414,143 @@ T1 tokens are the foundational design tokens that define the raw values of your 
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-50); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-50"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-50); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-50"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.purple.50" type="button">color.purple.50</button>
+          <button class="token-value" data-clipboard="color.indigo.50" type="button">color.indigo.50</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-50)" type="button">var(--esds-color-purple-50)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-50)" type="button">var(--esds-color-indigo-50)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-100); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-100"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-100); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-100"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.purple.100" type="button">color.purple.100</button>
+          <button class="token-value" data-clipboard="color.indigo.100" type="button">color.indigo.100</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-100)" type="button">var(--esds-color-purple-100)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-100)" type="button">var(--esds-color-indigo-100)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-200); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-200"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-200); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-200"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.purple.200" type="button">color.purple.200</button>
+          <button class="token-value" data-clipboard="color.indigo.200" type="button">color.indigo.200</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-200)" type="button">var(--esds-color-purple-200)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-200)" type="button">var(--esds-color-indigo-200)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-300); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-300"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-300); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-300"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.purple.300" type="button">color.purple.300</button>
+          <button class="token-value" data-clipboard="color.indigo.300" type="button">color.indigo.300</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-300)" type="button">var(--esds-color-purple-300)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-300)" type="button">var(--esds-color-indigo-300)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-400); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-400"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-400); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-400"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.purple.400" type="button">color.purple.400</button>
+          <button class="token-value" data-clipboard="color.indigo.400" type="button">color.indigo.400</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-400)" type="button">var(--esds-color-purple-400)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-400)" type="button">var(--esds-color-indigo-400)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-500); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-500"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-500); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-500"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.purple.500" type="button">color.purple.500</button>
+          <button class="token-value" data-clipboard="color.indigo.500" type="button">color.indigo.500</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-500)" type="button">var(--esds-color-purple-500)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-500)" type="button">var(--esds-color-indigo-500)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-600); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-600"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-600); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-600"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.purple.600" type="button">color.purple.600</button>
+          <button class="token-value" data-clipboard="color.indigo.600" type="button">color.indigo.600</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-600)" type="button">var(--esds-color-purple-600)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-600)" type="button">var(--esds-color-indigo-600)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-700); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-700"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-700); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-700"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.purple.700" type="button">color.purple.700</button>
+          <button class="token-value" data-clipboard="color.indigo.700" type="button">color.indigo.700</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-700)" type="button">var(--esds-color-purple-700)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-700)" type="button">var(--esds-color-indigo-700)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-800); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-800"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-800); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-800"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.purple.800" type="button">color.purple.800</button>
+          <button class="token-value" data-clipboard="color.indigo.800" type="button">color.indigo.800</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-800)" type="button">var(--esds-color-purple-800)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-800)" type="button">var(--esds-color-indigo-800)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-900); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-900"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-900); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-900"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.purple.900" type="button">color.purple.900</button>
+          <button class="token-value" data-clipboard="color.indigo.900" type="button">color.indigo.900</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-900)" type="button">var(--esds-color-purple-900)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-900)" type="button">var(--esds-color-indigo-900)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-950); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-950"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-950); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-950"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.purple.950" type="button">color.purple.950</button>
+          <button class="token-value" data-clipboard="color.indigo.950" type="button">color.indigo.950</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-950)" type="button">var(--esds-color-purple-950)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-950)" type="button">var(--esds-color-indigo-950)</button>
         </div>
 
         <div class="token-row token-description"></div>
@@ -4283,143 +3999,143 @@ T1 tokens are the foundational design tokens that define the raw values of your 
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-50); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-50"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-cobalt-50); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-cobalt-50"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.indigo.50" type="button">color.indigo.50</button>
+          <button class="token-value" data-clipboard="color.cobalt.50" type="button">color.cobalt.50</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-50)" type="button">var(--esds-color-indigo-50)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-cobalt-50)" type="button">var(--esds-color-cobalt-50)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-100); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-100"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-cobalt-100); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-cobalt-100"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.indigo.100" type="button">color.indigo.100</button>
+          <button class="token-value" data-clipboard="color.cobalt.100" type="button">color.cobalt.100</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-100)" type="button">var(--esds-color-indigo-100)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-cobalt-100)" type="button">var(--esds-color-cobalt-100)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-200); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-200"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-cobalt-200); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-cobalt-200"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.indigo.200" type="button">color.indigo.200</button>
+          <button class="token-value" data-clipboard="color.cobalt.200" type="button">color.cobalt.200</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-200)" type="button">var(--esds-color-indigo-200)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-cobalt-200)" type="button">var(--esds-color-cobalt-200)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-300); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-300"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-cobalt-300); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-cobalt-300"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.indigo.300" type="button">color.indigo.300</button>
+          <button class="token-value" data-clipboard="color.cobalt.300" type="button">color.cobalt.300</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-300)" type="button">var(--esds-color-indigo-300)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-cobalt-300)" type="button">var(--esds-color-cobalt-300)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-400); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-400"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-cobalt-400); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-cobalt-400"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.indigo.400" type="button">color.indigo.400</button>
+          <button class="token-value" data-clipboard="color.cobalt.400" type="button">color.cobalt.400</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-400)" type="button">var(--esds-color-indigo-400)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-cobalt-400)" type="button">var(--esds-color-cobalt-400)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-500); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-500"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-cobalt-500); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-cobalt-500"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.indigo.500" type="button">color.indigo.500</button>
+          <button class="token-value" data-clipboard="color.cobalt.500" type="button">color.cobalt.500</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-500)" type="button">var(--esds-color-indigo-500)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-cobalt-500)" type="button">var(--esds-color-cobalt-500)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-600); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-600"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-cobalt-600); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-cobalt-600"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.indigo.600" type="button">color.indigo.600</button>
+          <button class="token-value" data-clipboard="color.cobalt.600" type="button">color.cobalt.600</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-600)" type="button">var(--esds-color-indigo-600)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-cobalt-600)" type="button">var(--esds-color-cobalt-600)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-700); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-700"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-cobalt-700); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-cobalt-700"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.indigo.700" type="button">color.indigo.700</button>
+          <button class="token-value" data-clipboard="color.cobalt.700" type="button">color.cobalt.700</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-700)" type="button">var(--esds-color-indigo-700)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-cobalt-700)" type="button">var(--esds-color-cobalt-700)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-800); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-800"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-cobalt-800); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-cobalt-800"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.indigo.800" type="button">color.indigo.800</button>
+          <button class="token-value" data-clipboard="color.cobalt.800" type="button">color.cobalt.800</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-800)" type="button">var(--esds-color-indigo-800)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-cobalt-800)" type="button">var(--esds-color-cobalt-800)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-900); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-900"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-cobalt-900); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-cobalt-900"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.indigo.900" type="button">color.indigo.900</button>
+          <button class="token-value" data-clipboard="color.cobalt.900" type="button">color.cobalt.900</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-900)" type="button">var(--esds-color-indigo-900)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-cobalt-900)" type="button">var(--esds-color-cobalt-900)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-indigo-950); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-indigo-950"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-cobalt-950); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-cobalt-950"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.indigo.950" type="button">color.indigo.950</button>
+          <button class="token-value" data-clipboard="color.cobalt.950" type="button">color.cobalt.950</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-indigo-950)" type="button">var(--esds-color-indigo-950)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-cobalt-950)" type="button">var(--esds-color-cobalt-950)</button>
         </div>
 
         <div class="token-row token-description"></div>
@@ -4569,143 +4285,143 @@ T1 tokens are the foundational design tokens that define the raw values of your 
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-violet-50); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-violet-50"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-50); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-50"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.violet.50" type="button">color.violet.50</button>
+          <button class="token-value" data-clipboard="color.purple.50" type="button">color.purple.50</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-violet-50)" type="button">var(--esds-color-violet-50)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-50)" type="button">var(--esds-color-purple-50)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-violet-100); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-violet-100"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-100); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-100"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.violet.100" type="button">color.violet.100</button>
+          <button class="token-value" data-clipboard="color.purple.100" type="button">color.purple.100</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-violet-100)" type="button">var(--esds-color-violet-100)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-100)" type="button">var(--esds-color-purple-100)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-violet-200); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-violet-200"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-200); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-200"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.violet.200" type="button">color.violet.200</button>
+          <button class="token-value" data-clipboard="color.purple.200" type="button">color.purple.200</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-violet-200)" type="button">var(--esds-color-violet-200)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-200)" type="button">var(--esds-color-purple-200)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-violet-300); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-violet-300"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-300); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-300"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.violet.300" type="button">color.violet.300</button>
+          <button class="token-value" data-clipboard="color.purple.300" type="button">color.purple.300</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-violet-300)" type="button">var(--esds-color-violet-300)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-300)" type="button">var(--esds-color-purple-300)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-violet-400); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-violet-400"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-400); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-400"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.violet.400" type="button">color.violet.400</button>
+          <button class="token-value" data-clipboard="color.purple.400" type="button">color.purple.400</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-violet-400)" type="button">var(--esds-color-violet-400)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-400)" type="button">var(--esds-color-purple-400)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-violet-500); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-violet-500"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-500); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-500"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.violet.500" type="button">color.violet.500</button>
+          <button class="token-value" data-clipboard="color.purple.500" type="button">color.purple.500</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-violet-500)" type="button">var(--esds-color-violet-500)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-500)" type="button">var(--esds-color-purple-500)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-violet-600); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-violet-600"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-600); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-600"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.violet.600" type="button">color.violet.600</button>
+          <button class="token-value" data-clipboard="color.purple.600" type="button">color.purple.600</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-violet-600)" type="button">var(--esds-color-violet-600)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-600)" type="button">var(--esds-color-purple-600)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-violet-700); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-violet-700"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-700); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-700"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.violet.700" type="button">color.violet.700</button>
+          <button class="token-value" data-clipboard="color.purple.700" type="button">color.purple.700</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-violet-700)" type="button">var(--esds-color-violet-700)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-700)" type="button">var(--esds-color-purple-700)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-violet-800); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-violet-800"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-800); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-800"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.violet.800" type="button">color.violet.800</button>
+          <button class="token-value" data-clipboard="color.purple.800" type="button">color.purple.800</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-violet-800)" type="button">var(--esds-color-violet-800)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-800)" type="button">var(--esds-color-purple-800)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-violet-900); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-violet-900"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-900); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-900"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.violet.900" type="button">color.violet.900</button>
+          <button class="token-value" data-clipboard="color.purple.900" type="button">color.purple.900</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-violet-900)" type="button">var(--esds-color-violet-900)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-900)" type="button">var(--esds-color-purple-900)</button>
         </div>
 
         <div class="token-row token-description"></div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-violet-950); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-violet-950"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-purple-950); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-purple-950"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.violet.950" type="button">color.violet.950</button>
+          <button class="token-value" data-clipboard="color.purple.950" type="button">color.purple.950</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-violet-950)" type="button">var(--esds-color-violet-950)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-purple-950)" type="button">var(--esds-color-purple-950)</button>
         </div>
 
         <div class="token-row token-description"></div>
@@ -7964,42 +7680,42 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-dataviz-violet-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-dataviz-violet-dim1"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-dataviz-purple-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-dataviz-purple-dim1"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.dataviz.violet.dim1" type="button">color.background.dataviz.violet.dim1</button>
+          <button class="token-value" data-clipboard="color.background.dataviz.purple.dim1" type="button">color.background.dataviz.purple.dim1</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-violet-dim1)" type="button">var(--esds-color-background-dataviz-violet-dim1)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-purple-dim1)" type="button">var(--esds-color-background-dataviz-purple-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-violet-dim1" type="button">bg-dataviz-violet-dim1</button></div>
-        <div class="token-row token-description">Strong violet data-viz background (dim1).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-purple-dim1" type="button">bg-dataviz-purple-dim1</button></div>
+        <div class="token-row token-description">Strong purple data-viz background (dim1).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-dataviz-violet-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-dataviz-violet-dim2"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-dataviz-purple-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-dataviz-purple-dim2"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.dataviz.violet.dim2" type="button">color.background.dataviz.violet.dim2</button>
+          <button class="token-value" data-clipboard="color.background.dataviz.purple.dim2" type="button">color.background.dataviz.purple.dim2</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-violet-dim2)" type="button">var(--esds-color-background-dataviz-violet-dim2)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-purple-dim2)" type="button">var(--esds-color-background-dataviz-purple-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-violet-dim2" type="button">bg-dataviz-violet-dim2</button></div>
-        <div class="token-row token-description">Soft violet data-viz background (dim2).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-purple-dim2" type="button">bg-dataviz-purple-dim2</button></div>
+        <div class="token-row token-description">Soft purple data-viz background (dim2).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-dataviz-violet-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-dataviz-violet-dim3"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-dataviz-purple-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-dataviz-purple-dim3"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.dataviz.violet.dim3" type="button">color.background.dataviz.violet.dim3</button>
+          <button class="token-value" data-clipboard="color.background.dataviz.purple.dim3" type="button">color.background.dataviz.purple.dim3</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-violet-dim3)" type="button">var(--esds-color-background-dataviz-violet-dim3)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-purple-dim3)" type="button">var(--esds-color-background-dataviz-purple-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-violet-dim3" type="button">bg-dataviz-violet-dim3</button></div>
-        <div class="token-row token-description">Subtle violet data-viz background (dim3).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-purple-dim3" type="button">bg-dataviz-purple-dim3</button></div>
+        <div class="token-row token-description">Subtle purple data-viz background (dim3).</div>
       </td>
     </tr>
     <tr>
@@ -8848,42 +8564,42 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-dataviz-violet-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-dataviz-violet-dim1"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-dataviz-purple-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-dataviz-purple-dim1"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.dataviz.violet.dim1" type="button">color.content.on.dataviz.violet.dim1</button>
+          <button class="token-value" data-clipboard="color.content.on.dataviz.purple.dim1" type="button">color.content.on.dataviz.purple.dim1</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-violet-dim1)" type="button">var(--esds-color-content-on-dataviz-violet-dim1)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-purple-dim1)" type="button">var(--esds-color-content-on-dataviz-purple-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-violet-dim1" type="button">text-on-dataviz-violet-dim1</button></div>
-        <div class="token-row token-description">Foreground on strong violet data-viz backgrounds (dim1).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-purple-dim1" type="button">text-on-dataviz-purple-dim1</button></div>
+        <div class="token-row token-description">Foreground on strong purple data-viz backgrounds (dim1).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-dataviz-violet-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-dataviz-violet-dim2"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-dataviz-purple-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-dataviz-purple-dim2"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.dataviz.violet.dim2" type="button">color.content.on.dataviz.violet.dim2</button>
+          <button class="token-value" data-clipboard="color.content.on.dataviz.purple.dim2" type="button">color.content.on.dataviz.purple.dim2</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-violet-dim2)" type="button">var(--esds-color-content-on-dataviz-violet-dim2)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-purple-dim2)" type="button">var(--esds-color-content-on-dataviz-purple-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-violet-dim2" type="button">text-on-dataviz-violet-dim2</button></div>
-        <div class="token-row token-description">Foreground on soft violet data-viz backgrounds (dim2).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-purple-dim2" type="button">text-on-dataviz-purple-dim2</button></div>
+        <div class="token-row token-description">Foreground on soft purple data-viz backgrounds (dim2).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-dataviz-violet-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-dataviz-violet-dim3"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-dataviz-purple-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-dataviz-purple-dim3"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.dataviz.violet.dim3" type="button">color.content.on.dataviz.violet.dim3</button>
+          <button class="token-value" data-clipboard="color.content.on.dataviz.purple.dim3" type="button">color.content.on.dataviz.purple.dim3</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-violet-dim3)" type="button">var(--esds-color-content-on-dataviz-violet-dim3)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-purple-dim3)" type="button">var(--esds-color-content-on-dataviz-purple-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-violet-dim3" type="button">text-on-dataviz-violet-dim3</button></div>
-        <div class="token-row token-description">Foreground on subtle violet data-viz backgrounds (dim3).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-purple-dim3" type="button">text-on-dataviz-purple-dim3</button></div>
+        <div class="token-row token-description">Foreground on subtle purple data-viz backgrounds (dim3).</div>
       </td>
     </tr>
     <tr>
@@ -9654,16 +9370,16 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-dataviz-violet); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-dataviz-violet"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-dataviz-purple); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-dataviz-purple"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.dataviz.violet" type="button">color.content.dataviz.violet</button>
+          <button class="token-value" data-clipboard="color.content.dataviz.purple" type="button">color.content.dataviz.purple</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-dataviz-violet)" type="button">var(--esds-color-content-dataviz-violet)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-dataviz-purple)" type="button">var(--esds-color-content-dataviz-purple)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-dataviz-violet" type="button">text-dataviz-violet</button></div>
-        <div class="token-row token-description">Violet data-viz foreground color.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-dataviz-purple" type="button">text-dataviz-purple</button></div>
+        <div class="token-row token-description">Purple data-viz foreground color.</div>
       </td>
     </tr>
     <tr>
@@ -9914,42 +9630,42 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-dataviz-violet-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-dataviz-violet-dim1"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-dataviz-purple-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-dataviz-purple-dim1"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.border.on.dataviz.violet.dim1" type="button">color.border.on.dataviz.violet.dim1</button>
+          <button class="token-value" data-clipboard="color.border.on.dataviz.purple.dim1" type="button">color.border.on.dataviz.purple.dim1</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-violet-dim1)" type="button">var(--esds-color-border-on-dataviz-violet-dim1)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-purple-dim1)" type="button">var(--esds-color-border-on-dataviz-purple-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-violet-dim1" type="button">border-on-dataviz-violet-dim1</button> <button class="token-value" data-clipboard="outline-on-dataviz-violet-dim1" type="button">outline-on-dataviz-violet-dim1</button></div>
-        <div class="token-row token-description">Border on strong violet data-viz backgrounds (dim1).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-purple-dim1" type="button">border-on-dataviz-purple-dim1</button> <button class="token-value" data-clipboard="outline-on-dataviz-purple-dim1" type="button">outline-on-dataviz-purple-dim1</button></div>
+        <div class="token-row token-description">Border on strong purple data-viz backgrounds (dim1).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-dataviz-violet-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-dataviz-violet-dim2"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-dataviz-purple-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-dataviz-purple-dim2"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.border.on.dataviz.violet.dim2" type="button">color.border.on.dataviz.violet.dim2</button>
+          <button class="token-value" data-clipboard="color.border.on.dataviz.purple.dim2" type="button">color.border.on.dataviz.purple.dim2</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-violet-dim2)" type="button">var(--esds-color-border-on-dataviz-violet-dim2)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-purple-dim2)" type="button">var(--esds-color-border-on-dataviz-purple-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-violet-dim2" type="button">border-on-dataviz-violet-dim2</button> <button class="token-value" data-clipboard="outline-on-dataviz-violet-dim2" type="button">outline-on-dataviz-violet-dim2</button></div>
-        <div class="token-row token-description">Border on soft violet data-viz backgrounds (dim2).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-purple-dim2" type="button">border-on-dataviz-purple-dim2</button> <button class="token-value" data-clipboard="outline-on-dataviz-purple-dim2" type="button">outline-on-dataviz-purple-dim2</button></div>
+        <div class="token-row token-description">Border on soft purple data-viz backgrounds (dim2).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-dataviz-violet-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-dataviz-violet-dim3"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-dataviz-purple-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-dataviz-purple-dim3"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.border.on.dataviz.violet.dim3" type="button">color.border.on.dataviz.violet.dim3</button>
+          <button class="token-value" data-clipboard="color.border.on.dataviz.purple.dim3" type="button">color.border.on.dataviz.purple.dim3</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-violet-dim3)" type="button">var(--esds-color-border-on-dataviz-violet-dim3)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-purple-dim3)" type="button">var(--esds-color-border-on-dataviz-purple-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-violet-dim3" type="button">border-on-dataviz-violet-dim3</button> <button class="token-value" data-clipboard="outline-on-dataviz-violet-dim3" type="button">outline-on-dataviz-violet-dim3</button></div>
-        <div class="token-row token-description">Border on subtle violet data-viz backgrounds (dim3).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-purple-dim3" type="button">border-on-dataviz-purple-dim3</button> <button class="token-value" data-clipboard="outline-on-dataviz-purple-dim3" type="button">outline-on-dataviz-purple-dim3</button></div>
+        <div class="token-row token-description">Border on subtle purple data-viz backgrounds (dim3).</div>
       </td>
     </tr>
     <tr>
@@ -10564,16 +10280,16 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-dataviz-violet); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-dataviz-violet"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-dataviz-purple); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-dataviz-purple"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.border.dataviz.violet" type="button">color.border.dataviz.violet</button>
+          <button class="token-value" data-clipboard="color.border.dataviz.purple" type="button">color.border.dataviz.purple</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dataviz-violet)" type="button">var(--esds-color-border-dataviz-violet)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dataviz-purple)" type="button">var(--esds-color-border-dataviz-purple)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dataviz-violet" type="button">border-dataviz-violet</button> <button class="token-value" data-clipboard="outline-dataviz-violet" type="button">outline-dataviz-violet</button></div>
-        <div class="token-row token-description">Violet data-viz border color.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dataviz-purple" type="button">border-dataviz-purple</button> <button class="token-value" data-clipboard="outline-dataviz-purple" type="button">outline-dataviz-purple</button></div>
+        <div class="token-row token-description">Purple data-viz border color.</div>
       </td>
     </tr>
     <tr>
@@ -13791,9 +13507,73 @@ T3 tokens are component-specific design tokens that reference T1 (primitive) and
 
 # Design Tokens/CHANGELOG
 
-> Color tokens are now excluded from the Kotlin output by token type instead of by name, and are exported to Figma as D...
+> Offsets, blur and spread values are unchanged.
 
 # Changelog
+
+## 0.10.0 (2026-11-18)
+
+### Minor Changes
+
+- [#515](https://github.com/Infomaniak/design-system/pull/515) [`f174bed`](https://github.com/Infomaniak/design-system/commit/f174bed2401dca3c705cea8c19a61c3b6c4cf32b): Updated the data-viz palette, aligning it with the Figma Token Core:
+
+  - **Breaking:** the `purple` data-viz color is replaced by `citrus`, a new lime-green that stands apart from `emerald`. All `color.*.dataviz.purple.*` tokens are renamed to `color.*.dataviz.citrus.*`, and the `dataviz` modifier value `purple` becomes `citrus`. The `color.purple.*` primitives are unchanged.
+  - On strong citrus backgrounds (`dim1`), text now uses `color.citrus.950` in light theme for readable contrast.
+  - Added `brown` and `magenta` data-viz colors (background, content and border tokens, plus `dataviz` modifier values).
+  - Added the `color.brown.*`, `color.magenta.*` and `color.citrus.*` primitive palettes (50 to 950).
+
+- [#512](https://github.com/Infomaniak/design-system/pull/512) [`bed9b58`](https://github.com/Infomaniak/design-system/commit/bed9b5893f9ebcf2225b1eafaa9b9a44fe73162f): **Breaking:** shadow tokens are now real DTCG composite tokens (`$type: "shadow"`), aligning the code tokens with Figma Token Core:
+
+  - `shadow.{xs,sm,md,lg,xl,2xl}` are single tokens whose value holds the offset, blur, spread and color: `--esds-shadow-md` now contains the full `box-shadow` value (e.g. `0px 2px 4px -1px var(--esds-color-shadow)`).
+  - The per-axis sub-tokens are removed (`shadow.{size}.{x,y,blur,spread,color}` → `--esds-shadow-md-x`, …), as well as the T1 primitives `shadow.1`–`shadow.6` (`--esds-shadow-1-x`, …).
+  - The shadow color is now the semantic token `color.shadow` (`--esds-color-shadow`), overridden by the themes (gray.700 in light, gray.500 in dark, both at 30% opacity), referenced by every shadow: `--esds-color-shadow-md` is removed.
+  - The 30% opacity now lives in `color.shadow` (previously `color.gray.400` at 6–14% in the light theme and `color.gray.950` at 6–14% in the dark theme), giving more visible elevation.
+  - New T1 primitives: `blur.{1,2,6,10,50}`, `dimension.25` and `dimension.minus-{1,3,6,12}`.
+  - Removed the now-unused alpha primitives `color.gray.400-{6,8,10,14}` and `color.gray.950-{6,8,10,14}`.
+  - The Tailwind output now binds the `--shadow-*` theme namespace to the tokens: Tailwind's built-in shadow scale is cleared and the `shadow-{xs,sm,md,lg,xl,2xl}` utilities resolve to `--esds-shadow-*`, staying theme-swappable.
+
+  Offsets, blur and spread values are unchanged.
+
+- [#509](https://github.com/Infomaniak/design-system/pull/509) [`1c5ab84`](https://github.com/Infomaniak/design-system/commit/1c5ab8470028acb2edf588a1b218d35faa191053): Reset Tailwind's default container scale in the generated Tailwind CSS, so sizing utilities resolve exclusively from the design tokens' spacing scale:
+
+  - `w-3xs`, `min-w-3xs` and other names outside the spacing scale no longer fall back to Tailwind's default container values (e.g. `w-3xs` was 256px), eliminating the mixed, inconsistent sizing scale.
+  - Container query variants (`@sm:`, `@max-md:`, ...) no longer compile against Tailwind's default container values; they will work again once container-related tokens are bound to the `--container-*` namespace. In the meantime, use arbitrary values instead, e.g. `@min-[28rem]:hidden` / `@max-[48rem]:hidden` (note: future container token bindings will require literal values, as Tailwind rejects `var()` references in container query conditions).
+
+- [#510](https://github.com/Infomaniak/design-system/pull/510) [`873f4f4`](https://github.com/Infomaniak/design-system/commit/873f4f4843af97d18d9dce6b240bc77389f25a06): Fixed the 6xl font size to 56px, aligning it with the Figma Token Core:
+
+  - Replaced the primitive token `font.size.52` (3.25rem) with `font.size.56` (3.5rem).
+  - `font.size.6xl` now references `font.size.56`, so `text.6xl`, `typography.6xl.*` and `heading.2xl` render at 56px (line-height unchanged at 60px).
+
+### Patch Changes
+
+- [#457](https://github.com/Infomaniak/design-system/pull/457) [`7ce9eeb`](https://github.com/Infomaniak/design-system/commit/7ce9eeb38c68d2a48b18a16c2267b01d2d48b228): Add the new Avatar components and their design tokens, aligned with the Avatar component in the Figma file _Edelweiss – Token Core_:
+
+  - New `esds-avatar` component supporting image, icon and initials avatars, with shape and size variants.
+  - While an image is loading or failing to load, `esds-avatar` falls back to the icon, the initials or the default user icon; the new `data-image-state` attribute reflects the image loading state and drives the image-specific styles of `esds-avatar-button`.
+  - New `esds-avatar-group` component to stack and group avatars.
+  - New `esds-avatar-button` attribute to make an avatar interactive, with hover, focus, active and disabled states.
+  - New T3 `avatar` tokens and `avatar-size` modifier contexts matching Figma: `small` (24px), `medium` (32px), `large` (40px) and `extra-large` (48px, default).
+  - Stacked-avatar overlap (`avatar.group.gap`) uses the new negative spacing tokens `spacing.minus-sm` (-6px) and `spacing.minus-md` (-8px).
+  - New `avatar.color.state.hover.image` / `avatar.color.state.pressed.image` tokens provide the stronger overlays used by the image variant.
+  - The default initials typography (`heading.xs` emphasized) matches the 48px default size.
+
+- [#492](https://github.com/Infomaniak/design-system/pull/492) [`404d989`](https://github.com/Infomaniak/design-system/commit/404d9891c29a9b1b12717f92961d38d80981bd26): Added a new `modifiers/all.attr.css` output, which imports the attribute CSS of every modifier into a single file. Consumers can now apply all modifiers at once instead of importing each modifier's `all.attr.css` individually:
+
+  ```css
+  @import '@infomaniak-design-system/tokens/css/modifiers/all.attr.css';
+  ```
+
+- [#497](https://github.com/Infomaniak/design-system/pull/497) [`49a9b1f`](https://github.com/Infomaniak/design-system/commit/49a9b1f11ef3ea893d4b886fafe3deaf640787ff): Fixed the badge dot size: `badge.size.dot` now resolves to 8px (`{dimension.8}`) instead of 4px, aligning it with the Badge component in Figma.
+
+- [#520](https://github.com/Infomaniak/design-system/pull/520) [`4d7ba99`](https://github.com/Infomaniak/design-system/commit/4d7ba99f8079a59db8a19e3dc68861bceb2afed3): Fixed the `color.border.on.feedback.{error,information,neutral,success,warning}.dim1` semantic color tokens: they now resolve to white (as designed in Figma) instead of transparent, so borders drawn on strong (dim1) feedback backgrounds render consistently with the light theme.
+
+- [#494](https://github.com/Infomaniak/design-system/pull/494) [`a35b793`](https://github.com/Infomaniak/design-system/commit/a35b793946a08823b894dea035e345c5cd2c6fff): State overlay colors (hover, pressed and selected, in soft, medium and strong intensities) are now expressed on the theme modifiers as their base color (`color.blue.900` in light, `color.gray.50` in dark) with an exact opacity percentage, matching Figma, instead of pointing to pre-computed alpha primitives. Resolved alphas become exact (e.g. 6% instead of ~5.9%); the visual rendering is unchanged.
+
+- [#498](https://github.com/Infomaniak/design-system/pull/498) [`8587118`](https://github.com/Infomaniak/design-system/commit/858711882b25820ee40ecaae549cb18b27c3692f): Synced new tokens from Figma (Token Core):
+
+  - Added the `dimension.6`, `dimension.28` and `dimension.85` primitives.
+  - Added `color.background.backdrop` (black at 50% opacity, in both light and dark themes) for overlays displayed behind modals and dialogs.
+  - Added light/dark theme values for `color.border.dim1` and the `color.border.on.dataviz.*.dim1` tokens, matching the Figma theme collection. Resolved values are unchanged.
 
 ## 0.9.0 (2026-11-04)
 
@@ -16092,6 +15872,23 @@ Adding the custom attribute `esds-text-link` to an `<a>` element, applies the `e
 > The `heading.{xs..xl}.font` and `body.{xs..lg}.font` tokens now expose `base` and `emphasized` variants instead of a...
 
 # Changelog
+
+## 0.7.1 (2026-11-18)
+
+### Patch Changes
+
+- [#457](https://github.com/Infomaniak/design-system/pull/457) [`7ce9eeb`](https://github.com/Infomaniak/design-system/commit/7ce9eeb38c68d2a48b18a16c2267b01d2d48b228): Add the new Avatar components and their design tokens, aligned with the Avatar component in the Figma file _Edelweiss – Token Core_:
+
+  - New `esds-avatar` component supporting image, icon and initials avatars, with shape and size variants.
+  - While an image is loading or failing to load, `esds-avatar` falls back to the icon, the initials or the default user icon; the new `data-image-state` attribute reflects the image loading state and drives the image-specific styles of `esds-avatar-button`.
+  - New `esds-avatar-group` component to stack and group avatars.
+  - New `esds-avatar-button` attribute to make an avatar interactive, with hover, focus, active and disabled states.
+  - New T3 `avatar` tokens and `avatar-size` modifier contexts matching Figma: `small` (24px), `medium` (32px), `large` (40px) and `extra-large` (48px, default).
+  - Stacked-avatar overlap (`avatar.group.gap`) uses the new negative spacing tokens `spacing.minus-sm` (-6px) and `spacing.minus-md` (-8px).
+  - New `avatar.color.state.hover.image` / `avatar.color.state.pressed.image` tokens provide the stronger overlays used by the image variant.
+  - The default initials typography (`heading.xs` emphasized) matches the 48px default size.
+
+- [#517](https://github.com/Infomaniak/design-system/pull/517) [`c39d0bd`](https://github.com/Infomaniak/design-system/commit/c39d0bd752fc601e6ba09d80bb12703e7a5e253a): Fixed `esds-button` removing an author-defined `aria-label` from anchor buttons (`<a esds-button>`) when the element was upgraded or when its state changed. The accessible name of a button or anchor button is now never modified; the loading state is conveyed with the `aria-disabled` and `aria-busy` attributes instead.
 
 ## 0.7.0 (2026-11-04)
 

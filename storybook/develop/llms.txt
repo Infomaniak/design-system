@@ -23,7 +23,6 @@ For complete single-file context ingestion, see [Full Design System Documentatio
 - [Designers Guide/iOS/iOS - iPadOS Kit](llms/designers-guide/ios/ios-ipados-kit.md): **The figma kit includes:**
 - [Designers Guide/iOS/iOS - Technical Limitations](llms/designers-guide/ios/ios-technical-limitations.md): **Goal:** identify which components can be modified and their related constraints.
 - [Designers Guide/Web/Shadcn Kit](llms/designers-guide/web/shadcn-kit.md): **The figma kit includes:**
-- [Designers Guide/Web/Shadcn Token Mapping](llms/designers-guide/web/shadcn-token-mapping.md): Mapping between the shadcn/ui semantic tokens (CSS variables on the dev side) and the design system tokens used in th...
 
 ## Design Tokens
 
@@ -102,6 +101,6 @@ For complete single-file context ingestion, see [Full Design System Documentatio
 
 ## Optional
 
-- [Design Tokens/CHANGELOG](llms/design-tokens/changelog.md): Color tokens are now excluded from the Kotlin output by token type instead of by name, and are exported to Figma as D...
+- [Design Tokens/CHANGELOG](llms/design-tokens/changelog.md): Offsets, blur and spread values are unchanged.
 - [Components/CHANGELOG](llms/components/changelog.md): The `heading.{xs..xl}.font` and `body.{xs..lg}.font` tokens now expose `base` and `emphasized` variants instead of a...
 - [DESIGN.md (raw token reference)](DESIGN.md): Machine-readable token hierarchy with resolved values for all themes, optimized for AI consumption.

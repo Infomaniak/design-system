@@ -327,42 +327,42 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-dataviz-violet-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-dataviz-violet-dim1"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-dataviz-purple-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-dataviz-purple-dim1"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.dataviz.violet.dim1" type="button">color.background.dataviz.violet.dim1</button>
+          <button class="token-value" data-clipboard="color.background.dataviz.purple.dim1" type="button">color.background.dataviz.purple.dim1</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-violet-dim1)" type="button">var(--esds-color-background-dataviz-violet-dim1)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-purple-dim1)" type="button">var(--esds-color-background-dataviz-purple-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-violet-dim1" type="button">bg-dataviz-violet-dim1</button></div>
-        <div class="token-row token-description">Strong violet data-viz background (dim1).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-purple-dim1" type="button">bg-dataviz-purple-dim1</button></div>
+        <div class="token-row token-description">Strong purple data-viz background (dim1).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-dataviz-violet-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-dataviz-violet-dim2"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-dataviz-purple-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-dataviz-purple-dim2"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.dataviz.violet.dim2" type="button">color.background.dataviz.violet.dim2</button>
+          <button class="token-value" data-clipboard="color.background.dataviz.purple.dim2" type="button">color.background.dataviz.purple.dim2</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-violet-dim2)" type="button">var(--esds-color-background-dataviz-violet-dim2)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-purple-dim2)" type="button">var(--esds-color-background-dataviz-purple-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-violet-dim2" type="button">bg-dataviz-violet-dim2</button></div>
-        <div class="token-row token-description">Soft violet data-viz background (dim2).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-purple-dim2" type="button">bg-dataviz-purple-dim2</button></div>
+        <div class="token-row token-description">Soft purple data-viz background (dim2).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-dataviz-violet-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-dataviz-violet-dim3"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-dataviz-purple-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-dataviz-purple-dim3"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.dataviz.violet.dim3" type="button">color.background.dataviz.violet.dim3</button>
+          <button class="token-value" data-clipboard="color.background.dataviz.purple.dim3" type="button">color.background.dataviz.purple.dim3</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-violet-dim3)" type="button">var(--esds-color-background-dataviz-violet-dim3)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-dataviz-purple-dim3)" type="button">var(--esds-color-background-dataviz-purple-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-violet-dim3" type="button">bg-dataviz-violet-dim3</button></div>
-        <div class="token-row token-description">Subtle violet data-viz background (dim3).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-dataviz-purple-dim3" type="button">bg-dataviz-purple-dim3</button></div>
+        <div class="token-row token-description">Subtle purple data-viz background (dim3).</div>
       </td>
     </tr>
     <tr>
@@ -1211,42 +1211,42 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-dataviz-violet-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-dataviz-violet-dim1"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-dataviz-purple-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-dataviz-purple-dim1"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.dataviz.violet.dim1" type="button">color.content.on.dataviz.violet.dim1</button>
+          <button class="token-value" data-clipboard="color.content.on.dataviz.purple.dim1" type="button">color.content.on.dataviz.purple.dim1</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-violet-dim1)" type="button">var(--esds-color-content-on-dataviz-violet-dim1)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-purple-dim1)" type="button">var(--esds-color-content-on-dataviz-purple-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-violet-dim1" type="button">text-on-dataviz-violet-dim1</button></div>
-        <div class="token-row token-description">Foreground on strong violet data-viz backgrounds (dim1).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-purple-dim1" type="button">text-on-dataviz-purple-dim1</button></div>
+        <div class="token-row token-description">Foreground on strong purple data-viz backgrounds (dim1).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-dataviz-violet-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-dataviz-violet-dim2"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-dataviz-purple-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-dataviz-purple-dim2"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.dataviz.violet.dim2" type="button">color.content.on.dataviz.violet.dim2</button>
+          <button class="token-value" data-clipboard="color.content.on.dataviz.purple.dim2" type="button">color.content.on.dataviz.purple.dim2</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-violet-dim2)" type="button">var(--esds-color-content-on-dataviz-violet-dim2)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-purple-dim2)" type="button">var(--esds-color-content-on-dataviz-purple-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-violet-dim2" type="button">text-on-dataviz-violet-dim2</button></div>
-        <div class="token-row token-description">Foreground on soft violet data-viz backgrounds (dim2).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-purple-dim2" type="button">text-on-dataviz-purple-dim2</button></div>
+        <div class="token-row token-description">Foreground on soft purple data-viz backgrounds (dim2).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-dataviz-violet-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-dataviz-violet-dim3"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-dataviz-purple-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-dataviz-purple-dim3"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.dataviz.violet.dim3" type="button">color.content.on.dataviz.violet.dim3</button>
+          <button class="token-value" data-clipboard="color.content.on.dataviz.purple.dim3" type="button">color.content.on.dataviz.purple.dim3</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-violet-dim3)" type="button">var(--esds-color-content-on-dataviz-violet-dim3)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-dataviz-purple-dim3)" type="button">var(--esds-color-content-on-dataviz-purple-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-violet-dim3" type="button">text-on-dataviz-violet-dim3</button></div>
-        <div class="token-row token-description">Foreground on subtle violet data-viz backgrounds (dim3).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-dataviz-purple-dim3" type="button">text-on-dataviz-purple-dim3</button></div>
+        <div class="token-row token-description">Foreground on subtle purple data-viz backgrounds (dim3).</div>
       </td>
     </tr>
     <tr>
@@ -2017,16 +2017,16 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-dataviz-violet); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-dataviz-violet"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-dataviz-purple); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-dataviz-purple"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.dataviz.violet" type="button">color.content.dataviz.violet</button>
+          <button class="token-value" data-clipboard="color.content.dataviz.purple" type="button">color.content.dataviz.purple</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-dataviz-violet)" type="button">var(--esds-color-content-dataviz-violet)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-dataviz-purple)" type="button">var(--esds-color-content-dataviz-purple)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-dataviz-violet" type="button">text-dataviz-violet</button></div>
-        <div class="token-row token-description">Violet data-viz foreground color.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-dataviz-purple" type="button">text-dataviz-purple</button></div>
+        <div class="token-row token-description">Purple data-viz foreground color.</div>
       </td>
     </tr>
     <tr>
@@ -2277,42 +2277,42 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-dataviz-violet-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-dataviz-violet-dim1"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-dataviz-purple-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-dataviz-purple-dim1"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.border.on.dataviz.violet.dim1" type="button">color.border.on.dataviz.violet.dim1</button>
+          <button class="token-value" data-clipboard="color.border.on.dataviz.purple.dim1" type="button">color.border.on.dataviz.purple.dim1</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-violet-dim1)" type="button">var(--esds-color-border-on-dataviz-violet-dim1)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-purple-dim1)" type="button">var(--esds-color-border-on-dataviz-purple-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-violet-dim1" type="button">border-on-dataviz-violet-dim1</button> <button class="token-value" data-clipboard="outline-on-dataviz-violet-dim1" type="button">outline-on-dataviz-violet-dim1</button></div>
-        <div class="token-row token-description">Border on strong violet data-viz backgrounds (dim1).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-purple-dim1" type="button">border-on-dataviz-purple-dim1</button> <button class="token-value" data-clipboard="outline-on-dataviz-purple-dim1" type="button">outline-on-dataviz-purple-dim1</button></div>
+        <div class="token-row token-description">Border on strong purple data-viz backgrounds (dim1).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-dataviz-violet-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-dataviz-violet-dim2"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-dataviz-purple-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-dataviz-purple-dim2"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.border.on.dataviz.violet.dim2" type="button">color.border.on.dataviz.violet.dim2</button>
+          <button class="token-value" data-clipboard="color.border.on.dataviz.purple.dim2" type="button">color.border.on.dataviz.purple.dim2</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-violet-dim2)" type="button">var(--esds-color-border-on-dataviz-violet-dim2)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-purple-dim2)" type="button">var(--esds-color-border-on-dataviz-purple-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-violet-dim2" type="button">border-on-dataviz-violet-dim2</button> <button class="token-value" data-clipboard="outline-on-dataviz-violet-dim2" type="button">outline-on-dataviz-violet-dim2</button></div>
-        <div class="token-row token-description">Border on soft violet data-viz backgrounds (dim2).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-purple-dim2" type="button">border-on-dataviz-purple-dim2</button> <button class="token-value" data-clipboard="outline-on-dataviz-purple-dim2" type="button">outline-on-dataviz-purple-dim2</button></div>
+        <div class="token-row token-description">Border on soft purple data-viz backgrounds (dim2).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-dataviz-violet-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-dataviz-violet-dim3"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-dataviz-purple-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-dataviz-purple-dim3"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.border.on.dataviz.violet.dim3" type="button">color.border.on.dataviz.violet.dim3</button>
+          <button class="token-value" data-clipboard="color.border.on.dataviz.purple.dim3" type="button">color.border.on.dataviz.purple.dim3</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-violet-dim3)" type="button">var(--esds-color-border-on-dataviz-violet-dim3)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-dataviz-purple-dim3)" type="button">var(--esds-color-border-on-dataviz-purple-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-violet-dim3" type="button">border-on-dataviz-violet-dim3</button> <button class="token-value" data-clipboard="outline-on-dataviz-violet-dim3" type="button">outline-on-dataviz-violet-dim3</button></div>
-        <div class="token-row token-description">Border on subtle violet data-viz backgrounds (dim3).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-dataviz-purple-dim3" type="button">border-on-dataviz-purple-dim3</button> <button class="token-value" data-clipboard="outline-on-dataviz-purple-dim3" type="button">outline-on-dataviz-purple-dim3</button></div>
+        <div class="token-row token-description">Border on subtle purple data-viz backgrounds (dim3).</div>
       </td>
     </tr>
     <tr>
@@ -2927,16 +2927,16 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-dataviz-violet); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-dataviz-violet"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-dataviz-purple); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-dataviz-purple"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.border.dataviz.violet" type="button">color.border.dataviz.violet</button>
+          <button class="token-value" data-clipboard="color.border.dataviz.purple" type="button">color.border.dataviz.purple</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dataviz-violet)" type="button">var(--esds-color-border-dataviz-violet)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-dataviz-purple)" type="button">var(--esds-color-border-dataviz-purple)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dataviz-violet" type="button">border-dataviz-violet</button> <button class="token-value" data-clipboard="outline-dataviz-violet" type="button">outline-dataviz-violet</button></div>
-        <div class="token-row token-description">Violet data-viz border color.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-dataviz-purple" type="button">border-dataviz-purple</button> <button class="token-value" data-clipboard="outline-dataviz-purple" type="button">outline-dataviz-purple</button></div>
+        <div class="token-row token-description">Purple data-viz border color.</div>
       </td>
     </tr>
     <tr>
