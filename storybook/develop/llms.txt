@@ -69,7 +69,7 @@ For complete single-file context ingestion, see [Full Design System Documentatio
 
 - [Icons/Getting Started](llms/icons/getting-started.md): Our icon system is powered by a self-hosted Iconify server. This enables consistent visual language across all Infoma...
 - [Icons/Icon Component](llms/icons/icon-component.md): For full documentation of the `esds-icon` web component, see:
-- [Icons/Icon Contribution](llms/icons/icon-contribution.md): A guide for designers on how to create icons.
+- [Icons/Icon Contribution](llms/icons/icon-contribution.md): A guide for designers on how to create icons. Each icon is delivered in two versions, one for developers and one for...
 - [Icons/Icon Gallery](llms/icons/icon-gallery.md)
 
 ## Typography
