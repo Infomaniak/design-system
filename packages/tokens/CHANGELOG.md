@@ -1,5 +1,69 @@
 # Changelog
 
+## 0.10.0 (2026-11-18)
+
+### Minor Changes
+
+- [#515](https://github.com/Infomaniak/design-system/pull/515) [`f174bed`](https://github.com/Infomaniak/design-system/commit/f174bed2401dca3c705cea8c19a61c3b6c4cf32b): Updated the data-viz palette, aligning it with the Figma Token Core:
+
+  - **Breaking:** the `purple` data-viz color is replaced by `citrus`, a new lime-green that stands apart from `emerald`. All `color.*.dataviz.purple.*` tokens are renamed to `color.*.dataviz.citrus.*`, and the `dataviz` modifier value `purple` becomes `citrus`. The `color.purple.*` primitives are unchanged.
+  - On strong citrus backgrounds (`dim1`), text now uses `color.citrus.950` in light theme for readable contrast.
+  - Added `brown` and `magenta` data-viz colors (background, content and border tokens, plus `dataviz` modifier values).
+  - Added the `color.brown.*`, `color.magenta.*` and `color.citrus.*` primitive palettes (50 to 950).
+
+- [#512](https://github.com/Infomaniak/design-system/pull/512) [`bed9b58`](https://github.com/Infomaniak/design-system/commit/bed9b5893f9ebcf2225b1eafaa9b9a44fe73162f): **Breaking:** shadow tokens are now real DTCG composite tokens (`$type: "shadow"`), aligning the code tokens with Figma Token Core:
+
+  - `shadow.{xs,sm,md,lg,xl,2xl}` are single tokens whose value holds the offset, blur, spread and color: `--esds-shadow-md` now contains the full `box-shadow` value (e.g. `0px 2px 4px -1px var(--esds-color-shadow)`).
+  - The per-axis sub-tokens are removed (`shadow.{size}.{x,y,blur,spread,color}` → `--esds-shadow-md-x`, …), as well as the T1 primitives `shadow.1`–`shadow.6` (`--esds-shadow-1-x`, …).
+  - The shadow color is now the semantic token `color.shadow` (`--esds-color-shadow`), overridden by the themes (gray.700 in light, gray.500 in dark, both at 30% opacity), referenced by every shadow: `--esds-color-shadow-md` is removed.
+  - The 30% opacity now lives in `color.shadow` (previously `color.gray.400` at 6–14% in the light theme and `color.gray.950` at 6–14% in the dark theme), giving more visible elevation.
+  - New T1 primitives: `blur.{1,2,6,10,50}`, `dimension.25` and `dimension.minus-{1,3,6,12}`.
+  - Removed the now-unused alpha primitives `color.gray.400-{6,8,10,14}` and `color.gray.950-{6,8,10,14}`.
+  - The Tailwind output now binds the `--shadow-*` theme namespace to the tokens: Tailwind's built-in shadow scale is cleared and the `shadow-{xs,sm,md,lg,xl,2xl}` utilities resolve to `--esds-shadow-*`, staying theme-swappable.
+
+  Offsets, blur and spread values are unchanged.
+
+- [#509](https://github.com/Infomaniak/design-system/pull/509) [`1c5ab84`](https://github.com/Infomaniak/design-system/commit/1c5ab8470028acb2edf588a1b218d35faa191053): Reset Tailwind's default container scale in the generated Tailwind CSS, so sizing utilities resolve exclusively from the design tokens' spacing scale:
+
+  - `w-3xs`, `min-w-3xs` and other names outside the spacing scale no longer fall back to Tailwind's default container values (e.g. `w-3xs` was 256px), eliminating the mixed, inconsistent sizing scale.
+  - Container query variants (`@sm:`, `@max-md:`, ...) no longer compile against Tailwind's default container values; they will work again once container-related tokens are bound to the `--container-*` namespace. In the meantime, use arbitrary values instead, e.g. `@min-[28rem]:hidden` / `@max-[48rem]:hidden` (note: future container token bindings will require literal values, as Tailwind rejects `var()` references in container query conditions).
+
+- [#510](https://github.com/Infomaniak/design-system/pull/510) [`873f4f4`](https://github.com/Infomaniak/design-system/commit/873f4f4843af97d18d9dce6b240bc77389f25a06): Fixed the 6xl font size to 56px, aligning it with the Figma Token Core:
+
+  - Replaced the primitive token `font.size.52` (3.25rem) with `font.size.56` (3.5rem).
+  - `font.size.6xl` now references `font.size.56`, so `text.6xl`, `typography.6xl.*` and `heading.2xl` render at 56px (line-height unchanged at 60px).
+
+### Patch Changes
+
+- [#457](https://github.com/Infomaniak/design-system/pull/457) [`7ce9eeb`](https://github.com/Infomaniak/design-system/commit/7ce9eeb38c68d2a48b18a16c2267b01d2d48b228): Add the new Avatar components and their design tokens, aligned with the Avatar component in the Figma file _Edelweiss – Token Core_:
+
+  - New `esds-avatar` component supporting image, icon and initials avatars, with shape and size variants.
+  - While an image is loading or failing to load, `esds-avatar` falls back to the icon, the initials or the default user icon; the new `data-image-state` attribute reflects the image loading state and drives the image-specific styles of `esds-avatar-button`.
+  - New `esds-avatar-group` component to stack and group avatars.
+  - New `esds-avatar-button` attribute to make an avatar interactive, with hover, focus, active and disabled states.
+  - New T3 `avatar` tokens and `avatar-size` modifier contexts matching Figma: `small` (24px), `medium` (32px), `large` (40px) and `extra-large` (48px, default).
+  - Stacked-avatar overlap (`avatar.group.gap`) uses the new negative spacing tokens `spacing.minus-sm` (-6px) and `spacing.minus-md` (-8px).
+  - New `avatar.color.state.hover.image` / `avatar.color.state.pressed.image` tokens provide the stronger overlays used by the image variant.
+  - The default initials typography (`heading.xs` emphasized) matches the 48px default size.
+
+- [#492](https://github.com/Infomaniak/design-system/pull/492) [`404d989`](https://github.com/Infomaniak/design-system/commit/404d9891c29a9b1b12717f92961d38d80981bd26): Added a new `modifiers/all.attr.css` output, which imports the attribute CSS of every modifier into a single file. Consumers can now apply all modifiers at once instead of importing each modifier's `all.attr.css` individually:
+
+  ```css
+  @import '@infomaniak-design-system/tokens/css/modifiers/all.attr.css';
+  ```
+
+- [#497](https://github.com/Infomaniak/design-system/pull/497) [`49a9b1f`](https://github.com/Infomaniak/design-system/commit/49a9b1f11ef3ea893d4b886fafe3deaf640787ff): Fixed the badge dot size: `badge.size.dot` now resolves to 8px (`{dimension.8}`) instead of 4px, aligning it with the Badge component in Figma.
+
+- [#520](https://github.com/Infomaniak/design-system/pull/520) [`4d7ba99`](https://github.com/Infomaniak/design-system/commit/4d7ba99f8079a59db8a19e3dc68861bceb2afed3): Fixed the `color.border.on.feedback.{error,information,neutral,success,warning}.dim1` semantic color tokens: they now resolve to white (as designed in Figma) instead of transparent, so borders drawn on strong (dim1) feedback backgrounds render consistently with the light theme.
+
+- [#494](https://github.com/Infomaniak/design-system/pull/494) [`a35b793`](https://github.com/Infomaniak/design-system/commit/a35b793946a08823b894dea035e345c5cd2c6fff): State overlay colors (hover, pressed and selected, in soft, medium and strong intensities) are now expressed on the theme modifiers as their base color (`color.blue.900` in light, `color.gray.50` in dark) with an exact opacity percentage, matching Figma, instead of pointing to pre-computed alpha primitives. Resolved alphas become exact (e.g. 6% instead of ~5.9%); the visual rendering is unchanged.
+
+- [#498](https://github.com/Infomaniak/design-system/pull/498) [`8587118`](https://github.com/Infomaniak/design-system/commit/858711882b25820ee40ecaae549cb18b27c3692f): Synced new tokens from Figma (Token Core):
+
+  - Added the `dimension.6`, `dimension.28` and `dimension.85` primitives.
+  - Added `color.background.backdrop` (black at 50% opacity, in both light and dark themes) for overlays displayed behind modals and dialogs.
+  - Added light/dark theme values for `color.border.dim1` and the `color.border.on.dataviz.*.dim1` tokens, matching the Figma theme collection. Resolved values are unchanged.
+
 ## 0.9.0 (2026-11-04)
 
 ### Minor Changes
