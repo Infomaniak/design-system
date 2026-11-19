@@ -1,0 +1,1 @@
+import{t as e}from"./iframe-DDlax4TS.js";e();
