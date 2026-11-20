@@ -20,11 +20,13 @@ export interface PageSources {
 const SUMMARY_MAX_LENGTH = 120;
 
 /**
- * Root resource files (llms.txt, llms-full.txt, DESIGN.md) live at the site
- * root, so links to them written in MDX are correct for the Storybook page and
- * llms-full.txt, but not from generated pages which sit under `llms/`.
+ * Root resource files (llms.txt, llms-full.txt, DESIGN.md, the Playground) live
+ * at the site root, so links to them written in MDX are correct for the
+ * Storybook page and llms-full.txt, but not from generated pages which sit
+ * under `llms/`.
  */
-const ROOT_FILE_TARGET_PATTERN = /^(?:\.{1,2}\/)?(llms\.txt|llms-full\.txt|DESIGN\.md)$/;
+const ROOT_FILE_TARGET_PATTERN =
+  /^(?:\.{1,2}\/)?(llms\.txt|llms-full\.txt|DESIGN\.md|playground\/index\.html)$/;
 
 const ROOT_FILE_LINK_PATTERN = /\]\(([^()\s]+)\)/g;
 

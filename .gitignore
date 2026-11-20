@@ -177,6 +177,7 @@ test-results/
 apps/docs/public/DESIGN.md
 apps/docs/public/llms.txt
 apps/docs/public/llms-full.txt
+apps/docs/public/playground/
 apps/docs/src/stories/assets/*.md
 packages/tokens/scripts/scripts/convert-figma-tokens/tokens
 packages/components/custom-elements.json
