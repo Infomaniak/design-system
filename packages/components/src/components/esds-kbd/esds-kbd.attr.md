@@ -51,11 +51,9 @@ Adding the custom attribute `esds-kbd` to a `<kbd>` element applies the `esds-kb
 
 ### Sizes
 
-By default, the component uses the extra-small body typography. List of all available keyboard key sizes:
+By default, the component uses the medium size. List of all available keyboard key sizes:
 
-- `extra-small` (default)
-- `small`
-- `medium`
+- `medium` (default)
 - `large`
 
 #### Import

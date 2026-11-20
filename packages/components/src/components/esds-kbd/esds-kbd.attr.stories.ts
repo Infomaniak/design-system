@@ -13,7 +13,7 @@ const defineEsdsKbdAttr = htmlElementRef((element: Element) => {
   });
 });
 
-const KBD_SIZES = ['extra-small', 'small', 'medium', 'large'] as const;
+const KBD_SIZES = ['medium', 'large'] as const;
 
 const { args, argTypes } = getStorybookHelpers<EsdsKbdAttr>('esds-kbd');
 
@@ -45,7 +45,7 @@ type Story = StoryObj<
 export const Default: Story = {
   ...storybookInteractiveControls({
     text: '/',
-    size: { value: 'extra-small', type: 'select', options: KBD_SIZES },
+    size: { value: 'medium', type: 'select', options: KBD_SIZES },
   }),
   render: (args) =>
     html`<p>
