@@ -48,7 +48,7 @@
       }
     },
     "gap": {
-      "$value": "{spacing.xs}",
+      "$value": "{spacing.2xs}",
       "$description": "Default gap between keys inside a multi-key keyboard shortcut.",
       "$extensions": {
         "scopes": ["GAP"]

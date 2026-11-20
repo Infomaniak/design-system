@@ -1,0 +1,18 @@
+{
+  "kbd": {
+    "font": {
+      "$value": "{body.xs.font.emphasized}"
+    },
+    "gap": {
+      "$value": "{spacing.2xs}"
+    },
+    "padding": {
+      "block": {
+        "$value": "{spacing.2xs}"
+      },
+      "inline": {
+        "$value": "{spacing.xs}"
+      }
+    }
+  }
+}
