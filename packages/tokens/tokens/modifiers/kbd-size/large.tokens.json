@@ -1,0 +1,23 @@
+{
+  "kbd": {
+    "font": {
+      "$value": "{body.lg.font.emphasized}"
+    },
+    "gap": {
+      "$value": "{spacing.sm}"
+    },
+    "padding": {
+      "block": {
+        "$value": "{spacing.xs}"
+      },
+      "inline": {
+        "$value": "{spacing.sm}"
+      }
+    },
+    "border": {
+      "radius": {
+        "$value": "{radius.lg}"
+      }
+    }
+  }
+}
