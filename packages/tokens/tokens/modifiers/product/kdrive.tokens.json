@@ -2,18 +2,47 @@
   "color": {
     "background": {
       "brand": {
-        "$value": "{color.background.brand.kdrive}"
+        "dim1": {
+          "$value": "{color.background.brand.kdrive.dim1}"
+        },
+        "dim2": {
+          "$value": "{color.background.brand.kdrive.dim2}"
+        },
+        "dim3": {
+          "$value": "{color.background.brand.kdrive.dim3}"
+        }
       }
     },
     "border": {
       "brand": {
         "$value": "{color.border.brand.kdrive}"
+      },
+      "on": {
+        "brand": {
+          "dim1": {
+            "$value": "{color.border.on.brand.kdrive.dim1}"
+          },
+          "dim2": {
+            "$value": "{color.border.on.brand.kdrive.dim2}"
+          },
+          "dim3": {
+            "$value": "{color.border.on.brand.kdrive.dim3}"
+          }
+        }
       }
     },
     "content": {
       "on": {
         "brand": {
-          "$value": "{color.content.on.brand.kdrive}"
+          "dim1": {
+            "$value": "{color.content.on.brand.kdrive.dim1}"
+          },
+          "dim2": {
+            "$value": "{color.content.on.brand.kdrive.dim2}"
+          },
+          "dim3": {
+            "$value": "{color.content.on.brand.kdrive.dim3}"
+          }
         }
       },
       "brand": {

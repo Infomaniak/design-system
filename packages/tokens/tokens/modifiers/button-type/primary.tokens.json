@@ -3,7 +3,7 @@
     "border": {
       "color": {
         "$root": {
-          "$value": "{color.background.brand}"
+          "$value": "{color.background.brand.dim1}"
         },
         "disabled": {
           "$value": "{color.background.disabled}"
@@ -16,7 +16,7 @@
     "background": {
       "color": {
         "$root": {
-          "$value": "{color.background.brand}"
+          "$value": "{color.background.brand.dim1}"
         },
         "disabled": {
           "$value": "{color.background.disabled}"
@@ -26,7 +26,7 @@
     "content": {
       "color": {
         "$root": {
-          "$value": "{color.content.on.brand}"
+          "$value": "{color.content.on.brand.dim1}"
         },
         "disabled": {
           "$value": "{color.content.on.disabled}"

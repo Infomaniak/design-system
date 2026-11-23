@@ -42,7 +42,7 @@
       },
       "color": {
         "$root": {
-          "$value": "{color.background.brand}",
+          "$value": "{color.background.brand.dim1}",
           "$description": "Default button border color.",
           "$extensions": {
             "scopes": []
@@ -76,7 +76,7 @@
     "background": {
       "color": {
         "$root": {
-          "$value": "{color.background.brand}",
+          "$value": "{color.background.brand.dim1}",
           "$description": "Default button background color.",
           "$extensions": {
             "scopes": []
@@ -94,7 +94,7 @@
     "content": {
       "color": {
         "$root": {
-          "$value": "{color.content.on.brand}",
+          "$value": "{color.content.on.brand.dim1}",
           "$description": "Default button label color.",
           "$extensions": {
             "scopes": []

@@ -745,7 +745,9 @@ describe('buildDesignMdTokens', () => {
     expect(content).toContain('typography:');
 
     // AI implementation directives reference real token names
-    expect(content).toContain('`color.background.brand` with `var(--esds-color-background-brand)`');
+    expect(content).toContain(
+      '`color.background.brand.dim1` with `var(--esds-color-background-brand-dim1)`',
+    );
     expect(content).toContain('var(--esds-typography-heading-lg)');
 
     // Tier separation (T1 is excluded; sections are renumbered)
@@ -803,7 +805,9 @@ describe('buildDesignMdTokens', () => {
 
     // Should contain the portable token guidance, referencing real token names
     expect(content).toContain('Portable product tokens');
-    expect(content).toContain('`color.background.brand` with `var(--esds-color-background-brand)`');
+    expect(content).toContain(
+      '`color.background.brand.dim1` with `var(--esds-color-background-brand-dim1)`',
+    );
     expect(content).toContain('color.background.brand.calendar');
   });
 
