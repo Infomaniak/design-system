@@ -1336,11 +1336,20 @@ Download the latest zip, unzip it over the previous folder and reload the plugin
 
 # Designers Guide/Helpers/Creating a custom component
 
-> Use this guide only when no native component covers the need, even with its properties or slots, **and** the DS team...
+> Use this guide only when no native component covers the need, even with its properties or slots. Before you start, go...
 
-Use this guide only when no native component covers the need, even with its properties or slots, **and** the DS team has approved the creation of a custom component. If that approval hasn't happened yet, talk to the DS team before you start.
+Use this guide only when no native component covers the need, even with its properties or slots. Before you start, go through the steps in **Before you start: share the need** below.
 
 > 👑 **Golden rule**: don't do anything now that will have to be undone later. The component must be able to join its kit as is when it's integrated, without being taken apart.
+
+## Before you start: share the need 🗣️
+
+Before creating a custom or semi-custom component, go through these steps:
+
+1. **Explain the need** to the DS team: what problem you're solving, and whether it's a **DS need** (useful across products) or a **product need** (specific to one product).
+2. **Is it blocking?**
+   - **Yes**: the DS team steps in and tells you what to do (use a native component, adapt an existing one, or create a custom one).
+   - **No**: you can move forward on your own by following this guide.
 
 ## Which tokens for which component?
 
