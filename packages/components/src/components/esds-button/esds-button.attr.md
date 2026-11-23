@@ -121,6 +121,14 @@ Both `data-esds-button-type` and `data-esds-button-size` can be combined:
 
 The custom attribute never modifies the accessible name: an author-defined `aria-label` is always preserved.
 
+### Icon-only buttons
+
+An icon-only button (e.g. a `square` button with only an `esds-icon` inside) has no discernible text: `esds-icon` renders a decorative SVG that contributes no accessible name. Give it one, in order of preference:
+
+1. **Visible text content** — the best option, but not applicable to truly icon-only buttons.
+2. **Visually-hidden text** inside the button (see [MDN: icon buttons](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/button_role#icon_buttons)) — the name lives next to the icon and survives machine translation.
+3. **An author-defined `aria-label`** on the button — pragmatic and fully supported by assistive technologies.
+
 While `loading`, an `<a>` element gets the `aria-disabled` and `aria-busy` attributes, and the spinner is a CSS pseudo-element that is not exposed to assistive technologies.
 
 ## Demo
