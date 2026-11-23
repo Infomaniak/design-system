@@ -95,6 +95,10 @@ Add the attribute `data-esds-kbd-size="[size]"` to apply a keyboard key size:
 
 Its appearance is driven by the design tokens; changes to the look belong to the token layer, not to component consumers.
 
+### Symbol glyphs
+
+Accessibility checkers such as axe report symbol glyphs like `⌘` as an _incomplete_ `color-contrast` result ("Element content contains only non-text characters"): a glyph is not classified as text, so the ratio cannot be computed automatically. This is a manual-review item, not a failure — the glyph is painted with the same color as regular text (`--esds-kbd-content-color`), so it passes whenever text does.
+
 ## Demo
 
 ## Examples
