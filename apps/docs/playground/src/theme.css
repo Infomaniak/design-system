@@ -15,6 +15,9 @@ html,
 body {
   height: 100%;
   margin: 0;
+  /* App shell: the page never scrolls — scrolling belongs to the editor and
+     the preview iframe. */
+  overflow: hidden;
 }
 
 body {
@@ -60,7 +63,9 @@ body {
   flex: 1;
   min-height: 0;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto 1fr;
+  /* minmax(0, 1fr) instead of 1fr: the track's implicit auto minimum could
+     otherwise grow past the container by a few pixels. */
+  grid-template-rows: auto minmax(0, 1fr);
 }
 
 /* The project element is invisible state, keep it out of the grid flow. */
