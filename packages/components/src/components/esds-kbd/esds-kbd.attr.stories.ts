@@ -13,6 +13,8 @@ const defineEsdsKbdAttr = htmlElementRef((element: Element) => {
   });
 });
 
+const KBD_SIZES = ['medium', 'large'] as const;
+
 const { args, argTypes } = getStorybookHelpers<EsdsKbdAttr>('esds-kbd');
 
 const meta = {
@@ -36,12 +38,14 @@ type Story = StoryObj<
   EsdsKbdAttr &
     HTMLElement & {
       text: string;
+      size: (typeof KBD_SIZES)[number];
     }
 >;
 
 export const Default: Story = {
   ...storybookInteractiveControls({
-    text: 'K',
+    text: '/',
+    size: { value: 'medium', type: 'select', options: KBD_SIZES },
   }),
   render: (args) =>
     html`<p>
@@ -49,6 +53,7 @@ export const Default: Story = {
       <kbd
         ${defineEsdsKbdAttr}
         esds-kbd
+        data-esds-kbd-size=${args.size}
         >${args.text}</kbd
       >
       to open the search.
