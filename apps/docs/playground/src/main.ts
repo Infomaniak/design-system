@@ -27,6 +27,7 @@ document.head.append(fontsLink);
 interface PlaygroundProjectElement extends HTMLElement {
   config: PlaygroundProjectManifest;
   modified: boolean;
+  sandboxBaseUrl: string;
 }
 
 const HASH_KEY = 'code';
@@ -116,8 +117,13 @@ window.addEventListener('hashchange', () => {
 
 const copyLinkButton = document.querySelector<HTMLButtonElement>('#copy-link')!;
 copyLinkButton.addEventListener('click', async () => {
-  await navigator.clipboard.writeText(location.href);
-  copyLinkButton.textContent = 'Copied!';
+  try {
+    await navigator.clipboard.writeText(location.href);
+    copyLinkButton.textContent = 'Copied!';
+  } catch (error) {
+    console.error('Failed to copy the share link:', error);
+    copyLinkButton.textContent = 'Copy failed';
+  }
   window.setTimeout(() => {
     copyLinkButton.textContent = 'Copy link';
   }, 1500);
