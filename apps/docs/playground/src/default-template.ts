@@ -1,21 +1,18 @@
 /**
- * The three (plus one) default files of a new playground project.
+ * The four default files of a new playground project.
  *
  * Zero-magic principle: every file is visible and editable in the editor. The
  * template is intentionally copy-pasteable integration code — what a consumer
- * would actually write on a plain HTML page to use the design system from a
- * CDN.
+ * would actually write on a plain HTML page to use the design system.
  *
  * JS dependency versions live in the visible `package.json` (playground's
  * module resolution reads it, like npm); CSS dependency versions live in the
- * `<link>` URLs (the published tokens package has no exports map, so its CSS
- * can only be loaded as a stylesheet).
+ * `<link>` URLs.
  */
 
 const TEMPLATE_INDEX_HTML = `<!doctype html>
 <head>
-  <!-- Design tokens + theming. Bump @latest to a version (e.g. @0.10.0)
-       or a dist-tag (@rc, @dev) to pin. -->
+  <!-- Design tokens + theming. Update @latest to a version (e.g. @0.10.0) to pin. -->
   <link rel="stylesheet" href="https://unpkg.com/@infomaniak-design-system/tokens@latest/css/tokens.root.css">
   <link rel="stylesheet" href="https://unpkg.com/@infomaniak-design-system/tokens@latest/css/modifiers/all.attr.css">
   <link rel="stylesheet" href="https://fonts.storage.infomaniak.com/design-system/latest/infomaniak-sans.min.css">
@@ -23,11 +20,16 @@ const TEMPLATE_INDEX_HTML = `<!doctype html>
   <script type="module" src="./script.js"></script>
 </head>
 <body data-esds-product="infomaniak" data-esds-theme="light">
-  <!-- products: infomaniak, mail, kdrive, kchat, calendar, contacts, knote,
-       security, euria, swisstransfer — themes: light, dark -->
+  <h1 esds-heading="2xl">
+    Hello world <esds-icon name="esds:megaphone" />
+  </h1>
+  <esds-separator></esds-separator>
+  <p esds-body="md">
+    And welcome to the Playground.
+  </p>
   <button esds-button>
-    <esds-avatar></esds-avatar>
-    Hello playground
+    <esds-avatar data-esds-avatar-size="small"></esds-avatar>
+    Click me!
   </button>
 </body>
 `;

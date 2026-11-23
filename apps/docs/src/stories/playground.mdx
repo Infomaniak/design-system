@@ -4,34 +4,9 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Playground
 
-The [Playground](./playground/index.html) is a CodePen-like workbench for the design system: write
-HTML and TypeScript using ESDS components **with no install, no build and no hosting**, then share
-your snippet as a plain URL — useful to quickly prototype an idea or to reproduce a bug.
+The [Playground](./playground/index.html) is an in-browser code editor for the design system: write HTML and TypeScript using ESDS components **with no install, no build and no hosting**, then share your snippet as a plain URL. This is useful to quickly prototype an idea or to reproduce a bug.
 
 **→ [Open the Playground](./playground/index.html)**
-
-## How it works
-
-The playground shows four editable tabs, and everything is visible — no hidden machinery:
-
-- **`index.html`** — your markup. The `<body>` tag carries the theming attributes:
-  `data-esds-product` and `data-esds-theme` (the values are listed in a comment right above).
-- **`package.json`** — the JS dependency versions, resolved like a real npm install.
-- **`setup.ts`** — registers every component and custom attribute of the design system. You rarely
-  need to touch it, but you can (drop a `define()` line to experiment).
-- **`script.ts`** — your TypeScript, compiled in the browser.
-
-Tokens, modifiers, fonts and icons are loaded from the CDN by the template itself — the template is
-copy-pasteable integration code for real projects.
-
-## Sharing
-
-The URL always reflects your snippet: it updates live as you type (base64-encoded in the URL hash).
-Use **Copy link** to share it, **Reset** to restore the default template. A shared link keeps
-running whatever versions it was created with.
-
-> **Note** — shared snippets run untrusted code in a sandbox on a separate origin (like lit.dev).
-> Only open links from people you trust.
 
 ## Pinning versions
 
