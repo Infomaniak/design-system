@@ -729,7 +729,7 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | kbd.border.radius | 6px | 6px | var(--esds-kbd-border-radius) | Default keyboard key corner radius. |
 | kbd.content.color | #62748e | #90a1b9 | var(--esds-kbd-content-color) | Default keyboard key label color. |
 | kbd.font | 500 0.75rem/16px Infomaniak Sans | 500 0.75rem/16px Infomaniak Sans | var(--esds-kbd-font) | Default keyboard key typography (extra-small emphasized body text). |
-| kbd.gap | 4px | 4px | var(--esds-kbd-gap) | Default gap between keys inside a multi-key keyboard shortcut. |
+| kbd.gap | 2px | 2px | var(--esds-kbd-gap) | Default gap between keys inside a multi-key keyboard shortcut. |
 | kbd.padding.block | 2px | 2px | var(--esds-kbd-padding-block) | Default keyboard key block padding. |
 | kbd.padding.inline | 4px | 4px | var(--esds-kbd-padding-inline) | Default keyboard key inline padding. |
 | separator.color | #cad5e2 | #62748e | var(--esds-separator-color) | Default separator line color (strong neutral border). |

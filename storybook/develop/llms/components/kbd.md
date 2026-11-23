@@ -53,6 +53,40 @@ Adding the custom attribute `esds-kbd` to a `<kbd>` element applies the `esds-kb
 > It is expected that the `<kbd esds-kbd>` element is used as a **child** of a _text container_ like a `<p>`, `<li>`, `<button>` element.
 > It is not intended to be used as a standalone/isolated element.
 
+### Sizes
+
+By default, the component uses the medium size. List of all available keyboard key sizes:
+
+- `medium` (default)
+- `large`
+
+#### Import
+
+To import all sizes:
+
+```css
+@import '@infomaniak-design-system/tokens/css/modifiers/kbd-size/all.attr.css';
+```
+
+Or individually:
+
+```css
+@import '@infomaniak-design-system/tokens/css/modifiers/kbd-size/[size].attr.css';
+/* example: @import '@infomaniak-design-system/tokens/css/modifiers/kbd-size/large.attr.css'; */
+```
+
+#### Apply
+
+Add the attribute `data-esds-kbd-size="[size]"` to apply a keyboard key size:
+
+```html
+<kbd
+  esds-kbd
+  data-esds-kbd-size="large"
+  >⌘<span>+</span>K
+</kbd>
+```
+
 ### Semantics
 
 - Use `esds-kbd` for keyboard keys and shortcuts only. For inline code, use a `<code>` element instead so assistive technology conveys the right meaning.
@@ -71,7 +105,8 @@ Its appearance is driven by the design tokens; changes to the look belong to the
 <p>
       Press
       <kbd
-        esds-kbd>K</kbd>
+        esds-kbd
+        data-esds-kbd-size="medium">/</kbd>
       to open the search.
     </p>
 ```
