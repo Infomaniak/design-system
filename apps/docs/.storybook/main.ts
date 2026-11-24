@@ -28,6 +28,12 @@ const config: StorybookConfig = {
     getAbsolutePath('@storybook/addon-onboarding'),
   ],
   framework: getAbsolutePath('@storybook/web-components-vite'),
+  /**
+   * Serves `public/` (Playground build output, DESIGN.md, …) in the dev
+   * server. In production builds Vite's `publicDir` already copies it, and
+   * Storybook's static copy of the same files is idempotent.
+   */
+  staticDirs: ['../public'],
   viteFinal: (config: InlineConfig): InlineConfig => {
     return mergeConfig(config, {
       envDir: '../..', // use .env in the repo root,

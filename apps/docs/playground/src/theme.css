@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  font-family: var(--esds-font-family-base), sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  color: var(--esds-color-gray-900);
+  background: var(--esds-color-background-elevation-surface);
+}
+
+.app-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--esds-color-gray-200);
+}
+
+.app-bar h1 {
+  flex: 1;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ui-button {
+  padding: 6px 12px;
+  border: 1px solid var(--esds-color-gray-300);
+  border-radius: 6px;
+  background: var(--esds-color-background-elevation-surface);
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+}
+
+.ui-button:hover {
+  background: var(--esds-color-gray-100);
+}
+
+.playground {
+  display: grid;
+  flex: 1;
+  min-height: 0;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+/* The project element is invisible state, keep it out of the grid flow. */
+playground-project {
+  display: none;
+}
+
+playground-tab-bar {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+playground-file-editor {
+  grid-column: 1;
+  grid-row: 2;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+playground-preview {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  height: 100%;
+  min-height: 0;
+  border-left: 1px solid var(--esds-color-gray-200);
+}

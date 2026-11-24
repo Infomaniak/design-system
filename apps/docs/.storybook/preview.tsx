@@ -307,6 +307,7 @@ const preview: Preview = {
       storySort: {
         order: [
           'Welcome',
+          'Playground',
           'Designers Guide',
           ['Getting Started', 'Install the Font', 'Figma Plugins', 'Helpers'],
           'Design Tokens',
