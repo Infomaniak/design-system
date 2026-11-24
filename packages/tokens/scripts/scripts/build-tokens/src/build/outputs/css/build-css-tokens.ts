@@ -11,7 +11,10 @@ import {
 } from '../../../../../../shared/dtcg/resolver/to/css/token/design-tokens-collection-token-to-css-variable-declaration.ts';
 import { createCssVariableNameGenerator } from '../../../../../../shared/dtcg/resolver/to/css/token/name/create-css-variable-name-generator.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
-import { buildBaseTokensCssFiles } from './helpers/build-base-tokens-css-files.ts';
+import {
+  buildBaseTokensCssFiles,
+  type BaseTokensCssFiles,
+} from './helpers/build-base-tokens-css-files.ts';
 import {
   buildModifierContextCssFiles,
   type ModifierContextCssFiles,
