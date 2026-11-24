@@ -5,19 +5,18 @@ import { removeTrailingSlash } from '../../../../../../../../../scripts/helpers/
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { DesignTokenModifiers } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
 import type { CssVariableDeclaration } from '../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
-import { cssVariableDeclarationsToString } from '../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/to/css-variable-declarations-to-string.ts';
-import { wrapCssVariableDeclarationsWithCssSelector } from '../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/to/wrap-css-variable-declarations-with-css-selector.ts';
 import {
   designTokensCollectionTokenToCssVariableDeclaration,
   type DesignTokensCollectionTokenToCssVariableDeclarationOptions,
 } from '../../../../../../shared/dtcg/resolver/to/css/token/design-tokens-collection-token-to-css-variable-declaration.ts';
 import { createCssVariableNameGenerator } from '../../../../../../shared/dtcg/resolver/to/css/token/name/create-css-variable-name-generator.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
-import type { ArrayDesignTokenName } from '../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
+import { buildBaseTokensCssFiles } from './helpers/build-base-tokens-css-files.ts';
 import {
-  buildBaseTokensCssFiles,
-  CSS_AUTO_GENERATED_FILE_HEADER,
-} from './helpers/build-base-tokens-css-files.ts';
+  buildModifierContextCssFiles,
+  type ModifierContextCssFiles,
+} from './helpers/build-modifier-context-css-files.ts';
+import { CSS_AUTO_GENERATED_FILE_HEADER } from './helpers/css-variable-declarations-to-two-block-string.ts';
 
 export interface BuildCssTokensOptions {
   readonly baseCollection: DesignTokensCollection;
@@ -46,17 +45,17 @@ export function buildCssTokens({
     };
 
     await logger.asyncTask('main', async (): Promise<void> => {
-      const declarations: CssVariableDeclaration[] = baseCollection
-        .tokens()
-        .map((token: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
-          return designTokensCollectionTokenToCssVariableDeclaration(
+      const declarations: CssVariableDeclaration[] = Array.from(
+        baseCollection.tokens(),
+        (token: GenericDesignTokensCollectionToken): CssVariableDeclaration =>
+          designTokensCollectionTokenToCssVariableDeclaration(
             {
               ...token,
               type: baseCollection.resolve(token).type,
             },
             cssOptions,
-          );
-        });
+          ),
+      );
 
       const files: BaseTokensCssFiles = buildBaseTokensCssFiles(declarations);
 
@@ -69,6 +68,18 @@ export function buildCssTokens({
     await logger.asyncTask('modifier', async (logger: Logger): Promise<void> => {
       const modifiersOutputDirectory: string = `${cssOutputDirectory}/modifiers`;
 
+      const baseDeclarations: CssVariableDeclaration[] = Array.from(
+        baseCollection.tokens(),
+        (token: GenericDesignTokensCollectionToken): CssVariableDeclaration =>
+          designTokensCollectionTokenToCssVariableDeclaration(
+            {
+              ...token,
+              type: baseCollection.resolve(token).type,
+            },
+            cssOptions,
+          ),
+      );
+
       for (const [modifier, contexts] of modifiers.entries()) {
         await logger.asyncTask(modifier, async (logger: Logger): Promise<void> => {
           const modifierOutputDirectory: string = `${modifiersOutputDirectory}/${modifier}`;
@@ -76,79 +87,28 @@ export function buildCssTokens({
           await logger.asyncTask('context', async (logger: Logger): Promise<void> => {
             for (const [context, collection] of contexts.entries()) {
               await logger.asyncTask(context, async (): Promise<void> => {
-                const expectedPath: string = `${modifier}/${context}`;
-
-                const toRedeclare: Set<string> = new Set();
-
                 const declarations: CssVariableDeclaration[] = Array.from(
-                  collection
-                    .tokens()
-                    .filter((token: GenericDesignTokensCollectionToken): boolean => {
-                      return token.files.some((path: string): boolean =>
-                        path.includes(expectedPath),
-                      );
-                    })
-                    .map((token: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
-                      for (const referenced of collection.getTokensDirectlyReferencing(
-                        token.name,
-                      )) {
-                        toRedeclare.add(JSON.stringify(referenced.name));
-                      }
-
-                      return designTokensCollectionTokenToCssVariableDeclaration(
-                        {
-                          ...token,
-                          type: collection.resolve(token).type,
-                        },
-                        cssOptions,
-                      );
-                    }),
-                );
-
-                const declarationsToRedeclare: CssVariableDeclaration[] = Array.from(
-                  toRedeclare.values().map((referenced: string): CssVariableDeclaration => {
-                    const name: ArrayDesignTokenName = JSON.parse(referenced);
-                    const token: GenericDesignTokensCollectionToken = collection.get(name);
-
-                    return designTokensCollectionTokenToCssVariableDeclaration(
+                  collection.tokens(),
+                  (token: GenericDesignTokensCollectionToken): CssVariableDeclaration =>
+                    designTokensCollectionTokenToCssVariableDeclaration(
                       {
                         ...token,
                         type: collection.resolve(token).type,
                       },
                       cssOptions,
-                    );
-                  }),
+                    ),
                 );
 
-                let cssVariables: string = cssVariableDeclarationsToString(declarations);
-
-                if (declarationsToRedeclare.length > 0) {
-                  cssVariables +=
-                    '\n\n' +
-                    dedent`
-                      /* REDECLARED */
-                      
-                      ${cssVariableDeclarationsToString(declarationsToRedeclare)}
-                    `;
-                }
+                const files: ModifierContextCssFiles = buildModifierContextCssFiles({
+                  modifier,
+                  context,
+                  declarations,
+                  baseDeclarations,
+                });
 
                 await Promise.all([
-                  writeTextFileSafe(
-                    `${modifierOutputDirectory}/${context}.root.css`,
-                    wrapCssVariableDeclarationsWithCssSelector(
-                      cssVariables,
-                      ':root,\n:host',
-                      CSS_AUTO_GENERATED_FILE_HEADER,
-                    ),
-                  ),
-                  writeTextFileSafe(
-                    `${modifierOutputDirectory}/${context}.attr.css`,
-                    wrapCssVariableDeclarationsWithCssSelector(
-                      cssVariables,
-                      `[data-esds-${modifier}="${context}"]`,
-                      CSS_AUTO_GENERATED_FILE_HEADER,
-                    ),
-                  ),
+                  writeTextFileSafe(`${modifierOutputDirectory}/${context}.root.css`, files.root),
+                  writeTextFileSafe(`${modifierOutputDirectory}/${context}.attr.css`, files.attr),
                 ]);
               });
             }
