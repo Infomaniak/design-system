@@ -99,6 +99,10 @@ For complete single-file context ingestion, see [Full Design System Documentatio
 
 - [Help and Feedback](llms/help-and-feedback.md): Questions, bug reports, or feedback about the Design System? Internal consumers can reach out to the Design System te...
 
+## Playground
+
+- [Playground](llms/playground.md): The [Playground](./playground/index.html) is an in-browser code editor for the design system: write HTML and TypeScri...
+
 ## Optional
 
 - [Design Tokens/CHANGELOG](llms/design-tokens/changelog.md): Offsets, blur and spread values are unchanged.
