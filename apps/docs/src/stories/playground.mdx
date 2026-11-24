@@ -8,10 +8,8 @@ The [Playground](./playground/index.html) is an in-browser code editor for the d
 
 **→ [Open the Playground](./playground/index.html)**
 
-## Pinning versions
+## Versions
 
-To reproduce an issue against a specific release, edit the versions directly in the snippet:
+The snippet loads the `latest` published packages by default. Both the `package.json` dependencies and the `<link>` in `index.html` accept the same specifiers: a moving dist-tag (`rc`, `dev`) or an exact version.
 
-- `package.json` → `"@infomaniak-design-system/components": "0.7.1"` (exact version), `"rc"` or
-  `"dev"` (dist-tags) instead of `"latest"`.
-- `index.html` → the tokens `<link>` URLs (`@latest`, `@0.10.0`, `@rc`, …).
+- Reproduce an issue on a specific build: use the **exact version**. Copy the string from the [components](https://www.npmjs.com/package/@infomaniak-design-system/components?activeTab=versions) or [tokens](https://www.npmjs.com/package/@infomaniak-design-system/tokens?activeTab=versions) versions tab, e.g. `"@infomaniak-design-system/components": "0.7.2-rc.1795441900506"` or `…/tokens@0.11.0-rc.1795425232343/…` in a `<link>`.
