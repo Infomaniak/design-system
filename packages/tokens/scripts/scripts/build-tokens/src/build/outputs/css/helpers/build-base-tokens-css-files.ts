@@ -12,16 +12,26 @@ export interface BaseTokensCssFiles {
 
 export function buildBaseTokensCssFiles(
   declarations: readonly CssVariableDeclaration[],
+  dynamicNames: ReadonlySet<string>,
 ): BaseTokensCssFiles {
   const { leaves, aliases }: PartitionedCssVariableDeclarations =
     partitionCssVariableDeclarations(declarations);
 
+  const staticAliases: CssVariableDeclaration[] = aliases.filter(
+    (declaration: CssVariableDeclaration): boolean => !dynamicNames.has(declaration.name),
+  );
+  const dynamicAliases: CssVariableDeclaration[] = aliases.filter(
+    (declaration: CssVariableDeclaration): boolean => dynamicNames.has(declaration.name),
+  );
+
+  const scopeDeclarations: readonly CssVariableDeclaration[] = [...leaves, ...staticAliases];
+
   return {
-    'tokens.root.css': cssVariableDeclarationsToTwoBlockString(leaves, aliases, {
+    'tokens.root.css': cssVariableDeclarationsToTwoBlockString(scopeDeclarations, dynamicAliases, {
       leavesSelector: ':root,\n:host',
       aliasesSelector: ':host,\n:where(*)',
     }),
-    'tokens.attr.css': cssVariableDeclarationsToTwoBlockString(leaves, aliases, {
+    'tokens.attr.css': cssVariableDeclarationsToTwoBlockString(scopeDeclarations, dynamicAliases, {
       leavesSelector: '[data-esds-tokens]',
       aliasesSelector: '[data-esds-tokens],\n[data-esds-tokens] :where(*)',
     }),

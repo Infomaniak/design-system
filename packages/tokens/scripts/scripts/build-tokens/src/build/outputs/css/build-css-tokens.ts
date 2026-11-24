@@ -16,6 +16,7 @@ import {
   buildModifierContextCssFiles,
   type ModifierContextCssFiles,
 } from './helpers/build-modifier-context-css-files.ts';
+import { computeDynamicTokenNames } from './helpers/compute-dynamic-token-names.ts';
 import { CSS_AUTO_GENERATED_FILE_HEADER } from './helpers/css-variable-declarations-to-two-block-string.ts';
 
 export interface BuildCssTokensOptions {
@@ -44,6 +45,12 @@ export function buildCssTokens({
       }),
     };
 
+    const dynamicTokenNames: ReadonlySet<string> = computeDynamicTokenNames({
+      baseCollection,
+      modifiers,
+      cssOptions,
+    });
+
     await logger.asyncTask('main', async (): Promise<void> => {
       const declarations: CssVariableDeclaration[] = Array.from(
         baseCollection.tokens(),
@@ -57,7 +64,7 @@ export function buildCssTokens({
           ),
       );
 
-      const files: BaseTokensCssFiles = buildBaseTokensCssFiles(declarations);
+      const files: BaseTokensCssFiles = buildBaseTokensCssFiles(declarations, dynamicTokenNames);
 
       await Promise.all([
         writeTextFileSafe(`${cssOutputDirectory}/tokens.root.css`, files['tokens.root.css']),
