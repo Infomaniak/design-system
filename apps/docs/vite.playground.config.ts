@@ -62,21 +62,12 @@ function copyPlaygroundWorkerTypeScript(): Plugin {
  */
 const PLAYGROUND_SANDBOX_BASE_URL = `https://unpkg.com/playground-elements@${version}/`;
 
-/**
- * Remote Infomaniak Sans stylesheet for the page chrome, same mechanism as the
- * Storybook build (workflow-provided env, dev fallback).
- */
-const PLAYGROUND_FONTS_CSS_URL =
-  process.env.VITE_FONTS_CSS_URL ??
-  'https://fonts.storage.infomaniak.com/design-system/dev/infomaniak-sans.min.css';
-
 export default defineConfig({
   root: fileURLToPath(new URL('./playground', import.meta.url)),
   base: './',
   publicDir: false,
   define: {
     PLAYGROUND_SANDBOX_BASE_URL: JSON.stringify(PLAYGROUND_SANDBOX_BASE_URL),
-    PLAYGROUND_FONTS_CSS_URL: JSON.stringify(PLAYGROUND_FONTS_CSS_URL),
   },
   plugins: [copyPlaygroundWorkerTypeScript()],
   build: {

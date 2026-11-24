@@ -6,6 +6,10 @@
   color-scheme: light;
 }
 
+html {
+  font-family: var(--esds-font-family-base), sans-serif;
+}
+
 html,
 body {
   height: 100%;
@@ -16,7 +20,6 @@ body {
 body {
   display: flex;
   flex-direction: column;
-  font-family: var(--esds-font-family-base), system-ui, sans-serif;
   color: var(--esds-color-gray-900);
   background: var(--esds-color-background-elevation-surface);
 }

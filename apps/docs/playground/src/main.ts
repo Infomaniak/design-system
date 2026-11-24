@@ -15,15 +15,6 @@ import './theme.css';
  */
 declare const PLAYGROUND_SANDBOX_BASE_URL: string;
 
-/** Remote Infomaniak Sans stylesheet, baked at build time (same env as Storybook). */
-declare const PLAYGROUND_FONTS_CSS_URL: string;
-
-/** Load Infomaniak Sans for the page chrome. */
-const fontsLink = document.createElement('link');
-fontsLink.rel = 'stylesheet';
-fontsLink.href = PLAYGROUND_FONTS_CSS_URL;
-document.head.append(fontsLink);
-
 interface PlaygroundProjectElement extends HTMLElement {
   config: PlaygroundProjectManifest;
   modified: boolean;
