@@ -64,6 +64,9 @@ The main file `@infomaniak-design-system/tokens/css/tokens.root.css` **must alwa
 > [!WARNING]
 > Do **not** import it inside a shadow root: values must be inherited from the document, otherwise theming breaks inside the component.
 
+> [!NOTE]
+> Do **not** override design system CSS variables directly: modifiers are the only supported override mechanism. Manually overriding a dynamic alias applies to the element carrying the override but is re-declared per element below it, so it does not reach its descendants.
+
 For the other `*.root.css` files, you **must** use _media queries_ with theme files to prevent conflicts (e.g., loading both light and dark simultaneously).
 
 _Example:_

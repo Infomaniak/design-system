@@ -1,0 +1,13 @@
+# Playground
+
+> The [Playground](../playground/index.html) is an in-browser code editor for the design system: write HTML and TypeScri...
+
+The [Playground](../playground/index.html) is an in-browser code editor for the design system: write HTML and TypeScript using ESDS components **with no install, no build and no hosting**, then share your snippet as a plain URL. This is useful to quickly prototype an idea or to reproduce a bug.
+
+**→ [Open the Playground](../playground/index.html)**
+
+## Versions
+
+The snippet loads the `latest` published packages by default. Both the `package.json` dependencies and the `<link>` in `index.html` accept the same specifiers: a moving dist-tag (`rc`, `dev`) or an exact version.
+
+- Reproduce an issue on a specific build: use the **exact version**. Copy the string from the [components](https://www.npmjs.com/package/@infomaniak-design-system/components?activeTab=versions) or [tokens](https://www.npmjs.com/package/@infomaniak-design-system/tokens?activeTab=versions) versions tab, e.g. `"@infomaniak-design-system/components": "0.7.2-rc.1795441900506"` or `…/tokens@0.11.0-rc.1795425232343/…` in a `<link>`.
