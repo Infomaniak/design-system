@@ -6,9 +6,11 @@ import {
   designTokensCollectionTokenToCssVariableDeclaration,
   type DesignTokensCollectionTokenToCssVariableDeclarationOptions,
 } from '../../../../../../../shared/dtcg/resolver/to/css/token/design-tokens-collection-token-to-css-variable-declaration.ts';
+import type { BaseCssVariableDeclaration } from './build-base-css-variable-declarations.ts';
 
 export interface ComputeDynamicTokenNamesOptions {
   readonly baseCollection: DesignTokensCollection;
+  readonly baseTokenDeclarations: readonly BaseCssVariableDeclaration[];
   readonly modifiers: DesignTokenModifiers;
   readonly cssOptions: DesignTokensCollectionTokenToCssVariableDeclarationOptions;
 }
@@ -22,21 +24,14 @@ export interface ComputeDynamicTokenNamesOptions {
  */
 export function computeDynamicTokenNames({
   baseCollection,
+  baseTokenDeclarations,
   modifiers,
   cssOptions,
 }: ComputeDynamicTokenNamesOptions): ReadonlySet<string> {
   const baseDeclarations: Map<string, CssVariableDeclaration> = new Map();
   const tokenNameByCssName: Map<string, readonly string[]> = new Map();
 
-  for (const token of baseCollection.tokens()) {
-    const declaration: CssVariableDeclaration = designTokensCollectionTokenToCssVariableDeclaration(
-      {
-        ...token,
-        type: baseCollection.resolve(token).type,
-      },
-      cssOptions,
-    );
-
+  for (const { token, declaration } of baseTokenDeclarations) {
     baseDeclarations.set(declaration.name, declaration);
     tokenNameByCssName.set(declaration.name, token.name);
   }

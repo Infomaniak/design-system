@@ -12,6 +12,10 @@ import {
 import { createCssVariableNameGenerator } from '../../../../../../shared/dtcg/resolver/to/css/token/name/create-css-variable-name-generator.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import {
+  buildBaseCssVariableDeclarations,
+  type BaseCssVariableDeclaration,
+} from './helpers/build-base-css-variable-declarations.ts';
+import {
   buildBaseTokensCssFiles,
   type BaseTokensCssFiles,
 } from './helpers/build-base-tokens-css-files.ts';
@@ -48,26 +52,24 @@ export function buildCssTokens({
       }),
     };
 
+    const baseTokenDeclarations: readonly BaseCssVariableDeclaration[] =
+      buildBaseCssVariableDeclarations(baseCollection, cssOptions);
+    const baseDeclarations: readonly CssVariableDeclaration[] = baseTokenDeclarations.map(
+      ({ declaration }: BaseCssVariableDeclaration): CssVariableDeclaration => declaration,
+    );
+
     const dynamicTokenNames: ReadonlySet<string> = computeDynamicTokenNames({
       baseCollection,
+      baseTokenDeclarations,
       modifiers,
       cssOptions,
     });
 
     await logger.asyncTask('main', async (): Promise<void> => {
-      const declarations: CssVariableDeclaration[] = Array.from(
-        baseCollection.tokens(),
-        (token: GenericDesignTokensCollectionToken): CssVariableDeclaration =>
-          designTokensCollectionTokenToCssVariableDeclaration(
-            {
-              ...token,
-              type: baseCollection.resolve(token).type,
-            },
-            cssOptions,
-          ),
+      const files: BaseTokensCssFiles = buildBaseTokensCssFiles(
+        baseDeclarations,
+        dynamicTokenNames,
       );
-
-      const files: BaseTokensCssFiles = buildBaseTokensCssFiles(declarations, dynamicTokenNames);
 
       await Promise.all([
         writeTextFileSafe(`${cssOutputDirectory}/tokens.root.css`, files['tokens.root.css']),
@@ -77,18 +79,6 @@ export function buildCssTokens({
 
     await logger.asyncTask('modifier', async (logger: Logger): Promise<void> => {
       const modifiersOutputDirectory: string = `${cssOutputDirectory}/modifiers`;
-
-      const baseDeclarations: CssVariableDeclaration[] = Array.from(
-        baseCollection.tokens(),
-        (token: GenericDesignTokensCollectionToken): CssVariableDeclaration =>
-          designTokensCollectionTokenToCssVariableDeclaration(
-            {
-              ...token,
-              type: baseCollection.resolve(token).type,
-            },
-            cssOptions,
-          ),
-      );
 
       for (const [modifier, contexts] of modifiers.entries()) {
         await logger.asyncTask(modifier, async (logger: Logger): Promise<void> => {

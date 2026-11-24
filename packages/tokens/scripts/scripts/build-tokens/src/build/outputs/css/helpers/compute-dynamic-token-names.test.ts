@@ -4,11 +4,24 @@ import type { DesignTokenModifiers } from '../../../../../../../shared/dtcg/reso
 import type { DesignTokensCollectionTokenToCssVariableDeclarationOptions } from '../../../../../../../shared/dtcg/resolver/to/css/token/design-tokens-collection-token-to-css-variable-declaration.ts';
 import { createCssVariableNameGenerator } from '../../../../../../../shared/dtcg/resolver/to/css/token/name/create-css-variable-name-generator.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
+import { buildBaseCssVariableDeclarations } from './build-base-css-variable-declarations.ts';
 import { computeDynamicTokenNames } from './compute-dynamic-token-names.ts';
 
 const CSS_OPTIONS: DesignTokensCollectionTokenToCssVariableDeclarationOptions = {
   generateCssVariableName: createCssVariableNameGenerator({ prefix: 'esds' }),
 };
+
+function computeNames(
+  baseCollection: DesignTokensCollection,
+  modifiers: DesignTokenModifiers,
+): ReadonlySet<string> {
+  return computeDynamicTokenNames({
+    baseCollection,
+    baseTokenDeclarations: buildBaseCssVariableDeclarations(baseCollection, CSS_OPTIONS),
+    modifiers,
+    cssOptions: CSS_OPTIONS,
+  });
+}
 
 function createColorToken(
   name: readonly string[],
@@ -83,11 +96,10 @@ describe('computeDynamicTokenNames', () => {
       hex: '#91dfce',
     });
 
-    const names: ReadonlySet<string> = computeDynamicTokenNames({
-      baseCollection: createCollection(BASE_TOKENS),
-      modifiers: createModifiers(darkGray),
-      cssOptions: CSS_OPTIONS,
-    });
+    const names: ReadonlySet<string> = computeNames(
+      createCollection(BASE_TOKENS),
+      createModifiers(darkGray),
+    );
 
     expect(names.has('--esds-color-gray-500')).toBe(true);
   });
@@ -99,11 +111,10 @@ describe('computeDynamicTokenNames', () => {
       hex: '#91dfce',
     });
 
-    const names: ReadonlySet<string> = computeDynamicTokenNames({
-      baseCollection: createCollection(BASE_TOKENS),
-      modifiers: createModifiers(darkGray),
-      cssOptions: CSS_OPTIONS,
-    });
+    const names: ReadonlySet<string> = computeNames(
+      createCollection(BASE_TOKENS),
+      createModifiers(darkGray),
+    );
 
     expect(names.has('--esds-color-background-brand')).toBe(true);
     expect(names.has('--esds-button-background-color')).toBe(true);
@@ -116,11 +127,10 @@ describe('computeDynamicTokenNames', () => {
       hex: '#91dfce',
     });
 
-    const names: ReadonlySet<string> = computeDynamicTokenNames({
-      baseCollection: createCollection(BASE_TOKENS),
-      modifiers: createModifiers(darkGray),
-      cssOptions: CSS_OPTIONS,
-    });
+    const names: ReadonlySet<string> = computeNames(
+      createCollection(BASE_TOKENS),
+      createModifiers(darkGray),
+    );
 
     expect(names.has('--esds-color-background-surface')).toBe(false);
     expect(names.has('--esds-card-background-color')).toBe(false);
@@ -136,11 +146,10 @@ describe('computeDynamicTokenNames', () => {
       description: 'A different comment, same value.',
     };
 
-    const names: ReadonlySet<string> = computeDynamicTokenNames({
-      baseCollection: createCollection(BASE_TOKENS),
-      modifiers: createModifiers(darkGray),
-      cssOptions: CSS_OPTIONS,
-    });
+    const names: ReadonlySet<string> = computeNames(
+      createCollection(BASE_TOKENS),
+      createModifiers(darkGray),
+    );
 
     expect(names.has('--esds-color-gray-500')).toBe(false);
   });
@@ -167,11 +176,7 @@ describe('computeDynamicTokenNames', () => {
       ],
     ]);
 
-    const names: ReadonlySet<string> = computeDynamicTokenNames({
-      baseCollection: createCollection(BASE_TOKENS),
-      modifiers,
-      cssOptions: CSS_OPTIONS,
-    });
+    const names: ReadonlySet<string> = computeNames(createCollection(BASE_TOKENS), modifiers);
 
     expect(names.has('--esds-color-gray-500')).toBe(true);
     expect(names.has('--esds-color-gray-100')).toBe(true);
