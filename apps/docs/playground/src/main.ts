@@ -4,6 +4,7 @@ import 'playground-elements/playground-preview.js';
 import 'playground-elements/playground-project.js';
 import 'playground-elements/playground-tab-bar.js';
 import { DEFAULT_PROJECT_FILES, type PlaygroundProjectManifest } from './default-template.ts';
+import { decodeConfig, encodeConfig, SHARE_HASH_KEY } from './encode-config.ts';
 import './theme.css';
 
 /**
@@ -21,69 +22,16 @@ interface PlaygroundProjectElement extends HTMLElement {
   sandboxBaseUrl: string;
 }
 
-const HASH_KEY = 'code';
 const HASH_DEBOUNCE_MS = 400;
-
-/**
- * Serialize the project for a share link: only the editable essentials
- * (`content`, `selected`). Playground-inferred `contentType`s (e.g. its
- * `video/mp2t` guess for `.ts` files) and labels are dropped — they are
- * re-inferred on load and would bloat the URL.
- */
-function serializeConfig(config: PlaygroundProjectManifest): PlaygroundProjectManifest {
-  return {
-    files: Object.fromEntries(
-      Object.entries(config.files ?? {}).map(([name, file]) => [
-        name,
-        file.selected === true
-          ? { content: file.content, selected: true }
-          : { content: file.content },
-      ]),
-    ),
-  };
-}
-
-function encodeConfig(config: PlaygroundProjectManifest): string {
-  const bytes = new TextEncoder().encode(JSON.stringify(serializeConfig(config)));
-  let binary = '';
-  for (const byte of bytes) {
-    binary += String.fromCharCode(byte);
-  }
-  return btoa(binary).replaceAll('+', '-').replaceAll('/', '_').replace(/=+$/, '');
-}
-
-function decodeConfig(hash: string): PlaygroundProjectManifest | undefined {
-  const match = hash.match(new RegExp(`#${HASH_KEY}=([A-Za-z0-9_-]+)`));
-  if (match === null) {
-    return undefined;
-  }
-  let base64 = match[1].replaceAll('-', '+').replaceAll('_', '/');
-  base64 = base64.padEnd(base64.length + ((4 - (base64.length % 4)) % 4), '=');
-  try {
-    const bytes = Uint8Array.from(atob(base64), (char) => char.charCodeAt(0));
-    const config: unknown = JSON.parse(new TextDecoder().decode(bytes));
-    if (
-      typeof config !== 'object' ||
-      config === null ||
-      typeof (config as PlaygroundProjectManifest).files !== 'object'
-    ) {
-      return undefined;
-    }
-    return config as PlaygroundProjectManifest;
-  } catch {
-    return undefined;
-  }
-}
 
 const project = document.querySelector<PlaygroundProjectElement>('#project')!;
 project.sandboxBaseUrl = PLAYGROUND_SANDBOX_BASE_URL;
 
 const defaultConfig: PlaygroundProjectManifest = { files: structuredClone(DEFAULT_PROJECT_FILES) };
-const initialConfig: PlaygroundProjectManifest = decodeConfig(location.hash) ?? defaultConfig;
-project.config = structuredClone(initialConfig);
 
 /* Live share URL: debounce the serialization of the current project state. */
 let hashTimeout: number | undefined = undefined;
+let latestEncode = 0;
 project.addEventListener('compileDone', () => {
   window.clearTimeout(hashTimeout);
   hashTimeout = window.setTimeout(() => {
@@ -91,7 +39,13 @@ project.addEventListener('compileDone', () => {
     if (currentConfig === undefined || !project.modified) {
       return;
     }
-    history.replaceState(null, '', `#${HASH_KEY}=${encodeConfig(currentConfig)}`);
+    const request = ++latestEncode;
+    void encodeConfig(currentConfig).then((payload) => {
+      // Ignore stale encodings: a newer edit must win, whatever resolved first.
+      if (payload !== undefined && request === latestEncode) {
+        history.replaceState(null, '', `#${SHARE_HASH_KEY}=${payload}`);
+      }
+    });
   }, HASH_DEBOUNCE_MS);
 });
 
@@ -99,11 +53,17 @@ project.addEventListener('compileDone', () => {
  * A hash pasted into the same tab applies the shared snippet. Our own
  * `replaceState` updates don't fire `hashchange`, so there is no loop.
  */
-window.addEventListener('hashchange', () => {
-  const incomingConfig = decodeConfig(location.hash);
-  if (incomingConfig !== undefined) {
+let latestDecode = 0;
+const applyHash = async (): Promise<void> => {
+  const request = ++latestDecode;
+  const incomingConfig = await decodeConfig(location.hash);
+  // Ignore stale decodes when several hash changes race.
+  if (incomingConfig !== undefined && request === latestDecode) {
     project.config = incomingConfig;
   }
+};
+window.addEventListener('hashchange', () => {
+  void applyHash();
 });
 
 const copyLinkButton = document.querySelector<HTMLButtonElement>('#copy-link')!;
@@ -125,3 +85,7 @@ resetButton.addEventListener('click', () => {
   project.config = structuredClone(defaultConfig);
   history.replaceState(null, '', location.pathname + location.search);
 });
+
+/* Initial load: apply the shared snippet when a hash is present. */
+const initialConfig = await decodeConfig(location.hash);
+project.config = structuredClone(initialConfig ?? defaultConfig);
