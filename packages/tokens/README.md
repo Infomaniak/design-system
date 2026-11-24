@@ -167,11 +167,22 @@ The tokens are published as a npm package: `@infomaniak-design-system/tokens`.
 
 The `css/tokens.root.css` file contains all the _base_ tokens as CSS variables and must be imported in every project.
 
-The `css/modifiers/<modifier>/<context>.(root|attr).css` contains the tokens for the given modifier and context.
+The `css/modifiers/<modifier>/<context>.(root|attr).css` contains only the tokens the given modifier and context **actually change** (their value differs from the base): a token merely referencing a changed token is not re-emitted, it re-resolves itself.
+
+The generated CSS distinguishes two kinds of tokens:
+
+- **Leaf tokens** (literal values) and **static aliases** (aliases whose dependencies are never overridden by any modifier) are declared once, on `:root, :host`: they propagate by inheritance.
+- **Dynamic aliases** (aliases whose dependencies are overridden by at least one modifier) are declared under `:host, :where(*)`: they are re-resolved **per element**, so a modifier applied to a scope affects that element and all its descendants.
 
 > [!NOTE]
-> The `root` suffix contains the tokens wrapped by the selector: `:root, :host`
-> The `attr` suffix contains the tokens wrapped by the attribute selector: `[data-esds-<modifier>="<context>"]`
+> The `root` suffix contains the tokens wrapped by the selector: `:root, :host` (leaves and static aliases) and `:host, :where(*)` (dynamic aliases).
+> The `attr` suffix contains the tokens wrapped by the attribute selector `[data-esds-<modifier>="<context>"]`, followed by a reapplication block `[data-esds-<modifier>="<context>"] :where(*)` so the override reaches every descendant.
+
+> [!WARNING]
+> Do **not** import `tokens.root.css` inside a shadow root: its `:where(*)` block would re-declare the token defaults inside the component and break attribute-based theming. Import it at the document level; values inherit into shadow trees.
+
+> [!NOTE]
+> Modifiers are the only supported mechanism to override a token inside a subtree: overriding a never-overridden token manually in a subtree is not guaranteed to propagate to the static aliases depending on it. Modifier declarations whose value is identical to the base in every context are ignored by the CSS output.
 
 ##### Import
 
