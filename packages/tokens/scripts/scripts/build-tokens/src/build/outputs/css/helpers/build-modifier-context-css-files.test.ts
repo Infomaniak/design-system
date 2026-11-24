@@ -117,4 +117,15 @@ describe('buildModifierContextCssFiles', () => {
 
     expect(attr).toContain('--esds-color-context-only: var(--esds-color-pink-600);');
   });
+
+  it('ignores description-only differences from the base', () => {
+    const { attr } = buildModifierContextCssFiles({
+      modifier: 'product',
+      context: 'mail',
+      declarations: [...MAIL, { ...MAIL[1]!, description: 'A different comment, same value.' }],
+      baseDeclarations: BASE,
+    });
+
+    expect(attr).not.toContain('--esds-color-background-brand-infomaniak:');
+  });
 });

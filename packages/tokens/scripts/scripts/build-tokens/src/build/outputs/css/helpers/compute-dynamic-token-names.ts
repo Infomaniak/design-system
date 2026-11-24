@@ -1,7 +1,7 @@
 import type { DesignTokensCollection } from '../../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { DesignTokenModifiers } from '../../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
+import { areCssVariableDeclarationValuesEqual } from '../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/are-css-variable-declaration-values-equal.ts';
 import type { CssVariableDeclaration } from '../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
-import { cssVariableDeclarationToString } from '../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/to/css-variable-declaration-to-string.ts';
 import {
   designTokensCollectionTokenToCssVariableDeclaration,
   type DesignTokensCollectionTokenToCssVariableDeclarationOptions,
@@ -58,10 +58,7 @@ export function computeDynamicTokenNames({
           );
         const base: CssVariableDeclaration | undefined = baseDeclarations.get(declaration.name);
 
-        if (
-          base !== undefined &&
-          cssVariableDeclarationToString(base) === cssVariableDeclarationToString(declaration)
-        ) {
+        if (base !== undefined && areCssVariableDeclarationValuesEqual(base, declaration)) {
           continue;
         }
 

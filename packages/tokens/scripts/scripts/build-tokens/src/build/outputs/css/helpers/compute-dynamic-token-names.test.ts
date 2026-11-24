@@ -126,6 +126,25 @@ describe('computeDynamicTokenNames', () => {
     expect(names.has('--esds-card-background-color')).toBe(false);
   });
 
+  it('does not mark a token dynamic for a description-only difference', () => {
+    const darkGray: GenericDesignTokensCollectionToken = {
+      ...createColorToken(['color', 'gray', '500'], {
+        colorSpace: 'srgb',
+        components: [0.53, 0.53, 0.53],
+        hex: '#888888',
+      }),
+      description: 'A different comment, same value.',
+    };
+
+    const names: ReadonlySet<string> = computeDynamicTokenNames({
+      baseCollection: createCollection(BASE_TOKENS),
+      modifiers: createModifiers(darkGray),
+      cssOptions: CSS_OPTIONS,
+    });
+
+    expect(names.has('--esds-color-gray-500')).toBe(false);
+  });
+
   it('unions overrides across contexts and modifiers', () => {
     const darkGray = createColorToken(['color', 'gray', '500'], {
       colorSpace: 'srgb',
