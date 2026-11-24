@@ -1,8 +1,8 @@
-import { indent } from '../../../../../../../../../../scripts/helpers/misc/string/indent/indent.ts';
-import type { CssVariableDeclaration } from '../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
-import { cssVariableDeclarationsToString } from '../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/to/css-variable-declarations-to-string.ts';
-import { wrapCssVariableDeclarationsWithCssSelector } from '../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/to/wrap-css-variable-declarations-with-css-selector.ts';
-import { AUTO_GENERATED_FILE_HEADER } from '../../../constants/auto-generated-file-header.ts';
+import { indent } from '../../../../../../../../../../../scripts/helpers/misc/string/indent/indent.ts';
+import type { CssVariableDeclaration } from '../../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
+import { cssVariableDeclarationsToString } from '../../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/to/css-variable-declarations-to-string.ts';
+import { wrapCssVariableDeclarationsWithCssSelector } from '../../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/to/wrap-css-variable-declarations-with-css-selector.ts';
+import { AUTO_GENERATED_FILE_HEADER } from '../../../../constants/auto-generated-file-header.ts';
 
 export const CSS_AUTO_GENERATED_FILE_HEADER = `/*
   ${indent(AUTO_GENERATED_FILE_HEADER)}

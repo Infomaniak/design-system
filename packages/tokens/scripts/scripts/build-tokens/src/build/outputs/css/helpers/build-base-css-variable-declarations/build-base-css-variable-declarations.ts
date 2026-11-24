@@ -1,10 +1,10 @@
-import type { DesignTokensCollection } from '../../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
-import type { CssVariableDeclaration } from '../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
+import type { DesignTokensCollection } from '../../../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
+import type { CssVariableDeclaration } from '../../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
 import {
   designTokensCollectionTokenToCssVariableDeclaration,
   type DesignTokensCollectionTokenToCssVariableDeclarationOptions,
-} from '../../../../../../../shared/dtcg/resolver/to/css/token/design-tokens-collection-token-to-css-variable-declaration.ts';
-import type { GenericDesignTokensCollectionToken } from '../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
+} from '../../../../../../../../shared/dtcg/resolver/to/css/token/design-tokens-collection-token-to-css-variable-declaration.ts';
+import type { GenericDesignTokensCollectionToken } from '../../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 
 export interface BaseCssVariableDeclaration {
   readonly token: GenericDesignTokensCollectionToken;

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { DesignTokensCollection } from '../../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
-import type { DesignTokensCollectionTokenToCssVariableDeclarationOptions } from '../../../../../../../shared/dtcg/resolver/to/css/token/design-tokens-collection-token-to-css-variable-declaration.ts';
-import { createCssVariableNameGenerator } from '../../../../../../../shared/dtcg/resolver/to/css/token/name/create-css-variable-name-generator.ts';
-import type { GenericDesignTokensCollectionToken } from '../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
+import { DesignTokensCollection } from '../../../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
+import type { DesignTokensCollectionTokenToCssVariableDeclarationOptions } from '../../../../../../../../shared/dtcg/resolver/to/css/token/design-tokens-collection-token-to-css-variable-declaration.ts';
+import { createCssVariableNameGenerator } from '../../../../../../../../shared/dtcg/resolver/to/css/token/name/create-css-variable-name-generator.ts';
+import type { GenericDesignTokensCollectionToken } from '../../../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import { buildBaseCssVariableDeclarations } from './build-base-css-variable-declarations.ts';
 
 const CSS_OPTIONS: DesignTokensCollectionTokenToCssVariableDeclarationOptions = {

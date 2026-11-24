@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { CssVariableDeclaration } from '../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
+import type { CssVariableDeclaration } from '../../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
 import { buildBaseTokensCssFiles } from './build-base-tokens-css-files.ts';
 
 const LEAF: CssVariableDeclaration = {

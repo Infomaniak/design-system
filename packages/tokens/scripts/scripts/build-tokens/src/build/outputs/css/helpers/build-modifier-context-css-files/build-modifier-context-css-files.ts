@@ -1,10 +1,10 @@
-import { areCssVariableDeclarationValuesEqual } from '../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/are-css-variable-declaration-values-equal.ts';
-import type { CssVariableDeclaration } from '../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
+import { areCssVariableDeclarationValuesEqual } from '../../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/are-css-variable-declaration-values-equal.ts';
+import type { CssVariableDeclaration } from '../../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
 import {
   partitionCssVariableDeclarations,
   type PartitionedCssVariableDeclarations,
-} from '../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/references-css-variable.ts';
-import { cssVariableDeclarationsToTwoBlockString } from './css-variable-declarations-to-two-block-string.ts';
+} from '../../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/references-css-variable.ts';
+import { cssVariableDeclarationsToTwoBlockString } from '../css-variable-declarations-to-two-block-string/css-variable-declarations-to-two-block-string.ts';
 
 export interface ModifierContextCssFiles {
   readonly root: string;

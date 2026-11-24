@@ -14,17 +14,17 @@ import type { GenericDesignTokensCollectionToken } from '../../../../../../share
 import {
   buildBaseCssVariableDeclarations,
   type BaseCssVariableDeclaration,
-} from './helpers/build-base-css-variable-declarations.ts';
+} from './helpers/build-base-css-variable-declarations/build-base-css-variable-declarations.ts';
 import {
   buildBaseTokensCssFiles,
   type BaseTokensCssFiles,
-} from './helpers/build-base-tokens-css-files.ts';
+} from './helpers/build-base-tokens-css-files/build-base-tokens-css-files.ts';
 import {
   buildModifierContextCssFiles,
   type ModifierContextCssFiles,
-} from './helpers/build-modifier-context-css-files.ts';
-import { computeDynamicTokenNames } from './helpers/compute-dynamic-token-names.ts';
-import { CSS_AUTO_GENERATED_FILE_HEADER } from './helpers/css-variable-declarations-to-two-block-string.ts';
+} from './helpers/build-modifier-context-css-files/build-modifier-context-css-files.ts';
+import { computeDynamicTokenNames } from './helpers/compute-dynamic-token-names/compute-dynamic-token-names.ts';
+import { CSS_AUTO_GENERATED_FILE_HEADER } from './helpers/css-variable-declarations-to-two-block-string/css-variable-declarations-to-two-block-string.ts';
 
 export interface BuildCssTokensOptions {
   readonly baseCollection: DesignTokensCollection;

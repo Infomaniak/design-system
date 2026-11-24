@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { CssVariableDeclaration } from '../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
+import type { CssVariableDeclaration } from '../../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
 import { buildModifierContextCssFiles } from './build-modifier-context-css-files.ts';
 
 const BASE: CssVariableDeclaration[] = [

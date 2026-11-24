@@ -1,12 +1,12 @@
-import type { DesignTokensCollection } from '../../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
-import type { DesignTokenModifiers } from '../../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
-import { areCssVariableDeclarationValuesEqual } from '../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/are-css-variable-declaration-values-equal.ts';
-import type { CssVariableDeclaration } from '../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
+import type { DesignTokensCollection } from '../../../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
+import type { DesignTokenModifiers } from '../../../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
+import { areCssVariableDeclarationValuesEqual } from '../../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/are-css-variable-declaration-values-equal.ts';
+import type { CssVariableDeclaration } from '../../../../../../../../shared/dtcg/resolver/to/css/css-variable-declaration/css-variable-declaration.ts';
 import {
   designTokensCollectionTokenToCssVariableDeclaration,
   type DesignTokensCollectionTokenToCssVariableDeclarationOptions,
-} from '../../../../../../../shared/dtcg/resolver/to/css/token/design-tokens-collection-token-to-css-variable-declaration.ts';
-import type { BaseCssVariableDeclaration } from './build-base-css-variable-declarations.ts';
+} from '../../../../../../../../shared/dtcg/resolver/to/css/token/design-tokens-collection-token-to-css-variable-declaration.ts';
+import type { BaseCssVariableDeclaration } from '../build-base-css-variable-declarations/build-base-css-variable-declarations.ts';
 
 export interface ComputeDynamicTokenNamesOptions {
   readonly baseCollection: DesignTokensCollection;
