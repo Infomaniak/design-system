@@ -1,7 +1,6 @@
 import { writeTextFileSafe } from '../../../../../../../../../scripts/helpers/file/write-text-file-safe.ts';
 import type { Logger } from '../../../../../../../../../scripts/helpers/log/logger.ts';
 import { dedent } from '../../../../../../../../../scripts/helpers/misc/string/dedent/dedent.ts';
-import { indent } from '../../../../../../../../../scripts/helpers/misc/string/indent/indent.ts';
 import { removeTrailingSlash } from '../../../../../../../../../scripts/helpers/path/remove-traling-slash.ts';
 import { DesignTokensCollection } from '../../../../../../shared/dtcg/resolver/design-tokens-collection.ts';
 import type { DesignTokenModifiers } from '../../../../../../shared/dtcg/resolver/modifiers/design-token-modifiers.ts';
@@ -15,12 +14,10 @@ import {
 import { createCssVariableNameGenerator } from '../../../../../../shared/dtcg/resolver/to/css/token/name/create-css-variable-name-generator.ts';
 import type { GenericDesignTokensCollectionToken } from '../../../../../../shared/dtcg/resolver/token/design-tokens-collection-token.ts';
 import type { ArrayDesignTokenName } from '../../../../../../shared/dtcg/resolver/token/name/array-design-token-name.ts';
-import { AUTO_GENERATED_FILE_HEADER } from '../../constants/auto-generated-file-header.ts';
-
-const CSS_AUTO_GENERATED_FILE_HEADER = `/*
-  ${indent(AUTO_GENERATED_FILE_HEADER)}
-*/
-`;
+import {
+  buildBaseTokensCssFiles,
+  CSS_AUTO_GENERATED_FILE_HEADER,
+} from './helpers/build-base-tokens-css-files.ts';
 
 export interface BuildCssTokensOptions {
   readonly baseCollection: DesignTokensCollection;
@@ -49,37 +46,23 @@ export function buildCssTokens({
     };
 
     await logger.asyncTask('main', async (): Promise<void> => {
-      const cssVariables: string = cssVariableDeclarationsToString(
-        baseCollection
-          .tokens()
-          .map((token: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
-            return designTokensCollectionTokenToCssVariableDeclaration(
-              {
-                ...token,
-                type: baseCollection.resolve(token).type,
-              },
-              cssOptions,
-            );
-          }),
-      );
+      const declarations: CssVariableDeclaration[] = baseCollection
+        .tokens()
+        .map((token: GenericDesignTokensCollectionToken): CssVariableDeclaration => {
+          return designTokensCollectionTokenToCssVariableDeclaration(
+            {
+              ...token,
+              type: baseCollection.resolve(token).type,
+            },
+            cssOptions,
+          );
+        });
+
+      const files: BaseTokensCssFiles = buildBaseTokensCssFiles(declarations);
 
       await Promise.all([
-        writeTextFileSafe(
-          `${cssOutputDirectory}/tokens.root.css`,
-          wrapCssVariableDeclarationsWithCssSelector(
-            cssVariables,
-            ':root,\n:host',
-            CSS_AUTO_GENERATED_FILE_HEADER,
-          ),
-        ),
-        writeTextFileSafe(
-          `${cssOutputDirectory}/tokens.attr.css`,
-          wrapCssVariableDeclarationsWithCssSelector(
-            cssVariables,
-            `[data-esds-tokens]`,
-            CSS_AUTO_GENERATED_FILE_HEADER,
-          ),
-        ),
+        writeTextFileSafe(`${cssOutputDirectory}/tokens.root.css`, files['tokens.root.css']),
+        writeTextFileSafe(`${cssOutputDirectory}/tokens.attr.css`, files['tokens.attr.css']),
       ]);
     });
 
