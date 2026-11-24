@@ -182,7 +182,7 @@ The generated CSS distinguishes two kinds of tokens:
 > Do **not** import `tokens.root.css` inside a shadow root: its `:where(*)` block would re-declare the token defaults inside the component and break attribute-based theming. Import it at the document level; values inherit into shadow trees.
 
 > [!NOTE]
-> Modifiers are the only supported mechanism to override a token inside a subtree: overriding a never-overridden token manually in a subtree is not guaranteed to propagate to the static aliases depending on it. Modifier declarations whose value is identical to the base in every context are ignored by the CSS output.
+> Do **not** override design system CSS variables directly: modifiers are the only supported override mechanism. Overriding a never-overridden token manually in a subtree is not guaranteed to propagate to the static aliases depending on it, and overriding a dynamic alias manually applies to the element carrying the override but is re-declared per element below it, so it does not reach its descendants. Modifier declarations whose value is identical to the base in every context are ignored by the CSS output.
 
 ##### Import
 
