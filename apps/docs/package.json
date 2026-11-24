@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "yarn workspace @infomaniak-design-system/components analyze:cem --watch & storybook dev -p 6006",
-    "build": "yarn build:playground && storybook build && yarn build:llms",
+    "build": "yarn build:playground && yarn build:storybook && yarn build:llms",
     "build:playground": "tsc --noEmit -p tsconfig.playground.json && vite build --config vite.playground.config.ts",
+    "build:storybook": "storybook build",
     "build:llms": "node --no-warnings=ExperimentalWarning scripts/generate-llms-docs/generate-llms-docs.script.ts --dist=storybook-static"
   },
   "dependencies": {
