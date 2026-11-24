@@ -48,6 +48,64 @@
   <body>
     <h1>Hello world !</h1>
 
+    <div theme="dark" style="color: var(--color-button)">test</div>
+    <div  product="mail" style="color: var(--color-button)">test</div>
+
+<!--    <div theme="dark" product="mail" style="color: var(&#45;&#45;color-button)">test</div>-->
+<!--    <div product="mail" theme="dark" style="color: var(&#45;&#45;color-button)">test</div>-->
+<!--    <div theme="dark"><div product="mail" style="color: var(&#45;&#45;color-button)">test</div></div>-->
+<!--    <div product="mail"><div theme="dark" style="color: var(&#45;&#45;color-button)">test</div></div>-->
+
+    <div theme="dark" product="mail" button="primary" style="color: var(--color-button)">test</div>
+    <div product="mail" theme="dark" button="primary" style="color: var(--color-button)">test</div>
+
+    <div theme="dark">
+      <div product="mail">
+        <div button="primary" style="color: var(--color-button)">
+          test
+        </div>
+      </div>
+    </div>
+
+    <div product="mail">
+      <div theme="dark" style="color: var(--color-button)">
+        <div button="primary" style="color: var(--color-button)">
+          test
+        </div>
+      </div>
+    </div>
+
+    <div theme="dark">
+      <div product="mail" style="color: var(--color-button)">
+        <div button="secondary" style="color: var(--color-button)">
+          test
+        </div>
+      </div>
+    </div>
+
+    <div product="mail">
+      <div theme="dark" style="color: var(--color-button)">
+        <div button="secondary" style="color: var(--color-button)">
+          test
+        </div>
+      </div>
+    </div>
+
+    <!-- Descendant nu (aucun attribut) : prouve la réapplication de l'alias par [product] :where(*) -->
+    <div product="mail">
+      <div style="color: var(--color-brand)">descendant nu : rouge (mail)</div>
+      <div theme="dark">
+        <div style="color: var(--color-brand)">descendant nu + dark : #ff00db</div>
+      </div>
+    </div>
+
+    <!-- Propagation : un modifier s'applique à l'élément ET à ses descendants -->
+    <div button="secondary" style="color: var(--color-button)">secondary : vert</div>
+    <div button="secondary">
+      <div style="color: var(--color-button)">descendant de secondary : vert (propagation)</div>
+    </div>
+
+
     <!--    <div class="card" data-variant="light">-->
     <div class="card">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
