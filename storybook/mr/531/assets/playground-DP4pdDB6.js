@@ -1,0 +1,11 @@
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{l as t,s as n}from"./blocks-BhIHenDv.js";import{a as r}from"./chunk-W22LQPXL-DAacIxBz.js";import{i,r as a}from"./react-DITjJg24.js";function o(e){let t={a:`a`,code:`code`,h1:`h1`,h2:`h2`,li:`li`,p:`p`,strong:`strong`,ul:`ul`,...i(),...e.components};return(0,c.jsxs)(c.Fragment,{children:[(0,c.jsx)(n,{title:`Playground`}),`
+`,(0,c.jsx)(t.h1,{id:`playground`,children:`Playground`}),`
+`,(0,c.jsxs)(t.p,{children:[`The `,(0,c.jsx)(t.a,{href:`./playground/index.html`,children:`Playground`}),` is an in-browser code editor for the design system: write HTML and TypeScript using ESDS components `,(0,c.jsx)(t.strong,{children:`with no install, no build and no hosting`}),`, then share your snippet as a plain URL. This is useful to quickly prototype an idea or to reproduce a bug.`]}),`
+`,(0,c.jsx)(t.p,{children:(0,c.jsxs)(t.strong,{children:[`→ `,(0,c.jsx)(t.a,{href:`./playground/index.html`,children:`Open the Playground`})]})}),`
+`,(0,c.jsx)(t.h2,{id:`pinning-versions`,children:`Pinning versions`}),`
+`,(0,c.jsx)(t.p,{children:`To reproduce an issue against a specific release, edit the versions directly in the snippet:`}),`
+`,(0,c.jsxs)(t.ul,{children:[`
+`,(0,c.jsxs)(t.li,{children:[(0,c.jsx)(t.code,{children:`package.json`}),` → `,(0,c.jsx)(t.code,{children:`"@infomaniak-design-system/components": "0.7.1"`}),` (exact version), `,(0,c.jsx)(t.code,{children:`"rc"`}),` or
+`,(0,c.jsx)(t.code,{children:`"dev"`}),` (dist-tags) instead of `,(0,c.jsx)(t.code,{children:`"latest"`}),`.`]}),`
+`,(0,c.jsxs)(t.li,{children:[(0,c.jsx)(t.code,{children:`index.html`}),` → the tokens `,(0,c.jsx)(t.code,{children:`<link>`}),` URLs (`,(0,c.jsx)(t.code,{children:`@latest`}),`, `,(0,c.jsx)(t.code,{children:`@0.10.0`}),`, `,(0,c.jsx)(t.code,{children:`@rc`}),`, …).`]}),`
+`]})]})}function s(e={}){let{wrapper:t}={...i(),...e.components};return t?(0,c.jsx)(t,{...e,children:(0,c.jsx)(o,{...e})}):o(e)}var c;function l(){return(l=e((()=>{c=r(),a(),t()})))()}l();export{s as default};
