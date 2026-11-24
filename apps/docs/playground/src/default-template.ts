@@ -27,8 +27,8 @@ const TEMPLATE_INDEX_HTML = `<!doctype html>
   <p esds-body="md">
     And welcome to the Playground.
   </p>
-  <button esds-button>
-    <esds-avatar data-esds-avatar-size="small"></esds-avatar>
+  <button esds-button data-esds-avatar-size="small">
+    <esds-avatar></esds-avatar>
     Click me!
   </button>
 </body>
