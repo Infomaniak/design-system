@@ -182,3 +182,6 @@ apps/docs/src/stories/assets/*.md
 packages/tokens/scripts/scripts/convert-figma-tokens/tokens
 packages/components/custom-elements.json
 .tmp
+
+# superpowers
+docs/plans
