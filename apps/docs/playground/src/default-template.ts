@@ -7,7 +7,7 @@
  *
  * JS dependency versions live in the visible `package.json` (playground's
  * module resolution reads it, like npm); CSS dependency versions live in the
- * `<link>` URLs.
+ * `<link>` URLs. Page CSS lives inline in `index.html`.
  */
 
 const TEMPLATE_INDEX_HTML = `<!doctype html>
@@ -16,12 +16,18 @@ const TEMPLATE_INDEX_HTML = `<!doctype html>
   <link rel="stylesheet" href="https://unpkg.com/@infomaniak-design-system/tokens@latest/css/tokens.root.css">
   <link rel="stylesheet" href="https://unpkg.com/@infomaniak-design-system/tokens@latest/css/modifiers/all.attr.css">
   <link rel="stylesheet" href="https://fonts.storage.infomaniak.com/design-system/latest/infomaniak-sans.min.css">
+  <style>
+    body {
+      background-color: var(--esds-color-background-elevation-surface);
+      color: var(--esds-color-content-primary);
+    }
+  </style>
   <script type="module" src="./setup.js"></script>
   <script type="module" src="./script.js"></script>
 </head>
 <body data-esds-product="infomaniak" data-esds-theme="light">
   <h1 esds-heading="2xl">
-    Hello world <esds-icon name="esds:megaphone" />
+    Hello world <esds-icon inline name="esds:megaphone" />
   </h1>
   <esds-separator></esds-separator>
   <p esds-body="md">
