@@ -287,17 +287,39 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.elevation.surface | #fff | #192334 | var(--esds-color-background-elevation-surface) | Background for the default surface level, the base UI layer. |
 | color.background.elevation.raised | #f8fafc | #0f172b | var(--esds-color-background-elevation-raised) | Background for raised, elevated surfaces such as cards. |
 | color.background.elevation.overlay | #fff | #314158 | var(--esds-color-background-elevation-overlay) | Background for overlay and modal surfaces above the base UI. |
-| color.background.brand | #0077cf | #36adfa | var(--esds-color-background-brand) | Default brand background (Infomaniak). |
-| color.background.brand.infomaniak | #0077cf | #36adfa | var(--esds-color-background-brand-infomaniak) | Infomaniak brand background colors. |
-| color.background.brand.mail | #e9004c | #ff97af | var(--esds-color-background-brand-mail) | Mail product brand background colors. |
-| color.background.brand.kdrive | #3e66f3 | #95b5fb | var(--esds-color-background-brand-kdrive) | kDrive product brand background colors. |
-| color.background.brand.euria | #0071ec | #48c2ff | var(--esds-color-background-brand-euria) | Euria product brand background colors. |
-| color.background.brand.kchat | #009cd4 | #75ddff | var(--esds-color-background-brand-kchat) | kChat product brand background colors. |
-| color.background.brand.security | #4d62ea | #a3c4fe | var(--esds-color-background-brand-security) | Security product brand background colors. |
-| color.background.brand.calendar | #0a848f | #4cc6d4 | var(--esds-color-background-brand-calendar) | Calendar product brand background colors. |
-| color.background.brand.contacts | #9346ff | #cab1ff | var(--esds-color-background-brand-contacts) | Contacts product brand background colors. |
-| color.background.brand.knote | #f94f00 | #ffb36b | var(--esds-color-background-brand-knote) | kNote product brand background colors. |
-| color.background.brand.swisstransfer | #15864e | #7bdaa2 | var(--esds-color-background-brand-swisstransfer) | SwissTransfer product brand background colors. |
+| color.background.brand.infomaniak.dim1 | #0077cf | #36adfa | var(--esds-color-background-brand-infomaniak-dim1) | Strong Infomaniak brand background (dim1). |
+| color.background.brand.infomaniak.dim2 | #b9e0fe | #064e86 | var(--esds-color-background-brand-infomaniak-dim2) | Soft Infomaniak brand background (dim2). |
+| color.background.brand.infomaniak.dim3 | #f0f8ff | #072a4a | var(--esds-color-background-brand-infomaniak-dim3) | Subtle Infomaniak brand background (dim3). |
+| color.background.brand.mail.dim1 | #e9004c | #ff97af | var(--esds-color-background-brand-mail-dim1) | Strong Mail brand background (dim1). |
+| color.background.brand.mail.dim2 | #ffc6d3 | #b40045 | var(--esds-color-background-brand-mail-dim2) | Soft Mail brand background (dim2). |
+| color.background.brand.mail.dim3 | #ffeff2 | #570022 | var(--esds-color-background-brand-mail-dim3) | Subtle Mail brand background (dim3). |
+| color.background.brand.kdrive.dim1 | #3e66f3 | #95b5fb | var(--esds-color-background-brand-kdrive-dim1) | Strong kDrive brand background (dim1). |
+| color.background.brand.kdrive.dim2 | #c0d1fd | #212cac | var(--esds-color-background-brand-kdrive-dim2) | Soft kDrive brand background (dim2). |
+| color.background.brand.kdrive.dim3 | #eff3ff | #181c53 | var(--esds-color-background-brand-kdrive-dim3) | Subtle kDrive brand background (dim3). |
+| color.background.brand.euria.dim1 | #0071ec | #48c2ff | var(--esds-color-background-brand-euria-dim1) | Strong Euria brand background (dim1). |
+| color.background.brand.euria.dim2 | #b5e6ff | #085dc5 | var(--esds-color-background-brand-euria-dim2) | Soft Euria brand background (dim2). |
+| color.background.brand.euria.dim3 | #edf9ff | #0e315d | var(--esds-color-background-brand-euria-dim3) | Subtle Euria brand background (dim3). |
+| color.background.brand.kchat.dim1 | #009cd4 | #75ddff | var(--esds-color-background-brand-kchat-dim1) | Strong kChat brand background (dim1). |
+| color.background.brand.kchat.dim2 | #b6ebff | #00668d | var(--esds-color-background-brand-kchat-dim2) | Soft kChat brand background (dim2). |
+| color.background.brand.kchat.dim3 | #effaff | #04354d | var(--esds-color-background-brand-kchat-dim3) | Subtle kChat brand background (dim3). |
+| color.background.brand.security.dim1 | #4d62ea | #a3c4fe | var(--esds-color-background-brand-security-dim1) | Strong Security brand background (dim1). |
+| color.background.brand.security.dim2 | #c6dcff | #2d3da6 | var(--esds-color-background-brand-security-dim2) | Soft Security brand background (dim2). |
+| color.background.brand.security.dim3 | #eef5ff | #1a204c | var(--esds-color-background-brand-security-dim3) | Subtle Security brand background (dim3). |
+| color.background.brand.calendar.dim1 | #0a848f | #4cc6d4 | var(--esds-color-background-brand-calendar-dim1) | Strong Calendar brand background (dim1). |
+| color.background.brand.calendar.dim2 | #6fe5f4 | #04454b | var(--esds-color-background-brand-calendar-dim2) | Soft Calendar brand background (dim2). |
+| color.background.brand.calendar.dim3 | #e1fbff | #001f23 | var(--esds-color-background-brand-calendar-dim3) | Subtle Calendar brand background (dim3). |
+| color.background.brand.contacts.dim1 | #9346ff | #cab1ff | var(--esds-color-background-brand-contacts-dim1) | Strong Contacts brand background (dim1). |
+| color.background.brand.contacts.dim2 | #e0d4ff | #6c18bf | var(--esds-color-background-brand-contacts-dim2) | Soft Contacts brand background (dim2). |
+| color.background.brand.contacts.dim3 | #f6f2ff | #370b6a | var(--esds-color-background-brand-contacts-dim3) | Subtle Contacts brand background (dim3). |
+| color.background.brand.knote.dim1 | #f94f00 | #ffb36b | var(--esds-color-background-brand-knote-dim1) | Strong kNote brand background (dim1). |
+| color.background.brand.knote.dim2 | #ffd3a4 | #a32c09 | var(--esds-color-background-brand-knote-dim2) | Soft kNote brand background (dim2). |
+| color.background.brand.knote.dim3 | #fff6ec | #471003 | var(--esds-color-background-brand-knote-dim3) | Subtle kNote brand background (dim3). |
+| color.background.brand.swisstransfer.dim1 | #15864e | #7bdaa2 | var(--esds-color-background-brand-swisstransfer-dim1) | Strong SwissTransfer brand background (dim1). |
+| color.background.brand.swisstransfer.dim2 | #afebc4 | #105535 | var(--esds-color-background-brand-swisstransfer-dim2) | Soft SwissTransfer brand background (dim2). |
+| color.background.brand.swisstransfer.dim3 | #eefbf2 | #072719 | var(--esds-color-background-brand-swisstransfer-dim3) | Subtle SwissTransfer brand background (dim3). |
+| color.background.brand.dim1 | #0077cf | #36adfa | var(--esds-color-background-brand-dim1) | Default dim1 brand background. |
+| color.background.brand.dim2 | #b9e0fe | #064e86 | var(--esds-color-background-brand-dim2) | Default dim2 brand background. |
+| color.background.brand.dim3 | #f0f8ff | #072a4a | var(--esds-color-background-brand-dim3) | Default dim3 brand background. |
 | color.background.dataviz.orange.dim1 | #f97207 | #ffa032 | var(--esds-color-background-dataviz-orange-dim1) | Strong orange data-viz background (dim1). |
 | color.background.dataviz.orange.dim2 | #ffd188 | #94260c | var(--esds-color-background-dataviz-orange-dim2) | Soft orange data-viz background (dim2). |
 | color.background.dataviz.orange.dim3 | #fff7eb | #460d02 | var(--esds-color-background-dataviz-orange-dim3) | Subtle orange data-viz background (dim3). |
@@ -349,17 +371,39 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.background.disabled | #e2e8f0 | #0f172b | var(--esds-color-background-disabled) | Background for disabled, non-interactive elements. |
 | color.background.backdrop | #00000080 | #00000080 | var(--esds-color-background-backdrop) | Backdrop overlay color displayed behind modals and dialogs. |
 | color.content.on.disabled | #90a1b9 | #62748e | var(--esds-color-content-on-disabled) | Content color for disabled states on backgrounds. |
-| color.content.on.brand | #fff | #072a4a | var(--esds-color-content-on-brand) | Default foreground on brand backgrounds. |
-| color.content.on.brand.infomaniak | #fff | #072a4a | var(--esds-color-content-on-brand-infomaniak) | Foreground on Infomaniak brand backgrounds. |
-| color.content.on.brand.calendar | #fff | #001f23 | var(--esds-color-content-on-brand-calendar) | Foreground on Calendar brand backgrounds. |
-| color.content.on.brand.contacts | #fff | #370b6a | var(--esds-color-content-on-brand-contacts) | Foreground on Contacts brand backgrounds. |
-| color.content.on.brand.euria | #fff | #0e315d | var(--esds-color-content-on-brand-euria) | Foreground on Euria brand backgrounds. |
-| color.content.on.brand.kchat | #fff | #04354d | var(--esds-color-content-on-brand-kchat) | Foreground on kChat brand backgrounds. |
-| color.content.on.brand.kdrive | #fff | #181c53 | var(--esds-color-content-on-brand-kdrive) | Foreground on kDrive brand backgrounds. |
-| color.content.on.brand.knote | #fff | #471003 | var(--esds-color-content-on-brand-knote) | Foreground on kNote brand backgrounds. |
-| color.content.on.brand.mail | #fff | #570022 | var(--esds-color-content-on-brand-mail) | Foreground on Mail brand backgrounds. |
-| color.content.on.brand.security | #fff | #1a204c | var(--esds-color-content-on-brand-security) | Foreground on Security brand backgrounds. |
-| color.content.on.brand.swisstransfer | #fff | #072719 | var(--esds-color-content-on-brand-swisstransfer) | Foreground on SwissTransfer brand backgrounds. |
+| color.content.on.brand.infomaniak.dim1 | #fff | #072a4a | var(--esds-color-content-on-brand-infomaniak-dim1) | Foreground on strong Infomaniak brand backgrounds (dim1). |
+| color.content.on.brand.infomaniak.dim2 | #0b426f | #e0effe | var(--esds-color-content-on-brand-infomaniak-dim2) | Foreground on soft Infomaniak brand backgrounds (dim2). |
+| color.content.on.brand.infomaniak.dim3 | #015ca3 | #7cc8fd | var(--esds-color-content-on-brand-infomaniak-dim3) | Foreground on subtle Infomaniak brand backgrounds (dim3). |
+| color.content.on.brand.calendar.dim1 | #fff | #001f23 | var(--esds-color-content-on-brand-calendar-dim1) | Foreground on strong Calendar brand backgrounds (dim1). |
+| color.content.on.brand.calendar.dim2 | #023137 | #b4f6ff | var(--esds-color-content-on-brand-calendar-dim2) | Foreground on soft Calendar brand backgrounds (dim2). |
+| color.content.on.brand.calendar.dim3 | #0c5961 | #4cc6d4 | var(--esds-color-content-on-brand-calendar-dim3) | Foreground on subtle Calendar brand backgrounds (dim3). |
+| color.content.on.brand.contacts.dim1 | #fff | #370b6a | var(--esds-color-content-on-brand-contacts-dim1) | Foreground on strong Contacts brand backgrounds (dim1). |
+| color.content.on.brand.contacts.dim2 | #59169c | #efe8ff | var(--esds-color-content-on-brand-contacts-dim2) | Foreground on soft Contacts brand backgrounds (dim2). |
+| color.content.on.brand.contacts.dim3 | #811ee3 | #cab1ff | var(--esds-color-content-on-brand-contacts-dim3) | Foreground on subtle Contacts brand backgrounds (dim3). |
+| color.content.on.brand.euria.dim1 | #fff | #0e315d | var(--esds-color-content-on-brand-euria-dim1) | Foreground on strong Euria brand backgrounds (dim1). |
+| color.content.on.brand.euria.dim2 | #0d519b | #d6f0ff | var(--esds-color-content-on-brand-euria-dim2) | Foreground on soft Euria brand backgrounds (dim2). |
+| color.content.on.brand.euria.dim3 | #0071ec | #83d8ff | var(--esds-color-content-on-brand-euria-dim3) | Foreground on subtle Euria brand backgrounds (dim3). |
+| color.content.on.brand.kchat.dim1 | #fff | #04354d | var(--esds-color-content-on-brand-kchat-dim1) | Foreground on strong kChat brand backgrounds (dim1). |
+| color.content.on.brand.kchat.dim2 | #065474 | #def4ff | var(--esds-color-content-on-brand-kchat-dim2) | Foreground on soft kChat brand backgrounds (dim2). |
+| color.content.on.brand.kchat.dim3 | #007bab | #75ddff | var(--esds-color-content-on-brand-kchat-dim3) | Foreground on subtle kChat brand backgrounds (dim3). |
+| color.content.on.brand.kdrive.dim1 | #fff | #181c53 | var(--esds-color-content-on-brand-kdrive-dim1) | Foreground on strong kDrive brand backgrounds (dim1). |
+| color.content.on.brand.kdrive.dim2 | #202b88 | #dce5fd | var(--esds-color-content-on-brand-kdrive-dim2) | Foreground on soft kDrive brand backgrounds (dim2). |
+| color.content.on.brand.kdrive.dim3 | #2033d5 | #95b5fb | var(--esds-color-content-on-brand-kdrive-dim3) | Foreground on subtle kDrive brand backgrounds (dim3). |
+| color.content.on.brand.knote.dim1 | #fff | #471003 | var(--esds-color-content-on-brand-knote-dim1) | Foreground on strong kNote brand backgrounds (dim1). |
+| color.content.on.brand.knote.dim2 | #83270b | #ffebd2 | var(--esds-color-content-on-brand-knote-dim2) | Foreground on soft kNote brand backgrounds (dim2). |
+| color.content.on.brand.knote.dim3 | #d93a00 | #ffb36b | var(--esds-color-content-on-brand-knote-dim3) | Foreground on subtle kNote brand backgrounds (dim3). |
+| color.content.on.brand.mail.dim1 | #fff | #570022 | var(--esds-color-content-on-brand-mail-dim1) | Foreground on strong Mail brand backgrounds (dim1). |
+| color.content.on.brand.mail.dim2 | #990241 | #ffe0e6 | var(--esds-color-content-on-brand-mail-dim2) | Foreground on soft Mail brand backgrounds (dim2). |
+| color.content.on.brand.mail.dim3 | #d7004b | #ff97af | var(--esds-color-content-on-brand-mail-dim3) | Foreground on subtle Mail brand backgrounds (dim3). |
+| color.content.on.brand.security.dim1 | #fff | #1a204c | var(--esds-color-content-on-brand-security-dim1) | Foreground on strong Security brand backgrounds (dim1). |
+| color.content.on.brand.security.dim2 | #2c3983 | #dfecff | var(--esds-color-content-on-brand-security-dim2) | Foreground on soft Security brand backgrounds (dim2). |
+| color.content.on.brand.security.dim3 | #3546cd | #a3c4fe | var(--esds-color-content-on-brand-security-dim3) | Foreground on subtle Security brand backgrounds (dim3). |
+| color.content.on.brand.swisstransfer.dim1 | #fff | #072719 | var(--esds-color-content-on-brand-swisstransfer-dim1) | Foreground on strong SwissTransfer brand backgrounds (dim1). |
+| color.content.on.brand.swisstransfer.dim2 | #0e462d | #d6f5df | var(--esds-color-content-on-brand-swisstransfer-dim2) | Foreground on soft SwissTransfer brand backgrounds (dim2). |
+| color.content.on.brand.swisstransfer.dim3 | #116b40 | #7bdaa2 | var(--esds-color-content-on-brand-swisstransfer-dim3) | Foreground on subtle SwissTransfer brand backgrounds (dim3). |
+| color.content.on.brand.dim1 | #fff | #072a4a | var(--esds-color-content-on-brand-dim1) | Default foreground on brand dim1 backgrounds. |
+| color.content.on.brand.dim2 | #0b426f | #e0effe | var(--esds-color-content-on-brand-dim2) | Default foreground on brand dim2 backgrounds. |
+| color.content.on.brand.dim3 | #015ca3 | #7cc8fd | var(--esds-color-content-on-brand-dim3) | Default foreground on brand dim3 backgrounds. |
 | color.content.on.dataviz.blue.dim1 | #f0f8ff | #072a4a | var(--esds-color-content-on-dataviz-blue-dim1) | Foreground on strong blue data-viz backgrounds (dim1). |
 | color.content.on.dataviz.blue.dim2 | #0b426f | #e0effe | var(--esds-color-content-on-dataviz-blue-dim2) | Foreground on soft blue data-viz backgrounds (dim2). |
 | color.content.on.dataviz.blue.dim3 | #015ca3 | #7cc8fd | var(--esds-color-content-on-dataviz-blue-dim3) | Foreground on subtle blue data-viz backgrounds (dim3). |
@@ -442,6 +486,39 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 | color.content.dataviz.gray | #45556c | #90a1b9 | var(--esds-color-content-dataviz-gray) | Gray data-viz foreground color. |
 | color.content.dataviz.brown | #9f5b29 | #d0905a | var(--esds-color-content-dataviz-brown) | Brown data-viz foreground color. |
 | color.content.dataviz.magenta | #c002b4 | #e76edf | var(--esds-color-content-dataviz-magenta) | Magenta data-viz foreground color. |
+| color.border.on.brand.infomaniak.dim1 | #0000 | #0000 | var(--esds-color-border-on-brand-infomaniak-dim1) | Border on strong Infomaniak brand backgrounds (dim1). |
+| color.border.on.brand.infomaniak.dim2 | #0b426f | #e0effe | var(--esds-color-border-on-brand-infomaniak-dim2) | Border on soft Infomaniak brand backgrounds (dim2). |
+| color.border.on.brand.infomaniak.dim3 | #015ca3 | #7cc8fd | var(--esds-color-border-on-brand-infomaniak-dim3) | Border on subtle Infomaniak brand backgrounds (dim3). |
+| color.border.on.brand.mail.dim1 | #0000 | #0000 | var(--esds-color-border-on-brand-mail-dim1) | Border on strong Mail brand backgrounds (dim1). |
+| color.border.on.brand.mail.dim2 | #990241 | #ffe0e6 | var(--esds-color-border-on-brand-mail-dim2) | Border on soft Mail brand backgrounds (dim2). |
+| color.border.on.brand.mail.dim3 | #d7004b | #ff97af | var(--esds-color-border-on-brand-mail-dim3) | Border on subtle Mail brand backgrounds (dim3). |
+| color.border.on.brand.kdrive.dim1 | #0000 | #0000 | var(--esds-color-border-on-brand-kdrive-dim1) | Border on strong kDrive brand backgrounds (dim1). |
+| color.border.on.brand.kdrive.dim2 | #202b88 | #dce5fd | var(--esds-color-border-on-brand-kdrive-dim2) | Border on soft kDrive brand backgrounds (dim2). |
+| color.border.on.brand.kdrive.dim3 | #2033d5 | #95b5fb | var(--esds-color-border-on-brand-kdrive-dim3) | Border on subtle kDrive brand backgrounds (dim3). |
+| color.border.on.brand.euria.dim1 | #0000 | #0000 | var(--esds-color-border-on-brand-euria-dim1) | Border on strong Euria brand backgrounds (dim1). |
+| color.border.on.brand.euria.dim2 | #0d519b | #d6f0ff | var(--esds-color-border-on-brand-euria-dim2) | Border on soft Euria brand backgrounds (dim2). |
+| color.border.on.brand.euria.dim3 | #0071ec | #83d8ff | var(--esds-color-border-on-brand-euria-dim3) | Border on subtle Euria brand backgrounds (dim3). |
+| color.border.on.brand.kchat.dim1 | #0000 | #0000 | var(--esds-color-border-on-brand-kchat-dim1) | Border on strong kChat brand backgrounds (dim1). |
+| color.border.on.brand.kchat.dim2 | #065474 | #def4ff | var(--esds-color-border-on-brand-kchat-dim2) | Border on soft kChat brand backgrounds (dim2). |
+| color.border.on.brand.kchat.dim3 | #007bab | #75ddff | var(--esds-color-border-on-brand-kchat-dim3) | Border on subtle kChat brand backgrounds (dim3). |
+| color.border.on.brand.security.dim1 | #0000 | #0000 | var(--esds-color-border-on-brand-security-dim1) | Border on strong Security brand backgrounds (dim1). |
+| color.border.on.brand.security.dim2 | #2c3983 | #dfecff | var(--esds-color-border-on-brand-security-dim2) | Border on soft Security brand backgrounds (dim2). |
+| color.border.on.brand.security.dim3 | #3546cd | #a3c4fe | var(--esds-color-border-on-brand-security-dim3) | Border on subtle Security brand backgrounds (dim3). |
+| color.border.on.brand.calendar.dim1 | #0000 | #0000 | var(--esds-color-border-on-brand-calendar-dim1) | Border on strong Calendar brand backgrounds (dim1). |
+| color.border.on.brand.calendar.dim2 | #023137 | #b4f6ff | var(--esds-color-border-on-brand-calendar-dim2) | Border on soft Calendar brand backgrounds (dim2). |
+| color.border.on.brand.calendar.dim3 | #0c5961 | #4cc6d4 | var(--esds-color-border-on-brand-calendar-dim3) | Border on subtle Calendar brand backgrounds (dim3). |
+| color.border.on.brand.contacts.dim1 | #0000 | #0000 | var(--esds-color-border-on-brand-contacts-dim1) | Border on strong Contacts brand backgrounds (dim1). |
+| color.border.on.brand.contacts.dim2 | #59169c | #efe8ff | var(--esds-color-border-on-brand-contacts-dim2) | Border on soft Contacts brand backgrounds (dim2). |
+| color.border.on.brand.contacts.dim3 | #811ee3 | #cab1ff | var(--esds-color-border-on-brand-contacts-dim3) | Border on subtle Contacts brand backgrounds (dim3). |
+| color.border.on.brand.knote.dim1 | #0000 | #0000 | var(--esds-color-border-on-brand-knote-dim1) | Border on strong kNote brand backgrounds (dim1). |
+| color.border.on.brand.knote.dim2 | #83270b | #ffebd2 | var(--esds-color-border-on-brand-knote-dim2) | Border on soft kNote brand backgrounds (dim2). |
+| color.border.on.brand.knote.dim3 | #d93a00 | #ffb36b | var(--esds-color-border-on-brand-knote-dim3) | Border on subtle kNote brand backgrounds (dim3). |
+| color.border.on.brand.swisstransfer.dim1 | #0000 | #0000 | var(--esds-color-border-on-brand-swisstransfer-dim1) | Border on strong SwissTransfer brand backgrounds (dim1). |
+| color.border.on.brand.swisstransfer.dim2 | #0e462d | #d6f5df | var(--esds-color-border-on-brand-swisstransfer-dim2) | Border on soft SwissTransfer brand backgrounds (dim2). |
+| color.border.on.brand.swisstransfer.dim3 | #116b40 | #7bdaa2 | var(--esds-color-border-on-brand-swisstransfer-dim3) | Border on subtle SwissTransfer brand backgrounds (dim3). |
+| color.border.on.brand.dim1 | #0000 | #0000 | var(--esds-color-border-on-brand-dim1) | Default border on brand dim1 backgrounds. |
+| color.border.on.brand.dim2 | #0b426f | #e0effe | var(--esds-color-border-on-brand-dim2) | Default border on brand dim2 backgrounds. |
+| color.border.on.brand.dim3 | #015ca3 | #7cc8fd | var(--esds-color-border-on-brand-dim3) | Default border on brand dim3 backgrounds. |
 | color.border.on.dataviz.blue.dim1 | #0000 | #0000 | var(--esds-color-border-on-dataviz-blue-dim1) | Border on strong blue data-viz backgrounds (dim1). |
 | color.border.on.dataviz.blue.dim2 | #0b426f | #e0effe | var(--esds-color-border-on-dataviz-blue-dim2) | Border on soft blue data-viz backgrounds (dim2). |
 | color.border.on.dataviz.blue.dim3 | #015ca3 | #7cc8fd | var(--esds-color-border-on-dataviz-blue-dim3) | Border on subtle blue data-viz backgrounds (dim3). |
@@ -744,4 +821,4 @@ This design tokens reference is part of the Infomaniak Design System. It contain
 - **Prefer Tier 2 (Semantic) tokens** for all component styling. Only use Tier 3 (Component) tokens when they explicitly exist for the element you are building.
 - **Never reference Tier 1 (Primitive) tokens directly** in component code; they exist only for alias resolution and designer reference.
 - **Theme awareness**: The design system supports `light` and `dark` modes. Use the `data-esds-theme` attribute or corresponding modifier CSS file to apply themes.
-- **Portable product tokens**: When building components for a specific product (calendar, mail, swisstransfer, etc.), always use the token names exactly as shown in this file (e.g., `color.background.brand` with `var(--esds-color-background-brand)`). The build system automatically resolves these to the correct product-specific colors. **Never** use product-specific token names such as `color.background.brand.calendar` directly in component code. **Never** create separate component variants or branches per product when the same semantic token exists. All products share the same token API — only the resolved values differ.
+- **Portable product tokens**: When building components for a specific product (calendar, mail, swisstransfer, etc.), always use the token names exactly as shown in this file (e.g., `color.background.brand.dim1` with `var(--esds-color-background-brand-dim1)`). The build system automatically resolves these to the correct product-specific colors. **Never** use product-specific token names such as `color.background.brand.calendar.dim1` directly in component code. **Never** create separate component variants or branches per product when the same semantic token exists. All products share the same token API — only the resolved values differ.

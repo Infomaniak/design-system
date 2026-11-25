@@ -50,7 +50,7 @@ Modifiers let you swap the values of existing tokens without changing their name
 
 **Example**: The `euria` product modifier
 
-The `euria.tokens.json` modifier overrides `color.background.brand` (the default brand background) by including the same path with a different value:
+The `euria.tokens.json` modifier overrides `color.background.brand.dim1` (the default brand background) by including the same path with a different value:
 
 Base `t2-semantic/color.tokens.json`:
 
@@ -59,9 +59,9 @@ Base `t2-semantic/color.tokens.json`:
   "color": {
     "background": {
       "brand": {
-        "$root": { "$value": "{color.background.brand.infomaniak}" },
-        "infomaniak": { "$value": "{color.blue.600}" },
-        "euria": { "$value": "{color.ocean.700}" }
+        "infomaniak": { "dim1": { "$value": "{color.blue.600}" } },
+        "euria": { "dim1": { "$value": "{color.ocean.700}" } },
+        "dim1": { "$value": "{color.background.brand.infomaniak.dim1}" }
       }
     }
   }
@@ -75,7 +75,7 @@ Base `t2-semantic/color.tokens.json`:
   "color": {
     "background": {
       "brand": {
-        "$value": "{color.background.brand.euria}"
+        "dim1": { "$value": "{color.background.brand.euria.dim1}" }
       }
     }
   }
@@ -91,11 +91,11 @@ With data-esds-product="euria" data-esds-theme="dark":
 
               T3: button.background.color
                       ↓
-              T2: color.background.brand
+              T2: color.background.brand.dim1
                       ↓
-  Euria modifier: color.background.brand.euria (color.ocean.700)
+  Euria modifier: color.background.brand.euria.dim1 (color.ocean.700)
                       ↓
-   Dark modifier: color.background.brand.euria (color.ocean.400)
+   Dark modifier: color.background.brand.euria.dim1 (color.ocean.400)
                       ↓
               T1: color.ocean.400
 ```
@@ -108,7 +108,7 @@ _**Web example -** apply modifiers using data attributes:_
   data-esds-theme="dark"
 >
   <!-- All children resolve with both modifiers applied -->
-  <button style="background: var(--esds-color-background-brand)">
+  <button style="background: var(--esds-color-background-brand-dim1)">
     Gets a color.ocean.400 background
   </button>
 </body>

@@ -67,146 +67,432 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-infomaniak-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-infomaniak-dim1"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.brand" type="button">color.background.brand</button>
+          <button class="token-value" data-clipboard="color.background.brand.infomaniak.dim1" type="button">color.background.brand.infomaniak.dim1</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand)" type="button">var(--esds-color-background-brand)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-infomaniak-dim1)" type="button">var(--esds-color-background-brand-infomaniak-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand" type="button">bg-brand</button></div>
-        <div class="token-row token-description">Default brand background (Infomaniak).</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-infomaniak-dim1" type="button">bg-brand-infomaniak-dim1</button></div>
+        <div class="token-row token-description">Strong Infomaniak brand background (dim1).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-infomaniak); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-infomaniak"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-infomaniak-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-infomaniak-dim2"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.brand.infomaniak" type="button">color.background.brand.infomaniak</button>
+          <button class="token-value" data-clipboard="color.background.brand.infomaniak.dim2" type="button">color.background.brand.infomaniak.dim2</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-infomaniak)" type="button">var(--esds-color-background-brand-infomaniak)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-infomaniak-dim2)" type="button">var(--esds-color-background-brand-infomaniak-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-infomaniak" type="button">bg-brand-infomaniak</button></div>
-        <div class="token-row token-description">Infomaniak brand background colors.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-infomaniak-dim2" type="button">bg-brand-infomaniak-dim2</button></div>
+        <div class="token-row token-description">Soft Infomaniak brand background (dim2).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-mail); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-mail"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-infomaniak-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-infomaniak-dim3"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.brand.mail" type="button">color.background.brand.mail</button>
+          <button class="token-value" data-clipboard="color.background.brand.infomaniak.dim3" type="button">color.background.brand.infomaniak.dim3</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-mail)" type="button">var(--esds-color-background-brand-mail)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-infomaniak-dim3)" type="button">var(--esds-color-background-brand-infomaniak-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-mail" type="button">bg-brand-mail</button></div>
-        <div class="token-row token-description">Mail product brand background colors.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-infomaniak-dim3" type="button">bg-brand-infomaniak-dim3</button></div>
+        <div class="token-row token-description">Subtle Infomaniak brand background (dim3).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-kdrive); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-kdrive"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-mail-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-mail-dim1"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.brand.kdrive" type="button">color.background.brand.kdrive</button>
+          <button class="token-value" data-clipboard="color.background.brand.mail.dim1" type="button">color.background.brand.mail.dim1</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-kdrive)" type="button">var(--esds-color-background-brand-kdrive)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-mail-dim1)" type="button">var(--esds-color-background-brand-mail-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-kdrive" type="button">bg-brand-kdrive</button></div>
-        <div class="token-row token-description">kDrive product brand background colors.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-mail-dim1" type="button">bg-brand-mail-dim1</button></div>
+        <div class="token-row token-description">Strong Mail brand background (dim1).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-euria); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-euria"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-mail-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-mail-dim2"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.brand.euria" type="button">color.background.brand.euria</button>
+          <button class="token-value" data-clipboard="color.background.brand.mail.dim2" type="button">color.background.brand.mail.dim2</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-euria)" type="button">var(--esds-color-background-brand-euria)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-mail-dim2)" type="button">var(--esds-color-background-brand-mail-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-euria" type="button">bg-brand-euria</button></div>
-        <div class="token-row token-description">Euria product brand background colors.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-mail-dim2" type="button">bg-brand-mail-dim2</button></div>
+        <div class="token-row token-description">Soft Mail brand background (dim2).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-kchat); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-kchat"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-mail-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-mail-dim3"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.brand.kchat" type="button">color.background.brand.kchat</button>
+          <button class="token-value" data-clipboard="color.background.brand.mail.dim3" type="button">color.background.brand.mail.dim3</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-kchat)" type="button">var(--esds-color-background-brand-kchat)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-mail-dim3)" type="button">var(--esds-color-background-brand-mail-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-kchat" type="button">bg-brand-kchat</button></div>
-        <div class="token-row token-description">kChat product brand background colors.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-mail-dim3" type="button">bg-brand-mail-dim3</button></div>
+        <div class="token-row token-description">Subtle Mail brand background (dim3).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-security); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-security"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-kdrive-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-kdrive-dim1"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.brand.security" type="button">color.background.brand.security</button>
+          <button class="token-value" data-clipboard="color.background.brand.kdrive.dim1" type="button">color.background.brand.kdrive.dim1</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-security)" type="button">var(--esds-color-background-brand-security)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-kdrive-dim1)" type="button">var(--esds-color-background-brand-kdrive-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-security" type="button">bg-brand-security</button></div>
-        <div class="token-row token-description">Security product brand background colors.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-kdrive-dim1" type="button">bg-brand-kdrive-dim1</button></div>
+        <div class="token-row token-description">Strong kDrive brand background (dim1).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-calendar); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-calendar"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-kdrive-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-kdrive-dim2"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.brand.calendar" type="button">color.background.brand.calendar</button>
+          <button class="token-value" data-clipboard="color.background.brand.kdrive.dim2" type="button">color.background.brand.kdrive.dim2</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-calendar)" type="button">var(--esds-color-background-brand-calendar)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-kdrive-dim2)" type="button">var(--esds-color-background-brand-kdrive-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-calendar" type="button">bg-brand-calendar</button></div>
-        <div class="token-row token-description">Calendar product brand background colors.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-kdrive-dim2" type="button">bg-brand-kdrive-dim2</button></div>
+        <div class="token-row token-description">Soft kDrive brand background (dim2).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-contacts); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-contacts"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-kdrive-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-kdrive-dim3"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.brand.contacts" type="button">color.background.brand.contacts</button>
+          <button class="token-value" data-clipboard="color.background.brand.kdrive.dim3" type="button">color.background.brand.kdrive.dim3</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-contacts)" type="button">var(--esds-color-background-brand-contacts)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-kdrive-dim3)" type="button">var(--esds-color-background-brand-kdrive-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-contacts" type="button">bg-brand-contacts</button></div>
-        <div class="token-row token-description">Contacts product brand background colors.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-kdrive-dim3" type="button">bg-brand-kdrive-dim3</button></div>
+        <div class="token-row token-description">Subtle kDrive brand background (dim3).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-knote); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-knote"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-euria-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-euria-dim1"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.brand.knote" type="button">color.background.brand.knote</button>
+          <button class="token-value" data-clipboard="color.background.brand.euria.dim1" type="button">color.background.brand.euria.dim1</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-knote)" type="button">var(--esds-color-background-brand-knote)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-euria-dim1)" type="button">var(--esds-color-background-brand-euria-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-knote" type="button">bg-brand-knote</button></div>
-        <div class="token-row token-description">kNote product brand background colors.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-euria-dim1" type="button">bg-brand-euria-dim1</button></div>
+        <div class="token-row token-description">Strong Euria brand background (dim1).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-swisstransfer); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-swisstransfer"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-euria-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-euria-dim2"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.background.brand.swisstransfer" type="button">color.background.brand.swisstransfer</button>
+          <button class="token-value" data-clipboard="color.background.brand.euria.dim2" type="button">color.background.brand.euria.dim2</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-swisstransfer)" type="button">var(--esds-color-background-brand-swisstransfer)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-euria-dim2)" type="button">var(--esds-color-background-brand-euria-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-swisstransfer" type="button">bg-brand-swisstransfer</button></div>
-        <div class="token-row token-description">SwissTransfer product brand background colors.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-euria-dim2" type="button">bg-brand-euria-dim2</button></div>
+        <div class="token-row token-description">Soft Euria brand background (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-euria-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-euria-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.euria.dim3" type="button">color.background.brand.euria.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-euria-dim3)" type="button">var(--esds-color-background-brand-euria-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-euria-dim3" type="button">bg-brand-euria-dim3</button></div>
+        <div class="token-row token-description">Subtle Euria brand background (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-kchat-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-kchat-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.kchat.dim1" type="button">color.background.brand.kchat.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-kchat-dim1)" type="button">var(--esds-color-background-brand-kchat-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-kchat-dim1" type="button">bg-brand-kchat-dim1</button></div>
+        <div class="token-row token-description">Strong kChat brand background (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-kchat-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-kchat-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.kchat.dim2" type="button">color.background.brand.kchat.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-kchat-dim2)" type="button">var(--esds-color-background-brand-kchat-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-kchat-dim2" type="button">bg-brand-kchat-dim2</button></div>
+        <div class="token-row token-description">Soft kChat brand background (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-kchat-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-kchat-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.kchat.dim3" type="button">color.background.brand.kchat.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-kchat-dim3)" type="button">var(--esds-color-background-brand-kchat-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-kchat-dim3" type="button">bg-brand-kchat-dim3</button></div>
+        <div class="token-row token-description">Subtle kChat brand background (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-security-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-security-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.security.dim1" type="button">color.background.brand.security.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-security-dim1)" type="button">var(--esds-color-background-brand-security-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-security-dim1" type="button">bg-brand-security-dim1</button></div>
+        <div class="token-row token-description">Strong Security brand background (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-security-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-security-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.security.dim2" type="button">color.background.brand.security.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-security-dim2)" type="button">var(--esds-color-background-brand-security-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-security-dim2" type="button">bg-brand-security-dim2</button></div>
+        <div class="token-row token-description">Soft Security brand background (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-security-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-security-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.security.dim3" type="button">color.background.brand.security.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-security-dim3)" type="button">var(--esds-color-background-brand-security-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-security-dim3" type="button">bg-brand-security-dim3</button></div>
+        <div class="token-row token-description">Subtle Security brand background (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-calendar-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-calendar-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.calendar.dim1" type="button">color.background.brand.calendar.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-calendar-dim1)" type="button">var(--esds-color-background-brand-calendar-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-calendar-dim1" type="button">bg-brand-calendar-dim1</button></div>
+        <div class="token-row token-description">Strong Calendar brand background (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-calendar-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-calendar-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.calendar.dim2" type="button">color.background.brand.calendar.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-calendar-dim2)" type="button">var(--esds-color-background-brand-calendar-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-calendar-dim2" type="button">bg-brand-calendar-dim2</button></div>
+        <div class="token-row token-description">Soft Calendar brand background (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-calendar-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-calendar-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.calendar.dim3" type="button">color.background.brand.calendar.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-calendar-dim3)" type="button">var(--esds-color-background-brand-calendar-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-calendar-dim3" type="button">bg-brand-calendar-dim3</button></div>
+        <div class="token-row token-description">Subtle Calendar brand background (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-contacts-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-contacts-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.contacts.dim1" type="button">color.background.brand.contacts.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-contacts-dim1)" type="button">var(--esds-color-background-brand-contacts-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-contacts-dim1" type="button">bg-brand-contacts-dim1</button></div>
+        <div class="token-row token-description">Strong Contacts brand background (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-contacts-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-contacts-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.contacts.dim2" type="button">color.background.brand.contacts.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-contacts-dim2)" type="button">var(--esds-color-background-brand-contacts-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-contacts-dim2" type="button">bg-brand-contacts-dim2</button></div>
+        <div class="token-row token-description">Soft Contacts brand background (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-contacts-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-contacts-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.contacts.dim3" type="button">color.background.brand.contacts.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-contacts-dim3)" type="button">var(--esds-color-background-brand-contacts-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-contacts-dim3" type="button">bg-brand-contacts-dim3</button></div>
+        <div class="token-row token-description">Subtle Contacts brand background (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-knote-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-knote-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.knote.dim1" type="button">color.background.brand.knote.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-knote-dim1)" type="button">var(--esds-color-background-brand-knote-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-knote-dim1" type="button">bg-brand-knote-dim1</button></div>
+        <div class="token-row token-description">Strong kNote brand background (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-knote-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-knote-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.knote.dim2" type="button">color.background.brand.knote.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-knote-dim2)" type="button">var(--esds-color-background-brand-knote-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-knote-dim2" type="button">bg-brand-knote-dim2</button></div>
+        <div class="token-row token-description">Soft kNote brand background (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-knote-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-knote-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.knote.dim3" type="button">color.background.brand.knote.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-knote-dim3)" type="button">var(--esds-color-background-brand-knote-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-knote-dim3" type="button">bg-brand-knote-dim3</button></div>
+        <div class="token-row token-description">Subtle kNote brand background (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-swisstransfer-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-swisstransfer-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.swisstransfer.dim1" type="button">color.background.brand.swisstransfer.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-swisstransfer-dim1)" type="button">var(--esds-color-background-brand-swisstransfer-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-swisstransfer-dim1" type="button">bg-brand-swisstransfer-dim1</button></div>
+        <div class="token-row token-description">Strong SwissTransfer brand background (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-swisstransfer-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-swisstransfer-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.swisstransfer.dim2" type="button">color.background.brand.swisstransfer.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-swisstransfer-dim2)" type="button">var(--esds-color-background-brand-swisstransfer-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-swisstransfer-dim2" type="button">bg-brand-swisstransfer-dim2</button></div>
+        <div class="token-row token-description">Soft SwissTransfer brand background (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-swisstransfer-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-swisstransfer-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.swisstransfer.dim3" type="button">color.background.brand.swisstransfer.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-swisstransfer-dim3)" type="button">var(--esds-color-background-brand-swisstransfer-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-swisstransfer-dim3" type="button">bg-brand-swisstransfer-dim3</button></div>
+        <div class="token-row token-description">Subtle SwissTransfer brand background (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.dim1" type="button">color.background.brand.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-dim1)" type="button">var(--esds-color-background-brand-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-dim1" type="button">bg-brand-dim1</button></div>
+        <div class="token-row token-description">Default dim1 brand background.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.dim2" type="button">color.background.brand.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-dim2)" type="button">var(--esds-color-background-brand-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-dim2" type="button">bg-brand-dim2</button></div>
+        <div class="token-row token-description">Default dim2 brand background.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-background-brand-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-background-brand-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.background.brand.dim3" type="button">color.background.brand.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-background-brand-dim3)" type="button">var(--esds-color-background-brand-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="bg-brand-dim3" type="button">bg-brand-dim3</button></div>
+        <div class="token-row token-description">Default dim3 brand background.</div>
       </td>
     </tr>
     <tr>
@@ -873,146 +1159,432 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-infomaniak-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-infomaniak-dim1"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.brand" type="button">color.content.on.brand</button>
+          <button class="token-value" data-clipboard="color.content.on.brand.infomaniak.dim1" type="button">color.content.on.brand.infomaniak.dim1</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand)" type="button">var(--esds-color-content-on-brand)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-infomaniak-dim1)" type="button">var(--esds-color-content-on-brand-infomaniak-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand" type="button">text-on-brand</button></div>
-        <div class="token-row token-description">Default foreground on brand backgrounds.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-infomaniak-dim1" type="button">text-on-brand-infomaniak-dim1</button></div>
+        <div class="token-row token-description">Foreground on strong Infomaniak brand backgrounds (dim1).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-infomaniak); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-infomaniak"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-infomaniak-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-infomaniak-dim2"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.brand.infomaniak" type="button">color.content.on.brand.infomaniak</button>
+          <button class="token-value" data-clipboard="color.content.on.brand.infomaniak.dim2" type="button">color.content.on.brand.infomaniak.dim2</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-infomaniak)" type="button">var(--esds-color-content-on-brand-infomaniak)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-infomaniak-dim2)" type="button">var(--esds-color-content-on-brand-infomaniak-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-infomaniak" type="button">text-on-brand-infomaniak</button></div>
-        <div class="token-row token-description">Foreground on Infomaniak brand backgrounds.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-infomaniak-dim2" type="button">text-on-brand-infomaniak-dim2</button></div>
+        <div class="token-row token-description">Foreground on soft Infomaniak brand backgrounds (dim2).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-calendar); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-calendar"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-infomaniak-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-infomaniak-dim3"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.brand.calendar" type="button">color.content.on.brand.calendar</button>
+          <button class="token-value" data-clipboard="color.content.on.brand.infomaniak.dim3" type="button">color.content.on.brand.infomaniak.dim3</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-calendar)" type="button">var(--esds-color-content-on-brand-calendar)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-infomaniak-dim3)" type="button">var(--esds-color-content-on-brand-infomaniak-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-calendar" type="button">text-on-brand-calendar</button></div>
-        <div class="token-row token-description">Foreground on Calendar brand backgrounds.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-infomaniak-dim3" type="button">text-on-brand-infomaniak-dim3</button></div>
+        <div class="token-row token-description">Foreground on subtle Infomaniak brand backgrounds (dim3).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-contacts); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-contacts"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-calendar-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-calendar-dim1"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.brand.contacts" type="button">color.content.on.brand.contacts</button>
+          <button class="token-value" data-clipboard="color.content.on.brand.calendar.dim1" type="button">color.content.on.brand.calendar.dim1</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-contacts)" type="button">var(--esds-color-content-on-brand-contacts)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-calendar-dim1)" type="button">var(--esds-color-content-on-brand-calendar-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-contacts" type="button">text-on-brand-contacts</button></div>
-        <div class="token-row token-description">Foreground on Contacts brand backgrounds.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-calendar-dim1" type="button">text-on-brand-calendar-dim1</button></div>
+        <div class="token-row token-description">Foreground on strong Calendar brand backgrounds (dim1).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-euria); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-euria"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-calendar-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-calendar-dim2"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.brand.euria" type="button">color.content.on.brand.euria</button>
+          <button class="token-value" data-clipboard="color.content.on.brand.calendar.dim2" type="button">color.content.on.brand.calendar.dim2</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-euria)" type="button">var(--esds-color-content-on-brand-euria)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-calendar-dim2)" type="button">var(--esds-color-content-on-brand-calendar-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-euria" type="button">text-on-brand-euria</button></div>
-        <div class="token-row token-description">Foreground on Euria brand backgrounds.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-calendar-dim2" type="button">text-on-brand-calendar-dim2</button></div>
+        <div class="token-row token-description">Foreground on soft Calendar brand backgrounds (dim2).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-kchat); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-kchat"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-calendar-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-calendar-dim3"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.brand.kchat" type="button">color.content.on.brand.kchat</button>
+          <button class="token-value" data-clipboard="color.content.on.brand.calendar.dim3" type="button">color.content.on.brand.calendar.dim3</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-kchat)" type="button">var(--esds-color-content-on-brand-kchat)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-calendar-dim3)" type="button">var(--esds-color-content-on-brand-calendar-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-kchat" type="button">text-on-brand-kchat</button></div>
-        <div class="token-row token-description">Foreground on kChat brand backgrounds.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-calendar-dim3" type="button">text-on-brand-calendar-dim3</button></div>
+        <div class="token-row token-description">Foreground on subtle Calendar brand backgrounds (dim3).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-kdrive); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-kdrive"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-contacts-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-contacts-dim1"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.brand.kdrive" type="button">color.content.on.brand.kdrive</button>
+          <button class="token-value" data-clipboard="color.content.on.brand.contacts.dim1" type="button">color.content.on.brand.contacts.dim1</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-kdrive)" type="button">var(--esds-color-content-on-brand-kdrive)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-contacts-dim1)" type="button">var(--esds-color-content-on-brand-contacts-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-kdrive" type="button">text-on-brand-kdrive</button></div>
-        <div class="token-row token-description">Foreground on kDrive brand backgrounds.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-contacts-dim1" type="button">text-on-brand-contacts-dim1</button></div>
+        <div class="token-row token-description">Foreground on strong Contacts brand backgrounds (dim1).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-knote); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-knote"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-contacts-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-contacts-dim2"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.brand.knote" type="button">color.content.on.brand.knote</button>
+          <button class="token-value" data-clipboard="color.content.on.brand.contacts.dim2" type="button">color.content.on.brand.contacts.dim2</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-knote)" type="button">var(--esds-color-content-on-brand-knote)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-contacts-dim2)" type="button">var(--esds-color-content-on-brand-contacts-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-knote" type="button">text-on-brand-knote</button></div>
-        <div class="token-row token-description">Foreground on kNote brand backgrounds.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-contacts-dim2" type="button">text-on-brand-contacts-dim2</button></div>
+        <div class="token-row token-description">Foreground on soft Contacts brand backgrounds (dim2).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-mail); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-mail"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-contacts-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-contacts-dim3"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.brand.mail" type="button">color.content.on.brand.mail</button>
+          <button class="token-value" data-clipboard="color.content.on.brand.contacts.dim3" type="button">color.content.on.brand.contacts.dim3</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-mail)" type="button">var(--esds-color-content-on-brand-mail)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-contacts-dim3)" type="button">var(--esds-color-content-on-brand-contacts-dim3)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-mail" type="button">text-on-brand-mail</button></div>
-        <div class="token-row token-description">Foreground on Mail brand backgrounds.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-contacts-dim3" type="button">text-on-brand-contacts-dim3</button></div>
+        <div class="token-row token-description">Foreground on subtle Contacts brand backgrounds (dim3).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-security); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-security"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-euria-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-euria-dim1"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.brand.security" type="button">color.content.on.brand.security</button>
+          <button class="token-value" data-clipboard="color.content.on.brand.euria.dim1" type="button">color.content.on.brand.euria.dim1</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-security)" type="button">var(--esds-color-content-on-brand-security)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-euria-dim1)" type="button">var(--esds-color-content-on-brand-euria-dim1)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-security" type="button">text-on-brand-security</button></div>
-        <div class="token-row token-description">Foreground on Security brand backgrounds.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-euria-dim1" type="button">text-on-brand-euria-dim1</button></div>
+        <div class="token-row token-description">Foreground on strong Euria brand backgrounds (dim1).</div>
       </td>
     </tr>
     <tr>
-      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-swisstransfer); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-swisstransfer"></div></td>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-euria-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-euria-dim2"></div></td>
       <td>
         <div class="token-row">
-          <button class="token-value" data-clipboard="color.content.on.brand.swisstransfer" type="button">color.content.on.brand.swisstransfer</button>
+          <button class="token-value" data-clipboard="color.content.on.brand.euria.dim2" type="button">color.content.on.brand.euria.dim2</button>
         </div>
         <div class="token-row">
-          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-swisstransfer)" type="button">var(--esds-color-content-on-brand-swisstransfer)</button>
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-euria-dim2)" type="button">var(--esds-color-content-on-brand-euria-dim2)</button>
         </div>
-        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-swisstransfer" type="button">text-on-brand-swisstransfer</button></div>
-        <div class="token-row token-description">Foreground on SwissTransfer brand backgrounds.</div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-euria-dim2" type="button">text-on-brand-euria-dim2</button></div>
+        <div class="token-row token-description">Foreground on soft Euria brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-euria-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-euria-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.euria.dim3" type="button">color.content.on.brand.euria.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-euria-dim3)" type="button">var(--esds-color-content-on-brand-euria-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-euria-dim3" type="button">text-on-brand-euria-dim3</button></div>
+        <div class="token-row token-description">Foreground on subtle Euria brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-kchat-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-kchat-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.kchat.dim1" type="button">color.content.on.brand.kchat.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-kchat-dim1)" type="button">var(--esds-color-content-on-brand-kchat-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-kchat-dim1" type="button">text-on-brand-kchat-dim1</button></div>
+        <div class="token-row token-description">Foreground on strong kChat brand backgrounds (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-kchat-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-kchat-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.kchat.dim2" type="button">color.content.on.brand.kchat.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-kchat-dim2)" type="button">var(--esds-color-content-on-brand-kchat-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-kchat-dim2" type="button">text-on-brand-kchat-dim2</button></div>
+        <div class="token-row token-description">Foreground on soft kChat brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-kchat-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-kchat-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.kchat.dim3" type="button">color.content.on.brand.kchat.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-kchat-dim3)" type="button">var(--esds-color-content-on-brand-kchat-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-kchat-dim3" type="button">text-on-brand-kchat-dim3</button></div>
+        <div class="token-row token-description">Foreground on subtle kChat brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-kdrive-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-kdrive-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.kdrive.dim1" type="button">color.content.on.brand.kdrive.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-kdrive-dim1)" type="button">var(--esds-color-content-on-brand-kdrive-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-kdrive-dim1" type="button">text-on-brand-kdrive-dim1</button></div>
+        <div class="token-row token-description">Foreground on strong kDrive brand backgrounds (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-kdrive-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-kdrive-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.kdrive.dim2" type="button">color.content.on.brand.kdrive.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-kdrive-dim2)" type="button">var(--esds-color-content-on-brand-kdrive-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-kdrive-dim2" type="button">text-on-brand-kdrive-dim2</button></div>
+        <div class="token-row token-description">Foreground on soft kDrive brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-kdrive-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-kdrive-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.kdrive.dim3" type="button">color.content.on.brand.kdrive.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-kdrive-dim3)" type="button">var(--esds-color-content-on-brand-kdrive-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-kdrive-dim3" type="button">text-on-brand-kdrive-dim3</button></div>
+        <div class="token-row token-description">Foreground on subtle kDrive brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-knote-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-knote-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.knote.dim1" type="button">color.content.on.brand.knote.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-knote-dim1)" type="button">var(--esds-color-content-on-brand-knote-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-knote-dim1" type="button">text-on-brand-knote-dim1</button></div>
+        <div class="token-row token-description">Foreground on strong kNote brand backgrounds (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-knote-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-knote-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.knote.dim2" type="button">color.content.on.brand.knote.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-knote-dim2)" type="button">var(--esds-color-content-on-brand-knote-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-knote-dim2" type="button">text-on-brand-knote-dim2</button></div>
+        <div class="token-row token-description">Foreground on soft kNote brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-knote-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-knote-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.knote.dim3" type="button">color.content.on.brand.knote.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-knote-dim3)" type="button">var(--esds-color-content-on-brand-knote-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-knote-dim3" type="button">text-on-brand-knote-dim3</button></div>
+        <div class="token-row token-description">Foreground on subtle kNote brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-mail-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-mail-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.mail.dim1" type="button">color.content.on.brand.mail.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-mail-dim1)" type="button">var(--esds-color-content-on-brand-mail-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-mail-dim1" type="button">text-on-brand-mail-dim1</button></div>
+        <div class="token-row token-description">Foreground on strong Mail brand backgrounds (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-mail-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-mail-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.mail.dim2" type="button">color.content.on.brand.mail.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-mail-dim2)" type="button">var(--esds-color-content-on-brand-mail-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-mail-dim2" type="button">text-on-brand-mail-dim2</button></div>
+        <div class="token-row token-description">Foreground on soft Mail brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-mail-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-mail-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.mail.dim3" type="button">color.content.on.brand.mail.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-mail-dim3)" type="button">var(--esds-color-content-on-brand-mail-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-mail-dim3" type="button">text-on-brand-mail-dim3</button></div>
+        <div class="token-row token-description">Foreground on subtle Mail brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-security-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-security-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.security.dim1" type="button">color.content.on.brand.security.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-security-dim1)" type="button">var(--esds-color-content-on-brand-security-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-security-dim1" type="button">text-on-brand-security-dim1</button></div>
+        <div class="token-row token-description">Foreground on strong Security brand backgrounds (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-security-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-security-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.security.dim2" type="button">color.content.on.brand.security.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-security-dim2)" type="button">var(--esds-color-content-on-brand-security-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-security-dim2" type="button">text-on-brand-security-dim2</button></div>
+        <div class="token-row token-description">Foreground on soft Security brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-security-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-security-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.security.dim3" type="button">color.content.on.brand.security.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-security-dim3)" type="button">var(--esds-color-content-on-brand-security-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-security-dim3" type="button">text-on-brand-security-dim3</button></div>
+        <div class="token-row token-description">Foreground on subtle Security brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-swisstransfer-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-swisstransfer-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.swisstransfer.dim1" type="button">color.content.on.brand.swisstransfer.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-swisstransfer-dim1)" type="button">var(--esds-color-content-on-brand-swisstransfer-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-swisstransfer-dim1" type="button">text-on-brand-swisstransfer-dim1</button></div>
+        <div class="token-row token-description">Foreground on strong SwissTransfer brand backgrounds (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-swisstransfer-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-swisstransfer-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.swisstransfer.dim2" type="button">color.content.on.brand.swisstransfer.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-swisstransfer-dim2)" type="button">var(--esds-color-content-on-brand-swisstransfer-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-swisstransfer-dim2" type="button">text-on-brand-swisstransfer-dim2</button></div>
+        <div class="token-row token-description">Foreground on soft SwissTransfer brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-swisstransfer-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-swisstransfer-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.swisstransfer.dim3" type="button">color.content.on.brand.swisstransfer.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-swisstransfer-dim3)" type="button">var(--esds-color-content-on-brand-swisstransfer-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-swisstransfer-dim3" type="button">text-on-brand-swisstransfer-dim3</button></div>
+        <div class="token-row token-description">Foreground on subtle SwissTransfer brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.dim1" type="button">color.content.on.brand.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-dim1)" type="button">var(--esds-color-content-on-brand-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-dim1" type="button">text-on-brand-dim1</button></div>
+        <div class="token-row token-description">Default foreground on brand dim1 backgrounds.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.dim2" type="button">color.content.on.brand.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-dim2)" type="button">var(--esds-color-content-on-brand-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-dim2" type="button">text-on-brand-dim2</button></div>
+        <div class="token-row token-description">Default foreground on brand dim2 backgrounds.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-content-on-brand-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-content-on-brand-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.content.on.brand.dim3" type="button">color.content.on.brand.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-content-on-brand-dim3)" type="button">var(--esds-color-content-on-brand-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-on-brand-dim3" type="button">text-on-brand-dim3</button></div>
+        <div class="token-row token-description">Default foreground on brand dim3 backgrounds.</div>
       </td>
     </tr>
     <tr>
@@ -2079,6 +2651,435 @@ T2 Color tokens provide semantic color definitions for backgrounds, text, border
         </div>
         <div class="token-row">Tailwind: <button class="token-value" data-clipboard="text-dataviz-magenta" type="button">text-dataviz-magenta</button></div>
         <div class="token-row token-description">Magenta data-viz foreground color.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-infomaniak-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-infomaniak-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.infomaniak.dim1" type="button">color.border.on.brand.infomaniak.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-infomaniak-dim1)" type="button">var(--esds-color-border-on-brand-infomaniak-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-infomaniak-dim1" type="button">border-on-brand-infomaniak-dim1</button> <button class="token-value" data-clipboard="outline-on-brand-infomaniak-dim1" type="button">outline-on-brand-infomaniak-dim1</button></div>
+        <div class="token-row token-description">Border on strong Infomaniak brand backgrounds (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-infomaniak-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-infomaniak-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.infomaniak.dim2" type="button">color.border.on.brand.infomaniak.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-infomaniak-dim2)" type="button">var(--esds-color-border-on-brand-infomaniak-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-infomaniak-dim2" type="button">border-on-brand-infomaniak-dim2</button> <button class="token-value" data-clipboard="outline-on-brand-infomaniak-dim2" type="button">outline-on-brand-infomaniak-dim2</button></div>
+        <div class="token-row token-description">Border on soft Infomaniak brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-infomaniak-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-infomaniak-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.infomaniak.dim3" type="button">color.border.on.brand.infomaniak.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-infomaniak-dim3)" type="button">var(--esds-color-border-on-brand-infomaniak-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-infomaniak-dim3" type="button">border-on-brand-infomaniak-dim3</button> <button class="token-value" data-clipboard="outline-on-brand-infomaniak-dim3" type="button">outline-on-brand-infomaniak-dim3</button></div>
+        <div class="token-row token-description">Border on subtle Infomaniak brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-mail-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-mail-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.mail.dim1" type="button">color.border.on.brand.mail.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-mail-dim1)" type="button">var(--esds-color-border-on-brand-mail-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-mail-dim1" type="button">border-on-brand-mail-dim1</button> <button class="token-value" data-clipboard="outline-on-brand-mail-dim1" type="button">outline-on-brand-mail-dim1</button></div>
+        <div class="token-row token-description">Border on strong Mail brand backgrounds (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-mail-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-mail-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.mail.dim2" type="button">color.border.on.brand.mail.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-mail-dim2)" type="button">var(--esds-color-border-on-brand-mail-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-mail-dim2" type="button">border-on-brand-mail-dim2</button> <button class="token-value" data-clipboard="outline-on-brand-mail-dim2" type="button">outline-on-brand-mail-dim2</button></div>
+        <div class="token-row token-description">Border on soft Mail brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-mail-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-mail-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.mail.dim3" type="button">color.border.on.brand.mail.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-mail-dim3)" type="button">var(--esds-color-border-on-brand-mail-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-mail-dim3" type="button">border-on-brand-mail-dim3</button> <button class="token-value" data-clipboard="outline-on-brand-mail-dim3" type="button">outline-on-brand-mail-dim3</button></div>
+        <div class="token-row token-description">Border on subtle Mail brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-kdrive-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-kdrive-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.kdrive.dim1" type="button">color.border.on.brand.kdrive.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-kdrive-dim1)" type="button">var(--esds-color-border-on-brand-kdrive-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-kdrive-dim1" type="button">border-on-brand-kdrive-dim1</button> <button class="token-value" data-clipboard="outline-on-brand-kdrive-dim1" type="button">outline-on-brand-kdrive-dim1</button></div>
+        <div class="token-row token-description">Border on strong kDrive brand backgrounds (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-kdrive-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-kdrive-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.kdrive.dim2" type="button">color.border.on.brand.kdrive.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-kdrive-dim2)" type="button">var(--esds-color-border-on-brand-kdrive-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-kdrive-dim2" type="button">border-on-brand-kdrive-dim2</button> <button class="token-value" data-clipboard="outline-on-brand-kdrive-dim2" type="button">outline-on-brand-kdrive-dim2</button></div>
+        <div class="token-row token-description">Border on soft kDrive brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-kdrive-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-kdrive-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.kdrive.dim3" type="button">color.border.on.brand.kdrive.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-kdrive-dim3)" type="button">var(--esds-color-border-on-brand-kdrive-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-kdrive-dim3" type="button">border-on-brand-kdrive-dim3</button> <button class="token-value" data-clipboard="outline-on-brand-kdrive-dim3" type="button">outline-on-brand-kdrive-dim3</button></div>
+        <div class="token-row token-description">Border on subtle kDrive brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-euria-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-euria-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.euria.dim1" type="button">color.border.on.brand.euria.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-euria-dim1)" type="button">var(--esds-color-border-on-brand-euria-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-euria-dim1" type="button">border-on-brand-euria-dim1</button> <button class="token-value" data-clipboard="outline-on-brand-euria-dim1" type="button">outline-on-brand-euria-dim1</button></div>
+        <div class="token-row token-description">Border on strong Euria brand backgrounds (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-euria-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-euria-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.euria.dim2" type="button">color.border.on.brand.euria.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-euria-dim2)" type="button">var(--esds-color-border-on-brand-euria-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-euria-dim2" type="button">border-on-brand-euria-dim2</button> <button class="token-value" data-clipboard="outline-on-brand-euria-dim2" type="button">outline-on-brand-euria-dim2</button></div>
+        <div class="token-row token-description">Border on soft Euria brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-euria-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-euria-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.euria.dim3" type="button">color.border.on.brand.euria.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-euria-dim3)" type="button">var(--esds-color-border-on-brand-euria-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-euria-dim3" type="button">border-on-brand-euria-dim3</button> <button class="token-value" data-clipboard="outline-on-brand-euria-dim3" type="button">outline-on-brand-euria-dim3</button></div>
+        <div class="token-row token-description">Border on subtle Euria brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-kchat-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-kchat-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.kchat.dim1" type="button">color.border.on.brand.kchat.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-kchat-dim1)" type="button">var(--esds-color-border-on-brand-kchat-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-kchat-dim1" type="button">border-on-brand-kchat-dim1</button> <button class="token-value" data-clipboard="outline-on-brand-kchat-dim1" type="button">outline-on-brand-kchat-dim1</button></div>
+        <div class="token-row token-description">Border on strong kChat brand backgrounds (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-kchat-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-kchat-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.kchat.dim2" type="button">color.border.on.brand.kchat.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-kchat-dim2)" type="button">var(--esds-color-border-on-brand-kchat-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-kchat-dim2" type="button">border-on-brand-kchat-dim2</button> <button class="token-value" data-clipboard="outline-on-brand-kchat-dim2" type="button">outline-on-brand-kchat-dim2</button></div>
+        <div class="token-row token-description">Border on soft kChat brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-kchat-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-kchat-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.kchat.dim3" type="button">color.border.on.brand.kchat.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-kchat-dim3)" type="button">var(--esds-color-border-on-brand-kchat-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-kchat-dim3" type="button">border-on-brand-kchat-dim3</button> <button class="token-value" data-clipboard="outline-on-brand-kchat-dim3" type="button">outline-on-brand-kchat-dim3</button></div>
+        <div class="token-row token-description">Border on subtle kChat brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-security-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-security-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.security.dim1" type="button">color.border.on.brand.security.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-security-dim1)" type="button">var(--esds-color-border-on-brand-security-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-security-dim1" type="button">border-on-brand-security-dim1</button> <button class="token-value" data-clipboard="outline-on-brand-security-dim1" type="button">outline-on-brand-security-dim1</button></div>
+        <div class="token-row token-description">Border on strong Security brand backgrounds (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-security-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-security-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.security.dim2" type="button">color.border.on.brand.security.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-security-dim2)" type="button">var(--esds-color-border-on-brand-security-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-security-dim2" type="button">border-on-brand-security-dim2</button> <button class="token-value" data-clipboard="outline-on-brand-security-dim2" type="button">outline-on-brand-security-dim2</button></div>
+        <div class="token-row token-description">Border on soft Security brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-security-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-security-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.security.dim3" type="button">color.border.on.brand.security.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-security-dim3)" type="button">var(--esds-color-border-on-brand-security-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-security-dim3" type="button">border-on-brand-security-dim3</button> <button class="token-value" data-clipboard="outline-on-brand-security-dim3" type="button">outline-on-brand-security-dim3</button></div>
+        <div class="token-row token-description">Border on subtle Security brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-calendar-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-calendar-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.calendar.dim1" type="button">color.border.on.brand.calendar.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-calendar-dim1)" type="button">var(--esds-color-border-on-brand-calendar-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-calendar-dim1" type="button">border-on-brand-calendar-dim1</button> <button class="token-value" data-clipboard="outline-on-brand-calendar-dim1" type="button">outline-on-brand-calendar-dim1</button></div>
+        <div class="token-row token-description">Border on strong Calendar brand backgrounds (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-calendar-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-calendar-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.calendar.dim2" type="button">color.border.on.brand.calendar.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-calendar-dim2)" type="button">var(--esds-color-border-on-brand-calendar-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-calendar-dim2" type="button">border-on-brand-calendar-dim2</button> <button class="token-value" data-clipboard="outline-on-brand-calendar-dim2" type="button">outline-on-brand-calendar-dim2</button></div>
+        <div class="token-row token-description">Border on soft Calendar brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-calendar-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-calendar-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.calendar.dim3" type="button">color.border.on.brand.calendar.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-calendar-dim3)" type="button">var(--esds-color-border-on-brand-calendar-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-calendar-dim3" type="button">border-on-brand-calendar-dim3</button> <button class="token-value" data-clipboard="outline-on-brand-calendar-dim3" type="button">outline-on-brand-calendar-dim3</button></div>
+        <div class="token-row token-description">Border on subtle Calendar brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-contacts-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-contacts-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.contacts.dim1" type="button">color.border.on.brand.contacts.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-contacts-dim1)" type="button">var(--esds-color-border-on-brand-contacts-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-contacts-dim1" type="button">border-on-brand-contacts-dim1</button> <button class="token-value" data-clipboard="outline-on-brand-contacts-dim1" type="button">outline-on-brand-contacts-dim1</button></div>
+        <div class="token-row token-description">Border on strong Contacts brand backgrounds (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-contacts-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-contacts-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.contacts.dim2" type="button">color.border.on.brand.contacts.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-contacts-dim2)" type="button">var(--esds-color-border-on-brand-contacts-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-contacts-dim2" type="button">border-on-brand-contacts-dim2</button> <button class="token-value" data-clipboard="outline-on-brand-contacts-dim2" type="button">outline-on-brand-contacts-dim2</button></div>
+        <div class="token-row token-description">Border on soft Contacts brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-contacts-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-contacts-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.contacts.dim3" type="button">color.border.on.brand.contacts.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-contacts-dim3)" type="button">var(--esds-color-border-on-brand-contacts-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-contacts-dim3" type="button">border-on-brand-contacts-dim3</button> <button class="token-value" data-clipboard="outline-on-brand-contacts-dim3" type="button">outline-on-brand-contacts-dim3</button></div>
+        <div class="token-row token-description">Border on subtle Contacts brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-knote-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-knote-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.knote.dim1" type="button">color.border.on.brand.knote.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-knote-dim1)" type="button">var(--esds-color-border-on-brand-knote-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-knote-dim1" type="button">border-on-brand-knote-dim1</button> <button class="token-value" data-clipboard="outline-on-brand-knote-dim1" type="button">outline-on-brand-knote-dim1</button></div>
+        <div class="token-row token-description">Border on strong kNote brand backgrounds (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-knote-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-knote-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.knote.dim2" type="button">color.border.on.brand.knote.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-knote-dim2)" type="button">var(--esds-color-border-on-brand-knote-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-knote-dim2" type="button">border-on-brand-knote-dim2</button> <button class="token-value" data-clipboard="outline-on-brand-knote-dim2" type="button">outline-on-brand-knote-dim2</button></div>
+        <div class="token-row token-description">Border on soft kNote brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-knote-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-knote-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.knote.dim3" type="button">color.border.on.brand.knote.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-knote-dim3)" type="button">var(--esds-color-border-on-brand-knote-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-knote-dim3" type="button">border-on-brand-knote-dim3</button> <button class="token-value" data-clipboard="outline-on-brand-knote-dim3" type="button">outline-on-brand-knote-dim3</button></div>
+        <div class="token-row token-description">Border on subtle kNote brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-swisstransfer-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-swisstransfer-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.swisstransfer.dim1" type="button">color.border.on.brand.swisstransfer.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-swisstransfer-dim1)" type="button">var(--esds-color-border-on-brand-swisstransfer-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-swisstransfer-dim1" type="button">border-on-brand-swisstransfer-dim1</button> <button class="token-value" data-clipboard="outline-on-brand-swisstransfer-dim1" type="button">outline-on-brand-swisstransfer-dim1</button></div>
+        <div class="token-row token-description">Border on strong SwissTransfer brand backgrounds (dim1).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-swisstransfer-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-swisstransfer-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.swisstransfer.dim2" type="button">color.border.on.brand.swisstransfer.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-swisstransfer-dim2)" type="button">var(--esds-color-border-on-brand-swisstransfer-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-swisstransfer-dim2" type="button">border-on-brand-swisstransfer-dim2</button> <button class="token-value" data-clipboard="outline-on-brand-swisstransfer-dim2" type="button">outline-on-brand-swisstransfer-dim2</button></div>
+        <div class="token-row token-description">Border on soft SwissTransfer brand backgrounds (dim2).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-swisstransfer-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-swisstransfer-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.swisstransfer.dim3" type="button">color.border.on.brand.swisstransfer.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-swisstransfer-dim3)" type="button">var(--esds-color-border-on-brand-swisstransfer-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-swisstransfer-dim3" type="button">border-on-brand-swisstransfer-dim3</button> <button class="token-value" data-clipboard="outline-on-brand-swisstransfer-dim3" type="button">outline-on-brand-swisstransfer-dim3</button></div>
+        <div class="token-row token-description">Border on subtle SwissTransfer brand backgrounds (dim3).</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-dim1); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-dim1"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.dim1" type="button">color.border.on.brand.dim1</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-dim1)" type="button">var(--esds-color-border-on-brand-dim1)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-dim1" type="button">border-on-brand-dim1</button> <button class="token-value" data-clipboard="outline-on-brand-dim1" type="button">outline-on-brand-dim1</button></div>
+        <div class="token-row token-description">Default border on brand dim1 backgrounds.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-dim2); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-dim2"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.dim2" type="button">color.border.on.brand.dim2</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-dim2)" type="button">var(--esds-color-border-on-brand-dim2)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-dim2" type="button">border-on-brand-dim2</button> <button class="token-value" data-clipboard="outline-on-brand-dim2" type="button">outline-on-brand-dim2</button></div>
+        <div class="token-row token-description">Default border on brand dim2 backgrounds.</div>
+      </td>
+    </tr>
+    <tr>
+      <td><div style=" border-radius: 4px; width: 100%; height: 75px; background: var(--esds-color-border-on-brand-dim3); border: 1px solid #e5e7eb; " ></div> <div data-preview-value="--esds-color-border-on-brand-dim3"></div></td>
+      <td>
+        <div class="token-row">
+          <button class="token-value" data-clipboard="color.border.on.brand.dim3" type="button">color.border.on.brand.dim3</button>
+        </div>
+        <div class="token-row">
+          CSS: <button class="token-value" data-clipboard="var(--esds-color-border-on-brand-dim3)" type="button">var(--esds-color-border-on-brand-dim3)</button>
+        </div>
+        <div class="token-row">Tailwind: <button class="token-value" data-clipboard="border-on-brand-dim3" type="button">border-on-brand-dim3</button> <button class="token-value" data-clipboard="outline-on-brand-dim3" type="button">outline-on-brand-dim3</button></div>
+        <div class="token-row token-description">Default border on brand dim3 backgrounds.</div>
       </td>
     </tr>
     <tr>
