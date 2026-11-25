@@ -66,12 +66,18 @@ function base64UrlToBytes(base64Url: string): Uint8Array<ArrayBuffer> {
   return Uint8Array.from(atob(base64), (char) => char.charCodeAt(0));
 }
 
-async function pipeThrough(
-  bytes: Uint8Array<ArrayBuffer>,
-  stream: TransformStream,
-): Promise<Uint8Array> {
-  const piped = new Blob([bytes]).stream().pipeThrough(stream);
-  return new Uint8Array(await new Response(piped).arrayBuffer());
+async function deflateToBase64Url(json: string): Promise<string> {
+  const piped = new Blob([json]).stream().pipeThrough(new CompressionStream('deflate-raw'));
+  // `Response` drains the piped stream; `Blob#arrayBuffer()` would return the uncompressed input.
+  const compressed = new Uint8Array(await new Response(piped).arrayBuffer());
+  return bytesToBase64Url(compressed);
+}
+
+async function inflateFromBase64Url(base64Url: string): Promise<string> {
+  const piped = new Blob([base64UrlToBytes(base64Url)])
+    .stream()
+    .pipeThrough(new DecompressionStream('deflate-raw'));
+  return new Response(piped).text();
 }
 
 function parseConfig(json: string): PlaygroundProjectManifest | undefined {
@@ -99,11 +105,9 @@ export async function encodeConfig(config: PlaygroundProjectManifest): Promise<s
     warnAboutMissingStreamsOnce();
     return undefined;
   }
-  const json = JSON.stringify(serializeConfig(config));
-  const bytes = new TextEncoder().encode(json);
   try {
-    const compressed = await pipeThrough(bytes, new CompressionStream('deflate-raw'));
-    return `${FORMAT_PREFIX}${bytesToBase64Url(compressed)}`;
+    const payload = await deflateToBase64Url(JSON.stringify(serializeConfig(config)));
+    return `${FORMAT_PREFIX}${payload}`;
   } catch {
     return undefined;
   }
@@ -119,11 +123,7 @@ export async function decodeConfig(hash: string): Promise<PlaygroundProjectManif
     return undefined;
   }
   try {
-    const decompressed = await pipeThrough(
-      base64UrlToBytes(match[1]),
-      new DecompressionStream('deflate-raw'),
-    );
-    return parseConfig(new TextDecoder().decode(decompressed));
+    return parseConfig(await inflateFromBase64Url(match[1]));
   } catch {
     return undefined;
   }
