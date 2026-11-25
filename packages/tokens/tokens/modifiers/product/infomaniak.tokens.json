@@ -2,18 +2,47 @@
   "color": {
     "background": {
       "brand": {
-        "$value": "{color.background.brand.infomaniak}"
+        "dim1": {
+          "$value": "{color.background.brand.infomaniak.dim1}"
+        },
+        "dim2": {
+          "$value": "{color.background.brand.infomaniak.dim2}"
+        },
+        "dim3": {
+          "$value": "{color.background.brand.infomaniak.dim3}"
+        }
       }
     },
     "border": {
       "brand": {
         "$value": "{color.border.brand.infomaniak}"
+      },
+      "on": {
+        "brand": {
+          "dim1": {
+            "$value": "{color.border.on.brand.infomaniak.dim1}"
+          },
+          "dim2": {
+            "$value": "{color.border.on.brand.infomaniak.dim2}"
+          },
+          "dim3": {
+            "$value": "{color.border.on.brand.infomaniak.dim3}"
+          }
+        }
       }
     },
     "content": {
       "on": {
         "brand": {
-          "$value": "{color.content.on.brand.infomaniak}"
+          "dim1": {
+            "$value": "{color.content.on.brand.infomaniak.dim1}"
+          },
+          "dim2": {
+            "$value": "{color.content.on.brand.infomaniak.dim2}"
+          },
+          "dim3": {
+            "$value": "{color.content.on.brand.infomaniak.dim3}"
+          }
         }
       },
       "brand": {

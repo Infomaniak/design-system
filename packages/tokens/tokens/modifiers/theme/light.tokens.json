@@ -17,34 +17,114 @@
       },
       "brand": {
         "infomaniak": {
-          "$value": "{color.blue.600}"
+          "dim1": {
+            "$value": "{color.blue.600}"
+          },
+          "dim2": {
+            "$value": "{color.blue.200}"
+          },
+          "dim3": {
+            "$value": "{color.blue.50}"
+          }
         },
         "mail": {
-          "$value": "{color.pink.600}"
+          "dim1": {
+            "$value": "{color.pink.600}"
+          },
+          "dim2": {
+            "$value": "{color.pink.200}"
+          },
+          "dim3": {
+            "$value": "{color.pink.50}"
+          }
         },
         "kdrive": {
-          "$value": "{color.cobalt.500}"
+          "dim1": {
+            "$value": "{color.cobalt.500}"
+          },
+          "dim2": {
+            "$value": "{color.cobalt.200}"
+          },
+          "dim3": {
+            "$value": "{color.cobalt.50}"
+          }
         },
         "euria": {
-          "$value": "{color.ocean.700}"
+          "dim1": {
+            "$value": "{color.ocean.700}"
+          },
+          "dim2": {
+            "$value": "{color.ocean.200}"
+          },
+          "dim3": {
+            "$value": "{color.ocean.50}"
+          }
         },
         "kchat": {
-          "$value": "{color.cyan.600}"
+          "dim1": {
+            "$value": "{color.cyan.600}"
+          },
+          "dim2": {
+            "$value": "{color.cyan.200}"
+          },
+          "dim3": {
+            "$value": "{color.cyan.50}"
+          }
         },
         "security": {
-          "$value": "{color.indigo.600}"
+          "dim1": {
+            "$value": "{color.indigo.600}"
+          },
+          "dim2": {
+            "$value": "{color.indigo.200}"
+          },
+          "dim3": {
+            "$value": "{color.indigo.50}"
+          }
         },
         "calendar": {
-          "$value": "{color.aqua.500}"
+          "dim1": {
+            "$value": "{color.aqua.500}"
+          },
+          "dim2": {
+            "$value": "{color.aqua.200}"
+          },
+          "dim3": {
+            "$value": "{color.aqua.50}"
+          }
         },
         "contacts": {
-          "$value": "{color.purple.500}"
+          "dim1": {
+            "$value": "{color.purple.500}"
+          },
+          "dim2": {
+            "$value": "{color.purple.200}"
+          },
+          "dim3": {
+            "$value": "{color.purple.50}"
+          }
         },
         "knote": {
-          "$value": "{color.coral.600}"
+          "dim1": {
+            "$value": "{color.coral.600}"
+          },
+          "dim2": {
+            "$value": "{color.coral.200}"
+          },
+          "dim3": {
+            "$value": "{color.coral.50}"
+          }
         },
         "swisstransfer": {
-          "$value": "{color.emerald.600}"
+          "dim1": {
+            "$value": "{color.emerald.600}"
+          },
+          "dim2": {
+            "$value": "{color.emerald.200}"
+          },
+          "dim3": {
+            "$value": "{color.emerald.50}"
+          }
         }
       },
       "dataviz": {
@@ -235,34 +315,114 @@
         },
         "brand": {
           "infomaniak": {
-            "$value": "{color.white}"
+            "dim1": {
+              "$value": "{color.white}"
+            },
+            "dim2": {
+              "$value": "{color.blue.900}"
+            },
+            "dim3": {
+              "$value": "{color.blue.700}"
+            }
           },
           "calendar": {
-            "$value": "{color.white}"
+            "dim1": {
+              "$value": "{color.white}"
+            },
+            "dim2": {
+              "$value": "{color.aqua.900}"
+            },
+            "dim3": {
+              "$value": "{color.aqua.700}"
+            }
           },
           "contacts": {
-            "$value": "{color.white}"
+            "dim1": {
+              "$value": "{color.white}"
+            },
+            "dim2": {
+              "$value": "{color.purple.900}"
+            },
+            "dim3": {
+              "$value": "{color.purple.700}"
+            }
           },
           "euria": {
-            "$value": "{color.white}"
+            "dim1": {
+              "$value": "{color.white}"
+            },
+            "dim2": {
+              "$value": "{color.ocean.900}"
+            },
+            "dim3": {
+              "$value": "{color.ocean.700}"
+            }
           },
           "kchat": {
-            "$value": "{color.white}"
+            "dim1": {
+              "$value": "{color.white}"
+            },
+            "dim2": {
+              "$value": "{color.cyan.900}"
+            },
+            "dim3": {
+              "$value": "{color.cyan.700}"
+            }
           },
           "kdrive": {
-            "$value": "{color.white}"
+            "dim1": {
+              "$value": "{color.white}"
+            },
+            "dim2": {
+              "$value": "{color.cobalt.900}"
+            },
+            "dim3": {
+              "$value": "{color.cobalt.700}"
+            }
           },
           "knote": {
-            "$value": "{color.white}"
+            "dim1": {
+              "$value": "{color.white}"
+            },
+            "dim2": {
+              "$value": "{color.coral.900}"
+            },
+            "dim3": {
+              "$value": "{color.coral.700}"
+            }
           },
           "mail": {
-            "$value": "{color.white}"
+            "dim1": {
+              "$value": "{color.white}"
+            },
+            "dim2": {
+              "$value": "{color.pink.900}"
+            },
+            "dim3": {
+              "$value": "{color.pink.700}"
+            }
           },
           "security": {
-            "$value": "{color.white}"
+            "dim1": {
+              "$value": "{color.white}"
+            },
+            "dim2": {
+              "$value": "{color.indigo.900}"
+            },
+            "dim3": {
+              "$value": "{color.indigo.700}"
+            }
           },
           "swisstransfer": {
-            "$value": "{color.white}"
+            "dim1": {
+              "$value": "{color.white}"
+            },
+            "dim2": {
+              "$value": "{color.emerald.900}"
+            },
+            "dim3": {
+              "$value": "{color.emerald.700}"
+            }
           }
         },
         "dataviz": {
@@ -540,6 +700,118 @@
     },
     "border": {
       "on": {
+        "brand": {
+          "infomaniak": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
+            "dim2": {
+              "$value": "{color.blue.900}"
+            },
+            "dim3": {
+              "$value": "{color.blue.700}"
+            }
+          },
+          "mail": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
+            "dim2": {
+              "$value": "{color.pink.900}"
+            },
+            "dim3": {
+              "$value": "{color.pink.700}"
+            }
+          },
+          "kdrive": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
+            "dim2": {
+              "$value": "{color.cobalt.900}"
+            },
+            "dim3": {
+              "$value": "{color.cobalt.700}"
+            }
+          },
+          "euria": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
+            "dim2": {
+              "$value": "{color.ocean.900}"
+            },
+            "dim3": {
+              "$value": "{color.ocean.700}"
+            }
+          },
+          "kchat": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
+            "dim2": {
+              "$value": "{color.cyan.900}"
+            },
+            "dim3": {
+              "$value": "{color.cyan.700}"
+            }
+          },
+          "security": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
+            "dim2": {
+              "$value": "{color.indigo.900}"
+            },
+            "dim3": {
+              "$value": "{color.indigo.700}"
+            }
+          },
+          "calendar": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
+            "dim2": {
+              "$value": "{color.aqua.900}"
+            },
+            "dim3": {
+              "$value": "{color.aqua.700}"
+            }
+          },
+          "contacts": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
+            "dim2": {
+              "$value": "{color.purple.900}"
+            },
+            "dim3": {
+              "$value": "{color.purple.700}"
+            }
+          },
+          "knote": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
+            "dim2": {
+              "$value": "{color.coral.900}"
+            },
+            "dim3": {
+              "$value": "{color.coral.700}"
+            }
+          },
+          "swisstransfer": {
+            "dim1": {
+              "$value": "{color.transparent}"
+            },
+            "dim2": {
+              "$value": "{color.emerald.900}"
+            },
+            "dim3": {
+              "$value": "{color.emerald.700}"
+            }
+          }
+        },
         "dataviz": {
           "orange": {
             "dim1": {

@@ -2,18 +2,47 @@
   "color": {
     "background": {
       "brand": {
-        "$value": "{color.background.brand.calendar}"
+        "dim1": {
+          "$value": "{color.background.brand.calendar.dim1}"
+        },
+        "dim2": {
+          "$value": "{color.background.brand.calendar.dim2}"
+        },
+        "dim3": {
+          "$value": "{color.background.brand.calendar.dim3}"
+        }
       }
     },
     "border": {
       "brand": {
         "$value": "{color.border.brand.calendar}"
+      },
+      "on": {
+        "brand": {
+          "dim1": {
+            "$value": "{color.border.on.brand.calendar.dim1}"
+          },
+          "dim2": {
+            "$value": "{color.border.on.brand.calendar.dim2}"
+          },
+          "dim3": {
+            "$value": "{color.border.on.brand.calendar.dim3}"
+          }
+        }
       }
     },
     "content": {
       "on": {
         "brand": {
-          "$value": "{color.content.on.brand.calendar}"
+          "dim1": {
+            "$value": "{color.content.on.brand.calendar.dim1}"
+          },
+          "dim2": {
+            "$value": "{color.content.on.brand.calendar.dim2}"
+          },
+          "dim3": {
+            "$value": "{color.content.on.brand.calendar.dim3}"
+          }
         }
       },
       "brand": {
