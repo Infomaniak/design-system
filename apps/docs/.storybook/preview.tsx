@@ -309,7 +309,13 @@ const preview: Preview = {
           'Welcome',
           'Playground',
           'Designers Guide',
-          ['Getting Started', 'Install the Font', 'Figma Plugins', 'Helpers'],
+          [
+            'Getting Started',
+            ['Starting a project', 'Kits'],
+            'Install the Font',
+            'Figma Plugins',
+            'Helpers',
+          ],
           'Design Tokens',
           [
             'Getting Started',
