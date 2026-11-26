@@ -29,6 +29,7 @@ import type { LintRule } from './rule.ts';
 export const unknownCollectionRule: LintRule = {
   id: 'unknown-collection',
   title: 'Unknown collection',
+  description: 'A variable is bound, but points at no known token tier (t1/t2/t3).',
   severity: 'warning',
   appliesTo: ALL_PROPERTY_KINDS,
   evaluate: (observation: PropertyObservation, context: LintContext): readonly Finding[] => {

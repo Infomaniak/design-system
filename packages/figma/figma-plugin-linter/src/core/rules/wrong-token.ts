@@ -25,6 +25,8 @@ import type { LintRule } from './rule.ts';
 export const wrongTokenRule: LintRule = {
   id: 'wrong-token',
   title: 'Wrong token',
+  description:
+    'A semantic (t2) color variable is bound, but its category does not match the property.',
   severity: 'error',
   appliesTo: ['fill', 'stroke'],
   evaluate: (observation: PropertyObservation, context: LintContext): readonly Finding[] => {

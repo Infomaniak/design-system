@@ -7,6 +7,15 @@ import { parseFixRequestItems, type FixRequestItem } from '../core/fix-request.t
 import type { LintNode } from '../core/model/lint-node.ts';
 import type { VariableInfo } from '../core/model/variable-info.ts';
 import { LINT_RULES } from '../core/rules/registry.ts';
+import type { LintRule } from '../core/rules/rule.ts';
+import {
+  loadRuleSelection,
+  parseRuleSelection,
+  resetRuleSelection,
+  resolveRules,
+  saveRuleSelection,
+  type KeyValueStore,
+} from '../core/rules/selection.ts';
 import {
   parseScanScope,
   requiresSelection,
@@ -35,10 +44,17 @@ import { loadTokenMetadata } from './token-metadata.ts';
 declare const __html__: string;
 
 const NO_SELECTION_MESSAGE: string = 'Select at least one layer to lint.';
+const NO_RULES_ENABLED_MESSAGE: string = 'No rules enabled — open Rules and enable at least one.';
 const LINT_FAILED_MESSAGE: string = 'Lint failed — try again (see the developer console).';
 const DEBUG_PREFIX: string = '[design-linter]';
 
 let cancelRequested: boolean = false;
+
+/** Async key-value store over `figma.clientStorage` (per-user, survives sessions). */
+const clientStorage: KeyValueStore = {
+  get: (key: string): Promise<unknown> => figma.clientStorage.getAsync(key),
+  set: (key: string, value: unknown): Promise<void> => figma.clientStorage.setAsync(key, value),
+};
 
 function debug(label: string, detail: string = ''): void {
   console.info(`${DEBUG_PREFIX} ${label}${detail === '' ? '' : ` — ${detail}`}`);
@@ -51,7 +67,10 @@ figma.ui.onmessage = (message: unknown): void => {
 
   switch (uiMessage.type) {
     case 'lint-request':
-      void runLint(parseScanScope(uiMessage.scope)).catch((error: unknown): void => {
+      void runLint(
+        parseScanScope(uiMessage.scope),
+        parseRuleSelection(uiMessage.enabledRuleIds),
+      ).catch((error: unknown): void => {
         console.error(`${DEBUG_PREFIX} Lint run failed:`, error);
         post({ type: 'lint-setup-error', message: LINT_FAILED_MESSAGE });
       });
@@ -65,11 +84,40 @@ figma.ui.onmessage = (message: unknown): void => {
     case 'fix-request':
       void applyFixes(uiMessage.items);
       break;
+    case 'get-rule-selection':
+      void sendRuleSelection(loadRuleSelection(clientStorage));
+      break;
+    case 'save-rule-selection':
+      void saveRuleSelection(clientStorage, parseRuleSelection(uiMessage.enabledRuleIds)).then(
+        (saved: boolean): void => {
+          if (!saved) {
+            debug('rule selection save failed');
+          }
+        },
+      );
+      break;
+    case 'reset-rule-selection':
+      void sendRuleSelection(resetRuleSelection(clientStorage));
+      break;
   }
 };
 
-async function runLint(scope: ScanScope): Promise<void> {
+/** Replies to the panel with a resolved rule selection as an id array. */
+async function sendRuleSelection(selection: Promise<ReadonlySet<string>>): Promise<void> {
+  post({ type: 'rule-selection', enabledRuleIds: [...(await selection)] });
+}
+
+async function runLint(scope: ScanScope, enabledRuleIds: ReadonlySet<string>): Promise<void> {
   cancelRequested = false;
+
+  const rules: readonly LintRule[] = resolveRules(enabledRuleIds);
+
+  if (rules.length === 0) {
+    post({ type: 'lint-setup-error', message: NO_RULES_ENABLED_MESSAGE });
+    return;
+  }
+
+  debug('rules resolved', `${rules.length}/${LINT_RULES.length} enabled`);
 
   const roots: readonly AnyFigmaNode[] = collectScanRoots(scanRootsFor(scope));
 
@@ -121,7 +169,7 @@ async function runLint(scope: ScanScope): Promise<void> {
   debug('text style metadata loaded', `${textStylesById.size} styles`);
 
   const result = await lintTree(nodes, {
-    rules: LINT_RULES,
+    rules,
     context: createLintContext(variablesById, effectStylesById, textStylesById),
     onProgress: (completed: number, total: number): void => {
       post({ type: 'lint-progress', completed, total });

@@ -30,6 +30,7 @@ import type { LintRule } from './rule.ts';
 export const unboundValueRule: LintRule = {
   id: 'unbound-value',
   title: 'Unbound value',
+  description: 'A property is set with a raw value (color, number…) and no design token bound.',
   severity: 'error',
   appliesTo: ['fill', 'stroke', 'padding', 'gap', 'cornerRadius', 'strokeWeight'],
   evaluate: (observation: PropertyObservation, context: LintContext): readonly Finding[] => {

@@ -20,6 +20,8 @@ import type { LintRule } from './rule.ts';
 export const localEffectStyleRule: LintRule = {
   id: 'local-effect-style',
   title: 'Local effect style',
+  description:
+    'The effect comes from a style local to the file, not published from the token library.',
   severity: 'warning',
   appliesTo: ['effect'],
   evaluate: (observation: PropertyObservation, context: LintContext): readonly Finding[] => {

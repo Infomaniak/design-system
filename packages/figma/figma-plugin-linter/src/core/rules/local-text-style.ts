@@ -21,6 +21,7 @@ import type { LintRule } from './rule.ts';
 export const localTextStyleRule: LintRule = {
   id: 'local-text-style',
   title: 'Local text style',
+  description: 'The text style is local to the file, not published from the token library.',
   severity: 'warning',
   appliesTo: ['textStyle'],
   evaluate: (observation: PropertyObservation, context: LintContext): readonly Finding[] => {

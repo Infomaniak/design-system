@@ -7,7 +7,9 @@ the wrong property, primitive tokens used where semantic tokens are expected, to
 bound from unrecognized or local collections, bindings that cannot be resolved, raw
 effects and stroke weights, hand-set opacity over colored layers, non-default blend
 modes, brand/dataviz tokens missing their `@root` variant, leftover lorem ipsum copy,
-and typography not driven by published text styles.
+and typography not driven by published text styles. Designers choose which rules
+apply through the panel's **Rules** view — the selection persists per user (see
+«Rule selection»).
 
 The plugin reads the document and lints it; the only writes happen when **you** click a
 Fix button (see « Fix mode » below) — reporting itself never modifies the document.
@@ -149,14 +151,15 @@ Then, in the Figma desktop app:
 ### Run a lint
 
 1. Pick a scope in the panel — **Selection** (default), **Page** or **File**
-2. For the Selection scope, select one or more frames or layers on the canvas
-3. Open the plugin and hit **Run lint**
-4. Results appear as `N errors · M warnings`, errors first, **grouped by rule within
+2. Optionally open **Rules** to choose which rules apply (see «Rule selection»)
+3. For the Selection scope, select one or more frames or layers on the canvas
+4. Open the plugin and hit **Run lint**
+5. Results appear as `N errors · M warnings`, errors first, **grouped by rule within
    each severity** — expand a rule section to see its findings and their messages
-5. Click a finding to select the offending layer on canvas (and zoom to it)
-6. Hit **Copy report** to get a markdown summary for handoff tickets (same rule
+6. Click a finding to select the offending layer on canvas (and zoom to it)
+7. Hit **Copy report** to get a markdown summary for handoff tickets (same rule
    grouping)
-7. Fix the layers and hit **Run again** — results are a snapshot, there is no live watching
+8. Fix the layers and hit **Run again** — results are a snapshot, there is no live watching
 
 The Selection scope requires a non-empty selection (setup error otherwise). The Page
 scope lints the current page's top-level layers and their subtrees; the File scope
@@ -165,11 +168,28 @@ same in every scope.
 
 | State       | Reached when                   | Content                                                                            |
 | ----------- | ------------------------------ | ---------------------------------------------------------------------------------- |
-| Idle        | Plugin opened, nothing run yet | Title, scope picker, Run button, hint                                              |
+| Idle        | Plugin opened, nothing run yet | Title, scope picker, Rules count, Run button, hint                                 |
 | Setup error | No selection (Selection scope) | Blocking message with recovery hint + Retry                                        |
 | Running     | Run clicked                    | `Checking layers…` shimmer, then `Checking 340/1200 layers…`, progress bar, Cancel |
 | Results     | Run finished or cancelled      | Counts, findings grouped by rule (collapsible sections), Run again + Copy report   |
 | Clean pass  | Run finished, zero findings    | "0 errors, 0 warnings — all checked properties are token-bound.", Run again        |
+| Rules       | Rules button clicked           | Back button, one checkbox row per rule (title, severity, description), Reset       |
+
+### Rule selection
+
+The **Rules · N/18** button beside the scope picker opens a view listing every rule
+with its severity and a one-line description. Toggling a rule applies from the next
+run (including the automatic re-lint after a fix) and is persisted per user via
+`figma.clientStorage` — the selection survives closing Figma and is stored per user
+and per plugin, never in the file. **Reset to defaults** re-enables every rule.
+
+- With every rule disabled, the Run button is disabled; the sandbox also refuses a
+  run without rules with a «No rules enabled» setup error
+- Unknown rule ids in a stored selection are ignored, so a selection survives plugin
+  updates that add or remove rules; a missing or invalid stored value falls back to
+  every rule enabled
+- The count label (`Rules · 14/18`) is always visible on the panel so a muted rule
+  never comes as a surprise
 
 > [!NOTE]
 > If the file's variables carry no scopes, the wrong-scope rule stays dormant — the
@@ -224,9 +244,10 @@ flowchart LR
 - **`ui/`** — the plugin panel: a pure state → DOM renderer plus a small bootstrap
   that wires clicks (run/cancel/copy/select) and sandbox messages
 
-One run: `Run` → sandbox reads the selection → token metadata preloaded → node tree
-adapted → engine traverses and evaluates the rules → findings summarized → posted to
-the panel → click a row → sandbox selects and zooms to the node.
+One run: `Run` → sandbox resolves the enabled rules and reads the scan roots → token
+metadata preloaded → node tree adapted → engine traverses and evaluates the rules →
+findings summarized → posted to the panel → click a row → sandbox selects and zooms
+to the node.
 
 ### Extending
 
@@ -287,4 +308,9 @@ Manual smoke checklist after a build:
 - Raw `#FF0000` fill matching exactly one token → Fix button; apply → fill bound, auto re-lint clears the finding, one undo reverts
 - 3 raw paddings matching tokens → batch Apply button, confirm → all applied, single undo reverts the batch; a failing row shows `fix failed`
 - Findings for effects/opacity/text styles → no Fix button
+- Rules view: toggle a rule off and run → no findings from that rule; count label reflects the selection
+- Reopen the plugin → the rule selection is restored from clientStorage
+- Reset to defaults → every rule re-enabled and persisted
+- Disable every rule → Run button disabled; a run forced through the console reports «No rules enabled»
+- Toggle rules → the next Run and the post-fix re-lint both apply the same selection
 - Kit token aliased to a published DS t2/t3 token → accepted (alias chains re-verified with the values plumbing fix)

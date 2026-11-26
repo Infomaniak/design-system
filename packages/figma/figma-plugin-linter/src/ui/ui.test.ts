@@ -289,6 +289,97 @@ describe('renderPanel', () => {
     expect(root.querySelector('.success')).not.toBeNull();
   });
 
+  describe('rule selection rendering', () => {
+    it('shows the rules button with the enabled count next to the scope picker', () => {
+      const root: HTMLElement = render({
+        kind: 'idle',
+        enabledRuleIds: ['unbound-value', 'lorem-ipsum'],
+      });
+
+      const rules: HTMLElement = root.querySelector('[data-action="open-settings"]')!;
+      expect(rules.textContent).toBe('Rules · 2/18');
+      expect(rules.className).toContain('rules-button');
+    });
+
+    it('hides the rules button when no selection is provided', () => {
+      const root: HTMLElement = render({ kind: 'idle' });
+
+      expect(root.querySelector('[data-action="open-settings"]')).toBeNull();
+    });
+
+    it('disables the run button while every rule is disabled', () => {
+      const root: HTMLElement = render({ kind: 'idle', enabledRuleIds: [] });
+
+      const run: HTMLButtonElement = root.querySelector('[data-action="run"]') as HTMLButtonElement;
+      expect(run.disabled).toBe(true);
+    });
+
+    it('keeps the run button enabled with rules enabled', () => {
+      const root: HTMLElement = render({ kind: 'idle', enabledRuleIds: ['unbound-value'] });
+
+      const run: HTMLButtonElement = root.querySelector('[data-action="run"]') as HTMLButtonElement;
+      expect(run.disabled).toBe(false);
+    });
+
+    it('shows the rules button on results and clean states', () => {
+      const results: HTMLElement = render({
+        kind: 'results',
+        summary: { sections: [], errorCount: 0, warningCount: 0 },
+        inspectedCount: 3,
+        cancelled: false,
+        enabledRuleIds: ['unbound-value'],
+      });
+      expect(results.querySelector('[data-action="open-settings"]')!.textContent).toBe(
+        'Rules · 1/18',
+      );
+
+      const clean: HTMLElement = render({ kind: 'clean', inspectedCount: 3, enabledRuleIds: [] });
+      expect(clean.querySelector('[data-action="open-settings"]')!.textContent).toBe(
+        'Rules · 0/18',
+      );
+    });
+
+    it('renders the settings view with one row per registered rule', () => {
+      const root: HTMLElement = render({
+        kind: 'settings',
+        scope: 'selection',
+        enabledRuleIds: ['unbound-value'],
+      });
+
+      const rows: NodeListOf<HTMLElement> = root.querySelectorAll('.rule-row');
+      expect(rows).toHaveLength(18);
+
+      const first: HTMLElement = rows[0]!;
+      expect(first.querySelector('.rule-title')!.textContent).toBe('Unbound value');
+      expect(first.querySelector('.rule-description')!.textContent).toBe(
+        'A property is set with a raw value (color, number…) and no design token bound.',
+      );
+      expect(first.querySelector('.rule-severity')!.textContent).toBe('error');
+      expect(first.querySelector('.rule-severity')!.className).toBe('rule-severity error');
+
+      const checkboxes: NodeListOf<HTMLInputElement> = root.querySelectorAll('.rule-checkbox');
+      const enabledIds: readonly string[] = [...checkboxes]
+        .filter((checkbox: HTMLInputElement): boolean => checkbox.checked)
+        .map((checkbox: HTMLInputElement): string => checkbox.getAttribute('data-rule-id')!);
+      expect(enabledIds).toEqual(['unbound-value']);
+      expect(checkboxes).toHaveLength(18);
+
+      expect(root.querySelector('[data-action="close-settings"]')!.textContent).toBe('‹ Back');
+      expect(root.querySelector('[data-action="reset-rules"]')!.textContent).toBe(
+        'Reset to defaults',
+      );
+      expect(root.querySelector('.settings-warning')).toBeNull();
+    });
+
+    it('warns in the settings view when no rule is enabled', () => {
+      const root: HTMLElement = render({ kind: 'settings', enabledRuleIds: [] });
+
+      expect(root.querySelector('.settings-warning')!.textContent).toBe(
+        'No rules enabled — the lint would check nothing.',
+      );
+    });
+  });
+
   describe('fix mode rendering', () => {
     const paintFix: FixSuggestion = {
       label: 'surface-primary',

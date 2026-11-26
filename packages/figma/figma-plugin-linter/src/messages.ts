@@ -4,10 +4,18 @@ import type { ScanScope } from './core/scan-scope.ts';
 
 /** Messages sent from the plugin iframe (UI) to the sandbox. */
 export type UiToSandboxMessage =
-  | { readonly type: 'lint-request'; readonly scope: ScanScope }
+  | {
+      readonly type: 'lint-request';
+      readonly scope: ScanScope;
+      /** Enabled rule ids; absent means every rule (default selection). */
+      readonly enabledRuleIds?: readonly string[];
+    }
   | { readonly type: 'lint-cancel' }
   | { readonly type: 'select-finding'; readonly nodeId: string }
-  | { readonly type: 'fix-request'; readonly items: readonly FixRequestItem[] };
+  | { readonly type: 'fix-request'; readonly items: readonly FixRequestItem[] }
+  | { readonly type: 'get-rule-selection' }
+  | { readonly type: 'save-rule-selection'; readonly enabledRuleIds: readonly string[] }
+  | { readonly type: 'reset-rule-selection' };
 
 /** A node whose fix could not be applied, with the reason. */
 export interface FixFailure {
@@ -25,6 +33,7 @@ export type SandboxToUiMessage =
       readonly cancelled: boolean;
     }
   | { readonly type: 'lint-setup-error'; readonly message: string }
+  | { readonly type: 'rule-selection'; readonly enabledRuleIds: readonly string[] }
   | {
       readonly type: 'fix-result';
       readonly applied: readonly string[];

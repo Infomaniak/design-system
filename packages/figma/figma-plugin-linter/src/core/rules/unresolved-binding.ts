@@ -18,6 +18,8 @@ import type { LintRule } from './rule.ts';
 export const unresolvedBindingRule: LintRule = {
   id: 'unresolved-binding',
   title: 'Unresolved token',
+  description:
+    'A variable is bound, but cannot be resolved from this file or an accessible library.',
   severity: 'warning',
   appliesTo: ALL_PROPERTY_KINDS,
   evaluate: (observation: PropertyObservation, context: LintContext): readonly Finding[] => {

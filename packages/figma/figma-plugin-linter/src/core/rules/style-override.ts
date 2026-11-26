@@ -41,6 +41,8 @@ const OVERRIDABLE_PROPS: readonly {
 export const styleOverrideRule: LintRule = {
   id: 'style-override',
   title: 'Style override',
+  description:
+    'The node overrides a published text style (size, weight, decoration or line height).',
   severity: 'warning',
   appliesTo: ['textStyle'],
   evaluate: (observation: PropertyObservation, context: LintContext): readonly Finding[] => {

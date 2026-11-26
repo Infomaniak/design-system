@@ -33,6 +33,8 @@ const ICON_NAME_SET: ReadonlySet<string> = new Set(ICON_NAMES);
 export const localDuplicateRule: LintRule = {
   id: 'local-duplicate',
   title: 'Local duplicate',
+  description:
+    'A local component is named exactly like a kit icon — a duplicated icon in the file.',
   severity: 'warning',
   appliesTo: ['component'],
   evaluate: (observation: PropertyObservation, _context: LintContext): readonly Finding[] => {

@@ -17,6 +17,7 @@ import type { LintRule } from './rule.ts';
 export const blendModeRule: LintRule = {
   id: 'blend-mode',
   title: 'Blend mode',
+  description: 'The blend mode differs from the expected NORMAL or PASS_THROUGH.',
   severity: 'warning',
   appliesTo: ['blendMode'],
   evaluate: (observation: PropertyObservation, _context: LintContext): readonly Finding[] => {

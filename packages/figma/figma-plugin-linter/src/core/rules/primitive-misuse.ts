@@ -20,6 +20,7 @@ import type { LintRule } from './rule.ts';
 export const primitiveMisuseRule: LintRule = {
   id: 'primitive-misuse',
   title: 'Primitive misuse',
+  description: 'The bound token effectively resolves to a primitive (t1) token.',
   severity: 'warning',
   appliesTo: ALL_PROPERTY_KINDS,
   evaluate: (observation: PropertyObservation, context: LintContext): readonly Finding[] => {
