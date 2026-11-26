@@ -190,6 +190,8 @@ and per plugin, never in the file. **Reset to defaults** re-enables every rule.
   every rule enabled
 - The count label (`Rules · 14/18`) is always visible on the panel so a muted rule
   never comes as a surprise
+- A clean pass with a subset of rules qualifies the message («the 3/18 enabled rules
+  all passed») so a muted run never reads as a full compliance pass
 
 > [!NOTE]
 > If the file's variables carry no scopes, the wrong-scope rule stays dormant — the
@@ -312,5 +314,6 @@ Manual smoke checklist after a build:
 - Reopen the plugin → the rule selection is restored from clientStorage
 - Reset to defaults → every rule re-enabled and persisted
 - Disable every rule → Run button disabled; a run forced through the console reports «No rules enabled»
+- Clean pass with a subset of rules → the success message names the enabled count (e.g. «the 3/18 enabled rules all passed»)
 - Toggle rules → the next Run and the post-fix re-lint both apply the same selection
 - Kit token aliased to a published DS t2/t3 token → accepted (alias chains re-verified with the values plumbing fix)

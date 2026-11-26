@@ -268,14 +268,25 @@ function buildClean(state: Extract<LintPanelState, { readonly kind: 'clean' }>):
     panel.append(buildFixFeedback(state.fixFeedback));
   }
 
-  panel.append(
-    element('p', 'success', '0 errors, 0 warnings — all checked properties are token-bound.'),
-  );
+  panel.append(element('p', 'success', cleanMessage(state.enabledRuleIds)));
   panel.append(element('p', 'hint', `${state.inspectedCount} layers inspected.`));
 
   panel.append(buildActionsRow(buildRunButton('Run again', state.enabledRuleIds)));
 
   return panel;
+}
+
+/**
+ * The clean pass must not read as a full compliance pass when rules are muted —
+ * a subset run qualifies the message with its enabled count (same vocabulary
+ * as the `Rules · N/18` button).
+ */
+function cleanMessage(enabledRuleIds?: readonly string[]): string {
+  if (enabledRuleIds === undefined || enabledRuleIds.length === LINT_RULES.length) {
+    return '0 errors, 0 warnings — all checked properties are token-bound.';
+  }
+
+  return `0 errors, 0 warnings — the ${enabledRuleIds.length}/${LINT_RULES.length} enabled rules all passed.`;
 }
 
 function buildFixFeedback(feedback: FixFeedback): HTMLElement {

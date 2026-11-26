@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import type { Finding, FixSuggestion } from '../core/model/finding.ts';
+import { DEFAULT_RULE_SELECTION } from '../core/rules/selection.ts';
 import { renderPanel, type LintPanelState } from './ui.ts';
 
 function findingFixture(severity: Finding['severity'], nodeName: string): Finding {
@@ -376,6 +377,30 @@ describe('renderPanel', () => {
 
       expect(root.querySelector('.settings-warning')!.textContent).toBe(
         'No rules enabled — the lint would check nothing.',
+      );
+    });
+
+    it('keeps the full clean-pass copy when every rule is enabled', () => {
+      const root: HTMLElement = render({
+        kind: 'clean',
+        inspectedCount: 3,
+        enabledRuleIds: DEFAULT_RULE_SELECTION,
+      });
+
+      expect(root.querySelector('.success')!.textContent).toBe(
+        '0 errors, 0 warnings — all checked properties are token-bound.',
+      );
+    });
+
+    it('qualifies the clean-pass message when rules are muted', () => {
+      const root: HTMLElement = render({
+        kind: 'clean',
+        inspectedCount: 3,
+        enabledRuleIds: ['unbound-value', 'wrong-scope', 'lorem-ipsum'],
+      });
+
+      expect(root.querySelector('.success')!.textContent).toBe(
+        '0 errors, 0 warnings — the 3/18 enabled rules all passed.',
       );
     });
   });
