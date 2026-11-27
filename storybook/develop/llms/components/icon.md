@@ -55,6 +55,18 @@ InjectionContext.root = new InjectionContext([
 
 > `InjectionContext` is only required when the default icon resources are insufficient.
 
+## Content Security Policy (Optional)
+
+Most Infomaniak applications enforce a strict Content Security Policy (CSP). Since icons are fetched at runtime, add the API host to the `connect-src` directive:
+
+```txt
+connect-src 'self' https://iconify.infomaniak.com;
+```
+
+If your application uses the shared `docker/default.conf` template, add the host to the `$CSP_CONNECT` variable.
+
+> If you configured a custom icon resource (see Configuration above), allow its host instead of the default one.
+
 ## Demo
 
 ## API
