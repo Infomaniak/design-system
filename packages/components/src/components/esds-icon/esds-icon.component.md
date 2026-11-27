@@ -37,6 +37,8 @@ You may set the icon size using the tailwind `text-icon-{size}` class:
 
 If you need custom icon resources (e.g., a specific icon server), set the `InjectionContext`:
 
+By default, the component fetches icons from the production server `https://iconify.infomaniak.com`. The configuration below is only required to target the preprod server or a custom one.
+
 ```ts
 import { ICONIFY_API, InjectionContext, IconifyApi } from '@infomaniak-design-system/components';
 
