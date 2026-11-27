@@ -16,7 +16,7 @@ describe('unknown-collection rule', () => {
     const kitToken: ReturnType<typeof variableInfo> = variableInfo({
       id: 'VariableID:1:1',
       name: 'foreground',
-      collectionName: 'theme',
+      collectionName: 'third-party',
       tier: 'unknown',
     });
     const node = lintNode({ id: 'node:1', name: 'Card' });
@@ -36,8 +36,8 @@ describe('unknown-collection rule', () => {
         nodeId: 'node:1',
         nodeName: 'Card',
         propertyLabel: 'Fill',
-        valueLabel: 'foreground · theme',
-        message: 'Bound token comes from collection “theme” — expected t1/t2/t3.',
+        valueLabel: 'foreground · third-party',
+        message: 'Bound token comes from collection “third-party” — expected t1/t2/t3.',
       },
     ]);
   });
@@ -68,7 +68,7 @@ describe('unknown-collection rule', () => {
   it('flags unknown-tier variables on number properties too', () => {
     const kitSpacing: ReturnType<typeof variableInfo> = variableInfo({
       name: 'spacing/16',
-      collectionName: 'theme',
+      collectionName: 'third-party',
       tier: 'unknown',
     });
     const node = lintNode();
@@ -215,6 +215,25 @@ describe('unknown-collection rule', () => {
     ).toHaveLength(1);
   });
 
+  it('flags raw palette collections shipped inside kit libraries', () => {
+    // Edelweiss-published, but a raw palette step (`Red/100`) should still
+    // warn — the kit counterpart of primitive-misuse for t1 tokens.
+    const paletteStep = variableInfo({
+      name: 'Red/100',
+      collectionName: 'Primitives',
+      tier: 'unknown',
+      remote: true,
+      knownKit: true,
+    });
+    const node = lintNode({ name: 'Android card' });
+    const property = colorProperty('fill', hexPart('#ff0000', 'VariableID:palette'));
+    const context = createLintContext(new Map([['VariableID:palette', paletteStep]]));
+
+    expect(
+      unknownCollectionRule.evaluate(observation(node, property, property.parts[0]!), context),
+    ).toHaveLength(1);
+  });
+
   it('still flags non-icon nodes bound to unknown collections', () => {
     const kitToken = variableInfo({
       id: 'VariableID:kit',
@@ -225,6 +244,60 @@ describe('unknown-collection rule', () => {
     const node = lintNode({ name: 'glyph' });
     const property = colorProperty('fill', hexPart('#000000', 'VariableID:kit'));
     const context = createLintContext(new Map([['VariableID:kit', kitToken]]));
+
+    expect(
+      unknownCollectionRule.evaluate(observation(node, property, property.parts[0]!), context),
+    ).toHaveLength(1);
+  });
+
+  it('passes remote bindings stamped from a known kit library (Token Core)', () => {
+    for (const collectionName of ['theme', 'dataviz', 'product', 'button-size', 'badge-type']) {
+      const kitToken = variableInfo({
+        name: 'some/token',
+        collectionName,
+        tier: 'unknown',
+        remote: true,
+        knownKit: true,
+      });
+      const node = lintNode({ name: 'Android card' });
+      const property = colorProperty('fill', hexPart('#e6eeff', 'VariableID:kit'));
+      const context = createLintContext(new Map([['VariableID:kit', kitToken]]));
+
+      expect(
+        unknownCollectionRule.evaluate(observation(node, property, property.parts[0]!), context),
+      ).toEqual([]);
+    }
+  });
+
+  it('passes remote Material scheme bindings (Schemes/… namespace)', () => {
+    const schemeToken = variableInfo({
+      name: 'Schemes/Surface Container',
+      collectionName: 'Theme',
+      tier: 'unknown',
+      remote: true,
+    });
+    const node = lintNode({ name: 'Android card' });
+    const property = colorProperty('fill', hexPart('#e6eeff', 'VariableID:scheme'));
+    const context = createLintContext(new Map([['VariableID:scheme', schemeToken]]));
+
+    expect(
+      unknownCollectionRule.evaluate(observation(node, property, property.parts[0]!), context),
+    ).toEqual([]);
+  });
+
+  it('flags local copies of kit collections', () => {
+    // Remote-only exemption: a collection pasted into the file is a duplicate,
+    // like a duplicated kit icon.
+    const localCopy = variableInfo({
+      name: 'Schemes/Primary',
+      collectionName: 'Theme',
+      tier: 'unknown',
+      remote: false,
+      knownKit: true,
+    });
+    const node = lintNode({ name: 'Card' });
+    const property = colorProperty('fill', hexPart('#000000', 'VariableID:local'));
+    const context = createLintContext(new Map([['VariableID:local', localCopy]]));
 
     expect(
       unknownCollectionRule.evaluate(observation(node, property, property.parts[0]!), context),

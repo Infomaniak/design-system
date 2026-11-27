@@ -139,6 +139,7 @@ export interface VariableInfoFixtureOptions {
   readonly tier?: TokenTier;
   readonly scopes?: readonly string[];
   readonly remote?: boolean;
+  readonly knownKit?: boolean;
   /** Raw variable value (rgba color object, number…) for fix-suggestion tests. */
   readonly value?: unknown;
   readonly aliasTargetId?: string;
@@ -154,6 +155,7 @@ export function variableInfo(options: VariableInfoFixtureOptions = {}): Variable
     tier: options.tier ?? 't2',
     scopes: options.scopes ?? [],
     remote: options.remote ?? true,
+    ...(options.knownKit === undefined ? {} : { knownKit: options.knownKit }),
     ...(options.value === undefined ? {} : { value: options.value }),
     ...(options.aliasTargetId === undefined ? {} : { aliasTargetId: options.aliasTargetId }),
   };

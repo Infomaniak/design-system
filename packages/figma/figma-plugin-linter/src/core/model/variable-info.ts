@@ -16,4 +16,12 @@ export interface VariableInfo {
   readonly value?: unknown;
   /** Present when the variable's value is an alias to another variable. */
   readonly aliasTargetId?: string;
+  /**
+   * True when the variable was imported from a recognized Edelweiss kit
+   * library (see `core/known-kits.ts`) — stamped by the library-import pass,
+   * which is the only place the source library is known. Tier stays
+   * `unknown`: known-kit tokens are exempted from `unknown-collection` but
+   * never suggested as fixes.
+   */
+  readonly knownKit?: boolean;
 }

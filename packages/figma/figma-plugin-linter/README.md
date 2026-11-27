@@ -58,7 +58,7 @@ rejected) stay visible with a `fix failed` marker.
 | No text style      | Error    | A TEXT node carries no text style — typography set by hand                                                             |
 | Icon as frame      | Error    | A drawn container (frame/section/group) is named exactly like a kit icon — instance the icon                           |
 | Primitive misuse   | Warning  | The bound token effectively resolves to a primitive (t1) token — directly or through an alias chain                    |
-| Unknown collection | Warning  | A variable IS bound, but points at no known token tier (t1/t2/t3)                                                      |
+| Unknown collection | Warning  | A variable IS bound, but points at no known token tier (t1/t2/t3) — recognized Edelweiss kit collections are accepted  |
 | Unresolved token   | Warning  | A variable IS bound, but it can't be resolved from this file's variables or an accessible library                      |
 | Opacity over color | Warning  | The layer's opacity is hand-set below 100% while it carries a colored fill                                             |
 | Local effect style | Warning  | The effect comes from a style local to the file, not published from the token library                                  |
@@ -78,6 +78,19 @@ in Figma: when the alias chain resolves to a t2/t3 token, the binding is **accep
 misuse, and chains that dead-end (raw value, deleted target, cycle) keep the
 unknown-collection warning. Wrong-token is deliberately not validated through the
 chain (the alias only affects tier classification).
+
+**Known kit collections**: the platform kits (Edelweiss Material Kit, Shadcn kit,
+iOS-iPadOS kit) bind tokens from Edelweiss - Token Core, which publishes semantic
+collections beyond the tiers (`theme`, `dataviz`, `product`, `button-type`,
+`button-size`, `badge-type`, `avatar-size`), and the Material Kit adds the
+`Schemes/…` design-token namespace. Bindings from Edelweiss kit libraries are
+therefore accepted by matching the **library** (`Edelweiss - …` prefix, stamped
+during the library-import pass — see `core/known-kits.ts`): a new collection
+inside a known kit needs no plugin change. Two guards: remote only (a collection
+pasted into the file keeps its warning) and raw palette collections excluded
+(`Red/100` still warns — the kit counterpart of primitive-misuse). Kit tokens
+keep their `unknown` tier, so they are never suggested as fixes, and the other
+rules — wrong-token, primitive-misuse — keep evaluating them normally.
 
 **Icon library exemption**: the Edelweiss Iconography library (`esds/icon/…`
 components) publishes its own token collection (`Collection 1`), which is not a
@@ -304,6 +317,8 @@ Manual smoke checklist after a build:
 - Token bound from an unrecognized collection (e.g. a third-party kit) → unknown-collection warning
 - Third-party token aliased to a t2/t3 token → accepted
 - Third-party token aliased to a t1 token → primitive-misuse warning
+- Token Core `theme`/`dataviz`/`product`/`button-*` binding (remote) → clean; `Schemes/…` Material role → clean
+- Same kit collection pasted locally into the file → unknown-collection warning
 - Instance + hidden layers → hidden skipped, instance linted
 - Token bound from a published library → classified correctly
 - Token bound to a deleted variable → unresolved-token warning

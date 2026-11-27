@@ -40,7 +40,7 @@ const KIT_FOREGROUND: TokenFixture = {
   name: 'foreground',
   tier: 'unknown',
   scopes: [],
-  collectionName: 'theme',
+  collectionName: 'third-party',
 };
 
 const T2_RADIUS: TokenFixture = {
@@ -355,9 +355,52 @@ describe('golden acceptance — spec scenarios end-to-end', () => {
     expect(result.findings[0]).toMatchObject({
       severity: 'warning',
       nodeName: 'Kit button',
-      valueLabel: 'foreground · theme',
-      message: 'Bound token comes from collection “theme” — expected t1/t2/t3.',
+      valueLabel: 'foreground · third-party',
+      message: 'Bound token comes from collection “third-party” — expected t1/t2/t3.',
     });
+  });
+
+  it('scenario: Material kit scheme binding (Schemes/…, remote Theme collection) → accepted', async () => {
+    // The Edelweiss Material Kit binds its own `Schemes/…` roles from a
+    // collection named `Theme` — a recognized kit namespace (remote), not an
+    // unknown collection. The tier stays unknown, so no other rule fires
+    // either (unknown category → wrong-token dormant, scopes empty →
+    // wrong-scope dormant).
+    const schemesToken: TokenFixture = {
+      id: 'V:schemes',
+      name: 'Schemes/Surface Container',
+      tier: 'unknown',
+      scopes: [],
+      collectionName: 'Theme',
+    };
+    const context = createLintContext(
+      new Map([
+        ...TOKENS_BY_ID,
+        [
+          schemesToken.id,
+          {
+            id: schemesToken.id,
+            nameSegments: schemesToken.name.split('/'),
+            collectionName: schemesToken.collectionName ?? schemesToken.tier,
+            tier: schemesToken.tier,
+            scopes: schemesToken.scopes,
+            remote: true,
+          } satisfies VariableInfo,
+        ],
+      ]),
+    );
+    const card: LintNode = {
+      id: 'n:1',
+      name: 'Android card',
+      type: 'FRAME',
+      visible: true,
+      properties: [fillProperty(fillPart('#e6eeff', schemesToken.id))],
+      children: [],
+    };
+
+    const result = await lintTree([card], { rules: LINT_RULES, context });
+
+    expect(result.findings).toEqual([]);
   });
 
   it('scenario: kit token aliased to a t2 token → accepted, even where the target would be wrong-token', async () => {

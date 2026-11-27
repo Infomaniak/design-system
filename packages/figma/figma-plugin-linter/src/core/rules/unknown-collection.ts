@@ -1,5 +1,6 @@
 import type { LintContext } from '../context.ts';
 import { resolveEffectiveVariable } from '../effective-variable.ts';
+import { isKnownKitVariable } from '../known-kits.ts';
 import { variableToLabel } from '../labels.ts';
 import type { Finding } from '../model/finding.ts';
 import { ALL_PROPERTY_KINDS } from '../model/lint-property.ts';
@@ -12,19 +13,24 @@ import type { LintRule } from './rule.ts';
  * Rule `unknown-collection` (warning).
  *
  * A variable IS bound and resolves, but it effectively points at no known token
- * tier (t1/t2/t3): its collection is unrecognized (e.g. tokens from a
- * third-party kit) and its alias chain — if any — dead-ends on a raw value, an
- * unresolvable target or a cycle. Third-party tokens re-pointed to DS t2/t3
- * tokens ARE accepted (known effective tier) and pass silently. The other rules
- * cannot classify unknown bindings, so this rule surfaces them instead of
- * passing silently.
+ * tier (t1/t2/t3): its collection is unrecognized and its alias chain — if any
+ * — dead-ends on a raw value, an unresolvable target or a cycle. Third-party
+ * tokens re-pointed to DS t2/t3 tokens ARE accepted (known effective tier) and
+ * pass silently. The other rules cannot classify unknown bindings, so this
+ * rule surfaces them instead of passing silently.
  *
- * Exemption: nodes inside a component instance from the DS icon library
- * (`esds/icon/…`) are skipped — the iconography library carries its own token
- * collection (`Collection 1`, not a t1/t2/t3 tier), which is expected inside
- * icons. Name-based identity: renaming an icon instance or extracting its
- * glyph out of it re-flags the binding (same false-positive policy as the
- * Stage 4 name heuristics).
+ * Exemptions:
+ * - nodes inside a component instance from the DS icon library
+ *   (`esds/icon/…`) — the iconography library carries its own token collection
+ *   (`Collection 1`, not a t1/t2/t3 tier), which is expected inside icons.
+ *   Name-based identity: renaming an icon instance or extracting its glyph out
+ *   of it re-flags the binding.
+ * - variables from known Edelweiss kit collections (`core/known-kits.ts`):
+ *   Token Core publishes semantic collections beyond the tiers (`theme`,
+ *   `dataviz`, `product`, `button-*`, `badge-*`, `avatar-*`) and the platform
+ *   kits use them — `Schemes/…` Material roles included. Remote only: a local
+ *   copy of a kit collection keeps the warning. Their tier stays `unknown`, so
+ *   they are never suggested as fixes.
  */
 export const unknownCollectionRule: LintRule = {
   id: 'unknown-collection',
@@ -39,7 +45,11 @@ export const unknownCollectionRule: LintRule = {
 
     const variable = resolveBoundVariable(observation, context);
 
-    if (variable === undefined || resolveEffectiveVariable(variable, context) !== undefined) {
+    if (
+      variable === undefined ||
+      isKnownKitVariable(variable) ||
+      resolveEffectiveVariable(variable, context) !== undefined
+    ) {
       return [];
     }
 
