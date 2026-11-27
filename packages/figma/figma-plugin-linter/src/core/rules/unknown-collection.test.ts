@@ -196,6 +196,25 @@ describe('unknown-collection rule', () => {
     ).toEqual([]);
   });
 
+  it('flags icon-named nodes not marked as library instances (local copies)', () => {
+    // An in-file component reusing the `esds/icon/…` convention is a
+    // duplicate: the adapter only marks instances of remote (published) main
+    // components, so this node's bindings are surfaced.
+    const kitToken = variableInfo({
+      id: 'VariableID:kit',
+      name: 'stroke-width/2',
+      collectionName: 'Collection 1',
+      tier: 'unknown',
+    });
+    const node = lintNode({ name: 'esds/icon/plus', type: 'INSTANCE' });
+    const property = colorProperty('fill', hexPart('#000000', 'VariableID:kit'));
+    const context = createLintContext(new Map([['VariableID:kit', kitToken]]));
+
+    expect(
+      unknownCollectionRule.evaluate(observation(node, property, property.parts[0]!), context),
+    ).toHaveLength(1);
+  });
+
   it('still flags non-icon nodes bound to unknown collections', () => {
     const kitToken = variableInfo({
       id: 'VariableID:kit',

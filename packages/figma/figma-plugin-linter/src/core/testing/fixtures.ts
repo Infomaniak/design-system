@@ -108,6 +108,10 @@ export interface LintNodeFixtureOptions {
   readonly type?: LintNodeType | (string & {});
   readonly visible?: boolean;
   readonly fromIconLibrary?: boolean;
+  readonly isAsset?: boolean;
+  readonly width?: number;
+  readonly height?: number;
+  readonly hasImageFill?: boolean;
   readonly properties?: readonly LintProperty[];
   readonly children?: readonly LintNode[];
 }
@@ -120,6 +124,10 @@ export function lintNode(options: LintNodeFixtureOptions = {}): LintNode {
     visible: options.visible ?? true,
     properties: options.properties ?? [],
     ...(options.fromIconLibrary === true ? { fromIconLibrary: true } : {}),
+    ...(options.isAsset === undefined ? {} : { isAsset: options.isAsset }),
+    ...(options.width === undefined ? {} : { width: options.width }),
+    ...(options.height === undefined ? {} : { height: options.height }),
+    ...(options.hasImageFill === undefined ? {} : { hasImageFill: options.hasImageFill }),
     children: options.children ?? [],
   };
 }

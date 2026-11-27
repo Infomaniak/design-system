@@ -21,6 +21,7 @@ describe('collectInstanceIdentities', () => {
         name: 'Primary',
         type: 'COMPONENT',
         parent: { name: 'Buttons' },
+        remote: true,
       }),
     ];
 
@@ -29,6 +30,7 @@ describe('collectInstanceIdentities', () => {
     expect(identities.get('I:1')).toEqual({
       componentName: 'Primary',
       componentSetName: 'Buttons',
+      remote: true,
     });
   });
 
@@ -37,10 +39,10 @@ describe('collectInstanceIdentities', () => {
       instance('I:1', 'icon', { id: 'C:1', name: 'esds/icon/plus', type: 'COMPONENT' }),
     ]);
 
-    expect(identities.get('I:1')).toEqual({ componentName: 'esds/icon/plus' });
+    expect(identities.get('I:1')).toEqual({ componentName: 'esds/icon/plus', remote: false });
   });
 
-  it('skips the API call for instances already named after the icon convention', async () => {
+  it('resolves kit-named instances too — provenance must be verified, not trusted', async () => {
     let called: boolean = false;
     const node: AnyFigmaNode = {
       id: 'I:1',
@@ -48,14 +50,37 @@ describe('collectInstanceIdentities', () => {
       type: 'INSTANCE',
       getMainComponentAsync: async (): Promise<AnyFigmaNode | null> => {
         called = true;
-        return null;
+        return {
+          id: 'C:1',
+          name: 'size=24',
+          type: 'COMPONENT',
+          parent: { name: 'esds/icon/plus' },
+          remote: true,
+        };
       },
     };
 
     const identities = await collectInstanceIdentities([node]);
 
-    expect(called).toBe(false);
-    expect(identities.size).toBe(0);
+    expect(called).toBe(true);
+    expect(identities.get('I:1')).toEqual({
+      componentName: 'size=24',
+      componentSetName: 'esds/icon/plus',
+      remote: true,
+    });
+  });
+
+  it('captures the remote flag off the main component (local component → false)', async () => {
+    const identities = await collectInstanceIdentities([
+      instance('I:1', 'Local copy', {
+        id: 'C:1',
+        name: 'esds/icon/plus',
+        type: 'COMPONENT',
+        remote: false,
+      }),
+    ]);
+
+    expect(identities.get('I:1')).toEqual({ componentName: 'esds/icon/plus', remote: false });
   });
 
   it('ignores detached instances and instances without the async accessor', async () => {

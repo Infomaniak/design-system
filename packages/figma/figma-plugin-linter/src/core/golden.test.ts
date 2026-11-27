@@ -459,4 +459,125 @@ describe('golden acceptance — spec scenarios end-to-end', () => {
       valueLabel: '#AAAAAA',
     });
   });
+
+  it('scenario: vector named like a kit icon (local SVG import) → icon-local-import warning', async () => {
+    const vector: LintNode = {
+      id: 'n:1',
+      name: 'chevron-right',
+      type: 'SHAPE',
+      visible: true,
+      properties: [
+        {
+          kind: 'component',
+          valueKind: 'string',
+          parts: [{ id: 'uniform', value: { kind: 'string', value: 'VECTOR' } }],
+        },
+      ],
+      children: [],
+    };
+
+    const result = await lintTree([vector], { rules: LINT_RULES, context: CONTEXT });
+
+    expect(ruleIds(result.findings)).toEqual(['icon-local-import']);
+    expect(result.findings[0]).toMatchObject({
+      severity: 'warning',
+      nodeName: 'chevron-right',
+      propertyLabel: 'Component',
+      valueLabel: 'chevron-right',
+    });
+  });
+
+  it('scenario: generically named local icon (unnamed vector, "Icon" instance) → icon-local-import warning', async () => {
+    function iconShaped(name: string, isAsset: boolean, width: number, height: number): LintNode {
+      return {
+        id: 'n:1',
+        name,
+        type: 'SHAPE',
+        visible: true,
+        properties: [
+          {
+            kind: 'component',
+            valueKind: 'string',
+            parts: [{ id: 'uniform', value: { kind: 'string', value: 'VECTOR' } }],
+          },
+        ],
+        isAsset,
+        width,
+        height,
+        children: [],
+      };
+    }
+
+    // "Vector path": an import nobody renamed, caught by Figma's asset heuristic.
+    const unnamed = await lintTree([iconShaped('Vector path', true, 24, 24)], {
+      rules: LINT_RULES,
+      context: CONTEXT,
+    });
+
+    expect(ruleIds(unnamed.findings)).toEqual(['icon-local-import']);
+    expect(unnamed.findings[0]).toMatchObject({
+      message:
+        'Looks like an icon but is not instanced from the Edelweiss Iconography library — use the published component instead.',
+    });
+
+    // Canonical kit size without the asset heuristic.
+    const sized = await lintTree([iconShaped('Vector 3', false, 32, 32)], {
+      rules: LINT_RULES,
+      context: CONTEXT,
+    });
+
+    expect(ruleIds(sized.findings)).toEqual(['icon-local-import']);
+
+    // Off-size decorative vector: no name, no asset heuristic, no kit size → silent.
+    const oversized = await lintTree([iconShaped('Blob', false, 64, 64)], {
+      rules: LINT_RULES,
+      context: CONTEXT,
+    });
+
+    expect(oversized.findings).toEqual([]);
+
+    // An image-filled node (a placed photo) is an asset but never an icon.
+    const photo: LintNode = { ...iconShaped('image.png', true, 24, 24), hasImageFill: true };
+
+    expect((await lintTree([photo], { rules: LINT_RULES, context: CONTEXT })).findings).toEqual([]);
+  });
+
+  it('scenario: instance of a local icon copy loses the kit exemption; verified kit instance stays clean', async () => {
+    function iconInstance(fromIconLibrary: boolean): LintNode {
+      return {
+        id: 'n:1',
+        name: 'esds/icon/plus',
+        type: 'INSTANCE',
+        visible: true,
+        ...(fromIconLibrary ? { fromIconLibrary: true as const } : {}),
+        properties: [
+          {
+            kind: 'component',
+            valueKind: 'string',
+            parts: [{ id: 'uniform', value: { kind: 'string', value: 'INSTANCE' } }],
+          },
+          fillProperty(fillPart('#191F33', KIT_FOREGROUND.id)),
+        ],
+        children: [],
+      };
+    }
+
+    // Local copy (main component not remote): its unpublished `Collection 1`
+    // bindings surface AND the icon itself is flagged. Findings come in
+    // property order — the component observation precedes the fill.
+    const localCopy = await lintTree([iconInstance(false)], {
+      rules: LINT_RULES,
+      context: CONTEXT,
+    });
+
+    expect(ruleIds(localCopy.findings)).toEqual(['icon-local-import', 'unknown-collection']);
+
+    // Verified kit instance (remote main component): exempt and clean.
+    const published = await lintTree([iconInstance(true)], {
+      rules: LINT_RULES,
+      context: CONTEXT,
+    });
+
+    expect(published.findings).toEqual([]);
+  });
 });

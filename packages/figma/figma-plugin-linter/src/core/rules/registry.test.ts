@@ -22,6 +22,7 @@ describe('LINT_RULES registry', () => {
       'lorem-ipsum',
       'style-override',
       'local-duplicate',
+      'icon-local-import',
     ]);
   });
 });

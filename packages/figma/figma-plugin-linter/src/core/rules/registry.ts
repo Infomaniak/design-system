@@ -1,6 +1,7 @@
 import { blendModeRule } from './blend-mode.ts';
 import { datavizBrandRootRule } from './dataviz-brand-root.ts';
 import { iconAsFrameRule } from './icon-as-frame.ts';
+import { iconLocalImportRule } from './icon-local-import.ts';
 import { localCollectionRule } from './local-collection.ts';
 import { localDuplicateRule } from './local-duplicate.ts';
 import { localEffectStyleRule } from './local-effect-style.ts';
@@ -41,4 +42,5 @@ export const LINT_RULES: readonly LintRule[] = [
   loremIpsumRule,
   styleOverrideRule,
   localDuplicateRule,
+  iconLocalImportRule,
 ];

@@ -67,10 +67,11 @@ const CORNERS: readonly {
  * property-level part.
  *
  * Component instances from the DS icon library (`esds/icon/…` — resolved from
- * the pre-fetched component identity, its component-set parent, or the
- * instance's own name)
- * mark their whole subtree `fromIconLibrary` so tier-classifying rules can
- * exempt the library's own token collection.
+ * the pre-fetched component identity, whose main component must be remote,
+ * i.e. published from the team library) mark their whole subtree
+ * `fromIconLibrary` so tier-classifying rules can exempt the library's own
+ * token collection. Local components reusing the naming convention are
+ * duplicates, never treated as the kit.
  */
 export function toLintNode(node: AnyFigmaNode, options: ToLintNodeOptions = {}): LintNode {
   return toLintNodeWithLibraryFlag(node, false, options.instanceIdentities ?? new Map());
@@ -82,9 +83,18 @@ function toLintNodeWithLibraryFlag(
   identities: ReadonlyMap<string, InstanceIdentity>,
 ): LintNode {
   const type: LintNodeType = toLintNodeType(node.type);
+  const identity: InstanceIdentity | undefined = identities.get(node.id);
   const isIconInstance: boolean =
-    type === 'INSTANCE' && isIconLibraryComponent(resolveInstanceIdentityName(node, identities));
+    type === 'INSTANCE' &&
+    identity?.remote === true &&
+    isIconLibraryComponent(resolveInstanceIdentityName(node, identities));
   const inIconLibrary: boolean = fromIconLibrary || isIconInstance;
+  const children: readonly LintNode[] = (node.children ?? []).map((child: AnyFigmaNode): LintNode =>
+    toLintNodeWithLibraryFlag(child, inIconLibrary, identities),
+  );
+  const hasImageFill: boolean =
+    hasVisibleImageFill(node) ||
+    children.some((child: LintNode): boolean => child.hasImageFill === true);
 
   return {
     id: node.id,
@@ -93,10 +103,23 @@ function toLintNodeWithLibraryFlag(
     visible: node.visible !== false,
     properties: extractProperties(node),
     ...(inIconLibrary ? { fromIconLibrary: true } : {}),
-    children: (node.children ?? []).map((child: AnyFigmaNode): LintNode =>
-      toLintNodeWithLibraryFlag(child, inIconLibrary, identities),
-    ),
+    ...(node.isAsset === true ? { isAsset: true } : {}),
+    ...(typeof node.width === 'number' ? { width: node.width } : {}),
+    ...(typeof node.height === 'number' ? { height: node.height } : {}),
+    ...(hasImageFill ? { hasImageFill: true } : {}),
+    children,
   };
+}
+
+/** Whether the node's own paints carry a visible image (raster) fill. */
+function hasVisibleImageFill(node: AnyFigmaNode): boolean {
+  if (!Array.isArray(node.fills)) {
+    return false;
+  }
+
+  return node.fills.some(
+    (paint: FigmaPaint): boolean => paint.type === 'IMAGE' && paint.visible !== false,
+  );
 }
 
 /**

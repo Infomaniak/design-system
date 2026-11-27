@@ -279,7 +279,7 @@ function buildClean(state: Extract<LintPanelState, { readonly kind: 'clean' }>):
 /**
  * The clean pass must not read as a full compliance pass when rules are muted —
  * a subset run qualifies the message with its enabled count (same vocabulary
- * as the `Rules · N/18` button).
+ * as the `Rules · N/19` button).
  */
 function cleanMessage(enabledRuleIds?: readonly string[]): string {
   if (enabledRuleIds === undefined || enabledRuleIds.length === LINT_RULES.length) {

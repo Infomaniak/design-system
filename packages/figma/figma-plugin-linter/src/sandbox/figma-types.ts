@@ -99,6 +99,18 @@ export interface AnyFigmaNode {
   readonly effects?: readonly FigmaEffect[] | symbol;
   readonly effectStyleId?: string | symbol;
   readonly textStyleId?: string | symbol;
+  /**
+   * Whether the component is remote — published from a team library rather
+   * than living in the file (`ComponentNode.remote`, read on the main
+   * component resolved through `getMainComponentAsync`). Absent on non-
+   * component nodes and on mocks.
+   */
+  readonly remote?: boolean;
+  /** Figma's own asset heuristic: true for small vector graphics and raster images. */
+  readonly isAsset?: boolean;
+  /** Node bounds (unrotated). Absent on node kinds without a size. */
+  readonly width?: number;
+  readonly height?: number;
   /** Plain tree access (sync-safe in dynamic-page mode, unlike `mainComponent`). */
   readonly parent?: { readonly name: string };
   /**

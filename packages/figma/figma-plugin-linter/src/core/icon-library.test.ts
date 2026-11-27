@@ -30,6 +30,12 @@ describe('toIconLeafName', () => {
     expect(toIconLeafName('plus')).toBe('plus');
     expect(toIconLeafName('esds/icon/chevron-right')).toBe('chevron-right');
   });
+
+  it('trims surrounding whitespace', () => {
+    expect(toIconLeafName('esds/icon/plus ')).toBe('plus');
+    expect(toIconLeafName('minus ')).toBe('minus');
+    expect(toIconLeafName('esds/icon/minus ')).toBe('minus');
+  });
 });
 
 describe('matchesIconInventory', () => {
@@ -39,6 +45,12 @@ describe('matchesIconInventory', () => {
     expect(matchesIconInventory('plus', inventory)).toBe(true);
     expect(matchesIconInventory('esds/icon/plus', inventory)).toBe(true);
     expect(matchesIconInventory('chevron-right', inventory)).toBe(true);
+  });
+
+  it('matches kit set names carrying trailing spaces', () => {
+    // The kit ships component sets named `esds/icon/minus ` (trailing space).
+    expect(matchesIconInventory('esds/icon/minus ', new Set(['minus']))).toBe(true);
+    expect(matchesIconInventory('minus ', new Set(['minus']))).toBe(true);
   });
 
   it('never matches partial or renamed names', () => {

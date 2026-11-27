@@ -298,7 +298,7 @@ describe('renderPanel', () => {
       });
 
       const rules: HTMLElement = root.querySelector('[data-action="open-settings"]')!;
-      expect(rules.textContent).toBe('Rules · 2/18');
+      expect(rules.textContent).toBe('Rules · 2/19');
       expect(rules.className).toContain('rules-button');
     });
 
@@ -331,12 +331,12 @@ describe('renderPanel', () => {
         enabledRuleIds: ['unbound-value'],
       });
       expect(results.querySelector('[data-action="open-settings"]')!.textContent).toBe(
-        'Rules · 1/18',
+        'Rules · 1/19',
       );
 
       const clean: HTMLElement = render({ kind: 'clean', inspectedCount: 3, enabledRuleIds: [] });
       expect(clean.querySelector('[data-action="open-settings"]')!.textContent).toBe(
-        'Rules · 0/18',
+        'Rules · 0/19',
       );
     });
 
@@ -348,7 +348,7 @@ describe('renderPanel', () => {
       });
 
       const rows: NodeListOf<HTMLElement> = root.querySelectorAll('.rule-row');
-      expect(rows).toHaveLength(18);
+      expect(rows).toHaveLength(19);
 
       const first: HTMLElement = rows[0]!;
       expect(first.querySelector('.rule-title')!.textContent).toBe('Unbound value');
@@ -363,7 +363,7 @@ describe('renderPanel', () => {
         .filter((checkbox: HTMLInputElement): boolean => checkbox.checked)
         .map((checkbox: HTMLInputElement): string => checkbox.getAttribute('data-rule-id')!);
       expect(enabledIds).toEqual(['unbound-value']);
-      expect(checkboxes).toHaveLength(18);
+      expect(checkboxes).toHaveLength(19);
 
       expect(root.querySelector('[data-action="close-settings"]')!.textContent).toBe('‹ Back');
       expect(root.querySelector('[data-action="reset-rules"]')!.textContent).toBe(
@@ -400,7 +400,7 @@ describe('renderPanel', () => {
       });
 
       expect(root.querySelector('.success')!.textContent).toBe(
-        '0 errors, 0 warnings — the 3/18 enabled rules all passed.',
+        '0 errors, 0 warnings — the 3/19 enabled rules all passed.',
       );
     });
   });
