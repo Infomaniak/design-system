@@ -84,16 +84,45 @@ describe('loadRuleSelection', () => {
 
     expect([...selection]).toEqual(ALL_IDS);
   });
+
+  it('enables rules added since the stored snapshot while preserving mutes', async () => {
+    // Snapshot taken when `icon-local-import` did not exist; `lorem-ipsum`
+    // was explicitly muted.
+    const selection: ReadonlySet<string> = await loadRuleSelection(
+      storeWithValue({
+        enabledRuleIds: ALL_IDS.filter((id: string): boolean => id !== 'lorem-ipsum'),
+        knownRuleIds: ALL_IDS.filter((id: string): boolean => id !== 'icon-local-import'),
+      }),
+    );
+
+    expect(selection.has('icon-local-import')).toBe(true);
+    expect(selection.has('lorem-ipsum')).toBe(false);
+    expect(selection.has('unbound-value')).toBe(true);
+  });
+
+  it('falls back to the legacy payload when the stored value is not a versioned selection', async () => {
+    const selection: ReadonlySet<string> = await loadRuleSelection(
+      storeWithValue({
+        enabledRuleIds: 'unbound-value',
+        knownRuleIds: [],
+      }),
+    );
+
+    expect([...selection]).toEqual(ALL_IDS);
+  });
 });
 
 describe('saveRuleSelection', () => {
-  it('persists the selection as an id array', async () => {
+  it('persists the selection with the current registry snapshot', async () => {
     const set = vi.fn((_key: string, _value: unknown): Promise<void> => Promise.resolve());
 
     const saved: boolean = await saveRuleSelection({ get: vi.fn(), set }, new Set(['blend-mode']));
 
     expect(saved).toBe(true);
-    expect(set).toHaveBeenCalledWith('ruleSelection', ['blend-mode']);
+    expect(set).toHaveBeenCalledWith('ruleSelection.v2', {
+      enabledRuleIds: ['blend-mode'],
+      knownRuleIds: ALL_IDS,
+    });
   });
 
   it('reports a failed write', async () => {
@@ -108,6 +137,9 @@ describe('resetRuleSelection', () => {
     const selection: ReadonlySet<string> = await resetRuleSelection({ get: vi.fn(), set });
 
     expect([...selection]).toEqual(ALL_IDS);
-    expect(set).toHaveBeenCalledWith('ruleSelection', ALL_IDS);
+    expect(set).toHaveBeenCalledWith('ruleSelection.v2', {
+      enabledRuleIds: ALL_IDS,
+      knownRuleIds: ALL_IDS,
+    });
   });
 });

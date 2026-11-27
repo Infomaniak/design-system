@@ -205,6 +205,10 @@ and per plugin, never in the file. **Reset to defaults** re-enables every rule.
 - Unknown rule ids in a stored selection are ignored, so a selection survives plugin
   updates that add or remove rules; a missing or invalid stored value falls back to
   every rule enabled
+- The selection is stored with the registry snapshot at save time (`ruleSelection.v2`):
+  rules added **after** the last save default to enabled on the next load, so a plugin
+  update never silently disables a new rule — rules the user explicitly muted stay
+  muted (selections saved before versioning keep their stored ids as-is)
 - The count label (`Rules · 14/19`) is always visible on the panel so a muted rule
   never comes as a surprise
 - A clean pass with a subset of rules qualifies the message («the 3/19 enabled rules
