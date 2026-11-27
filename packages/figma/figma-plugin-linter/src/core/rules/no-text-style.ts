@@ -21,6 +21,7 @@ import type { LintRule } from './rule.ts';
 export const noTextStyleRule: LintRule = {
   id: 'no-text-style',
   title: 'No text style',
+  description: 'A text layer carries no text style — typography set by hand.',
   severity: 'error',
   appliesTo: ['textStyle'],
   evaluate: (observation: PropertyObservation, _context: LintContext): readonly Finding[] => {

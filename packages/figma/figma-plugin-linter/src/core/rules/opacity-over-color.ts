@@ -22,6 +22,7 @@ import type { LintRule } from './rule.ts';
 export const opacityOverColorRule: LintRule = {
   id: 'opacity-over-color',
   title: 'Opacity over color',
+  description: 'Layer opacity is hand-set below 100% while the layer carries a colored fill.',
   severity: 'warning',
   appliesTo: ['opacity'],
   evaluate: (observation: PropertyObservation, _context: LintContext): readonly Finding[] => {

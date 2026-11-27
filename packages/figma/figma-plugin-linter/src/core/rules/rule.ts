@@ -13,6 +13,8 @@ import type { PropertyObservation } from '../model/property-observation.ts';
 export interface LintRule {
   readonly id: string;
   readonly title: string;
+  /** One-line designer-facing meaning, shown in the rule-selection settings list. */
+  readonly description: string;
   readonly severity: LintSeverity;
   readonly appliesTo: readonly LintPropertyKind[];
   readonly evaluate: (observation: PropertyObservation, context: LintContext) => readonly Finding[];

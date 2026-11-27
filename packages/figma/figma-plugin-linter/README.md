@@ -7,7 +7,9 @@ the wrong property, primitive tokens used where semantic tokens are expected, to
 bound from unrecognized or local collections, bindings that cannot be resolved, raw
 effects and stroke weights, hand-set opacity over colored layers, non-default blend
 modes, brand/dataviz tokens missing their `@root` variant, leftover lorem ipsum copy,
-and typography not driven by published text styles.
+and typography not driven by published text styles. Designers choose which rules
+apply through the panel's **Rules** view — the selection persists per user (see
+«Rule selection»).
 
 The plugin reads the document and lints it; the only writes happen when **you** click a
 Fix button (see « Fix mode » below) — reporting itself never modifies the document.
@@ -47,26 +49,27 @@ rejected) stay visible with a `fix failed` marker.
 
 ## What it checks
 
-| Rule               | Severity | Meaning                                                                                             |
-| ------------------ | -------- | --------------------------------------------------------------------------------------------------- |
-| Unbound value      | Error    | Property set with a raw value (`#4A90D9`, `16px`, `1` stroke weight…) and no design token bound     |
-| Wrong scope        | Error    | A variable IS bound, but its Figma scopes don't cover the property (e.g. a stroke token on a fill)  |
-| Wrong token        | Error    | A semantic (t2) color variable IS bound, but its category doesn't match the property                |
-| Unbound effect     | Error    | An effect (shadow, blur…) is set with raw settings — no effect style or variable bound              |
-| No text style      | Error    | A TEXT node carries no text style — typography set by hand                                          |
-| Icon as frame      | Error    | A drawn container (frame/section/group) is named exactly like a kit icon — instance the icon        |
-| Primitive misuse   | Warning  | The bound token effectively resolves to a primitive (t1) token — directly or through an alias chain |
-| Unknown collection | Warning  | A variable IS bound, but points at no known token tier (t1/t2/t3)                                   |
-| Unresolved token   | Warning  | A variable IS bound, but it can't be resolved from this file's variables or an accessible library   |
-| Opacity over color | Warning  | The layer's opacity is hand-set below 100% while it carries a colored fill                          |
-| Local effect style | Warning  | The effect comes from a style local to the file, not published from the token library               |
-| Local text style   | Warning  | The text style is local to the file, not published from the token library                           |
-| Style override     | Warning  | The node overrides a published text style (size, weight, decoration or line height)                 |
-| Blend mode         | Warning  | The node's blend mode differs from the accepted `NORMAL`/`PASS_THROUGH`                             |
-| Brand/dataviz root | Warning  | A bound t2 brand/dataviz token is not the `@root` variant (only those are published)                |
-| Local collection   | Warning  | The bound variable comes from a collection local to the file — unpublished                          |
-| Lorem ipsum        | Warning  | The text layer still carries placeholder copy (`lorem`/`ipsum`, any casing)                         |
-| Local duplicate    | Warning  | A local component (or set) is named exactly like a kit icon — a duplicated icon in the file         |
+| Rule               | Severity | Meaning                                                                                                                |
+| ------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Unbound value      | Error    | Property set with a raw value (`#4A90D9`, `16px`, `1` stroke weight…) and no design token bound                        |
+| Wrong scope        | Error    | A variable IS bound, but its Figma scopes don't cover the property (e.g. a stroke token on a fill)                     |
+| Wrong token        | Error    | A semantic (t2) color variable IS bound, but its category doesn't match the property                                   |
+| Unbound effect     | Error    | An effect (shadow, blur…) is set with raw settings — no effect style or variable bound                                 |
+| No text style      | Error    | A TEXT node carries no text style — typography set by hand                                                             |
+| Icon as frame      | Error    | A drawn container (frame/section/group) is named exactly like a kit icon — instance the icon                           |
+| Primitive misuse   | Warning  | The bound token effectively resolves to a primitive (t1) token — directly or through an alias chain                    |
+| Unknown collection | Warning  | A variable IS bound, but points at no known token tier (t1/t2/t3) — recognized Edelweiss kit collections are accepted  |
+| Unresolved token   | Warning  | A variable IS bound, but it can't be resolved from this file's variables or an accessible library                      |
+| Opacity over color | Warning  | The layer's opacity is hand-set below 100% while it carries a colored fill                                             |
+| Local effect style | Warning  | The effect comes from a style local to the file, not published from the token library                                  |
+| Local text style   | Warning  | The text style is local to the file, not published from the token library                                              |
+| Style override     | Warning  | The node overrides a published text style (size, weight, decoration or line height)                                    |
+| Blend mode         | Warning  | The node's blend mode differs from the accepted `NORMAL`/`PASS_THROUGH`                                                |
+| Brand/dataviz root | Warning  | A bound t2 brand/dataviz token is not the `@root` variant (only those are published)                                   |
+| Local collection   | Warning  | The bound variable comes from a collection local to the file — unpublished                                             |
+| Lorem ipsum        | Warning  | The text layer still carries placeholder copy (`lorem`/`ipsum`, any casing)                                            |
+| Local duplicate    | Warning  | A local component (or set) is named exactly like a kit icon — a duplicated icon in the file                            |
+| Icon local import  | Warning  | A shape or instance that looks like a kit icon (name, size or asset heuristic) is not an instance of the published kit |
 
 **Alias chains**: a variable's value may be an alias to another variable. This is what
 lets third-party tokens (e.g. a Shadcn kit's `foreground`) be re-pointed to DS tokens
@@ -76,24 +79,53 @@ misuse, and chains that dead-end (raw value, deleted target, cycle) keep the
 unknown-collection warning. Wrong-token is deliberately not validated through the
 chain (the alias only affects tier classification).
 
+**Known kit collections**: the platform kits (Edelweiss Material Kit, Shadcn kit,
+iOS-iPadOS kit) bind tokens from Edelweiss - Token Core, which publishes semantic
+collections beyond the tiers (`theme`, `dataviz`, `product`, `button-type`,
+`button-size`, `badge-type`, `avatar-size`), and the Material Kit adds the
+`Schemes/…` design-token namespace. Bindings from Edelweiss kit libraries are
+therefore accepted by matching the **library** (`Edelweiss - …` prefix, stamped
+during the library-import pass — see `core/known-kits.ts`): a new collection
+inside a known kit needs no plugin change. Two guards: remote only (a collection
+pasted into the file keeps its warning) and raw palette collections excluded
+(`Red/100` still warns — the kit counterpart of primitive-misuse). Kit tokens
+keep their `unknown` tier, so they are never suggested as fixes, and the other
+rules — wrong-token, primitive-misuse — keep evaluating them normally.
+
 **Icon library exemption**: the Edelweiss Iconography library (`esds/icon/…`
 components) publishes its own token collection (`Collection 1`), which is not a
 t1/t2/t3 tier. Bindings inside instances of `esds/icon/…` components are therefore
 exempt from the unknown-collection rule — the icon library's stroke-width tokens are
 expected there. The identity is resolved per instance through
-`getMainComponentAsync()` (component-set name, then component name, then the
-instance's layer name — the sync getter is off-limits in dynamic-page mode):
-renaming an icon instance keeps it exempt, but extracting its glyph out of it
-re-flags the binding.
+`getMainComponentAsync()` (the sync getter is off-limits in dynamic-page mode) and
+must check out on **both** signals: the component's name follows the `esds/icon/…`
+convention **and** the main component is remote (`ComponentNode.remote` — published
+from the team library). The layer name alone is never trusted: an in-file component
+reusing the convention is a duplicate, its instances keep no exemption, and its
+unpublished bindings surface. Renaming a genuine icon instance keeps it exempt, but
+extracting its glyph out of it re-flags the binding.
 
-**Icon component checks**: every node also carries its raw Figma type, letting two
-rules police icon usage by name — `icon-as-frame` (error) for drawn containers named
-exactly like a kit icon, `local-duplicate` (warning) for local components duplicating
-one. The name match is exact against the icon inventory generated from the svg-assets
-package (`assets/svg/monotone/figma/*.svg`): renamed or partial names (`plus copy`,
-`icon plus`) pass silently — the heuristic is deliberately conservative to avoid
-name-based false positives. Detached icon instances surface as `icon-as-frame`
-errors (detaching produces a frame keeping the icon name).
+**Icon component checks**: every node also carries its raw Figma type, letting three
+rules police icon usage — `icon-as-frame` (error) for drawn containers named exactly
+like a kit icon, `local-duplicate` (warning) for local components duplicating one,
+and `icon-local-import` (warning) for icon-carrying shapes or instances that are not
+verified kit instances. `icon-local-import` combines three signals, so a local icon
+is caught even when nobody named it: an exact inventory-name match (bare name or
+`esds/icon/` prefix, insensitive to the trailing spaces some kit component-set names
+carry), Figma's own asset heuristic (`isAsset` — small vector graphic), and the
+canonical kit icon sizes (16/20/24/32/40) on the node's bounds. Nodes whose subtree
+carries an image fill stay silent (the asset heuristic fires for raster images too —
+photos and avatars are not icons). Renamed or partial names (`plus copy`,
+`icon plus`) without an icon shape pass silently — the heuristics are deliberately
+conservative to limit false positives, at the accepted cost of flagging small logo
+glyphs. Detached icon instances surface as `icon-as-frame` errors (detaching
+produces a frame keeping the icon name).
+
+> [!NOTE]
+> The icon rules assume the linter runs on consumer files. Inside the Edelweiss
+> Iconography kit file itself, every icon component is local (remote is only true
+> once the kit is published and instanced elsewhere) — the same policy as the
+> other local-* rules: library source files are not lint targets.
 
 The "wrong token" rule derives the category of a bound variable from its own name
 (`color/background/…`, `color/content/…`) — read live from the file, so it can't drift
@@ -149,14 +181,15 @@ Then, in the Figma desktop app:
 ### Run a lint
 
 1. Pick a scope in the panel — **Selection** (default), **Page** or **File**
-2. For the Selection scope, select one or more frames or layers on the canvas
-3. Open the plugin and hit **Run lint**
-4. Results appear as `N errors · M warnings`, errors first, **grouped by rule within
+2. Optionally open **Rules** to choose which rules apply (see «Rule selection»)
+3. For the Selection scope, select one or more frames or layers on the canvas
+4. Open the plugin and hit **Run lint**
+5. Results appear as `N errors · M warnings`, errors first, **grouped by rule within
    each severity** — expand a rule section to see its findings and their messages
-5. Click a finding to select the offending layer on canvas (and zoom to it)
-6. Hit **Copy report** to get a markdown summary for handoff tickets (same rule
+6. Click a finding to select the offending layer on canvas (and zoom to it)
+7. Hit **Copy report** to get a markdown summary for handoff tickets (same rule
    grouping)
-7. Fix the layers and hit **Run again** — results are a snapshot, there is no live watching
+8. Fix the layers and hit **Run again** — results are a snapshot, there is no live watching
 
 The Selection scope requires a non-empty selection (setup error otherwise). The Page
 scope lints the current page's top-level layers and their subtrees; the File scope
@@ -165,11 +198,34 @@ same in every scope.
 
 | State       | Reached when                   | Content                                                                            |
 | ----------- | ------------------------------ | ---------------------------------------------------------------------------------- |
-| Idle        | Plugin opened, nothing run yet | Title, scope picker, Run button, hint                                              |
+| Idle        | Plugin opened, nothing run yet | Title, scope picker, Rules count, Run button, hint                                 |
 | Setup error | No selection (Selection scope) | Blocking message with recovery hint + Retry                                        |
 | Running     | Run clicked                    | `Checking layers…` shimmer, then `Checking 340/1200 layers…`, progress bar, Cancel |
 | Results     | Run finished or cancelled      | Counts, findings grouped by rule (collapsible sections), Run again + Copy report   |
 | Clean pass  | Run finished, zero findings    | "0 errors, 0 warnings — all checked properties are token-bound.", Run again        |
+| Rules       | Rules button clicked           | Back button, one checkbox row per rule (title, severity, description), Reset       |
+
+### Rule selection
+
+The **Rules · N/19** button beside the scope picker opens a view listing every rule
+with its severity and a one-line description. Toggling a rule applies from the next
+run (including the automatic re-lint after a fix) and is persisted per user via
+`figma.clientStorage` — the selection survives closing Figma and is stored per user
+and per plugin, never in the file. **Reset to defaults** re-enables every rule.
+
+- With every rule disabled, the Run button is disabled; the sandbox also refuses a
+  run without rules with a «No rules enabled» setup error
+- Unknown rule ids in a stored selection are ignored, so a selection survives plugin
+  updates that add or remove rules; a missing or invalid stored value falls back to
+  every rule enabled
+- The selection is stored with the registry snapshot at save time (`ruleSelection.v2`):
+  rules added **after** the last save default to enabled on the next load, so a plugin
+  update never silently disables a new rule — rules the user explicitly muted stay
+  muted (selections saved before versioning keep their stored ids as-is)
+- The count label (`Rules · 14/19`) is always visible on the panel so a muted rule
+  never comes as a surprise
+- A clean pass with a subset of rules qualifies the message («the 3/19 enabled rules
+  all passed») so a muted run never reads as a full compliance pass
 
 > [!NOTE]
 > If the file's variables carry no scopes, the wrong-scope rule stays dormant — the
@@ -196,7 +252,7 @@ flowchart LR
 
     subgraph Core["Core — pure (no Figma, no DOM)"]
         Engine["engine — traverse + lint"]
-        Rules["rules × 6"]
+        Rules["rules × 19"]
         Helpers["scopes + semantic-usage"]
         Report["report — summarize + markdown"]
     end
@@ -224,9 +280,10 @@ flowchart LR
 - **`ui/`** — the plugin panel: a pure state → DOM renderer plus a small bootstrap
   that wires clicks (run/cancel/copy/select) and sandbox messages
 
-One run: `Run` → sandbox reads the selection → token metadata preloaded → node tree
-adapted → engine traverses and evaluates the rules → findings summarized → posted to
-the panel → click a row → sandbox selects and zooms to the node.
+One run: `Run` → sandbox resolves the enabled rules and reads the scan roots → token
+metadata preloaded → node tree adapted → engine traverses and evaluates the rules →
+findings summarized → posted to the panel → click a row → sandbox selects and zooms
+to the node.
 
 ### Extending
 
@@ -260,6 +317,8 @@ Manual smoke checklist after a build:
 - Token bound from an unrecognized collection (e.g. a third-party kit) → unknown-collection warning
 - Third-party token aliased to a t2/t3 token → accepted
 - Third-party token aliased to a t1 token → primitive-misuse warning
+- Token Core `theme`/`dataviz`/`product`/`button-*` binding (remote) → clean; `Schemes/…` Material role → clean
+- Same kit collection pasted locally into the file → unknown-collection warning
 - Instance + hidden layers → hidden skipped, instance linted
 - Token bound from a published library → classified correctly
 - Token bound to a deleted variable → unresolved-token warning
@@ -277,6 +336,13 @@ Manual smoke checklist after a build:
 - Local variable bound to a fill → local-collection warning (also inside the DS source file)
 - Text layer with lorem placeholder → lorem-ipsum warning
 - `esds/icon/…` instance (glyph stroke weights bound to the iconography library's `Collection 1`) → no unknown-collection warning; the same binding outside an icon → warning
+- Instance of a local component named `esds/icon/plus` (duplicated icon) → icon-local-import warning, and its `Collection 1` bindings → unknown-collection warning
+- Vector named `chevron-right` (local SVG import on the canvas) → icon-local-import warning; the same vector inside a real kit instance → clean
+- Genuine kit-icon instance → clean for icon-local-import and unknown-collection; renamed kit instance (`plus` on canvas) → still exempt (identity resolved from the component, not the layer name)
+- Instance of the kit set named `esds/icon/minus ` (trailing space) → no icon finding (inventory matching trims)
+- Vector named `Vector path` (unnamed local SVG import, Figma marks it as asset) → icon-local-import warning
+- Instance of a local component named `Icon` at 24×24 (Figma: «From this file») → icon-local-import warning; the same instance carrying an image fill (avatar) → clean
+- Placed photo (rectangle with image fill) → no icon finding
 - Text layer styled by hand → no-text-style error
 - Local text style applied → local-text-style warning; remote style → clean
 - Remote Token Core style applied, then size changed → style-override warning naming `font size`
@@ -287,4 +353,10 @@ Manual smoke checklist after a build:
 - Raw `#FF0000` fill matching exactly one token → Fix button; apply → fill bound, auto re-lint clears the finding, one undo reverts
 - 3 raw paddings matching tokens → batch Apply button, confirm → all applied, single undo reverts the batch; a failing row shows `fix failed`
 - Findings for effects/opacity/text styles → no Fix button
+- Rules view: toggle a rule off and run → no findings from that rule; count label reflects the selection
+- Reopen the plugin → the rule selection is restored from clientStorage
+- Reset to defaults → every rule re-enabled and persisted
+- Disable every rule → Run button disabled; a run forced through the console reports «No rules enabled»
+- Clean pass with a subset of rules → the success message names the enabled count (e.g. «the 3/19 enabled rules all passed»)
+- Toggle rules → the next Run and the post-fix re-lint both apply the same selection
 - Kit token aliased to a published DS t2/t3 token → accepted (alias chains re-verified with the values plumbing fix)

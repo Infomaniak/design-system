@@ -737,7 +737,7 @@ describe('toLintNode — text content extraction', () => {
 });
 
 describe('toLintNode — icon library marking', () => {
-  it('marks the subtree of an instance identified through its component-set name', () => {
+  it('marks the subtree of an instance identified through its remote component-set name', () => {
     const node: AnyFigmaNode = {
       id: '1',
       name: 'size=24',
@@ -747,7 +747,7 @@ describe('toLintNode — icon library marking', () => {
 
     const lintNode = toLintNode(node, {
       instanceIdentities: new Map([
-        ['1', { componentName: 'size=24', componentSetName: 'esds/icon/plus' }],
+        ['1', { componentName: 'size=24', componentSetName: 'esds/icon/plus', remote: true }],
       ]),
     });
 
@@ -755,7 +755,7 @@ describe('toLintNode — icon library marking', () => {
     expect(lintNode.children[0]!.fromIconLibrary).toBe(true);
   });
 
-  it('marks the subtree through the main component name (flat components)', () => {
+  it('marks the subtree through the remote main component name (flat components)', () => {
     const node: AnyFigmaNode = {
       id: '1',
       name: 'icon',
@@ -764,14 +764,30 @@ describe('toLintNode — icon library marking', () => {
     };
 
     const lintNode = toLintNode(node, {
-      instanceIdentities: new Map([['1', { componentName: 'esds/icon/plus' }]]),
+      instanceIdentities: new Map([['1', { componentName: 'esds/icon/plus', remote: true }]]),
     });
 
     expect(lintNode.fromIconLibrary).toBe(true);
     expect(lintNode.children[0]!.fromIconLibrary).toBe(true);
   });
 
-  it('falls back to the instance layer name when no component identity exists', () => {
+  it('does not mark instances of local (non-remote) icon components', () => {
+    const node: AnyFigmaNode = {
+      id: '1',
+      name: 'esds/icon/plus',
+      type: 'INSTANCE',
+      children: [{ id: '2', name: 'glyph', type: 'VECTOR' }],
+    };
+
+    const lintNode = toLintNode(node, {
+      instanceIdentities: new Map([['1', { componentName: 'esds/icon/plus', remote: false }]]),
+    });
+
+    expect(lintNode.fromIconLibrary).toBeUndefined();
+    expect(lintNode.children[0]!.fromIconLibrary).toBeUndefined();
+  });
+
+  it('does not trust the layer name when no component identity was resolved', () => {
     const node: AnyFigmaNode = {
       id: '1',
       name: 'esds/icon/close',
@@ -779,7 +795,7 @@ describe('toLintNode — icon library marking', () => {
       children: [{ id: '2', name: 'glyph', type: 'VECTOR' }],
     };
 
-    expect(toLintNode(node).fromIconLibrary).toBe(true);
+    expect(toLintNode(node).fromIconLibrary).toBeUndefined();
   });
 
   it('leaves non-icon instances unmarked but marks nested icon instances', () => {
@@ -792,8 +808,8 @@ describe('toLintNode — icon library marking', () => {
 
     const lintNode = toLintNode(node, {
       instanceIdentities: new Map([
-        ['1', { componentName: 'Button/Primary', componentSetName: 'Buttons' }],
-        ['2', { componentName: 'esds/icon/plus' }],
+        ['1', { componentName: 'Button/Primary', componentSetName: 'Buttons', remote: true }],
+        ['2', { componentName: 'esds/icon/plus', remote: true }],
       ]),
     });
 
@@ -801,10 +817,99 @@ describe('toLintNode — icon library marking', () => {
     expect(lintNode.children[0]!.fromIconLibrary).toBe(true);
   });
 
+  it('marks instances of remote components even when the identity carries no names', () => {
+    // Defensive fallback: a resolved (remote) identity without component names
+    // falls back to the instance's layer name for the convention check.
+    const node: AnyFigmaNode = {
+      id: '1',
+      name: 'esds/icon/close',
+      type: 'INSTANCE',
+      children: [{ id: '2', name: 'glyph', type: 'VECTOR' }],
+    };
+
+    const lintNode = toLintNode(node, {
+      instanceIdentities: new Map([['1', { remote: true }]]),
+    });
+
+    expect(lintNode.fromIconLibrary).toBe(true);
+  });
+
   it('ignores icon-like names on non-instance nodes', () => {
     const node: AnyFigmaNode = { id: '1', name: 'esds/icon/plus', type: 'FRAME' };
 
     expect(toLintNode(node).fromIconLibrary).toBeUndefined();
+  });
+});
+
+describe('toLintNode — shape signals', () => {
+  it('carries the asset heuristic and bounds through', () => {
+    const node: AnyFigmaNode = {
+      id: '1',
+      name: 'Vector path',
+      type: 'VECTOR',
+      isAsset: true,
+      width: 24,
+      height: 24,
+    };
+
+    const lintNode = toLintNode(node);
+
+    expect(lintNode.isAsset).toBe(true);
+    expect(lintNode.width).toBe(24);
+    expect(lintNode.height).toBe(24);
+  });
+
+  it('omits bounds when the node kind has none', () => {
+    const lintNode = toLintNode({ id: '1', name: 'x', type: 'VECTOR' });
+
+    expect(lintNode.isAsset).toBeUndefined();
+    expect(lintNode.width).toBeUndefined();
+    expect(lintNode.height).toBeUndefined();
+  });
+
+  it('marks the subtree of a node holding an image fill', () => {
+    const node: AnyFigmaNode = {
+      id: '1',
+      name: 'Card',
+      type: 'FRAME',
+      children: [
+        { id: '2', name: 'Photo', type: 'RECTANGLE', fills: [{ type: 'IMAGE' }] },
+        {
+          id: '3',
+          name: 'Hidden photo',
+          type: 'RECTANGLE',
+          fills: [{ type: 'IMAGE', visible: false }],
+        },
+        { id: '4', name: 'Glyph', type: 'VECTOR' },
+      ],
+    };
+
+    const lintNode = toLintNode(node);
+
+    expect(lintNode.hasImageFill).toBe(true);
+    expect(lintNode.children[0]!.hasImageFill).toBe(true);
+    expect(lintNode.children[1]!.hasImageFill).toBeUndefined();
+    expect(lintNode.children[2]!.hasImageFill).toBeUndefined();
+  });
+
+  it('detects image paints among solid fills and ignores mixed fill arrays', () => {
+    const withImage: AnyFigmaNode = {
+      id: '1',
+      name: 'Icon-ish',
+      type: 'VECTOR',
+      fills: [{ type: 'SOLID', color: { r: 0, g: 0, b: 0, a: 1 } }, { type: 'IMAGE' }],
+    };
+    const solidOnly: AnyFigmaNode = {
+      id: '2',
+      name: 'Icon',
+      type: 'VECTOR',
+      fills: [{ type: 'SOLID', color: { r: 0, g: 0, b: 0, a: 1 } }],
+    };
+    const mixed: AnyFigmaNode = { id: '3', name: 'x', type: 'VECTOR', fills: Symbol('mixed') };
+
+    expect(toLintNode(withImage).hasImageFill).toBe(true);
+    expect(toLintNode(solidOnly).hasImageFill).toBeUndefined();
+    expect(toLintNode(mixed).hasImageFill).toBeUndefined();
   });
 });
 

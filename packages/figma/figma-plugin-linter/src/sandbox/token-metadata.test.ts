@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import type { VariableInfo } from '../core/model/variable-info.ts';
 import type { TokenVariablesApi } from './token-metadata.ts';
 import {
@@ -83,10 +83,11 @@ function apiFixture(
 
 function teamLibraryFixture(
   libraryVariables: readonly LibraryVariable[] | undefined,
+  libraryName: string = 'DS tokens',
 ): () => TeamLibraryAPI | undefined {
   return (): TeamLibraryAPI | undefined => ({
     getAvailableLibraryVariableCollectionsAsync: async (): Promise<LibraryVariableCollection[]> => [
-      { name: 't2', key: 'lib-collection', libraryName: 'DS tokens' },
+      { name: 't2', key: 'lib-collection', libraryName },
     ],
     getVariablesInLibraryCollectionAsync: async (): Promise<LibraryVariable[]> => [
       ...(libraryVariables ?? []),
@@ -463,6 +464,164 @@ describe('loadTokenMetadata — published library variables (fix mode pool)', ()
 
     expect(metadata.get('V:pub')!.remote).toBe(true);
     expect(api.getVariableByIdAsyncCalls).toEqual(['V:pub']);
+  });
+
+  it('stamps variables imported from a known kit library', async () => {
+    const api = apiFixture({
+      importedVariablesByKey: new Map([
+        ['kit-key', variableFixture('V:kit', 'Schemes/Surface Container', 'C:kit')],
+      ]),
+      collectionsById: new Map([['C:kit', collectionFixture('C:kit', 'Theme')]]),
+    });
+
+    const metadata: Map<string, VariableInfo> = await loadTokenMetadata(
+      api,
+      [],
+      teamLibraryFixture(
+        [{ name: 'Schemes/Surface Container', key: 'kit-key', resolvedType: 'COLOR' as const }],
+        'Edelweiss - Material Kit',
+      ),
+    );
+
+    expect(metadata.get('V:kit')!.knownKit).toBe(true);
+  });
+
+  it('backfills the kit stamp onto bound variables resolved before the merge', async () => {
+    // The on-demand resolution of a bound id cannot know the source library —
+    // the import pass (which can) must stamp the entry afterwards.
+    const boundKitVariable: Variable = {
+      ...variableFixture('V:kit', 'button-size/lg', 'C:kit'),
+      remote: true,
+    };
+    const api = apiFixture({
+      variablesById: new Map([['V:kit', boundKitVariable]]),
+      collectionsById: new Map([['C:kit', collectionFixture('C:kit', 'button-size')]]),
+      importedVariablesByKey: new Map([['kit-key', boundKitVariable]]),
+    });
+
+    const metadata: Map<string, VariableInfo> = await loadTokenMetadata(
+      api,
+      ['V:kit'],
+      teamLibraryFixture(
+        [{ name: 'button-size/lg', key: 'kit-key', resolvedType: 'FLOAT' as const }],
+        'Edelweiss - Token Core',
+      ),
+    );
+
+    expect(metadata.get('V:kit')!.knownKit).toBe(true);
+  });
+
+  it('lists every collection in parallel — the deferred listing starts before the immediate one settles', async () => {
+    // Locks the enumeration parallelism: collection A's listing is held until
+    // released, so a sequential implementation would never reach collection B
+    // while A is pending.
+    const listingCalls: string[] = [];
+    let releaseListing: () => void = (): void => undefined;
+    const held: Promise<void> = new Promise<void>((resolve) => {
+      releaseListing = resolve;
+    });
+
+    const api = apiFixture({
+      importedVariablesByKey: new Map([
+        ['key-a', variableFixture('V:a', 'color/a', 'C:pub')],
+        ['key-b', variableFixture('V:b', 'color/b', 'C:pub')],
+      ]),
+      collectionsById: new Map([['C:pub', collectionFixture('C:pub', 't2')]]),
+    });
+
+    const metadataPromise: Promise<Map<string, VariableInfo>> = loadTokenMetadata(
+      api,
+      [],
+      (): TeamLibraryAPI | undefined => ({
+        getAvailableLibraryVariableCollectionsAsync: async (): Promise<
+          LibraryVariableCollection[]
+        > => [
+          { name: 'A', key: 'collection-a', libraryName: 'DS tokens' },
+          { name: 'B', key: 'collection-b', libraryName: 'DS tokens' },
+        ],
+        getVariablesInLibraryCollectionAsync: async (
+          collectionKey: string,
+        ): Promise<LibraryVariable[]> => {
+          listingCalls.push(collectionKey);
+
+          if (collectionKey === 'collection-a') {
+            await held;
+
+            return [{ name: 'color/a', key: 'key-a', resolvedType: 'COLOR' as const }];
+          }
+
+          return [{ name: 'color/b', key: 'key-b', resolvedType: 'COLOR' as const }];
+        },
+      }),
+    );
+
+    await vi.waitFor(() => expect(listingCalls).toContain('collection-b'), { timeout: 1_000 });
+
+    releaseListing();
+
+    const metadata: Map<string, VariableInfo> = await metadataPromise;
+
+    expect(metadata.get('V:a')).toBeDefined();
+    expect(metadata.get('V:b')).toBeDefined();
+  });
+
+  it('keeps importing the other collections when one listing fails', async () => {
+    const api = apiFixture({
+      importedVariablesByKey: new Map([['key-ok', variableFixture('V:ok', 'color/ok', 'C:pub')]]),
+      collectionsById: new Map([['C:pub', collectionFixture('C:pub', 't2')]]),
+    });
+
+    const metadata: Map<string, VariableInfo> = await loadTokenMetadata(
+      api,
+      [],
+      (): TeamLibraryAPI | undefined => ({
+        getAvailableLibraryVariableCollectionsAsync: async (): Promise<
+          LibraryVariableCollection[]
+        > => [
+          { name: 'Broken', key: 'collection-broken', libraryName: 'DS tokens' },
+          { name: 'Working', key: 'collection-working', libraryName: 'DS tokens' },
+        ],
+        getVariablesInLibraryCollectionAsync: async (
+          collectionKey: string,
+        ): Promise<LibraryVariable[]> => {
+          if (collectionKey === 'collection-broken') {
+            throw new Error('listing unavailable');
+          }
+
+          return [{ name: 'color/ok', key: 'key-ok', resolvedType: 'COLOR' as const }];
+        },
+      }),
+    );
+
+    expect(metadata.get('V:ok')).toBeDefined();
+  });
+
+  it('counts failed imports without dropping the successful ones', async () => {
+    const base: TokenVariablesApi = apiFixture({
+      importedVariablesByKey: new Map([['key-ok', variableFixture('V:ok', 'color/ok', 'C:pub')]]),
+      collectionsById: new Map([['C:pub', collectionFixture('C:pub', 't2')]]),
+    });
+    const api: TokenVariablesApi = {
+      ...base,
+      importVariableByKeyAsync: async (key: string): Promise<Variable> => {
+        if (key === 'key-throws') {
+          throw new Error('import rejected');
+        }
+
+        return base.importVariableByKeyAsync(key);
+      },
+    };
+
+    const metadata: Map<string, VariableInfo> = await loadTokenMetadata(
+      api,
+      [],
+      teamLibraryFixture([
+        { name: 'color/ok', key: 'key-ok', resolvedType: 'COLOR' as const },
+        { name: 'broken', key: 'key-throws', resolvedType: 'COLOR' as const },
+      ]),
+    );
+
+    expect(metadata.get('V:ok')).toBeDefined();
   });
 
   it('skips imports that fail or resolve to nothing', async () => {

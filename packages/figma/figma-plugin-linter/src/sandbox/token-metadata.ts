@@ -1,4 +1,5 @@
 import { MAX_ALIAS_CHAIN_DEPTH } from '../core/effective-variable.ts';
+import { isKnownKitLibrary } from '../core/known-kits.ts';
 import type { TokenTier } from '../core/model/token-tier.ts';
 import type { VariableInfo } from '../core/model/variable-info.ts';
 import { isFigmaVariableAlias } from './figma-types.ts';
@@ -33,7 +34,11 @@ export type TokenVariablesApi = Pick<
   | 'importVariableByKeyAsync'
 >;
 
-export function buildVariableInfo(variable: Variable, collectionName: string): VariableInfo {
+export function buildVariableInfo(
+  variable: Variable,
+  collectionName: string,
+  knownKit: boolean = false,
+): VariableInfo {
   const rawValue: unknown = firstModeValue(variable.valuesByMode);
   const aliasTargetId: string | undefined = isFigmaVariableAlias(rawValue)
     ? rawValue.id
@@ -46,6 +51,7 @@ export function buildVariableInfo(variable: Variable, collectionName: string): V
     tier: getTokenTier(collectionName),
     scopes: variable.scopes,
     remote: variable.remote ?? false,
+    ...(knownKit ? { knownKit: true } : {}),
     ...(aliasTargetId === undefined && rawValue !== undefined ? { value: rawValue } : {}),
     ...(aliasTargetId === undefined ? {} : { aliasTargetId }),
   };
@@ -284,10 +290,14 @@ export async function loadTokenMetadata(
  * them into the map (fix mode's suggestion pool). Imports are independent of
  * the bound ids above — a published token that is not bound anywhere in the
  * scanned nodes must still be suggestible. Figma caches imports per session;
- * ids already in the map win. A missing or failing library surface degrades to
- * the previous pool (local + bound) instead of failing the run — the surface
- * is resolved lazily (inside a guard) because merely READING `figma.teamLibrary`
- * throws when the manifest lacks the `teamlibrary` capability.
+ * ids already in the map win — except for known kit libraries
+ * (`core/known-kits.ts`): their variables are stamped even when an earlier
+ * on-demand resolution (a bound id) created an unstamped entry, since the
+ * import pass is the only place the source library is known. A missing or
+ * failing library surface degrades to the previous pool (local + bound)
+ * instead of failing the run — the surface is resolved lazily (inside a
+ * guard) because merely READING `figma.teamLibrary` throws when the manifest
+ * lacks the `teamlibrary` capability.
  */
 async function mergeLibraryVariables(
   api: TokenVariablesApi,
@@ -309,30 +319,63 @@ async function mergeLibraryVariables(
     return;
   }
 
-  let keys: readonly string[];
+  let collections: readonly LibraryVariableCollection[];
 
   try {
-    keys = await collectLibraryVariableKeys(teamLibrary);
+    collections = await teamLibrary.getAvailableLibraryVariableCollectionsAsync();
   } catch {
     debug?.('library variables', 'enumeration failed — pool limited to local + bound tokens');
     return;
   }
 
+  const batches: readonly {
+    readonly knownKit: boolean;
+    readonly variables: readonly LibraryVariable[];
+    readonly failed: boolean;
+  }[] = await Promise.all(
+    collections.map(async (collection: LibraryVariableCollection) => {
+      const knownKit: boolean = isKnownKitLibrary(collection.libraryName);
+
+      try {
+        return {
+          knownKit,
+          variables: await teamLibrary.getVariablesInLibraryCollectionAsync(collection.key),
+          failed: false,
+        };
+      } catch {
+        return { knownKit, variables: [], failed: true };
+      }
+    }),
+  );
+
+  // One flat parallel import pass — the per-key kit stamp travels with the
+  // entry, so the listing phase stays fully parallel across collections.
+  const entries: readonly { readonly key: string; readonly knownKit: boolean }[] = batches.flatMap(
+    (
+      batch: (typeof batches)[number],
+    ): readonly { readonly key: string; readonly knownKit: boolean }[] =>
+      batch.variables.map((libraryVariable: LibraryVariable) => ({
+        key: libraryVariable.key,
+        knownKit: batch.knownKit,
+      })),
+  );
+
+  const failedCollections: number = batches.filter((batch) => batch.failed).length;
+  let failedImports: number = 0;
   let imported: number = 0;
-  let failed: number = 0;
 
   await Promise.all(
-    keys.map(async (key: string): Promise<void> => {
+    entries.map(async ({ key, knownKit }): Promise<void> => {
       let variable: Variable | null;
 
       try {
         variable = await api.importVariableByKeyAsync(key);
       } catch {
-        failed += 1;
+        failedImports += 1;
         return;
       }
 
-      if (variable === null || variablesById.has(variable.id)) {
+      if (variable === null) {
         return;
       }
 
@@ -342,6 +385,17 @@ async function mergeLibraryVariables(
         collectionNameCache,
       );
 
+      if (knownKit) {
+        // Stamp even when the id already exists: a bound kit variable
+        // resolved on demand carries no library information.
+        variablesById.set(variable.id, buildVariableInfo(variable, collectionName, true));
+        return;
+      }
+
+      if (variablesById.has(variable.id)) {
+        return;
+      }
+
       variablesById.set(variable.id, buildVariableInfo(variable, collectionName));
       imported += 1;
     }),
@@ -349,26 +403,6 @@ async function mergeLibraryVariables(
 
   debug?.(
     'library variables',
-    `${keys.length} variables available, ${imported} imported, ${failed} failed`,
+    `${entries.length} variables available, ${imported} imported, ${failedImports} failed imports, ${failedCollections} failed collections`,
   );
-}
-
-/**
- * Enumerates every variable key available from the enabled libraries — the
- * real API is two-step (collections, then their variables).
- */
-async function collectLibraryVariableKeys(teamLibrary: TeamLibraryAPI): Promise<readonly string[]> {
-  const collections: readonly LibraryVariableCollection[] =
-    await teamLibrary.getAvailableLibraryVariableCollectionsAsync();
-
-  const keyLists: readonly (readonly string[])[] = await Promise.all(
-    collections.map(async (collection: LibraryVariableCollection): Promise<readonly string[]> => {
-      const variables: readonly LibraryVariable[] =
-        await teamLibrary.getVariablesInLibraryCollectionAsync(collection.key);
-
-      return variables.map((variable: LibraryVariable): string => variable.key);
-    }),
-  );
-
-  return keyLists.flat();
 }

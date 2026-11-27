@@ -33,6 +33,7 @@ const ICON_NAME_SET: ReadonlySet<string> = new Set(ICON_NAMES);
 export const iconAsFrameRule: LintRule = {
   id: 'icon-as-frame',
   title: 'Icon as frame',
+  description: 'A drawn container is named exactly like a kit icon — instance the icon instead.',
   severity: 'error',
   appliesTo: ['component'],
   evaluate: (observation: PropertyObservation, _context: LintContext): readonly Finding[] => {

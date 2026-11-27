@@ -108,6 +108,10 @@ export interface LintNodeFixtureOptions {
   readonly type?: LintNodeType | (string & {});
   readonly visible?: boolean;
   readonly fromIconLibrary?: boolean;
+  readonly isAsset?: boolean;
+  readonly width?: number;
+  readonly height?: number;
+  readonly hasImageFill?: boolean;
   readonly properties?: readonly LintProperty[];
   readonly children?: readonly LintNode[];
 }
@@ -120,6 +124,10 @@ export function lintNode(options: LintNodeFixtureOptions = {}): LintNode {
     visible: options.visible ?? true,
     properties: options.properties ?? [],
     ...(options.fromIconLibrary === true ? { fromIconLibrary: true } : {}),
+    ...(options.isAsset === undefined ? {} : { isAsset: options.isAsset }),
+    ...(options.width === undefined ? {} : { width: options.width }),
+    ...(options.height === undefined ? {} : { height: options.height }),
+    ...(options.hasImageFill === undefined ? {} : { hasImageFill: options.hasImageFill }),
     children: options.children ?? [],
   };
 }
@@ -131,6 +139,7 @@ export interface VariableInfoFixtureOptions {
   readonly tier?: TokenTier;
   readonly scopes?: readonly string[];
   readonly remote?: boolean;
+  readonly knownKit?: boolean;
   /** Raw variable value (rgba color object, number…) for fix-suggestion tests. */
   readonly value?: unknown;
   readonly aliasTargetId?: string;
@@ -146,6 +155,7 @@ export function variableInfo(options: VariableInfoFixtureOptions = {}): Variable
     tier: options.tier ?? 't2',
     scopes: options.scopes ?? [],
     remote: options.remote ?? true,
+    ...(options.knownKit === undefined ? {} : { knownKit: options.knownKit }),
     ...(options.value === undefined ? {} : { value: options.value }),
     ...(options.aliasTargetId === undefined ? {} : { aliasTargetId: options.aliasTargetId }),
   };

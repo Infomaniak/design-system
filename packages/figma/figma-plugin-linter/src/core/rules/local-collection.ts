@@ -26,6 +26,7 @@ import type { LintRule } from './rule.ts';
 export const localCollectionRule: LintRule = {
   id: 'local-collection',
   title: 'Local collection',
+  description: 'The bound variable comes from a collection local to the file — unpublished.',
   severity: 'warning',
   appliesTo: ['fill', 'stroke', 'padding', 'gap', 'cornerRadius', 'strokeWeight', 'effect'],
   evaluate: (observation: PropertyObservation, context: LintContext): readonly Finding[] => {

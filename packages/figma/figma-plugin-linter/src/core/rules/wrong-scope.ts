@@ -23,6 +23,8 @@ import type { LintRule } from './rule.ts';
 export const wrongScopeRule: LintRule = {
   id: 'wrong-scope',
   title: 'Wrong scope',
+  description:
+    'A variable is bound, but its scopes do not cover the property (e.g. a stroke token on a fill).',
   severity: 'error',
   appliesTo: ALL_PROPERTY_KINDS,
   evaluate: (observation: PropertyObservation, context: LintContext): readonly Finding[] => {

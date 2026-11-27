@@ -22,6 +22,8 @@ import type { LintRule } from './rule.ts';
 export const datavizBrandRootRule: LintRule = {
   id: 'dataviz-brand-root',
   title: 'Brand/dataviz @root',
+  description:
+    'A bound t2 brand/dataviz token is not the @root variant (only those are published).',
   severity: 'warning',
   appliesTo: ['fill', 'stroke'],
   evaluate: (observation: PropertyObservation, context: LintContext): readonly Finding[] => {

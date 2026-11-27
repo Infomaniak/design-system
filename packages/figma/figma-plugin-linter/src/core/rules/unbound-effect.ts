@@ -21,6 +21,8 @@ import type { LintRule } from './rule.ts';
 export const unboundEffectRule: LintRule = {
   id: 'unbound-effect',
   title: 'Unbound effect',
+  description:
+    'An effect (shadow, blur…) is set with raw settings — no effect style or variable bound.',
   severity: 'error',
   appliesTo: ['effect'],
   evaluate: (observation: PropertyObservation, _context: LintContext): readonly Finding[] => {

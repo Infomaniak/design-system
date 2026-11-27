@@ -1,14 +1,16 @@
-import { isIconLibraryComponent } from '../core/icon-library.ts';
 import type { AnyFigmaNode } from './figma-types.ts';
 
 /**
  * The resolved identity of a component instance, used by the node adapter to
  * recognize icon-library components. The component-set name (variant icons)
- * takes precedence over the component's own name.
+ * takes precedence over the component's own name. `remote` is the provenance
+ * signal (`ComponentNode.remote`): true when the main component is published
+ * from a team library rather than living in the file.
  */
 export interface InstanceIdentity {
   readonly componentName?: string;
   readonly componentSetName?: string;
+  readonly remote: boolean;
 }
 
 /**
@@ -17,13 +19,14 @@ export interface InstanceIdentity {
  *
  * The sync `mainComponent` getter is forbidden in `dynamic-page` document
  * access mode (it throws at runtime), so identities go through
- * `getMainComponentAsync()` — one call per instance, batched. Instances whose
- * layer name already matches the icon-library convention skip the call: their
- * identity is established without it (and unrenamed icons cost zero
- * round-trips, which matters for page/file-wide scans).
+ * `getMainComponentAsync()` — one call per instance, batched. Every instance
+ * is resolved: provenance (remote or not) can only be verified against the
+ * main component, so the instance's layer name alone is never trusted — an
+ * in-file component reusing the icon naming convention must not pass for the
+ * published kit.
  *
  * Detached instances (no main component) resolve to no identity and fall back
- * to their layer name in the adapter.
+ * to their layer name in the adapter — without the library marking.
  */
 export async function collectInstanceIdentities(
   roots: readonly AnyFigmaNode[],
@@ -36,10 +39,6 @@ export async function collectInstanceIdentities(
 
   await Promise.all(
     instances.map(async (instance: AnyFigmaNode): Promise<void> => {
-      if (isIconLibraryComponent(instance.name)) {
-        return;
-      }
-
       if (instance.getMainComponentAsync === undefined) {
         return;
       }
@@ -55,6 +54,7 @@ export async function collectInstanceIdentities(
         ...(component.parent?.name === undefined
           ? {}
           : { componentSetName: component.parent.name }),
+        remote: component.remote === true,
       });
     }),
   );

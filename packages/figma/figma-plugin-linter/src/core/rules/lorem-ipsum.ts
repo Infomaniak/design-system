@@ -19,6 +19,7 @@ const VALUE_LABEL_MAX_LENGTH: number = 40;
 export const loremIpsumRule: LintRule = {
   id: 'lorem-ipsum',
   title: 'Lorem ipsum',
+  description: 'The text layer still carries placeholder lorem/ipsum copy.',
   severity: 'warning',
   appliesTo: ['textContent'],
   evaluate: (observation: PropertyObservation, _context: LintContext): readonly Finding[] => {

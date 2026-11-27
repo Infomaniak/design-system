@@ -1,5 +1,7 @@
 import type { Finding, FixSuggestion } from '../core/model/finding.ts';
 import type { LintSummary } from '../core/report/summarize.ts';
+import { LINT_RULES } from '../core/rules/registry.ts';
+import type { LintRule } from '../core/rules/rule.ts';
 import { DEFAULT_SCAN_SCOPE, type ScanScope } from '../core/scan-scope.ts';
 
 const SCAN_SCOPE_OPTIONS: readonly (readonly [ScanScope, string])[] = [
@@ -16,8 +18,17 @@ export interface FixFeedback {
 }
 
 export type LintPanelState =
-  | { readonly kind: 'idle'; readonly scope?: ScanScope }
-  | { readonly kind: 'setup-error'; readonly message: string; readonly scope?: ScanScope }
+  | {
+      readonly kind: 'idle';
+      readonly scope?: ScanScope;
+      readonly enabledRuleIds?: readonly string[];
+    }
+  | {
+      readonly kind: 'setup-error';
+      readonly message: string;
+      readonly scope?: ScanScope;
+      readonly enabledRuleIds?: readonly string[];
+    }
   | { readonly kind: 'running'; readonly completed: number; readonly total: number }
   | {
       readonly kind: 'results';
@@ -34,6 +45,7 @@ export type LintPanelState =
       readonly openFixRow?: number;
       /** Feedback from the last applied batch, until the next lint run. */
       readonly fixFeedback?: FixFeedback;
+      readonly enabledRuleIds?: readonly string[];
     }
   | {
       readonly kind: 'clean';
@@ -41,6 +53,13 @@ export type LintPanelState =
       readonly refreshed?: boolean;
       readonly scope?: ScanScope;
       readonly fixFeedback?: FixFeedback;
+      readonly enabledRuleIds?: readonly string[];
+    }
+  | {
+      readonly kind: 'settings';
+      readonly scope?: ScanScope;
+      /** Ids of the enabled rules; the list renders every registry rule. */
+      readonly enabledRuleIds: readonly string[];
     };
 
 /**
@@ -66,19 +85,24 @@ function buildPanel(state: LintPanelState): HTMLElement {
 function buildPanelContent(state: LintPanelState): HTMLElement {
   switch (state.kind) {
     case 'idle':
-      return buildIdle(state.scope);
+      return buildIdle(state.scope, state.enabledRuleIds);
     case 'setup-error':
-      return buildSetupError(state.message, state.scope);
+      return buildSetupError(state.message, state.scope, state.enabledRuleIds);
     case 'running':
       return buildRunning(state.completed, state.total);
     case 'results':
       return buildResults(state);
     case 'clean':
-      return buildClean(state.inspectedCount, state.scope, state.fixFeedback);
+      return buildClean(state);
+    case 'settings':
+      return buildSettings(state);
   }
 }
 
-function buildScopePicker(scope: ScanScope | undefined): HTMLElement {
+function buildScopePicker(
+  scope: ScanScope | undefined,
+  enabledRuleIds?: readonly string[],
+): HTMLElement {
   const picker: HTMLElement = element('div', 'scope-row');
   const label: HTMLElement = element('label', 'scope-label', 'Scope');
   label.setAttribute('for', 'scope-picker');
@@ -101,31 +125,60 @@ function buildScopePicker(scope: ScanScope | undefined): HTMLElement {
 
   picker.append(label, select);
 
+  if (enabledRuleIds !== undefined) {
+    picker.append(buildRulesButton(enabledRuleIds));
+  }
+
   return picker;
 }
 
-function buildIdle(scope?: ScanScope): HTMLElement {
+function buildRulesButton(enabledRuleIds: readonly string[]): HTMLElement {
+  const button: HTMLButtonElement = buildActionButton(
+    `Rules · ${enabledRuleIds.length}/${LINT_RULES.length}`,
+    'open-settings',
+  );
+  button.classList.add('rules-button');
+
+  return button;
+}
+
+function buildIdle(scope?: ScanScope, enabledRuleIds?: readonly string[]): HTMLElement {
   const panel: HTMLElement = element('div', 'panel');
 
   panel.append(buildHeader());
-  panel.append(buildScopePicker(scope));
+  panel.append(buildScopePicker(scope, enabledRuleIds));
   panel.append(element('p', 'hint', 'Select at least one layer to lint.'));
 
-  panel.append(buildActionButton('Run lint', 'run', 'primary'));
+  panel.append(buildRunButton('Run lint', enabledRuleIds));
 
   return panel;
 }
 
-function buildSetupError(message: string, scope?: ScanScope): HTMLElement {
+function buildSetupError(
+  message: string,
+  scope?: ScanScope,
+  enabledRuleIds?: readonly string[],
+): HTMLElement {
   const panel: HTMLElement = element('div', 'panel');
 
   panel.append(buildHeader());
-  panel.append(buildScopePicker(scope));
+  panel.append(buildScopePicker(scope, enabledRuleIds));
   panel.append(element('p', 'error', message));
 
-  panel.append(buildActionButton('Retry', 'run', 'primary'));
+  panel.append(buildRunButton('Retry', enabledRuleIds));
 
   return panel;
+}
+
+/** The run action is unavailable while every rule is disabled. */
+function buildRunButton(label: string, enabledRuleIds?: readonly string[]): HTMLButtonElement {
+  const button: HTMLButtonElement = buildActionButton(label, 'run', 'primary');
+
+  if (enabledRuleIds !== undefined && enabledRuleIds.length === 0) {
+    button.disabled = true;
+  }
+
+  return button;
 }
 
 function buildRunning(completed: number, total: number): HTMLElement {
@@ -160,7 +213,7 @@ function buildResults(state: Extract<LintPanelState, { readonly kind: 'results' 
   const panel: HTMLElement = element('div', 'panel');
 
   panel.append(buildHeader());
-  panel.append(buildScopePicker(state.scope));
+  panel.append(buildScopePicker(state.scope, state.enabledRuleIds));
   panel.append(
     element(
       'p',
@@ -205,28 +258,35 @@ function buildResults(state: Extract<LintPanelState, { readonly kind: 'results' 
   return panel;
 }
 
-function buildClean(
-  inspectedCount: number,
-  scope?: ScanScope,
-  fixFeedback?: FixFeedback,
-): HTMLElement {
+function buildClean(state: Extract<LintPanelState, { readonly kind: 'clean' }>): HTMLElement {
   const panel: HTMLElement = element('div', 'panel');
 
   panel.append(buildHeader());
-  panel.append(buildScopePicker(scope));
+  panel.append(buildScopePicker(state.scope, state.enabledRuleIds));
 
-  if (fixFeedback !== undefined) {
-    panel.append(buildFixFeedback(fixFeedback));
+  if (state.fixFeedback !== undefined) {
+    panel.append(buildFixFeedback(state.fixFeedback));
   }
 
-  panel.append(
-    element('p', 'success', '0 errors, 0 warnings — all checked properties are token-bound.'),
-  );
-  panel.append(element('p', 'hint', `${inspectedCount} layers inspected.`));
+  panel.append(element('p', 'success', cleanMessage(state.enabledRuleIds)));
+  panel.append(element('p', 'hint', `${state.inspectedCount} layers inspected.`));
 
-  panel.append(buildActionsRow(buildActionButton('Run again', 'run')));
+  panel.append(buildActionsRow(buildRunButton('Run again', state.enabledRuleIds)));
 
   return panel;
+}
+
+/**
+ * The clean pass must not read as a full compliance pass when rules are muted —
+ * a subset run qualifies the message with its enabled count (same vocabulary
+ * as the `Rules · N/19` button).
+ */
+function cleanMessage(enabledRuleIds?: readonly string[]): string {
+  if (enabledRuleIds === undefined || enabledRuleIds.length === LINT_RULES.length) {
+    return '0 errors, 0 warnings — all checked properties are token-bound.';
+  }
+
+  return `0 errors, 0 warnings — the ${enabledRuleIds.length}/${LINT_RULES.length} enabled rules all passed.`;
 }
 
 function buildFixFeedback(feedback: FixFeedback): HTMLElement {
@@ -249,8 +309,8 @@ function buildHeader(): HTMLElement {
   return element('h1', 'title', 'ESDS Linter');
 }
 
-function buildActionButton(label: string, action: string, modifier?: string): HTMLElement {
-  const button: HTMLElement = element(
+function buildActionButton(label: string, action: string, modifier?: string): HTMLButtonElement {
+  const button: HTMLButtonElement = element<HTMLButtonElement>(
     'button',
     modifier === undefined ? 'button' : `button ${modifier}`,
     label,
@@ -258,6 +318,62 @@ function buildActionButton(label: string, action: string, modifier?: string): HT
   button.setAttribute('data-action', action);
 
   return button;
+}
+
+function buildSettings(state: Extract<LintPanelState, { readonly kind: 'settings' }>): HTMLElement {
+  const panel: HTMLElement = element('div', 'panel');
+
+  const header: HTMLElement = element('div', 'settings-header');
+  header.append(buildActionButton('‹ Back', 'close-settings'), element('h1', 'title', 'Rules'));
+  panel.append(header);
+
+  panel.append(
+    element(
+      'p',
+      'hint',
+      'Choose which rules the linter checks — your selection is saved for the next sessions.',
+    ),
+  );
+
+  const enabled: ReadonlySet<string> = new Set(state.enabledRuleIds);
+  const list: HTMLElement = element('div', 'rules-list');
+
+  for (const rule of LINT_RULES) {
+    list.append(buildRuleRow(rule, enabled.has(rule.id)));
+  }
+
+  panel.append(list);
+
+  if (state.enabledRuleIds.length === 0) {
+    panel.append(
+      element('p', 'error settings-warning', 'No rules enabled — the lint would check nothing.'),
+    );
+  }
+
+  panel.append(buildActionButton('Reset to defaults', 'reset-rules'));
+
+  return panel;
+}
+
+function buildRuleRow(rule: LintRule, enabled: boolean): HTMLElement {
+  const row: HTMLElement = element('label', 'rule-row');
+
+  const checkbox: HTMLInputElement = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.className = 'rule-checkbox';
+  checkbox.checked = enabled;
+  checkbox.setAttribute('data-action', 'toggle-rule');
+  checkbox.setAttribute('data-rule-id', rule.id);
+
+  const body: HTMLElement = element('div', 'rule-body');
+  const head: HTMLElement = element('div', 'rule-head');
+  head.append(element('span', 'rule-title', rule.title));
+  head.append(element('span', `rule-severity ${rule.severity}`, rule.severity));
+  body.append(head, element('span', 'rule-description', rule.description));
+
+  row.append(checkbox, body);
+
+  return row;
 }
 
 function buildFindingsList(
@@ -437,7 +553,11 @@ function buildFixButton(label: string, index: number): HTMLElement {
   return button;
 }
 
-function element(tag: string, className: string, text?: string): HTMLElement {
+function element<T extends HTMLElement = HTMLElement>(
+  tag: string,
+  className: string,
+  text?: string,
+): T {
   const node: HTMLElement = document.createElement(tag);
   node.className = className;
 
@@ -445,5 +565,5 @@ function element(tag: string, className: string, text?: string): HTMLElement {
     node.textContent = text;
   }
 
-  return node;
+  return node as T;
 }
