@@ -37,6 +37,26 @@ All icons follow the `<prefix>:<name>` format (e.g., `esds:home`).
 
 > For detailed naming guidelines, see the [internal icons documentation](https://infomaniak.pages.infomaniak.com/handbook/activites/frontend/convention-nommage-icones/).
 
+## Icon Server & API
+
+All icons are served by our self-hosted Iconify API:
+
+| Environment | URL                                         | Usage                                                              |
+| ----------- | ------------------------------------------- | ------------------------------------------------------------------ |
+| Production  | `https://iconify.infomaniak.com`            | Default for `esds-icon` and production Storybook builds            |
+| Preprod     | `https://iconify.preprod.dev.infomaniak.ch` | Local dev and Storybook builds on PRs (via `VITE_ICONIFY_API_URL`) |
+
+### API cheat sheet
+
+| Endpoint                            | Description                                                                                                |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `GET /esds/<name>.svg`              | Direct SVG of an icon, e.g. [`/esds/paper-plane.svg`](https://iconify.infomaniak.com/esds/paper-plane.svg) |
+| `GET /collection?prefix=esds`       | Complete icon list with tags/categories                                                                    |
+| `GET /collections`                  | Available icon sets (`esds`, `esds-legacy-global`)                                                         |
+| `GET /search?query=<q>&prefix=esds` | Search icons (matches names and aliases only)                                                              |
+
+> **Note:** the search endpoint indexes icon names and aliases only — tags are not searchable. Use `/collection?prefix=esds` to browse by tag.
+
 ## Web
 
 ### Optical Sizing
