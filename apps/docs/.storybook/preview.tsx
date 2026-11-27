@@ -311,10 +311,9 @@ const preview: Preview = {
           'Designers Guide',
           [
             'Getting Started',
-            ['Starting a project', 'Kits'],
-            'Install the Font',
+            ['Starting a project', 'Kits', 'Install the Font'],
             'Figma Plugins',
-            'Helpers',
+            'Components',
           ],
           'Design Tokens',
           [
