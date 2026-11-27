@@ -37,6 +37,8 @@ You may set the icon size using the tailwind `text-icon-{size}` class:
 
 If you need custom icon resources (e.g., a specific icon server), set the `InjectionContext`:
 
+By default, the component fetches icons from the production server `https://iconify.infomaniak.com`. The configuration below is only required to target the preprod server or a custom one.
+
 ```ts
 import { ICONIFY_API, InjectionContext, IconifyApi } from '@infomaniak-design-system/components';
 
@@ -50,5 +52,17 @@ InjectionContext.root = new InjectionContext([
 ```
 
 > `InjectionContext` is only required when the default icon resources are insufficient.
+
+## Content Security Policy (Optional)
+
+Most Infomaniak applications enforce a strict Content Security Policy (CSP). Since icons are fetched at runtime, add the API host to the `connect-src` directive:
+
+```txt
+connect-src 'self' https://iconify.infomaniak.com;
+```
+
+If your application uses the shared `docker/default.conf` template, add the host to the `$CSP_CONNECT` variable.
+
+> If you configured a custom icon resource (see Configuration above), allow its host instead of the default one.
 
 ## Demo

@@ -31,7 +31,10 @@ design-system/
 │       │   ├── components/      # React docs components (DocsLink, DocsMarkdown, …)
 │       │   ├── stories/         # Storybook stories + token docs (MDX, raw .md assets)
 │       │   └── styles/          # Docs stylesheets
+│       ├── playground/          # Playground source (standalone code editor page, built to public/playground/)
+│       ├── public/playground/   # Playground build output (gitignored, ships with the Storybook deploy)
 │       ├── .storybook/          # Storybook configuration (preview.tsx = entry)
+│       ├── vite.playground.config.ts  # Playground build (base './', sandbox URL + envs baked)
 │       └── dist/                # Built docs output
 ├── packages/
 │   ├── tokens/                  # Design tokens library (DTCG format + documented exceptions, see `packages/tokens/README.md`)

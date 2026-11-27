@@ -620,7 +620,7 @@ describe('real component stories', () => {
   it('renders the real kbd stories with host markup', () => {
     const snippets = buildFor('esds-kbd/esds-kbd.attr.stories.ts', KBD_CONTEXT, {});
     expect(snippets[0]?.code).toBe(
-      '<p>\n      Press\n      <kbd\n        esds-kbd>K</kbd>\n      to open the search.\n    </p>',
+      '<p>\n      Press\n      <kbd\n        esds-kbd\n        data-esds-kbd-size="medium">/</kbd>\n      to open the search.\n    </p>',
     );
     expect(snippets).toHaveLength(3);
   });

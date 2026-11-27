@@ -2,18 +2,47 @@
   "color": {
     "background": {
       "brand": {
-        "$value": "{color.background.brand.swisstransfer}"
+        "dim1": {
+          "$value": "{color.background.brand.swisstransfer.dim1}"
+        },
+        "dim2": {
+          "$value": "{color.background.brand.swisstransfer.dim2}"
+        },
+        "dim3": {
+          "$value": "{color.background.brand.swisstransfer.dim3}"
+        }
       }
     },
     "border": {
       "brand": {
         "$value": "{color.border.brand.swisstransfer}"
+      },
+      "on": {
+        "brand": {
+          "dim1": {
+            "$value": "{color.border.on.brand.swisstransfer.dim1}"
+          },
+          "dim2": {
+            "$value": "{color.border.on.brand.swisstransfer.dim2}"
+          },
+          "dim3": {
+            "$value": "{color.border.on.brand.swisstransfer.dim3}"
+          }
+        }
       }
     },
     "content": {
       "on": {
         "brand": {
-          "$value": "{color.content.on.brand.swisstransfer}"
+          "dim1": {
+            "$value": "{color.content.on.brand.swisstransfer.dim1}"
+          },
+          "dim2": {
+            "$value": "{color.content.on.brand.swisstransfer.dim2}"
+          },
+          "dim3": {
+            "$value": "{color.content.on.brand.swisstransfer.dim3}"
+          }
         }
       },
       "brand": {

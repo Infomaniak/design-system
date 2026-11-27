@@ -45,3 +45,76 @@ h1 {
 /*  font: var(--esde-typography-body-medium); */
 /*  color: white; */
 /* } */
+
+/*:root {*/
+/*  --color-infomaniak: blue;*/
+/*  --color-mail: red;*/
+
+/*  --color-brand: var(--color-infomaniak);*/
+/*  --color-button: var(--color-brand);*/
+/*}*/
+
+/*[theme='light'] {*/
+/*  --color-infomaniak: blue;*/
+/*  --color-mail: red;*/
+/*  !*redeclared*!*/
+/*  --color-brand: var(--color-infomaniak);*/
+/*  --color-button: var(--color-brand);*/
+/*}*/
+
+/*[theme='dark'] {*/
+/*  --color-infomaniak: #91dfce;*/
+/*  --color-mail: #ff00db;*/
+/*  !*redeclared*!*/
+/*  --color-brand: var(--color-infomaniak);*/
+/*  !*--color-button: var(--color-brand);*!*/
+/*}*/
+
+/*[product='mail'] {*/
+/*  --color-brand: var(--color-mail);*/
+/*  !*redeclared*!*/
+/*  --color-button: var(--color-brand);*/
+
+/*  [theme='dark'] {*/
+/*    --color-brand: var(--color-mail);*/
+/*    --color-button: var(--color-brand);*/
+/*  }*/
+/*}*/
+
+:root {
+  --color-infomaniak: blue;
+  --color-mail: red;
+  --color-success: green;
+}
+
+:where(*) {
+  --color-brand: var(--color-infomaniak);
+  --color-button: var(--color-brand);
+}
+
+[theme='light'] {
+  --color-infomaniak: blue;
+  --color-mail: red;
+  --color-success: green;
+}
+
+[theme='dark'] {
+  --color-infomaniak: #75a6ff;
+  --color-mail: #ff00db;
+  --color-success: #91ff75;
+}
+
+[product='mail'],
+[product='mail'] :where(*) {
+  --color-brand: var(--color-mail);
+}
+
+[button='primary'],
+[button='primary'] :where(*) {
+  --color-button: var(--color-brand);
+}
+
+[button='secondary'],
+[button='secondary'] :where(*) {
+  --color-button: var(--color-success);
+}

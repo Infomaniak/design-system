@@ -36,81 +36,268 @@
       },
       "brand": {
         "$description": "Brand-specific background colors.",
-        "$root": {
-          "$value": "{color.background.brand.infomaniak}",
-          "$description": "Default brand background (Infomaniak).",
-          "$extensions": {
-            "scopes": ["ALL_FILLS"]
-          }
-        },
         "infomaniak": {
-          "$value": "{color.blue.600}",
           "$description": "Infomaniak brand background colors.",
-          "$extensions": {
-            "scopes": []
+          "dim1": {
+            "$value": "{color.blue.600}",
+            "$description": "Strong Infomaniak brand background (dim1).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim2": {
+            "$value": "{color.blue.200}",
+            "$description": "Soft Infomaniak brand background (dim2).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim3": {
+            "$value": "{color.blue.50}",
+            "$description": "Subtle Infomaniak brand background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
           }
         },
         "mail": {
-          "$value": "{color.pink.600}",
           "$description": "Mail product brand background colors.",
-          "$extensions": {
-            "scopes": []
+          "dim1": {
+            "$value": "{color.pink.600}",
+            "$description": "Strong Mail brand background (dim1).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim2": {
+            "$value": "{color.pink.200}",
+            "$description": "Soft Mail brand background (dim2).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim3": {
+            "$value": "{color.pink.50}",
+            "$description": "Subtle Mail brand background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
           }
         },
         "kdrive": {
-          "$value": "{color.indigo.500}",
           "$description": "kDrive product brand background colors.",
-          "$extensions": {
-            "scopes": []
+          "dim1": {
+            "$value": "{color.cobalt.500}",
+            "$description": "Strong kDrive brand background (dim1).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim2": {
+            "$value": "{color.cobalt.200}",
+            "$description": "Soft kDrive brand background (dim2).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim3": {
+            "$value": "{color.cobalt.50}",
+            "$description": "Subtle kDrive brand background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
           }
         },
         "euria": {
-          "$value": "{color.ocean.700}",
           "$description": "Euria product brand background colors.",
-          "$extensions": {
-            "scopes": []
+          "dim1": {
+            "$value": "{color.ocean.700}",
+            "$description": "Strong Euria brand background (dim1).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim2": {
+            "$value": "{color.ocean.200}",
+            "$description": "Soft Euria brand background (dim2).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim3": {
+            "$value": "{color.ocean.50}",
+            "$description": "Subtle Euria brand background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
           }
         },
         "kchat": {
-          "$value": "{color.cyan.600}",
           "$description": "kChat product brand background colors.",
-          "$extensions": {
-            "scopes": []
+          "dim1": {
+            "$value": "{color.cyan.600}",
+            "$description": "Strong kChat brand background (dim1).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim2": {
+            "$value": "{color.cyan.200}",
+            "$description": "Soft kChat brand background (dim2).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim3": {
+            "$value": "{color.cyan.50}",
+            "$description": "Subtle kChat brand background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
           }
         },
         "security": {
-          "$value": "{color.purple.600}",
           "$description": "Security product brand background colors.",
-          "$extensions": {
-            "scopes": []
+          "dim1": {
+            "$value": "{color.indigo.600}",
+            "$description": "Strong Security brand background (dim1).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim2": {
+            "$value": "{color.indigo.200}",
+            "$description": "Soft Security brand background (dim2).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim3": {
+            "$value": "{color.indigo.50}",
+            "$description": "Subtle Security brand background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
           }
         },
         "calendar": {
-          "$value": "{color.aqua.500}",
           "$description": "Calendar product brand background colors.",
-          "$extensions": {
-            "scopes": []
+          "dim1": {
+            "$value": "{color.aqua.500}",
+            "$description": "Strong Calendar brand background (dim1).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim2": {
+            "$value": "{color.aqua.200}",
+            "$description": "Soft Calendar brand background (dim2).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim3": {
+            "$value": "{color.aqua.50}",
+            "$description": "Subtle Calendar brand background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
           }
         },
         "contacts": {
-          "$value": "{color.violet.500}",
           "$description": "Contacts product brand background colors.",
-          "$extensions": {
-            "scopes": []
+          "dim1": {
+            "$value": "{color.purple.500}",
+            "$description": "Strong Contacts brand background (dim1).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim2": {
+            "$value": "{color.purple.200}",
+            "$description": "Soft Contacts brand background (dim2).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim3": {
+            "$value": "{color.purple.50}",
+            "$description": "Subtle Contacts brand background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
           }
         },
         "knote": {
-          "$value": "{color.coral.600}",
           "$description": "kNote product brand background colors.",
-          "$extensions": {
-            "scopes": []
+          "dim1": {
+            "$value": "{color.coral.600}",
+            "$description": "Strong kNote brand background (dim1).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim2": {
+            "$value": "{color.coral.200}",
+            "$description": "Soft kNote brand background (dim2).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim3": {
+            "$value": "{color.coral.50}",
+            "$description": "Subtle kNote brand background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
           }
         },
         "swisstransfer": {
-          "$value": "{color.emerald.600}",
           "$description": "SwissTransfer product brand background colors.",
+          "dim1": {
+            "$value": "{color.emerald.600}",
+            "$description": "Strong SwissTransfer brand background (dim1).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim2": {
+            "$value": "{color.emerald.200}",
+            "$description": "Soft SwissTransfer brand background (dim2).",
+            "$extensions": {
+              "scopes": []
+            }
+          },
+          "dim3": {
+            "$value": "{color.emerald.50}",
+            "$description": "Subtle SwissTransfer brand background (dim3).",
+            "$extensions": {
+              "scopes": []
+            }
+          }
+        },
+        "dim1": {
+          "$value": "{color.background.brand.infomaniak.dim1}",
+          "$description": "Default dim1 brand background.",
           "$extensions": {
-            "scopes": []
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+            "figmaName": ["color", "background", "brand", "@root", "dim1"]
+          }
+        },
+        "dim2": {
+          "$value": "{color.background.brand.infomaniak.dim2}",
+          "$description": "Default dim2 brand background.",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+            "figmaName": ["color", "background", "brand", "@root", "dim2"]
+          }
+        },
+        "dim3": {
+          "$value": "{color.background.brand.infomaniak.dim3}",
+          "$description": "Default dim3 brand background.",
+          "$extensions": {
+            "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+            "figmaName": ["color", "background", "brand", "@root", "dim3"]
           }
         }
       },
@@ -188,25 +375,25 @@
             }
           }
         },
-        "violet": {
-          "$description": "Violet data-viz background colors.",
+        "purple": {
+          "$description": "Purple data-viz background colors.",
           "dim1": {
-            "$value": "{color.violet.500}",
-            "$description": "Strong violet data-viz background (dim1).",
+            "$value": "{color.purple.500}",
+            "$description": "Strong purple data-viz background (dim1).",
             "$extensions": {
               "scopes": []
             }
           },
           "dim2": {
-            "$value": "{color.violet.200}",
-            "$description": "Soft violet data-viz background (dim2).",
+            "$value": "{color.purple.200}",
+            "$description": "Soft purple data-viz background (dim2).",
             "$extensions": {
               "scopes": []
             }
           },
           "dim3": {
-            "$value": "{color.violet.50}",
-            "$description": "Subtle violet data-viz background (dim3).",
+            "$value": "{color.purple.50}",
+            "$description": "Subtle purple data-viz background (dim3).",
             "$extensions": {
               "scopes": []
             }
@@ -537,81 +724,268 @@
         },
         "brand": {
           "$description": "Foreground colors placed on brand backgrounds.",
-          "$root": {
-            "$value": "{color.content.on.brand.infomaniak}",
-            "$description": "Default foreground on brand backgrounds.",
-            "$extensions": {
-              "scopes": ["ALL_FILLS"]
-            }
-          },
           "infomaniak": {
-            "$value": "{color.white}",
             "$description": "Foreground on Infomaniak brand backgrounds.",
-            "$extensions": {
-              "scopes": []
+            "dim1": {
+              "$value": "{color.white}",
+              "$description": "Foreground on strong Infomaniak brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.blue.900}",
+              "$description": "Foreground on soft Infomaniak brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.blue.700}",
+              "$description": "Foreground on subtle Infomaniak brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
             }
           },
           "calendar": {
-            "$value": "{color.white}",
             "$description": "Foreground on Calendar brand backgrounds.",
-            "$extensions": {
-              "scopes": []
+            "dim1": {
+              "$value": "{color.white}",
+              "$description": "Foreground on strong Calendar brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.aqua.900}",
+              "$description": "Foreground on soft Calendar brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.aqua.700}",
+              "$description": "Foreground on subtle Calendar brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
             }
           },
           "contacts": {
-            "$value": "{color.white}",
             "$description": "Foreground on Contacts brand backgrounds.",
-            "$extensions": {
-              "scopes": []
+            "dim1": {
+              "$value": "{color.white}",
+              "$description": "Foreground on strong Contacts brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.purple.900}",
+              "$description": "Foreground on soft Contacts brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.purple.700}",
+              "$description": "Foreground on subtle Contacts brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
             }
           },
           "euria": {
-            "$value": "{color.white}",
             "$description": "Foreground on Euria brand backgrounds.",
-            "$extensions": {
-              "scopes": []
+            "dim1": {
+              "$value": "{color.white}",
+              "$description": "Foreground on strong Euria brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.ocean.900}",
+              "$description": "Foreground on soft Euria brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.ocean.700}",
+              "$description": "Foreground on subtle Euria brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
             }
           },
           "kchat": {
-            "$value": "{color.white}",
             "$description": "Foreground on kChat brand backgrounds.",
-            "$extensions": {
-              "scopes": []
+            "dim1": {
+              "$value": "{color.white}",
+              "$description": "Foreground on strong kChat brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.cyan.900}",
+              "$description": "Foreground on soft kChat brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.cyan.700}",
+              "$description": "Foreground on subtle kChat brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
             }
           },
           "kdrive": {
-            "$value": "{color.white}",
             "$description": "Foreground on kDrive brand backgrounds.",
-            "$extensions": {
-              "scopes": []
+            "dim1": {
+              "$value": "{color.white}",
+              "$description": "Foreground on strong kDrive brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.cobalt.900}",
+              "$description": "Foreground on soft kDrive brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.cobalt.700}",
+              "$description": "Foreground on subtle kDrive brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
             }
           },
           "knote": {
-            "$value": "{color.white}",
             "$description": "Foreground on kNote brand backgrounds.",
-            "$extensions": {
-              "scopes": []
+            "dim1": {
+              "$value": "{color.white}",
+              "$description": "Foreground on strong kNote brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.coral.900}",
+              "$description": "Foreground on soft kNote brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.coral.700}",
+              "$description": "Foreground on subtle kNote brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
             }
           },
           "mail": {
-            "$value": "{color.white}",
             "$description": "Foreground on Mail brand backgrounds.",
-            "$extensions": {
-              "scopes": []
+            "dim1": {
+              "$value": "{color.white}",
+              "$description": "Foreground on strong Mail brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.pink.900}",
+              "$description": "Foreground on soft Mail brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.pink.700}",
+              "$description": "Foreground on subtle Mail brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
             }
           },
           "security": {
-            "$value": "{color.white}",
             "$description": "Foreground on Security brand backgrounds.",
-            "$extensions": {
-              "scopes": []
+            "dim1": {
+              "$value": "{color.white}",
+              "$description": "Foreground on strong Security brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.indigo.900}",
+              "$description": "Foreground on soft Security brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.indigo.700}",
+              "$description": "Foreground on subtle Security brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
             }
           },
           "swisstransfer": {
-            "$value": "{color.white}",
             "$description": "Foreground on SwissTransfer brand backgrounds.",
+            "dim1": {
+              "$value": "{color.white}",
+              "$description": "Foreground on strong SwissTransfer brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.emerald.900}",
+              "$description": "Foreground on soft SwissTransfer brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.emerald.700}",
+              "$description": "Foreground on subtle SwissTransfer brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "dim1": {
+            "$value": "{color.content.on.brand.infomaniak.dim1}",
+            "$description": "Default foreground on brand dim1 backgrounds.",
             "$extensions": {
-              "scopes": []
+              "scopes": ["ALL_FILLS"],
+              "figmaName": ["color", "content", "on", "brand", "@root", "dim1"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.content.on.brand.infomaniak.dim2}",
+            "$description": "Default foreground on brand dim2 backgrounds.",
+            "$extensions": {
+              "scopes": ["ALL_FILLS"],
+              "figmaName": ["color", "content", "on", "brand", "@root", "dim2"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.content.on.brand.infomaniak.dim3}",
+            "$description": "Default foreground on brand dim3 backgrounds.",
+            "$extensions": {
+              "scopes": ["ALL_FILLS"],
+              "figmaName": ["color", "content", "on", "brand", "@root", "dim3"]
             }
           }
         },
@@ -737,25 +1111,25 @@
               }
             }
           },
-          "violet": {
-            "$description": "Foreground on violet data-viz backgrounds.",
+          "purple": {
+            "$description": "Foreground on purple data-viz backgrounds.",
             "dim1": {
-              "$value": "{color.violet.50}",
-              "$description": "Foreground on strong violet data-viz backgrounds (dim1).",
+              "$value": "{color.purple.50}",
+              "$description": "Foreground on strong purple data-viz backgrounds (dim1).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim2": {
-              "$value": "{color.violet.900}",
-              "$description": "Foreground on soft violet data-viz backgrounds (dim2).",
+              "$value": "{color.purple.900}",
+              "$description": "Foreground on soft purple data-viz backgrounds (dim2).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim3": {
-              "$value": "{color.violet.700}",
-              "$description": "Foreground on subtle violet data-viz backgrounds (dim3).",
+              "$value": "{color.purple.700}",
+              "$description": "Foreground on subtle purple data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -1025,7 +1399,7 @@
           }
         },
         "kdrive": {
-          "$value": "{color.indigo.500}",
+          "$value": "{color.cobalt.500}",
           "$description": "kDrive product brand foreground colors.",
           "$extensions": {
             "scopes": []
@@ -1046,7 +1420,7 @@
           }
         },
         "security": {
-          "$value": "{color.purple.600}",
+          "$value": "{color.indigo.600}",
           "$description": "Security product brand foreground colors.",
           "$extensions": {
             "scopes": []
@@ -1060,7 +1434,7 @@
           }
         },
         "contacts": {
-          "$value": "{color.violet.500}",
+          "$value": "{color.purple.500}",
           "$description": "Contacts product brand foreground colors.",
           "$extensions": {
             "scopes": []
@@ -1155,7 +1529,7 @@
         }
       },
       "visited": {
-        "$value": "{color.violet.600}",
+        "$value": "{color.purple.600}",
         "$description": "Visited-link content colors with interaction states.",
         "$extensions": {
           "scopes": ["ALL_FILLS"]
@@ -1211,9 +1585,9 @@
             "scopes": ["ALL_FILLS"]
           }
         },
-        "violet": {
-          "$value": "{color.violet.600}",
-          "$description": "Violet data-viz foreground color.",
+        "purple": {
+          "$value": "{color.purple.600}",
+          "$description": "Purple data-viz foreground color.",
           "$extensions": {
             "scopes": ["ALL_FILLS"]
           }
@@ -1251,6 +1625,263 @@
     "border": {
       "$description": "Semantic border colors across brands, data-viz, feedback, and neutral dimensions.",
       "on": {
+        "brand": {
+          "$description": "Border colors placed on brand backgrounds.",
+          "infomaniak": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong Infomaniak brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.blue.900}",
+              "$description": "Border on soft Infomaniak brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.blue.700}",
+              "$description": "Border on subtle Infomaniak brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "mail": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong Mail brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.pink.900}",
+              "$description": "Border on soft Mail brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.pink.700}",
+              "$description": "Border on subtle Mail brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "kdrive": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong kDrive brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.cobalt.900}",
+              "$description": "Border on soft kDrive brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.cobalt.700}",
+              "$description": "Border on subtle kDrive brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "euria": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong Euria brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.ocean.900}",
+              "$description": "Border on soft Euria brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.ocean.700}",
+              "$description": "Border on subtle Euria brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "kchat": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong kChat brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.cyan.900}",
+              "$description": "Border on soft kChat brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.cyan.700}",
+              "$description": "Border on subtle kChat brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "security": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong Security brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.indigo.900}",
+              "$description": "Border on soft Security brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.indigo.700}",
+              "$description": "Border on subtle Security brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "calendar": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong Calendar brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.aqua.900}",
+              "$description": "Border on soft Calendar brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.aqua.700}",
+              "$description": "Border on subtle Calendar brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "contacts": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong Contacts brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.purple.900}",
+              "$description": "Border on soft Contacts brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.purple.700}",
+              "$description": "Border on subtle Contacts brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "knote": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong kNote brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.coral.900}",
+              "$description": "Border on soft kNote brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.coral.700}",
+              "$description": "Border on subtle kNote brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "swisstransfer": {
+            "dim1": {
+              "$value": "{color.transparent}",
+              "$description": "Border on strong SwissTransfer brand backgrounds (dim1).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim2": {
+              "$value": "{color.emerald.900}",
+              "$description": "Border on soft SwissTransfer brand backgrounds (dim2).",
+              "$extensions": {
+                "scopes": []
+              }
+            },
+            "dim3": {
+              "$value": "{color.emerald.700}",
+              "$description": "Border on subtle SwissTransfer brand backgrounds (dim3).",
+              "$extensions": {
+                "scopes": []
+              }
+            }
+          },
+          "dim1": {
+            "$value": "{color.border.on.brand.infomaniak.dim1}",
+            "$description": "Default border on brand dim1 backgrounds.",
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"],
+              "figmaName": ["color", "border", "on", "brand", "@root", "dim1"]
+            }
+          },
+          "dim2": {
+            "$value": "{color.border.on.brand.infomaniak.dim2}",
+            "$description": "Default border on brand dim2 backgrounds.",
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"],
+              "figmaName": ["color", "border", "on", "brand", "@root", "dim2"]
+            }
+          },
+          "dim3": {
+            "$value": "{color.border.on.brand.infomaniak.dim3}",
+            "$description": "Default border on brand dim3 backgrounds.",
+            "$extensions": {
+              "scopes": ["STROKE_COLOR"],
+              "figmaName": ["color", "border", "on", "brand", "@root", "dim3"]
+            }
+          }
+        },
         "dataviz": {
           "blue": {
             "dim1": {
@@ -1367,24 +1998,24 @@
               }
             }
           },
-          "violet": {
+          "purple": {
             "dim1": {
               "$value": "{color.transparent}",
-              "$description": "Border on strong violet data-viz backgrounds (dim1).",
+              "$description": "Border on strong purple data-viz backgrounds (dim1).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim2": {
-              "$value": "{color.violet.900}",
-              "$description": "Border on soft violet data-viz backgrounds (dim2).",
+              "$value": "{color.purple.900}",
+              "$description": "Border on soft purple data-viz backgrounds (dim2).",
               "$extensions": {
                 "scopes": []
               }
             },
             "dim3": {
-              "$value": "{color.violet.700}",
-              "$description": "Border on subtle violet data-viz backgrounds (dim3).",
+              "$value": "{color.purple.700}",
+              "$description": "Border on subtle purple data-viz backgrounds (dim3).",
               "$extensions": {
                 "scopes": []
               }
@@ -1650,7 +2281,7 @@
           }
         },
         "kdrive": {
-          "$value": "{color.indigo.500}",
+          "$value": "{color.cobalt.500}",
           "$description": "kDrive product brand border colors.",
           "$extensions": {
             "scopes": []
@@ -1671,7 +2302,7 @@
           }
         },
         "security": {
-          "$value": "{color.purple.600}",
+          "$value": "{color.indigo.600}",
           "$description": "Security product brand border colors.",
           "$extensions": {
             "scopes": []
@@ -1685,7 +2316,7 @@
           }
         },
         "contacts": {
-          "$value": "{color.violet.500}",
+          "$value": "{color.purple.500}",
           "$description": "Contacts product brand border colors.",
           "$extensions": {
             "scopes": []
@@ -1750,9 +2381,9 @@
             "scopes": []
           }
         },
-        "violet": {
-          "$value": "{color.violet.600}",
-          "$description": "Violet data-viz border color.",
+        "purple": {
+          "$value": "{color.purple.600}",
+          "$description": "Purple data-viz border color.",
           "$extensions": {
             "scopes": []
           }

@@ -2,18 +2,47 @@
   "color": {
     "background": {
       "brand": {
-        "$value": "{color.background.brand.mail}"
+        "dim1": {
+          "$value": "{color.background.brand.mail.dim1}"
+        },
+        "dim2": {
+          "$value": "{color.background.brand.mail.dim2}"
+        },
+        "dim3": {
+          "$value": "{color.background.brand.mail.dim3}"
+        }
       }
     },
     "border": {
       "brand": {
         "$value": "{color.border.brand.mail}"
+      },
+      "on": {
+        "brand": {
+          "dim1": {
+            "$value": "{color.border.on.brand.mail.dim1}"
+          },
+          "dim2": {
+            "$value": "{color.border.on.brand.mail.dim2}"
+          },
+          "dim3": {
+            "$value": "{color.border.on.brand.mail.dim3}"
+          }
+        }
       }
     },
     "content": {
       "on": {
         "brand": {
-          "$value": "{color.content.on.brand.mail}"
+          "dim1": {
+            "$value": "{color.content.on.brand.mail.dim1}"
+          },
+          "dim2": {
+            "$value": "{color.content.on.brand.mail.dim2}"
+          },
+          "dim3": {
+            "$value": "{color.content.on.brand.mail.dim3}"
+          }
         }
       },
       "brand": {

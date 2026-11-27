@@ -190,6 +190,7 @@ export const Types: StoryObj<EsdsButtonAttr & HTMLButtonElement & ExtraControls>
             esds-button
             data-esds-button-type=${ifDefined(variant)}
             square
+            aria-label=${variant}
             ?disabled=${args.disabled}
             ?loading=${args.loading}
           >
@@ -223,6 +224,7 @@ export const Sizes: StoryObj<EsdsButtonAttr & HTMLButtonElement & ExtraControls>
             esds-button
             data-esds-button-size=${ifDefined(variant)}
             square
+            aria-label=${variant}
             ?disabled=${args.disabled}
             ?loading=${args.loading}
           >

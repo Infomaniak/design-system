@@ -23,6 +23,7 @@ export default {
   ignoreFiles: [
     '**/dist/**',
     '**/coverage/**',
+    '**/public/playground/**',
     '**/storybook-static/**',
     '**/.idea/**',
     '**/.yarn/**',

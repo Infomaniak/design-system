@@ -1,6 +1,6 @@
 button {
   padding: var(--esds-spacing-md);
-  background-color: var(--esds-color-background-brand-default);
+  background-color: var(--esds-color-background-brand);
   color: var(--esds-color-text-inverse);
   border-radius: var(--esds-radius-md);
   /*background-color: var(--esds-button-background-color);*/

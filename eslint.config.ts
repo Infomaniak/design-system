@@ -8,6 +8,7 @@ export default defineConfig([
     ignores: [
       '**/dist/**',
       '**/coverage/**',
+      '**/public/playground/**',
       '**/storybook-static/**',
       '**/.idea/**',
       '**/.yarn/**',
